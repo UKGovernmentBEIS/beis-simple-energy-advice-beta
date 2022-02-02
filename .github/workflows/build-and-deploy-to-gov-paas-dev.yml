@@ -9,3 +9,5 @@ jobs:
     uses: ./.github/workflows/_build-and-deploy-to-gov-paas.yml
     with:
       environment_name: DEV
+    secrets:
+      gov_paas_password: ${{ secrets.GOV_PAAS_PASSWORD }}

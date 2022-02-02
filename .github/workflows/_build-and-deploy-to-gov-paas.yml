@@ -6,6 +6,9 @@ on:
       environment_name:
         required: true
         type: string
+    secrets:
+      gov_paas_password:
+        required: true
 
 jobs:
   build-and-deploy:
@@ -47,7 +50,7 @@ jobs:
 
     - name: Push the app to Gov.UK PaaS
       run: |
-        cf login -a api.cloud.service.gov.uk -u jwg@swi.re -p '${{ secrets.GOV_PAAS_PASSWORD }}' -o 'beis-domestic-energy-advice-service'
+        cf login -a api.cloud.service.gov.uk -u jwg@swi.re -p '${{ secrets.gov_paas_password }}' -o 'beis-domestic-energy-advice-service'
         cf target -s sea-alpha-${{ inputs.environment_name }}
         cf push sea-alpha-${{ inputs.environment_name }} --manifest manifest.yml
       working-directory: ./ci-server-build/
