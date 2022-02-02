@@ -25,7 +25,7 @@ APP_MEMORY="1G"     # In PaaS this is 4G for all environments other than product
 
 #-----------------
 # Create the space
-cf create-space "sea-alpha-${PAAS_ENV_SHORTNAME}" -o "Organisation beis-domestic-energy-advice-service"
+cf create-space "sea-alpha-${PAAS_ENV_SHORTNAME}" -o "beis-domestic-energy-advice-service"
 
 # - Target future commands at this space
 cf target -s "sea-alpha--${PAAS_ENV_SHORTNAME}"
