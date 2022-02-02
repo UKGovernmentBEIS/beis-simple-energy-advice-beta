@@ -21,6 +21,12 @@ jobs:
       with:
         dotnet-version: 5.0.x
         
+    - name: Install the Cloud Foundry CLI
+      run: |
+        wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+        echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+        sudo apt-get install cf7-cli
+
     - name: Restore Node.JS dependencies
       run: npm ci
       working-directory: ./SeaPublicWebsite
@@ -34,3 +40,10 @@ jobs:
       
     - name: Build .Net code
       run: dotnet build --no-restore
+
+    - name: Push the app to Gov.UK PaaS
+      run: |
+        cf login -a api.cloud.service.gov.uk -u jwg@swi.re -p '${{ secrets.GOV_PAAS_PASSWORD }}' -o 'beis-domestic-energy-advice-service'
+        cf target -s sea-alpha-DEV
+        cf push sea-alpha-DEV --manifest manifest.yml
+      working-directory: ./SeaPublicWebsite
