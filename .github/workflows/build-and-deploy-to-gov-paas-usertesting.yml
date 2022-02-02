@@ -1,4 +1,4 @@
-name: Build and Deploy SEA-Alpha to Gov.UK PaaS (USERTESTING environment)
+name: [U.TEST] Build & Deploy SEA-Alpha to Gov.UK PaaS
 
 on:
   push:

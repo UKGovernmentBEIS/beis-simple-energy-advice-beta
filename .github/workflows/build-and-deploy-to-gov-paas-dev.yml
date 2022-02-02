@@ -1,4 +1,4 @@
-name: Build and Deploy SEA-Alpha to Gov.UK PaaS (DEV environment)
+name: [DEV] Build & Deploy SEA-Alpha to Gov.UK PaaS
 
 on:
   push:

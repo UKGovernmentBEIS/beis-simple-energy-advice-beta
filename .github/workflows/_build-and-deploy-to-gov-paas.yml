@@ -1,4 +1,4 @@
-name: Build and Deploy SEA-Alpha to Gov.UK PaaS
+name: Shared functionality for the Build & Deploy workflows
 
 on:
   workflow_call:
