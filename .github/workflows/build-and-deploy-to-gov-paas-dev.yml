@@ -40,11 +40,11 @@ jobs:
       run: dotnet restore
       
     - name: Build .Net code
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration Release --output ./ci-server-build/
 
     - name: Push the app to Gov.UK PaaS
       run: |
         cf login -a api.cloud.service.gov.uk -u jwg@swi.re -p '${{ secrets.GOV_PAAS_PASSWORD }}' -o 'beis-domestic-energy-advice-service'
         cf target -s sea-alpha-DEV
         cf push sea-alpha-DEV --manifest manifest.yml
-      working-directory: ./SeaPublicWebsite
+      working-directory: ./ci-server-build/
