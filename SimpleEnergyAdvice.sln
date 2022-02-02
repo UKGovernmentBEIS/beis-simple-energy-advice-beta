@@ -9,6 +9,18 @@ ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{EE6BCE34-EE65-4B59-9310-3AD1608277BB}"
+ProjectSection(SolutionItems) = preProject
+	Infrastructure\CreateEnvironment.sh = Infrastructure\CreateEnvironment.sh
+	Infrastructure\LoginToGovPaas.sh = Infrastructure\LoginToGovPaas.sh
+	Infrastructure\LoginToGovPaasTemplate.sh = Infrastructure\LoginToGovPaasTemplate.sh
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHubActions", "GitHubActions", "{F7C11F5D-EF14-4842-90D1-BB3084CA7F14}"
+ProjectSection(SolutionItems) = preProject
+	.github\workflows\build-and-deploy-to-gov-paas-dev.yml = .github\workflows\build-and-deploy-to-gov-paas-dev.yml
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

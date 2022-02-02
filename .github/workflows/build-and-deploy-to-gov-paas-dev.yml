@@ -1,0 +1,36 @@
+name: Build and Deploy SEA-Alpha to Gov.UK PaaS
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code onto job runner
+      uses: actions/checkout@v2
+      
+    - name: Install Node.JS (v14)
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+        
+    - name: Install .Net (5.0)
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+        
+    - name: Restore Node.JS dependencies
+      run: npm ci
+      working-directory: ./SeaPublicWebsite
+      
+    - name: Build SCSS and JS code
+      run: npm run build
+      working-directory: ./SeaPublicWebsite
+      
+    - name: Restore .Net dependencies
+      run: dotnet restore
+      
+    - name: Build .Net code
+      run: dotnet build --no-restore
