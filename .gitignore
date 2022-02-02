@@ -12,3 +12,5 @@ obj/
 
 # App Secrets
 SeaPublicWebsite/appsettings.secret.json
+
+Infrastructure/LoginToGovPaas.sh
