@@ -1,0 +1,11 @@
+name: Build and Deploy SEA-Alpha to Gov.UK PaaS (USERTESTING environment)
+
+on:
+  push:
+    branches: [ usertesting ]
+
+jobs:
+  call-build-and-deploy-workflow:
+    uses: ./.github/workflows/_build-and-deploy-to-gov-paas.yml
+    with:
+      environment_name: USERTESTING
