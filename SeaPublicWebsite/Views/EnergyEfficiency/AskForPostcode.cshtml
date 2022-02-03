@@ -1,0 +1,55 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@model SeaPublicWebsite.Models.EnergyEfficiency.AskForPostcodeViewModel
+@{
+    ViewBag.Title = "Enter your post code";
+}
+
+@section BeforeMain {
+    @{
+        var crumbs = new List<CrumbViewModel>
+        {
+            new CrumbViewModel
+            {
+                Text = "Home",
+                Href = Url.Action("Index", "Home")
+            },
+            new CrumbViewModel
+            {
+                Text = "Energy Efficiency Questionnaire",
+                Href = Url.Action("Index", "EnergyEfficiency")
+            },
+            new CrumbViewModel
+            {
+                Text = "Post code"
+            }
+        };
+    }
+
+    @(Html.GovUkBreadcrumbs(new BreadcrumbsViewModel
+    {
+        Crumbs = crumbs
+    }))
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="@Url.Action("AskForPostcode_Post", "EnergyEfficiency")" method="post" novalidate>
+
+            @(Html.GovUkTextInputFor(
+                m => m.Postcode,
+                labelOptions: new LabelViewModel
+                {
+                    Text = "What is your postcode?",
+                    IsPageHeading = true,
+                    Classes = "govuk-label--xl"
+                },
+                classes: "govuk-input--width-10"
+            ))
+
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
