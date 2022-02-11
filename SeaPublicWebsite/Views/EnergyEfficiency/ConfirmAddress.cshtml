@@ -1,0 +1,57 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@model SeaPublicWebsite.Models.EnergyEfficiency.ConfirmAddressViewModel
+@{
+    ViewBag.Title = "Confirm your address";
+}
+
+@section BeforeMain {
+    @Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = @Url.Action("AskForPostcode_Get", "EnergyEfficiency"),
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = false
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-l">Found your property</h1>
+        <div id="dob-hint" class="govuk-hint">
+            We found your property! Are these details correct?
+        </div>
+
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              @(Model.Address.line_1)<br />
+              @if (Model.Address.line_2 != null)
+                {
+                    @(Model.Address.line_2) <br />
+                }
+              @(Model.Address.town_or_city)<br />
+              @(Model.Address.postcode)
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="@Url.Action("AskForPostcode_Get", "EnergyEfficiency")">
+                Change<span class="govuk-visually-hidden"> address</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+        <p class="govuk-body">
+            <a href="@Url.Action("HomeType_Get", "EnergyEfficiency")" class="govuk-button" data-module="govuk-button">
+                Continue
+            </a>
+        </p>
+
+    </div>
+</div>

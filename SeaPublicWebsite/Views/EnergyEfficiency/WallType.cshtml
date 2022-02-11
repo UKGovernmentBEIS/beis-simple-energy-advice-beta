@@ -1,0 +1,46 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.EnergyEfficiency
+@model SeaPublicWebsite.Models.EnergyEfficiency.WallTypeViewModel;
+@{
+    ViewBag.Title = "Wall Type";
+}
+
+@section BeforeMain {
+    @Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = @Url.Action("Index", "EnergyEfficiency"),
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = false
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="@Url.Action("WallType_Post", "EnergyEfficiency")" method="post" novalidate>
+
+            <fieldset class="govuk-fieldset">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                <span class="govuk-caption-l">@Model.Theme.GetDisplayName()</span>
+                <h1 class="govuk-fieldset__heading">
+                  @Model.Title
+                </h1>
+              </legend>
+              <div id="passport-number-hint" class="govuk-hint">
+                @Model.Description
+              </div>
+
+            @(Html.GovUkRadiosFor(m => m.Answer))
+
+            </fieldset>
+
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
