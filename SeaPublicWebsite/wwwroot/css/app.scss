@@ -3,6 +3,7 @@
 @import "_reset";
 
 /* Imported from Gov.UK Frontend */
+$govuk-new-link-styles: true;
 @import "../../node_modules/govuk-frontend/govuk/all";
 
 /* Simple Energy Advice service custom styles */
