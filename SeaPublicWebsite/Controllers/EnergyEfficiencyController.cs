@@ -4,9 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
-using SeaPublicWebsite.Services;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SeaPublicWebsite.Controllers
 {
