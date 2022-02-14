@@ -223,7 +223,7 @@ namespace SeaPublicWebsite.Controllers
                 return View("HouseType", viewModel);
             }
 
-            return RedirectToAction("WallType_Get");
+            return RedirectToAction("HomeAge_Get");
         }
 
         [HttpGet("bungalow-type")]
@@ -244,7 +244,7 @@ namespace SeaPublicWebsite.Controllers
                 return View("BungalowType", viewModel);
             }
 
-            return RedirectToAction("WallType_Get");
+            return RedirectToAction("HomeAge_Get");
         }
 
         [HttpGet("flat-type")]
@@ -265,7 +265,7 @@ namespace SeaPublicWebsite.Controllers
                 return View("FlatType", viewModel);
             }
 
-            return RedirectToAction("WallType_Get");
+            return RedirectToAction("HomeAge_Get");
         }
 
         [HttpGet("home-age")]
