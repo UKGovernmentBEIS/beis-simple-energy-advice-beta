@@ -7,6 +7,5 @@
         public string town_or_city { get; set; }
         public string county { get; set; }
         public string postcode { get; set; }
-
     }
 }

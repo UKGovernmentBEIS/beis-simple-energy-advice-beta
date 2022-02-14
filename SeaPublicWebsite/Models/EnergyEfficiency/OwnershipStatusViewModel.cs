@@ -11,7 +11,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Description = "What does that mean?";
         public QuestionTheme Theme = QuestionTheme.Suitability;
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Must select tenancy type")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Please let us know your circumstances")]
         public OwnershipStatus? Answer { get; set; }
     }
 }

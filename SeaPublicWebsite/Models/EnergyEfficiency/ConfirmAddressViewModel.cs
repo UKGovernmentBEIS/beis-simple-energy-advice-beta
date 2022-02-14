@@ -1,5 +1,6 @@
 ﻿using GovUkDesignSystem;
 using SeaPublicWebsite.ExternalServices;
+using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
@@ -9,6 +10,8 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         {
             Address = address;
         }
+
+        public QuestionTheme Theme = QuestionTheme.YourHome;
 
         public Address Address { get; set; }
     }

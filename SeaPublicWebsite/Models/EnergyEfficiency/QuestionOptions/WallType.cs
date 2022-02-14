@@ -5,14 +5,14 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
     public enum WallType
     {
         [GovUkRadioCheckboxLabelText(Text = "Cavity and uninsulated")]
-        CavityNoInsulation = 1,
+        CavityNoInsulation,
         [GovUkRadioCheckboxLabelText(Text = "Cavity and insulated")]
-        CavityInsulated = 2,
+        CavityInsulated,
         [GovUkRadioCheckboxLabelText(Text = "Solid and uninsulated")]
-        SolidNoInsulation = 3,
+        SolidNoInsulation,
         [GovUkRadioCheckboxLabelText(Text = "Solid and insulated")]
-        SolidInsulated = 4,
+        SolidInsulated,
         [GovUkRadioCheckboxLabelText(Text = "I don't know")]
-        DoNotKnow = 0,
+        DoNotKnow,
     }
 }

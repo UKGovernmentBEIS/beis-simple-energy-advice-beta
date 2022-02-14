@@ -6,11 +6,11 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class RoofConstructionViewModel : GovUkViewModel
     {
-        public string Title = "What kind of roof does your property have?";
-        public string Description = "Homes of your type have ";
+        public string Title = "Is your roof flat or pitched at an angle?";
+        public string Description = "";
         public QuestionTheme Theme = QuestionTheme.YourHome;
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Must select roof type")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Please select roof type")]
         public RoofConstruction? Answer { get; set; }
     }
 }
