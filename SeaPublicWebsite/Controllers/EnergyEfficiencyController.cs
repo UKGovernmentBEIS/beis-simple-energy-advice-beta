@@ -1,7 +1,10 @@
 ﻿using GovUkDesignSystem;
 using GovUkDesignSystem.Parsers;
 using Microsoft.AspNetCore.Mvc;
+using SeaPublicWebsite.DataModels;
+using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
+using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
@@ -10,10 +13,57 @@ namespace SeaPublicWebsite.Controllers
     [Route("energy-efficiency")]
     public class EnergyEfficiencyController : Controller
     {
+        private readonly UserDataStore userDataStore;
+
+        public EnergyEfficiencyController(UserDataStore userDataStore)
+        {
+            this.userDataStore = userDataStore;
+        }
+        
         [HttpGet("")]
         public IActionResult Index()
         {
            return View("Index");
+        }
+
+        [HttpGet("new-or-returning-user")]
+        public IActionResult NewOrReturningUser_Get()
+        {
+            var viewModel = new NewOrReturningUserViewModel();
+            return View("NewOrReturningUser", viewModel);
+        }
+
+        [HttpPost("new-or-returning-user")]
+        public IActionResult NewOrReturningUser_Post(NewOrReturningUserViewModel viewModel)
+        {
+            viewModel.ParseAndValidateParameters(Request, m => m.NewOrReturningUser);
+
+            if (viewModel.HasAnyErrors())
+            {
+                return View("NewOrReturningUser", viewModel);
+            }
+
+            if (viewModel.NewOrReturningUser == NewOrReturningUser.ReturningUser)
+            {
+                viewModel.ParseAndValidateParameters(Request, m => m.Reference);
+
+                if (viewModel.HasAnyErrors())
+                {
+                    return View("NewOrReturningUser", viewModel);
+                }
+
+                if (!userDataStore.IsReferenceValid(viewModel.Reference))
+                {
+                    viewModel.AddErrorFor(m => m.Reference, "We could not find this reference. Are you sure you have copied it correctly?");
+                    return View("NewOrReturningUser", viewModel);
+                }
+                
+                return RedirectToAction("OwnershipStatus_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
+            }
+
+            string reference = userDataStore.GenerateNewReferenceAndSaveEmptyUserData();
+            
+            return RedirectToAction("OwnershipStatus_Get", "EnergyEfficiency", new { reference = reference });
         }
 
         [HttpGet("service-unsuitable")]
@@ -34,9 +84,11 @@ namespace SeaPublicWebsite.Controllers
             return View("AnswerSummary");
         }
 
-        [HttpGet("ownership-status")]
-        public IActionResult OwnershipStatus_Get()
+        [HttpGet("ownership-status/{reference}")]
+        public IActionResult OwnershipStatus_Get(string reference)
         {
+            var userDataModel = userDataStore.LoadUserData(reference);
+
             var viewModel = new OwnershipStatusViewModel();
 
             return View("OwnershipStatus", viewModel);

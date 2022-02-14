@@ -1,0 +1,61 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
+@model SeaPublicWebsite.Models.EnergyEfficiency.NewOrReturningUserViewModel
+@{
+    ViewBag.Title = "Energy Efficiency Questionnaire";
+}
+
+@section BeforeMain {
+    @Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = @Url.Action("Index", "EnergyEfficiency"),
+        OverrideWithJavascript = true
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        
+        <form method="post" action="@Url.Action("NewOrReturningUser_Post", "EnergyEfficiency")">
+
+            @Html.GovUkRadiosFor(
+                m => m.NewOrReturningUser,
+                fieldsetOptions: new FieldsetViewModel
+                {
+                    Legend = new LegendViewModel
+                    {
+                        Text = "Have you used this service before?",
+                        Classes = "govuk-fieldset__legend--l",
+                        IsPageHeading = true,
+                    },
+                },
+                conditionalOptions: new Dictionary<NewOrReturningUser?, Func<object, object>>
+                {
+                    {
+                        NewOrReturningUser.ReturningUser,
+                        @<text>
+                            @(Html.GovUkTextInputFor(
+                                m => m.Reference,
+                                labelOptions: new LabelViewModel
+                                {
+                                    Text = "Your 8-digit reference",
+                                },
+                                classes: "govuk-input--width-10"
+                            ))
+                         </text>
+                    }
+                }
+                )
+
+            @(Html.GovUkButton(new ButtonViewModel
+            {
+                Text = "Continue",
+            }))
+
+        </form>
+
+    </div>
+    @await Html.PartialAsync("/Views/EnergyEfficiency/Sections/RelatedContent.cshtml")
+</div>
