@@ -11,7 +11,10 @@
     {
         Text = "Back",
         Href = @Url.Action("Index", "EnergyEfficiency"),
-        OverrideWithJavascript = true
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = false
     })
 }
 
@@ -57,5 +60,4 @@
         </form>
 
     </div>
-    @await Html.PartialAsync("/Views/EnergyEfficiency/Sections/RelatedContent.cshtml")
 </div>

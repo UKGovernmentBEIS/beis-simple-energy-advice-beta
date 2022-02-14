@@ -17,7 +17,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     
     public enum NewOrReturningUser
     {
-        [GovUkRadioCheckboxLabelText(Text = "Yes, and I have my 8-digit reference number from my previous visit")]
+        [GovUkRadioCheckboxLabelText(Text = "Yes, and I have the 8-digit reference number from my previous visit")]
         ReturningUser,
         [GovUkRadioCheckboxLabelText(Text = "This is my first visit, or I don't have a reference number at hand")]
         NewUser

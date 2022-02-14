@@ -20,12 +20,14 @@ namespace SeaPublicWebsite.Controllers
             this.userDataStore = userDataStore;
         }
         
+        
         [HttpGet("")]
         public IActionResult Index()
         {
            return View("Index");
         }
 
+        
         [HttpGet("new-or-returning-user")]
         public IActionResult NewOrReturningUser_Get()
         {
@@ -66,55 +68,50 @@ namespace SeaPublicWebsite.Controllers
             return RedirectToAction("OwnershipStatus_Get", "EnergyEfficiency", new { reference = reference });
         }
 
-        [HttpGet("service-unsuitable")]
-        public IActionResult ServiceUnsuitable()
-        {
-            return View("ServiceUnsuitable");
-        }
-
-        [HttpGet("your-property")]
-        public IActionResult YourPropertyCover()
-        {
-            return View("YourPropertyCover");
-        }
-
-        [HttpGet("answer-summary")]
-        public IActionResult AnswerSummary()
-        {
-            return View("AnswerSummary");
-        }
-
+        
         [HttpGet("ownership-status/{reference}")]
         public IActionResult OwnershipStatus_Get(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
-            var viewModel = new OwnershipStatusViewModel();
+            var viewModel = new OwnershipStatusViewModel
+            {
+                OwnershipStatus = userDataModel.OwnershipStatus,
+                Reference = userDataModel.Reference
+            };
 
             return View("OwnershipStatus", viewModel);
         }
 
-        [HttpPost("ownership-status")]
+        [HttpPost("ownership-status/{reference}")]
         public IActionResult OwnershipStatus_Post(OwnershipStatusViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.OwnershipStatus);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("OwnershipStatus", viewModel);
             }
 
-            if (viewModel.Answer == OwnershipStatus.PrivateTenancy)
+            userDataModel.OwnershipStatus = viewModel.OwnershipStatus;
+            userDataStore.SaveUserData(userDataModel);
+
+            if (viewModel.OwnershipStatus == OwnershipStatus.PrivateTenancy)
             {
                 return RedirectToAction("ServiceUnsuitable");
             }
 
-            return RedirectToAction("Country_Get");
+            return RedirectToAction("Country_Get", "EnergyEfficiency", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("country")]
-        public IActionResult Country_Get()
+        
+        [HttpGet("country/{reference}")]
+        public IActionResult Country_Get(string reference)
         {
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
             var viewModel = new CountryViewModel();
 
             return View("Country", viewModel);
@@ -135,6 +132,25 @@ namespace SeaPublicWebsite.Controllers
                 return RedirectToAction("ServiceUnsuitable");
             }
             return RedirectToAction("UserGoal_Get");
+        }
+
+
+        [HttpGet("service-unsuitable")]
+        public IActionResult ServiceUnsuitable()
+        {
+            return View("ServiceUnsuitable");
+        }
+
+        [HttpGet("your-property")]
+        public IActionResult YourPropertyCover()
+        {
+            return View("YourPropertyCover");
+        }
+
+        [HttpGet("answer-summary")]
+        public IActionResult AnswerSummary()
+        {
+            return View("AnswerSummary");
         }
 
         [HttpGet("user-goal")]

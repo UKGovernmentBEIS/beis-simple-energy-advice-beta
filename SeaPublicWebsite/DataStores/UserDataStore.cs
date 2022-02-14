@@ -27,9 +27,9 @@ namespace SeaPublicWebsite.DataStores
             return userDataDatabase.ContainsKey(reference);
         }
         
-        public void SaveUserData(string reference, UserDataModel userDataModel)
+        public void SaveUserData(UserDataModel userDataModel)
         {
-            userDataDatabase[reference] = userDataModel;
+            userDataDatabase[userDataModel.Reference] = userDataModel;
         }
         
         public string GenerateNewReferenceAndSaveEmptyUserData()
@@ -39,8 +39,12 @@ namespace SeaPublicWebsite.DataStores
             {
                 reference = RandomHelper.Generate8DigitReference();
             } while (IsReferenceValid(reference));
-            
-            SaveUserData(reference, new UserDataModel());
+
+            var userDataModel = new UserDataModel
+            {
+                Reference = reference
+            };
+            SaveUserData(userDataModel);
 
             return reference;
         }
