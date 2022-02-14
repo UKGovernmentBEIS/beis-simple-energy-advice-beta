@@ -14,6 +14,5 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public List<UserInterests> Answer { get; set; }
         [GovUkValidateRequired(ErrorMessageIfMissing = "Please let us know if you have some improvements in mind")]
         public HasUserInterests? HasUserInterests { get; set; }
-        public Answers Answers { get; set; }
     }
 } 
