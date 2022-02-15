@@ -11,7 +11,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Description = "";
         public QuestionTheme Theme = QuestionTheme.YourHome;
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Must select bungalow type")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select bungalow type")]
         public BungalowType? Answer { get; set; }
     }
 }

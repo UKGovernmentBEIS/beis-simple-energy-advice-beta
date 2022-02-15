@@ -8,9 +8,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public string Title = "What kind of heating does your property have?";
         public string Description = "";
-        public QuestionTheme Theme = QuestionTheme.YourHome;
+        public QuestionTheme Theme = QuestionTheme.Heating;
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Please select heating type")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select heating type")]
         public HeatingType? Answer { get; set; }
     }
 }

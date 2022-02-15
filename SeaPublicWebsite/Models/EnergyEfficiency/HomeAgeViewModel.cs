@@ -13,8 +13,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string HelpText = "Typically...";
         public QuestionTheme Theme = QuestionTheme.YourHome ;
 
-        [GovUkDisplayNameForErrors(NameAtStartOfSentence = "Year home was built", NameWithinSentence = "year home was built")]
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Please provide the approximate year that your home was built")]
+        [GovUkDisplayNameForErrors(NameAtStartOfSentence = "Year that you home was built", NameWithinSentence = "year that your home was built")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Enter the approximate year that your home was built")]
+        [GovUkValidateIntRange(Minimum = 1000, Maximum = 2022)]
         public int? HomeAge { get; set; }
     }
 }

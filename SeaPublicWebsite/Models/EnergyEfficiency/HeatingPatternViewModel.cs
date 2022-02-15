@@ -10,7 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Description = "";
         public QuestionTheme Theme = QuestionTheme.Behaviour;
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Must select heating pattern")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select heating pattern")]
         public HeatingPattern? Answer { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Description = "";
         public QuestionTheme Theme = QuestionTheme.Suitability;
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Please let us know which country you live in")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select the country that you live in")]
         public Country? Answer { get; set; }
     }
 }

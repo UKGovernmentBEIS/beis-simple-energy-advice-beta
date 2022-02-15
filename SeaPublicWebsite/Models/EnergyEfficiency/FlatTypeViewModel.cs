@@ -10,7 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Description = "";
         public QuestionTheme Theme = QuestionTheme.YourHome;
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Must select flat type")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select flat type")]
         public FlatType? Answer { get; set; }
     }
 }

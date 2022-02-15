@@ -9,3 +9,47 @@
 .app-related-items .govuk-list > li {
     margin-bottom: govuk-spacing(2);
 }
+
+.sea-service-unsuitable, .sea-recommendations-panel {
+    background-color: govuk-colour("blue");
+}
+
+.sea-recommendations-panel {
+    text-align: left;
+
+    .govuk-caption-l, .sea-reference {
+        color: govuk-colour("white");
+    }
+}
+
+.sea-user-reference {
+    border: solid 2px govuk-colour("blue");
+    padding: 40px 10px 0px 20px;
+}
+
+.sea-recommendation-side-panel {
+    border-top: 2px solid govuk-colour("blue");
+    padding-top: govuk-spacing(2);
+}
+
+.sea-recommendation-financial-impact {
+    .sea-install-costs {
+        border-left: 4px solid govuk-colour("black");
+    }
+
+    .sea-yearly-savings {
+        border-left: 4px solid govuk-colour("green");
+
+        h3 {
+            color: govuk-colour("green");
+        }
+    }
+}
+
+.sea-recommendation-impact {
+    text-align: right;
+}
+
+.sea-next-steps {
+    margin-top: 15px;
+}

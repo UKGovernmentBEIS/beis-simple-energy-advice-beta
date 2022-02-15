@@ -1,0 +1,144 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.EnergyEfficiency
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+
+@{
+    ViewBag.Title = "Your saved recommendations";
+}
+
+@section BeforeMain {
+    @Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = @Url.Action("Recommendation_Get", "EnergyEfficiency"),
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = false
+    })
+}
+
+<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel">
+  <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Your goal</span>
+        <h1 class="govuk-panel__title">
+        To reduce my energy bills
+        </h1>
+        <a href="#" class="govuk-link govuk-link--inverse">Change my answers</a>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <p class="govuk-body-l sea-reference">Your reference <strong>YZ431XJ</strong></p>
+      </div>
+    </div>
+</div>
+
+  <main class="govuk-main-wrapper " id="main-content" role="main">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Your saved recommendations</h1>
+        <p class="govuk-body">
+            Some useful text or guidance here. 
+        </p>
+
+        <span class="govuk-caption-m">Together, these improvements could cost</span>
+        <h3 class="govuk-heading-l">£9,500 - £14,000</h3>
+        <span class="govuk-caption-m">You could save up to</span>
+        <h3 class="govuk-heading-l">£350 a year</h3>
+
+        <table class="govuk-table">
+          <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+              <th scope="col" class="govuk-table__header"></th>
+              <th scope="col" class="govuk-table__header">Typical costs</th>
+              <th scope="col" class="govuk-table__header">Typical savings per year</th>
+              <th scope="col" class="govuk-table__header"></th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header">
+                  <p class="govuk-body-l">
+                      <a class="govuk-link"  href=#>Add some loft insulation</a>
+                  </p>
+                  <p class="govuk-body">
+                      Your loft should be insulated with a thickness of around 300mm
+                  </p>
+              </th>
+              <td class="govuk-table__cell">£2000 - 3500</td>
+              <td class="govuk-table__cell">£150</td>
+              <td class="govuk-table__cell"><a class="govuk-link"  href=#>Remove</a></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header">
+                  <p class="govuk-body-l">
+                      <a class="govuk-link"  href=#>Insulate the ground floor</a>
+                  </p>
+                  <p class="govuk-body">
+                      If you have a suspended timber floor, the gap should be filled with insulating material.
+                  </p>
+              </th>
+              <td class="govuk-table__cell">£1000 - 2500</td>
+              <td class="govuk-table__cell">£75</td>
+              <td class="govuk-table__cell"><a class="govuk-link"  href=#>Remove</a></td>
+            </tr>
+            <tr class="govuk-table__row">
+              <th scope="row" class="govuk-table__header">
+                  <p class="govuk-body-l">
+                      <a class="govuk-link"  href=#>Install a heat pump</a>
+                  </p>
+                  <p class="govuk-body">
+                      You should consider if a highly efficient heat pump system is suitable for your property. 
+                  </p>
+              </th>
+              <td class="govuk-table__cell">£6500 - 8000</td>
+              <td class="govuk-table__cell">£210</td>
+              <td class="govuk-table__cell"><a class="govuk-link"  href=#>Remove</a></td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h2 class="govuk-heading-m">Find grants to cover some or all of the costs</h2>
+        <p class="govuk-body">There may be grants available to help cover the cost of 
+            improvements to your property that reduce the amount of extra energy it 
+            lets go to waste.</p>
+
+        <h2 class="govuk-heading-m">Find qualified installers to do the work</h2>
+        <p class="govuk-body">We recommend consulting with a qualified installer 
+            to make changes to your property.</p>
+        <p class="govuk-body">You can get help finding an qualified installer 
+            in your area by visiting the <a href=# class="govuk-link">Find a local installer service</a> 
+            on the MCS website.</p>
+
+        <h2 class="govuk-heading-m">Where to find more information about energy efficiency</h2>
+        <p class="govuk-body">You can also visit the <a href=# class="govuk-link">Energy Savings Trust website</a> 
+            for more information on other ways you can improve your energy efficiency to reduce your bills.</p>
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <aside class="sea-user-reference" role="complementary">
+            <span class="govuk-caption-l">Your reference</span>
+            <h2 class="govuk-heading-m" id="subsection-title">YZA431XJ</h2>
+            <p class="govuk-body-s">
+                Your reference allows you to get back to your recommendations quickly if you visit 
+                the service again at a later date.
+            </p>
+        </aside>
+        <div class="govuk-notification-banner  sea-next-steps" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+        <div class="govuk-notification-banner__header">
+          <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+            Next steps
+          </h2>
+        </div>
+        <div class="govuk-notification-banner__content">
+            <p class="govuk-body">
+                <ol class="govuk-list govuk-list--number">
+                  <li>Print or email your wishlist</li>
+                  <li>Check for grants</li>
+                  <li>Consult with a qualified installer</li>
+                </ol>
+            </p>
+        </div>
+      </div>
+    </div>
