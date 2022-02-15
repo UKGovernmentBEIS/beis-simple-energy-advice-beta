@@ -10,7 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Description = "";
         public QuestionTheme Theme = QuestionTheme.YourHome;
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Please select roof type")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select roof type")]
         public RoofConstruction? Answer { get; set; }
     }
 }

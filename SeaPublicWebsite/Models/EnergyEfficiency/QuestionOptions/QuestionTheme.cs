@@ -13,9 +13,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         UserNeeds,
         [Display(Name = "Section 3: Your property")]
         YourHome,
-        [Display(Name = "Section 4: Heating")]
+        [Display(Name = "Section 4: Your heating system")]
         Heating,
-        [Display(Name = "Section 5: Behaviour")]
+        [Display(Name = "Section 5: Your energy usage")]
         Behaviour
     }
 }

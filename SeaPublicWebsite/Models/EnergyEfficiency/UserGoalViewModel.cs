@@ -10,7 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Description = "";
         public QuestionTheme Theme = QuestionTheme.UserNeeds;
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Please select what is most important to you")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select what is most important to you")]
         public UserGoal? Answer { get; set; }
     }
 }

@@ -8,9 +8,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public string Title = "Do you have a hot water cylinder?";
         public string Description = "";
-        public QuestionTheme Theme = QuestionTheme.YourHome;
+        public QuestionTheme Theme = QuestionTheme.Heating;
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Please let us know if you have a hot water cylinder")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select whether you have a hot water cylinder")]
         public HasHotWaterCylinder? Answer { get; set; }
     }
 }

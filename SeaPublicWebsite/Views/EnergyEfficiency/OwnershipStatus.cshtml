@@ -21,19 +21,18 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("OwnershipStatus_Post", "EnergyEfficiency", new {reference =  Model.Reference})" method="post" novalidate>
-
-            @(Html.GovUkRadiosFor(m => m.OwnershipStatus,
+        <form action="@Url.Action("OwnershipStatus_Post", "EnergyEfficiency", new {reference =  Model.Reference})" method="post" novalidate>            
+            @(Html.GovUkRadiosFor(m => m.Answer,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
                     {
                         Html = @<text>
                                    <span class="govuk-caption-l govuk-!-margin-bottom-4">
-                                       Section 1: Is this service right for you?
+                                       @Model.Theme.GetDisplayName()
                                    </span>
                                    <h1 class="govuk-fieldset__heading">
-                                       Which if the following statements best describes your circumstances
+                                       @Model.Title
                                    </h1>
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
@@ -45,7 +44,7 @@
                                 <details class="govuk-details" data-module="govuk-details">
                                     <summary class="govuk-details__summary">
                                         <span class="govuk-details__summary-text">
-                                            Help with circumstances
+                                            Why do we need to know this?
                                         </span>
                                     </summary>
                                     <div class="govuk-details__text">

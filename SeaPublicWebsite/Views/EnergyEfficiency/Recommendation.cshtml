@@ -1,0 +1,145 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.EnergyEfficiency
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+
+@{
+    ViewBag.Title = "Recommendation 1 of 4";
+}
+
+@section BeforeMain {
+    @Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = @Url.Action("YourRecommendations_Get", "EnergyEfficiency"),
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = false
+    })
+}
+
+<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel">
+    <div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-l">Your goal</span>
+    <h1 class="govuk-panel__title">
+    To reduce my energy bills
+    </h1>
+    <a href="#" class="govuk-link govuk-link--inverse">Change my answers</a>
+  </div>
+  <div class="govuk-grid-column-one-third">
+    <p class="govuk-body-l sea-reference">Your reference <strong>YZ431XJ</strong></p>
+  </div>
+  
+</div>
+</div>
+
+  <main class="govuk-main-wrapper " id="main-content" role="main">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Recommendation 1 of 4</span>
+        <h1 class="govuk-heading-l">Add some loft insulation</h1>
+        <p class="govuk-body">
+            It looks like you have some insulation in your loft but 
+            it’s less than the recommended amount. It could be worthwhile 
+            adding some more to bring it up to the recommended thickness of 
+            300mm, or 12 inches.
+        </p>
+
+        <p class="govuk-body">
+            If your loft isn’t insulated enough, a lot of the heat your home 
+            generates will be lost through your roof as it rises.
+        </p>
+
+        <p class="govuk-body">
+            Adding extra insulation can help trap the heat inside your property 
+            so your heating doesn’t need to be on as much. 
+        </p>
+
+         <div class="govuk-inset-text">
+            <p class="govuk-body">
+                If some of your loft is boarded so that you can store things up 
+                there you will either need to raise this boarding up and insulate 
+                underneath it, or leave that part of the loft with thinner insulation.
+            </p>
+        </div>
+
+        <p class="govuk-body">
+            You can find more information on loft insulation on the 
+            <a href=# class="govuk-link">Energy Saving Trust website.</a>
+        </p>
+
+
+        <div class="govuk-warning-text">
+          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+          <strong class="govuk-warning-text__text">
+            <span class="govuk-warning-text__assistive">Warning</span>
+            You should consult a qualified installer to work out how much insulation 
+            is right for your property. 
+          </strong>
+        </div>
+
+        <h2 class="govuk-heading-m">Who this improvement is suitable for</h2>
+        <p class="govuk-body">You should consider this improvement for your property if:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>Your loft has less than the recommended amount of insulation. 
+              This is currently 300mm or 12 inches thick.</li>
+          <li>You are able to go a short time without using the rooms that need insulating. </li>
+        </ul>
+
+        <h2 class="govuk-heading-m">What you could save</h2>
+
+        <div class="govuk-grid-row sea-recommendation-financial-impact">
+            <div class="govuk-grid-column-one-half sea-install-costs">
+                <span class="govuk-caption-m">This could cost</span>
+                <h3 class="govuk-heading-l">£2000 - £3500</h3>
+            </div>
+            <div class="govuk-grid-column-one-half sea-yearly-savings">
+                <span class="govuk-caption-m">This could save up to</span>
+                <h3 class="govuk-heading-l">£150 a year</h3>
+            </div>
+        </div>
+
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
+              Will this cause disruption during installation?
+            </dt>
+            <dd class="govuk-summary-list__value sea-recommendation-impact">
+              <strong class="govuk-tag govuk-tag--green">MINIMAL</strong>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
+              How long could this take to install?
+            </dt>
+            <dd class="govuk-summary-list__value  sea-recommendation-impact">
+              <strong class="govuk-tag govuk-tag--green">2-5 DAYS</strong>
+            </dd>
+          </div>
+        </dl>
+
+        <h2 class="govuk-heading-m">What would you like to do with this recommendation?</h2>
+
+        <div class="govuk-button-group">
+            <a href="@Url.Action("YourSavedRecommendations_Get", "EnergyEfficiency")" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8" data-module="govuk-button">
+                Save this recommendation to my wishlist
+            </a>
+            <a href="@Url.Action("YourSavedRecommendations_Get", "EnergyEfficiency")" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--secondary" data-module="govuk-button">
+                Discard and continue
+            </a>
+        </div>
+
+      </div>
+      <div class="govuk-grid-column-one-third">
+        <aside class="sea-recommendation-side-panel" role="complementary">
+            <h2 class="govuk-heading-m" id="subsection-title">Keep a copy</h2>
+            <p class="govuk-body-s">
+                <a href=# class="govuk-link">Print or email this recommendation</a>
+            </p>
+            <h2 class="govuk-heading-m" id="subsection-title">Your wish list</h2>
+            <p class="govuk-body-s">You haven’t saved any improvements yet.</p>
+        </aside>
+      </div>

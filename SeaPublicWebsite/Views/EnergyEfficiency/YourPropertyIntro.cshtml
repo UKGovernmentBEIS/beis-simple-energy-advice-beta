@@ -24,7 +24,16 @@
     <div class="govuk-grid-column-two-thirds">
         <span class="govuk-heading-m">@QuestionTheme.YourHome.GetDisplayName()</span>
         <h1 class="govuk-heading-l">We need some information about your property</h1>
-
+        <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+        Why do we need to know this?
+        </span>
+        </summary>
+        <div class="govuk-details__text">
+        We need to know your circumstances so we can work if this service is suitable for you.
+        </div>
+        </details>
         <p class="govuk-body">Add in some content here explaining why.</p>
 
         <a href="@Url.Action("AskForPostcode_Get", "EnergyEfficiency")" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">

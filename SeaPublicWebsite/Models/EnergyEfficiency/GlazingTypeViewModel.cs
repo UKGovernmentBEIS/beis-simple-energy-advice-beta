@@ -10,7 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Description = "";
         public QuestionTheme Theme = QuestionTheme.YourHome;
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Must select glazing type")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select glazing type")]
         public GlazingType? Answer { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace SeaPublicWebsite.DataModels
         public List<UserInterests> UserInterests { get; set; }
         public string Postcode { get; set; }
         public string EpcLmkKey { get; set; }
-        public HomeType? HomeType { get; set; }
+        public PropertyType? HomeType { get; set; }
         public int YearBuilt { get; set; }
         public WallType? WallType { get; set; }
         public RoofConstruction? RoofConstruction { get; set; }

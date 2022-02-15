@@ -11,7 +11,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Description = "";
         public QuestionTheme Theme = QuestionTheme.YourHome;
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Please let us know if you have outdoor space")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select whether you have outdoor space")]
         public HasOutdoorSpace? Answer { get; set; }
     }
 }

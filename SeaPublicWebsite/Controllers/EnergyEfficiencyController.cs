@@ -1,10 +1,8 @@
 ﻿using GovUkDesignSystem;
 using GovUkDesignSystem.Parsers;
 using Microsoft.AspNetCore.Mvc;
-using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
-using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
@@ -68,7 +66,18 @@ namespace SeaPublicWebsite.Controllers
             return RedirectToAction("OwnershipStatus_Get", "EnergyEfficiency", new { reference = reference });
         }
 
-        
+        [HttpGet("your-property-intro")]
+        public IActionResult YourPropertyIntro()
+        {
+            return View("YourPropertyIntro");
+        }
+
+        [HttpGet("answer-summary")]
+        public IActionResult AnswerSummary()
+        {
+            return View("AnswerSummary");
+        }
+
         [HttpGet("ownership-status/{reference}")]
         public IActionResult OwnershipStatus_Get(string reference)
         {
@@ -76,7 +85,7 @@ namespace SeaPublicWebsite.Controllers
 
             var viewModel = new OwnershipStatusViewModel
             {
-                OwnershipStatus = userDataModel.OwnershipStatus,
+                Answer = userDataModel.OwnershipStatus,
                 Reference = userDataModel.Reference
             };
 
@@ -88,17 +97,17 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
             
-            viewModel.ParseAndValidateParameters(Request, m => m.OwnershipStatus);
+            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("OwnershipStatus", viewModel);
             }
 
-            userDataModel.OwnershipStatus = viewModel.OwnershipStatus;
+            userDataModel.OwnershipStatus = viewModel.Answer;
             userDataStore.SaveUserData(userDataModel);
 
-            if (viewModel.OwnershipStatus == OwnershipStatus.PrivateTenancy)
+            if (viewModel.Answer == OwnershipStatus.PrivateTenancy)
             {
                 return RedirectToAction("ServiceUnsuitable");
             }
@@ -147,12 +156,6 @@ namespace SeaPublicWebsite.Controllers
             return View("YourPropertyCover");
         }
 
-        [HttpGet("answer-summary")]
-        public IActionResult AnswerSummary()
-        {
-            return View("AnswerSummary");
-        }
-
         [HttpGet("user-goal")]
         public IActionResult UserGoal_Get()
         {
@@ -186,14 +189,23 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("user-interests")]
         public IActionResult UserInterests_Post(UserInterestsViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            viewModel.ParseAndValidateParameters(Request, m => m.HasUserInterests);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("UserInterests", viewModel);
             }
+            
+            if (viewModel.HasUserInterests == HasUserInterests.Yes)
+            {
+                viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+                if (viewModel.HasAnyErrors())
+                {
+                    return View("UserInterests", viewModel);
+                }
+            }
 
-            return RedirectToAction("YourPropertyCover");
+            return RedirectToAction("YourPropertyIntro");
         }
 
 
@@ -240,33 +252,33 @@ namespace SeaPublicWebsite.Controllers
             return View("ConfirmAddress", viewModel);
         }
 
-        [HttpGet("home-type")]
-        public IActionResult HomeType_Get()
+        [HttpGet("property-type")]
+        public IActionResult PropertyType_Get()
         {
-            var viewModel = new HomeTypeViewModel();
+            var viewModel = new PropertyTypeViewModel();
 
-            return View("HomeType", viewModel);
+            return View("PropertyType", viewModel);
         }
 
-        [HttpPost("home-type")]
-        public IActionResult HomeType_Post(HomeTypeViewModel viewModel)
+        [HttpPost("property-type")]
+        public IActionResult PropertyType_Post(PropertyTypeViewModel viewModel)
         {
             viewModel.ParseAndValidateParameters(Request, m => m.Answer);
 
             if (viewModel.HasAnyErrors())
             {
-                return View("HomeType", viewModel);
+                return View("PropertyType", viewModel);
             }
 
             switch (viewModel.Answer)
             {
-                case HomeType.House:
+                case PropertyType.House:
                     return RedirectToAction("HouseType_Get");
-                case HomeType.Bungalow:
+                case PropertyType.Bungalow:
                     return RedirectToAction("BungalowType_Get");
-                case HomeType.FlatDuplexOrMaisonette:
-                    return RedirectToAction("FlatDuplexOrMaisonetteType_Get");
-                case HomeType.ParkHomeOrMobileHome:
+                case PropertyType.ApartmentFlatOrMaisonette:
+                    return RedirectToAction("FlatType_Get");
+                case PropertyType.ParkHomeOrMobileHome:
                     return RedirectToAction("ParkHomeOrMobileHomeType_Get");
                 default:
                     return RedirectToAction("HomeAge_Get");
@@ -544,6 +556,24 @@ namespace SeaPublicWebsite.Controllers
             }
 
             return RedirectToAction("AnswerSummary");
+        }
+
+        [HttpGet("your-recommendations")]
+        public IActionResult YourRecommendations_Get()
+        {
+            return View("YourRecommendations");
+        }
+
+        [HttpGet("recommendation")]
+        public IActionResult Recommendation_Get()
+        {
+            return View("Recommendation");
+        }
+
+        [HttpGet("your-saved-recommendations")]
+        public IActionResult YourSavedRecommendations_Get()
+        {
+            return View("YourSavedRecommendations");
         }
     }
 }

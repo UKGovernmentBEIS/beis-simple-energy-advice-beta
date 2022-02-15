@@ -12,7 +12,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string HelpTitle = "Not sure if your walls are insulated?";
         public string HelpText = "Typically...";
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Must select wall type")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select wall type")]
         public WallType? Answer { get; set; }
     }
 }

@@ -8,9 +8,12 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class OwnershipStatusViewModel : GovUkViewModel
     {
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Please let us know your circumstances")]
-        public OwnershipStatus? OwnershipStatus { get; set; }
-
         public string Reference { get; set; }
+        public string Title = "Which if the following statements best describes your circumstances";
+        public string Description = "What does that mean?";
+        public QuestionTheme Theme = QuestionTheme.Suitability;
+
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select your circumstances")]
+        public OwnershipStatus? Answer { get; set; }
     }
 }
