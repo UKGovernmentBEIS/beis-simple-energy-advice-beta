@@ -140,7 +140,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 return RedirectToAction("ServiceUnsuitable");
             }
-            return RedirectToAction("UserGoal_Get");
+            return RedirectToAction("YourPropertyIntro");
         }
 
 
@@ -155,59 +155,6 @@ namespace SeaPublicWebsite.Controllers
         {
             return View("YourPropertyCover");
         }
-
-        [HttpGet("user-goal")]
-        public IActionResult UserGoal_Get()
-        {
-            var viewModel = new UserGoalViewModel();
-
-            return View("UserGoal", viewModel);
-        }
-
-        [HttpPost("user-goal")]
-        public IActionResult UserGoal_Post(UserGoalViewModel viewModel)
-        {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
-
-            if (viewModel.HasAnyErrors())
-            {
-                return View("UserGoal", viewModel);
-            }
-
-
-            return RedirectToAction("UserInterests_Get");
-        }
-
-        [HttpGet("user-interests")]
-        public IActionResult UserInterests_Get()
-        {
-            var viewModel = new UserInterestsViewModel();
-
-            return View("UserInterests", viewModel);
-        }
-
-        [HttpPost("user-interests")]
-        public IActionResult UserInterests_Post(UserInterestsViewModel viewModel)
-        {
-            viewModel.ParseAndValidateParameters(Request, m => m.HasUserInterests);
-
-            if (viewModel.HasAnyErrors())
-            {
-                return View("UserInterests", viewModel);
-            }
-            
-            if (viewModel.HasUserInterests == HasUserInterests.Yes)
-            {
-                viewModel.ParseAndValidateParameters(Request, m => m.Answer);
-                if (viewModel.HasAnyErrors())
-                {
-                    return View("UserInterests", viewModel);
-                }
-            }
-
-            return RedirectToAction("YourPropertyIntro");
-        }
-
 
         [HttpGet("postcode")]
         public IActionResult AskForPostcode_Get()

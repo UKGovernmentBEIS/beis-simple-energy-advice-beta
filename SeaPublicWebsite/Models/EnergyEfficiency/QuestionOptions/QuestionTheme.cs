@@ -9,13 +9,11 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
     {
         [Display(Name = "Section 1: Is this service right for you?")]
         Suitability,
-        [Display(Name = "Section 2: Getting the most out of this service")] 
-        UserNeeds,
-        [Display(Name = "Section 3: Your property")]
+        [Display(Name = "Section 2: Your property")]
         YourHome,
-        [Display(Name = "Section 4: Your heating system")]
+        [Display(Name = "Section 3: Your heating system")]
         Heating,
-        [Display(Name = "Section 5: Your energy usage")]
+        [Display(Name = "Section 4: Your energy usage")]
         Behaviour
     }
 }

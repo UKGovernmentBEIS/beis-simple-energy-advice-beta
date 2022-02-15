@@ -8,7 +8,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public string Title = "Which of these is the most important thing for you to achieve?";
         public string Description = "";
-        public QuestionTheme Theme = QuestionTheme.UserNeeds;
 
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select what is most important to you")]
         public UserGoal? Answer { get; set; }
