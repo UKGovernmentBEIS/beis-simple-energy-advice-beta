@@ -11,7 +11,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Reference { get; set; }
         public string Title = "Which if the following statements best describes your circumstances";
         public string Description = "What does that mean?";
-        public QuestionTheme Theme = QuestionTheme.Suitability;
+        public QuestionSection Section = QuestionSection.Suitability;
 
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select your circumstances")]
         public OwnershipStatus? Answer { get; set; }

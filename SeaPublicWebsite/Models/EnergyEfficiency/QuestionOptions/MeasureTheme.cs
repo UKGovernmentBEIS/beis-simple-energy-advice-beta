@@ -3,7 +3,7 @@ using GovUkDesignSystem.Attributes.ValidationAttributes;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 {
-    public enum MeasureTheme
+    public enum MeasureSection
     {
         LoftInsulation,
         ImproveGlazing,

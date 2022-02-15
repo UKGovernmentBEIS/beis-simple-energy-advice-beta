@@ -8,7 +8,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public string Title = "Is your roof flat or pitched at an angle?";
         public string Description = "";
-        public QuestionTheme Theme = QuestionTheme.YourHome;
+        public QuestionSection Section = QuestionSection.YourHome;
 
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select roof type")]
         public RoofConstruction? Answer { get; set; }

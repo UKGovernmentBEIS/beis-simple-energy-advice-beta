@@ -11,7 +11,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
             Address = address;
         }
 
-        public QuestionTheme Theme = QuestionTheme.YourHome;
+        public QuestionSection Section = QuestionSection.YourHome;
 
         public Address Address { get; set; }
     }

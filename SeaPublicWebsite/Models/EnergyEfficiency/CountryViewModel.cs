@@ -8,7 +8,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public string Title = "Which country is your property located in?";
         public string Description = "";
-        public QuestionTheme Theme = QuestionTheme.Suitability;
+        public QuestionSection Section = QuestionSection.Suitability;
 
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select the country that you live in")]
         public Country? Answer { get; set; }

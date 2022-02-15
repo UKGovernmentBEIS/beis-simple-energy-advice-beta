@@ -22,20 +22,23 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <form action="@Url.Action("RoofInsulated_Post", "EnergyEfficiency")" method="post" novalidate>
-            <span class="govuk-heading-m">@Model.Theme.GetDisplayName()</span>
-            <fieldset class="govuk-fieldset">
-              <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                <h1 class="govuk-fieldset__heading">
-                  @Model.Title
-                </h1>
-              </legend>
-              <div id="passport-number-hint" class="govuk-hint">
-                @Model.Description
-              </div>
-
-            @(Html.GovUkRadiosFor(m => m.Answer))
-
-            </fieldset>
+             @(Html.GovUkRadiosFor(m => m.Answer,
+                fieldsetOptions: new FieldsetViewModel
+                {
+                    Legend = new LegendViewModel
+                    {
+                        Html = @<text>
+                                   <span class="govuk-heading-m govuk-!-margin-bottom-4">
+                                       @Model.Section.GetDisplayName()
+                                   </span>
+                                   <h1 class="govuk-fieldset__heading">
+                                       @Model.Title
+                                   </h1>
+                                </text>,
+                        Classes = "govuk-fieldset__legend--l"
+                    }
+                }
+            ))
 
             <button class="govuk-button" data-module="govuk-button">
                 Continue

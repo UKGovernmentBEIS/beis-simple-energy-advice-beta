@@ -9,7 +9,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public string Title = "Do you have outdoor space?";
         public string Description = "";
-        public QuestionTheme Theme = QuestionTheme.YourHome;
+        public QuestionSection Section = QuestionSection.YourHome;
 
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select whether you have outdoor space")]
         public HasOutdoorSpace? Answer { get; set; }

@@ -8,7 +8,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public string Title = "What kind of flat do you have?";
         public string Description = "";
-        public QuestionTheme Theme = QuestionTheme.YourHome;
+        public QuestionSection Section = QuestionSection.YourHome;
 
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select flat type")]
         public FlatType? Answer { get; set; }

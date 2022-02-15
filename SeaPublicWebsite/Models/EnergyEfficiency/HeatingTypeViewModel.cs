@@ -6,11 +6,11 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class HeatingTypeViewModel : GovUkViewModel
     {
-        public string Title = "What kind of heating does your property have?";
+        public string Title = "What is your main heating system?";
         public string Description = "";
-        public QuestionTheme Theme = QuestionTheme.Heating;
+        public QuestionSection Section = QuestionSection.Heating;
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Select heating type")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select heating system")]
         public HeatingType? Answer { get; set; }
     }
 }

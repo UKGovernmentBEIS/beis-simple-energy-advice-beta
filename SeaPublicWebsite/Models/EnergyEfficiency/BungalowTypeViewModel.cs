@@ -9,7 +9,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public string Title = "What kind of bungalow do you have?";
         public string Description = "";
-        public QuestionTheme Theme = QuestionTheme.YourHome;
+        public QuestionSection Section = QuestionSection.YourHome;
 
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select bungalow type")]
         public BungalowType? Answer { get; set; }

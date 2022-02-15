@@ -225,8 +225,6 @@ namespace SeaPublicWebsite.Controllers
                     return RedirectToAction("BungalowType_Get");
                 case PropertyType.ApartmentFlatOrMaisonette:
                     return RedirectToAction("FlatType_Get");
-                case PropertyType.ParkHomeOrMobileHome:
-                    return RedirectToAction("ParkHomeOrMobileHomeType_Get");
                 default:
                     return RedirectToAction("HomeAge_Get");
             }
@@ -495,12 +493,22 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("temperature")]
         public IActionResult Temperature_Post(TemperatureViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Temperature);
+            viewModel.ParseAndValidateParameters(Request, m => m.ThermostatTemperatureKnown);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("Temperature", viewModel);
-            }
+            };
+
+            if (viewModel.ThermostatTemperatureKnown == ThermostatTemperatureKnown.Yes)
+            {
+                viewModel.ParseAndValidateParameters(Request, m => m.Temperature);
+
+                if (viewModel.HasAnyErrors())
+                {
+                    return View("Temperature", viewModel);
+                }
+            };
 
             return RedirectToAction("AnswerSummary");
         }

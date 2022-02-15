@@ -8,7 +8,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public string Title = "What is your home address?";
         public string Description = "";
-        public QuestionTheme Theme = QuestionTheme.YourHome;
+        public QuestionSection Section = QuestionSection.YourHome;
 
         [GovUkValidateRequired(ErrorMessageIfMissing = "Enter a UK post code")]
         public string Postcode { get; set; }

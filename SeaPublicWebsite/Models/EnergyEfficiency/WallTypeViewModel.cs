@@ -8,7 +8,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public string Title = "What kind of walls does your property have?";
         public string Description = "Homes of your type typically have ";
-        public QuestionTheme Theme = QuestionTheme.YourHome;
+        public QuestionSection Section = QuestionSection.YourHome;
         public string HelpTitle = "Not sure if your walls are insulated?";
         public string HelpText = "Typically...";
 

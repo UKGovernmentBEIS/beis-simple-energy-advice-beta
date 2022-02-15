@@ -8,7 +8,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public string Title = "Is your roof insulated?";
         public string Description = "";
-        public QuestionTheme Theme = QuestionTheme.YourHome;
+        public QuestionSection Section = QuestionSection.YourHome;
         
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select if the roof is insulated")]
         public RoofInsulated? Answer { get; set; }

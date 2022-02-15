@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 {
-    public enum QuestionTheme
+    public enum QuestionSection
     {
         [Display(Name = "Section 1: Is this service right for you?")]
         Suitability,
