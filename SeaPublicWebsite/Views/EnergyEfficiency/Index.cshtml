@@ -1,46 +1,57 @@
-﻿@using GovUkDesignSystem
-@using GovUkDesignSystem.GovUkDesignSystemComponents
-@{
+﻿@{
     ViewBag.Title = "Energy Efficiency Questionnaire";
 }
 
 @section BeforeMain {
-    @{
-        var crumbs = new List<CrumbViewModel>
-        {
-            new CrumbViewModel
-            {
-                Text = "Home",
-                Href = Url.Action("Index", "Home")
-            },
-            new CrumbViewModel
-            {
-                Text = "Energy Efficiency Questionnaire"
-            }
-        };
-    }
-
-    @(Html.GovUkBreadcrumbs(new BreadcrumbsViewModel
-    {
-        Crumbs = crumbs
-    }))
 }
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <h1 class="govuk-heading-l">How to reduce your energy bills</h1>
+        <h1 class="govuk-heading-l">
+            How to reduce your energy bills
+        </h1>
         
         <p class="govuk-body">
-            This service is for people who:
+            Find ways to reduce your energy bills and make your home more energy efficient.
         </p>
-
+        <p class="govuk-body">
+            This service is for homes in England and Wales.
+        </p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>Live in England and Wales</li>
-          <li>Own their home</li>
+            <li>
+                If you live in Scotland,
+                <a href="https://www.homeenergyscotland.org/">Home Energy Scotland</a>
+                can help you find ways to reduce your energy bills.
+            </li>
+            <li>
+                If you live in Northern Ireland, 
+                <a href="https://www.nidirect.gov.uk/">NI Direct</a>
+                can help.
+            </li>
         </ul>
 
-        <p class="govuk-body">The questionnaire takes around 15 minutes.</p>
+        <h2 class="govuk-heading-m">
+            How long it takes
+        </h2>
+        
+        <p class="govuk-body">
+            It takes around 15 minutes to answer the questions and be shown recommendations tailored to you.
+            You will need to answer some questions about your home and how much energy you use to make sure
+            the recommendations to reduce your energy bills are relevant and suitable for your home.
+        </p>
+        <p class="govuk-body">
+            You could receive advice on ways to save energy, such as:
+        </p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>insulating your loft and cavity walls</li>
+            <li>draught-proofing windows and doors</li>
+            <li>upgrading your heating</li>
+            <li>installing double glazing</li>
+        </ul>
+        <p class="govuk-body">
+            The recommendations will explain what’s involved, and where to go to for further advice.
+        </p>
 
         <a href="@Url.Action("NewOrReturningUser_Get", "EnergyEfficiency")" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
             Start now
@@ -49,9 +60,17 @@
             </svg>
         </a>
         
-        <h2 class="govuk-heading-m">Before you start</h2>
+        <h2 class="govuk-heading-m">
+            Other ways to get support
+        </h2>
+        <p class="govuk-body">
+            <a href="tel:+44800444202">0800 444202</a>
+        </p>
+        <p class="govuk-body">
+            Monday to Friday: 8am to 8pm<br>
+            Saturday and Sunday: 9am to 5pm
+        </p>
 
-        <p class="govuk-body">The online service is also available in <a class="govuk-link" href="#">Welsh (Cymraeg)</a>.</p>
     </div>
     @await Html.PartialAsync("/Views/EnergyEfficiency/Sections/RelatedContent.cshtml")
 </div>

@@ -59,12 +59,12 @@ namespace SeaPublicWebsite.Controllers
                     return View("NewOrReturningUser", viewModel);
                 }
                 
-                return RedirectToAction("OwnershipStatus_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
+                return RedirectToAction("Country_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
             }
 
             string reference = userDataStore.GenerateNewReferenceAndSaveEmptyUserData();
             
-            return RedirectToAction("OwnershipStatus_Get", "EnergyEfficiency", new { reference = reference });
+            return RedirectToAction("Country_Get", "EnergyEfficiency", new { reference = reference });
         }
 
         
@@ -102,7 +102,7 @@ namespace SeaPublicWebsite.Controllers
                 return RedirectToAction("ServiceUnsuitable", "EnergyEfficiency", new {from = "OwnershipStatus", reference = viewModel.Reference});
             }
 
-            return RedirectToAction("Country_Get", "EnergyEfficiency", new {reference = viewModel.Reference});
+            return RedirectToAction("YourPropertyIntro", "EnergyEfficiency", new {reference = viewModel.Reference});
         }
 
         
@@ -140,7 +140,7 @@ namespace SeaPublicWebsite.Controllers
                 return RedirectToAction("ServiceUnsuitable", "EnergyEfficiency", new {from = "Country", reference = viewModel.Reference});
             }
             
-            return RedirectToAction("YourPropertyIntro", "EnergyEfficiency", new {reference = viewModel.Reference});
+            return RedirectToAction("OwnershipStatus_Get", "EnergyEfficiency", new {reference = viewModel.Reference});
         }
 
 
@@ -425,8 +425,16 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.WallType = viewModel.WallType;
             userDataStore.SaveUserData(userDataModel);
-            
-            return RedirectToAction("RoofConstruction_Get", new {reference = viewModel.Reference});
+
+            if (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette
+                && (userDataModel.FlatType == FlatType.GroundFloor || userDataModel.FlatType == FlatType.MiddleFloor))
+            {
+                return RedirectToAction("GlazingType_Get", new {reference = viewModel.Reference});
+            }
+            else
+            {
+                return RedirectToAction("RoofConstruction_Get", new {reference = viewModel.Reference});
+            }
         }
 
         
@@ -492,7 +500,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.RoofInsulated = viewModel.RoofInsulated;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("OutdoorSpace_Get", new {reference = viewModel.Reference});
+            return RedirectToAction("GlazingType_Get", new {reference = viewModel.Reference});
         }
 
         
@@ -525,7 +533,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HasOutdoorSpace = viewModel.HasOutdoorSpace;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("GlazingType_Get", new {reference = viewModel.Reference});
+            return RedirectToAction("HeatingType_Get", new {reference = viewModel.Reference});
         }
 
         
@@ -558,7 +566,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.GlazingType = viewModel.GlazingType;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("HeatingType_Get", new {reference = viewModel.Reference});
+            return RedirectToAction("OutdoorSpace_Get", new {reference = viewModel.Reference});
         }
 
         

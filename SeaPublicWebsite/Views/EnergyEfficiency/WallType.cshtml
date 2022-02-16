@@ -42,11 +42,11 @@
                         {
                             expectedWallType = "solid and insulated";
                         }
-                        else if (Model.YearBuilt.Value >= 1930 && Model.YearBuilt.Value < 1995)
+                        else if (Model.YearBuilt.Value >= 1930 && Model.YearBuilt.Value < 1991)
                         {
                             expectedWallType = "cavity and uninsulated";
                         }
-                        else if (Model.YearBuilt.Value >= 1995)
+                        else if (Model.YearBuilt.Value >= 1991)
                         {
                             expectedWallType = "cavity and insulated";
                         }
@@ -55,17 +55,26 @@
                 @if (expectedWallType != null)
                 {
                     <div class="govuk-hint">
-                        Homes of your type typically have <b>@(expectedWallType)</b>
+                        Homes of your type typically have <b>@(expectedWallType)</b><br>
+                        If your home has been extended or has multiple wall types, choose the wall type that makes up most of your home.
                     </div>
                 }
                 <details class="govuk-details" data-module="govuk-details">
                     <summary class="govuk-details__summary">
                         <span class="govuk-details__summary-text">
-                            Not sure if your walls are insulated?
+                            Help me choose which wall type I have
                         </span>
                     </summary>
                     <div class="govuk-details__text">
-                        Typically...
+                        <p class="govuk-body">
+                            Most homes built before 1930 have solid walls.
+                            These were built without insulation, so unless you or a previous owner added insulation, it is likely to be uninsulated.
+                        </p>
+                        <p class="govuk-body">
+                            Most homes built after 1930 have cavity walls.
+                            In 1991, it became a legal requirement to build walls with insulation.
+                            If your home was built after 1991, it is likely to already be insulated.
+                        </p>
                     </div>
                 </details>
                 @(Html.GovUkRadiosFor(m => m.WallType))

@@ -1,7 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Helpers
-@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.CountryViewModel
 @{
@@ -12,7 +11,7 @@
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("OwnershipStatus_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        Href = @Url.Action("NewOrReturningUser_Get", "EnergyEfficiency"),
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -40,6 +39,21 @@
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
                     }
+                },
+                new HintViewModel
+                {
+                    Html = @<text>
+                               <details class="govuk-details" data-module="govuk-details">
+                                   <summary class="govuk-details__summary">
+                                       <span class="govuk-details__summary-text">
+                                           Why do we need to know this?
+                                       </span>
+                                   </summary>
+                                   <div class="govuk-details__text">
+                                       This service is only available for those who live in England and Wales.
+                                   </div>
+                               </details>
+                            </text>
                 }
             ))
 

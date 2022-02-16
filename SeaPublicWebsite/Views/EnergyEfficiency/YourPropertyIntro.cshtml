@@ -12,7 +12,7 @@
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("Country_Get", "EnergyEfficiency", new { reference = Model }),
+        Href = @Url.Action("OwnershipStatus_Get", "EnergyEfficiency", new { reference = Model }),
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -31,7 +31,8 @@
         </h1>
         
         <p class="govuk-body">
-            Add in some content here explaining why.
+            We need to ask questions about your property to understand how it is built and its current energy performance.
+            This helps us to recommend improvements that you can make.
         </p>
 
         <p class="govuk-body govuk-!-margin-top-6">

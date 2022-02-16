@@ -34,11 +34,27 @@
                                        @(QuestionSection.YourHome.GetDisplayName())
                                    </span>
                                    <h1 class="govuk-fieldset__heading">
-                                       Is your roof insulated?
+                                       Is your roof fully insulated?
                                    </h1>
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
                     }
+                },
+                new HintViewModel
+                {
+                    Html = @<text>
+                                <details class="govuk-details" data-module="govuk-details">
+                                    <summary class="govuk-details__summary">
+                                        <span class="govuk-details__summary-text">
+                                            Help me decide if my roof is fully insulated
+                                        </span>
+                                    </summary>
+                                    <div class="govuk-details__text">
+                                        A fully insulated roof is insulated to current building regulations, or insulation that is at least 270mm deep.<br>
+                                        If your home was built after 2002, or you have installed roof insulation since 2002, it is likely that it is fully insulated.
+                                    </div>
+                                </details>
+                            </text>
                 }
                 ))
 

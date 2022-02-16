@@ -11,7 +11,7 @@
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("NewOrReturningUser_Get", "EnergyEfficiency"),
+        Href = @Url.Action("Country_Get", "EnergyEfficiency", new {reference = Model.Reference}),
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -33,7 +33,7 @@
                                        @(QuestionSection.Suitability.GetDisplayName())
                                    </span>
                                    <h1 class="govuk-fieldset__heading">
-                                       Which of the following statements best describes your circumstances?
+                                       Do you own your home?
                                    </h1>
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"

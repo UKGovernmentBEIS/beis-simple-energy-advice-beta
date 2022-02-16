@@ -11,7 +11,7 @@
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("RoofInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        Href = @Url.Action("GlazingType_Get", "EnergyEfficiency", new {reference = Model.Reference}),
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -39,6 +39,25 @@
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
                     }
+                },
+                hintOptions: new HintViewModel
+                {
+                    Html = @<text>
+                               <details class="govuk-details" data-module="govuk-details">
+                                   <summary class="govuk-details__summary">
+                                       <span class="govuk-details__summary-text">
+                                           Help me decide if I have any outside space
+                                       </span>
+                                   </summary>
+                                   <div class="govuk-details__text">
+                                       If you have any garden or land adjacent to your home that you own,
+                                       then you have some outside space.<br>
+                                       If you don’t have any garden or land adjacent to your home, 
+                                       or you do but it is shared with neighbours or you don’t own it, 
+                                       then you do not have any outside space.
+                                   </div>
+                               </details>
+                            </text>
                 }
             ))
 

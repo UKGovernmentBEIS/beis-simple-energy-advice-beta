@@ -11,7 +11,7 @@
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("OutdoorSpace_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        Href = @Url.Action("RoofInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference}),
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -34,11 +34,29 @@
                                        @(QuestionSection.YourHome.GetDisplayName())
                                    </span>
                                    <h1 class="govuk-fieldset__heading">
-                                       What kind of windows do you have?
+                                       What type of windows does your property have?
                                    </h1>
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
                     }
+                },
+                hintOptions: new HintViewModel
+                {
+                    Html = @<text>
+                               <details class="govuk-details" data-module="govuk-details">
+                                   <summary class="govuk-details__summary">
+                                       <span class="govuk-details__summary-text">
+                                           Help me decide what type of windows I have
+                                       </span>
+                                   </summary>
+                                   <div class="govuk-details__text">
+                                       <ul class="govuk-list govuk-list--bullet">
+                                           <li>A single glazed window has a single pane of glass.</li>
+                                           <li class="govuk-!-margin-bottom-0">A double glazed window has two panes of glass, separated by air or gas, to make up a single window. A triple glazed window has three panes of glass.</li>
+                                       </ul>
+                                   </div>
+                               </details>
+                            </text>
                 }
             ))
 
