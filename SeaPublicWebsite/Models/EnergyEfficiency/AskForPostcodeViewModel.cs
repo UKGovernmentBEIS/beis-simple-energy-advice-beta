@@ -6,13 +6,11 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class AskForPostcodeViewModel : GovUkViewModel
     {
-        public string Title = "What is your home address?";
-        public string Description = "";
-        public QuestionSection Section = QuestionSection.YourHome;
-
         [GovUkValidateRequired(ErrorMessageIfMissing = "Enter a UK post code")]
         public string Postcode { get; set; }
         [GovUkValidateRequired(ErrorMessageIfMissing = "Enter house name or number")]
         public string HouseNameOrNumber { get; set; }
+
+        public string Reference { get; set; }
     }
 }

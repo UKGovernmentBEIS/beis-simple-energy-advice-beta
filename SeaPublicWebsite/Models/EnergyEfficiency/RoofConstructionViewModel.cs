@@ -6,11 +6,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class RoofConstructionViewModel : GovUkViewModel
     {
-        public string Title = "Is your roof flat or pitched at an angle?";
-        public string Description = "";
-        public QuestionSection Section = QuestionSection.YourHome;
-
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select roof type")]
-        public RoofConstruction? Answer { get; set; }
+        public RoofConstruction? RoofConstruction { get; set; }
+
+        public string Reference { get; set; }
     }
 }

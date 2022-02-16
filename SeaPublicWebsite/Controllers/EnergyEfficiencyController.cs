@@ -1,4 +1,5 @@
-﻿using GovUkDesignSystem;
+﻿using System;
+using GovUkDesignSystem;
 using GovUkDesignSystem.Parsers;
 using Microsoft.AspNetCore.Mvc;
 using SeaPublicWebsite.DataStores;
@@ -66,18 +67,7 @@ namespace SeaPublicWebsite.Controllers
             return RedirectToAction("OwnershipStatus_Get", "EnergyEfficiency", new { reference = reference });
         }
 
-        [HttpGet("your-property-intro")]
-        public IActionResult YourPropertyIntro()
-        {
-            return View("YourPropertyIntro");
-        }
-
-        [HttpGet("answer-summary")]
-        public IActionResult AnswerSummary()
-        {
-            return View("AnswerSummary");
-        }
-
+        
         [HttpGet("ownership-status/{reference}")]
         public IActionResult OwnershipStatus_Get(string reference)
         {
@@ -85,7 +75,7 @@ namespace SeaPublicWebsite.Controllers
 
             var viewModel = new OwnershipStatusViewModel
             {
-                Answer = userDataModel.OwnershipStatus,
+                OwnershipStatus = userDataModel.OwnershipStatus,
                 Reference = userDataModel.Reference
             };
 
@@ -97,19 +87,19 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
             
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            viewModel.ParseAndValidateParameters(Request, m => m.OwnershipStatus);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("OwnershipStatus", viewModel);
             }
 
-            userDataModel.OwnershipStatus = viewModel.Answer;
+            userDataModel.OwnershipStatus = viewModel.OwnershipStatus;
             userDataStore.SaveUserData(userDataModel);
 
-            if (viewModel.Answer == OwnershipStatus.PrivateTenancy)
+            if (viewModel.OwnershipStatus == OwnershipStatus.PrivateTenancy)
             {
-                return RedirectToAction("ServiceUnsuitable");
+                return RedirectToAction("ServiceUnsuitable", "EnergyEfficiency", new {from = "OwnershipStatus", reference = viewModel.Reference});
             }
 
             return RedirectToAction("Country_Get", "EnergyEfficiency", new {reference = viewModel.Reference});
@@ -121,52 +111,77 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
-            var viewModel = new CountryViewModel();
+            var viewModel = new CountryViewModel
+            {
+                Country = userDataModel.Country,
+                Reference = userDataModel.Reference
+            };
 
             return View("Country", viewModel);
         }
 
-        [HttpPost("country")]
+        [HttpPost("country/{reference}")]
         public IActionResult Country_Post(CountryViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.Country);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("Country", viewModel);
             }
 
-            if (viewModel.Answer != Country.England && viewModel.Answer != Country.Wales)
+            userDataModel.Country = viewModel.Country;
+            userDataStore.SaveUserData(userDataModel);
+            
+            if (viewModel.Country != Country.England && viewModel.Country != Country.Wales)
             {
-                return RedirectToAction("ServiceUnsuitable");
+                return RedirectToAction("ServiceUnsuitable", "EnergyEfficiency", new {from = "Country", reference = viewModel.Reference});
             }
-            return RedirectToAction("YourPropertyIntro");
+            
+            return RedirectToAction("YourPropertyIntro", "EnergyEfficiency", new {reference = viewModel.Reference});
         }
 
 
-        [HttpGet("service-unsuitable")]
-        public IActionResult ServiceUnsuitable()
+        [HttpGet("service-unsuitable/{from}/{reference}")]
+        public IActionResult ServiceUnsuitable(string from, string reference)
         {
-            return View("ServiceUnsuitable");
+            ViewBag.From = from;
+            return View("ServiceUnsuitable", reference);
         }
 
-        [HttpGet("your-property")]
-        public IActionResult YourPropertyCover()
+        
+        [HttpGet("your-property-intro/{reference}")]
+        public IActionResult YourPropertyIntro(string reference)
         {
-            return View("YourPropertyCover");
+            // We don't really do anything with the userDataModel
+            // But, we must load it to check that the reference is valid
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            return View("YourPropertyIntro", userDataModel.Reference);
         }
 
-        [HttpGet("postcode")]
-        public IActionResult AskForPostcode_Get()
+        
+        [HttpGet("postcode/{reference}")]
+        public IActionResult AskForPostcode_Get(string reference)
         {
-            var viewModel = new AskForPostcodeViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new AskForPostcodeViewModel
+            {
+                Postcode = userDataModel.Address?.postcode,
+                Reference = userDataModel.Reference
+            };
 
             return View("AskForPostcode", viewModel);
         }
 
-        [HttpPost("postcode")]
+        [HttpPost("postcode/{reference}")]
         public IActionResult AskForPostcode_Post(AskForPostcodeViewModel viewModel)
         {
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
             viewModel.ParseAndValidateParameters(Request, m => m.Postcode);
             viewModel.ParseAndValidateParameters(Request, m => m.HouseNameOrNumber);
 
@@ -178,321 +193,494 @@ namespace SeaPublicWebsite.Controllers
             if (!PostcodesIoApi.IsValidPostcode(viewModel.Postcode))
             {
                 viewModel.AddErrorFor(m => m.Postcode, "Enter a valid UK post code");
-            }
-
-            if (viewModel.HasAnyErrors())
-            {
                 return View("AskForPostcode", viewModel);
             }
 
-            var address = GetAddressApi.getAddress(viewModel.Postcode, viewModel.HouseNameOrNumber);
+            Address address = GetAddressApi.getAddress(viewModel.Postcode, viewModel.HouseNameOrNumber);
 
-
-            return RedirectToAction("ConfirmAddress_Get", address);
+            userDataModel.Address = address;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("ConfirmAddress_Get", "EnergyEfficiency", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("address")]
-        public IActionResult ConfirmAddress_Get(Address address)
+        
+        [HttpGet("address/{reference}")]
+        public IActionResult ConfirmAddress_Get(string reference)
         {
-            var viewModel = new ConfirmAddressViewModel(address);
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new ConfirmAddressViewModel
+            {
+                Reference = reference,
+                Address = userDataModel.Address
+            };
 
             return View("ConfirmAddress", viewModel);
         }
 
-        [HttpGet("property-type")]
-        public IActionResult PropertyType_Get()
+        
+        [HttpGet("property-type/{reference}")]
+        public IActionResult PropertyType_Get(string reference)
         {
-            var viewModel = new PropertyTypeViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new PropertyTypeViewModel
+            {
+                PropertyType = userDataModel.PropertyType,
+                Reference = reference
+            };
 
             return View("PropertyType", viewModel);
         }
 
-        [HttpPost("property-type")]
+        [HttpPost("property-type/{reference}")]
         public IActionResult PropertyType_Post(PropertyTypeViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.PropertyType);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("PropertyType", viewModel);
             }
 
-            switch (viewModel.Answer)
+            userDataModel.PropertyType = viewModel.PropertyType;
+            userDataStore.SaveUserData(userDataModel);
+
+            switch (viewModel.PropertyType)
             {
                 case PropertyType.House:
-                    return RedirectToAction("HouseType_Get");
+                    return RedirectToAction("HouseType_Get", new {reference = viewModel.Reference});
                 case PropertyType.Bungalow:
-                    return RedirectToAction("BungalowType_Get");
+                    return RedirectToAction("BungalowType_Get", new {reference = viewModel.Reference});
                 case PropertyType.ApartmentFlatOrMaisonette:
-                    return RedirectToAction("FlatType_Get");
+                    return RedirectToAction("FlatType_Get", new {reference = viewModel.Reference});
                 default:
-                    return RedirectToAction("HomeAge_Get");
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
-        [HttpGet("house-type")]
-        public IActionResult HouseType_Get()
+        
+        [HttpGet("house-type/{reference}")]
+        public IActionResult HouseType_Get(string reference)
         {
-            var viewModel = new HouseTypeViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new HouseTypeViewModel
+            {
+                HouseType = userDataModel.HouseType,
+                Reference = userDataModel.Reference
+            };
 
             return View("HouseType", viewModel);
         }
 
-        [HttpPost("house-type")]
+        [HttpPost("house-type/{reference}")]
         public IActionResult HouseType_Post(HouseTypeViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.HouseType);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("HouseType", viewModel);
             }
 
-            return RedirectToAction("HomeAge_Get");
+            userDataModel.HouseType = viewModel.HouseType;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("HomeAge_Get", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("bungalow-type")]
-        public IActionResult BungalowType_Get()
+        
+        [HttpGet("bungalow-type/{reference}")]
+        public IActionResult BungalowType_Get(string reference)
         {
-            var viewModel = new BungalowTypeViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new BungalowTypeViewModel
+            {
+                BungalowType = userDataModel.BungalowType,
+                Reference = reference
+            };
 
             return View("BungalowType", viewModel);
         }
 
-        [HttpPost("bungalow-type")]
+        [HttpPost("bungalow-type/{reference}")]
         public IActionResult BungalowType_Post(BungalowTypeViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.BungalowType);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("BungalowType", viewModel);
             }
 
-            return RedirectToAction("HomeAge_Get");
+            userDataModel.BungalowType = viewModel.BungalowType;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("HomeAge_Get", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("flat-type")]
-        public IActionResult FlatType_Get()
+        
+        [HttpGet("flat-type/{reference}")]
+        public IActionResult FlatType_Get(string reference)
         {
-            var viewModel = new FlatTypeViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new FlatTypeViewModel
+            {
+                FlatType = userDataModel.FlatType,
+                Reference = userDataModel.Reference
+            };
 
             return View("FlatType", viewModel);
         }
 
-        [HttpPost("flat-type")]
+        [HttpPost("flat-type/{reference}")]
         public IActionResult FlatType_Post(FlatTypeViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.FlatType);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("FlatType", viewModel);
             }
 
-            return RedirectToAction("HomeAge_Get");
+            userDataModel.FlatType = viewModel.FlatType;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("HomeAge_Get", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("home-age")]
-        public IActionResult HomeAge_Get()
+        
+        [HttpGet("home-age/{reference}")]
+        public IActionResult HomeAge_Get(string reference)
         {
-            var viewModel = new HomeAgeViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new HomeAgeViewModel
+            {
+                PropertyType = userDataModel.PropertyType,
+                YearBuilt = userDataModel.YearBuilt,
+                Reference = userDataModel.Reference
+            };
 
             return View("HomeAge", viewModel);
         }
 
-        [HttpPost("home-age")]
+        [HttpPost("home-age/{reference}")]
         public IActionResult HomeAge_Post(HomeAgeViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.HomeAge);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.YearBuilt);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("HomeAge", viewModel);
             }
 
-            return RedirectToAction("WallType_Get");
+            userDataModel.YearBuilt = viewModel.YearBuilt;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("WallType_Get", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("wall-type")]
-        public IActionResult WallType_Get()
+        
+        [HttpGet("wall-type/{reference}")]
+        public IActionResult WallType_Get(string reference)
         {
-            var viewModel = new WallTypeViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new WallTypeViewModel
+            {
+                WallType = userDataModel.WallType,
+                YearBuilt = userDataModel.YearBuilt,
+                Reference = userDataModel.Reference
+            };
 
             return View("WallType", viewModel);
         }
 
-        [HttpPost("wall-type")]
+        [HttpPost("wall-type/{reference}")]
         public IActionResult WallType_Post(WallTypeViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.WallType);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("WallType", viewModel);
             }
 
-            return RedirectToAction("RoofConstruction_Get");
+            userDataModel.WallType = viewModel.WallType;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("RoofConstruction_Get", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("roof-construction")]
-        public IActionResult RoofConstruction_Get()
+        
+        [HttpGet("roof-construction/{reference}")]
+        public IActionResult RoofConstruction_Get(string reference)
         {
-            var viewModel = new RoofConstructionViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new RoofConstructionViewModel
+            {
+                RoofConstruction = userDataModel.RoofConstruction,
+                Reference = userDataModel.Reference
+            };
 
             return View("RoofConstruction", viewModel);
         }
 
-        [HttpPost("roof-construction")]
+        [HttpPost("roof-construction/{reference}")]
         public IActionResult RoofConstruction_Post(RoofConstructionViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.RoofConstruction);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("RoofConstruction", viewModel);
             }
 
-            return RedirectToAction("RoofInsulated_Get");
+            userDataModel.RoofConstruction = viewModel.RoofConstruction;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("RoofInsulated_Get", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("roof-insulated")]
-        public IActionResult RoofInsulated_Get()
+        
+        [HttpGet("roof-insulated/{reference}")]
+        public IActionResult RoofInsulated_Get(string reference)
         {
-            var viewModel = new RoofInsulatedViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new RoofInsulatedViewModel
+            {
+                RoofInsulated = userDataModel.RoofInsulated,
+                Reference = userDataModel.Reference
+            };
 
             return View("RoofInsulated", viewModel);
         }
 
-        [HttpPost("roof-insulated")]
+        [HttpPost("roof-insulated/{reference}")]
         public IActionResult RoofInsulated_Post(RoofInsulatedViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.RoofInsulated);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("RoofInsulated", viewModel);
             }
 
-            return RedirectToAction("OutdoorSpace_Get");
+            userDataModel.RoofInsulated = viewModel.RoofInsulated;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("OutdoorSpace_Get", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("outdoor-space")]
-        public IActionResult OutdoorSpace_Get()
+        
+        [HttpGet("outdoor-space/{reference}")]
+        public IActionResult OutdoorSpace_Get(string reference)
         {
-            var viewModel = new OutdoorSpaceViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new OutdoorSpaceViewModel
+            {
+                HasOutdoorSpace = userDataModel.HasOutdoorSpace,
+                Reference = userDataModel.Reference
+            };
 
             return View("OutdoorSpace", viewModel);
         }
 
-        [HttpPost("outdoor-space")]
+        [HttpPost("outdoor-space/{reference}")]
         public IActionResult OutdoorSpace_Post(OutdoorSpaceViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.HasOutdoorSpace);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("OutdoorSpace", viewModel);
             }
 
-            return RedirectToAction("GlazingType_Get");
+            userDataModel.HasOutdoorSpace = viewModel.HasOutdoorSpace;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("GlazingType_Get", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("glazing-type")]
-        public IActionResult GlazingType_Get()
+        
+        [HttpGet("glazing-type/{reference}")]
+        public IActionResult GlazingType_Get(string reference)
         {
-            var viewModel = new GlazingTypeViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new GlazingTypeViewModel
+            {
+                GlazingType = userDataModel.GlazingType,
+                Reference = userDataModel.Reference
+            };
 
             return View("GlazingType", viewModel);
         }
 
-        [HttpPost("glazing-type")]
+        [HttpPost("glazing-type/{reference}")]
         public IActionResult GlazingType_Post(GlazingTypeViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.GlazingType);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("GlazingType", viewModel);
             }
 
-            return RedirectToAction("HeatingType_Get");
+            userDataModel.GlazingType = viewModel.GlazingType;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("HeatingType_Get", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("heating-type")]
-        public IActionResult HeatingType_Get()
+        
+        [HttpGet("heating-type/{reference}")]
+        public IActionResult HeatingType_Get(string reference)
         {
-            var viewModel = new HeatingTypeViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new HeatingTypeViewModel
+            {
+                HeatingType = userDataModel.HeatingType,
+                Reference = userDataModel.Reference
+            };
 
             return View("HeatingType", viewModel);
         }
 
-        [HttpPost("heating-type")]
+        [HttpPost("heating-type/{reference}")]
         public IActionResult HeatingType_Post(HeatingTypeViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.HeatingType);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("HeatingType", viewModel);
             }
 
-            return RedirectToAction("HotWaterCylinder_Get");
+            userDataModel.HeatingType = viewModel.HeatingType;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("HotWaterCylinder_Get", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("hot-water-cylinder")]
-        public IActionResult HotWaterCylinder_Get()
+        
+        [HttpGet("hot-water-cylinder/{reference}")]
+        public IActionResult HotWaterCylinder_Get(string reference)
         {
-            var viewModel = new HotWaterCylinderViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+
+            var viewModel = new HotWaterCylinderViewModel
+            {
+                HasHotWaterCylinder = userDataModel.HasHotWaterCylinder,
+                Reference = userDataModel.Reference
+            };
 
             return View("HotWaterCylinder", viewModel);
         }
 
-        [HttpPost("hot-water-cylinder")]
+        [HttpPost("hot-water-cylinder/{reference}")]
         public IActionResult HotWaterCylinder_Post(HotWaterCylinderViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.HasHotWaterCylinder);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("HotWaterCylinder", viewModel);
             }
 
-            return RedirectToAction("HeatingPattern_Get");
+            userDataModel.HasHotWaterCylinder = viewModel.HasHotWaterCylinder;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("HeatingPattern_Get", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("heating-pattern")]
-        public IActionResult HeatingPattern_Get()
+        
+        [HttpGet("heating-pattern/{reference}")]
+        public IActionResult HeatingPattern_Get(string reference)
         {
-            var viewModel = new HeatingPatternViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new HeatingPatternViewModel
+            {
+                HeatingPattern = userDataModel.HeatingPattern,
+                Reference = userDataModel.Reference
+            };
 
             return View("HeatingPattern", viewModel);
         }
 
-        [HttpPost("heating-pattern")]
+        [HttpPost("heating-pattern/{reference}")]
         public IActionResult HeatingPattern_Post(HeatingPatternViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.Answer);
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.HeatingPattern);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("HeatingPattern", viewModel);
             }
 
-            return RedirectToAction("Temperature_Get");
+            userDataModel.HeatingPattern = viewModel.HeatingPattern;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("Temperature_Get", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("temperature")]
-        public IActionResult Temperature_Get()
+        
+        [HttpGet("temperature/{reference}")]
+        public IActionResult Temperature_Get(string reference)
         {
-            var viewModel = new TemperatureViewModel();
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new TemperatureViewModel
+            {
+                ThermostatTemperatureKnown = userDataModel.ThermostatTemperatureKnown,
+                Temperature = userDataModel.Temperature,
+                Reference = userDataModel.Reference
+            };
 
             return View("Temperature", viewModel);
         }
 
-        [HttpPost("temperature")]
+        [HttpPost("temperature/{reference}")]
         public IActionResult Temperature_Post(TemperatureViewModel viewModel)
         {
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
             viewModel.ParseAndValidateParameters(Request, m => m.ThermostatTemperatureKnown);
 
             if (viewModel.HasAnyErrors())
@@ -510,25 +698,51 @@ namespace SeaPublicWebsite.Controllers
                 }
             };
 
-            return RedirectToAction("AnswerSummary");
+            userDataModel.ThermostatTemperatureKnown = viewModel.ThermostatTemperatureKnown;
+            userDataModel.Temperature = viewModel.Temperature;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("AnswerSummary", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("your-recommendations")]
-        public IActionResult YourRecommendations_Get()
+        
+        
+        
+        
+        
+        
+        
+        [HttpGet("answer-summary/{reference}")]
+        public IActionResult AnswerSummary(string reference)
         {
-            return View("YourRecommendations");
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            return View("AnswerSummary", reference);
         }
 
-        [HttpGet("recommendation")]
-        public IActionResult Recommendation_Get()
+
+        [HttpGet("your-recommendations/{reference}")]
+        public IActionResult YourRecommendations_Get(string reference)
         {
-            return View("Recommendation");
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            return View("YourRecommendations", reference);
         }
 
-        [HttpGet("your-saved-recommendations")]
-        public IActionResult YourSavedRecommendations_Get()
+        [HttpGet("recommendation/{reference}")]
+        public IActionResult Recommendation_Get(string reference)
         {
-            return View("YourSavedRecommendations");
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            return View("Recommendation", reference);
+        }
+
+        [HttpGet("your-saved-recommendations/{reference}")]
+        public IActionResult YourSavedRecommendations_Get(string reference)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            return View("YourSavedRecommendations", reference);
         }
     }
 }

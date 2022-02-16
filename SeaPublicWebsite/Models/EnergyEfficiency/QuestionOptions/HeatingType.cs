@@ -18,7 +18,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         HeatPump,
         [GovUkRadioCheckboxLabelText(Text = "Coal")]
         Coal,
-        [GovUkRadioCheckboxLabelText(Text = "I Don't know")]
+        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
         DoNotKnow
     }
 }

@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.AskForPostcodeViewModel
 @{
     ViewBag.Title = "Enter your address";
@@ -10,7 +11,7 @@
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("Index", "EnergyEfficiency"),
+        Href = @Url.Action("YourPropertyIntro", "EnergyEfficiency", new {reference = Model.Reference}),
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -20,40 +21,55 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form action="@Url.Action("AskForPostcode_Post", "EnergyEfficiency")" method="post" novalidate>
-        <span class="govuk-heading-m">@Model.Section.GetDisplayName()</span>
+        
+        <form action="@Url.Action("AskForPostcode_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+            
+            <span class="govuk-caption-l govuk-!-margin-bottom-4">
+                @(QuestionSection.YourHome.GetDisplayName())
+            </span>
+            
             <fieldset class="govuk-fieldset">
-              <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                <h1 class="govuk-fieldset__heading">
-                  @Model.Title
-                </h1>
-              </legend>
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        What is your home address?
+                    </h1>
+                </legend>
 
                 @(Html.GovUkTextInputFor(
                     m => m.HouseNameOrNumber,
                     labelOptions: new LabelViewModel
                     {
-                        Text = "Building number or name",
-                        Classes = "govuk-label--m"
+                        Text = "Door number or building name",
                     },
-                    classes: "govuk-input--width-10"
-                ))
+                    classes: "govuk-input--width-10",
+                    formGroupOptions: new FormGroupViewModel
+                    {
+                        Classes = "govuk-!-margin-bottom-2"
+                    }
+                    ))
+
                 @(Html.GovUkTextInputFor(
                     m => m.Postcode,
                     labelOptions: new LabelViewModel
                     {
                         Text = "Postcode",
-                        Classes = "govuk-label--m"
                     },
                     classes: "govuk-input--width-10"
-                ))
+                    ))
             </fieldset>
+            
             <div class="govuk-button-group">
-                <button class="govuk-button" data-module="govuk-button">
-                    Continue
-                </button>
-                <a class="govuk-link" rel="external noopener track" href="@Url.Action("PropertyType_Get", "EnergyEfficiency")">Skip this question</a>
+                @(Html.GovUkButton(new ButtonViewModel
+                {
+                    Text = "Continue",
+                }))
+                <a href="@Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference})"
+                   class="govuk-link">
+                    Skip this question
+                </a>
             </div>
+            
         </form>
+        
     </div>
 </div>

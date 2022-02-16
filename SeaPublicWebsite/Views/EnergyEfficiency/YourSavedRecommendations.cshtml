@@ -12,7 +12,7 @@
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("Recommendation_Get", "EnergyEfficiency"),
+        Href = @Url.Action("Recommendation_Get", "EnergyEfficiency", new {reference = Model}),
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -21,23 +21,22 @@
 }
 
 <div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel">
-  <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        <span class="govuk-caption-l">Your goal</span>
-        <h1 class="govuk-panel__title">
-        To reduce my energy bills
-        </h1>
-        <a href="#" class="govuk-link govuk-link--inverse">Change my answers</a>
-      </div>
-      <div class="govuk-grid-column-one-third">
-        <p class="govuk-body-l sea-reference">Your reference <strong>YZ431XJ</strong></p>
-      </div>
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <span class="govuk-caption-l">Your goal</span>
+            <h1 class="govuk-panel__title">
+                To reduce my energy bills
+            </h1>
+            <a href="#" class="govuk-link govuk-link--inverse">Change my answers</a>
+        </div>
+        <div class="govuk-grid-column-one-third">
+            <p class="govuk-body-l sea-reference">Your reference <strong>YZ431XJ</strong></p>
+        </div>
     </div>
 </div>
 
-  <main class="govuk-main-wrapper " id="main-content" role="main">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-xl">Your saved recommendations</h1>
         <p class="govuk-body">
             Some useful text or guidance here. 
@@ -49,55 +48,55 @@
         <h3 class="govuk-heading-l">£350 a year</h3>
 
         <table class="govuk-table">
-          <thead class="govuk-table__head">
+            <thead class="govuk-table__head">
             <tr class="govuk-table__row">
-              <th scope="col" class="govuk-table__header"></th>
-              <th scope="col" class="govuk-table__header">Typical costs</th>
-              <th scope="col" class="govuk-table__header">Typical savings per year</th>
-              <th scope="col" class="govuk-table__header"></th>
+                <th scope="col" class="govuk-table__header"></th>
+                <th scope="col" class="govuk-table__header">Typical costs</th>
+                <th scope="col" class="govuk-table__header">Typical savings per year</th>
+                <th scope="col" class="govuk-table__header"></th>
             </tr>
-          </thead>
-          <tbody class="govuk-table__body">
+            </thead>
+            <tbody class="govuk-table__body">
             <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">
-                  <p class="govuk-body-l">
-                      <a class="govuk-link"  href=#>Add some loft insulation</a>
-                  </p>
-                  <p class="govuk-body">
-                      Your loft should be insulated with a thickness of around 300mm
-                  </p>
-              </th>
-              <td class="govuk-table__cell">£2000 - 3500</td>
-              <td class="govuk-table__cell">£150</td>
-              <td class="govuk-table__cell"><a class="govuk-link"  href=#>Remove</a></td>
-            </tr>
-            <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">
-                  <p class="govuk-body-l">
-                      <a class="govuk-link"  href=#>Insulate the ground floor</a>
-                  </p>
-                  <p class="govuk-body">
-                      If you have a suspended timber floor, the gap should be filled with insulating material.
-                  </p>
-              </th>
-              <td class="govuk-table__cell">£1000 - 2500</td>
-              <td class="govuk-table__cell">£75</td>
-              <td class="govuk-table__cell"><a class="govuk-link"  href=#>Remove</a></td>
+                <th scope="row" class="govuk-table__header">
+                    <p class="govuk-body-l">
+                        <a class="govuk-link"  href=#>Add some loft insulation</a>
+                    </p>
+                    <p class="govuk-body">
+                        Your loft should be insulated with a thickness of around 300mm
+                    </p>
+                </th>
+                <td class="govuk-table__cell">£2000 - 3500</td>
+                <td class="govuk-table__cell">£150</td>
+                <td class="govuk-table__cell"><a class="govuk-link"  href=#>Remove</a></td>
             </tr>
             <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">
-                  <p class="govuk-body-l">
-                      <a class="govuk-link"  href=#>Install a heat pump</a>
-                  </p>
-                  <p class="govuk-body">
-                      You should consider if a highly efficient heat pump system is suitable for your property. 
-                  </p>
-              </th>
-              <td class="govuk-table__cell">£6500 - 8000</td>
-              <td class="govuk-table__cell">£210</td>
-              <td class="govuk-table__cell"><a class="govuk-link"  href=#>Remove</a></td>
+                <th scope="row" class="govuk-table__header">
+                    <p class="govuk-body-l">
+                        <a class="govuk-link"  href=#>Insulate the ground floor</a>
+                    </p>
+                    <p class="govuk-body">
+                        If you have a suspended timber floor, the gap should be filled with insulating material.
+                    </p>
+                </th>
+                <td class="govuk-table__cell">£1000 - 2500</td>
+                <td class="govuk-table__cell">£75</td>
+                <td class="govuk-table__cell"><a class="govuk-link"  href=#>Remove</a></td>
             </tr>
-          </tbody>
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">
+                    <p class="govuk-body-l">
+                        <a class="govuk-link"  href=#>Install a heat pump</a>
+                    </p>
+                    <p class="govuk-body">
+                        You should consider if a highly efficient heat pump system is suitable for your property. 
+                    </p>
+                </th>
+                <td class="govuk-table__cell">£6500 - 8000</td>
+                <td class="govuk-table__cell">£210</td>
+                <td class="govuk-table__cell"><a class="govuk-link"  href=#>Remove</a></td>
+            </tr>
+            </tbody>
         </table>
         
         <h2 class="govuk-heading-m">Find grants to cover some or all of the costs</h2>
@@ -115,8 +114,8 @@
         <h2 class="govuk-heading-m">Where to find more information about energy efficiency</h2>
         <p class="govuk-body">You can also visit the <a href=# class="govuk-link">Energy Savings Trust website</a> 
             for more information on other ways you can improve your energy efficiency to reduce your bills.</p>
-      </div>
-      <div class="govuk-grid-column-one-third">
+    </div>
+    <div class="govuk-grid-column-one-third">
         <aside class="sea-user-reference" role="complementary">
             <span class="govuk-caption-l">Your reference</span>
             <h2 class="govuk-heading-m" id="subsection-title">YZA431XJ</h2>
@@ -126,19 +125,20 @@
             </p>
         </aside>
         <div class="govuk-notification-banner  sea-next-steps" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
-        <div class="govuk-notification-banner__header">
-          <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
-            Next steps
-          </h2>
+            <div class="govuk-notification-banner__header">
+                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                    Next steps
+                </h2>
+            </div>
+            <div class="govuk-notification-banner__content">
+                <p class="govuk-body">
+                    <ol class="govuk-list govuk-list--number">
+                        <li>Print or email your wishlist</li>
+                        <li>Check for grants</li>
+                        <li>Consult with a qualified installer</li>
+                    </ol>
+                </p>
+            </div>
         </div>
-        <div class="govuk-notification-banner__content">
-            <p class="govuk-body">
-                <ol class="govuk-list govuk-list--number">
-                  <li>Print or email your wishlist</li>
-                  <li>Check for grants</li>
-                  <li>Consult with a qualified installer</li>
-                </ol>
-            </p>
-        </div>
-      </div>
     </div>
+</div>

@@ -8,7 +8,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         Flat,
         [GovUkRadioCheckboxLabelText(Text = "Pitched at an angle")]
         Pitched,
-        [GovUkRadioCheckboxLabelText(Text = "I Don't know")]
+        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
         DoNotKnow
     }
 }

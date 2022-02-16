@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.OwnershipStatusViewModel
 @{
     ViewBag.Title = "Ownership status";
@@ -22,17 +23,17 @@
     <div class="govuk-grid-column-two-thirds">
         
         <form action="@Url.Action("OwnershipStatus_Post", "EnergyEfficiency", new {reference =  Model.Reference})" method="post" novalidate>            
-            @(Html.GovUkRadiosFor(m => m.Answer,
+            @(Html.GovUkRadiosFor(m => m.OwnershipStatus,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
                     {
                         Html = @<text>
-                                   <span class="govuk-heading-m govuk-!-margin-bottom-4">
-                                       @Model.Section.GetDisplayName()
+                                   <span class="govuk-caption-l govuk-!-margin-bottom-4">
+                                       @(QuestionSection.Suitability.GetDisplayName())
                                    </span>
                                    <h1 class="govuk-fieldset__heading">
-                                       @Model.Title
+                                       Which of the following statements best describes your circumstances?
                                    </h1>
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"

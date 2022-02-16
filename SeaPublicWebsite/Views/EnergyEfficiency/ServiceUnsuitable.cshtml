@@ -5,31 +5,41 @@
 }
 
 @section BeforeMain {
-    @{
-    }
+    @Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = @Url.Action($"{ViewBag.From}_Get", "EnergyEfficiency", new {reference = Model}),
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = false
+    })
 }
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+        
         <div class="govuk-panel govuk-panel--confirmation sea-service-unsuitable">
-        <h1 class="govuk-panel__title">
-        Sorry...
-        </h1>
-        <div class="govuk-panel__body">
-        This service currently can only provide advice for people who own their own home in England and Wales        
+            <h1 class="govuk-panel__title">
+                Sorry...
+            </h1>
+            <div class="govuk-panel__body">
+                This service currently can only provide advice for people who own their own home in England and Wales
+            </div>
         </div>
+
+        <h2 class="govuk-heading-m">Other services that might be helpful to you</h2>
+
+        <p class="govuk-body">
+            We’ve sent your application to Hackney Electoral Register Office.
+        </p>
+        <p class="govuk-body">
+            They will contact you either to confirm your registration, or to ask for more information.
+        </p>
+
+        <p class="govuk-body">
+            <a href="#" class="govuk-link">What did you think of this service?</a> (takes 30 seconds)
+        </p>
+        
     </div>
-
-    <h2 class="govuk-heading-m">Other services that might be helpful to you</h2>
-
-    <p class="govuk-body">
-        We’ve sent your application to Hackney Electoral Register Office.
-    </p>
-    <p class="govuk-body">
-        They will contact you either to confirm your registration, or to ask for more information.
-    </p>
-
-    <p class="govuk-body">
-        <a href="#" class="govuk-link">What did you think of this service?</a> (takes 30 seconds)
-    </p>
 </div>

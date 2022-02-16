@@ -1,7 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Helpers
-@using SeaPublicWebsite.Models.EnergyEfficiency
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.FlatTypeViewModel
 @{
     ViewBag.Title = "Flat type";
@@ -11,7 +11,7 @@
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("Index", "EnergyEfficiency"),
+        Href = @Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference}),
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -21,18 +21,20 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form action="@Url.Action("FlatType_Post", "EnergyEfficiency")" method="post" novalidate>
-             @(Html.GovUkRadiosFor(m => m.Answer,
+        
+        <form action="@Url.Action("FlatType_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+            
+            @(Html.GovUkRadiosFor(m => m.FlatType,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
                     {
                         Html = @<text>
                                    <span class="govuk-caption-l govuk-!-margin-bottom-4">
-                                       @Model.Section.GetDisplayName()
+                                       @(QuestionSection.YourHome.GetDisplayName())
                                    </span>
                                    <h1 class="govuk-fieldset__heading">
-                                       @Model.Title
+                                       What kind of flat do you have?
                                    </h1>
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
@@ -43,6 +45,8 @@
             <button class="govuk-button" data-module="govuk-button">
                 Continue
             </button>
+            
         </form>
+        
     </div>
 </div>

@@ -1,7 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Helpers
-@using SeaPublicWebsite.Models.EnergyEfficiency
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.RoofInsulatedViewModel
 @{
     ViewBag.Title = "Roof Insulated";
@@ -11,7 +11,7 @@
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("Index", "EnergyEfficiency"),
+        Href = @Url.Action("RoofConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference}),
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -21,28 +21,32 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form action="@Url.Action("RoofInsulated_Post", "EnergyEfficiency")" method="post" novalidate>
-             @(Html.GovUkRadiosFor(m => m.Answer,
+        
+        <form action="@Url.Action("RoofInsulated_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+            
+            @(Html.GovUkRadiosFor(m => m.RoofInsulated,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
                     {
                         Html = @<text>
-                                   <span class="govuk-heading-m govuk-!-margin-bottom-4">
-                                       @Model.Section.GetDisplayName()
+                                   <span class="govuk-caption-l govuk-!-margin-bottom-4">
+                                       @(QuestionSection.YourHome.GetDisplayName())
                                    </span>
                                    <h1 class="govuk-fieldset__heading">
-                                       @Model.Title
+                                       Is your roof insulated?
                                    </h1>
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
                     }
                 }
-            ))
+                ))
 
             <button class="govuk-button" data-module="govuk-button">
                 Continue
             </button>
+            
         </form>
+        
     </div>
 </div>

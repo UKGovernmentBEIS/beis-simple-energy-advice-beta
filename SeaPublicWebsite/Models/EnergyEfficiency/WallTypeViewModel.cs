@@ -6,13 +6,11 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class WallTypeViewModel : GovUkViewModel
     {
-        public string Title = "What kind of walls does your property have?";
-        public string Description = "Homes of your type typically have ";
-        public QuestionSection Section = QuestionSection.YourHome;
-        public string HelpTitle = "Not sure if your walls are insulated?";
-        public string HelpText = "Typically...";
-
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select wall type")]
-        public WallType? Answer { get; set; }
+        public WallType? WallType { get; set; }
+
+        public string Reference { get; set; }
+        
+        public int? YearBuilt { get; set; }
     }
 }

@@ -6,11 +6,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class CountryViewModel : GovUkViewModel
     {
-        public string Title = "Which country is your property located in?";
-        public string Description = "";
-        public QuestionSection Section = QuestionSection.Suitability;
-
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Select the country that you live in")]
-        public Country? Answer { get; set; }
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select which country the property is located in")]
+        public Country? Country { get; set; }
+        
+        public string Reference { get; set; }
     }
 }

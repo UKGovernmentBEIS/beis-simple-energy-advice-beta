@@ -1,7 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Helpers
-@using SeaPublicWebsite.Models.EnergyEfficiency
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.WallTypeViewModel;
 @{
     ViewBag.Title = "Wall Type";
@@ -11,7 +11,7 @@
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("Index", "EnergyEfficiency"),
+        Href = @Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model.Reference}),
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -21,34 +21,62 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form action="@Url.Action("WallType_Post", "EnergyEfficiency")" method="post" novalidate>
-            <span class="govuk-heading-m">@Model.Section.GetDisplayName()</span>
+        
+        <form action="@Url.Action("WallType_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+            
+            <span class="govuk-caption-l govuk-!-margin-bottom-4">
+                @(QuestionSection.YourHome.GetDisplayName())
+            </span>
+            
             <fieldset class="govuk-fieldset">
-              <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                <h1 class="govuk-fieldset__heading">
-                  @Model.Title
-                </h1>
-              </legend>
-              <div id="passport-number-hint" class="govuk-hint">
-                @Model.Description <b>solid uninsulated walls</b>
-              </div>
-              <details class="govuk-details" data-module="govuk-details">
-              <summary class="govuk-details__summary">
-                <span class="govuk-details__summary-text">
-                  @Model.HelpTitle
-                </span>
-              </summary>
-              <div class="govuk-details__text">
-                @Model.HelpText
-              </div>
-            </details>
-            @(Html.GovUkRadiosFor(m => m.Answer))
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        What kind of walls does your property have?
+                    </h1>
+                </legend>
+                @{
+                    string expectedWallType = null;
+                    if (Model.YearBuilt.HasValue)
+                    {
+                        if (Model.YearBuilt.Value < 1930)
+                        {
+                            expectedWallType = "solid and insulated";
+                        }
+                        else if (Model.YearBuilt.Value >= 1930 && Model.YearBuilt.Value < 1995)
+                        {
+                            expectedWallType = "cavity and uninsulated";
+                        }
+                        else if (Model.YearBuilt.Value >= 1995)
+                        {
+                            expectedWallType = "cavity and insulated";
+                        }
+                    }
+                }
+                @if (expectedWallType != null)
+                {
+                    <div class="govuk-hint">
+                        Homes of your type typically have <b>@(expectedWallType)</b>
+                    </div>
+                }
+                <details class="govuk-details" data-module="govuk-details">
+                    <summary class="govuk-details__summary">
+                        <span class="govuk-details__summary-text">
+                            Not sure if your walls are insulated?
+                        </span>
+                    </summary>
+                    <div class="govuk-details__text">
+                        Typically...
+                    </div>
+                </details>
+                @(Html.GovUkRadiosFor(m => m.WallType))
 
             </fieldset>
 
             <button class="govuk-button" data-module="govuk-button">
                 Continue
             </button>
+            
         </form>
+        
     </div>
 </div>

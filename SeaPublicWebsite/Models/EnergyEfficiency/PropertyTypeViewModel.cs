@@ -7,11 +7,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class PropertyTypeViewModel : GovUkViewModel
     {
-        public string Title = "What kind of property do you have?";
-        public string Description = "";
-        public QuestionSection Section = QuestionSection.YourHome;
-
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select property type")]
-        public PropertyType? Answer { get; set; }
+        public PropertyType? PropertyType { get; set; }
+
+        public string Reference { get; set; }
     }
 }

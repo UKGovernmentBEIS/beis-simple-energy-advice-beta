@@ -6,7 +6,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
     {
         Yes,
         No,
-        [GovUkRadioCheckboxLabelText(Text = "I Don't know")]
+        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
         DoNotKnow
     }
 }

@@ -1,17 +1,36 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Helpers
-@using SeaPublicWebsite.Models.EnergyEfficiency
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.HomeAgeViewModel
 @{
     ViewBag.Title = "Ownership status";
 }
 
 @section BeforeMain {
+    @{
+        string backLinkHref;
+
+        switch (Model.PropertyType)
+        {
+            case PropertyType.House:
+                backLinkHref = @Url.Action("HouseType_Get", "EnergyEfficiency", new {reference = Model.Reference});
+                break;
+            case PropertyType.Bungalow:
+                backLinkHref = @Url.Action("BungalowType_Get", "EnergyEfficiency", new {reference = Model.Reference});
+                break;
+            case PropertyType.ApartmentFlatOrMaisonette:
+                backLinkHref = @Url.Action("FlatType_Get", "EnergyEfficiency", new {reference = Model.Reference});
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+    
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("Index", "EnergyEfficiency"),
+        Href = backLinkHref,
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -20,34 +39,49 @@
 }
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">  
-        <form action="@Url.Action("HomeAge_Post", "EnergyEfficiency")" method="post" novalidate>
-            <span class="govuk-heading-m">@Model.Section.GetDisplayName()</span>
+    <div class="govuk-grid-column-two-thirds">
+        
+        <form action="@Url.Action("HomeAge_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+            
+            @Html.HiddenFor(m => m.PropertyType)
+
+            <span class="govuk-caption-l govuk-!-margin-bottom-4">
+                @(QuestionSection.YourHome.GetDisplayName())
+            </span>
+
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
-                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                      @Model.Title
-                  </legend>
-                  <details class="govuk-details" data-module="govuk-details">
-                      <summary class="govuk-details__summary">
-                        <span class="govuk-details__summary-text">
-                          @Model.HelpTitle
-                        </span>
-                      </summary>
-                      <div class="govuk-details__text">
-                          @Model.HelpText
-                      </div>
-                </details>
-                  <div id="passport-number-hint" class="govuk-hint">
-                      @Model.Description
-                  </div>
-                    @(Html.GovUkTextInputFor(m => m.HomeAge, classes:"govuk-input--width-4"))
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        Roughly what year was your property built?
+                    </legend>
+
+                    <details class="govuk-details" data-module="govuk-details">
+                        <summary class="govuk-details__summary">
+                            <span class="govuk-details__summary-text">
+                                Help me determine the year my property was built
+                            </span>
+                        </summary>
+                        <div class="govuk-details__text">
+                            Typically...
+                        </div>
+                    </details>
+
+                    <div id="passport-number-hint" class="govuk-hint">
+                        Enter the year your property was built, approximately. It does not have to be exact. e.g. 1950
+                    </div>
+
+                    @(Html.GovUkTextInputFor(
+                        m => m.YearBuilt,
+                        classes: "govuk-input--width-5"
+                        ))
                 </fieldset>
             </div>
 
             <button class="govuk-button" data-module="govuk-button">
                 Continue
             </button>
+
         </form>
+        
     </div>
 </div>
