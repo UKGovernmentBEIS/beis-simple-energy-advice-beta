@@ -8,6 +8,7 @@ using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations;
 
 namespace SeaPublicWebsite.Controllers
 {
@@ -715,30 +716,59 @@ namespace SeaPublicWebsite.Controllers
         public IActionResult YourRecommendations_Get(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
-            var recommendationsForUser = RecommendationService.GetUserRecommendations(userDataModel);
-            userDataModel.UserRecommendations = recommendationsForUser;
-            return View("YourRecommendations", reference);
+            var recommendationsForUser = RecommendationService.GetRecommendationsForUser(userDataModel);
+            userDataModel.UserRecommendations = recommendationsForUser.Select(r => 
+                new UserRecommendation()
+                {
+                    Key = r.Key,
+                    MinInstallCost = r.MinInstallCost,
+                    MaxInstallCost = r.MaxInstallCost,
+                    Saving = r.Saving
+                }
+            ).ToList();
+;            return View("YourRecommendations", reference);
         }
 
-        [HttpGet("next-recommendation/{reference}")]
-        public IActionResult NextRecommendation(string reference)
-        {
-            var userDataModel = userDataStore.LoadUserData(reference);
-            var recommendationsForUser = RecommendationService.GetUserRecommendations(userDataModel);
-            
-            return RedirectToAction("Recommendation_Get", new { id = (int)recommendationsForUser.First(), reference = userDataModel.Reference });
-        }
-
-        [HttpGet("recommendation/{id}/{reference}")]
+        [HttpGet("your-recommendations/{id}/{reference}")]
         public IActionResult Recommendation_Get(int id, string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
-            var recommendation = RecommendationService.GetRecommendation(id);
             var viewModel = new RecommendationViewModel
             {
                 UserDataModel = userDataModel,
-                Recommendation = recommendation
+                UserRecommendation = userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey) id)
             };
+
+            var recommendationKey = (RecommendationKey) id;
+            switch (recommendationKey)
+            {
+                case RecommendationKey.AddLoftInsulation:
+                    return View("Recommendations/LoftInsulation", viewModel);
+                case RecommendationKey.GroundFloorInsulation:
+                    return View("Recommendations/GroundFloorInsulation", viewModel);
+            }
+
+            return RedirectToAction("YourRecommendations_get", new {reference = reference});
+    }
+
+        [HttpPost("your-recommendations/{id}/{reference}")]
+        public IActionResult Recommendation_Post(RecommendationViewModel viewModel, string action, int id)
+        {
+            var userDataModel = userDataStore.LoadUserData(viewModel.UserDataModel.Reference);
+            viewModel.ParseAndValidateParameters(Request, m => m.RecommendationAction);
+            viewModel.UserDataModel = userDataModel;
+            viewModel.RecommendationKey = (RecommendationKey) id;
+
+            switch(action)
+            {
+                case "goForwards":
+                    return RedirectToAction("Recommendation_Get",
+                        new {id = (int) viewModel.NextRecommendationKey(), reference = userDataModel.Reference});
+                case "goBackwards":
+                    return RedirectToAction("Recommendation_Get",
+                        new {id = (int) viewModel.PreviousRecommendationKey(), reference = userDataModel.Reference});
+            }
+
             return View("Recommendation", viewModel);
         }
 

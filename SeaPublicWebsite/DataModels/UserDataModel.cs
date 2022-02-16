@@ -35,6 +35,6 @@ namespace SeaPublicWebsite.DataModels
         public HeatingPattern? HeatingPattern { get; set; }
         public ThermostatTemperatureKnown? ThermostatTemperatureKnown { get; set; }
         public int? Temperature { get; set; }
-        public List<RecommendationKey> UserRecommendations { get; set; }
+        public List<UserRecommendation> UserRecommendations { get; set; }
     }
 }

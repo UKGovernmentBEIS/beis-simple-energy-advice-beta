@@ -7,7 +7,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     { 
         AddLoftInsulation,
         GroundFloorInsulation,
-        HeatPump,
         UpgradeHeatingControls,
         FitNewWindows,
         InsulateCavityWalls,

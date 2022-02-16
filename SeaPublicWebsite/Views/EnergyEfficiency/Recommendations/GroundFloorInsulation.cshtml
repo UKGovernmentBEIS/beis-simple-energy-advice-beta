@@ -1,0 +1,139 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
+
+@{
+    ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.UserDataModel.UserRecommendations.Count;
+}
+
+@section BeforeMain {
+    @Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = @Url.Action("YourRecommendations_Get", "EnergyEfficiency", new {reference = Model}),
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = false
+    })
+}
+
+<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <span class="govuk-caption-l">Your goal</span>
+            <h1 class="govuk-panel__title">
+                To reduce my energy bills
+            </h1>
+            <a href="#" class="govuk-link govuk-link--inverse">Change my answers</a>
+        </div>
+        <div class="govuk-grid-column-one-third">
+            <p class="govuk-body-l sea-reference">Your reference <strong>@Model.UserDataModel.Reference</strong></p>
+        </div>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int)Model.UserRecommendation.Key, reference = Model.UserDataModel.Reference})" method="post" novalidate>
+
+            @Html.HiddenFor(m => m.UserDataModel.Reference)
+
+        <span class="govuk-caption-l">
+            Recommendation @(Model.GetCurrentIndex() + 1) of @Model.UserDataModel.UserRecommendations.Count 
+        </span>
+        <h1 class="govuk-heading-l">Insulate the ground floor</h1>
+
+        <p class="govuk-body">
+            From the information we have it looks like you have a suspended timber floor.
+            This means your ground floor is made of wooden floorboards with a gap underneath.
+        </p>
+        <p class="govuk-body">
+            Adding extra insulation can help trap the heat inside your property so your
+            heating doesn’t need to be on as much.
+        </p>
+
+        <div class="govuk-inset-text">
+            Your floor could be insulated by lifting the floorboards, fitting insulation
+            between the joists and then putting the floorboards back. This is normally a
+            job for a professional installer.
+        </div>
+
+        <p class="govuk-body govuk-!-margin-bottom-7">
+            You can find more information on floor insulation on the
+            <a href="https://energysavingtrust.org.uk/" class="govuk-link">Energy Saving Trust website.</a>
+        </p>
+
+        <div class="govuk-warning-text govuk-!-margin-bottom-7">
+            <span class="govuk-warning-text__icon  sea-warning-text__icon--long" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-warning-text__assistive">Caution</span>
+                You will need to completely empty the rooms that are being insulated, and remove
+                any carpet or other floor covering, before the floor boards can be lifted.
+            </strong>
+        </div>
+
+        <h2 class="govuk-heading-m">Who this improvement is suitable for</h2>
+        <p class="govuk-body">You should consider this improvement for your property if:</p>
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+            <li>
+                Your property has a suspended timber floor that has not yet been insulated.
+                If you are unsure, a qualified installer will be able to confirm this for you.
+            </li>
+        </ul>
+
+        <h2 class="govuk-heading-m ">What you could save</h2>
+        <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-bottom-6  govuk-!-margin-top-6">
+            <div class="govuk-grid-column-one-half sea-install-costs">
+                <span class="govuk-caption-m">This could cost</span>
+                <h3 class="govuk-heading-l">£@Model.UserRecommendation.MinInstallCost - £@Model.UserRecommendation.MaxInstallCost</h3>
+            </div>
+            <div class="govuk-grid-column-one-half sea-yearly-savings">
+                <span class="govuk-caption-m">This could save up to</span>
+                <h3 class="govuk-heading-l">£@Model.UserRecommendation.Saving a year</h3>
+            </div>
+        </div>
+        <dl class="govuk-summary-list  govuk-!-margin-bottom-7">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
+                    Will this cause disruption during installation?
+                </dt>
+                <dd class="govuk-summary-list__value sea-recommendation-impact">
+                    <strong class="govuk-tag govuk-tag--green">MINIMAL</strong>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
+                    How long could this take to install?
+                </dt>
+                <dd class="govuk-summary-list__value  sea-recommendation-impact">
+                    <strong class="govuk-tag govuk-tag--green">LESS THAN A DAY</strong>
+                </dd>
+            </div>
+        </dl>
+
+        @if (Model.HasNextIndex())
+        {
+            <button name="goForward" class="govuk-button" data-module="govuk-button">
+                Next recommendation @(Model.GetCurrentIndex() + 1)
+            </button>
+        }
+        @if (Model.HasPreviousIndex())
+        {
+            <button name="goBackwards" class="govuk-button" data-module="govuk-button">
+                Previous recommendation @(Model.GetCurrentIndex() - 1)
+            </button>
+        }
+        </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <aside class="sea-recommendation-side-panel" role="complementary">
+            <h2 class="govuk-heading-m" id="subsection-title">Keep a copy</h2>
+            <p class="govuk-body-s">
+                <a href=# class="govuk-link">Print or email this recommendation</a>
+            </p>
+            <h2 class="govuk-heading-m" id="subsection-title">Your wish list</h2>
+            <p class="govuk-body-s">You haven’t saved any improvements yet.</p>
+        </aside>
+    </div>
+</div>

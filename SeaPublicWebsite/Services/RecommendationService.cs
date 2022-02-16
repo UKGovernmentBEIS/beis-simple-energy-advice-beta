@@ -16,33 +16,7 @@ namespace SeaPublicWebsite.DataStores
                     Title = "Add more loft insulation",
                     MinInstallCost = 300,
                     MaxInstallCost = 700,
-                    Saving = 45,
-                    Disruption = "Minimal",
-                    InstallationTime = "Less than a day",
-                    Description = new List<string>{
-                        "It looks like you have some insulation in your loft but it’s less " +
-                        "than the recommended amount. It could be worthwhile adding some more " +
-                        "to bring it up to the recommended thickness of 300mm, or 12 inches. ",
-                        "Adding extra insulation can help trap the heat inside your property so your " +
-                        "heating doesn’t need to be on as much."
-                    },
-                    Considerations = 
-                        "If some of your loft is boarded so that you " +
-                        "can store things up there you will either need to raise this " +
-                        "boarding up and insulate underneath it, or leave that part of " +
-                        "the loft with thinner insulation.",
-                    FurtherInfo = "loft insulation",
-                    Suitability = new RecommendationSuitability
-                    {
-                        IntroText = "You should consider this improvement for your property if:",
-                        SuitabilityPoints = new List<string>
-                        {
-                            "You have a pitched (sloping) roof with an unheated loft space that " +
-                            "someone could easily get into.",
-                            "Your loft has less than the recommended amount of insulation. This is " +
-                            "300mm or 12 inches thick. "
-                        }
-                    }
+                    Saving = 45
                 },
                 new Recommendation
                 {
@@ -53,12 +27,6 @@ namespace SeaPublicWebsite.DataStores
                     Saving = 75,
                     Disruption = "Definitely",
                     InstallationTime = "1 - 2 days",
-                    Description = new List<string>{
-                        "From the information we have it looks like you have a suspended timber floor. " +
-                        "This means your ground floor is made of wooden floorboards with a gap underneath.",
-                        "Adding extra insulation can help trap the heat inside your property so your " +
-                        "heating doesn’t need to be on as much."
-                    },
                     Considerations = 
                         "Your floor could be insulated by lifting the floorboards, fitting " +
                         "insulation between the joists and then putting the floorboards back. This is normally a " +
@@ -212,7 +180,7 @@ namespace SeaPublicWebsite.DataStores
             return Recommendations.First(r => (int)r.Key == id);
         }
 
-        public static List<RecommendationKey> GetUserRecommendations(UserDataModel answers)
+        public static List<Recommendation> GetRecommendationsForUser(UserDataModel answers)
         {
             var userRecommendationKeys = new List<RecommendationKey>
             {
@@ -233,7 +201,7 @@ namespace SeaPublicWebsite.DataStores
                 RecommendationKey.GroundFloorInsulation
             };
 
-            return userRecommendationKeys;
+            return Recommendations.Where(r => userRecommendationKeys.Contains(r.Key)).ToList();
         }
     }
 }
