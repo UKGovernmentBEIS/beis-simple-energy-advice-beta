@@ -6,28 +6,16 @@
     ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.UserDataModel.UserRecommendations.Count;
 }
 
-@section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        Href = @Url.Action("YourRecommendations_Get", "EnergyEfficiency", new {reference = Model}),
-        
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = false
-    })
-}
-
-<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel">
+<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel govuk-!-margin-bottom-9">
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
             <span class="govuk-caption-l">Your goal</span>
             <h1 class="govuk-panel__title">
                 To reduce my energy bills
             </h1>
-            <a href="#" class="govuk-link govuk-link--inverse">Change my answers</a>
+            <a href="@Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference})" class="govuk-link govuk-link--inverse">Change my answers</a>
         </div>
-        <div class="govuk-grid-column-one-third">
+        <div class="govuk-grid-column-one-third govuk-!-padding-0">
             <p class="govuk-body-l sea-reference">Your reference <strong>@Model.UserDataModel.Reference</strong></p>
         </div>
     </div>
@@ -35,12 +23,11 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int)Model.UserRecommendation.Key, reference = Model.UserDataModel.Reference})" method="post" novalidate>
-
-            @Html.HiddenFor(m => m.UserDataModel.Reference)
+    <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.UserRecommendation.Key, reference = Model.UserDataModel.Reference})" method="post" novalidate>
+        @Html.HiddenFor(m => m.UserDataModel.Reference)
 
         <span class="govuk-caption-l">
-            Recommendation @(Model.GetCurrentIndex() + 1) of @Model.UserDataModel.UserRecommendations.Count 
+            Recommendation @(Model.GetCurrentIndex() + 1) of @Model.UserDataModel.UserRecommendations.Count
         </span>
         <h1 class="govuk-heading-l">Insulate the ground floor</h1>
 
@@ -53,15 +40,15 @@
             heating doesn’t need to be on as much.
         </p>
 
-        <div class="govuk-inset-text">
+        <p class="govuk-body">
             Your floor could be insulated by lifting the floorboards, fitting insulation
             between the joists and then putting the floorboards back. This is normally a
             job for a professional installer.
-        </div>
+        </p>
 
         <p class="govuk-body govuk-!-margin-bottom-7">
             You can find more information on floor insulation on the
-            <a href="https://energysavingtrust.org.uk/" class="govuk-link">Energy Saving Trust website.</a>
+            <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/floor-insulation/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
         </p>
 
         <div class="govuk-warning-text govuk-!-margin-bottom-7">
@@ -99,7 +86,7 @@
                     Will this cause disruption during installation?
                 </dt>
                 <dd class="govuk-summary-list__value sea-recommendation-impact">
-                    <strong class="govuk-tag govuk-tag--green">MINIMAL</strong>
+                    <strong class="govuk-tag govuk-tag--orange">SIGNIFICANT</strong>
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -107,24 +94,45 @@
                     How long could this take to install?
                 </dt>
                 <dd class="govuk-summary-list__value  sea-recommendation-impact">
-                    <strong class="govuk-tag govuk-tag--green">LESS THAN A DAY</strong>
+                    <strong class="govuk-tag govuk-tag--yellow">1 to 2 days</strong>
                 </dd>
             </div>
         </dl>
+        
+        @(Html.GovUkRadiosFor(m => m.RecommendationAction,
+            fieldsetOptions: new FieldsetViewModel
+            {
+                Legend = new LegendViewModel
+                {
+                    Html = @<text>
+                               <h1 class="govuk-fieldset__heading">
+                                   What would you like to do with this recommendation?
+                               </h1>
+                            </text>,
+                    Classes = "govuk-fieldset__legend--l"
+                }
+            }
+            ))
 
-        @if (Model.HasNextIndex())
-        {
-            <button name="goForward" class="govuk-button" data-module="govuk-button">
-                Next recommendation @(Model.GetCurrentIndex() + 1)
-            </button>
-        }
         @if (Model.HasPreviousIndex())
         {
-            <button name="goBackwards" class="govuk-button" data-module="govuk-button">
-                Previous recommendation @(Model.GetCurrentIndex() - 1)
+            <button name="command" value="goBackwards" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Previous recommendation @(Model.GetCurrentIndex())
             </button>
         }
-        </form>
+        @if (Model.HasNextIndex())
+        {
+            <button name="command" value="goForwards" class="govuk-button" data-module="govuk-button">
+                Next recommendation @(Model.GetCurrentIndex() + 2)
+            </button>
+        }
+        else
+        {
+            <button name="command" value="goToActionPlan" class="govuk-button govuk-button" data-module="govuk-button">
+                Go to action plan
+            </button>
+        }
+    </form>
     </div>
     <div class="govuk-grid-column-one-third">
         <aside class="sea-recommendation-side-panel" role="complementary">

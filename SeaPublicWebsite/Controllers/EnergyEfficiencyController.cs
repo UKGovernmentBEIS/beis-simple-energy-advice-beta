@@ -721,12 +721,20 @@ namespace SeaPublicWebsite.Controllers
                 new UserRecommendation()
                 {
                     Key = r.Key,
+                    Title = r.Title,
                     MinInstallCost = r.MinInstallCost,
                     MaxInstallCost = r.MaxInstallCost,
-                    Saving = r.Saving
+                    Saving = r.Saving,
+                    Summary = r.Summary
                 }
             ).ToList();
-;            return View("YourRecommendations", reference);
+
+            var viewModel = new YourRecommendationsViewModel
+                {
+                    Reference = reference,
+                    NumberOfUserRecommendations = recommendationsForUser.Count
+                }
+;            return View("YourRecommendations", viewModel);
         }
 
         [HttpGet("your-recommendations/{id}/{reference}")]
@@ -736,30 +744,34 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new RecommendationViewModel
             {
                 UserDataModel = userDataModel,
-                UserRecommendation = userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey) id)
+                UserRecommendation = userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey) id),
+                RecommendationAction = userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey)id).RecommendationAction
             };
 
             var recommendationKey = (RecommendationKey) id;
-            switch (recommendationKey)
-            {
-                case RecommendationKey.AddLoftInsulation:
-                    return View("Recommendations/LoftInsulation", viewModel);
-                case RecommendationKey.GroundFloorInsulation:
-                    return View("Recommendations/GroundFloorInsulation", viewModel);
-            }
 
-            return RedirectToAction("YourRecommendations_get", new {reference = reference});
-    }
+            return View("recommendations/" + Enum.GetName(recommendationKey), viewModel);
+        }
 
         [HttpPost("your-recommendations/{id}/{reference}")]
-        public IActionResult Recommendation_Post(RecommendationViewModel viewModel, string action, int id)
+        public IActionResult Recommendation_Post(RecommendationViewModel viewModel, string command, int id)
         {
             var userDataModel = userDataStore.LoadUserData(viewModel.UserDataModel.Reference);
-            viewModel.ParseAndValidateParameters(Request, m => m.RecommendationAction);
             viewModel.UserDataModel = userDataModel;
-            viewModel.RecommendationKey = (RecommendationKey) id;
+            viewModel.UserRecommendation =
+                userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey)id);
 
-            switch(action)
+            viewModel.ParseAndValidateParameters(Request, m => m.RecommendationAction);
+
+            if (viewModel.HasAnyErrors())
+            {
+                return View("recommendations/" + Enum.GetName(viewModel.UserRecommendation.Key), viewModel);
+            };
+
+            userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey) id).RecommendationAction =
+                viewModel.RecommendationAction;
+
+            switch(command)
             {
                 case "goForwards":
                     return RedirectToAction("Recommendation_Get",
@@ -767,6 +779,8 @@ namespace SeaPublicWebsite.Controllers
                 case "goBackwards":
                     return RedirectToAction("Recommendation_Get",
                         new {id = (int) viewModel.PreviousRecommendationKey(), reference = userDataModel.Reference});
+                case "goToActionPlan":
+                    return RedirectToAction("YourSavedRecommendations_Get", new {reference = userDataModel.Reference});
             }
 
             return View("Recommendation", viewModel);
@@ -779,7 +793,7 @@ namespace SeaPublicWebsite.Controllers
             
             var viewModel = new YourSavedRecommendationsViewModel
             {
-                UserData = userDataModel
+                UserDataModel = userDataModel
             };
             return View("YourSavedRecommendations", viewModel);
         }

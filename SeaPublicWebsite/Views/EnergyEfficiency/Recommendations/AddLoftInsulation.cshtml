@@ -1,35 +1,21 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Helpers
-@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
     ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.UserDataModel.UserRecommendations.Count;
 }
 
-@section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        Href = @Url.Action("YourRecommendations_Get", "EnergyEfficiency", new {reference = Model}),
-        
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = false
-    })
-}
-
-<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel">
+<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel govuk-!-margin-bottom-9">
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
             <span class="govuk-caption-l">Your goal</span>
             <h1 class="govuk-panel__title">
                 To reduce my energy bills
             </h1>
-            <a href="#" class="govuk-link govuk-link--inverse">Change my answers</a>
+            <a href="@Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference})" class="govuk-link govuk-link--inverse">Change my answers</a>
         </div>
-        <div class="govuk-grid-column-one-third">
+        <div class="govuk-grid-column-one-third govuk-!-padding-0">
             <p class="govuk-body-l sea-reference">Your reference <strong>@Model.UserDataModel.Reference</strong></p>
         </div>
     </div>
@@ -51,20 +37,21 @@
             than the recommended amount. It could be worthwhile adding some more
             to bring it up to the recommended thickness of 300mm, or 12 inches.
         </p>
+
         <p class="govuk-body">
             Adding extra insulation can help trap the heat inside your property so your
             heating doesn’t need to be on as much.
         </p>
 
-        <div class="govuk-inset-text">
+        <p class="govuk-body">
             If some of your loft is boarded so that you can store things up there
             you will either need to raise this boarding up and insulate underneath
             it, or leave that part of the loft with thinner insulation.
-        </div>
+        </p>
 
         <p class="govuk-body govuk-!-margin-bottom-7">
-            You can find more information on loft insulation on the
-            <a href="https://energysavingtrust.org.uk/" class="govuk-link">Energy Saving Trust website.</a>
+            You can find more information on floor insulation on the
+            <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/roof-and-loft-insulation/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
         </p>
 
         <h2 class="govuk-heading-m">Who this improvement is suitable for</h2>
@@ -122,17 +109,23 @@
                     }
                 }
                 ))
-            
-            @if (Model.HasNextIndex())
-            {
-                <button name="action" value="goForwards" class="govuk-button" data-module="govuk-button">
-                    Next recommendation @(Model.GetCurrentIndex() + 1)
-                </button>
-            }
+
             @if (Model.HasPreviousIndex())
             {
-                <button name="action" value="goBackwards" class="govuk-button" data-module="govuk-button">
-                    Previous recommendation @(Model.GetCurrentIndex() - 1)
+                <button name="command" value="goBackwards" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                    Previous recommendation @(Model.GetCurrentIndex())
+                </button>
+            }
+            @if (Model.HasNextIndex())
+            {
+                <button name="command" value="goForwards" class="govuk-button" data-module="govuk-button">
+                    Next recommendation @(Model.GetCurrentIndex() + 2)
+                </button>
+            }
+            else
+            {
+                <button name="command" value="goToActionPlan" class="govuk-button govuk-button" data-module="govuk-button">
+                    Go to action plan
                 </button>
             }
         </form>

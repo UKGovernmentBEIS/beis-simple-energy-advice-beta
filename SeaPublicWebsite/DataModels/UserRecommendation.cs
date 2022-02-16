@@ -9,6 +9,8 @@ namespace SeaPublicWebsite.DataModels
         public int MinInstallCost { get; set; }
         public int MaxInstallCost { get; set; }
         public int Saving { get; set; }
-        public RecommendationAction? State { get; set; }
+        public string Title { get; set; }
+        public string Summary { get; set; }
+        public RecommendationAction? RecommendationAction { get; set; }
     }
 }

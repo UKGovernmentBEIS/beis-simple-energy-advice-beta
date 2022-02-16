@@ -13,10 +13,11 @@ namespace SeaPublicWebsite.DataStores
                 new Recommendation
                 {
                     Key = RecommendationKey.AddLoftInsulation,
-                    Title = "Add more loft insulation",
+                    Title = "Add some loft insulation",
                     MinInstallCost = 300,
                     MaxInstallCost = 700,
-                    Saving = 45
+                    Saving = 45,
+                    Summary = "Increase the level of insulation in your loft to the recommended level of 300mm"
                 },
                 new Recommendation
                 {
@@ -25,25 +26,7 @@ namespace SeaPublicWebsite.DataStores
                     MinInstallCost = 1200,
                     MaxInstallCost = 1800,
                     Saving = 75,
-                    Disruption = "Definitely",
-                    InstallationTime = "1 - 2 days",
-                    Considerations = 
-                        "Your floor could be insulated by lifting the floorboards, fitting " +
-                        "insulation between the joists and then putting the floorboards back. This is normally a " +
-                        "job for a professional installer .",
-                    Caution = 
-                        "You will need to completely empty the rooms that are being insulated, " +
-                        "and remove any carpet or other floor covering, before the floor boards can be lifted.",
-                    FurtherInfo = "floor insulation",
-                    Suitability = new RecommendationSuitability
-                    {
-                        IntroText = "You should consider this improvement for your property if:",
-                        SuitabilityPoints = new List<string>
-                        {
-                            "Your property has a suspended timber floor that has not yet been insulated. " +
-                            "If you are unsure, a qualified installer will be able to confirm this for you."
-                        }
-                    }
+                    Summary = "Lift the floor boards up and fit insulation in the gap beneath them"
                 },
                 new Recommendation
                 {
@@ -52,28 +35,7 @@ namespace SeaPublicWebsite.DataStores
                     MinInstallCost = 150,
                     MaxInstallCost = 400,
                     Saving = 75,
-                    Disruption = "Minimal",
-                    InstallationTime = "Less than a day",
-                    Description = new List<string>{
-                        "If you have a central heating system then it’s important you can control it " +
-                        "effectively, so that you can stay warm without wasting energy.",
-                        "The standard way to do that is to have a central programmer and thermostat to " +
-                        "manage when the heating is on and how much, as well as thermostatic radiator valves " +
-                        "(TRVs) to control the heating in each room.",
-                        "Alternatively, you may want to choose a smart heating controller to make it easier to " +
-                        "adjust the settings. "
-                    },
-                    Caution = " You will need a competent installer to fit new controls to your heating system.",
-                    FurtherInfo = "heating controls",
-                    Suitability = new RecommendationSuitability
-                    {
-                        IntroText = "You should consider this improvement for your property if:",
-                        SuitabilityPoints = new List<string>
-                        {
-                            "You have a central heating system with radiators and you do not already have a " +
-                            "full set of controls. "
-                        }
-                    }
+                    Summary = "Fit a programmer, thermostat and thermostatic radiator valves"
                 },
                 new Recommendation
                 {
@@ -82,29 +44,7 @@ namespace SeaPublicWebsite.DataStores
                     MinInstallCost = 3000,
                     MaxInstallCost = 5000,
                     Saving = 175,
-                    Disruption = "Moderate",
-                    InstallationTime = "1 or 2 days",
-                    Description = new List<string>{
-                        "It looks like you have some single glazed windows in your home. Double or triple glazed " +
-                        "windows are much better at keeping the heat in, so would help you keep warm while " +
-                        "reducing your heating bills.",
-                        "The fuel bill savings from replacing windows are unlikely to pay back the full installation " +
-                        "cost, but there are other benefits such as reduced maintenance and better sound proofing " +
-                        "that may affect your decision. "
-                    },
-                    Caution = 
-                        "If you live in a conservation area or listed building there may be limits on what " +
-                        "changes you can make to your windows. You should check with your local authority to " +
-                        "see what is allowed.",
-                    FurtherInfo = "efficient windows",
-                    Suitability = new RecommendationSuitability
-                    {
-                        IntroText = "You should consider this improvement for your property if:",
-                        SuitabilityPoints = new List<string>
-                        {
-                            "You have any single glazed windows."
-                        }
-                    }
+                    Summary = "Replace old single glazed windows with new double or triple glazing"
                 },
                 new Recommendation
                 {
@@ -113,29 +53,7 @@ namespace SeaPublicWebsite.DataStores
                     MinInstallCost = 700,
                     MaxInstallCost = 1200,
                     Saving = 185,
-                    Disruption = "Minimal",
-                    InstallationTime = "1 day",
-                    Description = new List<string>{
-                        "From the information we have it looks like the outside walls of your home " +
-                        "are cavity walls, and that the cavity has not been insulated.",
-                        "Specialist contractors can inject insulation into the cavity, reducing heat " +
-                        "loss significantly and helping to cut your bills."
-                    },
-                    Caution =
-                        "Not all buildings are suitable for standard cavity wall insulation. You will " +
-                        "need a specialist contractor to inspect your property to work out what insulation " +
-                        "options you have.",
-                    FurtherInfo = "efficient windows",
-                    Suitability = new RecommendationSuitability
-                    {
-                        IntroText = "You should consider this improvement for your property if:",
-                        SuitabilityPoints = new List<string>
-                        {
-                            "Your property was built with uninsulated cavity walls - this was common between the " +
-                            "1920s and the 1980s.",
-                            "The cavity has not been insulated since."
-                        }
-                    }
+                    Summary = "Inject insulation into the cavity in your external walls"
                 },
                 new Recommendation
                 {
@@ -144,29 +62,7 @@ namespace SeaPublicWebsite.DataStores
                     MinInstallCost = 3500,
                     MaxInstallCost = 5500,
                     Saving = 220,
-                    Disruption = "Moderate",
-                    InstallationTime = "2 days",
-                    Description = new List<string>{
-                        "If you have a suitable roof area you may be able to fit solar photovoltaic panels, " +
-                        "or solar PV, to generate electricity.",
-                        "You will be able to use some of this electricity to reduce the amount you buy from " +
-                        "your energy supplier, cutting your bills. At times you will generate more than you " +
-                        "are using – you can sell any surplus to your electricity supplier to save even more " +
-                        "money.  "
-                    },
-                    Caution =
-                        "The savings you get from a solar PV system will depend on many factors, including " +
-                        "whether there are people at home during the day using electricity.",
-                    FurtherInfo = "solar PV",
-                    Suitability = new RecommendationSuitability
-                    {
-                        IntroText = "You should consider this improvement for your property if:",
-                        SuitabilityPoints = new List<string>
-                        {
-                            "You have a roof area that faces somewhere south of due east or due west.",
-                            "This roof area is not often shaded by trees or other buildings."
-                        }
-                    }
+                    Summary = "Install PV panels on your roof to generate electricity"
                 }
             };
 
@@ -198,7 +94,10 @@ namespace SeaPublicWebsite.DataStores
                 RecommendationKey.AddLoftInsulation,
 
                 // Not for mid or top floor flat
-                RecommendationKey.GroundFloorInsulation
+                RecommendationKey.GroundFloorInsulation,
+
+                // Not on ground or mid floor flat
+                RecommendationKey.SolarElectricPanels
             };
 
             return Recommendations.Where(r => userRecommendationKeys.Contains(r.Key)).ToList();

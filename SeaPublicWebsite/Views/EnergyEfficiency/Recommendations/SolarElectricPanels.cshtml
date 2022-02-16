@@ -1,0 +1,149 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
+@model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
+
+@{
+    ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.UserDataModel.UserRecommendations.Count;
+}
+
+<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel govuk-!-margin-bottom-9">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <span class="govuk-caption-l">Your goal</span>
+            <h1 class="govuk-panel__title">
+                To reduce my energy bills
+            </h1>
+            <a href="@Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference})" class="govuk-link govuk-link--inverse">Change my answers</a>
+        </div>
+        <div class="govuk-grid-column-one-third govuk-!-padding-0">
+            <p class="govuk-body-l sea-reference">Your reference <strong>@Model.UserDataModel.Reference</strong></p>
+        </div>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int)Model.UserRecommendation.Key, reference = Model.UserDataModel.Reference})" method="post" novalidate>
+
+        @Html.HiddenFor(m => m.UserDataModel.Reference)
+
+        <span class="govuk-caption-l">
+            Recommendation @(Model.GetCurrentIndex() + 1) of @Model.UserDataModel.UserRecommendations.Count 
+        </span>
+        <h1 class="govuk-heading-l">Fit solar electric panels</h1>
+
+        <p class="govuk-body">
+            If you have a suitable roof area you may be able to fit solar photovoltaic panels, or solar PV, 
+            to generate electricity. 
+        </p>
+
+        <p class="govuk-body">
+            You will be able to use some of this electricity to reduce the amount you buy from your energy supplier, 
+            cutting your bills. At times you will generate more than you are using – you can sell any surplus to your 
+            electricity supplier to save even more money.  
+        </p>
+
+        <p class="govuk-body govuk-!-margin-bottom-7">
+            You can find more information on solar PV on the
+            <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/solar-panels/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
+        </p>
+        
+        <div class="govuk-warning-text govuk-!-margin-bottom-7">
+            <span class="govuk-warning-text__icon  sea-warning-text__icon--long" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-warning-text__assistive">Caution</span>
+                The savings you get from a solar PV system will depend on many factors, 
+                including whether there are people at home during the day using electricity.  
+            </strong>
+        </div>
+
+        <h2 class="govuk-heading-m">Who this improvement is suitable for</h2>
+        <p class="govuk-body">You should consider this improvement for your property if:</p>
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+            <li>
+                You have a roof area that faces somewhere south of due east or due west.
+            </li>
+            <li>
+                This roof area is not often shaded by trees or other buildings.
+            </li>
+        </ul>
+
+        <h2 class="govuk-heading-m ">What you could save</h2>
+        <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-bottom-6  govuk-!-margin-top-6">
+            <div class="govuk-grid-column-one-half sea-install-costs">
+                <span class="govuk-caption-m">This could cost</span>
+                <h3 class="govuk-heading-l">£@Model.UserRecommendation.MinInstallCost - £@Model.UserRecommendation.MaxInstallCost</h3>
+            </div>
+            <div class="govuk-grid-column-one-half sea-yearly-savings">
+                <span class="govuk-caption-m">This could save up to</span>
+                <h3 class="govuk-heading-l">£@Model.UserRecommendation.Saving a year</h3>
+            </div>
+        </div>
+            <dl class="govuk-summary-list  govuk-!-margin-bottom-7">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
+                        Will this cause disruption during installation?
+                    </dt>
+                    <dd class="govuk-summary-list__value sea-recommendation-impact">
+                        <strong class="govuk-tag govuk-tag--yellow">MODERATE</strong>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
+                        How long could this take to install?
+                    </dt>
+                    <dd class="govuk-summary-list__value  sea-recommendation-impact">
+                        <strong class="govuk-tag govuk-tag--orange">2 DAYS</strong>
+                    </dd>
+                </div>
+            </dl>
+            
+            @(Html.GovUkRadiosFor(m => m.RecommendationAction,
+                fieldsetOptions: new FieldsetViewModel
+                {
+                    Legend = new LegendViewModel
+                    {
+                        Html = @<text>
+                                   <h1 class="govuk-fieldset__heading">
+                                       What would you like to do with this recommendation?
+                                   </h1>
+                                </text>,
+                        Classes = "govuk-fieldset__legend--l"
+                    }
+                }
+                ))
+            
+
+            @if (Model.HasPreviousIndex())
+            {
+                <button name="command" value="goBackwards" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                    Previous recommendation @(Model.GetCurrentIndex())
+                </button>
+            }
+            @if (Model.HasNextIndex())
+            {
+                <button name="command" value="goForwards" class="govuk-button" data-module="govuk-button">
+                    Next recommendation @(Model.GetCurrentIndex() + 2)
+                </button>
+            }
+            else
+            {
+                <button name="command" value="goToActionPlan" class="govuk-button govuk-button" data-module="govuk-button">
+                    Go to action plan
+                </button>
+            }
+        </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <aside class="sea-recommendation-side-panel" role="complementary">
+            <h2 class="govuk-heading-m" id="subsection-title">Keep a copy</h2>
+            <p class="govuk-body-s">
+                <a href=# class="govuk-link">Print or email this recommendation</a>
+            </p>
+            <h2 class="govuk-heading-m" id="subsection-title">Your wish list</h2>
+            <p class="govuk-body-s">You haven’t saved any improvements yet.</p>
+        </aside>
+    </div>
+</div>

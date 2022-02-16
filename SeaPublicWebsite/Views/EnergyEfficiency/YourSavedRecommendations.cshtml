@@ -4,32 +4,20 @@
 @model SeaPublicWebsite.Models.EnergyEfficiency.YourSavedRecommendationsViewModel;
 
 @{
-    ViewBag.Title = "Your saved recommendations";
+    ViewBag.Title = "Your action plan";
 }
 
-@section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        Href = @Url.Action("Recommendation_Get", "EnergyEfficiency", new {reference = Model}),
-        
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = false
-    })
-}
-
-<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel">
+<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel govuk-!-margin-bottom-9">
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
             <span class="govuk-caption-l">Your goal</span>
             <h1 class="govuk-panel__title">
                 To reduce my energy bills
             </h1>
-            <a href="#" class="govuk-link govuk-link--inverse">Change my answers</a>
+            <a href="@Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference})" class="govuk-link govuk-link--inverse">Change my answers</a>
         </div>
         <div class="govuk-grid-column-one-third">
-            <p class="govuk-body-l sea-reference">Your reference <strong>YZ431XJ</strong></p>
+            <p class="govuk-body-l sea-reference">Your reference <strong>@Model.UserDataModel.Reference</strong></p>
         </div>
     </div>
 </div>
@@ -38,13 +26,29 @@
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-xl">Your saved recommendations</h1>
         <p class="govuk-body">
-            Some useful text or guidance here.
+            If you went ahead with all the recommendations you have chosen, this is the impact it could have:
         </p>
 
         <span class="govuk-caption-m">Together, these improvements could cost</span>
         <h3 class="govuk-heading-l">@Model.GetInstallationCostText()</h3>
         <span class="govuk-caption-m">You could save up to</span>
         <h3 class="govuk-heading-l">@Model.GetSavingText()</h3>
+        
+        <div class="govuk-inset-text">
+            You may be able to apply for grants to help with the cost of fitting some or all of these improvements. 
+            See Next Steps for details.  
+        </div>
+
+        <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                    How did we calculate these figures?
+                </span>
+            </summary>
+            <div class="govuk-details__text">
+                Details here
+            </div>
+        </details>
 
         <table class="govuk-table">
             <thead class="govuk-table__head">
@@ -56,12 +60,12 @@
             </tr>
             </thead>
             <tbody class="govuk-table__body">
-            @foreach (Recommendation recommendation in @Model.Recommendations)
+            @foreach (UserRecommendation recommendation in @Model.GetSavedRecommendations())
             {
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell">
                         <p class="govuk-body-l">
-                            <a class="govuk-link" href=#>@(recommendation.Title)</a>
+                            <a class="govuk-link" href=@Url.Action("Recommendation_Get", new { id = (int)recommendation.Key, reference = Model.UserDataModel.Reference})>@(recommendation.Title)</a>
                         </p>
                         <p class="govuk-body">
                             @(recommendation.Summary)
@@ -70,34 +74,57 @@
                     <td class="govuk-table__cell">@Model.GetInstallationCostText(recommendation)</td>
                     <td class="govuk-table__cell">@Model.GetSavingText(recommendation)</td>
                     <td class="govuk-table__cell">
-                        <a class="govuk-link" href=#>Remove</a>
+                        <a class="govuk-link" href=#>Discard</a>
                     </td>
                 </tr>
             }
             </tbody>
         </table>
+        
+        @if (Model.GetDecideLaterRecommendations().Count > 0)
+        {
+            <h2 class="govuk-heading-m">Recommendations you wanted to decide on later</h2>
 
-        <h2 class="govuk-heading-m">Find grants to cover some or all of the costs</h2>
-        <p class="govuk-body">
-            There may be grants available to help cover the cost of
-            improvements to your property that reduce the amount of extra energy it
-            lets go to waste.
-        </p>
+            <dl class="govuk-summary-list">
+                @foreach (UserRecommendation recommendation in Model.GetDecideLaterRecommendations())
+                {
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            <p class="govuk-body-l">
+                                <a class="govuk-link" href=@Url.Action("Recommendation_Get", new { id = (int)recommendation.Key, reference = Model.UserDataModel.Reference})>@(recommendation.Title)</a>
+                            </p>
+                            <p class="govuk-body">
+                                @(recommendation.Summary)
+                            </p>
+                        </dt>
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link" href="#">
+                                Add to action plan
+                            </a>
+                            <a class="govuk-link" href="#">
+                                Discard
+                            </a>
+                        </dd>
+                    </div>
+                }
+            </dl>
+        
+        }
+        <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                    What recommendations were not suitable for your home
+                </span>
+            </summary>
+            <div class="govuk-details__text">
+                If you are interested, you can <a class="govuk-link">view a full breakdown of the recommendations that we determined to be unsuitable for your home.</a>
+            </div>
+        </details>
 
-        <h2 class="govuk-heading-m">Find qualified installers to do the work</h2>
+        <h2 class="govuk-heading-m">Find out more about saving energy</h2>
         <p class="govuk-body">
-            We recommend consulting with a qualified installer
-            to make changes to your property.
-        </p>
-        <p class="govuk-body">
-            You can get help finding an qualified installer
-            in your area by visiting the <a href=# class="govuk-link">Find a local installer service</a>
-            on the MCS website.
-        </p>
-
-        <h2 class="govuk-heading-m">Where to find more information about energy efficiency</h2>
-        <p class="govuk-body">
-            You can also visit the <a href=# class="govuk-link">Energy Savings Trust website</a>
+            You can visit the 
+            <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/">Energy Saving Trust website <span class="govuk-visually-hidden">(opens in a new window)</span></a>
             for more information on other ways you can improve your energy efficiency to reduce your bills.
         </p>
     </div>
