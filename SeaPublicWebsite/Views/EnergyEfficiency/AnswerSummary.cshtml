@@ -11,7 +11,7 @@
     {
         Text = "Back",
         Href = @Url.Action("Temperature_Get", "EnergyEfficiency", new {reference = Model}),
-        
+
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
         OverrideWithJavascript = false
@@ -23,193 +23,222 @@
         <h1 class="govuk-heading-l">Please review the information we have gathered about your property and update any incorrect information</h1>
 
         <p class="govuk-body">Add in some content here explaining why.</p>
-        
-        <h2 class="govuk-heading-m">@QuestionSection.Suitability</h2>
+
         <dl class="govuk-summary-list">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Living Circumstances
-            </dt>
-            <dd class="govuk-summary-list__value">
-              @OwnershipStatus.OwnerOccupancy
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> circumstances</span>
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Country
-            </dt>
-            <dd class="govuk-summary-list__value">
-              @Country.England
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> country</span>
-              </a>
-            </dd>
-          </div>
-        </dl>
-        <h2 class="govuk-heading-m">@QuestionSection.YourHome</h2>
-        <dl class="govuk-summary-list">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Address
-            </dt>
-            <dd class="govuk-summary-list__value">
-              123 Test, London, N19 TST
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> address</span>
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Type of property
-            </dt>
-            <dd class="govuk-summary-list__value">
-              @HouseType.Detatched @PropertyType.House
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> home type</span>
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Year property was built
-            </dt>
-            <dd class="govuk-summary-list__value">
-              1950
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> year property was built</span>
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-             Wall type
-            </dt>
-            <dd class="govuk-summary-list__value">
-              @WallType.CavityInsulated
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> type of walls</span>
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-             Roof type
-            </dt>
-            <dd class="govuk-summary-list__value">
-              @RoofConstruction.Flat insulated
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> type of roof</span>
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-             Outdoor space
-            </dt>
-            <dd class="govuk-summary-list__value">
-              @HasOutdoorSpace.Yes
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> has outdoor space</span>
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-             Type of glazing
-            </dt>
-            <dd class="govuk-summary-list__value">
-              @GlazingType.DoubleOrTripleGlazed
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> type of glazing</span>
-              </a>
-            </dd>
-          </div>
-        </dl>
-        <h2 class="govuk-heading-m">@QuestionSection.Heating</h2>
-        <dl class="govuk-summary-list">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-             Type of heating
-            </dt>
-            <dd class="govuk-summary-list__value">
-              @HeatingType.GasBoiler
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> type of heating</span>
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-             Hot water cylinder
-            </dt>
-            <dd class="govuk-summary-list__value">
-              @HasHotWaterCylinder.Yes
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> has hot water cylinder</span>
-              </a>
-            </dd>
-          </div>
-        </dl>
-        <h2 class="govuk-heading-m">@QuestionSection.Behaviour</h2>
-        <dl class="govuk-summary-list">
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-             Typical heating pattern
-            </dt>
-            <dd class="govuk-summary-list__value">
-              @HeatingPattern.AllDayAndNight
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> type of glazing</span>
-              </a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-             Temperature
-            </dt>
-            <dd class="govuk-summary-list__value">
-              21
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> temperature</span>
-              </a>
-            </dd>
-          </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    Which country is your property located in?
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    @Country.England
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("Country_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> country</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    Do you own your home?
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    yes
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("OwnershipStatus_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> circumstances</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    What is the address of your property?
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    123 Test, London, N19 TST
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("AskForPostcode_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> address</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    What kind of property do you have?
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    @PropertyType.House
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> home type</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    What kind of @PropertyType.House do you have? 
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    @HouseType.Detatched
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("HouseType_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> type of house</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    Roughly what year was your property built? 
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    1950
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> age of property</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    What kind of walls does your property have? 
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    @WallType.CavityInsulated
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("WallType_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> type of roof</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    Is any part of your roof flat? 
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    Yes
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("RoofConstruction_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> is roof flat</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    Is your roof fully insulated?
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    No
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("RoofInsulated_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> is roof insulated</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    What type of windows does your property have? 
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    Single glazing
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("GlazingType_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> type of glazing</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    Do you have any outside space?
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    Yes
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("OutdoorSpace_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> outdoor space</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    How do you heat your home? 
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    Coal
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("HeatingType_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> how you heat your home</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    Do you have a hot water cylinder? 
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    Yes
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("HotWaterCylinder_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> do you have a hot water cylinder</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    How many people aged 5 or over live in the home?  
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    4
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("GlazingType_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> number of people over 5 in the home</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    When do you heat your home on a typical day?
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    All day and off at night
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("HeatingPattern_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> heating pattern</span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    What temperature do you heat your home to?
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    22
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("Temperature_Get", "EnergyEfficiency", new {reference = Model})">
+                        Change<span class="govuk-visually-hidden"> temperature</span>
+                    </a>
+                </dd>
+            </div>
         </dl>
 
         <a href="@Url.Action("YourRecommendations_Get", "EnergyEfficiency", new {reference = Model})" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
             See results
             <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
-                <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+                <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/>
             </svg>
         </a>
     </div>
