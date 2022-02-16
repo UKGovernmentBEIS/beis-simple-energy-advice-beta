@@ -102,7 +102,7 @@ namespace SeaPublicWebsite.Controllers
                 return RedirectToAction("ServiceUnsuitable", "EnergyEfficiency", new {from = "OwnershipStatus", reference = viewModel.Reference});
             }
 
-            return RedirectToAction("YourPropertyIntro", "EnergyEfficiency", new {reference = viewModel.Reference});
+            return RedirectToAction("AskForPostcode_Get", "EnergyEfficiency", new {reference = viewModel.Reference});
         }
 
         
@@ -151,18 +151,6 @@ namespace SeaPublicWebsite.Controllers
             return View("ServiceUnsuitable", reference);
         }
 
-        
-        [HttpGet("your-property-intro/{reference}")]
-        public IActionResult YourPropertyIntro(string reference)
-        {
-            // We don't really do anything with the userDataModel
-            // But, we must load it to check that the reference is valid
-            var userDataModel = userDataStore.LoadUserData(reference);
-            
-            return View("YourPropertyIntro", userDataModel.Reference);
-        }
-
-        
         [HttpGet("postcode/{reference}")]
         public IActionResult AskForPostcode_Get(string reference)
         {
