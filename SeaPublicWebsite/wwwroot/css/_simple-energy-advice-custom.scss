@@ -32,17 +32,15 @@
     padding-top: govuk-spacing(2);
 }
 
-.sea-recommendation-financial-impact {
-    .sea-install-costs {
-        border-left: 4px solid govuk-colour("black");
-    }
+.sea-install-costs {
+    border-left: 4px solid govuk-colour("black");
+}
 
-    .sea-yearly-savings {
-        border-left: 4px solid govuk-colour("green");
+.sea-yearly-savings {
+    border-left: 4px solid govuk-colour("green");
 
-        h3 {
-            color: govuk-colour("green");
-        }
+    h3 {
+        color: govuk-colour("green");
     }
 }
 
@@ -52,4 +50,8 @@
 
 .sea-next-steps {
     margin-top: 15px;
+}
+
+.sea-warning-text__icon--long {
+    top: 33.3%;
 }

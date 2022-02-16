@@ -1,4 +1,5 @@
-﻿using SeaPublicWebsite.Models.EnergyEfficiency;
+﻿using System.Collections.Generic;
+using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.DataModels
@@ -34,5 +35,6 @@ namespace SeaPublicWebsite.DataModels
         public HeatingPattern? HeatingPattern { get; set; }
         public ThermostatTemperatureKnown? ThermostatTemperatureKnown { get; set; }
         public int? Temperature { get; set; }
+        public List<RecommendationKey> UserRecommendations { get; set; }
     }
 }

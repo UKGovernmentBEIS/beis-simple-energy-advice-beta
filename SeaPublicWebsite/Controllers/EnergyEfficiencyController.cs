@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using GovUkDesignSystem;
 using GovUkDesignSystem.Parsers;
 using Microsoft.AspNetCore.Mvc;
+using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.Models.EnergyEfficiency;
@@ -700,13 +702,6 @@ namespace SeaPublicWebsite.Controllers
             
             return RedirectToAction("AnswerSummary", new {reference = viewModel.Reference});
         }
-
-        
-        
-        
-        
-        
-        
         
         [HttpGet("answer-summary/{reference}")]
         public IActionResult AnswerSummary(string reference)
@@ -716,21 +711,35 @@ namespace SeaPublicWebsite.Controllers
             return View("AnswerSummary", reference);
         }
 
-
         [HttpGet("your-recommendations/{reference}")]
         public IActionResult YourRecommendations_Get(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
-            
+            var recommendationsForUser = RecommendationService.GetUserRecommendations(userDataModel);
+            userDataModel.UserRecommendations = recommendationsForUser;
             return View("YourRecommendations", reference);
         }
 
-        [HttpGet("recommendation/{reference}")]
-        public IActionResult Recommendation_Get(string reference)
+        [HttpGet("next-recommendation/{reference}")]
+        public IActionResult NextRecommendation(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
+            var recommendationsForUser = RecommendationService.GetUserRecommendations(userDataModel);
             
-            return View("Recommendation", reference);
+            return RedirectToAction("Recommendation_Get", new { id = (int)recommendationsForUser.First(), reference = userDataModel.Reference });
+        }
+
+        [HttpGet("recommendation/{id}/{reference}")]
+        public IActionResult Recommendation_Get(int id, string reference)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+            var recommendation = RecommendationService.GetRecommendation(id);
+            var viewModel = new RecommendationViewModel
+            {
+                UserDataModel = userDataModel,
+                Recommendation = recommendation
+            };
+            return View("Recommendation", viewModel);
         }
 
         [HttpGet("your-saved-recommendations/{reference}")]
@@ -738,7 +747,11 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
-            return View("YourSavedRecommendations", reference);
+            var viewModel = new YourSavedRecommendationsViewModel
+            {
+                UserData = userDataModel
+            };
+            return View("YourSavedRecommendations", viewModel);
         }
     }
 }

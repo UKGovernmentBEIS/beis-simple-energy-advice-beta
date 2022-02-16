@@ -1,11 +1,9 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Helpers
-@using SeaPublicWebsite.Models.EnergyEfficiency
-@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+@model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
-    ViewBag.Title = "Recommendation 1 of 4";
+    ViewBag.Title = "Recommendation " + (Model.UserDataModel.UserRecommendations.FindIndex(r => r == Model.Recommendation.Key) + 1) + " of " + Model.UserDataModel.UserRecommendations.Count;
 }
 
 @section BeforeMain {
@@ -32,82 +30,70 @@
         <div class="govuk-grid-column-one-third">
             <p class="govuk-body-l sea-reference">Your reference <strong>YZ431XJ</strong></p>
         </div>
-  
     </div>
 </div>
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <span class="govuk-caption-l">Recommendation 1 of 4</span>
-        <h1 class="govuk-heading-l">Add some loft insulation</h1>
-        <p class="govuk-body">
-            It looks like you have some insulation in your loft but 
-            it’s less than the recommended amount. It could be worthwhile 
-            adding some more to bring it up to the recommended thickness of 
-            300mm, or 12 inches.
-        </p>
+        <span class="govuk-caption-l">
+            Recommendation @(Model.UserDataModel.UserRecommendations.FindIndex(r => r == Model.Recommendation.Key) + 1) of @Model.UserDataModel.UserRecommendations.Count
+        </span>
+        <h1 class="govuk-heading-l">@Model.Recommendation.Title</h1>
 
-        <p class="govuk-body">
-            If your loft isn’t insulated enough, a lot of the heat your home 
-            generates will be lost through your roof as it rises.
-        </p>
+        @foreach (string paragraph in Model.Recommendation.Description)
+        {
+            <p class="govuk-body">@(paragraph)</p>
+        }
 
-        <p class="govuk-body">
-            Adding extra insulation can help trap the heat inside your property 
-            so your heating doesn’t need to be on as much. 
-        </p>
+        @Html.GovUkInsetText(
+            new InsetTextViewModel
+            {
+                Text = @Model.Recommendation.Considerations
+            })
 
-        <div class="govuk-inset-text">
-            <p class="govuk-body">
-                If some of your loft is boarded so that you can store things up 
-                there you will either need to raise this boarding up and insulate 
-                underneath it, or leave that part of the loft with thinner insulation.
-            </p>
-        </div>
-
-        <p class="govuk-body">
-            You can find more information on loft insulation on the 
+        <p class="govuk-body govuk-!-margin-bottom-7">
+            You can find more information on @Model.Recommendation.FurtherInfo on the
             <a href=# class="govuk-link">Energy Saving Trust website.</a>
         </p>
 
-
-        <div class="govuk-warning-text">
-            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-            <strong class="govuk-warning-text__text">
-                <span class="govuk-warning-text__assistive">Warning</span>
-                You should consult a qualified installer to work out how much insulation 
-                is right for your property. 
-            </strong>
-        </div>
+        @if (@Model.Recommendation.Caution != null)
+        {
+            <div class="govuk-warning-text govuk-!-margin-bottom-7">
+                <span class="govuk-warning-text__icon  sea-warning-text__icon--long" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                    <span class="govuk-warning-text__assistive">Caution</span>
+                    @Model.Recommendation.Caution
+                </strong>
+            </div>
+        }
 
         <h2 class="govuk-heading-m">Who this improvement is suitable for</h2>
-        <p class="govuk-body">You should consider this improvement for your property if:</p>
-        <ul class="govuk-list govuk-list--bullet">
-            <li>Your loft has less than the recommended amount of insulation. 
-                This is currently 300mm or 12 inches thick.</li>
-            <li>You are able to go a short time without using the rooms that need insulating. </li>
+        <p class="govuk-body">@Model.Recommendation.Suitability.IntroText</p>
+        <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+            @foreach (string item in @Model.Recommendation.Suitability.SuitabilityPoints)
+            {
+                <li>@(item)</li>
+            }
         </ul>
 
-        <h2 class="govuk-heading-m">What you could save</h2>
-
-        <div class="govuk-grid-row sea-recommendation-financial-impact">
+        <h2 class="govuk-heading-m ">What you could save</h2>
+        <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-bottom-6  govuk-!-margin-top-6">
             <div class="govuk-grid-column-one-half sea-install-costs">
                 <span class="govuk-caption-m">This could cost</span>
-                <h3 class="govuk-heading-l">£2000 - £3500</h3>
+                <h3 class="govuk-heading-l">£@Model.Recommendation.MinInstallCost - £@Model.Recommendation.MaxInstallCost</h3>
             </div>
             <div class="govuk-grid-column-one-half sea-yearly-savings">
                 <span class="govuk-caption-m">This could save up to</span>
-                <h3 class="govuk-heading-l">£150 a year</h3>
+                <h3 class="govuk-heading-l">£@Model.Recommendation.Saving a year</h3>
             </div>
         </div>
-
-        <dl class="govuk-summary-list">
+        <dl class="govuk-summary-list  govuk-!-margin-bottom-7">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
                     Will this cause disruption during installation?
                 </dt>
                 <dd class="govuk-summary-list__value sea-recommendation-impact">
-                    <strong class="govuk-tag govuk-tag--green">MINIMAL</strong>
+                    <strong class="govuk-tag govuk-tag--green">@Model.Recommendation.Disruption.ToUpper()</strong>
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -115,22 +101,19 @@
                     How long could this take to install?
                 </dt>
                 <dd class="govuk-summary-list__value  sea-recommendation-impact">
-                    <strong class="govuk-tag govuk-tag--green">2-5 DAYS</strong>
+                    <strong class="govuk-tag govuk-tag--green">@Model.Recommendation.InstallationTime.ToUpper()</strong>
                 </dd>
             </div>
         </dl>
 
         <h2 class="govuk-heading-m">What would you like to do with this recommendation?</h2>
+        <a href="@Url.Action("NextRecommendation", "EnergyEfficiency")" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
 
-        <div class="govuk-button-group">
-            <a href="@Url.Action("YourSavedRecommendations_Get", "EnergyEfficiency", new {reference = Model})" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8" data-module="govuk-button">
-                Save this recommendation to my wishlist
-            </a>
-            <a href="@Url.Action("YourSavedRecommendations_Get", "EnergyEfficiency", new {reference = Model})" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--secondary" data-module="govuk-button">
-                Discard and continue
-            </a>
-        </div>
-
+            Explore recommendations
+            <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/>
+            </svg>
+        </a>
     </div>
     <div class="govuk-grid-column-one-third">
         <aside class="sea-recommendation-side-panel" role="complementary">
