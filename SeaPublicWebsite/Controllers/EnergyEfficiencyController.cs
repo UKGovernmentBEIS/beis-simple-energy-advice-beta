@@ -761,6 +761,7 @@ namespace SeaPublicWebsite.Controllers
                     Summary = r.Summary
                 }
             ).ToList();
+            userDataStore.SaveUserData(userDataModel);
 
             var viewModel = new YourRecommendationsViewModel
                 {
