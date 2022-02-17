@@ -117,13 +117,13 @@
             @if (Model.HasPreviousIndex())
             {
                 <button name="command" value="goBackwards" class="govuk-button govuk-button--secondary  govuk-!-margin-right-4" data-module="govuk-button">
-                    Previous recommendation @(Model.GetCurrentIndex())
+                    Go back to Recommendation @(Model.GetCurrentIndex())
                 </button>
             }
             @if (Model.HasNextIndex())
             {
                 <button name="command" value="goForwards" class="govuk-button" data-module="govuk-button">
-                    Next recommendation @(Model.GetCurrentIndex() + 2)
+                    Continue to Recommendation @(Model.GetCurrentIndex() + 2)
                 </button>
             }
             else
