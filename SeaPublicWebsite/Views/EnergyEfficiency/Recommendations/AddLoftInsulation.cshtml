@@ -1,5 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.DataModels
+@using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
@@ -138,7 +140,35 @@
                 <a href=# class="govuk-link">Print or email this recommendation</a>
             </p>
             <h2 class="govuk-heading-m" id="subsection-title">Your action plan</h2>
-            <p class="govuk-body-s">You haven’t saved any improvements yet.</p>
+            @if (Model.GetSavedRecommendations().Count > 0)
+            {
+                <p class="govuk-body-s">
+                    You have saved <strong>@Model.GetSavedRecommendations().Count</strong> recommended improvement.
+                </p>
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key govuk-!-width-one-half govuk-!-margin-bottom-0">
+                            It could cost
+                        </dt>
+                        <dd class="govuk-summary-list__value govuk-!-width-one-half">
+                            @Model.GetTotalInstallationCostText()
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key govuk-!-width-one-half govuk-!-margin-bottom-0">
+                            It could save
+                        </dt>
+                        <dd class="govuk-summary-list__value govuk-!-width-one-half">
+                            @Model.GetTotalSavingText()
+                        </dd>
+                    </div>
+                </dl>
+                <a href="@Url.Action("YourSavedRecommendations_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference})" class="govuk-link">View your action plan</a>
+            }
+            else
+            {
+                <p class="govuk-body-s">You haven’t saved any improvements yet.</p>
+            }
         </aside>
     </div>
 </div>

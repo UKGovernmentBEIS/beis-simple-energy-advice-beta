@@ -11,7 +11,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public UserDataModel UserDataModel { get; set; }
 
-        public string GetInstallationCostText()
+        public string GetTotalInstallationCostText()
         {
             var minCost = GetSavedRecommendations().Sum(r => r.MinInstallCost);
             var maxCost = GetSavedRecommendations().Sum(r => r.MaxInstallCost);
@@ -27,7 +27,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
             return UserDataModel.UserRecommendations.Where(r => r.RecommendationAction == RecommendationAction.DecideLater).ToList();
         }
          
-        public string GetSavingText()
+        public string GetTotalSavingText()
         {
             var saving = GetSavedRecommendations().Sum(r => r.Saving);
             return $"{saving:C0} a year";
