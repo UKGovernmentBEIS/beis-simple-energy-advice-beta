@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.CodeAnalysis.CSharp.Syntax
 @using SeaPublicWebsite.DataModels
 @using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
@@ -148,15 +149,15 @@
                 <dl class="govuk-summary-list">
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key govuk-!-width-one-half govuk-!-margin-bottom-0">
-                            It could cost
+                            @(Model.GetSavedRecommendations().Count == 1 ? "It could cost" : "They could cost")
                         </dt>
-                        <dd class="govuk-summary-list__value govuk-!-width-one-half">
+                        <dd class="govuk-summary-list__value govuk-!-width-one-half govuk-!-padding-right-0">
                             @Model.GetTotalInstallationCostText()
                         </dd>
                     </div>
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key govuk-!-width-one-half govuk-!-margin-bottom-0">
-                            It could save
+                            You could save
                         </dt>
                         <dd class="govuk-summary-list__value govuk-!-width-one-half">
                             @Model.GetTotalSavingText()
