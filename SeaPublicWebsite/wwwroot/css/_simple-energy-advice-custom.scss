@@ -108,3 +108,65 @@
     text-align: center;
     z-index: 1;
 }
+
+.sea-nav-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    height: 60px;
+    text-decoration: none;
+}
+
+.sea-nav-button-title {
+    color: govuk-colour("blue");
+    text-decoration: underline;
+    text-decoration-thickness: max(1px, 0.0625rem);
+    text-underline-offset: 0.1em;
+}
+
+.sea-nav-button:hover {
+    .sea-nav-button-title {
+        color: govuk-colour("dark-blue");
+        text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
+    }
+}
+
+.sea-nav-button:focus {
+    color: govuk-colour("black");
+    box-sizing: border-box;
+    box-shadow: 0 -2px govuk-colour("yellow"), 0 4px govuk-colour("black");
+    background-color: govuk-colour("yellow");
+
+    .sea-nav-button-title {
+        color: govuk-colour("black");
+        text-decoration: none;
+    }
+}
+
+.sea-nav-button-caption-recommendation {
+    margin-right: 115px;
+}
+
+.sea-nav-button-caption-plan {
+    margin-right: 25px;
+}
+
+.sea-nav-button-left, .sea-recommendation-link-left {
+    left: 0;
+    text-align: left;
+    position: relative;
+    top: -65px;
+}
+
+.sea-nav-button-right {
+    right: 0;
+    position: relative;
+    top: -65px;
+}
+
+.sea-recommendation-link-caption {
+    text-decoration: none;
+}

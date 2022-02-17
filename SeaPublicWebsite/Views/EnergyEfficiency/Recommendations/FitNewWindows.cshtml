@@ -26,7 +26,6 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.UserRecommendation.Key, reference = Model.UserDataModel.Reference})" method="post" novalidate>
-
             @Html.HiddenFor(m => m.UserDataModel.Reference)
 
             <span class="govuk-caption-l">
@@ -115,25 +114,63 @@
                     }
                 }
                 ))
-
-            @if (Model.HasPreviousIndex())
-            {
-                <button name="command" value="goBackwards" class="govuk-button govuk-button--secondary  govuk-!-margin-right-4" data-module="govuk-button">
-                    Go back to Recommendation @(Model.GetCurrentIndex())
-                </button>
-            }
-            @if (Model.HasNextIndex())
-            {
-                <button name="command" value="goForwards" class="govuk-button" data-module="govuk-button">
-                    Continue to Recommendation @(Model.GetCurrentIndex() + 2)
-                </button>
-            }
-            else
-            {
-                <button name="command" value="goToActionPlan" class="govuk-button govuk-button" data-module="govuk-button">
-                    Go to action plan
-                </button>
-            }
+            <div class="govuk-grid-row">
+                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+                <div class="govuk-button-group govuk-grid-column-full govuk-!-padding-0">
+                    <div class="govuk-grid-column-one-half govuk-!-padding-left-0">
+                        @if (Model.HasPreviousIndex())
+                        {
+                            <button name="command" value="goBackwards" class="sea-nav-button govuk-!-width-full govuk-!-margin-0 govuk-!-text-align-left">
+                                <span class="govuk-body govuk-!-padding-bottom-0 govuk-!-padding-left-8">
+                                    Go back to
+                                </span>
+                                <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0 govuk-!-padding-left-8">
+                                    Recommendation @(Model.GetCurrentIndex())
+                                </span>
+                                <svg class="sea-nav-button-left" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18.5 34.8288C27.8198 34.8288 35.375 27.2943 35.375 18C35.375 8.70566 27.8198 1.17114 18.5 1.17114C9.18019 1.17114 1.625 8.70566 1.625 18C1.625 27.2943 9.18019 34.8288 18.5 34.8288Z" stroke="black" stroke-width="2" stroke-miterlimit="10"/>
+                                    <path d="M17.4277 23.9425L11.4688 17.9998L17.4277 12.0571" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M11.4688 18H25.5312" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        }
+                    </div>
+                    <div class="govuk-grid-column-one-half govuk-!-padding-right-0">
+                        @if (Model.HasNextIndex())
+                        {
+                            <button name="command" value="goForwards" class="sea-nav-button govuk-!-width-full govuk-!-padding-right-0 govuk-!-text-align-right">
+                                <span class="sea-nav-button-caption-recommendation govuk-body govuk-!-padding-bottom-0 govuk-!-padding-right-8">
+                                    Continue to
+                                </span>
+                                <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0 govuk-!-padding-right-8">
+                                    Recommendation @(Model.GetCurrentIndex() + 2)
+                                </span>
+                                <svg class="sea-nav-button-right" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18.5 34.875C27.8198 34.875 35.375 27.3198 35.375 18C35.375 8.68019 27.8198 1.125 18.5 1.125C9.18019 1.125 1.625 8.68019 1.625 18C1.625 27.3198 9.18019 34.875 18.5 34.875Z" stroke="black" stroke-width="2" stroke-miterlimit="10"/>
+                                    <path d="M19.5723 23.959L25.5312 18L19.5723 12.041" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M11.4688 18H25.5312" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        }
+                        else
+                        {
+                            <button name="command" value="goToActionPlan" class="sea-nav-button govuk-!-width-full govuk-!-text-align-right">
+                                <span class="sea-nav-button-caption-plan govuk-body govuk-!-padding-bottom-0 govuk-!-padding-right-8">
+                                    Continue to
+                                </span>
+                                <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0 govuk-!-padding-right-8">
+                                    Action plan
+                                </span>
+                                <svg class="sea-nav-button-right" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18.5 34.875C27.8198 34.875 35.375 27.3198 35.375 18C35.375 8.68019 27.8198 1.125 18.5 1.125C9.18019 1.125 1.625 8.68019 1.625 18C1.625 27.3198 9.18019 34.875 18.5 34.875Z" stroke="black" stroke-width="2" stroke-miterlimit="10"/>
+                                    <path d="M19.5723 23.959L25.5312 18L19.5723 12.041" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M11.4688 18H25.5312" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
     <div class="govuk-grid-column-one-third">

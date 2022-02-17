@@ -133,9 +133,19 @@
             <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/">Energy Saving Trust website <span class="govuk-visually-hidden">(opens in a new window)</span></a>
             for more information on other ways you can improve your energy efficiency to reduce your bills.
         </p>
-        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-        <a href="@Url.Action("Recommendation_Get", "EnergyEfficiency", new {id = (int) Model.UserDataModel.UserRecommendations[0].Key, reference = Model.UserDataModel.Reference})" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
-            Start again at Recommendation 1
+        <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+        <a href="@Url.Action("Recommendation_Get", "EnergyEfficiency", new {id = (int) Model.UserDataModel.UserRecommendations[0].Key, reference = Model.UserDataModel.Reference})" role="button" draggable="false"  class="sea-nav-button govuk-heading-m govuk-!-width-full govuk-!-text-align-left">
+            <span class="govuk-body govuk-!-padding-bottom-0 govuk-!-padding-left-8">
+                Start again at
+            </span>
+            <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0 govuk-!-padding-left-8">
+                Recommendation 1
+            </span>
+            <svg class="sea-nav-button-left" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.5 34.8288C27.8198 34.8288 35.375 27.2943 35.375 18C35.375 8.70566 27.8198 1.17114 18.5 1.17114C9.18019 1.17114 1.625 8.70566 1.625 18C1.625 27.2943 9.18019 34.8288 18.5 34.8288Z" stroke="black" stroke-width="2" stroke-miterlimit="10"/>
+                <path d="M17.4277 23.9425L11.4688 17.9998L17.4277 12.0571" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M11.4688 18H25.5312" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </a>
     </div>
     <div class="govuk-grid-column-one-third">
