@@ -856,6 +856,7 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey) id).RecommendationAction =
                 viewModel.RecommendationAction;
+            userDataStore.SaveUserData(userDataModel);
 
             switch(command)
             {
@@ -891,6 +892,8 @@ namespace SeaPublicWebsite.Controllers
 
             var recommendationToUpdate = userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey) id);
             recommendationToUpdate.RecommendationAction = RecommendationAction.SaveToActionPlan;
+            userDataStore.SaveUserData(userDataModel);
+            
             return RedirectToAction("YourSavedRecommendations_Get", new { reference = userDataModel.Reference });
         }
 
@@ -901,6 +904,8 @@ namespace SeaPublicWebsite.Controllers
 
             var recommendationToUpdate = userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey)id);
             recommendationToUpdate.RecommendationAction = RecommendationAction.Discard;
+            userDataStore.SaveUserData(userDataModel);
+            
             return RedirectToAction("YourSavedRecommendations_Get", new { reference = userDataModel.Reference });
         }
     }
