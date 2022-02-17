@@ -32,9 +32,11 @@ namespace SeaPublicWebsite.DataModels
         public GlazingType? GlazingType { get; set; }
         public HeatingType? HeatingType { get; set; }
         public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
+        
+        public int? NumberOfOccupants { get; set; }
         public HeatingPattern? HeatingPattern { get; set; }
-        public ThermostatTemperatureKnown? ThermostatTemperatureKnown { get; set; }
         public int? Temperature { get; set; }
+        
         public List<UserRecommendation> UserRecommendations { get; set; }
     }
 }

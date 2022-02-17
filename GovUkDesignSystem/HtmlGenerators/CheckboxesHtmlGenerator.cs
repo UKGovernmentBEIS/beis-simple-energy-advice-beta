@@ -42,7 +42,7 @@ namespace GovUkDesignSystem.HtmlGenerators
                     var isEnumValueInListOfCurrentlySelectedValues =
                         currentlySelectedValues != null && currentlySelectedValues.Contains(enumValue);
 
-                    string checkboxLabelText = GetCheckboxLabelText(enumValue);
+                    string checkboxLabelText = CheckboxHelper.GetCheckboxLabelText(enumValue);
                     
                     var checkboxItemViewModel = new CheckboxItemViewModel
                     {
@@ -100,15 +100,5 @@ namespace GovUkDesignSystem.HtmlGenerators
             }
         }
 
-        private static string GetCheckboxLabelText<TEnum>(
-            TEnum enumValue)
-            where TEnum : struct, IConvertible
-        {
-            string textFromAttribute = GovUkRadioCheckboxLabelTextAttribute.GetValueForEnum(typeof(TEnum), enumValue);
-
-            string checkboxLabel = textFromAttribute ?? enumValue.ToString();
-
-            return checkboxLabel;
-        }
     }
 }

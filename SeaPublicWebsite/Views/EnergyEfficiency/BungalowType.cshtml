@@ -40,25 +40,36 @@
                         Classes = "govuk-fieldset__legend--l"
                     }
                 },
-                hintOptions: new HintViewModel
+                itemHintOptions: new Dictionary<BungalowType?, HintViewModel>
                 {
-                    Html = @<text>
-                               <details class="govuk-details" data-module="govuk-details">
-                                   <summary class="govuk-details__summary">
-                                       <span class="govuk-details__summary-text">
-                                           Help me answer what kind of bungalow I have
-                                       </span>
-                                   </summary>
-                                   <div class="govuk-details__text">
-                                       <ul class="govuk-list govuk-list--bullet">
-                                           <li>A detached house does not share any of its walls with another house or building</li>
-                                           <li>A semi-detached house is attached to one other house or building</li>
-                                           <li>A mid-terrace house sits in the middle with a house or building on each side</li>
-                                           <li class="govuk-!-margin-bottom-0">An end-terrace house sits at the end of a row of similar houses with one house attached to it</li>
-                                       </ul>
-                                   </div>
-                               </details>
-                            </text>
+                    {
+                        BungalowType.Detatched,
+                        new HintViewModel
+                        {
+                            Text = "A detached house does not share any of its walls with another house or building"
+                        }
+                    },
+                    {
+                        BungalowType.SemiDetatched,
+                        new HintViewModel
+                        {
+                            Text = "A semi-detached house is attached to one other house or building"
+                        }
+                    },
+                    {
+                        BungalowType.Terraced,
+                        new HintViewModel
+                        {
+                            Text = "A mid-terrace house sits in the middle with a house or building on each side"
+                        }
+                    },
+                    {
+                        BungalowType.EndTerrace,
+                        new HintViewModel
+                        {
+                            Text = "An end-terrace house sits at the end of a row of similar houses with one house attached to it"
+                        }
+                    },
                 }
             ))
 

@@ -9,16 +9,14 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         [GovUkRadioCheckboxLabelText(Text = "Oil boiler")]
         OilBoiler,
         [GovUkRadioCheckboxLabelText(Text = "LPG boiler")]
-        LPGBoiler,
+        LpgBoiler,
         [GovUkRadioCheckboxLabelText(Text = "Storage heater")]
         Storage,
-        [GovUkRadioCheckboxLabelText(Text = "Other electric heating")]
-        OtherElectric,
+        [GovUkRadioCheckboxLabelText(Text = "Direct acting electric heating")]
+        DirectActionElectric,
         [GovUkRadioCheckboxLabelText(Text = "Heat pump")]
         HeatPump,
-        [GovUkRadioCheckboxLabelText(Text = "Coal")]
-        Coal,
-        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
-        DoNotKnow
+        [GovUkRadioCheckboxLabelText(Text = "Other or I don't know")]
+        OtherOrDoNotKnow
     }
 }

@@ -43,6 +43,16 @@
                 hintOptions: new HintViewModel
                 {
                     Html = @<text>
+                               <details class="govuk-details govuk-!-margin-bottom-3" data-module="govuk-details">
+                                   <summary class="govuk-details__summary">
+                                       <span class="govuk-details__summary-text">
+                                           Why do we need this?
+                                       </span>
+                                   </summary>
+                                   <div class="govuk-details__text">
+                                       Having outside space helps us determine whether your home may be suitable for a heat pump.
+                                   </div>
+                               </details>
                                <details class="govuk-details" data-module="govuk-details">
                                    <summary class="govuk-details__summary">
                                        <span class="govuk-details__summary-text">
@@ -50,11 +60,15 @@
                                        </span>
                                    </summary>
                                    <div class="govuk-details__text">
-                                       If you have any garden or land adjacent to your home that you own,
-                                       then you have some outside space.<br>
-                                       If you don’t have any garden or land adjacent to your home, 
-                                       or you do but it is shared with neighbours or you don’t own it, 
-                                       then you do not have any outside space.
+                                       <p class="govuk-body">
+                                           If you have any garden or land adjacent to your home that you own,
+                                           then you have some outside space.
+                                       </p>
+                                       <p class="govuk-body">
+                                           If you don’t have any garden or land adjacent to your home,
+                                           or you do but it is shared with neighbours or you don’t own it,
+                                           then you do not have any outside space.
+                                       </p>
                                    </div>
                                </details>
                             </text>

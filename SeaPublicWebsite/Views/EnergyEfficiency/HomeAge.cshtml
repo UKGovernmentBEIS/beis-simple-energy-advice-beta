@@ -89,9 +89,16 @@
                 </fieldset>
             </div>
 
-            <button class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+            <div class="govuk-button-group">
+                @(Html.GovUkButton(new ButtonViewModel
+                {
+                    Text = "Continue",
+                }))
+                <a href="@Url.Action("WallType_Get", "EnergyEfficiency", new {reference = Model.Reference})"
+                   class="govuk-link">
+                    I don't know
+                </a>
+            </div>
 
         </form>
         

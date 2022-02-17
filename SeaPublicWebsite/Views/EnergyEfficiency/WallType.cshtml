@@ -34,6 +34,7 @@
                         What kind of walls does your property have?
                     </h1>
                 </legend>
+                
                 @{
                     string expectedWallType = null;
                     if (Model.YearBuilt.HasValue)
@@ -46,19 +47,21 @@
                         {
                             expectedWallType = "cavity and uninsulated";
                         }
-                        else if (Model.YearBuilt.Value >= 1991)
+                        else // implied..... if (Model.YearBuilt.Value >= 1991)
                         {
                             expectedWallType = "cavity and insulated";
                         }
                     }
+                    else
+                    {
+                        expectedWallType = "cavity and uninsulated";
+                    }
                 }
-                @if (expectedWallType != null)
-                {
-                    <div class="govuk-hint">
-                        Homes of your type typically have <b>@(expectedWallType)</b><br>
-                        If your home has been extended or has multiple wall types, choose the wall type that makes up most of your home.
-                    </div>
-                }
+                <div class="govuk-hint">
+                    Homes of your type typically have <b>@expectedWallType</b>.<br>
+                    If your home has been extended or has multiple wall types, choose the wall type that makes up most of your home.
+                </div>
+                
                 <details class="govuk-details" data-module="govuk-details">
                     <summary class="govuk-details__summary">
                         <span class="govuk-details__summary-text">

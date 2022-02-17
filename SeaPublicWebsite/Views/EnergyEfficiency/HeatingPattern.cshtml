@@ -11,7 +11,7 @@
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("HotWaterCylinder_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        Href = @Url.Action("NumberOfOccupants_Get", "EnergyEfficiency", new {reference = Model.Reference}),
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -31,7 +31,7 @@
                     {
                         Html = @<text>
                                    <span class="govuk-caption-l govuk-!-margin-bottom-4">
-                                       @(QuestionSection.Heating.GetDisplayName())
+                                       @(QuestionSection.Behaviour.GetDisplayName())
                                    </span>
                                    <h1 class="govuk-fieldset__heading">
                                        When would you normally heat your home on a typical weekday?
@@ -39,6 +39,35 @@
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
                     }
+                },
+                new HintViewModel
+                {
+                    Html = @<text>
+                               <div class="govuk-hint">
+                                   Heating use can vary throughout the year and even from one day to the next.
+                                   It helps us better estimate your energy use if you select an option that
+                                   best resembles a typical day in winter, or whenever you use your heating.
+                               </div>
+                                <details class="govuk-details" data-module="govuk-details">
+                                    <summary class="govuk-details__summary">
+                                        <span class="govuk-details__summary-text">
+                                            Help me decide when I heat my home
+                                        </span>
+                                    </summary>
+                                    <div class="govuk-details__text">
+                                        <p class="govuk-body">
+                                            You may have your heating run all day, but switch it off before you go to sleep at night.
+                                        </p>
+                                        <p class="govuk-body">
+                                            Households that leave home throughout the day, for example for work or school,
+                                            may opt to only have their heating on in the morning and in the evening. 
+                                        </p>
+                                        <p class="govuk-body">
+                                            Some people use their heating for less frequently, for example only in the morning or only in the evening.
+                                        </p>
+                                    </div>
+                                </details>
+                            </text>
                 }
             ))
 

@@ -1,0 +1,67 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
+@model SeaPublicWebsite.Models.EnergyEfficiency.NumberOfOccupantsViewModel
+@{
+    ViewBag.Title = "Number of occupants";
+}
+
+@section BeforeMain {
+    @Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = @Url.Action("HotWaterCylinder_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = false
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        
+        <form action="@Url.Action("NumberOfOccupants_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+            
+            <span class="govuk-caption-l govuk-!-margin-bottom-4">
+                @(QuestionSection.Behaviour.GetDisplayName())
+            </span>
+
+            <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    How many people aged 5 or over live in the property?
+                </legend>
+
+                <details class="govuk-details" data-module="govuk-details">
+                    <summary class="govuk-details__summary">
+                        <span class="govuk-details__summary-text">
+                            Why do we need to know this?
+                        </span>
+                    </summary>
+                    <div class="govuk-details__text">
+                        Providing this information gives us an estimate on how much energy your household uses.
+                    </div>
+                </details>
+
+                @(Html.GovUkTextInputFor(
+                    m => m.NumberOfOccupants,
+                    classes: "govuk-input--width-5"
+                    ))
+            </fieldset>
+            
+            <div class="govuk-button-group">
+                @(Html.GovUkButton(new ButtonViewModel
+                {
+                    Text = "Continue",
+                }))
+                <a href="@Url.Action("HeatingPattern_Get", "EnergyEfficiency", new {reference = Model.Reference})"
+                   class="govuk-link">
+                    Skip this question
+                </a>
+            </div>
+            
+        </form>
+        
+    </div>
+</div>

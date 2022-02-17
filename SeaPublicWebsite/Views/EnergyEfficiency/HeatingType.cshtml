@@ -39,6 +39,42 @@
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
                     }
+                },
+                hintOptions: new HintViewModel
+                {
+                    Html = @<text>
+                               <div class="govuk-hint">
+                                   If you have more than one heating type, for example an oil boiler and
+                                   wood burning stove, select the system that you use more often,
+                                   or that is able to heat the whole home.
+                               </div>
+                               <details class="govuk-details" data-module="govuk-details">
+                                   <summary class="govuk-details__summary">
+                                       <span class="govuk-details__summary-text">
+                                           Help me decide how I heat my home
+                                       </span>
+                                   </summary>
+                                   <div class="govuk-details__text">
+                                       <p class="govuk-body">
+                                           Most people in England and Wales heat their home with a gas boiler.
+                                       </p>
+                                       <p class="govuk-body">
+                                           People who have an oil or liquified petroleum gas (LPG) boiler will order fuel in advance.
+                                       </p>
+                                       <p class="govuk-body">
+                                           Storage heaters convert electricity to heat and provide that heat the next day.
+                                       </p>
+                                       <p class="govuk-body">
+                                           Direct acting electric heating refers to all electric radiators or
+                                           plug-in heaters that use electricity at the same time as they emit heat.
+                                       </p>
+                                       <p class="govuk-body">
+                                           A heat pump transfers heat energy from the outdoor environment inside,
+                                           either through a warm-air system or through radiators or underfloor heating
+                                       </p>
+                                   </div>
+                               </details>
+                            </text>
                 }
             ))
 

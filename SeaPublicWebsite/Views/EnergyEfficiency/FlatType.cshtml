@@ -40,24 +40,29 @@
                         Classes = "govuk-fieldset__legend--l"
                     }
                 },
-                hintOptions: new HintViewModel
+                itemHintOptions: new Dictionary<FlatType?, HintViewModel>
                 {
-                    Html = @<text>
-                               <details class="govuk-details" data-module="govuk-details">
-                                   <summary class="govuk-details__summary">
-                                       <span class="govuk-details__summary-text">
-                                           Help me answer what kind of flat I have
-                                       </span>
-                                   </summary>
-                                   <div class="govuk-details__text">
-                                       <ul class="govuk-list govuk-list--bullet">
-                                           <li>A top floor flat sits directly below the roof with no other dwelling above it</li>
-                                           <li>A mid floor flat sits above another home or business, and below another home or business</li>
-                                           <li class="govuk-!-margin-bottom-0">A ground floor flat is on the ground floor, typically street level, with no other dwelling or business below it</li>
-                                       </ul>
-                                   </div>
-                               </details>
-                            </text>
+                    {
+                        FlatType.TopFloor,
+                        new HintViewModel
+                        {
+                            Text = "A top floor flat sits directly below the roof with no other dwelling above it"
+                        }
+                    },
+                    {
+                        FlatType.MiddleFloor,
+                        new HintViewModel
+                        {
+                            Text = "A mid floor flat sits above another home or business, and below another home or business"
+                        }
+                    },
+                    {
+                        FlatType.GroundFloor,
+                        new HintViewModel
+                        {
+                            Text = "A ground floor flat is on the ground floor, typically street level, with no other dwelling or business below it"
+                        }
+                    },
                 }
             ))
 

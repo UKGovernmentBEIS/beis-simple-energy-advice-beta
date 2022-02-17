@@ -589,8 +589,17 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.HeatingType = viewModel.HeatingType;
             userDataStore.SaveUserData(userDataModel);
-            
-            return RedirectToAction("HotWaterCylinder_Get", new {reference = viewModel.Reference});
+
+            if (viewModel.HeatingType == HeatingType.GasBoiler ||
+                viewModel.HeatingType == HeatingType.OilBoiler ||
+                viewModel.HeatingType == HeatingType.LpgBoiler)
+            {
+                return RedirectToAction("HotWaterCylinder_Get", new {reference = viewModel.Reference});
+            }
+            else
+            {
+                return RedirectToAction("NumberOfOccupants_Get", new {reference = viewModel.Reference});
+            }
         }
 
         
@@ -621,6 +630,39 @@ namespace SeaPublicWebsite.Controllers
             }
 
             userDataModel.HasHotWaterCylinder = viewModel.HasHotWaterCylinder;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return RedirectToAction("NumberOfOccupants_Get", new {reference = viewModel.Reference});
+        }
+
+        
+        [HttpGet("number-of-occupants/{reference}")]
+        public IActionResult NumberOfOccupants_Get(string reference)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+
+            var viewModel = new NumberOfOccupantsViewModel
+            {
+                NumberOfOccupants = userDataModel.NumberOfOccupants,
+                Reference = userDataModel.Reference
+            };
+
+            return View("NumberOfOccupants", viewModel);
+        }
+
+        [HttpPost("number-of-occupants/{reference}")]
+        public IActionResult NumberOfOccupants_Post(NumberOfOccupantsViewModel viewModel)
+        {
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.NumberOfOccupants);
+
+            if (viewModel.HasAnyErrors())
+            {
+                return View("NumberOfOccupants", viewModel);
+            }
+
+            userDataModel.NumberOfOccupants = viewModel.NumberOfOccupants;
             userDataStore.SaveUserData(userDataModel);
             
             return RedirectToAction("HeatingPattern_Get", new {reference = viewModel.Reference});
@@ -667,7 +709,6 @@ namespace SeaPublicWebsite.Controllers
             
             var viewModel = new TemperatureViewModel
             {
-                ThermostatTemperatureKnown = userDataModel.ThermostatTemperatureKnown,
                 Temperature = userDataModel.Temperature,
                 Reference = userDataModel.Reference
             };
@@ -680,38 +721,29 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
             
-            viewModel.ParseAndValidateParameters(Request, m => m.ThermostatTemperatureKnown);
+            viewModel.ParseAndValidateParameters(Request, m => m.Temperature);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("Temperature", viewModel);
             };
 
-            if (viewModel.ThermostatTemperatureKnown == ThermostatTemperatureKnown.Yes)
-            {
-                viewModel.ParseAndValidateParameters(Request, m => m.Temperature);
-
-                if (viewModel.HasAnyErrors())
-                {
-                    return View("Temperature", viewModel);
-                }
-            };
-
-            userDataModel.ThermostatTemperatureKnown = viewModel.ThermostatTemperatureKnown;
             userDataModel.Temperature = viewModel.Temperature;
             userDataStore.SaveUserData(userDataModel);
             
             return RedirectToAction("AnswerSummary", new {reference = viewModel.Reference});
         }
         
+        
         [HttpGet("answer-summary/{reference}")]
         public IActionResult AnswerSummary(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
-            return View("AnswerSummary", reference);
+            return View("AnswerSummary", userDataModel);
         }
 
+        
         [HttpGet("your-recommendations/{reference}")]
         public IActionResult YourRecommendations_Get(string reference)
         {
