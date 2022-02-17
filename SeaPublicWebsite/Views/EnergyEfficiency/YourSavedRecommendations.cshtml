@@ -45,7 +45,11 @@
                 </span>
             </summary>
             <div class="govuk-details__text">
-                Details here
+                The costs and savings you view using the services on this site are based on standards 
+                developed for Government as a way of understanding how houses and flats use energy, 
+                and how your home’s energy use could be improved. You can find out more information 
+                about these standards with the guidance published on the 
+                <a class="govuk-link" target="_blank" href="https://www.gov.uk/guidance/standard-assessment-procedure">Standard Assessment Procedure site.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
             </div>
         </details>
         
@@ -78,7 +82,7 @@
                     <td class="govuk-table__cell govuk-!-padding-top-4">@Model.GetInstallationCostText(recommendation)</td>
                     <td class="govuk-table__cell govuk-!-padding-top-4">@Model.GetSavingText(recommendation)</td>
                     <td class="govuk-table__cell govuk-!-padding-top-4">
-                        <a class="govuk-link" href=#>Discard</a>
+                        <a href="@Url.Action("RemoveFromPlan_Get", "EnergyEfficiency", new {id = (int)recommendation.Key, reference = Model.UserDataModel.Reference})" class="govuk-link">Discard</a>
                     </td>
                 </tr>
             }
@@ -102,12 +106,8 @@
                             </p>
                         </dt>
                         <dd class="govuk-summary-list__actions govuk-!-margin-bottom-0">
-                            <a class="govuk-link govuk-!-margin-right-3" href="#">
-                                Add to action plan
-                            </a>
-                            <a class="govuk-link" href="#">
-                                Discard
-                            </a>
+                            <a href="@Url.Action("AddToPlan_Get", "EnergyEfficiency", new {id = (int)recommendation.Key, reference = Model.UserDataModel.Reference})" class="govuk-link govuk-!-margin-right-3">Add to action plan</a>
+                            <a href="@Url.Action("RemoveFromPlan_Get", "EnergyEfficiency", new {id = (int)recommendation.Key, reference = Model.UserDataModel.Reference})" class="govuk-link">Discard</a>
                         </dd>
                     </div>
                 }

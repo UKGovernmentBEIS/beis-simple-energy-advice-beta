@@ -831,5 +831,25 @@ namespace SeaPublicWebsite.Controllers
             };
             return View("YourSavedRecommendations", viewModel);
         }
+
+        [HttpGet("recommendation/add-to-plan/{id}/{reference}")]
+        public IActionResult AddToPlan_Get(int id, string reference)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+
+            var recommendationToUpdate = userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey) id);
+            recommendationToUpdate.RecommendationAction = RecommendationAction.SaveToActionPlan;
+            return RedirectToAction("YourSavedRecommendations_Get", new { reference = userDataModel.Reference });
+        }
+
+        [HttpGet("recommendation/remove-from-plan/{id}/{reference}")]
+        public IActionResult RemoveFromPlan_Get(int id, string reference)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+
+            var recommendationToUpdate = userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey)id);
+            recommendationToUpdate.RecommendationAction = RecommendationAction.Discard;
+            return RedirectToAction("YourSavedRecommendations_Get", new { reference = userDataModel.Reference });
+        }
     }
 }
