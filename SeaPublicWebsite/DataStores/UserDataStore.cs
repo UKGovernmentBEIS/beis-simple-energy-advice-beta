@@ -1,17 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.ErrorHandling;
+using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.Helpers;
 
 namespace SeaPublicWebsite.DataStores
 {
     public class UserDataStore
     {
-        private static readonly Dictionary<string, UserDataModel> userDataDatabase = new Dictionary<string, UserDataModel>();
+        private readonly IFileRepository fileRepository;
+
+        public UserDataStore(IFileRepository fileRepository)
+        {
+            this.fileRepository = fileRepository;
+        }
         
         public UserDataModel LoadUserData(string reference)
         {
-            if (!userDataDatabase.ContainsKey(reference))
+            if (!IsReferenceValid(reference))
             {
                 throw new UserReferenceNotFoundException
                 {
@@ -19,17 +25,17 @@ namespace SeaPublicWebsite.DataStores
                 };
             }
 
-            return userDataDatabase[reference];
+            return JsonConvert.DeserializeObject<UserDataModel>(fileRepository.Read(reference));
         }
         
         public bool IsReferenceValid(string reference)
         {
-            return userDataDatabase.ContainsKey(reference);
+            return fileRepository.GetFiles("").Contains(reference);
         }
         
         public void SaveUserData(UserDataModel userDataModel)
         {
-            userDataDatabase[userDataModel.Reference] = userDataModel;
+            fileRepository.Write(userDataModel.Reference, JsonConvert.SerializeObject(userDataModel, Formatting.Indented));
         }
         
         public string GenerateNewReferenceAndSaveEmptyUserData()

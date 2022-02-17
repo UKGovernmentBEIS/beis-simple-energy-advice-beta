@@ -63,7 +63,7 @@ namespace SeaPublicWebsite.Controllers
                     return View("NewOrReturningUser", viewModel);
                 }
                 
-                return RedirectToAction("Country_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
+                return RedirectToAction("AnswerSummary", "EnergyEfficiency", new { reference = viewModel.Reference });
             }
 
             string reference = userDataStore.GenerateNewReferenceAndSaveEmptyUserData();

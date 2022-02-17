@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ErrorHandling;
+using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.Helpers;
 
 namespace SeaPublicWebsite
@@ -27,11 +28,28 @@ namespace SeaPublicWebsite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserDataStore, UserDataStore>();
+
+            ConfigureFileRepository(services);
             
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add<ErrorHandlingFilter>();
             });
+        }
+
+        private void ConfigureFileRepository(IServiceCollection services)
+        {
+            if (!Config.IsLocal())
+            {
+                VcapAwsS3Bucket fileStorageBucketConfiguration = Global.VcapServices.AwsS3Bucket.First(b => b.Name.EndsWith("-filestorage"));
+
+                services.AddSingleton<IFileRepository>(s => new AwsFileRepository(fileStorageBucketConfiguration));
+            }
+            else
+            {
+                services.AddSingleton<IFileRepository>(s => new SystemFileRepository());
+            }
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +73,16 @@ namespace SeaPublicWebsite
 
             app.UseAuthorization();
 
+            ConfigureHttpBasicAuth(app);
+            
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+        }
+
+        private static void ConfigureHttpBasicAuth(IApplicationBuilder app)
+        {
             if (!string.IsNullOrWhiteSpace(Global.BasicAuthUsername)
                 && !string.IsNullOrWhiteSpace(Global.BasicAuthPassword))
             {
@@ -62,11 +90,6 @@ namespace SeaPublicWebsite
                 // The site will still also be secured by the usual login/cookie auth - this is just an extra layer to make the site not publicly accessible
                 app.UseMiddleware<BasicAuthMiddleware>();
             }
-            
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
         }
     }
 }
