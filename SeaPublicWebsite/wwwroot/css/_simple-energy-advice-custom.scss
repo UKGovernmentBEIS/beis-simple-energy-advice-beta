@@ -15,13 +15,21 @@
 }
 
 .sea-recommendations-panel {
-    text-align: left;
-
     .govuk-caption-l, .sea-reference {
         color: govuk-colour("white");
     }
+}
 
+.sea-total-installation-cost {
+    border-left: 4px solid govuk-colour("black");
+}
 
+.sea-total-savings {
+    border-left: 4px solid govuk-colour("green");
+}
+
+.sea-total-savings-text {
+    color: govuk-colour("green");
 }
 
 .sea-user-reference {
@@ -56,4 +64,47 @@
 
 .sea-warning-text__icon--long {
     top: 33.3%;
+}
+
+.sea-numbered-steps {
+    position: relative;
+
+    ol {
+        list-style: none;
+        counter-reset: li;
+    }
+}
+
+.sea-numbered-steps::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    background-color: govuk-colour("mid-grey");
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin-left: 15px;
+}
+
+.sea-step {
+    counter-increment: li;
+    padding: 0 0 0 30px;
+    position: relative;
+    background-color: inherit;
+    width: 100%;
+}
+
+.sea-step::after {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    left: -20px;
+    background-color: govuk-colour("blue");
+    border: 4px solid govuk-colour("blue");
+    top: 0px;
+    border-radius: 50%;
+    color: govuk-colour("white");
+    content: counter(li);
+    text-align: center;
+    z-index: 1;
 }

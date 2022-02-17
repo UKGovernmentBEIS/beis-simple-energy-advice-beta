@@ -1,4 +1,5 @@
-﻿using GovUkDesignSystem;
+﻿using System;
+using GovUkDesignSystem;
 using SeaPublicWebsite.DataModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 
         public string GetInstallationCostText()
         {
-            var minCost = UserDataModel.UserRecommendations.Sum(r => r.MinInstallCost);
-            var maxCost = UserDataModel.UserRecommendations.Sum(r => r.MaxInstallCost);
-            return $"£{minCost} - £{maxCost}";
+            var minCost = GetSavedRecommendations().Sum(r => r.MinInstallCost);
+            var maxCost = GetSavedRecommendations().Sum(r => r.MaxInstallCost);
+            return $"{minCost:C0} - {maxCost:C0}";
         }
 
         public List<UserRecommendation> GetSavedRecommendations()
@@ -28,17 +29,17 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
          
         public string GetSavingText()
         {
-            var saving = UserDataModel.UserRecommendations.Sum(r => r.Saving);
-            return $"£{saving} per year";
+            var saving = GetSavedRecommendations().Sum(r => r.Saving);
+            return $"{saving:C0} a year";
         }
         public string GetInstallationCostText(UserRecommendation recommendation)
         {
-            return $"£{recommendation.MinInstallCost} - £{recommendation.MinInstallCost}";
+            return $"{recommendation.MinInstallCost:C0} - {recommendation.MaxInstallCost:C0}";
         }
 
         public string GetSavingText(UserRecommendation recommendation)
         {
-            return $"£{recommendation.Saving} per year";
+            return $"{recommendation.Saving:C0}";
         }
     }
 }

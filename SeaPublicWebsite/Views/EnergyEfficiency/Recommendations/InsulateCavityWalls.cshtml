@@ -10,9 +10,9 @@
 
 <div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel govuk-!-margin-bottom-9">
     <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-grid-column-two-thirds govuk-!-text-align-left">
             <span class="govuk-caption-l">Your goal</span>
-            <h1 class="govuk-panel__title">
+            <h1 class="govuk-panel__title govuk-!-margin-bottom-3">
                 To reduce my energy bills
             </h1>
             <a href="@Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference})" class="govuk-link govuk-link--inverse">Change my answers</a>
@@ -32,7 +32,7 @@
         <span class="govuk-caption-l">
             Recommendation @(Model.GetCurrentIndex() + 1) of @Model.UserDataModel.UserRecommendations.Count 
         </span>
-        <h1 class="govuk-heading-l">Fit new windows</h1>
+        <h1 class="govuk-heading-l">Insulate cavity walls</h1>
 
         <p class="govuk-body">
             From the information we have it looks like the outside walls of your home are cavity walls, 
@@ -44,7 +44,7 @@
             significantly and helping to cut your bills. 
         </p>
 
-        <p class="govuk-body govuk-!-margin-bottom-7">
+        <p class="govuk-body govuk-!-margin-bottom-6">
             You can find more information on cavity wall insulation on the
             <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/cavity-wall-insulation/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
         </p>
@@ -70,22 +70,22 @@
         </ul>
 
         <h2 class="govuk-heading-m ">What you could save</h2>
-        <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-bottom-6  govuk-!-margin-top-6">
+        <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-bottom-7 govuk-!-margin-top-6">
             <div class="govuk-grid-column-one-half sea-install-costs">
                 <span class="govuk-caption-m">This could cost</span>
-                <h3 class="govuk-heading-l">£@Model.UserRecommendation.MinInstallCost - £@Model.UserRecommendation.MaxInstallCost</h3>
+                <h3 class="govuk-heading-l govuk-!-margin-bottom-1">£@Model.UserRecommendation.MinInstallCost - £@Model.UserRecommendation.MaxInstallCost</h3>
             </div>
             <div class="govuk-grid-column-one-half sea-yearly-savings">
                 <span class="govuk-caption-m">This could save up to</span>
-                <h3 class="govuk-heading-l">£@Model.UserRecommendation.Saving a year</h3>
+                <h3 class="govuk-heading-l govuk-!-margin-bottom-1">£@Model.UserRecommendation.Saving a year</h3>
             </div>
         </div>
-            <dl class="govuk-summary-list  govuk-!-margin-bottom-7">
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
                         Will this cause disruption during installation?
                     </dt>
-                    <dd class="govuk-summary-list__value sea-recommendation-impact">
+                    <dd class="govuk-summary-list__value sea-recommendation-impact govuk-!-padding-right-0">
                         <strong class="govuk-tag govuk-tag--green">MINIMAL</strong>
                     </dd>
                 </div>
@@ -93,7 +93,7 @@
                     <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
                         How long could this take to install?
                     </dt>
-                    <dd class="govuk-summary-list__value  sea-recommendation-impact">
+                    <dd class="govuk-summary-list__value sea-recommendation-impact govuk-!-padding-right-0">
                         <strong class="govuk-tag govuk-tag--yellow">1 DAY</strong>
                     </dd>
                 </div>
@@ -141,7 +141,7 @@
             <p class="govuk-body-s">
                 <a href=# class="govuk-link">Print or email this recommendation</a>
             </p>
-            <h2 class="govuk-heading-m" id="subsection-title">Your wish list</h2>
+            <h2 class="govuk-heading-m" id="subsection-title">Your action plan</h2>
             <p class="govuk-body-s">You haven’t saved any improvements yet.</p>
         </aside>
     </div>

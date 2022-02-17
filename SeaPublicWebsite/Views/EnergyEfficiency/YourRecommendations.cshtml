@@ -17,9 +17,9 @@
     })
 }
 
-<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel govuk-!-margin-bottom-9">
+<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel govuk-!-margin-bottom-9  govuk-!-text-align-left">
     <span class="govuk-caption-l">Your goal</span>
-    <h1 class="govuk-panel__title">
+    <h1 class="govuk-panel__title govuk-!-margin-bottom-3">
         To reduce my energy bills
     </h1>
     <a href="@Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})" class="govuk-link govuk-link--inverse">Change my answers</a>
@@ -50,7 +50,7 @@
             the available recommendations
         </p>
 
-        <div class="govuk-inset-text">
+        <div class="govuk-inset-text govuk-!-margin-bottom-7">
             <p class="govuk-body">
                 The costs and savings we have provided for this service are estimates based on an average
                 home in England and Wales.

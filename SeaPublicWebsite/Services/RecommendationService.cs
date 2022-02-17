@@ -2,8 +2,9 @@
 using System.Linq;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.Models.EnergyEfficiency;
+using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
-namespace SeaPublicWebsite.DataStores
+namespace SeaPublicWebsite.Services
 {
     public static class RecommendationService
     {
@@ -76,28 +77,43 @@ namespace SeaPublicWebsite.DataStores
             return Recommendations.First(r => (int)r.Key == id);
         }
 
-        public static List<Recommendation> GetRecommendationsForUser(UserDataModel answers)
+        public static List<Recommendation> GetRecommendationsForUser(UserDataModel userData)
         {
             var userRecommendationKeys = new List<RecommendationKey>
             {
-
                 // Always shown
-                RecommendationKey.UpgradeHeatingControls,
+                RecommendationKey.UpgradeHeatingControls
+            };
 
-                // Glazing is single or both
-                RecommendationKey.FitNewWindows,
+            // Glazing is single or both
+            if (userData.GlazingType is GlazingType.Both or GlazingType.SingleGlazed)
+            {
+                userRecommendationKeys.Add(RecommendationKey.FitNewWindows);
+            }
 
-                // User has uninsulated cavity walls OR don't know and property 1930-1995
-                RecommendationKey.InsulateCavityWalls,
+            // User has uninsulated cavity walls OR don't know and property 1930-1995
 
-                // Not for ground floor or mid floor flat, or if loft is insulated/ flat roof
-                RecommendationKey.AddLoftInsulation,
+            if (userData.WallType == WallType.CavityNoInsulation || userData.WallType == WallType.DoNotKnow && userData.YearBuilt is >= 1930 and <= 1995 )
+            {
+                userRecommendationKeys.Add(RecommendationKey.InsulateCavityWalls);
+            }
 
-                // Not for mid or top floor flat
-                RecommendationKey.GroundFloorInsulation,
+            // Not for ground floor or mid floor flat, or if loft is insulated/ flat roof
+            if (userData.FlatType is not FlatType.GroundFloor or FlatType.MiddleFloor && userData.RoofConstruction != RoofConstruction.Flat || userData.RoofInsulated != RoofInsulated.Yes)
+            {
+                userRecommendationKeys.Add(RecommendationKey.AddLoftInsulation);
+            }
+            
+            // Not for mid or top floor flat
+            if (userData.FlatType is not FlatType.TopFloor or FlatType.GroundFloor)
+            {
+                userRecommendationKeys.Add(RecommendationKey.GroundFloorInsulation);
+            }
 
-                // Not on ground or mid floor flat
-                RecommendationKey.SolarElectricPanels
+            // Not on ground or mid floor flat
+            if (userData.FlatType is not FlatType.GroundFloor or FlatType.MiddleFloor)
+            {
+                userRecommendationKeys.Add(RecommendationKey.SolarElectricPanels);
             };
 
             return Recommendations.Where(r => userRecommendationKeys.Contains(r.Key)).ToList();
