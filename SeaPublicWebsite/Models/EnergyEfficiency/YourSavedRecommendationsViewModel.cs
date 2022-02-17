@@ -15,7 +15,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         {
             var minCost = GetSavedRecommendations().Sum(r => r.MinInstallCost);
             var maxCost = GetSavedRecommendations().Sum(r => r.MaxInstallCost);
-            return $"{minCost:C0} - {maxCost:C0}";
+            return $"£{minCost:N0} - £{maxCost:N0}";
         }
 
         public List<UserRecommendation> GetSavedRecommendations()
@@ -30,16 +30,16 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string GetTotalSavingText()
         {
             var saving = GetSavedRecommendations().Sum(r => r.Saving);
-            return $"{saving:C0} a year";
+            return $"£{saving:N0} a year";
         }
         public string GetInstallationCostText(UserRecommendation recommendation)
         {
-            return $"{recommendation.MinInstallCost:C0} - {recommendation.MaxInstallCost:C0}";
+            return $"£{recommendation.MinInstallCost:N0} - £{recommendation.MaxInstallCost:N0}";
         }
 
         public string GetSavingText(UserRecommendation recommendation)
         {
-            return $"{recommendation.Saving:C0}";
+            return $"£{recommendation.Saving:N0}";
         }
     }
 }
