@@ -73,14 +73,15 @@ namespace SeaPublicWebsite.Controllers
 
         
         [HttpGet("ownership-status/{reference}")]
-        public IActionResult OwnershipStatus_Get(string reference)
+        public IActionResult OwnershipStatus_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
             var viewModel = new OwnershipStatusViewModel
             {
                 OwnershipStatus = userDataModel.OwnershipStatus,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("OwnershipStatus", viewModel);
@@ -106,19 +107,22 @@ namespace SeaPublicWebsite.Controllers
                 return RedirectToAction("ServiceUnsuitable", "EnergyEfficiency", new {from = "OwnershipStatus", reference = viewModel.Reference});
             }
 
-            return RedirectToAction("AskForPostcode_Get", "EnergyEfficiency", new {reference = viewModel.Reference});
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("AskForPostcode_Get", "EnergyEfficiency", new {reference = viewModel.Reference});
         }
 
         
         [HttpGet("country/{reference}")]
-        public IActionResult Country_Get(string reference)
+        public IActionResult Country_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
             var viewModel = new CountryViewModel
             {
                 Country = userDataModel.Country,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("Country", viewModel);
@@ -143,8 +147,10 @@ namespace SeaPublicWebsite.Controllers
             {
                 return RedirectToAction("ServiceUnsuitable", "EnergyEfficiency", new {from = "Country", reference = viewModel.Reference});
             }
-            
-            return RedirectToAction("OwnershipStatus_Get", "EnergyEfficiency", new {reference = viewModel.Reference});
+
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("OwnershipStatus_Get", "EnergyEfficiency", new {reference = viewModel.Reference});
         }
 
 
@@ -213,14 +219,15 @@ namespace SeaPublicWebsite.Controllers
 
         
         [HttpGet("property-type/{reference}")]
-        public IActionResult PropertyType_Get(string reference)
+        public IActionResult PropertyType_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
             var viewModel = new PropertyTypeViewModel
             {
                 PropertyType = userDataModel.PropertyType,
-                Reference = reference
+                Reference = reference,
+                Change = change
             };
 
             return View("PropertyType", viewModel);
@@ -244,11 +251,11 @@ namespace SeaPublicWebsite.Controllers
             switch (viewModel.PropertyType)
             {
                 case PropertyType.House:
-                    return RedirectToAction("HouseType_Get", new {reference = viewModel.Reference});
+                    return RedirectToAction("HouseType_Get", new {reference = viewModel.Reference, change = viewModel.Change});
                 case PropertyType.Bungalow:
-                    return RedirectToAction("BungalowType_Get", new {reference = viewModel.Reference});
+                    return RedirectToAction("BungalowType_Get", new {reference = viewModel.Reference, change = viewModel.Change});
                 case PropertyType.ApartmentFlatOrMaisonette:
-                    return RedirectToAction("FlatType_Get", new {reference = viewModel.Reference});
+                    return RedirectToAction("FlatType_Get", new {reference = viewModel.Reference, change = viewModel.Change});
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -256,14 +263,15 @@ namespace SeaPublicWebsite.Controllers
 
         
         [HttpGet("house-type/{reference}")]
-        public IActionResult HouseType_Get(string reference)
+        public IActionResult HouseType_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
             var viewModel = new HouseTypeViewModel
             {
                 HouseType = userDataModel.HouseType,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("HouseType", viewModel);
@@ -284,19 +292,22 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HouseType = viewModel.HouseType;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("HomeAge_Get", new {reference = viewModel.Reference});
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("HomeAge_Get", new {reference = viewModel.Reference});
         }
 
         
         [HttpGet("bungalow-type/{reference}")]
-        public IActionResult BungalowType_Get(string reference)
+        public IActionResult BungalowType_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
             var viewModel = new BungalowTypeViewModel
             {
                 BungalowType = userDataModel.BungalowType,
-                Reference = reference
+                Reference = reference,
+                Change = change
             };
 
             return View("BungalowType", viewModel);
@@ -317,19 +328,22 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.BungalowType = viewModel.BungalowType;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("HomeAge_Get", new {reference = viewModel.Reference});
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("HomeAge_Get", new {reference = viewModel.Reference});
         }
 
         
         [HttpGet("flat-type/{reference}")]
-        public IActionResult FlatType_Get(string reference)
+        public IActionResult FlatType_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
             var viewModel = new FlatTypeViewModel
             {
                 FlatType = userDataModel.FlatType,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("FlatType", viewModel);
@@ -350,12 +364,14 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.FlatType = viewModel.FlatType;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("HomeAge_Get", new {reference = viewModel.Reference});
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("HomeAge_Get", new {reference = viewModel.Reference});
         }
 
         
         [HttpGet("home-age/{reference}")]
-        public IActionResult HomeAge_Get(string reference)
+        public IActionResult HomeAge_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -363,7 +379,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 PropertyType = userDataModel.PropertyType,
                 YearBuilt = userDataModel.YearBuilt,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("HomeAge", viewModel);
@@ -384,12 +401,14 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.YearBuilt = viewModel.YearBuilt;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("WallType_Get", new {reference = viewModel.Reference});
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("WallType_Get", new {reference = viewModel.Reference});
         }
 
         
         [HttpGet("wall-type/{reference}")]
-        public IActionResult WallType_Get(string reference)
+        public IActionResult WallType_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -397,7 +416,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 WallType = userDataModel.WallType,
                 YearBuilt = userDataModel.YearBuilt,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("WallType", viewModel);
@@ -418,7 +438,11 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.WallType = viewModel.WallType;
             userDataStore.SaveUserData(userDataModel);
 
-            if (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette
+            if (viewModel.Change)
+            {
+                return RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference});
+            }
+            else if (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette
                 && (userDataModel.FlatType == FlatType.GroundFloor || userDataModel.FlatType == FlatType.MiddleFloor))
             {
                 return RedirectToAction("GlazingType_Get", new {reference = viewModel.Reference});
@@ -431,14 +455,15 @@ namespace SeaPublicWebsite.Controllers
 
         
         [HttpGet("roof-construction/{reference}")]
-        public IActionResult RoofConstruction_Get(string reference)
+        public IActionResult RoofConstruction_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
             var viewModel = new RoofConstructionViewModel
             {
                 RoofConstruction = userDataModel.RoofConstruction,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("RoofConstruction", viewModel);
@@ -459,19 +484,22 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.RoofConstruction = viewModel.RoofConstruction;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("RoofInsulated_Get", new {reference = viewModel.Reference});
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("RoofInsulated_Get", new {reference = viewModel.Reference});
         }
 
         
         [HttpGet("roof-insulated/{reference}")]
-        public IActionResult RoofInsulated_Get(string reference)
+        public IActionResult RoofInsulated_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
             var viewModel = new RoofInsulatedViewModel
             {
                 RoofInsulated = userDataModel.RoofInsulated,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("RoofInsulated", viewModel);
@@ -492,19 +520,22 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.RoofInsulated = viewModel.RoofInsulated;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("GlazingType_Get", new {reference = viewModel.Reference});
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("GlazingType_Get", new {reference = viewModel.Reference});
         }
 
         
         [HttpGet("outdoor-space/{reference}")]
-        public IActionResult OutdoorSpace_Get(string reference)
+        public IActionResult OutdoorSpace_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
             var viewModel = new OutdoorSpaceViewModel
             {
                 HasOutdoorSpace = userDataModel.HasOutdoorSpace,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("OutdoorSpace", viewModel);
@@ -525,19 +556,22 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HasOutdoorSpace = viewModel.HasOutdoorSpace;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("HeatingType_Get", new {reference = viewModel.Reference});
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("HeatingType_Get", new {reference = viewModel.Reference});
         }
 
         
         [HttpGet("glazing-type/{reference}")]
-        public IActionResult GlazingType_Get(string reference)
+        public IActionResult GlazingType_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
             var viewModel = new GlazingTypeViewModel
             {
                 GlazingType = userDataModel.GlazingType,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("GlazingType", viewModel);
@@ -558,19 +592,22 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.GlazingType = viewModel.GlazingType;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("OutdoorSpace_Get", new {reference = viewModel.Reference});
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("OutdoorSpace_Get", new {reference = viewModel.Reference});
         }
 
         
         [HttpGet("heating-type/{reference}")]
-        public IActionResult HeatingType_Get(string reference)
+        public IActionResult HeatingType_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
             var viewModel = new HeatingTypeViewModel
             {
                 HeatingType = userDataModel.HeatingType,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("HeatingType", viewModel);
@@ -595,24 +632,27 @@ namespace SeaPublicWebsite.Controllers
                 viewModel.HeatingType == HeatingType.OilBoiler ||
                 viewModel.HeatingType == HeatingType.LpgBoiler)
             {
-                return RedirectToAction("HotWaterCylinder_Get", new {reference = viewModel.Reference});
+                return RedirectToAction("HotWaterCylinder_Get", new {reference = viewModel.Reference, change = viewModel.Change});
             }
             else
             {
-                return RedirectToAction("NumberOfOccupants_Get", new {reference = viewModel.Reference});
+                return viewModel.Change
+                    ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                    : RedirectToAction("NumberOfOccupants_Get", new {reference = viewModel.Reference});
             }
         }
 
         
         [HttpGet("hot-water-cylinder/{reference}")]
-        public IActionResult HotWaterCylinder_Get(string reference)
+        public IActionResult HotWaterCylinder_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
             var viewModel = new HotWaterCylinderViewModel
             {
                 HasHotWaterCylinder = userDataModel.HasHotWaterCylinder,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("HotWaterCylinder", viewModel);
@@ -633,19 +673,22 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HasHotWaterCylinder = viewModel.HasHotWaterCylinder;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("NumberOfOccupants_Get", new {reference = viewModel.Reference});
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("NumberOfOccupants_Get", new {reference = viewModel.Reference});
         }
 
         
         [HttpGet("number-of-occupants/{reference}")]
-        public IActionResult NumberOfOccupants_Get(string reference)
+        public IActionResult NumberOfOccupants_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
             var viewModel = new NumberOfOccupantsViewModel
             {
                 NumberOfOccupants = userDataModel.NumberOfOccupants,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("NumberOfOccupants", viewModel);
@@ -666,19 +709,22 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.NumberOfOccupants = viewModel.NumberOfOccupants;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("HeatingPattern_Get", new {reference = viewModel.Reference});
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("HeatingPattern_Get", new {reference = viewModel.Reference});
         }
 
         
         [HttpGet("heating-pattern/{reference}")]
-        public IActionResult HeatingPattern_Get(string reference)
+        public IActionResult HeatingPattern_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
             var viewModel = new HeatingPatternViewModel
             {
                 HeatingPattern = userDataModel.HeatingPattern,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("HeatingPattern", viewModel);
@@ -699,19 +745,22 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HeatingPattern = viewModel.HeatingPattern;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("Temperature_Get", new {reference = viewModel.Reference});
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("Temperature_Get", new {reference = viewModel.Reference});
         }
 
         
         [HttpGet("temperature/{reference}")]
-        public IActionResult Temperature_Get(string reference)
+        public IActionResult Temperature_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
             var viewModel = new TemperatureViewModel
             {
                 Temperature = userDataModel.Temperature,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                Change = change
             };
 
             return View("Temperature", viewModel);
@@ -732,7 +781,9 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.Temperature = viewModel.Temperature;
             userDataStore.SaveUserData(userDataModel);
             
-            return RedirectToAction("AnswerSummary", new {reference = viewModel.Reference});
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("AnswerSummary", new {reference = viewModel.Reference});
         }
         
         

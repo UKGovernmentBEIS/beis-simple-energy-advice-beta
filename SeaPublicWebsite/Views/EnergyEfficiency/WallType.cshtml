@@ -11,7 +11,9 @@
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        Href = Model.Change
+            ? @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
+            : @Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model.Reference}),
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -22,7 +24,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("WallType_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+        <form action="@Url.Action("WallType_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
             <span class="govuk-caption-l govuk-!-margin-bottom-4">
                 @(QuestionSection.YourHome.GetDisplayName())

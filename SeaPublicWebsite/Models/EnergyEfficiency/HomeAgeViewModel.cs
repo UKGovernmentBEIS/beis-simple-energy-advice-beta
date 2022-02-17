@@ -16,5 +16,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Reference { get; set; }
         
         public PropertyType? PropertyType { get; set; }
+        public bool Change { get; set; }
     }
 }

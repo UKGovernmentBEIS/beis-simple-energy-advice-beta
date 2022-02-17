@@ -34,7 +34,7 @@
                     @(Model.Country?.GetCheckboxLabelText())
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("Country_Get", "EnergyEfficiency", new {reference = Model.Reference})">
+                    <a class="govuk-link" href="@Url.Action("Country_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                         Change<span class="govuk-visually-hidden"> country</span>
                     </a>
                 </dd>
@@ -47,7 +47,7 @@
                     @(Model.OwnershipStatus?.GetCheckboxLabelText())
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("OwnershipStatus_Get", "EnergyEfficiency", new {reference = Model.Reference})">
+                    <a class="govuk-link" href="@Url.Action("OwnershipStatus_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                         Change<span class="govuk-visually-hidden"> circumstances</span>
                     </a>
                 </dd>
@@ -68,7 +68,7 @@
                     @(Model.PropertyType?.GetCheckboxLabelText())
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference})">
+                    <a class="govuk-link" href="@Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                         Change<span class="govuk-visually-hidden"> address</span>
                     </a>
                 </dd>
@@ -81,7 +81,7 @@
                     @(Model.YearBuilt?.ToString() ?? "I don't know")
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model.Reference})">
+                    <a class="govuk-link" href="@Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                         Change<span class="govuk-visually-hidden"> home type</span>
                     </a>
                 </dd>
@@ -94,7 +94,7 @@
                     @(Model.WallType?.GetCheckboxLabelText())
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("WallType_Get", "EnergyEfficiency", new {reference = Model.Reference})">
+                    <a class="govuk-link" href="@Url.Action("WallType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                         Change<span class="govuk-visually-hidden"> type of roof</span>
                     </a>
                 </dd>
@@ -110,7 +110,7 @@
                         @(Model.RoofConstruction?.GetCheckboxLabelText())
                     </dd>
                     <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                        <a class="govuk-link" href="@Url.Action("RoofConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference})">
+                        <a class="govuk-link" href="@Url.Action("RoofConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                             Change<span class="govuk-visually-hidden"> is roof flat</span>
                         </a>
                     </dd>
@@ -123,7 +123,7 @@
                         @(Model.RoofInsulated?.GetCheckboxLabelText())
                     </dd>
                     <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                        <a class="govuk-link" href="@Url.Action("RoofInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference})">
+                        <a class="govuk-link" href="@Url.Action("RoofInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                             Change<span class="govuk-visually-hidden"> is roof insulated</span>
                         </a>
                     </dd>
@@ -138,7 +138,7 @@
                     @(Model.GlazingType?.GetCheckboxLabelText())
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("GlazingType_Get", "EnergyEfficiency", new {reference = Model.Reference})">
+                    <a class="govuk-link" href="@Url.Action("GlazingType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                         Change<span class="govuk-visually-hidden"> type of glazing</span>
                     </a>
                 </dd>
@@ -151,7 +151,7 @@
                     @(Model.HasOutdoorSpace?.GetCheckboxLabelText())
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("OutdoorSpace_Get", "EnergyEfficiency", new {reference = Model.Reference})">
+                    <a class="govuk-link" href="@Url.Action("OutdoorSpace_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                         Change<span class="govuk-visually-hidden"> outdoor space</span>
                     </a>
                 </dd>
@@ -164,7 +164,7 @@
                     @(Model.HeatingType?.GetCheckboxLabelText())
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("HeatingType_Get", "EnergyEfficiency", new {reference = Model.Reference})">
+                    <a class="govuk-link" href="@Url.Action("HeatingType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                         Change<span class="govuk-visually-hidden"> how you heat your home</span>
                     </a>
                 </dd>
@@ -194,7 +194,7 @@
                     }
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("HotWaterCylinder_Get", "EnergyEfficiency", new {reference = Model.Reference})">
+                    <a class="govuk-link" href="@Url.Action("HotWaterCylinder_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                         Change<span class="govuk-visually-hidden"> do you have a hot water cylinder</span>
                     </a>
                 </dd>
@@ -212,7 +212,7 @@
                     @(Model.NumberOfOccupants?.ToString() ?? "Question skipped")
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("NumberOfOccupants_Get", "EnergyEfficiency", new {reference = Model.Reference})">
+                    <a class="govuk-link" href="@Url.Action("NumberOfOccupants_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                         Change<span class="govuk-visually-hidden"> number of people over 5 in the home</span>
                     </a>
                 </dd>
@@ -225,7 +225,7 @@
                     @(Model.HeatingPattern?.GetCheckboxLabelText())
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("HeatingPattern_Get", "EnergyEfficiency", new {reference = Model.Reference})">
+                    <a class="govuk-link" href="@Url.Action("HeatingPattern_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                         Change<span class="govuk-visually-hidden"> heating pattern</span>
                     </a>
                 </dd>
@@ -238,7 +238,7 @@
                     @(Model.Temperature.HasValue ? Model.Temperature.Value + "°C" : "Question skipped")
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("Temperature_Get", "EnergyEfficiency", new {reference = Model.Reference})">
+                    <a class="govuk-link" href="@Url.Action("Temperature_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                         Change<span class="govuk-visually-hidden"> temperature</span>
                     </a>
                 </dd>

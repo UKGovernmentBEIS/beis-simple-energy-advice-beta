@@ -10,5 +10,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public HeatingPattern? HeatingPattern { get; set; }
 
         public string Reference { get; set; }
+        public bool Change { get; set; }
     }
 }

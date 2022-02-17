@@ -10,5 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select your circumstances")]
         public OwnershipStatus? OwnershipStatus { get; set; }
+
+        public bool Change { get; set; }
     }
 }

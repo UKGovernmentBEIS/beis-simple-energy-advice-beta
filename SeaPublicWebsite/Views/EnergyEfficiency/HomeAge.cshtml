@@ -11,19 +11,26 @@
     @{
         string backLinkHref;
 
-        switch (Model.PropertyType)
+        if (Model.Change)
         {
-            case PropertyType.House:
-                backLinkHref = @Url.Action("HouseType_Get", "EnergyEfficiency", new {reference = Model.Reference});
-                break;
-            case PropertyType.Bungalow:
-                backLinkHref = @Url.Action("BungalowType_Get", "EnergyEfficiency", new {reference = Model.Reference});
-                break;
-            case PropertyType.ApartmentFlatOrMaisonette:
-                backLinkHref = @Url.Action("FlatType_Get", "EnergyEfficiency", new {reference = Model.Reference});
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
+            backLinkHref = @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference});
+        }
+        else
+        {
+            switch (Model.PropertyType)
+            {
+                case PropertyType.House:
+                    backLinkHref = @Url.Action("HouseType_Get", "EnergyEfficiency", new {reference = Model.Reference});
+                    break;
+                case PropertyType.Bungalow:
+                    backLinkHref = @Url.Action("BungalowType_Get", "EnergyEfficiency", new {reference = Model.Reference});
+                    break;
+                case PropertyType.ApartmentFlatOrMaisonette:
+                    backLinkHref = @Url.Action("FlatType_Get", "EnergyEfficiency", new {reference = Model.Reference});
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
     
@@ -41,7 +48,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("HomeAge_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+        <form action="@Url.Action("HomeAge_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
             @Html.HiddenFor(m => m.PropertyType)
             
