@@ -6,5 +6,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public int NumberOfUserRecommendations { get; set; }
         public string Reference { get; set; }
+        public int FirstReferenceId { get; set; }
     }
 }

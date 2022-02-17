@@ -765,7 +765,8 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new YourRecommendationsViewModel
                 {
                     Reference = reference,
-                    NumberOfUserRecommendations = recommendationsForUser.Count
+                    NumberOfUserRecommendations = recommendationsForUser.Count,
+                    FirstReferenceId = (int)recommendationsForUser[0].Key
                 }
 ;            return View("YourRecommendations", viewModel);
         }

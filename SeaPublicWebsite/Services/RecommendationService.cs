@@ -99,7 +99,7 @@ namespace SeaPublicWebsite.Services
             }
 
             // Not for ground floor or mid floor flat, or if loft is insulated/ flat roof
-            if (userData.FlatType is not FlatType.GroundFloor or FlatType.MiddleFloor && userData.RoofConstruction != RoofConstruction.Flat || userData.RoofInsulated != RoofInsulated.Yes)
+            if (userData.FlatType is not FlatType.GroundFloor or FlatType.MiddleFloor && userData.RoofConstruction != RoofConstruction.Flat && userData.RoofInsulated != RoofInsulated.Yes)
             {
                 userRecommendationKeys.Add(RecommendationKey.AddLoftInsulation);
             }
