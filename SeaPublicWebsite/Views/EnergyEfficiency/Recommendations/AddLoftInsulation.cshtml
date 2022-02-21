@@ -115,15 +115,15 @@
 
             <div class="govuk-grid-row">
                 <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
-                <div class="govuk-button-group govuk-grid-column-full govuk-!-padding-0">
+                <div class="govuk-button-group govuk-grid-column-full">
                     <div class="govuk-grid-column-one-half govuk-!-padding-left-0">
                         @if (Model.HasPreviousIndex())
                         {
-                            <button name="command" value="goBackwards" class="sea-nav-button govuk-!-width-full govuk-!-margin-0 govuk-!-text-align-left">
-                                <span class="govuk-body govuk-!-padding-bottom-0 govuk-!-padding-left-8">
+                            <button name="command" value="goBackwards" class="sea-nav-button sea-previous-recommendation govuk-!-width-full govuk-!-margin-0 govuk-!-text-align-left">
+                                <span class="sea-nav-button-caption govuk-body govuk-!-padding-bottom-0">
                                     Go back to
                                 </span>
-                                <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0 govuk-!-padding-left-8">
+                                <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0">
                                     Recommendation @(Model.GetCurrentIndex())
                                 </span>
                                 <svg class="sea-nav-button-left" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -137,11 +137,11 @@
                     <div class="govuk-grid-column-one-half govuk-!-padding-right-0">
                         @if (Model.HasNextIndex())
                         {
-                            <button name="command" value="goForwards" class="sea-nav-button govuk-!-width-full govuk-!-padding-right-0 govuk-!-text-align-right">
-                                <span class="sea-nav-button-caption-recommendation govuk-body govuk-!-padding-bottom-0 govuk-!-padding-right-8">
+                            <button name="command" value="goForwards" class="sea-nav-button sea-next-recommendation govuk-!-width-full govuk-!-padding-right-0 govuk-!-text-align-right">
+                                <span class="sea-nav-button-caption govuk-body govuk-!-padding-bottom-0">
                                     Continue to
                                 </span>
-                                <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0 govuk-!-padding-right-8">
+                                <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0">
                                     Recommendation @(Model.GetCurrentIndex() + 2)
                                 </span>
                                 <svg class="sea-nav-button-right" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -153,11 +153,11 @@
                         }
                         else
                         {
-                            <button name="command" value="goToActionPlan" class="sea-nav-button govuk-!-width-full govuk-!-text-align-right">
-                                <span class="sea-nav-button-caption-plan govuk-body govuk-!-padding-bottom-0 govuk-!-padding-right-8">
+                            <button name="command" value="goToActionPlan" class="sea-nav-button sea-go-to-plan govuk-!-width-full govuk-!-text-align-right">
+                                <span class="sea-nav-button-caption govuk-body govuk-!-padding-bottom-0">
                                     Continue to
                                 </span>
-                                <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0 govuk-!-padding-right-8">
+                                <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0">
                                     Action plan
                                 </span>
                                 <svg class="sea-nav-button-right" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -182,7 +182,8 @@
             @if (Model.GetSavedRecommendations().Count > 0)
             {
                 <p class="govuk-body-s">
-                    You have saved <strong>@Model.GetSavedRecommendations().Count</strong> recommended improvement.
+                    You have saved <strong>@Model.GetSavedRecommendations().Count</strong> recommended 
+                    @(Model.GetSavedRecommendations().Count == 1 ? "improvement" : "improvements").
                 </p>
                 <dl class="govuk-summary-list">
                     <div class="govuk-summary-list__row">

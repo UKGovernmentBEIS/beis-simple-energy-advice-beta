@@ -116,7 +116,7 @@
     font: inherit;
     cursor: pointer;
     outline: inherit;
-    height: 60px;
+    height: 80px;
     text-decoration: none;
 }
 
@@ -146,25 +146,70 @@
     }
 }
 
-.sea-nav-button-caption-recommendation {
-    margin-right: 115px;
+.sea-first-recommendation, .sea-previous-recommendation {
+    .sea-nav-button-caption, .sea-nav-button-title {
+        padding-left: govuk-spacing(8);
+    }
+
+    .sea-nav-button-title {
+        word-wrap: normal;
+    }
 }
 
-.sea-nav-button-caption-plan {
-    margin-right: 25px;
+.sea-next-recommendation, .sea-go-to-plan {
+    .sea-nav-button-caption, .sea-nav-button-title {
+        padding-right: govuk-spacing(8);
+
+    }
+
+    .sea-nav-button-title {
+        word-wrap: normal;
+    }
 }
 
-.sea-nav-button-left, .sea-recommendation-link-left {
+.sea-nav-button-left {
     left: 0;
     text-align: left;
     position: relative;
     top: -65px;
 }
 
+.sea-previous-recommendation {
+    .sea-nav-button-left {
+        @media (max-width: 900px) {
+            top: -95px;
+        }
+    }
+}
+
+.sea-previous-recommendation, .sea-first-recommendation {
+    .sea-nav-button-left {
+        @media (max-width: 769px) {
+            top: -55px;
+        }
+    }
+}
+
 .sea-nav-button-right {
     right: 0;
     position: relative;
     top: -65px;
+}
+
+.sea-next-recommendation {
+    .sea-nav-button-right {
+        @media (max-width: 900px) {
+            top: -95px;
+        }
+    }
+}
+
+.sea-next-recommendation, .sea-go-to-plan {
+    .sea-nav-button-right {
+        @media (max-width: 769px) {
+            top: -55px;
+        }
+    }
 }
 
 .sea-recommendation-link-caption {

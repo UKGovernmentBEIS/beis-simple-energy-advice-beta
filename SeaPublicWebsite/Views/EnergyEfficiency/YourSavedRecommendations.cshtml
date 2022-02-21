@@ -108,7 +108,7 @@
                                 @(recommendation.Summary)
                             </p>
                         </dt>
-                        <dd class="govuk-summary-list__actions govuk-!-margin-bottom-5">
+                        <dd class="govuk-summary-list__actions govuk-!-margin-bottom-2">
                             <a href="@Url.Action("AddToPlan_Get", "EnergyEfficiency", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})" class="govuk-link govuk-!-margin-right-3">Add to action plan</a>
                             <a href="@Url.Action("RemoveFromPlan_Get", "EnergyEfficiency", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})" class="govuk-link">Discard</a>
                         </dd>
@@ -134,11 +134,11 @@
             for more information on other ways you can improve your energy efficiency to reduce your bills.
         </p>
         <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
-        <a href="@Url.Action("Recommendation_Get", "EnergyEfficiency", new {id = (int) Model.UserDataModel.UserRecommendations[0].Key, reference = Model.UserDataModel.Reference})" role="button" draggable="false"  class="sea-nav-button govuk-heading-m govuk-!-width-full govuk-!-text-align-left">
-            <span class="govuk-body govuk-!-padding-bottom-0 govuk-!-padding-left-8">
+        <a href="@Url.Action("Recommendation_Get", "EnergyEfficiency", new {id = (int) Model.UserDataModel.UserRecommendations[0].Key, reference = Model.UserDataModel.Reference})" role="button" draggable="false"  class="sea-nav-button sea-first-recommendation govuk-heading-m govuk-!-width-full govuk-!-text-align-left">
+            <span class="sea-nav-button-caption govuk-body govuk-!-padding-bottom-0">
                 Start again at
             </span>
-            <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0 govuk-!-padding-left-8">
+            <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0">
                 Recommendation 1
             </span>
             <svg class="sea-nav-button-left" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
