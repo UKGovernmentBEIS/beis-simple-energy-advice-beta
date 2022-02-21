@@ -108,7 +108,7 @@
                                 @(recommendation.Summary)
                             </p>
                         </dt>
-                        <dd class="govuk-summary-list__actions govuk-!-margin-bottom-0">
+                        <dd class="govuk-summary-list__actions govuk-!-margin-bottom-5">
                             <a href="@Url.Action("AddToPlan_Get", "EnergyEfficiency", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})" class="govuk-link govuk-!-margin-right-3">Add to action plan</a>
                             <a href="@Url.Action("RemoveFromPlan_Get", "EnergyEfficiency", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})" class="govuk-link">Discard</a>
                         </dd>
