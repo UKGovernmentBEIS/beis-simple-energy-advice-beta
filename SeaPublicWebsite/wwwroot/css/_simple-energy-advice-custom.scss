@@ -215,3 +215,10 @@
 .sea-recommendation-link-caption {
     text-decoration: none;
 }
+
+.sea-change-answers-link {
+    @media (max-width: 769px) {
+        margin-top: 10px;
+        margin-bottom: 40px;
+    }
+}

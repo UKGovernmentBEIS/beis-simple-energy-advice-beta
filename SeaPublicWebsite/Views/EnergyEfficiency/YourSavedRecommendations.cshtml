@@ -14,10 +14,10 @@
             <h1 class="govuk-panel__title">
                 To reduce my energy bills
             </h1>
-            <a href="@Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference})" class="govuk-link govuk-link--inverse">Change my answers</a>
+            <a href="@Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference})" class="govuk-link govuk-link--inverse sea-change-answers-link">Change my answers</a>
         </div>
-        <div class="govuk-grid-column-one-third govuk-!-padding-0">
-            <p class="govuk-body-l sea-reference">Your reference <strong>@Model.UserDataModel.Reference</strong></p>
+        <div class="govuk-grid-column-one-third govuk-!-text-align-right govuk-!-padding-left-0">
+            <p class="govuk-body-l sea-reference govuk-!-margin-bottom-0">Your reference <strong>@Model.UserDataModel.Reference</strong></p>
         </div>
     </div>
 </div>
