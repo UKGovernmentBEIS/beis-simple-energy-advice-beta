@@ -11,11 +11,11 @@ namespace SeaPublicWebsite.DataModels
         public OwnershipStatus? OwnershipStatus { get; set; }
         public Country? Country { get; set; }
         
-        public Address Address { get; set; }
+        public Epc Epc { get; set; }
         
         // public UserGoal? UserGoal { get; set; }
         // public List<UserInterests> UserInterests { get; set; }
-        // public string Postcode { get; set; }
+        public string Postcode { get; set; }
         // public string EpcLmkKey { get; set; }
         
         public PropertyType? PropertyType { get; set; }

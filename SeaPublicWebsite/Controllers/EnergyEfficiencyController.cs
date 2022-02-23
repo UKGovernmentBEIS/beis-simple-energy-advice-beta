@@ -168,7 +168,7 @@ namespace SeaPublicWebsite.Controllers
             
             var viewModel = new AskForPostcodeViewModel
             {
-                Postcode = userDataModel.Address?.postcode,
+                Postcode = userDataModel.Postcode,
                 Reference = userDataModel.Reference
             };
 
@@ -194,30 +194,52 @@ namespace SeaPublicWebsite.Controllers
                 return View("AskForPostcode", viewModel);
             }
 
-            Address address = GetAddressApi.getAddress(viewModel.Postcode, viewModel.HouseNameOrNumber);
-
-            userDataModel.Address = address;
+            userDataModel.Postcode = viewModel.Postcode;
             userDataStore.SaveUserData(userDataModel);
-            
-            return RedirectToAction("ConfirmAddress_Get", "EnergyEfficiency", new {reference = viewModel.Reference});
+
+            return RedirectToAction("ConfirmAddress_Get", "EnergyEfficiency", new {reference = viewModel.Reference, houseNameOrNumber = viewModel.HouseNameOrNumber});
         }
 
         
         [HttpGet("address/{reference}")]
-        public IActionResult ConfirmAddress_Get(string reference)
+        public IActionResult ConfirmAddress_Get(string reference, string houseNameOrNumber)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
-            
+
+            var epcList = OpenEPCApi.GetEpcsForPostcode(userDataModel.Postcode);
+
+            if (houseNameOrNumber != null)
+            {
+                var filteredEpcList = epcList.Where(e =>
+                    e.Address1.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase) || e.Address2.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase)).ToList();
+
+                epcList = filteredEpcList.Any() ? filteredEpcList : epcList;
+            }
+
             var viewModel = new ConfirmAddressViewModel
             {
                 Reference = reference,
-                Address = userDataModel.Address
+                EPCList = epcList,
+                SelectedEpcId = epcList.Count == 1 ? epcList[0].EpcId : null,
             };
 
             return View("ConfirmAddress", viewModel);
         }
 
-        
+        [HttpPost("address/{reference}")]
+        public IActionResult ConfirmAddress_Post(ConfirmAddressViewModel viewModel)
+        {
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            var epc = OpenEPCApi.GetEpcsForPostcode(userDataModel.Postcode).FirstOrDefault(e => e.EpcId == viewModel.SelectedEpcId);
+            userDataModel.Epc = epc;
+
+            userDataStore.SaveUserData(userDataModel);
+
+            return RedirectToAction("PropertyType_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
+        }
+
+
         [HttpGet("property-type/{reference}")]
         public IActionResult PropertyType_Get(string reference, bool change = false)
         {
@@ -261,7 +283,6 @@ namespace SeaPublicWebsite.Controllers
             }
         }
 
-        
         [HttpGet("house-type/{reference}")]
         public IActionResult HouseType_Get(string reference, bool change = false)
         {
