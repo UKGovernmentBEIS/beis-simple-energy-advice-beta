@@ -46,35 +46,10 @@
                                     Text = "Your 8-digit reference",
                                 },
                                 classes: "govuk-input--width-10"
-                            ))
+                                ))
                          </text>
                     }
-                },
-                hintOptions: new HintViewModel
-                {
-                    Html = @<text>
-                               <details class="govuk-details" data-module="govuk-details">
-                                   <summary class="govuk-details__summary">
-                                       <span class="govuk-details__summary-text">
-                                           What does this mean?
-                                       </span>
-                                   </summary>
-                                   <div class="govuk-details__text">
-                                       <p class="govuk-body">
-                                           If you have visited the service the service will have provided you with
-                                           an 8-digit reference number with your recommendations.
-                                       </p>
-                                       <p class="govuk-body">
-                                           If you have your reference number to hand, answer Yes to return quickly to your action plan.
-                                       </p>
-                                       <p class="govuk-body">
-                                           If not, then answer No.
-                                       </p>
-                                   </div>
-                               </details>
-                            </text>
-                }
-                )
+                })
 
             @(Html.GovUkButton(new ButtonViewModel
             {
@@ -84,4 +59,15 @@
         </form>
 
     </div>
+    <div class="govuk-grid-column-one-third">
+        <aside class="app-related-items" role="complementary">
+            <h2 class="govuk-heading-m" id="subsection-title">What does that mean?</h2>
+            <p class="govuk-body-s">If you have visited the service before, we will 
+                have provided you with an 8-digit reference number with your recommendations.</p>
+        </aside>
+        <aside class="sea-user-reference" role="complementary">
+            <span class="govuk-caption-l">Example reference</span>
+            <h2 class="govuk-heading-l govuk-!-padding-bottom-3" id="subsection-title">ABC123DC</h2>
+        </aside>
+</div>
 </div>
