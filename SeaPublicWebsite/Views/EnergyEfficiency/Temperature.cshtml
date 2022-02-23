@@ -25,11 +25,7 @@
     <div class="govuk-grid-column-two-thirds">
         
         <form action="@Url.Action("Temperature_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
-            
-            <span class="govuk-caption-l govuk-!-margin-bottom-4">
-                @QuestionSection.Behaviour.GetDisplayName()
-            </span>
-            
+
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">

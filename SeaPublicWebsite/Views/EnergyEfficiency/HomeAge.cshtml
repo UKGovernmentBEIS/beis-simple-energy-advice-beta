@@ -51,10 +51,6 @@
         <form action="@Url.Action("HomeAge_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
             @Html.HiddenFor(m => m.PropertyType)
-            
-            <span class="govuk-caption-l govuk-!-margin-bottom-4">
-                @(QuestionSection.YourHome.GetDisplayName())
-            </span>
 
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
