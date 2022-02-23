@@ -58,14 +58,15 @@
                         Roughly what year was your property built?
                     </legend>
 
-                    <div id="passport-number-hint" class="govuk-hint">
-                        Enter the year your property was built, approximately. It does not have to be exact. e.g. 1950
+                    <div class="govuk-body">
+                        If you’re not sure when the property was built, but know the era, input any date in that period, 
+                        for example 1890, 1935 or 1970. 
                     </div>
 
                     <details class="govuk-details" data-module="govuk-details">
                         <summary class="govuk-details__summary">
                             <span class="govuk-details__summary-text">
-                                Help me determine the year my property was built
+                                Help me to answer this question
                             </span>
                         </summary>
                         <div class="govuk-details__text">
@@ -87,7 +88,15 @@
 
                     @(Html.GovUkTextInputFor(
                         m => m.YearBuilt,
-                        classes: "govuk-input--width-5"
+                        classes: "govuk-input--width-5",
+                        hintOptions: new HintViewModel
+                        {
+                            Html = @<text>
+                                       <div class="govuk-hint">
+                                           Enter the year your property was built. This does not have to be exact.
+                                       </div>
+                                    </text>
+                        }
                         ))
                 </fieldset>
             </div>

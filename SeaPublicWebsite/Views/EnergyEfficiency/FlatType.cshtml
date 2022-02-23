@@ -60,6 +60,22 @@
                             Text = "A ground floor flat is on the ground floor, typically street level, with no other dwelling or business below it"
                         }
                     },
+                },
+                hintOptions: new HintViewModel
+                {
+                    Html = @<text>
+                               <details class="govuk-details" data-module="govuk-details">
+                                   <summary class="govuk-details__summary">
+                                       <span class="govuk-details__summary-text">
+                                           Why do we need to know this?
+                                       </span>
+                                   </summary>
+                                   <div class="govuk-details__text">
+                                       Energy use varies between different buildings, particularly for heating.<br>
+                                       Some energy improvements are only possible or appropriate for certain buildings.
+                                   </div>
+                               </details>
+                            </text>
                 }
             ))
 
