@@ -10,6 +10,14 @@
     margin-bottom: govuk-spacing(2);
 }
 
+
+
+// sea specific styling
+
+.sea-telephone {
+    color: govuk-colour("green");
+}
+
 .sea-service-unsuitable, .sea-recommendations-panel {
     background-color: govuk-colour("blue");
 }
