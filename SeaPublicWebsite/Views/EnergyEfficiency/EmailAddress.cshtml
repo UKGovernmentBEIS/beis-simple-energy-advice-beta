@@ -1,0 +1,63 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
+@model SeaPublicWebsite.Models.EnergyEfficiency.EmailAddressViewModel
+@{
+    ViewBag.Title = "Email address";
+}
+
+@section BeforeMain {
+    @Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = Model.Change
+            ? @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
+            : @Url.Action("Temperature_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = false
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        
+        <form method="post" action="@Url.Action("EmailAddress_Post", "EnergyEfficiency")">
+
+            @Html.GovUkRadiosFor(
+                m => m.HasEmailAddress,
+                fieldsetOptions: new FieldsetViewModel
+                {
+                    Legend = new LegendViewModel
+                    {
+                        Text = "Do you have an email address?",
+                        Classes = "govuk-fieldset__legend--l",
+                        IsPageHeading = true,
+                    },
+                },
+                conditionalOptions: new Dictionary<HasEmailAddress?, Func<object, object>>
+                {
+                    {
+                        HasEmailAddress.Yes,
+                        @<text>
+                            @(Html.GovUkTextInputFor(
+                                m => m.EmailAddress,
+                                labelOptions: new LabelViewModel
+                                {
+                                    Text = "Email address",
+                                }
+                                ))
+                         </text>
+                    }
+                })
+
+            @(Html.GovUkButton(new ButtonViewModel
+            {
+                Text = "Continue",
+            }))
+
+        </form>
+
+    </div>
+</div>

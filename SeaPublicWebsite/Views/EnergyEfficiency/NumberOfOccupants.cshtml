@@ -28,7 +28,7 @@
 
             <fieldset class="govuk-fieldset">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    How many people aged 5 or over live in the property?
+                    How many people live in your property who are over 5 years old?
                 </legend>
 
                 <details class="govuk-details" data-module="govuk-details">
@@ -44,7 +44,16 @@
 
                 @(Html.GovUkTextInputFor(
                     m => m.NumberOfOccupants,
-                    classes: "govuk-input--width-5"
+                    classes: "govuk-input--width-5",
+                    hintOptions: new HintViewModel
+                    {
+                        Html = @<text>
+                                       <div class="govuk-hint">
+                                           Enter the number of people living in your property who are over 5 years old.
+                                       </div>
+                                    </text>
+                        },
+                    placeholder: "e.g. 3"
                     ))
             </fieldset>
             

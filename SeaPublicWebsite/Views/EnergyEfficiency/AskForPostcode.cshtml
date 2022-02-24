@@ -53,7 +53,8 @@
                     formGroupOptions: new FormGroupViewModel
                     {
                         Classes = "govuk-!-margin-bottom-2"
-                    }
+                    },
+                    placeholder: "e.g. 19 or Swiss Cottage"
                     ))
 
                 @(Html.GovUkTextInputFor(
@@ -62,7 +63,8 @@
                     {
                         Text = "Postcode",
                     },
-                    classes: "govuk-input--width-10"
+                    classes: "govuk-input--width-10",
+                    placeholder: "e.g. AB12 3CD"
                     ))
             </fieldset>
             

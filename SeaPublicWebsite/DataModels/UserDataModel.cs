@@ -25,7 +25,8 @@ namespace SeaPublicWebsite.DataModels
         
         public int? YearBuilt { get; set; }
         
-        public WallType? WallType { get; set; }
+        public WallConstruction? WallConstruction { get; set; }
+        public WallsInsulated? WallsInsulated { get; set; }
         public RoofConstruction? RoofConstruction { get; set; }
         public RoofInsulated? RoofInsulated { get; set; }
         public HasOutdoorSpace? HasOutdoorSpace { get; set; }
@@ -36,6 +37,7 @@ namespace SeaPublicWebsite.DataModels
         public int? NumberOfOccupants { get; set; }
         public HeatingPattern? HeatingPattern { get; set; }
         public int? Temperature { get; set; }
+        public string EmailAddress { get; set; }
         
         public List<UserRecommendation> UserRecommendations { get; set; }
     }

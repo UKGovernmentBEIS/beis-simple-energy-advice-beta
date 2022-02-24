@@ -11,7 +11,7 @@
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("Temperature_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        Href = @Url.Action("EmailAddress_Get", "EnergyEfficiency", new {reference = Model.Reference}),
 
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -86,11 +86,26 @@
                     Wall type 
                 </dt>
                 <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
-                    @(Model.WallType?.GetCheckboxLabelText())
+                    @(Model.WallConstruction?.GetCheckboxLabelText())
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("WallType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
-                        Change<span class="govuk-visually-hidden"> type of roof</span>
+                    <a class="govuk-link" href="@Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                        Change<span class="govuk-visually-hidden"> type of walls
+                        </span>
+                    </a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    Are you walls fully insulated? 
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    @(Model.WallsInsulated?.GetCheckboxLabelText())
+                </dd>
+                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                    <a class="govuk-link" href="@Url.Action("WallsInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                        Change<span class="govuk-visually-hidden"> are walls insulated
+                        </span>
                     </a>
                 </dd>
             </div>
@@ -124,7 +139,7 @@
                     </dd>
                 </div>
             }
-            
+
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key govuk-!-width-one-half">
                     Glazing type 
@@ -220,19 +235,32 @@
                     </a>
                 </dd>
             </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half">
-                    Temperature
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
-                    @(Model.Temperature.HasValue ? Model.Temperature.Value + "°C" : "Question skipped")
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("Temperature_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
-                        Change<span class="govuk-visually-hidden"> temperature</span>
-                    </a>
-                </dd>
-            </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                Temperature
+            </dt>
+            <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                @(Model.Temperature.HasValue ? Model.Temperature.Value + "°C" : "Question skipped")
+            </dd>
+            <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                <a class="govuk-link" href="@Url.Action("Temperature_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                    Change<span class="govuk-visually-hidden"> temperature</span>
+                </a>
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                Email address 
+            </dt>
+            <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                @(string.IsNullOrEmpty(Model.EmailAddress) ? "Not given" : Model.EmailAddress)
+            </dd>
+            <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                <a class="govuk-link" href="@Url.Action("EmailAddress_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                    Change<span class="govuk-visually-hidden"> email address</span>
+                </a>
+            </dd>
+        </div>
         </dl>
 
         <a href="@Url.Action("YourRecommendations_Get", "EnergyEfficiency", new {reference = Model.Reference})" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">

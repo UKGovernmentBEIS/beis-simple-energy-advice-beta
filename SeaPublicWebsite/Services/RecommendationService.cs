@@ -93,7 +93,10 @@ namespace SeaPublicWebsite.Services
 
             // User has uninsulated cavity walls OR don't know and property 1930-1995
 
-            if (userData.WallType == WallType.CavityNoInsulation || userData.WallType == WallType.DoNotKnow && userData.YearBuilt is >= 1930 and <= 1995 )
+            if ((userData.WallConstruction == WallConstruction.Cavity && userData.WallsInsulated != WallsInsulated.Yes) 
+                || (userData.WallConstruction != WallConstruction.Solid 
+                    && userData.WallsInsulated != WallsInsulated.Yes 
+                    && userData.YearBuilt is >= 1930 and <= 1995 ))
             {
                 userRecommendationKeys.Add(RecommendationKey.InsulateCavityWalls);
             }

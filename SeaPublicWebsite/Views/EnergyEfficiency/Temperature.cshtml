@@ -32,10 +32,8 @@
                         What temperature do you heat your home to?
                     </legend>
             
-                    <div class="govuk-hint">
-                        If you have a room thermostat, you could tell us what temperature that is usually set to.
-                        This answer should be in degrees Celcius.
-                        Entering this helps us better estimate the savings on your energy bill from our recommendations.
+                    <div class="govuk-body">
+                        If you have a room thermostat, this will be the temperature that is usually set to. 
                     </div>
             
                     <details class="govuk-details" data-module="govuk-details">
@@ -51,7 +49,16 @@
             
                     @(Html.GovUkTextInputFor(
                         m => m.Temperature,
-                        classes: "govuk-input--width-5"
+                        classes: "govuk-input--width-5",
+                        hintOptions: new HintViewModel
+                        {
+                            Html = @<text>
+                                       <div class="govuk-hint">
+                                           Enter the temperature you heat your home to in degrees Celcius (℃).
+                                       </div>
+                                    </text>
+                        },
+                        placeholder: "e.g. 20"
                         ))
                 </fieldset>
             </div>
@@ -63,13 +70,20 @@
                 }))
                 <a href="@(Model.Change
                              ? Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
-                             : Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference}))"
+                             : Url.Action("EmailAddress_Get", "EnergyEfficiency", new {reference = Model.Reference}))"
                    class="govuk-link">
                     I don't know
                 </a>
             </div>
             
         </form>
-        
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <aside class="app-related-items" role="complementary">
+            <h2 class="govuk-heading-m" id="subsection-title">What temperature should I heat my home to?</h2>
+            <p class="govuk-body-s">If you have visited the service before, we will 
+                The World Health Organisation recommends living areas are heated between 18- and 21-degrees Celsius (℃).
+            </p>
+        </aside>
     </div>
 </div>

@@ -23,6 +23,7 @@
         <None Include="wwwroot\**\*">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <Content Remove="wwwroot\assets\images\hot-water-tank.png" />
         <None Update="manifest.yml">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>

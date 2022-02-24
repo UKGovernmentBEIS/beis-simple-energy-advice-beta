@@ -1,6 +1,5 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.HomeAgeViewModel
 @{
@@ -96,7 +95,8 @@
                                            Enter the year your property was built. This does not have to be exact.
                                        </div>
                                     </text>
-                        }
+                        },
+                        placeholder: "e.g. 1950"
                         ))
                 </fieldset>
             </div>
@@ -106,7 +106,7 @@
                 {
                     Text = "Continue",
                 }))
-                <a href="@Url.Action("WallType_Get", "EnergyEfficiency", new {reference = Model.Reference})"
+                <a href="@Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference})"
                    class="govuk-link">
                     I don't know
                 </a>

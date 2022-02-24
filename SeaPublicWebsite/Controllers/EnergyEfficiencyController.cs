@@ -3,6 +3,7 @@ using System.Linq;
 using GovUkDesignSystem;
 using GovUkDesignSystem.Parsers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
@@ -424,57 +425,98 @@ namespace SeaPublicWebsite.Controllers
             
             return viewModel.Change
                 ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("WallType_Get", new {reference = viewModel.Reference});
+                : RedirectToAction("WallConstruction_Get", new {reference = viewModel.Reference});
         }
 
         
-        [HttpGet("wall-type/{reference}")]
-        public IActionResult WallType_Get(string reference, bool change = false)
+        [HttpGet("wall-construction/{reference}")]
+        public IActionResult WallConstruction_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
-            var viewModel = new WallTypeViewModel
+            var viewModel = new WallConstructionViewModel
             {
-                WallType = userDataModel.WallType,
+                WallConstruction = userDataModel.WallConstruction,
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
                 Change = change
             };
 
-            return View("WallType", viewModel);
+            return View("WallConstruction", viewModel);
         }
 
-        [HttpPost("wall-type/{reference}")]
-        public IActionResult WallType_Post(WallTypeViewModel viewModel)
+        [HttpPost("wall-construction/{reference}")]
+        public IActionResult WallConstruction_Post(WallConstructionViewModel viewModel)
         {
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
             
-            viewModel.ParseAndValidateParameters(Request, m => m.WallType);
+            viewModel.ParseAndValidateParameters(Request, m => m.WallConstruction);
 
             if (viewModel.HasAnyErrors())
             {
-                return View("WallType", viewModel);
+                return View("WallConstruction", viewModel);
             }
 
-            userDataModel.WallType = viewModel.WallType;
+            userDataModel.WallConstruction = viewModel.WallConstruction;
             userDataStore.SaveUserData(userDataModel);
 
             if (viewModel.Change)
             {
                 return RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference});
             }
-            else if (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette
-                && (userDataModel.FlatType == FlatType.GroundFloor || userDataModel.FlatType == FlatType.MiddleFloor))
-            {
-                return RedirectToAction("GlazingType_Get", new {reference = viewModel.Reference});
-            }
             else
             {
-                return RedirectToAction("RoofConstruction_Get", new {reference = viewModel.Reference});
+                return RedirectToAction("WallsInsulated_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
             }
         }
 
-        
+        [HttpGet("walls-insulated/{reference}")]
+        public IActionResult WallsInsulated_Get(string reference, bool change = false)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+
+            var viewModel = new WallsInsulatedViewModel
+            {
+                WallsInsulated = userDataModel.WallsInsulated,
+                YearBuilt = userDataModel.YearBuilt,
+                Reference = userDataModel.Reference,
+                Change = change
+            };
+
+            return View("WallsInsulated", viewModel);
+        }
+
+        [HttpPost("walls-insulated/{reference}")]
+        public IActionResult WallsInsulated_Post(WallsInsulatedViewModel viewModel)
+        {
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+
+            viewModel.ParseAndValidateParameters(Request, m => m.WallsInsulated);
+
+            if (viewModel.HasAnyErrors())
+            {
+                return View("WallsInsulated", viewModel);
+            }
+
+            userDataModel.WallsInsulated = viewModel.WallsInsulated;
+            userDataStore.SaveUserData(userDataModel);
+
+            if (viewModel.Change)
+            {
+                return RedirectToAction("AnswerSummary", "EnergyEfficiency", new { reference = viewModel.Reference });
+            }
+            else if (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette
+                     && (userDataModel.FlatType == FlatType.GroundFloor || userDataModel.FlatType == FlatType.MiddleFloor))
+            {
+                return RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference });
+            }
+            else
+            {
+                return RedirectToAction("RoofConstruction_Get", new { reference = viewModel.Reference });
+            }
+        }
+
+
         [HttpGet("roof-construction/{reference}")]
         public IActionResult RoofConstruction_Get(string reference, bool change = false)
         {
@@ -804,10 +846,56 @@ namespace SeaPublicWebsite.Controllers
             
             return viewModel.Change
                 ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("AnswerSummary", new {reference = viewModel.Reference});
+                : RedirectToAction("EmailAddress_Get", new {reference = viewModel.Reference});
         }
-        
-        
+
+
+        [HttpGet("email-address/{reference}")]
+        public IActionResult EmailAddress_Get(string reference, bool change = false)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+
+            var viewModel = new EmailAddressViewModel
+            {
+                HasEmailAddress = string.IsNullOrEmpty(userDataModel.EmailAddress) ? HasEmailAddress.No : HasEmailAddress.Yes,
+                EmailAddress = userDataModel.EmailAddress,
+                Reference = userDataModel.Reference,
+                Change = change
+            };
+
+            return View("EmailAddress", viewModel);
+        }
+
+        [HttpPost("email-address/{reference}")]
+        public IActionResult EmailAddress_Post(EmailAddressViewModel viewModel)
+        {
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+
+            viewModel.ParseAndValidateParameters(Request, m => m.HasEmailAddress);
+            viewModel.ParseAndValidateParameters(Request, m => m.EmailAddress);
+
+            if (viewModel.HasAnyErrors())
+            {
+                return View("EmailAddress", viewModel);
+            };
+
+            if (viewModel.HasEmailAddress == HasEmailAddress.Yes)
+            {
+                userDataModel.EmailAddress = viewModel.EmailAddress;
+                userDataStore.SaveUserData(userDataModel);
+            }
+            else
+            {
+                userDataModel.EmailAddress = null;
+
+            }
+            userDataStore.SaveUserData(userDataModel);
+
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new { reference = viewModel.Reference })
+                : RedirectToAction("AnswerSummary", new { reference = viewModel.Reference });
+        }
+
         [HttpGet("answer-summary/{reference}")]
         public IActionResult AnswerSummary(string reference)
         {
