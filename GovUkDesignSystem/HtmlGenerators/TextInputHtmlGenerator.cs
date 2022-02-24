@@ -21,7 +21,8 @@ namespace GovUkDesignSystem.HtmlGenerators
             string classes = null,
             TextInputAppendixViewModel textInputAppendix = null,
             string type = "text",
-            string autocomplete = null
+            string autocomplete = null,
+            string placeholder = null
         )
             where TModel : GovUkViewModel
         {
@@ -50,7 +51,7 @@ namespace GovUkDesignSystem.HtmlGenerators
                 Classes = classes,
                 TextInputAppendix = textInputAppendix,
                 Type = type,
-                Attributes = new Dictionary<string, string> {{"autocomplete", autocomplete}}
+                Attributes = new Dictionary<string, string> {{"autocomplete", autocomplete}, {"placeholder", placeholder}}
             };
 
             if (model.HasErrorFor(property))

@@ -321,7 +321,8 @@ namespace GovUkDesignSystem
             string classes = null,
             TextInputAppendixViewModel textInputAppendix = null,
             string type = "text",
-            string autocomplete = null)
+            string autocomplete = null,
+            string placeholder = null)
             where TModel : GovUkViewModel
         {
             return TextInputHtmlGenerator.GenerateHtml(
@@ -333,7 +334,8 @@ namespace GovUkDesignSystem
                 classes,
                 textInputAppendix,
                 type,
-                autocomplete);
+                autocomplete,
+                placeholder);
         }
 
         public static IHtmlContent GovUkTextInputFor<TModel>(
@@ -345,7 +347,8 @@ namespace GovUkDesignSystem
             string classes = null,
             TextInputAppendixViewModel textInputAppendix = null,
             string type = "text",
-            string autocomplete = null)
+            string autocomplete = null,
+            string placeholder = null)
             where TModel : GovUkViewModel
         {
             return TextInputHtmlGenerator.GenerateHtml(
@@ -357,7 +360,8 @@ namespace GovUkDesignSystem
                 classes,
                 textInputAppendix,
                 type,
-                autocomplete);
+                autocomplete,
+                placeholder);
         }
 
         public static IHtmlContent GovUkTextInputFor<TModel>(
@@ -369,7 +373,8 @@ namespace GovUkDesignSystem
             string classes = null,
             TextInputAppendixViewModel textInputAppendix = null,
             string type = "text",
-            string autocomplete = null)
+            string autocomplete = null,
+            string placeholder = null)
             where TModel : GovUkViewModel
         {
             return TextInputHtmlGenerator.GenerateHtml(
@@ -381,7 +386,8 @@ namespace GovUkDesignSystem
                 classes,
                 textInputAppendix,
                 type,
-                autocomplete);
+                autocomplete,
+                placeholder);
         }
 
     }
