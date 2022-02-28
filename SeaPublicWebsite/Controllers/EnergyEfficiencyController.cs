@@ -464,42 +464,131 @@ namespace SeaPublicWebsite.Controllers
             {
                 return RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference});
             }
+            else if (viewModel.WallConstruction == WallConstruction.Cavity ||
+                     viewModel.WallConstruction == WallConstruction.Mixed)
+            {
+                return RedirectToAction("CavityWallsInsulated_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
+            }
+            else if (viewModel.WallConstruction == WallConstruction.Solid)
+            {
+                return RedirectToAction("SolidWallsInsulated_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
+            }
             else
             {
-                return RedirectToAction("WallsInsulated_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
+                // These options below are for people who have chosen "Don't know" to "What type of walls do you have?"
+                if (userDataModel.PropertyType == PropertyType.House ||
+                    userDataModel.PropertyType == PropertyType.Bungalow ||
+                    (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.GroundFloor))
+                {
+                    return RedirectToAction("FloorConstruction_Get", new { reference = viewModel.Reference });
+                }
+                else if (userDataModel.PropertyType == PropertyType.House ||
+                         userDataModel.PropertyType == PropertyType.Bungalow ||
+                         (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.TopFloor))
+                {
+                    return RedirectToAction("RoofConstruction_Get", new { reference = viewModel.Reference });
+                }
+                else
+                {
+                    return RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference });
+                }
             }
         }
 
-        [HttpGet("walls-insulated/{reference}")]
-        public IActionResult WallsInsulated_Get(string reference, bool change = false)
+        
+        [HttpGet("cavity-walls-insulated/{reference}")]
+        public IActionResult CavityWallsInsulated_Get(string reference, bool change = false)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
-            var viewModel = new WallsInsulatedViewModel
+            var viewModel = new CavityWallsInsulatedViewModel
             {
-                WallsInsulated = userDataModel.WallsInsulated,
+                CavityWallsInsulated = userDataModel.CavityWallsInsulated,
                 WallConstruction = userDataModel.WallConstruction,
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
                 Change = change
             };
 
-            return View("WallsInsulated", viewModel);
+            return View("CavityWallsInsulated", viewModel);
         }
 
-        [HttpPost("walls-insulated/{reference}")]
-        public IActionResult WallsInsulated_Post(WallsInsulatedViewModel viewModel)
+        [HttpPost("cavity-walls-insulated/{reference}")]
+        public IActionResult CavityWallsInsulated_Post(CavityWallsInsulatedViewModel viewModel)
         {
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
-            viewModel.ParseAndValidateParameters(Request, m => m.WallsInsulated);
+            viewModel.ParseAndValidateParameters(Request, m => m.CavityWallsInsulated);
 
             if (viewModel.HasAnyErrors())
             {
-                return View("WallsInsulated", viewModel);
+                return View("CavityWallsInsulated", viewModel);
             }
 
-            userDataModel.WallsInsulated = viewModel.WallsInsulated;
+            userDataModel.CavityWallsInsulated = viewModel.CavityWallsInsulated;
+            userDataStore.SaveUserData(userDataModel);
+
+            if (viewModel.Change)
+            {
+                return RedirectToAction("AnswerSummary", "EnergyEfficiency", new { reference = viewModel.Reference });
+            }
+            else if (viewModel.WallConstruction == WallConstruction.Mixed)
+            {
+                return RedirectToAction("SolidWallsInsulated_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
+            }
+            else
+            {
+                // These options below are for people who have finished the "wall insulation" questions (e.g. who only have cavity walls)
+                if (userDataModel.PropertyType == PropertyType.House ||
+                    userDataModel.PropertyType == PropertyType.Bungalow ||
+                    (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.GroundFloor))
+                {
+                    return RedirectToAction("FloorConstruction_Get", new { reference = viewModel.Reference });
+                }
+                else if (userDataModel.PropertyType == PropertyType.House ||
+                         userDataModel.PropertyType == PropertyType.Bungalow ||
+                         (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.TopFloor))
+                {
+                    return RedirectToAction("RoofConstruction_Get", new { reference = viewModel.Reference });
+                }
+                else
+                {
+                    return RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference });
+                }
+            }
+        }
+
+
+        [HttpGet("solid-walls-insulated/{reference}")]
+        public IActionResult SolidWallsInsulated_Get(string reference, bool change = false)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+
+            var viewModel = new SolidWallsInsulatedViewModel
+            {
+                SolidWallsInsulated = userDataModel.SolidWallsInsulated,
+                WallConstruction = userDataModel.WallConstruction,
+                YearBuilt = userDataModel.YearBuilt,
+                Reference = userDataModel.Reference,
+                Change = change
+            };
+
+            return View("SolidWallsInsulated", viewModel);
+        }
+
+        [HttpPost("solid-walls-insulated/{reference}")]
+        public IActionResult SolidWallsInsulated_Post(SolidWallsInsulatedViewModel viewModel)
+        {
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+
+            viewModel.ParseAndValidateParameters(Request, m => m.SolidWallsInsulated);
+
+            if (viewModel.HasAnyErrors())
+            {
+                return View("SolidWallsInsulated", viewModel);
+            }
+
+            userDataModel.SolidWallsInsulated = viewModel.SolidWallsInsulated;
             userDataStore.SaveUserData(userDataModel);
 
             if (viewModel.Change)
@@ -533,6 +622,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new FloorConstructionViewModel
             {
                 FloorConstruction = userDataModel.FloorConstruction,
+                WallConstruction = userDataModel.WallConstruction,
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
                 Change = change

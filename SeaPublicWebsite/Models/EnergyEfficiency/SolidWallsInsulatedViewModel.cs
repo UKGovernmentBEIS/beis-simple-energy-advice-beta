@@ -4,14 +4,15 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class FloorConstructionViewModel : GovUkViewModel
+    public class SolidWallsInsulatedViewModel : GovUkViewModel
     {
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Select how your floor is built")]
-        public FloorConstruction? FloorConstruction { get; set; }
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select if your solid walls are insulated")]
+        public SolidWallsInsulated? SolidWallsInsulated { get; set; }
 
         public string Reference { get; set; }
-        public bool Change { get; set; }
+        
         public int? YearBuilt { get; set; }
+        public bool Change { get; set; }
         public WallConstruction? WallConstruction { get; set; }
     }
 }

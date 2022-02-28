@@ -72,20 +72,43 @@
                     </a>
                 </dd>
             </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half">
-                    Are you walls fully insulated? 
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
-                    @(Model.WallsInsulated?.GetCheckboxLabelText())
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("WallsInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
-                        Change<span class="govuk-visually-hidden"> are walls insulated
-                        </span>
-                    </a>
-                </dd>
-            </div>
+
+            @if (Model.WallConstruction == WallConstruction.Cavity ||
+                 Model.WallConstruction == WallConstruction.Mixed)
+            {
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                        Are your cavity walls fully insulated? 
+                    </dt>
+                    <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                        @(Model.CavityWallsInsulated?.GetCheckboxLabelText())
+                    </dd>
+                    <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                        <a class="govuk-link" href="@Url.Action("CavityWallsInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                            Change<span class="govuk-visually-hidden"> are cavity walls insulated
+                            </span>
+                        </a>
+                    </dd>
+                </div>
+            }
+            @if (Model.WallConstruction == WallConstruction.Solid ||
+                 Model.WallConstruction == WallConstruction.Mixed)
+            {
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                        Are your solid walls fully insulated? 
+                    </dt>
+                    <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                        @(Model.SolidWallsInsulated?.GetCheckboxLabelText())
+                    </dd>
+                    <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                        <a class="govuk-link" href="@Url.Action("SolidWallsInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                            Change<span class="govuk-visually-hidden"> are solid walls insulated
+                            </span>
+                        </a>
+                    </dd>
+                </div>
+            }
             
             @if (Model.PropertyType != PropertyType.ApartmentFlatOrMaisonette || Model.FlatType == FlatType.GroundFloor)
             {

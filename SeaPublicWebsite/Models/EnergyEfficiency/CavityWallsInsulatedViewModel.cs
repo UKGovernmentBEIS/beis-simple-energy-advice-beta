@@ -4,10 +4,10 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class WallsInsulatedViewModel : GovUkViewModel
+    public class CavityWallsInsulatedViewModel : GovUkViewModel
     {
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Select if your walls are insulated")]
-        public WallsInsulated? WallsInsulated { get; set; }
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select if your cavity walls are insulated")]
+        public CavityWallsInsulated? CavityWallsInsulated { get; set; }
 
         public string Reference { get; set; }
         

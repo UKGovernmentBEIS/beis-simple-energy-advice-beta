@@ -1,0 +1,130 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
+@model SeaPublicWebsite.Models.EnergyEfficiency.CavityWallsInsulatedViewModel
+@{
+    ViewBag.Title = "Cavity Walls Insulated";
+}
+
+@section BeforeMain {
+    @Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = Model.Change
+            ? @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
+            : @Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = false
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        
+        <form action="@Url.Action("CavityWallsInsulated_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
+            
+            @(Html.HiddenFor(m => m.WallConstruction))
+            @(Html.HiddenFor(m => m.YearBuilt))
+            
+            @(Html.GovUkRadiosFor(m => m.CavityWallsInsulated,
+                fieldsetOptions: new FieldsetViewModel
+                {
+                    Legend = new LegendViewModel
+                    {
+                        Html = @<text>
+                                   <h1 class="govuk-fieldset__heading">
+                                       Are your cavity walls insulated?
+                                   </h1>
+                                </text>,
+                        Classes = "govuk-fieldset__legend--l"
+                    }
+                },
+                hintOptions: new HintViewModel
+                {
+                    Html = @<text>
+                               @if (Model.YearBuilt.HasValue)
+                               {
+                                   @if (Model.YearBuilt.Value < 1991)
+                                   {
+                                       <p class="govuk-body">
+                                           Cavity walls built before 1991 are typically uninsulated, unless you or someone before you had insulation installed.
+                                       </p>
+                                   }
+                                   else
+                                   {
+                                       <p class="govuk-body">
+                                           Cavity walls built after 1991 are typically insulated.
+                                       </p>
+                                   }
+                               }
+                               else
+                               {
+                                   <p class="govuk-body">
+                                       Cavity walls built before 1991 are typically uninsulated, unless you or someone before you had insulation installed. 
+                                   </p>
+                                   <p class="govuk-body">
+                                       Cavity walls built after 1991 were typically built with insulating material between the outer and inner walls.
+                                   </p>
+                               }
+                               
+                               <details class="govuk-details govuk-!-margin-bottom-3" data-module="govuk-details">
+                                   <summary class="govuk-details__summary">
+                                       <span class="govuk-details__summary-text">
+                                           Help me to answer this question
+                                       </span>
+                                   </summary>
+                                   <div class="govuk-details__text">
+                                       @if (Model.YearBuilt.HasValue && Model.YearBuilt.Value >= 1991)
+                                       {
+                                           <p class="govuk-body">
+                                               Homes built after 1991 were typically built with insulating material between the outer and inner walls. 
+                                           </p>
+                                           <p class="govuk-body">
+                                               If your home was converted, for example it was a shop or other commercial premises before, 
+                                               it may have been built without insulation.
+                                           </p>
+                                       }
+                                       else
+                                       {
+                                           <p class="govuk-body">
+                                               Many cavity walls can be insulated by injecting insulation material into the cavity from the outside. 
+                                               A specialist company will drill holes in the outside walls, inject insulation through the holes and 
+                                               then seal them with cement.
+                                           </p>
+                                           <p class="govuk-body">
+                                               If there are small, filled 22 millimetre holes at regular intervals around the outside walls, 
+                                               it’s a sign they may have been insulated.
+                                           </p>
+                                       }
+                                   </div>
+                               </details>
+
+                               @if (Model.YearBuilt.HasValue)
+                               {
+                                   @if (Model.YearBuilt.Value < 1991)
+                                   {
+                                       <p class="govuk-hint govuk-!-margin-bottom-5">
+                                           Properties of your type typically have <b>uninsulated</b> walls.
+                                       </p>
+                                   }
+                                   else
+                                   {
+                                       <p class="govuk-hint govuk-!-margin-bottom-5">
+                                           Properties of your type typically have <b>insulated</b> walls.
+                                       </p>
+                                   }
+                               }
+                            </text>
+                    }
+                ))
+
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+            
+        </form>
+        
+    </div>
+</div>

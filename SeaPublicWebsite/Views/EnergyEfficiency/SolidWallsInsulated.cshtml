@@ -1,0 +1,93 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
+@model SeaPublicWebsite.Models.EnergyEfficiency.SolidWallsInsulatedViewModel
+@{
+    ViewBag.Title = "Solid Walls Insulated";
+}
+
+@section BeforeMain {
+    @{
+        string backlink;
+        switch (Model.WallConstruction)
+        {
+            case WallConstruction.Cavity:
+            case WallConstruction.Mixed:
+                backlink = Url.Action("CavityWallsInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference});
+                break;
+            case WallConstruction.Solid:
+            case WallConstruction.DoNotKnow:
+            case null:
+            default:
+                backlink = Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference});
+                break;
+        }
+    }
+    @Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = Model.Change
+            ? @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
+            : backlink,
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = false
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        
+        <form action="@Url.Action("SolidWallsInsulated_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
+            
+            @(Html.HiddenFor(m => m.WallConstruction))
+            
+            @(Html.GovUkRadiosFor(m => m.SolidWallsInsulated,
+                fieldsetOptions: new FieldsetViewModel
+                {
+                    Legend = new LegendViewModel
+                    {
+                        Html = @<text>
+                                   <h1 class="govuk-fieldset__heading">
+                                       Are your solid walls insulated?
+                                   </h1>
+                                </text>,
+                        Classes = "govuk-fieldset__legend--l"
+                    }
+                },
+                hintOptions: new HintViewModel
+                {
+                    Html = @<text>
+                               <p class="govuk-body">
+                                   Most solid walls are uninsulated.
+                               </p>
+                               
+                               <details class="govuk-details govuk-!-margin-bottom-3" data-module="govuk-details">
+                                   <summary class="govuk-details__summary">
+                                       <span class="govuk-details__summary-text">
+                                           Help me to answer this question
+                                       </span>
+                                   </summary>
+                                   <div class="govuk-details__text">
+                                       <p class="govuk-body">
+                                           Solid wall insulation may be installed internally, inside your home, or externally, on the outside walls.
+                                       </p>
+                                   </div>
+                               </details>
+                               
+                               <p class="govuk-hint govuk-!-margin-bottom-5">
+                                   Properties of your type typically have <b>uninsulated</b> walls.
+                               </p>
+                            </text>
+                    }
+                ))
+
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+            
+        </form>
+        
+    </div>
+</div>
