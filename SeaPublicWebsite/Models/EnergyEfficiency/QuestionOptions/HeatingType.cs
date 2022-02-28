@@ -16,7 +16,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         DirectActionElectric,
         [GovUkRadioCheckboxLabelText(Text = "Heat pump")]
         HeatPump,
-        [GovUkRadioCheckboxLabelText(Text = "Other or I don't know")]
-        OtherOrDoNotKnow
+        [GovUkRadioCheckboxLabelText(Text = "Other")]
+        Other,
+        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
+        DoNotKnow,
     }
 }

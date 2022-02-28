@@ -858,7 +858,7 @@ namespace SeaPublicWebsite.Controllers
 
             var viewModel = new EmailAddressViewModel
             {
-                HasEmailAddress = string.IsNullOrEmpty(userDataModel.EmailAddress) ? HasEmailAddress.No : HasEmailAddress.Yes,
+                HasEmailAddress = userDataModel.HasEmailAddress,
                 EmailAddress = userDataModel.EmailAddress,
                 Reference = userDataModel.Reference,
                 Change = change
@@ -873,21 +873,24 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             viewModel.ParseAndValidateParameters(Request, m => m.HasEmailAddress);
-            viewModel.ParseAndValidateParameters(Request, m => m.EmailAddress);
 
             if (viewModel.HasAnyErrors())
             {
                 return View("EmailAddress", viewModel);
-            };
+            }
 
             if (viewModel.HasEmailAddress == HasEmailAddress.Yes)
             {
-                userDataModel.EmailAddress = viewModel.EmailAddress;
+                viewModel.ParseAndValidateParameters(Request, m => m.EmailAddress);
+
+                if (viewModel.HasAnyErrors())
+                {
+                    return View("EmailAddress", viewModel);
+                }
             }
-            else
-            {
-                userDataModel.EmailAddress = null;
-            }
+
+            userDataModel.HasEmailAddress = viewModel.HasEmailAddress;
+            userDataModel.EmailAddress = viewModel.HasEmailAddress == HasEmailAddress.Yes ? viewModel.EmailAddress : null;
             userDataStore.SaveUserData(userDataModel);
 
             return viewModel.Change
@@ -895,6 +898,7 @@ namespace SeaPublicWebsite.Controllers
                 : RedirectToAction("AnswerSummary", new { reference = viewModel.Reference });
         }
 
+        
         [HttpGet("answer-summary/{reference}")]
         public IActionResult AnswerSummary(string reference)
         {

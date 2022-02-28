@@ -5,8 +5,8 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class TemperatureViewModel : GovUkViewModel
     {
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Enter the temperature that you heat your home to, or choose 'Skip this question'")]
-        [GovUkValidateIntRange(Minimum = 16, Maximum = 30)]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Please enter a whole number between 16 and 30, or skip this question")]
+        [GovUkValidateIntRange(Minimum = 16, Maximum = 30, OutOfRangeErrorMessage = "Please enter a whole number between 16 and 30, or skip this question")]
         public int? Temperature { get; set; }
 
         public string Reference { get; set; }

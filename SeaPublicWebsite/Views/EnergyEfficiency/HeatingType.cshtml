@@ -42,11 +42,6 @@
                 hintOptions: new HintViewModel
                 {
                     Html = @<text>
-                               <div class="govuk-hint">
-                                   If you have more than one heating type, for example an oil boiler and
-                                   wood burning stove, select the system that you use more often,
-                                   or that is able to heat the whole home.
-                               </div>
                                <details class="govuk-details" data-module="govuk-details">
                                    <summary class="govuk-details__summary">
                                        <span class="govuk-details__summary-text">
@@ -73,7 +68,33 @@
                                        </p>
                                    </div>
                                </details>
+                               <div class="govuk-warning-text">
+                                   <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                                   <strong class="govuk-warning-text__text">
+                                       <span class="govuk-warning-text__assistive">Note</span>
+                                       If you have more than one heating type, select the system that you use more often, 
+                                       or that is able to heat the whole home. 
+                                       For example, select ‘Oil boiler’ if you have an oil boiler and wood burning stove.
+                                   </strong>
+                               </div>
                             </text>
+                },
+                itemHintOptions: new Dictionary<HeatingType?, HintViewModel>
+                {
+                    {
+                        HeatingType.LpgBoiler,
+                        new HintViewModel
+                        {
+                            Text = "You have an LPG boiler if you order gas deliveries to a tank in your garden"
+                        }
+                    },
+                    {
+                        HeatingType.DirectActionElectric,
+                        new HintViewModel
+                        {
+                            Text = "This could include electric fires, fan heaters or electric radiators"
+                        }
+                    },
                 }
             ))
 

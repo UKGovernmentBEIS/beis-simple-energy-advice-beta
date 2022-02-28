@@ -37,6 +37,8 @@ namespace SeaPublicWebsite.DataModels
         public int? NumberOfOccupants { get; set; }
         public HeatingPattern? HeatingPattern { get; set; }
         public int? Temperature { get; set; }
+        
+        public HasEmailAddress? HasEmailAddress { get; set; }
         public string EmailAddress { get; set; }
         
         public List<UserRecommendation> UserRecommendations { get; set; }

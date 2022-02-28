@@ -28,8 +28,12 @@
 
             <fieldset class="govuk-fieldset">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    How many people live in your property who are over 5 years old?
+                    How many people live in your home?
                 </legend>
+                
+                <p class="govuk-body">
+                    Count all adults and any children over 5 years old.
+                </p>
 
                 <details class="govuk-details" data-module="govuk-details">
                     <summary class="govuk-details__summary">
@@ -38,21 +42,13 @@
                         </span>
                     </summary>
                     <div class="govuk-details__text">
-                        Providing this information gives us an estimate on how much energy your household uses.
+                        This information allows us to estimate how much energy your household uses.
                     </div>
                 </details>
 
                 @(Html.GovUkTextInputFor(
                     m => m.NumberOfOccupants,
                     classes: "govuk-input--width-5",
-                    hintOptions: new HintViewModel
-                    {
-                        Html = @<text>
-                                       <div class="govuk-hint">
-                                           Enter the number of people living in your property who are over 5 years old.
-                                       </div>
-                                    </text>
-                        },
                     placeholder: "e.g. 3"
                     ))
             </fieldset>

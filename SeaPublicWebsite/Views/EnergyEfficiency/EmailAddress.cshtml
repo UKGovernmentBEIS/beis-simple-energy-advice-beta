@@ -36,6 +36,22 @@
                         IsPageHeading = true,
                     },
                 },
+                hintOptions: new HintViewModel
+                {
+                    Html = @<text>
+                               <p class="govuk-body">
+                                   Please provide us with an email address if you would like us to email you with 
+                                   a copy of the improvements this service recommends for you. 
+                               </p>
+                               <p class="govuk-body">
+                                   If you save any recommendations to your action plan, we will also send you 
+                                   a copy for you to refer to once you leave this service. 
+                               </p>
+                               <p class="govuk-body">
+                                   Your email will not be shared or used for any other purposes.
+                               </p>
+                            </text>
+                },
                 conditionalOptions: new Dictionary<HasEmailAddress?, Func<object, object>>
                 {
                     {
@@ -52,10 +68,16 @@
                     }
                 })
 
-            @(Html.GovUkButton(new ButtonViewModel
-            {
-                Text = "Continue",
-            }))
+            <div class="govuk-button-group">
+                @(Html.GovUkButton(new ButtonViewModel
+                {
+                    Text = "Continue",
+                }))
+                <a href="@Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})"
+                   class="govuk-link">
+                    Skip this question
+                </a>
+            </div>
 
         </form>
 

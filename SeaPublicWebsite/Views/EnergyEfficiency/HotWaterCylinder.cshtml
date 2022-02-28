@@ -36,8 +36,16 @@
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
                     }
+                },
+                hintOptions: new HintViewModel
+                {
+                    Html = @<text>
+                               <div class="govuk-hint">
+                                   If you have a combi boiler, you will not have a hot water cylinder.
+                               </div>
+                            </text>
                 }
-                ))
+            ))
 
             <button class="govuk-button" data-module="govuk-button">
                 Continue
@@ -48,18 +56,20 @@
     </div>
     <div class="govuk-grid-column-one-third">
         <aside class="app-related-items" role="complementary">
-            <h2 class="govuk-heading-m" id="subsection-title">What does that mean?</h2>
+            <h2 class="govuk-heading-m" id="subsection-title">
+                What is a hot water cylinder?
+            </h2>
             <p class="govuk-body-s">
                 A hot water cylinder, or hot water tank, stores hot water and is separate from your boiler. 
             </p>
             <p class="govuk-body-s">
-                If you have a combi boiler, you will not have a hot water cylinder.
+                If you have a warm tank in an airing cupboard or loft space, it’s likely this is your hot water cylinder.
             </p>
-            <img src="/assets/images/hot-water-tank.png"/>
+            <img src="/assets/images/hot-water-tank.png" style="max-width: 100%"/>
             <p class="govuk-body-s">
                 Image above is of a typical domestic hot water cylinder. 
                 It is a large round cylinder with pipes attached at multiple places. 
-                It is a separate device from the boiler.
+                It is separate from the boiler.
             </p>
         </aside>
     </div>

@@ -21,37 +21,14 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-l">Check your answers</h1>
-    <div class="govuk-hint">
-        Please review the information we have gathered. You can still change your answers if anything looks wrong.
-    </div>
+        <h1 class="govuk-heading-l">
+            Check your answers
+        </h1>
+        <div class="govuk-hint">
+            Please review the information we have gathered. You can still change your answers if anything looks wrong.
+        </div>
+    
         <dl class="govuk-summary-list">
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half">
-                    Country
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
-                    @(Model.Country?.GetCheckboxLabelText())
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("Country_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
-                        Change<span class="govuk-visually-hidden"> country</span>
-                    </a>
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half">
-                    Do you own your home?
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
-                    @(Model.OwnershipStatus?.GetCheckboxLabelText())
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("OwnershipStatus_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
-                        Change<span class="govuk-visually-hidden"> circumstances</span>
-                    </a>
-                </dd>
-            </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key govuk-!-width-one-half">
                     Building type
