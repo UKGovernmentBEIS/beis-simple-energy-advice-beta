@@ -1,0 +1,96 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
+@model SeaPublicWebsite.Models.EnergyEfficiency.FloorInsulatedViewModel
+@{
+    ViewBag.Title = "Floor Insulated";
+}
+
+@section BeforeMain {
+    @Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = Model.Change
+            ? @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
+            : @Url.Action("FloorConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = false
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        
+        <form action="@Url.Action("FloorInsulated_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
+            
+            @(Html.HiddenFor(m => m.YearBuilt))
+            
+            @(Html.GovUkRadiosFor(m => m.FloorInsulated,
+                fieldsetOptions: new FieldsetViewModel
+                {
+                    Legend = new LegendViewModel
+                    {
+                        Html = @<text>
+                                   <h1 class="govuk-fieldset__heading">
+                                       Is your ground floor insulated?
+                                   </h1>
+                                </text>,
+                        Classes = "govuk-fieldset__legend--l"
+                    }
+                },
+                new HintViewModel
+                {
+                    Html = @<text>
+                               <p class="govuk-body">
+                                   Properties built before 1996 typically have uninsulated floors, unless you or a previous owner has installed floor insulation.
+                               </p>
+                               <details class="govuk-details govuk-!-margin-bottom-3" data-module="govuk-details">
+                                   <summary class="govuk-details__summary">
+                                       <span class="govuk-details__summary-text">
+                                           Help me to answer this question
+                                       </span>
+                                   </summary>
+                                   <div class="govuk-details__text">
+                                       <p class="govuk-body">
+                                           A solid floor may be insulated by laying insulation on top or underneath a new floor. 
+                                           If you’ve had to replace the ground floor, it’s likely insulated in order to comply with Building Regulations. 
+                                       </p>
+                                       <p class="govuk-body">
+                                           A suspended timber floor can be insulated by lifting the floorboards and laying mineral wool 
+                                           insulation supported by netting between the joists, or cutting rigid insulation boards to size. 
+                                           It is possible done from below if there’s enough access to the cellar or crawl space. 
+                                           Suspended timber floors were rarely built with insulation, so this would need to have been installed after.
+                                       </p>
+                                   </div>
+                               </details>
+                               
+                               @if (Model.YearBuilt.HasValue)
+                               {
+                                   <div class="govuk-hint govuk-!-margin-bottom-5">
+                                       Properties of your type typically 
+                                       @if (Model.YearBuilt.Value < 1996)
+                                       {
+                                           <b>do not have an insulated</b>
+                                       }
+                                       else
+                                       {
+                                           <b>have an insulated</b>
+                                       }
+                                       ground floor.
+                                   </div>
+                               }
+                            </text>
+                }
+                ))
+
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+            
+        </form>
+        
+    </div>
+</div>

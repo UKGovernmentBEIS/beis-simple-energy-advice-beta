@@ -506,18 +506,110 @@ namespace SeaPublicWebsite.Controllers
             {
                 return RedirectToAction("AnswerSummary", "EnergyEfficiency", new { reference = viewModel.Reference });
             }
-            else if (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette
-                     && (userDataModel.FlatType == FlatType.GroundFloor || userDataModel.FlatType == FlatType.MiddleFloor))
+            else if (userDataModel.PropertyType == PropertyType.House ||
+                     userDataModel.PropertyType == PropertyType.Bungalow ||
+                     (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.GroundFloor))
             {
-                return RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference });
+                return RedirectToAction("FloorConstruction_Get", new { reference = viewModel.Reference });
+            }
+            else if (userDataModel.PropertyType == PropertyType.House ||
+                     userDataModel.PropertyType == PropertyType.Bungalow ||
+                     (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.TopFloor))
+            {
+                return RedirectToAction("RoofConstruction_Get", new { reference = viewModel.Reference });
             }
             else
             {
-                return RedirectToAction("RoofConstruction_Get", new { reference = viewModel.Reference });
+                return RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference });
             }
         }
 
 
+        [HttpGet("floor-construction/{reference}")]
+        public IActionResult FloorConstruction_Get(string reference, bool change = false)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new FloorConstructionViewModel
+            {
+                FloorConstruction = userDataModel.FloorConstruction,
+                YearBuilt = userDataModel.YearBuilt,
+                Reference = userDataModel.Reference,
+                Change = change
+            };
+
+            return View("FloorConstruction", viewModel);
+        }
+
+        [HttpPost("floor-construction/{reference}")]
+        public IActionResult FloorConstruction_Post(FloorConstructionViewModel viewModel)
+        {
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.FloorConstruction);
+
+            if (viewModel.HasAnyErrors())
+            {
+                return View("FloorConstruction", viewModel);
+            }
+
+            userDataModel.FloorConstruction = viewModel.FloorConstruction;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("FloorInsulated_Get", new {reference = viewModel.Reference});
+        }
+
+        
+        [HttpGet("floor-insulated/{reference}")]
+        public IActionResult FloorInsulated_Get(string reference, bool change = false)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new FloorInsulatedViewModel
+            {
+                FloorInsulated = userDataModel.FloorInsulated,
+                YearBuilt = userDataModel.YearBuilt,
+                Reference = userDataModel.Reference,
+                Change = change
+            };
+
+            return View("FloorInsulated", viewModel);
+        }
+
+        [HttpPost("floor-insulated/{reference}")]
+        public IActionResult FloorInsulated_Post(FloorInsulatedViewModel viewModel)
+        {
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
+            viewModel.ParseAndValidateParameters(Request, m => m.FloorInsulated);
+
+            if (viewModel.HasAnyErrors())
+            {
+                return View("FloorInsulated", viewModel);
+            }
+
+            userDataModel.FloorInsulated = viewModel.FloorInsulated;
+            userDataStore.SaveUserData(userDataModel);
+            
+            if (viewModel.Change)
+            {
+                return RedirectToAction("AnswerSummary", "EnergyEfficiency", new { reference = viewModel.Reference });
+            }
+            else if (userDataModel.PropertyType == PropertyType.House ||
+                     userDataModel.PropertyType == PropertyType.Bungalow ||
+                     (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.TopFloor))
+            {
+                return RedirectToAction("RoofConstruction_Get", new { reference = viewModel.Reference });
+            }
+            else
+            {
+                return RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference });
+            }
+        }
+
+        
         [HttpGet("roof-construction/{reference}")]
         public IActionResult RoofConstruction_Get(string reference, bool change = false)
         {
@@ -525,6 +617,8 @@ namespace SeaPublicWebsite.Controllers
             
             var viewModel = new RoofConstructionViewModel
             {
+                PropertyType = userDataModel.PropertyType,
+                FlatType = userDataModel.FlatType,
                 RoofConstruction = userDataModel.RoofConstruction,
                 Reference = userDataModel.Reference,
                 Change = change

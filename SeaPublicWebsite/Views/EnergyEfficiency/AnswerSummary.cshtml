@@ -87,6 +87,36 @@
                 </dd>
             </div>
             
+            @if (Model.PropertyType != PropertyType.ApartmentFlatOrMaisonette || Model.FlatType == FlatType.GroundFloor)
+            {
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                        Floor construction 
+                    </dt>
+                    <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                        @(Model.FloorConstruction?.GetCheckboxLabelText())
+                    </dd>
+                    <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                        <a class="govuk-link" href="@Url.Action("FloorConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                            Change<span class="govuk-visually-hidden"> floor construction</span>
+                        </a>
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                        Is your groud floor insulated?
+                    </dt>
+                    <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                        @(Model.FloorInsulated?.GetCheckboxLabelText())
+                    </dd>
+                    <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                        <a class="govuk-link" href="@Url.Action("FloorInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                            Change<span class="govuk-visually-hidden"> is floor insulated</span>
+                        </a>
+                    </dd>
+                </div>
+            }
+
             @if (Model.PropertyType != PropertyType.ApartmentFlatOrMaisonette || Model.FlatType == FlatType.TopFloor)
             {
                 <div class="govuk-summary-list__row">

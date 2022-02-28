@@ -27,6 +27,8 @@ namespace SeaPublicWebsite.DataModels
         
         public WallConstruction? WallConstruction { get; set; }
         public WallsInsulated? WallsInsulated { get; set; }
+        public FloorConstruction? FloorConstruction { get; set; }
+        public FloorInsulated? FloorInsulated { get; set; }
         public RoofConstruction? RoofConstruction { get; set; }
         public RoofInsulated? RoofInsulated { get; set; }
         public HasOutdoorSpace? HasOutdoorSpace { get; set; }
