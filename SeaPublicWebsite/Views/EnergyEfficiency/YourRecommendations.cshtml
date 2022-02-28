@@ -17,17 +17,11 @@
     })
 }
 
-<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel govuk-!-margin-bottom-9  govuk-!-text-align-left">
-    <span class="govuk-caption-l">Your goal</span>
-    <h1 class="govuk-panel__title govuk-!-margin-bottom-3">
-        To reduce my energy bills
-    </h1>
-    <a href="@Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})" class="govuk-link govuk-link--inverse">Change my answers</a>
-</div>
-
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-xl">You may be able to make some improvements to your home</h1>
+        <h1 class="govuk-heading-xl">
+            You may be able to make some improvements to your home
+        </h1>
         <p class="govuk-body">
             Based on the information you’ve given us, there may be some changes a qualified
             installer could make to your home to reduce the amount of energy it needs to use.
@@ -59,6 +53,29 @@
                 They may not be the same as the costs and savings you see in practice, as every property is unique.
             </p>
         </div>
+        
+        <h2 class="govuk-heading-m">
+            Getting back to the service once you leave
+        </h2>
+        <p class="govuk-body">
+            You will need a reference number to return to your recommendations and action plan quickly if you leave the service.
+        </p>
+        <p class="govuk-body">
+            If you have provided your email address, you should have receieved an email with a copy of this reference number. 
+        </p>
+
+        <aside class="sea-user-reference govuk-!-margin-bottom-6" role="complementary">
+            <span class="govuk-caption-l">Your reference</span>
+            <h2 class="govuk-heading-l" id="subsection-title">@Model.Reference</h2>
+            
+            <div class="govuk-warning-text">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                    <span class="govuk-warning-text__assistive">Note</span>
+                    If you have not provided an email address, you should write down this reference number
+                </strong>
+            </div>
+        </aside>
 
         <a href="@Url.Action("Recommendation_Get", "EnergyEfficiency", new {id = Model.FirstReferenceId, reference = Model.Reference})" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
             Explore recommendations
@@ -68,13 +85,5 @@
         </a>
     </div>
     <div class="govuk-grid-column-one-third">
-        <aside class="sea-user-reference" role="complementary">
-            <span class="govuk-caption-l">Your reference</span>
-            <h2 class="govuk-heading-m" id="subsection-title">@Model.Reference</h2>
-            <p class="govuk-body-s">
-                Your reference allows you to get back to your recommendations quickly if you visit
-                the service again at a later date.
-            </p>
-        </aside>
     </div>
 </div>
