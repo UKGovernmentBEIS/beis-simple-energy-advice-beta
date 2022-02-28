@@ -13,5 +13,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         
         public int? YearBuilt { get; set; }
         public bool Change { get; set; }
+        public WallConstruction? WallConstruction { get; set; }
     }
 }

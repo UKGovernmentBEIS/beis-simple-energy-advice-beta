@@ -478,6 +478,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new WallsInsulatedViewModel
             {
                 WallsInsulated = userDataModel.WallsInsulated,
+                WallConstruction = userDataModel.WallConstruction,
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
                 Change = change
@@ -882,12 +883,10 @@ namespace SeaPublicWebsite.Controllers
             if (viewModel.HasEmailAddress == HasEmailAddress.Yes)
             {
                 userDataModel.EmailAddress = viewModel.EmailAddress;
-                userDataStore.SaveUserData(userDataModel);
             }
             else
             {
                 userDataModel.EmailAddress = null;
-
             }
             userDataStore.SaveUserData(userDataModel);
 

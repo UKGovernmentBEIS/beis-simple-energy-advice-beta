@@ -57,10 +57,12 @@
                         Roughly what year was your property built?
                     </legend>
 
-                    <div class="govuk-body">
-                        If you’re not sure when the property was built, but know the era, input any date in that period, 
-                        for example 1890, 1935 or 1970. 
-                    </div>
+                    <p class="govuk-body">
+                        If you’re not sure when the property was built but know the era, input any date in that period. For example, Victorian 1890.  
+                    </p>
+                    <p class="govuk-body">
+                        If you don’t know, you can skip this question. We will take a best guess based on other information you provide.
+                    </p>
 
                     <details class="govuk-details" data-module="govuk-details">
                         <summary class="govuk-details__summary">
@@ -69,11 +71,6 @@
                             </span>
                         </summary>
                         <div class="govuk-details__text">
-                            <p class="govuk-body">
-                                If you’re not sure when the property was built, but know the era, for example you know
-                                it's Victorian, Inter-war or was built in the 1970s, input any date in that period,
-                                for example 1890, 1935 or 1970.
-                            </p>
                             <p class="govuk-body">
                                 You may find information about the age of the property in title deeds or other
                                 paperwork you received when you bought your home.
@@ -92,7 +89,7 @@
                         {
                             Html = @<text>
                                        <div class="govuk-hint">
-                                           Enter the year your property was built. This does not have to be exact.
+                                           Enter the year your property was built, approximately. It does not have to be exact.
                                        </div>
                                     </text>
                         },
@@ -108,7 +105,7 @@
                 }))
                 <a href="@Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference})"
                    class="govuk-link">
-                    I don't know
+                    Skip this question
                 </a>
             </div>
 

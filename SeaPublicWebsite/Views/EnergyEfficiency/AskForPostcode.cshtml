@@ -31,6 +31,10 @@
                     </h1>
                 </legend>
 
+                <div class="govuk-hint">
+                    You don’t need to provide this, but it could reduce the number of questions we need to ask.
+                </div>
+                
                 <details class="govuk-details" data-module="govuk-details">
                     <summary class="govuk-details__summary">
                         <span class="govuk-details__summary-text">
@@ -39,7 +43,6 @@
                     </summary>
                     <div class="govuk-details__text">
                         Your address may allow us to access information stored about the building that answers some of our questions about its energy performance.
-                        You don’t need to provide this, but it could reduce the number of questions we need to ask.
                     </div>
                 </details>
                 
@@ -47,7 +50,7 @@
                     m => m.HouseNameOrNumber,
                     labelOptions: new LabelViewModel
                     {
-                        Text = "Door number or building name",
+                        Text = "Building number or name",
                     },
                     classes: "govuk-input--width-10",
                     formGroupOptions: new FormGroupViewModel

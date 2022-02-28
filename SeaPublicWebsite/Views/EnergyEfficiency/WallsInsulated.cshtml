@@ -24,6 +24,8 @@
         
         <form action="@Url.Action("WallsInsulated_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
+            @(Html.HiddenFor(m => m.WallConstruction))
+            
             @(Html.GovUkRadiosFor(m => m.WallsInsulated,
                 fieldsetOptions: new FieldsetViewModel
                 {
@@ -31,7 +33,7 @@
                     {
                         Html = @<text>
                                    <h1 class="govuk-fieldset__heading">
-                                       Are your walls fully insulated?
+                                       Are your walls insulated?
                                    </h1>
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
