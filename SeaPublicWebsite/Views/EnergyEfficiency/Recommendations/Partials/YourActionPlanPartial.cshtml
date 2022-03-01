@@ -22,18 +22,18 @@
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key govuk-!-width-one-half govuk-!-margin-bottom-0 govuk-body-s">
-                    @(Model.GetSavedRecommendations().Count == 1 ? "It could cost" : "They could cost")
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-half govuk-!-padding-right-0 govuk-body-s govuk-!-text-align-right">
-                    @Model.GetTotalInstallationCostText()
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half govuk-!-margin-bottom-0 govuk-body-s">
                     You could save
                 </dt>
                 <dd class="govuk-summary-list__value govuk-!-width-one-half govuk-!-padding-right-0 govuk-body-s govuk-!-text-align-right">
                     @Model.GetTotalSavingText()
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key govuk-!-width-one-half govuk-!-margin-bottom-0 govuk-body-s">
+                    @(Model.GetSavedRecommendations().Count == 1 ? "It could cost" : "They could cost")
+                </dt>
+                <dd class="govuk-summary-list__value govuk-!-width-one-half govuk-!-padding-right-0 govuk-body-s govuk-!-text-align-right">
+                    @Model.GetTotalInstallationCostText()
                 </dd>
             </div>
         </dl>
