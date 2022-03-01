@@ -6,6 +6,18 @@
     ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.UserDataModel.UserRecommendations.Count;
 }
 
+@section BeforeMain {
+    @Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = "#",
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = true
+    })
+}
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
         @{ await Html.RenderPartialAsync("Partials/YourActionPlanPartial.cshtml", Model); }
