@@ -8,22 +8,15 @@
     ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.UserDataModel.UserRecommendations.Count;
 }
 
-<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel govuk-!-margin-bottom-9">
-    <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds govuk-!-text-align-left">
-            <span class="govuk-caption-l">Your goal</span>
-            <h1 class="govuk-panel__title">
-                To reduce my energy bills
-            </h1>
-            <a href="@Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference})" class="govuk-link govuk-link--inverse sea-change-answers-link">Change my answers</a>
-        </div>
-        <div class="govuk-grid-column-one-third govuk-!-text-align-right govuk-!-padding-left-0">
-            <p class="govuk-body-l sea-reference govuk-!-margin-bottom-0">Your reference <strong>@Model.UserDataModel.Reference</strong></p>
-        </div>
-    </div>
-</div>
 <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+        @{ await Html.RenderPartialAsync("Partials/YourActionPlanPartial.cshtml", Model); }
+    </div>
+    
     <div class="govuk-grid-column-two-thirds">
+
+        @(Html.GovUkErrorSummary())
+        
         <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.UserRecommendation.Key, reference = Model.UserDataModel.Reference})" method="post" novalidate>
             @Html.HiddenFor(m => m.UserDataModel.Reference)
 
@@ -39,9 +32,8 @@
             </p>
 
             <p class="govuk-body">
-                The fuel bill savings from replacing windows are unlikely to pay back the
-                full installation cost, but there are other benefits such as reduced
-                maintenance and better sound proofing that may affect your decision.
+                The fuel bill savings from replacing windows are unlikely to pay back the full installation cost, 
+                but there are other benefits such as reduced maintenance and better sound proofing that may affect your decision.
             </p>
 
             <p class="govuk-body govuk-!-margin-bottom-6">
@@ -69,17 +61,18 @@
                 </li>
             </ul>
 
-            <h2 class="govuk-heading-m ">What you could save</h2>
-            <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-bottom-7 govuk-!-margin-top-6">
-                <div class="govuk-grid-column-one-half sea-install-costs">
-                    <span class="govuk-caption-m">This could cost</span>
-                    <h3 class="govuk-heading-l govuk-!-margin-bottom-1">£@Model.UserRecommendation.MinInstallCost - £@Model.UserRecommendation.MaxInstallCost</h3>
-                </div>
-                <div class="govuk-grid-column-one-half sea-yearly-savings">
-                    <span class="govuk-caption-m">This could save up to</span>
-                    <h3 class="govuk-heading-l govuk-!-margin-bottom-1">£@Model.UserRecommendation.Saving a year</h3>
-                </div>
+            @{ await Html.RenderPartialAsync("Partials/WhatYouCouldSavePartial.cshtml", Model); }
+            
+            <div class="govuk-warning-text">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                    <span class="govuk-warning-text__assistive">Note</span>
+                    These figures are for a typical installation in a home like yours. 
+                    The costs and savings you experience will be affected by your circumstances, 
+                    the details of the installations, and future energy tariffs.
+                </strong>
             </div>
+
             <dl class="govuk-summary-list govuk-!-margin-bottom-9">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
@@ -113,102 +106,12 @@
                     }
                 }
                 ))
-            <div class="govuk-grid-row">
-                <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
-                <div class="govuk-button-group govuk-grid-column-full">
-                    <div class="govuk-grid-column-one-half govuk-!-padding-left-0">
-                        @if (Model.HasPreviousIndex())
-                        {
-                            <button name="command" value="goBackwards" class="sea-nav-button sea-previous-recommendation govuk-!-width-full govuk-!-margin-0 govuk-!-text-align-left">
-                                <span class="sea-nav-button-caption govuk-body govuk-!-padding-bottom-0">
-                                    Go back to
-                                </span>
-                                <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0">
-                                    Recommendation @(Model.GetCurrentIndex())
-                                </span>
-                                <svg class="sea-nav-button-left" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M18.5 34.8288C27.8198 34.8288 35.375 27.2943 35.375 18C35.375 8.70566 27.8198 1.17114 18.5 1.17114C9.18019 1.17114 1.625 8.70566 1.625 18C1.625 27.2943 9.18019 34.8288 18.5 34.8288Z" stroke="black" stroke-width="2" stroke-miterlimit="10"/>
-                                    <path d="M17.4277 23.9425L11.4688 17.9998L17.4277 12.0571" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M11.4688 18H25.5312" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                        }
-                    </div>
-                    <div class="govuk-grid-column-one-half govuk-!-padding-right-0">
-                        @if (Model.HasNextIndex())
-                        {
-                            <button name="command" value="goForwards" class="sea-nav-button sea-next-recommendation govuk-!-width-full govuk-!-padding-right-0 govuk-!-text-align-right">
-                                <span class="sea-nav-button-caption govuk-body govuk-!-padding-bottom-0">
-                                    Continue to
-                                </span>
-                                <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0">
-                                    Recommendation @(Model.GetCurrentIndex() + 2)
-                                </span>
-                                <svg class="sea-nav-button-right" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M18.5 34.875C27.8198 34.875 35.375 27.3198 35.375 18C35.375 8.68019 27.8198 1.125 18.5 1.125C9.18019 1.125 1.625 8.68019 1.625 18C1.625 27.3198 9.18019 34.875 18.5 34.875Z" stroke="black" stroke-width="2" stroke-miterlimit="10"/>
-                                    <path d="M19.5723 23.959L25.5312 18L19.5723 12.041" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M11.4688 18H25.5312" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                        }
-                        else
-                        {
-                            <button name="command" value="goToActionPlan" class="sea-nav-button sea-go-to-plan govuk-!-width-full govuk-!-text-align-right">
-                                <span class="sea-nav-button-caption govuk-body govuk-!-padding-bottom-0">
-                                    Continue to
-                                </span>
-                                <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0">
-                                    Action plan
-                                </span>
-                                <svg class="sea-nav-button-right" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M18.5 34.875C27.8198 34.875 35.375 27.3198 35.375 18C35.375 8.68019 27.8198 1.125 18.5 1.125C9.18019 1.125 1.625 8.68019 1.625 18C1.625 27.3198 9.18019 34.875 18.5 34.875Z" stroke="black" stroke-width="2" stroke-miterlimit="10"/>
-                                    <path d="M19.5723 23.959L25.5312 18L19.5723 12.041" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M11.4688 18H25.5312" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                        }
-                    </div>
-                </div>
-            </div>
+            
+            @{ await Html.RenderPartialAsync("Partials/KeepACopyPartial.cshtml"); }
+        
+            @{ await Html.RenderPartialAsync("Partials/ActionButtonsPartial.cshtml"); }
+
         </form>
-    </div>
-    <div class="govuk-grid-column-one-third">
-        <aside class="sea-recommendation-side-panel" role="complementary">
-            <h2 class="govuk-heading-m" id="subsection-title">Keep a copy</h2>
-            <p class="govuk-body-s">
-                <a href=# class="govuk-link">Print or email this recommendation</a>
-            </p>
-            <h2 class="govuk-heading-m" id="subsection-title">Your action plan</h2>
-            @if (Model.GetSavedRecommendations().Count > 0)
-            {
-                <p class="govuk-body-s">
-                    You have saved <strong>@Model.GetSavedRecommendations().Count</strong> recommended 
-                    @(Model.GetSavedRecommendations().Count == 1 ? "improvement" : "improvements").
-                </p>
-                <dl class="govuk-summary-list">
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key govuk-!-width-one-half govuk-!-margin-bottom-0">
-                            @(Model.GetSavedRecommendations().Count == 1 ? "It could cost" : "They could cost")
-                        </dt>
-                        <dd class="govuk-summary-list__value govuk-!-width-one-half govuk-!-padding-right-0">
-                            @Model.GetTotalInstallationCostText()
-                        </dd>
-                    </div>
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key govuk-!-width-one-half govuk-!-margin-bottom-0">
-                            You could save
-                        </dt>
-                        <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                            @Model.GetTotalSavingText()
-                        </dd>
-                    </div>
-                </dl>
-                <a href="@Url.Action("YourSavedRecommendations_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference})" class="govuk-link">View your action plan</a>
-            }
-            else
-            {
-                <p class="govuk-body-s">You haven’t saved any improvements yet.</p>
-            }
-        </aside>
+        
     </div>
 </div>

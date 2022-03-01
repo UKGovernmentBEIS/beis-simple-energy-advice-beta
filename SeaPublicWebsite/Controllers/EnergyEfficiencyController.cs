@@ -1164,9 +1164,9 @@ namespace SeaPublicWebsite.Controllers
                         new {id = (int) viewModel.PreviousRecommendationKey(), reference = userDataModel.Reference});
                 case "goToActionPlan":
                     return RedirectToAction("YourSavedRecommendations_Get", new {reference = userDataModel.Reference});
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-
-            return View("Recommendation", viewModel);
         }
 
         [HttpGet("your-saved-recommendations/{reference}")]

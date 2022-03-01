@@ -7,35 +7,31 @@
     ViewBag.Title = "Your action plan";
 }
 
-<div class="govuk-panel govuk-panel--confirmation sea-recommendations-panel govuk-!-margin-bottom-9">
-    <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds govuk-!-text-align-left">
-            <span class="govuk-caption-l">Your goal</span>
-            <h1 class="govuk-panel__title">
-                To reduce my energy bills
-            </h1>
-            <a href="@Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference})" class="govuk-link govuk-link--inverse sea-change-answers-link">Change my answers</a>
-        </div>
-        <div class="govuk-grid-column-one-third govuk-!-text-align-right govuk-!-padding-left-0">
-            <p class="govuk-body-l sea-reference govuk-!-margin-bottom-0">Your reference <strong>@Model.UserDataModel.Reference</strong></p>
-        </div>
-    </div>
-</div>
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
         <h1 class="govuk-heading-xl govuk-!-margin-bottom-5">Your action plan</h1>
         <p class="govuk-body govuk-!-margin-bottom-6">
             If you went ahead with all the recommendations you have chosen, this is the impact it could have:
         </p>
 
-        <div class="govuk-!-padding-left-4 sea-total-installation-cost">
-            <span class="govuk-caption-m">Together, these improvements could cost</span>
-            <h3 class="govuk-heading-l">@Model.GetTotalInstallationCostText()</h3>
-        </div>
         <div class="govuk-!-padding-left-4 sea-total-savings govuk-!-margin-bottom-6">
             <span class="govuk-caption-m">You could save up to</span>
             <h3 class="govuk-heading-l sea-total-savings-text">@Model.GetTotalSavingText()</h3>
+        </div>
+        <div class="govuk-grid-row govuk-!-margin-bottom-4">
+            <div class="govuk-grid-column-one-half">
+                <div class="govuk-!-padding-left-4 sea-total-installation-cost">
+                    <span class="govuk-caption-m">Together, these improvements could cost</span>
+                    <h3 class="govuk-heading-l">@Model.GetTotalInstallationCostText()</h3>
+                </div>
+            </div>
+            <div class="govuk-grid-column-one-half">
+                <div class="govuk-inset-text govuk-!-margin-0 govuk-!-padding-top-1  govuk-!-padding-bottom-1">
+                    You may be able to apply for grants to help with the cost of fitting some or all of these improvements.
+                    See Next Steps for details.
+                </div>
+            </div>
         </div>
 
         <details class="govuk-details govuk-!-margin-bottom-7" data-module="govuk-details">
@@ -53,10 +49,6 @@
             </div>
         </details>
 
-        <div class="govuk-inset-text">
-            You may be able to apply for grants to help with the cost of fitting some or all of these improvements.
-            See Next Steps for details.
-        </div>
 
         @if (Model.GetSavedRecommendations().Count > 0)
         {
@@ -64,27 +56,45 @@
                 <thead class="govuk-table__head">
                 <tr class="govuk-table__row">
                     <th scope="col" class="govuk-table__header"></th>
-                    <th scope="col" class="govuk-table__header">Typical costs</th>
                     <th scope="col" class="govuk-table__header">Typical savings per year</th>
-                    <th scope="col" class="govuk-table__header"></th>
+                    <th scope="col" class="govuk-table__header">Typical costs</th>
+                    <th scope="col" class="govuk-table__header sea-saved-recommendations-table-headers"></th>
+                    <th scope="col" class="govuk-table__header sea-saved-recommendations-table-headers"></th>
                 </tr>
                 </thead>
                 <tbody class="govuk-table__body">
                 @foreach (UserRecommendation recommendation in @Model.GetSavedRecommendations())
                 {
                     <tr class="govuk-table__row">
-                        <td class="govuk-table__cell govuk-!-padding-top-4">
-                            <p class="govuk-body-l govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
-                                <a class="govuk-link" href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})>@(recommendation.Title)</a>
+                        <td class="govuk-table__cell govuk-!-padding-top-4 sea-saved-recommendations-table-headers">
+                            <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
+                                @(recommendation.Title)
                             </p>
-                            <p class="govuk-body govuk-!-margin-bottom-0">
+                            <p class="govuk-body-s govuk-!-margin-bottom-0">
                                 @(recommendation.Summary)
                             </p>
                         </td>
-                        <td class="govuk-table__cell govuk-!-padding-top-4">@Model.GetInstallationCostText(recommendation)</td>
-                        <td class="govuk-table__cell govuk-!-padding-top-4">@Model.GetSavingText(recommendation)</td>
-                        <td class="govuk-table__cell govuk-!-padding-top-4">
-                            <a href="@Url.Action("RemoveFromPlan_Get", "EnergyEfficiency", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})" class="govuk-link">Discard</a>
+                        <td class="govuk-table__cell govuk-!-padding-top-4 sea-saved-recommendations-table-headers">@Model.GetSavingText(recommendation)</td>
+                        <td class="govuk-table__cell govuk-!-padding-top-4 sea-saved-recommendations-table-headers">@Model.GetInstallationCostText(recommendation)</td>
+                        <td class="govuk-table__cell govuk-!-padding-top-4 sea-saved-recommendations-table-headers-hide">
+                            <a class="govuk-link" href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})>
+                                View information again
+                            </a>
+                        </td>
+                        <td class="govuk-table__cell govuk-!-padding-top-4 sea-saved-recommendations-table-headers-hide">
+                            <a href="@Url.Action("RemoveFromPlan_Get", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})" class="govuk-link">Discard</a>
+                        </td>
+                    </tr>
+                    <tr class="govuk-table__row sea-saved-recommendations-secondary-row">
+                        <td colspan="3" class="govuk-table__cell">
+                            <a href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})
+                               class="govuk-link govuk-!-margin-right-3">
+                                View information again
+                            </a>
+                            <a href="@Url.Action("RemoveFromPlan_Get", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})"
+                               class="govuk-link">
+                                Discard
+                            </a>
                         </td>
                     </tr>
                 }
@@ -101,16 +111,28 @@
                 {
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            <p class="govuk-body-l govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
-                                <a class="govuk-link" href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})>@(recommendation.Title)</a>
+                            <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
+                                @(recommendation.Title)
                             </p>
-                            <p class="govuk-body govuk-!-margin-bottom-0">
+                            <p class="govuk-body-s govuk-!-margin-bottom-0">
                                 @(recommendation.Summary)
                             </p>
                         </dt>
                         <dd class="govuk-summary-list__actions govuk-!-margin-bottom-2">
-                            <a href="@Url.Action("AddToPlan_Get", "EnergyEfficiency", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})" class="govuk-link govuk-!-margin-right-3">Add to action plan</a>
-                            <a href="@Url.Action("RemoveFromPlan_Get", "EnergyEfficiency", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})" class="govuk-link">Discard</a>
+                            <div class="sea-decide-later-action-links">
+                                <a href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})
+                                   class="govuk-link">
+                                    View information again
+                                </a>
+                                <a href="@Url.Action("AddToPlan_Get", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})"
+                                   class="govuk-link">
+                                    Add to action plan
+                                </a>
+                                <a href="@Url.Action("RemoveFromPlan_Get", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})"
+                                   class="govuk-link">
+                                    Discard
+                                </a>
+                            </div>
                         </dd>
                     </div>
                 }
@@ -119,48 +141,28 @@
         <details class="govuk-details govuk-!-margin-bottom-7" data-module="govuk-details">
             <summary class="govuk-details__summary">
                 <span class="govuk-details__summary-text">
-                    What recommendations were not suitable for your home
+                    Think something’s missing?
                 </span>
             </summary>
             <div class="govuk-details__text">
-                If you are interested, you can <a class="govuk-link">view a full breakdown of the recommendations that we determined to be unsuitable for your home.</a>
+                <p class="govuk-body">
+                    Based on the answers you provided earlier, we were able to rule out some improvements that are unlikely to be suitable for your home. 
+                </p>
+                <p class="govuk-body">
+                    If you are interested, you can 
+                    <a href="javascript:void(0);" class="govuk-link">
+                        view the recommendations that we decided were not suitable for your home.
+                    </a>
+                </p>
             </div>
         </details>
-
-        <h2 class="govuk-heading-m">Find out more about saving energy</h2>
-        <p class="govuk-body govuk-!-margin-bottom-9 govuk-!-padding-bottom-4">
-            You can visit the
-            <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/">Energy Saving Trust website <span class="govuk-visually-hidden">(opens in a new window)</span></a>
-            for more information on other ways you can improve your energy efficiency to reduce your bills.
-        </p>
-        <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
-        <a href="@Url.Action("Recommendation_Get", "EnergyEfficiency", new {id = (int) Model.UserDataModel.UserRecommendations[0].Key, reference = Model.UserDataModel.Reference})" role="button" draggable="false"  class="sea-nav-button sea-first-recommendation govuk-heading-m govuk-!-width-full govuk-!-text-align-left">
-            <span class="sea-nav-button-caption govuk-body govuk-!-padding-bottom-0">
-                Start again at
-            </span>
-            <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0">
-                Recommendation 1
-            </span>
-            <svg class="sea-nav-button-left" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18.5 34.8288C27.8198 34.8288 35.375 27.2943 35.375 18C35.375 8.70566 27.8198 1.17114 18.5 1.17114C9.18019 1.17114 1.625 8.70566 1.625 18C1.625 27.2943 9.18019 34.8288 18.5 34.8288Z" stroke="black" stroke-width="2" stroke-miterlimit="10"/>
-                <path d="M17.4277 23.9425L11.4688 17.9998L17.4277 12.0571" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M11.4688 18H25.5312" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </a>
     </div>
-    <div class="govuk-grid-column-one-third">
-        <aside class="sea-user-reference" role="complementary">
-            <span class="govuk-caption-l">Your reference</span>
-            <h2 class="govuk-heading-m" id="subsection-title">@Model.UserDataModel.Reference</h2>
-            <p class="govuk-body-s">
-                Your reference allows you to get back to your recommendations quickly if you visit
-                the service again at a later date.
-            </p>
-        </aside>
+    
+    <div class="govuk-grid-column-full">
         <div class="govuk-notification-banner  sea-next-steps" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
             <div class="govuk-notification-banner__header govuk-!-padding-top-4 govuk-!-padding-bottom-4">
-                <h2 class="govuk-notification-banner__title govuk-heading-m" id="govuk-notification-banner-title">
-                    Next steps
+                <h2 class="govuk-notification-banner__title govuk-heading-l govuk-!-font-size-27" id="govuk-notification-banner-title">
+                    What you can do next
                 </h2>
             </div>
             <div class="govuk-notification-banner__content">
@@ -169,18 +171,9 @@
                         <li class="sea-step">
                             <div class="content">
                                 <h3 class="govuk-heading-s">Print or email your action plan</h3>
-                                <p class="govuk-body-s">Keep a copy of your action plan to refer back to or show to a qualified installer when you’re ready to get a quote. </p>
-                                <p class="govuk-body-s">
-                                    <a href="#" class="govuk-link">Print or email your action plan</a>
-                                </p>
-                            </div>
-                        </li>
-                        <li class="sea-step">
-                            <div class="content">
-                                <h3 class="govuk-heading-s">Check for grants</h3>
-                                <p class="govuk-body-s">There may be grants available to help towards the cost of some or all of the improvements.</p>
-                                <p class="govuk-body-s">
-                                    <a href="#" class="govuk-link">Check if you are eligible for a grant</a>
+                                <p class="govuk-body-s">Keep a copy of your action plan to refer to or show to a qualified installer when you’re ready to get a quote. </p>
+                                <p class="govuk-body-s govuk-!-padding-bottom-4">
+                                    <a href="javascript:void(0);" class="govuk-link">Print or email your action plan</a>
                                 </p>
                             </div>
                         </li>
@@ -190,7 +183,17 @@
                                 <p class="govuk-body-s">We recommend speaking to qualified installers about making changes to your property.</p>
                                 <p class="govuk-body-s">You can get help finding a qualified installer in your area by visiting the TrustMark website.</p>
                                 <p class="govuk-body-s govuk-!-padding-bottom-4">
-                                    <a class="govuk-link" href="https://www.trustmark.org.uk/">Find a qualified installers on the TrustMark website</a>
+                                    <a class="govuk-link" href="https://www.trustmark.org.uk/">Find qualified installers</a>
+                                    on the TrustMark website
+                                </p>
+                            </div>
+                        </li>
+                        <li class="sea-step">
+                            <div class="content">
+                                <h3 class="govuk-heading-s">Check for grants</h3>
+                                <p class="govuk-body-s">There may be grants available to help towards the cost of some or all the improvements.</p>
+                                <p class="govuk-body-s">
+                                    <a href="javascript:void(0);" class="govuk-link">Check if you are eligible for a grant</a>
                                 </p>
                             </div>
                         </li>
@@ -198,5 +201,35 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half govuk-!-margin-bottom-8">
+        <h2 class="govuk-heading-m">
+            Find out more about saving energy
+        </h2>
+        <p class="govuk-body">
+            You can visit the
+            <a href="https://energysavingtrust.org.uk" class="govuk-link">
+                Energy Saving Trust website
+            </a>
+            for more information on other ways to save energy and reduce your bills.
+        </p>
+    </div>
+    <div class="govuk-grid-column-one-half">
+        <h2 class="govuk-heading-m">
+            Leave some feedback for this service
+        </h2>
+        <p class="govuk-body">
+            This service is still in its early stages and under active development. 
+        </p>
+        <p class="govuk-body">
+            Your feedback can help us to shape how the service develops so that it can best serve the needs of the public.
+        </p>
+        <p class="govuk-body">
+            <a href="javascript:void(0);" class="govuk-link">
+                Leave some feedback for this service
+            </a>
+        </p>
     </div>
 </div>

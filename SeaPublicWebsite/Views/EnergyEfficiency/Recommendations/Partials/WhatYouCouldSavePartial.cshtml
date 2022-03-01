@@ -1,0 +1,20 @@
+﻿@model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel
+
+<h2 class="govuk-heading-m ">
+    What you could save
+</h2>
+
+<div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-bottom-7 govuk-!-margin-top-6">
+    <div class="govuk-grid-column-one-half sea-yearly-savings govuk-!-margin-bottom-2">
+        <span class="govuk-caption-m">This could save up to</span>
+        <h3 class="govuk-heading-l govuk-!-margin-bottom-1">
+            £@Model.UserRecommendation.Saving a year
+        </h3>
+    </div>
+    <div class="govuk-grid-column-one-half sea-install-costs">
+        <span class="govuk-caption-m">This could cost</span>
+        <h3 class="govuk-heading-l govuk-!-margin-bottom-1">
+            £@Model.UserRecommendation.MinInstallCost - £@Model.UserRecommendation.MaxInstallCost
+        </h3>
+    </div>
+</div>

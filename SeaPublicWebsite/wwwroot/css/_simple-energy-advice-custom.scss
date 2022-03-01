@@ -67,7 +67,7 @@
 }
 
 .sea-next-steps {
-    margin-top: 15px;
+    //margin-top: 15px;
 }
 
 .sea-warning-text__icon--long {
@@ -228,5 +228,35 @@
     @media (max-width: 769px) {
         margin-top: 10px;
         margin-bottom: 40px;
+    }
+}
+
+.sea-decide-later-action-links {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    @media (max-width: 640px) and (min-width: 400px) {
+        flex-direction: row;
+        gap: 15px;
+    }
+}
+
+.sea-saved-recommendations-table-headers {
+    @media (max-width: 640px) {
+        border: none;
+        padding-bottom: 0;
+    }
+}
+
+.sea-saved-recommendations-table-headers-hide {
+    @media (max-width: 640px) {
+        display: none;
+    }
+}
+
+.sea-saved-recommendations-secondary-row {
+    @media (min-width: 641px) {
+        display: none;
     }
 }
