@@ -9,7 +9,8 @@ namespace GovUkDesignSystem.Attributes.ValidationAttributes
 
         public double Minimum { get; set; }
         public double Maximum { get; set; }
-        
+        public string OutOfRangeErrorMessage { get; set; }
+
         public override bool CheckForValidationErrors<TProperty>(
             GovUkViewModel model,
             PropertyInfo property,
@@ -60,9 +61,16 @@ namespace GovUkDesignSystem.Attributes.ValidationAttributes
             decimal minimum = (decimal) decimalRangeAttribute.Minimum;
             decimal maximum = (decimal) decimalRangeAttribute.Maximum;
 
-            ParserHelpers.AddErrorMessageBasedOnPropertyDisplayName(model, property,
-                name => $"{name} must be between {minimum} and {maximum}",
-                ErrorMessagePropertyNamePosition.StartOfMessage);
+            if (!string.IsNullOrWhiteSpace(decimalRangeAttribute.OutOfRangeErrorMessage))
+            {
+                model.AddErrorFor(property, decimalRangeAttribute.OutOfRangeErrorMessage);
+            }
+            else
+            {
+                ParserHelpers.AddErrorMessageBasedOnPropertyDisplayName(model, property,
+                    name => $"{name} must be between {minimum} and {maximum}",
+                    ErrorMessagePropertyNamePosition.StartOfMessage);
+            }
         }
 
     }
