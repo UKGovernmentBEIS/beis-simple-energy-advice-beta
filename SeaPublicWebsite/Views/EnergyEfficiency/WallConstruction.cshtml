@@ -100,23 +100,35 @@
                                     if (Model.Epc.WallConstruction == WallConstruction.Solid)
                                     {
                                         <div class="govuk-hint">
-                                            The EPC for your property indicates that you have <b>solid</b> walls.
-                                            We will make recommendations based on this assumption.
+                                            <p>
+                                                Your Energy Performance Certificate suggests that you have <b>solid</b> walls.
+                                            </p>
+                                            <p>
+                                                We will generate recommendations for you based on this information.
+                                            </p>
                                         </div>
                                     }
                                     else
                                     {
                                         <div class="govuk-hint">
-                                            The EPC for your property indicates that you have <b>cavity</b> walls.
-                                            We will make recommendations based on this assumption.
+                                            <p>
+                                                Your Energy Performance Certificate suggests that you have <b>cavity</b> walls.<br/>
+                                            </p>
+                                            <p>
+                                                We will generate recommendations for you based on this information.
+                                            </p>
                                         </div>
                                     }
                                 }
                                 else
                                 {
                                     <div class="govuk-hint">
+                                    <p>
                                         Properties of your type typically have <b>@(expectedWallType)</b> walls.
-                                        We will make recommendations based on this assumption.
+                                    </p>
+                                    <p>
+                                        We will generate recommendations for you based on this assumption.
+                                    </p>
                                     </div>
                                 }
                              </text>
