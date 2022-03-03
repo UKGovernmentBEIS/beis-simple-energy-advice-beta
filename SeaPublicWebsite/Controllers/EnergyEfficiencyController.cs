@@ -1035,7 +1035,7 @@ namespace SeaPublicWebsite.Controllers
             
             return viewModel.Change
                 ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("EmailAddress_Get", new {reference = viewModel.Reference});
+                : RedirectToAction("AnswerSummary", new { reference = viewModel.Reference });
         }
 
 

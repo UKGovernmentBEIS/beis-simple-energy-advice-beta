@@ -278,19 +278,7 @@
                 </a>
             </dd>
         </div>
-        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key govuk-!-width-one-half">
-                Email address 
-            </dt>
-            <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
-                @(string.IsNullOrEmpty(Model.EmailAddress) ? "Not given" : Model.EmailAddress)
-            </dd>
-            <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                <a class="govuk-link" href="@Url.Action("EmailAddress_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
-                    Change<span class="govuk-visually-hidden"> email address</span>
-                </a>
-            </dd>
-        </div>
+
         </dl>
 
         <a href="@Url.Action("YourRecommendations_Get", "EnergyEfficiency", new {reference = Model.Reference})" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
