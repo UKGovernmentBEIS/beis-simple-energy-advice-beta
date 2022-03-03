@@ -4,9 +4,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 {
     public enum HasHotWaterCylinder
     {
+        [GovUkRadioCheckboxLabelText(Text = "I'm not sure")]
+        DoNotKnow,
         Yes,
-        No,
-        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
-        DoNotKnow
+        No
     }
 }

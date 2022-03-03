@@ -4,8 +4,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 {
      public enum RoofType
     {
-        [GovUkRadioCheckboxLabelText(Text = "Don't know")]
-        DoNotKnow = 0,
+
+        [GovUkRadioCheckboxLabelText(Text = "I'm not sure")]
+        DoNotKnow,
         [GovUkRadioCheckboxLabelText(Text = "Pitched uninsulated roof")]
         PitchedNoInsulation = 1,
         [GovUkRadioCheckboxLabelText(Text = "Pitched insulated roof")]

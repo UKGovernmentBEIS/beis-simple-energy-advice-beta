@@ -6,9 +6,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 {
     public enum RoofInsulated
     {
+        [GovUkRadioCheckboxLabelText(Text = "I'm not sure")]
+        DoNotKnow,
         Yes,
         No,
-        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
-        DoNotKnow,
     }
 }

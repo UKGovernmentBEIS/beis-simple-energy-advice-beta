@@ -6,6 +6,8 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 {
     public enum FloorInsulated
     {
+        [GovUkRadioCheckboxLabelText(Text = "I'm not sure")]
+        DoNotKnow,
         [GovUkRadioCheckboxLabelText(Text = "No, my floors are not insulated")]
         No,
         [GovUkRadioCheckboxLabelText(Text = "Yes, my floor is insulated")]
@@ -14,7 +16,5 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         // SolidFloorOnly,
         // [GovUkRadioCheckboxLabelText(Text = "Yes, my suspended timber floor is insulated but my solid floor is not insulated")]
         // SuspendedTimberFloorOnly,
-        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
-        DoNotKnow,
     }
 }
