@@ -11,7 +11,7 @@
     @Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("EmailAddress_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        Href = @Url.Action("Temperature_Get", "EnergyEfficiency", new {reference = Model.Reference}),
 
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly

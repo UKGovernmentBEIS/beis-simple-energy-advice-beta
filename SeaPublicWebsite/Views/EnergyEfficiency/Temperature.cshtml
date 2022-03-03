@@ -57,9 +57,7 @@
                 {
                     Text = "Continue",
                 }))
-                <a href="@(Model.Change
-                             ? Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
-                             : Url.Action("EmailAddress_Get", "EnergyEfficiency", new {reference = Model.Reference}))"
+                <a href="@(Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference}))"
                    class="govuk-link">
                     I don't know
                 </a>
