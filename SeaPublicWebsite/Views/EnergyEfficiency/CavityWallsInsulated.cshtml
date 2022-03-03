@@ -100,25 +100,33 @@
                                        }
                                    </div>
                                </details>
-
-                               @if (Model.YearBuilt.HasValue)
-                               {
-                                   @if (Model.YearBuilt.Value < 1991)
-                                   {
-                                       <p class="govuk-hint govuk-!-margin-bottom-5">
-                                           Properties of your type typically have <b>uninsulated</b> walls.
-                                       </p>
-                                   }
-                                   else
-                                   {
-                                       <p class="govuk-hint govuk-!-margin-bottom-5">
-                                           Properties of your type typically have <b>insulated</b> walls.
-                                       </p>
-                                   }
-                               }
                             </text>
-                    }
-                ))
+                    },
+                    conditionalOptions: new Dictionary<CavityWallsInsulated?, Func<object, object>>
+                    {
+                        {
+                            CavityWallsInsulated.DoNotKnow,
+                                @<text>
+                                    @if (Model.YearBuilt.HasValue)
+                                    {
+                                        if (Model.YearBuilt.Value < 1991)
+                                        {
+                                            <div class="govuk-hint">
+                                                Properties of your type typically have <b>uninsulated</b> walls.
+                                                We will make recommendations based on this assumption.
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="govuk-hint">
+                                                Properties of your type typically have <b>insulated</b> walls.
+                                                We will make recommendations based on this assumption.
+                                            </div>
+                                        }
+                                    }
+                                    </text>
+                        }
+                    }))
 
             <button class="govuk-button" data-module="govuk-button">
                 Continue

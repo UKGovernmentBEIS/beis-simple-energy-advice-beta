@@ -93,29 +93,37 @@
                                        </p>
                                    </div>
                                </details>
-                               
-                               @{
-                                   string estimatedFloorConstruction = null;
-                                   if (Model.YearBuilt.HasValue)
-                                   {
-                                       if (Model.YearBuilt.Value < 1950)
-                                       {
-                                           estimatedFloorConstruction = "suspended timber";
-                                       }
-                                       else
-                                       {
-                                           estimatedFloorConstruction = "solid concrete";
-                                       }
-                                   }
-                               }
-                               @if (estimatedFloorConstruction != null)
-                               {
-                                   <div class="govuk-hint govuk-!-margin-bottom-5">
-                                       Properties of your type typically have a <b>@(estimatedFloorConstruction)</b> ground floor.
-                                   </div>
-                               }
                             </text>
-                }
+                },
+                conditionalOptions: new Dictionary<FloorConstruction?, Func<object, object>>
+                {
+                    {
+                        FloorConstruction.DoNotKnow,
+                        @<text>
+                            @{
+                                string estimatedFloorConstruction = null;
+                                if (Model.YearBuilt.HasValue)
+                                {
+                                    if (Model.YearBuilt.Value < 1950)
+                                    {
+                                        estimatedFloorConstruction = "suspended timber";
+                                    }
+                                    else
+                                    {
+                                        estimatedFloorConstruction = "solid concrete";
+                                    }
+                                }
+                            }
+                            @if (estimatedFloorConstruction != null)
+                            {
+                                <div class="govuk-hint">
+                                    Properties of your type typically have a <b>@(estimatedFloorConstruction)</b> ground floor. <br/>
+                                    We will make recommendations based on this assumption.
+                                </div>
+                            }
+                        </text>
+                        }
+                    }
             ))
 
             <button class="govuk-button" data-module="govuk-button">

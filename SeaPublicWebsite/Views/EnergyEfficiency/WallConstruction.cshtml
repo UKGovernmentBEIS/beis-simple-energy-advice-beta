@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.WallConstructionViewModel;
 @{
     ViewBag.Title = "Wall Construction";
@@ -87,13 +88,20 @@
                                            </p>
                                        </div>
                                    </details>
-                                   
-                                   <p class="govuk-hint">
-                                       Properties of your type typically have <b>@(expectedWallType)</b> walls.
-                                   </p>
                                 </text>
-                    }
-                    ))
+                    },
+                    conditionalOptions: new Dictionary<WallConstruction?, Func<object, object>>
+                    {
+                        {
+                            WallConstruction.DoNotKnow,
+                            @<text>
+                                <div class="govuk-hint">
+                                    Properties of your type typically have <b>@(expectedWallType)</b> walls. 
+                                    We will make recommendations based on this assumption.
+                                </div>
+                            </text>
+                        }
+                    }))
 
             </fieldset>
 

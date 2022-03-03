@@ -66,24 +66,32 @@
                                        </p>
                                    </div>
                                </details>
-                               
-                               @if (Model.YearBuilt.HasValue)
-                               {
-                                   <div class="govuk-hint govuk-!-margin-bottom-5">
-                                       Properties of your type typically 
-                                       @if (Model.YearBuilt.Value < 1996)
-                                       {
-                                           <b>do not have an insulated</b>
-                                       }
-                                       else
-                                       {
-                                           <b>have an insulated</b>
-                                       }
-                                       ground floor.
-                                   </div>
-                               }
                             </text>
-                }
+                },
+                conditionalOptions: new Dictionary<FloorInsulated?, Func<object, object>>
+                {
+                    {
+                        FloorInsulated.DoNotKnow,
+                        @<text>
+                            @if (Model.YearBuilt.HasValue)
+                            {
+                                <div class="govuk-hint">
+                                    Properties of your type typically 
+                                    @if (Model.YearBuilt.Value < 1996)
+                                    {
+                                        <b>do not have an insulated</b>
+                                    }
+                                    else
+                                    {
+                                        <b>have an insulated</b>
+                                    }
+                                    ground floor.<br/>
+                                    We will make recommendations based on this assumption.
+                                </div>
+                            }
+                        </text>
+                        }
+                    }
                 ))
 
             <button class="govuk-button" data-module="govuk-button">
