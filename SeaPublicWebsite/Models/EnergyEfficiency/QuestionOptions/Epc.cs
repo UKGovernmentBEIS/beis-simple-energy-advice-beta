@@ -12,6 +12,12 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         public string EpcId { get; set; }
         public string BuildingReference { get; set; }
         public string InspectionDate { get; set; }
+        public PropertyType? PropertyType { get; set; }
+        public HeatingType? HeatingType { get; set; }
+        public WallConstruction? WallConstruction { get; set; }
+        public SolidWallsInsulated? SolidWallsInsulated { get; set; }
+        public CavityWallsInsulated? CavityWallsInsulated { get; set; }
+
 
         public int? GetHouseNumber() {
             var houseNumberFromFirstLine = Epc.GetIntegerFromStartOfString(this.Address1);

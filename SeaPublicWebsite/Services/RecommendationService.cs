@@ -108,7 +108,7 @@ namespace SeaPublicWebsite.Services
             }
             
             // Not for mid or top floor flat
-            if (userData.FlatType is not FlatType.TopFloor or FlatType.GroundFloor)
+            if (userData.FlatType is not FlatType.TopFloor or FlatType.GroundFloor && userData.FloorConstruction != FloorConstruction.SolidConcrete && userData.FloorInsulated is FloorInsulated.No or FloorInsulated.DoNotKnow)
             {
                 userRecommendationKeys.Add(RecommendationKey.GroundFloorInsulation);
             }

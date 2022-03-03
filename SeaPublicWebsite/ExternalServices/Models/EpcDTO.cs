@@ -16,5 +16,16 @@ namespace SeaPublicWebsite.ExternalServices.Models
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string Postcode { get; set; }
+        [JsonProperty(PropertyName = "property-type")]
+        public string PropertyType { get; set; }
+        [JsonProperty(PropertyName = "built-form")]
+        public string BuiltForm { get; set; }
+        [JsonProperty(PropertyName = "mainheat-description")]
+        public string MainHeatDescription { get; set; }
+        [JsonProperty(PropertyName = "main-fuel")]
+        public string MainFuel { get; set; }        
+        [JsonProperty(PropertyName = "walls-description")]
+        public string WallsDescription { get; set; }
+
     }
 }

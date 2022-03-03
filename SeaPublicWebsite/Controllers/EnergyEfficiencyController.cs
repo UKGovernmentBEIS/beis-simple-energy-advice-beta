@@ -439,7 +439,8 @@ namespace SeaPublicWebsite.Controllers
                 WallConstruction = userDataModel.WallConstruction,
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                Epc = userDataModel.Epc
             };
 
             return View("WallConstruction", viewModel);
@@ -507,7 +508,8 @@ namespace SeaPublicWebsite.Controllers
                 WallConstruction = userDataModel.WallConstruction,
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                Epc = userDataModel.Epc
             };
 
             return View("CavityWallsInsulated", viewModel);
@@ -570,7 +572,8 @@ namespace SeaPublicWebsite.Controllers
                 WallConstruction = userDataModel.WallConstruction,
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                Epc = userDataModel.Epc
             };
 
             return View("SolidWallsInsulated", viewModel);
@@ -855,7 +858,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 HeatingType = userDataModel.HeatingType,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                Epc = userDataModel.Epc
             };
 
             return View("HeatingType", viewModel);
