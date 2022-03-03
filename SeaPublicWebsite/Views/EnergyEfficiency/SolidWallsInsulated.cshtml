@@ -75,13 +75,40 @@
                                        </p>
                                    </div>
                                </details>
-                               
-                               <p class="govuk-hint govuk-!-margin-bottom-5">
-                                   Properties of your type typically have <b>uninsulated</b> walls.
-                               </p>
                             </text>
-                    }
-                ))
+                    },
+                conditionalOptions: new Dictionary<SolidWallsInsulated?, Func<object, object>>
+                {
+                    {
+                        SolidWallsInsulated.DoNotKnow,
+                        @<text>
+                            @if (Model.Epc.SolidWallsInsulated.HasValue)
+                            {
+                                if (Model.SolidWallsInsulated == SolidWallsInsulated.All)
+                                {
+                                    <div class="govuk-hint">
+                                        The EPC for your property indicates that you have <b>insulated</b> walls.
+                                        We will make recommendations based on this assumption.
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="govuk-hint">
+                                        The EPC for your property indicates that you have <b>uninsulated</b> walls.
+                                        We will make recommendations based on this assumption.
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="govuk-hint">
+                                    Properties of your type typically have <b>uninsulated</b> walls.
+                                    We will make recommendations based on this assumption.
+                                </div>
+                            }
+                         </text>
+                        }
+                }))
 
             <button class="govuk-button" data-module="govuk-button">
                 Continue

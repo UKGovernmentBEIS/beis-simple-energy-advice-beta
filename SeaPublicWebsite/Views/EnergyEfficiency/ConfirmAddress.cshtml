@@ -23,10 +23,10 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <form action="@Url.Action("ConfirmAddress_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
-            @Html.HiddenFor(m => m.SelectedEpcId)
 
             @if (Model.EPCList.Count == 1)
             {
+                @Html.HiddenFor(m => m.SelectedEpcId)
                 <span class="govuk-caption-l govuk-!-margin-bottom-4">
                     @(QuestionSection.YourHome.GetDisplayName())
                 </span>
@@ -60,7 +60,7 @@
             {
                 string error = Model.GetErrorFor(m => m.SelectedEpcId);
                 ErrorMessageViewModel errorMessageViewModel = error != null ? new ErrorMessageViewModel {Text = error} : null;
-
+                
                 @Html.GovUkRadios(new RadiosViewModel()
                 {
                     Name = nameof(ConfirmAddressViewModel.SelectedEpcId),

@@ -95,11 +95,31 @@
                         {
                             WallConstruction.DoNotKnow,
                             @<text>
-                                <div class="govuk-hint">
-                                    Properties of your type typically have <b>@(expectedWallType)</b> walls. 
-                                    We will make recommendations based on this assumption.
-                                </div>
-                            </text>
+                                @if (Model.Epc.WallConstruction != null)
+                                {
+                                    if (Model.Epc.WallConstruction == WallConstruction.Solid)
+                                    {
+                                        <div class="govuk-hint">
+                                            The EPC for your property indicates that you have <b>solid</b> walls.
+                                            We will make recommendations based on this assumption.
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="govuk-hint">
+                                            The EPC for your property indicates that you have <b>cavity</b> walls.
+                                            We will make recommendations based on this assumption.
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="govuk-hint">
+                                        Properties of your type typically have <b>@(expectedWallType)</b> walls.
+                                        We will make recommendations based on this assumption.
+                                    </div>
+                                }
+                             </text>
                         }
                     }))
 

@@ -101,30 +101,47 @@
                                    </div>
                                </details>
                             </text>
-                    },
-                    conditionalOptions: new Dictionary<CavityWallsInsulated?, Func<object, object>>
+                },
+                conditionalOptions: new Dictionary<CavityWallsInsulated?, Func<object, object>>
+                {
                     {
-                        {
-                            CavityWallsInsulated.DoNotKnow,
-                                @<text>
-                                    @if (Model.YearBuilt.HasValue)
-                                    {
-                                        if (Model.YearBuilt.Value < 1991)
-                                        {
-                                            <div class="govuk-hint">
-                                                Properties of your type typically have <b>uninsulated</b> walls.
-                                                We will make recommendations based on this assumption.
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="govuk-hint">
-                                                Properties of your type typically have <b>insulated</b> walls.
-                                                We will make recommendations based on this assumption.
-                                            </div>
-                                        }
-                                    }
-                                    </text>
+                        CavityWallsInsulated.DoNotKnow,
+                        @<text>
+                            @if (Model.Epc.CavityWallsInsulated.HasValue)
+                            {
+                                if (Model.Epc.CavityWallsInsulated == CavityWallsInsulated.All)
+                                {
+                                    <div class="govuk-hint">
+                                        The EPC for your property indicates that you have <b>insulated</b> walls.
+                                        We will make recommendations based on this assumption.
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="govuk-hint">
+                                        The EPC for your property indicates that you have <b>uninsulated</b> walls.
+                                        We will make recommendations based on this assumption.
+                                    </div>
+                                }
+                            }
+                            else if (Model.YearBuilt.HasValue)
+                            {
+                                if (Model.YearBuilt.Value < 1991)
+                                {
+                                    <div class="govuk-hint">
+                                        Properties of your type typically have <b>uninsulated</b> walls.
+                                        We will make recommendations based on this assumption.
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="govuk-hint">
+                                        Properties of your type typically have <b>insulated</b> walls.
+                                        We will make recommendations based on this assumption.
+                                    </div>
+                                }
+                            }
+                         </text>
                         }
                     }))
 
