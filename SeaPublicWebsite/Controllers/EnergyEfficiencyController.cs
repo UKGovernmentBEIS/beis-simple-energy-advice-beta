@@ -704,7 +704,6 @@ namespace SeaPublicWebsite.Controllers
             }
         }
 
-        
         [HttpGet("roof-construction/{reference}")]
         public IActionResult RoofConstruction_Get(string reference, bool change = false)
         {
@@ -736,13 +735,51 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.RoofConstruction = viewModel.RoofConstruction;
             userDataStore.SaveUserData(userDataModel);
-            
+
             return viewModel.Change
                 ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("RoofInsulated_Get", new {reference = viewModel.Reference});
+                : userDataModel.RoofConstruction == RoofConstruction.Flat 
+                    ? RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference }) 
+                    :  RedirectToAction("AccessibleLoftSpace_Get", new {reference = viewModel.Reference});
         }
 
-        
+        [HttpGet("accessible-loft-space/{reference}")]
+        public IActionResult AccessibleLoftSpace_Get(string reference, bool change = false)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+
+            var viewModel = new AccessibleLoftSpaceViewModel
+            {
+                AccessibleLoftSpace = userDataModel.AccessibleLoftSpace,
+                Reference = userDataModel.Reference,
+                Change = change
+            };
+
+            return View("AccessibleLoftSpace", viewModel);
+        }
+
+        [HttpPost("accessible-loft-space/{reference}")]
+        public IActionResult AccessibleLoftSpace_Post(AccessibleLoftSpaceViewModel viewModel)
+        {
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+
+            viewModel.ParseAndValidateParameters(Request, m => m.AccessibleLoftSpace);
+
+            if (viewModel.HasAnyErrors())
+            {
+                return View("AccessibleLoftSpace", viewModel);
+            }
+
+            userDataModel.AccessibleLoftSpace = viewModel.AccessibleLoftSpace;
+            userDataStore.SaveUserData(userDataModel);
+
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : userDataModel.AccessibleLoftSpace == AccessibleLoftSpace.Yes
+                    ? RedirectToAction("RoofInsulated_Get", new {reference = viewModel.Reference})
+                    : RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference });
+        }
+
         [HttpGet("roof-insulated/{reference}")]
         public IActionResult RoofInsulated_Get(string reference, bool change = false)
         {
@@ -778,7 +815,6 @@ namespace SeaPublicWebsite.Controllers
                 : RedirectToAction("GlazingType_Get", new {reference = viewModel.Reference});
         }
 
-        
         [HttpGet("outdoor-space/{reference}")]
         public IActionResult OutdoorSpace_Get(string reference, bool change = false)
         {

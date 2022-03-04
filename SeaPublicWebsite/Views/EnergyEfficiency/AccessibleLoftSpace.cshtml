@@ -1,8 +1,8 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@model SeaPublicWebsite.Models.EnergyEfficiency.RoofInsulatedViewModel
+@model SeaPublicWebsite.Models.EnergyEfficiency.AccessibleLoftSpaceViewModel
 @{
-    ViewBag.Title = "Roof Insulated";
+    ViewBag.Title = "Accessible loft space";
 }
 
 @section BeforeMain {
@@ -11,7 +11,7 @@
         Text = "Back",
         Href = Model.Change
             ? @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
-            : @Url.Action("AccessibleLoftSpace_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+            : @Url.Action("RoofConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference}),
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -22,16 +22,16 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("RoofInsulated_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
+        <form action="@Url.Action("AccessibleLoftSpace_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
-            @(Html.GovUkRadiosFor(m => m.RoofInsulated,
+            @(Html.GovUkRadiosFor(m => m.AccessibleLoftSpace,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
                     {
                         Html = @<text>
                                    <h1 class="govuk-fieldset__heading">
-                                       Is your roof fully insulated?
+                                       Do you have an accessible loft area that hasn’t been converted into a room? 
                                    </h1>
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
@@ -40,9 +40,6 @@
                 new HintViewModel
                 {
                     Html = @<text>
-                               <p class="govuk-body">
-                                   If your home was built after 2002, or you have installed roof insulation since 2002, it is likely that it is fully insulated.
-                               </p>
                                <details class="govuk-details" data-module="govuk-details">
                                    <summary class="govuk-details__summary">
                                        <span class="govuk-details__summary-text">
@@ -51,7 +48,13 @@
                                    </summary>
                                    <div class="govuk-details__text">
                                        <p class="govuk-body">
-                                           A fully insulated roof is insulated to current building regulations, or insulation that is at least 270mm deep.
+                                           A loft area is an unheated space without walls and ceilings, immediately beneath the pitched roof. You will usually be able to see the roof timbers.
+                                       </p>
+                                       <p class="govuk-body">
+                                           It is accessible if an installer could easily get into it to do some work – for example, if there is an existing loft hatch and some of the space is big enough for someone to stand up in it.  
+                                       </p>
+                                       <p class="govuk-body">
+                                           If all the space under your pitched roof, or nearly all the space, is used as living space with finished walls and ceilings then you don’t have an accessible loft. 
                                        </p>
                                    </div>
                                </details>
