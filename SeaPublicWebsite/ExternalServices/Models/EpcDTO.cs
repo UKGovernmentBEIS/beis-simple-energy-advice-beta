@@ -28,6 +28,8 @@ namespace SeaPublicWebsite.ExternalServices.Models
         public string WallsDescription { get; set; }        
         [JsonProperty(PropertyName = "floor-description")]
         public string FloorDescription { get; set; }
+        [JsonProperty(PropertyName = "construction-age-band")]
+        public string ConstructionAgeBand { get; set; }
 
     }
 }

@@ -54,6 +54,7 @@ namespace SeaPublicWebsite.ExternalServices
                             SolidWallsInsulated = GetSolidWallsInsulatedFromEpc(r),
                             FloorConstruction = GetFloorConstructionFromEpc(r),
                             FloorInsulated = GetFloorInsulationFromEpc(r),
+                            ConstructionAgeBand = GetConstructionAgeBandFromEpc(r)
                         }).ToList();
 
                         epcs = FixFormatting(epcs);
@@ -288,6 +289,65 @@ namespace SeaPublicWebsite.ExternalServices
                 if (epc.FloorDescription.Contains("insulated", StringComparison.OrdinalIgnoreCase))
                 {
                     return FloorInsulated.Yes;
+                }
+            }
+
+            return null;
+        }
+
+        private static HomeAge? GetConstructionAgeBandFromEpc(EpcDto epc)
+        {
+            if (epc.ConstructionAgeBand != null)
+            {
+                var ageBand = epc.ConstructionAgeBand.Replace("England and Wales: ", "");
+                switch (ageBand)
+                {
+                    case ("before 1900"):
+                    {
+                        return HomeAge.Pre1900;
+                    }
+                    case ("1900-1929"):
+                    {
+                        return HomeAge.From1900To1929;
+                    }
+                    case ("1930-1949"):
+                    {
+                        return HomeAge.From1900To1929;
+                    }
+                    case ("1950-1966"):
+                    {
+                        return HomeAge.From1950To1966;
+                    }
+                    case ("1967-1975"):
+                    {
+                        return HomeAge.From1967To1975;
+                    }
+                    case ("1976-1982"):
+                    {
+                        return HomeAge.From1976To1982;
+                    }
+                    case ("1983-1990"):
+                    {
+                        return HomeAge.From1983To1990;
+                    }
+                    case ("1991-1995"):
+                    {
+                        return HomeAge.From1991To1995;
+                    }
+                    case ("1996-2002"):
+                    {
+                        return HomeAge.From1996To2002;
+                    }
+                    case ("2003-2006"):
+                    {
+                        return HomeAge.From2003To2006;
+                    }
+                    case ("2007 onwards"):
+                    {
+                        return HomeAge.From2007ToPresent;
+                    }
+                    default:
+                        return null;
                 }
             }
 
