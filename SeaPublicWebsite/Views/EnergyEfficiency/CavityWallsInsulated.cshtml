@@ -107,7 +107,7 @@
                     {
                         CavityWallsInsulated.DoNotKnow,
                         @<text>
-                            @if (Model.Epc.CavityWallsInsulated.HasValue)
+                            @if (Model.Epc?.CavityWallsInsulated != null)
                             {
                                 if (Model.Epc.CavityWallsInsulated == CavityWallsInsulated.All)
                                 {

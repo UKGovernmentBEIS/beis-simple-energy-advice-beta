@@ -73,7 +73,7 @@
                         FloorInsulated.DoNotKnow,
                         @<text>
                             <div class="govuk-hint">
-                            @if (Model.Epc.FloorConstruction.HasValue)
+                            @if (Model.Epc?.FloorConstruction != null)
                             {
                                 if (Model.Epc.FloorInsulated == FloorInsulated.Yes)
                                 {

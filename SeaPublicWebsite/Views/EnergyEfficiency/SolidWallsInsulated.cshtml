@@ -82,7 +82,7 @@
                     {
                         SolidWallsInsulated.DoNotKnow,
                         @<text>
-                            @if (Model.Epc.SolidWallsInsulated.HasValue)
+                            @if (Model.Epc?.SolidWallsInsulated != null)
                             {
                                 if (Model.SolidWallsInsulated == SolidWallsInsulated.All)
                                 {
