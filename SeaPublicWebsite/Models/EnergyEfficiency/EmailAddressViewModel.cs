@@ -1,6 +1,6 @@
 ﻿using GovUkDesignSystem;
-using GovUkDesignSystem.Attributes;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
+using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
@@ -14,13 +14,5 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         
         public string Reference { get; set; }
         public bool Change { get; set; }
-    }
-    
-    public enum HasEmailAddress
-    {
-        [GovUkRadioCheckboxLabelText(Text = "Yes, I have an email address")]
-        Yes,
-        [GovUkRadioCheckboxLabelText(Text = "No")]
-        No
     }
 }

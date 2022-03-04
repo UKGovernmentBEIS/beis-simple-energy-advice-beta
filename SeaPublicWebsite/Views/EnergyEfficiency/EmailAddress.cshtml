@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Models.EnergyEfficiency
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.EmailAddressViewModel
 @{
     ViewBag.Title = "Email address";
@@ -63,7 +64,8 @@
                                 {
                                     Text = "Email address",
                                 },
-                                autocomplete: "email"
+                                autocomplete: "email",
+                                placeholder: "e.g. my.email@example.com"
                                 ))
                          </text>
                     }

@@ -1120,9 +1120,38 @@ namespace SeaPublicWebsite.Controllers
                 {
                     Reference = reference,
                     NumberOfUserRecommendations = recommendationsForUser.Count,
-                    FirstReferenceId = (int)recommendationsForUser[0].Key
+                    FirstReferenceId = (int)recommendationsForUser[0].Key,
+                    EmailAddress = userDataModel.EmailAddress
                 }
 ;            return View("YourRecommendations", viewModel);
+        }
+
+        [HttpPost("your-recommendations/{reference}")]
+        public IActionResult YourRecommendations_Post(YourRecommendationsViewModel viewModel)
+        {
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+
+            viewModel.ParseAndValidateParameters(Request, m => m.HasEmailAddress);
+
+            if (viewModel.HasAnyErrors())
+            {
+                return View("YourRecommendations", viewModel);
+            }
+
+            if (viewModel.HasEmailAddress == HasEmailAddress.Yes)
+            {
+                viewModel.ParseAndValidateParameters(Request, m => m.EmailAddress);
+
+                if (viewModel.HasAnyErrors())
+                {
+                    return View("YourRecommendations", viewModel);
+                }
+            }
+
+            userDataModel.HasEmailAddress = viewModel.HasEmailAddress;
+            userDataModel.EmailAddress = viewModel.HasEmailAddress == HasEmailAddress.Yes ? viewModel.EmailAddress : null;
+            userDataStore.SaveUserData(userDataModel);
+            return RedirectToAction("Recommendation_Get", new { id = viewModel.FirstReferenceId, reference = viewModel.Reference });
         }
 
         [HttpGet("your-recommendations/{id}/{reference}")]
