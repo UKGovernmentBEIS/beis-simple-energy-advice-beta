@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO.Pipes;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -12,7 +11,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.ExternalServices
 {
-    public class OpenEPCApi
+    public class OpenEpcApi
     {
         public static List<Epc> GetEpcsForPostcode(string postcode)
         {
@@ -52,8 +51,9 @@ namespace SeaPublicWebsite.ExternalServices
                             PropertyType = GetPropertyTypeFromEpc(r),
                             WallConstruction = GetWallConstructionFromEpc(r),
                             CavityWallsInsulated = GetCavityWallsInsulatedFromEpc(r),
-                            SolidWallsInsulated = GetSolidWallsInsulatedFromEpc(r)
-
+                            SolidWallsInsulated = GetSolidWallsInsulatedFromEpc(r),
+                            FloorConstruction = GetFloorConstructionFromEpc(r),
+                            FloorInsulated = GetFloorInsulationFromEpc(r),
                         }).ToList();
 
                         epcs = FixFormatting(epcs);
@@ -139,11 +139,12 @@ namespace SeaPublicWebsite.ExternalServices
         }
 
 
-        public static HeatingType? GetHeatingTypeFromEpc(EpcDTO epc)
+        public static HeatingType? GetHeatingTypeFromEpc(EpcDto epc)
         {
             // This is not a complete mapping but there are too many options for mainHeatDescription and mainFuel to parse them all.
             // mainFuel is marked as deprecated in some places so we should try mainHeatDescription first
-            if (epc.MainHeatDescription != null && epc.MainHeatDescription.Contains("mains gas", StringComparison.OrdinalIgnoreCase))
+            if (epc.MainHeatDescription != null &&
+                epc.MainHeatDescription.Contains("mains gas", StringComparison.OrdinalIgnoreCase))
             {
                 return HeatingType.GasBoiler;
             }
@@ -151,7 +152,8 @@ namespace SeaPublicWebsite.ExternalServices
             {
                 return HeatingType.GasBoiler;
             }
-            else if (epc.MainHeatDescription != null && epc.MainHeatDescription.Contains("electric", StringComparison.OrdinalIgnoreCase))
+            else if (epc.MainHeatDescription != null &&
+                     epc.MainHeatDescription.Contains("electric", StringComparison.OrdinalIgnoreCase))
             {
                 return HeatingType.DirectActionElectric;
             }
@@ -164,17 +166,22 @@ namespace SeaPublicWebsite.ExternalServices
                 return null;
             }
         }
-        public static PropertyType? GetPropertyTypeFromEpc(EpcDTO epc)
+
+        public static PropertyType? GetPropertyTypeFromEpc(EpcDto epc)
         {
             if (epc.PropertyType != null && epc.PropertyType.Contains("House", StringComparison.OrdinalIgnoreCase))
             {
                 return PropertyType.House;
             }
+
             if (epc.PropertyType != null && epc.PropertyType.Contains("Bungalow", StringComparison.OrdinalIgnoreCase))
             {
                 return PropertyType.Bungalow;
             }
-            if (epc.PropertyType != null && (epc.PropertyType.Contains("Apartment", StringComparison.OrdinalIgnoreCase) || epc.PropertyType.Contains("Maisonette", StringComparison.OrdinalIgnoreCase)))
+
+            if (epc.PropertyType != null &&
+                (epc.PropertyType.Contains("Apartment", StringComparison.OrdinalIgnoreCase) ||
+                 epc.PropertyType.Contains("Maisonette", StringComparison.OrdinalIgnoreCase)))
             {
                 return PropertyType.ApartmentFlatOrMaisonette;
             }
@@ -184,13 +191,16 @@ namespace SeaPublicWebsite.ExternalServices
             }
         }
 
-        public static WallConstruction? GetWallConstructionFromEpc(EpcDTO epc)
+        public static WallConstruction? GetWallConstructionFromEpc(EpcDto epc)
         {
-            if (epc.WallsDescription != null && epc.WallsDescription.Contains("cavity", StringComparison.OrdinalIgnoreCase))
+            if (epc.WallsDescription != null &&
+                epc.WallsDescription.Contains("cavity", StringComparison.OrdinalIgnoreCase))
             {
                 return WallConstruction.Cavity;
             }
-            if (epc.WallsDescription != null && epc.WallsDescription.Contains("solid", StringComparison.OrdinalIgnoreCase))
+
+            if (epc.WallsDescription != null &&
+                epc.WallsDescription.Contains("solid", StringComparison.OrdinalIgnoreCase))
             {
                 return WallConstruction.Solid;
             }
@@ -200,9 +210,10 @@ namespace SeaPublicWebsite.ExternalServices
             }
         }
 
-        public static CavityWallsInsulated? GetCavityWallsInsulatedFromEpc(EpcDTO epc)
+        public static CavityWallsInsulated? GetCavityWallsInsulatedFromEpc(EpcDto epc)
         {
-            if (epc.WallsDescription != null && epc.WallsDescription.Contains("cavity", StringComparison.OrdinalIgnoreCase))
+            if (epc.WallsDescription != null &&
+                epc.WallsDescription.Contains("cavity", StringComparison.OrdinalIgnoreCase))
             {
                 if (epc.WallsDescription.Contains("no insulation", StringComparison.OrdinalIgnoreCase))
                 {
@@ -223,9 +234,10 @@ namespace SeaPublicWebsite.ExternalServices
             }
         }
 
-        public static SolidWallsInsulated? GetSolidWallsInsulatedFromEpc(EpcDTO epc)
+        public static SolidWallsInsulated? GetSolidWallsInsulatedFromEpc(EpcDto epc)
         {
-            if (epc.WallsDescription != null && epc.WallsDescription.Contains("solid", StringComparison.OrdinalIgnoreCase))
+            if (epc.WallsDescription != null &&
+                epc.WallsDescription.Contains("solid", StringComparison.OrdinalIgnoreCase))
             {
                 if (epc.WallsDescription.Contains("no insulation", StringComparison.OrdinalIgnoreCase))
                 {
@@ -245,10 +257,46 @@ namespace SeaPublicWebsite.ExternalServices
                 return null;
             }
         }
+
+        public static FloorConstruction? GetFloorConstructionFromEpc(EpcDto epc)
+        {
+            if (epc.FloorDescription != null)
+            {
+                if (epc.FloorDescription.Contains("solid", StringComparison.OrdinalIgnoreCase))
+                {
+                    return FloorConstruction.SolidConcrete;
+                }
+
+                if (epc.FloorDescription.Contains("suspended", StringComparison.OrdinalIgnoreCase))
+                {
+                    return FloorConstruction.SuspendedTimber;
+                }
+            }
+
+            return null;
+        }
+
+        public static FloorInsulated? GetFloorInsulationFromEpc(EpcDto epc)
+        {
+            if (epc.FloorDescription != null && GetFloorConstructionFromEpc(epc).HasValue)
+            {
+                if (epc.FloorDescription.Contains("no insulation", StringComparison.OrdinalIgnoreCase))
+                {
+                    return FloorInsulated.No;
+                }
+
+                if (epc.FloorDescription.Contains("insulated", StringComparison.OrdinalIgnoreCase))
+                {
+                    return FloorInsulated.Yes;
+                }
+            }
+
+            return null;
+        }
     }
 
     internal class OpenEpcResponse
     {
-        public List<EpcDTO> rows { get; set; }
+        public List<EpcDto> rows { get; set; }
     }
 }

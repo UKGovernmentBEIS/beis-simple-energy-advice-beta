@@ -12,5 +12,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Reference { get; set; }
         public bool Change { get; set; }
         public int? YearBuilt { get; set; }
+        public Epc Epc { get; set; }
     }
 }

@@ -100,28 +100,47 @@
                     {
                         FloorConstruction.DoNotKnow,
                         @<text>
+                            <div class="govuk-hint">
                             @{
-                                string estimatedFloorConstruction = null;
-                                if (Model.YearBuilt.HasValue)
+                                if (Model.Epc.FloorConstruction.HasValue)
                                 {
-                                    if (Model.YearBuilt.Value < 1950)
+                                    if (Model.Epc.FloorConstruction == FloorConstruction.SuspendedTimber)
                                     {
-                                        estimatedFloorConstruction = "suspended timber";
+                                        <p>
+                                            Your Energy Performance Certificate suggests that your ground floor is <b>suspended timber</b>.
+                                        </p>
                                     }
                                     else
                                     {
-                                        estimatedFloorConstruction = "solid concrete";
+                                        <p>
+                                            Your Energy Performance Certificate suggests that your ground floor is <b>solid concrete</b>.
+                                        </p>
                                     }
+                                    <p>
+                                        We will generate recommendations for you based on this information.
+                                    </p>
+                                }
+                                else if (Model.YearBuilt.HasValue)
+                                {
+                                    if (Model.YearBuilt.Value < 1950)
+                                    {
+                                        <p>
+                                            Properties of your type typically have a <b>suspended timber</b> ground floor.
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        <p>
+                                            Properties of your type typically have a <b>solid concrete</b> ground floor.
+                                        </p>
+                                    }
+                                    <p>
+                                        We will make recommendations based on this assumption.
+                                    </p>
                                 }
                             }
-                            @if (estimatedFloorConstruction != null)
-                            {
-                                <div class="govuk-hint">
-                                    Properties of your type typically have a <b>@(estimatedFloorConstruction)</b> ground floor. <br/>
-                                    We will make recommendations based on this assumption.
-                                </div>
-                            }
-                        </text>
+                            </div >
+                         </text>
                         }
                     }
             ))

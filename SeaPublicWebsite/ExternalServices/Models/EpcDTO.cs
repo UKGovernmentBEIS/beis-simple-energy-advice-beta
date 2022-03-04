@@ -2,7 +2,7 @@
 
 namespace SeaPublicWebsite.ExternalServices.Models
 {
-    public class EpcDTO
+    public class EpcDto
     {
         // Individual lodgement identifier. Guaranteed to be unique and can be used to identify a
         // certificate in the downloads and the API.
@@ -25,7 +25,9 @@ namespace SeaPublicWebsite.ExternalServices.Models
         [JsonProperty(PropertyName = "main-fuel")]
         public string MainFuel { get; set; }        
         [JsonProperty(PropertyName = "walls-description")]
-        public string WallsDescription { get; set; }
+        public string WallsDescription { get; set; }        
+        [JsonProperty(PropertyName = "floor-description")]
+        public string FloorDescription { get; set; }
 
     }
 }

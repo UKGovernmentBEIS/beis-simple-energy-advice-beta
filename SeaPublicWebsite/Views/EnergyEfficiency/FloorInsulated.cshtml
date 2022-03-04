@@ -1,6 +1,5 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.FloorInsulatedViewModel
 @{
@@ -73,22 +72,44 @@
                     {
                         FloorInsulated.DoNotKnow,
                         @<text>
-                            @if (Model.YearBuilt.HasValue)
+                            <div class="govuk-hint">
+                            @if (Model.Epc.FloorConstruction.HasValue)
                             {
-                                <div class="govuk-hint">
-                                    Properties of your type typically 
-                                    @if (Model.YearBuilt.Value < 1996)
-                                    {
-                                        <b>do not have an insulated</b>
-                                    }
-                                    else
-                                    {
-                                        <b>have an insulated</b>
-                                    }
-                                    ground floor.<br/>
-                                    We will make recommendations based on this assumption.
-                                </div>
+                                if (Model.Epc.FloorInsulated == FloorInsulated.Yes)
+                                {
+                                    <p>
+                                        Your Energy Performance Certificate suggests that your ground floor is <b>insulated</b>.
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p>
+                                        Your Energy Performance Certificate suggests that your ground floor is <b>not insulated</b>.
+                                    </p>
+                                }
+                                <p>
+                                    We will generate recommendations for you based on this information.
+                                </p>
                             }
+                            else if (Model.YearBuilt.HasValue)
+                            {
+                                    <p>
+                                        Properties of your type typically
+                                        @if (Model.YearBuilt.Value < 1996)
+                                        {
+                                            <b>do not have an insulated</b>
+                                        }
+                                        else
+                                        {
+                                            <b>have an insulated</b>
+                                        }
+                                        ground floor.
+                                    </p>
+                                    <p>
+                                        We will make recommendations based on this assumption.
+                                    </p>
+                            }                                
+                            </div>
                         </text>
                         }
                     }

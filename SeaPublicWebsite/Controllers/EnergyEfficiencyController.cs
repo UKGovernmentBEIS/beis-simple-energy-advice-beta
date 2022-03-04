@@ -207,7 +207,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
-            var epcList = OpenEPCApi.GetEpcsForPostcode(userDataModel.Postcode);
+            var epcList = OpenEpcApi.GetEpcsForPostcode(userDataModel.Postcode);
 
             if (houseNameOrNumber != null)
             {
@@ -232,7 +232,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
             
-            var epc = OpenEPCApi.GetEpcsForPostcode(userDataModel.Postcode).FirstOrDefault(e => e.EpcId == viewModel.SelectedEpcId);
+            var epc = OpenEpcApi.GetEpcsForPostcode(userDataModel.Postcode).FirstOrDefault(e => e.EpcId == viewModel.SelectedEpcId);
             userDataModel.Epc = epc;
 
             userDataStore.SaveUserData(userDataModel);
@@ -628,7 +628,8 @@ namespace SeaPublicWebsite.Controllers
                 WallConstruction = userDataModel.WallConstruction,
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                Epc = userDataModel.Epc
             };
 
             return View("FloorConstruction", viewModel);
@@ -665,7 +666,8 @@ namespace SeaPublicWebsite.Controllers
                 FloorInsulated = userDataModel.FloorInsulated,
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                Epc = userDataModel.Epc
             };
 
             return View("FloorInsulated", viewModel);

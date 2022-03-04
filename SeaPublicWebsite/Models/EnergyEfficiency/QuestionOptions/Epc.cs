@@ -17,6 +17,8 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         public WallConstruction? WallConstruction { get; set; }
         public SolidWallsInsulated? SolidWallsInsulated { get; set; }
         public CavityWallsInsulated? CavityWallsInsulated { get; set; }
+        public FloorConstruction? FloorConstruction { get; set; }
+        public FloorInsulated? FloorInsulated { get; set; }
 
 
         public int? GetHouseNumber() {
