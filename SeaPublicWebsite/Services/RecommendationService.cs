@@ -19,6 +19,8 @@ namespace SeaPublicWebsite.Services
                      MinInstallCost = 300,
                      MaxInstallCost = 700,
                      Saving = 45,
+                     LifetimeSaving = 1900,
+                     Lifetime = 42,
                      Summary = "Increase the level of insulation in your loft to the recommended level of 300mm"
                  },
                  new Recommendation
@@ -28,6 +30,8 @@ namespace SeaPublicWebsite.Services
                      MinInstallCost = 1200,
                      MaxInstallCost = 1800,
                      Saving = 75,
+                     LifetimeSaving = 3200,
+                     Lifetime = 42,
                      Summary = "Lift the floor boards up and fit insulation in the gap beneath them"
                  },
                  new Recommendation
@@ -37,6 +41,8 @@ namespace SeaPublicWebsite.Services
                      MinInstallCost = 150,
                      MaxInstallCost = 400,
                      Saving = 75,
+                     LifetimeSaving = 900,
+                     Lifetime = 12,
                      Summary = "Fit a programmer, thermostat and thermostatic radiator valves"
                  },
                  new Recommendation
@@ -46,6 +52,8 @@ namespace SeaPublicWebsite.Services
                      MinInstallCost = 3000,
                      MaxInstallCost = 5000,
                      Saving = 175,
+                     LifetimeSaving = 3500,
+                     Lifetime = 20,
                      Summary = "Replace old single glazed windows with new double or triple glazing"
                  },
                  new Recommendation
@@ -55,6 +63,8 @@ namespace SeaPublicWebsite.Services
                      MinInstallCost = 700,
                      MaxInstallCost = 1200,
                      Saving = 185,
+                     LifetimeSaving = 7800,
+                     Lifetime = 42,
                      Summary = "Inject insulation into the cavity in your external walls"
                  },
                  new Recommendation
@@ -64,6 +74,8 @@ namespace SeaPublicWebsite.Services
                      MinInstallCost = 3500,
                      MaxInstallCost = 5500,
                      Saving = 220,
+                     LifetimeSaving = 5500,
+                     Lifetime = 25,
                      Summary = "Install PV panels on your roof to generate electricity"
                  }
              };

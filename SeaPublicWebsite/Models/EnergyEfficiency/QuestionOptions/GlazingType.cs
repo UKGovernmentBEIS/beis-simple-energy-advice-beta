@@ -8,7 +8,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         DoNotKnow,
         [GovUkRadioCheckboxLabelText(Text = "Single glazing")]
         SingleGlazed,
-        [GovUkRadioCheckboxLabelText(Text = "Double or triple glazing")]
+        [GovUkRadioCheckboxLabelText(Text = "Double, triple or secondary glazing")]
         DoubleOrTripleGlazed,
         [GovUkRadioCheckboxLabelText(Text = "A mix of both")]
         Both

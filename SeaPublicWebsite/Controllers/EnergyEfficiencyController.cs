@@ -1177,6 +1177,8 @@ namespace SeaPublicWebsite.Controllers
                     MinInstallCost = r.MinInstallCost,
                     MaxInstallCost = r.MaxInstallCost,
                     Saving = r.Saving,
+                    LifetimeSaving = r.LifetimeSaving,
+                    Lifetime = r.Lifetime,
                     Summary = r.Summary
                 }
             ).ToList();
