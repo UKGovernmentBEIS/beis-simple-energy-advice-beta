@@ -104,6 +104,8 @@
                     </dd>
                 </div>
             </dl>
+            
+            @{ await Html.RenderPartialAsync("Partials/KeepACopyPartial.cshtml"); }
 
             @(Html.GovUkRadiosFor(m => m.RecommendationAction,
                 fieldsetOptions: new FieldsetViewModel
@@ -119,9 +121,7 @@
                     }
                 }
                 ))
-            
-            @{ await Html.RenderPartialAsync("Partials/KeepACopyPartial.cshtml"); }
-        
+
             @{ await Html.RenderPartialAsync("Partials/ActionButtonsPartial.cshtml"); }
 
         </form>

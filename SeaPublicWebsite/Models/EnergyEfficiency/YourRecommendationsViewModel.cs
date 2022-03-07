@@ -10,7 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Reference { get; set; }
         public int FirstReferenceId { get; set; }
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Select 'Yes' if you want to be emailed your recommendations")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Please choose an action")]
         public HasEmailAddress? HasEmailAddress { get; set; }
 
         [GovUkValidateRequired(ErrorMessageIfMissing = "Enter your email address, or select 'No'")]

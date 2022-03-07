@@ -216,7 +216,8 @@ namespace SeaPublicWebsite.ExternalServices
             if (epc.WallsDescription != null &&
                 epc.WallsDescription.Contains("cavity", StringComparison.OrdinalIgnoreCase))
             {
-                if (epc.WallsDescription.Contains("no insulation", StringComparison.OrdinalIgnoreCase))
+                if (epc.WallsDescription.Contains("no insulation", StringComparison.OrdinalIgnoreCase) 
+                    || epc.WallsDescription.Contains("partial insulation", StringComparison.OrdinalIgnoreCase))
                 {
                     return CavityWallsInsulated.No;
                 }

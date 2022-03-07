@@ -75,7 +75,12 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "Would you like us to email your reference to you?",
+                        Html = @<text>
+                                   <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-4">
+                                       Would you like us to email your reference to you?
+                                   </h1>
+                                   <p class="govuk-body">If you do not wish to provide an email, make sure you make a note of your reference number.</p>
+                                </text>,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true,
                     },

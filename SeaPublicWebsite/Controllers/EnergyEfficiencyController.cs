@@ -3,7 +3,6 @@ using System.Linq;
 using GovUkDesignSystem;
 using GovUkDesignSystem.Parsers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
@@ -1189,6 +1188,7 @@ namespace SeaPublicWebsite.Controllers
                     Reference = reference,
                     NumberOfUserRecommendations = recommendationsForUser.Count,
                     FirstReferenceId = (int)recommendationsForUser[0].Key,
+                    HasEmailAddress = userDataModel.HasEmailAddress,
                     EmailAddress = userDataModel.EmailAddress
                 }
 ;            return View("YourRecommendations", viewModel);

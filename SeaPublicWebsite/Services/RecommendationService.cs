@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SeaPublicWebsite.DataModels;
+using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
@@ -105,7 +106,7 @@ namespace SeaPublicWebsite.Services
             }
 
             // User has uninsulated cavity walls OR don't know and property 1930-1995
-            if (!UserDataHelper.HasInsulatedCavityWalls(userData))
+            if (UserDataHelper.HasCavityWalls(userData) && !UserDataHelper.HasInsulatedCavityWalls(userData))
             {
                 userRecommendationKeys.Add(RecommendationKey.InsulateCavityWalls);
             }
