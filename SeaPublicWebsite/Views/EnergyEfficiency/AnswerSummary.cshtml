@@ -222,19 +222,37 @@
                         </a>
                     </dd>
                 </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                        Is your ground floor insulated?
-                    </dt>
-                    <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                        @(Model.FloorInsulated?.GetCheckboxLabelText())
-                    </dd>
-                    <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                        <a class="govuk-link" href="@Url.Action("FloorInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
-                            Change<span class="govuk-visually-hidden"> is floor insulated</span>
-                        </a>
-                    </dd>
-                </div>
+                @if (Model.FloorConstruction != FloorConstruction.DoNotKnow)
+                {
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
+                            Is your ground floor insulated?
+                        </dt>
+                        <dd class="govuk-summary-list__value govuk-!-width-one-half">
+                            @(Model.FloorInsulated?.GetCheckboxLabelText())
+                            @if (Model.FloorInsulated == FloorInsulated.DoNotKnow)
+                            {
+                                if (Model.Epc != null && (Model?.Epc.FloorInsulated != null || Model?.Epc.ConstructionAgeBand != null))
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") floor.
+                                    </p>
+                                }
+                                else if (Model.YearBuilt.HasValue)
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-1">
+                                        Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") floor.
+                                    </p>
+                                }
+                            }
+                        </dd>
+                        <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                            <a class="govuk-link" href="@Url.Action("FloorInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                                Change<span class="govuk-visually-hidden"> is floor insulated</span>
+                            </a>
+                        </dd>
+                    </div>
+                }
             }
 
             @if (Model.PropertyType != PropertyType.ApartmentFlatOrMaisonette || Model.FlatType == FlatType.TopFloor)
@@ -262,7 +280,7 @@
                             @(Model.AccessibleLoftSpace?.GetCheckboxLabelText())
                         </dd>
                         <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                            <a class="govuk-link" href="@Url.Action("RoofInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                            <a class="govuk-link" href="@Url.Action("AccessibleLoftSpace_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
                                 Change<span class="govuk-visually-hidden"> accessible loft space</span>
                             </a>
                         </dd>

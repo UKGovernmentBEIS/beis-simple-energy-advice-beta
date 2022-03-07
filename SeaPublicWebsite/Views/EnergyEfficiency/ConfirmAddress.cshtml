@@ -27,9 +27,6 @@
             @if (Model.EPCList.Count == 1)
             {
                 @Html.HiddenFor(m => m.SelectedEpcId)
-                <span class="govuk-caption-l govuk-!-margin-bottom-4">
-                    @(QuestionSection.YourHome.GetDisplayName())
-                </span>
                 <h1 class="govuk-heading-l">
                     Is this your address?
                 </h1>

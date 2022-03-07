@@ -21,7 +21,7 @@ namespace SeaPublicWebsite.Helpers
                 || (userData.FloorInsulated == FloorInsulated.DoNotKnow
                     && (userData.Epc?.FloorInsulated == null && userData.YearBuilt < 1996
                         || userData.Epc?.FloorInsulated == FloorInsulated.Yes
-                        || userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand < 8));
+                        || userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand > 1996));
         }
 
         public static bool HasCavityWalls(UserDataModel userData)
