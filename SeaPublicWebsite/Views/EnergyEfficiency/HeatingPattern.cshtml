@@ -33,7 +33,7 @@
                     {
                         Html = @<text>
                                    <h1 class="govuk-fieldset__heading">
-                                       When do you heat your home on a typical winter day?
+                                       In winter, how do you typically heat your home?
                                    </h1>
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
@@ -43,8 +43,7 @@
                 {
                     Html = @<text>
                                <div class="govuk-body">
-                                   Heating use can vary throughout the year and from one day to the next. 
-                                   Select an option that best resembles a typical day in winter.
+                                   We know heating use can vary throughout the year and from one day to the next. Choose a number that best resembles the most common weekday in winter.  
                                </div>
                                <details class="govuk-details" data-module="govuk-details">
                                    <summary class="govuk-details__summary">
@@ -54,17 +53,10 @@
                                    </summary>
                                    <div class="govuk-details__text">
                                        <p class="govuk-body">
-                                           You may have your heating run all day but switch it off before you go to sleep at night.
+                                           You may have your heating on through the day but switch it off before you go to sleep at night.
                                        </p>
                                        <p class="govuk-body">
-                                           Households that aren’t home during the day, for example those who leave for work or school, 
-                                           may only have their heating on in the morning and in the evening. 
-                                       </p>
-                                       <p class="govuk-body">
-                                           Some people use their heating less frequently, for example only in the morning or only in the evening.
-                                       </p>
-                                       <p class="govuk-body">
-                                           Choose the closest option if you don’t see an option that matches you.
+                                           Some people may run their heating all night, or for a few hours overnight.
                                        </p>
                                    </div>
                                </details>
@@ -79,7 +71,7 @@
                                 m => m.HoursOfHeating,
                                 labelOptions: new LabelViewModel
                                 {
-                                    Text = "Number of hours heating is on in 24hr period",
+                                    Text = "Type a number between 0 (no heating) to 24 hours (heating all day and all night). Enter the total hours, even if you have separate heating periods",
                                 },
                                 placeholder: "e.g. 6"
                                 )

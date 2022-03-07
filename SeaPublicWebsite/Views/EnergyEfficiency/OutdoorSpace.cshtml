@@ -4,7 +4,7 @@
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.OutdoorSpaceViewModel
 @{
-    ViewBag.Title = "Outdoor space";
+    ViewBag.Title = "Outdoor space for heat pump";
 }
 
 @section BeforeMain {
@@ -33,7 +33,8 @@
                     {
                         Html = @<text>
                                    <h1 class="govuk-fieldset__heading">
-                                       Do you have anywhere outside your home where you could fit a heat pump?                                    </h1>
+                                       Do you have anywhere outside your home where you could fit a heat pump?                                    
+                                   </h1>
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
                     }
@@ -41,6 +42,10 @@
                 hintOptions: new HintViewModel
                 {
                     Html = @<text>
+                               <div class="govuk-body">
+                                   Most heat pump systems will need some outside space that you own where you could fit an external unit, 
+                                   about as big as a medium-sized chest of drawers. 
+                               </div>
                                <details class="govuk-details" data-module="govuk-details">
                                    <summary class="govuk-details__summary">
                                        <span class="govuk-details__summary-text">
@@ -49,8 +54,13 @@
                                    </summary>
                                    <div class="govuk-details__text">
                                        <p class="govuk-body">
-                                           Most heat pump systems will need some outside space that you own where 
-                                           you could fit an external unit, about as big as a medium-sized chest of drawers.                                        </p>
+                                           If you have a garden or own some land next to your home that would be accessible to an installer, 
+                                           then you may have enough outside space for a heat pump.                                        
+                                       </p>
+                                       <p class="govuk-body">
+                                           If you don’t have a garden or don’t own any land next to your home, then you may not have anywhere 
+                                           that could fit the external unit of a heat pump.                                        
+                                       </p>
                                    </div>
                                </details>
                             </text>
