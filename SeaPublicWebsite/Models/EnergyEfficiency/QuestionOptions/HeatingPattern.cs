@@ -12,5 +12,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         MorningAndEvening,
         [GovUkRadioCheckboxLabelText(Text = "Less frequently")]
         OnceADay,
+        Other
     }
 }

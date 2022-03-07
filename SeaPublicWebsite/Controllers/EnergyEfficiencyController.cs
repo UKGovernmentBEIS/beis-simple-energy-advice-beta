@@ -1013,6 +1013,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new HeatingPatternViewModel
             {
                 HeatingPattern = userDataModel.HeatingPattern,
+                HoursOfHeating = userDataModel.HoursOfHeating,
                 Reference = userDataModel.Reference,
                 Change = change
             };
@@ -1032,7 +1033,19 @@ namespace SeaPublicWebsite.Controllers
                 return View("HeatingPattern", viewModel);
             }
 
+            if (viewModel.HeatingPattern == HeatingPattern.Other)
+            {
+                viewModel.ParseAndValidateParameters(Request, m => m.HoursOfHeating);
+
+                if (viewModel.HasAnyErrors())
+                {
+                    return View("HeatingPattern", viewModel);
+                }
+            }
+
             userDataModel.HeatingPattern = viewModel.HeatingPattern;
+            userDataModel.HoursOfHeating = viewModel.HeatingPattern == HeatingPattern.Other ? viewModel.HoursOfHeating : null;
+
             userDataStore.SaveUserData(userDataModel);
             
             return viewModel.Change

@@ -12,5 +12,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         SolidConcrete,
         [GovUkRadioCheckboxLabelText(Text = "A mix of both")]
         Mix,
+        [GovUkRadioCheckboxLabelText(Text = "I don’t see my option listed")]
+        Other
     }
 }

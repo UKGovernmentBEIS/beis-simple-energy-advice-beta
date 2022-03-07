@@ -50,7 +50,7 @@
                     Year home was built
                 </dt>
                 <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
-                    @(Model.YearBuilt?.ToString() ?? "I don't know")
+                    @(Model.YearBuilt?.ToString() ?? "I'm not sure")
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
                     <a class="govuk-link" href="@Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
@@ -155,19 +155,38 @@
                         </a>
                     </dd>
                 </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-one-half">
-                        Is your roof fully insulated?
-                    </dt>
-                    <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
-                        @(Model.RoofInsulated?.GetCheckboxLabelText())
-                    </dd>
-                    <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                        <a class="govuk-link" href="@Url.Action("RoofInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
-                            Change<span class="govuk-visually-hidden"> is roof insulated</span>
-                        </a>
-                    </dd>
-                </div>
+                @if (Model.RoofConstruction != RoofConstruction.Flat)
+                {
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                            Do you have accessible loft space?
+                        </dt>
+                        <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                            @(Model.AccessibleLoftSpace?.GetCheckboxLabelText())
+                        </dd>
+                        <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                            <a class="govuk-link" href="@Url.Action("RoofInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                                Change<span class="govuk-visually-hidden"> accessible loft space</span>
+                            </a>
+                        </dd>
+                    </div>
+                    @if (Model.AccessibleLoftSpace != AccessibleLoftSpace.No)
+                    {
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                                Is your loft fully insulated?
+                            </dt>
+                            <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                                @(Model.RoofInsulated?.GetCheckboxLabelText())
+                            </dd>
+                            <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                                <a class="govuk-link" href="@Url.Action("RoofInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                                    Change<span class="govuk-visually-hidden"> is roof insulated</span>
+                                </a>
+                            </dd>
+                        </div>
+                    }
+                }
             }
 
             <div class="govuk-summary-list__row">
@@ -257,7 +276,18 @@
                     Heating pattern
                 </dt>
                 <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
-                    @(Model.HeatingPattern?.GetCheckboxLabelText())
+                    @{
+                        var heatingPatternText = "";
+                        if (Model.HeatingPattern == HeatingPattern.Other)
+                        {
+                            heatingPatternText = $"{Model.HeatingPattern?.GetCheckboxLabelText()} - {Model?.HoursOfHeating.ToString()} hours";
+                        }
+                        else
+                        {
+                            heatingPatternText = Model.HeatingPattern?.GetCheckboxLabelText();
+                        }
+                        <span>@(heatingPatternText)</span>
+                    }
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
                     <a class="govuk-link" href="@Url.Action("HeatingPattern_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">

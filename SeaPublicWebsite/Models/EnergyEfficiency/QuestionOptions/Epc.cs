@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using Microsoft.VisualBasic;
+using GovUkDesignSystem.Helpers;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 {
@@ -43,6 +43,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 
             return result ? number : null;
         }
-}
+    }
 }
 

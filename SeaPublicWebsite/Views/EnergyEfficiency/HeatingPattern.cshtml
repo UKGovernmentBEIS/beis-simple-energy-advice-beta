@@ -25,8 +25,8 @@
     <div class="govuk-grid-column-two-thirds">
         
         <form action="@Url.Action("HeatingPattern_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
-            
-            @(Html.GovUkRadiosFor(m => m.HeatingPattern,
+
+            @Html.GovUkRadiosFor(m => m.HeatingPattern,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -46,31 +46,46 @@
                                    Heating use can vary throughout the year and from one day to the next. 
                                    Select an option that best resembles a typical day in winter.
                                </div>
-                                <details class="govuk-details" data-module="govuk-details">
-                                    <summary class="govuk-details__summary">
-                                        <span class="govuk-details__summary-text">
-                                            Help me to answer this question
-                                        </span>
-                                    </summary>
-                                    <div class="govuk-details__text">
-                                        <p class="govuk-body">
-                                            You may have your heating run all day but switch it off before you go to sleep at night.
-                                        </p>
-                                        <p class="govuk-body">
-                                            Households that aren’t home during the day, for example those who leave for work or school, 
-                                            may only have their heating on in the morning and in the evening. 
-                                        </p>
-                                        <p class="govuk-body">
-                                            Some people use their heating less frequently, for example only in the morning or only in the evening.
-                                        </p>
-                                        <p class="govuk-body">
-                                            Choose the closest option if you don’t see an option that matches you.
-                                        </p>
-                                    </div>
-                                </details>
+                               <details class="govuk-details" data-module="govuk-details">
+                                   <summary class="govuk-details__summary">
+                                       <span class="govuk-details__summary-text">
+                                           Help me to answer this question
+                                       </span>
+                                   </summary>
+                                   <div class="govuk-details__text">
+                                       <p class="govuk-body">
+                                           You may have your heating run all day but switch it off before you go to sleep at night.
+                                       </p>
+                                       <p class="govuk-body">
+                                           Households that aren’t home during the day, for example those who leave for work or school, 
+                                           may only have their heating on in the morning and in the evening. 
+                                       </p>
+                                       <p class="govuk-body">
+                                           Some people use their heating less frequently, for example only in the morning or only in the evening.
+                                       </p>
+                                       <p class="govuk-body">
+                                           Choose the closest option if you don’t see an option that matches you.
+                                       </p>
+                                   </div>
+                               </details>
                             </text>
-                }
-            ))
+                },
+                conditionalOptions: new Dictionary<HeatingPattern?, Func<object, object>>
+                {
+                    {
+                        HeatingPattern.Other,
+                        @<text>
+                            @Html.GovUkTextInputFor(
+                                m => m.HoursOfHeating,
+                                labelOptions: new LabelViewModel
+                                {
+                                    Text = "Number of hours heating is on in 24hr period",
+                                },
+                                placeholder: "e.g. 6"
+                                )
+                         </text>
+                    }
+                })
 
             <button class="govuk-button" data-module="govuk-button">
                 Continue

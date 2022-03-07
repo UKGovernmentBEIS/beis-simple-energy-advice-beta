@@ -78,35 +78,35 @@
                                 if (Model.Epc.FloorInsulated == FloorInsulated.Yes)
                                 {
                                     <p>
-                                        Your Energy Performance Certificate suggests that your ground floor is <b>insulated</b>.
+                                        Your Energy Performance Certificate suggests you have an <b>insulated</b> floor.
                                     </p>
                                 }
                                 else
                                 {
                                     <p>
-                                        Your Energy Performance Certificate suggests that your ground floor is <b>not insulated</b>.
+                                        Your Energy Performance Certificate suggests you have an <b>uninsulated</b> floor.
                                     </p>
                                 }
                                 <p>
-                                    We will generate recommendations for you based on this information.
+                                    We can generate recommendations based on this information.
                                 </p>
                             }
                             else if (Model.YearBuilt.HasValue)
                             {
                                     <p>
-                                        Properties of your type typically
+                                        Properties of your type typically have an
                                         @if (Model.YearBuilt.Value < 1996)
                                         {
-                                            <b>do not have an insulated</b>
+                                            <b> uninsulated</b>
                                         }
                                         else
                                         {
-                                            <b>have an insulated</b>
+                                            <b>insulated</b>
                                         }
-                                        ground floor.
+                                         floor.
                                     </p>
                                     <p>
-                                        We will make recommendations based on this assumption.
+                                        We can generate recommendations based on this information.
                                     </p>
                             }                                
                             </div>

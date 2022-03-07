@@ -109,14 +109,14 @@
                         @<text>
                             @if (Model.Epc?.CavityWallsInsulated != null)
                             {
-                                if (Model.Epc.CavityWallsInsulated == CavityWallsInsulated.All)
+                                if (Model.Epc.CavityWallsInsulated == CavityWallsInsulated.No)
                                 {
                                     <div class="govuk-hint">
                                         <p>
-                                            Your Energy Performance Certificate suggests that your cavity walls are <b>fully insulated</b>.
+                                            Your Energy Performance Certificate suggests you have <b>uninsulated</b> cavity walls.
                                         </p>
                                         <p>
-                                            We will generate recommendations for you based on this information.
+                                            We can generate recommendations based on this information.
                                         </p>
                                     </div>
                                 }
@@ -124,10 +124,10 @@
                                 {
                                     <div class="govuk-hint">
                                         <p>
-                                            Your Energy Performance Certificate suggests that your cavity walls are <b>not yet fully insulated</b>.
+                                            Your Energy Performance Certificate suggests you have <b>insulated</b> cavity walls.
                                         </p>
                                         <p>
-                                            We will generate recommendations for you based on this information.
+                                            We can generate recommendations based on this information.
                                         </p>
                                     </div>
                                 }
@@ -141,7 +141,7 @@
                                             Properties of your type typically have <b>uninsulated</b> cavity walls.
                                         </p>
                                         <p>
-                                            We will generate recommendations for you based on this assumption.
+                                            We can generate recommendations based on this information.
                                         </p>
                                     </div>
                                 }
@@ -152,7 +152,7 @@
                                             Properties of your type typically have <b>insulated</b> cavity walls.
                                         </p>
                                         <p>
-                                            We will generate recommendations for you based on this assumption.
+                                            We can generate recommendations based on this information.
                                         </p>
                                     </div>
                                 }

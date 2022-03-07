@@ -95,6 +95,16 @@
                                </details>
                             </text>
                 },
+                itemHintOptions: new Dictionary<FloorConstruction?, HintViewModel>
+                {
+                    {
+                        FloorConstruction.Other,
+                        new HintViewModel
+                        {
+                            Text = "Other ground floor construction types include suspended concrete, flagstones or non-traditional build types."
+                        }
+                    }
+                },
                 conditionalOptions: new Dictionary<FloorConstruction?, Func<object, object>>
                 {
                     {
@@ -107,17 +117,17 @@
                                     if (Model.Epc.FloorConstruction == FloorConstruction.SuspendedTimber)
                                     {
                                         <p>
-                                            Your Energy Performance Certificate suggests that your ground floor is <b>suspended timber</b>.
+                                            Your Energy Performance Certificate suggests you have a <b>suspended timber</b> floor.
                                         </p>
                                     }
                                     else
                                     {
                                         <p>
-                                            Your Energy Performance Certificate suggests that your ground floor is <b>solid concrete</b>.
+                                            Your Energy Performance Certificate suggests you have a <b>solid concrete</b> floor.
                                         </p>
                                     }
                                     <p>
-                                        We will generate recommendations for you based on this information.
+                                        We can generate recommendations based on this information.
                                     </p>
                                 }
                                 else if (Model.YearBuilt.HasValue)
@@ -125,17 +135,17 @@
                                     if (Model.YearBuilt.Value < 1950)
                                     {
                                         <p>
-                                            Properties of your type typically have a <b>suspended timber</b> ground floor.
+                                            Properties of your type typically have a <b>suspended timber</b> floor.
                                         </p>
                                     }
                                     else
                                     {
                                         <p>
-                                            Properties of your type typically have a <b>solid concrete</b> ground floor.
+                                            Properties of your type typically have a <b>solid concrete</b> floor.
                                         </p>
                                     }
                                     <p>
-                                        We will make recommendations based on this assumption.
+                                        We can generate recommendations based on this information.
                                     </p>
                                 }
                             }

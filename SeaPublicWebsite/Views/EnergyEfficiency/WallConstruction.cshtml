@@ -33,13 +33,13 @@
                 </legend>
                 
                 <div class="govuk-body">
-                    Solid walls may be made from brick or stone. If your home was built before 1930, it’s likely to have solid walls. 
+                    Solid walls may be made from brick or stone. If your home was built before 1930, it’s likely to have solid walls.
                 </div>
                 <div class="govuk-body">
                     Most homes built after 1930 have cavity walls. Cavity walls have a gap, or cavity, between the wall outside and wall inside. 
                 </div>
                 <div class="govuk-body">
-                    You may have both types. For example, you have a pre-1930 home with a modern extension. 
+                    You may have both types. For example, you have a pre-1930 home with an extension built later than 1930.
                 </div>
                 
                 @{
@@ -90,6 +90,16 @@
                                    </details>
                                 </text>
                     },
+                    itemHintOptions: new Dictionary<WallConstruction?, HintViewModel>
+                    {
+                        {
+                            WallConstruction.Other,
+                            new HintViewModel
+                            {
+                                Text = "Other wall types could include cob walls, timber framed, system built, steel framed or other non-traditional build types"
+                            }
+                        }
+                    },
                     conditionalOptions: new Dictionary<WallConstruction?, Func<object, object>>
                     {
                         {
@@ -101,10 +111,10 @@
                                     {
                                         <div class="govuk-hint">
                                             <p>
-                                                Your Energy Performance Certificate suggests that you have <b>solid</b> walls.
+                                                Your Energy Performance Certificate suggests you have <b>solid</b> walls.
                                             </p>
                                             <p>
-                                                We will generate recommendations for you based on this information.
+                                                We can generate recommendations based on this information.
                                             </p>
                                         </div>
                                     }
@@ -112,10 +122,10 @@
                                     {
                                         <div class="govuk-hint">
                                             <p>
-                                                Your Energy Performance Certificate suggests that you have <b>cavity</b> walls.<br/>
+                                                Your Energy Performance Certificate suggests you have <b>cavity</b> walls.<br/>
                                             </p>
                                             <p>
-                                                We will generate recommendations for you based on this information.
+                                                We can generate recommendations based on this information.
                                             </p>
                                         </div>
                                     }
@@ -127,7 +137,7 @@
                                         Properties of your type typically have <b>@(expectedWallType)</b> walls.
                                     </p>
                                     <p>
-                                        We will generate recommendations for you based on this assumption.
+                                        We can generate recommendations based on this information.
                                     </p>
                                     </div>
                                 }
