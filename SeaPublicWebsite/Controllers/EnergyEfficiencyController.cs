@@ -650,9 +650,26 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.FloorConstruction = viewModel.FloorConstruction;
             userDataStore.SaveUserData(userDataModel);
             
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("FloorInsulated_Get", new {reference = viewModel.Reference});
+            if (viewModel.Change)
+            {
+                return RedirectToAction("AnswerSummary", "EnergyEfficiency", new { reference = viewModel.Reference });
+            }
+            else if (userDataModel.FloorConstruction == FloorConstruction.SolidConcrete 
+                || userDataModel.FloorConstruction == FloorConstruction.SuspendedTimber 
+                || userDataModel.FloorConstruction == FloorConstruction.Mix ) 
+            {
+                return RedirectToAction("FloorInsulated_Get", new { reference = viewModel.Reference });
+            }
+            else if (userDataModel.PropertyType == PropertyType.House ||
+                     userDataModel.PropertyType == PropertyType.Bungalow ||
+                     (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.TopFloor))
+            {
+                return RedirectToAction("RoofConstruction_Get", new { reference = viewModel.Reference });
+            }
+            else
+            {
+                return RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference });
+            }
         }
 
         

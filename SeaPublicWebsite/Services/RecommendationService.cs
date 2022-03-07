@@ -2,6 +2,7 @@
 using System.Linq;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.Models.EnergyEfficiency;
+using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Services
@@ -92,7 +93,7 @@ namespace SeaPublicWebsite.Services
             }
 
             // User has uninsulated cavity walls OR don't know and property 1930-1995
-            if (HasUnInsulatedCavityWalls(userData))
+            if (!UserDataHelper.HasInsulatedCavityWalls(userData))
             {
                 userRecommendationKeys.Add(RecommendationKey.InsulateCavityWalls);
             }
@@ -108,8 +109,8 @@ namespace SeaPublicWebsite.Services
 
             // Not for mid or top floor flat, not for solid floors or properties with insulation OR don't know and > 1996
             if (userData.FlatType != FlatType.TopFloor && userData.FlatType != FlatType.MiddleFloor
-                && !HasSolidFloor(userData)
-                && !HasInsulatedFloor(userData))
+                && !UserDataHelper.HasSolidFloor(userData)
+                && !UserDataHelper.HasInsulatedFloor(userData))
             {
                 userRecommendationKeys.Add(RecommendationKey.GroundFloorInsulation);
             }
@@ -121,35 +122,6 @@ namespace SeaPublicWebsite.Services
             };
 
             return Recommendations.Where(r => userRecommendationKeys.Contains(r.Key)).ToList();
-        }
-
-        public static bool HasSolidFloor(UserDataModel userData)
-        {
-            return userData.FloorConstruction == FloorConstruction.SolidConcrete
-                || (userData.FloorConstruction == FloorConstruction.DoNotKnow
-                    && (userData.Epc?.FloorConstruction == null && userData.YearBuilt is not null and < 1950
-                        || userData.Epc?.FloorConstruction == FloorConstruction.SolidConcrete
-                        || (userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand < 3))
-                    );
-        }
-
-        public static bool HasInsulatedFloor(UserDataModel userData)
-        {
-            return userData.FloorInsulated == FloorInsulated.Yes
-                || (userData.FloorInsulated == FloorInsulated.DoNotKnow
-                    && (userData.Epc?.FloorInsulated == null && userData.YearBuilt < 1996
-                        || userData.Epc?.FloorInsulated == FloorInsulated.Yes
-                        || userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand < 8));
-        }
-
-        public static bool HasUnInsulatedCavityWalls(UserDataModel userData)
-        {
-            return (userData.WallConstruction != WallConstruction.Solid
-                && (userData.CavityWallsInsulated is CavityWallsInsulated.Some or CavityWallsInsulated.No
-                    || (userData.CavityWallsInsulated == CavityWallsInsulated.DoNotKnow
-                        && (userData.Epc?.CavityWallsInsulated == null && userData.YearBuilt is >= 1930 and <= 1995
-                            || userData.Epc?.WallConstruction == WallConstruction.Cavity && userData.Epc?.CavityWallsInsulated != CavityWallsInsulated.All
-                            || userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand is >= 2 and <= 7))));
         }
     }
 }

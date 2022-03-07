@@ -1,7 +1,8 @@
 @using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using GovUkDesignSystem.Helpers
-@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+@using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.DataModels.UserDataModel
 @{
     ViewBag.Title = "Your answers";
@@ -30,10 +31,10 @@
     
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                     Building type
                 </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                <dd class="govuk-summary-list__value govuk-!-width-one-half">
                     @(Model.PropertyType == PropertyType.House ? Model.HouseType?.GetCheckboxLabelText() : null)
                     @(Model.PropertyType == PropertyType.Bungalow ? Model.BungalowType?.GetCheckboxLabelText() : null)
                     @(Model.PropertyType == PropertyType.ApartmentFlatOrMaisonette ? Model.FlatType?.GetCheckboxLabelText() : null)
@@ -46,10 +47,10 @@
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                     Year home was built
                 </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                <dd class="govuk-summary-list__value govuk-!-width-one-half">
                     @(Model.YearBuilt?.ToString() ?? "I'm not sure")
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
@@ -59,11 +60,44 @@
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                     Wall type 
                 </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                <dd class="govuk-summary-list__value govuk-!-width-one-half">
                     @(Model.WallConstruction?.GetCheckboxLabelText())
+                    @if (Model.WallConstruction == WallConstruction.DoNotKnow)
+                    {
+                        if (Model.Epc != null && (Model?.Epc.WallConstruction != null || Model?.Epc.ConstructionAgeBand != null))
+                        {
+                            if (UserDataHelper.HasCavityWalls(Model))
+                            {
+                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls.
+                                </p>
+                            }
+                            else if (UserDataHelper.HasSolidWalls(Model))
+                            {
+                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls.
+                                </p>
+                            }
+                        }
+                        else if (Model.YearBuilt.HasValue)
+                        {
+                            if (UserDataHelper.HasCavityWalls(Model))
+                            {
+                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls.
+                                </p>
+                            }
+                            else if (UserDataHelper.HasSolidWalls(Model))
+                            {
+                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls.
+                                </p>                                
+                            }
+                        }
+                    }
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
                     <a class="govuk-link" href="@Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
@@ -77,11 +111,26 @@
                  Model.WallConstruction == WallConstruction.Mixed)
             {
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                         Are your cavity walls fully insulated? 
                     </dt>
-                    <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    <dd class="govuk-summary-list__value govuk-!-width-one-half">
                         @(Model.CavityWallsInsulated?.GetCheckboxLabelText())
+                        @if (Model.CavityWallsInsulated == CavityWallsInsulated.DoNotKnow)
+                        {
+                            if (Model.Epc != null && (Model?.Epc.CavityWallsInsulated != null || Model?.Epc.ConstructionAgeBand != null))
+                            {
+                                <p class="govuk-body-s sea-assumed-answers">
+                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls.
+                                </p>
+                            }
+                            else if (Model.YearBuilt.HasValue)
+                            {
+                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls.
+                                </p>
+                            }
+                        }
                     </dd>
                     <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
                         <a class="govuk-link" href="@Url.Action("CavityWallsInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
@@ -95,11 +144,26 @@
                  Model.WallConstruction == WallConstruction.Mixed)
             {
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                         Are your solid walls fully insulated? 
                     </dt>
-                    <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    <dd class="govuk-summary-list__value govuk-!-width-one-half">
                         @(Model.SolidWallsInsulated?.GetCheckboxLabelText())
+                        @if (Model.SolidWallsInsulated == SolidWallsInsulated.DoNotKnow)
+                        {
+                            if (Model.Epc != null && (Model?.Epc.SolidWallsInsulated != null || Model?.Epc.ConstructionAgeBand != null))
+                            {
+                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls.
+                                </p>
+                            }
+                            else if (Model.YearBuilt.HasValue)
+                            {
+                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-1">
+                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls.
+                                </p>
+                            }
+                        }
                     </dd>
                     <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
                         <a class="govuk-link" href="@Url.Action("SolidWallsInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
@@ -113,11 +177,44 @@
             @if (Model.PropertyType != PropertyType.ApartmentFlatOrMaisonette || Model.FlatType == FlatType.GroundFloor)
             {
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                         Floor construction 
                     </dt>
-                    <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    <dd class="govuk-summary-list__value govuk-!-width-one-half">
                         @(Model.FloorConstruction?.GetCheckboxLabelText())
+                        @if (Model.FloorConstruction == FloorConstruction.DoNotKnow)
+                        {
+                            if (Model.Epc != null && (Model?.Epc.FloorConstruction != null || Model?.Epc.ConstructionAgeBand != null))
+                            {
+                                if (UserDataHelper.HasSolidFloor(Model))
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") solid concrete floor.
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") suspended timber floor.
+                                    </p>
+                                }
+                            }
+                            else if (Model.YearBuilt.HasValue)
+                            {
+                                if (UserDataHelper.HasSolidFloor(Model))
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") solid concrete floor.
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") suspended timber floor.
+                                    </p>                                
+                                }
+                            }
+                        }
                     </dd>
                     <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
                         <a class="govuk-link" href="@Url.Action("FloorConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
@@ -126,10 +223,10 @@
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                         Is your ground floor insulated?
                     </dt>
-                    <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    <dd class="govuk-summary-list__value govuk-!-width-one-half">
                         @(Model.FloorInsulated?.GetCheckboxLabelText())
                     </dd>
                     <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
@@ -143,10 +240,10 @@
             @if (Model.PropertyType != PropertyType.ApartmentFlatOrMaisonette || Model.FlatType == FlatType.TopFloor)
             {
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                    <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                         Is any part of your roof flat? 
                     </dt>
-                    <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                    <dd class="govuk-summary-list__value govuk-!-width-one-half">
                         @(Model.RoofConstruction?.GetCheckboxLabelText())
                     </dd>
                     <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
@@ -158,10 +255,10 @@
                 @if (Model.RoofConstruction != RoofConstruction.Flat)
                 {
                     <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                        <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                             Do you have accessible loft space?
                         </dt>
-                        <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                        <dd class="govuk-summary-list__value govuk-!-width-one-half">
                             @(Model.AccessibleLoftSpace?.GetCheckboxLabelText())
                         </dd>
                         <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
@@ -170,13 +267,13 @@
                             </a>
                         </dd>
                     </div>
-                    @if (Model.AccessibleLoftSpace != AccessibleLoftSpace.No)
+                    @if (Model.AccessibleLoftSpace == AccessibleLoftSpace.Yes)
                     {
                         <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                            <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                                 Is your loft fully insulated?
                             </dt>
-                            <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                            <dd class="govuk-summary-list__value govuk-!-width-one-half">
                                 @(Model.RoofInsulated?.GetCheckboxLabelText())
                             </dd>
                             <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
@@ -190,10 +287,10 @@
             }
 
             <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                     Glazing type 
                 </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                <dd class="govuk-summary-list__value govuk-!-width-one-half">
                     @(Model.GlazingType?.GetCheckboxLabelText())
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
@@ -203,10 +300,10 @@
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                     Outdoor space
                 </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                <dd class="govuk-summary-list__value govuk-!-width-one-half">
                     @(Model.HasOutdoorSpace?.GetCheckboxLabelText())
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
@@ -216,10 +313,10 @@
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                     Heating system 
                 </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                <dd class="govuk-summary-list__value govuk-!-width-one-half">
                     @(Model.HeatingType?.GetCheckboxLabelText())
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
@@ -230,10 +327,10 @@
             </div>
             
             <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                     Hot water cylinder 
                 </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                <dd class="govuk-summary-list__value govuk-!-width-one-half">
                     @if (Model.HasHotWaterCylinder.HasValue)
                     {
                         @(Model.HasHotWaterCylinder?.GetCheckboxLabelText())
@@ -259,10 +356,10 @@
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                     Size of household 
                 </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                <dd class="govuk-summary-list__value govuk-!-width-one-half">
                     @(Model.NumberOfOccupants?.ToString() ?? "Question skipped")
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
@@ -272,10 +369,10 @@
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-half">
+                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                     Heating pattern
                 </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+                <dd class="govuk-summary-list__value govuk-!-width-one-half">
                     @{
                         var heatingPatternText = "";
                         if (Model.HeatingPattern == HeatingPattern.Other)
@@ -296,10 +393,10 @@
                 </dd>
             </div>
         <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key govuk-!-width-one-half">
+            <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                 Temperature
             </dt>
-            <dd class="govuk-summary-list__value govuk-!-width-one-quarter">
+            <dd class="govuk-summary-list__value govuk-!-width-one-half">
                 @(Model.Temperature.HasValue ? Model.Temperature.Value + "°C" : "Question skipped")
             </dd>
             <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
