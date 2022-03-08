@@ -76,6 +76,12 @@
                     You have a central heating system with radiators and you do not already have a full set of controls.
                 </li>
             </ul>
+            
+            <h2 class="govuk-heading-m ">
+                What you could save
+            </h2>
+
+            <p class="govuk-body">Heating controls are typically expected to last <b>around @Model.UserRecommendation.Lifetime years</b></p>
 
             @{ await Html.RenderPartialAsync("Partials/WhatYouCouldSavePartial.cshtml", Model); }
             
@@ -107,7 +113,7 @@
                     </dd>
                 </div>
             </dl>
-   
+
             @{ await Html.RenderPartialAsync("Partials/KeepACopyPartial.cshtml"); }
 
             @(Html.GovUkRadiosFor(m => m.RecommendationAction,

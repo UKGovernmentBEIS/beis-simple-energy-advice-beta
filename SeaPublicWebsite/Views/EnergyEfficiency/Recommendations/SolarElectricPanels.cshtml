@@ -74,6 +74,12 @@
                 </strong>
             </div>
 
+            <h2 class="govuk-heading-m ">
+                What you could save
+            </h2>
+
+            <p class="govuk-body">Solar panels are typically expected to last <b>around @Model.UserRecommendation.Lifetime years</b></p>
+
             @{ await Html.RenderPartialAsync("Partials/WhatYouCouldSavePartial.cshtml", Model); }
             
             <div class="govuk-warning-text">
