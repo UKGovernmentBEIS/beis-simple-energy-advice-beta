@@ -6,10 +6,10 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 {
     public enum BungalowType
     {
-        [GovUkRadioCheckboxLabelText(Text = "Detatched")]
-        Detatched,
-        [GovUkRadioCheckboxLabelText(Text = "Semi-detatched")]
-        SemiDetatched,
+        [GovUkRadioCheckboxLabelText(Text = "Detached")]
+        Detached,
+        [GovUkRadioCheckboxLabelText(Text = "Semi-detached")]
+        SemiDetached,
         [GovUkRadioCheckboxLabelText(Text = "Terraced")]
         Terraced,
         [GovUkRadioCheckboxLabelText(Text = "End terrace")]
