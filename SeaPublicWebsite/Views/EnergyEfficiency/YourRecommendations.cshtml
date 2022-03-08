@@ -69,6 +69,7 @@
         
         <form method="post" action="@Url.Action("EmailAddress_Post", "EnergyEfficiency")">
             @Html.HiddenFor(m => m.FirstReferenceId)
+            @Html.HiddenFor(m => m.NumberOfUserRecommendations)
             @Html.GovUkRadiosFor(
                 m => m.HasEmailAddress,
                 fieldsetOptions: new FieldsetViewModel
