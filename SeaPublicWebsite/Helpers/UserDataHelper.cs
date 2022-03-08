@@ -9,9 +9,9 @@ namespace SeaPublicWebsite.Helpers
         {
             return userData.FloorConstruction == FloorConstruction.SolidConcrete
                 || (userData.FloorConstruction == FloorConstruction.DoNotKnow
-                    && (userData.Epc?.FloorConstruction == null && userData.YearBuilt is not null and < 1950
+                    && (userData.Epc?.FloorConstruction == null && userData.YearBuilt is not null and > 1950
                         || userData.Epc?.FloorConstruction == FloorConstruction.SolidConcrete
-                        || (userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand < 3))
+                        || (userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand > 3))
                     );
         }
 
