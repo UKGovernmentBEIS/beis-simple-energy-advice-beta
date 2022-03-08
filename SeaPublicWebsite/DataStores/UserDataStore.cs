@@ -25,7 +25,7 @@ namespace SeaPublicWebsite.DataStores
                 };
             }
 
-            return JsonConvert.DeserializeObject<UserDataModel>(fileRepository.Read(reference));
+            return JsonConvert.DeserializeObject<UserDataModel>(fileRepository.Read(reference.ToUpper()));
         }
         
         public bool IsReferenceValid(string reference)
