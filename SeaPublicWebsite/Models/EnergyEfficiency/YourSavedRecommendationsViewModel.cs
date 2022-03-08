@@ -26,7 +26,11 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         {
             return UserDataModel.UserRecommendations.Where(r => r.RecommendationAction == RecommendationAction.DecideLater).ToList();
         }
-         
+        public List<UserRecommendation> GetDiscardedRecommendations()
+        {
+            return UserDataModel.UserRecommendations.Where(r => r.RecommendationAction == RecommendationAction.Discard).ToList();
+        }
+
         public string GetTotalSavingText()
         {
             var saving = GetSavedRecommendations().Sum(r => r.Saving);

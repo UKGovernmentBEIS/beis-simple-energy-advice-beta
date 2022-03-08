@@ -264,3 +264,26 @@
         display: none;
     }
 }
+
+.sea-change-decision-link {
+    white-space: nowrap;
+}
+
+.sea-decide-later-summary-list {
+    border-top: 2px solid govuk-colour("blue");
+    border-bottom: 0;
+}
+
+.sea-action-plan-margin-right {
+    @media (min-width: 641px) {
+        margin-right: govuk-spacing(9);
+    }
+
+    @media (max-width: 641px) {
+        margin-right: govuk-spacing(3);
+    }
+}
+
+.sea-decide-summary-list-cell {
+    padding-top: govuk-spacing(4);
+}

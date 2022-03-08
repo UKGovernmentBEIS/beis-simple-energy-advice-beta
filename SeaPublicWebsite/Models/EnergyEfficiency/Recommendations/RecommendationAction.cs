@@ -6,7 +6,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.Recommendations
     {
         [GovUkRadioCheckboxLabelText(Text = "Yes, save this recommendation to my action plan")]
         SaveToActionPlan,
-        [GovUkRadioCheckboxLabelText(Text = "Maybe, but I’d like to decide later")]
+        [GovUkRadioCheckboxLabelText(Text = "Maybe, but I’d like more information")]
         DecideLater,
         [GovUkRadioCheckboxLabelText(Text = "No, discard this recommendation")]
         Discard,
