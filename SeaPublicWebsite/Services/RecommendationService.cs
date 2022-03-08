@@ -81,16 +81,6 @@ namespace SeaPublicWebsite.Services
                  }
              };
 
-        public static List<Recommendation> GetRecommendations()
-        {
-            return Recommendations;
-        }
-
-        public static Recommendation GetRecommendation(int id)
-        {
-            return Recommendations.First(r => (int)r.Key == id);
-        }
-
         public static List<Recommendation> GetRecommendationsForUser(UserDataModel userData)
         {
             var userRecommendationKeys = new List<RecommendationKey>
@@ -115,7 +105,8 @@ namespace SeaPublicWebsite.Services
             if (userData.FlatType != FlatType.GroundFloor && userData.FlatType != FlatType.MiddleFloor
                 && userData.RoofConstruction != RoofConstruction.Flat
                 && userData.AccessibleLoftSpace == AccessibleLoftSpace.Yes
-                && userData.RoofInsulated != RoofInsulated.Yes)
+                && userData.RoofInsulated != RoofInsulated.Yes
+                && !UserDataHelper.HasRoofInsulation(userData))
             {
                 userRecommendationKeys.Add(RecommendationKey.AddLoftInsulation);
             }

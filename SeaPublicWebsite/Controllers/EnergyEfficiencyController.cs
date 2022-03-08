@@ -805,7 +805,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 RoofInsulated = userDataModel.RoofInsulated,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                YearBuilt = userDataModel.YearBuilt
             };
 
             return View("RoofInsulated", viewModel);

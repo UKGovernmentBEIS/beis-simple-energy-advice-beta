@@ -55,5 +55,12 @@ namespace SeaPublicWebsite.Helpers
                     || userData.Epc?.ConstructionAgeBand > HomeAge.From1991To1995
                     || userData.Epc == null && userData.YearBuilt > 1991);
         }
-    }
+
+        public static bool HasRoofInsulation(UserDataModel userData)
+        {
+            return userData.RoofConstruction is RoofConstruction.Pitched or RoofConstruction.Mixed
+                   && userData.AccessibleLoftSpace is AccessibleLoftSpace.Yes or AccessibleLoftSpace.DoNotKnow
+                   && userData.YearBuilt > 2002;
+        }
+    } 
 }

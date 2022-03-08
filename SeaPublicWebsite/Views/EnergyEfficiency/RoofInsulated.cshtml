@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.RoofInsulatedViewModel
 @{
     ViewBag.Title = "Roof Insulated";
@@ -51,13 +52,42 @@
                                    </summary>
                                    <div class="govuk-details__text">
                                        <p class="govuk-body">
-                                           A fully insulated loft is insulated to current building regulations. This might be with 300mm (six inches) of mineral 
+                                           A fully insulated loft is insulated to current building regulations. 
+                                       </p>
+                                       <p class="govuk-body">
+                                           This might be with 300mm (six inches) of mineral 
                                            wool insulation laid on the “floor” of the loft, or foam board insulation fitted between and over the sloping rafters 
                                            that make up the structure of the pitched roof.
                                        </p>
                                    </div>
                                </details>
                             </text>
+                },
+                conditionalOptions: new Dictionary<RoofInsulated?, Func<object, object>>
+                {
+                    {
+                        RoofInsulated.DoNotKnow,
+                        @<text>
+                            @if (Model.YearBuilt.HasValue)
+                            {
+                                <p class="govuk-body">
+                                    Properties of your type typically
+                                    @if (Model.YearBuilt.Value > 2002)
+                                    {
+                                        <b> do have </b>
+                                    }
+                                    else
+                                    {
+                                        <b> do not have </b>
+                                    }
+                                    a fully insulated loft.
+                                </p>
+                                <p class="govuk-body">
+                                    We can generate recommendations based on this information.
+                                </p>
+                            }          
+                         </text>
+                        }
                 }
                 ))
 

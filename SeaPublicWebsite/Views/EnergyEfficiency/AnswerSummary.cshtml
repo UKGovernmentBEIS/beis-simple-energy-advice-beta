@@ -72,13 +72,13 @@
                             if (UserDataHelper.HasCavityWalls(Model))
                             {
                                 <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls.
+                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls
                                 </p>
                             }
                             else if (UserDataHelper.HasSolidWalls(Model))
                             {
                                 <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls.
+                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls
                                 </p>
                             }
                         }
@@ -87,13 +87,13 @@
                             if (UserDataHelper.HasCavityWalls(Model))
                             {
                                 <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls.
+                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls
                                 </p>
                             }
                             else if (UserDataHelper.HasSolidWalls(Model))
                             {
                                 <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls.
+                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls
                                 </p>                                
                             }
                         }
@@ -121,13 +121,13 @@
                             if (Model.Epc != null && (Model?.Epc.CavityWallsInsulated != null || Model?.Epc.ConstructionAgeBand != null))
                             {
                                 <p class="govuk-body-s sea-assumed-answers">
-                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls.
+                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls
                                 </p>
                             }
                             else if (Model.YearBuilt.HasValue)
                             {
                                 <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls.
+                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls
                                 </p>
                             }
                         }
@@ -154,13 +154,13 @@
                             if (Model.Epc != null && (Model?.Epc.SolidWallsInsulated != null || Model?.Epc.ConstructionAgeBand != null))
                             {
                                 <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls.
+                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls
                                 </p>
                             }
                             else if (Model.YearBuilt.HasValue)
                             {
                                 <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-1">
-                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls.
+                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls
                                 </p>
                             }
                         }
@@ -189,13 +189,13 @@
                                 if (UserDataHelper.HasSolidFloor(Model))
                                 {
                                     <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                        Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") solid concrete floor.
+                                        Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") solid concrete floor
                                     </p>
                                 }
                                 else
                                 {
                                     <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                        Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") suspended timber floor.
+                                        Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") suspended timber floor
                                     </p>
                                 }
                             }
@@ -204,13 +204,13 @@
                                 if (UserDataHelper.HasSolidFloor(Model))
                                 {
                                     <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                        Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") solid concrete floor.
+                                        Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") solid concrete floor
                                     </p>
                                 }
                                 else
                                 {
                                     <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                        Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") suspended timber floor.
+                                        Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") suspended timber floor
                                     </p>                                
                                 }
                             }
@@ -235,13 +235,13 @@
                                 if (Model.Epc != null && (Model?.Epc.FloorInsulated != null || Model?.Epc.ConstructionAgeBand != null))
                                 {
                                     <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                        Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") floor.
+                                        Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") floor
                                     </p>
                                 }
                                 else if (Model.YearBuilt.HasValue)
                                 {
                                     <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-1">
-                                        Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") floor.
+                                        Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") floor
                                     </p>
                                 }
                             }
@@ -293,6 +293,15 @@
                             </dt>
                             <dd class="govuk-summary-list__value govuk-!-width-one-half">
                                 @(Model.RoofInsulated?.GetCheckboxLabelText())
+                                @if (Model.RoofInsulated == RoofInsulated.DoNotKnow)
+                                {
+                                    if (Model.YearBuilt.HasValue)
+                                    {
+                                        <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-1">
+                                            Based on your type of property, we will assume that you @(UserDataHelper.HasRoofInsulation(Model) ? "have " : "do not have") a fully insulated loft
+                                        </p>
+                                    }
+                                }
                             </dd>
                             <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
                                 <a class="govuk-link" href="@Url.Action("RoofInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
