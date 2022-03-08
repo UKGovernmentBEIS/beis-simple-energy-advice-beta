@@ -30,7 +30,7 @@ namespace SeaPublicWebsite.DataStores
         
         public bool IsReferenceValid(string reference)
         {
-            return fileRepository.GetFiles("").Contains(reference);
+            return fileRepository.GetFiles("").Contains(reference.ToUpper());
         }
         
         public void SaveUserData(UserDataModel userDataModel)
