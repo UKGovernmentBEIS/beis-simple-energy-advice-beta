@@ -50,7 +50,7 @@
                     }
                     else if (Model.Epc?.ConstructionAgeBand != null)
                     {
-                        expectedWallType = (int) Model.Epc.ConstructionAgeBand < (int) HomeAge.From1930To1949 ? "solid" : "cavity";
+                        expectedWallType = Model.Epc.ConstructionAgeBand < HomeAge.From1930To1949 ? "solid" : "cavity";
                     }
                     else
                     {

@@ -67,7 +67,7 @@
                     @(Model.WallConstruction?.GetCheckboxLabelText())
                     @if (Model.WallConstruction == WallConstruction.DoNotKnow)
                     {
-                        if (Model.Epc != null && (Model?.Epc.WallConstruction != null || Model?.Epc.ConstructionAgeBand != null))
+                        if (Model?.Epc?.WallConstruction != null || !Model.YearBuilt.HasValue &&  Model?.Epc.ConstructionAgeBand != null)
                         {
                             if (UserDataHelper.HasCavityWalls(Model))
                             {
@@ -184,7 +184,7 @@
                         @(Model.FloorConstruction?.GetCheckboxLabelText())
                         @if (Model.FloorConstruction == FloorConstruction.DoNotKnow)
                         {
-                            if (Model.Epc != null && (Model?.Epc.FloorConstruction != null || Model?.Epc.ConstructionAgeBand != null))
+                            if (Model?.Epc?.FloorConstruction != null || !Model.YearBuilt.HasValue && Model?.Epc?.ConstructionAgeBand != null)
                             {
                                 if (UserDataHelper.HasSolidFloor(Model))
                                 {
@@ -192,7 +192,7 @@
                                         Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") solid concrete floor
                                     </p>
                                 }
-                                else
+                                else if (UserDataHelper.HasSuspendedFloor(Model))
                                 {
                                     <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
                                         Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") suspended timber floor
@@ -207,7 +207,7 @@
                                         Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") solid concrete floor
                                     </p>
                                 }
-                                else
+                                else if (UserDataHelper.HasSuspendedFloor(Model))
                                 {
                                     <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
                                         Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") suspended timber floor
@@ -222,7 +222,7 @@
                         </a>
                     </dd>
                 </div>
-                @if (Model.FloorConstruction != FloorConstruction.DoNotKnow || Model.FloorConstruction != FloorConstruction.Other)
+                @if (Model.FloorConstruction != FloorConstruction.DoNotKnow && Model.FloorConstruction != FloorConstruction.Other)
                 {
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
@@ -232,7 +232,7 @@
                             @(Model.FloorInsulated?.GetCheckboxLabelText())
                             @if (Model.FloorInsulated == FloorInsulated.DoNotKnow)
                             {
-                                if (Model.Epc != null && (Model?.Epc.FloorInsulated != null || Model?.Epc.ConstructionAgeBand != null))
+                                if (Model?.Epc?.FloorConstruction != null || !Model.YearBuilt.HasValue && Model?.Epc?.ConstructionAgeBand != null)
                                 {
                                     <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
                                         Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model) ? "insulated" : "uninsulated") floor

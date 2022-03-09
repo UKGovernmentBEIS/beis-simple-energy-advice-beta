@@ -112,7 +112,7 @@ namespace SeaPublicWebsite.Services
 
             // Not for mid or top floor flat, not for solid floors or properties with insulation OR don't know and > 1996
             if (userData.FlatType != FlatType.TopFloor && userData.FlatType != FlatType.MiddleFloor
-                && !UserDataHelper.HasSolidFloor(userData)
+                && UserDataHelper.HasSuspendedFloor(userData)
                 && !UserDataHelper.HasInsulatedFloor(userData))
             {
                 userRecommendationKeys.Add(RecommendationKey.GroundFloorInsulation);
