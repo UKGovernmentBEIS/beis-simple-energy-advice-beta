@@ -9,9 +9,11 @@ namespace SeaPublicWebsite.Helpers
         {
             return userData.FloorConstruction == FloorConstruction.SolidConcrete
                 || (userData.FloorConstruction == FloorConstruction.DoNotKnow
-                    && (userData.Epc?.FloorConstruction == null && userData.YearBuilt is not null and > 1950
-                        || userData.Epc?.FloorConstruction == FloorConstruction.SolidConcrete
-                        || (userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand > 3))
+                    && (userData.Epc?.FloorConstruction == FloorConstruction.SolidConcrete
+                        || (userData.Epc?.FloorConstruction == null
+                            && (userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand > (int)HomeAge.From1950To1966)
+                            || userData.YearBuilt > 1950)
+                        )
                     );
         }
 
@@ -19,9 +21,12 @@ namespace SeaPublicWebsite.Helpers
         {
             return userData.FloorInsulated == FloorInsulated.Yes
                 || (userData.FloorInsulated == FloorInsulated.DoNotKnow
-                    && (userData.Epc?.FloorInsulated == null && userData.YearBuilt < 1996
-                        || userData.Epc?.FloorInsulated == FloorInsulated.Yes
-                        || userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand > 1996));
+                    && (userData.Epc?.FloorInsulated == FloorInsulated.Yes
+                        || (userData.Epc?.FloorInsulated == null 
+                            && (userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand >= (int)HomeAge.From1996To2002)
+                            || userData.YearBuilt >= 1996)
+                        )
+                    );
         }
 
         public static bool HasCavityWalls(UserDataModel userData)
@@ -29,8 +34,10 @@ namespace SeaPublicWebsite.Helpers
             return userData.WallConstruction == WallConstruction.Cavity
                 || (userData.WallConstruction == WallConstruction.DoNotKnow
                     && (userData.Epc?.WallConstruction == WallConstruction.Cavity
-                        || userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand >= (int)HomeAge.From1930To1949
-                        || userData.Epc == null && userData.YearBuilt >= 1930)
+                        || (userData.Epc?.WallConstruction == null 
+                            && (userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand >= (int)HomeAge.From1930To1949)
+                            || userData.YearBuilt >= 1930)
+                        )
                     ); 
         }
         public static bool HasSolidWalls(UserDataModel userData)
@@ -38,8 +45,10 @@ namespace SeaPublicWebsite.Helpers
             return userData.WallConstruction == WallConstruction.Solid
                 || (userData.WallConstruction == WallConstruction.DoNotKnow
                     && (userData.Epc?.WallConstruction == WallConstruction.Solid
-                        || userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand < (int)HomeAge.From1930To1949
-                        || userData.Epc == null && userData.YearBuilt < 1930)
+                        || (userData.Epc?.WallConstruction == null 
+                            && (userData.Epc?.ConstructionAgeBand != null && (int)userData.Epc?.ConstructionAgeBand < (int)HomeAge.From1930To1949)
+                            || userData.YearBuilt < 1930)
+                        )
                     );
         }
 
@@ -53,7 +62,7 @@ namespace SeaPublicWebsite.Helpers
             return HasCavityWalls(userData)
                 && (userData.Epc?.CavityWallsInsulated == CavityWallsInsulated.All
                     || userData.Epc?.ConstructionAgeBand > HomeAge.From1991To1995
-                    || userData.Epc == null && userData.YearBuilt > 1991);
+                    || userData.YearBuilt > 1991);
         }
 
         public static bool HasRoofInsulation(UserDataModel userData)
