@@ -20,6 +20,7 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+
         <h1 class="govuk-heading-xl">
             You may be able to make some improvements to your home
         </h1>
@@ -54,7 +55,7 @@
                 They may not be the same as the costs and savings you see in practice, as every property is unique.
             </p>
         </div>
-        
+
         <h2 class="govuk-heading-m">
             Getting back to the service once you leave
         </h2>
@@ -66,7 +67,7 @@
             <span class="govuk-caption-l">Your reference</span>
             <h2 class="govuk-heading-l" id="subsection-title">@Model.Reference</h2>
         </aside>
-        
+
         <form method="post" action="@Url.Action("EmailAddress_Post", "EnergyEfficiency")">
             @Html.HiddenFor(m => m.FirstReferenceId)
             @Html.HiddenFor(m => m.NumberOfUserRecommendations)
