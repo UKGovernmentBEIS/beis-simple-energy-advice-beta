@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @{
     ViewBag.Title = "Only available to homeowners in England and Wales";
 }
@@ -27,19 +28,24 @@
                 This service currently can only provide advice for people who own their own home in England and Wales
             </div>
         </div>
-
-        <h2 class="govuk-heading-m">Other services that might be helpful to you</h2>
-
-        <p class="govuk-body">
-            We’ve sent your application to Hackney Electoral Register Office.
-        </p>
-        <p class="govuk-body">
-            They will contact you either to confirm your registration, or to ask for more information.
-        </p>
-
-        <p class="govuk-body">
-            <a href="#" class="govuk-link">What did you think of this service?</a> (takes 30 seconds)
-        </p>
         
+        @if (ViewBag.Country is Country.Scotland or Country.NorthernIreland)
+        {
+            <h2 class="govuk-heading-m">Other services that might be helpful to you</h2>
+
+            @if (ViewBag.Country == Country.Scotland)
+            {
+                <p class="govuk-body">
+                    Visit <a href="https://www.homeenergyscotland.org/" target="_blank" class="govuk-link">Home Energy Scotland</a> to help you find ways to improve your property’s energy efficiency.
+                </p>
+            }
+            else
+            {
+                <p class="govuk-body">
+                    Visit <a href="https://www.nidirect.gov.uk/" target="_blank" class="govuk-link">NI Direct</a> to help you find ways to improve your property’s energy efficiency.
+                </p>
+            }
+        }
+
     </div>
 </div>

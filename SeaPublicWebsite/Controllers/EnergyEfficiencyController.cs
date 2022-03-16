@@ -59,7 +59,7 @@ namespace SeaPublicWebsite.Controllers
 
                 if (!userDataStore.IsReferenceValid(viewModel.Reference))
                 {
-                    viewModel.AddErrorFor(m => m.Reference, "We could not find this reference. Are you sure you have copied it correctly?");
+                    viewModel.AddErrorFor(m => m.Reference, "Check you have typed the reference correctly. Reference must be 8 characters.");
                     return View("NewOrReturningUser", viewModel);
                 }
                 
@@ -157,7 +157,10 @@ namespace SeaPublicWebsite.Controllers
         [HttpGet("service-unsuitable/{from}/{reference}")]
         public IActionResult ServiceUnsuitable(string from, string reference)
         {
+            var userDataModel = userDataStore.LoadUserData(reference);
             ViewBag.From = from;
+            ViewBag.Country = userDataModel.Country;
+            
             return View("ServiceUnsuitable", reference);
         }
 

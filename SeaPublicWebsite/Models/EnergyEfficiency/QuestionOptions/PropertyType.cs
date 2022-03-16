@@ -10,7 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         House,
         [GovUkRadioCheckboxLabelText(Text = "Bungalow")]
         Bungalow,
-        [GovUkRadioCheckboxLabelText(Text = "Apartment, Flat or Maisonette")]
+        [GovUkRadioCheckboxLabelText(Text = "Apartment, flat or maisonette")]
         ApartmentFlatOrMaisonette
     }
 }

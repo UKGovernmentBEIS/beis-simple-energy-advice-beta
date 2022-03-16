@@ -1,6 +1,5 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.HeatingPatternViewModel
 @{
@@ -12,9 +11,9 @@
     {
         Text = "Back",
         Href = Model.Change
-            ? @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
-            : @Url.Action("NumberOfOccupants_Get", "EnergyEfficiency", new {reference = Model.Reference}),
-        
+            ? Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
+            : Url.Action("NumberOfOccupants_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
         OverrideWithJavascript = false
@@ -23,7 +22,7 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        
+
         <form action="@Url.Action("HeatingPattern_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
 
             @Html.GovUkRadiosFor(m => m.HeatingPattern,
@@ -42,13 +41,16 @@
                 new HintViewModel
                 {
                     Html = @<text>
-                               <div class="govuk-body">
-                                   We know heating use can vary throughout the year and from one day to the next. Choose a number that best resembles the most common weekday in winter.  
-                               </div>
+                               <p class="govuk-body">
+                                   We know heating use can vary throughout the year and from one day to the next.
+                               </p>
+                               <p class="govuk-body">
+                                   Choose a number that best resembles the most common weekday in winter.
+                               </p>
                                <details class="govuk-details" data-module="govuk-details">
                                    <summary class="govuk-details__summary">
                                        <span class="govuk-details__summary-text">
-                                           Help me to answer this question
+                                           Help me answer this question
                                        </span>
                                    </summary>
                                    <div class="govuk-details__text">
@@ -69,9 +71,9 @@
                         @<text>
                             @Html.GovUkTextInputFor(
                                 m => m.HoursOfHeating,
-                                labelOptions: new LabelViewModel
+                                new LabelViewModel
                                 {
-                                    Text = "Type a number between 0 (no heating) to 24 hours (heating all day and all night). Enter the total hours, even if you have separate heating periods",
+                                    Text = "Type a number between 0 (no heating) to 24 hours (heating all day and all night). Enter the total hours, even if you have separate heating periods"
                                 },
                                 placeholder: "e.g. 6"
                                 )
@@ -79,11 +81,12 @@
                     }
                 })
 
-            <button class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
-            
+            @(Html.GovUkButton(new ButtonViewModel
+            {
+                Text = "Continue"
+            }))
+
         </form>
-        
+
     </div>
 </div>

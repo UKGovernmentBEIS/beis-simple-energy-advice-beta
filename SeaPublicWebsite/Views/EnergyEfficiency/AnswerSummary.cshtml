@@ -112,7 +112,7 @@
             {
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                        Are your cavity walls fully insulated? 
+                        Are your cavity walls insulated? 
                     </dt>
                     <dd class="govuk-summary-list__value govuk-!-width-one-half">
                         @(Model.CavityWallsInsulated?.GetCheckboxLabelText())
@@ -145,7 +145,7 @@
             {
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                        Are your solid walls fully insulated? 
+                        Are your solid walls insulated? 
                     </dt>
                     <dd class="govuk-summary-list__value govuk-!-width-one-half">
                         @(Model.SolidWallsInsulated?.GetCheckboxLabelText())
@@ -285,7 +285,7 @@
                             </a>
                         </dd>
                     </div>
-                    @if (Model.AccessibleLoftSpace == AccessibleLoftSpace.Yes)
+                    @if (Model.AccessibleLoftSpace == AccessibleLoftSpace.Yes || Model.AccessibleLoftSpace == AccessibleLoftSpace.DoNotKnow)
                     {
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
@@ -293,7 +293,7 @@
                             </dt>
                             <dd class="govuk-summary-list__value govuk-!-width-one-half">
                                 @(Model.RoofInsulated?.GetCheckboxLabelText())
-                                @if (Model.RoofInsulated == RoofInsulated.DoNotKnow)
+                                @if (Model.RoofInsulated == RoofInsulated.DoNotKnow || Model.AccessibleLoftSpace == AccessibleLoftSpace.DoNotKnow)
                                 {
                                     if (Model.YearBuilt.HasValue)
                                     {
