@@ -11,6 +11,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public HeatingPattern? HeatingPattern { get; set; }
         [GovUkValidateRequired(ErrorMessageIfMissing = "Enter number of hours")]
         [GovUkValidateDecimalRange(Minimum = 0, Maximum = 24, OutOfRangeErrorMessage = "Enter a number between 0 and 24")]
+        [GovUkDisplayNameForErrors(NameAtStartOfSentence = "Number of hours")]
         public decimal? HoursOfHeating { get; set; }
 
         public string Reference { get; set; }

@@ -36,6 +36,7 @@ namespace SeaPublicWebsite.DataModels
         public HasOutdoorSpace? HasOutdoorSpace { get; set; }
         public GlazingType? GlazingType { get; set; }
         public HeatingType? HeatingType { get; set; }
+        public OtherHeatingType? OtherHeatingType { get; set; }
         public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
         
         public int? NumberOfOccupants { get; set; }

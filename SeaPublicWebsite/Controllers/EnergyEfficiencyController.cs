@@ -927,7 +927,7 @@ namespace SeaPublicWebsite.Controllers
         public IActionResult HeatingType_Post(HeatingTypeViewModel viewModel)
         {
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
+
             viewModel.ParseAndValidateParameters(Request, m => m.HeatingType);
 
             if (viewModel.HasAnyErrors())
@@ -938,21 +938,65 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HeatingType = viewModel.HeatingType;
             userDataStore.SaveUserData(userDataModel);
 
-            if (viewModel.HeatingType == HeatingType.GasBoiler ||
-                viewModel.HeatingType == HeatingType.OilBoiler ||
-                viewModel.HeatingType == HeatingType.LpgBoiler)
+            if (viewModel.HeatingType == HeatingType.Other)
             {
-                return RedirectToAction("HotWaterCylinder_Get", new {reference = viewModel.Reference, change = viewModel.Change});
+                return RedirectToAction("OtherHeatingType_Get",
+                    new {reference = viewModel.Reference, change = viewModel.Change});
+            }
+            else if (viewModel.Change)
+            {
+                return RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference});
+            }
+            else if (viewModel.HeatingType == HeatingType.GasBoiler ||
+                     viewModel.HeatingType == HeatingType.OilBoiler ||
+                     viewModel.HeatingType == HeatingType.LpgBoiler)
+            {
+                return RedirectToAction("HotWaterCylinder_Get",
+                    new {reference = viewModel.Reference, change = viewModel.Change});
             }
             else
             {
-                return viewModel.Change
-                    ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                    : RedirectToAction("NumberOfOccupants_Get", new {reference = viewModel.Reference});
+                return RedirectToAction("NumberOfOccupants_Get", new {reference = viewModel.Reference});
             }
         }
 
-        
+        [HttpGet("other-heating-type/{reference}")]
+        public IActionResult OtherHeatingType_Get(string reference, bool change = false)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+
+            var viewModel = new OtherHeatingTypeViewModel
+            {
+                OtherHeatingType = userDataModel.OtherHeatingType,
+                Reference = userDataModel.Reference,
+                Change = change,
+                Epc = userDataModel.Epc
+            };
+
+            return View("OtherHeatingType", viewModel);
+        }
+
+        [HttpPost("other-heating-type/{reference}")]
+        public IActionResult OtherHeatingType_Post(OtherHeatingTypeViewModel viewModel)
+        {
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+
+            viewModel.ParseAndValidateParameters(Request, m => m.OtherHeatingType);
+
+            if (viewModel.HasAnyErrors())
+            {
+                return View("OtherHeatingType", viewModel);
+            }
+
+            userDataModel.OtherHeatingType = viewModel.OtherHeatingType;
+            userDataStore.SaveUserData(userDataModel);
+
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new { reference = viewModel.Reference })
+                : RedirectToAction("NumberOfOccupants_Get", new { reference = viewModel.Reference });
+        }
+
+
         [HttpGet("hot-water-cylinder/{reference}")]
         public IActionResult HotWaterCylinder_Get(string reference, bool change = false)
         {

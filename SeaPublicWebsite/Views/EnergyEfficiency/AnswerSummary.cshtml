@@ -344,7 +344,18 @@
                     Heating system 
                 </dt>
                 <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @(Model.HeatingType?.GetCheckboxLabelText())
+                    @{
+                        var heatingTypeText = "";
+                        if (Model.HeatingType == HeatingType.Other)
+                        {
+                            heatingTypeText = $"{Model.HeatingType?.GetCheckboxLabelText()} - {Model?.OtherHeatingType?.GetCheckboxLabelText()}";
+                        }
+                        else
+                        {
+                            heatingTypeText = Model.HeatingType?.GetCheckboxLabelText();
+                        }
+                        <span>@(heatingTypeText)</span>
+                    }
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
                     <a class="govuk-link" href="@Url.Action("HeatingType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
