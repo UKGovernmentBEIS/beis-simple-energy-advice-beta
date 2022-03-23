@@ -35,7 +35,8 @@ jobs:
         sudo apt-get install cf7-cli
 
     - name: Save the build number to build-number.json
-      run: echo '{ \"BuildNumber\": \"${{ github.run_number }}\" }' > build-number.json
+      run: |
+        echo '{ BuildNumber: ${{ github.run_number }} }' > build-number.json
       working-directory: ./SeaPublicWebsite
 
     - name: Restore Node.JS dependencies
