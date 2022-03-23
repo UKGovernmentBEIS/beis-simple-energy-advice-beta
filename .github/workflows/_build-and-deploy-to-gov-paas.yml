@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Echo run_id and run_number
-      run |
+      run: |
         echo 'Run id is ${{ github.run_id }} and run number is ${{ github.run_number }}'
       
     - name: Checkout code onto job runner
