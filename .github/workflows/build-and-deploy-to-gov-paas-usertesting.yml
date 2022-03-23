@@ -10,4 +10,4 @@ jobs:
     with:
       environment_name: USERTESTING
     secrets:
-      gov_paas_password: ${{ secrets.GOV_PAAS_PASSWORD }}
+      gov_paas_password: ${{ secrets.TEAM_BEISESASSUPPORT_GOV_PAAS_PASSWORD }}
