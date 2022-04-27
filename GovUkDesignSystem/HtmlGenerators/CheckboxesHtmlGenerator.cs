@@ -18,8 +18,7 @@ namespace GovUkDesignSystem.HtmlGenerators
             Expression<Func<TModel, List<TPropertyListItem>>> propertyLambdaExpression,
             FieldsetViewModel fieldsetOptions = null,
             HintViewModel hintOptions = null,
-            Dictionary<TPropertyListItem, Func<object, object>> conditionalOptions = null,
-            Dictionary<TPropertyListItem, HintViewModel> itemHintOptions = null)
+            Dictionary<TPropertyListItem, Func<object, object>> conditionalOptions = null)
             where TModel : GovUkViewModel
             where TPropertyListItem : struct, IConvertible
         {
@@ -42,8 +41,8 @@ namespace GovUkDesignSystem.HtmlGenerators
                     var isEnumValueInListOfCurrentlySelectedValues =
                         currentlySelectedValues != null && currentlySelectedValues.Contains(enumValue);
 
-                    string checkboxLabelText = CheckboxHelper.GetCheckboxLabelText(enumValue);
-                    
+                    string checkboxLabelText = GetCheckboxLabelText(enumValue);
+
                     var checkboxItemViewModel = new CheckboxItemViewModel
                     {
                         Value = enumValue.ToString(),
@@ -54,17 +53,13 @@ namespace GovUkDesignSystem.HtmlGenerators
                             Text = checkboxLabelText
                         }
                     };
-                    
+
                     if (conditionalOptions != null && conditionalOptions.TryGetValue(enumValue, out Func<object, object> conditionalHtml))
                     {
-                        checkboxItemViewModel.Conditional = new Conditional {Html = conditionalHtml};
+                        checkboxItemViewModel.Conditional = new Conditional { Html = conditionalHtml };
+
                     }
-                    
-                    if (itemHintOptions != null && itemHintOptions.TryGetValue(enumValue, out HintViewModel hintViewModel))
-                    {
-                        checkboxItemViewModel.Hint = hintViewModel;
-                    }
-                    
+
                     return checkboxItemViewModel;
                 })
                 .Cast<ItemViewModel>()
@@ -100,5 +95,15 @@ namespace GovUkDesignSystem.HtmlGenerators
             }
         }
 
+        private static string GetCheckboxLabelText<TEnum>(
+            TEnum enumValue)
+            where TEnum : struct, IConvertible
+        {
+            string textFromAttribute = GovUkRadioCheckboxLabelTextAttribute.GetValueForEnum(typeof(TEnum), enumValue);
+
+            string checkboxLabel = textFromAttribute ?? enumValue.ToString();
+
+            return checkboxLabel;
+        }
     }
 }

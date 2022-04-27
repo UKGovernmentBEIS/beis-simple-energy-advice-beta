@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Globalization;
 using System.Reflection;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 using GovUkDesignSystem.Helpers;
@@ -18,7 +17,7 @@ namespace GovUkDesignSystem.Parsers
         {
             string parameterName = $"GovUk_Text_{property.Name}";
 
-            StringValues parameterValues = HttpRequestParameterHelper.GetRequestParameter(httpRequest, parameterName);
+            StringValues parameterValues = httpRequest.Form[parameterName];
 
             ParserHelpers.ThrowIfMoreThanOneValue(parameterValues, property);
             ParserHelpers.SaveUnparsedValueFromRequestToModel(model, httpRequest, parameterName);
@@ -36,8 +35,7 @@ namespace GovUkDesignSystem.Parsers
                 if (!double.TryParse(parameterValue, out _))
                 {
                     ParserHelpers.AddErrorMessageBasedOnPropertyDisplayName(model, property,
-                        (name) => $"{name} must be a number",
-                        ErrorMessagePropertyNamePosition.StartOfMessage);
+                        (name) => $"{name} must be a number");
                     return;
                 }
 
@@ -45,23 +43,8 @@ namespace GovUkDesignSystem.Parsers
                 if (!int.TryParse(parameterValue, out parsedIntValue))
                 {
                     ParserHelpers.AddErrorMessageBasedOnPropertyDisplayName(model, property,
-                        (name) => $"{name} must be a whole number",
-                        ErrorMessagePropertyNamePosition.StartOfMessage);
+                        (name) => $"{name} must be a whole number");
                     return;
-                }
-
-
-                List<GovUkValidationAttribute> customAttributes = property
-                    .GetCustomAttributes(typeof(GovUkValidationAttribute))
-                    .Cast<GovUkValidationAttribute>()
-                    .ToList();
-                foreach (var attribute in customAttributes)
-                {
-                    var result = attribute.CheckForValidationErrors(model, property, parsedIntValue);
-                    if (result == false)
-                    {
-                        return;
-                    }
                 }
 
                 property.SetValue(model, parsedIntValue);

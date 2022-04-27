@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using GovUkDesignSystem.Attributes.ValidationAttributes;
 using GovUkDesignSystem.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
@@ -14,7 +15,7 @@ namespace GovUkDesignSystem.Parsers
             HttpRequest httpRequest)
         {
             string propertyName = $"GovUk_Radio_{property.Name}";
-            StringValues parameterValues = HttpRequestParameterHelper.GetRequestParameter(httpRequest, propertyName);
+            StringValues parameterValues = httpRequest.Form[propertyName];
 
             ThrowIfPropertyTypeIsNotNullableEnum(property);
             ParserHelpers.ThrowIfMoreThanOneValue(parameterValues, property);

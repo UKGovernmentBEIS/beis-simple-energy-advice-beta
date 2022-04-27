@@ -24,7 +24,7 @@ namespace GovUkDesignSystem.Helpers
 
         public static void SaveUnparsedValueFromRequestToModel(GovUkViewModel model, HttpRequest httpRequest, string parameterName)
         {
-            StringValues unparsedValuesFromRequestForThisProperty = HttpRequestParameterHelper.GetRequestParameter(httpRequest, parameterName);
+            StringValues unparsedValuesFromRequestForThisProperty = httpRequest.Form[parameterName];
 
             model.AddUnparsedValues(parameterName, unparsedValuesFromRequestForThisProperty);
         }
@@ -75,25 +75,14 @@ namespace GovUkDesignSystem.Helpers
         public static void AddErrorMessageBasedOnPropertyDisplayName(
             GovUkViewModel model,
             PropertyInfo property,
-            Func<string, string> getErrorMessageBasedOnPropertyDisplayName,
-            ErrorMessagePropertyNamePosition position)
+            Func<string, string> getErrorMessageBasedOnPropertyDisplayName)
         {
             var displayNameForErrorsAttribute = property.GetSingleCustomAttribute<GovUkDisplayNameForErrorsAttribute>();
 
             string errorMessage;
             if (displayNameForErrorsAttribute != null)
             {
-                switch (position)
-                {
-                    case ErrorMessagePropertyNamePosition.StartOfMessage:
-                        errorMessage = getErrorMessageBasedOnPropertyDisplayName(displayNameForErrorsAttribute.NameAtStartOfSentence);
-                        break;
-                    case ErrorMessagePropertyNamePosition.WithinMessage:
-                        errorMessage = getErrorMessageBasedOnPropertyDisplayName(displayNameForErrorsAttribute.NameWithinSentence);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(position), position, null);
-                }
+                errorMessage = getErrorMessageBasedOnPropertyDisplayName(displayNameForErrorsAttribute.NameWithinSentence);
             }
             else
             {
@@ -103,11 +92,5 @@ namespace GovUkDesignSystem.Helpers
             model.AddErrorFor(property, errorMessage);
         }
 
-    }
-
-    public enum ErrorMessagePropertyNamePosition
-    {
-        StartOfMessage,
-        WithinMessage
     }
 }

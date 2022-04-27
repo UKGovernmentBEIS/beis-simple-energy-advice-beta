@@ -13,14 +13,11 @@ namespace GovUkDesignSystem.HtmlGenerators
 {
     internal static class RadiosHtmlGenerator
     {
-        public static IHtmlContent GenerateHtml<TModel, TProperty>(IHtmlHelper<TModel> htmlHelper,
+        public static IHtmlContent GenerateHtml<TModel, TProperty>(
+            IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> propertyLambdaExpression,
             FieldsetViewModel fieldsetOptions = null,
-            HintViewModel hintOptions = null,
-            Dictionary<TProperty, LabelViewModel> itemLabelOptions = null,
-            Dictionary<TProperty, HintViewModel> itemHintOptions = null,
-            Dictionary<TProperty, Func<object, object>> conditionalOptions = null,
-            string classes = null)
+            HintViewModel hintOptions = null)
             where TModel : GovUkViewModel
         {
             PropertyInfo property = ExpressionHelpers.GetPropertyFromExpression(propertyLambdaExpression);
@@ -42,34 +39,16 @@ namespace GovUkDesignSystem.HtmlGenerators
                     bool isEnumValueCurrentlySelected = enumValue.ToString() == currentlySelectedValue.ToString();
                     string radioLabelText = GetRadioLabelText(enumType, enumValue);
 
-                    var radioItemViewModel = new RadioItemViewModel
+                    return new RadioItemViewModel
                     {
                         Value = enumValue.ToString(),
                         Id = $"GovUk_Radio_{propertyName}_{enumValue}",
                         Checked = isEnumValueCurrentlySelected,
-                        Label = new LabelViewModel()
+                        Label = new LabelViewModel
+                        {
+                            Text = radioLabelText
+                        }
                     };
-                    
-                    if (conditionalOptions != null && conditionalOptions.TryGetValue((TProperty)enumValue, out Func<object, object> conditionalHtml))
-                    {
-                        radioItemViewModel.Conditional = new Conditional {Html = conditionalHtml};
-                    }
-
-                    if (itemLabelOptions != null && itemLabelOptions.TryGetValue((TProperty)enumValue, out LabelViewModel labelViewModel))
-                    {
-                        radioItemViewModel.Label = labelViewModel;
-                    }
-                    if (radioItemViewModel.Label.Text == null && radioItemViewModel.Label.Html == null)
-                    {
-                        radioItemViewModel.Label.Text = radioLabelText;
-                    }
-
-                    if (itemHintOptions != null && itemHintOptions.TryGetValue((TProperty)enumValue, out HintViewModel hintViewModel))
-                    {
-                        radioItemViewModel.Hint = hintViewModel;
-                    }
-
-                    return radioItemViewModel;
                 })
                 .Cast<ItemViewModel>()
                 .ToList();
@@ -80,8 +59,7 @@ namespace GovUkDesignSystem.HtmlGenerators
                 IdPrefix = $"GovUk_{propertyName}",
                 Items = radios,
                 Fieldset = fieldsetOptions,
-                Hint = hintOptions,
-                Classes = classes
+                Hint = hintOptions
             };
             if (model.HasErrorFor(property))
             {

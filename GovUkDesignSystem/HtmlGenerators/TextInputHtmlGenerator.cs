@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using GovUkDesignSystem.GovUkDesignSystemComponents;
@@ -19,10 +18,7 @@ namespace GovUkDesignSystem.HtmlGenerators
             HintViewModel hintOptions = null,
             FormGroupViewModel formGroupOptions = null,
             string classes = null,
-            TextInputAppendixViewModel textInputAppendix = null,
-            string type = "text",
-            string autocomplete = null,
-            string placeholder = null
+            TextInputAppendixViewModel textInputAppendix = null
         )
             where TModel : GovUkViewModel
         {
@@ -32,16 +28,15 @@ namespace GovUkDesignSystem.HtmlGenerators
 
             TModel model = htmlHelper.ViewData.Model;
 
+            string id = $"GovUk_{propertyName}";
             string currentValue = ExtensionHelpers.GetCurrentValue(model, property, propertyLambdaExpression);
 
-            string id = $"GovUk_{propertyName}";
             if (labelOptions != null)
             {
                 labelOptions.For = id;
             }
 
-            var textInputViewModel = new TextInputViewModel
-            {
+            var textInputViewModel = new TextInputViewModel {
                 Name = $"GovUk_Text_{propertyName}",
                 Id = id,
                 Value = currentValue,
@@ -49,9 +44,7 @@ namespace GovUkDesignSystem.HtmlGenerators
                 Hint = hintOptions,
                 FormGroup = formGroupOptions,
                 Classes = classes,
-                TextInputAppendix = textInputAppendix,
-                Type = type,
-                Attributes = new Dictionary<string, string> {{"autocomplete", autocomplete}, {"placeholder", placeholder}}
+                TextInputAppendix = textInputAppendix
             };
 
             if (model.HasErrorFor(property))

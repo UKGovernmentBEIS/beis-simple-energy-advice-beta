@@ -30,18 +30,12 @@ namespace GovUkDesignSystem.HtmlGenerators
             TModel model = htmlHelper.ViewData.Model;
 
             string currentValue = ExtensionHelpers.GetCurrentValue(model, property, propertyLambdaExpression);
-            
-            string id = $"GovUk_{propertyName}";
-            if (labelOptions != null)
-            {
-                labelOptions.For = id;
-            }
 
             int maximumCharacters = GetMaximumCharacters(property);
 
             var characterCountViewModel = new CharacterCountViewModel {
                 Name = $"GovUk_Text_{propertyName}",
-                Id = id,
+                Id = $"GovUk_{propertyName}",
                 MaxLength = maximumCharacters,
                 Value = currentValue,
                 Rows = rows,

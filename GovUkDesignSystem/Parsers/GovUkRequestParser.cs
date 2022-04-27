@@ -46,10 +46,6 @@ namespace GovUkDesignSystem.Parsers
             {
                 NullableIntParser.ParseAndValidate(model, property, httpRequest);
             }
-            else if (typeof(TProperty) == typeof(decimal?))
-            {
-                NullableDecimalParser.ParseAndValidate(model, property, httpRequest);
-            }
         }
 
         private static void ThrowIfPropertyHasNonDefaultValue(object model, PropertyInfo property)

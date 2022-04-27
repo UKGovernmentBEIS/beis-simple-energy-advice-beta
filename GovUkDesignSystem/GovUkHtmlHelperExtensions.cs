@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using GovUkDesignSystem.GovUkDesignSystemComponents;
 using GovUkDesignSystem.GovUkDesignSystemComponents.SubComponents;
 using GovUkDesignSystem.HtmlGenerators;
 using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GovUkDesignSystem
@@ -72,8 +70,8 @@ namespace GovUkDesignSystem
             Expression<Func<TModel, List<TPropertyListItem>>> propertyLambdaExpression,
             FieldsetViewModel fieldsetOptions = null,
             HintViewModel hintOptions = null,
-            Dictionary<TPropertyListItem, Func<object, object>> conditionalOptions = null,
-            Dictionary<TPropertyListItem, HintViewModel> itemHintOptions = null)
+            Dictionary<TPropertyListItem, Func<object, object>> conditionalOptions = null
+            )
             where TModel : GovUkViewModel
             where TPropertyListItem : struct, IConvertible // A fairly good check that TPropertyListItem is an Enum
         {
@@ -82,8 +80,7 @@ namespace GovUkDesignSystem
                 propertyLambdaExpression,
                 fieldsetOptions,
                 hintOptions,
-                conditionalOptions,
-                itemHintOptions);
+                conditionalOptions);
         }
 
         public static IHtmlContent GovUkCheckboxItem(
@@ -91,23 +88,6 @@ namespace GovUkDesignSystem
             CheckboxItemViewModel checkboxItemViewModel)
         {
             return htmlHelper.Partial("/GovUkDesignSystemComponents/CheckboxItem.cshtml", checkboxItemViewModel);
-        }
-
-        public static IHtmlContent GovUkCheckboxItemFor<TModel>(
-            this IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, bool>> propertyLambdaExpression,
-            LabelViewModel labelOptions = null,
-            HintViewModel hintOptions = null,
-            Conditional conditional = null,
-            bool disabled = false)
-        {
-            return CheckboxItemHtmlGenerator.GenerateHtml(
-                htmlHelper,
-                propertyLambdaExpression,
-                labelOptions,
-                hintOptions,
-                conditional,
-                disabled);
         }
 
         public static IHtmlContent GovUkErrorMessage(
@@ -130,7 +110,7 @@ namespace GovUkDesignSystem
             where TModel : GovUkViewModel
         {
             // Give 'optionalOrderOfPropertiesInTheView' a default value (of an empty array)
-            string[] orderOfPropertyNamesInTheView = optionalOrderOfPropertyNamesInTheView ?? new string[0];
+            var orderOfPropertyNamesInTheView = optionalOrderOfPropertyNamesInTheView ?? new string[0];
 
             return ErrorSummaryHtmlGenerator.GenerateHtml(htmlHelper, orderOfPropertyNamesInTheView);
         }
@@ -140,31 +120,6 @@ namespace GovUkDesignSystem
             FieldsetViewModel fieldsetViewModel)
         {
             return htmlHelper.Partial("/GovUkDesignSystemComponents/Fieldset.cshtml", fieldsetViewModel);
-        }
-
-        public static async Task<IHtmlContent> GovUkFileUpload(
-            this IHtmlHelper htmlHelper,
-            FileUploadViewModel fileUploadViewModel)
-        {
-            return await htmlHelper.PartialAsync("/GovUkDesignSystemComponents/FileUpload.cshtml", fileUploadViewModel);
-        }
-
-        public static async Task<IHtmlContent> GovUkFileUploadFor<TModel>(
-            this IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, IFormFile>> propertyLambdaExpression,
-            LabelViewModel labelOptions = null,
-            HintViewModel hintOptions = null,
-            FormGroupViewModel formGroupOptions = null,
-            string classes = null)
-            where TModel : GovUkViewModel
-        {
-            return await FileUploadHtmlGenerator.GenerateHtml(
-                htmlHelper,
-                propertyLambdaExpression,
-                labelOptions,
-                hintOptions,
-                formGroupOptions,
-                classes);
         }
 
         public static IHtmlContent GovUkFooter(
@@ -237,33 +192,18 @@ namespace GovUkDesignSystem
             return htmlHelper.Partial("/GovUkDesignSystemComponents/PhaseBanner.cshtml", phaseBannerViewModel);
         }
 
-        public static IHtmlContent GovUkRadios(
-            this IHtmlHelper htmlHelper,
-            RadiosViewModel radioItemViewModel)
-        {
-            return htmlHelper.Partial("/GovUkDesignSystemComponents/Radios.cshtml", radioItemViewModel);
-        }
-
         public static IHtmlContent GovUkRadiosFor<TModel, TProperty>(
             this IHtmlHelper<TModel> htmlHelper,
             Expression<Func<TModel, TProperty>> propertyLambdaExpression,
             FieldsetViewModel fieldsetOptions = null,
-            HintViewModel hintOptions = null,
-            Dictionary<TProperty, LabelViewModel> itemLabelOptions = null,
-            Dictionary<TProperty, HintViewModel> itemHintOptions = null,
-            string classes = null,
-            Dictionary<TProperty, Func<object, object>> conditionalOptions = null)
+            HintViewModel hintOptions = null)
             where TModel : GovUkViewModel
         {
             return RadiosHtmlGenerator.GenerateHtml(
                 htmlHelper,
                 propertyLambdaExpression,
                 fieldsetOptions,
-                hintOptions,
-                itemLabelOptions,
-                itemHintOptions,
-                conditionalOptions,
-                classes);
+                hintOptions);
         }
 
         public static IHtmlContent GovUkRadioItem(
@@ -319,10 +259,7 @@ namespace GovUkDesignSystem
             HintViewModel hintOptions = null,
             FormGroupViewModel formGroupOptions = null,
             string classes = null,
-            TextInputAppendixViewModel textInputAppendix = null,
-            string type = "text",
-            string autocomplete = null,
-            string placeholder = null)
+            TextInputAppendixViewModel textInputAppendix = null)
             where TModel : GovUkViewModel
         {
             return TextInputHtmlGenerator.GenerateHtml(
@@ -332,10 +269,7 @@ namespace GovUkDesignSystem
                 hintOptions,
                 formGroupOptions,
                 classes,
-                textInputAppendix,
-                type,
-                autocomplete,
-                placeholder);
+                textInputAppendix);
         }
 
         public static IHtmlContent GovUkTextInputFor<TModel>(
@@ -345,10 +279,7 @@ namespace GovUkDesignSystem
             HintViewModel hintOptions = null,
             FormGroupViewModel formGroupOptions = null,
             string classes = null,
-            TextInputAppendixViewModel textInputAppendix = null,
-            string type = "text",
-            string autocomplete = null,
-            string placeholder = null)
+            TextInputAppendixViewModel textInputAppendix = null)
             where TModel : GovUkViewModel
         {
             return TextInputHtmlGenerator.GenerateHtml(
@@ -358,36 +289,7 @@ namespace GovUkDesignSystem
                 hintOptions,
                 formGroupOptions,
                 classes,
-                textInputAppendix,
-                type,
-                autocomplete,
-                placeholder);
-        }
-
-        public static IHtmlContent GovUkTextInputFor<TModel>(
-            this IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, decimal?>> propertyLambdaExpression,
-            LabelViewModel labelOptions = null,
-            HintViewModel hintOptions = null,
-            FormGroupViewModel formGroupOptions = null,
-            string classes = null,
-            TextInputAppendixViewModel textInputAppendix = null,
-            string type = "text",
-            string autocomplete = null,
-            string placeholder = null)
-            where TModel : GovUkViewModel
-        {
-            return TextInputHtmlGenerator.GenerateHtml(
-                htmlHelper,
-                propertyLambdaExpression,
-                labelOptions,
-                hintOptions,
-                formGroupOptions,
-                classes,
-                textInputAppendix,
-                type,
-                autocomplete,
-                placeholder);
+                textInputAppendix);
         }
 
     }
