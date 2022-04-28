@@ -4,9 +4,8 @@ using GovUkDesignSystem.GovUkDesignSystemComponents.SubComponents;
 
 namespace GovUkDesignSystem.GovUkDesignSystemComponents
 {
-    public class TextInputViewModel
+    public class TextInputViewModel : IHasErrorMessage
     {
-
         /// <summary>
         ///     Required. The id of the input.
         /// </summary>

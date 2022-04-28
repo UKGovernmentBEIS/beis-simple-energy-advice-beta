@@ -1,36 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GovUkDesignSystem.GovUkDesignSystemComponents;
 using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GovUkDesignSystem.HtmlGenerators
 {
     public static class ErrorSummaryHtmlGenerator
     {
-        public static IHtmlContent GenerateHtml<TModel>(
-            IHtmlHelper<TModel> htmlHelper,
-            string[] orderOfPropertyNamesInTheView)
-            where TModel : GovUkViewModel
+        internal static async Task<IHtmlContent> GenerateHtml(
+            this IHtmlHelper htmlHelper,
+            ModelStateDictionary modelState,
+            string[] orderOfPropertyNamesInTheView,
+            string idPrefix = null)
         {
-            TModel model = htmlHelper.ViewData.Model;
-
-            if (!model.HasAnyErrors())
+            if (modelState.IsValid)
             {
                 return null;
             }
 
-            Dictionary<string, string> errors = model.GetAllErrors();
-
-            var orderedPropertyNames = GetErroredPropertyNamesInSpecifiedOrder(errors, orderOfPropertyNamesInTheView);
-
-            var errorSummaryItems = orderedPropertyNames
-                .Select(propertyName =>
-                    new ErrorSummaryItemViewModel
-                    {
-                        Href = $"#GovUk_{propertyName}-error",
-                        Text = errors[propertyName]
-                    })
+            // IndexOf returns -1 for items not in the property ordering list so we
+            // reverse the list and order by descending index.
+            var reversedPropertyOrder = orderOfPropertyNamesInTheView.Reverse().ToList();
+            var propertiesWithErrorsInOrder = modelState
+                .Where(mse => mse.Value.Errors.Count > 0)
+                .OrderByDescending(mse => reversedPropertyOrder.IndexOf(mse.Key));
+            
+            var errorSummaryItems = propertiesWithErrorsInOrder
+                .SelectMany(mse => mse.Value.Errors.Select(error => new Tuple<string, string>(mse.Key, error.ErrorMessage)))
+                .Select(tuple => new ErrorSummaryItemViewModel { Href = $"#{tuple.Item1}-error", Text = tuple.Item2 })
                 .ToList();
 
             var errorSummaryViewModel = new ErrorSummaryViewModel
@@ -42,7 +43,7 @@ namespace GovUkDesignSystem.HtmlGenerators
                 Errors = errorSummaryItems
             };
 
-            return htmlHelper.Partial("/GovUkDesignSystemComponents/ErrorSummary.cshtml", errorSummaryViewModel);
+            return await htmlHelper.PartialAsync("/GovUkDesignSystemComponents/ErrorSummary.cshtml", errorSummaryViewModel);
         }
 
         private static List<string> GetErroredPropertyNamesInSpecifiedOrder(
