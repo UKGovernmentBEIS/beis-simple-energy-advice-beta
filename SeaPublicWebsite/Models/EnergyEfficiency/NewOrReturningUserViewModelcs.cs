@@ -13,6 +13,11 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 
         [GovUkValidateRequired(ErrorMessageIfMissing = "Enter your 8-digit reference (or choose the 'This is my first visit' option)")]
         public string Reference { get; set; }
+
+        public bool IsReferenceValid()
+        {
+            return !string.IsNullOrEmpty(Reference);
+        }
     }
     
     public enum NewOrReturningUser

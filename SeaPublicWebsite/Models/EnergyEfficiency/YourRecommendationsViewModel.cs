@@ -13,5 +13,10 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public HasEmailAddress? HasEmailAddress { get; set; }
 
         public string EmailAddress { get; set; }
+
+        public bool IsValidEmailAddress()
+        {
+            return HasEmailAddress != null;
+        }
     }
 }

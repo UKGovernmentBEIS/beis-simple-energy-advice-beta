@@ -14,5 +14,10 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         
         public string Reference { get; set; }
         public bool Change { get; set; }
+
+        public bool IsValidEmailAddress()
+        {
+            return EmailAddress != null;
+        }
     }
 }
