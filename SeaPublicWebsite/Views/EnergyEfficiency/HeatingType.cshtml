@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.HeatingTypeViewModel;
 @{
@@ -26,7 +27,7 @@
         
         <form action="@Url.Action("HeatingType_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
-            @(Html.GovUkRadiosFor(m => m.HeatingType,
+            @(Html.GovUkRadiosFor<HeatingTypeViewModel, HeatingType>(m => m.HeatingType,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -79,7 +80,7 @@
                                </div>
                             </text>
                 },
-                itemHintOptions: new Dictionary<HeatingType?, HintViewModel>
+                radioHints: new Dictionary<HeatingType, HintViewModel>
                 {
                     {
                         HeatingType.LpgBoiler,

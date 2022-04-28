@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.HeatingPatternViewModel
 @{
@@ -25,7 +26,7 @@
 
         <form action="@Url.Action("HeatingPattern_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
 
-            @Html.GovUkRadiosFor(m => m.HeatingPattern,
+            @(Html.GovUkRadiosFor<HeatingPatternViewModel, HeatingPattern>(m => m.HeatingPattern,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -64,7 +65,7 @@
                                </details>
                             </text>
                 },
-                conditionalOptions: new Dictionary<HeatingPattern?, Func<object, object>>
+                conditionalOptions: new Dictionary<HeatingPattern, Conditional>
                 {
                     {
                         HeatingPattern.Other,
@@ -79,7 +80,7 @@
                                 )
                          </text>
                     }
-                })
+                }))
 
             @(Html.GovUkButton(new ButtonViewModel
             {

@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.FlatTypeViewModel
 @{
@@ -24,7 +25,7 @@
         
         <form action="@Url.Action("FlatType_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
-            @(Html.GovUkRadiosFor(m => m.FlatType,
+            @(Html.GovUkRadiosFor<FlatTypeViewModel, FlatType>(m => m.FlatType,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -37,7 +38,7 @@
                         Classes = "govuk-fieldset__legend--l"
                     }
                 },
-                itemHintOptions: new Dictionary<FlatType?, HintViewModel>
+                radioHints: new Dictionary<FlatType, HintViewModel>
                 {
                     {
                         FlatType.TopFloor,

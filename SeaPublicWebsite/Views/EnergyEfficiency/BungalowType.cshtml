@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.BungalowTypeViewModel
 @{
@@ -24,7 +25,7 @@
         
         <form action="@Url.Action("BungalowType_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
-            @(Html.GovUkRadiosFor(m => m.BungalowType,
+            @(Html.GovUkRadiosFor<BungalowTypeViewModel, BungalowType>(m => m.BungalowType,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -37,7 +38,7 @@
                         Classes = "govuk-fieldset__legend--l"
                     }
                 },
-                itemHintOptions: new Dictionary<BungalowType?, HintViewModel>
+                radioHints: new Dictionary<BungalowType, HintViewModel>
                 {
                     {
                         BungalowType.Detached,

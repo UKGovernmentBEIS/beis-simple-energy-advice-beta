@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.RoofInsulatedViewModel
 @{
@@ -25,7 +26,7 @@
         
         <form action="@Url.Action("RoofInsulated_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
-            @(Html.GovUkRadiosFor(m => m.RoofInsulated,
+            @(Html.GovUkRadiosFor<RoofInsulatedViewModel, RoofInsulated>(m => m.RoofInsulated,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -66,7 +67,7 @@
                                </details>
                             </text>
                 },
-                conditionalOptions: new Dictionary<RoofInsulated?, Func<object, object>>
+                conditionalOptions: new Dictionary<RoofInsulated, Conditional>
                 {
                     {
                         RoofInsulated.DoNotKnow,

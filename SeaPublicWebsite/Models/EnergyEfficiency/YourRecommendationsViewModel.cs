@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class YourRecommendationsViewModel : GovUkViewModel
+    public class YourRecommendationsViewModel
     {
         public int NumberOfUserRecommendations { get; set; }
         public string Reference { get; set; }

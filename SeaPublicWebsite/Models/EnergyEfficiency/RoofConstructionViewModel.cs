@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class RoofConstructionViewModel : GovUkViewModel
+    public class RoofConstructionViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select roof type")]
         public RoofConstruction? RoofConstruction { get; set; }

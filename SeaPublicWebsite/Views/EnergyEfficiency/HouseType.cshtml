@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.HouseTypeViewModel
 @{
@@ -24,7 +25,7 @@
         
         <form action="@Url.Action("HouseType_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
 
-            @Html.GovUkRadiosFor(m => m.HouseType,
+            @(Html.GovUkRadiosFor<HouseTypeViewModel, HouseType>(m => m.HouseType,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -37,7 +38,7 @@
                         Classes = "govuk-fieldset__legend--l"
                     }
                 },
-                itemHintOptions: new Dictionary<HouseType?, HintViewModel>
+                radioHints: new Dictionary<HouseType, HintViewModel>
                 {
                     {
                         HouseType.Detached,
@@ -87,7 +88,7 @@
                                    </div>
                                </details>
                             </text>
-                })
+                }))
 
             <button class="govuk-button" data-module="govuk-button">
                 Continue

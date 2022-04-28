@@ -6,7 +6,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class NewOrReturningUserViewModel : GovUkViewModel
+    public class NewOrReturningUserViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select if you have used this service before")]
         public NewOrReturningUser? NewOrReturningUser { get; set; }

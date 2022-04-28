@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class AccessibleLoftSpaceViewModel : GovUkViewModel
+    public class AccessibleLoftSpaceViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select if you have accessible loft space")]
         public AccessibleLoftSpace? AccessibleLoftSpace { get; set; }

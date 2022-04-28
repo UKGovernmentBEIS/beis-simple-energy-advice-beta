@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.OtherHeatingTypeViewModel;
 @{
@@ -25,7 +26,7 @@
         
         <form action="@Url.Action("OtherHeatingType_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
 
-            @Html.GovUkRadiosFor(m => m.OtherHeatingType,
+            @(Html.GovUkRadiosFor<OtherHeatingTypeViewModel, OtherHeatingType>(m => m.OtherHeatingType,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -38,7 +39,7 @@
                         Classes = "govuk-fieldset__legend--l"
                     }
                 },
-                itemHintOptions: new Dictionary<OtherHeatingType?, HintViewModel>
+                radioHints: new Dictionary<OtherHeatingType, HintViewModel>
                 {
                     {
                         OtherHeatingType.Biomass,
@@ -54,7 +55,7 @@
                             Text = "You have coal or solid fuel heating if you burn coal or other solid fuels in a fireplace or stove"
                         }
                     },
-                })
+                }))
 
             <button class="govuk-button" data-module="govuk-button">
                 Continue

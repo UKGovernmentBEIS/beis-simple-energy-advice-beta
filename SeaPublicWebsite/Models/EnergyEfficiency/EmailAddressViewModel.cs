@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class EmailAddressViewModel : GovUkViewModel
+    public class EmailAddressViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select 'Yes' if you have an email address")]
         public HasEmailAddress? HasEmailAddress { get; set; }

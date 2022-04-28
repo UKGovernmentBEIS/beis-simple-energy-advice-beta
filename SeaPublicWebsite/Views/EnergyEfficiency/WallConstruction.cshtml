@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.WallConstructionViewModel;
 @{
@@ -57,7 +58,7 @@
                         expectedWallType = "cavity";
                     }
                 }
-                @(Html.GovUkRadiosFor(m => m.WallConstruction,
+                @(Html.GovUkRadiosFor<WallConstructionViewModel, WallConstruction>(m => m.WallConstruction,
                     hintOptions: new HintViewModel
                     {
                         Html = @<text>
@@ -88,7 +89,7 @@
                                    </details>
                                 </text>
                     },
-                    itemHintOptions: new Dictionary<WallConstruction?, HintViewModel>
+                    radioHints: new Dictionary<WallConstruction, HintViewModel>
                     {
                         {
                             WallConstruction.Other,
@@ -98,7 +99,7 @@
                             }
                         }
                     },
-                    conditionalOptions: new Dictionary<WallConstruction?, Func<object, object>>
+                    conditionalOptions: new Dictionary<WallConstruction, Conditional>
                     {
                         {
                             WallConstruction.DoNotKnow,

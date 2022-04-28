@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class SolidWallsInsulatedViewModel : GovUkViewModel
+    public class SolidWallsInsulatedViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select if your solid walls are insulated")]
         public SolidWallsInsulated? SolidWallsInsulated { get; set; }

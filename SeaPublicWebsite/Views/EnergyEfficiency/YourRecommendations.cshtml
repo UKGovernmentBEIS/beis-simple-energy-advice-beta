@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.YourRecommendationsViewModel
 @{
@@ -71,7 +72,7 @@
         <form method="post" action="@Url.Action("EmailAddress_Post", "EnergyEfficiency")">
             @Html.HiddenFor(m => m.FirstReferenceId)
             @Html.HiddenFor(m => m.NumberOfUserRecommendations)
-            @Html.GovUkRadiosFor(
+            @(Html.GovUkRadiosFor<YourRecommendationsViewModel, HasEmailAddress>(
                 m => m.HasEmailAddress,
                 fieldsetOptions: new FieldsetViewModel
                 {
@@ -87,12 +88,12 @@
                         IsPageHeading = true,
                     },
                 },
-                conditionalOptions: new Dictionary<HasEmailAddress?, Func<object, object>>
+                conditionalOptions: new Dictionary<HasEmailAddress, Conditional>
                 {
                     {
                         HasEmailAddress.Yes,
                         @<text>
-                            @(Html.GovUkTextInputFor(
+                            @Html.GovUkTextInputFor(
                                 m => m.EmailAddress,
                                 labelOptions: new LabelViewModel
                                 {
@@ -100,10 +101,10 @@
                                 },
                                 autocomplete: "email",
                                 placeholder: "e.g. my.email@example.com"
-                                ))
+                                )
                          </text>
                     }
-                })
+                }))
 
             <div class="govuk-button-group">
                 @(Html.GovUkButton(new ButtonViewModel

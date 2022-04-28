@@ -1,4 +1,5 @@
 @using GovUkDesignSystem
+@using GovUkDesignSystem.Attributes
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using GovUkDesignSystem.Helpers
 @using SeaPublicWebsite.Helpers
@@ -35,10 +36,10 @@
                     Building type
                 </dt>
                 <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @(Model.PropertyType == PropertyType.House ? Model.HouseType?.GetCheckboxLabelText() : null)
-                    @(Model.PropertyType == PropertyType.Bungalow ? Model.BungalowType?.GetCheckboxLabelText() : null)
-                    @(Model.PropertyType == PropertyType.ApartmentFlatOrMaisonette ? Model.FlatType?.GetCheckboxLabelText() : null)
-                    @(Model.PropertyType?.GetCheckboxLabelText())
+                    @(Model.PropertyType == PropertyType.House ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HouseType) : null)
+                    @(Model.PropertyType == PropertyType.Bungalow ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.BungalowType) : null)
+                    @(Model.PropertyType == PropertyType.ApartmentFlatOrMaisonette ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.FlatType) : null)
+                    @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyType))
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
                     <a class="govuk-link" href="@Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
@@ -64,7 +65,7 @@
                     Wall type 
                 </dt>
                 <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @(Model.WallConstruction?.GetCheckboxLabelText())
+                    @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.WallConstruction))
                     @if (Model.WallConstruction == WallConstruction.DoNotKnow)
                     {
                         if (Model?.Epc?.WallConstruction != null || !Model.YearBuilt.HasValue &&  Model?.Epc.ConstructionAgeBand != null)
@@ -115,7 +116,7 @@
                         Are your cavity walls insulated? 
                     </dt>
                     <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                        @(Model.CavityWallsInsulated?.GetCheckboxLabelText())
+                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.CavityWallsInsulated))
                         @if (Model.CavityWallsInsulated == CavityWallsInsulated.DoNotKnow)
                         {
                             if (Model.Epc != null && (Model?.Epc.CavityWallsInsulated != null || Model?.Epc.ConstructionAgeBand != null))
@@ -148,7 +149,7 @@
                         Are your solid walls insulated? 
                     </dt>
                     <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                        @(Model.SolidWallsInsulated?.GetCheckboxLabelText())
+                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.SolidWallsInsulated))
                         @if (Model.SolidWallsInsulated == SolidWallsInsulated.DoNotKnow)
                         {
                             if (Model.Epc != null && (Model?.Epc.SolidWallsInsulated != null || Model?.Epc.ConstructionAgeBand != null))
@@ -181,7 +182,7 @@
                         Floor construction 
                     </dt>
                     <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                        @(Model.FloorConstruction?.GetCheckboxLabelText())
+                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.FloorConstruction))
                         @if (Model.FloorConstruction == FloorConstruction.DoNotKnow)
                         {
                             if (Model?.Epc?.FloorConstruction != null || !Model.YearBuilt.HasValue && Model?.Epc?.ConstructionAgeBand != null)
@@ -229,7 +230,7 @@
                             Is your ground floor insulated?
                         </dt>
                         <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                            @(Model.FloorInsulated?.GetCheckboxLabelText())
+                            @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.FloorInsulated))
                             @if (Model.FloorInsulated == FloorInsulated.DoNotKnow)
                             {
                                 if (Model?.Epc?.FloorConstruction != null || !Model.YearBuilt.HasValue && Model?.Epc?.ConstructionAgeBand != null)
@@ -262,7 +263,7 @@
                         Is any part of your roof flat? 
                     </dt>
                     <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                        @(Model.RoofConstruction?.GetCheckboxLabelText())
+                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.RoofConstruction))
                     </dd>
                     <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
                         <a class="govuk-link" href="@Url.Action("RoofConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
@@ -277,7 +278,7 @@
                             Do you have accessible loft space?
                         </dt>
                         <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                            @(Model.AccessibleLoftSpace?.GetCheckboxLabelText())
+                            @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.AccessibleLoftSpace))
                         </dd>
                         <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
                             <a class="govuk-link" href="@Url.Action("AccessibleLoftSpace_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
@@ -292,7 +293,7 @@
                                 Is your loft fully insulated?
                             </dt>
                             <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                                @(Model.RoofInsulated?.GetCheckboxLabelText())
+                                @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.RoofInsulated))
                                 @if (Model.RoofInsulated == RoofInsulated.DoNotKnow || Model.AccessibleLoftSpace == AccessibleLoftSpace.DoNotKnow)
                                 {
                                     if (Model.YearBuilt.HasValue)
@@ -318,7 +319,7 @@
                     Glazing type 
                 </dt>
                 <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @(Model.GlazingType?.GetCheckboxLabelText())
+                    @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.GlazingType))
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
                     <a class="govuk-link" href="@Url.Action("GlazingType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
@@ -331,7 +332,7 @@
                     Outdoor space for heat pump
                 </dt>
                 <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @(Model.HasOutdoorSpace?.GetCheckboxLabelText())
+                    @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HasOutdoorSpace))
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
                     <a class="govuk-link" href="@Url.Action("OutdoorSpace_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
@@ -348,11 +349,11 @@
                         var heatingTypeText = "";
                         if (Model.HeatingType == HeatingType.Other)
                         {
-                            heatingTypeText = $"{Model.HeatingType?.GetCheckboxLabelText()} - {Model?.OtherHeatingType?.GetCheckboxLabelText()}";
+                            heatingTypeText = $"{GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HeatingType)} - {GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model?.OtherHeatingType)}";
                         }
                         else
                         {
-                            heatingTypeText = Model.HeatingType?.GetCheckboxLabelText();
+                            heatingTypeText = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HeatingType);
                         }
                         <span>@(heatingTypeText)</span>
                     }
@@ -371,7 +372,7 @@
                 <dd class="govuk-summary-list__value govuk-!-width-one-half">
                     @if (Model.HasHotWaterCylinder.HasValue)
                     {
-                        @(Model.HasHotWaterCylinder?.GetCheckboxLabelText())
+                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HasHotWaterCylinder))
                     }
                     else
                     {
@@ -379,7 +380,7 @@
                             Model.HeatingType == HeatingType.OilBoiler ||
                             Model.HeatingType == HeatingType.LpgBoiler)
                         {
-                            @(Model.HasHotWaterCylinder?.GetCheckboxLabelText())
+                            @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HasHotWaterCylinder))
                         }
                         else
                         {
@@ -415,11 +416,11 @@
                         var heatingPatternText = "";
                         if (Model.HeatingPattern == HeatingPattern.Other)
                         {
-                            heatingPatternText = $"{Model.HeatingPattern?.GetCheckboxLabelText()} - {Model?.HoursOfHeating.ToString()} hours";
+                            heatingPatternText = $"{GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HeatingPattern)} - {Model?.HoursOfHeating.ToString()} hours";
                         }
                         else
                         {
-                            heatingPatternText = Model.HeatingPattern?.GetCheckboxLabelText();
+                            heatingPatternText = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HeatingPattern);
                         }
                         <span>@(heatingPatternText)</span>
                     }

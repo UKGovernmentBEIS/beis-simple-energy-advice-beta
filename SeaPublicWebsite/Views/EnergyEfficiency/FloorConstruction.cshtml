@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.FloorConstructionViewModel
 @{
@@ -46,7 +47,7 @@
             @(Html.HiddenFor(m => m.YearBuilt))
             @(Html.HiddenFor(m => m.WallConstruction))
             
-            @(Html.GovUkRadiosFor(m => m.FloorConstruction,
+            @(Html.GovUkRadiosFor<FloorConstructionViewModel, FloorConstruction>(m => m.FloorConstruction,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -94,7 +95,7 @@
                                </details>
                             </text>
                 },
-                itemHintOptions: new Dictionary<FloorConstruction?, HintViewModel>
+                radioHints: new Dictionary<FloorConstruction, HintViewModel>
                 {
                     {
                         FloorConstruction.Other,
@@ -104,7 +105,7 @@
                         }
                     }
                 },
-                conditionalOptions: new Dictionary<FloorConstruction?, Func<object, object>>
+                conditionalOptions: new Dictionary<FloorConstruction, Conditional>
                 {
                     {
                         FloorConstruction.DoNotKnow,

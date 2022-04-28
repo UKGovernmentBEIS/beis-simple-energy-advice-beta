@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.FloorInsulatedViewModel
 @{
@@ -27,7 +28,7 @@
             
             @(Html.HiddenFor(m => m.YearBuilt))
             
-            @(Html.GovUkRadiosFor(m => m.FloorInsulated,
+            @(Html.GovUkRadiosFor<FloorInsulatedViewModel, FloorInsulated>(m => m.FloorInsulated,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -69,7 +70,7 @@
                                </details>
                             </text>
                 },
-                conditionalOptions: new Dictionary<FloorInsulated?, Func<object, object>>
+                conditionalOptions: new Dictionary<FloorInsulated, Conditional>
                 {
                     {
                         FloorInsulated.DoNotKnow,
