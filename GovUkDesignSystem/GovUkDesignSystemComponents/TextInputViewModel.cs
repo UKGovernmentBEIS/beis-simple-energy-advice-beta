@@ -61,6 +61,11 @@ namespace GovUkDesignSystem.GovUkDesignSystemComponents
         ///     Attribute to identify input purpose, for instance "postal-code" or "username".
         /// </summary>
         public string Autocomplete { get; set; }
+        
+        /// <summary>
+        ///     Attribute to serve as placeholder text until the initial value is supplied
+        /// </summary>
+        public string Placeholder { get; set; }
 
         /// <summary>
         ///     Attribute to provide a regular expression pattern, used to match allowed character combinations for the input
