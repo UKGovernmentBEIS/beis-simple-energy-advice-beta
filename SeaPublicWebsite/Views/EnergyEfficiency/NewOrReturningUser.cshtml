@@ -38,16 +38,19 @@
                 {
                     {
                         NewOrReturningUser.ReturningUser,
-                        @<text>
-                            @Html.GovUkTextInputFor(
-                                m => m.Reference,
-                                labelOptions: new LabelViewModel
-                                {
-                                    Text = "Your 8-digit reference",
-                                },
-                                classes: "govuk-input--width-10"
-                                )
-                         </text>
+                        new Conditional
+                        {
+                            Html = (@<text>
+                                        @await Html.GovUkTextInputFor(
+                                            m => m.Reference,
+                                            labelOptions: new LabelViewModel
+                                            {
+                                                Text = "Your 8-digit reference",
+                                            },
+                                            classes: "govuk-input--width-10"
+                                            )
+                                     </text>)
+                        }
                     }
                 }))
 

@@ -69,16 +69,19 @@
                 {
                     {
                         HeatingPattern.Other,
-                        @<text>
-                            @Html.GovUkTextInputFor(
-                                m => m.HoursOfHeating,
-                                new LabelViewModel
-                                {
-                                    Text = "Type a number between 0 (no heating) to 24 hours (heating all day and all night). Enter the total hours, even if you have separate heating periods"
-                                },
-                                placeholder: "e.g. 6"
-                                )
-                         </text>
+                        new Conditional
+                        {
+                            Html = (@<text>
+                                        @Html.GovUkTextInputFor(
+                                            m => m.HoursOfHeating,
+                                            new LabelViewModel
+                                            {
+                                                Text = "Type a number between 0 (no heating) to 24 hours (heating all day and all night). Enter the total hours, even if you have separate heating periods"
+                                            },
+                                            placeholder: "e.g. 6"
+                                            )
+                                     </text>)
+                        }
                     }
                 }))
 

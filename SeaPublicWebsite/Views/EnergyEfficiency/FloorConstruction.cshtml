@@ -109,7 +109,9 @@
                 {
                     {
                         FloorConstruction.DoNotKnow,
-                        @<text>
+                        new Conditional
+                        {
+                            Html = (@<text>
                             <div class="govuk-hint">
                             @{
                                 if (Model.Epc?.FloorConstruction != null)
@@ -150,7 +152,8 @@
                                 }
                             }
                             </div >
-                         </text>
+                         </text>)
+                        }
                         }
                     }
             ))

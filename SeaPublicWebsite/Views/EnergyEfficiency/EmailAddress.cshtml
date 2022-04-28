@@ -57,17 +57,20 @@
                 {
                     {
                         HasEmailAddress.Yes,
-                        @<text>
-                            @Html.GovUkTextInputFor(
-                                m => m.EmailAddress,
-                                labelOptions: new LabelViewModel
-                                {
-                                    Text = "Email address",
-                                },
-                                autocomplete: "email",
-                                placeholder: "e.g. my.email@example.com"
-                                )
-                         </text>
+                        new Conditional
+                        {
+                            Html = (@<text>
+                                        @Html.GovUkTextInputFor(
+                                            m => m.EmailAddress,
+                                            labelOptions: new LabelViewModel
+                                            {
+                                                Text = "Email address",
+                                            },
+                                            autocomplete: "email",
+                                            placeholder: "e.g. my.email@example.com"
+                                            )
+                                     </text>)
+                        }
                     }
                 }))
 

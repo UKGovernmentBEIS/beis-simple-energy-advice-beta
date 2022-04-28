@@ -71,26 +71,29 @@
                 {
                     {
                         RoofInsulated.DoNotKnow,
-                        @<text>
-                            @if (Model.YearBuilt.HasValue)
-                            {
-                                <p class="govuk-body">
-                                    Properties of your type typically
-                                    @if (Model.YearBuilt.Value > 2002)
-                                    {
-                                        <b> do have </b>
-                                    }
-                                    else
-                                    {
-                                        <b> do not have </b>
-                                    }
-                                    a fully insulated loft.
-                                </p>
-                                <p class="govuk-body">
-                                    We can generate recommendations based on this information.
-                                </p>
-                            }          
-                         </text>
+                        new Conditional
+                        {
+                            Html = (@<text>
+                                        @if (Model.YearBuilt.HasValue)
+                                        {
+                                            <p class="govuk-body">
+                                                Properties of your type typically
+                                                @if (Model.YearBuilt.Value > 2002)
+                                                {
+                                                    <b> do have </b>
+                                                }
+                                                else
+                                                {
+                                                    <b> do not have </b>
+                                                }
+                                                a fully insulated loft.
+                                            </p>
+                                            <p class="govuk-body">
+                                                We can generate recommendations based on this information.
+                                            </p>
+                                        }          
+                                     </text>)
+                        }
                         }
                 }
                 ))

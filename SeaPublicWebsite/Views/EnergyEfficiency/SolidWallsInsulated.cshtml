@@ -85,7 +85,9 @@
                 {
                     {
                         SolidWallsInsulated.DoNotKnow,
-                        @<text>
+                        new Conditional
+                        {
+                            Html = (@<text>
                             @if (Model.Epc?.SolidWallsInsulated != null)
                             {
                                 if (Model.SolidWallsInsulated == SolidWallsInsulated.All)
@@ -122,7 +124,8 @@
                                     </p>
                                 </div>
                             }
-                         </text>
+                         </text>)
+                        }
                         }
                 }))
 

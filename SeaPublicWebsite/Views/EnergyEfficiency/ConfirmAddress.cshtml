@@ -55,7 +55,13 @@
             }
             else
             {
-                string error = null; // Model.GetErrorFor(m => m.SelectedEpcId);
+                string error = null;
+                var errors = ViewData.ModelState[nameof(ConfirmAddressViewModel.SelectedEpcId)].Errors;
+                if (errors.Count > 0)
+                {
+                    error = errors[0].ErrorMessage;
+                }
+                // string error = Model.GetErrorFor(m => m.SelectedEpcId);
                 ErrorMessageViewModel errorMessageViewModel = error != null ? new ErrorMessageViewModel {Text = error} : null;
                 
                 @Html.GovUkRadios(new RadiosViewModel()

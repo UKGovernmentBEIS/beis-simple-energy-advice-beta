@@ -103,7 +103,9 @@
                     {
                         {
                             WallConstruction.DoNotKnow,
-                            @<text>
+                            new Conditional
+                            {
+                                Html = (@<text>
                                 @if (Model.Epc?.WallConstruction != null)
                                 {
                                     if (Model.Epc.WallConstruction == WallConstruction.Solid)
@@ -140,7 +142,8 @@
                                     </p>
                                     </div>
                                 }
-                             </text>
+                             </text>)
+                            }
                         }
                     }))
 
