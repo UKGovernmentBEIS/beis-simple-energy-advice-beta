@@ -8,7 +8,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = Model.Change
@@ -58,7 +58,7 @@
                         expectedWallType = "cavity";
                     }
                 }
-                @(Html.GovUkRadiosFor<WallConstructionViewModel, WallConstruction>(m => m.WallConstruction,
+                @(await Html.GovUkRadiosFor<WallConstructionViewModel, WallConstruction>(m => m.WallConstruction,
                     hintOptions: new HintViewModel
                     {
                         Html = @<text>

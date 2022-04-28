@@ -9,7 +9,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = @Url.Action("AskForPostcode_Get", "EnergyEfficiency", new {reference = Model.Reference}),
@@ -64,7 +64,7 @@
                 // string error = Model.GetErrorFor(m => m.SelectedEpcId);
                 ErrorMessageViewModel errorMessageViewModel = error != null ? new ErrorMessageViewModel {Text = error} : null;
                 
-                @Html.GovUkRadios(new RadiosViewModel()
+                @await Html.GovUkRadios(new RadiosViewModel()
                 {
                     Name = nameof(ConfirmAddressViewModel.SelectedEpcId),
                     Fieldset = new FieldsetViewModel
@@ -105,7 +105,7 @@
             }
 
             <div class="govuk-button-group">
-                @(Html.GovUkButton(new ButtonViewModel
+                @(await Html.GovUkButton(new ButtonViewModel
                 {
                     Text = (Model.EPCList.Count == 1 ? "Yes, continue" : "Continue"),
 

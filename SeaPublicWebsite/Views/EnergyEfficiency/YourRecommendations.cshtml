@@ -8,7 +8,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference}),
@@ -72,7 +72,7 @@
         <form method="post" action="@Url.Action("EmailAddress_Post", "EnergyEfficiency")">
             @Html.HiddenFor(m => m.FirstReferenceId)
             @Html.HiddenFor(m => m.NumberOfUserRecommendations)
-            @(Html.GovUkRadiosFor<YourRecommendationsViewModel, HasEmailAddress>(
+            @(await Html.GovUkRadiosFor<YourRecommendationsViewModel, HasEmailAddress>(
                 m => m.HasEmailAddress,
                 fieldsetOptions: new FieldsetViewModel
                 {
@@ -95,7 +95,7 @@
                         new Conditional
                         {
                             Html = (@<text>
-                                        @Html.GovUkTextInputFor(
+                                        @await Html.GovUkTextInputFor(
                                             m => m.EmailAddress,
                                             labelOptions: new LabelViewModel
                                             {
@@ -110,7 +110,7 @@
                 }))
 
             <div class="govuk-button-group">
-                @(Html.GovUkButton(new ButtonViewModel
+                @(await Html.GovUkButton(new ButtonViewModel
                 {
                     Text = "Explore recommendations",
                     IsStartButton = true

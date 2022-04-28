@@ -26,7 +26,7 @@
                 break;
         }
     }
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = Model.Change
@@ -47,7 +47,7 @@
             @(Html.HiddenFor(m => m.YearBuilt))
             @(Html.HiddenFor(m => m.WallConstruction))
             
-            @(Html.GovUkRadiosFor<FloorConstructionViewModel, FloorConstruction>(m => m.FloorConstruction,
+            @(await Html.GovUkRadiosFor<FloorConstructionViewModel, FloorConstruction>(m => m.FloorConstruction,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel

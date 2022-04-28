@@ -10,7 +10,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = @Url.Action("Temperature_Get", "EnergyEfficiency", new {reference = Model.Reference}),

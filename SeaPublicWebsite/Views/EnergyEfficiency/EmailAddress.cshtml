@@ -8,7 +8,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = Model.Change
@@ -26,7 +26,7 @@
         
         <form method="post" action="@Url.Action("EmailAddress_Post", "EnergyEfficiency")">
 
-            @(Html.GovUkRadiosFor<EmailAddressViewModel, HasEmailAddress>(
+            @(await Html.GovUkRadiosFor<EmailAddressViewModel, HasEmailAddress>(
                 m => m.HasEmailAddress,
                 fieldsetOptions: new FieldsetViewModel
                 {
@@ -60,7 +60,7 @@
                         new Conditional
                         {
                             Html = (@<text>
-                                        @Html.GovUkTextInputFor(
+                                        @await Html.GovUkTextInputFor(
                                             m => m.EmailAddress,
                                             labelOptions: new LabelViewModel
                                             {
@@ -75,7 +75,7 @@
                 }))
 
             <div class="govuk-button-group">
-                @(Html.GovUkButton(new ButtonViewModel
+                @(await Html.GovUkButton(new ButtonViewModel
                 {
                     Text = "Continue",
                 }))

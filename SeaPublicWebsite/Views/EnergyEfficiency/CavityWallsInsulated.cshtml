@@ -8,7 +8,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = Model.Change
@@ -29,7 +29,7 @@
             @(Html.HiddenFor(m => m.WallConstruction))
             @(Html.HiddenFor(m => m.YearBuilt))
             
-            @(Html.GovUkRadiosFor<CavityWallsInsulatedViewModel, CavityWallsInsulated>(m => m.CavityWallsInsulated,
+            @(await Html.GovUkRadiosFor<CavityWallsInsulatedViewModel, CavityWallsInsulated>(m => m.CavityWallsInsulated,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel

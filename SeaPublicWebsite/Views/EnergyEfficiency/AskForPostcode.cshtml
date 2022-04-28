@@ -8,7 +8,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = @Url.Action("OwnershipStatus_Get", "EnergyEfficiency", new {reference = Model.Reference}),
@@ -58,7 +58,7 @@
                     </div>
                 </details>
                 
-                @(Html.GovUkTextInputFor(
+                @(await Html.GovUkTextInputFor(
                     m => m.HouseNameOrNumber,
                     labelOptions: new LabelViewModel
                     {
@@ -72,7 +72,7 @@
                     placeholder: "e.g. 19 or Swiss Cottage"
                     ))
 
-                @(Html.GovUkTextInputFor(
+                @(await Html.GovUkTextInputFor(
                     m => m.Postcode,
                     labelOptions: new LabelViewModel
                     {
@@ -84,7 +84,7 @@
             </fieldset>
             
             <div class="govuk-button-group">
-                @(Html.GovUkButton(new ButtonViewModel
+                @(await Html.GovUkButton(new ButtonViewModel
                 {
                     Text = "Continue",
                 }))

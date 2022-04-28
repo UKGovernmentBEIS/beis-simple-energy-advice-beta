@@ -7,7 +7,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = @Url.Action("Index", "EnergyEfficiency"),
@@ -23,7 +23,7 @@
         
         <form method="post" action="@Url.Action("NewOrReturningUser_Post", "EnergyEfficiency")">
 
-            @(Html.GovUkRadiosFor<NewOrReturningUserViewModel, NewOrReturningUser>(
+            @(await Html.GovUkRadiosFor<NewOrReturningUserViewModel, NewOrReturningUser>(
                 m => m.NewOrReturningUser,
                 fieldsetOptions: new FieldsetViewModel
                 {
@@ -54,7 +54,7 @@
                     }
                 }))
 
-            @(Html.GovUkButton(new ButtonViewModel
+            @(await Html.GovUkButton(new ButtonViewModel
             {
                 Text = "Continue",
             }))

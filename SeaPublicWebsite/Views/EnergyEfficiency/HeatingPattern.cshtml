@@ -8,7 +8,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = Model.Change
@@ -26,7 +26,7 @@
 
         <form action="@Url.Action("HeatingPattern_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
 
-            @(Html.GovUkRadiosFor<HeatingPatternViewModel, HeatingPattern>(m => m.HeatingPattern,
+            @(await Html.GovUkRadiosFor<HeatingPatternViewModel, HeatingPattern>(m => m.HeatingPattern,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -72,7 +72,7 @@
                         new Conditional
                         {
                             Html = (@<text>
-                                        @Html.GovUkTextInputFor(
+                                        @await Html.GovUkTextInputFor(
                                             m => m.HoursOfHeating,
                                             new LabelViewModel
                                             {
@@ -85,7 +85,7 @@
                     }
                 }))
 
-            @(Html.GovUkButton(new ButtonViewModel
+            @(await Html.GovUkButton(new ButtonViewModel
             {
                 Text = "Continue"
             }))
