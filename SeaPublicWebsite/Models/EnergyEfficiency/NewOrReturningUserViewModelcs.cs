@@ -11,13 +11,11 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select if you have used this service before")]
         public NewOrReturningUser? NewOrReturningUser { get; set; }
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Enter your 8-digit reference (or choose the 'This is my first visit' option)")]
+        [GovUkValidateRequiredIf(
+            ErrorMessageIfMissing = "Enter your 8-digit reference (or choose the 'This is my first visit' option)", 
+            IsRequiredPropertyName = nameof(RefRequired))]
         public string Reference { get; set; }
-
-        public bool IsReferenceValid()
-        {
-            return !string.IsNullOrEmpty(Reference);
-        }
+        public bool RefRequired => NewOrReturningUser == EnergyEfficiency.NewOrReturningUser.ReturningUser;
     }
     
     public enum NewOrReturningUser

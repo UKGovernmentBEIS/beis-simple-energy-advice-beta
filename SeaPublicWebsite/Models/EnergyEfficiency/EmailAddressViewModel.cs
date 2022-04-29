@@ -1,5 +1,6 @@
 ﻿using GovUkDesignSystem;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
+using Microsoft.CodeAnalysis.Operations;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
@@ -9,15 +10,13 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select 'Yes' if you have an email address")]
         public HasEmailAddress? HasEmailAddress { get; set; }
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Enter your email address, or select 'No'")]
+        [GovUkValidateRequiredIf(ErrorMessageIfMissing = "Enter your email address, or select 'No'", 
+            IsRequiredPropertyName = nameof(IsRequiredEmailAddress))]
         public string EmailAddress { get; set; }
         
         public string Reference { get; set; }
         public bool Change { get; set; }
 
-        public bool IsValidEmailAddress()
-        {
-            return EmailAddress != null;
-        }
+        public bool IsRequiredEmailAddress => HasEmailAddress == QuestionOptions.HasEmailAddress.Yes;
     }
 }

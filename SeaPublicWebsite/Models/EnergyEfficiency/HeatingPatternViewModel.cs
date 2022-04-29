@@ -10,16 +10,14 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select heating pattern")]
         public HeatingPattern? HeatingPattern { get; set; }
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Enter number of hours")]
+        [GovUkValidateRequiredIf(ErrorMessageIfMissing = "Enter number of hours", 
+            IsRequiredPropertyName = nameof(IsRequiredHoursOfHeating))]
         [GovUkValidateDecimalRange("Number of hours", 0, 24)]
         public decimal? HoursOfHeating { get; set; }
 
         public string Reference { get; set; }
         public bool Change { get; set; }
 
-        public bool IsValidHoursOfHeating()
-        {
-            return HoursOfHeating is >= 0 and <= 24;
-        }
+        public bool IsRequiredHoursOfHeating => HeatingPattern == QuestionOptions.HeatingPattern.Other;
     }
 }

@@ -46,12 +46,6 @@ namespace SeaPublicWebsite.Controllers
 
             if (viewModel.NewOrReturningUser == NewOrReturningUser.ReturningUser)
             {
-
-                if (!viewModel.IsReferenceValid())
-                {
-                    return View("NewOrReturningUser", viewModel);
-                }
-
                 if (!userDataStore.IsReferenceValid(viewModel.Reference))
                 {
                     ModelState.AddModelError(nameof(NewOrReturningUserViewModel.Reference), "Check you have typed the reference correctly. Reference must be 8 characters.");
@@ -1041,14 +1035,6 @@ namespace SeaPublicWebsite.Controllers
             {
                 return View("HeatingPattern", viewModel);
             }
-
-            if (viewModel.HeatingPattern == HeatingPattern.Other)
-            {
-                if (!viewModel.IsValidHoursOfHeating())
-                {
-                    return View("HeatingPattern", viewModel);
-                }
-            }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
@@ -1121,14 +1107,6 @@ namespace SeaPublicWebsite.Controllers
                 return View("EmailAddress", viewModel);
             }
             
-            if (viewModel.HasEmailAddress == HasEmailAddress.Yes)
-            {
-                if (!viewModel.IsValidEmailAddress())
-                {
-                    return View("EmailAddress", viewModel);
-                }
-            }
-            
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.HasEmailAddress = viewModel.HasEmailAddress;
@@ -1187,14 +1165,6 @@ namespace SeaPublicWebsite.Controllers
             if (!ModelState.IsValid)
             {
                 return View("YourRecommendations", viewModel);
-            }
-
-            if (viewModel.HasEmailAddress == HasEmailAddress.Yes)
-            {
-                if (!viewModel.IsValidEmailAddress())
-                {
-                    return View("YourRecommendations", viewModel);
-                }
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);

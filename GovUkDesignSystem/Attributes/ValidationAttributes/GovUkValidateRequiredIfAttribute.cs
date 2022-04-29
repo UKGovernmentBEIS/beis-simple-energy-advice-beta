@@ -4,20 +4,13 @@ using System.ComponentModel.DataAnnotations;
 namespace GovUkDesignSystem.Attributes.ValidationAttributes
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class GovUkValidateRequiredIfAttribute: ValidationAttribute
+    public class GovUkValidateRequiredIfAttribute: GovUkValidateRequiredAttribute
     {
-        private readonly string requiredError;
-        private readonly string isRequiredPropertyName;
-
-        public GovUkValidateRequiredIfAttribute(string requiredError, string isRequiredPropertyName)
-        {
-            this.requiredError = requiredError;
-            this.isRequiredPropertyName = isRequiredPropertyName;
-        }
+        public string IsRequiredPropertyName;
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var isRequiredPropertyInfo = validationContext.ObjectInstance.GetType().GetProperty(isRequiredPropertyName);
+            var isRequiredPropertyInfo = validationContext.ObjectInstance.GetType().GetProperty(IsRequiredPropertyName);
             
             if (isRequiredPropertyInfo is null)
             {
@@ -29,7 +22,7 @@ namespace GovUkDesignSystem.Attributes.ValidationAttributes
             
             if (isRequired && value is null)
             {
-                return new ValidationResult(requiredError);
+                return new ValidationResult(ErrorMessageIfMissing);
             }
             return ValidationResult.Success;
         }
