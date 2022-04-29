@@ -7,16 +7,26 @@ namespace GovUkDesignSystem.Attributes.ValidationAttributes
     public class GovUkValidateRequiredIfAttribute: ValidationAttribute
     {
         private readonly string requiredError;
-        private readonly bool isRequired;
+        private readonly string isRequiredPropertyName;
 
-        public GovUkValidateRequiredIfAttribute(string requiredError, bool isRequired)
+        public GovUkValidateRequiredIfAttribute(string requiredError, string isRequiredPropertyName)
         {
             this.requiredError = requiredError;
-            this.isRequired = isRequired;
+            this.isRequiredPropertyName = isRequiredPropertyName;
         }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
+            var isRequiredPropertyInfo = validationContext.ObjectInstance.GetType().GetProperty(isRequiredPropertyName);
+            
+            if (isRequiredPropertyInfo is null)
+            {
+                throw new ArgumentException(
+                    "'isRequiredPropertyName' must be a boolean property in the model the attribute is included in");
+            }
+            
+            var isRequired = (bool)isRequiredPropertyInfo.GetValue(validationContext.ObjectInstance, null)!;
+            
             if (isRequired && value is null)
             {
                 return new ValidationResult(requiredError);
