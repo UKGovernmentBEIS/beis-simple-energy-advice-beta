@@ -1194,15 +1194,15 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("your-recommendations/{id}/{reference}")]
         public IActionResult Recommendation_Post(RecommendationViewModel viewModel, string command, int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("recommendations/" + Enum.GetName(viewModel.UserRecommendation.Key), viewModel);
-            }
-            
             var userDataModel = userDataStore.LoadUserData(viewModel.UserDataModel.Reference);
             viewModel.UserDataModel = userDataModel;
             viewModel.UserRecommendation =
                 userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey)id);
+            
+            if (!ModelState.IsValid)
+            {
+                return View("recommendations/" + Enum.GetName(viewModel.UserRecommendation.Key), viewModel);
+            }
 
             userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey) id).RecommendationAction =
                 viewModel.RecommendationAction;
