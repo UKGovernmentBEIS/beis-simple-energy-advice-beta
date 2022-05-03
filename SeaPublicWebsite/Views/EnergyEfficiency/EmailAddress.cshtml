@@ -8,7 +8,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = Model.Change
@@ -26,7 +26,7 @@
         
         <form method="post" action="@Url.Action("EmailAddress_Post", "EnergyEfficiency")">
 
-            @Html.GovUkRadiosFor(
+            @(await Html.GovUkRadiosFor(
                 m => m.HasEmailAddress,
                 fieldsetOptions: new FieldsetViewModel
                 {
@@ -53,26 +53,29 @@
                                </p>
                             </text>
                 },
-                conditionalOptions: new Dictionary<HasEmailAddress?, Func<object, object>>
+                conditionalOptions: new Dictionary<HasEmailAddress, Conditional>
                 {
                     {
                         HasEmailAddress.Yes,
-                        @<text>
-                            @(Html.GovUkTextInputFor(
-                                m => m.EmailAddress,
-                                labelOptions: new LabelViewModel
-                                {
-                                    Text = "Email address",
-                                },
-                                autocomplete: "email",
-                                placeholder: "e.g. my.email@example.com"
-                                ))
-                         </text>
+                        new Conditional
+                        {
+                            Html = (@<text>
+                                        @await Html.GovUkTextInputFor(
+                                            m => m.EmailAddress,
+                                            labelOptions: new LabelViewModel
+                                            {
+                                                Text = "Email address",
+                                            },
+                                            autocomplete: "email",
+                                            placeholder: "e.g. my.email@example.com"
+                                            )
+                                     </text>)
+                        }
                     }
-                })
+                }))
 
             <div class="govuk-button-group">
-                @(Html.GovUkButton(new ButtonViewModel
+                @(await Html.GovUkButton(new ButtonViewModel
                 {
                     Text = "Continue",
                 }))

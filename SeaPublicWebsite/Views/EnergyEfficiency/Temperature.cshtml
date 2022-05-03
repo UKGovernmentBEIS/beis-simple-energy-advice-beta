@@ -8,7 +8,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = Model.Change
@@ -36,7 +36,7 @@
                         If you have a room thermostat, this will be the temperature that is usually set to. 
                     </div>
             
-                    @(Html.GovUkTextInputFor(
+                    @(await Html.GovUkTextInputFor(
                         m => m.Temperature,
                         classes: "govuk-input--width-5",
                         hintOptions: new HintViewModel
@@ -53,7 +53,7 @@
             </div>
             
             <div class="govuk-button-group">
-                @(Html.GovUkButton(new ButtonViewModel
+                @(await Html.GovUkButton(new ButtonViewModel
                 {
                     Text = "Continue",
                 }))

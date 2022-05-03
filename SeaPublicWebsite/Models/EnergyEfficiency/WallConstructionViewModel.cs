@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class WallConstructionViewModel : GovUkViewModel
+    public class WallConstructionViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select wall type")]
         public WallConstruction? WallConstruction { get; set; }

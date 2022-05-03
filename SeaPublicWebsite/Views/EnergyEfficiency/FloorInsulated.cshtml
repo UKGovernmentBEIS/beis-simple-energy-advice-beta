@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.FloorInsulatedViewModel
 @{
@@ -7,7 +8,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = Model.Change
@@ -27,7 +28,7 @@
             
             @(Html.HiddenFor(m => m.YearBuilt))
             
-            @(Html.GovUkRadiosFor(m => m.FloorInsulated,
+            @(await Html.GovUkRadiosFor(m => m.FloorInsulated,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -69,11 +70,13 @@
                                </details>
                             </text>
                 },
-                conditionalOptions: new Dictionary<FloorInsulated?, Func<object, object>>
+                conditionalOptions: new Dictionary<FloorInsulated, Conditional>
                 {
                     {
                         FloorInsulated.DoNotKnow,
-                        @<text>
+                        new Conditional
+                        {
+                            Html = (@<text>
                             <div class="govuk-hint">
                             @if (Model.Epc?.FloorConstruction != null)
                             {
@@ -112,7 +115,8 @@
                                     </p>
                             }                                
                             </div>
-                        </text>
+                        </text>)
+                        }
                         }
                     }
                 ))

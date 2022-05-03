@@ -1,70 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using GovUkDesignSystem.Attributes;
+﻿using GovUkDesignSystem.Attributes;
 using GovUkDesignSystem.GovUkDesignSystemComponents;
 using GovUkDesignSystem.Helpers;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace GovUkDesignSystem.HtmlGenerators
 {
     internal static class CheckboxesHtmlGenerator
     {
-        public static IHtmlContent GenerateHtml<TModel, TPropertyListItem>(
+        internal static async Task<IHtmlContent> GenerateHtml<TModel, TEnum>(
             IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, List<TPropertyListItem>>> propertyLambdaExpression,
+            Expression<Func<TModel, List<TEnum>>> propertyExpression,
             FieldsetViewModel fieldsetOptions = null,
             HintViewModel hintOptions = null,
-            Dictionary<TPropertyListItem, Func<object, object>> conditionalOptions = null,
-            Dictionary<TPropertyListItem, HintViewModel> itemHintOptions = null)
-            where TModel : GovUkViewModel
-            where TPropertyListItem : struct, IConvertible
+            Dictionary<TEnum, string> classOptions = null,
+            Dictionary<TEnum, Conditional> conditionalOptions = null,
+            string idPrefix = null,
+            Dictionary<TEnum, LabelViewModel> labelOptions = null)
+            where TModel : class
+            where TEnum : struct, Enum
         {
-            PropertyInfo property = ExpressionHelpers.GetPropertyFromExpression(propertyLambdaExpression);
-            ThrowIfPropertyTypeIsNotListOfEnums<TPropertyListItem>(property);
-            string propertyName = property.Name;
+            string propertyId = idPrefix + htmlHelper.IdFor(propertyExpression);
+            string propertyName = idPrefix + htmlHelper.NameFor(propertyExpression);
+            htmlHelper.ViewData.ModelState.TryGetValue(propertyName, out var modelStateEntry);
 
-            TModel model = htmlHelper.ViewData.Model;
-            List<TPropertyListItem> currentlySelectedValues =
-                ExpressionHelpers.GetPropertyValueFromModelAndExpression(model, propertyLambdaExpression);
+            // Get the value to put in the input from the post data if possible, otherwise use the value in the model 
+            var selectedValues = HtmlGenerationHelpers.GetListOfEnumValuesFromModelStateOrModel(htmlHelper.ViewData.Model, propertyExpression, modelStateEntry, CheckboxesViewModel.HIDDEN_CHECKBOX_DUMMY_VALUE);
 
-            List<TPropertyListItem> allEnumValues =
-                Enum.GetValues(typeof(TPropertyListItem))
-                    .Cast<TPropertyListItem>()
-                    .ToList();
-
-            List<ItemViewModel> checkboxes = allEnumValues
+            List<ItemViewModel> checkboxes = Enum.GetValues(typeof(TEnum))
+                .Cast<TEnum>()
                 .Select(enumValue =>
                 {
-                    var isEnumValueInListOfCurrentlySelectedValues =
-                        currentlySelectedValues != null && currentlySelectedValues.Contains(enumValue);
+                    var isEnumValueInListOfCurrentlySelectedValues = selectedValues.Contains(enumValue);
+                    if (labelOptions == null || !labelOptions.TryGetValue(enumValue, out LabelViewModel checkboxLabelViewModel))
+                    {
+                        checkboxLabelViewModel = new LabelViewModel
+                        {
+                            Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(enumValue)
+                        };
+                    }
 
-                    string checkboxLabelText = CheckboxHelper.GetCheckboxLabelText(enumValue);
-                    
+                    string classes = null;
+                    classOptions?.TryGetValue(enumValue, out classes);
+
                     var checkboxItemViewModel = new CheckboxItemViewModel
                     {
                         Value = enumValue.ToString(),
-                        Id = $"GovUk_Checkbox_{propertyName}_{enumValue}",
+                        Id = $"{propertyName}_{enumValue}",
                         Checked = isEnumValueInListOfCurrentlySelectedValues,
-                        Label = new LabelViewModel
-                        {
-                            Text = checkboxLabelText
-                        }
+                        Label = checkboxLabelViewModel,
+                        Classes = classes
                     };
-                    
-                    if (conditionalOptions != null && conditionalOptions.TryGetValue(enumValue, out Func<object, object> conditionalHtml))
+
+                    if (conditionalOptions != null && conditionalOptions.TryGetValue(enumValue, out Conditional conditional))
                     {
-                        checkboxItemViewModel.Conditional = new Conditional {Html = conditionalHtml};
+                        checkboxItemViewModel.Conditional = conditional;
                     }
-                    
-                    if (itemHintOptions != null && itemHintOptions.TryGetValue(enumValue, out HintViewModel hintViewModel))
-                    {
-                        checkboxItemViewModel.Hint = hintViewModel;
-                    }
-                    
+
                     return checkboxItemViewModel;
                 })
                 .Cast<ItemViewModel>()
@@ -72,21 +70,16 @@ namespace GovUkDesignSystem.HtmlGenerators
 
             var checkboxesViewModel = new CheckboxesViewModel
             {
-                Name = $"GovUk_Checkbox_{propertyName}",
-                IdPrefix = $"GovUk_{propertyName}",
+                Name = propertyName,
+                IdPrefix = propertyId,
                 Items = checkboxes,
                 Fieldset = fieldsetOptions,
                 Hint = hintOptions
             };
-            if (model.HasErrorFor(property))
-            {
-                checkboxesViewModel.ErrorMessage = new ErrorMessageViewModel
-                {
-                    Text = model.GetErrorFor(property)
-                };
-            }
 
-            return htmlHelper.Partial("/GovUkDesignSystemComponents/Checkboxes.cshtml", checkboxesViewModel);
+            HtmlGenerationHelpers.SetErrorMessages(checkboxesViewModel, modelStateEntry);
+
+            return await htmlHelper.PartialAsync("/GovUkDesignSystemComponents/Checkboxes.cshtml", checkboxesViewModel);
         }
 
         private static void ThrowIfPropertyTypeIsNotListOfEnums<TPropertyListItem>(PropertyInfo property)
@@ -99,6 +92,5 @@ namespace GovUkDesignSystem.HtmlGenerators
                 );
             }
         }
-
     }
 }

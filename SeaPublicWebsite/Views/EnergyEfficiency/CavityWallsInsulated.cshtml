@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.CavityWallsInsulatedViewModel
 @{
@@ -7,7 +8,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = Model.Change
@@ -28,7 +29,7 @@
             @(Html.HiddenFor(m => m.WallConstruction))
             @(Html.HiddenFor(m => m.YearBuilt))
             
-            @(Html.GovUkRadiosFor(m => m.CavityWallsInsulated,
+            @(await Html.GovUkRadiosFor(m => m.CavityWallsInsulated,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -102,11 +103,13 @@
                                </details>
                             </text>
                 },
-                conditionalOptions: new Dictionary<CavityWallsInsulated?, Func<object, object>>
+                conditionalOptions: new Dictionary<CavityWallsInsulated, Conditional>
                 {
                     {
                         CavityWallsInsulated.DoNotKnow,
-                        @<text>
+                        new Conditional
+                        {
+                            Html = ( @<text>
                             @if (Model.Epc?.CavityWallsInsulated != null)
                             {
                                 if (Model.Epc.CavityWallsInsulated == CavityWallsInsulated.No)
@@ -157,7 +160,8 @@
                                     </div>
                                 }
                             }
-                         </text>
+                         </text>)
+                        }
                         }
                     }))
 

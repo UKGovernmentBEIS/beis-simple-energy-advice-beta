@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 using System.Linq.Expressions;
-using System.Reflection;
+using System.Threading.Tasks;
 using GovUkDesignSystem.GovUkDesignSystemComponents;
 using GovUkDesignSystem.Helpers;
 using Microsoft.AspNetCore.Html;
@@ -10,49 +10,43 @@ namespace GovUkDesignSystem.HtmlGenerators
 {
     internal static class TextAreaHtmlGenerator
     {
-
-        internal static IHtmlContent GenerateHtml<TModel>(
+        internal static async Task<IHtmlContent> GenerateHtml<TModel>(
             IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, string>> propertyLambdaExpression,
+            Expression<Func<TModel, string>> propertyExpression,
             int? rows = null,
             LabelViewModel labelOptions = null,
             HintViewModel hintOptions = null,
-            FormGroupViewModel formGroupOptions = null
+            FormGroupViewModel formGroupOptions = null,
+            string idPrefix = null
         )
-            where TModel : GovUkViewModel
+            where TModel : class
         {
-            PropertyInfo property = ExpressionHelpers.GetPropertyFromExpression(propertyLambdaExpression);
+            string propertyId = idPrefix + htmlHelper.IdFor(propertyExpression);
+            string propertyName = idPrefix + htmlHelper.NameFor(propertyExpression);
+            htmlHelper.ViewData.ModelState.TryGetValue(propertyName, out var modelStateEntry);
 
-            string propertyName = property.Name;
+            // Get the value to put in the input from the post data if possible, otherwise use the value in the model
+            string inputValue = HtmlGenerationHelpers.GetStringValueFromModelStateOrModel(modelStateEntry, htmlHelper.ViewData.Model, propertyExpression);
 
-            TModel model = htmlHelper.ViewData.Model;
-
-            string currentValue = ExtensionHelpers.GetCurrentValue(model, property, propertyLambdaExpression);
-
-            string id = $"GovUk_{propertyName}";
             if (labelOptions != null)
             {
-                labelOptions.For = id;
+                labelOptions.For = propertyId;
             }
 
             var textAreaViewModel = new TextAreaViewModel
             {
-                Name = $"GovUk_Text_{propertyName}",
-                Id = id,
-                Value = currentValue,
+                Name = propertyName,
+                Id = propertyId,
+                Value = inputValue,
                 Rows = rows,
                 Label = labelOptions,
                 Hint = hintOptions,
                 FormGroup = formGroupOptions
             };
 
-            if (model.HasErrorFor(property))
-            {
-                textAreaViewModel.ErrorMessage = new ErrorMessageViewModel {Text = model.GetErrorFor(property)};
-            }
+            HtmlGenerationHelpers.SetErrorMessages(textAreaViewModel, modelStateEntry);
 
-            return htmlHelper.Partial("/GovUkDesignSystemComponents/Textarea.cshtml", textAreaViewModel);
+            return await htmlHelper.PartialAsync("/GovUkDesignSystemComponents/Textarea.cshtml", textAreaViewModel);
         }
-
     }
 }

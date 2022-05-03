@@ -6,7 +6,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = @Url.Action($"{ViewBag.From}_Get", "EnergyEfficiency", new {reference = Model}),

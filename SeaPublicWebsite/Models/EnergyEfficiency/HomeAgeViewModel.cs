@@ -6,11 +6,10 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class HomeAgeViewModel : GovUkViewModel
+    public class HomeAgeViewModel
     {
-        [GovUkDisplayNameForErrors(NameAtStartOfSentence = "The year your property was built", NameWithinSentence = "the year your property was built")]
         [GovUkValidateRequired(ErrorMessageIfMissing = "Enter the approximate year that your property was built")]
-        [GovUkValidateIntRange(Minimum = 1000, Maximum = 2022)]
+        [GovUkValidateIntRange("The year your property was build", 1000, 2022)]
         public int? YearBuilt { get; set; }
 
         public string Reference { get; set; }

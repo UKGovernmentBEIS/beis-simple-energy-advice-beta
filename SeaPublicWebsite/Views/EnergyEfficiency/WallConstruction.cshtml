@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.WallConstructionViewModel;
 @{
@@ -7,7 +8,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = Model.Change
@@ -57,7 +58,7 @@
                         expectedWallType = "cavity";
                     }
                 }
-                @(Html.GovUkRadiosFor(m => m.WallConstruction,
+                @(await Html.GovUkRadiosFor(m => m.WallConstruction,
                     hintOptions: new HintViewModel
                     {
                         Html = @<text>
@@ -88,7 +89,7 @@
                                    </details>
                                 </text>
                     },
-                    itemHintOptions: new Dictionary<WallConstruction?, HintViewModel>
+                    radioHints: new Dictionary<WallConstruction, HintViewModel>
                     {
                         {
                             WallConstruction.Other,
@@ -98,11 +99,13 @@
                             }
                         }
                     },
-                    conditionalOptions: new Dictionary<WallConstruction?, Func<object, object>>
+                    conditionalOptions: new Dictionary<WallConstruction, Conditional>
                     {
                         {
                             WallConstruction.DoNotKnow,
-                            @<text>
+                            new Conditional
+                            {
+                                Html = (@<text>
                                 @if (Model.Epc?.WallConstruction != null)
                                 {
                                     if (Model.Epc.WallConstruction == WallConstruction.Solid)
@@ -139,7 +142,8 @@
                                     </p>
                                     </div>
                                 }
-                             </text>
+                             </text>)
+                            }
                         }
                     }))
 

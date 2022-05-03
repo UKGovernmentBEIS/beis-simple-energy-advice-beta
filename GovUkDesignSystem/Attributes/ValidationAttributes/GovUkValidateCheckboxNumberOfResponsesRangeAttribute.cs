@@ -1,24 +1,27 @@
 ﻿using System;
+using System.Collections;
+using System.ComponentModel.DataAnnotations;
 
 namespace GovUkDesignSystem.Attributes.ValidationAttributes
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class GovUkValidateCheckboxNumberOfResponsesRangeAttribute : Attribute
+    public class GovUkValidateCheckboxNumberOfResponsesRangeAttribute : ValidationAttribute
     {
         /// <summary>
         ///     The minimum number of checkboxes the user must select for us not to show an error
-        ///     <br/>If this is omitted, or has the value null, then there is no minimum
+        ///     <br/>If this is omitted then there is no minimum
         /// </summary>
-        public int? MinimumSelected { get; set; }
+        public int MinimumSelected { get; set; } = int.MinValue;
 
         /// <summary>
         ///     The maximum number of checkboxes the user can select before we show an error
-        ///     <br/>If this is omitted, or has the value null, then there is no maximum
+        ///     <br/>If this is omitted, then there is no maximum
         /// </summary>
-        public int? MaximumSelected { get; set; }
+        public int MaximumSelected { get; set; } = int.MaxValue;
 
         /// <summary>
-        /// The error message to show to the user if they don't select an option
+        /// The error message to show to the user if they don't select an option.
+        /// Leave null if the value is not required
         /// <br/>
         /// <br/>GDS guidance:
         /// <br/>
@@ -34,5 +37,37 @@ namespace GovUkDesignSystem.Attributes.ValidationAttributes
         /// </summary>
         public string ErrorMessageIfNothingSelected { get; set; }
 
+        /// <summary>
+        /// The name to use within error messages about the number of selected options
+        /// </summary>
+        public string PropertyNameForErrorMessage { get; set; }
+
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if (string.IsNullOrEmpty(PropertyNameForErrorMessage))
+            {
+                throw new ArgumentNullException("PropertyNameForErrorMessage cannot be null or empty");
+            }
+
+            var selectedValues = (IList)value;
+
+            if (!string.IsNullOrEmpty(ErrorMessageIfNothingSelected) &&
+                selectedValues.Count == 0)
+            {
+                return new ValidationResult(ErrorMessageIfNothingSelected);
+            }
+
+            if (selectedValues.Count < MinimumSelected)
+            {
+                return new ValidationResult($"Select at least {MinimumSelected} options for {PropertyNameForErrorMessage}");
+            }
+
+            if (selectedValues.Count > MaximumSelected)
+            {
+                return new ValidationResult($"Select at most {MaximumSelected} options for {PropertyNameForErrorMessage}");
+            }
+
+            return ValidationResult.Success;
+        }
     }
 }

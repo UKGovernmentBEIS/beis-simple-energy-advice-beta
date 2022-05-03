@@ -7,7 +7,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class RecommendationViewModel : GovUkViewModel
+    public class RecommendationViewModel
     {
         public UserRecommendation UserRecommendation { get; set; }
         public UserDataModel UserDataModel { get; set; }

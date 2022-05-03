@@ -7,7 +7,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = @Url.Action("Index", "EnergyEfficiency"),
@@ -23,7 +23,7 @@
         
         <form method="post" action="@Url.Action("NewOrReturningUser_Post", "EnergyEfficiency")">
 
-            @Html.GovUkRadiosFor(
+            @(await Html.GovUkRadiosFor(
                 m => m.NewOrReturningUser,
                 fieldsetOptions: new FieldsetViewModel
                 {
@@ -34,24 +34,27 @@
                         IsPageHeading = true,
                     },
                 },
-                conditionalOptions: new Dictionary<NewOrReturningUser?, Func<object, object>>
+                conditionalOptions: new Dictionary<NewOrReturningUser, Conditional>
                 {
                     {
                         NewOrReturningUser.ReturningUser,
-                        @<text>
-                            @(Html.GovUkTextInputFor(
-                                m => m.Reference,
-                                labelOptions: new LabelViewModel
-                                {
-                                    Text = "Your 8-digit reference",
-                                },
-                                classes: "govuk-input--width-10"
-                                ))
-                         </text>
+                        new Conditional
+                        {
+                            Html = (@<text>
+                                        @await Html.GovUkTextInputFor(
+                                            m => m.Reference,
+                                            labelOptions: new LabelViewModel
+                                            {
+                                                Text = "Your 8-digit reference",
+                                            },
+                                            classes: "govuk-input--width-10"
+                                            )
+                                     </text>)
+                        }
                     }
-                })
+                }))
 
-            @(Html.GovUkButton(new ButtonViewModel
+            @(await Html.GovUkButton(new ButtonViewModel
             {
                 Text = "Continue",
             }))

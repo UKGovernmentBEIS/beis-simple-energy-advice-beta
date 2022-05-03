@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.FloorConstructionViewModel
 @{
@@ -25,7 +26,7 @@
                 break;
         }
     }
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = Model.Change
@@ -46,7 +47,7 @@
             @(Html.HiddenFor(m => m.YearBuilt))
             @(Html.HiddenFor(m => m.WallConstruction))
             
-            @(Html.GovUkRadiosFor(m => m.FloorConstruction,
+            @(await Html.GovUkRadiosFor(m => m.FloorConstruction,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -94,7 +95,7 @@
                                </details>
                             </text>
                 },
-                itemHintOptions: new Dictionary<FloorConstruction?, HintViewModel>
+                radioHints: new Dictionary<FloorConstruction, HintViewModel>
                 {
                     {
                         FloorConstruction.Other,
@@ -104,11 +105,13 @@
                         }
                     }
                 },
-                conditionalOptions: new Dictionary<FloorConstruction?, Func<object, object>>
+                conditionalOptions: new Dictionary<FloorConstruction, Conditional>
                 {
                     {
                         FloorConstruction.DoNotKnow,
-                        @<text>
+                        new Conditional
+                        {
+                            Html = (@<text>
                             <div class="govuk-hint">
                             @{
                                 if (Model.Epc?.FloorConstruction != null)
@@ -149,7 +152,8 @@
                                 }
                             }
                             </div >
-                         </text>
+                         </text>)
+                        }
                         }
                     }
             ))
