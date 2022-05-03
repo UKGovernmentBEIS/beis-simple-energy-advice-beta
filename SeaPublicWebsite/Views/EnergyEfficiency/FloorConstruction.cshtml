@@ -47,7 +47,7 @@
             @(Html.HiddenFor(m => m.YearBuilt))
             @(Html.HiddenFor(m => m.WallConstruction))
             
-            @(await Html.GovUkRadiosFor<FloorConstructionViewModel, FloorConstruction>(m => m.FloorConstruction,
+            @(await Html.GovUkRadiosFor(m => m.FloorConstruction,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel

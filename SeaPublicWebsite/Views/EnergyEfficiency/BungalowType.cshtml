@@ -25,7 +25,7 @@
         
         <form action="@Url.Action("BungalowType_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
-            @(await Html.GovUkRadiosFor<BungalowTypeViewModel, BungalowType>(m => m.BungalowType,
+            @(await Html.GovUkRadiosFor(m => m.BungalowType,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel

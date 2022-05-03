@@ -58,7 +58,7 @@
                         expectedWallType = "cavity";
                     }
                 }
-                @(await Html.GovUkRadiosFor<WallConstructionViewModel, WallConstruction>(m => m.WallConstruction,
+                @(await Html.GovUkRadiosFor(m => m.WallConstruction,
                     hintOptions: new HintViewModel
                     {
                         Html = @<text>

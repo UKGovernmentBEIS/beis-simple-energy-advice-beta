@@ -26,7 +26,7 @@
         
         <form method="post" action="@Url.Action("EmailAddress_Post", "EnergyEfficiency")">
 
-            @(await Html.GovUkRadiosFor<EmailAddressViewModel, HasEmailAddress>(
+            @(await Html.GovUkRadiosFor(
                 m => m.HasEmailAddress,
                 fieldsetOptions: new FieldsetViewModel
                 {

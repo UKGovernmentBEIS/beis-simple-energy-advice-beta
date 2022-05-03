@@ -23,7 +23,7 @@
         
         <form method="post" action="@Url.Action("NewOrReturningUser_Post", "EnergyEfficiency")">
 
-            @(await Html.GovUkRadiosFor<NewOrReturningUserViewModel, NewOrReturningUser>(
+            @(await Html.GovUkRadiosFor(
                 m => m.NewOrReturningUser,
                 fieldsetOptions: new FieldsetViewModel
                 {

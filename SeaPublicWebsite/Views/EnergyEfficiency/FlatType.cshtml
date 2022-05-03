@@ -25,7 +25,7 @@
         
         <form action="@Url.Action("FlatType_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
-            @(await Html.GovUkRadiosFor<FlatTypeViewModel, FlatType>(m => m.FlatType,
+            @(await Html.GovUkRadiosFor(m => m.FlatType,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
