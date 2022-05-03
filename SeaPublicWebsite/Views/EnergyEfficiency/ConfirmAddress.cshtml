@@ -61,7 +61,7 @@
                 {
                     error = errors[0].ErrorMessage;
                 }
-                // string error = Model.GetErrorFor(m => m.SelectedEpcId);
+                
                 ErrorMessageViewModel errorMessageViewModel = error != null ? new ErrorMessageViewModel {Text = error} : null;
                 
                 @await Html.GovUkRadios(new RadiosViewModel()
