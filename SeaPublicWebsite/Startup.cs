@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ErrorHandling;
+using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.Helpers;
 
@@ -31,6 +32,8 @@ namespace SeaPublicWebsite
 
             ConfigureFileRepository(services);
             
+            ConfigureGovUkNotifyApi(services);
+            
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add<ErrorHandlingFilter>();
@@ -50,6 +53,18 @@ namespace SeaPublicWebsite
                 services.AddSingleton<IFileRepository>(s => new SystemFileRepository());
             }
 
+        }
+
+        private void ConfigureGovUkNotifyApi(IServiceCollection services)
+        {
+            if (!Config.IsLocal())
+            {
+                // TODO
+            }
+            else
+            {
+                services.AddSingleton<IGovNotifyAPI>(s => new GovUkNotifyApi());
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

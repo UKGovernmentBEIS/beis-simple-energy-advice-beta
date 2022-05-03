@@ -15,10 +15,12 @@ namespace SeaPublicWebsite.Controllers
     public class EnergyEfficiencyController : Controller
     {
         private readonly UserDataStore userDataStore;
+        private readonly IGovNotifyAPI emailApi;
 
-        public EnergyEfficiencyController(UserDataStore userDataStore)
+        public EnergyEfficiencyController(UserDataStore userDataStore, IGovNotifyAPI emailApi)
         {
             this.userDataStore = userDataStore;
+            this.emailApi = emailApi;
         }
         
         
@@ -1168,7 +1170,8 @@ namespace SeaPublicWebsite.Controllers
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
+
+            // TODO: GDPR considerations: Save email now? Send at the end?
             userDataModel.HasEmailAddress = viewModel.HasEmailAddress;
             userDataModel.EmailAddress = viewModel.HasEmailAddress == HasEmailAddress.Yes ? viewModel.EmailAddress : null;
             userDataStore.SaveUserData(userDataModel);
