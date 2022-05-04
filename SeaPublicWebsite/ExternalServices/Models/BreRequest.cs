@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SeaPublicWebsite.ExternalServices.Models
+﻿namespace SeaPublicWebsite.ExternalServices.Models
 {
     public class BreRequest
     {
