@@ -1,7 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
-
-namespace SeaPublicWebsite.Models.EnergyEfficiency
+﻿namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public enum RecommendationKey
     { 

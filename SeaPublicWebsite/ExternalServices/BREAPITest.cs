@@ -13,9 +13,9 @@ using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 
-var testBreRequest = new BreRequest()
+var exampleCase3Request = new BreRequest
 {
-    epc = new RequestEpc()
+    epc = new RequestEpc
     {
         postcode = "A12 3BC",
         isConnectedtoMainsGas = true,
@@ -35,7 +35,7 @@ var testBreRequest = new BreRequest()
         lowEnergyLighting = "80",
         solarWaterHeatingFlag = "N",
         photoSupply = "0",
-        windTurbineCount = "0",
+        windTurbineCount = "0"
     },
     construction_date = "C",
     heating_fuel = "26",
@@ -49,17 +49,17 @@ var testBreRequest = new BreRequest()
     showers_per_week = 0,
     baths_per_week = 7,
     measures = true,
-    measures_package = new[] {"A", "W1", "G", "U"},
+    measures_package = new[] {"A", "W1", "G", "U"}
 };
 
-string request = JsonConvert.SerializeObject(testBreRequest);
+var request = JsonConvert.SerializeObject(exampleCase3Request);
 
 const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 Random random = new();
 var nonce = new string(Enumerable.Repeat(chars, 64)
     .Select(s => s[random.Next(s.Length)]).ToArray());
 
-string created = DateTime.Now.ToUniversalTime().ToString
+var created = DateTime.Now.ToUniversalTime().ToString
     (DateTimeFormatInfo.InvariantInfo.SortableDateTimePattern) + "Z";
 
 
@@ -67,58 +67,101 @@ var username = "softwire0.0.1";
 
 var password = "9b052a18df10baade8c7448f3";
 
-String sha256_hash(String value) {
-    using (SHA256 hash = SHA256.Create()) {
-        return String.Concat(hash
+string sha256_hash(string value)
+{
+    using (var hash = SHA256.Create())
+    {
+        return string.Concat(hash
             .ComputeHash(Encoding.UTF8.GetBytes(value))
             .Select(item => item.ToString("x2")));
     }
 }
-string token = sha256_hash(password + nonce + username + created);
-var wsse_header = string.Join("", "WSSE UsernameToken ", "Token=\"", token, "\", ", "Nonce=\"", nonce, "\", ", "Username=\"", username, "\", ", "Created=\"", created, "\"");
+
+var token = sha256_hash(password + nonce + username + created);
+var wsse_header = string.Join("", "WSSE UsernameToken ", "Token=\"", token, "\", ", "Nonce=\"", nonce, "\", ",
+    "Username=\"", username, "\", ", "Created=\"", created, "\"");
 
 using (var httpClient = new HttpClient())
 {
-    
     httpClient.DefaultRequestHeaders.Add("Authorization", wsse_header);
     httpClient.BaseAddress = new Uri("https://uat.brewebserv.com");
 
-    string path = "/bemapi/energy_use";
+    var path = "/bemapi/energy_use";
     StringContent stringContent = new(request);
 
-    HttpResponseMessage response = httpClient.PostAsync(path, stringContent).Result;
+    var response = httpClient.PostAsync(path, stringContent).Result;
 
     if (response.IsSuccessStatusCode)
     {
-        string bodyString = response.Content.ReadAsStringAsync().Result;
-        JObject measures = JObject.FromObject(JObject.Parse(bodyString)["measures"]);
+        var bodyString = response.Content.ReadAsStringAsync().Result;
+        var measures = JObject.FromObject(JObject.Parse(bodyString)["measures"]);
 
         IList<Recommendation> recommendations = new List<Recommendation>();
-        foreach (JProperty prop in measures.Properties())
+        foreach (var prop in measures.Properties())
         {
+            var recommendationDictionary = new Dictionary<string, Recommendation>
+            {
+                {
+                    "A", new Recommendation
+                    {
+                        Key = RecommendationKey.AddLoftInsulation,
+                        Title = "Add some loft insulation",
+                        Summary = "Increase the level of insulation in your loft to the recommended level of 300mm"
+                    }
+                },
+                {
+                    "B", new Recommendation
+                    {
+                        Key = RecommendationKey.InsulateCavityWalls,
+                        Title = "Insulate your cavity walls",
+                        Summary = "Inject insulation into the cavity in your external walls"
+                    }
+                },
+                {
+                    "G", new Recommendation
+                    {
+                        Key = RecommendationKey.UpgradeHeatingControls,
+                        Title = "Upgrade your heating controls",
+                        Summary = "Fit a programmer, thermostat and thermostatic radiator valves"
+                    }
+                },
+                {
+                    "O3", new Recommendation
+                    {
+                        Key = RecommendationKey.FitNewWindows,
+                        Title = "Fit new windows",
+                        Summary = "Replace old single glazed windows with new double or triple glazing"
+                    }
+                },
+                {
+                    "U", new Recommendation
+                    {
+                        Key = RecommendationKey.SolarElectricPanels,
+                        Title = "Fit solar electric panels",
+                        Summary = "Install PV panels on your roof to generate electricity"
+                    }
+                },
+            };
             var value = prop.Value;
-            int minInstallCost = (int) value["min_installation_cost"];
-            int maxInstallCost = (int) value["max_installation_cost"];
-            int saving = (int) value["cost_saving"];
-            int lifetime = (int) value["lifetime"];
+            var minInstallCost = (int) value["min_installation_cost"];
+            var maxInstallCost = (int) value["max_installation_cost"];
+            var saving = (int) value["cost_saving"];
+            var lifetime = (int) value["lifetime"];
 
             Recommendation recommendation = new()
             {
-                Key = RecommendationKey.AddLoftInsulation,
-                Title = prop.Name,
+                Key = recommendationDictionary[prop.Name].Key,
+                Title = recommendationDictionary[prop.Name].Title,
                 MinInstallCost = minInstallCost,
                 MaxInstallCost = maxInstallCost,
                 Saving = saving,
                 LifetimeSaving = lifetime * saving,
                 Lifetime = lifetime,
-                Summary = prop.Name
+                Summary = recommendationDictionary[prop.Name].Summary,
             };
             recommendations.Add(recommendation);
         }
-        
-        foreach (var recommendation in recommendations)
-        {
-            Console.WriteLine(recommendation.Title);
-        }
+
+        foreach (var recommendation in recommendations) Console.WriteLine($"{recommendation.Title}: {recommendation.Summary}");
     }
 }
