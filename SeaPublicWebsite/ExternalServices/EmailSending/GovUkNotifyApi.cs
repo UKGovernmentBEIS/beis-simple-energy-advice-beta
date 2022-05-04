@@ -37,14 +37,15 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
 
         public void SendReferenceNumberEmail(string emailAddress, string reference)
         {
+            var template = "ApplicationReferenceNumberTemplate";
             var personalisation = new Dictionary<string, dynamic>
             {
-                { "reference", reference }
+                { Global.GetFieldForTemplate(template, "reference"), reference }
             };
             var emailModel = new GovUkNotifyEmailModel
             {
                 EmailAddress = emailAddress,
-                TemplateId = EmailTemplates.ApplicationReferenceNumberTemplateId,
+                TemplateId = Global.GetIdForTemplate(template),
                 Personalisation = personalisation
             };
             var response = SendEmail(emailModel);
@@ -52,24 +53,19 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
 
         public void SendRequestedDocumentEmail(string emailAddress, byte[] documentContents)
         {
+            var template = "RequestDocumentTemplate";
             var personalisation = new Dictionary<string, dynamic>
             {
-                { "link_to_file", NotificationClient.PrepareUpload(documentContents) }
+                { Global.GetFieldForTemplate(template, "documentContents"), NotificationClient.PrepareUpload(documentContents) }
             };
             var emailModel = new GovUkNotifyEmailModel
             {
                 EmailAddress = emailAddress,
-                TemplateId = EmailTemplates.RequestDocumentTemplateId,
+                TemplateId = Global.GetIdForTemplate(template),
                 Personalisation = personalisation
             };
             var response = SendEmail(emailModel);
         }
-    }
-
-    public static class EmailTemplates
-    {
-        public const string ApplicationReferenceNumberTemplateId = "28470b42-26ff-4888-8221-c65e27a8c832";
-        public const string RequestDocumentTemplateId = "91ea7d56-aca9-4f79-8ba9-99dfb54c464d";
     }
 
     internal class GovUkNotifyEmailModel
