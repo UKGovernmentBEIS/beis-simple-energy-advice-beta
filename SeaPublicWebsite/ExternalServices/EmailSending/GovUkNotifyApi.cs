@@ -49,7 +49,6 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
                 Personalisation = personalisation
             };
             var response = SendEmail(emailModel);
-            Console.WriteLine(response);
         }
 
         public void SendRequestedDocumentEmail(string emailAddress, byte[] documentContents)
@@ -65,7 +64,6 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
                 Personalisation = personalisation
             };
             var response = SendEmail(emailModel);
-            Console.WriteLine(response);
         }
     }
 
