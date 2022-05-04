@@ -51,10 +51,27 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
             var response = SendEmail(emailModel);
             Console.WriteLine(response);
         }
+
+        public void SendRequestedDocumentEmail(string emailAddress, byte[] documentContents)
+        {
+            var personalisation = new Dictionary<string, dynamic>
+            {
+                { "link_to_file", NotificationClient.PrepareUpload(documentContents) }
+            };
+            var emailModel = new GovUkNotifyEmailModel
+            {
+                EmailAddress = emailAddress,
+                TemplateId = EmailTemplates.RequestDocumentTemplateId,
+                Personalisation = personalisation
+            };
+            var response = SendEmail(emailModel);
+            Console.WriteLine(response);
+        }
     }
 
     public static class EmailTemplates
     {
         public const string ApplicationReferenceNumberTemplateId = "28470b42-26ff-4888-8221-c65e27a8c832";
+        public const string RequestDocumentTemplateId = "91ea7d56-aca9-4f79-8ba9-99dfb54c464d";
     }
 }
