@@ -1,0 +1,11 @@
+﻿using System.Collections.Generic;
+
+namespace SeaPublicWebsite.ExternalServices.Models
+{
+    public class GovUkNotifyEmailModel
+    {
+        public string EmailAddress { get; set; }
+        public string TemplateId { get; set; }
+        public Dictionary<string, dynamic> Personalisation { get; set; } = null;
+    }
+}

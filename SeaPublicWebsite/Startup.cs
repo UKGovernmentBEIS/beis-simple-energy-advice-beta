@@ -29,10 +29,9 @@ namespace SeaPublicWebsite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserDataStore, UserDataStore>();
+            services.AddSingleton<IGovNotifyApi>(s => new GovUkNotifyApi());
 
             ConfigureFileRepository(services);
-            
-            ConfigureGovUkNotifyApi(services);
             
             services.AddControllersWithViews(options =>
             {
@@ -53,18 +52,6 @@ namespace SeaPublicWebsite
                 services.AddSingleton<IFileRepository>(s => new SystemFileRepository());
             }
 
-        }
-
-        private void ConfigureGovUkNotifyApi(IServiceCollection services)
-        {
-            if (!Config.IsLocal())
-            {
-                // TODO
-            }
-            else
-            {
-                services.AddSingleton<IGovNotifyAPI>(s => new GovUkNotifyApi());
-            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
