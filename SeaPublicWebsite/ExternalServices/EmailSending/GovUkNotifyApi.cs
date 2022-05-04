@@ -32,6 +32,7 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
             }
             catch (NotifyClientException e)
             {
+                // TODO: Logging, SEABETA-192
                 throw;
             }
         }
