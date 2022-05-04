@@ -1,4 +1,5 @@
-﻿using Notify.Client;
+﻿using System.Collections.Generic;
+using Notify.Client;
 using Notify.Exceptions;
 using Notify.Models.Responses;
 using SeaPublicWebsite.ExternalServices.Models;
@@ -14,14 +15,19 @@ namespace SeaPublicWebsite.ExternalServices
     
     public class GovUkNotifyApi: IGovNotifyApi
     {
-        private static readonly string ApiKey = Global.GovUkNotifyApiKey;
-        private static readonly NotificationClient Client = new NotificationClient(ApiKey);
+        private readonly string apiKey = Global.GovUkNotifyApiKey;
+        private readonly NotificationClient client;
+
+        public GovUkNotifyApi()
+        {
+            client = new NotificationClient(apiKey);
+        }
 
         public EmailNotificationResponse SendEmail(GovUkNotifyEmailModel emailModel)
         {
             try
             {
-                var response = Client.SendEmail(
+                var response = client.SendEmail(
                     emailModel.EmailAddress,
                     emailModel.TemplateId,
                     emailModel.Personalisation);
@@ -32,5 +38,25 @@ namespace SeaPublicWebsite.ExternalServices
                 throw;
             }
         }
+
+        public EmailNotificationResponse SendReferenceNumberEmail(string emailAddress, string reference)
+        {
+            var personalisation = new Dictionary<string, dynamic>
+            {
+                { "reference", reference }
+            };
+            var emailModel = new GovUkNotifyEmailModel
+            {
+                EmailAddress = emailAddress,
+                TemplateId = EmailTemplates.ApplicationReferenceNumberTemplateId,
+                Personalisation = personalisation
+            };
+            return SendEmail(emailModel);
+        }
+    }
+
+    public static class EmailTemplates
+    {
+        public const string ApplicationReferenceNumberTemplateId = "28470b42-26ff-4888-8221-c65e27a8c832";
     }
 }
