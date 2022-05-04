@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Notify.Client;
 using Notify.Exceptions;
 using Notify.Models.Responses;
-using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Helpers;
 
 namespace SeaPublicWebsite.ExternalServices.EmailSending
@@ -72,5 +70,14 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
     {
         public const string ApplicationReferenceNumberTemplateId = "28470b42-26ff-4888-8221-c65e27a8c832";
         public const string RequestDocumentTemplateId = "91ea7d56-aca9-4f79-8ba9-99dfb54c464d";
+    }
+
+    internal class GovUkNotifyEmailModel
+    {
+        public string EmailAddress { get; set; }
+        public string TemplateId { get; set; }
+        public Dictionary<string, dynamic> Personalisation { get; set; }
+        public string Reference { get; set; }
+        public string EmailReplyToId { get; set; }
     }
 }
