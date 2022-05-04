@@ -13,7 +13,7 @@ namespace SeaPublicWebsite.Helpers
         public static string BasicAuthPassword => Config.GetAppSetting("BasicAuthPassword");
         public static string EpcAuthUsername => Config.GetAppSetting("EpcAuthUsername");
         public static string EpcAuthPassword => Config.GetAppSetting("EpcAuthPassword");
-
         public static string GovUkNotifyApiKey => Config.GetAppSetting("GovUkNotifyApiKey");
+        public static string GovUkNotifyApiTestKey => Config.GetAppSetting("GovUkNotifyApiTestKey");
     }
 }

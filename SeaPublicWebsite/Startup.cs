@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices;
+using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.Helpers;
 
@@ -29,7 +30,7 @@ namespace SeaPublicWebsite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserDataStore, UserDataStore>();
-            services.AddSingleton<IGovNotifyApi>(s => new GovUkNotifyApi());
+            services.AddScoped<IEmailSender, GovUkNotifyApi>();
 
             ConfigureFileRepository(services);
             

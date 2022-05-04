@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
+using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations;
@@ -15,9 +16,9 @@ namespace SeaPublicWebsite.Controllers
     public class EnergyEfficiencyController : Controller
     {
         private readonly UserDataStore userDataStore;
-        private readonly IGovNotifyApi emailApi;
+        private readonly IEmailSender emailApi;
 
-        public EnergyEfficiencyController(UserDataStore userDataStore, IGovNotifyApi emailApi)
+        public EnergyEfficiencyController(UserDataStore userDataStore, IEmailSender emailApi)
         {
             this.userDataStore = userDataStore;
             this.emailApi = emailApi;
@@ -1174,6 +1175,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HasEmailAddress = viewModel.HasEmailAddress;
             userDataModel.EmailAddress = viewModel.HasEmailAddress == HasEmailAddress.Yes ? viewModel.EmailAddress : null;
             userDataStore.SaveUserData(userDataModel);
+
+            if (viewModel.HasEmailAddress == HasEmailAddress.Yes)
+            {
+                emailApi.SendReferenceNumberEmail(userDataModel.EmailAddress, userDataModel.Reference);
+            }
+            
             return RedirectToAction("Recommendation_Get", new { id = viewModel.FirstReferenceId, reference = viewModel.Reference });
         }
 

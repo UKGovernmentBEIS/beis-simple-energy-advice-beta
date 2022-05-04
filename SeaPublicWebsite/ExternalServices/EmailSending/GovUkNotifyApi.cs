@@ -1,19 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Notify.Client;
 using Notify.Exceptions;
 using Notify.Models.Responses;
 using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Helpers;
 
-namespace SeaPublicWebsite.ExternalServices
+namespace SeaPublicWebsite.ExternalServices.EmailSending
 {
-
-    public interface IGovNotifyApi
-    {
-        public EmailNotificationResponse SendEmail(GovUkNotifyEmailModel emailModel);
-    }
-    
-    public class GovUkNotifyApi: IGovNotifyApi
+    public class GovUkNotifyApi: IEmailSender
     {
         private readonly string apiKey = Global.GovUkNotifyApiKey;
         private readonly NotificationClient client;
@@ -23,14 +18,16 @@ namespace SeaPublicWebsite.ExternalServices
             client = new NotificationClient(apiKey);
         }
 
-        public EmailNotificationResponse SendEmail(GovUkNotifyEmailModel emailModel)
+        private EmailNotificationResponse SendEmail(GovUkNotifyEmailModel emailModel)
         {
             try
             {
                 var response = client.SendEmail(
                     emailModel.EmailAddress,
                     emailModel.TemplateId,
-                    emailModel.Personalisation);
+                    emailModel.Personalisation,
+                    emailModel.Reference,
+                    emailModel.EmailReplyToId);
                 return response;
             }
             catch (NotifyClientException e)
@@ -39,7 +36,7 @@ namespace SeaPublicWebsite.ExternalServices
             }
         }
 
-        public EmailNotificationResponse SendReferenceNumberEmail(string emailAddress, string reference)
+        public void SendReferenceNumberEmail(string emailAddress, string reference)
         {
             var personalisation = new Dictionary<string, dynamic>
             {
@@ -51,7 +48,8 @@ namespace SeaPublicWebsite.ExternalServices
                 TemplateId = EmailTemplates.ApplicationReferenceNumberTemplateId,
                 Personalisation = personalisation
             };
-            return SendEmail(emailModel);
+            var response = SendEmail(emailModel);
+            Console.WriteLine(response);
         }
     }
 
