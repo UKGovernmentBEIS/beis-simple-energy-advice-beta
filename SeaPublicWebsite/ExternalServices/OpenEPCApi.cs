@@ -313,7 +313,7 @@ namespace SeaPublicWebsite.ExternalServices
                     }
                     case ("1930-1949"):
                     {
-                        return HomeAge.From1900To1929;
+                        return HomeAge.From1930To1949;
                     }
                     case ("1950-1966"):
                     {

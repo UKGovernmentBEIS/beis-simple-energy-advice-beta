@@ -67,7 +67,7 @@
                     @(Model.WallConstruction?.GetCheckboxLabelText())
                     @if (Model.WallConstruction == WallConstruction.DoNotKnow)
                     {
-                        if (Model?.Epc?.WallConstruction != null || !Model.YearBuilt.HasValue &&  Model?.Epc.ConstructionAgeBand != null)
+                        if (Model?.Epc?.WallConstruction != null || !Model.YearBuilt.HasValue &&  Model?.Epc?.ConstructionAgeBand != null)
                         {
                             if (UserDataHelper.HasCavityWalls(Model))
                             {
