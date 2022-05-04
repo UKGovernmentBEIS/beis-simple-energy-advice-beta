@@ -245,24 +245,6 @@ namespace SeaPublicWebsite.Controllers
             return RedirectToAction("PropertyType_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
         }
 
-        [HttpGet("bre/{reference}")]
-        public List<Recommendation> EnergyUse()
-        {
-            var testBreRequest = new BreRequest()
-            {
-                property_type = "0",
-                built_form = "4",
-                construction_date = "G",
-                num_storeys = 1,
-                num_bedrooms = 2,
-                heating_fuel = "26"
-            };
-
-            var stringContent = testBreRequest.ToString();
-            var bre = BreApi.EnergyUse(stringContent);
-            return bre;
-        }
-
         [HttpGet("property-type/{reference}")]
         public IActionResult PropertyType_Get(string reference, bool change = false)
         {
