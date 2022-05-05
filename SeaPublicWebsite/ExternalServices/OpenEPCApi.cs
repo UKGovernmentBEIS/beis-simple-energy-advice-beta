@@ -31,50 +31,40 @@ namespace SeaPublicWebsite.ExternalServices
 
             try
             {
-                using (var httpClient = new HttpClient())
+                var openEpcResponse = HttpRequestHelper.SendGetRequest<OpenEpcResponse>(
+                    "https://epc.opendatacommunities.org",
+                    $"/api/v1/domestic/search?postcode={postcode}&size=100",
+                    new AuthenticationHeaderValue("Basic",
+                        HttpRequestHelper.ConvertToBase64(epcAuthUsername, epcAuthPassword)));
+
+                if (openEpcResponse is null)
                 {
-                    httpClient.BaseAddress = new Uri("https://epc.opendatacommunities.org");
-                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-                        "Basic", Convert.ToBase64String(
-                            System.Text.ASCIIEncoding.ASCII.GetBytes(
-                                $"{epcAuthUsername}:{epcAuthPassword}")));
-                    httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
-                    string path = $"/api/v1/domestic/search?postcode={postcode}&size=100";
-
-                    HttpResponseMessage response = httpClient.GetAsync(path).Result;
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string bodyString = response.Content.ReadAsStringAsync().Result;
-                        var openEpcResponse = JsonConvert.DeserializeObject<OpenEpcResponse>(bodyString);
-
-                        var epcs = openEpcResponse.rows.Select(r => new Epc()
-                        {
-                            Address1 = r.Address1,
-                            Address2 = r.Address2,
-                            Postcode = r.Postcode,
-                            BuildingReference = r.BuildingReference,
-                            EpcId = r.LmkKey,
-                            InspectionDate = r.InspectionDate,
-                            HeatingType = GetHeatingTypeFromEpc(r),
-                            PropertyType = GetPropertyTypeFromEpc(r),
-                            WallConstruction = GetWallConstructionFromEpc(r),
-                            CavityWallsInsulated = GetCavityWallsInsulatedFromEpc(r),
-                            SolidWallsInsulated = GetSolidWallsInsulatedFromEpc(r),
-                            FloorConstruction = GetFloorConstructionFromEpc(r),
-                            FloorInsulated = GetFloorInsulationFromEpc(r),
-                            ConstructionAgeBand = GetConstructionAgeBandFromEpc(r)
-                        }).ToList();
-
-                        epcs = FixFormatting(epcs);
-                        epcs = RemoveDuplicates(epcs);
-                        epcs.Sort(SortEpcsByHouseNumberOrAlphabetically);
-
-                        return epcs;
-                    }
-
                     return null;
                 }
+
+                var epcs = openEpcResponse.rows.Select(r => new Epc()
+                {
+                    Address1 = r.Address1,
+                    Address2 = r.Address2,
+                    Postcode = r.Postcode,
+                    BuildingReference = r.BuildingReference,
+                    EpcId = r.LmkKey,
+                    InspectionDate = r.InspectionDate,
+                    HeatingType = GetHeatingTypeFromEpc(r),
+                    PropertyType = GetPropertyTypeFromEpc(r),
+                    WallConstruction = GetWallConstructionFromEpc(r),
+                    CavityWallsInsulated = GetCavityWallsInsulatedFromEpc(r),
+                    SolidWallsInsulated = GetSolidWallsInsulatedFromEpc(r),
+                    FloorConstruction = GetFloorConstructionFromEpc(r),
+                    FloorInsulated = GetFloorInsulationFromEpc(r),
+                    ConstructionAgeBand = GetConstructionAgeBandFromEpc(r)
+                }).ToList();
+
+                epcs = FixFormatting(epcs);
+                epcs = RemoveDuplicates(epcs);
+                epcs.Sort(SortEpcsByHouseNumberOrAlphabetically);
+
+                return epcs;
             }
             catch (Exception)
             {
