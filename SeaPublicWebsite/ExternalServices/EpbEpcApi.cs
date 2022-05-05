@@ -65,8 +65,9 @@ namespace SeaPublicWebsite.ExternalServices
 
         private bool IsTokenExpired()
         {
-            // TODO: Check is token expired
-            return true;
+            var currentDate = DateTime.Now;
+            var diff = currentDate.Subtract(tokenRequestDate);
+            return diff.Seconds >= ExpiryTimeInSeconds;
         }
     }
 }
