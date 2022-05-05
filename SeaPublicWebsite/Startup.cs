@@ -57,6 +57,8 @@ namespace SeaPublicWebsite
         private void ConfigureEpcApi(IServiceCollection services)
         {
             services.AddScoped<IEpcApi, OpenEpcApi>();
+            // TODO: When the EPB API is ready, uncomment this and remove the above:
+            // services.AddScoped<IEpcApi, EPBEPCApi>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
