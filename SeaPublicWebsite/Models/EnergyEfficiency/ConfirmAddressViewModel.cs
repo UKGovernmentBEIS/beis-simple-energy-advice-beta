@@ -6,7 +6,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class ConfirmAddressViewModel : GovUkViewModel
+    public class ConfirmAddressViewModel
     {
         public List<Epc> EPCList { get; set; }
         public string SelectedEpcId { get; set; }

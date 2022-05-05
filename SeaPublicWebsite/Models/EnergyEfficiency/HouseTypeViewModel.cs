@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class HouseTypeViewModel : GovUkViewModel
+    public class HouseTypeViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select house type")]
         public HouseType? HouseType { get; set; }

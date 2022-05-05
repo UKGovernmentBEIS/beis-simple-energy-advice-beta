@@ -9,7 +9,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = @Url.Action("OwnershipStatus_Get", "EnergyEfficiency", new { reference = Model }),
@@ -36,7 +36,7 @@
         </p>
 
         <p class="govuk-body govuk-!-margin-top-6">
-            @(Html.GovUkButton(new ButtonViewModel
+            @(await Html.GovUkButton(new ButtonViewModel
             {
                 Text = "Continue",
                 Href = @Url.Action("AskForPostcode_Get", "EnergyEfficiency", new { reference = Model })

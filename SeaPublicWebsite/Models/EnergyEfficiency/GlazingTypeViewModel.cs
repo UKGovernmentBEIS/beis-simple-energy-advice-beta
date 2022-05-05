@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class GlazingTypeViewModel : GovUkViewModel
+    public class GlazingTypeViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select glazing type")]
         public GlazingType? GlazingType { get; set; }

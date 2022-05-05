@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Reflection;
+using System.Threading.Tasks;
 using GovUkDesignSystem.GovUkDesignSystemComponents;
 using GovUkDesignSystem.Helpers;
 using Microsoft.AspNetCore.Html;
@@ -11,56 +10,51 @@ namespace GovUkDesignSystem.HtmlGenerators
 {
     internal static class TextInputHtmlGenerator
     {
-
-        internal static IHtmlContent GenerateHtml<TModel, TProperty>(
+        internal static async Task<IHtmlContent> GenerateHtml<TModel, TProperty>(
             IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TProperty>> propertyLambdaExpression,
+            Expression<Func<TModel, TProperty>> propertyExpression,
             LabelViewModel labelOptions = null,
             HintViewModel hintOptions = null,
             FormGroupViewModel formGroupOptions = null,
             string classes = null,
             TextInputAppendixViewModel textInputAppendix = null,
-            string type = "text",
             string autocomplete = null,
-            string placeholder = null
+            string placeholder = null,
+            string pattern = null,
+            string idPrefix = null
         )
-            where TModel : GovUkViewModel
+            where TModel : class
         {
-            PropertyInfo property = ExpressionHelpers.GetPropertyFromExpression(propertyLambdaExpression);
+            string propertyId = idPrefix + htmlHelper.IdFor(propertyExpression);
+            string propertyName = idPrefix + htmlHelper.NameFor(propertyExpression);
+            htmlHelper.ViewData.ModelState.TryGetValue(propertyName, out var modelStateEntry);
 
-            string propertyName = property.Name;
+            // Get the value to put in the input from the post data if possible, otherwise use the value in the model
+            string inputValue = HtmlGenerationHelpers.GetStringValueFromModelStateOrModel(modelStateEntry, htmlHelper.ViewData.Model, propertyExpression);
 
-            TModel model = htmlHelper.ViewData.Model;
-
-            string currentValue = ExtensionHelpers.GetCurrentValue(model, property, propertyLambdaExpression);
-
-            string id = $"GovUk_{propertyName}";
             if (labelOptions != null)
             {
-                labelOptions.For = id;
+                labelOptions.For = propertyId;
             }
 
             var textInputViewModel = new TextInputViewModel
             {
-                Name = $"GovUk_Text_{propertyName}",
-                Id = id,
-                Value = currentValue,
+                Id = propertyId,
+                Name = propertyName,
                 Label = labelOptions,
                 Hint = hintOptions,
                 FormGroup = formGroupOptions,
                 Classes = classes,
                 TextInputAppendix = textInputAppendix,
-                Type = type,
-                Attributes = new Dictionary<string, string> {{"autocomplete", autocomplete}, {"placeholder", placeholder}}
+                Autocomplete = autocomplete,
+                Placeholder = placeholder,
+                Value = inputValue,
+                Pattern = pattern
             };
 
-            if (model.HasErrorFor(property))
-            {
-                textInputViewModel.ErrorMessage = new ErrorMessageViewModel {Text = model.GetErrorFor(property)};
-            }
+            HtmlGenerationHelpers.SetErrorMessages(textInputViewModel, modelStateEntry);
 
-            return htmlHelper.Partial("/GovUkDesignSystemComponents/TextInput.cshtml", textInputViewModel);
+            return await htmlHelper.PartialAsync("/GovUkDesignSystemComponents/TextInput.cshtml", textInputViewModel);
         }
-
     }
 }

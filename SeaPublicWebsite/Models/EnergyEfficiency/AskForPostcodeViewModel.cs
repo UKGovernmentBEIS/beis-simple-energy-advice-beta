@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class AskForPostcodeViewModel : GovUkViewModel
+    public class AskForPostcodeViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Enter a UK post code")]
         public string Postcode { get; set; }

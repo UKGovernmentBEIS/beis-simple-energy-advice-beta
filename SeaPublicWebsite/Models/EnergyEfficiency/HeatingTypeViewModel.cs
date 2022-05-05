@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class HeatingTypeViewModel : GovUkViewModel
+    public class HeatingTypeViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select your main heating system")]
         public HeatingType? HeatingType { get; set; }

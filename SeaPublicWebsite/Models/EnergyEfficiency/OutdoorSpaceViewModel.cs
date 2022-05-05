@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class OutdoorSpaceViewModel : GovUkViewModel
+    public class OutdoorSpaceViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select whether you have outdoor space")]
         public HasOutdoorSpace? HasOutdoorSpace { get; set; }

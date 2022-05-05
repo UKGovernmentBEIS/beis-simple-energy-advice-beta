@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class OwnershipStatusViewModel : GovUkViewModel
+    public class OwnershipStatusViewModel
     {
         public string Reference { get; set; }
 

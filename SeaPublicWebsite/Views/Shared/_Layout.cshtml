@@ -48,7 +48,7 @@
         //     });
         // }
 
-        @(Html.GovUkHeader(new HeaderViewModel
+        @(await Html.GovUkHeader(new HeaderViewModel
         {
             ServiceName = "Simple Energy Advice service",
             AssetsPath = assetsPath,
@@ -63,7 +63,7 @@
         
         @if (ViewBag.ServiceUnavailable != true)
         {
-            @(Html.GovUkPhaseBanner(new PhaseBannerViewModel
+            @(await Html.GovUkPhaseBanner(new PhaseBannerViewModel
             {
                 Phase = "Alpha",
                 Html = @<text>This is a new service – your feedback will help us to improve it.</text>
@@ -77,7 +77,7 @@
         </main>
     </div>
 
-@Html.GovUkFooter(new FooterViewModel
+@await Html.GovUkFooter(new FooterViewModel
 {
     MetaNavigation = new FooterMetaNavigationViewModel
     {

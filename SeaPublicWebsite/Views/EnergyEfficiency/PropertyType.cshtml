@@ -8,7 +8,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = Model.Change
@@ -26,7 +26,7 @@
         
         <form action="@Url.Action("PropertyType_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
-            @(Html.GovUkRadiosFor(m => m.PropertyType,
+            @(await Html.GovUkRadiosFor(m => m.PropertyType,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel

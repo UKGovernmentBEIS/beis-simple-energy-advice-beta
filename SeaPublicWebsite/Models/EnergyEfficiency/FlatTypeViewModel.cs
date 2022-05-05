@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class FlatTypeViewModel : GovUkViewModel
+    public class FlatTypeViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select flat type")]
         public FlatType? FlatType { get; set; }

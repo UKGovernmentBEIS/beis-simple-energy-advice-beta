@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 using GovUkDesignSystem.GovUkDesignSystemComponents;
 using GovUkDesignSystem.Helpers;
@@ -11,51 +12,43 @@ namespace GovUkDesignSystem.HtmlGenerators
 {
     internal static class CharacterCountHtmlGenerator
     {
-
-        internal static IHtmlContent GenerateHtml<TModel>(
+        internal static async Task<IHtmlContent> GenerateHtml<TModel>(
             IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, string>> propertyLambdaExpression,
+            Expression<Func<TModel, string>> propertyExpression,
             int? rows = null,
             LabelViewModel labelOptions = null,
             HintViewModel hintOptions = null,
-            FormGroupViewModel formGroupOptions = null
+            FormGroupViewModel formGroupOptions = null,
+            string idPrefix = null
         )
-            where TModel : GovUkViewModel
+            where TModel : class
         {
-            PropertyInfo property = ExpressionHelpers.GetPropertyFromExpression(propertyLambdaExpression);
+            PropertyInfo property = ExpressionHelpers.GetPropertyFromExpression(propertyExpression);
             ThrowIfPropertyDoesNotHaveCharacterCountAttribute(property);
-
-            string propertyName = property.Name;
-
-            TModel model = htmlHelper.ViewData.Model;
-
-            string currentValue = ExtensionHelpers.GetCurrentValue(model, property, propertyLambdaExpression);
-            
-            string id = $"GovUk_{propertyName}";
-            if (labelOptions != null)
-            {
-                labelOptions.For = id;
-            }
-
             int maximumCharacters = GetMaximumCharacters(property);
 
-            var characterCountViewModel = new CharacterCountViewModel {
-                Name = $"GovUk_Text_{propertyName}",
-                Id = id,
+            string propertyId = idPrefix + htmlHelper.IdFor(propertyExpression);
+            string propertyName = idPrefix + htmlHelper.NameFor(propertyExpression);
+            htmlHelper.ViewData.ModelState.TryGetValue(propertyName, out var modelStateEntry);
+
+            // Get the value to put in the input from the post data if possible, otherwise use the value in the model
+            string inputValue = HtmlGenerationHelpers.GetStringValueFromModelStateOrModel(modelStateEntry, htmlHelper.ViewData.Model, propertyExpression);
+
+            var characterCountViewModel = new CharacterCountViewModel
+            {
+                Name = propertyName,
+                Id = propertyId,
                 MaxLength = maximumCharacters,
-                Value = currentValue,
+                Value = inputValue,
                 Rows = rows,
                 Label = labelOptions,
                 Hint = hintOptions,
                 FormGroup = formGroupOptions
             };
 
-            if (model.HasErrorFor(property))
-            {
-                characterCountViewModel.ErrorMessage = new ErrorMessageViewModel {Text = model.GetErrorFor(property)};
-            }
+            HtmlGenerationHelpers.SetErrorMessages(characterCountViewModel, modelStateEntry);
 
-            return htmlHelper.Partial("/GovUkDesignSystemComponents/CharacterCount.cshtml", characterCountViewModel);
+            return await htmlHelper.PartialAsync("/GovUkDesignSystemComponents/CharacterCount.cshtml", characterCountViewModel);
         }
 
         private static void ThrowIfPropertyDoesNotHaveCharacterCountAttribute(PropertyInfo property)

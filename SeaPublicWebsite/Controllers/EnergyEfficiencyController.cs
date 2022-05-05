@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using GovUkDesignSystem;
-using GovUkDesignSystem.Parsers;
 using Microsoft.AspNetCore.Mvc;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
-using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations;
@@ -44,25 +39,16 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("new-or-returning-user")]
         public IActionResult NewOrReturningUser_Post(NewOrReturningUserViewModel viewModel)
         {
-            viewModel.ParseAndValidateParameters(Request, m => m.NewOrReturningUser);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("NewOrReturningUser", viewModel);
             }
 
             if (viewModel.NewOrReturningUser == NewOrReturningUser.ReturningUser)
             {
-                viewModel.ParseAndValidateParameters(Request, m => m.Reference);
-
-                if (viewModel.HasAnyErrors())
-                {
-                    return View("NewOrReturningUser", viewModel);
-                }
-
                 if (!userDataStore.IsReferenceValid(viewModel.Reference))
                 {
-                    viewModel.AddErrorFor(m => m.Reference, "Check you have typed the reference correctly. Reference must be 8 characters.");
+                    ModelState.AddModelError(nameof(NewOrReturningUserViewModel.Reference), "Check you have typed the reference correctly. Reference must be 8 characters.");
                     return View("NewOrReturningUser", viewModel);
                 }
                 
@@ -93,15 +79,13 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("ownership-status/{reference}")]
         public IActionResult OwnershipStatus_Post(OwnershipStatusViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.OwnershipStatus);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("OwnershipStatus", viewModel);
             }
-
+            
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
             userDataModel.OwnershipStatus = viewModel.OwnershipStatus;
             userDataStore.SaveUserData(userDataModel);
 
@@ -134,14 +118,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("country/{reference}")]
         public IActionResult Country_Post(CountryViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.Country);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("Country", viewModel);
             }
+            
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.Country = viewModel.Country;
             userDataStore.SaveUserData(userDataModel);
@@ -184,21 +166,17 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("postcode/{reference}")]
         public IActionResult AskForPostcode_Post(AskForPostcodeViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.Postcode);
-            viewModel.ParseAndValidateParameters(Request, m => m.HouseNameOrNumber);
-
-            if (viewModel.HasAnyErrors())
-            {
-                return View("AskForPostcode", viewModel);
-            }
-
             if (!PostcodesIoApi.IsValidPostcode(viewModel.Postcode))
             {
-                viewModel.AddErrorFor(m => m.Postcode, "Enter a valid UK post code");
+                ModelState.AddModelError(nameof(AskForPostcodeViewModel.Postcode), "Enter a valid UK post code");
+            }
+            
+            if (!ModelState.IsValid)
+            {
                 return View("AskForPostcode", viewModel);
             }
+            
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.Postcode = viewModel.Postcode;
             userDataStore.SaveUserData(userDataModel);
@@ -245,6 +223,7 @@ namespace SeaPublicWebsite.Controllers
             return RedirectToAction("PropertyType_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
         }
 
+
         [HttpGet("property-type/{reference}")]
         public IActionResult PropertyType_Get(string reference, bool change = false)
         {
@@ -263,14 +242,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("property-type/{reference}")]
         public IActionResult PropertyType_Post(PropertyTypeViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.PropertyType);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("PropertyType", viewModel);
             }
+            
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.PropertyType = viewModel.PropertyType;
             userDataStore.SaveUserData(userDataModel);
@@ -306,14 +283,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("house-type/{reference}")]
         public IActionResult HouseType_Post(HouseTypeViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.HouseType);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("HouseType", viewModel);
             }
+            
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.HouseType = viewModel.HouseType;
             userDataStore.SaveUserData(userDataModel);
@@ -342,15 +317,13 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("bungalow-type/{reference}")]
         public IActionResult BungalowType_Post(BungalowTypeViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.BungalowType);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("BungalowType", viewModel);
             }
-
+            
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
             userDataModel.BungalowType = viewModel.BungalowType;
             userDataStore.SaveUserData(userDataModel);
             
@@ -378,14 +351,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("flat-type/{reference}")]
         public IActionResult FlatType_Post(FlatTypeViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.FlatType);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("FlatType", viewModel);
             }
+            
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.FlatType = viewModel.FlatType;
             userDataStore.SaveUserData(userDataModel);
@@ -415,15 +386,13 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("home-age/{reference}")]
         public IActionResult HomeAge_Post(HomeAgeViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.YearBuilt);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("HomeAge", viewModel);
             }
 
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
             userDataModel.YearBuilt = viewModel.YearBuilt;
             userDataStore.SaveUserData(userDataModel);
             
@@ -453,14 +422,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("wall-construction/{reference}")]
         public IActionResult WallConstruction_Post(WallConstructionViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.WallConstruction);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("WallConstruction", viewModel);
             }
+            
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.WallConstruction = viewModel.WallConstruction;
             userDataStore.SaveUserData(userDataModel);
@@ -522,14 +489,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("cavity-walls-insulated/{reference}")]
         public IActionResult CavityWallsInsulated_Post(CavityWallsInsulatedViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-
-            viewModel.ParseAndValidateParameters(Request, m => m.CavityWallsInsulated);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("CavityWallsInsulated", viewModel);
             }
+            
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.CavityWallsInsulated = viewModel.CavityWallsInsulated;
             userDataStore.SaveUserData(userDataModel);
@@ -585,16 +550,14 @@ namespace SeaPublicWebsite.Controllers
 
         [HttpPost("solid-walls-insulated/{reference}")]
         public IActionResult SolidWallsInsulated_Post(SolidWallsInsulatedViewModel viewModel)
-        {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-
-            viewModel.ParseAndValidateParameters(Request, m => m.SolidWallsInsulated);
-
-            if (viewModel.HasAnyErrors())
+        {            
+            if (!ModelState.IsValid)
             {
                 return View("SolidWallsInsulated", viewModel);
             }
-
+            
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
             userDataModel.SolidWallsInsulated = viewModel.SolidWallsInsulated;
             userDataStore.SaveUserData(userDataModel);
 
@@ -642,14 +605,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("floor-construction/{reference}")]
         public IActionResult FloorConstruction_Post(FloorConstructionViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.FloorConstruction);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("FloorConstruction", viewModel);
             }
+            
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.FloorConstruction = viewModel.FloorConstruction;
             userDataStore.SaveUserData(userDataModel);
@@ -697,14 +658,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("floor-insulated/{reference}")]
         public IActionResult FloorInsulated_Post(FloorInsulatedViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.FloorInsulated);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("FloorInsulated", viewModel);
             }
+            
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.FloorInsulated = viewModel.FloorInsulated;
             userDataStore.SaveUserData(userDataModel);
@@ -745,14 +704,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("roof-construction/{reference}")]
         public IActionResult RoofConstruction_Post(RoofConstructionViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.RoofConstruction);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("RoofConstruction", viewModel);
             }
+
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.RoofConstruction = viewModel.RoofConstruction;
             userDataStore.SaveUserData(userDataModel);
@@ -782,14 +739,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("accessible-loft-space/{reference}")]
         public IActionResult AccessibleLoftSpace_Post(AccessibleLoftSpaceViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-
-            viewModel.ParseAndValidateParameters(Request, m => m.AccessibleLoftSpace);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("AccessibleLoftSpace", viewModel);
             }
+
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.AccessibleLoftSpace = viewModel.AccessibleLoftSpace;
             userDataStore.SaveUserData(userDataModel);
@@ -820,14 +775,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("roof-insulated/{reference}")]
         public IActionResult RoofInsulated_Post(RoofInsulatedViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.RoofInsulated);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("RoofInsulated", viewModel);
             }
+
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.RoofInsulated = viewModel.RoofInsulated;
             userDataStore.SaveUserData(userDataModel);
@@ -855,14 +808,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("outdoor-space/{reference}")]
         public IActionResult OutdoorSpace_Post(OutdoorSpaceViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.HasOutdoorSpace);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("OutdoorSpace", viewModel);
             }
+
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.HasOutdoorSpace = viewModel.HasOutdoorSpace;
             userDataStore.SaveUserData(userDataModel);
@@ -891,14 +842,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("glazing-type/{reference}")]
         public IActionResult GlazingType_Post(GlazingTypeViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.GlazingType);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("GlazingType", viewModel);
             }
+
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.GlazingType = viewModel.GlazingType;
             userDataStore.SaveUserData(userDataModel);
@@ -928,14 +877,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("heating-type/{reference}")]
         public IActionResult HeatingType_Post(HeatingTypeViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-
-            viewModel.ParseAndValidateParameters(Request, m => m.HeatingType);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("HeatingType", viewModel);
             }
+
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.HeatingType = viewModel.HeatingType;
             userDataStore.SaveUserData(userDataModel);
@@ -981,14 +928,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("other-heating-type/{reference}")]
         public IActionResult OtherHeatingType_Post(OtherHeatingTypeViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-
-            viewModel.ParseAndValidateParameters(Request, m => m.OtherHeatingType);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("OtherHeatingType", viewModel);
             }
+
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.OtherHeatingType = viewModel.OtherHeatingType;
             userDataStore.SaveUserData(userDataModel);
@@ -1017,14 +962,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("hot-water-cylinder/{reference}")]
         public IActionResult HotWaterCylinder_Post(HotWaterCylinderViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.HasHotWaterCylinder);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("HotWaterCylinder", viewModel);
             }
+
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.HasHotWaterCylinder = viewModel.HasHotWaterCylinder;
             userDataStore.SaveUserData(userDataModel);
@@ -1053,14 +996,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("number-of-occupants/{reference}")]
         public IActionResult NumberOfOccupants_Post(NumberOfOccupantsViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.NumberOfOccupants);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("NumberOfOccupants", viewModel);
             }
+
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.NumberOfOccupants = viewModel.NumberOfOccupants;
             userDataStore.SaveUserData(userDataModel);
@@ -1090,24 +1031,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("heating-pattern/{reference}")]
         public IActionResult HeatingPattern_Post(HeatingPatternViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.HeatingPattern);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("HeatingPattern", viewModel);
             }
-
-            if (viewModel.HeatingPattern == HeatingPattern.Other)
-            {
-                viewModel.ParseAndValidateParameters(Request, m => m.HoursOfHeating);
-
-                if (viewModel.HasAnyErrors())
-                {
-                    return View("HeatingPattern", viewModel);
-                }
-            }
+            
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.HeatingPattern = viewModel.HeatingPattern;
             userDataModel.HoursOfHeating = viewModel.HeatingPattern == HeatingPattern.Other ? viewModel.HoursOfHeating : null;
@@ -1138,14 +1067,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("temperature/{reference}")]
         public IActionResult Temperature_Post(TemperatureViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
-            viewModel.ParseAndValidateParameters(Request, m => m.Temperature);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("Temperature", viewModel);
-            };
+            }
+
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.Temperature = viewModel.Temperature;
             userDataStore.SaveUserData(userDataModel);
@@ -1175,24 +1102,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("email-address/{reference}")]
         public IActionResult EmailAddress_Post(EmailAddressViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-
-            viewModel.ParseAndValidateParameters(Request, m => m.HasEmailAddress);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("EmailAddress", viewModel);
             }
-
-            if (viewModel.HasEmailAddress == HasEmailAddress.Yes)
-            {
-                viewModel.ParseAndValidateParameters(Request, m => m.EmailAddress);
-
-                if (viewModel.HasAnyErrors())
-                {
-                    return View("EmailAddress", viewModel);
-                }
-            }
+            
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.HasEmailAddress = viewModel.HasEmailAddress;
             userDataModel.EmailAddress = viewModel.HasEmailAddress == HasEmailAddress.Yes ? viewModel.EmailAddress : null;
@@ -1247,25 +1162,13 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("your-recommendations/{reference}")]
         public IActionResult YourRecommendations_Post(YourRecommendationsViewModel viewModel)
         {
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-
-            viewModel.ParseAndValidateParameters(Request, m => m.HasEmailAddress);
-
-            if (viewModel.HasAnyErrors())
+            if (!ModelState.IsValid)
             {
                 return View("YourRecommendations", viewModel);
             }
 
-            if (viewModel.HasEmailAddress == HasEmailAddress.Yes)
-            {
-                viewModel.ParseAndValidateParameters(Request, m => m.EmailAddress);
-
-                if (viewModel.HasAnyErrors())
-                {
-                    return View("YourRecommendations", viewModel);
-                }
-            }
-
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+            
             userDataModel.HasEmailAddress = viewModel.HasEmailAddress;
             userDataModel.EmailAddress = viewModel.HasEmailAddress == HasEmailAddress.Yes ? viewModel.EmailAddress : null;
             userDataStore.SaveUserData(userDataModel);
@@ -1295,13 +1198,11 @@ namespace SeaPublicWebsite.Controllers
             viewModel.UserDataModel = userDataModel;
             viewModel.UserRecommendation =
                 userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey)id);
-
-            viewModel.ParseAndValidateParameters(Request, m => m.RecommendationAction);
-
-            if (viewModel.HasAnyErrors())
+            
+            if (!ModelState.IsValid)
             {
                 return View("recommendations/" + Enum.GetName(viewModel.UserRecommendation.Key), viewModel);
-            };
+            }
 
             userDataModel.UserRecommendations.First(r => r.Key == (RecommendationKey) id).RecommendationAction =
                 viewModel.RecommendationAction;

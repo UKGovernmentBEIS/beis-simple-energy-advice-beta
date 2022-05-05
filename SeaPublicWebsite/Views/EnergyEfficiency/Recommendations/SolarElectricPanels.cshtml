@@ -9,7 +9,7 @@
 }
 
 @section BeforeMain {
-    @Html.GovUkBackLink(new BackLinkViewModel
+    @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
         Href = "#",
@@ -27,7 +27,7 @@
     
     <div class="govuk-grid-column-two-thirds">
 
-        @(Html.GovUkErrorSummary())
+        @(await Html.GovUkErrorSummary(ViewData.ModelState))
         
         <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.UserRecommendation.Key, reference = Model.UserDataModel.Reference})" method="post" novalidate>
 
@@ -113,7 +113,7 @@
             
             @{ await Html.RenderPartialAsync("Partials/KeepACopyPartial.cshtml"); }
 
-            @(Html.GovUkRadiosFor(m => m.RecommendationAction,
+            @(await Html.GovUkRadiosFor(m => m.RecommendationAction,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel

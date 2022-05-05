@@ -1,72 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using GovUkDesignSystem.Attributes;
+﻿using GovUkDesignSystem.Attributes;
 using GovUkDesignSystem.GovUkDesignSystemComponents;
 using GovUkDesignSystem.Helpers;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace GovUkDesignSystem.HtmlGenerators
 {
     internal static class RadiosHtmlGenerator
     {
-        public static IHtmlContent GenerateHtml<TModel, TProperty>(IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TProperty>> propertyLambdaExpression,
+        internal static async Task<IHtmlContent> GenerateHtml<TModel, TEnum>(
+            IHtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TEnum?>> propertyExpression,
             FieldsetViewModel fieldsetOptions = null,
             HintViewModel hintOptions = null,
-            Dictionary<TProperty, LabelViewModel> itemLabelOptions = null,
-            Dictionary<TProperty, HintViewModel> itemHintOptions = null,
-            Dictionary<TProperty, Func<object, object>> conditionalOptions = null,
-            string classes = null)
-            where TModel : GovUkViewModel
+            string classes = null,
+            Dictionary<TEnum, HintViewModel> radioHints = null,
+            Dictionary<TEnum, Conditional> conditionalOptions = null,
+            Dictionary<TEnum, LabelViewModel> labelOptions = null,
+            Dictionary<TEnum, Dictionary<string,string>> attributeOptions = null,
+            IEnumerable<TEnum> overrideRadioValues = null,
+            string idPrefix = null)
+            where TModel : class
+            where TEnum : struct, Enum
         {
-            PropertyInfo property = ExpressionHelpers.GetPropertyFromExpression(propertyLambdaExpression);
-            ThrowIfPropertyTypeIsNotNullableEnum(property);
-            string propertyName = property.Name;
+            string propertyId = idPrefix + htmlHelper.IdFor(propertyExpression);
+            string propertyName = idPrefix + htmlHelper.NameFor(propertyExpression);
+            htmlHelper.ViewData.ModelState.TryGetValue(propertyName, out var modelStateEntry);
 
-            TModel model = htmlHelper.ViewData.Model;
-            TProperty currentlySelectedValue =
-                ExpressionHelpers.GetPropertyValueFromModelAndExpression(model, propertyLambdaExpression);
+            // Get the value to put in the input from the post data if possible, otherwise use the value in the model 
+            TEnum? selectedValue = HtmlGenerationHelpers.GetNullableEnumValueFromModelStateOrModel(htmlHelper.ViewData.Model, propertyExpression, modelStateEntry);
 
-            Type enumType = Nullable.GetUnderlyingType(typeof(TProperty));
-            Array allEnumValues = Enum.GetValues(enumType);
+            IEnumerable<TEnum> enumRadioOptions = overrideRadioValues ?? Enum.GetValues(typeof(TEnum)).Cast<TEnum>();
 
-
-            List<ItemViewModel> radios = allEnumValues
-                .OfType<object>()
+            List<ItemViewModel> radios = enumRadioOptions
                 .Select(enumValue =>
                 {
-                    bool isEnumValueCurrentlySelected = enumValue.ToString() == currentlySelectedValue.ToString();
-                    string radioLabelText = GetRadioLabelText(enumType, enumValue);
+                    bool isEnumValueCurrentlySelected = selectedValue.HasValue && enumValue.Equals(selectedValue.Value);
+                    if (labelOptions == null || !labelOptions.TryGetValue(enumValue, out LabelViewModel radioLabelViewModel))
+                    {
+                        radioLabelViewModel = new LabelViewModel
+                        {
+                            Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(enumValue)
+                        };
+                    }
+
+                    HintViewModel itemHint = null;
+                    radioHints?.TryGetValue(enumValue, out itemHint);
+
+                    Dictionary<string, string> attributes = null;
+                    attributeOptions?.TryGetValue(enumValue, out attributes);
 
                     var radioItemViewModel = new RadioItemViewModel
                     {
                         Value = enumValue.ToString(),
-                        Id = $"GovUk_Radio_{propertyName}_{enumValue}",
+                        Id = $"{propertyId}_{enumValue}",
                         Checked = isEnumValueCurrentlySelected,
-                        Label = new LabelViewModel()
+                        Label = radioLabelViewModel,
+                        Hint = itemHint,
+                        Attributes = attributes
                     };
-                    
-                    if (conditionalOptions != null && conditionalOptions.TryGetValue((TProperty)enumValue, out Func<object, object> conditionalHtml))
-                    {
-                        radioItemViewModel.Conditional = new Conditional {Html = conditionalHtml};
-                    }
 
-                    if (itemLabelOptions != null && itemLabelOptions.TryGetValue((TProperty)enumValue, out LabelViewModel labelViewModel))
+                    if (conditionalOptions != null && conditionalOptions.TryGetValue(enumValue, out Conditional conditional))
                     {
-                        radioItemViewModel.Label = labelViewModel;
-                    }
-                    if (radioItemViewModel.Label.Text == null && radioItemViewModel.Label.Html == null)
-                    {
-                        radioItemViewModel.Label.Text = radioLabelText;
-                    }
-
-                    if (itemHintOptions != null && itemHintOptions.TryGetValue((TProperty)enumValue, out HintViewModel hintViewModel))
-                    {
-                        radioItemViewModel.Hint = hintViewModel;
+                        radioItemViewModel.Conditional = conditional;
                     }
 
                     return radioItemViewModel;
@@ -76,43 +77,17 @@ namespace GovUkDesignSystem.HtmlGenerators
 
             var radiosViewModel = new RadiosViewModel
             {
-                Name = $"GovUk_Radio_{propertyName}",
-                IdPrefix = $"GovUk_{propertyName}",
+                Name = propertyName,
+                Classes = classes,
+                IdPrefix = propertyId,
                 Items = radios,
                 Fieldset = fieldsetOptions,
-                Hint = hintOptions,
-                Classes = classes
+                Hint = hintOptions
             };
-            if (model.HasErrorFor(property))
-            {
-                radiosViewModel.ErrorMessage = new ErrorMessageViewModel
-                {
-                    Text = model.GetErrorFor(property)
-                };
-            }
 
-            return htmlHelper.Partial("/GovUkDesignSystemComponents/Radios.cshtml", radiosViewModel);
+            HtmlGenerationHelpers.SetErrorMessages(radiosViewModel, modelStateEntry);
+
+            return await htmlHelper.PartialAsync("/GovUkDesignSystemComponents/Radios.cshtml", radiosViewModel);
         }
-
-        private static void ThrowIfPropertyTypeIsNotNullableEnum(PropertyInfo property)
-        {
-            if (!TypeHelpers.IsNullableEnum(property.PropertyType))
-            {
-                throw new ArgumentException(
-                    "GovUkRadiosFor can only be used on Nullable Enum properties, " +
-                    $"but was actually used on property [{property.Name}] of type [{property.PropertyType.FullName}] "
-                );
-            }
-        }
-
-        private static string GetRadioLabelText(Type enumType, object enumValue)
-        {
-            string textFromAttribute = GovUkRadioCheckboxLabelTextAttribute.GetValueForEnum(enumType, enumValue);
-
-            string radioLabel = textFromAttribute ?? enumValue.ToString();
-
-            return radioLabel;
-        }
-
     }
 }

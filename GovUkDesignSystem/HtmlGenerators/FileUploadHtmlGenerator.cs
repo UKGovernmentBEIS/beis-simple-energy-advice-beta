@@ -1,55 +1,47 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Threading.Tasks;
-using GovUkDesignSystem.GovUkDesignSystemComponents;
+﻿using GovUkDesignSystem.GovUkDesignSystemComponents;
 using GovUkDesignSystem.Helpers;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace GovUkDesignSystem.HtmlGenerators
 {
     internal static class FileUploadHtmlGenerator
     {
-
         internal static async Task<IHtmlContent> GenerateHtml<TModel, TProperty>(
             IHtmlHelper<TModel> htmlHelper,
-            Expression<Func<TModel, TProperty>> propertyLambdaExpression,
+            Expression<Func<TModel, TProperty>> propertyExpression,
             LabelViewModel labelOptions = null,
             HintViewModel hintOptions = null,
             FormGroupViewModel formGroupOptions = null,
-            string classes = null)
-            where TModel : GovUkViewModel
+            string classes = null,
+            string idPrefix = null)
+            where TModel : class
         {
-            PropertyInfo property = ExpressionHelpers.GetPropertyFromExpression(propertyLambdaExpression);
+            string propertyId = idPrefix + htmlHelper.IdFor(propertyExpression);
+            string propertyName = idPrefix + htmlHelper.NameFor(propertyExpression);
+            htmlHelper.ViewData.ModelState.TryGetValue(propertyName, out var modelStateEntry);
 
-            string propertyName = property.Name;
-
-            TModel model = htmlHelper.ViewData.Model;
-
-            string id = propertyName;
             if (labelOptions != null)
             {
-                labelOptions.For = id;
+                labelOptions.For = propertyId;
             }
 
-            var fileUploadViewModel = new FileUploadViewModel
+            var fileUploadViewModel = new FileUploadViewModel()
             {
-                Id = id,
+                Id = propertyId,
                 Name = propertyName,
                 Label = labelOptions,
                 Hint = hintOptions,
                 FormGroup = formGroupOptions,
-                Classes = classes
+                Classes = classes,
             };
 
-            if (model.HasErrorFor(property))
-            {
-                fileUploadViewModel.ErrorMessage = new ErrorMessageViewModel {Text = model.GetErrorFor(property)};
-            }
+            HtmlGenerationHelpers.SetErrorMessages(fileUploadViewModel, modelStateEntry);
 
             return await htmlHelper.PartialAsync("/GovUkDesignSystemComponents/FileUpload.cshtml", fileUploadViewModel);
         }
-
     }
 }
