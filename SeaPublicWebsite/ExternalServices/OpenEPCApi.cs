@@ -11,9 +11,18 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.ExternalServices
 {
-    public class OpenEpcApi
+    public class OpenEpcApi : IEpcApi
     {
-        public static List<Epc> GetEpcsForPostcode(string postcode)
+        private readonly string epcAuthUsername;
+        private readonly string epcAuthPassword;
+
+        public OpenEpcApi()
+        {
+            epcAuthUsername = Global.EpcAuthUsername;
+            epcAuthPassword = Global.EpcAuthPassword;
+        }
+
+        public List<Epc> GetEpcsForPostcode(string postcode)
         {
             if (string.IsNullOrWhiteSpace(postcode))
             {
@@ -28,7 +37,7 @@ namespace SeaPublicWebsite.ExternalServices
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
                         "Basic", Convert.ToBase64String(
                             System.Text.ASCIIEncoding.ASCII.GetBytes(
-                                $"{Global.EpcAuthUsername}:{Global.EpcAuthPassword}")));
+                                $"{epcAuthUsername}:{epcAuthPassword}")));
                     httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
                     string path = $"/api/v1/domestic/search?postcode={postcode}&size=100";
 

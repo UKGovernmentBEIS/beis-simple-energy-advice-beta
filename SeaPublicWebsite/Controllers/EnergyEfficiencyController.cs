@@ -15,10 +15,12 @@ namespace SeaPublicWebsite.Controllers
     public class EnergyEfficiencyController : Controller
     {
         private readonly UserDataStore userDataStore;
+        private readonly IEpcApi epcApi;
 
-        public EnergyEfficiencyController(UserDataStore userDataStore)
+        public EnergyEfficiencyController(UserDataStore userDataStore, IEpcApi epcApi)
         {
             this.userDataStore = userDataStore;
+            this.epcApi = epcApi;
         }
         
         
@@ -190,7 +192,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
-            var epcList = OpenEpcApi.GetEpcsForPostcode(userDataModel.Postcode);
+            var epcList = epcApi.GetEpcsForPostcode(userDataModel.Postcode);
 
             if (houseNameOrNumber != null)
             {
@@ -215,7 +217,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
             
-            var epc = OpenEpcApi.GetEpcsForPostcode(userDataModel.Postcode).FirstOrDefault(e => e.EpcId == viewModel.SelectedEpcId);
+            var epc = epcApi.GetEpcsForPostcode(userDataModel.Postcode).FirstOrDefault(e => e.EpcId == viewModel.SelectedEpcId);
             userDataModel.Epc = epc;
 
             userDataStore.SaveUserData(userDataModel);
