@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using SeaPublicWebsite.ErrorHandling;
 
 namespace SeaPublicWebsite.Helpers
 {
@@ -44,8 +45,12 @@ namespace SeaPublicWebsite.Helpers
 
         private static T ConvertResponseToObject<T>(HttpResponseMessage response)
         {
-            if (!response.IsSuccessStatusCode) return default;
-            
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new EpcApiException($"Request to {response.RequestMessage?.RequestUri} failed. " +
+                                          $"Error message: {response.StatusCode}; {response.ReasonPhrase}");
+            }
+
             var bodyString = response.Content.ReadAsStringAsync().Result;
             return JsonConvert.DeserializeObject<T>(bodyString);
         }

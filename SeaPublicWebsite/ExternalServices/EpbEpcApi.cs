@@ -31,12 +31,7 @@ namespace SeaPublicWebsite.ExternalServices
                     Path = "/api/greendeal/rhi/assessments/0000-0000-0000-0476-5172/latest",
                     Auth = new AuthenticationHeaderValue("Bearer", token)
                 });
-            if (response is null)
-            {
-                throw new Exception();
-            }
-            Console.WriteLine("Huzaah! Here's the response");
-            Console.WriteLine(response);
+            // TODO: Once we have access to the full API, map the response to the EPC class
             return new List<Epc>();
         }
 
@@ -52,10 +47,6 @@ namespace SeaPublicWebsite.ExternalServices
                         HttpRequestHelper.ConvertToBase64(epcAuthUsername, epcAuthPassword))
                 }
             );
-            if (response is null)
-            {
-                throw new Exception();
-            }
             token = response.Token;
             // We divide by 2 to avoid edge cases of sending requests on the exact expiration time
             expiryTimeInSeconds = response.ExpiryTimeInSeconds / 2;
@@ -73,10 +64,10 @@ namespace SeaPublicWebsite.ExternalServices
     internal class TokenRequestResponse
     {
         [JsonProperty(PropertyName = "access_token")]
-        public string Token;
+        public string Token { get; set; }
         [JsonProperty(PropertyName = "expires_in")]
-        public int ExpiryTimeInSeconds;
+        public int ExpiryTimeInSeconds { get; set; }
         [JsonProperty(PropertyName = "token_type")]
-        public string TokenType;
+        public string TokenType { get; set; }
     }
 }
