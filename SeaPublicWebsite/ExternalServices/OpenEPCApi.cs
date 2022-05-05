@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
 using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
@@ -32,10 +30,13 @@ namespace SeaPublicWebsite.ExternalServices
             try
             {
                 var openEpcResponse = HttpRequestHelper.SendGetRequest<OpenEpcResponse>(
-                    "https://epc.opendatacommunities.org",
-                    $"/api/v1/domestic/search?postcode={postcode}&size=100",
-                    new AuthenticationHeaderValue("Basic",
-                        HttpRequestHelper.ConvertToBase64(epcAuthUsername, epcAuthPassword)));
+                    new RequestParameters
+                    {
+                        BaseAddress = "https://epc.opendatacommunities.org",
+                        Path = $"/api/v1/domestic/search?postcode={postcode}&size=100",
+                        Auth = new AuthenticationHeaderValue("Basic",
+                            HttpRequestHelper.ConvertToBase64(epcAuthUsername, epcAuthPassword))
+                    });
 
                 if (openEpcResponse is null)
                 {
