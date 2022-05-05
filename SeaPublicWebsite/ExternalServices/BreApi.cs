@@ -7,13 +7,14 @@ using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using SeaPublicWebsite.DataModels;
+using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Services;
 
 namespace SeaPublicWebsite.ExternalServices
 {
     public static class BreApi
     {
-        public static List<Recommendation> GetRecommendationsForUserRequest(string request)
+        public static List<Recommendation> GetRecommendationsForUserRequest(string requestString)
         {
             try
             {
@@ -21,29 +22,18 @@ namespace SeaPublicWebsite.ExternalServices
                 {
                     httpClient.BaseAddress = new Uri("https://uat.brewebserv.com");
 
-                    string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                    Random random = new();
-                    string nonce = new string(Enumerable.Repeat(chars, 64)
-                        .Select(s => s[random.Next(s.Length)]).ToArray());
+                    string username = Global.BreUsername;
+                    string password = Global.BrePassword;
+                    string nonce = GenerateNonce();
                     string created = DateTime.Now.ToUniversalTime().ToString
                         (DateTimeFormatInfo.InvariantInfo.SortableDateTimePattern) + "Z";
-                    string username = "softwire0.0.1";
-                    string password = "9b052a18df10baade8c7448f3";
-                    string token;
-                    using (SHA256 hash = SHA256.Create())
-                    {
-                        token = string.Concat(hash
-                            .ComputeHash(Encoding.UTF8.GetBytes(password + nonce + username + created))
-                            .Select(item => item.ToString("x2")));
-                    }
-
+                    string token = GenerateToken(password + nonce + username + created);
                     string wsseHeader =
                         $"WSSE UsernameToken Token=\"{token}\", Nonce=\"{nonce}\", Username=\"{username}\", Created=\"{created}\"";
                     httpClient.DefaultRequestHeaders.Add("Authorization", wsseHeader);
 
                     string path = "/bemapi/energy_use";
-                    StringContent stringContent = new(request);
-
+                    StringContent stringContent = new(requestString);
                     HttpResponseMessage response = httpClient.PostAsync(path, stringContent).Result;
 
                     if (response.IsSuccessStatusCode)
@@ -86,6 +76,24 @@ namespace SeaPublicWebsite.ExternalServices
             catch (Exception)
             {
                 return null;
+            }
+        }
+
+        private static string GenerateNonce()
+        {
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            Random random = new();
+            return new string(Enumerable.Repeat(chars, 64)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+        
+        private static string GenerateToken(string input)
+        {
+            using (SHA256 hash = SHA256.Create())
+            {
+                return string.Concat(hash
+                    .ComputeHash(Encoding.UTF8.GetBytes(input))
+                    .Select(item => item.ToString("x2")));
             }
         }
     }

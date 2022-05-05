@@ -58,6 +58,15 @@ namespace SeaPublicWebsite.Services
 
         public static List<Recommendation> GetRecommendationsForUser(UserDataModel userData)
         {
+            BreRequest request = GenerateRequest(userData);
+            
+            string requestString = JsonConvert.SerializeObject(request);
+
+            return BreApi.GetRecommendationsForUserRequest(requestString);
+        }
+
+        public static BreRequest GenerateRequest(UserDataModel userData)
+        {
             // Just using example data for now, extracting epc and other request params from userData to come
             BreRequest exampleCase3Request = new BreRequest
             {
@@ -98,9 +107,7 @@ namespace SeaPublicWebsite.Services
                 measures_package = new[] { "A", "W1", "G", "U" }
             };
 
-            string request = JsonConvert.SerializeObject(exampleCase3Request);
-
-            return BreApi.GetRecommendationsForUserRequest(request);
+            return exampleCase3Request;
         }
     }
 }
