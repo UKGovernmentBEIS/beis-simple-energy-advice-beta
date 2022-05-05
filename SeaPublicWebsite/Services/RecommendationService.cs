@@ -5,6 +5,7 @@ using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Models.EnergyEfficiency;
+using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Services
 {
@@ -61,14 +62,77 @@ namespace SeaPublicWebsite.Services
             BreRequest request = GenerateRequest(userData);
             
             string requestString = JsonConvert.SerializeObject(request);
-
+            Console.WriteLine(requestString);
             return BreApi.GetRecommendationsForUserRequest(requestString);
         }
 
         public static BreRequest GenerateRequest(UserDataModel userData)
         {
-            // Just using example data for now, extracting epc and other request params from userData to come
-            BreRequest exampleCase3Request = new BreRequest
+            Console.WriteLine(JsonConvert.SerializeObject(userData));
+
+            //ApartmentFlatOrMaisonette is assumed to be Flat
+            int propertyType = (int) (PropertyTypeEnum) userData.PropertyType; 
+            int? builtForm = null;
+            int? flatLevel = null;
+            switch (userData.PropertyType)
+            {
+                case PropertyType.House:
+                    builtForm = userData.HouseType switch
+                    {
+                        HouseType.Detached => (int) BuiltFormEnum.Detached,
+                        HouseType.SemiDetached => (int) BuiltFormEnum.SemiDetached,
+                        HouseType.EndTerrace => (int) BuiltFormEnum.EndTerrace,
+                        HouseType.Terraced => (int) BuiltFormEnum.MidTerrace,
+                        _ => null,
+                    };
+                    break;
+                case PropertyType.Bungalow:
+                    builtForm = userData.BungalowType switch
+                    {
+                        BungalowType.Detached => (int) BuiltFormEnum.Detached,
+                        BungalowType.SemiDetached => (int) BuiltFormEnum.SemiDetached,
+                        BungalowType.EndTerrace => (int) BuiltFormEnum.EndTerrace,
+                        BungalowType.Terraced => (int) BuiltFormEnum.MidTerrace,
+                        _ => null
+                    };
+                    break;
+                case PropertyType.ApartmentFlatOrMaisonette:
+                    flatLevel = userData.FlatType switch
+                    {
+                        FlatType.TopFloor => (int) FlatLevelEnum.TopFloor,
+                        FlatType.MiddleFloor => (int) FlatLevelEnum.MidFloor,
+                        FlatType.GroundFloor => (int) FlatLevelEnum.GroundFloor,
+                        _ => null
+                    };
+                    builtForm = (int) BuiltFormEnum.MidTerrace;
+                    break;
+            }
+            BreRequest request = new()
+            {
+                property_type = propertyType.ToString(),
+                built_form = builtForm.ToString(),
+                flat_level = flatLevel.ToString(),
+                construction_date = "E",
+                wall_type = 1,
+                //no input for floor_type
+                roof_type = 1,
+                glazing_type = 1,
+                //no input for outdoor heater space
+                heating_fuel = "26",
+                hot_water_cylinder = false,
+                occupants = 2,
+                heating_pattern_type = 1,
+                living_room_temperature = 22,
+                num_storeys = 1,
+                num_bedrooms = 1,
+                measures = true,
+                measures_package = new[] { "A", "B", "G", "O3", "U" }
+            };
+            Console.WriteLine(request.property_type);
+            Console.WriteLine(request.built_form);
+            Console.WriteLine(request.flat_level);
+            
+            BreRequest exampleCase3Request = new()
             {
                 epc = new RequestEpc
                 {
@@ -92,6 +156,9 @@ namespace SeaPublicWebsite.Services
                     photoSupply = "0",
                     windTurbineCount = "0"
                 },
+                property_type = "0",
+                num_bedrooms = 1,
+                built_form = "1",
                 construction_date = "C",
                 heating_fuel = "26",
                 electricity_tariff = 1,
@@ -107,7 +174,7 @@ namespace SeaPublicWebsite.Services
                 measures_package = new[] { "A", "W1", "G", "U" }
             };
 
-            return exampleCase3Request;
+            return request;
         }
     }
 }
