@@ -27,7 +27,7 @@ namespace SeaPublicWebsite.ExternalServices
             var response = HttpRequestHelper.SendGetRequest<string>(
                 new RequestParameters
                 {
-                    BaseAddress = "https://api.epb-staging.digital.communities.gov.uk",
+                    BaseAddress = Global.EpbEpcBaseAddress,
                     Path = "/api/greendeal/rhi/assessments/0000-0000-0000-0476-5172/latest",
                     Auth = new AuthenticationHeaderValue("Bearer", token)
                 });
@@ -41,7 +41,7 @@ namespace SeaPublicWebsite.ExternalServices
             var response = HttpRequestHelper.SendPostRequest<TokenRequestResponse>(
                 new RequestParameters
                 {
-                    BaseAddress = "https://api.epb-staging.digital.communities.gov.uk",
+                    BaseAddress = Global.EpbEpcBaseAddress,
                     Path = "/auth/oauth/token",
                     Auth = new AuthenticationHeaderValue("Basic",
                         HttpRequestHelper.ConvertToBase64(epcAuthUsername, epcAuthPassword))

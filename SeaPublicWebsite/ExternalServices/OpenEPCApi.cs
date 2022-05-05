@@ -32,7 +32,7 @@ namespace SeaPublicWebsite.ExternalServices
                 var openEpcResponse = HttpRequestHelper.SendGetRequest<OpenEpcResponse>(
                     new RequestParameters
                     {
-                        BaseAddress = "https://epc.opendatacommunities.org",
+                        BaseAddress = Global.OpenEpcBaseAddress,
                         Path = $"/api/v1/domestic/search?postcode={postcode}&size=100",
                         Auth = new AuthenticationHeaderValue("Basic",
                             HttpRequestHelper.ConvertToBase64(epcAuthUsername, epcAuthPassword))
