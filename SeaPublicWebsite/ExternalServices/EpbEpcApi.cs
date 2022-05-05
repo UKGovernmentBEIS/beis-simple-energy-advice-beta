@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authentication.OAuth;
 using Newtonsoft.Json;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
@@ -16,7 +17,7 @@ namespace SeaPublicWebsite.ExternalServices
         
         private string token;
         private DateTime tokenRequestDate;
-        public readonly int ExpiryTimeInSeconds = 30 * 60;
+        private int expiryTimeInSeconds = 30 * 60;
 
         public EpbEpcApi()
         {
@@ -57,8 +58,22 @@ namespace SeaPublicWebsite.ExternalServices
         {
             if (token is null || IsTokenExpired())
             {
-                // TODO: Request new token
-                token = null;
+                var response = HttpRequestHelper.SendPostRequest<TokenRequestResponse>(
+                    new RequestParameters
+                    {
+                        BaseAddress = "https://api.epb-staging.digital.communities.gov.uk",
+                        Path = "/auth/oauth/token",
+                        Auth = new AuthenticationHeaderValue("Basic",
+                            HttpRequestHelper.ConvertToBase64(epcAuthUsername, epcAuthPassword))
+                    }
+                );
+                if (response is null)
+                {
+                    throw new Exception();
+                }
+                token = response.Token;
+                // We divide by 2 to avoid edge cases of sending requests on the exact expiration time
+                expiryTimeInSeconds = response.ExpiryTimeInSeconds / 2;
                 tokenRequestDate = DateTime.Now;
             }
         }
@@ -67,7 +82,17 @@ namespace SeaPublicWebsite.ExternalServices
         {
             var currentDate = DateTime.Now;
             var diff = currentDate.Subtract(tokenRequestDate);
-            return diff.Seconds >= ExpiryTimeInSeconds;
+            return diff.Seconds >= expiryTimeInSeconds;
         }
+    }
+
+    internal class TokenRequestResponse
+    {
+        [JsonProperty(PropertyName = "access_token")]
+        public string Token;
+        [JsonProperty(PropertyName = "expires_in")]
+        public int ExpiryTimeInSeconds;
+        [JsonProperty(PropertyName = "token_type")]
+        public string TokenType;
     }
 }
