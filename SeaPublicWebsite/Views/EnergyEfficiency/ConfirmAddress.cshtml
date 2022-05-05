@@ -56,10 +56,16 @@
             else
             {
                 string error = null;
-                var errors = ViewData.ModelState[nameof(ConfirmAddressViewModel.SelectedEpcId)].Errors;
-                if (errors.Count > 0)
+                var errors = ViewData.ModelState
+                    .Where(n => n.Value.Errors.Count > 0)
+                    .ToList();
+                foreach (var (key, value) in ViewData.ModelState)
                 {
-                    error = errors[0].ErrorMessage;
+                    if (value.Errors.Count > 0)
+                    {
+                        error = value.Errors[0].ErrorMessage;
+                        break;
+                    }
                 }
                 
                 ErrorMessageViewModel errorMessageViewModel = error != null ? new ErrorMessageViewModel {Text = error} : null;
