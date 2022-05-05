@@ -15,15 +15,5 @@ namespace SeaPublicWebsite.Helpers
         public static string EpcAuthPassword => Config.GetAppSetting("EpcAuthPassword");
         public static string GovUkNotifyApiKey => Config.GetAppSetting("GovUkNotifyApiKey");
         public static string GovUkNotifyApiTestKey => Config.GetAppSetting("GovUkNotifyApiTestKey");
-
-        public static string GetIdForTemplate(string template)
-        {
-            return Config.GetAppSetting($"GovUkNotifyTemplates:{template}:id");
-        }
-
-        public static string GetFieldForTemplate(string template, string field)
-        {
-            return Config.GetAppSetting($"GovUkNotifyTemplates:{template}:fields:{field}");
-        }
     }
 }

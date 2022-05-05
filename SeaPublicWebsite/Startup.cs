@@ -30,9 +30,9 @@ namespace SeaPublicWebsite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserDataStore, UserDataStore>();
-            services.AddScoped<IEmailSender, GovUkNotifyApi>();
 
             ConfigureFileRepository(services);
+            ConfigureGovUkNotify(services);
             
             services.AddControllersWithViews(options =>
             {
@@ -53,6 +53,16 @@ namespace SeaPublicWebsite
                 services.AddSingleton<IFileRepository>(s => new SystemFileRepository());
             }
 
+        }
+
+        private void ConfigureGovUkNotify(IServiceCollection services)
+        {
+            services.AddScoped<IEmailSender, GovUkNotifyApi>();
+            
+            // Bind the 'Name' field from the config file to the 'config' object
+            var config = new GovUkNotifyConfiguration();
+            Configuration.Bind(GovUkNotifyConfiguration.Name, config);
+            services.AddSingleton<GovUkNotifyConfiguration>(config);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

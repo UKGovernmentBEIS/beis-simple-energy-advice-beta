@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 using Notify.Client;
 using Notify.Exceptions;
 using Notify.Models.Responses;
@@ -10,9 +11,11 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
     {
         private readonly string apiKey = Global.GovUkNotifyApiKey;
         private readonly NotificationClient client;
+        private readonly GovUkNotifyConfiguration govUkNotifyConfig;
 
-        public GovUkNotifyApi()
+        public GovUkNotifyApi(GovUkNotifyConfiguration config)
         {
+            govUkNotifyConfig = config;
             client = new NotificationClient(apiKey);
         }
 
@@ -37,15 +40,15 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
 
         public void SendReferenceNumberEmail(string emailAddress, string reference)
         {
-            var template = "ApplicationReferenceNumberTemplate";
+            var template = govUkNotifyConfig.ApplicationReferenceNumber;
             var personalisation = new Dictionary<string, dynamic>
             {
-                { Global.GetFieldForTemplate(template, "reference"), reference }
+                { template.Reference, reference }
             };
             var emailModel = new GovUkNotifyEmailModel
             {
                 EmailAddress = emailAddress,
-                TemplateId = Global.GetIdForTemplate(template),
+                TemplateId = template.Id,
                 Personalisation = personalisation
             };
             var response = SendEmail(emailModel);
@@ -53,15 +56,15 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
 
         public void SendRequestedDocumentEmail(string emailAddress, byte[] documentContents)
         {
-            var template = "RequestDocumentTemplate";
+            var template = govUkNotifyConfig.RequestDocument;
             var personalisation = new Dictionary<string, dynamic>
             {
-                { Global.GetFieldForTemplate(template, "documentContents"), NotificationClient.PrepareUpload(documentContents) }
+                { template.DocumentContents, NotificationClient.PrepareUpload(documentContents) }
             };
             var emailModel = new GovUkNotifyEmailModel
             {
                 EmailAddress = emailAddress,
-                TemplateId = Global.GetIdForTemplate(template),
+                TemplateId = template.Id,
                 Personalisation = personalisation
             };
             var response = SendEmail(emailModel);
@@ -76,4 +79,6 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
         public string Reference { get; set; }
         public string EmailReplyToId { get; set; }
     }
+    
+    
 }
