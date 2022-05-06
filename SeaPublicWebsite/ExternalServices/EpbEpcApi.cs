@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
@@ -10,21 +11,20 @@ namespace SeaPublicWebsite.ExternalServices
 {
     public class EpbEpcApi: IEpcApi
     {
+        private readonly IMemoryCache memoryCache;
         private readonly string epcAuthUsername;
         private readonly string epcAuthPassword;
+        private readonly string cacheTokenKey = "EpbEpcToken";
         
-        private string token;
-        private DateTime tokenRequestDate;
-        private int expiryTimeInSeconds = 30 * 60;
-
-        public EpbEpcApi()
+        public EpbEpcApi(IMemoryCache memoryCache)
         {
+            this.memoryCache = memoryCache;
             epcAuthUsername = Global.EpcAuthUsername;
             epcAuthPassword = Global.EpcAuthPassword;
         }
         public async Task<List<Epc>> GetEpcsForPostcode(string postcode)
         {
-            RequestTokenIfNeeded();
+            var token = await RequestTokenIfNeeded();
             var response = HttpRequestHelper.SendGetRequestAsync<string>(
                 new RequestParameters
                 {
@@ -36,11 +36,11 @@ namespace SeaPublicWebsite.ExternalServices
             return new List<Epc>();
         }
 
-        private async Task RequestTokenIfNeeded()
+        private async Task<string> RequestTokenIfNeeded()
         {
-            if (token is not null && !IsTokenExpired())
+            if (memoryCache.TryGetValue(cacheTokenKey, out string token))
             {
-                return;
+                return token;
             }
             var response = await HttpRequestHelper.SendPostRequestAsync<TokenRequestResponse>(
                 new RequestParameters
@@ -51,17 +51,15 @@ namespace SeaPublicWebsite.ExternalServices
                         HttpRequestHelper.ConvertToBase64(epcAuthUsername, epcAuthPassword))
                 }
             );
-            token = response.Token;
             // We divide by 2 to avoid edge cases of sending requests on the exact expiration time
-            expiryTimeInSeconds = response.ExpiryTimeInSeconds / 2;
-            tokenRequestDate = DateTime.Now;
-        }
+            var expiryTimeInSeconds = response.ExpiryTimeInSeconds / 2;
+            token = response.Token;
+            
+            var cacheEntryOptions = new MemoryCacheEntryOptions()
+                .SetAbsoluteExpiration(TimeSpan.FromSeconds(expiryTimeInSeconds));
 
-        private bool IsTokenExpired()
-        {
-            var currentDate = DateTime.Now;
-            var diff = currentDate.Subtract(tokenRequestDate);
-            return diff.Seconds >= expiryTimeInSeconds;
+            memoryCache.Set(cacheTokenKey, token, cacheEntryOptions);
+            return token;
         }
     }
 
