@@ -29,6 +29,7 @@ namespace SeaPublicWebsite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserDataStore, UserDataStore>();
+            services.AddMemoryCache();
 
             ConfigureFileRepository(services);
             ConfigureEpcApi(services);
