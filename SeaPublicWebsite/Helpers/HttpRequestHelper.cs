@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SeaPublicWebsite.ErrorHandling;
 
@@ -8,29 +9,29 @@ namespace SeaPublicWebsite.Helpers
 {
     public static class HttpRequestHelper
     {
-        public static T SendGetRequest<T>(RequestParameters parameters)
+        public static Task<T> SendGetRequestAsync<T>(RequestParameters parameters)
         {
-            return SendRequest<T>(RequestType.Get, parameters);
+            return SendRequestAsync<T>(RequestType.Get, parameters);
         }
         
-        public static T SendPostRequest<T>(RequestParameters parameters)
+        public static Task<T> SendPostRequestAsync<T>(RequestParameters parameters)
         {
-            return SendRequest<T>(RequestType.Post, parameters);
+            return SendRequestAsync<T>(RequestType.Post, parameters);
         }
 
         public static string ConvertToBase64(string username, string password)
         {
             return Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"{username}:{password}"));
         }
-        private static T SendRequest<T>(RequestType requestType, RequestParameters parameters)
+        private static async Task<T> SendRequestAsync<T>(RequestType requestType, RequestParameters parameters)
         {
             var httpClient = SetupHttpClient(parameters);
-            var response = requestType switch
+            var response =  await (requestType switch
             {
-                RequestType.Get => httpClient.GetAsync(parameters.Path).Result,
-                RequestType.Post => httpClient.PostAsync(parameters.Path, parameters.Body).Result,
+                RequestType.Get => httpClient.GetAsync(parameters.Path),
+                RequestType.Post => httpClient.PostAsync(parameters.Path, parameters.Body),
                 _ => throw new ArgumentOutOfRangeException(nameof(requestType), requestType, null)
-            };
+            });
             return ConvertResponseToObject<T>(response);
         }
 

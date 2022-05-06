@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
@@ -21,10 +22,10 @@ namespace SeaPublicWebsite.ExternalServices
             epcAuthUsername = Global.EpcAuthUsername;
             epcAuthPassword = Global.EpcAuthPassword;
         }
-        public List<Epc> GetEpcsForPostcode(string postcode)
+        public async Task<List<Epc>> GetEpcsForPostcode(string postcode)
         {
             RequestTokenIfNeeded();
-            var response = HttpRequestHelper.SendGetRequest<string>(
+            var response = HttpRequestHelper.SendGetRequestAsync<string>(
                 new RequestParameters
                 {
                     BaseAddress = Global.EpbEpcBaseAddress,
@@ -35,13 +36,13 @@ namespace SeaPublicWebsite.ExternalServices
             return new List<Epc>();
         }
 
-        private void RequestTokenIfNeeded()
+        private async Task RequestTokenIfNeeded()
         {
             if (token is not null && !IsTokenExpired())
             {
                 return;
             }
-            var response = HttpRequestHelper.SendPostRequest<TokenRequestResponse>(
+            var response = await HttpRequestHelper.SendPostRequestAsync<TokenRequestResponse>(
                 new RequestParameters
                 {
                     BaseAddress = Global.EpbEpcBaseAddress,

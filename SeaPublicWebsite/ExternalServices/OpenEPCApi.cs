@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
@@ -20,7 +21,7 @@ namespace SeaPublicWebsite.ExternalServices
             epcAuthPassword = Global.EpcAuthPassword;
         }
 
-        public List<Epc> GetEpcsForPostcode(string postcode)
+        public async Task<List<Epc>> GetEpcsForPostcode(string postcode)
         {
             if (string.IsNullOrWhiteSpace(postcode))
             {
@@ -29,7 +30,7 @@ namespace SeaPublicWebsite.ExternalServices
 
             try
             {
-                var openEpcResponse = HttpRequestHelper.SendGetRequest<OpenEpcResponse>(
+                var openEpcResponse = await HttpRequestHelper.SendGetRequestAsync<OpenEpcResponse>(
                     new RequestParameters
                     {
                         BaseAddress = Global.OpenEpcBaseAddress,

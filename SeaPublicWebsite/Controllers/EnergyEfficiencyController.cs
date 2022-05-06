@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
@@ -188,11 +189,11 @@ namespace SeaPublicWebsite.Controllers
 
         
         [HttpGet("address/{reference}")]
-        public IActionResult ConfirmAddress_Get(string reference, string houseNameOrNumber)
+        public async Task<IActionResult> ConfirmAddress_Get(string reference, string houseNameOrNumber)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
-            var epcList = epcApi.GetEpcsForPostcode(userDataModel.Postcode);
+            var epcList = await epcApi.GetEpcsForPostcode(userDataModel.Postcode);
 
             if (houseNameOrNumber != null)
             {
@@ -213,11 +214,11 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpPost("address/{reference}")]
-        public IActionResult ConfirmAddress_Post(ConfirmAddressViewModel viewModel)
+        public async Task<IActionResult> ConfirmAddress_Post(ConfirmAddressViewModel viewModel)
         {
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
             
-            var epc = epcApi.GetEpcsForPostcode(userDataModel.Postcode).FirstOrDefault(e => e.EpcId == viewModel.SelectedEpcId);
+            var epc = (await epcApi.GetEpcsForPostcode(userDataModel.Postcode)).FirstOrDefault(e => e.EpcId == viewModel.SelectedEpcId);
             userDataModel.Epc = epc;
 
             userDataStore.SaveUserData(userDataModel);
