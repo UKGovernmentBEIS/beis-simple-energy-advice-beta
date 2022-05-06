@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SeaPublicWebsite.DataModels;
@@ -1148,11 +1149,12 @@ namespace SeaPublicWebsite.Controllers
             ).ToList();
             userDataStore.SaveUserData(userDataModel);
 
+            int firstReferenceId = recommendationsForUser.Count == 0 ? -1 : (int) recommendationsForUser[0].Key;
             var viewModel = new YourRecommendationsViewModel
                 {
                     Reference = reference,
                     NumberOfUserRecommendations = recommendationsForUser.Count,
-                    FirstReferenceId = (int)recommendationsForUser[0].Key,
+                    FirstReferenceId = firstReferenceId,
                     HasEmailAddress = userDataModel.HasEmailAddress,
                     EmailAddress = userDataModel.EmailAddress
                 }

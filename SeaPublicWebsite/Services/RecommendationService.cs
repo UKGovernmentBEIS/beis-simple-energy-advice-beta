@@ -60,121 +60,236 @@ namespace SeaPublicWebsite.Services
         public static List<Recommendation> GetRecommendationsForUser(UserDataModel userData)
         {
             BreRequest request = GenerateRequest(userData);
-            
+
             string requestString = JsonConvert.SerializeObject(request);
             Console.WriteLine(requestString);
             return BreApi.GetRecommendationsForUserRequest(requestString);
         }
 
-        public static BreRequest GenerateRequest(UserDataModel userData)
+        private static BreRequest GenerateRequest(UserDataModel userData)
         {
             Console.WriteLine(JsonConvert.SerializeObject(userData));
 
             //ApartmentFlatOrMaisonette is assumed to be Flat
-            int propertyType = (int) (PropertyTypeEnum) userData.PropertyType; 
-            int? builtForm = null;
-            int? flatLevel = null;
-            switch (userData.PropertyType)
-            {
-                case PropertyType.House:
-                    builtForm = userData.HouseType switch
-                    {
-                        HouseType.Detached => (int) BuiltFormEnum.Detached,
-                        HouseType.SemiDetached => (int) BuiltFormEnum.SemiDetached,
-                        HouseType.EndTerrace => (int) BuiltFormEnum.EndTerrace,
-                        HouseType.Terraced => (int) BuiltFormEnum.MidTerrace,
-                        _ => null,
-                    };
-                    break;
-                case PropertyType.Bungalow:
-                    builtForm = userData.BungalowType switch
-                    {
-                        BungalowType.Detached => (int) BuiltFormEnum.Detached,
-                        BungalowType.SemiDetached => (int) BuiltFormEnum.SemiDetached,
-                        BungalowType.EndTerrace => (int) BuiltFormEnum.EndTerrace,
-                        BungalowType.Terraced => (int) BuiltFormEnum.MidTerrace,
-                        _ => null
-                    };
-                    break;
-                case PropertyType.ApartmentFlatOrMaisonette:
-                    flatLevel = userData.FlatType switch
-                    {
-                        FlatType.TopFloor => (int) FlatLevelEnum.TopFloor,
-                        FlatType.MiddleFloor => (int) FlatLevelEnum.MidFloor,
-                        FlatType.GroundFloor => (int) FlatLevelEnum.GroundFloor,
-                        _ => null
-                    };
-                    builtForm = (int) BuiltFormEnum.MidTerrace;
-                    break;
-            }
+            (int builtForm, int? flatLevel) = GetBuiltFormAndFlatLevel(userData.PropertyType, userData.HouseType,
+                userData.BungalowType, userData.FlatType);
+
+            string constructionDate = GetConstructionDate(userData.YearBuilt);
+
+            int wallType = GetWallType(userData.WallConstruction, userData.SolidWallsInsulated,
+                userData.CavityWallsInsulated);
+
+            int roofType = GetRoofType(userData.RoofConstruction, userData.RoofInsulated);
+
+            int glazingType = GetGlazingType(userData.GlazingType);
+
+            int heatingFuel = GetHeatingFuel(userData.HeatingType, userData.OtherHeatingType);
+
+            bool? hotWaterCylinder = GetHotWaterCylinder(userData.HasHotWaterCylinder);
+
+            int heatingPatternType = GetHeatingPatternType(userData.HeatingPattern);
+
             BreRequest request = new()
             {
-                property_type = propertyType.ToString(),
+                postcode = userData.Postcode,
+                property_type = ((int) (PropertyTypeEnum) userData.PropertyType).ToString(),
                 built_form = builtForm.ToString(),
                 flat_level = flatLevel.ToString(),
-                construction_date = "E",
-                wall_type = 1,
+                construction_date = constructionDate,
+                wall_type = wallType,
                 //no input for floor_type
-                roof_type = 1,
-                glazing_type = 1,
+                roof_type = roofType,
+                glazing_type = glazingType,
                 //no input for outdoor heater space
-                heating_fuel = "26",
-                hot_water_cylinder = false,
-                occupants = 2,
-                heating_pattern_type = 1,
-                living_room_temperature = 22,
+                heating_fuel = heatingFuel.ToString(),
+                hot_water_cylinder = hotWaterCylinder,
+                occupants = userData.NumberOfOccupants,
+                heating_pattern_type = heatingPatternType,
+                living_room_temperature = userData.Temperature,
+
+                //set as defaults?
                 num_storeys = 1,
                 num_bedrooms = 1,
                 measures = true,
                 measures_package = new[] { "A", "B", "G", "O3", "U" }
             };
-            Console.WriteLine(request.property_type);
-            Console.WriteLine(request.built_form);
-            Console.WriteLine(request.flat_level);
-            
-            BreRequest exampleCase3Request = new()
-            {
-                epc = new RequestEpc
-                {
-                    postcode = "A12 3BC",
-                    isConnectedtoMainsGas = true,
-                    propertyType = "house",
-                    builtForm = "mid-terrace",
-                    floorLevel = null,
-                    heatLossCorridor = "no corridor",
-                    numberHabitableRooms = 7,
-                    totalFloorArea = "151.26",
-                    wallsDescription = "Solid brick, as built, no insulation (assumed)",
-                    roofDescription = "Pitched, no insulation (assumed)",
-                    multiGlazeProportion = "30",
-                    glazedArea = "Normal",
-                    mainheatDescription = "boiler and radiators, mains gas",
-                    mainheatcontDescription = "Programmer, no room thermostat",
-                    numberOpenFireplaces = "1",
-                    lowEnergyLighting = "80",
-                    solarWaterHeatingFlag = "N",
-                    photoSupply = "0",
-                    windTurbineCount = "0"
-                },
-                property_type = "0",
-                num_bedrooms = 1,
-                built_form = "1",
-                construction_date = "C",
-                heating_fuel = "26",
-                electricity_tariff = 1,
-                num_storeys = 2,
-                hot_water_cylinder = true,
-                condensing_boiler = true,
-                heating_pattern_type = 3,
-                normal_days_off_hours = new[] { 7, 9 },
-                living_room_temperature = 22,
-                showers_per_week = 0,
-                baths_per_week = 7,
-                measures = true,
-                measures_package = new[] { "A", "W1", "G", "U" }
-            };
 
             return request;
+        }
+
+        private static (int builtForm, int? flatLevel) GetBuiltFormAndFlatLevel(PropertyType? propertyType,
+            HouseType? houseType, BungalowType? bungalowType, FlatType? flatType)
+        {
+            int builtForm;
+            int? flatLevel = null;
+            switch (propertyType)
+            {
+                case PropertyType.House:
+                    builtForm = houseType switch
+                    {
+                        HouseType.Detached => (int) BuiltFormEnum.Detached,
+                        HouseType.SemiDetached => (int) BuiltFormEnum.SemiDetached,
+                        HouseType.EndTerrace => (int) BuiltFormEnum.EndTerrace,
+                        HouseType.Terraced => (int) BuiltFormEnum.MidTerrace,
+                        _ => throw new ArgumentOutOfRangeException()
+                    };
+                    break;
+                case PropertyType.Bungalow:
+                    builtForm = bungalowType switch
+                    {
+                        BungalowType.Detached => (int) BuiltFormEnum.Detached,
+                        BungalowType.SemiDetached => (int) BuiltFormEnum.SemiDetached,
+                        BungalowType.EndTerrace => (int) BuiltFormEnum.EndTerrace,
+                        BungalowType.Terraced => (int) BuiltFormEnum.MidTerrace,
+                        _ => throw new ArgumentOutOfRangeException()
+                    };
+                    break;
+                case PropertyType.ApartmentFlatOrMaisonette:
+                    flatLevel = flatType switch
+                    {
+                        FlatType.TopFloor => (int) FlatLevelEnum.TopFloor,
+                        FlatType.MiddleFloor => (int) FlatLevelEnum.MidFloor,
+                        FlatType.GroundFloor => (int) FlatLevelEnum.GroundFloor,
+                        _ => throw new ArgumentOutOfRangeException()
+                    };
+                    builtForm = (int) BuiltFormEnum.MidTerrace;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return (builtForm, flatLevel);
+        }
+
+        private static string GetConstructionDate(int? yearBuilt)
+        {
+            return yearBuilt switch
+            {
+                <= 1899 => "A",
+                <= 1929 => "B",
+                <= 1949 => "C",
+                <= 1966 => "D",
+                <= 1975 => "E",
+                <= 1982 => "F",
+                <= 1990 => "G",
+                <= 1995 => "H",
+                <= 2002 => "I",
+                <= 2006 => "J",
+                <= 2011 => "K",
+                >= 2012 => "L",
+                _ => "D"
+            };
+        }
+
+        private static int GetWallType(WallConstruction? wallConstruction, SolidWallsInsulated? solidWallsInsulated,
+            CavityWallsInsulated? cavityWallsInsulated)
+        {
+            return wallConstruction switch
+            {
+                WallConstruction.DoNotKnow => (int) WallTypeEnum.DontKnow,
+                WallConstruction.Solid => solidWallsInsulated switch
+                {
+                    SolidWallsInsulated.DoNotKnow => (int) WallTypeEnum.DontKnow,
+                    SolidWallsInsulated.No => (int) WallTypeEnum.SolidWallsWithoutInsulation,
+                    SolidWallsInsulated.Some => (int) WallTypeEnum.SolidWallsWithoutInsulation,
+                    SolidWallsInsulated.All => (int) WallTypeEnum.SolidWallsWithInsulation,
+                    _ => throw new ArgumentOutOfRangeException()
+                },
+                WallConstruction.Cavity => cavityWallsInsulated switch
+                {
+                    CavityWallsInsulated.DoNotKnow => (int) WallTypeEnum.DontKnow,
+                    CavityWallsInsulated.No => (int) WallTypeEnum.CavityWallsWithoutInsulation,
+                    CavityWallsInsulated.Some => (int) WallTypeEnum.CavityWallsWithoutInsulation,
+                    CavityWallsInsulated.All => (int) WallTypeEnum.CavityWallsWithInsulation,
+                    _ => throw new ArgumentOutOfRangeException()
+                },
+                WallConstruction.Mixed =>
+                    //should we prioritise one wall type here?
+                    (int) WallTypeEnum.DontKnow,
+                WallConstruction.Other => (int) WallTypeEnum.DontKnow,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+
+        private static int GetRoofType(RoofConstruction? roofConstruction, RoofInsulated? roofInsulated)
+        {
+            return roofConstruction switch
+            {
+                RoofConstruction.Flat =>
+                    //should we ask about flat roof insulation?
+                    (int) RoofTypeEnum.DontKnow,
+                RoofConstruction.Mixed =>
+                    //should we prioritise one roof type here?
+                    (int) RoofTypeEnum.DontKnow,
+                RoofConstruction.Pitched => roofInsulated switch
+                {
+                    RoofInsulated.DoNotKnow => (int) RoofTypeEnum.DontKnow,
+                    RoofInsulated.Yes => (int) RoofTypeEnum.PitchedRoofWithInsulation,
+                    RoofInsulated.No => (int) RoofTypeEnum.PitchedRoofWithoutInsulation,
+                    _ => throw new ArgumentOutOfRangeException()
+                },
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+
+        private static int GetGlazingType(GlazingType? glazingType)
+        {
+            return glazingType switch
+            {
+                GlazingType.DoNotKnow => (int) GlazingTypeEnum.DontKnow,
+                GlazingType.SingleGlazed => (int) GlazingTypeEnum.SingleGlazed,
+                //or go triple?
+                GlazingType.DoubleOrTripleGlazed => (int) GlazingTypeEnum.DoubleGlazed,
+                GlazingType.Both => (int) GlazingTypeEnum.DontKnow,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+
+        private static int GetHeatingFuel(HeatingType? heatingType, OtherHeatingType? otherHeatingType)
+        {
+            return heatingType switch
+            {
+                //check these assignments are correct
+                HeatingType.DoNotKnow => (int) HeatingFuelEnum.MainsGas,
+                HeatingType.GasBoiler => (int) HeatingFuelEnum.MainsGas,
+                HeatingType.OilBoiler => (int) HeatingFuelEnum.HeatingOil,
+                HeatingType.LpgBoiler => (int) HeatingFuelEnum.Lpg,
+                HeatingType.Storage => (int) HeatingFuelEnum.Electricity,
+                HeatingType.DirectActionElectric => (int) HeatingFuelEnum.Electricity,
+                HeatingType.HeatPump => (int) HeatingFuelEnum.Electricity,
+                HeatingType.Other => otherHeatingType switch
+                {
+                    OtherHeatingType.Biomass => (int) HeatingFuelEnum.MainsGas,
+                    OtherHeatingType.CoalOrSolidFuel => (int) HeatingFuelEnum.SolidFuel,
+                    OtherHeatingType.Other => (int) HeatingFuelEnum.MainsGas,
+                    _ => throw new ArgumentOutOfRangeException()
+                },
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+
+        private static bool? GetHotWaterCylinder(HasHotWaterCylinder? hasHotWaterCylinder)
+        {
+            return hasHotWaterCylinder switch
+            {
+                HasHotWaterCylinder.DoNotKnow => null,
+                HasHotWaterCylinder.Yes => true,
+                HasHotWaterCylinder.No => false,
+                _ => null
+            };
+        }
+
+        private static int GetHeatingPatternType(HeatingPattern? heatingPattern)
+        {
+            return heatingPattern switch
+            {
+                HeatingPattern.AllDayAndNight => (int) HeatingPatternTypeEnum.AllDayAndAllNight,
+                HeatingPattern.AllDayNotNight => (int) HeatingPatternTypeEnum.AllDayButOffAtNight,
+                HeatingPattern.MorningAndEvening => (int) HeatingPatternTypeEnum.MorningAndEvening,
+                HeatingPattern.OnceADay => (int) HeatingPatternTypeEnum.JustOnceADay,
+                HeatingPattern.Other => (int) HeatingPatternTypeEnum.NoneOfTheAbove,
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
     }
 }

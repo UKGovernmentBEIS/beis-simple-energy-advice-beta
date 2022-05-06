@@ -36,10 +36,11 @@ namespace SeaPublicWebsite.ExternalServices
                     StringContent stringContent = new(requestString);
                     HttpResponseMessage response = httpClient.PostAsync(path, stringContent).Result;
 
+                    Console.WriteLine(response.ToString());
                     if (response.IsSuccessStatusCode)
                     {
                         string bodyString = response.Content.ReadAsStringAsync().Result;
-                        JObject measures = JObject.FromObject(JObject.Parse(bodyString)["measures"]);
+                        JObject measures = JObject.FromObject(JObject.Parse(bodyString)["measures"] ?? new JObject());
 
                         List<Recommendation> recommendations = new List<Recommendation>();
                         foreach (JProperty prop in measures.Properties())
@@ -65,7 +66,6 @@ namespace SeaPublicWebsite.ExternalServices
                             };
                             recommendations.Add(recommendation);
                         }
-
                         Console.WriteLine($"{recommendations.Count} recommendations found");
                         return recommendations;
                     }
