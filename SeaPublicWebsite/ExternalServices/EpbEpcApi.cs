@@ -22,6 +22,7 @@ namespace SeaPublicWebsite.ExternalServices
             epcAuthUsername = Global.EpcAuthUsername;
             epcAuthPassword = Global.EpcAuthPassword;
         }
+        
         public async Task<List<Epc>> GetEpcsForPostcode(string postcode)
         {
             var token = await RequestTokenIfNeeded();

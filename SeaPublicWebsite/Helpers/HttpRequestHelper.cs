@@ -23,6 +23,7 @@ namespace SeaPublicWebsite.Helpers
         {
             return Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"{username}:{password}"));
         }
+        
         private static async Task<T> SendRequestAsync<T>(RequestType requestType, RequestParameters parameters)
         {
             var httpClient = SetupHttpClient(parameters);
