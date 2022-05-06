@@ -12,6 +12,7 @@ using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.Helpers;
+using SeaPublicWebsite.Helpers.UserFlow;
 
 namespace SeaPublicWebsite
 {
@@ -28,6 +29,7 @@ namespace SeaPublicWebsite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserDataStore, UserDataStore>();
+            services.AddScoped<IPageLinker, PageLinker>();
 
             ConfigureFileRepository(services);
             

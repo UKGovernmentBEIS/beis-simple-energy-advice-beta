@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
+using SeaPublicWebsite.Helpers.UserFlow;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations;
@@ -15,10 +16,12 @@ namespace SeaPublicWebsite.Controllers
     public class EnergyEfficiencyController : Controller
     {
         private readonly UserDataStore userDataStore;
+        private readonly IPageLinker pageLinker;
 
-        public EnergyEfficiencyController(UserDataStore userDataStore)
+        public EnergyEfficiencyController(UserDataStore userDataStore, IPageLinker pageLinker)
         {
             this.userDataStore = userDataStore;
+            this.pageLinker = pageLinker;
         }
         
         
