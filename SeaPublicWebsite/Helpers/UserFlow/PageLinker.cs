@@ -5,7 +5,9 @@ namespace SeaPublicWebsite.Helpers.UserFlow
 {
     public interface IPageLinker
     {
-        public string GetBackLink();
+        public string NewOrReturningUserBackLink();
+
+        public string OwnershipStatusBackLink(string reference, bool change);
     }
 
     public class PageLinker: IPageLinker
@@ -17,9 +19,16 @@ namespace SeaPublicWebsite.Helpers.UserFlow
             this.linkGenerator = linkGenerator;
         }
         
-        public string GetBackLink()
+        public string NewOrReturningUserBackLink()
         {
             return linkGenerator.GetPathByAction("Index", "EnergyEfficiency");
+        }
+
+        public string OwnershipStatusBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("Country_Get", "EnergyEfficiency", new { reference });
         }
     }
 }

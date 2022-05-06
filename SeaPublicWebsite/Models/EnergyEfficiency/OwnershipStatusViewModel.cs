@@ -12,5 +12,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public OwnershipStatus? OwnershipStatus { get; set; }
 
         public bool Change { get; set; }
+        
+        public string BackLink { get; set; }
     }
 }

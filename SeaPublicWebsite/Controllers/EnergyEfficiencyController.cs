@@ -37,7 +37,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var viewModel = new NewOrReturningUserViewModel
             {
-                BackLink = pageLinker.GetBackLink()
+                BackLink = pageLinker.NewOrReturningUserBackLink()
             };
             return View("NewOrReturningUser", viewModel);
         }
@@ -76,7 +76,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 OwnershipStatus = userDataModel.OwnershipStatus,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.OwnershipStatusBackLink(reference, change)
             };
 
             return View("OwnershipStatus", viewModel);
