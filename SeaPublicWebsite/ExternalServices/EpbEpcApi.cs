@@ -37,7 +37,10 @@ namespace SeaPublicWebsite.ExternalServices
 
         private void RequestTokenIfNeeded()
         {
-            if (token is not null && !IsTokenExpired()) return;
+            if (token is not null && !IsTokenExpired())
+            {
+                return;
+            }
             var response = HttpRequestHelper.SendPostRequest<TokenRequestResponse>(
                 new RequestParameters
                 {
