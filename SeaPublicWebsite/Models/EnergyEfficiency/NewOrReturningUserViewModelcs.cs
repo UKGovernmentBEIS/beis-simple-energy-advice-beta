@@ -16,6 +16,8 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
             IsRequiredPropertyName = nameof(RefRequired))]
         public string Reference { get; set; }
         public bool RefRequired => NewOrReturningUser == EnergyEfficiency.NewOrReturningUser.ReturningUser;
+        
+        public string BackLink { get; set; }
     }
     
     public enum NewOrReturningUser

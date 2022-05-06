@@ -35,7 +35,10 @@ namespace SeaPublicWebsite.Controllers
         [HttpGet("new-or-returning-user")]
         public IActionResult NewOrReturningUser_Get()
         {
-            var viewModel = new NewOrReturningUserViewModel();
+            var viewModel = new NewOrReturningUserViewModel
+            {
+                BackLink = pageLinker.GetBackLink()
+            };
             return View("NewOrReturningUser", viewModel);
         }
 
