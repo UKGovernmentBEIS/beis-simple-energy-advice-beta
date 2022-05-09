@@ -150,10 +150,15 @@ namespace SeaPublicWebsite.Controllers
         public IActionResult ServiceUnsuitable(string from, string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
+            var viewModel = new ServiceUnsuitableViewModel
+            {
+                Reference = userDataModel.Reference,
+                Country = userDataModel.Country,
+            };
             ViewBag.From = from;
             ViewBag.Country = userDataModel.Country;
             
-            return View("ServiceUnsuitable", reference);
+            return View("ServiceUnsuitable", viewModel);
         }
 
         [HttpGet("postcode/{reference}")]
