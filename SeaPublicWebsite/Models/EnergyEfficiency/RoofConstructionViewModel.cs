@@ -13,5 +13,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public bool Change { get; set; }
         public PropertyType? PropertyType { get; set; }
         public FlatType? FlatType { get; set; }
+        
+        public string BackLink { get; set; }
     }
 }

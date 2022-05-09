@@ -18,5 +18,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public bool Change { get; set; }
 
         public bool IsRequiredEmailAddress => HasEmailAddress == QuestionOptions.HasEmailAddress.Yes;
+        
+        public string BackLink { get; set; }
     }
 }

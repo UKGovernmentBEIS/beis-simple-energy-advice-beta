@@ -19,5 +19,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public bool Change { get; set; }
 
         public bool IsRequiredHoursOfHeating => HeatingPattern == QuestionOptions.HeatingPattern.Other;
+        
+        public string BackLink { get; set; }
     }
 }

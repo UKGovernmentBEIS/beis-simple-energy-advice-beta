@@ -15,5 +15,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public bool Change { get; set; }
         public WallConstruction? WallConstruction { get; set; }
         public Epc Epc { get; set; }
+        
+        public string BackLink { get; set; }
     }
 }

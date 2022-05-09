@@ -12,5 +12,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string HouseNameOrNumber { get; set; }
 
         public string Reference { get; set; }
+        
+        public string BackLink { get; set; }
     }
 }

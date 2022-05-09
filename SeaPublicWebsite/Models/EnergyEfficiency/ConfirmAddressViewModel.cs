@@ -11,5 +11,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public List<Epc> EPCList { get; set; }
         public string SelectedEpcId { get; set; }
         public string Reference { get; set; }
+        
+        public string BackLink { get; set; }
     }
 }

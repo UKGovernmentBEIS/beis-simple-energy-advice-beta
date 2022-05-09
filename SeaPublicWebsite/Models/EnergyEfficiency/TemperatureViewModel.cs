@@ -10,5 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public decimal? Temperature { get; set; }
         public string Reference { get; set; }
         public bool Change { get; set; }
+        
+        public string BackLink { get; set; }
     }
 }
