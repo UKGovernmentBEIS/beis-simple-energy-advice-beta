@@ -116,7 +116,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 Country = userDataModel.Country,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.CountryBackLink(reference, change)
             };
 
             return View("Country", viewModel);
@@ -154,9 +155,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 Reference = userDataModel.Reference,
                 Country = userDataModel.Country,
+                BackLink = pageLinker.ServiceUnsuitableBackLink(userDataModel.Reference, from)
             };
-            ViewBag.From = from;
-            ViewBag.Country = userDataModel.Country;
             
             return View("ServiceUnsuitable", viewModel);
         }
@@ -169,7 +169,8 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new AskForPostcodeViewModel
             {
                 Postcode = userDataModel.Postcode,
-                Reference = userDataModel.Reference
+                Reference = userDataModel.Reference,
+                BackLink = pageLinker.AskForPostcodeBackLink(reference)
             };
 
             return View("AskForPostcode", viewModel);
@@ -217,6 +218,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = reference,
                 EPCList = epcList,
                 SelectedEpcId = epcList.Count == 1 ? epcList[0].EpcId : null,
+                BackLink = pageLinker.ConfirmAddressBackLink(reference)
             };
 
             return View("ConfirmAddress", viewModel);
@@ -245,7 +247,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 PropertyType = userDataModel.PropertyType,
                 Reference = reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.PropertyTypeBackLink(reference, change)
             };
 
             return View("PropertyType", viewModel);
@@ -286,7 +289,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 HouseType = userDataModel.HouseType,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.HouseTypeBackLink(userDataModel.Reference, change)
             };
 
             return View("HouseType", viewModel);

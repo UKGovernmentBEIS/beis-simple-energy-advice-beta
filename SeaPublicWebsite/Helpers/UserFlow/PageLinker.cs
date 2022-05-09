@@ -9,6 +9,68 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         public string NewOrReturningUserBackLink();
 
         public string OwnershipStatusBackLink(string reference, bool change);
+
+
+        public string CountryBackLink(string reference, bool change);
+
+        public string ServiceUnsuitableBackLink(string reference, string from);
+
+        public string AskForPostcodeBackLink(string reference);
+
+        public string ConfirmAddressBackLink(string reference);
+
+        public string PropertyTypeBackLink(string reference, bool change);
+        
+        public string HouseTypeBackLink(string reference, bool change);
+        
+        public string BungalowTypeBackLink();
+        
+        public string FlatTypeBackLink();
+        
+        public string HomeAgeBackLink();
+        
+        public string WallConstructionBackLink();
+        
+        public string CavityWallsInsulatedBackLink();
+        
+        public string SolidWallsInsulatedBackLink();
+        
+        public string FloorConstructionBackLink();
+        
+        public string FloorInsulatedBackLink();
+        
+        public string RoofConstructionBackLink();
+        
+        public string AccessibleLoftSpaceBackLink();
+        
+        public string RoofInsulatedBackLink();
+        
+        public string OutdoorSpaceBackLink();
+        
+        public string GlazingTypeBackLink();
+        
+        public string HeatingTypeBackLink();
+        
+        public string OtherHeatingTypeBackLink();
+        
+        public string HotWaterCylinderBackLink();
+        
+        public string NumberOfOccupantsBackLink();
+        
+        public string HeatingPatternBackLink();
+        
+        public string TemperatureBackLink();
+        
+        // Ghost page
+        public string EmailAddressBackLink();
+
+        public string AnswerSummaryBackLink();
+        
+        public string YourRecommendationsBackLink();
+        
+        public string BackLink();
+        
+        // ^ Copy paste template ^
     }
 
     public class PageLinker: IPageLinker
@@ -32,153 +94,173 @@ namespace SeaPublicWebsite.Helpers.UserFlow
                 : linkGenerator.GetPathByAction("Country_Get", "EnergyEfficiency", new { reference });
         }
 
-        public string CountryBackLink()
+        public string CountryBackLink(string reference, bool change)
         {
-            throw new Exception();
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("NewOrReturningUser_Get", "EnergyEfficiency");
         }
 
-        public string ServiceUnsuitableBackLink()
+        public string ServiceUnsuitableBackLink(string reference, string from)
         {
-            throw new Exception();
-            
+            return linkGenerator.GetPathByAction($"{from}_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string AskForPostcodeBackLink(string reference)
+        {
+            return linkGenerator.GetPathByAction("OwnershipStatus_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string ConfirmAddressBackLink(string reference)
+        {
+            return linkGenerator.GetPathByAction("AskForPostcode_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string PropertyTypeBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("AskForPostcode_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string HouseTypeBackLink(string reference, bool change)
+        {
+            return linkGenerator.GetPathByAction("PropertyType_Get", "EnergyEfficiency", new { reference, change });
         }
 
         public string AskForPostcodeBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
 
         public string ConfirmAddressBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
 
         public string PropertyTypeBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string HouseTypeBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string BungalowTypeBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string FlatTypeBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string HomeAgeBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string WallConstructionBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string CavityWallsInsulatedBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string SolidWallsInsulatedBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string FloorConstructionBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string FloorInsulatedBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string RoofConstructionBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string AccessibleLoftSpaceBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string RoofInsulatedBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string OutdoorSpaceBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string GlazingTypeBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string HeatingTypeBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string OtherHeatingTypeBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string HotWaterCylinderBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string NumberOfOccupantsBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string HeatingPatternBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string TemperatureBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
-        // Ghost page
+
         public string EmailAddressBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string AnswerSummaryBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string YourRecommendationsBackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
+
         public string BackLink()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
-        
-        // ^ Copy paste template ^
     }
 }
