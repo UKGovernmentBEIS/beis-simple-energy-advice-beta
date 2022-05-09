@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Helpers.UserFlow
 {
@@ -23,17 +24,17 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         
         public string HouseTypeBackLink(string reference, bool change);
         
-        public string BungalowTypeBackLink();
+        public string BungalowTypeBackLink(string reference, bool change);
         
-        public string FlatTypeBackLink();
+        public string FlatTypeBackLink(string reference, bool change);
         
-        public string HomeAgeBackLink();
+        public string HomeAgeBackLink(string reference, PropertyType? propertyType, bool change);
         
-        public string WallConstructionBackLink();
+        public string WallConstructionBackLink(string reference, bool change);
         
-        public string CavityWallsInsulatedBackLink();
+        public string CavityWallsInsulatedBackLink(string reference, bool change);
         
-        public string SolidWallsInsulatedBackLink();
+        public string SolidWallsInsulatedBackLink(string reference, WallConstruction? wallConstruction, bool change);
         
         public string FloorConstructionBackLink();
         
@@ -126,6 +127,60 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         public string HouseTypeBackLink(string reference, bool change)
         {
             return linkGenerator.GetPathByAction("PropertyType_Get", "EnergyEfficiency", new { reference, change });
+        }
+
+        public string BungalowTypeBackLink(string reference, bool change)
+        {
+            return linkGenerator.GetPathByAction("PropertyType_Get", "EnergyEfficiency", new { reference, change });
+        }
+
+        public string FlatTypeBackLink(string reference, bool change)
+        {
+            return linkGenerator.GetPathByAction("PropertyType_Get", "EnergyEfficiency", new { reference, change });
+        }
+
+        public string HomeAgeBackLink(string reference, PropertyType? propertyType, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : propertyType switch
+                {
+                    PropertyType.House => 
+                        linkGenerator.GetPathByAction("HouseType_Get", $"EnergyEfficiency, new {reference}"),
+                    PropertyType.Bungalow => 
+                        linkGenerator.GetPathByAction("BungalowType_Get", "EnergyEfficiency", new { reference }),
+                    PropertyType.ApartmentFlatOrMaisonette => 
+                        linkGenerator.GetPathByAction("FlatType_Get", "EnergyEfficiency", new { reference }),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+        }
+
+        public string WallConstructionBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("HomeAge_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string CavityWallsInsulatedBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("WallConstruction_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string SolidWallsInsulatedBackLink(string reference, WallConstruction? wallConstruction, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : wallConstruction switch
+                {
+                    WallConstruction.Cavity or WallConstruction.Mixed => 
+                        linkGenerator.GetPathByAction("CavityWallsInsulated_Get", "EnergyEfficiency", new {reference }),
+                    WallConstruction.Solid or WallConstruction.DoNotKnow or WallConstruction.Other => 
+                        linkGenerator.GetPathByAction("WallConstruction_Get", "EnergyEfficiency", new {reference }),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
         }
 
         public string AskForPostcodeBackLink()

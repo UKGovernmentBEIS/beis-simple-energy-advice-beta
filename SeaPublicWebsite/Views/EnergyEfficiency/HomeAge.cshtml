@@ -1,42 +1,15 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.HomeAgeViewModel
 @{
     ViewBag.Title = "Ownership status";
 }
 
 @section BeforeMain {
-    @{
-        string backLinkHref;
-
-        if (Model.Change)
-        {
-            backLinkHref = @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference});
-        }
-        else
-        {
-            switch (Model.PropertyType)
-            {
-                case PropertyType.House:
-                    backLinkHref = @Url.Action("HouseType_Get", "EnergyEfficiency", new {reference = Model.Reference});
-                    break;
-                case PropertyType.Bungalow:
-                    backLinkHref = @Url.Action("BungalowType_Get", "EnergyEfficiency", new {reference = Model.Reference});
-                    break;
-                case PropertyType.ApartmentFlatOrMaisonette:
-                    backLinkHref = @Url.Action("FlatType_Get", "EnergyEfficiency", new {reference = Model.Reference});
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-    }
-    
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = backLinkHref,
+        Href = Model.BackLink,
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly

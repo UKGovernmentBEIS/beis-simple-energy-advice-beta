@@ -290,7 +290,7 @@ namespace SeaPublicWebsite.Controllers
                 HouseType = userDataModel.HouseType,
                 Reference = userDataModel.Reference,
                 Change = change,
-                BackLink = pageLinker.HouseTypeBackLink(userDataModel.Reference, change)
+                BackLink = pageLinker.HouseTypeBackLink(reference, change)
             };
 
             return View("HouseType", viewModel);
@@ -324,7 +324,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 BungalowType = userDataModel.BungalowType,
                 Reference = reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.BungalowTypeBackLink(reference, change)
             };
 
             return View("BungalowType", viewModel);
@@ -358,7 +359,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 FlatType = userDataModel.FlatType,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.FlatTypeBackLink(reference, change)
             };
 
             return View("FlatType", viewModel);
@@ -393,7 +395,8 @@ namespace SeaPublicWebsite.Controllers
                 PropertyType = userDataModel.PropertyType,
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.HomeAgeBackLink(reference, userDataModel.PropertyType, change)
             };
 
             return View("HomeAge", viewModel);
@@ -429,7 +432,8 @@ namespace SeaPublicWebsite.Controllers
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
                 Change = change,
-                Epc = userDataModel.Epc
+                Epc = userDataModel.Epc,
+                BackLink = pageLinker.WallConstructionBackLink(reference, change)
             };
 
             return View("WallConstruction", viewModel);
@@ -496,7 +500,8 @@ namespace SeaPublicWebsite.Controllers
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
                 Change = change,
-                Epc = userDataModel.Epc
+                Epc = userDataModel.Epc,
+                BackLink = pageLinker.CavityWallsInsulatedBackLink(reference, change)
             };
 
             return View("CavityWallsInsulated", viewModel);
@@ -558,7 +563,8 @@ namespace SeaPublicWebsite.Controllers
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
                 Change = change,
-                Epc = userDataModel.Epc
+                Epc = userDataModel.Epc,
+                BackLink = pageLinker.SolidWallsInsulatedBackLink(reference, userDataModel.WallConstruction, change)
             };
 
             return View("SolidWallsInsulated", viewModel);

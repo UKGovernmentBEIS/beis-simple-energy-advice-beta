@@ -8,28 +8,10 @@
 }
 
 @section BeforeMain {
-    @{
-        string backlink;
-        switch (Model.WallConstruction)
-        {
-            case WallConstruction.Cavity:
-            case WallConstruction.Mixed:
-                backlink = Url.Action("CavityWallsInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference});
-                break;
-            case WallConstruction.Solid:
-            case WallConstruction.DoNotKnow:
-            case null:
-            default:
-                backlink = Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference});
-                break;
-        }
-    }
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = Model.Change
-            ? @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
-            : backlink,
+        Href = Model.BackLink,
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
