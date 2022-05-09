@@ -2,18 +2,26 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
 using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.ExternalServices
 {
-    public class OpenEpcApi
+    public class OpenEpcApi : IEpcApi
     {
-        public static List<Epc> GetEpcsForPostcode(string postcode)
+        private readonly string epcAuthUsername;
+        private readonly string epcAuthPassword;
+
+        public OpenEpcApi()
+        {
+            epcAuthUsername = Global.EpcAuthUsername;
+            epcAuthPassword = Global.EpcAuthPassword;
+        }
+
+        public async Task<List<Epc>> GetEpcsForPostcode(string postcode)
         {
             if (string.IsNullOrWhiteSpace(postcode))
             {
@@ -22,50 +30,43 @@ namespace SeaPublicWebsite.ExternalServices
 
             try
             {
-                using (var httpClient = new HttpClient())
-                {
-                    httpClient.BaseAddress = new Uri("https://epc.opendatacommunities.org");
-                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-                        "Basic", Convert.ToBase64String(
-                            System.Text.ASCIIEncoding.ASCII.GetBytes(
-                                $"{Global.EpcAuthUsername}:{Global.EpcAuthPassword}")));
-                    httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
-                    string path = $"/api/v1/domestic/search?postcode={postcode}&size=100";
-
-                    HttpResponseMessage response = httpClient.GetAsync(path).Result;
-
-                    if (response.IsSuccessStatusCode)
+                var openEpcResponse = await HttpRequestHelper.SendGetRequestAsync<OpenEpcResponse>(
+                    new RequestParameters
                     {
-                        string bodyString = response.Content.ReadAsStringAsync().Result;
-                        var openEpcResponse = JsonConvert.DeserializeObject<OpenEpcResponse>(bodyString);
+                        BaseAddress = Global.OpenEpcBaseAddress,
+                        Path = $"/api/v1/domestic/search?postcode={postcode}&size=100",
+                        Auth = new AuthenticationHeaderValue("Basic",
+                            HttpRequestHelper.ConvertToBase64(epcAuthUsername, epcAuthPassword))
+                    });
 
-                        var epcs = openEpcResponse.rows.Select(r => new Epc()
-                        {
-                            Address1 = r.Address1,
-                            Address2 = r.Address2,
-                            Postcode = r.Postcode,
-                            BuildingReference = r.BuildingReference,
-                            EpcId = r.LmkKey,
-                            InspectionDate = r.InspectionDate,
-                            HeatingType = GetHeatingTypeFromEpc(r),
-                            PropertyType = GetPropertyTypeFromEpc(r),
-                            WallConstruction = GetWallConstructionFromEpc(r),
-                            CavityWallsInsulated = GetCavityWallsInsulatedFromEpc(r),
-                            SolidWallsInsulated = GetSolidWallsInsulatedFromEpc(r),
-                            FloorConstruction = GetFloorConstructionFromEpc(r),
-                            FloorInsulated = GetFloorInsulationFromEpc(r),
-                            ConstructionAgeBand = GetConstructionAgeBandFromEpc(r)
-                        }).ToList();
-
-                        epcs = FixFormatting(epcs);
-                        epcs = RemoveDuplicates(epcs);
-                        epcs.Sort(SortEpcsByHouseNumberOrAlphabetically);
-
-                        return epcs;
-                    }
-
+                if (openEpcResponse is null)
+                {
                     return null;
                 }
+
+                var epcs = openEpcResponse.rows.Select(r => new Epc()
+                {
+                    Address1 = r.Address1,
+                    Address2 = r.Address2,
+                    Postcode = r.Postcode,
+                    BuildingReference = r.BuildingReference,
+                    EpcId = r.LmkKey,
+                    InspectionDate = r.InspectionDate,
+                    HeatingType = GetHeatingTypeFromEpc(r),
+                    PropertyType = GetPropertyTypeFromEpc(r),
+                    WallConstruction = GetWallConstructionFromEpc(r),
+                    CavityWallsInsulated = GetCavityWallsInsulatedFromEpc(r),
+                    SolidWallsInsulated = GetSolidWallsInsulatedFromEpc(r),
+                    FloorConstruction = GetFloorConstructionFromEpc(r),
+                    FloorInsulated = GetFloorInsulationFromEpc(r),
+                    ConstructionAgeBand = GetConstructionAgeBandFromEpc(r)
+                }).ToList();
+
+                epcs = FixFormatting(epcs);
+                epcs = RemoveDuplicates(epcs);
+                epcs.Sort(SortEpcsByHouseNumberOrAlphabetically);
+
+                return epcs;
             }
             catch (Exception)
             {

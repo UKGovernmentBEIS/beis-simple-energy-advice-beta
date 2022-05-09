@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ErrorHandling;
+using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.Helpers;
 
@@ -28,9 +29,11 @@ namespace SeaPublicWebsite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserDataStore, UserDataStore>();
+            services.AddMemoryCache();
 
             ConfigureFileRepository(services);
-            
+            ConfigureEpcApi(services);
+
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add<ErrorHandlingFilter>();
@@ -50,6 +53,13 @@ namespace SeaPublicWebsite
                 services.AddSingleton<IFileRepository>(s => new SystemFileRepository());
             }
 
+        }
+
+        private void ConfigureEpcApi(IServiceCollection services)
+        {
+            services.AddScoped<IEpcApi, OpenEpcApi>();
+            // TODO: When the EPB API is ready, uncomment this and remove the above:
+            // services.AddScoped<IEpcApi, EPBEPCApi>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
