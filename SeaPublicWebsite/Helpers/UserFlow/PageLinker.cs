@@ -48,7 +48,7 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         
         public string OutdoorSpaceBackLink(string reference, bool change);
         
-        public string GlazingTypeBackLink(string reference, bool change);
+        public string GlazingTypeBackLink(string reference, RoofConstruction? roofConstruction, AccessibleLoftSpace? accessibleLoftSpace, bool change);
         
         public string HeatingTypeBackLink(string reference, bool change);
         
@@ -247,11 +247,20 @@ namespace SeaPublicWebsite.Helpers.UserFlow
                 : linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency", new { reference });
         }
 
-        public string GlazingTypeBackLink(string reference, bool change)
+        public string GlazingTypeBackLink(string reference, RoofConstruction? roofConstruction, AccessibleLoftSpace? accessibleLoftSpace, bool change)
         {
             return change
                 ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
-                : linkGenerator.GetPathByAction("RoofInsulated_Get", "EnergyEfficiency", new { reference });
+                : (roofConstruction, accessibleLoftSpace) switch
+                {
+                    (RoofConstruction.Flat, _)
+                        => linkGenerator.GetPathByAction("RoofConstruction_Get", "EnergyEfficiency", new { reference }),
+                    (_, AccessibleLoftSpace.No or AccessibleLoftSpace.DoNotKnow)
+                        => linkGenerator.GetPathByAction("AccessibleLoftSpace_Get", "EnergyEfficiency",
+                            new { reference }),
+                    (_, _)
+                        => linkGenerator.GetPathByAction("RoofInsulated_Get", "EnergyEfficiency", new { reference }),
+                };
         }
 
         public string HeatingTypeBackLink(string reference, bool change)

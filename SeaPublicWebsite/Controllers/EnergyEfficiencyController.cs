@@ -862,7 +862,7 @@ namespace SeaPublicWebsite.Controllers
                 GlazingType = userDataModel.GlazingType,
                 Reference = userDataModel.Reference,
                 Change = change,
-                BackLink = pageLinker.GlazingTypeBackLink(reference, change)
+                BackLink = pageLinker.GlazingTypeBackLink(reference, userDataModel.RoofConstruction, userDataModel.AccessibleLoftSpace, change)
             };
 
             return View("GlazingType", viewModel);
