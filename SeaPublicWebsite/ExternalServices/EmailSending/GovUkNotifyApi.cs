@@ -40,10 +40,10 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
 
         public void SendReferenceNumberEmail(string emailAddress, string reference)
         {
-            var template = govUkNotifyConfig.ApplicationReferenceNumber;
+            var template = govUkNotifyConfig.ApplicationReferenceNumberTemplate;
             var personalisation = new Dictionary<string, dynamic>
             {
-                { template.Reference, reference }
+                { template.ReferencePlaceholder, reference }
             };
             var emailModel = new GovUkNotifyEmailModel
             {
@@ -56,10 +56,10 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
 
         public void SendRequestedDocumentEmail(string emailAddress, byte[] documentContents)
         {
-            var template = govUkNotifyConfig.RequestDocument;
+            var template = govUkNotifyConfig.RequestDocumentTemplate;
             var personalisation = new Dictionary<string, dynamic>
             {
-                { template.DocumentContents, NotificationClient.PrepareUpload(documentContents) }
+                { template.DocumentContentsPlaceholder, NotificationClient.PrepareUpload(documentContents) }
             };
             var emailModel = new GovUkNotifyEmailModel
             {
