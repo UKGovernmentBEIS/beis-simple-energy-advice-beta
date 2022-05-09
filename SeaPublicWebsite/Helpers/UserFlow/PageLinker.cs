@@ -219,7 +219,8 @@ namespace SeaPublicWebsite.Helpers.UserFlow
                         {
                             FloorConstruction.SuspendedTimber or FloorConstruction.SolidConcrete or FloorConstruction.Mix
                                 => linkGenerator.GetPathByAction("FloorInsulated_Get", "EnergyEfficiency", new { reference }),
-                            _ => linkGenerator.GetPathByAction("FloorConstruction_Get", "EnergyEfficiency", new { reference })
+                            FloorConstruction.DoNotKnow or FloorConstruction.Other => linkGenerator.GetPathByAction("FloorConstruction_Get", "EnergyEfficiency", new { reference }),
+                            _ => throw new ArgumentOutOfRangeException()
                         },
                     _ => linkGenerator.GetPathByAction("CavityWallsInsulated_Get", "EnergyEfficiency",
                         new { reference })
@@ -255,11 +256,12 @@ namespace SeaPublicWebsite.Helpers.UserFlow
                 {
                     (RoofConstruction.Flat, _)
                         => linkGenerator.GetPathByAction("RoofConstruction_Get", "EnergyEfficiency", new { reference }),
-                    (_, AccessibleLoftSpace.No or AccessibleLoftSpace.DoNotKnow)
+                    (RoofConstruction.Pitched or RoofConstruction.Mixed, AccessibleLoftSpace.No or AccessibleLoftSpace.DoNotKnow)
                         => linkGenerator.GetPathByAction("AccessibleLoftSpace_Get", "EnergyEfficiency",
                             new { reference }),
-                    (_, _)
+                    (RoofConstruction.Pitched or RoofConstruction.Mixed, AccessibleLoftSpace.Yes)
                         => linkGenerator.GetPathByAction("RoofInsulated_Get", "EnergyEfficiency", new { reference }),
+                    _ => throw new ArgumentOutOfRangeException()
                 };
         }
 
