@@ -24,11 +24,75 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
+                    "A2", new Recommendation
+                    {
+                        Key = RecommendationKey.FlatRoofInsulation,
+                        Title = "Flat roof insulation",
+                        Summary = "Under Development"
+                    }
+                },
+                {
                     "B", new Recommendation
                     {
                         Key = RecommendationKey.InsulateCavityWalls,
                         Title = "Insulate your cavity walls",
                         Summary = "Inject insulation into the cavity in your external walls"
+                    }
+                },
+                {
+                    "Q", new Recommendation
+                    {
+                        Key = RecommendationKey.WallInsulationBrickAgeAToD,
+                        Title = "Wall insulation Brick age A-D",
+                        Summary = "Under Development"
+                    }
+                },
+                {
+                    "Q1", new Recommendation
+                    {
+                        Key = RecommendationKey.WallInsulationOther,
+                        Title = "Wall insulation Other",
+                        Summary = "Under Development"
+                    }
+                },
+                {
+                    "W1", new Recommendation
+                    {
+                        Key = RecommendationKey.FloorInsulationSuspendedFloor,
+                        Title = "Floor insulation suspended floor",
+                        Summary = "Under Development"
+                    }
+                },
+                {
+                    "W2", new Recommendation
+                    {
+                        Key = RecommendationKey.FloorInsulationSolidFloor,
+                        Title = "Floor insulation solid floor",
+                        Summary = "Under Development"
+                    }
+                },
+                {
+                    "D", new Recommendation
+                    {
+                        Key = RecommendationKey.DraughtproofWindowsAndDoors,
+                        Title = "Draughtproof 100% of windows and doors",
+                        Summary = "Under Development"
+                    }
+                },
+                {
+                    "C", new Recommendation
+                    {
+                        Key = RecommendationKey.HotWaterCylinderInsulation,
+                        Title = "Hot water cylinder insulation",
+                        Summary = "Under Development"
+                    }
+                },
+                {
+                    "F", new Recommendation
+                    {
+                        Key = RecommendationKey.HotWaterCylinderThermostat,
+                        Title = "Hot water cylinder thermostat",
+                        Summary = "Under Development"
                     }
                 },
                 {
@@ -40,11 +104,67 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
+                    "I", new Recommendation
+                    {
+                        Key = RecommendationKey.ReplaceCondensingBoiler,
+                        Title = "Replacement condensing boiler",
+                        Summary = "Under Development"
+                    }
+                },
+                {
+                    "T", new Recommendation
+                    {
+                        Key = RecommendationKey.CondensingGasBoiler,
+                        Title = "Condensing gas boiler (fuel switch)",
+                        Summary = "Under Development"
+                    }
+                },
+                {
+                    "L2", new Recommendation
+                    {
+                        Key = RecommendationKey.HighHeatRetentionStorageHeaters,
+                        Title = "High heat retention storage heaters",
+                        Summary = "Under Development"
+                    }
+                },
+                {
+                    "N", new Recommendation
+                    {
+                        Key = RecommendationKey.SolarWaterHeating,
+                        Title = "Solar water heating",
+                        Summary = "Under Development"
+                    }
+                },
+                {
+                    "Y", new Recommendation
+                    {
+                        Key = RecommendationKey.MixerShowerHeatRecoverySystem,
+                        Title = "Heat recovery system for mixer showers",
+                        Summary = "Under Development"
+                    }
+                },
+                {
+                    "O", new Recommendation
+                    {
+                        Key = RecommendationKey.ReplaceSingleGlazedWindowsWithLowEDoubleGlazing,
+                        Title = "Replace single glazed windows with low-E double glazing",
+                        Summary = "Under Development"
+                    }
+                },
+                {
                     "O3", new Recommendation
                     {
-                        Key = RecommendationKey.FitNewWindows,
+                        Key = RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
                         Title = "Fit new windows",
                         Summary = "Replace old single glazed windows with new double or triple glazing"
+                    }
+                },
+                {
+                    "X", new Recommendation
+                    {
+                        Key = RecommendationKey.HighPerformanceExternalDoors,
+                        Title = "High performance external doors",
+                        Summary = "Under Development"
                     }
                 },
                 {
@@ -59,40 +179,47 @@ namespace SeaPublicWebsite.Services
 
         public static List<Recommendation> GetRecommendationsForUser(UserDataModel userData)
         {
-            BreRequest request = GenerateRequest(userData);
+            BreRequest request = CreateRequest(userData);
 
             string requestString = JsonConvert.SerializeObject(request);
             Console.WriteLine(requestString);
             return BreApi.GetRecommendationsForUserRequest(requestString);
         }
 
-        private static BreRequest GenerateRequest(UserDataModel userData)
+        private static BreRequest CreateRequest(UserDataModel userData)
         {
             Console.WriteLine(JsonConvert.SerializeObject(userData));
 
+            int propertyType = GetConvertedPropertyType(userData.PropertyType);
+
             //ApartmentFlatOrMaisonette is assumed to be Flat
-            (int builtForm, int? flatLevel) = GetBuiltFormAndFlatLevel(userData.PropertyType, userData.HouseType,
+            (int builtForm, int? flatLevel) = GetConvertedBuiltFormAndFlatLevel(userData.PropertyType,
+                userData.HouseType,
                 userData.BungalowType, userData.FlatType);
 
-            string constructionDate = GetConstructionDate(userData.YearBuilt);
+            string constructionDate = GetConvertedConstructionDate(userData.YearBuilt);
 
-            int wallType = GetWallType(userData.WallConstruction, userData.SolidWallsInsulated,
+            int wallType = GetConvertedWallType(userData.WallConstruction, userData.SolidWallsInsulated,
                 userData.CavityWallsInsulated);
 
-            int roofType = GetRoofType(userData.RoofConstruction, userData.RoofInsulated);
+            int roofType = GetConvertedRoofType(userData.RoofConstruction, userData.RoofInsulated);
 
-            int glazingType = GetGlazingType(userData.GlazingType);
+            int glazingType = GetConvertedGlazingType(userData.GlazingType);
 
-            int heatingFuel = GetHeatingFuel(userData.HeatingType, userData.OtherHeatingType);
+            int heatingFuel = GetConvertedHeatingFuel(userData.HeatingType, userData.OtherHeatingType);
 
-            bool? hotWaterCylinder = GetHotWaterCylinder(userData.HasHotWaterCylinder);
+            bool? hotWaterCylinder = GetConvertedHotWaterCylinder(userData.HasHotWaterCylinder);
 
-            int heatingPatternType = GetHeatingPatternType(userData.HeatingPattern);
+            int heatingPatternType = GetConvertedHeatingPatternType(userData.HeatingPattern);
 
+            string[] implementedMeasures =
+            {
+                "A", "A2", "B", "Q", "Q1", "W1", "W2", "D", "C", "F", "G", "I", "T", "L2", "N", "Y", "O", "O3", "X", "U"
+            };
             BreRequest request = new()
             {
                 postcode = userData.Postcode,
-                property_type = ((int) (PropertyTypeEnum) userData.PropertyType).ToString(),
+                property_type = propertyType.ToString(),
                 built_form = builtForm.ToString(),
                 flat_level = flatLevel.ToString(),
                 construction_date = constructionDate,
@@ -111,13 +238,19 @@ namespace SeaPublicWebsite.Services
                 num_storeys = 1,
                 num_bedrooms = 1,
                 measures = true,
-                measures_package = new[] { "A", "B", "G", "O3", "U" }
+                measures_package = implementedMeasures
             };
 
             return request;
         }
 
-        private static (int builtForm, int? flatLevel) GetBuiltFormAndFlatLevel(PropertyType? propertyType,
+        private static int GetConvertedPropertyType(PropertyType? propertyType)
+        {
+            if (propertyType != null) return (int) (PropertyTypeEnum) propertyType;
+            throw new ArgumentNullException();
+        }
+
+        private static (int builtForm, int? flatLevel) GetConvertedBuiltFormAndFlatLevel(PropertyType? propertyType,
             HouseType? houseType, BungalowType? bungalowType, FlatType? flatType)
         {
             int builtForm;
@@ -161,7 +294,7 @@ namespace SeaPublicWebsite.Services
             return (builtForm, flatLevel);
         }
 
-        private static string GetConstructionDate(int? yearBuilt)
+        private static string GetConvertedConstructionDate(int? yearBuilt)
         {
             return yearBuilt switch
             {
@@ -181,7 +314,8 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static int GetWallType(WallConstruction? wallConstruction, SolidWallsInsulated? solidWallsInsulated,
+        private static int GetConvertedWallType(WallConstruction? wallConstruction,
+            SolidWallsInsulated? solidWallsInsulated,
             CavityWallsInsulated? cavityWallsInsulated)
         {
             return wallConstruction switch
@@ -211,7 +345,7 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static int GetRoofType(RoofConstruction? roofConstruction, RoofInsulated? roofInsulated)
+        private static int GetConvertedRoofType(RoofConstruction? roofConstruction, RoofInsulated? roofInsulated)
         {
             return roofConstruction switch
             {
@@ -232,7 +366,7 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static int GetGlazingType(GlazingType? glazingType)
+        private static int GetConvertedGlazingType(GlazingType? glazingType)
         {
             return glazingType switch
             {
@@ -245,7 +379,7 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static int GetHeatingFuel(HeatingType? heatingType, OtherHeatingType? otherHeatingType)
+        private static int GetConvertedHeatingFuel(HeatingType? heatingType, OtherHeatingType? otherHeatingType)
         {
             return heatingType switch
             {
@@ -268,7 +402,7 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static bool? GetHotWaterCylinder(HasHotWaterCylinder? hasHotWaterCylinder)
+        private static bool? GetConvertedHotWaterCylinder(HasHotWaterCylinder? hasHotWaterCylinder)
         {
             return hasHotWaterCylinder switch
             {
@@ -279,7 +413,7 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static int GetHeatingPatternType(HeatingPattern? heatingPattern)
+        private static int GetConvertedHeatingPatternType(HeatingPattern? heatingPattern)
         {
             return heatingPattern switch
             {

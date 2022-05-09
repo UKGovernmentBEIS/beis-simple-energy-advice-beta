@@ -7,6 +7,22 @@
         UpgradeHeatingControls,
         FitNewWindows,
         InsulateCavityWalls,
-        SolarElectricPanels
+        SolarElectricPanels,
+        FlatRoofInsulation,
+        WallInsulationBrickAgeAToD,
+        WallInsulationOther,
+        FloorInsulationSuspendedFloor,
+        FloorInsulationSolidFloor,
+        DraughtproofWindowsAndDoors,
+        HotWaterCylinderInsulation,
+        HotWaterCylinderThermostat,
+        ReplaceCondensingBoiler,
+        CondensingGasBoiler,
+        HighHeatRetentionStorageHeaters,
+        SolarWaterHeating,
+        MixerShowerHeatRecoverySystem,
+        ReplaceSingleGlazedWindowsWithLowEDoubleGlazing,
+        ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
+        HighPerformanceExternalDoors
     }
 }
