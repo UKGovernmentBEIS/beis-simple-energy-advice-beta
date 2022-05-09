@@ -40,7 +40,7 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         
         public string FloorInsulatedBackLink(string reference, bool change);
         
-        public string RoofConstructionBackLink(string reference, PropertyType? propertyType, FlatType? flatType, bool change);
+        public string RoofConstructionBackLink(string reference, PropertyType? propertyType, FlatType? flatType, FloorConstruction? foFloorConstruction, bool change);
         
         public string AccessibleLoftSpaceBackLink(string reference, bool change);
         
@@ -208,15 +208,19 @@ namespace SeaPublicWebsite.Helpers.UserFlow
                 : linkGenerator.GetPathByAction("FloorConstruction_Get", "EnergyEfficiency", new { reference });
         }
 
-        public string RoofConstructionBackLink(string reference, PropertyType? propertyType, FlatType? flatType, bool change)
+        public string RoofConstructionBackLink(string reference, PropertyType? propertyType, FlatType? flatType, FloorConstruction? floorConstruction, bool change)
         {
             return change
                 ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
                 : (propertyType, flatType) switch
                 {
-                    (PropertyType.House, _) or (PropertyType.Bungalow, _)
-                        or (PropertyType.ApartmentFlatOrMaisonette, FlatType.GroundFloor)
-                        => linkGenerator.GetPathByAction("FloorInsulated_Get", "EnergyEfficiency", new { reference }),
+                    (PropertyType.House, _) or (PropertyType.Bungalow, _) or (PropertyType.ApartmentFlatOrMaisonette, FlatType.GroundFloor)
+                        => floorConstruction switch
+                        {
+                            FloorConstruction.SuspendedTimber or FloorConstruction.SolidConcrete or FloorConstruction.Mix
+                                => linkGenerator.GetPathByAction("FloorInsulated_Get", "EnergyEfficiency", new { reference }),
+                            _ => linkGenerator.GetPathByAction("FloorConstruction_Get", "EnergyEfficiency", new { reference })
+                        },
                     _ => linkGenerator.GetPathByAction("CavityWallsInsulated_Get", "EnergyEfficiency",
                         new { reference })
                 };

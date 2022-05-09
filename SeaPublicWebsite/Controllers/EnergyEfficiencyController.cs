@@ -720,7 +720,7 @@ namespace SeaPublicWebsite.Controllers
                 RoofConstruction = userDataModel.RoofConstruction,
                 Reference = userDataModel.Reference,
                 Change = change,
-                BackLink = pageLinker.RoofConstructionBackLink(reference, userDataModel.PropertyType, userDataModel.FlatType, change)
+                BackLink = pageLinker.RoofConstructionBackLink(reference, userDataModel.PropertyType, userDataModel.FlatType, userDataModel.FloorConstruction, change)
             };
 
             return View("RoofConstruction", viewModel);
