@@ -56,7 +56,7 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         
         public string HotWaterCylinderBackLink(string reference, bool change);
         
-        public string NumberOfOccupantsBackLink(string reference, bool change);
+        public string NumberOfOccupantsBackLink(string reference, HeatingType? heatingType, bool change);
         
         public string HeatingPatternBackLink(string reference, bool change);
         
@@ -286,11 +286,21 @@ namespace SeaPublicWebsite.Helpers.UserFlow
                 : linkGenerator.GetPathByAction("HeatingType_Get", "EnergyEfficiency", new { reference });
         }
 
-        public string NumberOfOccupantsBackLink(string reference, bool change)
+        public string NumberOfOccupantsBackLink(string reference, HeatingType? heatingType, bool change)
         {
             return change
                 ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
-                : linkGenerator.GetPathByAction("HotWaterCylinder_Get", "EnergyEfficiency", new { reference });
+                : heatingType switch
+                {
+                    HeatingType.Storage or HeatingType.DirectActionElectric or HeatingType.HeatPump
+                        or HeatingType.DoNotKnow
+                        => linkGenerator.GetPathByAction("HeatingType_Get", "EnergyEfficiency", new { reference }),
+                    HeatingType.GasBoiler or HeatingType.OilBoiler or HeatingType.LpgBoiler
+                        => linkGenerator.GetPathByAction("HotWaterCylinder_Get", "EnergyEfficiency", new { reference }),
+                    HeatingType.Other
+                        => linkGenerator.GetPathByAction("OtherHeatingType_Get", "EnergyEfficiency", new { reference }),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
         }
 
         public string HeatingPatternBackLink(string reference, bool change)

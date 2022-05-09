@@ -1020,7 +1020,7 @@ namespace SeaPublicWebsite.Controllers
                 NumberOfOccupants = userDataModel.NumberOfOccupants,
                 Reference = userDataModel.Reference,
                 Change = change,
-                BackLink = pageLinker.NumberOfOccupantsBackLink(reference, change)
+                BackLink = pageLinker.NumberOfOccupantsBackLink(reference, userDataModel.HeatingType, change)
             };
 
             return View("NumberOfOccupants", viewModel);
