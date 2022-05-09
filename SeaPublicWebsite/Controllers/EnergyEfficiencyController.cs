@@ -618,7 +618,8 @@ namespace SeaPublicWebsite.Controllers
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
                 Change = change,
-                Epc = userDataModel.Epc
+                Epc = userDataModel.Epc,
+                BackLink = pageLinker.FloorConstructionBackLink(reference, userDataModel.WallConstruction, change)
             };
 
             return View("FloorConstruction", viewModel);
@@ -671,7 +672,8 @@ namespace SeaPublicWebsite.Controllers
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
                 Change = change,
-                Epc = userDataModel.Epc
+                Epc = userDataModel.Epc,
+                BackLink = pageLinker.FloorInsulatedBackLink(reference, change)
             };
 
             return View("FloorInsulated", viewModel);
@@ -717,7 +719,8 @@ namespace SeaPublicWebsite.Controllers
                 FlatType = userDataModel.FlatType,
                 RoofConstruction = userDataModel.RoofConstruction,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.RoofConstructionBackLink(reference, userDataModel.PropertyType, userDataModel.FlatType, change)
             };
 
             return View("RoofConstruction", viewModel);
@@ -752,7 +755,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 AccessibleLoftSpace = userDataModel.AccessibleLoftSpace,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.AccessibleLoftSpaceBackLink(reference, change)
             };
 
             return View("AccessibleLoftSpace", viewModel);
@@ -788,7 +792,8 @@ namespace SeaPublicWebsite.Controllers
                 RoofInsulated = userDataModel.RoofInsulated,
                 Reference = userDataModel.Reference,
                 Change = change,
-                YearBuilt = userDataModel.YearBuilt
+                YearBuilt = userDataModel.YearBuilt,
+                BackLink = pageLinker.RoofInsulatedBackLink(reference, change)
             };
 
             return View("RoofInsulated", viewModel);
@@ -821,7 +826,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 HasOutdoorSpace = userDataModel.HasOutdoorSpace,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.OutdoorSpaceBackLink(reference, change)
             };
 
             return View("OutdoorSpace", viewModel);
@@ -855,7 +861,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 GlazingType = userDataModel.GlazingType,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.GlazingTypeBackLink(reference, change)
             };
 
             return View("GlazingType", viewModel);
@@ -890,7 +897,8 @@ namespace SeaPublicWebsite.Controllers
                 HeatingType = userDataModel.HeatingType,
                 Reference = userDataModel.Reference,
                 Change = change,
-                Epc = userDataModel.Epc
+                Epc = userDataModel.Epc,
+                BackLink = pageLinker.HeatingTypeBackLink(reference, change)
             };
 
             return View("HeatingType", viewModel);
@@ -941,7 +949,8 @@ namespace SeaPublicWebsite.Controllers
                 OtherHeatingType = userDataModel.OtherHeatingType,
                 Reference = userDataModel.Reference,
                 Change = change,
-                Epc = userDataModel.Epc
+                Epc = userDataModel.Epc,
+                BackLink = pageLinker.OtherHeatingTypeBackLink(reference, change)
             };
 
             return View("OtherHeatingType", viewModel);
@@ -975,7 +984,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 HasHotWaterCylinder = userDataModel.HasHotWaterCylinder,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.HotWaterCylinderBackLink(reference, change)
             };
 
             return View("HotWaterCylinder", viewModel);
@@ -1009,7 +1019,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 NumberOfOccupants = userDataModel.NumberOfOccupants,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.NumberOfOccupantsBackLink(reference, change)
             };
 
             return View("NumberOfOccupants", viewModel);
@@ -1044,7 +1055,8 @@ namespace SeaPublicWebsite.Controllers
                 HeatingPattern = userDataModel.HeatingPattern,
                 HoursOfHeating = userDataModel.HoursOfHeating,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.HeatingPatternBackLink(reference, change)
             };
 
             return View("HeatingPattern", viewModel);
@@ -1080,7 +1092,8 @@ namespace SeaPublicWebsite.Controllers
             {
                 Temperature = userDataModel.Temperature,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.TemperatureBackLink(reference, change)
             };
 
             return View("Temperature", viewModel);
@@ -1115,7 +1128,8 @@ namespace SeaPublicWebsite.Controllers
                 HasEmailAddress = userDataModel.HasEmailAddress,
                 EmailAddress = userDataModel.EmailAddress,
                 Reference = userDataModel.Reference,
-                Change = change
+                Change = change,
+                BackLink = pageLinker.EmailAddressBackLink(reference , change)
             };
 
             return View("EmailAddress", viewModel);
@@ -1145,6 +1159,7 @@ namespace SeaPublicWebsite.Controllers
         public IActionResult AnswerSummary(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
+            userDataModel.BackLink = pageLinker.AnswerSummaryBackLink(reference);
             
             return View("AnswerSummary", userDataModel);
         }
@@ -1176,7 +1191,8 @@ namespace SeaPublicWebsite.Controllers
                     NumberOfUserRecommendations = recommendationsForUser.Count,
                     FirstReferenceId = (int)recommendationsForUser[0].Key,
                     HasEmailAddress = userDataModel.HasEmailAddress,
-                    EmailAddress = userDataModel.EmailAddress
+                    EmailAddress = userDataModel.EmailAddress,
+                    BackLink = pageLinker.YourRecommendationsBackLink(reference)
                 }
 ;            return View("YourRecommendations", viewModel);
         }

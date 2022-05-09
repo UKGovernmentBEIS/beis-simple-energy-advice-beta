@@ -8,28 +8,10 @@
 }
 
 @section BeforeMain {
-    @{
-        string backLink;
-        if (Model.Change)
-        {
-            backLink = Url.Action("AnswerSummary", "EnergyEfficiency", new { reference = Model.Reference });
-        }
-        else if (Model.PropertyType == PropertyType.House ||
-                 Model.PropertyType == PropertyType.Bungalow ||
-                 (Model.PropertyType == PropertyType.ApartmentFlatOrMaisonette && Model.FlatType == FlatType.GroundFloor))
-        {
-            backLink = Url.Action("FloorInsulated_Get", new { reference = Model.Reference });
-        }
-        else
-        {
-            backLink = Url.Action("CavityWallsInsulated_Get", new { reference = Model.Reference });
-        }
-    }
-    
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = backLink,
+        Href = Model.BackLink,
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly

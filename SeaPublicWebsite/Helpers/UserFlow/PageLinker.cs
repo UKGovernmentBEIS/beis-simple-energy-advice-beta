@@ -36,38 +36,38 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         
         public string SolidWallsInsulatedBackLink(string reference, WallConstruction? wallConstruction, bool change);
         
-        public string FloorConstructionBackLink();
+        public string FloorConstructionBackLink(string reference, WallConstruction? wallConstruction, bool change);
         
-        public string FloorInsulatedBackLink();
+        public string FloorInsulatedBackLink(string reference, bool change);
         
-        public string RoofConstructionBackLink();
+        public string RoofConstructionBackLink(string reference, PropertyType? propertyType, FlatType? flatType, bool change);
         
-        public string AccessibleLoftSpaceBackLink();
+        public string AccessibleLoftSpaceBackLink(string reference, bool change);
         
-        public string RoofInsulatedBackLink();
+        public string RoofInsulatedBackLink(string reference, bool change);
         
-        public string OutdoorSpaceBackLink();
+        public string OutdoorSpaceBackLink(string reference, bool change);
         
-        public string GlazingTypeBackLink();
+        public string GlazingTypeBackLink(string reference, bool change);
         
-        public string HeatingTypeBackLink();
+        public string HeatingTypeBackLink(string reference, bool change);
         
-        public string OtherHeatingTypeBackLink();
+        public string OtherHeatingTypeBackLink(string reference, bool change);
         
-        public string HotWaterCylinderBackLink();
+        public string HotWaterCylinderBackLink(string reference, bool change);
         
-        public string NumberOfOccupantsBackLink();
+        public string NumberOfOccupantsBackLink(string reference, bool change);
         
-        public string HeatingPatternBackLink();
+        public string HeatingPatternBackLink(string reference, bool change);
         
-        public string TemperatureBackLink();
+        public string TemperatureBackLink(string reference, bool change);
         
         // Ghost page
-        public string EmailAddressBackLink();
+        public string EmailAddressBackLink(string reference, bool change);
 
-        public string AnswerSummaryBackLink();
+        public string AnswerSummaryBackLink(string reference);
         
-        public string YourRecommendationsBackLink();
+        public string YourRecommendationsBackLink(string reference);
         
         public string BackLink();
         
@@ -181,6 +181,132 @@ namespace SeaPublicWebsite.Helpers.UserFlow
                         linkGenerator.GetPathByAction("WallConstruction_Get", "EnergyEfficiency", new {reference }),
                     _ => throw new ArgumentOutOfRangeException()
                 };
+        }
+
+        public string FloorConstructionBackLink(string reference, WallConstruction? wallConstruction, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : wallConstruction switch
+                {
+                    WallConstruction.Solid or WallConstruction.Mixed =>
+                        linkGenerator.GetPathByAction("SolidWallsInsulated_Get", "EnergyEfficiency", new { reference }),
+                    WallConstruction.Cavity =>
+                        linkGenerator.GetPathByAction("CavityWallsInsulated_Get", "EnergyEfficiency",
+                            new { reference }),
+                    WallConstruction.DoNotKnow or WallConstruction.Other
+                        =>
+                        linkGenerator.GetPathByAction("WallConstruction_Get", "EnergyEfficiency", new { reference }),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+        }
+
+        public string FloorInsulatedBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("FloorConstruction_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string RoofConstructionBackLink(string reference, PropertyType? propertyType, FlatType? flatType, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : (propertyType, flatType) switch
+                {
+                    (PropertyType.House, _) or (PropertyType.Bungalow, _)
+                        or (PropertyType.ApartmentFlatOrMaisonette, FlatType.GroundFloor)
+                        => linkGenerator.GetPathByAction("FloorInsulated_Get", "EnergyEfficiency", new { reference }),
+                    _ => linkGenerator.GetPathByAction("CavityWallsInsulated_Get", "EnergyEfficiency",
+                        new { reference })
+                };
+        }
+
+        public string AccessibleLoftSpaceBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference  })
+                : linkGenerator.GetPathByAction("RoofConstruction_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string RoofInsulatedBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("AccessibleLoftSpace_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string OutdoorSpaceBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string GlazingTypeBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("RoofInsulated_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string HeatingTypeBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("OutdoorSpace_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string OtherHeatingTypeBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("HeatingType_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string HotWaterCylinderBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("HeatingType_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string NumberOfOccupantsBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("HotWaterCylinder_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string HeatingPatternBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("NumberOfOccupants_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string TemperatureBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("HeatingPattern_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string EmailAddressBackLink(string reference, bool change)
+        {
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("Temperature_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string AnswerSummaryBackLink(string reference)
+        {
+            return linkGenerator.GetPathByAction("Temperature_Get", "EnergyEfficiency", new { reference });
+        }
+
+        public string YourRecommendationsBackLink(string reference)
+        {
+            return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference });
         }
 
         public string AskForPostcodeBackLink()
