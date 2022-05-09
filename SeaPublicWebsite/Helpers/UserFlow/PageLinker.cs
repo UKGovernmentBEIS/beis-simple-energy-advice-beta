@@ -146,7 +146,7 @@ namespace SeaPublicWebsite.Helpers.UserFlow
                 : propertyType switch
                 {
                     PropertyType.House => 
-                        linkGenerator.GetPathByAction("HouseType_Get", $"EnergyEfficiency, new {reference}"),
+                        linkGenerator.GetPathByAction("HouseType_Get", "EnergyEfficiency", new {reference}),
                     PropertyType.Bungalow => 
                         linkGenerator.GetPathByAction("BungalowType_Get", "EnergyEfficiency", new { reference }),
                     PropertyType.ApartmentFlatOrMaisonette => 
