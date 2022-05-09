@@ -37,7 +37,6 @@ namespace SeaPublicWebsite.ExternalServices
                     StringContent stringContent = new(requestString);
                     HttpResponseMessage response = httpClient.PostAsync(path, stringContent).Result;
 
-                    Console.WriteLine(response.ToString());
                     if (response.IsSuccessStatusCode)
                     {
                         string bodyString = response.Content.ReadAsStringAsync().Result;
@@ -67,7 +66,6 @@ namespace SeaPublicWebsite.ExternalServices
                             };
                             recommendations.Add(recommendation);
                         }
-                        Console.WriteLine($"{recommendations.Count} recommendations found");
                         return recommendations;
                     }
 
