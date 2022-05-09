@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json.Linq;
@@ -20,7 +21,7 @@ namespace SeaPublicWebsite.ExternalServices
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    httpClient.BaseAddress = new Uri("https://uat.brewebserv.com");
+                    httpClient.BaseAddress = new Uri(Global.BreBaseAddress);
 
                     string username = Global.BreUsername;
                     string password = Global.BrePassword;
@@ -30,7 +31,7 @@ namespace SeaPublicWebsite.ExternalServices
                     string token = GenerateToken(password + nonce + username + created);
                     string wsseHeader =
                         $"WSSE UsernameToken Token=\"{token}\", Nonce=\"{nonce}\", Username=\"{username}\", Created=\"{created}\"";
-                    httpClient.DefaultRequestHeaders.Add("Authorization", wsseHeader);
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", wsseHeader);
 
                     string path = "/bemapi/energy_use";
                     StringContent stringContent = new(requestString);

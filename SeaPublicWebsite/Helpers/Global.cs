@@ -17,5 +17,6 @@ namespace SeaPublicWebsite.Helpers
         public static string EpbEpcBaseAddress => Config.GetAppSetting("EpbEpcBaseAddress");
         public static string BreUsername => Config.GetAppSetting("BreUsername");
         public static string BrePassword => Config.GetAppSetting("BrePassword");
+        public static string BreBaseAddress => Config.GetAppSetting("BreBaseAddress");
     }
 }
