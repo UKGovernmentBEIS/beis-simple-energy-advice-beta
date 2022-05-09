@@ -22,6 +22,7 @@
     <div class="govuk-grid-column-two-thirds">
         
         <form method="post" action="@Url.Action("NewOrReturningUser_Post", "EnergyEfficiency")">
+            @(Html.HiddenFor(m => m.BackLink))
 
             @(await Html.GovUkRadiosFor(
                 m => m.NewOrReturningUser,

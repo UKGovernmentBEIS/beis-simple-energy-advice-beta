@@ -22,7 +22,9 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("Country_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
+        <form action="@Url.Action("Country_Post", "EnergyEfficiency", new { reference = Model.Reference })" method="post" nov
+            @(Html.HiddenFor(m => m.Change))
+            @(Html.HiddenFor(m => m.BackLink))alidate>
             
             @(await Html.GovUkRadiosFor(m => m.Country,
                 fieldsetOptions: new FieldsetViewModel
@@ -52,13 +54,13 @@
                                </details>
                             </text>
                 }
-            ))
+                ))
 
             @(await Html.GovUkButton(new ButtonViewModel
             {
                 Text = "Continue",
             }))
-            
+
         </form>
         
     </div>

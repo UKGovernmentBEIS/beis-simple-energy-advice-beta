@@ -21,7 +21,9 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("BungalowType_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
+        <form action="@Url.Action("BungalowType_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+            @(Html.HiddenFor(m => m.Change))
+            @(Html.HiddenFor(m => m.BackLink))
             
             @(await Html.GovUkRadiosFor(m => m.BungalowType,
                 fieldsetOptions: new FieldsetViewModel
