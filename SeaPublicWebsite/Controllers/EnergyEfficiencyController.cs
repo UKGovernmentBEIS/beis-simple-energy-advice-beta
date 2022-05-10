@@ -96,14 +96,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.OwnershipStatus = viewModel.OwnershipStatus;
             userDataStore.SaveUserData(userDataModel);
 
-            if (viewModel.OwnershipStatus == OwnershipStatus.PrivateTenancy)
-            {
-                return RedirectToAction("ServiceUnsuitable", "EnergyEfficiency", new {from = "OwnershipStatus", reference = viewModel.Reference});
-            }
-
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("AskForPostcode_Get", "EnergyEfficiency", new {reference = viewModel.Reference});
+            return Redirect(pageLinker.ForwardLink(PageName.OwnershipStatus, userDataModel, viewModel.Change));
         }
 
         
