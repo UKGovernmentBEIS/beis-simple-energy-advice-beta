@@ -4,21 +4,20 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
-namespace SeaPublicWebsite.ExternalServices
+namespace SeaPublicWebsite.ExternalServices.OpenEpc
 {
     public class OpenEpcApi : IEpcApi
     {
-        private readonly string epcAuthUsername;
-        private readonly string epcAuthPassword;
+        private readonly OpenEpcConfiguration configuration;
 
-        public OpenEpcApi()
+        public OpenEpcApi(IOptions<OpenEpcConfiguration> options)
         {
-            epcAuthUsername = Global.EpcAuthUsername;
-            epcAuthPassword = Global.EpcAuthPassword;
+            configuration = options.Value;
         }
 
         public async Task<List<Epc>> GetEpcsForPostcode(string postcode)
@@ -33,10 +32,10 @@ namespace SeaPublicWebsite.ExternalServices
                 var openEpcResponse = await HttpRequestHelper.SendGetRequestAsync<OpenEpcResponse>(
                     new RequestParameters
                     {
-                        BaseAddress = Global.OpenEpcBaseAddress,
+                        BaseAddress = configuration.BaseUrl,
                         Path = $"/api/v1/domestic/search?postcode={postcode}&size=100",
                         Auth = new AuthenticationHeaderValue("Basic",
-                            HttpRequestHelper.ConvertToBase64(epcAuthUsername, epcAuthPassword))
+                            HttpRequestHelper.ConvertToBase64(configuration.Username, configuration.Password))
                     });
 
                 if (openEpcResponse is null)

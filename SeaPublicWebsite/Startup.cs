@@ -9,6 +9,7 @@ using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.FileRepositories;
+using SeaPublicWebsite.ExternalServices.OpenEpc;
 using SeaPublicWebsite.Helpers;
 
 namespace SeaPublicWebsite
@@ -56,18 +57,19 @@ namespace SeaPublicWebsite
         private void ConfigureEpcApi(IServiceCollection services)
         {
             services.AddScoped<IEpcApi, OpenEpcApi>();
+            services.Configure<OpenEpcConfiguration>(
+                Configuration.GetSection(OpenEpcConfiguration.ConfigSection));
             // TODO: When the EPB API is ready, uncomment this and remove the above:
             // services.AddScoped<IEpcApi, EPBEPCApi>();
+            // services.Configure<EpbEpcConfiguration>(
+            //     Configuration.GetSection(EpbEpcConfiguration.ConfigSection));
         }
 
         private void ConfigureGovUkNotify(IServiceCollection services)
         {
             services.AddScoped<IEmailSender, GovUkNotifyApi>();
-            
-            // Bind the 'Name' field from the config file to the 'config' object
-            var config = new GovUkNotifyConfiguration();
-            Configuration.Bind(GovUkNotifyConfiguration.Name, config);
-            services.AddSingleton<GovUkNotifyConfiguration>(config);
+            services.Configure<GovUkNotifyConfiguration>(
+                Configuration.GetSection(GovUkNotifyConfiguration.ConfigSection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

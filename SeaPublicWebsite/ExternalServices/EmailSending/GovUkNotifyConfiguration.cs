@@ -2,7 +2,9 @@
 {
     public class GovUkNotifyConfiguration
     {
-        public const string Name = "GovUkNotify";
+        public const string ConfigSection = "GovUkNotify";
+        
+        public string ApiKey { get; set; }
         public ApplicationReferenceNumberConfiguration ApplicationReferenceNumberTemplate { get; set; }
         public RequestDocumentConfiguration RequestDocumentTemplate { get; set; }
     }
