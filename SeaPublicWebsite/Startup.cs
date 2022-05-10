@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices;
+using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.Helpers;
 
@@ -33,7 +30,8 @@ namespace SeaPublicWebsite
 
             ConfigureFileRepository(services);
             ConfigureEpcApi(services);
-
+            ConfigureGovUkNotify(services);
+            
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add<ErrorHandlingFilter>();
@@ -60,6 +58,16 @@ namespace SeaPublicWebsite
             services.AddScoped<IEpcApi, OpenEpcApi>();
             // TODO: When the EPB API is ready, uncomment this and remove the above:
             // services.AddScoped<IEpcApi, EPBEPCApi>();
+        }
+
+        private void ConfigureGovUkNotify(IServiceCollection services)
+        {
+            services.AddScoped<IEmailSender, GovUkNotifyApi>();
+            
+            // Bind the 'Name' field from the config file to the 'config' object
+            var config = new GovUkNotifyConfiguration();
+            Configuration.Bind(GovUkNotifyConfiguration.Name, config);
+            services.AddSingleton<GovUkNotifyConfiguration>(config);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

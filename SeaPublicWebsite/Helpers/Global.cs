@@ -15,5 +15,6 @@ namespace SeaPublicWebsite.Helpers
         public static string EpcAuthPassword => Config.GetAppSetting("EpcAuthPassword");
         public static string OpenEpcBaseAddress => Config.GetAppSetting("OpenEpcBaseAddress");
         public static string EpbEpcBaseAddress => Config.GetAppSetting("EpbEpcBaseAddress");
+        public static string GovUkNotifyApiKey => Config.GetAppSetting("GovUkNotifyApiKey");
     }
 }
