@@ -14,6 +14,8 @@ ProjectSection(SolutionItems) = preProject
 	Infrastructure\CreateEnvironment.sh = Infrastructure\CreateEnvironment.sh
 	Infrastructure\LoginToGovPaas.sh = Infrastructure\LoginToGovPaas.sh
 	Infrastructure\LoginToGovPaasTemplate.sh = Infrastructure\LoginToGovPaasTemplate.sh
+	Infrastructure\SetEnvironmentSecrets.sh = Infrastructure\SetEnvironmentSecrets.sh
+	Infrastructure\SetEnvironmentSecretsTemplate.sh = Infrastructure\SetEnvironmentSecretsTemplate.sh
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHubActions", "GitHubActions", "{F7C11F5D-EF14-4842-90D1-BB3084CA7F14}"

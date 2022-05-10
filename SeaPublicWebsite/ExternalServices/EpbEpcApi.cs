@@ -19,8 +19,8 @@ namespace SeaPublicWebsite.ExternalServices
         public EpbEpcApi(IMemoryCache memoryCache)
         {
             this.memoryCache = memoryCache;
-            epcAuthUsername = Global.EpcAuthUsername;
-            epcAuthPassword = Global.EpcAuthPassword;
+            epcAuthUsername = Global.EpbEpcAuthUsername;
+            epcAuthPassword = Global.EpbEpcAuthPassword;
         }
         
         public async Task<List<Epc>> GetEpcsForPostcode(string postcode)
