@@ -92,8 +92,8 @@ namespace SeaPublicWebsite.Helpers.UserFlow
                 PageName.HotWaterCylinder => HotWaterCylinderForwardLink(userData, change),
                 PageName.NumberOfOccupants => NumberOfOccupantsForwardLink(userData, change),
                 PageName.HeatingPattern => HeatingPatternForwardLink(userData, change),
-                PageName.Temperature => TemperatureForwardLink(userData, change),
-                PageName.EmailAddress => EmailAddressForwardLink(userData, change),
+                PageName.Temperature => TemperatureForwardLink(userData),
+                PageName.EmailAddress => EmailAddressForwardLink(userData),
                 PageName.ServiceUnsuitable or PageName.AnswerSummary or PageName.YourRecommendations => throw new InvalidOperationException(),
                 _ => throw new ArgumentOutOfRangeException(nameof(page), page, null)
             };
@@ -414,26 +414,11 @@ namespace SeaPublicWebsite.Helpers.UserFlow
             // TODO: Routing for the first step?
             throw new InvalidOperationException();
         }
-
-        private string OwnershipStatusForwardLink(UserDataModel userData, bool change)
-        {
-            var reference = userData.Reference;
-            if (userData.OwnershipStatus == OwnershipStatus.PrivateTenancy)
-            {
-                return linkGenerator.GetPathByAction("ServiceUnsuitable", "EnergyEfficiency", new {from = "OwnershipStatus", reference });
-            }
-
-            return change
-                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
-                : linkGenerator.GetPathByAction("AskForPostcode_Get", "EnergyEfficiency", new { reference });
-        }
         
-        
-
         private string CountryForwardLink(UserDataModel userData, bool change)
         {
             var reference = userData.Reference;
-            if (userData.Country != Country.England && userData.Country != Country.Wales)
+            if (userData.Country is not Country.England && userData.Country is not Country.Wales)
             {
                 return linkGenerator.GetPathByAction("ServiceUnsuitable", "EnergyEfficiency", new {from = "Country", reference });
             }
@@ -441,6 +426,19 @@ namespace SeaPublicWebsite.Helpers.UserFlow
             return change
                 ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
                 : linkGenerator.GetPathByAction("OwnershipStatus_Get", "EnergyEfficiency", new { reference });
+        }
+
+        private string OwnershipStatusForwardLink(UserDataModel userData, bool change)
+        {
+            var reference = userData.Reference;
+            if (userData.OwnershipStatus is OwnershipStatus.PrivateTenancy)
+            {
+                return linkGenerator.GetPathByAction("ServiceUnsuitable", "EnergyEfficiency", new {from = "OwnershipStatus", reference });
+            }
+
+            return change
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("AskForPostcode_Get", "EnergyEfficiency", new { reference });
         }
 
         private string AskForPostcodeForwardLink(UserDataModel userData, string houseNameOrNumber)
@@ -458,17 +456,16 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         private string PropertyTypeForwardLink(UserDataModel userData, bool change)
         {
             var reference = userData.Reference;
-            switch (userData.PropertyType)
+            return userData.PropertyType switch
             {
-                case PropertyType.House:
-                    return linkGenerator.GetPathByAction("HouseType_Get", "EnergyEfficiency",new { reference, change});
-                case PropertyType.Bungalow:
-                    return linkGenerator.GetPathByAction("BungalowType_Get", "EnergyEfficiency",new { reference, change});
-                case PropertyType.ApartmentFlatOrMaisonette:
-                    return linkGenerator.GetPathByAction("FlatType_Get","EnergyEfficiency", new { reference, change});
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+                PropertyType.House =>
+                    linkGenerator.GetPathByAction("HouseType_Get", "EnergyEfficiency", new { reference, change }),
+                PropertyType.Bungalow =>
+                    linkGenerator.GetPathByAction("BungalowType_Get", "EnergyEfficiency", new { reference, change }),
+                PropertyType.ApartmentFlatOrMaisonette =>
+                    linkGenerator.GetPathByAction("FlatType_Get", "EnergyEfficiency", new { reference, change }),
+                _ => throw new ArgumentOutOfRangeException(),
+            };
         }
 
         private string HouseTypeForwardLink(UserDataModel userData, bool change)
@@ -510,35 +507,34 @@ namespace SeaPublicWebsite.Helpers.UserFlow
             {
                 return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference});
             }
-            else if (userData.WallConstruction == WallConstruction.Cavity ||
-                     userData.WallConstruction == WallConstruction.Mixed)
+
+            if (userData.WallConstruction is WallConstruction.Cavity or WallConstruction.Mixed)
             {
                 return linkGenerator.GetPathByAction("CavityWallsInsulated_Get", "EnergyEfficiency", new { reference });
             }
-            else if (userData.WallConstruction == WallConstruction.Solid)
+
+            if (userData.WallConstruction == WallConstruction.Solid)
             {
                 return linkGenerator.GetPathByAction("SolidWallsInsulated_Get", "EnergyEfficiency", new { reference });
             }
-            else
+
+            // These options below are for people who have chosen "Don't know" to "What type of walls do you have?"
+            if (userData.PropertyType is PropertyType.House or PropertyType.Bungalow ||
+                (userData.PropertyType is PropertyType.ApartmentFlatOrMaisonette &&
+                 userData.FlatType is FlatType.GroundFloor))
             {
-                // These options below are for people who have chosen "Don't know" to "What type of walls do you have?"
-                if (userData.PropertyType == PropertyType.House ||
-                    userData.PropertyType == PropertyType.Bungalow ||
-                    (userData.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userData.FlatType == FlatType.GroundFloor))
-                {
-                    return linkGenerator.GetPathByAction("FloorConstruction_Get", "EnergyEfficiency",new { reference });
-                }
-                else if (userData.PropertyType == PropertyType.House ||
-                         userData.PropertyType == PropertyType.Bungalow ||
-                         (userData.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userData.FlatType == FlatType.TopFloor))
-                {
-                    return linkGenerator.GetPathByAction("RoofConstruction_Get", "EnergyEfficiency",new { reference });
-                }
-                else
-                {
-                    return linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency",new { reference });
-                }
+                return linkGenerator.GetPathByAction("FloorConstruction_Get", "EnergyEfficiency",
+                    new { reference });
             }
+
+            if (userData.PropertyType is PropertyType.House or PropertyType.Bungalow ||
+                (userData.PropertyType is PropertyType.ApartmentFlatOrMaisonette &&
+                 userData.FlatType is FlatType.TopFloor))
+            {
+                return linkGenerator.GetPathByAction("RoofConstruction_Get", "EnergyEfficiency", new { reference });
+            }
+
+            return linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency", new { reference });
         }
 
         private string CavityWallsInsulatedForwardLink(UserDataModel userData, bool change)
@@ -548,30 +544,24 @@ namespace SeaPublicWebsite.Helpers.UserFlow
             {
                 return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference });
             }
-            else if (userData.WallConstruction == WallConstruction.Mixed)
+
+            if (userData.WallConstruction == WallConstruction.Mixed)
             {
                 return linkGenerator.GetPathByAction("SolidWallsInsulated_Get", "EnergyEfficiency", new { reference });
             }
-            else
+
+            // These options below are for people who have finished the "wall insulation" questions (e.g. who only have cavity walls)
+            if (userData.PropertyType is PropertyType.House or PropertyType.Bungalow || (userData.PropertyType is PropertyType.ApartmentFlatOrMaisonette && userData.FlatType is FlatType.GroundFloor))
             {
-                // These options below are for people who have finished the "wall insulation" questions (e.g. who only have cavity walls)
-                if (userData.PropertyType == PropertyType.House ||
-                    userData.PropertyType == PropertyType.Bungalow ||
-                    (userData.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userData.FlatType == FlatType.GroundFloor))
-                {
-                    return linkGenerator.GetPathByAction("FloorConstruction_Get", "EnergyEfficiency",new { reference });
-                }
-                else if (userData.PropertyType == PropertyType.House ||
-                         userData.PropertyType == PropertyType.Bungalow ||
-                         (userData.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userData.FlatType == FlatType.TopFloor))
-                {
-                    return linkGenerator.GetPathByAction("RoofConstruction_Get", "EnergyEfficiency",new { reference });
-                }
-                else
-                {
-                    return linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency",new { reference });
-                }
+                return linkGenerator.GetPathByAction("FloorConstruction_Get", "EnergyEfficiency",new { reference });
             }
+
+            if (userData.PropertyType is PropertyType.House or PropertyType.Bungalow || (userData.PropertyType is PropertyType.ApartmentFlatOrMaisonette && userData.FlatType is FlatType.TopFloor))
+            {
+                return linkGenerator.GetPathByAction("RoofConstruction_Get", "EnergyEfficiency",new { reference });
+            }
+
+            return linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency",new { reference });
         }
 
         private string SolidWallsInsulatedForwardLink(UserDataModel userData, bool change)
@@ -581,22 +571,18 @@ namespace SeaPublicWebsite.Helpers.UserFlow
             {
                 return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference });
             }
-            else if (userData.PropertyType == PropertyType.House ||
-                     userData.PropertyType == PropertyType.Bungalow ||
-                     (userData.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userData.FlatType == FlatType.GroundFloor))
+
+            if (userData.PropertyType is PropertyType.House or PropertyType.Bungalow || (userData.PropertyType is PropertyType.ApartmentFlatOrMaisonette && userData.FlatType is FlatType.GroundFloor))
             {
                 return linkGenerator.GetPathByAction("FloorConstruction_Get", "EnergyEfficiency",new { reference });
             }
-            else if (userData.PropertyType == PropertyType.House ||
-                     userData.PropertyType == PropertyType.Bungalow ||
-                     (userData.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userData.FlatType == FlatType.TopFloor))
+
+            if (userData.PropertyType is PropertyType.House or PropertyType.Bungalow || (userData.PropertyType is PropertyType.ApartmentFlatOrMaisonette && userData.FlatType is FlatType.TopFloor))
             {
                 return linkGenerator.GetPathByAction("RoofConstruction_Get", "EnergyEfficiency",new { reference });
             }
-            else
-            {
-                return linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency",new { reference });
-            }
+
+            return linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency",new { reference });
         }
 
         private string FloorConstructionForwardLink(UserDataModel userData, bool change)
@@ -606,22 +592,18 @@ namespace SeaPublicWebsite.Helpers.UserFlow
             {
                 return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference });
             }
-            else if (userData.FloorConstruction == FloorConstruction.SolidConcrete 
-                     || userData.FloorConstruction == FloorConstruction.SuspendedTimber 
-                     || userData.FloorConstruction == FloorConstruction.Mix ) 
+
+            if (userData.FloorConstruction is FloorConstruction.SolidConcrete or FloorConstruction.SuspendedTimber or FloorConstruction.Mix ) 
             {
                 return linkGenerator.GetPathByAction("FloorInsulated_Get", "EnergyEfficiency",new { reference });
             }
-            else if (userData.PropertyType == PropertyType.House ||
-                     userData.PropertyType == PropertyType.Bungalow ||
-                     (userData.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userData.FlatType == FlatType.TopFloor))
+
+            if (userData.PropertyType is PropertyType.House or PropertyType.Bungalow || (userData.PropertyType is PropertyType.ApartmentFlatOrMaisonette && userData.FlatType is FlatType.TopFloor))
             {
                 return linkGenerator.GetPathByAction("RoofConstruction_Get", "EnergyEfficiency",new { reference });
             }
-            else
-            {
-                return linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency",new { reference });
-            }
+
+            return linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency",new { reference });
         }
 
         private string FloorInsulatedForwardLink(UserDataModel userData, bool change)
@@ -631,16 +613,13 @@ namespace SeaPublicWebsite.Helpers.UserFlow
             {
                 return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference });
             }
-            else if (userData.PropertyType == PropertyType.House ||
-                     userData.PropertyType == PropertyType.Bungalow ||
-                     (userData.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userData.FlatType == FlatType.TopFloor))
+
+            if (userData.PropertyType is PropertyType.House or PropertyType.Bungalow || (userData.PropertyType is PropertyType.ApartmentFlatOrMaisonette && userData.FlatType is FlatType.TopFloor))
             {
                 return linkGenerator.GetPathByAction("RoofConstruction_Get", "EnergyEfficiency",new { reference });
             }
-            else
-            {
-                return linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency",new { reference });
-            }
+
+            return linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency",new { reference });
         }
 
         private string RoofConstructionForwardLink(UserDataModel userData, bool change)
@@ -648,7 +627,7 @@ namespace SeaPublicWebsite.Helpers.UserFlow
             var reference = userData.Reference;
             return change
                 ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference})
-                : userData.RoofConstruction == RoofConstruction.Flat 
+                : userData.RoofConstruction is RoofConstruction.Flat 
                     ? linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency",new { reference }) 
                     :  linkGenerator.GetPathByAction("AccessibleLoftSpace_Get", "EnergyEfficiency",new { reference});
         }
@@ -658,7 +637,7 @@ namespace SeaPublicWebsite.Helpers.UserFlow
             var reference = userData.Reference;
             return change
                 ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference})
-                : userData.AccessibleLoftSpace == AccessibleLoftSpace.Yes
+                : userData.AccessibleLoftSpace is AccessibleLoftSpace.Yes
                     ? linkGenerator.GetPathByAction("RoofInsulated_Get", "EnergyEfficiency",new { reference})
                     : linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency",new { reference });
         }
@@ -694,20 +673,18 @@ namespace SeaPublicWebsite.Helpers.UserFlow
             {
                 return linkGenerator.GetPathByAction("OtherHeatingType_Get", "EnergyEfficiency", new { reference, change});
             }
-            else if (change)
+
+            if (change)
             {
                 return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference});
             }
-            else if (userData.HeatingType == HeatingType.GasBoiler ||
-                     userData.HeatingType == HeatingType.OilBoiler ||
-                     userData.HeatingType == HeatingType.LpgBoiler)
+
+            return userData.HeatingType switch
             {
-                return linkGenerator.GetPathByAction("HotWaterCylinder_Get", "EnergyEfficiency", new { reference, change});
-            }
-            else
-            {
-                return linkGenerator.GetPathByAction("NumberOfOccupants_Get", "EnergyEfficiency",new { reference});
-            }
+                HeatingType.GasBoiler or HeatingType.OilBoiler or HeatingType.LpgBoiler
+                    => linkGenerator.GetPathByAction("HotWaterCylinder_Get", "EnergyEfficiency", new { reference }),
+                _ => linkGenerator.GetPathByAction("NumberOfOccupants_Get", "EnergyEfficiency", new { reference })
+            };
         }
 
         private string OtherHeatingTypeForwardLink(UserDataModel userData, bool change)
@@ -742,20 +719,16 @@ namespace SeaPublicWebsite.Helpers.UserFlow
                 : linkGenerator.GetPathByAction("Temperature_Get", "EnergyEfficiency",new { reference});
         }
 
-        private string TemperatureForwardLink(UserDataModel userData, bool change)
+        private string TemperatureForwardLink(UserDataModel userData)
         {
             var reference = userData.Reference;
-            return change
-                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference})
-                : linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency",new { reference });
+            return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency",new { reference });
         }
 
-        private string EmailAddressForwardLink(UserDataModel userData, bool change)
+        private string EmailAddressForwardLink(UserDataModel userData)
         {
             var reference = userData.Reference;
-            return change
-                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
-                : linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency",new { reference });
+            return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency",new { reference });
         }
 
         private bool HasFloor(UserDataModel userData)
@@ -780,8 +753,8 @@ namespace SeaPublicWebsite.Helpers.UserFlow
     public enum PageName
     {
         NewOrReturningUser,
-        OwnershipStatus,
         Country,
+        OwnershipStatus,
         ServiceUnsuitable,
         AskForPostcode,
         ConfirmAddress,
