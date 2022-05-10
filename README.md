@@ -2,9 +2,24 @@
 
 ## Development
 
+### Pre-requisites
+
+- .Net 6 (https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- Node v14+ (https://nodejs.org/en/)
+
+In SeaPublicWebsite run `npm install`
+
+### APIs
+
 The app communicates with a number of APIs. You will need to obtain and configure credentials for these APIs.
 
 Details TBC
+
+### Running Locally
+
+- In Visual Studio / Rider build the solution
+- In `SeaPublicWebsite` run `npm run watch`
+- In Visual Studio / Rider run the `SeaPublicWebsite` project
 
 ## Environments
 
