@@ -14,7 +14,6 @@ namespace SeaPublicWebsite.Services
         public static readonly Dictionary<string, Recommendation> RecommendationDictionary =
             new()
             {
-                //Not all possible measures from the bre api are here yet
                 {
                     "A", new Recommendation
                     {
