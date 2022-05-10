@@ -45,8 +45,8 @@ namespace SeaPublicWebsite.Helpers
                 var username = credentials[0];
                 var password = credentials[1];
 
-                if (Global.BasicAuthUsername == username &&
-                    Global.BasicAuthPassword == password)
+                if (Config.GetAppSetting("BasicAuthUsername") == username &&
+                    Config.GetAppSetting("BasicAuthPassword") == password)
                 {
                     return true;
                 }
