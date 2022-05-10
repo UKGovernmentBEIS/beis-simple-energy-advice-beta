@@ -182,17 +182,13 @@ namespace SeaPublicWebsite.Services
             BreRequest request = CreateRequest(userData);
 
             string requestString = JsonConvert.SerializeObject(request);
-            Console.WriteLine(requestString);
             return BreApi.GetRecommendationsForUserRequest(requestString);
         }
 
         private static BreRequest CreateRequest(UserDataModel userData)
         {
-            Console.WriteLine(JsonConvert.SerializeObject(userData));
-
             int propertyType = GetConvertedPropertyType(userData.PropertyType);
 
-            //ApartmentFlatOrMaisonette is assumed to be Flat
             (int builtForm, int? flatLevel) = GetConvertedBuiltFormAndFlatLevel(userData.PropertyType,
                 userData.HouseType,
                 userData.BungalowType, userData.FlatType);
@@ -212,10 +208,6 @@ namespace SeaPublicWebsite.Services
 
             int heatingPatternType = GetConvertedHeatingPatternType(userData.HeatingPattern);
 
-            string[] implementedMeasures =
-            {
-                "A", "A2", "B", "Q", "Q1", "W1", "W2", "D", "C", "F", "G", "I", "T", "L2", "N", "Y", "O", "O3", "X", "U"
-            };
             BreRequest request = new()
             {
                 postcode = userData.Postcode,
@@ -224,21 +216,26 @@ namespace SeaPublicWebsite.Services
                 flat_level = flatLevel.ToString(),
                 construction_date = constructionDate,
                 wall_type = wallType,
-                //no input for floor_type
+                //no input for floor_type in BRE API
                 roof_type = roofType,
                 glazing_type = glazingType,
-                //no input for outdoor heater space
+                //no input for outdoor heater space in BRE API
                 heating_fuel = heatingFuel.ToString(),
                 hot_water_cylinder = hotWaterCylinder,
                 occupants = userData.NumberOfOccupants,
                 heating_pattern_type = heatingPatternType,
                 living_room_temperature = userData.Temperature,
-
-                //set as defaults?
-                num_storeys = 1,
-                num_bedrooms = 1,
+                //assumption:
+                num_storeys = userData.PropertyType == PropertyType.House ? 2 : 1,
+                //assumption:
+                num_bedrooms = userData.NumberOfOccupants ?? 1,
                 measures = true,
-                measures_package = implementedMeasures
+                //measures_package consists of all measures implemented in the BRE API as of May 2021
+                measures_package = new[]
+                {
+                    "A", "A2", "B", "Q", "Q1", "W1", "W2", "D", "C", "F", "G", "I", "T", "L2", "N", "Y", "O", "O3", "X",
+                    "U"
+                }
             };
 
             return request;
@@ -246,6 +243,7 @@ namespace SeaPublicWebsite.Services
 
         private static int GetConvertedPropertyType(PropertyType? propertyType)
         {
+            //ApartmentFlatOrMaisonette is assumed to be a Flat
             if (propertyType != null) return (int) (PropertyTypeEnum) propertyType;
             throw new ArgumentNullException();
         }
@@ -262,7 +260,9 @@ namespace SeaPublicWebsite.Services
                     {
                         HouseType.Detached => (int) BuiltFormEnum.Detached,
                         HouseType.SemiDetached => (int) BuiltFormEnum.SemiDetached,
+                        //assumption:
                         HouseType.EndTerrace => (int) BuiltFormEnum.EndTerrace,
+                        //assumption:
                         HouseType.Terraced => (int) BuiltFormEnum.MidTerrace,
                         _ => throw new ArgumentOutOfRangeException()
                     };
@@ -272,7 +272,9 @@ namespace SeaPublicWebsite.Services
                     {
                         BungalowType.Detached => (int) BuiltFormEnum.Detached,
                         BungalowType.SemiDetached => (int) BuiltFormEnum.SemiDetached,
+                        //assumption:
                         BungalowType.EndTerrace => (int) BuiltFormEnum.EndTerrace,
+                        //assumption:
                         BungalowType.Terraced => (int) BuiltFormEnum.MidTerrace,
                         _ => throw new ArgumentOutOfRangeException()
                     };
@@ -285,6 +287,7 @@ namespace SeaPublicWebsite.Services
                         FlatType.GroundFloor => (int) FlatLevelEnum.GroundFloor,
                         _ => throw new ArgumentOutOfRangeException()
                     };
+                    //assumption:
                     builtForm = (int) BuiltFormEnum.MidTerrace;
                     break;
                 default:
@@ -338,7 +341,7 @@ namespace SeaPublicWebsite.Services
                     _ => throw new ArgumentOutOfRangeException()
                 },
                 WallConstruction.Mixed =>
-                    //should we prioritise one wall type here?
+                    //assumption:
                     (int) WallTypeEnum.DontKnow,
                 WallConstruction.Other => (int) WallTypeEnum.DontKnow,
                 _ => throw new ArgumentOutOfRangeException()
@@ -350,10 +353,10 @@ namespace SeaPublicWebsite.Services
             return roofConstruction switch
             {
                 RoofConstruction.Flat =>
-                    //should we ask about flat roof insulation?
+                    //assumption:
                     (int) RoofTypeEnum.DontKnow,
                 RoofConstruction.Mixed =>
-                    //should we prioritise one roof type here?
+                    //assumption:
                     (int) RoofTypeEnum.DontKnow,
                 RoofConstruction.Pitched => roofInsulated switch
                 {
@@ -372,7 +375,7 @@ namespace SeaPublicWebsite.Services
             {
                 GlazingType.DoNotKnow => (int) GlazingTypeEnum.DontKnow,
                 GlazingType.SingleGlazed => (int) GlazingTypeEnum.SingleGlazed,
-                //or go triple?
+                //assumption:
                 GlazingType.DoubleOrTripleGlazed => (int) GlazingTypeEnum.DoubleGlazed,
                 GlazingType.Both => (int) GlazingTypeEnum.DontKnow,
                 _ => throw new ArgumentOutOfRangeException()
@@ -383,7 +386,7 @@ namespace SeaPublicWebsite.Services
         {
             return heatingType switch
             {
-                //check these assignments are correct
+                //assumption:
                 HeatingType.DoNotKnow => (int) HeatingFuelEnum.MainsGas,
                 HeatingType.GasBoiler => (int) HeatingFuelEnum.MainsGas,
                 HeatingType.OilBoiler => (int) HeatingFuelEnum.HeatingOil,
@@ -393,8 +396,10 @@ namespace SeaPublicWebsite.Services
                 HeatingType.HeatPump => (int) HeatingFuelEnum.Electricity,
                 HeatingType.Other => otherHeatingType switch
                 {
-                    OtherHeatingType.Biomass => (int) HeatingFuelEnum.MainsGas,
+                    //assumption:
+                    OtherHeatingType.Biomass => (int) HeatingFuelEnum.SolidFuel,
                     OtherHeatingType.CoalOrSolidFuel => (int) HeatingFuelEnum.SolidFuel,
+                    //assumption:
                     OtherHeatingType.Other => (int) HeatingFuelEnum.MainsGas,
                     _ => throw new ArgumentOutOfRangeException()
                 },
