@@ -6,6 +6,7 @@
         public ApplicationReferenceNumberConfiguration ApplicationReferenceNumberTemplate { get; set; }
         public RequestDocumentConfiguration RequestDocumentTemplate { get; set; }
     }
+    
     public class ApplicationReferenceNumberConfiguration
     {
         public string Id { get; set; }
