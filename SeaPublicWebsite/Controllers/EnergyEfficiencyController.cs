@@ -817,40 +817,6 @@ namespace SeaPublicWebsite.Controllers
                 : RedirectToAction("GlazingType_Get", new {reference = viewModel.Reference});
         }
 
-        [HttpGet("outdoor-space/{reference}")]
-        public IActionResult OutdoorSpace_Get(string reference, bool change = false)
-        {
-            var userDataModel = userDataStore.LoadUserData(reference);
-            
-            var viewModel = new OutdoorSpaceViewModel
-            {
-                HasOutdoorSpace = userDataModel.HasOutdoorSpace,
-                Reference = userDataModel.Reference,
-                Change = change,
-                BackLink = pageLinker.BackLink(PageName.OutdoorSpace, userDataModel, change)
-            };
-
-            return View("OutdoorSpace", viewModel);
-        }
-
-        [HttpPost("outdoor-space/{reference}")]
-        public IActionResult OutdoorSpace_Post(OutdoorSpaceViewModel viewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return OutdoorSpace_Get(viewModel.Reference, viewModel.Change);
-            }
-
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-
-            userDataModel.HasOutdoorSpace = viewModel.HasOutdoorSpace;
-            userDataStore.SaveUserData(userDataModel);
-            
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("HeatingType_Get", new {reference = viewModel.Reference});
-        }
-
         
         [HttpGet("glazing-type/{reference}")]
         public IActionResult GlazingType_Get(string reference, bool change = false)
@@ -884,6 +850,40 @@ namespace SeaPublicWebsite.Controllers
             return viewModel.Change
                 ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
                 : RedirectToAction("OutdoorSpace_Get", new {reference = viewModel.Reference});
+        }
+
+        [HttpGet("outdoor-space/{reference}")]
+        public IActionResult OutdoorSpace_Get(string reference, bool change = false)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+            
+            var viewModel = new OutdoorSpaceViewModel
+            {
+                HasOutdoorSpace = userDataModel.HasOutdoorSpace,
+                Reference = userDataModel.Reference,
+                Change = change,
+                BackLink = pageLinker.BackLink(PageName.OutdoorSpace, userDataModel, change)
+            };
+
+            return View("OutdoorSpace", viewModel);
+        }
+
+        [HttpPost("outdoor-space/{reference}")]
+        public IActionResult OutdoorSpace_Post(OutdoorSpaceViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return OutdoorSpace_Get(viewModel.Reference, viewModel.Change);
+            }
+
+            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
+
+            userDataModel.HasOutdoorSpace = viewModel.HasOutdoorSpace;
+            userDataStore.SaveUserData(userDataModel);
+            
+            return viewModel.Change
+                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
+                : RedirectToAction("HeatingType_Get", new {reference = viewModel.Reference});
         }
 
         
