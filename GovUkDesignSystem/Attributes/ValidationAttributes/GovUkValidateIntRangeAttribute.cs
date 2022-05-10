@@ -1,12 +1,12 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace GovUkDesignSystem.Attributes.ValidationAttributes;
-
-public class GovUkValidateIntRangeAttribute : RangeAttribute
+namespace GovUkDesignSystem.Attributes.ValidationAttributes
 {
-    public GovUkValidateIntRangeAttribute(string propertyName, int minimum, int maximum) : base(minimum, maximum)
+    public class GovUkValidateIntRangeAttribute : RangeAttribute
     {
-        ErrorMessage = $"{propertyName} must be between {minimum} and {maximum}";
+        public GovUkValidateIntRangeAttribute(string propertyName, int minimum, int maximum) : base(minimum, maximum)
+        {
+            ErrorMessage = $"{propertyName} must be between {minimum} and {maximum}";
+        }
     }
 }
