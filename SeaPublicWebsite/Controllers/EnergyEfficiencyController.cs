@@ -128,15 +128,8 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.Country = viewModel.Country;
             userDataStore.SaveUserData(userDataModel);
-            
-            if (viewModel.Country != Country.England && viewModel.Country != Country.Wales)
-            {
-                return RedirectToAction("ServiceUnsuitable", "EnergyEfficiency", new {from = "Country", reference = viewModel.Reference});
-            }
 
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("OwnershipStatus_Get", "EnergyEfficiency", new {reference = viewModel.Reference});
+            return Redirect(pageLinker.ForwardLink(PageName.Country, userDataModel, viewModel.Change));
         }
 
 
@@ -187,7 +180,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.Postcode = viewModel.Postcode;
             userDataStore.SaveUserData(userDataModel);
 
-            return RedirectToAction("ConfirmAddress_Get", "EnergyEfficiency", new {reference = viewModel.Reference, houseNameOrNumber = viewModel.HouseNameOrNumber});
+            return Redirect(pageLinker.ForwardLink(PageName.AskForPostcode, userDataModel));
         }
 
         
@@ -227,7 +220,7 @@ namespace SeaPublicWebsite.Controllers
 
             userDataStore.SaveUserData(userDataModel);
 
-            return RedirectToAction("PropertyType_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
+            return Redirect(pageLinker.ForwardLink(PageName.ConfirmAddress, userDataModel));
         }
 
 
@@ -260,17 +253,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.PropertyType = viewModel.PropertyType;
             userDataStore.SaveUserData(userDataModel);
 
-            switch (viewModel.PropertyType)
-            {
-                case PropertyType.House:
-                    return RedirectToAction("HouseType_Get", new {reference = viewModel.Reference, change = viewModel.Change});
-                case PropertyType.Bungalow:
-                    return RedirectToAction("BungalowType_Get", new {reference = viewModel.Reference, change = viewModel.Change});
-                case PropertyType.ApartmentFlatOrMaisonette:
-                    return RedirectToAction("FlatType_Get", new {reference = viewModel.Reference, change = viewModel.Change});
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            return Redirect(pageLinker.ForwardLink(PageName.PropertyType, userDataModel, viewModel.Change));
         }
 
         [HttpGet("house-type/{reference}")]
@@ -301,10 +284,8 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.HouseType = viewModel.HouseType;
             userDataStore.SaveUserData(userDataModel);
-            
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("HomeAge_Get", new {reference = viewModel.Reference});
+
+            return Redirect(pageLinker.ForwardLink(PageName.HouseType, userDataModel, viewModel.Change));
         }
 
         
@@ -336,10 +317,8 @@ namespace SeaPublicWebsite.Controllers
             
             userDataModel.BungalowType = viewModel.BungalowType;
             userDataStore.SaveUserData(userDataModel);
-            
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("HomeAge_Get", new {reference = viewModel.Reference});
+
+            return Redirect(pageLinker.ForwardLink(PageName.BungalowType, userDataModel, viewModel.Change));
         }
 
         
@@ -371,10 +350,8 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.FlatType = viewModel.FlatType;
             userDataStore.SaveUserData(userDataModel);
-            
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("HomeAge_Get", new {reference = viewModel.Reference});
+
+            return Redirect(pageLinker.ForwardLink(PageName.FlatType, userDataModel, viewModel.Change));
         }
 
         
@@ -407,10 +384,8 @@ namespace SeaPublicWebsite.Controllers
             
             userDataModel.YearBuilt = viewModel.YearBuilt;
             userDataStore.SaveUserData(userDataModel);
-            
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("WallConstruction_Get", new {reference = viewModel.Reference});
+
+            return Redirect(pageLinker.ForwardLink(PageName.HomeAge, userDataModel, viewModel.Change));
         }
 
         
@@ -445,39 +420,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.WallConstruction = viewModel.WallConstruction;
             userDataStore.SaveUserData(userDataModel);
 
-            if (viewModel.Change)
-            {
-                return RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference});
-            }
-            else if (viewModel.WallConstruction == WallConstruction.Cavity ||
-                     viewModel.WallConstruction == WallConstruction.Mixed)
-            {
-                return RedirectToAction("CavityWallsInsulated_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
-            }
-            else if (viewModel.WallConstruction == WallConstruction.Solid)
-            {
-                return RedirectToAction("SolidWallsInsulated_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
-            }
-            else
-            {
-                // These options below are for people who have chosen "Don't know" to "What type of walls do you have?"
-                if (userDataModel.PropertyType == PropertyType.House ||
-                    userDataModel.PropertyType == PropertyType.Bungalow ||
-                    (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.GroundFloor))
-                {
-                    return RedirectToAction("FloorConstruction_Get", new { reference = viewModel.Reference });
-                }
-                else if (userDataModel.PropertyType == PropertyType.House ||
-                         userDataModel.PropertyType == PropertyType.Bungalow ||
-                         (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.TopFloor))
-                {
-                    return RedirectToAction("RoofConstruction_Get", new { reference = viewModel.Reference });
-                }
-                else
-                {
-                    return RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference });
-                }
-            }
+            return Redirect(pageLinker.ForwardLink(PageName.WallConstruction, userDataModel, viewModel.Change));
         }
 
         
@@ -513,34 +456,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.CavityWallsInsulated = viewModel.CavityWallsInsulated;
             userDataStore.SaveUserData(userDataModel);
 
-            if (viewModel.Change)
-            {
-                return RedirectToAction("AnswerSummary", "EnergyEfficiency", new { reference = viewModel.Reference });
-            }
-            else if (viewModel.WallConstruction == WallConstruction.Mixed)
-            {
-                return RedirectToAction("SolidWallsInsulated_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
-            }
-            else
-            {
-                // These options below are for people who have finished the "wall insulation" questions (e.g. who only have cavity walls)
-                if (userDataModel.PropertyType == PropertyType.House ||
-                    userDataModel.PropertyType == PropertyType.Bungalow ||
-                    (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.GroundFloor))
-                {
-                    return RedirectToAction("FloorConstruction_Get", new { reference = viewModel.Reference });
-                }
-                else if (userDataModel.PropertyType == PropertyType.House ||
-                         userDataModel.PropertyType == PropertyType.Bungalow ||
-                         (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.TopFloor))
-                {
-                    return RedirectToAction("RoofConstruction_Get", new { reference = viewModel.Reference });
-                }
-                else
-                {
-                    return RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference });
-                }
-            }
+            return Redirect(pageLinker.ForwardLink(PageName.CavityWallsInsulated, userDataModel, viewModel.Change));
         }
 
 
@@ -576,26 +492,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.SolidWallsInsulated = viewModel.SolidWallsInsulated;
             userDataStore.SaveUserData(userDataModel);
 
-            if (viewModel.Change)
-            {
-                return RedirectToAction("AnswerSummary", "EnergyEfficiency", new { reference = viewModel.Reference });
-            }
-            else if (userDataModel.PropertyType == PropertyType.House ||
-                     userDataModel.PropertyType == PropertyType.Bungalow ||
-                     (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.GroundFloor))
-            {
-                return RedirectToAction("FloorConstruction_Get", new { reference = viewModel.Reference });
-            }
-            else if (userDataModel.PropertyType == PropertyType.House ||
-                     userDataModel.PropertyType == PropertyType.Bungalow ||
-                     (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.TopFloor))
-            {
-                return RedirectToAction("RoofConstruction_Get", new { reference = viewModel.Reference });
-            }
-            else
-            {
-                return RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference });
-            }
+            return Redirect(pageLinker.ForwardLink(PageName.SolidWallsInsulated, userDataModel, viewModel.Change));
         }
 
 
@@ -630,27 +527,8 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.FloorConstruction = viewModel.FloorConstruction;
             userDataStore.SaveUserData(userDataModel);
-            
-            if (viewModel.Change)
-            {
-                return RedirectToAction("AnswerSummary", "EnergyEfficiency", new { reference = viewModel.Reference });
-            }
-            else if (userDataModel.FloorConstruction == FloorConstruction.SolidConcrete 
-                || userDataModel.FloorConstruction == FloorConstruction.SuspendedTimber 
-                || userDataModel.FloorConstruction == FloorConstruction.Mix ) 
-            {
-                return RedirectToAction("FloorInsulated_Get", new { reference = viewModel.Reference });
-            }
-            else if (userDataModel.PropertyType == PropertyType.House ||
-                     userDataModel.PropertyType == PropertyType.Bungalow ||
-                     (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.TopFloor))
-            {
-                return RedirectToAction("RoofConstruction_Get", new { reference = viewModel.Reference });
-            }
-            else
-            {
-                return RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference });
-            }
+
+            return Redirect(pageLinker.ForwardLink(PageName.FloorConstruction, userDataModel, viewModel.Change));
         }
 
         
@@ -684,21 +562,8 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.FloorInsulated = viewModel.FloorInsulated;
             userDataStore.SaveUserData(userDataModel);
-            
-            if (viewModel.Change)
-            {
-                return RedirectToAction("AnswerSummary", "EnergyEfficiency", new { reference = viewModel.Reference });
-            }
-            else if (userDataModel.PropertyType == PropertyType.House ||
-                     userDataModel.PropertyType == PropertyType.Bungalow ||
-                     (userDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette && userDataModel.FlatType == FlatType.TopFloor))
-            {
-                return RedirectToAction("RoofConstruction_Get", new { reference = viewModel.Reference });
-            }
-            else
-            {
-                return RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference });
-            }
+
+            return Redirect(pageLinker.ForwardLink(PageName.FloorInsulated, userDataModel, viewModel.Change));
         }
 
         [HttpGet("roof-construction/{reference}")]
@@ -732,11 +597,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.RoofConstruction = viewModel.RoofConstruction;
             userDataStore.SaveUserData(userDataModel);
 
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : userDataModel.RoofConstruction == RoofConstruction.Flat 
-                    ? RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference }) 
-                    :  RedirectToAction("AccessibleLoftSpace_Get", new {reference = viewModel.Reference});
+            return Redirect(pageLinker.ForwardLink(PageName.RoofConstruction, userDataModel, viewModel.Change));
         }
 
         [HttpGet("accessible-loft-space/{reference}")]
@@ -768,11 +629,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.AccessibleLoftSpace = viewModel.AccessibleLoftSpace;
             userDataStore.SaveUserData(userDataModel);
 
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : userDataModel.AccessibleLoftSpace == AccessibleLoftSpace.Yes
-                    ? RedirectToAction("RoofInsulated_Get", new {reference = viewModel.Reference})
-                    : RedirectToAction("GlazingType_Get", new { reference = viewModel.Reference });
+            return Redirect(pageLinker.ForwardLink(PageName.AccessibleLoftSpace, userDataModel, viewModel.Change));
         }
 
         [HttpGet("roof-insulated/{reference}")]
@@ -804,10 +661,8 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.RoofInsulated = viewModel.RoofInsulated;
             userDataStore.SaveUserData(userDataModel);
-            
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("GlazingType_Get", new {reference = viewModel.Reference});
+
+            return Redirect(pageLinker.ForwardLink(PageName.RoofInsulated, userDataModel, viewModel.Change));
         }
 
         
@@ -839,10 +694,8 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.GlazingType = viewModel.GlazingType;
             userDataStore.SaveUserData(userDataModel);
-            
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("OutdoorSpace_Get", new {reference = viewModel.Reference});
+
+            return Redirect(pageLinker.ForwardLink(PageName.GlazingType, userDataModel, viewModel.Change));
         }
 
         [HttpGet("outdoor-space/{reference}")]
@@ -873,10 +726,8 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.HasOutdoorSpace = viewModel.HasOutdoorSpace;
             userDataStore.SaveUserData(userDataModel);
-            
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("HeatingType_Get", new {reference = viewModel.Reference});
+
+            return Redirect(pageLinker.ForwardLink(PageName.OutdoorSpace, userDataModel, viewModel.Change));
         }
 
         
@@ -910,26 +761,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HeatingType = viewModel.HeatingType;
             userDataStore.SaveUserData(userDataModel);
 
-            if (viewModel.HeatingType == HeatingType.Other)
-            {
-                return RedirectToAction("OtherHeatingType_Get",
-                    new {reference = viewModel.Reference, change = viewModel.Change});
-            }
-            else if (viewModel.Change)
-            {
-                return RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference});
-            }
-            else if (viewModel.HeatingType == HeatingType.GasBoiler ||
-                     viewModel.HeatingType == HeatingType.OilBoiler ||
-                     viewModel.HeatingType == HeatingType.LpgBoiler)
-            {
-                return RedirectToAction("HotWaterCylinder_Get",
-                    new {reference = viewModel.Reference, change = viewModel.Change});
-            }
-            else
-            {
-                return RedirectToAction("NumberOfOccupants_Get", new {reference = viewModel.Reference});
-            }
+            return Redirect(pageLinker.ForwardLink(PageName.HeatingType, userDataModel, viewModel.Change));
         }
 
         [HttpGet("other-heating-type/{reference}")]
@@ -962,9 +794,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.OtherHeatingType = viewModel.OtherHeatingType;
             userDataStore.SaveUserData(userDataModel);
 
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new { reference = viewModel.Reference })
-                : RedirectToAction("NumberOfOccupants_Get", new { reference = viewModel.Reference });
+            return Redirect(pageLinker.ForwardLink(PageName.OtherHeatingType, userDataModel, viewModel.Change));
         }
 
 
@@ -996,10 +826,8 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.HasHotWaterCylinder = viewModel.HasHotWaterCylinder;
             userDataStore.SaveUserData(userDataModel);
-            
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("NumberOfOccupants_Get", new {reference = viewModel.Reference});
+
+            return Redirect(pageLinker.ForwardLink(PageName.HotWaterCylinder, userDataModel, viewModel.Change));
         }
 
         
@@ -1031,10 +859,8 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.NumberOfOccupants = viewModel.NumberOfOccupants;
             userDataStore.SaveUserData(userDataModel);
-            
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("HeatingPattern_Get", new {reference = viewModel.Reference});
+
+            return Redirect(pageLinker.ForwardLink(PageName.NumberOfOccupants, userDataModel, viewModel.Change));
         }
 
         
@@ -1069,10 +895,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HoursOfHeating = viewModel.HeatingPattern == HeatingPattern.Other ? viewModel.HoursOfHeating : null;
 
             userDataStore.SaveUserData(userDataModel);
-            
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("Temperature_Get", new {reference = viewModel.Reference});
+
+            return Redirect(pageLinker.ForwardLink(PageName.HeatingPattern, userDataModel, viewModel.Change));
         }
 
         
@@ -1104,10 +928,8 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.Temperature = viewModel.Temperature;
             userDataStore.SaveUserData(userDataModel);
-            
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new {reference = viewModel.Reference})
-                : RedirectToAction("AnswerSummary", new { reference = viewModel.Reference });
+
+            return Redirect(pageLinker.ForwardLink(PageName.Temperature, userDataModel, viewModel.Change));
         }
 
 
@@ -1142,9 +964,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.EmailAddress = viewModel.HasEmailAddress == HasEmailAddress.Yes ? viewModel.EmailAddress : null;
             userDataStore.SaveUserData(userDataModel);
 
-            return viewModel.Change
-                ? RedirectToAction("AnswerSummary", "EnergyEfficiency", new { reference = viewModel.Reference })
-                : RedirectToAction("AnswerSummary", new { reference = viewModel.Reference });
+            return Redirect(pageLinker.ForwardLink(PageName.EmailAddress, userDataModel, viewModel.Change));
         }
 
         
