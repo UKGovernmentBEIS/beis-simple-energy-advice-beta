@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,8 +26,10 @@ namespace SeaPublicWebsite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserDataStore, UserDataStore>();
+            services.AddMemoryCache();
 
             ConfigureFileRepository(services);
+            ConfigureEpcApi(services);
             ConfigureGovUkNotify(services);
             
             services.AddControllersWithViews(options =>
@@ -53,6 +51,13 @@ namespace SeaPublicWebsite
                 services.AddSingleton<IFileRepository>(s => new SystemFileRepository());
             }
 
+        }
+
+        private void ConfigureEpcApi(IServiceCollection services)
+        {
+            services.AddScoped<IEpcApi, OpenEpcApi>();
+            // TODO: When the EPB API is ready, uncomment this and remove the above:
+            // services.AddScoped<IEpcApi, EPBEPCApi>();
         }
 
         private void ConfigureGovUkNotify(IServiceCollection services)
