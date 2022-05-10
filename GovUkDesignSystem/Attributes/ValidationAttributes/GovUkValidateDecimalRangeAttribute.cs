@@ -1,13 +1,14 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace GovUkDesignSystem.Attributes.ValidationAttributes;
-
-public class GovUkValidateDecimalRangeAttribute : RangeAttribute
+namespace GovUkDesignSystem.Attributes.ValidationAttributes
 {
-    // Attributes do not allow decimals as parameters, but allow for their string representation
-    public GovUkValidateDecimalRangeAttribute(string propertyName, double minimum, double maximum) : base(typeof(decimal), minimum.ToString(), maximum.ToString())
+    public class GovUkValidateDecimalRangeAttribute : RangeAttribute
     {
-        ErrorMessage = $"{propertyName} must be between {minimum} and {maximum}";
+        // Attributes do not allow decimals as parameters, but allow for their string representation
+        public GovUkValidateDecimalRangeAttribute(string propertyName, double minimum, double maximum)
+            : base(typeof(decimal), minimum.ToString(), maximum.ToString())
+        {
+            ErrorMessage = $"{propertyName} must be between {minimum} and {maximum}";
+        }
     }
 }
