@@ -47,7 +47,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("NewOrReturningUser", viewModel);
+                return NewOrReturningUser_Get();
             }
 
             if (viewModel.NewOrReturningUser == NewOrReturningUser.ReturningUser)
@@ -55,7 +55,7 @@ namespace SeaPublicWebsite.Controllers
                 if (!userDataStore.IsReferenceValid(viewModel.Reference))
                 {
                     ModelState.AddModelError(nameof(NewOrReturningUserViewModel.Reference), "Check you have typed the reference correctly. Reference must be 8 characters.");
-                    return View("NewOrReturningUser", viewModel);
+                    return NewOrReturningUser_Get();
                 }
                 
                 return RedirectToAction("YourSavedRecommendations_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
@@ -88,7 +88,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("OwnershipStatus", viewModel);
+                return OwnershipStatus_Get(viewModel.Reference, viewModel.Change);
             }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -128,7 +128,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("Country", viewModel);
+                return Country_Get(viewModel.Reference, viewModel.Change);
             }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -186,7 +186,7 @@ namespace SeaPublicWebsite.Controllers
             
             if (!ModelState.IsValid)
             {
-                return View("AskForPostcode", viewModel);
+                return AskForPostcode_Get(viewModel.Reference);
             }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -259,7 +259,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("PropertyType", viewModel);
+                return PropertyType_Get(viewModel.Reference, viewModel.Change);
             }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -301,7 +301,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("HouseType", viewModel);
+                return HouseType_Get(viewModel.Reference, viewModel.Change);
             }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -336,7 +336,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("BungalowType", viewModel);
+                return BungalowType_Get(viewModel.Reference, viewModel.Change);
             }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -371,7 +371,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("FlatType", viewModel);
+                return FlatType_Get(viewModel.Reference, viewModel.Change);
             }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -407,7 +407,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("HomeAge", viewModel);
+                return HomeAge_Get(viewModel.Reference, viewModel.Change);
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -444,7 +444,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("WallConstruction", viewModel);
+                return WallConstruction_Get(viewModel.Reference, viewModel.Change);
             }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -512,7 +512,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("CavityWallsInsulated", viewModel);
+                return CavityWallsInsulated_Get(viewModel.Reference, viewModel.Change);
             }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -575,7 +575,7 @@ namespace SeaPublicWebsite.Controllers
         {            
             if (!ModelState.IsValid)
             {
-                return View("SolidWallsInsulated", viewModel);
+                return SolidWallsInsulated_Get(viewModel.Reference, viewModel.Change);
             }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -630,7 +630,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("FloorConstruction", viewModel);
+                return FloorConstruction_Get(viewModel.Reference, viewModel.Change);
             }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -684,7 +684,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("FloorInsulated", viewModel);
+                return FloorInsulated_Get(viewModel.Reference, viewModel.Change);
             }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -731,7 +731,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("RoofConstruction", viewModel);
+                return RoofConstruction_Get(viewModel.Reference, viewModel.Change);
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -767,7 +767,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("AccessibleLoftSpace", viewModel);
+                return AccessibleLoftSpace_Get(viewModel.Reference, viewModel.Change);
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -804,7 +804,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("RoofInsulated", viewModel);
+                return RoofInsulated_Get(viewModel.Reference, viewModel.Change);
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -838,7 +838,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("OutdoorSpace", viewModel);
+                return OutdoorSpace_Get(viewModel.Reference, viewModel.Change);
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -873,7 +873,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("GlazingType", viewModel);
+                return GlazingType_Get(viewModel.Reference, viewModel.Change);
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -909,7 +909,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("HeatingType", viewModel);
+                return HeatingType_Get(viewModel.Reference, viewModel.Change);
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -961,7 +961,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("OtherHeatingType", viewModel);
+                return OtherHeatingType_Get(viewModel.Reference, viewModel.Change);
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -996,7 +996,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("HotWaterCylinder", viewModel);
+                return HotWaterCylinder_Get(viewModel.Reference, viewModel.Change);
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -1031,7 +1031,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("NumberOfOccupants", viewModel);
+                return NumberOfOccupants_Get(viewModel.Reference, viewModel.Change);
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -1067,7 +1067,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("HeatingPattern", viewModel);
+                return HeatingPattern_Get(viewModel.Reference, viewModel.Change);
             }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -1104,7 +1104,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("Temperature", viewModel);
+                return Temperature_Get(viewModel.Reference, viewModel.Change);
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -1140,7 +1140,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("EmailAddress", viewModel);
+                return EmailAddress_Get(viewModel.Reference, viewModel.Change);
             }
             
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
@@ -1202,7 +1202,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("YourRecommendations", viewModel);
+                return YourRecommendations_Get(viewModel.Reference);
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);

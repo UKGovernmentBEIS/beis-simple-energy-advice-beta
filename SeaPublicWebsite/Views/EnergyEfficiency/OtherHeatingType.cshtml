@@ -24,7 +24,7 @@
         
         <form action="@Url.Action("OtherHeatingType_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.Change))
-            @(Html.HiddenFor(m => m.BackLink))
+            
 
             @(await Html.GovUkRadiosFor(m => m.OtherHeatingType,
                 fieldsetOptions: new FieldsetViewModel

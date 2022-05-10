@@ -24,7 +24,7 @@
         
         <form action="@Url.Action("WallConstruction_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.Change))
-            @(Html.HiddenFor(m => m.BackLink))
+            
 
             <fieldset class="govuk-fieldset">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
