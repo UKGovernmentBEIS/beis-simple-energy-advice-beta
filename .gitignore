@@ -14,5 +14,6 @@ obj/
 SeaPublicWebsite/appsettings.secret.json
 
 Infrastructure/LoginToGovPaas.sh
+Infrastructure/SetEnvironmentSecrets.sh
 
 ci-server-build/
