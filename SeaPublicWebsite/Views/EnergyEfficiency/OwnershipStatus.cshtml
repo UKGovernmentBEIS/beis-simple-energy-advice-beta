@@ -23,7 +23,7 @@
     <div class="govuk-grid-column-two-thirds">
         
         <form action="@Url.Action("OwnershipStatus_Post", "EnergyEfficiency", new {reference =  Model.Reference})" method="post" novalidate>  
-            @(Html.HiddenFor(m => m.Change))
+            @(Html.HiddenFor(m => m.EntryPoint))
               
             
             @(await Html.GovUkRadiosFor(m => m.OwnershipStatus,

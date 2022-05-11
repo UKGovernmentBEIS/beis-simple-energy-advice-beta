@@ -9,7 +9,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         [GovUkValidateDecimalRange("The temperature", 5, 35)]
         public decimal? Temperature { get; set; }
         public string Reference { get; set; }
-        public PageName? Change { get; set; }
+        public PageName? EntryPoint { get; set; }
         
         public string BackLink { get; set; }
     }

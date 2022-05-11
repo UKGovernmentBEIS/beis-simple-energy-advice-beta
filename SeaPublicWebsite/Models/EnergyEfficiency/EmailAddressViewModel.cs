@@ -15,7 +15,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string EmailAddress { get; set; }
         
         public string Reference { get; set; }
-        public PageName? Change { get; set; }
+        public PageName? EntryPoint { get; set; }
 
         public bool IsRequiredEmailAddress => HasEmailAddress == QuestionOptions.HasEmailAddress.Yes;
         

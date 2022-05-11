@@ -15,7 +15,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Reference { get; set; }
         
         public PropertyType? PropertyType { get; set; }
-        public PageName? Change { get; set; }
+        public PageName? EntryPoint { get; set; }
         
         public string BackLink { get; set; }
     }

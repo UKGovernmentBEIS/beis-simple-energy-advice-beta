@@ -16,7 +16,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public decimal? HoursOfHeating { get; set; }
 
         public string Reference { get; set; }
-        public PageName? Change { get; set; }
+        public PageName? EntryPoint { get; set; }
 
         public bool IsRequiredHoursOfHeating => HeatingPattern == QuestionOptions.HeatingPattern.Other;
         

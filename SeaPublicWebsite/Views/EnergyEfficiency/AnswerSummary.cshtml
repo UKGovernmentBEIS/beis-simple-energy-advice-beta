@@ -3,6 +3,7 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using GovUkDesignSystem.Helpers
 @using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Helpers.UserFlow
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.DataModels.UserDataModel
 @{
@@ -42,7 +43,7 @@
                     @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyType))
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                    <a class="govuk-link" href="@Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.PropertyType})">
                         Change<span class="govuk-visually-hidden"> address</span>
                     </a>
                 </dd>
@@ -55,7 +56,7 @@
                     @(Model.YearBuilt?.ToString() ?? "I'm not sure")
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                    <a class="govuk-link" href="@Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.HomeAge})">
                         Change<span class="govuk-visually-hidden"> home type</span>
                     </a>
                 </dd>
@@ -101,7 +102,7 @@
                     }
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                    <a class="govuk-link" href="@Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.WallConstruction})">
                         Change<span class="govuk-visually-hidden"> type of walls
                         </span>
                     </a>
@@ -134,7 +135,7 @@
                         }
                     </dd>
                     <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                        <a class="govuk-link" href="@Url.Action("CavityWallsInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                        <a class="govuk-link" href="@Url.Action("CavityWallsInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.CavityWallsInsulated})">
                             Change<span class="govuk-visually-hidden"> are cavity walls insulated
                             </span>
                         </a>
@@ -167,7 +168,7 @@
                         }
                     </dd>
                     <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                        <a class="govuk-link" href="@Url.Action("SolidWallsInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                        <a class="govuk-link" href="@Url.Action("SolidWallsInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.SolidWallsInsulated})">
                             Change<span class="govuk-visually-hidden"> are solid walls insulated
                             </span>
                         </a>
@@ -218,7 +219,7 @@
                         }
                     </dd>
                     <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                        <a class="govuk-link" href="@Url.Action("FloorConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                        <a class="govuk-link" href="@Url.Action("FloorConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.FloorConstruction})">
                             Change<span class="govuk-visually-hidden"> floor construction</span>
                         </a>
                     </dd>
@@ -248,7 +249,7 @@
                             }
                         </dd>
                         <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                            <a class="govuk-link" href="@Url.Action("FloorInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                            <a class="govuk-link" href="@Url.Action("FloorInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.FloorInsulated})">
                                 Change<span class="govuk-visually-hidden"> is floor insulated</span>
                             </a>
                         </dd>
@@ -266,7 +267,7 @@
                         @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.RoofConstruction))
                     </dd>
                     <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                        <a class="govuk-link" href="@Url.Action("RoofConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                        <a class="govuk-link" href="@Url.Action("RoofConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.RoofConstruction})">
                             Change<span class="govuk-visually-hidden"> is roof flat</span>
                         </a>
                     </dd>
@@ -281,7 +282,7 @@
                             @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.AccessibleLoftSpace))
                         </dd>
                         <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                            <a class="govuk-link" href="@Url.Action("AccessibleLoftSpace_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                            <a class="govuk-link" href="@Url.Action("AccessibleLoftSpace_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.AccessibleLoftSpace})">
                                 Change<span class="govuk-visually-hidden"> accessible loft space</span>
                             </a>
                         </dd>
@@ -305,7 +306,7 @@
                                 }
                             </dd>
                             <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                                <a class="govuk-link" href="@Url.Action("RoofInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                                <a class="govuk-link" href="@Url.Action("RoofInsulated_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.RoofInsulated})">
                                     Change<span class="govuk-visually-hidden"> is roof insulated</span>
                                 </a>
                             </dd>
@@ -322,7 +323,7 @@
                     @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.GlazingType))
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("GlazingType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                    <a class="govuk-link" href="@Url.Action("GlazingType_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.GlazingType})">
                         Change<span class="govuk-visually-hidden"> type of glazing</span>
                     </a>
                 </dd>
@@ -335,7 +336,7 @@
                     @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HasOutdoorSpace))
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("OutdoorSpace_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                    <a class="govuk-link" href="@Url.Action("OutdoorSpace_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.OutdoorSpace})">
                         Change<span class="govuk-visually-hidden"> outdoor space</span>
                     </a>
                 </dd>
@@ -359,7 +360,7 @@
                     }
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("HeatingType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                    <a class="govuk-link" href="@Url.Action("HeatingType_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.HeatingType})">
                         Change<span class="govuk-visually-hidden"> how you heat your home</span>
                     </a>
                 </dd>
@@ -375,7 +376,7 @@
                         @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HasHotWaterCylinder))
                     </dd>
                     <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                        <a class="govuk-link" href="@Url.Action("HotWaterCylinder_Get", "EnergyEfficiency", new { reference = Model.Reference, change = true })">
+                        <a class="govuk-link" href="@Url.Action("HotWaterCylinder_Get", "EnergyEfficiency", new { reference = Model.Reference,entryPoint = PageName.HotWaterCylinder })">
                             Change<span class="govuk-visually-hidden"> do you have a hot water cylinder</span>
                         </a>
                     </dd>
@@ -389,7 +390,7 @@
                     @(Model.NumberOfOccupants?.ToString() ?? "Question skipped")
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("NumberOfOccupants_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                    <a class="govuk-link" href="@Url.Action("NumberOfOccupants_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.NumberOfOccupants})">
                         Change<span class="govuk-visually-hidden"> number of people over 5 in the home</span>
                     </a>
                 </dd>
@@ -413,7 +414,7 @@
                     }
                 </dd>
                 <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("HeatingPattern_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                    <a class="govuk-link" href="@Url.Action("HeatingPattern_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.HeatingPattern})">
                         Change<span class="govuk-visually-hidden"> heating pattern</span>
                     </a>
                 </dd>
@@ -426,7 +427,7 @@
                 @(Model.Temperature.HasValue ? Model.Temperature.Value + "°C" : "Question skipped")
             </dd>
             <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                <a class="govuk-link" href="@Url.Action("Temperature_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
+                <a class="govuk-link" href="@Url.Action("Temperature_Get", "EnergyEfficiency", new {reference = Model.Reference,entryPoint = PageName.Temperature})">
                     Change<span class="govuk-visually-hidden"> temperature</span>
                 </a>
             </dd>

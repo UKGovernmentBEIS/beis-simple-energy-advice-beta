@@ -21,7 +21,7 @@
     <div class="govuk-grid-column-two-thirds">
         
         <form action="@Url.Action("HomeAge_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
-            @(Html.HiddenFor(m => m.Change))
+            @(Html.HiddenFor(m => m.EntryPoint))
             @Html.HiddenFor(m => m.PropertyType)
 
             <div class="govuk-form-group">
@@ -79,7 +79,7 @@
                 {
                     Text = "Continue",
                 }))
-                <a href="@(Model.Change is not null
+                <a href="@(Model.EntryPoint is not null
                              ? Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
                              : Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference}))"
                    class="govuk-link">

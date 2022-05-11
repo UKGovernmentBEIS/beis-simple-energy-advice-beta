@@ -23,7 +23,7 @@
     <div class="govuk-grid-column-two-thirds">
         
         <form method="post" action="@Url.Action("EmailAddress_Post", "EnergyEfficiency")">
-            @(Html.HiddenFor(m => m.Change))
+            @(Html.HiddenFor(m => m.EntryPoint))
 
             @(await Html.GovUkRadiosFor(
                 m => m.HasEmailAddress,

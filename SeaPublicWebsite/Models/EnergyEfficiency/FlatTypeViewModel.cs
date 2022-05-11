@@ -10,7 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public FlatType? FlatType { get; set; }
 
         public string Reference { get; set; }
-        public PageName? Change { get; set; }
+        public PageName? EntryPoint { get; set; }
         
         public string BackLink { get; set; }
     }

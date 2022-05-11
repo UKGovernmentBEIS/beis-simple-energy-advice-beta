@@ -10,7 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public FloorInsulated? FloorInsulated { get; set; }
 
         public string Reference { get; set; }
-        public PageName? Change { get; set; }
+        public PageName? EntryPoint { get; set; }
         public int? YearBuilt { get; set; }
         public Epc Epc { get; set; }
         

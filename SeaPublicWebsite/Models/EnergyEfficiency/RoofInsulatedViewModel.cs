@@ -10,7 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public RoofInsulated? RoofInsulated { get; set; }
 
         public string Reference { get; set; }
-        public PageName? Change { get; set; }
+        public PageName? EntryPoint { get; set; }
         public int? YearBuilt { get; set; }
         
         public string BackLink { get; set; }

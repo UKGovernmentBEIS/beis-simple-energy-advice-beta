@@ -11,7 +11,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select your circumstances")]
         public OwnershipStatus? OwnershipStatus { get; set; }
 
-        public PageName? Change { get; set; }
+        public PageName? EntryPoint { get; set; }
         
         public string BackLink { get; set; }
     }
