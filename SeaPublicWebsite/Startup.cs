@@ -11,23 +11,27 @@ using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.ExternalServices.OpenEpc;
 using SeaPublicWebsite.Helpers;
+using SeaPublicWebsite.Services;
 
 namespace SeaPublicWebsite
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IConfiguration configuration;
+        private readonly IWebHostEnvironment webHostEnvironment;
+        
+        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
-            Configuration = configuration;
+            this.configuration = configuration;
+            this.webHostEnvironment = webHostEnvironment;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserDataStore, UserDataStore>();
             services.AddMemoryCache();
+            services.AddSingleton<StaticAssetsVersioningService>();
 
             ConfigureFileRepository(services);
             ConfigureEpcApi(services);
@@ -41,9 +45,10 @@ namespace SeaPublicWebsite
 
         private void ConfigureFileRepository(IServiceCollection services)
         {
-            if (!Config.IsLocal())
+            if (!webHostEnvironment.IsDevelopment())
             {
-                VcapAwsS3Bucket fileStorageBucketConfiguration = Global.VcapServices.AwsS3Bucket.First(b => b.Name.EndsWith("-filestorage"));
+                var vcapServiceConfig = VcapServiceFactory.GetVcapServices(configuration);
+                VcapAwsS3Bucket fileStorageBucketConfiguration = vcapServiceConfig.AwsS3Bucket.First(b => b.Name.EndsWith("-filestorage"));
 
                 services.AddSingleton<IFileRepository>(s => new AwsFileRepository(fileStorageBucketConfiguration));
             }
@@ -51,14 +56,13 @@ namespace SeaPublicWebsite
             {
                 services.AddSingleton<IFileRepository>(s => new SystemFileRepository());
             }
-
         }
 
         private void ConfigureEpcApi(IServiceCollection services)
         {
             services.AddScoped<IEpcApi, OpenEpcApi>();
             services.Configure<OpenEpcConfiguration>(
-                Configuration.GetSection(OpenEpcConfiguration.ConfigSection));
+                configuration.GetSection(OpenEpcConfiguration.ConfigSection));
             // TODO: When the EPB API is ready, uncomment this and remove the above:
             // services.AddScoped<IEpcApi, EPBEPCApi>();
             // services.Configure<EpbEpcConfiguration>(
@@ -69,17 +73,13 @@ namespace SeaPublicWebsite
         {
             services.AddScoped<IEmailSender, GovUkNotifyApi>();
             services.Configure<GovUkNotifyConfiguration>(
-                Configuration.GetSection(GovUkNotifyConfiguration.ConfigSection));
+                configuration.GetSection(GovUkNotifyConfiguration.ConfigSection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
+            if (!webHostEnvironment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -101,9 +101,9 @@ namespace SeaPublicWebsite
             });
         }
 
-        private static void ConfigureHttpBasicAuth(IApplicationBuilder app)
+        private void ConfigureHttpBasicAuth(IApplicationBuilder app)
         {
-            if (!Config.IsProduction())
+            if (!webHostEnvironment.IsProduction())
             {
                 // Add HTTP Basic Authentication in our non-production environments to make sure people don't accidentally stumble across the site
                 app.UseMiddleware<BasicAuthMiddleware>();

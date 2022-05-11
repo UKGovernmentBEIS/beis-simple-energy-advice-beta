@@ -3,16 +3,19 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace SeaPublicWebsite.Helpers
 {
     public class BasicAuthMiddleware
     {
         private readonly RequestDelegate next;
+        private readonly IConfiguration configuration;
 
-        public BasicAuthMiddleware(RequestDelegate next)
+        public BasicAuthMiddleware(RequestDelegate next, IConfiguration configuration)
         {
             this.next = next;
+            this.configuration = configuration;
         }
 
         public async Task Invoke(HttpContext httpContext)
@@ -45,8 +48,8 @@ namespace SeaPublicWebsite.Helpers
                 var username = credentials[0];
                 var password = credentials[1];
 
-                if (Config.GetAppSetting("BasicAuthUsername") == username &&
-                    Config.GetAppSetting("BasicAuthPassword") == password)
+                if (configuration["BasicAuthUsername"] == username &&
+                    configuration["BasicAuthPassword"] == password)
                 {
                     return true;
                 }
