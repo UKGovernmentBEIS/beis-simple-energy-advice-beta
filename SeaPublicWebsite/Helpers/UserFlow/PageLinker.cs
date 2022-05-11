@@ -503,19 +503,20 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         private string WallConstructionForwardLink(UserDataModel userData, bool change)
         {
             var reference = userData.Reference;
-            if (change)
-            {
-                return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference});
-            }
 
             if (userData.WallConstruction is WallConstruction.Cavity or WallConstruction.Mixed)
             {
-                return linkGenerator.GetPathByAction("CavityWallsInsulated_Get", "EnergyEfficiency", new { reference });
+                return linkGenerator.GetPathByAction("CavityWallsInsulated_Get", "EnergyEfficiency", new { reference, change });
             }
 
             if (userData.WallConstruction == WallConstruction.Solid)
             {
-                return linkGenerator.GetPathByAction("SolidWallsInsulated_Get", "EnergyEfficiency", new { reference });
+                return linkGenerator.GetPathByAction("SolidWallsInsulated_Get", "EnergyEfficiency", new { reference, change });
+            }
+            
+            if (change)
+            {
+                return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference});
             }
 
             // These options below are for people who have chosen "Don't know" to "What type of walls do you have?"
@@ -536,14 +537,15 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         private string CavityWallsInsulatedForwardLink(UserDataModel userData, bool change)
         {
             var reference = userData.Reference;
-            if (change)
-            {
-                return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference });
-            }
 
             if (userData.WallConstruction is WallConstruction.Mixed)
             {
-                return linkGenerator.GetPathByAction("SolidWallsInsulated_Get", "EnergyEfficiency", new { reference });
+                return linkGenerator.GetPathByAction("SolidWallsInsulated_Get", "EnergyEfficiency", new { reference, change });
+            }
+            
+            if (change)
+            {
+                return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference });
             }
 
             // These options below are for people who have finished the "wall insulation" questions (e.g. who only have cavity walls)
@@ -584,14 +586,15 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         private string FloorConstructionForwardLink(UserDataModel userData, bool change)
         {
             var reference = userData.Reference;
-            if (change)
-            {
-                return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference });
-            }
 
             if (userData.FloorConstruction is FloorConstruction.SolidConcrete or FloorConstruction.SuspendedTimber or FloorConstruction.Mix ) 
             {
-                return linkGenerator.GetPathByAction("FloorInsulated_Get", "EnergyEfficiency",new { reference });
+                return linkGenerator.GetPathByAction("FloorInsulated_Get", "EnergyEfficiency",new { reference, change });
+            }
+            
+            if (change)
+            {
+                return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference });
             }
 
             if (HasRoof(userData))
@@ -621,27 +624,33 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         private string RoofConstructionForwardLink(UserDataModel userData, bool change)
         {
             var reference = userData.Reference;
-            return change
-                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
-                : userData.RoofConstruction switch
-                {
-                    RoofConstruction.Flat =>
-                        linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency", new { reference }),
-                    _ => linkGenerator.GetPathByAction("AccessibleLoftSpace_Get", "EnergyEfficiency", new { reference })
-                };
+            if (userData.RoofConstruction is RoofConstruction.Mixed or RoofConstruction.Pitched)
+            {
+                return linkGenerator.GetPathByAction("AccessibleLoftSpace_Get", "EnergyEfficiency", new { reference, change });
+            }
+
+            if (change)
+            {
+                return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference });
+            }
+
+            return linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency", new { reference });
         }
 
         private string AccessibleLoftSpaceForwardLink(UserDataModel userData, bool change)
         {
             var reference = userData.Reference;
-            return change
-                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
-                : userData.AccessibleLoftSpace switch
-                {
-                    AccessibleLoftSpace.Yes =>
-                        linkGenerator.GetPathByAction("RoofInsulated_Get", "EnergyEfficiency", new { reference }),
-                    _ => linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency", new { reference })
-                };
+            if (userData.AccessibleLoftSpace is AccessibleLoftSpace.Yes)
+            {
+                return linkGenerator.GetPathByAction("RoofInsulated_Get", "EnergyEfficiency", new { reference, change });
+            }
+
+            if (change)
+            {
+                return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference });
+            }
+
+            return linkGenerator.GetPathByAction("GlazingType_Get", "EnergyEfficiency", new { reference });
         }
 
         private string RoofInsulatedForwardLink(UserDataModel userData, bool change)
@@ -676,17 +685,18 @@ namespace SeaPublicWebsite.Helpers.UserFlow
                 return linkGenerator.GetPathByAction("OtherHeatingType_Get", "EnergyEfficiency", new { reference, change});
             }
 
+            if (userData.HeatingType is HeatingType.GasBoiler or HeatingType.OilBoiler or HeatingType.LpgBoiler)
+            {
+                return linkGenerator.GetPathByAction("HotWaterCylinder_Get", "EnergyEfficiency",
+                    new { reference, change });
+            }
+
             if (change)
             {
                 return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference});
             }
 
-            return userData.HeatingType switch
-            {
-                HeatingType.GasBoiler or HeatingType.OilBoiler or HeatingType.LpgBoiler
-                    => linkGenerator.GetPathByAction("HotWaterCylinder_Get", "EnergyEfficiency", new { reference }),
-                _ => linkGenerator.GetPathByAction("NumberOfOccupants_Get", "EnergyEfficiency", new { reference })
-            };
+            return linkGenerator.GetPathByAction("NumberOfOccupants_Get", "EnergyEfficiency", new { reference });
         }
 
         private string OtherHeatingTypeForwardLink(UserDataModel userData, bool change)

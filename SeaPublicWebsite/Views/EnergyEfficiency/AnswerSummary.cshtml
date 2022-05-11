@@ -365,35 +365,22 @@
                 </dd>
             </div>
             
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                    Hot water cylinder 
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @if (Model.HasHotWaterCylinder.HasValue)
-                    {
+            @if (Model.HeatingType is HeatingType.GasBoiler or HeatingType.OilBoiler or HeatingType.LpgBoiler)
+            {
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
+                        Hot water cylinder
+                    </dt>
+                    <dd class="govuk-summary-list__value govuk-!-width-one-half">
                         @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HasHotWaterCylinder))
-                    }
-                    else
-                    {
-                        if (Model.HeatingType == HeatingType.GasBoiler ||
-                            Model.HeatingType == HeatingType.OilBoiler ||
-                            Model.HeatingType == HeatingType.LpgBoiler)
-                        {
-                            @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HasHotWaterCylinder))
-                        }
-                        else
-                        {
-                            @:Yes
-                        }
-                    }
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("HotWaterCylinder_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
-                        Change<span class="govuk-visually-hidden"> do you have a hot water cylinder</span>
-                    </a>
-                </dd>
-            </div>
+                    </dd>
+                    <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+                        <a class="govuk-link" href="@Url.Action("HotWaterCylinder_Get", "EnergyEfficiency", new { reference = Model.Reference, change = true })">
+                            Change<span class="govuk-visually-hidden"> do you have a hot water cylinder</span>
+                        </a>
+                    </dd>
+                </div>
+            }
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
                     Size of household 

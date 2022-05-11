@@ -79,7 +79,9 @@
                 {
                     Text = "Continue",
                 }))
-                <a href="@Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference})"
+                <a href="@(Model.Change
+                             ? Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
+                             : Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference}))"
                    class="govuk-link">
                     Skip this question
                 </a>
