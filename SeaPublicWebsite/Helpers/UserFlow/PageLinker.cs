@@ -192,22 +192,18 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         private string CavityWallsInsulatedBackLink(UserDataModel userData, bool change)
         {
             var reference = userData.Reference;
-            return change
-                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
-                : linkGenerator.GetPathByAction("WallConstruction_Get", "EnergyEfficiency", new { reference });
+            return linkGenerator.GetPathByAction("WallConstruction_Get", "EnergyEfficiency", new { reference, change });
         }
 
         private string SolidWallsInsulatedBackLink(UserDataModel userData, bool change)
         {
             var reference = userData.Reference;
-            return change
-                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
-                : userData.WallConstruction switch
+            return userData.WallConstruction switch
                 {
                     WallConstruction.Mixed => 
-                        linkGenerator.GetPathByAction("CavityWallsInsulated_Get", "EnergyEfficiency", new { reference }),
+                        linkGenerator.GetPathByAction("CavityWallsInsulated_Get", "EnergyEfficiency", new { reference, change }),
                     WallConstruction.Solid => 
-                        linkGenerator.GetPathByAction("WallConstruction_Get", "EnergyEfficiency", new { reference }),
+                        linkGenerator.GetPathByAction("WallConstruction_Get", "EnergyEfficiency", new { reference, change }),
                     _ => throw new ArgumentOutOfRangeException()
                 };
         }
@@ -231,9 +227,7 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         private string FloorInsulatedBackLink(UserDataModel userData, bool change)
         {
             var reference = userData.Reference;
-            return change
-                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
-                : linkGenerator.GetPathByAction("FloorConstruction_Get", "EnergyEfficiency", new { reference });
+            return linkGenerator.GetPathByAction("FloorConstruction_Get", "EnergyEfficiency", new { reference, change });
         }
 
         private string RoofConstructionBackLink(UserDataModel userData, bool change)
@@ -268,17 +262,13 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         private string AccessibleLoftSpaceBackLink(UserDataModel userData, bool change)
         {
             var reference = userData.Reference;
-            return change
-                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference  })
-                : linkGenerator.GetPathByAction("RoofConstruction_Get", "EnergyEfficiency", new { reference });
+            return linkGenerator.GetPathByAction("RoofConstruction_Get", "EnergyEfficiency", new { reference, change });
         }
 
         private string RoofInsulatedBackLink(UserDataModel userData, bool change)
         {
             var reference = userData.Reference;
-            return change
-                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
-                : linkGenerator.GetPathByAction("AccessibleLoftSpace_Get", "EnergyEfficiency", new { reference });
+            return linkGenerator.GetPathByAction("AccessibleLoftSpace_Get", "EnergyEfficiency", new { reference, change });
         }
 
         private string GlazingTypeBackLink(UserDataModel userData, bool change)
@@ -342,17 +332,13 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         private string OtherHeatingTypeBackLink(UserDataModel userData, bool change)
         {
             var reference = userData.Reference;
-            return change
-                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
-                : linkGenerator.GetPathByAction("HeatingType_Get", "EnergyEfficiency", new { reference });
+            return linkGenerator.GetPathByAction("HeatingType_Get", "EnergyEfficiency", new { reference, change });
         }
 
         private string HotWaterCylinderBackLink(UserDataModel userData, bool change)
         {
             var reference = userData.Reference;
-            return change
-                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
-                : linkGenerator.GetPathByAction("HeatingType_Get", "EnergyEfficiency", new { reference });
+            return linkGenerator.GetPathByAction("HeatingType_Get", "EnergyEfficiency", new { reference, change });
         }
 
         private string NumberOfOccupantsBackLink(UserDataModel userData, bool change)
