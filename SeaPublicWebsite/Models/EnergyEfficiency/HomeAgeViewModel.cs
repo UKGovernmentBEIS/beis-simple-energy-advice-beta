@@ -1,4 +1,4 @@
-﻿using GovUkDesignSystem;
+﻿using SeaPublicWebsite.Helpers.UserFlow;
 using GovUkDesignSystem.Attributes;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -15,7 +15,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Reference { get; set; }
         
         public PropertyType? PropertyType { get; set; }
-        public bool Change { get; set; }
+        public PageName? Change { get; set; }
         
         public string BackLink { get; set; }
     }

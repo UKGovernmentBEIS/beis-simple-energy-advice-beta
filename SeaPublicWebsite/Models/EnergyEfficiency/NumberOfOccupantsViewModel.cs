@@ -1,4 +1,4 @@
-﻿using GovUkDesignSystem;
+﻿using SeaPublicWebsite.Helpers.UserFlow;
 using GovUkDesignSystem.Attributes;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 
@@ -11,7 +11,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public int? NumberOfOccupants { get; set; }
 
         public string Reference { get; set; }
-        public bool Change { get; set; }
+        public PageName? Change { get; set; }
         
         public string BackLink { get; set; }
     }

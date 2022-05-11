@@ -1,4 +1,4 @@
-﻿using GovUkDesignSystem;
+﻿using SeaPublicWebsite.Helpers.UserFlow;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
@@ -11,7 +11,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select your circumstances")]
         public OwnershipStatus? OwnershipStatus { get; set; }
 
-        public bool Change { get; set; }
+        public PageName? Change { get; set; }
         
         public string BackLink { get; set; }
     }

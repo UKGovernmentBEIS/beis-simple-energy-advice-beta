@@ -58,7 +58,7 @@
                 {
                     Text = "Continue",
                 }))
-                <a href="@(Model.Change
+                <a href="@(Model.Change is not null
                              ? Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
                              : Url.Action("HeatingPattern_Get", "EnergyEfficiency", new {reference = Model.Reference}))"
                    class="govuk-link">
