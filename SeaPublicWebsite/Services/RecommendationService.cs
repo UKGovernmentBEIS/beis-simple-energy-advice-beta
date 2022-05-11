@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Newtonsoft.Json;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.ExternalServices;
@@ -180,49 +181,48 @@ namespace SeaPublicWebsite.Services
         {
             BreRequest request = CreateRequest(userData);
 
-            string requestString = JsonConvert.SerializeObject(request);
-            return BreApi.GetRecommendationsForUserRequest(requestString);
+            return BreApi.GetRecommendationsForUserRequest(request).Result;
         }
 
         private static BreRequest CreateRequest(UserDataModel userData)
         {
-            int propertyType = GetConvertedPropertyType(userData.PropertyType);
+            BrePropertyType brePropertyType = GetBrePropertyType(userData.PropertyType);
 
-            (int builtForm, int? flatLevel) = GetConvertedBuiltFormAndFlatLevel(userData.PropertyType,
-                userData.HouseType,
-                userData.BungalowType, userData.FlatType);
+            BreBuiltForm breBuiltForm = GetBreBuiltForm(userData.PropertyType, userData.HouseType, userData.BungalowType);
 
-            string constructionDate = GetConvertedConstructionDate(userData.YearBuilt);
+            BreFlatLevel? breFlatLevel = GetBreFlatLevel(userData.PropertyType, userData.FlatType);
 
-            int wallType = GetConvertedWallType(userData.WallConstruction, userData.SolidWallsInsulated,
+            string breConstructionDate = GetBreConstructionDate(userData.YearBuilt);
+
+            BreWallType breWallType = GetBreWallType(userData.WallConstruction, userData.SolidWallsInsulated,
                 userData.CavityWallsInsulated);
 
-            int roofType = GetConvertedRoofType(userData.RoofConstruction, userData.RoofInsulated);
+            BreRoofType breRoofType = GetBreRoofType(userData.RoofConstruction, userData.RoofInsulated);
 
-            int glazingType = GetConvertedGlazingType(userData.GlazingType);
+            BreGlazingType breGlazingType = GetBreGlazingType(userData.GlazingType);
 
-            int heatingFuel = GetConvertedHeatingFuel(userData.HeatingType, userData.OtherHeatingType);
+            BreHeatingFuel breHeatingFuel = GetBreHeatingFuel(userData.HeatingType, userData.OtherHeatingType);
 
-            bool? hotWaterCylinder = GetConvertedHotWaterCylinder(userData.HasHotWaterCylinder);
+            bool? breHotWaterCylinder = GetBreHotWaterCylinder(userData.HasHotWaterCylinder);
 
-            int heatingPatternType = GetConvertedHeatingPatternType(userData.HeatingPattern);
+            BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(userData.HeatingPattern);
 
             BreRequest request = new()
             {
                 postcode = userData.Postcode,
-                property_type = propertyType.ToString(),
-                built_form = builtForm.ToString(),
-                flat_level = flatLevel.ToString(),
-                construction_date = constructionDate,
-                wall_type = wallType,
+                property_type = ((int) brePropertyType).ToString(),
+                built_form = ((int) breBuiltForm).ToString(),
+                flat_level = ((int?) breFlatLevel).ToString(),
+                construction_date = breConstructionDate,
+                wall_type = (int) breWallType,
                 //no input for floor_type in BRE API
-                roof_type = roofType,
-                glazing_type = glazingType,
+                roof_type = (int) breRoofType,
+                glazing_type = (int) breGlazingType,
                 //no input for outdoor heater space in BRE API
-                heating_fuel = heatingFuel.ToString(),
-                hot_water_cylinder = hotWaterCylinder,
+                heating_fuel = ((int) breHeatingFuel).ToString(),
+                hot_water_cylinder = breHotWaterCylinder,
                 occupants = userData.NumberOfOccupants,
-                heating_pattern_type = heatingPatternType,
+                heating_pattern_type = (int) breHeatingPatternType,
                 living_room_temperature = userData.Temperature,
                 //assumption:
                 num_storeys = userData.PropertyType == PropertyType.House ? 2 : 1,
@@ -240,63 +240,69 @@ namespace SeaPublicWebsite.Services
             return request;
         }
 
-        private static int GetConvertedPropertyType(PropertyType? propertyType)
+        private static BrePropertyType GetBrePropertyType(PropertyType? propertyType)
         {
-            //ApartmentFlatOrMaisonette is assumed to be a Flat
-            if (propertyType != null) return (int) (PropertyTypeEnum) propertyType;
-            throw new ArgumentNullException();
+            Console.WriteLine(BrePropertyType.Bungalow);
+            return propertyType switch
+            {
+                PropertyType.House => BrePropertyType.House,
+                PropertyType.Bungalow => BrePropertyType.Bungalow,
+                // assumption:
+                PropertyType.ApartmentFlatOrMaisonette => BrePropertyType.Flat,
+                _ => throw new ArgumentNullException()
+            };
         }
 
-        private static (int builtForm, int? flatLevel) GetConvertedBuiltFormAndFlatLevel(PropertyType? propertyType,
-            HouseType? houseType, BungalowType? bungalowType, FlatType? flatType)
+        private static BreBuiltForm GetBreBuiltForm(PropertyType? propertyType, HouseType? houseType,
+            BungalowType? bungalowType)
         {
-            int builtForm;
-            int? flatLevel = null;
+            return propertyType switch
+            {
+                PropertyType.House => houseType switch
+                {
+                    HouseType.Detached => BreBuiltForm.Detached,
+                    HouseType.SemiDetached => BreBuiltForm.SemiDetached,
+                    //assumption:
+                    HouseType.EndTerrace => BreBuiltForm.EndTerrace,
+                    //assumption:
+                    HouseType.Terraced => BreBuiltForm.MidTerrace,
+                    _ => throw new ArgumentOutOfRangeException()
+                },
+                PropertyType.Bungalow => bungalowType switch
+                {
+                    BungalowType.Detached => BreBuiltForm.Detached,
+                    BungalowType.SemiDetached => BreBuiltForm.SemiDetached,
+                    //assumption:
+                    BungalowType.EndTerrace => BreBuiltForm.EndTerrace,
+                    //assumption:
+                    BungalowType.Terraced => BreBuiltForm.MidTerrace,
+                    _ => throw new ArgumentOutOfRangeException()
+                },
+                PropertyType.ApartmentFlatOrMaisonette =>
+                    //the BreBuiltForm values don't make sense for flats, but built_form is a required input to the BRE API even when property_type is Flat  so we set MidTerrace as a default value:
+                    BreBuiltForm.MidTerrace,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+
+        private static BreFlatLevel? GetBreFlatLevel(PropertyType? propertyType, FlatType? flatType)
+        {
             switch (propertyType)
             {
-                case PropertyType.House:
-                    builtForm = houseType switch
-                    {
-                        HouseType.Detached => (int) BuiltFormEnum.Detached,
-                        HouseType.SemiDetached => (int) BuiltFormEnum.SemiDetached,
-                        //assumption:
-                        HouseType.EndTerrace => (int) BuiltFormEnum.EndTerrace,
-                        //assumption:
-                        HouseType.Terraced => (int) BuiltFormEnum.MidTerrace,
-                        _ => throw new ArgumentOutOfRangeException()
-                    };
-                    break;
-                case PropertyType.Bungalow:
-                    builtForm = bungalowType switch
-                    {
-                        BungalowType.Detached => (int) BuiltFormEnum.Detached,
-                        BungalowType.SemiDetached => (int) BuiltFormEnum.SemiDetached,
-                        //assumption:
-                        BungalowType.EndTerrace => (int) BuiltFormEnum.EndTerrace,
-                        //assumption:
-                        BungalowType.Terraced => (int) BuiltFormEnum.MidTerrace,
-                        _ => throw new ArgumentOutOfRangeException()
-                    };
-                    break;
                 case PropertyType.ApartmentFlatOrMaisonette:
-                    flatLevel = flatType switch
+                    return flatType switch
                     {
-                        FlatType.TopFloor => (int) FlatLevelEnum.TopFloor,
-                        FlatType.MiddleFloor => (int) FlatLevelEnum.MidFloor,
-                        FlatType.GroundFloor => (int) FlatLevelEnum.GroundFloor,
+                        FlatType.TopFloor => BreFlatLevel.TopFloor,
+                        FlatType.MiddleFloor => BreFlatLevel.MidFloor,
+                        FlatType.GroundFloor => BreFlatLevel.GroundFloor,
                         _ => throw new ArgumentOutOfRangeException()
                     };
-                    //assumption:
-                    builtForm = (int) BuiltFormEnum.MidTerrace;
-                    break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    return null;
             }
-
-            return (builtForm, flatLevel);
         }
 
-        private static string GetConvertedConstructionDate(int? yearBuilt)
+        private static string GetBreConstructionDate(int? yearBuilt)
         {
             return yearBuilt switch
             {
@@ -316,97 +322,97 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static int GetConvertedWallType(WallConstruction? wallConstruction,
+        private static BreWallType GetBreWallType(WallConstruction? wallConstruction,
             SolidWallsInsulated? solidWallsInsulated,
             CavityWallsInsulated? cavityWallsInsulated)
         {
             return wallConstruction switch
             {
-                WallConstruction.DoNotKnow => (int) WallTypeEnum.DontKnow,
+                WallConstruction.DoNotKnow => BreWallType.DontKnow,
                 WallConstruction.Solid => solidWallsInsulated switch
                 {
-                    SolidWallsInsulated.DoNotKnow => (int) WallTypeEnum.DontKnow,
-                    SolidWallsInsulated.No => (int) WallTypeEnum.SolidWallsWithoutInsulation,
-                    SolidWallsInsulated.Some => (int) WallTypeEnum.SolidWallsWithoutInsulation,
-                    SolidWallsInsulated.All => (int) WallTypeEnum.SolidWallsWithInsulation,
+                    SolidWallsInsulated.DoNotKnow => BreWallType.DontKnow,
+                    SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
+                    SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
+                    SolidWallsInsulated.All => BreWallType.SolidWallsWithInsulation,
                     _ => throw new ArgumentOutOfRangeException()
                 },
                 WallConstruction.Cavity => cavityWallsInsulated switch
                 {
-                    CavityWallsInsulated.DoNotKnow => (int) WallTypeEnum.DontKnow,
-                    CavityWallsInsulated.No => (int) WallTypeEnum.CavityWallsWithoutInsulation,
-                    CavityWallsInsulated.Some => (int) WallTypeEnum.CavityWallsWithoutInsulation,
-                    CavityWallsInsulated.All => (int) WallTypeEnum.CavityWallsWithInsulation,
+                    CavityWallsInsulated.DoNotKnow => BreWallType.DontKnow,
+                    CavityWallsInsulated.No => BreWallType.CavityWallsWithoutInsulation,
+                    CavityWallsInsulated.Some => BreWallType.CavityWallsWithoutInsulation,
+                    CavityWallsInsulated.All => BreWallType.CavityWallsWithInsulation,
                     _ => throw new ArgumentOutOfRangeException()
                 },
                 WallConstruction.Mixed =>
                     //assumption:
-                    (int) WallTypeEnum.DontKnow,
-                WallConstruction.Other => (int) WallTypeEnum.DontKnow,
+                    BreWallType.DontKnow,
+                WallConstruction.Other => BreWallType.DontKnow,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        private static int GetConvertedRoofType(RoofConstruction? roofConstruction, RoofInsulated? roofInsulated)
+        private static BreRoofType GetBreRoofType(RoofConstruction? roofConstruction, RoofInsulated? roofInsulated)
         {
             return roofConstruction switch
             {
                 RoofConstruction.Flat =>
                     //assumption:
-                    (int) RoofTypeEnum.DontKnow,
+                    BreRoofType.DontKnow,
                 RoofConstruction.Mixed =>
                     //assumption:
-                    (int) RoofTypeEnum.DontKnow,
+                    BreRoofType.DontKnow,
                 RoofConstruction.Pitched => roofInsulated switch
                 {
-                    RoofInsulated.DoNotKnow => (int) RoofTypeEnum.DontKnow,
-                    RoofInsulated.Yes => (int) RoofTypeEnum.PitchedRoofWithInsulation,
-                    RoofInsulated.No => (int) RoofTypeEnum.PitchedRoofWithoutInsulation,
+                    RoofInsulated.DoNotKnow => BreRoofType.DontKnow,
+                    RoofInsulated.Yes => BreRoofType.PitchedRoofWithInsulation,
+                    RoofInsulated.No => BreRoofType.PitchedRoofWithoutInsulation,
                     _ => throw new ArgumentOutOfRangeException()
                 },
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        private static int GetConvertedGlazingType(GlazingType? glazingType)
+        private static BreGlazingType GetBreGlazingType(GlazingType? glazingType)
         {
             return glazingType switch
             {
-                GlazingType.DoNotKnow => (int) GlazingTypeEnum.DontKnow,
-                GlazingType.SingleGlazed => (int) GlazingTypeEnum.SingleGlazed,
+                GlazingType.DoNotKnow => BreGlazingType.DontKnow,
+                GlazingType.SingleGlazed => BreGlazingType.SingleGlazed,
                 //assumption:
-                GlazingType.DoubleOrTripleGlazed => (int) GlazingTypeEnum.DoubleGlazed,
-                GlazingType.Both => (int) GlazingTypeEnum.DontKnow,
+                GlazingType.DoubleOrTripleGlazed => BreGlazingType.DoubleGlazed,
+                GlazingType.Both => BreGlazingType.DontKnow,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        private static int GetConvertedHeatingFuel(HeatingType? heatingType, OtherHeatingType? otherHeatingType)
+        private static BreHeatingFuel GetBreHeatingFuel(HeatingType? heatingType, OtherHeatingType? otherHeatingType)
         {
             return heatingType switch
             {
                 //assumption:
-                HeatingType.DoNotKnow => (int) HeatingFuelEnum.MainsGas,
-                HeatingType.GasBoiler => (int) HeatingFuelEnum.MainsGas,
-                HeatingType.OilBoiler => (int) HeatingFuelEnum.HeatingOil,
-                HeatingType.LpgBoiler => (int) HeatingFuelEnum.Lpg,
-                HeatingType.Storage => (int) HeatingFuelEnum.Electricity,
-                HeatingType.DirectActionElectric => (int) HeatingFuelEnum.Electricity,
-                HeatingType.HeatPump => (int) HeatingFuelEnum.Electricity,
+                HeatingType.DoNotKnow => BreHeatingFuel.MainsGas,
+                HeatingType.GasBoiler => BreHeatingFuel.MainsGas,
+                HeatingType.OilBoiler => BreHeatingFuel.HeatingOil,
+                HeatingType.LpgBoiler => BreHeatingFuel.Lpg,
+                HeatingType.Storage => BreHeatingFuel.Electricity,
+                HeatingType.DirectActionElectric => BreHeatingFuel.Electricity,
+                HeatingType.HeatPump => BreHeatingFuel.Electricity,
                 HeatingType.Other => otherHeatingType switch
                 {
                     //assumption:
-                    OtherHeatingType.Biomass => (int) HeatingFuelEnum.SolidFuel,
-                    OtherHeatingType.CoalOrSolidFuel => (int) HeatingFuelEnum.SolidFuel,
+                    OtherHeatingType.Biomass => BreHeatingFuel.SolidFuel,
+                    OtherHeatingType.CoalOrSolidFuel => BreHeatingFuel.SolidFuel,
                     //assumption:
-                    OtherHeatingType.Other => (int) HeatingFuelEnum.MainsGas,
+                    OtherHeatingType.Other => BreHeatingFuel.MainsGas,
                     _ => throw new ArgumentOutOfRangeException()
                 },
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        private static bool? GetConvertedHotWaterCylinder(HasHotWaterCylinder? hasHotWaterCylinder)
+        private static bool? GetBreHotWaterCylinder(HasHotWaterCylinder? hasHotWaterCylinder)
         {
             return hasHotWaterCylinder switch
             {
@@ -417,15 +423,15 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static int GetConvertedHeatingPatternType(HeatingPattern? heatingPattern)
+        private static BreHeatingPatternType GetBreHeatingPatternType(HeatingPattern? heatingPattern)
         {
             return heatingPattern switch
             {
-                HeatingPattern.AllDayAndNight => (int) HeatingPatternTypeEnum.AllDayAndAllNight,
-                HeatingPattern.AllDayNotNight => (int) HeatingPatternTypeEnum.AllDayButOffAtNight,
-                HeatingPattern.MorningAndEvening => (int) HeatingPatternTypeEnum.MorningAndEvening,
-                HeatingPattern.OnceADay => (int) HeatingPatternTypeEnum.JustOnceADay,
-                HeatingPattern.Other => (int) HeatingPatternTypeEnum.NoneOfTheAbove,
+                HeatingPattern.AllDayAndNight => BreHeatingPatternType.AllDayAndAllNight,
+                HeatingPattern.AllDayNotNight => BreHeatingPatternType.AllDayButOffAtNight,
+                HeatingPattern.MorningAndEvening => BreHeatingPatternType.MorningAndEvening,
+                HeatingPattern.OnceADay => BreHeatingPatternType.JustOnceADay,
+                HeatingPattern.Other => BreHeatingPatternType.NoneOfTheAbove,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

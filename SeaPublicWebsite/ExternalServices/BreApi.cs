@@ -6,8 +6,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SeaPublicWebsite.DataModels;
+using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Services;
 
@@ -15,7 +18,7 @@ namespace SeaPublicWebsite.ExternalServices
 {
     public static class BreApi
     {
-        public static List<Recommendation> GetRecommendationsForUserRequest(string requestString)
+        public static async Task<List<Recommendation>> GetRecommendationsForUserRequest(BreRequest request)
         {
             try
             {
@@ -25,7 +28,7 @@ namespace SeaPublicWebsite.ExternalServices
 
                     string username = Global.BreUsername;
                     string password = Global.BrePassword;
-                    string nonce = GenerateNonce();
+                    Guid nonce =  Guid.NewGuid();
                     string created = DateTime.Now.ToUniversalTime().ToString
                         (DateTimeFormatInfo.InvariantInfo.SortableDateTimePattern) + "Z";
                     string token = GenerateToken(password + nonce + username + created);
@@ -34,12 +37,13 @@ namespace SeaPublicWebsite.ExternalServices
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", wsseHeader);
 
                     string path = "/bemapi/energy_use";
+                    string requestString = JsonConvert.SerializeObject(request);
                     StringContent stringContent = new(requestString);
-                    HttpResponseMessage response = httpClient.PostAsync(path, stringContent).Result;
+                    HttpResponseMessage response = await Task.FromResult(httpClient.PostAsync(path, stringContent)).Result;
 
                     if (response.IsSuccessStatusCode)
                     {
-                        string bodyString = response.Content.ReadAsStringAsync().Result;
+                        string bodyString = await Task.FromResult(response.Content.ReadAsStringAsync().Result);
                         JObject measures = JObject.FromObject(JObject.Parse(bodyString)["measures"] ?? new JObject());
 
                         List<Recommendation> recommendations = new List<Recommendation>();
@@ -78,14 +82,6 @@ namespace SeaPublicWebsite.ExternalServices
             }
         }
 
-        private static string GenerateNonce()
-        {
-            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            Random random = new();
-            return new string(Enumerable.Repeat(chars, 64)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
-        
         private static string GenerateToken(string input)
         {
             using (SHA256 hash = SHA256.Create())
