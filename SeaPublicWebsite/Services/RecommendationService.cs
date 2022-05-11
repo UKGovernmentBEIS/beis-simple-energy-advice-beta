@@ -242,7 +242,6 @@ namespace SeaPublicWebsite.Services
 
         private static BrePropertyType GetBrePropertyType(PropertyType? propertyType)
         {
-            Console.WriteLine(BrePropertyType.Bungalow);
             return propertyType switch
             {
                 PropertyType.House => BrePropertyType.House,
