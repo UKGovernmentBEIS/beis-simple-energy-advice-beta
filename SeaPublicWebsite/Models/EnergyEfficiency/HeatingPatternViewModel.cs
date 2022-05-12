@@ -1,12 +1,9 @@
-﻿using System;
-using SeaPublicWebsite.Helpers.UserFlow;
-using GovUkDesignSystem.Attributes;
-using GovUkDesignSystem.Attributes.ValidationAttributes;
+﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class HeatingPatternViewModel
+    public class HeatingPatternViewModel : QuestionFlowViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select heating pattern")]
         public HeatingPattern? HeatingPattern { get; set; }
@@ -16,10 +13,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public decimal? HoursOfHeating { get; set; }
 
         public string Reference { get; set; }
-        public PageName? EntryPoint { get; set; }
 
         public bool IsRequiredHoursOfHeating => HeatingPattern == QuestionOptions.HeatingPattern.Other;
-        
-        public string BackLink { get; set; }
     }
 }

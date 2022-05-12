@@ -1,10 +1,8 @@
-﻿using GovUkDesignSystem;
-using GovUkDesignSystem.Attributes.ValidationAttributes;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class AskForPostcodeViewModel
+    public class AskForPostcodeViewModel : QuestionFlowViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Enter a UK post code")]
         public string Postcode { get; set; }
@@ -12,7 +10,5 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string HouseNameOrNumber { get; set; }
 
         public string Reference { get; set; }
-        
-        public string BackLink { get; set; }
     }
 }

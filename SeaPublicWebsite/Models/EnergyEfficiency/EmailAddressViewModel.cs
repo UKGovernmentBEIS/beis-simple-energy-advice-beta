@@ -5,7 +5,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class EmailAddressViewModel
+    public class EmailAddressViewModel : QuestionFlowViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select 'Yes' if you have an email address")]
         public HasEmailAddress? HasEmailAddress { get; set; }
@@ -15,10 +15,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string EmailAddress { get; set; }
         
         public string Reference { get; set; }
-        public PageName? EntryPoint { get; set; }
 
         public bool IsRequiredEmailAddress => HasEmailAddress == QuestionOptions.HasEmailAddress.Yes;
-        
-        public string BackLink { get; set; }
     }
 }

@@ -2,12 +2,10 @@
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class ServiceUnsuitableViewModel
+    public class ServiceUnsuitableViewModel : QuestionFlowViewModel
     {
         public string Reference { get; set; }
         
         public Country? Country { get; set; }
-        
-        public string BackLink { get; set; }
     }
 }

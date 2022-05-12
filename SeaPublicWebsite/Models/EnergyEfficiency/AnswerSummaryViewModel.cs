@@ -2,9 +2,8 @@
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class AnswerSummaryViewModel
+    public class AnswerSummaryViewModel : QuestionFlowViewModel
     {
         public UserDataModel UserDataModel { get; set; }
-        public string BackLink { get; set; }
     }
 }
