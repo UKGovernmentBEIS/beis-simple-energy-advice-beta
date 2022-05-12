@@ -57,8 +57,11 @@ namespace SeaPublicWebsite.Controllers
                     ModelState.AddModelError(nameof(NewOrReturningUserViewModel.Reference), "Check you have typed the reference correctly. Reference must be 8 characters.");
                     return View("NewOrReturningUser", viewModel);
                 }
+
+                var userData = userDataStore.LoadUserData(viewModel.Reference);
+                var recommendations = RecommendationService.GetRecommendationsForUser(userData);
                 
-                return RedirectToAction("YourSavedRecommendations_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
+                return RedirectToAction("Recommendation_Get", "EnergyEfficiency", new { reference = viewModel.Reference, id = (int) recommendations[0].Key });
             }
 
             string reference = userDataStore.GenerateNewReferenceAndSaveEmptyUserData();
