@@ -48,7 +48,5 @@ namespace SeaPublicWebsite.DataModels
         public string EmailAddress { get; set; }
 
         public List<UserRecommendation> UserRecommendations { get; set; }
-        
-        public string BackLink { get; set; }
     }
 }

@@ -979,9 +979,14 @@ namespace SeaPublicWebsite.Controllers
         public IActionResult AnswerSummary(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
-            userDataModel.BackLink = pageLinker.BackLink(PageName.AnswerSummary, userDataModel);
+
+            var viewModel = new AnswerSummaryViewModel
+            {
+                UserDataModel = userDataModel,
+                BackLink = pageLinker.BackLink(PageName.AnswerSummary, userDataModel)
+            };
             
-            return View("AnswerSummary", userDataModel);
+            return View("AnswerSummary", viewModel);
         }
 
         
