@@ -133,15 +133,15 @@ namespace SeaPublicWebsite.Controllers
         }
 
 
-        [HttpGet("service-unsuitable/{from}/{reference}")]
-        public IActionResult ServiceUnsuitable(string from, string reference)
+        [HttpGet("service-unsuitable/{reference}")]
+        public IActionResult ServiceUnsuitable(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             var viewModel = new ServiceUnsuitableViewModel
             {
                 Reference = userDataModel.Reference,
                 Country = userDataModel.Country,
-                BackLink = pageLinker.BackLink(PageName.ServiceUnsuitable, userDataModel, from: from)
+                BackLink = pageLinker.BackLink(PageName.ServiceUnsuitable, userDataModel)
             };
             
             return View("ServiceUnsuitable", viewModel);

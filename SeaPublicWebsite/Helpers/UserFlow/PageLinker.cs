@@ -7,7 +7,7 @@ namespace SeaPublicWebsite.Helpers.UserFlow
 {
     public interface IPageLinker
     { 
-        public string BackLink(PageName page, UserDataModel userData, PageName? entryPoint = null, string from = null);
+        public string BackLink(PageName page, UserDataModel userData, PageName? entryPoint = null);
         
         public string ForwardLink(PageName page, UserDataModel userData, PageName? entryPoint = null);
     }
@@ -24,15 +24,14 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         public string BackLink(
             PageName page, 
             UserDataModel userData, 
-            PageName? entryPoint = null,
-            string from = null)
+            PageName? entryPoint = null)
         {
             return page switch
             {
                 PageName.NewOrReturningUser => NewOrReturningUserBackLink(),
                 PageName.OwnershipStatus => OwnershipStatusBackLink(userData, entryPoint),
                 PageName.Country => CountryBackLink(userData, entryPoint),
-                PageName.ServiceUnsuitable => ServiceUnsuitableBackLink(userData, from),
+                PageName.ServiceUnsuitable => ServiceUnsuitableBackLink(userData),
                 PageName.AskForPostcode => AskForPostcodeBackLink(userData),
                 PageName.ConfirmAddress => ConfirmAddressBackLink(userData),
                 PageName.PropertyType => PropertyTypeBackLink(userData, entryPoint),
@@ -120,10 +119,17 @@ namespace SeaPublicWebsite.Helpers.UserFlow
                 : linkGenerator.GetPathByAction("NewOrReturningUser_Get", "EnergyEfficiency");
         }
 
-        private string ServiceUnsuitableBackLink(UserDataModel userData, string from)
+        private string ServiceUnsuitableBackLink(UserDataModel userData)
         {
             var reference = userData.Reference;
-            return linkGenerator.GetPathByAction($"{from}_Get", "EnergyEfficiency", new { reference });
+            return userData switch
+            {
+                { Country: not Country.England and not Country.Wales }
+                    => linkGenerator.GetPathByAction("Country_Get", "EnergyEfficiency", new { reference }),
+                { OwnershipStatus: OwnershipStatus.PrivateTenancy }
+                    => linkGenerator.GetPathByAction("OwnershipStatus_Get", "EnergyEfficiency", new { reference }),
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
 
         private string AskForPostcodeBackLink(UserDataModel userData)
@@ -414,9 +420,9 @@ namespace SeaPublicWebsite.Helpers.UserFlow
         private string CountryForwardLink(UserDataModel userData, PageName? entryPoint)
         {
             var reference = userData.Reference;
-            if (userData.Country is not Country.England && userData.Country is not Country.Wales)
+            if (userData.Country is not Country.England and not Country.Wales)
             {
-                return linkGenerator.GetPathByAction("ServiceUnsuitable", "EnergyEfficiency", new {from = "Country", reference });
+                return linkGenerator.GetPathByAction("ServiceUnsuitable", "EnergyEfficiency", new { reference });
             }
 
             return entryPoint is not null
@@ -429,7 +435,7 @@ namespace SeaPublicWebsite.Helpers.UserFlow
             var reference = userData.Reference;
             if (userData.OwnershipStatus is OwnershipStatus.PrivateTenancy)
             {
-                return linkGenerator.GetPathByAction("ServiceUnsuitable", "EnergyEfficiency", new {from = "OwnershipStatus", reference });
+                return linkGenerator.GetPathByAction("ServiceUnsuitable", "EnergyEfficiency", new { reference });
             }
 
             return entryPoint is not null
