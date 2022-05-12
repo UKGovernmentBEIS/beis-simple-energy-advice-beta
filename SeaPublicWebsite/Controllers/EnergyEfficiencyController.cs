@@ -938,8 +938,7 @@ namespace SeaPublicWebsite.Controllers
 
             return Redirect(pageLinker.ForwardLink(PageName.Temperature, userDataModel, viewModel.EntryPoint));
         }
-
-
+        
         [HttpGet("email-address/{reference}")]
         public IActionResult EmailAddress_Get(string reference, PageName? entryPoint = null)
         {

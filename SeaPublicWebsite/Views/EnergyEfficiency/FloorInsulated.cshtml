@@ -24,7 +24,6 @@
         
         <form action="@Url.Action("FloorInsulated_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
-            @(Html.HiddenFor(m => m.YearBuilt))
             
             @(await Html.GovUkRadiosFor(m => m.FloorInsulated,
                 fieldsetOptions: new FieldsetViewModel

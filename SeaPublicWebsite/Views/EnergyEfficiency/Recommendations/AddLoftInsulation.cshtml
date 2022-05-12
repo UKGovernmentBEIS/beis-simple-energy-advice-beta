@@ -30,7 +30,7 @@
         
         @(await Html.GovUkErrorSummary(ViewData.ModelState))
         
-        <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.UserRecommendation.Key, reference = Model.UserDataModel.Reference})" method="post" novalidate>
+        <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.UserRecommendation.Key})" method="post" novalidate>
 
             @Html.HiddenFor(m => m.UserDataModel.Reference)
 
