@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.ExternalServices;
+using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
@@ -11,11 +12,11 @@ namespace SeaPublicWebsite.Services
 {
     public static class RecommendationService
     {
-        public static readonly Dictionary<string, Recommendation> RecommendationDictionary =
+        public static readonly Dictionary<string, BreRecommendation> RecommendationDictionary =
             new()
             {
                 {
-                    "A", new Recommendation
+                    "A", new BreRecommendation
                     {
                         Key = RecommendationKey.AddLoftInsulation,
                         Title = "Add some loft insulation",
@@ -23,7 +24,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "A2", new Recommendation
+                    "A2", new BreRecommendation
                     {
                         Key = RecommendationKey.FlatRoofInsulation,
                         Title = "Flat roof insulation",
@@ -31,7 +32,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "B", new Recommendation
+                    "B", new BreRecommendation
                     {
                         Key = RecommendationKey.InsulateCavityWalls,
                         Title = "Insulate your cavity walls",
@@ -39,7 +40,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "Q", new Recommendation
+                    "Q", new BreRecommendation
                     {
                         Key = RecommendationKey.WallInsulationBrickAgeAToD,
                         Title = "Wall insulation Brick age A-D",
@@ -47,7 +48,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "Q1", new Recommendation
+                    "Q1", new BreRecommendation
                     {
                         Key = RecommendationKey.WallInsulationOther,
                         Title = "Wall insulation Other",
@@ -55,7 +56,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "W1", new Recommendation
+                    "W1", new BreRecommendation
                     {
                         Key = RecommendationKey.FloorInsulationSuspendedFloor,
                         Title = "Floor insulation suspended floor",
@@ -63,7 +64,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "W2", new Recommendation
+                    "W2", new BreRecommendation
                     {
                         Key = RecommendationKey.FloorInsulationSolidFloor,
                         Title = "Floor insulation solid floor",
@@ -71,7 +72,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "D", new Recommendation
+                    "D", new BreRecommendation
                     {
                         Key = RecommendationKey.DraughtproofWindowsAndDoors,
                         Title = "Draughtproof 100% of windows and doors",
@@ -79,7 +80,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "C", new Recommendation
+                    "C", new BreRecommendation
                     {
                         Key = RecommendationKey.HotWaterCylinderInsulation,
                         Title = "Hot water cylinder insulation",
@@ -87,7 +88,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "F", new Recommendation
+                    "F", new BreRecommendation
                     {
                         Key = RecommendationKey.HotWaterCylinderThermostat,
                         Title = "Hot water cylinder thermostat",
@@ -95,7 +96,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "G", new Recommendation
+                    "G", new BreRecommendation
                     {
                         Key = RecommendationKey.UpgradeHeatingControls,
                         Title = "Upgrade your heating controls",
@@ -103,7 +104,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "I", new Recommendation
+                    "I", new BreRecommendation
                     {
                         Key = RecommendationKey.ReplaceCondensingBoiler,
                         Title = "Replacement condensing boiler",
@@ -111,7 +112,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "T", new Recommendation
+                    "T", new BreRecommendation
                     {
                         Key = RecommendationKey.CondensingGasBoiler,
                         Title = "Condensing gas boiler (fuel switch)",
@@ -119,7 +120,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "L2", new Recommendation
+                    "L2", new BreRecommendation
                     {
                         Key = RecommendationKey.HighHeatRetentionStorageHeaters,
                         Title = "High heat retention storage heaters",
@@ -127,7 +128,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "N", new Recommendation
+                    "N", new BreRecommendation
                     {
                         Key = RecommendationKey.SolarWaterHeating,
                         Title = "Solar water heating",
@@ -135,7 +136,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "Y", new Recommendation
+                    "Y", new BreRecommendation
                     {
                         Key = RecommendationKey.MixerShowerHeatRecoverySystem,
                         Title = "Heat recovery system for mixer showers",
@@ -143,7 +144,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "O", new Recommendation
+                    "O", new BreRecommendation
                     {
                         Key = RecommendationKey.ReplaceSingleGlazedWindowsWithLowEDoubleGlazing,
                         Title = "Replace single glazed windows with low-E double glazing",
@@ -151,7 +152,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "O3", new Recommendation
+                    "O3", new BreRecommendation
                     {
                         Key = RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
                         Title = "Fit new windows",
@@ -159,7 +160,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "X", new Recommendation
+                    "X", new BreRecommendation
                     {
                         Key = RecommendationKey.HighPerformanceExternalDoors,
                         Title = "High performance external doors",
@@ -167,7 +168,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "U", new Recommendation
+                    "U", new BreRecommendation
                     {
                         Key = RecommendationKey.SolarElectricPanels,
                         Title = "Fit solar electric panels",
@@ -176,7 +177,7 @@ namespace SeaPublicWebsite.Services
                 }
             };
 
-        public static async Task<List<Recommendation>> GetRecommendationsForUserAsync(UserDataModel userData)
+        public static async Task<List<BreRecommendation>> GetRecommendationsForUserAsync(UserDataModel userData)
         {
             BreRequest request = CreateRequest(userData);
 

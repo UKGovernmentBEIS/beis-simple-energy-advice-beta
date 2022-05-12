@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SeaPublicWebsite.DataModels;
+using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Services;
@@ -18,7 +19,7 @@ namespace SeaPublicWebsite.ExternalServices
 {
     public static class BreApi
     {
-        public static async Task<List<Recommendation>> GetRecommendationsForUserRequestAsync(BreRequest request)
+        public static async Task<List<BreRecommendation>> GetRecommendationsForUserRequestAsync(BreRequest request)
         {
             try
             {
@@ -46,10 +47,10 @@ namespace SeaPublicWebsite.ExternalServices
                         string bodyString = await response.Content.ReadAsStringAsync();
                         JObject measures = JObject.FromObject(JObject.Parse(bodyString)["measures"] ?? new JObject());
 
-                        List<Recommendation> recommendations = new List<Recommendation>();
+                        List<BreRecommendation> recommendations = new List<BreRecommendation>();
                         foreach (JProperty prop in measures.Properties())
                         {
-                            Dictionary<string, Recommendation> recommendationDictionary =
+                            Dictionary<string, BreRecommendation> recommendationDictionary =
                                 RecommendationService.RecommendationDictionary;
                             JToken value = prop.Value;
                             int minInstallCost = (int) value["min_installation_cost"];
@@ -57,7 +58,7 @@ namespace SeaPublicWebsite.ExternalServices
                             int saving = (int) value["cost_saving"];
                             int lifetime = (int) value["lifetime"];
 
-                            Recommendation recommendation = new()
+                            BreRecommendation breRecommendation = new()
                             {
                                 Key = recommendationDictionary[prop.Name].Key,
                                 Title = recommendationDictionary[prop.Name].Title,
@@ -68,18 +69,19 @@ namespace SeaPublicWebsite.ExternalServices
                                 Lifetime = lifetime,
                                 Summary = recommendationDictionary[prop.Name].Summary
                             };
-                            recommendations.Add(recommendation);
+                            recommendations.Add(breRecommendation);
                         }
                         return recommendations;
                     }
 
-                    throw new ArgumentNullException();
+                    throw new Exception($"BRE API returned an error: {response.StatusCode}");
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 // TODO: seabeta-192 to add a log here
-                return null;
+                throw new Exception($"BRE API returned an error: {e.Message}");
+
             }
         }
 
