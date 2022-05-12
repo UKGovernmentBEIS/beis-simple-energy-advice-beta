@@ -57,7 +57,7 @@
                 {
                     Text = "Continue",
                 }))
-                <a href="@(Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference}))"
+                <a href="@Model.SkipLink"
                    class="govuk-link">
                     Skip this question
                 </a>

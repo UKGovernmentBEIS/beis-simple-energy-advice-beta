@@ -58,9 +58,7 @@
                 {
                     Text = "Continue",
                 }))
-                <a href="@(Model.EntryPoint is not null
-                             ? Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
-                             : Url.Action("HeatingPattern_Get", "EnergyEfficiency", new {reference = Model.Reference}))"
+                <a href="@Model.SkipLink"
                    class="govuk-link">
                     Skip this question
                 </a>

@@ -7,9 +7,10 @@ namespace SeaPublicWebsite.Services
 {
     public interface IQuestionFlowService
     { 
-        public string BackLink(QuestionFlowPage questionFlowPage, UserDataModel userData, QuestionFlowPage? entryPoint = null);
+        public string BackLink(QuestionFlowPage page, UserDataModel userData, QuestionFlowPage? entryPoint = null);
         
-        public string ForwardLink(QuestionFlowPage questionFlowPage, UserDataModel userData, QuestionFlowPage? entryPoint = null);
+        public string ForwardLink(QuestionFlowPage page, UserDataModel userData, QuestionFlowPage? entryPoint = null);
+        public string SkipLink(QuestionFlowPage page, UserDataModel userData, QuestionFlowPage? entryPoint = null);
     }
 
     public class QuestionFlowService: IQuestionFlowService
@@ -22,11 +23,11 @@ namespace SeaPublicWebsite.Services
         }
         
         public string BackLink(
-            QuestionFlowPage questionFlowPage, 
+            QuestionFlowPage page, 
             UserDataModel userData, 
             QuestionFlowPage? entryPoint = null)
         {
-            return questionFlowPage switch
+            return page switch
             {
                 QuestionFlowPage.NewOrReturningUser => NewOrReturningUserBackLink(),
                 QuestionFlowPage.OwnershipStatus => OwnershipStatusBackLink(userData, entryPoint),
@@ -62,9 +63,9 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        public string ForwardLink(QuestionFlowPage questionFlowPage, UserDataModel userData, QuestionFlowPage? entryPoint = null)
+        public string ForwardLink(QuestionFlowPage page, UserDataModel userData, QuestionFlowPage? entryPoint = null)
         {
-            return questionFlowPage switch
+            return page switch
             {
                 QuestionFlowPage.NewOrReturningUser => NewOrReturningUserForwardLink(),
                 QuestionFlowPage.OwnershipStatus => OwnershipStatusForwardLink(userData, entryPoint),
@@ -94,7 +95,20 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.Temperature => TemperatureForwardLink(userData),
                 QuestionFlowPage.EmailAddress => EmailAddressForwardLink(userData),
                 QuestionFlowPage.ServiceUnsuitable or QuestionFlowPage.AnswerSummary or QuestionFlowPage.YourRecommendations => throw new InvalidOperationException(),
-                _ => throw new ArgumentOutOfRangeException(nameof(questionFlowPage), questionFlowPage, null)
+                _ => throw new ArgumentOutOfRangeException(nameof(page), page, null)
+            };
+        }
+
+        public string SkipLink(QuestionFlowPage page, UserDataModel userData, QuestionFlowPage? entryPoint = null)
+        {
+            return page switch
+            {
+                QuestionFlowPage.AskForPostcode => AskForPostcodeSkipLink(userData),
+                QuestionFlowPage.HomeAge => HomeAgeSkipLink(userData, entryPoint),
+                QuestionFlowPage.NumberOfOccupants => NumberOfOccupantsSkipLink(userData, entryPoint),
+                QuestionFlowPage.Temperature => TemperatureSkipLink(userData),
+                QuestionFlowPage.EmailAddress => EmailAddressSkipLink(userData),
+                _ => throw new ArgumentOutOfRangeException()
             };
         }
 
@@ -746,6 +760,40 @@ namespace SeaPublicWebsite.Services
         {
             var reference = userData.Reference;
             return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency",new { reference });
+        }
+        
+        private string AskForPostcodeSkipLink(UserDataModel userData)
+        {
+            var reference = userData.Reference;
+            return linkGenerator.GetPathByAction("PropertyType_Get", "EnergyEfficiency", new { reference  });
+        }
+
+        private string HomeAgeSkipLink(UserDataModel userData, QuestionFlowPage? entryPoint)
+        {
+            var reference = userData.Reference;
+            return entryPoint is not null
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("WallConstruction_Get", "EnergyEfficiency", new { reference });
+        }
+
+        private string NumberOfOccupantsSkipLink(UserDataModel userData, QuestionFlowPage? entryPoint)
+        {
+            var reference = userData.Reference;
+            return entryPoint is not null
+                ? linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference })
+                : linkGenerator.GetPathByAction("HeatingPattern_Get", "EnergyEfficiency", new { reference });
+        }
+
+        private string TemperatureSkipLink(UserDataModel userData)
+        {
+            var reference = userData.Reference;
+            return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference  });
+        }
+
+        private string EmailAddressSkipLink(UserDataModel userData)
+        {
+            var reference = userData.Reference;
+            return linkGenerator.GetPathByAction("AnswerSummary", "EnergyEfficiency", new { reference  });
         }
 
         private bool HasFloor(UserDataModel userData)

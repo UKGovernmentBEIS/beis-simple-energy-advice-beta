@@ -156,7 +156,8 @@ namespace SeaPublicWebsite.Controllers
                 Postcode = userDataModel.Postcode,
                 HouseNameOrNumber = userDataModel.HouseNameOrNumber,
                 Reference = userDataModel.Reference,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.AskForPostcode, userDataModel)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.AskForPostcode, userDataModel),
+                SkipLink = questionFlowService.SkipLink(QuestionFlowPage.AskForPostcode, userDataModel)
             };
 
             return View("AskForPostcode", viewModel);
@@ -372,7 +373,8 @@ namespace SeaPublicWebsite.Controllers
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.HomeAge, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.HomeAge, userDataModel, entryPoint),
+                SkipLink = questionFlowService.SkipLink(QuestionFlowPage.HomeAge, userDataModel, entryPoint)
             };
 
             return View("HomeAge", viewModel);
@@ -847,7 +849,8 @@ namespace SeaPublicWebsite.Controllers
                 NumberOfOccupants = userDataModel.NumberOfOccupants,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.NumberOfOccupants, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.NumberOfOccupants, userDataModel, entryPoint),
+                SkipLink = questionFlowService.SkipLink(QuestionFlowPage.NumberOfOccupants, userDataModel, entryPoint)
             };
 
             return View("NumberOfOccupants", viewModel);
@@ -916,7 +919,8 @@ namespace SeaPublicWebsite.Controllers
                 Temperature = userDataModel.Temperature,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.Temperature, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.Temperature, userDataModel, entryPoint),
+                SkipLink = questionFlowService.SkipLink(QuestionFlowPage.Temperature, userDataModel, entryPoint)
             };
 
             return View("Temperature", viewModel);
@@ -949,7 +953,8 @@ namespace SeaPublicWebsite.Controllers
                 EmailAddress = userDataModel.EmailAddress,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.EmailAddress, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.EmailAddress, userDataModel, entryPoint),
+                SkipLink = questionFlowService.SkipLink(QuestionFlowPage.EmailAddress, userDataModel, entryPoint)
             };
 
             return View("EmailAddress", viewModel);
