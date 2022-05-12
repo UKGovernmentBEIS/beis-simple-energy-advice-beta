@@ -10,7 +10,7 @@ using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.ExternalServices.OpenEpc;
-using SeaPublicWebsite.Helpers;
+using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
 
 namespace SeaPublicWebsite
@@ -36,6 +36,12 @@ namespace SeaPublicWebsite
             ConfigureFileRepository(services);
             ConfigureEpcApi(services);
             ConfigureGovUkNotify(services);
+
+            if (!webHostEnvironment.IsProduction())
+            {
+                services.Configure<BasicAuthMiddlewareConfiguration>(
+                    configuration.GetSection(BasicAuthMiddlewareConfiguration.ConfigSection));
+            }
             
             services.AddControllersWithViews(options =>
             {

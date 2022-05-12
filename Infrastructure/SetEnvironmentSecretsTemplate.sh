@@ -13,8 +13,8 @@
 PAAS_ENV_SHORTNAME="<REAL_VALUE_HERE>"
 
 # Basic Auth credentials to access the site
-cf set-env "sea-alpha-${PAAS_ENV_SHORTNAME}" BasicAuthUsername "<REAL_VALUE_HERE>"
-cf set-env "sea-alpha-${PAAS_ENV_SHORTNAME}" BasicAuthPassword "<REAL_VALUE_HERE>"
+cf set-env "sea-alpha-${PAAS_ENV_SHORTNAME}" BasicAuth__Username "<REAL_VALUE_HERE>"
+cf set-env "sea-alpha-${PAAS_ENV_SHORTNAME}" BasicAuth__Password "<REAL_VALUE_HERE>"
 
 # DfLUHC EPC API Credentials
 cf set-env "sea-alpha-${PAAS_ENV_SHORTNAME}" EpbEpc__Username "<REAL_VALUE_HERE>"
