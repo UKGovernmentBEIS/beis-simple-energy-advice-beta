@@ -1,5 +1,4 @@
-﻿using SeaPublicWebsite.Helpers.UserFlow;
-using GovUkDesignSystem.Attributes.ValidationAttributes;
+﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency

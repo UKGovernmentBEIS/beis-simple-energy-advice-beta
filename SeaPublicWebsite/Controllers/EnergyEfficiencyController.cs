@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
-using SeaPublicWebsite.Helpers.UserFlow;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations;
@@ -16,12 +15,12 @@ namespace SeaPublicWebsite.Controllers
     public class EnergyEfficiencyController : Controller
     {
         private readonly UserDataStore userDataStore;
-        private readonly IPageLinker pageLinker;
+        private readonly IQuestionFlowService questionFlowService;
 
-        public EnergyEfficiencyController(UserDataStore userDataStore, IPageLinker pageLinker)
+        public EnergyEfficiencyController(UserDataStore userDataStore, IQuestionFlowService questionFlowService)
         {
             this.userDataStore = userDataStore;
-            this.pageLinker = pageLinker;
+            this.questionFlowService = questionFlowService;
         }
         
         
@@ -37,7 +36,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var viewModel = new NewOrReturningUserViewModel
             {
-                BackLink = pageLinker.BackLink(PageName.NewOrReturningUser, new UserDataModel())
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.NewOrReturningUser, new UserDataModel())
             };
             return View("NewOrReturningUser", viewModel);
         }
@@ -68,7 +67,7 @@ namespace SeaPublicWebsite.Controllers
 
         
         [HttpGet("ownership-status/{reference}")]
-        public IActionResult OwnershipStatus_Get(string reference, PageName? entryPoint = null)
+        public IActionResult OwnershipStatus_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
@@ -77,7 +76,7 @@ namespace SeaPublicWebsite.Controllers
                 OwnershipStatus = userDataModel.OwnershipStatus,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.OwnershipStatus, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.OwnershipStatus, userDataModel, entryPoint)
             };
 
             return View("OwnershipStatus", viewModel);
@@ -96,12 +95,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.OwnershipStatus = viewModel.OwnershipStatus;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.OwnershipStatus, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.OwnershipStatus, userDataModel, viewModel.EntryPoint));
         }
 
         
         [HttpGet("country/{reference}")]
-        public IActionResult Country_Get(string reference, PageName? entryPoint = null)
+        public IActionResult Country_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -110,7 +109,7 @@ namespace SeaPublicWebsite.Controllers
                 Country = userDataModel.Country,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.Country, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.Country, userDataModel, entryPoint)
             };
 
             return View("Country", viewModel);
@@ -129,7 +128,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.Country = viewModel.Country;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.Country, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.Country, userDataModel, viewModel.EntryPoint));
         }
 
 
@@ -141,7 +140,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 Reference = userDataModel.Reference,
                 Country = userDataModel.Country,
-                BackLink = pageLinker.BackLink(PageName.ServiceUnsuitable, userDataModel)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.ServiceUnsuitable, userDataModel)
             };
             
             return View("ServiceUnsuitable", viewModel);
@@ -157,7 +156,7 @@ namespace SeaPublicWebsite.Controllers
                 Postcode = userDataModel.Postcode,
                 HouseNameOrNumber = userDataModel.HouseNameOrNumber,
                 Reference = userDataModel.Reference,
-                BackLink = pageLinker.BackLink(PageName.AskForPostcode, userDataModel)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.AskForPostcode, userDataModel)
             };
 
             return View("AskForPostcode", viewModel);
@@ -182,7 +181,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HouseNameOrNumber = viewModel.HouseNameOrNumber;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.AskForPostcode, userDataModel));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.AskForPostcode, userDataModel));
         }
 
         
@@ -207,7 +206,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = reference,
                 EPCList = epcList,
                 SelectedEpcId = epcList.Count == 1 ? epcList[0].EpcId : null,
-                BackLink = pageLinker.BackLink(PageName.ConfirmAddress, userDataModel)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.ConfirmAddress, userDataModel)
             };
 
             return View("ConfirmAddress", viewModel);
@@ -227,12 +226,12 @@ namespace SeaPublicWebsite.Controllers
 
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.ConfirmAddress, userDataModel));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.ConfirmAddress, userDataModel));
         }
 
 
         [HttpGet("property-type/{reference}")]
-        public IActionResult PropertyType_Get(string reference, PageName? entryPoint = null)
+        public IActionResult PropertyType_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -241,7 +240,7 @@ namespace SeaPublicWebsite.Controllers
                 PropertyType = userDataModel.PropertyType,
                 Reference = reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.PropertyType, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.PropertyType, userDataModel, entryPoint)
             };
 
             return View("PropertyType", viewModel);
@@ -260,11 +259,11 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.PropertyType = viewModel.PropertyType;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.PropertyType, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.PropertyType, userDataModel, viewModel.EntryPoint));
         }
 
         [HttpGet("house-type/{reference}")]
-        public IActionResult HouseType_Get(string reference, PageName? entryPoint = null)
+        public IActionResult HouseType_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -273,7 +272,7 @@ namespace SeaPublicWebsite.Controllers
                 HouseType = userDataModel.HouseType,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.HouseType, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.HouseType, userDataModel, entryPoint)
             };
 
             return View("HouseType", viewModel);
@@ -292,12 +291,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HouseType = viewModel.HouseType;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.HouseType, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.HouseType, userDataModel, viewModel.EntryPoint));
         }
 
         
         [HttpGet("bungalow-type/{reference}")]
-        public IActionResult BungalowType_Get(string reference, PageName? entryPoint = null)
+        public IActionResult BungalowType_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -306,7 +305,7 @@ namespace SeaPublicWebsite.Controllers
                 BungalowType = userDataModel.BungalowType,
                 Reference = reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.BungalowType, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.BungalowType, userDataModel, entryPoint)
             };
 
             return View("BungalowType", viewModel);
@@ -325,12 +324,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.BungalowType = viewModel.BungalowType;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.BungalowType, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.BungalowType, userDataModel, viewModel.EntryPoint));
         }
 
         
         [HttpGet("flat-type/{reference}")]
-        public IActionResult FlatType_Get(string reference, PageName? entryPoint = null)
+        public IActionResult FlatType_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -339,7 +338,7 @@ namespace SeaPublicWebsite.Controllers
                 FlatType = userDataModel.FlatType,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.FlatType, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.FlatType, userDataModel, entryPoint)
             };
 
             return View("FlatType", viewModel);
@@ -358,12 +357,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.FlatType = viewModel.FlatType;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.FlatType, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.FlatType, userDataModel, viewModel.EntryPoint));
         }
 
         
         [HttpGet("home-age/{reference}")]
-        public IActionResult HomeAge_Get(string reference, PageName? entryPoint = null)
+        public IActionResult HomeAge_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -373,7 +372,7 @@ namespace SeaPublicWebsite.Controllers
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.HomeAge, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.HomeAge, userDataModel, entryPoint)
             };
 
             return View("HomeAge", viewModel);
@@ -392,12 +391,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.YearBuilt = viewModel.YearBuilt;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.HomeAge, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.HomeAge, userDataModel, viewModel.EntryPoint));
         }
 
         
         [HttpGet("wall-construction/{reference}")]
-        public IActionResult WallConstruction_Get(string reference, PageName? entryPoint = null)
+        public IActionResult WallConstruction_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -408,7 +407,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 Epc = userDataModel.Epc,
-                BackLink = pageLinker.BackLink(PageName.WallConstruction, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.WallConstruction, userDataModel, entryPoint)
             };
 
             return View("WallConstruction", viewModel);
@@ -427,12 +426,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.WallConstruction = viewModel.WallConstruction;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.WallConstruction, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.WallConstruction, userDataModel, viewModel.EntryPoint));
         }
 
         
         [HttpGet("cavity-walls-insulated/{reference}")]
-        public IActionResult CavityWallsInsulated_Get(string reference, PageName? entryPoint = null)
+        public IActionResult CavityWallsInsulated_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
@@ -444,7 +443,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 Epc = userDataModel.Epc,
-                BackLink = pageLinker.BackLink(PageName.CavityWallsInsulated, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.CavityWallsInsulated, userDataModel, entryPoint)
             };
 
             return View("CavityWallsInsulated", viewModel);
@@ -463,12 +462,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.CavityWallsInsulated = viewModel.CavityWallsInsulated;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.CavityWallsInsulated, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.CavityWallsInsulated, userDataModel, viewModel.EntryPoint));
         }
 
 
         [HttpGet("solid-walls-insulated/{reference}")]
-        public IActionResult SolidWallsInsulated_Get(string reference, PageName? entryPoint = null)
+        public IActionResult SolidWallsInsulated_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
@@ -480,7 +479,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 Epc = userDataModel.Epc,
-                BackLink = pageLinker.BackLink(PageName.SolidWallsInsulated, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.SolidWallsInsulated, userDataModel, entryPoint)
             };
 
             return View("SolidWallsInsulated", viewModel);
@@ -499,12 +498,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.SolidWallsInsulated = viewModel.SolidWallsInsulated;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.SolidWallsInsulated, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.SolidWallsInsulated, userDataModel, viewModel.EntryPoint));
         }
 
 
         [HttpGet("floor-construction/{reference}")]
-        public IActionResult FloorConstruction_Get(string reference, PageName? entryPoint = null)
+        public IActionResult FloorConstruction_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -516,7 +515,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 Epc = userDataModel.Epc,
-                BackLink = pageLinker.BackLink(PageName.FloorConstruction, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.FloorConstruction, userDataModel, entryPoint)
             };
 
             return View("FloorConstruction", viewModel);
@@ -535,12 +534,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.FloorConstruction = viewModel.FloorConstruction;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.FloorConstruction, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.FloorConstruction, userDataModel, viewModel.EntryPoint));
         }
 
         
         [HttpGet("floor-insulated/{reference}")]
-        public IActionResult FloorInsulated_Get(string reference, PageName? entryPoint = null)
+        public IActionResult FloorInsulated_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -551,7 +550,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 Epc = userDataModel.Epc,
-                BackLink = pageLinker.BackLink(PageName.FloorInsulated, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.FloorInsulated, userDataModel, entryPoint)
             };
 
             return View("FloorInsulated", viewModel);
@@ -570,11 +569,11 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.FloorInsulated = viewModel.FloorInsulated;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.FloorInsulated, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.FloorInsulated, userDataModel, viewModel.EntryPoint));
         }
 
         [HttpGet("roof-construction/{reference}")]
-        public IActionResult RoofConstruction_Get(string reference, PageName? entryPoint = null)
+        public IActionResult RoofConstruction_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -585,7 +584,7 @@ namespace SeaPublicWebsite.Controllers
                 RoofConstruction = userDataModel.RoofConstruction,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.RoofConstruction, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.RoofConstruction, userDataModel, entryPoint)
             };
 
             return View("RoofConstruction", viewModel);
@@ -604,11 +603,11 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.RoofConstruction = viewModel.RoofConstruction;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.RoofConstruction, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.RoofConstruction, userDataModel, viewModel.EntryPoint));
         }
 
         [HttpGet("accessible-loft-space/{reference}")]
-        public IActionResult AccessibleLoftSpace_Get(string reference, PageName? entryPoint = null)
+        public IActionResult AccessibleLoftSpace_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
@@ -617,7 +616,7 @@ namespace SeaPublicWebsite.Controllers
                 AccessibleLoftSpace = userDataModel.AccessibleLoftSpace,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.AccessibleLoftSpace, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.AccessibleLoftSpace, userDataModel, entryPoint)
             };
 
             return View("AccessibleLoftSpace", viewModel);
@@ -636,11 +635,11 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.AccessibleLoftSpace = viewModel.AccessibleLoftSpace;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.AccessibleLoftSpace, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.AccessibleLoftSpace, userDataModel, viewModel.EntryPoint));
         }
 
         [HttpGet("roof-insulated/{reference}")]
-        public IActionResult RoofInsulated_Get(string reference, PageName? entryPoint = null)
+        public IActionResult RoofInsulated_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -650,7 +649,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 YearBuilt = userDataModel.YearBuilt,
-                BackLink = pageLinker.BackLink(PageName.RoofInsulated, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.RoofInsulated, userDataModel, entryPoint)
             };
 
             return View("RoofInsulated", viewModel);
@@ -669,12 +668,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.RoofInsulated = viewModel.RoofInsulated;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.RoofInsulated, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.RoofInsulated, userDataModel, viewModel.EntryPoint));
         }
 
         
         [HttpGet("glazing-type/{reference}")]
-        public IActionResult GlazingType_Get(string reference, PageName? entryPoint = null)
+        public IActionResult GlazingType_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -683,7 +682,7 @@ namespace SeaPublicWebsite.Controllers
                 GlazingType = userDataModel.GlazingType,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.GlazingType, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.GlazingType, userDataModel, entryPoint)
             };
 
             return View("GlazingType", viewModel);
@@ -702,11 +701,11 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.GlazingType = viewModel.GlazingType;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.GlazingType, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.GlazingType, userDataModel, viewModel.EntryPoint));
         }
 
         [HttpGet("outdoor-space/{reference}")]
-        public IActionResult OutdoorSpace_Get(string reference, PageName? entryPoint = null)
+        public IActionResult OutdoorSpace_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -715,7 +714,7 @@ namespace SeaPublicWebsite.Controllers
                 HasOutdoorSpace = userDataModel.HasOutdoorSpace,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.OutdoorSpace, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.OutdoorSpace, userDataModel, entryPoint)
             };
 
             return View("OutdoorSpace", viewModel);
@@ -734,12 +733,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HasOutdoorSpace = viewModel.HasOutdoorSpace;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.OutdoorSpace, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.OutdoorSpace, userDataModel, viewModel.EntryPoint));
         }
 
         
         [HttpGet("heating-type/{reference}")]
-        public IActionResult HeatingType_Get(string reference, PageName? entryPoint = null)
+        public IActionResult HeatingType_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -749,7 +748,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 Epc = userDataModel.Epc,
-                BackLink = pageLinker.BackLink(PageName.HeatingType, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.HeatingType, userDataModel, entryPoint)
             };
 
             return View("HeatingType", viewModel);
@@ -768,11 +767,11 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HeatingType = viewModel.HeatingType;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.HeatingType, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.HeatingType, userDataModel, viewModel.EntryPoint));
         }
 
         [HttpGet("other-heating-type/{reference}")]
-        public IActionResult OtherHeatingType_Get(string reference, PageName? entryPoint = null)
+        public IActionResult OtherHeatingType_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
@@ -782,7 +781,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 Epc = userDataModel.Epc,
-                BackLink = pageLinker.BackLink(PageName.OtherHeatingType, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.OtherHeatingType, userDataModel, entryPoint)
             };
 
             return View("OtherHeatingType", viewModel);
@@ -801,12 +800,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.OtherHeatingType = viewModel.OtherHeatingType;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.OtherHeatingType, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.OtherHeatingType, userDataModel, viewModel.EntryPoint));
         }
 
 
         [HttpGet("hot-water-cylinder/{reference}")]
-        public IActionResult HotWaterCylinder_Get(string reference, PageName? entryPoint = null)
+        public IActionResult HotWaterCylinder_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
@@ -815,7 +814,7 @@ namespace SeaPublicWebsite.Controllers
                 HasHotWaterCylinder = userDataModel.HasHotWaterCylinder,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.HotWaterCylinder, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.HotWaterCylinder, userDataModel, entryPoint)
             };
 
             return View("HotWaterCylinder", viewModel);
@@ -834,12 +833,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HasHotWaterCylinder = viewModel.HasHotWaterCylinder;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.HotWaterCylinder, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.HotWaterCylinder, userDataModel, viewModel.EntryPoint));
         }
 
         
         [HttpGet("number-of-occupants/{reference}")]
-        public IActionResult NumberOfOccupants_Get(string reference, PageName? entryPoint = null)
+        public IActionResult NumberOfOccupants_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
@@ -848,7 +847,7 @@ namespace SeaPublicWebsite.Controllers
                 NumberOfOccupants = userDataModel.NumberOfOccupants,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.NumberOfOccupants, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.NumberOfOccupants, userDataModel, entryPoint)
             };
 
             return View("NumberOfOccupants", viewModel);
@@ -867,12 +866,12 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.NumberOfOccupants = viewModel.NumberOfOccupants;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.NumberOfOccupants, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.NumberOfOccupants, userDataModel, viewModel.EntryPoint));
         }
 
         
         [HttpGet("heating-pattern/{reference}")]
-        public IActionResult HeatingPattern_Get(string reference, PageName? entryPoint = null)
+        public IActionResult HeatingPattern_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -882,7 +881,7 @@ namespace SeaPublicWebsite.Controllers
                 HoursOfHeating = userDataModel.HoursOfHeating,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.HeatingPattern, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.HeatingPattern, userDataModel, entryPoint)
             };
 
             return View("HeatingPattern", viewModel);
@@ -903,12 +902,12 @@ namespace SeaPublicWebsite.Controllers
 
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.HeatingPattern, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.HeatingPattern, userDataModel, viewModel.EntryPoint));
         }
 
         
         [HttpGet("temperature/{reference}")]
-        public IActionResult Temperature_Get(string reference, PageName? entryPoint = null)
+        public IActionResult Temperature_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
@@ -917,7 +916,7 @@ namespace SeaPublicWebsite.Controllers
                 Temperature = userDataModel.Temperature,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.Temperature, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.Temperature, userDataModel, entryPoint)
             };
 
             return View("Temperature", viewModel);
@@ -936,11 +935,11 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.Temperature = viewModel.Temperature;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.Temperature, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.Temperature, userDataModel, viewModel.EntryPoint));
         }
         
         [HttpGet("email-address/{reference}")]
-        public IActionResult EmailAddress_Get(string reference, PageName? entryPoint = null)
+        public IActionResult EmailAddress_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
@@ -950,7 +949,7 @@ namespace SeaPublicWebsite.Controllers
                 EmailAddress = userDataModel.EmailAddress,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = pageLinker.BackLink(PageName.EmailAddress, userDataModel, entryPoint)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.EmailAddress, userDataModel, entryPoint)
             };
 
             return View("EmailAddress", viewModel);
@@ -970,7 +969,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.EmailAddress = viewModel.HasEmailAddress == HasEmailAddress.Yes ? viewModel.EmailAddress : null;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(pageLinker.ForwardLink(PageName.EmailAddress, userDataModel, viewModel.EntryPoint));
+            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.EmailAddress, userDataModel, viewModel.EntryPoint));
         }
 
         
@@ -982,7 +981,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new AnswerSummaryViewModel
             {
                 UserDataModel = userDataModel,
-                BackLink = pageLinker.BackLink(PageName.AnswerSummary, userDataModel)
+                BackLink = questionFlowService.BackLink(QuestionFlowPage.AnswerSummary, userDataModel)
             };
             
             return View("AnswerSummary", viewModel);
@@ -1016,7 +1015,7 @@ namespace SeaPublicWebsite.Controllers
                     FirstReferenceId = (int)recommendationsForUser[0].Key,
                     HasEmailAddress = userDataModel.HasEmailAddress,
                     EmailAddress = userDataModel.EmailAddress,
-                    BackLink = pageLinker.BackLink(PageName.YourRecommendations, userDataModel)
+                    BackLink = questionFlowService.BackLink(QuestionFlowPage.YourRecommendations, userDataModel)
                 }
 ;            return View("YourRecommendations", viewModel);
         }

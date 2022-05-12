@@ -1,10 +1,10 @@
-﻿using SeaPublicWebsite.Helpers.UserFlow;
+﻿using SeaPublicWebsite.Services;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class QuestionFlowViewModel
     {
         public string BackLink { get; set; }
-        public PageName? EntryPoint { get; set; }
+        public QuestionFlowPage? EntryPoint { get; set; }
     }
 }

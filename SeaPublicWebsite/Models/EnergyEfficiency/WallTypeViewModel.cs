@@ -1,6 +1,6 @@
-﻿using SeaPublicWebsite.Helpers.UserFlow;
-using GovUkDesignSystem.Attributes.ValidationAttributes;
+﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+using SeaPublicWebsite.Services;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
@@ -12,6 +12,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Reference { get; set; }
         
         public int? YearBuilt { get; set; }
-        public PageName? EntryPoint { get; set; }
+        public QuestionFlowPage? EntryPoint { get; set; }
     }
 }
