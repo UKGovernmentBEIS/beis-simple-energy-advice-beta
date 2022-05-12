@@ -9,7 +9,7 @@ namespace SeaPublicWebsite.Helpers.UserFlow
     { 
         public string BackLink(PageName page, UserDataModel userData, PageName? entryPoint = null, string from = null);
         
-        public string ForwardLink(PageName page, UserDataModel userData, PageName? entryPoint = null, string houseNameOrNumber = null);
+        public string ForwardLink(PageName page, UserDataModel userData, PageName? entryPoint = null);
     }
 
     public class PageLinker: IPageLinker
@@ -63,14 +63,14 @@ namespace SeaPublicWebsite.Helpers.UserFlow
             };
         }
 
-        public string ForwardLink(PageName page, UserDataModel userData, PageName? entryPoint = null, string houseNameOrNumber = null)
+        public string ForwardLink(PageName page, UserDataModel userData, PageName? entryPoint = null)
         {
             return page switch
             {
                 PageName.NewOrReturningUser => NewOrReturningUserForwardLink(),
                 PageName.OwnershipStatus => OwnershipStatusForwardLink(userData, entryPoint),
                 PageName.Country => CountryForwardLink(userData, entryPoint),
-                PageName.AskForPostcode => AskForPostcodeForwardLink(userData, houseNameOrNumber),
+                PageName.AskForPostcode => AskForPostcodeForwardLink(userData),
                 PageName.ConfirmAddress => ConfirmAddressForwardLink(userData),
                 PageName.PropertyType => PropertyTypeForwardLink(userData, entryPoint),
                 PageName.HouseType => HouseTypeForwardLink(userData, entryPoint),
@@ -437,10 +437,10 @@ namespace SeaPublicWebsite.Helpers.UserFlow
                 : linkGenerator.GetPathByAction("AskForPostcode_Get", "EnergyEfficiency", new { reference });
         }
 
-        private string AskForPostcodeForwardLink(UserDataModel userData, string houseNameOrNumber)
+        private string AskForPostcodeForwardLink(UserDataModel userData)
         {
             var reference = userData.Reference;
-            return linkGenerator.GetPathByAction("ConfirmAddress_Get", "EnergyEfficiency", new { reference, houseNameOrNumber });
+            return linkGenerator.GetPathByAction("ConfirmAddress_Get", "EnergyEfficiency", new { reference });
         }
 
         private string ConfirmAddressForwardLink(UserDataModel userData)

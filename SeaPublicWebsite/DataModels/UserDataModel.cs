@@ -17,7 +17,7 @@ namespace SeaPublicWebsite.DataModels
         // public List<UserInterests> UserInterests { get; set; }
         public string Postcode { get; set; }
         // public string EpcLmkKey { get; set; }
-        
+        public string HouseNameOrNumber { get; set; }
         public PropertyType? PropertyType { get; set; }
         public HouseType? HouseType { get; set; }
         public BungalowType? BungalowType { get; set; }

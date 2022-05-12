@@ -155,6 +155,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new AskForPostcodeViewModel
             {
                 Postcode = userDataModel.Postcode,
+                HouseNameOrNumber = userDataModel.HouseNameOrNumber,
                 Reference = userDataModel.Reference,
                 BackLink = pageLinker.BackLink(PageName.AskForPostcode, userDataModel)
             };
@@ -178,6 +179,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.Postcode = viewModel.Postcode;
+            userDataModel.HouseNameOrNumber = viewModel.HouseNameOrNumber;
             userDataStore.SaveUserData(userDataModel);
 
             return Redirect(pageLinker.ForwardLink(PageName.AskForPostcode, userDataModel));
@@ -185,12 +187,13 @@ namespace SeaPublicWebsite.Controllers
 
         
         [HttpGet("address/{reference}")]
-        public IActionResult ConfirmAddress_Get(string reference, string houseNameOrNumber)
+        public IActionResult ConfirmAddress_Get(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
             var epcList = OpenEpcApi.GetEpcsForPostcode(userDataModel.Postcode);
-
+            var houseNameOrNumber = userDataModel.HouseNameOrNumber;
+            
             if (houseNameOrNumber != null)
             {
                 var filteredEpcList = epcList.Where(e =>
