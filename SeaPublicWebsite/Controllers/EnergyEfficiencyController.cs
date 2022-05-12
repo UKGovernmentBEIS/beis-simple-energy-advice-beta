@@ -216,6 +216,10 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("address/{reference}")]
         public IActionResult ConfirmAddress_Post(ConfirmAddressViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return ConfirmAddress_Get(viewModel.Reference);
+            }
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
             
             var epc = OpenEpcApi.GetEpcsForPostcode(userDataModel.Postcode).FirstOrDefault(e => e.EpcId == viewModel.SelectedEpcId);
