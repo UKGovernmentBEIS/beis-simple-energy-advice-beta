@@ -66,13 +66,13 @@ namespace SeaPublicWebsite
 
         private void ConfigureEpcApi(IServiceCollection services)
         {
-            services.AddScoped<IEpcApi, OpenEpcApi>();
             services.Configure<OpenEpcConfiguration>(
                 configuration.GetSection(OpenEpcConfiguration.ConfigSection));
+            services.AddScoped<IEpcApi, OpenEpcApi>();
             // TODO: When the EPB API is ready, uncomment this and remove the above:
-            // services.AddScoped<IEpcApi, EPBEPCApi>();
             // services.Configure<EpbEpcConfiguration>(
             //     Configuration.GetSection(EpbEpcConfiguration.ConfigSection));
+            // services.AddScoped<IEpcApi, EPBEPCApi>();
         }
 
         private void ConfigureGovUkNotify(IServiceCollection services)
