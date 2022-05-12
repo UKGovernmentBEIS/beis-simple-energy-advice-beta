@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.Models;
@@ -177,11 +176,11 @@ namespace SeaPublicWebsite.Services
                 }
             };
 
-        public static List<Recommendation> GetRecommendationsForUser(UserDataModel userData)
+        public static async Task<List<Recommendation>> GetRecommendationsForUserAsync(UserDataModel userData)
         {
             BreRequest request = CreateRequest(userData);
 
-            return BreApi.GetRecommendationsForUserRequest(request).Result;
+            return await BreApi.GetRecommendationsForUserRequestAsync(request);
         }
 
         private static BreRequest CreateRequest(UserDataModel userData)

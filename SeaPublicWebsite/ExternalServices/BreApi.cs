@@ -18,7 +18,7 @@ namespace SeaPublicWebsite.ExternalServices
 {
     public static class BreApi
     {
-        public static async Task<List<Recommendation>> GetRecommendationsForUserRequest(BreRequest request)
+        public static async Task<List<Recommendation>> GetRecommendationsForUserRequestAsync(BreRequest request)
         {
             try
             {
@@ -39,11 +39,11 @@ namespace SeaPublicWebsite.ExternalServices
                     string path = "/bemapi/energy_use";
                     string requestString = JsonConvert.SerializeObject(request);
                     StringContent stringContent = new(requestString);
-                    HttpResponseMessage response = await Task.FromResult(httpClient.PostAsync(path, stringContent)).Result;
+                    HttpResponseMessage response = await httpClient.PostAsync(path, stringContent);
 
                     if (response.IsSuccessStatusCode)
                     {
-                        string bodyString = await Task.FromResult(response.Content.ReadAsStringAsync().Result);
+                        string bodyString = await response.Content.ReadAsStringAsync();
                         JObject measures = JObject.FromObject(JObject.Parse(bodyString)["measures"] ?? new JObject());
 
                         List<Recommendation> recommendations = new List<Recommendation>();
@@ -73,11 +73,12 @@ namespace SeaPublicWebsite.ExternalServices
                         return recommendations;
                     }
 
-                    return null;
+                    throw new ArgumentNullException();
                 }
             }
             catch (Exception)
             {
+                // TODO: seabeta-192 to add a log here
                 return null;
             }
         }

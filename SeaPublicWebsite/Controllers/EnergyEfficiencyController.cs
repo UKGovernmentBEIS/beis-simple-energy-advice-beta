@@ -1136,10 +1136,10 @@ namespace SeaPublicWebsite.Controllers
 
         
         [HttpGet("your-recommendations/{reference}")]
-        public IActionResult YourRecommendations_Get(string reference)
+        public async Task<IActionResult> YourRecommendations_GetAsync(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
-            var recommendationsForUser = RecommendationService.GetRecommendationsForUser(userDataModel);
+            var recommendationsForUser = await RecommendationService.GetRecommendationsForUserAsync(userDataModel);
             userDataModel.UserRecommendations = recommendationsForUser.Select(r => 
                 new UserRecommendation()
                 {
