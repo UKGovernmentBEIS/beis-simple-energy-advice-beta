@@ -37,7 +37,12 @@
 
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
 
-    @{
+    @await Html.GovUkCookieBanner(new CookieBannerViewModel
+    {
+        // TODO: Fill this in
+    });
+    
+@{
         List<HeaderNavigationViewModel> headerNavigationLinks = new List<HeaderNavigationViewModel>();
         // if (ViewBag.ServiceUnavailable != true)
         // {
