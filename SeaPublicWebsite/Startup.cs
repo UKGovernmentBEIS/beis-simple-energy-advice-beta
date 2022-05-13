@@ -32,6 +32,7 @@ namespace SeaPublicWebsite
             services.AddScoped<UserDataStore, UserDataStore>();
             services.AddMemoryCache();
             services.AddSingleton<StaticAssetsVersioningService>();
+            services.AddSingleton<CookieService>();
 
             ConfigureFileRepository(services);
             ConfigureEpcApi(services);

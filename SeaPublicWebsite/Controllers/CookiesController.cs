@@ -11,14 +11,14 @@ public class CookiesController: Controller
     [HttpGet("/cookies")]
     public IActionResult CookieSettingsGet()
     {
-        throw new Exception();
+        return View("CookieSettings");
     }
 
     [HttpPost("/cookies")]
     [ValidateAntiForgeryToken]
     public IActionResult CookieSettingsPost()
     {
-        throw new Exception();
+        return View("CookieSettings");
     }
 
     [HttpPost("/cookie-consent")]
@@ -41,7 +41,7 @@ public class CookiesController: Controller
     [HttpGet("/cookie-details")]
     public IActionResult CookieDetails()
     {
-        throw new Exception();
+        return View("CookieDetails");
     }
 
 }
