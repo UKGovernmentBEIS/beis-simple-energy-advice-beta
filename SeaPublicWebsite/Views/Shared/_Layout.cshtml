@@ -4,6 +4,7 @@
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Http.Extensions
 @using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.Cookies
 @using SeaPublicWebsite.Services
 @using SeaPublicWebsite.Services.Cookies
 @inject StaticAssetsVersioningService StaticAssetsVersioning
@@ -120,5 +121,17 @@
     <script src="@(StaticAssetsVersioning.GetAppJsFilename())"></script>
     <script>window.GOVUKFrontend.initAll()</script>
     @RenderSection("AfterLoadedCompiledScripts", false)
+
+@{
+    if (CookieService.TryGetCookie<CookieSettings>(Context.Request, CookieService.Configuration.CookieSettingsCookieName, out var cookie))
+    {
+        if (cookie.GoogleAnalytics)
+        {
+            <script>
+                // TODO: Google script
+            </script>
+        }
+    }
+}
 </body>
 </html>
