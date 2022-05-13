@@ -5,7 +5,9 @@
 @using Microsoft.AspNetCore.Http.Extensions
 @using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Services
+@using SeaPublicWebsite.Services.Cookies
 @inject StaticAssetsVersioningService StaticAssetsVersioning
+@inject CookieService cookieService
 @{
     string assetsPath = "/assets/images";
 }
@@ -41,16 +43,18 @@
     </script>
 
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
-
 @await Html.GovUkCookieBanner(new CookieBannerViewModel
 {
     NameOfService = "Improve your property's energy efficiency",
+    BannerState = Context.Request.Path.Value?.Equals("/cookies") is true || cookieService.HasSeenCookieLatestMessage(Context.Request)
+        ? BannerState.Hide
+        : BannerState.ShowBanner,
     CookieType = CookieType.Analytics,
     ButtonClickAction = @Url.Action("CookieConsent", "Cookie"),
     ViewCookiesLink = @Url.Action("CookieSettings_Get", "Cookie"),
-    ReturnUrl = Context.Request.GetEncodedUrl()
+    ReturnUrl = Context.Request.GetEncodedPathAndQuery()
 });
-    
+
 @{
         List<HeaderNavigationViewModel> headerNavigationLinks = new List<HeaderNavigationViewModel>();
 
