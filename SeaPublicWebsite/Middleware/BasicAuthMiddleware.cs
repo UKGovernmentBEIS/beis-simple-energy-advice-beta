@@ -3,16 +3,19 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 
-namespace SeaPublicWebsite.Helpers
+namespace SeaPublicWebsite.Middleware
 {
     public class BasicAuthMiddleware
     {
         private readonly RequestDelegate next;
+        private readonly BasicAuthMiddlewareConfiguration configuration;
 
-        public BasicAuthMiddleware(RequestDelegate next)
+        public BasicAuthMiddleware(RequestDelegate next, IOptions<BasicAuthMiddlewareConfiguration> options)
         {
             this.next = next;
+            configuration = options.Value;
         }
 
         public async Task Invoke(HttpContext httpContext)
@@ -23,8 +26,6 @@ namespace SeaPublicWebsite.Helpers
                 return;
             }
 
-            // Add HTTP Basic Authentication in our non-production environments to make sure people don't accidentally stumble across the site
-            // The site will still also be secured by the usual login/cookie auth - this is just an extra layer to make the site not publicly accessible
             if (IsAuthorised(httpContext))
             {
                 await next.Invoke(httpContext);
@@ -45,18 +46,12 @@ namespace SeaPublicWebsite.Helpers
                 var username = credentials[0];
                 var password = credentials[1];
 
-                if (Global.BasicAuthUsername == username &&
-                    Global.BasicAuthPassword == password)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return configuration.Username == username
+                       && configuration.Password == password;
             }
             catch
             {
+                // Default to denying access if anything goes wrong
                 return false;
             }
         }
@@ -64,7 +59,7 @@ namespace SeaPublicWebsite.Helpers
         private static void SendUnauthorisedResponse(HttpContext httpContext)
         {
             httpContext.Response.StatusCode = 401;
-            AddOrUpdateHeader(httpContext, "WWW-Authenticate", "Basic realm=\"Gender Pay Gap service\"");
+            AddOrUpdateHeader(httpContext, "WWW-Authenticate", "Basic realm=\"Improve Your Property's Energy Efficiency\"");
         }
 
         private static void AddOrUpdateHeader(HttpContext httpContext, string headerName, string headerValue)

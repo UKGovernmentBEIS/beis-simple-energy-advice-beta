@@ -8,6 +8,7 @@ using SeaPublicWebsite.Helpers;
 
 namespace SeaPublicWebsite.ExternalServices.FileRepositories
 {
+    // TODO: SEABETA-193 Remove this file
     public class AwsFileRepository : IFileRepository
     {
 

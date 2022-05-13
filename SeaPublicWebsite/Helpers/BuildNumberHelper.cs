@@ -11,7 +11,6 @@ namespace SeaPublicWebsite.Helpers
             public string BuildNumber { get; set; }
         }
 
-
         private static BuildNumberObject cachedBuildNumber;
         
         public static string GetBuildNumber()
