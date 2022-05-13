@@ -7,7 +7,7 @@
 @using SeaPublicWebsite.Services
 @using SeaPublicWebsite.Services.Cookies
 @inject StaticAssetsVersioningService StaticAssetsVersioning
-@inject CookieService cookieService
+@inject CookieService CookieService
 @{
     string assetsPath = "/assets/images";
 }
@@ -46,7 +46,7 @@
 @await Html.GovUkCookieBanner(new CookieBannerViewModel
 {
     NameOfService = "Improve your property's energy efficiency",
-    BannerState = Context.Request.Path.Value?.Equals("/cookies") is true || cookieService.HasSeenCookieLatestMessage(Context.Request)
+    BannerState = Context.Request.Path.Value?.Equals("/cookies") is true || CookieService.HasSeenCookieLatestMessage(Context.Request)
         ? BannerState.Hide
         : BannerState.ShowBanner,
     CookieType = CookieType.Analytics,
@@ -101,7 +101,7 @@
             new FooterLinksViewModel
             {
                 Text = "Cookies",
-                Href = Url.Action("Index", "Home")
+                Href = Url.Action("CookieSettings_Get", "Cookie")
             },
             new FooterLinksViewModel
             {

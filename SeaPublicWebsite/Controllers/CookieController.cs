@@ -17,16 +17,29 @@ public class CookieController: Controller
     }
 
     [HttpGet("/cookies")]
-    public IActionResult CookieSettings_Get()
+    public IActionResult CookieSettings_Get(bool changesHaveBeenSaved = false)
     {
-        return View("CookieSettings");
+        cookieService.TryGetCookie<CookieSettings>(Request, cookieService.Configuration.CookieSettingsCookieName, out var cookie);
+        
+        var viewModel = new CookieSettingsViewModel
+        {
+            GoogleAnalytics = cookie?.GoogleAnalytics is true,
+            ChangesHaveBeenSaved = changesHaveBeenSaved
+        };
+        return View("CookieSettings", viewModel);
     }
 
     [HttpPost("/cookies")]
     [ValidateAntiForgeryToken]
-    public IActionResult CookieSettings_Post()
+    public IActionResult CookieSettings_Post(CookieSettingsViewModel viewModel)
     {
-        return View("CookieSettings");
+        var cookieSettings = new CookieSettings
+        {
+            Version = cookieService.Configuration.CurrentCookieMessageVersion,
+            GoogleAnalytics = viewModel.GoogleAnalytics
+        };
+        cookieService.SetCookiesSettings(Response, cookieSettings);
+        return CookieSettings_Get(changesHaveBeenSaved: true);
     }
 
     [HttpPost("/cookie-consent")]
