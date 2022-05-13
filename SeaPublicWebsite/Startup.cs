@@ -12,6 +12,7 @@ using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.ExternalServices.OpenEpc;
 using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
+using SeaPublicWebsite.Services.Cookies;
 
 namespace SeaPublicWebsite
 {
@@ -32,11 +33,11 @@ namespace SeaPublicWebsite
             services.AddScoped<UserDataStore, UserDataStore>();
             services.AddMemoryCache();
             services.AddSingleton<StaticAssetsVersioningService>();
-            services.AddSingleton<CookieService>();
 
             ConfigureFileRepository(services);
             ConfigureEpcApi(services);
             ConfigureGovUkNotify(services);
+            ConfigureCookieService(services);
 
             if (!webHostEnvironment.IsProduction())
             {
@@ -48,6 +49,13 @@ namespace SeaPublicWebsite
             {
                 options.Filters.Add<ErrorHandlingFilter>();
             });
+        }
+
+        private void ConfigureCookieService(IServiceCollection services)
+        {
+            services.Configure<CookieServiceConfiguration>(
+                configuration.GetSection(CookieServiceConfiguration.ConfigSection));
+            services.AddSingleton<CookieService>();
         }
 
         private void ConfigureFileRepository(IServiceCollection services)

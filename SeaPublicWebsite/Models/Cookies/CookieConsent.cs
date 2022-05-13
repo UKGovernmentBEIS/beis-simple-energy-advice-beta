@@ -1,4 +1,4 @@
-﻿namespace SeaPublicWebsite.Models.Cookie;
+﻿namespace SeaPublicWebsite.Models.Cookies;
 
 public class CookieConsent
 {

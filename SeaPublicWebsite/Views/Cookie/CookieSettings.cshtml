@@ -4,7 +4,7 @@
 
 <div class="govuk-grid-row cookie-settings-page">
     <div class="govuk-grid-column-two-thirds">
-        <form method="POST" action="@Url.Action("CookieSettings_Post", "Cookies")">
+        <form method="POST" action="@Url.Action("CookieSettings_Post", "Cookie")">
             @(Html.AntiForgeryToken())
             <h1 class="govuk-heading-xl">Cookies on Improving your property's energy efficiency</h1>
             <p class="govuk-body">Cookies are files saved on your phone, tablet or computer when you visit a website.</p>
@@ -21,7 +21,7 @@
             </ul>
             <p class="govuk-body">They always need to be on.</p>
             <p class="govuk-body">
-                <a href="@Url.Action("CookieDetails", "Cookies")" class="govuk-link">Find out more about cookies on the gender pay gap service</a>
+                <a href="@Url.Action("CookieDetails", "Cookie")" class="govuk-link">Find out more about cookies on the gender pay gap service</a>
             </p>
 
             <input type="submit" class="govuk-button" data-module="govuk-button" value="Confirm"/>

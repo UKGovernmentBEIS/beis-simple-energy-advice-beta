@@ -1,12 +1,20 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SeaPublicWebsite.Models.Cookie;
+using SeaPublicWebsite.Models.Cookies;
+using SeaPublicWebsite.Services;
+using SeaPublicWebsite.Services.Cookies;
 
 namespace SeaPublicWebsite.Controllers;
 
-public class CookiesController: Controller
+public class CookieController: Controller
 {
+    private readonly CookieService cookieService;
+
+    public CookieController(CookieService cookieService)
+    {
+        this.cookieService = cookieService;
+    }
 
     [HttpGet("/cookies")]
     public IActionResult CookieSettings_Get()
@@ -26,14 +34,12 @@ public class CookiesController: Controller
     public IActionResult CookieConsent(CookieConsent cookieConsent)
     {
         var cookiesAccepted = cookieConsent.Consent == "accept";
-        if (cookiesAccepted)
+        var cookieSettings = new CookieSettings
         {
-            Console.WriteLine("True");
-        }
-        else
-        {
-            Console.WriteLine("False");
-        }
+            Version = cookieService.Configuration.CurrentCookieMessageVersion,
+            GoogleAnalytics = cookiesAccepted
+        };
+        cookieService.SetCookiesSettings(Response, cookieSettings);
 
         return Redirect(cookieConsent.ReturnUrl);
     }

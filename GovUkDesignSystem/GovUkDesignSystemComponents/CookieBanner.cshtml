@@ -12,7 +12,7 @@
 <form method="POST" action="@Model.ButtonClickAction">
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.ReturnUrl)
-    <div class="govuk-cookie-banner " data-nosnippet role="region" aria-label="Cookies on [name of service]">
+    <div class="govuk-cookie-banner " data-nosnippet role="region" aria-label="Cookies on @Model.NameOfService">
         <div class="govuk-cookie-banner__message govuk-width-container">
 
             <div class="govuk-grid-row">
