@@ -186,61 +186,48 @@ namespace SeaPublicWebsite.Services
 
         private static BreRequest CreateRequest(UserDataModel userData)
         {
-            BrePropertyType brePropertyType = GetBrePropertyType(userData.PropertyType);
+            BrePropertyType brePropertyType = GetBrePropertyType(userData.PropertyType.Value);
 
-            BreBuiltForm breBuiltForm = GetBreBuiltForm(userData.PropertyType, userData.HouseType, userData.BungalowType);
+            BreBuiltForm breBuiltForm =
+                GetBreBuiltForm(userData.PropertyType.Value, userData.HouseType, userData.BungalowType);
 
-            BreFlatLevel? breFlatLevel = GetBreFlatLevel(userData.PropertyType, userData.FlatType);
+            BreFlatLevel? breFlatLevel = GetBreFlatLevel(userData.PropertyType.Value, userData.FlatType);
 
             string breConstructionDate = GetBreConstructionDate(userData.YearBuilt);
 
-            BreWallType breWallType = GetBreWallType(userData.WallConstruction, userData.SolidWallsInsulated,
+            BreWallType breWallType = GetBreWallType(userData.WallConstruction.Value, userData.SolidWallsInsulated,
                 userData.CavityWallsInsulated);
 
-            BreRoofType breRoofType = GetBreRoofType(userData.RoofConstruction, userData.RoofInsulated);
+            BreRoofType breRoofType = GetBreRoofType(userData.RoofConstruction.Value, userData.RoofInsulated);
 
-            BreGlazingType breGlazingType = GetBreGlazingType(userData.GlazingType);
+            BreGlazingType breGlazingType = GetBreGlazingType(userData.GlazingType.Value);
 
-            BreHeatingFuel breHeatingFuel = GetBreHeatingFuel(userData.HeatingType, userData.OtherHeatingType);
+            BreHeatingFuel breHeatingFuel = GetBreHeatingFuel(userData.HeatingType.Value, userData.OtherHeatingType);
 
             bool? breHotWaterCylinder = GetBreHotWaterCylinder(userData.HasHotWaterCylinder);
 
-            BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(userData.HeatingPattern);
+            BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(userData.HeatingPattern.Value);
 
-            BreRequest request = new()
-            {
-                postcode = userData.Postcode,
-                property_type = ((int) brePropertyType).ToString(),
-                built_form = ((int) breBuiltForm).ToString(),
-                flat_level = ((int?) breFlatLevel).ToString(),
-                construction_date = breConstructionDate,
-                wall_type = (int) breWallType,
-                //no input for floor_type in BRE API
-                roof_type = (int) breRoofType,
-                glazing_type = (int) breGlazingType,
-                //no input for outdoor heater space in BRE API
-                heating_fuel = ((int) breHeatingFuel).ToString(),
-                hot_water_cylinder = breHotWaterCylinder,
-                occupants = userData.NumberOfOccupants,
-                heating_pattern_type = (int) breHeatingPatternType,
-                living_room_temperature = userData.Temperature,
-                //assumption:
-                num_storeys = userData.PropertyType == PropertyType.House ? 2 : 1,
-                //assumption:
-                num_bedrooms = userData.NumberOfOccupants ?? 1,
-                measures = true,
-                //measures_package consists of all measures implemented in the BRE API as of May 2021
-                measures_package = new[]
-                {
-                    "A", "A2", "B", "Q", "Q1", "W1", "W2", "D", "C", "F", "G", "I", "T", "L2", "N", "Y", "O", "O3", "X",
-                    "U"
-                }
-            };
+            BreRequest request = new(
+                brePostcode: userData.Postcode,
+                brePropertyType: brePropertyType,
+                breBuiltForm: breBuiltForm,
+                breFlatLevel: breFlatLevel,
+                breConstructionDate: breConstructionDate,
+                breWallType: breWallType,
+                breRoofType: breRoofType,
+                breGlazingType: breGlazingType,
+                breHeatingFuel: breHeatingFuel,
+                breHotWaterCylinder: breHotWaterCylinder,
+                breOccupants: userData.NumberOfOccupants,
+                breHeatingPatternType: breHeatingPatternType,
+                breTemperature: userData.Temperature
+            );
 
             return request;
         }
 
-        private static BrePropertyType GetBrePropertyType(PropertyType? propertyType)
+        private static BrePropertyType GetBrePropertyType(PropertyType propertyType)
         {
             return propertyType switch
             {
@@ -252,7 +239,7 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static BreBuiltForm GetBreBuiltForm(PropertyType? propertyType, HouseType? houseType,
+        private static BreBuiltForm GetBreBuiltForm(PropertyType propertyType, HouseType? houseType,
             BungalowType? bungalowType)
         {
             return propertyType switch
@@ -284,7 +271,7 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static BreFlatLevel? GetBreFlatLevel(PropertyType? propertyType, FlatType? flatType)
+        private static BreFlatLevel? GetBreFlatLevel(PropertyType propertyType, FlatType? flatType)
         {
             switch (propertyType)
             {
@@ -317,11 +304,12 @@ namespace SeaPublicWebsite.Services
                 <= 2006 => "J",
                 <= 2011 => "K",
                 >= 2012 => "L",
+                //assumption:
                 _ => "D"
             };
         }
 
-        private static BreWallType GetBreWallType(WallConstruction? wallConstruction,
+        private static BreWallType GetBreWallType(WallConstruction wallConstruction,
             SolidWallsInsulated? solidWallsInsulated,
             CavityWallsInsulated? cavityWallsInsulated)
         {
@@ -332,6 +320,7 @@ namespace SeaPublicWebsite.Services
                 {
                     SolidWallsInsulated.DoNotKnow => BreWallType.DontKnow,
                     SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
+                    //assumption:
                     SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
                     SolidWallsInsulated.All => BreWallType.SolidWallsWithInsulation,
                     _ => throw new ArgumentOutOfRangeException()
@@ -340,6 +329,7 @@ namespace SeaPublicWebsite.Services
                 {
                     CavityWallsInsulated.DoNotKnow => BreWallType.DontKnow,
                     CavityWallsInsulated.No => BreWallType.CavityWallsWithoutInsulation,
+                    //assumption:
                     CavityWallsInsulated.Some => BreWallType.CavityWallsWithoutInsulation,
                     CavityWallsInsulated.All => BreWallType.CavityWallsWithInsulation,
                     _ => throw new ArgumentOutOfRangeException()
@@ -352,7 +342,7 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static BreRoofType GetBreRoofType(RoofConstruction? roofConstruction, RoofInsulated? roofInsulated)
+        private static BreRoofType GetBreRoofType(RoofConstruction roofConstruction, RoofInsulated? roofInsulated)
         {
             return roofConstruction switch
             {
@@ -373,7 +363,7 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static BreGlazingType GetBreGlazingType(GlazingType? glazingType)
+        private static BreGlazingType GetBreGlazingType(GlazingType glazingType)
         {
             return glazingType switch
             {
@@ -386,7 +376,7 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static BreHeatingFuel GetBreHeatingFuel(HeatingType? heatingType, OtherHeatingType? otherHeatingType)
+        private static BreHeatingFuel GetBreHeatingFuel(HeatingType heatingType, OtherHeatingType? otherHeatingType)
         {
             return heatingType switch
             {
