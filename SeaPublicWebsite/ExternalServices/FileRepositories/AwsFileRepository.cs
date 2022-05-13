@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Amazon;
 using Amazon.Runtime;
@@ -22,6 +23,8 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
 
         public void Write(string relativeFilePath, string fileContents)
         {
+            Console.WriteLine($"Writing file {relativeFilePath}");//qq:DCC
+            
             using (AmazonS3Client client = CreateAmazonS3Client())
             {
                 var putRequest = new PutObjectRequest
@@ -31,7 +34,9 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
                     ContentBody = fileContents
                 };
 
-                client.PutObjectAsync(putRequest).Wait();
+                var response = client.PutObjectAsync(putRequest).Result;
+                
+                Console.WriteLine($"AWS response code {response.HttpStatusCode}");//qq:DCC
             }
         }
 
@@ -55,6 +60,7 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
 
         public string Read(string relativeFilePath)
         {
+            Console.WriteLine($"Reading file in S3 bucket {relativeFilePath}");//qq:DCC
             using (AmazonS3Client client = CreateAmazonS3Client())
             {
                 GetObjectRequest request = new GetObjectRequest
@@ -67,6 +73,7 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
                 using (Stream responseStream = response.ResponseStream)
                 using (StreamReader reader = new StreamReader(responseStream))
                 {
+                    Console.WriteLine($"AWS response code {response.HttpStatusCode}");//qq:DCC
                     string csvFileContents = reader.ReadToEnd();
                     return csvFileContents;
                 }
@@ -75,6 +82,7 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
 
         public List<string> GetFiles(string relativeDirectoryPath)
         {
+            Console.WriteLine($"Listing files in S3 bucket {relativeDirectoryPath}");//qq:DCC
             using (AmazonS3Client client = CreateAmazonS3Client())
             {
                 ListObjectsV2Request request = new ListObjectsV2Request
@@ -89,6 +97,7 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
                 do
                 {
                     response = client.ListObjectsV2Async(request).Result;
+                    Console.WriteLine($"AWS response code {response.HttpStatusCode}");//qq:DCC
 
                     foreach (S3Object entry in response.S3Objects)
                     {
@@ -104,6 +113,7 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
                     request.ContinuationToken = response.NextContinuationToken;
                 } while (response.IsTruncated);
 
+                Console.WriteLine($"Finished listing files in S3 bucket {relativeDirectoryPath}");//qq:DCC
                 return filePaths;
             }
         }
@@ -130,6 +140,7 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
             var credentials = new BasicAWSCredentials(accessKey, secretKey);
             var amazonS3Client = new AmazonS3Client(credentials, RegionEndpoint.GetBySystemName(vcapAwsS3Bucket.Credentials.Region));
 
+            Console.WriteLine("Created AmazonS3Client");//qq:DCC
             return amazonS3Client;
         }
 
