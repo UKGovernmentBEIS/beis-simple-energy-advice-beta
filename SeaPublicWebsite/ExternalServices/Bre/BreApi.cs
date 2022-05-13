@@ -7,28 +7,33 @@ using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SeaPublicWebsite.DataModels;
-using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.Models;
-using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Services;
 
-namespace SeaPublicWebsite.ExternalServices
+namespace SeaPublicWebsite.ExternalServices.Bre
 {
-    public static class BreApi
+    public class BreApi
     {
+        private static BreConfiguration configuration;
+
+        public BreApi(IOptions<BreConfiguration> options)
+        {
+            configuration = options.Value;
+        }
+
         public static async Task<List<BreRecommendation>> GetRecommendationsForUserRequestAsync(BreRequest request)
         {
             try
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    httpClient.BaseAddress = new Uri(Global.BreBaseAddress);
+                    httpClient.BaseAddress = new Uri(configuration.BaseUrl);
 
-                    string username = Global.BreUsername;
-                    string password = Global.BrePassword;
+                    string username = configuration.Username;
+                    string password = configuration.Password;
                     Guid nonce =  Guid.NewGuid();
                     string created = DateTime.Now.ToUniversalTime().ToString
                         (DateTimeFormatInfo.InvariantInfo.SortableDateTimePattern) + "Z";
