@@ -57,6 +57,7 @@ namespace SeaPublicWebsite
                 var vcapServiceConfig = VcapServiceFactory.GetVcapServices(configuration);
                 VcapAwsS3Bucket fileStorageBucketConfiguration = vcapServiceConfig.AwsS3Bucket.First(b => b.Name.EndsWith("-filestorage"));
                 Console.WriteLine($"Found config for bucket {fileStorageBucketConfiguration.Name}");//qq:DCC
+                Console.WriteLine($"bucket_name {fileStorageBucketConfiguration.Credentials.BucketName}");//qq:DCC
 
                 services.AddSingleton<IFileRepository>(s => new AwsFileRepository(fileStorageBucketConfiguration));
             }
