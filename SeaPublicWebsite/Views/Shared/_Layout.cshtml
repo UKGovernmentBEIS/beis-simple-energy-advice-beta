@@ -1,5 +1,8 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using GovUkDesignSystem.GovUkDesignSystemComponents.Enums
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
 @using SeaPublicWebsite.Helpers
 @{
     string assetsPath = "/assets/images";
@@ -37,10 +40,13 @@
 
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
 
-    @await Html.GovUkCookieBanner(new CookieBannerViewModel
-    {
-        // TODO: Fill this in
-    });
+@await Html.GovUkCookieBanner(new CookieBannerViewModel
+{
+    Action = @Url.Action("CookieConsent", "Cookies"),
+    CookieType = CookieType.Analytics,
+    NameOfService = "Improving your property's energy efficiency",
+    ReturnUrl = Context.Request.GetEncodedUrl()
+});
     
 @{
         List<HeaderNavigationViewModel> headerNavigationLinks = new List<HeaderNavigationViewModel>();

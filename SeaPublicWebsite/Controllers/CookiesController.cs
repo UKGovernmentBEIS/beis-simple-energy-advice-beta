@@ -1,5 +1,7 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SeaPublicWebsite.Models.Cookie;
 
 namespace SeaPublicWebsite.Controllers;
 
@@ -21,9 +23,19 @@ public class CookiesController: Controller
 
     [HttpPost("/cookie-consent")]
     [ValidateAntiForgeryToken]
-    public IActionResult CookieConsent()
+    public IActionResult CookieConsent(CookieConsent cookieConsent)
     {
-        throw new Exception();
+        var cookiesAccepted = cookieConsent.Consent == "accept";
+        if (cookiesAccepted)
+        {
+            Console.WriteLine("True");
+        }
+        else
+        {
+            Console.WriteLine("False");
+        }
+
+        return Redirect(cookieConsent.ReturnUrl);
     }
 
     [HttpGet("/cookie-details")]
