@@ -7,6 +7,11 @@
     var message = Model.CookieType is CookieType.Analytics
         ? "We'd also like to use analytics cookies so we can understand how you use the service and make improvements."
         : "We'd like to set additional cookies so we can remember your settings, understand how people use the service and make improvements.";
+    var decision = Model.BannerState switch {
+        BannerState.ShowAccepted => "accepted",
+        BannerState.ShowRejected => "rejected",
+        _ => null 
+        };
 }
 
 @if (Model.BannerState is not BannerState.Hide)
@@ -16,32 +21,53 @@
         @Html.HiddenFor(m => m.ReturnUrl)
         <div class="govuk-cookie-banner " data-nosnippet role="region" aria-label="Cookies on @Model.NameOfService">
             <div class="govuk-cookie-banner__message govuk-width-container">
-                <div class="govuk-grid-row">
-                    <div class="govuk-grid-column-two-thirds">
-                        <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on @Model.NameOfService</h2>
+                @if (Model.BannerState is BannerState.ShowBanner)
+                {
+                    <div class="govuk-grid-row">
+                        <div class="govuk-grid-column-two-thirds">
+                            <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on @Model.NameOfService</h2>
 
-                        <div class="govuk-cookie-banner__content">
-                            <p class="govuk-body">We use some essential cookies to make this service work.</p>
-                            <p class="govuk-body">@message</p>
+                            <div class="govuk-cookie-banner__content">
+                                <p class="govuk-body">We use some essential cookies to make this service work.</p>
+                                <p class="govuk-body">@message</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="govuk-button-group">
+                    <div class="govuk-button-group">
+                        @await Html.GovUkButton(new ButtonViewModel
+                        {
+                            Text = $"Accept {Model.CookieType} cookies",
+                            Name = "consent",
+                            Value = "accept"
+                        })
+                        @await Html.GovUkButton(new ButtonViewModel
+                        {
+                            Text = $"Reject {Model.CookieType} cookies",
+                            Name = "consent",
+                            Value = "reject"
+                        })
+                        <a class="govuk-link" href="@Model.ViewCookiesLink">View cookies</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="govuk-grid-row">
+                        <div class="govuk-grid-column-two-thirds">
+
+                            <div class="govuk-cookie-banner__content">
+                                <p class="govuk-body">You’ve @decision additional cookies. You can <a class="govuk-link" href="@Model.ViewCookiesLink">change your cookie settings</a> at any time.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
                     @await Html.GovUkButton(new ButtonViewModel
                     {
-                        Text = $"Accept {Model.CookieType} cookies",
+                        Text = "Hide this message",
                         Name = "consent",
-                        Value = "accept"
+                        Value = "hide"
                     })
-                    @await Html.GovUkButton(new ButtonViewModel
-                    {
-                        Text = $"Reject {Model.CookieType} cookies",
-                        Name = "consent",
-                        Value = "reject"
-                    })
-                    <a class="govuk-link" href="@Model.ViewCookiesLink">View cookies</a>
-                </div>
+                }
             </div>
         </div>
 

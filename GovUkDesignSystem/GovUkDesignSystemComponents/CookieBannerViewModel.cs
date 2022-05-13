@@ -15,6 +15,7 @@ public class CookieBannerViewModel
 public enum BannerState
 {
     ShowBanner,
-    ShowDecision,
+    ShowAccepted,
+    ShowRejected,
     Hide
 }

@@ -11,6 +11,10 @@
 @inject CookieService CookieService
 @{
     string assetsPath = "/assets/images";
+    TempData["BannerState"] ??= CookieService.HasSeenCookieLatestMessage(Context.Request)
+        ? BannerState.Hide
+        : BannerState.ShowBanner;
+    var bannerState = (BannerState) TempData["BannerState"];
 }
 <!DOCTYPE html>
 
@@ -43,20 +47,19 @@
         document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     </script>
 
-    <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
-@await Html.GovUkCookieBanner(new CookieBannerViewModel
-{
-    NameOfService = "Improve your property's energy efficiency",
-    BannerState = Context.Request.Path.Value?.Equals("/cookies") is true || CookieService.HasSeenCookieLatestMessage(Context.Request)
-        ? BannerState.Hide
-        : BannerState.ShowBanner,
-    CookieType = CookieType.Analytics,
-    ButtonClickAction = @Url.Action("CookieConsent", "Cookie"),
-    ViewCookiesLink = @Url.Action("CookieSettings_Get", "Cookie"),
-    ReturnUrl = Context.Request.GetEncodedPathAndQuery()
-});
+    @await Html.GovUkCookieBanner(new CookieBannerViewModel
+    {
+        NameOfService = "Improve your property's energy efficiency",
+        BannerState = bannerState,
+        CookieType = CookieType.Analytics,
+        ButtonClickAction = @Url.Action("CookieConsent", "Cookie"),
+        ViewCookiesLink = @Url.Action("CookieSettings_Get", "Cookie"),
+        ReturnUrl = Context.Request.GetEncodedPathAndQuery()
+    })
 
-@{
+    <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+
+    @{
         List<HeaderNavigationViewModel> headerNavigationLinks = new List<HeaderNavigationViewModel>();
 
         @(await Html.GovUkHeader(new HeaderViewModel

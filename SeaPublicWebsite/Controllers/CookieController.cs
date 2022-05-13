@@ -1,4 +1,5 @@
 ﻿using System;
+using GovUkDesignSystem.GovUkDesignSystemComponents;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SeaPublicWebsite.Models.Cookies;
@@ -46,6 +47,11 @@ public class CookieController: Controller
     [ValidateAntiForgeryToken]
     public IActionResult CookieConsent(CookieConsent cookieConsent)
     {
+        if (cookieConsent.Consent == "hide")
+        {
+            TempData["BannerState"] = BannerState.Hide;
+            return Redirect(cookieConsent.ReturnUrl);
+        }
         var cookiesAccepted = cookieConsent.Consent == "accept";
         var cookieSettings = new CookieSettings
         {
@@ -53,7 +59,9 @@ public class CookieController: Controller
             GoogleAnalytics = cookiesAccepted
         };
         cookieService.SetCookiesSettings(Response, cookieSettings);
-
+        TempData["BannerState"] = cookiesAccepted
+            ? BannerState.ShowAccepted
+            : BannerState.ShowRejected;
         return Redirect(cookieConsent.ReturnUrl);
     }
 
