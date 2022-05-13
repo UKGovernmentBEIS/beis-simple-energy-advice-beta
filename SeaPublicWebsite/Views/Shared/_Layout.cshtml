@@ -9,6 +9,7 @@
 @using SeaPublicWebsite.Services.Cookies
 @inject StaticAssetsVersioningService StaticAssetsVersioning
 @inject CookieService CookieService
+@inject GlobalConstants GlobalConstants
 @{
     string assetsPath = "/assets/images";
     TempData["BannerState"] ??= CookieService.HasSeenCookieLatestMessage(Context.Request)
@@ -24,7 +25,7 @@
 <html lang="en" class="govuk-template app-html-class">
 <head>
     <meta charset="utf-8" />
-    <title>@(ViewBag.Title != null ? ViewBag.Title + " -" : "") Improve your property's energy efficiency - Gov.UK</title>
+    <title>@(ViewBag.Title != null ? ViewBag.Title + " -" : "") @GlobalConstants.Configuration.ServiceName - Gov.UK</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="blue" />
 
@@ -49,7 +50,7 @@
 
     @await Html.GovUkCookieBanner(new CookieBannerViewModel
     {
-        NameOfService = "Improve your property's energy efficiency",
+        NameOfService = GlobalConstants.Configuration.ServiceName,
         BannerState = bannerState,
         CookieType = CookieType.Analytics,
         ButtonClickAction = @Url.Action("CookieConsent", "Cookie"),
@@ -64,7 +65,7 @@
 
         @(await Html.GovUkHeader(new HeaderViewModel
         {
-            ServiceName = "Improve your property's energy efficiency",
+            ServiceName = GlobalConstants.Configuration.ServiceName,
             AssetsPath = assetsPath,
             HomepageUrl = "/",
             ServiceUrl = "/",

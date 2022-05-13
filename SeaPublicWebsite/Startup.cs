@@ -10,6 +10,7 @@ using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.ExternalServices.OpenEpc;
+using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
@@ -38,6 +39,7 @@ namespace SeaPublicWebsite
             ConfigureEpcApi(services);
             ConfigureGovUkNotify(services);
             ConfigureCookieService(services);
+            ConfigureGlobalConstants(services);
 
             if (!webHostEnvironment.IsProduction())
             {
@@ -50,6 +52,14 @@ namespace SeaPublicWebsite
                 options.Filters.Add<ErrorHandlingFilter>();
             });
         }
+        
+        private void ConfigureGlobalConstants(IServiceCollection services)
+        {
+            services.Configure<GlobalConstantsConfiguration>(
+                configuration.GetSection(GlobalConstantsConfiguration.ConfigSection));
+            services.AddSingleton<GlobalConstants>();
+        }
+
 
         private void ConfigureCookieService(IServiceCollection services)
         {

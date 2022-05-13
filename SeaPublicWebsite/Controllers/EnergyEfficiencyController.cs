@@ -7,6 +7,7 @@ using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.PostcodesIo;
+using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations;
@@ -20,11 +21,13 @@ namespace SeaPublicWebsite.Controllers
         private readonly UserDataStore userDataStore;
         private readonly IEpcApi epcApi;
         private readonly IEmailSender emailApi;
+        private readonly GlobalConstants globalConstants;
 
-        public EnergyEfficiencyController(UserDataStore userDataStore, IEpcApi epcApi, IEmailSender emailApi)
+        public EnergyEfficiencyController(UserDataStore userDataStore, IEpcApi epcApi, IEmailSender emailApi, GlobalConstants globalConstants)
         {
             this.userDataStore = userDataStore;
             this.emailApi = emailApi;
+            this.globalConstants = globalConstants;
             this.epcApi = epcApi;
         }
         
@@ -32,7 +35,11 @@ namespace SeaPublicWebsite.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-           return View("Index");
+            var viewModel = new IndexViewModel
+            {
+                ServiceName = globalConstants.Configuration.ServiceName
+            };
+           return View("Index", viewModel);
         }
 
         

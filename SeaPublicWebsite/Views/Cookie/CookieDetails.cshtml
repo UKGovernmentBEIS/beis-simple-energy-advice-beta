@@ -1,11 +1,12 @@
-﻿@{
-    ViewBag.Title = "Details about cookies on ???service name???";
+﻿@model SeaPublicWebsite.Models.Cookies.CookieDetailsViewModel
+@{
+    ViewBag.Title = $"Details about cookies on {Model.ServiceName}";
 }
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-xl">Details about cookies on ???service name???</h1>
-        <p class="govuk-body">???service name??? puts small files (known as ‘cookies’) onto your computer to collect information about how you browse the site. Find out more about the cookies we use, what they’re for and when they expire.</p>
+        <h1 class="govuk-heading-xl">Details about cookies on @Model.ServiceName</h1>
+        <p class="govuk-body">@Model.ServiceName puts small files (known as ‘cookies’) onto your computer to collect information about how you browse the site. Find out more about the cookies we use, what they’re for and when they expire.</p>
 
         <h2 class="govuk-heading-l">Cookies that measure website usage</h2>
         <p class="govuk-body">We use Google Analytics software (Universal Analytics) to collect anonymised information about how you use the gender pay gap service and GOV.UK. We do this to help make sure the site is meeting the needs of its users and to help us make improvements to the site and to government digital services.</p>

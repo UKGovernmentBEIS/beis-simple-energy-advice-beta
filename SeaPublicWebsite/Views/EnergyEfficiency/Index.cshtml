@@ -1,4 +1,5 @@
-﻿@{
+﻿@model SeaPublicWebsite.Models.EnergyEfficiency.IndexViewModel
+@{
     ViewBag.Title = "Energy Efficiency Questionnaire";
 }
 
@@ -9,7 +10,7 @@
     <div class="govuk-grid-column-two-thirds">
         
         <h1 class="govuk-heading-l">
-            Improve your property's energy efficiency
+            @Model.ServiceName
         </h1>
         
         <p class="govuk-body">

@@ -2,6 +2,7 @@
 using GovUkDesignSystem.GovUkDesignSystemComponents;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.Cookies;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
@@ -11,10 +12,12 @@ namespace SeaPublicWebsite.Controllers;
 public class CookieController: Controller
 {
     private readonly CookieService cookieService;
+    private readonly GlobalConstants globalConstants;
 
-    public CookieController(CookieService cookieService)
+    public CookieController(CookieService cookieService, GlobalConstants globalConstants)
     {
         this.cookieService = cookieService;
+        this.globalConstants = globalConstants;
     }
 
     [HttpGet("/cookies")]
@@ -25,7 +28,8 @@ public class CookieController: Controller
         var viewModel = new CookieSettingsViewModel
         {
             GoogleAnalytics = cookie?.GoogleAnalytics is true,
-            ChangesHaveBeenSaved = changesHaveBeenSaved
+            ChangesHaveBeenSaved = changesHaveBeenSaved,
+            ServiceName = globalConstants.Configuration.ServiceName
         };
         return View("CookieSettings", viewModel);
     }
@@ -37,7 +41,7 @@ public class CookieController: Controller
         var cookieSettings = new CookieSettings
         {
             Version = cookieService.Configuration.CurrentCookieMessageVersion,
-            GoogleAnalytics = viewModel.GoogleAnalytics
+            GoogleAnalytics = viewModel.GoogleAnalytics,
         };
         cookieService.SetCookiesSettings(Response, cookieSettings);
         return CookieSettings_Get(changesHaveBeenSaved: true);
@@ -68,7 +72,11 @@ public class CookieController: Controller
     [HttpGet("/cookie-details")]
     public IActionResult CookieDetails()
     {
-        return View("CookieDetails");
+        var viewModel = new CookieDetailsViewModel
+        {
+            ServiceName = globalConstants.Configuration.ServiceName
+        };
+        return View("CookieDetails", viewModel);
     }
 
 }

@@ -1,6 +1,6 @@
 ﻿@model SeaPublicWebsite.Models.Cookies.CookieSettingsViewModel
 @{
-    ViewBag.Title = "Cookies on ???service name???";
+    ViewBag.Title = $"Cookies on {Model.ServiceName}";
 }
 
 <div class="govuk-grid-row cookie-settings-page">
@@ -23,9 +23,9 @@
 
         <form method="POST" action="@Url.Action("CookieSettings_Post", "Cookie")">
             @(Html.AntiForgeryToken())
-            <h1 class="govuk-heading-xl">Cookies on ???service name???</h1>
+            <h1 class="govuk-heading-xl">Cookies on @Model.ServiceName</h1>
             <p class="govuk-body">Cookies are files saved on your phone, tablet or computer when you visit a website.</p>
-            <p class="govuk-body">We use cookies to store information about how you use ???service name???, such as the pages you visit.</p>
+            <p class="govuk-body">We use cookies to store information about how you use @Model.ServiceName, such as the pages you visit.</p>
             <p class="govuk-body">
                 This page has a brief explanation of each type of cookie we use. If you want more details,
                 <a href="@Url.Action("CookieDetails", "Cookie")" class="govuk-link"> read our detailed cookie information</a>
@@ -37,7 +37,7 @@
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" aria-describedby="GoogleAnalyticsGpg-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                        <h3 class="govuk-fieldset__heading">Cookies used to improve ???service name???</h3>
+                        <h3 class="govuk-fieldset__heading">Cookies used to make @Model.ServiceName better</h3>
                     </legend>
                     <div id="GoogleAnalyticsGpg-hint" class="govuk-hint">
                         <p class="govuk-body govuk-hint">We use Google Analytics to measure how you use the service so we can improve it based on user needs. Google Analytics sets cookies that store anonymised information about:</p>
