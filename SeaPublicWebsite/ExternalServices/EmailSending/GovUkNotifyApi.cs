@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Notify.Client;
 using Notify.Exceptions;
 using Notify.Models.Responses;
@@ -9,14 +9,13 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
 {
     public class GovUkNotifyApi: IEmailSender
     {
-        private readonly string apiKey = Global.GovUkNotifyApiKey;
         private readonly NotificationClient client;
         private readonly GovUkNotifyConfiguration govUkNotifyConfig;
 
-        public GovUkNotifyApi(GovUkNotifyConfiguration config)
+        public GovUkNotifyApi(IOptions<GovUkNotifyConfiguration> config)
         {
-            govUkNotifyConfig = config;
-            client = new NotificationClient(apiKey);
+            govUkNotifyConfig = config.Value;
+            client = new NotificationClient(govUkNotifyConfig.ApiKey);
         }
 
         private EmailNotificationResponse SendEmail(GovUkNotifyEmailModel emailModel)
