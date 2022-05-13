@@ -108,7 +108,7 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
                         Console.WriteLine($"Found file {fileNameWithDirectory}");//qq:DCC
 
                         string fileNameWithoutDirectory =
-                            fileNameWithDirectory.StartsWith(relativeDirectoryPath)
+                            (!string.IsNullOrEmpty(relativeDirectoryPath) && fileNameWithDirectory.StartsWith(relativeDirectoryPath))
                                 ? fileNameWithDirectory.Substring(relativeDirectoryPath.Length + 1)
                                 : fileNameWithDirectory;
 
