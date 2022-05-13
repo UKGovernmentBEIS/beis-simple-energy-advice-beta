@@ -154,6 +154,13 @@ namespace GovUkDesignSystem
             return await htmlHelper.PartialAsync("/GovUkDesignSystemComponents/CheckboxItem.cshtml", checkboxItemViewModel);
         }
 
+        public static async Task<IHtmlContent> GovUkCookieBanner(
+            this IHtmlHelper htmlHelper,
+            CookieBannerViewModel cookieBannerViewModel)
+        {
+            return await htmlHelper.PartialAsync("/GovUkDesignSystemComponents/CookieBanner.cshtml", cookieBannerViewModel);
+        }
+
         public static async Task<IHtmlContent> GovUkDateInput(
             this IHtmlHelper htmlHelper,
             DateInputViewModel dateInputViewModel)
