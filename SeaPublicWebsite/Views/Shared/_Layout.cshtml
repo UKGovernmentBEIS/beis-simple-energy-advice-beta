@@ -44,9 +44,10 @@
 
 @await Html.GovUkCookieBanner(new CookieBannerViewModel
 {
-    Action = @Url.Action("CookieConsent", "Cookies"),
-    CookieType = CookieType.Analytics,
     NameOfService = "Improve your property's energy efficiency",
+    CookieType = CookieType.Analytics,
+    ButtonClickAction = @Url.Action("CookieConsent", "Cookies"),
+    ViewCookiesLink = @Url.Action("CookieSettings_Get", "Cookies"),
     ReturnUrl = Context.Request.GetEncodedUrl()
 });
     

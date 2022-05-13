@@ -9,14 +9,14 @@ public class CookiesController: Controller
 {
 
     [HttpGet("/cookies")]
-    public IActionResult CookieSettingsGet()
+    public IActionResult CookieSettings_Get()
     {
         return View("CookieSettings");
     }
 
     [HttpPost("/cookies")]
     [ValidateAntiForgeryToken]
-    public IActionResult CookieSettingsPost()
+    public IActionResult CookieSettings_Post()
     {
         return View("CookieSettings");
     }
