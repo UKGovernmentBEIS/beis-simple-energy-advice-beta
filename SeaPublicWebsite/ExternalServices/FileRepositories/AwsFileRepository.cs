@@ -24,6 +24,7 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
         public void Write(string relativeFilePath, string fileContents)
         {
             Console.WriteLine($"Writing file {relativeFilePath}");//qq:DCC
+            Console.WriteLine($"To bucket {vcapAwsS3Bucket.Credentials.BucketName}");//qq:DCC
             
             using (AmazonS3Client client = CreateAmazonS3Client())
             {
@@ -60,7 +61,8 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
 
         public string Read(string relativeFilePath)
         {
-            Console.WriteLine($"Reading file in S3 bucket {relativeFilePath}");//qq:DCC
+            Console.WriteLine($"Reading file {relativeFilePath}");//qq:DCC
+            Console.WriteLine($"In S3 bucket {vcapAwsS3Bucket.Credentials.BucketName}");//qq:DCC
             using (AmazonS3Client client = CreateAmazonS3Client())
             {
                 GetObjectRequest request = new GetObjectRequest
@@ -82,7 +84,8 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
 
         public List<string> GetFiles(string relativeDirectoryPath)
         {
-            Console.WriteLine($"Listing files in S3 bucket {relativeDirectoryPath}");//qq:DCC
+            Console.WriteLine($"Finished listing files in directory ./{relativeDirectoryPath}");//qq:DCC
+            Console.WriteLine($"In S3 bucket {vcapAwsS3Bucket.Credentials.BucketName}");//qq:DCC
             using (AmazonS3Client client = CreateAmazonS3Client())
             {
                 ListObjectsV2Request request = new ListObjectsV2Request
@@ -102,6 +105,7 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
                     foreach (S3Object entry in response.S3Objects)
                     {
                         string fileNameWithDirectory = entry.Key;
+                        Console.WriteLine($"Found file {fileNameWithDirectory}");//qq:DCC
 
                         string fileNameWithoutDirectory =
                             fileNameWithDirectory.StartsWith(relativeDirectoryPath)
@@ -109,6 +113,7 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
                                 : fileNameWithDirectory;
 
                         filePaths.Add(fileNameWithoutDirectory);
+                        Console.WriteLine($"File name processed to {fileNameWithoutDirectory}");//qq:DCC
                     }
                     request.ContinuationToken = response.NextContinuationToken;
                 } while (response.IsTruncated);
@@ -140,7 +145,7 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
             var credentials = new BasicAWSCredentials(accessKey, secretKey);
             var amazonS3Client = new AmazonS3Client(credentials, RegionEndpoint.GetBySystemName(vcapAwsS3Bucket.Credentials.Region));
 
-            Console.WriteLine("Created AmazonS3Client");//qq:DCC
+            Console.WriteLine($"Created AmazonS3Client for region {vcapAwsS3Bucket.Credentials.Region}");//qq:DCC
             return amazonS3Client;
         }
 
