@@ -126,14 +126,11 @@
     @RenderSection("AfterLoadedCompiledScripts", false)
 
 @{
-    if (CookieService.TryGetCookie<CookieSettings>(Context.Request, CookieService.Configuration.CookieSettingsCookieName, out var cookie))
+    if (CookieService.HasAcceptedGoogleAnalytics(Context.Request))
     {
-        if (cookie.GoogleAnalytics)
-        {
-            <script>
-                // TODO: Google script
-            </script>
-        }
+        <script>
+            // TODO: Google script
+        </script>
     }
 }
 </body>

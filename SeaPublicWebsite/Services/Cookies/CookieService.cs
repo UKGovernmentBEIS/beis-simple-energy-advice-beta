@@ -42,6 +42,11 @@ public class CookieService
         return false;
     }
 
+    public bool HasAcceptedGoogleAnalytics(HttpRequest request)
+    {
+        return TryGetCookie<CookieSettings>(request, Configuration.CookieSettingsCookieName, out var cookie) && cookie.GoogleAnalytics;
+    }
+
     public void SetCookie<T>(HttpResponse response, string cookieName, T cookie, int daysUntilExpiry = 365)
     {
         var cookieString = JsonConvert.SerializeObject(cookie);
