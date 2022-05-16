@@ -9,84 +9,72 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SeaPublicWebsite.ExternalServices.Models;
+using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Services;
 
 namespace SeaPublicWebsite.ExternalServices.Bre
 {
     public class BreApi
     {
-        private static BreConfiguration configuration;
+        private readonly BreConfiguration configuration;
 
         public BreApi(IOptions<BreConfiguration> options)
         {
             configuration = options.Value;
         }
 
-        public static async Task<List<BreRecommendation>> GetRecommendationsForUserRequestAsync(BreRequest request)
+        public async Task<List<BreRecommendation>> GetRecommendationsForUserRequestAsync(BreRequest request)
         {
             try
             {
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    httpClient.BaseAddress = new Uri(configuration.BaseUrl);
-
-                    string username = configuration.Username;
-                    string password = configuration.Password;
-                    Guid nonce =  Guid.NewGuid();
-                    string created = DateTime.Now.ToUniversalTime().ToString
-                        (DateTimeFormatInfo.InvariantInfo.SortableDateTimePattern) + "Z";
-                    string token = GenerateToken(password + nonce + username + created);
-                    string wsseHeader =
-                        $"WSSE UsernameToken Token=\"{token}\", Nonce=\"{nonce}\", Username=\"{username}\", Created=\"{created}\"";
-                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", wsseHeader);
-
-                    string path = "/bemapi/energy_use";
-                    string requestString = JsonConvert.SerializeObject(request);
-                    StringContent stringContent = new(requestString);
-                    HttpResponseMessage response = await httpClient.PostAsync(path, stringContent);
-
-                    if (response.IsSuccessStatusCode)
+                string username = configuration.Username;
+                string password = configuration.Password;
+                Guid nonce = Guid.NewGuid();
+                string created = DateTime.Now.ToUniversalTime().ToString
+                    (DateTimeFormatInfo.InvariantInfo.SortableDateTimePattern) + "Z";
+                string token = GenerateToken(password + nonce + username + created);
+                string wsseHeader =
+                    $"WSSE UsernameToken Token=\"{token}\", Nonce=\"{nonce}\", Username=\"{username}\", Created=\"{created}\"";
+                string requestString = JsonConvert.SerializeObject(request);
+                StringContent stringContent = new(requestString);
+                
+                var response = await HttpRequestHelper.SendPostRequestAsync<BreResponse>(
+                    new RequestParameters
                     {
-                        string bodyString = await response.Content.ReadAsStringAsync();
-                        JObject measures = JObject.FromObject(JObject.Parse(bodyString)["measures"] ?? new JObject());
-
-                        List<BreRecommendation> recommendations = new List<BreRecommendation>();
-                        foreach (JProperty prop in measures.Properties())
-                        {
-                            Dictionary<string, BreRecommendation> recommendationDictionary =
-                                RecommendationService.RecommendationDictionary;
-                            JToken value = prop.Value;
-                            int minInstallCost = (int) value["min_installation_cost"];
-                            int maxInstallCost = (int) value["max_installation_cost"];
-                            int saving = (int) value["cost_saving"];
-                            int lifetime = (int) value["lifetime"];
-
-                            BreRecommendation breRecommendation = new()
-                            {
-                                Key = recommendationDictionary[prop.Name].Key,
-                                Title = recommendationDictionary[prop.Name].Title,
-                                MinInstallCost = minInstallCost,
-                                MaxInstallCost = maxInstallCost,
-                                Saving = saving,
-                                LifetimeSaving = lifetime * saving,
-                                Lifetime = lifetime,
-                                Summary = recommendationDictionary[prop.Name].Summary
-                            };
-                            recommendations.Add(breRecommendation);
-                        }
-                        return recommendations;
+                        BaseAddress = configuration.BaseUrl,
+                        Path = "/bemapi/energy_use",
+                        Auth = new AuthenticationHeaderValue("Basic", wsseHeader),
+                        Body = stringContent
                     }
-
-                    throw new Exception($"BRE API returned an error: {response.StatusCode}");
+                );
+                
+                List<BreRecommendation> recommendations = new List<BreRecommendation>();
+                Dictionary<string, BreRecommendation> recommendationDictionary =
+                    RecommendationService.RecommendationDictionary;
+                foreach (KeyValuePair<string, BreMeasure> entry in response.Measures)
+                {
+                    string key = entry.Key;
+                    BreMeasure measure = entry.Value;
+                    BreRecommendation dictEntry = recommendationDictionary[key];
+                    recommendations.Add(new BreRecommendation()
+                    {
+                        Key = dictEntry.Key,
+                        Title = dictEntry.Title,
+                        MinInstallCost = measure.MinInstallationCost,
+                        MaxInstallCost = measure.MaxInstallationCost,
+                        Saving = (int) measure.Saving,
+                        LifetimeSaving = (int) (measure.Lifetime * measure.Saving),
+                        Lifetime = measure.Lifetime,
+                        Summary = dictEntry.Summary
+                    });
                 }
+                return recommendations;
             }
             catch (Exception e)
             {
                 // TODO: seabeta-192 to add a log here
                 throw new Exception($"BRE API returned an error: {e.Message}");
-
             }
         }
 
@@ -98,6 +86,27 @@ namespace SeaPublicWebsite.ExternalServices.Bre
                     .ComputeHash(Encoding.UTF8.GetBytes(input))
                     .Select(item => item.ToString("x2")));
             }
+        }
+
+        internal class BreResponse
+        {
+            [JsonProperty(PropertyName = "measures")]
+            public Dictionary<string, BreMeasure> Measures { get; set; }
+        }
+
+        internal class BreMeasure
+        {
+            [JsonProperty(PropertyName = "min_installation_cost")]
+            public int MinInstallationCost { get; set; }
+
+            [JsonProperty(PropertyName = "max_installation_cost")]
+            public int MaxInstallationCost { get; set; }
+
+            [JsonProperty(PropertyName = "cost_saving")]
+            public decimal Saving { get; set; }
+
+            [JsonProperty(PropertyName = "lifetime")]
+            public int Lifetime { get; set; }
         }
     }
 }

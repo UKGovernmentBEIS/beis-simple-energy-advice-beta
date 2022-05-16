@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SeaPublicWebsite.DataModels;
-using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Models.EnergyEfficiency;
@@ -10,8 +9,15 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Services
 {
-    public static class RecommendationService
+    public class RecommendationService
     {
+        private readonly BreApi breApi;
+
+        public RecommendationService(BreApi breApi)
+        {
+            this.breApi = breApi;
+        }
+
         public static readonly Dictionary<string, BreRecommendation> RecommendationDictionary =
             new()
             {
@@ -177,11 +183,11 @@ namespace SeaPublicWebsite.Services
                 }
             };
 
-        public static async Task<List<BreRecommendation>> GetRecommendationsForUserAsync(UserDataModel userData)
+        public async Task<List<BreRecommendation>> GetRecommendationsForUserAsync(UserDataModel userData)
         {
             BreRequest request = CreateRequest(userData);
 
-            return await BreApi.GetRecommendationsForUserRequestAsync(request);
+            return await breApi.GetRecommendationsForUserRequestAsync(request);
         }
 
         private static BreRequest CreateRequest(UserDataModel userData)

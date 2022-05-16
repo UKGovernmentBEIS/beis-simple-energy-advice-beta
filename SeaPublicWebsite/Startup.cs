@@ -49,6 +49,8 @@ namespace SeaPublicWebsite
             {
                 options.Filters.Add<ErrorHandlingFilter>();
             });
+
+            services.AddScoped<RecommendationService>();
         }
 
         private void ConfigureFileRepository(IServiceCollection services)

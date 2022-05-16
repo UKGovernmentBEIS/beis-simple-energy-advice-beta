@@ -21,12 +21,14 @@ namespace SeaPublicWebsite.Controllers
         private readonly UserDataStore userDataStore;
         private readonly IEpcApi epcApi;
         private readonly IEmailSender emailApi;
+        private readonly RecommendationService recommendationService;
 
-        public EnergyEfficiencyController(UserDataStore userDataStore, IEpcApi epcApi, IEmailSender emailApi)
+        public EnergyEfficiencyController(UserDataStore userDataStore, IEpcApi epcApi, IEmailSender emailApi, RecommendationService recommendationService)
         {
             this.userDataStore = userDataStore;
             this.emailApi = emailApi;
             this.epcApi = epcApi;
+            this.recommendationService = recommendationService;
         }
         
         
@@ -1140,7 +1142,7 @@ namespace SeaPublicWebsite.Controllers
         public async Task<IActionResult> YourRecommendations_GetAsync(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
-            var recommendationsForUser = await RecommendationService.GetRecommendationsForUserAsync(userDataModel);
+            var recommendationsForUser = await recommendationService.GetRecommendationsForUserAsync(userDataModel);
             userDataModel.UserRecommendations = recommendationsForUser.Select(r => 
                 new UserRecommendation()
                 {
