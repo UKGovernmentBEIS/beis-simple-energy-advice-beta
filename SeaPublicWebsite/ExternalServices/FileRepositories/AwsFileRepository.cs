@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Amazon;
 using Amazon.Runtime;
@@ -8,6 +9,7 @@ using SeaPublicWebsite.Helpers;
 
 namespace SeaPublicWebsite.ExternalServices.FileRepositories
 {
+    // TODO: SEABETA-193 Remove this file
     public class AwsFileRepository : IFileRepository
     {
 
@@ -30,7 +32,7 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
                     ContentBody = fileContents
                 };
 
-                client.PutObjectAsync(putRequest).Wait();
+                var response = client.PutObjectAsync(putRequest).Result;
             }
         }
 
@@ -94,7 +96,7 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
                         string fileNameWithDirectory = entry.Key;
 
                         string fileNameWithoutDirectory =
-                            fileNameWithDirectory.StartsWith(relativeDirectoryPath)
+                            (!string.IsNullOrEmpty(relativeDirectoryPath) && fileNameWithDirectory.StartsWith(relativeDirectoryPath))
                                 ? fileNameWithDirectory.Substring(relativeDirectoryPath.Length + 1)
                                 : fileNameWithDirectory;
 

@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
-namespace SeaPublicWebsite.ExternalServices
+namespace SeaPublicWebsite.ExternalServices.EpbEpc
 {
     public class EpbEpcApi: IEpcApi
     {
         private readonly IMemoryCache memoryCache;
-        private readonly string epcAuthUsername;
-        private readonly string epcAuthPassword;
+        private readonly EpbEpcConfiguration configuration;
         private readonly string cacheTokenKey = "EpbEpcToken";
         
-        public EpbEpcApi(IMemoryCache memoryCache)
+        public EpbEpcApi(IOptions<EpbEpcConfiguration> options, IMemoryCache memoryCache)
         {
             this.memoryCache = memoryCache;
-            epcAuthUsername = Global.EpbEpcAuthUsername;
-            epcAuthPassword = Global.EpbEpcAuthPassword;
+            this.configuration = options.Value;
         }
         
         public async Task<List<Epc>> GetEpcsForPostcode(string postcode)
@@ -29,7 +28,7 @@ namespace SeaPublicWebsite.ExternalServices
             var response = HttpRequestHelper.SendGetRequestAsync<string>(
                 new RequestParameters
                 {
-                    BaseAddress = Global.EpbEpcBaseAddress,
+                    BaseAddress = configuration.BaseUrl,
                     Path = "/api/greendeal/rhi/assessments/0000-0000-0000-0476-5172/latest",
                     Auth = new AuthenticationHeaderValue("Bearer", token)
                 });
@@ -46,10 +45,10 @@ namespace SeaPublicWebsite.ExternalServices
             var response = await HttpRequestHelper.SendPostRequestAsync<TokenRequestResponse>(
                 new RequestParameters
                 {
-                    BaseAddress = Global.EpbEpcBaseAddress,
+                    BaseAddress = configuration.BaseUrl,
                     Path = "/auth/oauth/token",
                     Auth = new AuthenticationHeaderValue("Basic",
-                        HttpRequestHelper.ConvertToBase64(epcAuthUsername, epcAuthPassword))
+                        HttpRequestHelper.ConvertToBase64(configuration.Username, configuration.Password))
                 }
             );
             // We divide by 2 to avoid edge cases of sending requests on the exact expiration time

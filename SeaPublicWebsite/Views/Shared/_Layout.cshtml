@@ -1,6 +1,8 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Services
+@inject StaticAssetsVersioningService StaticAssetsVersioning
 @{
     string assetsPath = "/assets/images";
 }
@@ -25,7 +27,7 @@
     <link rel="apple-touch-icon" sizes="152x152" href="@(assetsPath)/govuk-apple-touch-icon-152x152.png">
     <link rel="apple-touch-icon" href="@(assetsPath)/govuk-apple-touch-icon.png">
 
-    <link href="@(StaticAssetsVersioningHelper.GetAppCssFilename())" rel="stylesheet" />
+    <link href="@(StaticAssetsVersioning.GetAppCssFilename())" rel="stylesheet" />
 
     <meta property="og:image" content="@(assetsPath)/govuk-opengraph-image.png">
 </head>
@@ -39,14 +41,6 @@
 
     @{
         List<HeaderNavigationViewModel> headerNavigationLinks = new List<HeaderNavigationViewModel>();
-        // if (ViewBag.ServiceUnavailable != true)
-        // {
-        //     headerNavigationLinks.Add(new HeaderNavigationViewModel
-        //     {
-        //         Text = "Homepage",
-        //         Href = Url.RecommendationAction("Index", "Home")
-        //     });
-        // }
 
         @(await Html.GovUkHeader(new HeaderViewModel
         {
@@ -107,7 +101,7 @@
     }
 })
 
-<script src="@(StaticAssetsVersioningHelper.GetAppJsFilename())"></script>
+    <script src="@(StaticAssetsVersioning.GetAppJsFilename())"></script>
     <script>window.GOVUKFrontend.initAll()</script>
     @RenderSection("AfterLoadedCompiledScripts", false)
 </body>

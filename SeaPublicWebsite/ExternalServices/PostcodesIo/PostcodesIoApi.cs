@@ -2,7 +2,7 @@
 using System.Net.Http;
 using Newtonsoft.Json;
 
-namespace SeaPublicWebsite.ExternalServices
+namespace SeaPublicWebsite.ExternalServices.PostcodesIo
 {
     public class PostcodesIoApi
     {
