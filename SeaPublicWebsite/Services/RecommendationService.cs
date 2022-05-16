@@ -1,22 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
 using SeaPublicWebsite.DataModels;
-using SeaPublicWebsite.ExternalServices;
+using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Services
 {
-    public static class RecommendationService
+    public class RecommendationService
     {
-        public static readonly Dictionary<string, Recommendation> RecommendationDictionary =
+        private readonly BreApi breApi;
+
+        public RecommendationService(BreApi breApi)
+        {
+            this.breApi = breApi;
+        }
+
+        public static readonly Dictionary<string, BreRecommendation> RecommendationDictionary =
             new()
             {
                 {
-                    "A", new Recommendation
+                    "A", new BreRecommendation
                     {
                         Key = RecommendationKey.AddLoftInsulation,
                         Title = "Add some loft insulation",
@@ -24,7 +30,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "A2", new Recommendation
+                    "A2", new BreRecommendation
                     {
                         Key = RecommendationKey.FlatRoofInsulation,
                         Title = "Flat roof insulation",
@@ -32,7 +38,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "B", new Recommendation
+                    "B", new BreRecommendation
                     {
                         Key = RecommendationKey.InsulateCavityWalls,
                         Title = "Insulate your cavity walls",
@@ -40,7 +46,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "Q", new Recommendation
+                    "Q", new BreRecommendation
                     {
                         Key = RecommendationKey.WallInsulationBrickAgeAToD,
                         Title = "Wall insulation Brick age A-D",
@@ -48,7 +54,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "Q1", new Recommendation
+                    "Q1", new BreRecommendation
                     {
                         Key = RecommendationKey.WallInsulationOther,
                         Title = "Wall insulation Other",
@@ -56,7 +62,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "W1", new Recommendation
+                    "W1", new BreRecommendation
                     {
                         Key = RecommendationKey.FloorInsulationSuspendedFloor,
                         Title = "Floor insulation suspended floor",
@@ -64,7 +70,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "W2", new Recommendation
+                    "W2", new BreRecommendation
                     {
                         Key = RecommendationKey.FloorInsulationSolidFloor,
                         Title = "Floor insulation solid floor",
@@ -72,7 +78,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "D", new Recommendation
+                    "D", new BreRecommendation
                     {
                         Key = RecommendationKey.DraughtproofWindowsAndDoors,
                         Title = "Draughtproof 100% of windows and doors",
@@ -80,7 +86,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "C", new Recommendation
+                    "C", new BreRecommendation
                     {
                         Key = RecommendationKey.HotWaterCylinderInsulation,
                         Title = "Hot water cylinder insulation",
@@ -88,7 +94,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "F", new Recommendation
+                    "F", new BreRecommendation
                     {
                         Key = RecommendationKey.HotWaterCylinderThermostat,
                         Title = "Hot water cylinder thermostat",
@@ -96,7 +102,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "G", new Recommendation
+                    "G", new BreRecommendation
                     {
                         Key = RecommendationKey.UpgradeHeatingControls,
                         Title = "Upgrade your heating controls",
@@ -104,7 +110,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "I", new Recommendation
+                    "I", new BreRecommendation
                     {
                         Key = RecommendationKey.ReplaceCondensingBoiler,
                         Title = "Replacement condensing boiler",
@@ -112,7 +118,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "T", new Recommendation
+                    "T", new BreRecommendation
                     {
                         Key = RecommendationKey.CondensingGasBoiler,
                         Title = "Condensing gas boiler (fuel switch)",
@@ -120,7 +126,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "L2", new Recommendation
+                    "L2", new BreRecommendation
                     {
                         Key = RecommendationKey.HighHeatRetentionStorageHeaters,
                         Title = "High heat retention storage heaters",
@@ -128,7 +134,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "N", new Recommendation
+                    "N", new BreRecommendation
                     {
                         Key = RecommendationKey.SolarWaterHeating,
                         Title = "Solar water heating",
@@ -136,7 +142,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "Y", new Recommendation
+                    "Y", new BreRecommendation
                     {
                         Key = RecommendationKey.MixerShowerHeatRecoverySystem,
                         Title = "Heat recovery system for mixer showers",
@@ -144,7 +150,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "O", new Recommendation
+                    "O", new BreRecommendation
                     {
                         Key = RecommendationKey.ReplaceSingleGlazedWindowsWithLowEDoubleGlazing,
                         Title = "Replace single glazed windows with low-E double glazing",
@@ -152,7 +158,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "O3", new Recommendation
+                    "O3", new BreRecommendation
                     {
                         Key = RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
                         Title = "Fit new windows",
@@ -160,7 +166,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "X", new Recommendation
+                    "X", new BreRecommendation
                     {
                         Key = RecommendationKey.HighPerformanceExternalDoors,
                         Title = "High performance external doors",
@@ -168,7 +174,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "U", new Recommendation
+                    "U", new BreRecommendation
                     {
                         Key = RecommendationKey.SolarElectricPanels,
                         Title = "Fit solar electric panels",
@@ -177,70 +183,57 @@ namespace SeaPublicWebsite.Services
                 }
             };
 
-        public static List<Recommendation> GetRecommendationsForUser(UserDataModel userData)
+        public async Task<List<BreRecommendation>> GetRecommendationsForUserAsync(UserDataModel userData)
         {
             BreRequest request = CreateRequest(userData);
 
-            return BreApi.GetRecommendationsForUserRequest(request).Result;
+            return await breApi.GetRecommendationsForUserRequestAsync(request);
         }
 
         private static BreRequest CreateRequest(UserDataModel userData)
         {
-            BrePropertyType brePropertyType = GetBrePropertyType(userData.PropertyType);
+            BrePropertyType brePropertyType = GetBrePropertyType(userData.PropertyType.Value);
 
-            BreBuiltForm breBuiltForm = GetBreBuiltForm(userData.PropertyType, userData.HouseType, userData.BungalowType);
+            BreBuiltForm breBuiltForm =
+                GetBreBuiltForm(userData.PropertyType.Value, userData.HouseType, userData.BungalowType);
 
-            BreFlatLevel? breFlatLevel = GetBreFlatLevel(userData.PropertyType, userData.FlatType);
+            BreFlatLevel? breFlatLevel = GetBreFlatLevel(userData.PropertyType.Value, userData.FlatType);
 
             string breConstructionDate = GetBreConstructionDate(userData.YearBuilt);
 
-            BreWallType breWallType = GetBreWallType(userData.WallConstruction, userData.SolidWallsInsulated,
+            BreWallType breWallType = GetBreWallType(userData.WallConstruction.Value, userData.SolidWallsInsulated,
                 userData.CavityWallsInsulated);
 
-            BreRoofType breRoofType = GetBreRoofType(userData.RoofConstruction, userData.RoofInsulated);
+            BreRoofType breRoofType = GetBreRoofType(userData.RoofConstruction.Value, userData.RoofInsulated);
 
-            BreGlazingType breGlazingType = GetBreGlazingType(userData.GlazingType);
+            BreGlazingType breGlazingType = GetBreGlazingType(userData.GlazingType.Value);
 
-            BreHeatingFuel breHeatingFuel = GetBreHeatingFuel(userData.HeatingType, userData.OtherHeatingType);
+            BreHeatingFuel breHeatingFuel = GetBreHeatingFuel(userData.HeatingType.Value, userData.OtherHeatingType);
 
             bool? breHotWaterCylinder = GetBreHotWaterCylinder(userData.HasHotWaterCylinder);
 
-            BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(userData.HeatingPattern);
+            BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(userData.HeatingPattern.Value);
 
-            BreRequest request = new()
-            {
-                postcode = userData.Postcode,
-                property_type = ((int) brePropertyType).ToString(),
-                built_form = ((int) breBuiltForm).ToString(),
-                flat_level = ((int?) breFlatLevel).ToString(),
-                construction_date = breConstructionDate,
-                wall_type = (int) breWallType,
-                //no input for floor_type in BRE API
-                roof_type = (int) breRoofType,
-                glazing_type = (int) breGlazingType,
-                //no input for outdoor heater space in BRE API
-                heating_fuel = ((int) breHeatingFuel).ToString(),
-                hot_water_cylinder = breHotWaterCylinder,
-                occupants = userData.NumberOfOccupants,
-                heating_pattern_type = (int) breHeatingPatternType,
-                living_room_temperature = userData.Temperature,
-                //assumption:
-                num_storeys = userData.PropertyType == PropertyType.House ? 2 : 1,
-                //assumption:
-                num_bedrooms = userData.NumberOfOccupants ?? 1,
-                measures = true,
-                //measures_package consists of all measures implemented in the BRE API as of May 2021
-                measures_package = new[]
-                {
-                    "A", "A2", "B", "Q", "Q1", "W1", "W2", "D", "C", "F", "G", "I", "T", "L2", "N", "Y", "O", "O3", "X",
-                    "U"
-                }
-            };
+            BreRequest request = new(
+                brePostcode: userData.Postcode,
+                brePropertyType: brePropertyType,
+                breBuiltForm: breBuiltForm,
+                breFlatLevel: breFlatLevel,
+                breConstructionDate: breConstructionDate,
+                breWallType: breWallType,
+                breRoofType: breRoofType,
+                breGlazingType: breGlazingType,
+                breHeatingFuel: breHeatingFuel,
+                breHotWaterCylinder: breHotWaterCylinder,
+                breOccupants: userData.NumberOfOccupants,
+                breHeatingPatternType: breHeatingPatternType,
+                breTemperature: userData.Temperature
+            );
 
             return request;
         }
 
-        private static BrePropertyType GetBrePropertyType(PropertyType? propertyType)
+        private static BrePropertyType GetBrePropertyType(PropertyType propertyType)
         {
             return propertyType switch
             {
@@ -252,7 +245,7 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static BreBuiltForm GetBreBuiltForm(PropertyType? propertyType, HouseType? houseType,
+        private static BreBuiltForm GetBreBuiltForm(PropertyType propertyType, HouseType? houseType,
             BungalowType? bungalowType)
         {
             return propertyType switch
@@ -278,13 +271,15 @@ namespace SeaPublicWebsite.Services
                     _ => throw new ArgumentOutOfRangeException()
                 },
                 PropertyType.ApartmentFlatOrMaisonette =>
-                    //the BreBuiltForm values don't make sense for flats, but built_form is a required input to the BRE API even when property_type is Flat  so we set MidTerrace as a default value:
-                    BreBuiltForm.MidTerrace,
+                    //the BreBuiltForm values don't make sense for flats, but built_form is a required input to the
+                    //BRE API even when property_type is Flat  so we set EnclosedEndTerrace as a default value
+                    //(this value indicates two adjacent exposed walls which seems a good average for a flat):
+                    BreBuiltForm.EnclosedEndTerrace,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        private static BreFlatLevel? GetBreFlatLevel(PropertyType? propertyType, FlatType? flatType)
+        private static BreFlatLevel? GetBreFlatLevel(PropertyType propertyType, FlatType? flatType)
         {
             switch (propertyType)
             {
@@ -317,11 +312,12 @@ namespace SeaPublicWebsite.Services
                 <= 2006 => "J",
                 <= 2011 => "K",
                 >= 2012 => "L",
+                //assumption:
                 _ => "D"
             };
         }
 
-        private static BreWallType GetBreWallType(WallConstruction? wallConstruction,
+        private static BreWallType GetBreWallType(WallConstruction wallConstruction,
             SolidWallsInsulated? solidWallsInsulated,
             CavityWallsInsulated? cavityWallsInsulated)
         {
@@ -332,6 +328,7 @@ namespace SeaPublicWebsite.Services
                 {
                     SolidWallsInsulated.DoNotKnow => BreWallType.DontKnow,
                     SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
+                    //assumption:
                     SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
                     SolidWallsInsulated.All => BreWallType.SolidWallsWithInsulation,
                     _ => throw new ArgumentOutOfRangeException()
@@ -340,32 +337,61 @@ namespace SeaPublicWebsite.Services
                 {
                     CavityWallsInsulated.DoNotKnow => BreWallType.DontKnow,
                     CavityWallsInsulated.No => BreWallType.CavityWallsWithoutInsulation,
+                    //assumption:
                     CavityWallsInsulated.Some => BreWallType.CavityWallsWithoutInsulation,
                     CavityWallsInsulated.All => BreWallType.CavityWallsWithInsulation,
                     _ => throw new ArgumentOutOfRangeException()
                 },
-                WallConstruction.Mixed =>
+                WallConstruction.Mixed => cavityWallsInsulated switch
+                {
+                    CavityWallsInsulated.DoNotKnow => solidWallsInsulated switch
+                    {
+                        //assumption:
+                        SolidWallsInsulated.DoNotKnow => BreWallType.DontKnow,
+                        //assumption (pending confirmation):
+                        SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
+                        //assumption (pending confirmation):
+                        SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
+                        //assumption (pending confirmation):
+                        SolidWallsInsulated.All => BreWallType.SolidWallsWithInsulation,
+                        _ => throw new ArgumentOutOfRangeException()
+                    },
                     //assumption:
-                    BreWallType.DontKnow,
+                    CavityWallsInsulated.No => BreWallType.CavityWallsWithoutInsulation,
+                    //assumption:
+                    CavityWallsInsulated.Some => BreWallType.CavityWallsWithoutInsulation,
+                    CavityWallsInsulated.All => solidWallsInsulated switch
+                    {
+                        //assumption (pending confirmation):
+                        SolidWallsInsulated.DoNotKnow => BreWallType.CavityWallsWithInsulation,
+                        //assumption:
+                        SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
+                        //assumption:
+                        SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
+                        //assumption:
+                        SolidWallsInsulated.All => BreWallType.SolidWallsWithInsulation,
+                        _ => throw new ArgumentOutOfRangeException()
+                    },
+                    _ => throw new ArgumentOutOfRangeException()
+                },
                 WallConstruction.Other => BreWallType.DontKnow,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        private static BreRoofType GetBreRoofType(RoofConstruction? roofConstruction, RoofInsulated? roofInsulated)
+        private static BreRoofType GetBreRoofType(RoofConstruction roofConstruction, RoofInsulated? roofInsulated)
         {
             return roofConstruction switch
             {
                 RoofConstruction.Flat =>
                     //assumption:
-                    BreRoofType.DontKnow,
-                RoofConstruction.Mixed =>
-                    //assumption:
-                    BreRoofType.DontKnow,
-                RoofConstruction.Pitched => roofInsulated switch
+                    BreRoofType.FlatRoofWithInsulation,
+                RoofConstruction.Pitched or RoofConstruction.Mixed => roofInsulated switch
                 {
                     RoofInsulated.DoNotKnow => BreRoofType.DontKnow,
+                    //assumption in case RoofConstruction.Mixed:
                     RoofInsulated.Yes => BreRoofType.PitchedRoofWithInsulation,
+                    //assumption in case RoofConstruction.Mixed:
                     RoofInsulated.No => BreRoofType.PitchedRoofWithoutInsulation,
                     _ => throw new ArgumentOutOfRangeException()
                 },
@@ -373,7 +399,7 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static BreGlazingType GetBreGlazingType(GlazingType? glazingType)
+        private static BreGlazingType GetBreGlazingType(GlazingType glazingType)
         {
             return glazingType switch
             {
@@ -381,12 +407,13 @@ namespace SeaPublicWebsite.Services
                 GlazingType.SingleGlazed => BreGlazingType.SingleGlazed,
                 //assumption:
                 GlazingType.DoubleOrTripleGlazed => BreGlazingType.DoubleGlazed,
-                GlazingType.Both => BreGlazingType.DontKnow,
+                //assumption:
+                GlazingType.Both => BreGlazingType.SingleGlazed,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        private static BreHeatingFuel GetBreHeatingFuel(HeatingType? heatingType, OtherHeatingType? otherHeatingType)
+        private static BreHeatingFuel GetBreHeatingFuel(HeatingType heatingType, OtherHeatingType? otherHeatingType)
         {
             return heatingType switch
             {
@@ -401,7 +428,7 @@ namespace SeaPublicWebsite.Services
                 HeatingType.Other => otherHeatingType switch
                 {
                     //assumption:
-                    OtherHeatingType.Biomass => BreHeatingFuel.SolidFuel,
+                    OtherHeatingType.Biomass => BreHeatingFuel.MainsGas,
                     OtherHeatingType.CoalOrSolidFuel => BreHeatingFuel.SolidFuel,
                     //assumption:
                     OtherHeatingType.Other => BreHeatingFuel.MainsGas,
