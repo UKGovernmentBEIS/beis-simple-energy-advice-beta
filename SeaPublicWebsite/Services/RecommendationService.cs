@@ -271,8 +271,10 @@ namespace SeaPublicWebsite.Services
                     _ => throw new ArgumentOutOfRangeException()
                 },
                 PropertyType.ApartmentFlatOrMaisonette =>
-                    //the BreBuiltForm values don't make sense for flats, but built_form is a required input to the BRE API even when property_type is Flat  so we set MidTerrace as a default value:
-                    BreBuiltForm.MidTerrace,
+                    //the BreBuiltForm values don't make sense for flats, but built_form is a required input to the
+                    //BRE API even when property_type is Flat  so we set EnclosedEndTerrace as a default value
+                    //(this value indicates two adjacent exposed walls which seems a good average for a flat):
+                    BreBuiltForm.EnclosedEndTerrace,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
@@ -340,9 +342,38 @@ namespace SeaPublicWebsite.Services
                     CavityWallsInsulated.All => BreWallType.CavityWallsWithInsulation,
                     _ => throw new ArgumentOutOfRangeException()
                 },
-                WallConstruction.Mixed =>
+                WallConstruction.Mixed => cavityWallsInsulated switch
+                {
+                    CavityWallsInsulated.DoNotKnow => solidWallsInsulated switch
+                    {
+                        //assumption:
+                        SolidWallsInsulated.DoNotKnow => BreWallType.DontKnow,
+                        //assumption (pending confirmation):
+                        SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
+                        //assumption (pending confirmation):
+                        SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
+                        //assumption (pending confirmation):
+                        SolidWallsInsulated.All => BreWallType.SolidWallsWithInsulation,
+                        _ => throw new ArgumentOutOfRangeException()
+                    },
                     //assumption:
-                    BreWallType.DontKnow,
+                    CavityWallsInsulated.No => BreWallType.CavityWallsWithoutInsulation,
+                    //assumption:
+                    CavityWallsInsulated.Some => BreWallType.CavityWallsWithoutInsulation,
+                    CavityWallsInsulated.All => solidWallsInsulated switch
+                    {
+                        //assumption (pending confirmation):
+                        SolidWallsInsulated.DoNotKnow => BreWallType.CavityWallsWithInsulation,
+                        //assumption:
+                        SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
+                        //assumption:
+                        SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
+                        //assumption:
+                        SolidWallsInsulated.All => BreWallType.SolidWallsWithInsulation,
+                        _ => throw new ArgumentOutOfRangeException()
+                    },
+                    _ => throw new ArgumentOutOfRangeException()
+                },
                 WallConstruction.Other => BreWallType.DontKnow,
                 _ => throw new ArgumentOutOfRangeException()
             };
@@ -354,14 +385,13 @@ namespace SeaPublicWebsite.Services
             {
                 RoofConstruction.Flat =>
                     //assumption:
-                    BreRoofType.DontKnow,
-                RoofConstruction.Mixed =>
-                    //assumption:
-                    BreRoofType.DontKnow,
-                RoofConstruction.Pitched => roofInsulated switch
+                    BreRoofType.FlatRoofWithInsulation,
+                RoofConstruction.Pitched or RoofConstruction.Mixed => roofInsulated switch
                 {
                     RoofInsulated.DoNotKnow => BreRoofType.DontKnow,
+                    //assumption in case RoofConstruction.Mixed:
                     RoofInsulated.Yes => BreRoofType.PitchedRoofWithInsulation,
+                    //assumption in case RoofConstruction.Mixed:
                     RoofInsulated.No => BreRoofType.PitchedRoofWithoutInsulation,
                     _ => throw new ArgumentOutOfRangeException()
                 },
@@ -377,7 +407,8 @@ namespace SeaPublicWebsite.Services
                 GlazingType.SingleGlazed => BreGlazingType.SingleGlazed,
                 //assumption:
                 GlazingType.DoubleOrTripleGlazed => BreGlazingType.DoubleGlazed,
-                GlazingType.Both => BreGlazingType.DontKnow,
+                //assumption:
+                GlazingType.Both => BreGlazingType.SingleGlazed,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
@@ -397,7 +428,7 @@ namespace SeaPublicWebsite.Services
                 HeatingType.Other => otherHeatingType switch
                 {
                     //assumption:
-                    OtherHeatingType.Biomass => BreHeatingFuel.SolidFuel,
+                    OtherHeatingType.Biomass => BreHeatingFuel.MainsGas,
                     OtherHeatingType.CoalOrSolidFuel => BreHeatingFuel.SolidFuel,
                     //assumption:
                     OtherHeatingType.Other => BreHeatingFuel.MainsGas,

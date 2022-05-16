@@ -69,7 +69,7 @@
             living_room_temperature = breTemperature;
             //assumption:
             num_storeys = brePropertyType == BrePropertyType.House ? 2 : 1;
-            //assumption:
+            //assumption (question is being added for this):
             num_bedrooms = breOccupants ?? 1;
             measures = true;
             //measures_package consists of all measures implemented in the BRE API as of May 2021
