@@ -28,8 +28,7 @@ public class CookieController: Controller
         var viewModel = new CookieSettingsViewModel
         {
             GoogleAnalytics = cookie?.GoogleAnalytics is true,
-            ChangesHaveBeenSaved = changesHaveBeenSaved,
-            ServiceName = globalConstants.Configuration.ServiceName
+            ChangesHaveBeenSaved = changesHaveBeenSaved
         };
         TempData["BannerState"] = BannerState.Hide;
         return View("CookieSettings", viewModel);
@@ -73,11 +72,7 @@ public class CookieController: Controller
     [HttpGet("/cookie-details")]
     public IActionResult CookieDetails()
     {
-        var viewModel = new CookieDetailsViewModel
-        {
-            ServiceName = globalConstants.Configuration.ServiceName
-        };
-        return View("CookieDetails", viewModel);
+        return View("CookieDetails");
     }
 
 }

@@ -50,7 +50,6 @@
 
     @await Html.GovUkCookieBanner(new CookieBannerViewModel
     {
-        NameOfService = GlobalConstants.Configuration.ServiceName,
         BannerState = bannerState,
         CookieType = CookieType.Analytics,
         ButtonClickAction = @Url.Action("CookieConsent", "Cookie"),

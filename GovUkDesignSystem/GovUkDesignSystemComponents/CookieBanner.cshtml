@@ -19,13 +19,13 @@
     <form method="POST" action="@Model.ButtonClickAction">
         @Html.AntiForgeryToken()
         @Html.HiddenFor(m => m.ReturnUrl)
-        <div class="govuk-cookie-banner " data-nosnippet role="region" aria-label="Cookies on @Model.NameOfService">
+        <div class="govuk-cookie-banner " data-nosnippet role="region" aria-label="Cookies on GOV.UK">
             <div class="govuk-cookie-banner__message govuk-width-container">
                 @if (Model.BannerState is BannerState.ShowBanner)
                 {
                     <div class="govuk-grid-row">
                         <div class="govuk-grid-column-two-thirds">
-                            <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on @Model.NameOfService</h2>
+                            <h2 class="govuk-cookie-banner__heading govuk-heading-m">Cookies on GOV.UK</h2>
 
                             <div class="govuk-cookie-banner__content">
                                 <p class="govuk-body">We use some essential cookies to make this service work.</p>
@@ -37,13 +37,13 @@
                     <div class="govuk-button-group">
                         @await Html.GovUkButton(new ButtonViewModel
                         {
-                            Text = $"Accept {Model.CookieType} cookies",
+                            Text = $"Accept {Model.CookieType.ToString().ToLower()} cookies",
                             Name = "consent",
                             Value = "accept"
                         })
                         @await Html.GovUkButton(new ButtonViewModel
                         {
-                            Text = $"Reject {Model.CookieType} cookies",
+                            Text = $"Reject {Model.CookieType.ToString().ToLower()} cookies",
                             Name = "consent",
                             Value = "reject"
                         })
