@@ -42,12 +42,12 @@ public class CookieService
         return false;
     }
 
-    public void SetCookie<T>(HttpResponse response, string cookieName, T cookie)
+    public void SetCookie<T>(HttpResponse response, string cookieName, T cookie, int daysUntilExpiry = 365)
     {
         var cookieString = JsonConvert.SerializeObject(cookie);
         response.Cookies.Append(
             cookieName,
             cookieString,
-            new CookieOptions {Secure = true, SameSite = SameSiteMode.Lax, MaxAge = TimeSpan.FromDays(365)});
+            new CookieOptions {Secure = true, SameSite = SameSiteMode.Lax, MaxAge = TimeSpan.FromDays(daysUntilExpiry)});
     }
 }

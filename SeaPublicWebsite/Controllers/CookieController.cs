@@ -31,6 +31,7 @@ public class CookieController: Controller
             ChangesHaveBeenSaved = changesHaveBeenSaved,
             ServiceName = globalConstants.Configuration.ServiceName
         };
+        TempData["BannerState"] = BannerState.Hide;
         return View("CookieSettings", viewModel);
     }
 
