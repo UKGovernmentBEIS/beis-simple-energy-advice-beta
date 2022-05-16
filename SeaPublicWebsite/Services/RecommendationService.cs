@@ -348,12 +348,12 @@ namespace SeaPublicWebsite.Services
                     {
                         //assumption:
                         SolidWallsInsulated.DoNotKnow => BreWallType.DontKnow,
-                        //assumption (pending confirmation):
+                        //assumption (may change to DontKnow if this can drive recommendations):
                         SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
-                        //assumption (pending confirmation):
+                        //assumption (may change to DontKnow if this can drive recommendations):
                         SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
-                        //assumption (pending confirmation):
-                        SolidWallsInsulated.All => BreWallType.SolidWallsWithInsulation,
+                        //assumption:
+                        SolidWallsInsulated.All => BreWallType.DontKnow,
                         _ => throw new ArgumentOutOfRangeException()
                     },
                     //assumption:
@@ -362,8 +362,8 @@ namespace SeaPublicWebsite.Services
                     CavityWallsInsulated.Some => BreWallType.CavityWallsWithoutInsulation,
                     CavityWallsInsulated.All => solidWallsInsulated switch
                     {
-                        //assumption (pending confirmation):
-                        SolidWallsInsulated.DoNotKnow => BreWallType.CavityWallsWithInsulation,
+                        //assumption (may change to DontKnow if this can drive recommendations):
+                        SolidWallsInsulated.DoNotKnow => BreWallType.SolidWallsWithoutInsulation,
                         //assumption:
                         SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
                         //assumption:
