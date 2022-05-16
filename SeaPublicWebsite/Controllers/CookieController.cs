@@ -43,7 +43,7 @@ public class CookieController: Controller
             Version = cookieService.Configuration.CurrentCookieMessageVersion,
             GoogleAnalytics = viewModel.GoogleAnalytics,
         };
-        cookieService.SetCookiesSettings(Response, cookieSettings);
+        cookieService.SetCookie(Response, cookieService.Configuration.CookieSettingsCookieName, cookieSettings);
         return CookieSettings_Get(changesHaveBeenSaved: true);
     }
 
@@ -62,7 +62,7 @@ public class CookieController: Controller
             Version = cookieService.Configuration.CurrentCookieMessageVersion,
             GoogleAnalytics = cookiesAccepted
         };
-        cookieService.SetCookiesSettings(Response, cookieSettings);
+        cookieService.SetCookie(Response, cookieService.Configuration.CookieSettingsCookieName, cookieSettings);
         TempData["BannerState"] = cookiesAccepted
             ? BannerState.ShowAccepted
             : BannerState.ShowRejected;

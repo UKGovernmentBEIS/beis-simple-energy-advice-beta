@@ -42,12 +42,12 @@ public class CookieService
         return false;
     }
 
-    public void SetCookiesSettings(HttpResponse response, CookieSettings cookieSettings)
+    public void SetCookie<T>(HttpResponse response, string cookieName, T cookie)
     {
-        var cookiesString = JsonConvert.SerializeObject(cookieSettings);
+        var cookieString = JsonConvert.SerializeObject(cookie);
         response.Cookies.Append(
-            Configuration.CookieSettingsCookieName,
-            cookiesString,
+            cookieName,
+            cookieString,
             new CookieOptions {Secure = true, SameSite = SameSiteMode.Lax, MaxAge = TimeSpan.FromDays(365)});
     }
 }
