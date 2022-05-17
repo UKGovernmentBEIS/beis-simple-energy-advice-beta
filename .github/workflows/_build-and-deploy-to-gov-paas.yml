@@ -51,7 +51,7 @@ jobs:
       run: dotnet restore
       
     - name: Build .Net code
-      run: dotnet build --no-restore --configuration Release --output ./ci-server-build/
+      run: dotnet build SeaPublicWebsite --no-restore --configuration Release --output ./ci-server-build/
 
     - name: Push the app to Gov.UK PaaS
       run: |
