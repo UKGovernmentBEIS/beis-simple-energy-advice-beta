@@ -1,10 +1,6 @@
-﻿using System;
-using GovUkDesignSystem.GovUkDesignSystemComponents;
-using Microsoft.AspNetCore.Http;
+﻿using GovUkDesignSystem.GovUkDesignSystemComponents;
 using Microsoft.AspNetCore.Mvc;
-using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.Cookies;
-using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
 
 namespace SeaPublicWebsite.Controllers;

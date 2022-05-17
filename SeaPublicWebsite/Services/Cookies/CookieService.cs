@@ -9,7 +9,7 @@ namespace SeaPublicWebsite.Services.Cookies;
 public class CookieService
 {
     public readonly CookieServiceConfiguration Configuration;
-
+    
     public CookieService(IOptions<CookieServiceConfiguration> options)
     {
         Configuration = options.Value;

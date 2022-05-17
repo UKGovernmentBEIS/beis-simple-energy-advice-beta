@@ -56,7 +56,7 @@ namespace SeaPublicWebsite
         {
             services.Configure<CookieServiceConfiguration>(
                 configuration.GetSection(CookieServiceConfiguration.ConfigSection));
-            services.AddSingleton<CookieService>();
+            services.AddScoped<CookieService, CookieService>();
         }
 
         private void ConfigureFileRepository(IServiceCollection services)
