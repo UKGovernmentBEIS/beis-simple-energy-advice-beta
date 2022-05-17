@@ -14,7 +14,7 @@ In SeaPublicWebsite run `npm install`
 
 We are using the GovUkDesignSystem library from the Cabinet Office: https://github.com/cabinetoffice/govuk-design-system-dotnet
 
-As this library is not currently published to Nuget we have a copy of the library in a nuget package in the /lib folder of this solution.
+As this library is not currently published to Nuget we have a copy of the library in a nuget package in the /Lib folder of this solution.
 
 If you need to make changes to the GovUkDesignSystem (e.g. to add a new component) then you should:
 - Clone the BEIS fork of the repository (currently https://github.com/DanCorderSoftwire/govuk-design-system-dotnet) and check out the `sea-changes` branch.
@@ -24,7 +24,7 @@ If you need to make changes to the GovUkDesignSystem (e.g. to add a new componen
 - Copy the built package to /Lib and delete the old package
 - Update the package version in the IYPEE project
 - Test that your changes work on the IYPEE site
-- Create a PR from you branch back to `sea-changes`
+- Create a PR from your branch back to `sea-changes`
 - Get the PR reviewed and merged
 - From time to time create a PR to merge the `sea-changes` branch back to the Cabinet Office repository (https://github.com/cabinetoffice/govuk-design-system-dotnet)
 
