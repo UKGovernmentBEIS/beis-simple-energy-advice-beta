@@ -39,7 +39,6 @@ namespace SeaPublicWebsite
             ConfigureEpcApi(services);
             ConfigureGovUkNotify(services);
             ConfigureCookieService(services);
-            ConfigureGlobalConstants(services);
 
             if (!webHostEnvironment.IsProduction())
             {
@@ -53,14 +52,6 @@ namespace SeaPublicWebsite
             });
         }
         
-        private void ConfigureGlobalConstants(IServiceCollection services)
-        {
-            services.Configure<GlobalConstantsConfiguration>(
-                configuration.GetSection(GlobalConstantsConfiguration.ConfigSection));
-            services.AddSingleton<GlobalConstants>();
-        }
-
-
         private void ConfigureCookieService(IServiceCollection services)
         {
             services.Configure<CookieServiceConfiguration>(

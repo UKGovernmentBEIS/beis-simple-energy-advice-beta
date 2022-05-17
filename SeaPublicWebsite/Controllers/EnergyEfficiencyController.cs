@@ -21,13 +21,11 @@ namespace SeaPublicWebsite.Controllers
         private readonly UserDataStore userDataStore;
         private readonly IEpcApi epcApi;
         private readonly IEmailSender emailApi;
-        private readonly GlobalConstants globalConstants;
 
-        public EnergyEfficiencyController(UserDataStore userDataStore, IEpcApi epcApi, IEmailSender emailApi, GlobalConstants globalConstants)
+        public EnergyEfficiencyController(UserDataStore userDataStore, IEpcApi epcApi, IEmailSender emailApi)
         {
             this.userDataStore = userDataStore;
             this.emailApi = emailApi;
-            this.globalConstants = globalConstants;
             this.epcApi = epcApi;
         }
         
@@ -37,7 +35,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var viewModel = new IndexViewModel
             {
-                ServiceName = globalConstants.Configuration.ServiceName
+                ServiceName = Constants.SERVICE_NAME
             };
            return View("Index", viewModel);
         }

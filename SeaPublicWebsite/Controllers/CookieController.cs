@@ -12,12 +12,10 @@ namespace SeaPublicWebsite.Controllers;
 public class CookieController: Controller
 {
     private readonly CookieService cookieService;
-    private readonly GlobalConstants globalConstants;
 
-    public CookieController(CookieService cookieService, GlobalConstants globalConstants)
+    public CookieController(CookieService cookieService)
     {
         this.cookieService = cookieService;
-        this.globalConstants = globalConstants;
     }
 
     [HttpGet("/cookies")]

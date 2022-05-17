@@ -9,7 +9,6 @@
 @using SeaPublicWebsite.Services.Cookies
 @inject StaticAssetsVersioningService StaticAssetsVersioning
 @inject CookieService CookieService
-@inject GlobalConstants GlobalConstants
 @{
     string assetsPath = "/assets/images";
     var bannerState = BannerState.ShowBanner;
@@ -40,7 +39,7 @@
 <html lang="en" class="govuk-template app-html-class">
 <head>
     <meta charset="utf-8" />
-    <title>@(ViewBag.Title != null ? ViewBag.Title + " -" : "") @GlobalConstants.Configuration.ServiceName - Gov.UK</title>
+    <title>@(ViewBag.Title != null ? ViewBag.Title + " -" : "") @Constants.SERVICE_NAME - Gov.UK</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="blue" />
 
@@ -79,7 +78,7 @@
 
         @(await Html.GovUkHeader(new HeaderViewModel
         {
-            ServiceName = GlobalConstants.Configuration.ServiceName,
+            ServiceName = Constants.SERVICE_NAME,
             AssetsPath = assetsPath,
             HomepageUrl = "/",
             ServiceUrl = "/",
