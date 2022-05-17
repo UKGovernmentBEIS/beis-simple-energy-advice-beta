@@ -14,6 +14,9 @@ public class BreApi
     [Test]
     public void RequestsMeasures()
     {
+        //Arrange
+        
+        //Act
         BreRequest request = new(
             brePostcode: "",
             brePropertyType: BrePropertyType.House,
@@ -28,7 +31,9 @@ public class BreApi
             breOccupants: null,
             breHeatingPatternType: BreHeatingPatternType.MorningAndEvening,
             breTemperature: null
-        );       
+        );
+        
+        //Assert
         request.measures.Should().Be(true);
     }
 }

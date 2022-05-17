@@ -26,7 +26,7 @@ ProjectSection(SolutionItems) = preProject
 	.github\workflows\build-and-deploy-to-gov-paas-usertesting.yml = .github\workflows\build-and-deploy-to-gov-paas-usertesting.yml
 EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{BC27E00A-BCB1-40DD-872A-3FF0A46A5FFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaPublicWebsite.UnitTests", "SeaPublicWebsite.UnitTests\SeaPublicWebsite.UnitTests.csproj", "{BC27E00A-BCB1-40DD-872A-3FF0A46A5FFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
