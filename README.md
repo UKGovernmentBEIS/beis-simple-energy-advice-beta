@@ -73,6 +73,17 @@ Fill in the opened `secrets.json` file with:
 - In `SeaPublicWebsite` run `npm run watch`
 - In Visual Studio / Rider run the `SeaPublicWebsite` project
 
+
+### Local Database Setup
+Windows:
+- Download the installer and PostgreSQL 14
+- Follow default installation steps (no additional software is required from Stack Builder upon completion)
+  - You may be prompted for a password for the postgres user and a port (good defaults are "postgres" and "5432", respectively)
+- Open pgAdmin (sign in using the login details you just created)
+- In the Browser tab go to Servers > PostgreSQL 14 > Databases (right click) > Create... > Database
+  - Call your new database "seadev" then click Save to create it
+
+
 ## Environments
 
 This app is deployed to GOV.UK Platform as a Service (https://docs.cloud.service.gov.uk/)
