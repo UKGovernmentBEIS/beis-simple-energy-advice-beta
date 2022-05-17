@@ -35,11 +35,8 @@ public class CookieService
     }
     public bool HasSeenCookieLatestMessage(HttpRequest request)
     {
-        if (TryGetCookie<CookieSettings>(request, Configuration.CookieSettingsCookieName, out var cookie))
-        {
-            return cookie.Version == Configuration.CurrentCookieMessageVersion;
-        }
-        return false;
+        return TryGetCookie<CookieSettings>(request, Configuration.CookieSettingsCookieName, out var cookie) && 
+               cookie.Version == Configuration.CurrentCookieMessageVersion;
     }
 
     public bool HasAcceptedGoogleAnalytics(HttpRequest request)

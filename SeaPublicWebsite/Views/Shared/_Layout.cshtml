@@ -12,10 +12,25 @@
 @inject GlobalConstants GlobalConstants
 @{
     string assetsPath = "/assets/images";
-    TempData["BannerState"] ??= CookieService.HasSeenCookieLatestMessage(Context.Request)
-        ? BannerState.Hide
-        : BannerState.ShowBanner;
-    var bannerState = (BannerState) TempData["BannerState"];
+    var bannerState = BannerState.ShowBanner;
+    if (Context.Request.GetEncodedUrl().Contains("/cookies"))
+    {
+        bannerState = BannerState.Hide;
+    }
+    else if (!CookieService.HasSeenCookieLatestMessage(Context.Request))
+    {
+        bannerState = BannerState.ShowBanner;
+    } else if (CookieService.TryGetCookie<CookieSettings>(Context.Request, CookieService.Configuration.CookieSettingsCookieName, out var cookie))
+    {
+        bannerState = cookie.BannerState;
+        
+        // If the banner shows the confirmation message, update the cookie so it won't be shown again.
+        if (bannerState is BannerState.ShowAccepted or BannerState.ShowRejected)
+        {
+            cookie.BannerState = BannerState.Hide;
+            CookieService.SetCookie(Context.Response, CookieService.Configuration.CookieSettingsCookieName, cookie);
+        }
+    }
 }
 <!DOCTYPE html>
 

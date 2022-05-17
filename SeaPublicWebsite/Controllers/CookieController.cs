@@ -30,7 +30,6 @@ public class CookieController: Controller
             GoogleAnalytics = cookie?.GoogleAnalytics is true,
             ChangesHaveBeenSaved = changesHaveBeenSaved
         };
-        TempData["BannerState"] = BannerState.Hide;
         return View("CookieSettings", viewModel);
     }
 
@@ -53,19 +52,16 @@ public class CookieController: Controller
     {
         if (cookieConsent.Consent == "hide")
         {
-            TempData["BannerState"] = BannerState.Hide;
             return Redirect(cookieConsent.ReturnUrl);
         }
         var cookiesAccepted = cookieConsent.Consent == "accept";
         var cookieSettings = new CookieSettings
         {
             Version = cookieService.Configuration.CurrentCookieMessageVersion,
+            BannerState = cookiesAccepted ? BannerState.ShowAccepted : BannerState.ShowRejected,
             GoogleAnalytics = cookiesAccepted
         };
         cookieService.SetCookie(Response, cookieService.Configuration.CookieSettingsCookieName, cookieSettings);
-        TempData["BannerState"] = cookiesAccepted
-            ? BannerState.ShowAccepted
-            : BannerState.ShowRejected;
         return Redirect(cookieConsent.ReturnUrl);
     }
 
