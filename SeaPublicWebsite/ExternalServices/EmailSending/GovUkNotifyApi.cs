@@ -30,7 +30,7 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
                     emailModel.EmailReplyToId);
                 return response;
             }
-            catch (NotifyClientException e)
+            catch (NotifyClientException)
             {
                 // TODO: Logging, SEABETA-192
                 throw;
