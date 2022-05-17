@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices;
+using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.ExternalServices.OpenEpc;
@@ -35,6 +36,7 @@ namespace SeaPublicWebsite
 
             ConfigureFileRepository(services);
             ConfigureEpcApi(services);
+            ConfigureBreApi(services);
             ConfigureGovUkNotify(services);
 
             if (!webHostEnvironment.IsProduction())
@@ -47,6 +49,8 @@ namespace SeaPublicWebsite
             {
                 options.Filters.Add<ErrorHandlingFilter>();
             });
+
+            services.AddScoped<RecommendationService>();
         }
 
         private void ConfigureFileRepository(IServiceCollection services)
@@ -71,8 +75,15 @@ namespace SeaPublicWebsite
             services.AddScoped<IEpcApi, OpenEpcApi>();
             // TODO: When the EPB API is ready, uncomment this and remove the above:
             // services.Configure<EpbEpcConfiguration>(
-            //     Configuration.GetSection(EpbEpcConfiguration.ConfigSection));
-            // services.AddScoped<IEpcApi, EPBEPCApi>();
+            //     configuration.GetSection(EpbEpcConfiguration.ConfigSection));
+            // services.AddScoped<IEpcApi, EpbEpcApi>();
+        }
+
+        private void ConfigureBreApi(IServiceCollection services)
+        {
+            services.Configure<BreConfiguration>(
+                configuration.GetSection(BreConfiguration.ConfigSection));
+            services.AddScoped<BreApi>();
         }
 
         private void ConfigureGovUkNotify(IServiceCollection services)

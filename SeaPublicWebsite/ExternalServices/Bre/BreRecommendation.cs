@@ -1,9 +1,8 @@
 ﻿using SeaPublicWebsite.Models.EnergyEfficiency;
-using System.Collections.Generic;
 
-namespace SeaPublicWebsite.DataModels
+namespace SeaPublicWebsite.ExternalServices.Bre
 {
-    public class Recommendation
+    public class BreRecommendation
     {
         public RecommendationKey Key { get; set; }
         public string Title { get; set; }

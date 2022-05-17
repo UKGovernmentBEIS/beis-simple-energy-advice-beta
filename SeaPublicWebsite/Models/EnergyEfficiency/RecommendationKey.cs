@@ -1,7 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
-
-namespace SeaPublicWebsite.Models.EnergyEfficiency
+﻿namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public enum RecommendationKey
     { 
@@ -10,6 +7,22 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         UpgradeHeatingControls,
         FitNewWindows,
         InsulateCavityWalls,
-        SolarElectricPanels
+        SolarElectricPanels,
+        FlatRoofInsulation,
+        WallInsulationBrickAgeAToD,
+        WallInsulationOther,
+        FloorInsulationSuspendedFloor,
+        FloorInsulationSolidFloor,
+        DraughtproofWindowsAndDoors,
+        HotWaterCylinderInsulation,
+        HotWaterCylinderThermostat,
+        ReplaceCondensingBoiler,
+        CondensingGasBoiler,
+        HighHeatRetentionStorageHeaters,
+        SolarWaterHeating,
+        MixerShowerHeatRecoverySystem,
+        ReplaceSingleGlazedWindowsWithLowEDoubleGlazing,
+        ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
+        HighPerformanceExternalDoors
     }
 }

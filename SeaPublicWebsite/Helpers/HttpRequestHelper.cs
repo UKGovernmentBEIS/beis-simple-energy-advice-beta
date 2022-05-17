@@ -13,7 +13,7 @@ namespace SeaPublicWebsite.Helpers
         {
             return SendRequestAsync<T>(RequestType.Get, parameters);
         }
-        
+
         public static Task<T> SendPostRequestAsync<T>(RequestParameters parameters)
         {
             return SendRequestAsync<T>(RequestType.Post, parameters);
@@ -23,11 +23,11 @@ namespace SeaPublicWebsite.Helpers
         {
             return Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"{username}:{password}"));
         }
-        
+
         private static async Task<T> SendRequestAsync<T>(RequestType requestType, RequestParameters parameters)
         {
             var httpClient = SetupHttpClient(parameters);
-            var response =  await (requestType switch
+            var response = await (requestType switch
             {
                 RequestType.Get => httpClient.GetAsync(parameters.Path),
                 RequestType.Post => httpClient.PostAsync(parameters.Path, parameters.Body),
@@ -49,8 +49,8 @@ namespace SeaPublicWebsite.Helpers
         {
             if (!response.IsSuccessStatusCode)
             {
-                throw new EpcApiException($"Request to {response.RequestMessage?.RequestUri} failed. " +
-                                          $"Error message: {response.StatusCode}; {response.ReasonPhrase}");
+                throw new ApiException($"Request to {response.RequestMessage?.RequestUri} failed. " +
+                                       $"Error message: {response.StatusCode}; {response.ReasonPhrase}");
             }
 
             var bodyString = response.Content.ReadAsStringAsync().Result;
