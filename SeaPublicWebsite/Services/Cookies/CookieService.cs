@@ -45,12 +45,12 @@ public class CookieService
         return TryGetCookie<CookieSettings>(request, Configuration.CookieSettingsCookieName, out var cookie) && cookie.GoogleAnalytics;
     }
 
-    public void SetCookie<T>(HttpResponse response, string cookieName, T cookie, int daysUntilExpiry = 365)
+    public void SetCookie<T>(HttpResponse response, string cookieName, T cookie)
     {
         var cookieString = JsonConvert.SerializeObject(cookie);
         response.Cookies.Append(
             cookieName,
             cookieString,
-            new CookieOptions {Secure = true, SameSite = SameSiteMode.Lax, MaxAge = TimeSpan.FromDays(daysUntilExpiry)});
+            new CookieOptions {Secure = true, SameSite = SameSiteMode.Lax, MaxAge = TimeSpan.FromDays(Configuration.DefaultDaysUntilExpiry)});
     }
 }
