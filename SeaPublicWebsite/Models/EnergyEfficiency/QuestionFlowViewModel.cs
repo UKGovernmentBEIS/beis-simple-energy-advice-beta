@@ -2,7 +2,7 @@
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class QuestionFlowViewModel
+    public abstract class QuestionFlowViewModel
     {
         public string BackLink { get; set; }
         public QuestionFlowPage? EntryPoint { get; set; }
