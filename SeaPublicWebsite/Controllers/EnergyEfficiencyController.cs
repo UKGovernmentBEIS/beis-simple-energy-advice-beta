@@ -33,11 +33,7 @@ namespace SeaPublicWebsite.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            var viewModel = new IndexViewModel
-            {
-                ServiceName = Constants.SERVICE_NAME
-            };
-           return View("Index", viewModel);
+           return View("Index");
         }
 
         
