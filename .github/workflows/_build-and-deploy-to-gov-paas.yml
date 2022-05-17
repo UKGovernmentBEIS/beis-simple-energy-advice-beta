@@ -48,7 +48,7 @@ jobs:
       working-directory: ./SeaPublicWebsite
       
     - name: Restore .Net dependencies
-      run: dotnet restore
+      run: dotnet restore --configfile Nuget.config
       
     - name: Build .Net code
       run: dotnet build SeaPublicWebsite --no-restore --configuration Release --output ./ci-server-build/
