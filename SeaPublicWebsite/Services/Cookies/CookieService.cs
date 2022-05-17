@@ -1,5 +1,7 @@
 ﻿using System;
+using GovUkDesignSystem.GovUkDesignSystemComponents;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using SeaPublicWebsite.Models.Cookies;
@@ -43,6 +45,38 @@ public class CookieService
     public bool HasAcceptedGoogleAnalytics(HttpRequest request)
     {
         return TryGetCookie<CookieSettings>(request, Configuration.CookieSettingsCookieName, out var cookie) && cookie.GoogleAnalytics;
+    }
+
+    public BannerState GetAndUpdateBannerState(HttpRequest request, HttpResponse response)
+    {
+        // Cookie settings page doesn't display the banner
+        if (request.GetEncodedUrl().Contains("/cookies"))
+        {
+            return BannerState.Hide;
+        }
+
+        // Banner is displayed if the most recent cookie version wasn't reviewed.
+        if (!CookieSettingsAreUpToDate(request))
+        {
+            return BannerState.ShowBanner;
+        }
+        
+        if (TryGetCookie<CookieSettings>(request, Configuration.CookieSettingsCookieName, out var cookie))
+        {
+            // We don't need to show anything else after showing the confirmation
+            if (cookie.ConfirmationShown)
+            {
+                return BannerState.Hide;
+            }
+
+            // Otherwise, update the cookie to only show the confirmation banner once
+            var bannerState = cookie.GoogleAnalytics ? BannerState.ShowAccepted : BannerState.ShowRejected;
+            cookie.ConfirmationShown = true;
+            SetCookie(response, Configuration.CookieSettingsCookieName, cookie);
+            return bannerState;
+        }
+
+        return BannerState.Hide;
     }
 
     public void SetCookie<T>(HttpResponse response, string cookieName, T cookie)

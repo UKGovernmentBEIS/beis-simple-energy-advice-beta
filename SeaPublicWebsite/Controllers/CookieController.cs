@@ -34,6 +34,7 @@ public class CookieController: Controller
         var cookieSettings = new CookieSettings
         {
             Version = cookieService.Configuration.CurrentCookieMessageVersion,
+            ConfirmationShown = true,
             GoogleAnalytics = viewModel.GoogleAnalytics,
         };
         cookieService.SetCookie(Response, cookieService.Configuration.CookieSettingsCookieName, cookieSettings);
@@ -52,7 +53,7 @@ public class CookieController: Controller
         var cookieSettings = new CookieSettings
         {
             Version = cookieService.Configuration.CurrentCookieMessageVersion,
-            BannerState = cookiesAccepted ? BannerState.ShowAccepted : BannerState.ShowRejected,
+            ConfirmationShown = false,
             GoogleAnalytics = cookiesAccepted
         };
         cookieService.SetCookie(Response, cookieService.Configuration.CookieSettingsCookieName, cookieSettings);

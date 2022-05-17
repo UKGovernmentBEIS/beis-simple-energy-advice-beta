@@ -11,25 +11,7 @@
 @inject CookieService CookieService
 @{
     string assetsPath = "/assets/images";
-    var bannerState = BannerState.ShowBanner;
-    if (Context.Request.GetEncodedUrl().Contains("/cookies"))
-    {
-        bannerState = BannerState.Hide;
-    }
-    else if (!CookieService.CookieSettingsAreUpToDate(Context.Request))
-    {
-        bannerState = BannerState.ShowBanner;
-    } else if (CookieService.TryGetCookie<CookieSettings>(Context.Request, CookieService.Configuration.CookieSettingsCookieName, out var cookie))
-    {
-        bannerState = cookie.BannerState;
-        
-        // If the banner shows the confirmation message, update the cookie so it won't be shown again.
-        if (bannerState is BannerState.ShowAccepted or BannerState.ShowRejected)
-        {
-            cookie.BannerState = BannerState.Hide;
-            CookieService.SetCookie(Context.Response, CookieService.Configuration.CookieSettingsCookieName, cookie);
-        }
-    }
+    var bannerState = CookieService.GetAndUpdateBannerState(Context.Request, Context.Response);
 }
 <!DOCTYPE html>
 
