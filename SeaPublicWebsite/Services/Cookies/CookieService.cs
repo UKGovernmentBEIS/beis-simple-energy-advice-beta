@@ -33,7 +33,8 @@ public class CookieService
         cookie = default;
         return false;
     }
-    public bool HasSeenCookieLatestMessage(HttpRequest request)
+    
+    public bool CookieSettingsAreUpToDate(HttpRequest request)
     {
         return TryGetCookie<CookieSettings>(request, Configuration.CookieSettingsCookieName, out var cookie) && 
                cookie.Version == Configuration.CurrentCookieMessageVersion;

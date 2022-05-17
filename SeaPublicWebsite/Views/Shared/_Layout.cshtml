@@ -16,7 +16,7 @@
     {
         bannerState = BannerState.Hide;
     }
-    else if (!CookieService.HasSeenCookieLatestMessage(Context.Request))
+    else if (!CookieService.CookieSettingsAreUpToDate(Context.Request))
     {
         bannerState = BannerState.ShowBanner;
     } else if (CookieService.TryGetCookie<CookieSettings>(Context.Request, CookieService.Configuration.CookieSettingsCookieName, out var cookie))
