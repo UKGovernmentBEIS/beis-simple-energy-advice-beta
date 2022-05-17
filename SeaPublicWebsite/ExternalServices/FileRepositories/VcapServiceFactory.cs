@@ -8,7 +8,7 @@ namespace SeaPublicWebsite.ExternalServices.FileRepositories
     {
         public static VcapServices GetVcapServices(IConfiguration configuration)
         {
-            var setting = configuration.GetValue<string>("TEMP_AWS_CONFIG");
+            var setting = configuration.GetValue<string>("VCAP_SERVICES");
             return !string.IsNullOrWhiteSpace(setting)
                 ? JsonConvert.DeserializeObject<VcapServices>(setting)
                 : null;

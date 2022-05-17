@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +22,14 @@ namespace SeaPublicWebsite.Controllers
         private readonly UserDataStore userDataStore;
         private readonly IEpcApi epcApi;
         private readonly IEmailSender emailApi;
+        private readonly RecommendationService recommendationService;
 
-        public EnergyEfficiencyController(UserDataStore userDataStore, IEpcApi epcApi, IEmailSender emailApi)
+        public EnergyEfficiencyController(UserDataStore userDataStore, IEpcApi epcApi, IEmailSender emailApi, RecommendationService recommendationService)
         {
             this.userDataStore = userDataStore;
             this.emailApi = emailApi;
             this.epcApi = epcApi;
+            this.recommendationService = recommendationService;
         }
         
         
@@ -1137,10 +1140,10 @@ namespace SeaPublicWebsite.Controllers
 
         
         [HttpGet("your-recommendations/{reference}")]
-        public IActionResult YourRecommendations_Get(string reference)
+        public async Task<IActionResult> YourRecommendations_GetAsync(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
-            var recommendationsForUser = RecommendationService.GetRecommendationsForUser(userDataModel);
+            var recommendationsForUser = await recommendationService.GetRecommendationsForUserAsync(userDataModel);
             userDataModel.UserRecommendations = recommendationsForUser.Select(r => 
                 new UserRecommendation()
                 {
@@ -1156,11 +1159,12 @@ namespace SeaPublicWebsite.Controllers
             ).ToList();
             userDataStore.SaveUserData(userDataModel);
 
+            int firstReferenceId = recommendationsForUser.Count == 0 ? -1 : (int) recommendationsForUser[0].Key;
             var viewModel = new YourRecommendationsViewModel
                 {
                     Reference = reference,
                     NumberOfUserRecommendations = recommendationsForUser.Count,
-                    FirstReferenceId = (int)recommendationsForUser[0].Key,
+                    FirstReferenceId = firstReferenceId,
                     HasEmailAddress = userDataModel.HasEmailAddress,
                     EmailAddress = userDataModel.EmailAddress
                 }
