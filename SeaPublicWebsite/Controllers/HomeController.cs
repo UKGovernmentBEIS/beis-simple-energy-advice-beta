@@ -15,7 +15,7 @@ namespace SeaPublicWebsite.Controllers
         [HttpGet("/")]
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "EnergyEfficiency");
         }
 
     }

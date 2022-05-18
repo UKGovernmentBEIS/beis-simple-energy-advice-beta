@@ -10,9 +10,8 @@ bin/
 obj/
 **/wwwroot/compiled
 
-# App Secrets
-SeaPublicWebsite/appsettings.secret.json
-
+# Secrets
 Infrastructure/LoginToGovPaas.sh
+Infrastructure/SetEnvironmentSecrets.sh
 
 ci-server-build/

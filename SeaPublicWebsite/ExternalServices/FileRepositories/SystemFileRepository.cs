@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace SeaPublicWebsite.ExternalServices.FileRepositories
 {
+    // TODO: SEABETA-193 Remove this file
     public class SystemFileRepository : IFileRepository
     {
 

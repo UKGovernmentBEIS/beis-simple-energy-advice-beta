@@ -22,10 +22,10 @@ jobs:
       with:
         node-version: '14'
         
-    - name: Install .Net (5.0)
+    - name: Install .Net (6.0)
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
         
     - name: Install the Cloud Foundry CLI
       run: |
@@ -48,10 +48,10 @@ jobs:
       working-directory: ./SeaPublicWebsite
       
     - name: Restore .Net dependencies
-      run: dotnet restore
+      run: dotnet restore --configfile Nuget.config
       
     - name: Build .Net code
-      run: dotnet build --no-restore --configuration Release --output ./ci-server-build/
+      run: dotnet build SeaPublicWebsite --no-restore --configuration Release --output ./ci-server-build/
 
     - name: Push the app to Gov.UK PaaS
       run: |

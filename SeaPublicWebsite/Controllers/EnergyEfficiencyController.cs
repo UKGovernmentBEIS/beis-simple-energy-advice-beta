@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
+using SeaPublicWebsite.ExternalServices.EmailSending;
+using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations;
@@ -16,11 +20,17 @@ namespace SeaPublicWebsite.Controllers
     {
         private readonly UserDataStore userDataStore;
         private readonly IQuestionFlowService questionFlowService;
+        private readonly IEpcApi epcApi;
+        private readonly IEmailSender emailApi;
+        private readonly RecommendationService recommendationService;
 
-        public EnergyEfficiencyController(UserDataStore userDataStore, IQuestionFlowService questionFlowService)
+        public EnergyEfficiencyController(UserDataStore userDataStore, IQuestionFlowService questionFlowService, IEpcApi epcApi, IEmailSender emailApi, RecommendationService recommendationService)
         {
             this.userDataStore = userDataStore;
             this.questionFlowService = questionFlowService;
+            this.emailApi = emailApi;
+            this.epcApi = epcApi;
+            this.recommendationService = recommendationService;
         }
         
         
@@ -190,8 +200,7 @@ namespace SeaPublicWebsite.Controllers
         public IActionResult ConfirmAddress_Get(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
-
-            var epcList = OpenEpcApi.GetEpcsForPostcode(userDataModel.Postcode);
+            var epcList = await epcApi.GetEpcsForPostcode(userDataModel.Postcode);
             var houseNameOrNumber = userDataModel.HouseNameOrNumber;
             
             if (houseNameOrNumber != null)
@@ -214,7 +223,7 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpPost("address/{reference}")]
-        public IActionResult ConfirmAddress_Post(ConfirmAddressViewModel viewModel)
+        public async Task<IActionResult> ConfirmAddress_Post(ConfirmAddressViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -222,7 +231,7 @@ namespace SeaPublicWebsite.Controllers
             }
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
             
-            var epc = OpenEpcApi.GetEpcsForPostcode(userDataModel.Postcode).FirstOrDefault(e => e.EpcId == viewModel.SelectedEpcId);
+            var epc = (await epcApi.GetEpcsForPostcode(userDataModel.Postcode)).FirstOrDefault(e => e.EpcId == viewModel.SelectedEpcId);
             userDataModel.Epc = epc;
 
             userDataStore.SaveUserData(userDataModel);
@@ -994,10 +1003,10 @@ namespace SeaPublicWebsite.Controllers
 
         
         [HttpGet("your-recommendations/{reference}")]
-        public IActionResult YourRecommendations_Get(string reference)
+        public async Task<IActionResult> YourRecommendations_GetAsync(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
-            var recommendationsForUser = RecommendationService.GetRecommendationsForUser(userDataModel);
+            var recommendationsForUser = await recommendationService.GetRecommendationsForUserAsync(userDataModel);
             userDataModel.UserRecommendations = recommendationsForUser.Select(r => 
                 new UserRecommendation()
                 {
@@ -1013,11 +1022,12 @@ namespace SeaPublicWebsite.Controllers
             ).ToList();
             userDataStore.SaveUserData(userDataModel);
 
+            int firstReferenceId = recommendationsForUser.Count == 0 ? -1 : (int) recommendationsForUser[0].Key;
             var viewModel = new YourRecommendationsViewModel
                 {
                     Reference = reference,
                     NumberOfUserRecommendations = recommendationsForUser.Count,
-                    FirstReferenceId = (int)recommendationsForUser[0].Key,
+                    FirstReferenceId = firstReferenceId,
                     HasEmailAddress = userDataModel.HasEmailAddress,
                     EmailAddress = userDataModel.EmailAddress,
                     BackLink = questionFlowService.BackLink(QuestionFlowPage.YourRecommendations, userDataModel)
@@ -1034,10 +1044,16 @@ namespace SeaPublicWebsite.Controllers
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-            
+
             userDataModel.HasEmailAddress = viewModel.HasEmailAddress;
             userDataModel.EmailAddress = viewModel.HasEmailAddress == HasEmailAddress.Yes ? viewModel.EmailAddress : null;
             userDataStore.SaveUserData(userDataModel);
+
+            if (viewModel.HasEmailAddress == HasEmailAddress.Yes)
+            {
+                emailApi.SendReferenceNumberEmail(userDataModel.EmailAddress, userDataModel.Reference);
+            }
+            
             return RedirectToAction("Recommendation_Get", new { id = viewModel.FirstReferenceId, reference = viewModel.Reference });
         }
 
