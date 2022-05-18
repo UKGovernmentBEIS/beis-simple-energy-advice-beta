@@ -197,7 +197,7 @@ namespace SeaPublicWebsite.Controllers
 
         
         [HttpGet("address/{reference}")]
-        public IActionResult ConfirmAddress_Get(string reference)
+        public async Task<ViewResult> ConfirmAddress_Get(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             var epcList = await epcApi.GetEpcsForPostcode(userDataModel.Postcode);
@@ -227,7 +227,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return ConfirmAddress_Get(viewModel.Reference);
+                return await ConfirmAddress_Get(viewModel.Reference);
             }
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
             
@@ -1036,11 +1036,11 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpPost("your-recommendations/{reference}")]
-        public IActionResult YourRecommendations_Post(YourRecommendationsViewModel viewModel)
+        public async Task<IActionResult> YourRecommendations_Post(YourRecommendationsViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return YourRecommendations_Get(viewModel.Reference);
+                return await YourRecommendations_GetAsync(viewModel.Reference);
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
