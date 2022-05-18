@@ -160,8 +160,6 @@ public class CookieServiceTests
         request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderSrting(value)}";
         
         // Precondition
-        Assume.That(CookieService.CookieSettingsAreUpToDate(request));
-        Assume.That(value.ConfirmationShown);
 
         // Act
         var bannerState = CookieService.GetAndUpdateBannerState(request, response);
