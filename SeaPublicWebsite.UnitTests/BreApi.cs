@@ -34,6 +34,6 @@ public class BreApi
         );
         
         //Assert
-        request.measures.Should().Be(true);
+        request.measures.Should().Be(false);
     }
 }
