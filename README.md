@@ -73,16 +73,22 @@ Fill in the opened `secrets.json` file with:
 - In `SeaPublicWebsite` run `npm run watch`
 - In Visual Studio / Rider run the `SeaPublicWebsite` project
 
+## Local Database
 
 ### Local Database Setup
-Windows:
-- Download the installer and PostgreSQL 14
-- Follow default installation steps (no additional software is required from Stack Builder upon completion)
-  - You may be prompted for a password for the postgres user and a port (good defaults are "postgres" and "5432", respectively)
-- Open pgAdmin (sign in using the login details you just created)
-- In the Browser tab go to Servers > PostgreSQL 14 > Databases (right click) > Create... > Database
-  - Call your new database "seadev" then click Save to create it
 
+- For Windows: Download the installer and PostgreSQL 14 here: https://www.postgresql.org/download/windows/
+- Follow default installation steps (no additional software is required from Stack Builder upon completion)
+  - You may be prompted for a password for the postgres user and a port (good defaults are "postgres" and "5432", respectively). If you choose your own, you will have to update the connection string in appsettings.json
+
+### Creating/updating the local database
+
+- In the terminal (from the solution directory) run `dotnet ef database update --project .\SeaPublicWebsite`
+
+### Adding Migrations
+
+- In the terminal (from the solution directory) run `dotnet ef migrations add <YOUR_MIGRATION_NAME> --project .\SeaPublicWebsite.Data --startup-project .\SeaPublicWebsite`
+- Then update the local database
 
 ## Environments
 

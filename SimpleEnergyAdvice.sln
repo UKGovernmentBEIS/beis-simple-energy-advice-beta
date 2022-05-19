@@ -27,7 +27,7 @@ EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaPublicWebsite.UnitTests", "SeaPublicWebsite.UnitTests\SeaPublicWebsite.UnitTests.csproj", "{BC27E00A-BCB1-40DD-872A-3FF0A46A5FFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaPublicWebsite.Models", "SeaPublicWebsite.Models\SeaPublicWebsite.Models.csproj", "{2829E31D-41AF-4B37-87C9-1F78BE84990A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaPublicWebsite.Data", "SeaPublicWebsite.Data\SeaPublicWebsite.Data.csproj", "{2829E31D-41AF-4B37-87C9-1F78BE84990A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
