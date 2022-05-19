@@ -110,20 +110,20 @@ namespace SeaPublicWebsite.Services
             return new PathByActionArguments(nameof(EnergyEfficiencyController.Index), "EnergyEfficiency");
         }
 
-        private PathByActionArguments OwnershipStatusBackLinkArguments(UserDataModel userData, QuestionFlowPage? entryPoint)
-        {
-            var reference = userData.Reference;
-            return entryPoint is QuestionFlowPage.OwnershipStatus
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
-                : new PathByActionArguments(nameof(EnergyEfficiencyController.Country_Get), "EnergyEfficiency", new { reference, entryPoint });
-        }
-
         private PathByActionArguments CountryBackLinkArguments(UserDataModel userData, QuestionFlowPage? entryPoint)
         {
             var reference = userData.Reference;
             return entryPoint is QuestionFlowPage.Country
                 ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.NewOrReturningUser_Get), "EnergyEfficiency");
+        }
+
+        private PathByActionArguments OwnershipStatusBackLinkArguments(UserDataModel userData, QuestionFlowPage? entryPoint)
+        {
+            var reference = userData.Reference;
+            return entryPoint is QuestionFlowPage.OwnershipStatus
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                : new PathByActionArguments(nameof(EnergyEfficiencyController.Country_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
         private PathByActionArguments ServiceUnsuitableBackLinkArguments(UserDataModel userData)
