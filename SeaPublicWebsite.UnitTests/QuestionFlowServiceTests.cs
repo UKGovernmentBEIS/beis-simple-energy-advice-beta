@@ -495,7 +495,7 @@ public class QuestionFlowServiceTests
     
     [Datapoint] 
     public QuestionFlowServiceTestCase RoofConstruction3 = new(
-        "Roof construction goes back to wall insulation if user doesn't have floors but has insulated walls",
+        "Roof construction goes back to wall insulation if user was not asked about their floor but has insulated walls",
         TestType.Back,
         new Input(
             QuestionFlowPage.RoofConstruction,
@@ -512,7 +512,7 @@ public class QuestionFlowServiceTests
     
     [Datapoint] 
     public QuestionFlowServiceTestCase RoofConstruction4 = new(
-        "Roof construction goes back to wall construction if user doesn't have floors and has other walls",
+        "Roof construction goes back to wall construction if user was not asked about their floor and has other walls",
         TestType.Back,
         new Input(
             QuestionFlowPage.RoofConstruction,
@@ -537,7 +537,7 @@ public class QuestionFlowServiceTests
             entryPoint: QuestionFlowPage.RoofConstruction
         ),
         new PathByActionArguments(
-            nameof(EnergyEfficiencyController.RoofConstruction_Get),
+            nameof(EnergyEfficiencyController.AnswerSummary),
             "EnergyEfficiency",
             new {reference = "ABCDEFGH"}
         ));
@@ -592,7 +592,7 @@ public class QuestionFlowServiceTests
         new Input(
             QuestionFlowPage.RoofInsulated,
             reference: "ABCDEFGH",
-            entryPoint: QuestionFlowPage.AccessibleLoftSpace
+            entryPoint: QuestionFlowPage.RoofInsulated
         ),
         new PathByActionArguments(
             nameof(EnergyEfficiencyController.AnswerSummary),
@@ -601,15 +601,98 @@ public class QuestionFlowServiceTests
         ));
     
     [Datapoint] 
-    public QuestionFlowServiceTestCase GlazingTypeBackGoBrrrrr = new(
-        "TODO: Many cases",
+    public QuestionFlowServiceTestCase GlazingTypeBack1 = new(
+        "Glazing type goes back to roof construction if the user has flat roof",
         TestType.Back,
         new Input(
             QuestionFlowPage.GlazingType,
+            reference: "ABCDEFGH",
+            propertyType: PropertyType.House,
+            roofConstruction: RoofConstruction.Flat
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.RoofConstruction_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase GlazingTypeBack2 = new(
+        "Glazing type goes back to accessible loft space if the user does not have flat roof nor accessible loft space",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.GlazingType,
+            reference: "ABCDEFGH",
+            propertyType: PropertyType.House,
+            roofConstruction: RoofConstruction.Pitched,
+            accessibleLoftSpace: AccessibleLoftSpace.No
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.AccessibleLoftSpace_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase GlazingTypeBack3 = new(
+        "Glazing type goes back to roof insulation if the user does not have flat roof but has accessible loft space",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.GlazingType,
+            reference: "ABCDEFGH",
+            propertyType: PropertyType.House,
+            roofConstruction: RoofConstruction.Pitched,
+            accessibleLoftSpace: AccessibleLoftSpace.Yes
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.RoofInsulated_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase GlazingTypeBack4 = new(
+        "Glazing type goes back to floor construction if the user was not asked about their roof",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.GlazingType,
+            propertyType: PropertyType.ApartmentFlatOrMaisonette,
+            flatType: FlatType.GroundFloor,
             reference: "ABCDEFGH"
         ),
         new PathByActionArguments(
-            nameof(EnergyEfficiencyController.Index),
+            nameof(EnergyEfficiencyController.FloorConstruction_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase GlazingTypeBack5 = new(
+        "Glazing type goes back to wall construction if the user was not asked about neither their roof or floor",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.GlazingType,
+            propertyType: PropertyType.ApartmentFlatOrMaisonette,
+            flatType: FlatType.MiddleFloor,
+            reference: "ABCDEFGH"
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.WallConstruction_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase GlazingTypeBack6 = new(
+        "Changing glazing type goes back to summary",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.GlazingType,
+            reference: "ABCDEFGH",
+            entryPoint: QuestionFlowPage.GlazingType
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.AnswerSummary),
             "EnergyEfficiency",
             new {reference = "ABCDEFGH"}
         ));
@@ -658,18 +741,225 @@ public class QuestionFlowServiceTests
         ));
     
     [Datapoint] 
-    public QuestionFlowServiceTestCase x = new(
-        "",
+    public QuestionFlowServiceTestCase HeatingTypeBack2 = new(
+        "Changing heating type goes back to summary",
         TestType.Back,
         new Input(
-            QuestionFlowPage.,
-            reference: "ABCDEFGH"
+            QuestionFlowPage.HeatingType,
+            reference: "ABCDEFGH",
+            entryPoint: QuestionFlowPage.HeatingType
         ),
         new PathByActionArguments(
-            nameof(EnergyEfficiencyController.),
+            nameof(EnergyEfficiencyController.AnswerSummary),
             "EnergyEfficiency",
             new {reference = "ABCDEFGH"}
         ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase OtherHeatingTypeBack1 = new(
+        "Other heating type goes back to outdoor space",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.OtherHeatingType,
+            reference: "ABCDEFGH"
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.HeatingType_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase OtherHeatingTypeBack2 = new(
+        "Changing other heating type goes back to summary",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.OtherHeatingType,
+            reference: "ABCDEFGH",
+            entryPoint: QuestionFlowPage.OtherHeatingType
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.AnswerSummary),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase HotWaterCylinderBack1 = new(
+        "Hot water cylinder goes back to heating type",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.HotWaterCylinder,
+            reference: "ABCDEFGH"
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.HeatingType_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase HotWaterCylinderBack2 = new(
+        "Changing hot water cylinder goes back to summary",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.HotWaterCylinder,
+            reference: "ABCDEFGH",
+            entryPoint: QuestionFlowPage.HotWaterCylinder
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.AnswerSummary),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase NumberOfOccupantsBack1 = new(
+        "Number of occupants goes back to hot water cylinder if user has boiler",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.NumberOfOccupants,
+            reference: "ABCDEFGH",
+            heatingType: HeatingType.GasBoiler
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.HotWaterCylinder_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase NumberOfOccupantsBack2 = new(
+        "Number of occupants goes back to other heating type if the user selected so",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.NumberOfOccupants,
+            reference: "ABCDEFGH",
+            heatingType: HeatingType.Other
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.OtherHeatingType_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase NumberOfOccupantsBack3 = new(
+        "Number of occupants goes back to heating type if the user does not have a boiler",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.NumberOfOccupants,
+            reference: "ABCDEFGH",
+            heatingType: HeatingType.HeatPump
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.HeatingType_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase NumberOfOccupantsBack4 = new(
+        "Changing number of occupants goes back to summary",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.NumberOfOccupants,
+            reference: "ABCDEFGH",
+            entryPoint: QuestionFlowPage.NumberOfOccupants
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.AnswerSummary),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase HeatingPatternBack1 = new(
+        "Heating pattern goes back to number of occupants",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.HeatingPattern,
+            reference: "ABCDEFGH"
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.NumberOfOccupants_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase HeatingPatternBack2 = new(
+        "Changing heating pattern goes back to summary",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.HeatingPattern,
+            reference: "ABCDEFGH",
+            entryPoint: QuestionFlowPage.HeatingPattern
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.AnswerSummary),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase TemperatureBack1 = new(
+        "Temperature goes back to heating pattern",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.Temperature,
+            reference: "ABCDEFGH"
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.HeatingPattern_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase TemperatureBack2 = new(
+        "Changing temperature goes back to summary",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.Temperature,
+            reference: "ABCDEFGH",
+            entryPoint: QuestionFlowPage.Temperature
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.AnswerSummary),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase AnswerSummaryBack1 = new(
+        "Answer summary goes back to temperature",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.AnswerSummary,
+            reference: "ABCDEFGH"
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.Temperature_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase YourReccomendationsBack1 = new(
+        "Your recommendations goes back to summary",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.YourRecommendations,
+            reference: "ABCDEFGH"
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.AnswerSummary),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    /*
     
     [Datapoint] 
     public QuestionFlowServiceTestCase x = new(
@@ -684,133 +974,9 @@ public class QuestionFlowServiceTests
             "EnergyEfficiency",
             new {reference = "ABCDEFGH"}
         ));
-    
-    [Datapoint] 
-    public QuestionFlowServiceTestCase x = new(
-        "",
-        TestType.Back,
-        new Input(
-            QuestionFlowPage.,
-            reference: "ABCDEFGH"
-        ),
-        new PathByActionArguments(
-            nameof(EnergyEfficiencyController.),
-            "EnergyEfficiency",
-            new {reference = "ABCDEFGH"}
-        ));
-    
-    [Datapoint] 
-    public QuestionFlowServiceTestCase x = new(
-        "",
-        TestType.Back,
-        new Input(
-            QuestionFlowPage.,
-            reference: "ABCDEFGH"
-        ),
-        new PathByActionArguments(
-            nameof(EnergyEfficiencyController.),
-            "EnergyEfficiency",
-            new {reference = "ABCDEFGH"}
-        ));
-    
-    [Datapoint] 
-    public QuestionFlowServiceTestCase x = new(
-        "",
-        TestType.Back,
-        new Input(
-            QuestionFlowPage.,
-            reference: "ABCDEFGH"
-        ),
-        new PathByActionArguments(
-            nameof(EnergyEfficiencyController.),
-            "EnergyEfficiency",
-            new {reference = "ABCDEFGH"}
-        ));
-    
-    [Datapoint] 
-    public QuestionFlowServiceTestCase x = new(
-        "",
-        TestType.Back,
-        new Input(
-            QuestionFlowPage.,
-            reference: "ABCDEFGH"
-        ),
-        new PathByActionArguments(
-            nameof(EnergyEfficiencyController.),
-            "EnergyEfficiency",
-            new {reference = "ABCDEFGH"}
-        ));
-    
-    [Datapoint] 
-    public QuestionFlowServiceTestCase x = new(
-        "",
-        TestType.Back,
-        new Input(
-            QuestionFlowPage.,
-            reference: "ABCDEFGH"
-        ),
-        new PathByActionArguments(
-            nameof(EnergyEfficiencyController.),
-            "EnergyEfficiency",
-            new {reference = "ABCDEFGH"}
-        ));
-    
-    [Datapoint] 
-    public QuestionFlowServiceTestCase x = new(
-        "",
-        TestType.Back,
-        new Input(
-            QuestionFlowPage.,
-            reference: "ABCDEFGH"
-        ),
-        new PathByActionArguments(
-            nameof(EnergyEfficiencyController.),
-            "EnergyEfficiency",
-            new {reference = "ABCDEFGH"}
-        ));
-    
-    [Datapoint] 
-    public QuestionFlowServiceTestCase x = new(
-        "",
-        TestType.Back,
-        new Input(
-            QuestionFlowPage.,
-            reference: "ABCDEFGH"
-        ),
-        new PathByActionArguments(
-            nameof(EnergyEfficiencyController.),
-            "EnergyEfficiency",
-            new {reference = "ABCDEFGH"}
-        ));
-    
-    [Datapoint] 
-    public QuestionFlowServiceTestCase x = new(
-        "",
-        TestType.Back,
-        new Input(
-            QuestionFlowPage.,
-            reference: "ABCDEFGH"
-        ),
-        new PathByActionArguments(
-            nameof(EnergyEfficiencyController.),
-            "EnergyEfficiency",
-            new {reference = "ABCDEFGH"}
-        ));
-    
-[Datapoint] 
-    public QuestionFlowServiceTestCase  = new(
-        "",
-        TestType.Back,
-        new Input(
-            QuestionFlowPage.,
-            reference: "ABCDEFGH"
-        ),
-        new PathByActionArguments(
-            nameof(EnergyEfficiencyController.),
-            "EnergyEfficiency",
-            new {reference = "ABCDEFGH"}
-        ));
-    
+        
+        */
+
 
     public class QuestionFlowServiceTestCase
     {
