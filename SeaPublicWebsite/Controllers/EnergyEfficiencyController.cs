@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
@@ -44,9 +45,10 @@ namespace SeaPublicWebsite.Controllers
         [HttpGet("new-or-returning-user")]
         public IActionResult NewOrReturningUser_Get()
         {
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.NewOrReturningUser, new UserDataModel());
             var viewModel = new NewOrReturningUserViewModel
             {
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.NewOrReturningUser, new UserDataModel())
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
             return View("NewOrReturningUser", viewModel);
         }
@@ -81,12 +83,14 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
+            var backArgs =
+                questionFlowService.BackLinkArguments(QuestionFlowPage.OwnershipStatus, userDataModel, entryPoint);
             var viewModel = new OwnershipStatusViewModel
             {
                 OwnershipStatus = userDataModel.OwnershipStatus,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.OwnershipStatus, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("OwnershipStatus", viewModel);
@@ -104,8 +108,8 @@ namespace SeaPublicWebsite.Controllers
             
             userDataModel.OwnershipStatus = viewModel.OwnershipStatus;
             userDataStore.SaveUserData(userDataModel);
-
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.OwnershipStatus, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.OwnershipStatus, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -114,12 +118,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.Country, userDataModel, entryPoint);
             var viewModel = new CountryViewModel
             {
                 Country = userDataModel.Country,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.Country, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("Country", viewModel);
@@ -137,8 +142,9 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.Country = viewModel.Country;
             userDataStore.SaveUserData(userDataModel);
-
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.Country, userDataModel, viewModel.EntryPoint));
+            
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.Country, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
 
@@ -146,11 +152,12 @@ namespace SeaPublicWebsite.Controllers
         public IActionResult ServiceUnsuitable(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.ServiceUnsuitable, userDataModel);
             var viewModel = new ServiceUnsuitableViewModel
             {
                 Reference = userDataModel.Reference,
                 Country = userDataModel.Country,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.ServiceUnsuitable, userDataModel)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
             
             return View("ServiceUnsuitable", viewModel);
@@ -161,13 +168,15 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.AskForPostcode, userDataModel);
+            var skipArgs = questionFlowService.SkipLinkArguments(QuestionFlowPage.AskForPostcode, userDataModel);
             var viewModel = new AskForPostcodeViewModel
             {
                 Postcode = userDataModel.Postcode,
                 HouseNameOrNumber = userDataModel.HouseNameOrNumber,
                 Reference = userDataModel.Reference,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.AskForPostcode, userDataModel),
-                SkipLink = questionFlowService.SkipLink(QuestionFlowPage.AskForPostcode, userDataModel)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
+                SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
             };
 
             return View("AskForPostcode", viewModel);
@@ -192,7 +201,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HouseNameOrNumber = viewModel.HouseNameOrNumber;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.AskForPostcode, userDataModel));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AskForPostcode, userDataModel);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -211,12 +221,13 @@ namespace SeaPublicWebsite.Controllers
                 epcList = filteredEpcList.Any() ? filteredEpcList : epcList;
             }
 
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.ConfirmAddress, userDataModel);
             var viewModel = new ConfirmAddressViewModel
             {
                 Reference = reference,
                 EPCList = epcList,
                 SelectedEpcId = epcList.Count == 1 ? epcList[0].EpcId : null,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.ConfirmAddress, userDataModel)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("ConfirmAddress", viewModel);
@@ -236,7 +247,8 @@ namespace SeaPublicWebsite.Controllers
 
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.ConfirmAddress, userDataModel));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.ConfirmAddress, userDataModel);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
 
@@ -245,12 +257,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.PropertyType, userDataModel, entryPoint);
             var viewModel = new PropertyTypeViewModel
             {
                 PropertyType = userDataModel.PropertyType,
                 Reference = reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.PropertyType, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("PropertyType", viewModel);
@@ -269,7 +282,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.PropertyType = viewModel.PropertyType;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.PropertyType, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.PropertyType, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         [HttpGet("house-type/{reference}")]
@@ -277,12 +291,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.HouseType, userDataModel, entryPoint);
             var viewModel = new HouseTypeViewModel
             {
                 HouseType = userDataModel.HouseType,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.HouseType, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("HouseType", viewModel);
@@ -301,7 +316,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HouseType = viewModel.HouseType;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.HouseType, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HouseType, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -310,12 +326,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.BungalowType, userDataModel, entryPoint);
             var viewModel = new BungalowTypeViewModel
             {
                 BungalowType = userDataModel.BungalowType,
                 Reference = reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.BungalowType, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("BungalowType", viewModel);
@@ -334,7 +351,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.BungalowType = viewModel.BungalowType;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.BungalowType, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.BungalowType, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -343,12 +361,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.FlatType, userDataModel, entryPoint);
             var viewModel = new FlatTypeViewModel
             {
                 FlatType = userDataModel.FlatType,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.FlatType, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("FlatType", viewModel);
@@ -367,7 +386,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.FlatType = viewModel.FlatType;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.FlatType, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.FlatType, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -376,14 +396,16 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.HomeAge, userDataModel, entryPoint);
+            var skipArgs = questionFlowService.SkipLinkArguments(QuestionFlowPage.HomeAge, userDataModel, entryPoint);
             var viewModel = new HomeAgeViewModel
             {
                 PropertyType = userDataModel.PropertyType,
                 YearBuilt = userDataModel.YearBuilt,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.HomeAge, userDataModel, entryPoint),
-                SkipLink = questionFlowService.SkipLink(QuestionFlowPage.HomeAge, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
+                SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
             };
 
             return View("HomeAge", viewModel);
@@ -402,7 +424,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.YearBuilt = viewModel.YearBuilt;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.HomeAge, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HomeAge, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -411,6 +434,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.WallConstruction, userDataModel, entryPoint);
             var viewModel = new WallConstructionViewModel
             {
                 WallConstruction = userDataModel.WallConstruction,
@@ -418,7 +442,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 Epc = userDataModel.Epc,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.WallConstruction, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("WallConstruction", viewModel);
@@ -437,7 +461,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.WallConstruction = viewModel.WallConstruction;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.WallConstruction, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.WallConstruction, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -446,6 +471,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.CavityWallsInsulated, userDataModel, entryPoint);
             var viewModel = new CavityWallsInsulatedViewModel
             {
                 CavityWallsInsulated = userDataModel.CavityWallsInsulated,
@@ -454,7 +480,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 Epc = userDataModel.Epc,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.CavityWallsInsulated, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("CavityWallsInsulated", viewModel);
@@ -473,7 +499,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.CavityWallsInsulated = viewModel.CavityWallsInsulated;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.CavityWallsInsulated, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.CavityWallsInsulated, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
 
@@ -482,6 +509,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.SolidWallsInsulated, userDataModel, entryPoint);
             var viewModel = new SolidWallsInsulatedViewModel
             {
                 SolidWallsInsulated = userDataModel.SolidWallsInsulated,
@@ -490,7 +518,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 Epc = userDataModel.Epc,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.SolidWallsInsulated, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("SolidWallsInsulated", viewModel);
@@ -509,7 +537,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.SolidWallsInsulated = viewModel.SolidWallsInsulated;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.SolidWallsInsulated, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.SolidWallsInsulated, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
 
@@ -518,6 +547,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.FloorConstruction, userDataModel, entryPoint);
             var viewModel = new FloorConstructionViewModel
             {
                 FloorConstruction = userDataModel.FloorConstruction,
@@ -526,7 +556,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 Epc = userDataModel.Epc,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.FloorConstruction, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("FloorConstruction", viewModel);
@@ -545,7 +575,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.FloorConstruction = viewModel.FloorConstruction;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.FloorConstruction, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.FloorConstruction, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -554,6 +585,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.FloorInsulated, userDataModel, entryPoint);
             var viewModel = new FloorInsulatedViewModel
             {
                 FloorInsulated = userDataModel.FloorInsulated,
@@ -561,7 +593,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 Epc = userDataModel.Epc,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.FloorInsulated, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("FloorInsulated", viewModel);
@@ -574,13 +606,15 @@ namespace SeaPublicWebsite.Controllers
             {
                 return FloorInsulated_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-            
+
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.FloorInsulated = viewModel.FloorInsulated;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.FloorInsulated, userDataModel, viewModel.EntryPoint));
+            var forwardArgs =
+                questionFlowService.ForwardLinkArguments(QuestionFlowPage.FloorInsulated, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         [HttpGet("roof-construction/{reference}")]
@@ -588,6 +622,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.RoofConstruction, userDataModel, entryPoint);
             var viewModel = new RoofConstructionViewModel
             {
                 PropertyType = userDataModel.PropertyType,
@@ -595,7 +630,7 @@ namespace SeaPublicWebsite.Controllers
                 RoofConstruction = userDataModel.RoofConstruction,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.RoofConstruction, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("RoofConstruction", viewModel);
@@ -614,7 +649,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.RoofConstruction = viewModel.RoofConstruction;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.RoofConstruction, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.RoofConstruction, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         [HttpGet("accessible-loft-space/{reference}")]
@@ -622,12 +658,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.AccessibleLoftSpace, userDataModel, entryPoint);
             var viewModel = new AccessibleLoftSpaceViewModel
             {
                 AccessibleLoftSpace = userDataModel.AccessibleLoftSpace,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.AccessibleLoftSpace, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("AccessibleLoftSpace", viewModel);
@@ -646,7 +683,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.AccessibleLoftSpace = viewModel.AccessibleLoftSpace;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.AccessibleLoftSpace, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AccessibleLoftSpace, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         [HttpGet("roof-insulated/{reference}")]
@@ -654,13 +692,14 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.RoofInsulated, userDataModel, entryPoint);
             var viewModel = new RoofInsulatedViewModel
             {
                 RoofInsulated = userDataModel.RoofInsulated,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 YearBuilt = userDataModel.YearBuilt,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.RoofInsulated, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("RoofInsulated", viewModel);
@@ -679,7 +718,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.RoofInsulated = viewModel.RoofInsulated;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.RoofInsulated, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.RoofInsulated, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -688,12 +728,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.GlazingType, userDataModel, entryPoint);
             var viewModel = new GlazingTypeViewModel
             {
                 GlazingType = userDataModel.GlazingType,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.GlazingType, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("GlazingType", viewModel);
@@ -712,7 +753,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.GlazingType = viewModel.GlazingType;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.GlazingType, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.GlazingType, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         [HttpGet("outdoor-space/{reference}")]
@@ -720,12 +762,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.OutdoorSpace, userDataModel, entryPoint);
             var viewModel = new OutdoorSpaceViewModel
             {
                 HasOutdoorSpace = userDataModel.HasOutdoorSpace,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.OutdoorSpace, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("OutdoorSpace", viewModel);
@@ -744,7 +787,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HasOutdoorSpace = viewModel.HasOutdoorSpace;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.OutdoorSpace, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.OutdoorSpace, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -753,13 +797,14 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.HeatingType, userDataModel, entryPoint);
             var viewModel = new HeatingTypeViewModel
             {
                 HeatingType = userDataModel.HeatingType,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 Epc = userDataModel.Epc,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.HeatingType, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("HeatingType", viewModel);
@@ -778,7 +823,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HeatingType = viewModel.HeatingType;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.HeatingType, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HeatingType, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         [HttpGet("other-heating-type/{reference}")]
@@ -786,13 +832,14 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.OtherHeatingType, userDataModel, entryPoint);
             var viewModel = new OtherHeatingTypeViewModel
             {
                 OtherHeatingType = userDataModel.OtherHeatingType,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 Epc = userDataModel.Epc,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.OtherHeatingType, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("OtherHeatingType", viewModel);
@@ -811,7 +858,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.OtherHeatingType = viewModel.OtherHeatingType;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.OtherHeatingType, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.OtherHeatingType, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
 
@@ -820,12 +868,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.HotWaterCylinder, userDataModel, entryPoint);
             var viewModel = new HotWaterCylinderViewModel
             {
                 HasHotWaterCylinder = userDataModel.HasHotWaterCylinder,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.HotWaterCylinder, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("HotWaterCylinder", viewModel);
@@ -844,7 +893,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HasHotWaterCylinder = viewModel.HasHotWaterCylinder;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.HotWaterCylinder, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HotWaterCylinder, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -853,13 +903,15 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.NumberOfOccupants, userDataModel, entryPoint);
+            var skipArgs = questionFlowService.SkipLinkArguments(QuestionFlowPage.NumberOfOccupants, userDataModel, entryPoint);
             var viewModel = new NumberOfOccupantsViewModel
             {
                 NumberOfOccupants = userDataModel.NumberOfOccupants,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.NumberOfOccupants, userDataModel, entryPoint),
-                SkipLink = questionFlowService.SkipLink(QuestionFlowPage.NumberOfOccupants, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
+                SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
             };
 
             return View("NumberOfOccupants", viewModel);
@@ -878,7 +930,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.NumberOfOccupants = viewModel.NumberOfOccupants;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.NumberOfOccupants, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.NumberOfOccupants, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -887,13 +940,14 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.HeatingPattern, userDataModel, entryPoint);
             var viewModel = new HeatingPatternViewModel
             {
                 HeatingPattern = userDataModel.HeatingPattern,
                 HoursOfHeating = userDataModel.HoursOfHeating,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.HeatingPattern, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("HeatingPattern", viewModel);
@@ -914,7 +968,8 @@ namespace SeaPublicWebsite.Controllers
 
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.HeatingPattern, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HeatingPattern, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -923,13 +978,15 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
             
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.Temperature, userDataModel, entryPoint);
+            var skipArgs = questionFlowService.SkipLinkArguments(QuestionFlowPage.Temperature, userDataModel, entryPoint);
             var viewModel = new TemperatureViewModel
             {
                 Temperature = userDataModel.Temperature,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.Temperature, userDataModel, entryPoint),
-                SkipLink = questionFlowService.SkipLink(QuestionFlowPage.Temperature, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
+                SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
             };
 
             return View("Temperature", viewModel);
@@ -948,7 +1005,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.Temperature = viewModel.Temperature;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.Temperature, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.Temperature, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
         
         [HttpGet("email-address/{reference}")]
@@ -956,14 +1014,16 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.EmailAddress, userDataModel, entryPoint);
+            var skipArgs = questionFlowService.SkipLinkArguments(QuestionFlowPage.EmailAddress, userDataModel, entryPoint);
             var viewModel = new EmailAddressViewModel
             {
                 HasEmailAddress = userDataModel.HasEmailAddress,
                 EmailAddress = userDataModel.EmailAddress,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.EmailAddress, userDataModel, entryPoint),
-                SkipLink = questionFlowService.SkipLink(QuestionFlowPage.EmailAddress, userDataModel, entryPoint)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
+                SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
             };
 
             return View("EmailAddress", viewModel);
@@ -983,7 +1043,8 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.EmailAddress = viewModel.HasEmailAddress == HasEmailAddress.Yes ? viewModel.EmailAddress : null;
             userDataStore.SaveUserData(userDataModel);
 
-            return Redirect(questionFlowService.ForwardLink(QuestionFlowPage.EmailAddress, userDataModel, viewModel.EntryPoint));
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.EmailAddress, userDataModel, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -992,10 +1053,11 @@ namespace SeaPublicWebsite.Controllers
         {
             var userDataModel = userDataStore.LoadUserData(reference);
 
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.AnswerSummary, userDataModel);
             var viewModel = new AnswerSummaryViewModel
             {
                 UserDataModel = userDataModel,
-                BackLink = questionFlowService.BackLink(QuestionFlowPage.AnswerSummary, userDataModel)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
             
             return View("AnswerSummary", viewModel);
@@ -1023,6 +1085,7 @@ namespace SeaPublicWebsite.Controllers
             userDataStore.SaveUserData(userDataModel);
 
             int firstReferenceId = recommendationsForUser.Count == 0 ? -1 : (int) recommendationsForUser[0].Key;
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.YourRecommendations, userDataModel);
             var viewModel = new YourRecommendationsViewModel
                 {
                     Reference = reference,
@@ -1030,7 +1093,7 @@ namespace SeaPublicWebsite.Controllers
                     FirstReferenceId = firstReferenceId,
                     HasEmailAddress = userDataModel.HasEmailAddress,
                     EmailAddress = userDataModel.EmailAddress,
-                    BackLink = questionFlowService.BackLink(QuestionFlowPage.YourRecommendations, userDataModel)
+                    BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
                 }
 ;            return View("YourRecommendations", viewModel);
         }
