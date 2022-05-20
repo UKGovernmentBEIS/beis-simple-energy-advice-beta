@@ -25,7 +25,7 @@ namespace SeaPublicWebsite.Services
                     "A", new BreRecommendation
                     {
                         Key = RecommendationKey.AddLoftInsulation,
-                        Title = "Add some loft insulation",
+                        Title = "Add some more loft insulation",
                         Summary = "Increase the level of insulation in your loft to the recommended level of 300mm"
                     }
                 },
@@ -65,7 +65,7 @@ namespace SeaPublicWebsite.Services
                     "W1", new BreRecommendation
                     {
                         Key = RecommendationKey.FloorInsulationSuspendedFloor,
-                        Title = "Floor insulation suspended floor",
+                        Title = "Insulate the ground floor",
                         Summary = "Under Development"
                     }
                 },
