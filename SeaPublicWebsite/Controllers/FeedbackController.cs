@@ -6,16 +6,22 @@ namespace SeaPublicWebsite.Controllers;
 [Route("feedback")]
 public class FeedbackController : Controller
 {
-    [HttpGet("send-feedback")]
-    public IActionResult SendFeedback_Get()
+    [HttpGet("")]
+    public IActionResult FeedbackForm_Get()
     {
         var viewModel = new FeedbackFormViewModel();
         return View("FeedbackForm", viewModel);
     }
 
-    [HttpPost("send-feedback")]
-    public IActionResult SendFeedback_Post(FeedbackFormViewModel viewModel)
+    [HttpPost("")]
+    public IActionResult FeedbackForm_Post(FeedbackFormViewModel viewModel)
     {
-        return View("FeedbackForm", viewModel);
+        return RedirectToAction(nameof(FeedbackThankYou_Get), "Feedback");
+    }
+
+    [HttpGet("thank-you")]
+    public IActionResult FeedbackThankYou_Get()
+    {
+        return View("FeedbackThankYou");
     }
 }
