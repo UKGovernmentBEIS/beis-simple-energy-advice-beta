@@ -1,8 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using Microsoft.CodeAnalysis.CSharp.Syntax
-@using SeaPublicWebsite.DataModels
-@using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations
+@using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
@@ -27,48 +26,58 @@
     </div>
     
     <div class="govuk-grid-column-two-thirds">
-        
+
         @(await Html.GovUkErrorSummary(ViewData.ModelState))
         
         <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.UserRecommendation.Key, reference = Model.UserDataModel.Reference})" method="post" novalidate>
-
             @Html.HiddenFor(m => m.UserDataModel.Reference)
 
             <span class="govuk-caption-l">
                 Recommendation @(Model.GetCurrentIndex() + 1) of @Model.UserDataModel.UserRecommendations.Count
             </span>
-            <h1 class="govuk-heading-l">
-                @Model.UserRecommendation.Title
-            </h1>
+            <h1 class="govuk-heading-l">Fit new windows</h1>
 
             <p class="govuk-body">
-                Under Development
+                Based on the information we have collected; it looks like you have some single glazed windows in your home. Double or
+                triple glazed windows are much better at keeping the heat in, so would help
+                you keep warm while reducing your heating bills.
             </p>
 
             <p class="govuk-body">
-                Under Development
-            </p>
-
-            <p class="govuk-inset-text">
-                Under Development
+                The fuel bill savings from replacing windows are unlikely to pay back the full installation cost, 
+                but there are other benefits such as reduced maintenance and better sound proofing that may affect your decision.
             </p>
 
             <p class="govuk-body govuk-!-margin-bottom-6">
-                Under Development
+                You can find more information on efficient windows and how to choose them at the
+                <a class="govuk-link" target="_blank" href="https://www.bfrc.org/homeowners">
+                    British Fenestration Rating Council.<span class="govuk-visually-hidden">(opens in a new window)</span>
+                </a>
             </p>
+
+            <div class="govuk-warning-text govuk-!-margin-bottom-6">
+                <span class="govuk-warning-text__icon  sea-warning-text__icon--long" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                    <span class="govuk-warning-text__assistive">Caution</span>
+                    If you live in a conservation area or listed building there may be limits on what
+                    changes you can make to your windows. You should check with your local authority
+                    to see what is allowed.
+                </strong>
+            </div>
 
             <h2 class="govuk-heading-m">Who this improvement is suitable for</h2>
             <p class="govuk-body">You should consider this improvement for your property if:</p>
             <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
                 <li>
-                    Under Development
+                    You have any single glazed windows.
                 </li>
             </ul>
-            <h2 class="govuk-heading-m">
+
+            <h2 class="govuk-heading-m ">
                 What you could save
             </h2>
 
-            <p class="govuk-body">Under Development is typically expected to last <b>around @Model.UserRecommendation.Lifetime years</b></p>
+            <p class="govuk-body">New windows are typically expected to last <b>around @Model.UserRecommendation.Lifetime years</b></p>
 
             @{ await Html.RenderPartialAsync("Partials/WhatYouCouldSavePartial.cshtml", Model); }
             
@@ -88,7 +97,7 @@
                         Will this cause disruption during installation?
                     </dt>
                     <dd class="govuk-summary-list__value sea-recommendation-impact govuk-!-padding-right-0">
-                        <strong class="govuk-tag govuk-tag--green">Under Development</strong>
+                        <strong class="govuk-tag govuk-tag--yellow">MODERATE</strong>
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
@@ -96,7 +105,7 @@
                         How long could this take to install?
                     </dt>
                     <dd class="govuk-summary-list__value sea-recommendation-impact govuk-!-padding-right-0">
-                        <strong class="govuk-tag govuk-tag--green">Under Development</strong>
+                        <strong class="govuk-tag govuk-tag--yellow">1 OR 2 DAYS</strong>
                     </dd>
                 </div>
             </dl>
@@ -115,13 +124,12 @@
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
                     }
-                },
-                classes: "govuk-!-margin-bottom-7"
+                }
                 ))
 
             @{ await Html.RenderPartialAsync("Partials/ActionButtonsPartial.cshtml"); }
 
         </form>
-
+        
     </div>
 </div>
