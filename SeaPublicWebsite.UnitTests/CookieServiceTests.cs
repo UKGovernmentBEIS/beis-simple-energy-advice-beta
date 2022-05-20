@@ -15,36 +15,56 @@ public class CookieServiceTests
 {
     private CookieService CookieService;
     private string Key;
-    private int LatestVersion;
-    
+    private static int LatestVersion = 3;
+
     [DatapointSource] 
-    private CookieSettings[] CookieSettings;
+    private static CookieServiceTestCase[] CookieServiceTestCases =
+    {
+        new("Accepted latest cookies", new()
+        {
+            Version = LatestVersion,
+            ConfirmationShown = true,
+            GoogleAnalytics = true
+        }),
+        new("Outdated version", new()
+        {
+            Version = LatestVersion - 1,
+            ConfirmationShown = true,
+            GoogleAnalytics = true
+        }),
+        new("Rejected analytics and confirmation shown", new()
+        {
+            Version = LatestVersion,
+            ConfirmationShown = true,
+            GoogleAnalytics = false
+        }),
+        new("Rejected analytics and confirmation noy shown", new()
+        {
+            Version = LatestVersion,
+            ConfirmationShown = false,
+            GoogleAnalytics = false
+        }),
+        new("Missing cookie", new()),
+    };
 
     public CookieServiceTests()
     {
         var config = new CookieServiceConfiguration
         {
             CookieSettingsCookieName = "cookie_settings",
-            CurrentCookieMessageVersion = 3,
+            CurrentCookieMessageVersion = LatestVersion,
             DefaultDaysUntilExpiry = 365
         };
         var options = Options.Create(config);
         CookieService = new CookieService(options);
-
         Key = CookieService.Configuration.CookieSettingsCookieName;
-        LatestVersion = CookieService.Configuration.CurrentCookieMessageVersion;
-        CookieSettings = SetUpCookieSettings();
-    }
-
-    [SetUp]
-    public void Setup()
-    {
     }
     
-    [Theory]
-    public void CanSetResponseCookie(CookieSettings value)
+    [TestCaseSource(nameof(CookieServiceTestCases))]
+    public void CanSetResponseCookie(CookieServiceTestCase testCase)
     {
         // Arrange
+        var value = testCase.CookieSettings;
         var context = new DefaultHttpContext();
         var response = context.Response;
         
@@ -54,11 +74,12 @@ public class CookieServiceTests
         // Assert
         AssertResponseContainsCookie(response, Key, value);
     }
-
-    [Theory]
-    public void CanGetRequestCookieSettings(CookieSettings value)
+    
+    [TestCaseSource(nameof(CookieServiceTestCases))]
+    public void CanGetRequestCookieSettings(CookieServiceTestCase testCase)
     {
         // Arrange
+        var value = testCase.CookieSettings;
         var context = new DefaultHttpContext();
         var request = context.Request;
         request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderSrting(value)}";
@@ -85,10 +106,11 @@ public class CookieServiceTests
         success.Should().Be(false);
     }
     
-    [Theory]
-    public void CanCheckIfCookieSettingsVersionMatches(CookieSettings value)
+    [TestCaseSource(nameof(CookieServiceTestCases))]
+    public void CanCheckIfCookieSettingsVersionMatches(CookieServiceTestCase testCase)
     {
         // Arrange
+        var value = testCase.CookieSettings;
         var context = new DefaultHttpContext();
         var request = context.Request;
         request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderSrting(value)}";
@@ -100,10 +122,11 @@ public class CookieServiceTests
         success.Should().Be(value.Version == LatestVersion);
     }
     
-    [Theory]
-    public void CanCheckIfGoogleAnalyticsAreAccepted(CookieSettings value)
+    [TestCaseSource(nameof(CookieServiceTestCases))]
+    public void CanCheckIfGoogleAnalyticsAreAccepted(CookieServiceTestCase testCase)
     {
         // Arrange
+        var value = testCase.CookieSettings;
         var context = new DefaultHttpContext();
         var request = context.Request;
         request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderSrting(value)}";
@@ -131,10 +154,11 @@ public class CookieServiceTests
         bannerState.Should().Be(BannerState.Hide);
     }
     
-    [Theory]
-    public void ShowsBannerIfSettingsAreOutdatedOrMissing(CookieSettings value)
+    [TestCaseSource(nameof(CookieServiceTestCases))]
+    public void ShowsBannerIfSettingsAreOutdatedOrMissing(CookieServiceTestCase testCase)
     {
         // Arrange
+        var value = testCase.CookieSettings;
         var context = new DefaultHttpContext();
         var request = context.Request;
         var response = context.Response;
@@ -150,10 +174,11 @@ public class CookieServiceTests
         bannerState.Should().Be(BannerState.ShowBanner);
     }
     
-    [Theory]
-    public void HidesBannerIfCookiesWereSetAndConfirmationWasShown(CookieSettings value)
+    [TestCaseSource(nameof(CookieServiceTestCases))]
+    public void HidesBannerIfCookiesWereSetAndConfirmationWasShown(CookieServiceTestCase testCase)
     {
         // Arrange
+        var value = testCase.CookieSettings;
         var context = new DefaultHttpContext();
         var request = context.Request;
         var response = context.Response;
@@ -170,10 +195,11 @@ public class CookieServiceTests
         bannerState.Should().Be(BannerState.Hide);
     }
     
-    [Theory]
-    public void ShowsConfirmationBannerAndUpdatesRequestCookieIfItWasNotShownAlready(CookieSettings value)
+    [TestCaseSource(nameof(CookieServiceTestCases))]
+    public void ShowsConfirmationBannerAndUpdatesRequestCookieIfItWasNotShownAlready(CookieServiceTestCase testCase)
     {
         // Arrange
+        var value = testCase.CookieSettings;
         var context = new DefaultHttpContext();
         var request = context.Request;
         var response = context.Response;
@@ -202,46 +228,21 @@ public class CookieServiceTests
     {
         return Uri.EscapeDataString(JsonConvert.SerializeObject(o));
     }
-
-    private CookieSettings[] SetUpCookieSettings()
+    
+    public class CookieServiceTestCase
     {
-        var acceptedLatestCookies = new CookieSettings
-        {
-            Version = LatestVersion,
-            ConfirmationShown = true,
-            GoogleAnalytics = true
-        };
-        
-        var outdatedVersion = new CookieSettings
-        {
-            Version = LatestVersion - 1,
-            ConfirmationShown = true,
-            GoogleAnalytics = true
-        };
-        
-        var rejectedAnalyticsConfirmationShown = new CookieSettings
-        {
-            Version = LatestVersion,
-            ConfirmationShown = true,
-            GoogleAnalytics = false
-        };
-        
-        var rejectedAnalyticsConfirmationNotShown = new CookieSettings
-        {
-            Version = LatestVersion,
-            ConfirmationShown = false,
-            GoogleAnalytics = false
-        };
+        public string Description;
+        public CookieSettings CookieSettings;
 
-        var missingCookie = new CookieSettings();
-        
-        return new[]
+        public CookieServiceTestCase(string description, CookieSettings cookieSettings)
         {
-            acceptedLatestCookies,
-            outdatedVersion,
-            rejectedAnalyticsConfirmationShown,
-            rejectedAnalyticsConfirmationNotShown,
-            missingCookie
-        };
+            Description = description;
+            CookieSettings = cookieSettings;
+        }
+
+        public override string ToString()
+        {
+            return Description;
+        }
     }
 }
