@@ -269,7 +269,37 @@ public class QuestionFlowServiceTests
     
     [Datapoint] 
     public QuestionFlowServiceTestCase HomeAgeBack1 = new(
-        "Home age goes back to the property type it came from",
+        "Home age goes back to the property type it came from (house)",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.HomeAge,
+            reference: "ABCDEFGH",
+            propertyType: PropertyType.House
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.HouseType_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase HomeAgeBack2 = new(
+        "Home age goes back to the property type it came from (bungalow)",
+        TestType.Back,
+        new Input(
+            QuestionFlowPage.HomeAge,
+            reference: "ABCDEFGH",
+            propertyType: PropertyType.Bungalow
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.BungalowType_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase HomeAgeBack3 = new(
+        "Home age goes back to the property type it came from (flat)",
         TestType.Back,
         new Input(
             QuestionFlowPage.HomeAge,
@@ -283,7 +313,7 @@ public class QuestionFlowServiceTests
         ));
     
     [Datapoint] 
-    public QuestionFlowServiceTestCase HomeAgeBack2 = new(
+    public QuestionFlowServiceTestCase HomeAgeBack4 = new(
         "Changing home age goes back to summary",
         TestType.Back,
         new Input(
@@ -1108,7 +1138,22 @@ public class QuestionFlowServiceTests
     
     [Datapoint] 
     public QuestionFlowServiceTestCase PropertyTypeForward1 = new(
-        "Property type continues to the relevant specific type of property",
+        "Property type continues to the relevant specific type of property (house)",
+        TestType.Forward,
+        new Input(
+            QuestionFlowPage.PropertyType,
+            reference: "ABCDEFGH",
+            propertyType: PropertyType.House
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.HouseType_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase PropertyTypeForward2 = new(
+        "Property type continues to the relevant specific type of property (bungalow)",
         TestType.Forward,
         new Input(
             QuestionFlowPage.PropertyType,
@@ -1117,6 +1162,21 @@ public class QuestionFlowServiceTests
         ),
         new PathByActionArguments(
             nameof(EnergyEfficiencyController.BungalowType_Get),
+            "EnergyEfficiency",
+            new {reference = "ABCDEFGH"}
+        ));
+    
+    [Datapoint] 
+    public QuestionFlowServiceTestCase PropertyTypeForward3 = new(
+        "Property type continues to the relevant specific type of property (flat)",
+        TestType.Forward,
+        new Input(
+            QuestionFlowPage.PropertyType,
+            reference: "ABCDEFGH",
+            propertyType: PropertyType.ApartmentFlatOrMaisonette
+        ),
+        new PathByActionArguments(
+            nameof(EnergyEfficiencyController.FlatType_Get),
             "EnergyEfficiency",
             new {reference = "ABCDEFGH"}
         ));
