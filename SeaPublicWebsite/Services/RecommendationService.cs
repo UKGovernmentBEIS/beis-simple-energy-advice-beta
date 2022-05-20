@@ -129,7 +129,7 @@ namespace SeaPublicWebsite.Services
                     "L2", new BreRecommendation
                     {
                         Key = RecommendationKey.HighHeatRetentionStorageHeaters,
-                        Title = "High heat retention storage heaters",
+                        Title = "Upgrade to high heat retention storage heaters",
                         Summary = "Under Development"
                     }
                 },
