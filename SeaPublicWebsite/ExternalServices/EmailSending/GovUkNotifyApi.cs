@@ -68,6 +68,23 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
             };
             var response = SendEmail(emailModel);
         }
+
+        public void SendFeedbackFormResponseEmail(string whatUserWasDoing, string whatUserToldUs)
+        {
+            var template = govUkNotifyConfig.FeedbackFormResponseTemplate;
+            var personalisation = new Dictionary<string, dynamic>
+            {
+                { template.WhatUserWasDoingPlaceholder, whatUserWasDoing },
+                { template.WhatUserToldUsPlaceholder, whatUserToldUs }
+            };
+            var emailModel = new GovUkNotifyEmailModel
+            {
+                EmailAddress = govUkNotifyConfig.FeedbackCollectingEmailAddress,
+                TemplateId = template.Id,
+                Personalisation = personalisation
+            };
+            var response = SendEmail(emailModel);
+        }
     }
 
     internal class GovUkNotifyEmailModel
