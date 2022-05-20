@@ -14,7 +14,7 @@ public class CookieController: Controller
         this.cookieService = cookieService;
     }
 
-    [HttpGet("/cookies")]
+    [HttpGet("cookies")]
     public IActionResult CookieSettings_Get(bool changesHaveBeenSaved = false)
     {
         cookieService.TryGetCookie<CookieSettings>(Request, cookieService.Configuration.CookieSettingsCookieName, out var cookie);
@@ -27,7 +27,7 @@ public class CookieController: Controller
         return View("CookieSettings", viewModel);
     }
 
-    [HttpPost("/cookies")]
+    [HttpPost("cookies")]
     [ValidateAntiForgeryToken]
     public IActionResult CookieSettings_Post(CookieSettingsViewModel viewModel)
     {
@@ -41,7 +41,7 @@ public class CookieController: Controller
         return CookieSettings_Get(changesHaveBeenSaved: true);
     }
 
-    [HttpPost("/cookie-consent")]
+    [HttpPost("cookie-consent")]
     [ValidateAntiForgeryToken]
     public IActionResult CookieConsent(CookieConsent cookieConsent)
     {
@@ -60,7 +60,7 @@ public class CookieController: Controller
         return Redirect(cookieConsent.ReturnUrl);
     }
 
-    [HttpGet("/cookie-details")]
+    [HttpGet("cookie-details")]
     public IActionResult CookieDetails()
     {
         return View("CookieDetails");
