@@ -60,7 +60,11 @@
             @(await Html.GovUkPhaseBanner(new PhaseBannerViewModel
             {
                 Phase = "Beta",
-                Html = @<text>This is a new service – your feedback will help us to improve it.</text>
+                Html = @<text>
+                           This is a new service – your 
+                           <a class="govuk-link" href="@Url.Action("SendFeedback_Get", "Feedback")">feedback</a> 
+                           will help us to improve it.
+                        </text>
             }))
         }
 

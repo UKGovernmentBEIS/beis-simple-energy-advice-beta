@@ -1,0 +1,69 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@model SeaPublicWebsite.Models.Feedback.FeedbackFormViewModel
+@{
+    ViewBag.Title = "Help us improve GOV.UK";
+}
+
+@section BeforeMain {
+    @await Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        OverrideWithJavascript = true
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        
+        <form action="@Url.Action("SendFeedback_Post", "Feedback")" method="post" novalidate>
+            <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        Help us improve GOV.UK
+                    </h1>
+                </legend>
+                <p class="govuk-body">
+                    Please note that we will not be ableto reply to your feedback
+                </p>
+                
+                @(await Html.GovUkTextInputFor(
+                    m => m.WhatUserWasDoing, 
+                    labelOptions: new LabelViewModel
+                    {
+                        Text = "What were you doing"
+                    },
+                    classes: "govuk-input--width-10",
+                    formGroupOptions: new FormGroupViewModel
+                    {
+                        Classes = "govuk-!-margin-bottom-2"
+                    }
+                    ))
+                
+                @(await Html.GovUkTextInputFor(
+                    m => m.WhatUserToldUs, 
+                    labelOptions: new LabelViewModel
+                    {
+                        Text = "What would you like to tell us"
+                    },
+                    classes: "govuk-input--width-10"
+                    ))
+                
+                <!-- TODO: Add warning text to libary -->
+                <div class="govuk-warning-text">
+                    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                    <strong class="govuk-warning-text__text">
+                        <span class="govuk-warning-text__assistive">Warning</span>
+                        Don’t include personal or financial information like your National Insurance number or credit card details.
+                    </strong>
+                </div>
+            </fieldset>
+                
+            @(await Html.GovUkButton(new ButtonViewModel
+            {
+                Text = "Submit feedback"
+            }))
+        </form>
+        
+    </div>
+</div>
