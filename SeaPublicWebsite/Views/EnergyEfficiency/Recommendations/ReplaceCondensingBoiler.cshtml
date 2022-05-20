@@ -42,33 +42,43 @@
             </h1>
 
             <p class="govuk-body">
-                Under Development
-            </p>
-
-            <p class="govuk-body">
-                Under Development
+                Based on the information we have collected, it looks like you have an old gas boiler that may not be operating efficiently. You could consider replacing this with a modern condensing boiler, which will use less gas to provide the same amount of heat, helping to cut your fuel bills and carbon dioxide emissions.
             </p>
 
             <p class="govuk-inset-text">
-                Under Development
+                You may well need to fit new or additional controls when you fit a new gas boiler to comply with building regulations. These will help to maximise the system’s efficiency, saving you even more money.
             </p>
 
             <p class="govuk-body govuk-!-margin-bottom-6">
-                Under Development
+                You can find more information on replacing your gas boiler on the
+                <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/boilers/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
             </p>
 
             <h2 class="govuk-heading-m">Who this improvement is suitable for</h2>
             <p class="govuk-body">You should consider this improvement for your property if:</p>
             <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
                 <li>
-                    Under Development
+                    You have an old or inefficient gas boiler, or your boiler is broken
                 </li>
             </ul>
+            
+            <p class="govuk-body">
+                Alternatively, you may want to consider fitting a low carbon heating sustem such as a heat pump.
+            </p>
+            
+            <div class="govuk-warning-text">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                    <span class="govuk-warning-text__assistive">Note</span>
+                    Gas boiler installations, and any work on a gas heating system, can only be carried out by an installer on the Gas Safe Register. 
+                </strong>
+            </div>
+
             <h2 class="govuk-heading-m">
                 What you could save
             </h2>
 
-            <p class="govuk-body">Under Development is typically expected to last <b>around @Model.UserRecommendation.Lifetime years</b></p>
+            <p class="govuk-body">New gas boilers are typically expected to last <b>around @Model.UserRecommendation.Lifetime years</b></p>
 
             @{ await Html.RenderPartialAsync("Partials/WhatYouCouldSavePartial.cshtml", Model); }
             
@@ -88,7 +98,7 @@
                         Will this cause disruption during installation?
                     </dt>
                     <dd class="govuk-summary-list__value sea-recommendation-impact govuk-!-padding-right-0">
-                        <strong class="govuk-tag govuk-tag--green">Under Development</strong>
+                        <strong class="govuk-tag govuk-tag--green">Low to medium</strong>
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
@@ -96,7 +106,7 @@
                         How long could this take to install?
                     </dt>
                     <dd class="govuk-summary-list__value sea-recommendation-impact govuk-!-padding-right-0">
-                        <strong class="govuk-tag govuk-tag--green">Under Development</strong>
+                        <strong class="govuk-tag govuk-tag--green">Typically one day</strong>
                     </dd>
                 </div>
             </dl>

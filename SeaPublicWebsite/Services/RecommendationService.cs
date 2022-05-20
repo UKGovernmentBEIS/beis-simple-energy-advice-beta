@@ -113,7 +113,7 @@ namespace SeaPublicWebsite.Services
                     "I", new BreRecommendation
                     {
                         Key = RecommendationKey.ReplaceCondensingBoiler,
-                        Title = "Replacement condensing boiler",
+                        Title = "Replace your gas boiler",
                         Summary = "Under Development"
                     }
                 },
