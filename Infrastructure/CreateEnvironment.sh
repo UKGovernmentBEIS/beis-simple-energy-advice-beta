@@ -113,5 +113,7 @@ cf bind-service "sea-beta-${PAAS_ENV_SHORTNAME}" "sea-beta-${PAAS_ENV_SHORTNAME}
 
 # Wait for user input - just to make sure the window doesn't close without them noticing
 echo ""
+echo "NOTE: Now give the Github build action user the SpaceDeveloper permission on this space"
+# e.g. cf set-space-role test@example.com beis-domestic-energy-advice-service sea-beta-DEV SpaceDeveloper
 echo ""
 read  -n 1 -p "Press Enter to finish:" unused
