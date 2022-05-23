@@ -20,6 +20,131 @@
     })
 }
 
+@{
+    var rows = new List<SummaryListRowViewModel>();
+    
+    rows.Add(new()
+    {
+        Key = new() 
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Text = "Building type"
+        },
+        Value = new()
+        {
+            Classes = "govuk-!-width-one-half",
+            Html = (@<text>
+                        @(Model.PropertyType == PropertyType.House ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HouseType) : null)
+                        @(Model.PropertyType == PropertyType.Bungalow ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.BungalowType) : null)
+                        @(Model.PropertyType == PropertyType.ApartmentFlatOrMaisonette ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.FlatType) : null)
+                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyType))
+                     </text>)
+        },
+        Actions = new()
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Items = new()
+            {
+                new()
+                {
+                    Href = Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true}),
+                    Text = "Change",
+                    VisuallyHiddenText = "address"
+                }
+            }
+        }
+    });
+    
+    rows.Add(new()
+    {
+        Key = new() 
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Text = "Year home was built"
+        },
+        Value = new()
+        {
+            Classes = "govuk-!-width-one-half",
+            Text = (Model.YearBuilt?.ToString() ?? "I'm not sure")
+        },
+        Actions = new()
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Items = new()
+            {
+                new()
+                {
+                    Href = @Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true}),
+                    Text = "Change",
+                    VisuallyHiddenText = "home type"
+                }
+            }
+        }
+    });
+    
+    rows.Add(new()
+    {
+        Key = new() 
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Text = "Wall type"
+        },
+        Value = new()
+        {
+            Classes = "govuk-!-width-one-half",
+            Html = (@<text>
+                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.WallConstruction))
+                        @if (Model.WallConstruction == WallConstruction.DoNotKnow)
+                        {
+                            if (Model?.Epc?.WallConstruction != null || !Model.YearBuilt.HasValue &&  Model?.Epc?.ConstructionAgeBand != null)
+                            {
+                                if (UserDataHelper.HasCavityWalls(Model))
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls
+                                    </p>
+                                }
+                                else if (UserDataHelper.HasSolidWalls(Model))
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls
+                                    </p>
+                                }
+                            }
+                            else if (Model.YearBuilt.HasValue)
+                            {
+                                if (UserDataHelper.HasCavityWalls(Model))
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls
+                                    </p>
+                                }
+                                else if (UserDataHelper.HasSolidWalls(Model))
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls
+                                    </p>                                
+                                }
+                            }
+                        }
+                     </text>)
+        },
+        Actions = new()
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Items = new()
+            {
+                new()
+                {
+                    Href = @Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true}),
+                    Text = "Change",
+                    VisuallyHiddenText = "home type"
+                }
+            }
+        }
+    });
+}
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
@@ -31,127 +156,7 @@
     
     @(await Html.GovUkSummaryList(new SummaryListViewModel
     {
-        Rows = new()
-        {
-            new()
-            {
-                Key = new() 
-                {
-                    Classes = "govuk-!-width-one-quarter",
-                    Text = "Building type"
-                },
-                Value = new()
-                {
-                    Classes = "govuk-!-width-one-half",
-                    Html = (@<text>
-                                @(Model.PropertyType == PropertyType.House ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HouseType) : null)
-                                @(Model.PropertyType == PropertyType.Bungalow ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.BungalowType) : null)
-                                @(Model.PropertyType == PropertyType.ApartmentFlatOrMaisonette ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.FlatType) : null)
-                                @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyType))
-                             </text>)
-                },
-                Actions = new()
-                {
-                    Classes = "govuk-!-width-one-quarter",
-                    Items = new()
-                    {
-                        new()
-                        {
-                            Href = Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true}),
-                            Text = "Change",
-                            VisuallyHiddenText = "address"
-                        }
-                    }
-                }
-            },
-            new()
-            {
-                Key = new() 
-                {
-                    Classes = "govuk-!-width-one-quarter",
-                    Text = "Year home was built"
-                },
-                Value = new()
-                {
-                    Classes = "govuk-!-width-one-half",
-                    Text = (Model.YearBuilt?.ToString() ?? "I'm not sure")
-                },
-                Actions = new()
-                {
-                    Classes = "govuk-!-width-one-quarter",
-                    Items = new()
-                    {
-                        new()
-                        {
-                            Href = @Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true}),
-                            Text = "Change",
-                            VisuallyHiddenText = "home type"
-                        }
-                    }
-                }
-            },
-            new()
-            {
-                Key = new() 
-                {
-                    Classes = "govuk-!-width-one-quarter",
-                    Text = "Wall type"
-                },
-                Value = new()
-                {
-                    Classes = "govuk-!-width-one-half",
-                    Html = (@<text>
-                                @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.WallConstruction))
-                                @if (Model.WallConstruction == WallConstruction.DoNotKnow)
-                                {
-                                    if (Model?.Epc?.WallConstruction != null || !Model.YearBuilt.HasValue &&  Model?.Epc?.ConstructionAgeBand != null)
-                                    {
-                                        if (UserDataHelper.HasCavityWalls(Model))
-                                        {
-                                            <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                                Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls
-                                            </p>
-                                        }
-                                        else if (UserDataHelper.HasSolidWalls(Model))
-                                        {
-                                            <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                                Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls
-                                            </p>
-                                        }
-                                    }
-                                    else if (Model.YearBuilt.HasValue)
-                                    {
-                                        if (UserDataHelper.HasCavityWalls(Model))
-                                        {
-                                            <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                                Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls
-                                            </p>
-                                        }
-                                        else if (UserDataHelper.HasSolidWalls(Model))
-                                        {
-                                            <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                                Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls
-                                            </p>                                
-                                        }
-                                    }
-                                }
-                             </text>)
-                },
-                Actions = new()
-                {
-                    Classes = "govuk-!-width-one-quarter",
-                    Items = new()
-                    {
-                        new()
-                        {
-                            Href = @Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true}),
-                            Text = "Change",
-                            VisuallyHiddenText = "home type"
-                        }
-                    }
-                }
-            }
-        }
+        Rows = rows
     }))
     
     <dl class="govuk-summary-list">
