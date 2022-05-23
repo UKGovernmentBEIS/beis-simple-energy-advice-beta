@@ -1,7 +1,6 @@
 @using GovUkDesignSystem
 @using GovUkDesignSystem.Attributes
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using GovUkDesignSystem.Helpers
 @using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @model SeaPublicWebsite.DataModels.UserDataModel
@@ -26,88 +25,136 @@
         <h1 class="govuk-heading-l">
             Check your answers
         </h1>
-        <div class="govuk-hint">
-            Please review the information we have gathered. You can still change your answers if anything looks wrong.
-        </div>
+    <div class="govuk-hint">
+        Please review the information we have gathered. You can still change your answers if anything looks wrong.
+    </div>
     
-        <dl class="govuk-summary-list">
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                    Building type
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @(Model.PropertyType == PropertyType.House ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HouseType) : null)
-                    @(Model.PropertyType == PropertyType.Bungalow ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.BungalowType) : null)
-                    @(Model.PropertyType == PropertyType.ApartmentFlatOrMaisonette ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.FlatType) : null)
-                    @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyType))
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
-                        Change<span class="govuk-visually-hidden"> address</span>
-                    </a>
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                    Year home was built
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @(Model.YearBuilt?.ToString() ?? "I'm not sure")
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
-                        Change<span class="govuk-visually-hidden"> home type</span>
-                    </a>
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                    Wall type 
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.WallConstruction))
-                    @if (Model.WallConstruction == WallConstruction.DoNotKnow)
+    @(await Html.GovUkSummaryList(new SummaryListViewModel
+    {
+        Rows = new()
+        {
+            new()
+            {
+                Key = new() 
+                {
+                    Classes = "govuk-!-width-one-quarter",
+                    Text = "Building type"
+                },
+                Value = new()
+                {
+                    Classes = "govuk-!-width-one-half",
+                    Html = (@<text>
+                                @(Model.PropertyType == PropertyType.House ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.HouseType) : null)
+                                @(Model.PropertyType == PropertyType.Bungalow ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.BungalowType) : null)
+                                @(Model.PropertyType == PropertyType.ApartmentFlatOrMaisonette ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.FlatType) : null)
+                                @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyType))
+                             </text>)
+                },
+                Actions = new()
+                {
+                    Classes = "govuk-!-width-one-quarter",
+                    Items = new()
                     {
-                        if (Model?.Epc?.WallConstruction != null || !Model.YearBuilt.HasValue &&  Model?.Epc?.ConstructionAgeBand != null)
+                        new()
                         {
-                            if (UserDataHelper.HasCavityWalls(Model))
-                            {
-                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls
-                                </p>
-                            }
-                            else if (UserDataHelper.HasSolidWalls(Model))
-                            {
-                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls
-                                </p>
-                            }
-                        }
-                        else if (Model.YearBuilt.HasValue)
-                        {
-                            if (UserDataHelper.HasCavityWalls(Model))
-                            {
-                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls
-                                </p>
-                            }
-                            else if (UserDataHelper.HasSolidWalls(Model))
-                            {
-                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls
-                                </p>                                
-                            }
+                            Href = Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true}),
+                            Text = "Change",
+                            VisuallyHiddenText = "address"
                         }
                     }
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true})">
-                        Change<span class="govuk-visually-hidden"> type of walls
-                        </span>
-                    </a>
-                </dd>
-            </div>
-
+                }
+            },
+            new()
+            {
+                Key = new() 
+                {
+                    Classes = "govuk-!-width-one-quarter",
+                    Text = "Year home was built"
+                },
+                Value = new()
+                {
+                    Classes = "govuk-!-width-one-half",
+                    Text = (Model.YearBuilt?.ToString() ?? "I'm not sure")
+                },
+                Actions = new()
+                {
+                    Classes = "govuk-!-width-one-quarter",
+                    Items = new()
+                    {
+                        new()
+                        {
+                            Href = @Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true}),
+                            Text = "Change",
+                            VisuallyHiddenText = "home type"
+                        }
+                    }
+                }
+            },
+            new()
+            {
+                Key = new() 
+                {
+                    Classes = "govuk-!-width-one-quarter",
+                    Text = "Wall type"
+                },
+                Value = new()
+                {
+                    Classes = "govuk-!-width-one-half",
+                    Html = (@<text>
+                                @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.WallConstruction))
+                                @if (Model.WallConstruction == WallConstruction.DoNotKnow)
+                                {
+                                    if (Model?.Epc?.WallConstruction != null || !Model.YearBuilt.HasValue &&  Model?.Epc?.ConstructionAgeBand != null)
+                                    {
+                                        if (UserDataHelper.HasCavityWalls(Model))
+                                        {
+                                            <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                                Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls
+                                            </p>
+                                        }
+                                        else if (UserDataHelper.HasSolidWalls(Model))
+                                        {
+                                            <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                                Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls
+                                            </p>
+                                        }
+                                    }
+                                    else if (Model.YearBuilt.HasValue)
+                                    {
+                                        if (UserDataHelper.HasCavityWalls(Model))
+                                        {
+                                            <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                                Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model) ? "insulated" : "uninsulated") cavity walls
+                                            </p>
+                                        }
+                                        else if (UserDataHelper.HasSolidWalls(Model))
+                                        {
+                                            <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                                Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model) ? "insulated" : "uninsulated") solid walls
+                                            </p>                                
+                                        }
+                                    }
+                                }
+                             </text>)
+                },
+                Actions = new()
+                {
+                    Classes = "govuk-!-width-one-quarter",
+                    Items = new()
+                    {
+                        new()
+                        {
+                            Href = @Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.Reference, change = true}),
+                            Text = "Change",
+                            VisuallyHiddenText = "home type"
+                        }
+                    }
+                }
+            }
+        }
+    }))
+    
+    <dl class="govuk-summary-list">
             @if (Model.WallConstruction == WallConstruction.Cavity ||
                  Model.WallConstruction == WallConstruction.Mixed)
             {
