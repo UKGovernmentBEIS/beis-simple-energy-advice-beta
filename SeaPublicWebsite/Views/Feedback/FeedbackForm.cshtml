@@ -30,12 +30,7 @@
                     m => m.WhatUserWasDoing, 
                     labelOptions: new LabelViewModel
                     {
-                        Text = "What were you doing?",
-                        Classes = "govuk-!-font-weight-bold"
-                    },
-                    formGroupOptions: new FormGroupViewModel
-                    {
-                        Classes = "govuk-!-margin-bottom-2"
+                        Html = (@<strong>What were you doing?</strong>)
                     }
                     ))
                 
@@ -43,8 +38,7 @@
                     m => m.WhatUserToldUs, 
                     labelOptions: new LabelViewModel
                     {
-                        Text = "What would you like to tell us?",
-                        Classes = "govuk-!-font-weight-bold"
+                        Html = (@<strong>What would you like to tell us?</strong>)
                     }
                     ))
                 
