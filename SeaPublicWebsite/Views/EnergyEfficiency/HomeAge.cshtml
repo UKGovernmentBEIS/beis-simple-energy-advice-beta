@@ -49,6 +49,7 @@
         
         <form action="@Url.Action("HomeAge_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
+            @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.PropertyType)
 
             <div class="govuk-form-group">

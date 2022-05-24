@@ -23,6 +23,7 @@
         
         <form method="post" action="@Url.Action("NewOrReturningUser_Post", "EnergyEfficiency")">
 
+            @Html.AntiForgeryToken()
             @(await Html.GovUkRadiosFor(
                 m => m.NewOrReturningUser,
                 fieldsetOptions: new FieldsetViewModel

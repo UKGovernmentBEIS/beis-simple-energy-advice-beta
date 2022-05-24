@@ -24,6 +24,7 @@
         
         <form action="@Url.Action("HotWaterCylinder_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
+            @Html.AntiForgeryToken()
             @(await Html.GovUkRadiosFor(m => m.HasHotWaterCylinder,
                 fieldsetOptions: new FieldsetViewModel
                 {
