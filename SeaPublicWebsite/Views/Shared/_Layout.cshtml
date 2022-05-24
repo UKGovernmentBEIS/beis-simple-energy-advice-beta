@@ -133,13 +133,5 @@
     <script>window.GOVUKFrontend.initAll()</script>
     @RenderSection("AfterLoadedCompiledScripts", false)
 
-@{
-    if (CookieService.HasAcceptedGoogleAnalytics(Context.Request))
-    {
-        <script>
-            // TODO: Google script
-        </script>
-    }
-}
 </body>
 </html>
