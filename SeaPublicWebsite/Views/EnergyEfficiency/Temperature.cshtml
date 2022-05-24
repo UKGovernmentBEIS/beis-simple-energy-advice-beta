@@ -26,6 +26,7 @@
         
         <form action="@Url.Action("Temperature_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
 
+            @Html.AntiForgeryToken()
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">

@@ -26,6 +26,7 @@
         
         <form action="@Url.Action("FloorInsulated_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
+            @Html.AntiForgeryToken()
             @(Html.HiddenFor(m => m.YearBuilt))
             
             @(await Html.GovUkRadiosFor(m => m.FloorInsulated,

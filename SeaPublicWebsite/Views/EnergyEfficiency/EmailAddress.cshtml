@@ -26,6 +26,7 @@
         
         <form method="post" action="@Url.Action("EmailAddress_Post", "EnergyEfficiency")">
 
+            @Html.AntiForgeryToken()
             @(await Html.GovUkRadiosFor(
                 m => m.HasEmailAddress,
                 fieldsetOptions: new FieldsetViewModel

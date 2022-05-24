@@ -24,6 +24,7 @@
         
         <form action="@Url.Action("AccessibleLoftSpace_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
             
+            @Html.AntiForgeryToken()
             @(await Html.GovUkRadiosFor(m => m.AccessibleLoftSpace,
                 fieldsetOptions: new FieldsetViewModel
                 {

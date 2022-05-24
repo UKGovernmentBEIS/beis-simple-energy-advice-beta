@@ -28,7 +28,6 @@ public class CookieController: Controller
     }
 
     [HttpPost("cookies")]
-    [ValidateAntiForgeryToken]
     public IActionResult CookieSettings_Post(CookieSettingsViewModel viewModel)
     {
         var cookieSettings = new CookieSettings
@@ -42,7 +41,6 @@ public class CookieController: Controller
     }
 
     [HttpPost("cookie-consent")]
-    [ValidateAntiForgeryToken]
     public IActionResult CookieConsent(CookieConsent cookieConsent)
     {
         if (cookieConsent.Consent == "hide")

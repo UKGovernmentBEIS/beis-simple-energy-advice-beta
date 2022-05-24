@@ -24,6 +24,7 @@
     <div class="govuk-grid-column-two-thirds">
         <form action="@Url.Action("ConfirmAddress_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
 
+            @Html.AntiForgeryToken()
             @if (Model.EPCList.Count == 1)
             {
                 @Html.HiddenFor(m => m.SelectedEpcId)
