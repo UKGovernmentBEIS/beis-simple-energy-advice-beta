@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.Feedback;
 
 namespace SeaPublicWebsite.Controllers;
 
-[Route("feedback")]
+[Route("energy-efficiency/feedback")]
 public class FeedbackController : Controller
 {
     private readonly IEmailSender emailSender;
@@ -23,6 +23,11 @@ public class FeedbackController : Controller
     [HttpPost("")]
     public IActionResult FeedbackForm_Post(FeedbackFormViewModel viewModel)
     {
+        if (!ModelState.IsValid)
+        {
+            return View("FeedbackForm", viewModel);
+        }
+        
         emailSender.SendFeedbackFormResponseEmail(
             viewModel.WhatUserWasDoing, 
             viewModel.WhatUserToldUs);
