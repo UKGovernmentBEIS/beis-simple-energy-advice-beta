@@ -1,6 +1,6 @@
 ﻿namespace SeaPublicWebsite.Data;
 
-public class UserData
+public class PropertyData
 {
     public int Id { get; set; }
 }

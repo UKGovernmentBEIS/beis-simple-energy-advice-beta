@@ -8,5 +8,5 @@ public class SeaDbContext : DbContext
     {
         
     }
-    public DbSet<UserData> Users { get; set; }
+    public DbSet<PropertyData> Properties { get; set; }
 }
