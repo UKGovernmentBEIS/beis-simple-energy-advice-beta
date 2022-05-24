@@ -1,6 +1,7 @@
 ﻿using System;
 using SeaPublicWebsite.Controllers;
 using SeaPublicWebsite.DataModels;
+using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Services
@@ -256,7 +257,7 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
             }
 
-            if (HasFloor(userData))
+            if (UserDataHelper.HasAnsweredFloorQuestions(userData))
             {
                 return userData.FloorConstruction switch
                 {
@@ -300,7 +301,7 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
             }
 
-            if (HasRoof(userData))
+            if (UserDataHelper.HasAnsweredRoofQuestions(userData))
             {
                 return userData switch
                 {
@@ -312,7 +313,7 @@ namespace SeaPublicWebsite.Services
                 };
             }
 
-            if (HasFloor(userData))
+            if (UserDataHelper.HasAnsweredFloorQuestions(userData))
             {
                 return userData.FloorConstruction switch
                 {
@@ -529,12 +530,12 @@ namespace SeaPublicWebsite.Services
             }
 
             // These options below are for people who have chosen "Don't know" to "What type of walls do you have?"
-            if (HasFloor(userData))
+            if (UserDataHelper.HasAnsweredFloorQuestions(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.FloorConstruction_Get), "EnergyEfficiency", new { reference });
             }
 
-            if (HasRoof(userData))
+            if (UserDataHelper.HasAnsweredRoofQuestions(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency", new { reference });
             }
@@ -562,12 +563,12 @@ namespace SeaPublicWebsite.Services
             }
 
             // These options below are for people who have finished the "wall insulation" questions (e.g. who only have cavity walls)
-            if (HasFloor(userData))
+            if (UserDataHelper.HasAnsweredFloorQuestions(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.FloorConstruction_Get), "EnergyEfficiency",new { reference });
             }
 
-            if (HasRoof(userData))
+            if (UserDataHelper.HasAnsweredRoofQuestions(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency",new { reference });
             }
@@ -583,12 +584,12 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
             }
 
-            if (HasFloor(userData))
+            if (UserDataHelper.HasAnsweredFloorQuestions(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.FloorConstruction_Get), "EnergyEfficiency",new { reference });
             }
 
-            if (HasRoof(userData))
+            if (UserDataHelper.HasAnsweredRoofQuestions(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency",new { reference });
             }
@@ -610,7 +611,7 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
             }
 
-            if (HasRoof(userData))
+            if (UserDataHelper.HasAnsweredRoofQuestions(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency",new { reference });
             }
@@ -626,7 +627,7 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
             }
 
-            if (HasRoof(userData))
+            if (UserDataHelper.HasAnsweredRoofQuestions(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency",new { reference });
             }
@@ -787,24 +788,6 @@ namespace SeaPublicWebsite.Services
         {
             var reference = userData.Reference;
             return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference  });
-        }
-
-        private bool HasFloor(UserDataModel userData)
-        {
-            return (userData.PropertyType, userData.FlatType) switch
-            {
-                (PropertyType.House, _) or (PropertyType.Bungalow, _) or (PropertyType.ApartmentFlatOrMaisonette, FlatType.GroundFloor) => true,
-                _ => false
-            };
-        }
-
-        private bool HasRoof(UserDataModel userData)
-        {
-            return (userData.PropertyType, userData.FlatType) switch
-            {
-                (PropertyType.House, _) or (PropertyType.Bungalow, _) or (PropertyType.ApartmentFlatOrMaisonette, FlatType.TopFloor) => true,
-                _ => false
-            };
         }
     }
 

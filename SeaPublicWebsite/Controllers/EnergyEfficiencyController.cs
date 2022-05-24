@@ -26,7 +26,12 @@ namespace SeaPublicWebsite.Controllers
         private readonly IEmailSender emailApi;
         private readonly RecommendationService recommendationService;
 
-        public EnergyEfficiencyController(UserDataStore userDataStore, IQuestionFlowService questionFlowService, IEpcApi epcApi, IEmailSender emailApi, RecommendationService recommendationService)
+        public EnergyEfficiencyController(
+            UserDataStore userDataStore, 
+            IQuestionFlowService questionFlowService, 
+            IEpcApi epcApi, 
+            IEmailSender emailApi, 
+            RecommendationService recommendationService)
         {
             this.userDataStore = userDataStore;
             this.questionFlowService = questionFlowService;
@@ -200,6 +205,7 @@ namespace SeaPublicWebsite.Controllers
 
             userDataModel.Postcode = viewModel.Postcode;
             userDataModel.HouseNameOrNumber = viewModel.HouseNameOrNumber;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AskForPostcode, userDataModel);
@@ -246,6 +252,7 @@ namespace SeaPublicWebsite.Controllers
             var epc = (await epcApi.GetEpcsForPostcode(userDataModel.Postcode)).FirstOrDefault(e => e.EpcId == viewModel.SelectedEpcId);
             userDataModel.Epc = epc;
 
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.ConfirmAddress, userDataModel);
@@ -281,6 +288,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.PropertyType = viewModel.PropertyType;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.PropertyType, userDataModel, viewModel.EntryPoint);
@@ -315,6 +323,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.HouseType = viewModel.HouseType;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HouseType, userDataModel, viewModel.EntryPoint);
@@ -350,6 +359,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
             
             userDataModel.BungalowType = viewModel.BungalowType;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.BungalowType, userDataModel, viewModel.EntryPoint);
@@ -385,6 +395,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.FlatType = viewModel.FlatType;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.FlatType, userDataModel, viewModel.EntryPoint);
@@ -423,6 +434,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
             
             userDataModel.YearBuilt = viewModel.YearBuilt;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HomeAge, userDataModel, viewModel.EntryPoint);
@@ -460,6 +472,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.WallConstruction = viewModel.WallConstruction;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.WallConstruction, userDataModel, viewModel.EntryPoint);
@@ -498,6 +511,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.CavityWallsInsulated = viewModel.CavityWallsInsulated;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.CavityWallsInsulated, userDataModel, viewModel.EntryPoint);
@@ -536,6 +550,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
             
             userDataModel.SolidWallsInsulated = viewModel.SolidWallsInsulated;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.SolidWallsInsulated, userDataModel, viewModel.EntryPoint);
@@ -574,6 +589,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.FloorConstruction = viewModel.FloorConstruction;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.FloorConstruction, userDataModel, viewModel.EntryPoint);
@@ -611,6 +627,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.FloorInsulated = viewModel.FloorInsulated;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs =
@@ -648,6 +665,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.RoofConstruction = viewModel.RoofConstruction;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.RoofConstruction, userDataModel, viewModel.EntryPoint);
@@ -682,6 +700,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.AccessibleLoftSpace = viewModel.AccessibleLoftSpace;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AccessibleLoftSpace, userDataModel, viewModel.EntryPoint);
@@ -717,6 +736,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.RoofInsulated = viewModel.RoofInsulated;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.RoofInsulated, userDataModel, viewModel.EntryPoint);
@@ -752,6 +772,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.GlazingType = viewModel.GlazingType;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.GlazingType, userDataModel, viewModel.EntryPoint);
@@ -786,6 +807,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.HasOutdoorSpace = viewModel.HasOutdoorSpace;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.OutdoorSpace, userDataModel, viewModel.EntryPoint);
@@ -822,6 +844,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.HeatingType = viewModel.HeatingType;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HeatingType, userDataModel, viewModel.EntryPoint);
@@ -857,6 +880,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.OtherHeatingType = viewModel.OtherHeatingType;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.OtherHeatingType, userDataModel, viewModel.EntryPoint);
@@ -892,6 +916,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.HasHotWaterCylinder = viewModel.HasHotWaterCylinder;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HotWaterCylinder, userDataModel, viewModel.EntryPoint);
@@ -929,6 +954,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.NumberOfOccupants = viewModel.NumberOfOccupants;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.NumberOfOccupants, userDataModel, viewModel.EntryPoint);
@@ -967,6 +993,7 @@ namespace SeaPublicWebsite.Controllers
             userDataModel.HeatingPattern = viewModel.HeatingPattern;
             userDataModel.HoursOfHeating = viewModel.HeatingPattern == HeatingPattern.Other ? viewModel.HoursOfHeating : null;
 
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HeatingPattern, userDataModel, viewModel.EntryPoint);
@@ -1004,6 +1031,7 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.Temperature = viewModel.Temperature;
+            UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.Temperature, userDataModel, viewModel.EntryPoint);

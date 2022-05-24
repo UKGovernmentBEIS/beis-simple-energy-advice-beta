@@ -113,5 +113,88 @@ namespace SeaPublicWebsite.Helpers
                        && (!userData.YearBuilt.HasValue && userData.Epc?.ConstructionAgeBand > HomeAge.From1996To2002 ||
                            userData.YearBuilt > 2002));
         }
+
+        public static bool HasAnsweredFloorQuestions(UserDataModel userData)
+        {
+            return (userData.PropertyType, userData.FlatType) switch
+            {
+                (PropertyType.House, _) or (PropertyType.Bungalow, _) or (PropertyType.ApartmentFlatOrMaisonette, FlatType.GroundFloor) => true,
+                _ => false
+            };
+        }
+        
+        public static bool HasAnsweredRoofQuestions(UserDataModel userData)
+        {
+            return (userData.PropertyType, userData.FlatType) switch
+            {
+                (PropertyType.House, _) or (PropertyType.Bungalow, _) or (PropertyType.ApartmentFlatOrMaisonette, FlatType.TopFloor) => true,
+                _ => false
+            };
+        }
+        
+        public static void ResetUnusedFields(UserDataModel userData)
+        {
+            if (userData.PropertyType is not PropertyType.House)
+            {
+                userData.HouseType = null;
+            }
+            
+            if (userData.PropertyType is not PropertyType.Bungalow)
+            {
+                userData.BungalowType = null;
+            }
+            
+            if (userData.PropertyType is not PropertyType.ApartmentFlatOrMaisonette)
+            {
+                userData.FlatType = null;
+            }
+            
+            if (userData.WallConstruction is not WallConstruction.Cavity and not WallConstruction.Mixed)
+            {
+                userData.CavityWallsInsulated = null;
+            }
+            
+            if (userData.WallConstruction is not WallConstruction.Solid and not WallConstruction.Mixed)
+            {
+                userData.SolidWallsInsulated = null;
+            }
+            
+            if (!HasAnsweredFloorQuestions(userData))
+            {
+                userData.FloorConstruction = null;
+            }
+
+            if (userData.FloorConstruction is not FloorConstruction.SolidConcrete
+                and not FloorConstruction.SuspendedTimber and not FloorConstruction.Mix)
+            {
+                userData.FloorInsulated = null;
+            }
+
+            if (!HasAnsweredRoofQuestions(userData))
+            {
+                userData.RoofConstruction = null;
+            }
+
+            if (userData.RoofConstruction is not RoofConstruction.Mixed and not RoofConstruction.Pitched)
+            {
+                userData.AccessibleLoftSpace = null;
+            }
+
+            if (userData.AccessibleLoftSpace is not AccessibleLoftSpace.Yes)
+            {
+                userData.RoofInsulated = null;
+            }
+
+            if (userData.HeatingType is not HeatingType.Other)
+            {
+                userData.OtherHeatingType = null;
+            }
+
+            if (userData.HeatingType is not HeatingType.GasBoiler and not HeatingType.OilBoiler
+                and not HeatingType.LpgBoiler)
+            {
+                userData.HasHotWaterCylinder = null;
+            }
+        }
     }
 }
