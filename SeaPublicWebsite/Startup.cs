@@ -2,9 +2,11 @@ using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SeaPublicWebsite.Data;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices;
@@ -56,6 +58,9 @@ namespace SeaPublicWebsite
             });
 
             services.AddScoped<RecommendationService>();
+            
+            services.AddDbContext<SeaDbContext>(opt =>
+                opt.UseNpgsql(configuration.GetConnectionString("PostgreSQLConnection")));
         }
         
         private void ConfigureCookieService(IServiceCollection services)

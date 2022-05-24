@@ -73,6 +73,23 @@ Fill in the opened `secrets.json` file with:
 - In `SeaPublicWebsite` run `npm run watch`
 - In Visual Studio / Rider run the `SeaPublicWebsite` project
 
+## Local Database
+
+### Local Database Setup
+
+- For Windows: Download the installer and PostgreSQL 14 here: https://www.postgresql.org/download/windows/
+- Follow default installation steps (no additional software is required from Stack Builder upon completion)
+  - You may be prompted for a password for the postgres user and a port (good defaults are "postgres" and "5432", respectively). If you choose your own, you will have to update the connection string in appsettings.json
+
+### Creating/updating the local database
+
+- In the terminal (from the solution directory) run `dotnet ef database update --project .\SeaPublicWebsite`
+
+### Adding Migrations
+
+- In the terminal (from the solution directory) run `dotnet ef migrations add <YOUR_MIGRATION_NAME> --project .\SeaPublicWebsite.Data --startup-project .\SeaPublicWebsite`
+- Then update the local database
+
 ## Environments
 
 This app is deployed to GOV.UK Platform as a Service (https://docs.cloud.service.gov.uk/)
