@@ -20,7 +20,19 @@
 
 <html lang="en" class="govuk-template app-html-class">
 <head>
-    <meta charset="utf-8" />
+    @if (CookieService.HasAcceptedGoogleAnalytics(Context.Request))
+    {
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJC885GHSW"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+    
+            gtag('config', 'G-RJC885GHSW');
+        </script>
+    }
+    <meta charset="utf-8"/>
     <title>@(ViewBag.Title != null ? ViewBag.Title + " -" : "") @Constants.SERVICE_NAME - Gov.UK</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="blue" />
@@ -121,13 +133,5 @@
     <script>window.GOVUKFrontend.initAll()</script>
     @RenderSection("AfterLoadedCompiledScripts", false)
 
-@{
-    if (CookieService.HasAcceptedGoogleAnalytics(Context.Request))
-    {
-        <script>
-            // TODO: Google script
-        </script>
-    }
-}
 </body>
 </html>
