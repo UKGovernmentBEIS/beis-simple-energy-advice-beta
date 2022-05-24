@@ -23,6 +23,7 @@
     <div class="govuk-grid-column-two-thirds">
         
         <form action="@Url.Action("FloorConstruction_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+            @Html.AntiForgeryToken()
             @(Html.HiddenFor(m => m.EntryPoint))
             
             @(await Html.GovUkRadiosFor(m => m.FloorConstruction,

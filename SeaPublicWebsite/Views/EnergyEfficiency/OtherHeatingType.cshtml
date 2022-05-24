@@ -26,6 +26,7 @@
             @(Html.HiddenFor(m => m.EntryPoint))
             
 
+            @Html.AntiForgeryToken()
             @(await Html.GovUkRadiosFor(m => m.OtherHeatingType,
                 fieldsetOptions: new FieldsetViewModel
                 {

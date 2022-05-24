@@ -23,6 +23,7 @@
     <div class="govuk-grid-column-two-thirds">
         
         <form action="@Url.Action("OwnershipStatus_Post", "EnergyEfficiency", new {reference =  Model.Reference})" method="post" novalidate>  
+            @Html.AntiForgeryToken()
             @(Html.HiddenFor(m => m.EntryPoint))
               
             
@@ -42,25 +43,25 @@
                 new HintViewModel
                 {
                     Html = @<text>
-                                <details class="govuk-details" data-module="govuk-details">
-                                    <summary class="govuk-details__summary">
-                                        <span class="govuk-details__summary-text">
-                                            Why do we need to know this?
-                                        </span>
-                                    </summary>
-                                    <div class="govuk-details__text">
-                                        This service only provides advice to people who own their home.
-                                    </div>
-                                </details>
+                               <details class="govuk-details" data-module="govuk-details">
+                                   <summary class="govuk-details__summary">
+                                       <span class="govuk-details__summary-text">
+                                           Why do we need to know this?
+                                       </span>
+                                   </summary>
+                                   <div class="govuk-details__text">
+                                       This service only provides advice to people who own their home.
+                                   </div>
+                               </details>
                             </text>
                 }
-            ))
+                ))
 
             @(await Html.GovUkButton(new ButtonViewModel
             {
                 Text = "Continue",
             }))
-            
+
         </form>
         
     </div>

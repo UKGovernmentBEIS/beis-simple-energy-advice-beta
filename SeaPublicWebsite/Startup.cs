@@ -1,9 +1,12 @@
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SeaPublicWebsite.Data;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices;
@@ -11,8 +14,10 @@ using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.ExternalServices.OpenEpc;
+using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
+using SeaPublicWebsite.Services.Cookies;
 
 namespace SeaPublicWebsite
 {
@@ -39,6 +44,7 @@ namespace SeaPublicWebsite
             ConfigureEpcApi(services);
             ConfigureBreApi(services);
             ConfigureGovUkNotify(services);
+            ConfigureCookieService(services);
 
             if (!webHostEnvironment.IsProduction())
             {
@@ -49,9 +55,20 @@ namespace SeaPublicWebsite
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add<ErrorHandlingFilter>();
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             });
 
             services.AddScoped<RecommendationService>();
+            
+            services.AddDbContext<SeaDbContext>(opt =>
+                opt.UseNpgsql(configuration.GetConnectionString("PostgreSQLConnection")));
+        }
+        
+        private void ConfigureCookieService(IServiceCollection services)
+        {
+            services.Configure<CookieServiceConfiguration>(
+                configuration.GetSection(CookieServiceConfiguration.ConfigSection));
+            services.AddScoped<CookieService, CookieService>();
         }
 
         private void ConfigureFileRepository(IServiceCollection services)

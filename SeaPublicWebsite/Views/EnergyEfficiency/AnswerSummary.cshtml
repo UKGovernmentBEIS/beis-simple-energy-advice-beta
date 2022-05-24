@@ -1,6 +1,7 @@
 @using GovUkDesignSystem
 @using GovUkDesignSystem.Attributes
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Controllers
 @using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 @using SeaPublicWebsite.Services
@@ -21,6 +22,659 @@
     })
 }
 
+@{
+    var rows = new List<SummaryListRowViewModel>();
+    
+    rows.Add(new()
+    {
+        Key = new() 
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Text = "Building type"
+        },
+        Value = new()
+        {
+            Classes = "govuk-!-width-one-half",
+            Html = (@<text>
+                        @(Model.UserDataModel.PropertyType == PropertyType.House ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HouseType) : null)
+                        @(Model.UserDataModel.PropertyType == PropertyType.Bungalow ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.BungalowType) : null)
+                        @(Model.UserDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.FlatType) : null)
+                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.PropertyType))
+                     </text>)
+        },
+        Actions = new()
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Items = new()
+            {
+                new()
+                {
+                    Href = Url.Action(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.PropertyType}),
+                    Text = "Change",
+                    VisuallyHiddenText = "address"
+                }
+            }
+        }
+    });
+    
+    rows.Add(new()
+    {
+        Key = new() 
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Text = "Year home was built"
+        },
+        Value = new()
+        {
+            Classes = "govuk-!-width-one-half",
+            Text = Model.UserDataModel.YearBuilt?.ToString() ?? "I'm not sure"
+        },
+        Actions = new()
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Items = new()
+            {
+                new()
+                {
+                    Href = @Url.Action(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.HomeAge}),
+                    Text = "Change",
+                    VisuallyHiddenText = "home type"
+                }
+            }
+        }
+    });
+    
+    rows.Add(new()
+    {
+        Key = new() 
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Text = "Wall type"
+        },
+        Value = new()
+        {
+            Classes = "govuk-!-width-one-half",
+            Html = (@<text>
+                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.WallConstruction))
+                        @if (Model.UserDataModel.WallConstruction == WallConstruction.DoNotKnow)
+                        {
+                            if (Model.UserDataModel.Epc?.WallConstruction is not null || Model.UserDataModel.YearBuilt.HasValue &&  Model.UserDataModel.Epc?.ConstructionAgeBand is not null)
+                            {
+                                if (UserDataHelper.HasCavityWalls(Model.UserDataModel))
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model.UserDataModel) ? "insulated" : "uninsulated") cavity walls
+                                    </p>
+                                }
+                                else if (UserDataHelper.HasSolidWalls(Model.UserDataModel))
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model.UserDataModel) ? "insulated" : "uninsulated") solid walls
+                                    </p>
+                                }
+                            }
+                            else if (Model.UserDataModel.YearBuilt.HasValue)
+                            {
+                                if (UserDataHelper.HasCavityWalls(Model.UserDataModel))
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model.UserDataModel) ? "insulated" : "uninsulated") cavity walls
+                                    </p>
+                                }
+                                else if (UserDataHelper.HasSolidWalls(Model.UserDataModel))
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model.UserDataModel) ? "insulated" : "uninsulated") solid walls
+                                    </p>                                
+                                }
+                            }
+                        }
+                     </text>)
+        },
+        Actions = new()
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Items = new()
+            {
+                new()
+                {
+                    Href = @Url.Action(nameof(EnergyEfficiencyController.WallConstruction_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.WallConstruction}),
+                    Text = "Change",
+                    VisuallyHiddenText = "home type"
+                }
+            }
+        }
+    });
+
+    if (Model.UserDataModel.WallConstruction is WallConstruction.Cavity or WallConstruction.Mixed)
+    {
+        rows.Add(new()
+        {
+            Key = new()
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Text = "Are your cavity walls insulated?"
+            },
+            Value = new()
+            {
+                Classes = "govuk-!-width-one-half",
+                Html = (@<text>
+                            @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.CavityWallsInsulated))
+                            @if (Model.UserDataModel.CavityWallsInsulated is CavityWallsInsulated.DoNotKnow)
+                            {
+                                if (Model.UserDataModel.Epc is not null && (Model.UserDataModel.Epc.CavityWallsInsulated is not null || Model.UserDataModel.Epc.ConstructionAgeBand is not null))
+                                {
+                                    <p class="govuk-body-s sea-assumed-answers">
+                                        Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model.UserDataModel) ? "insulated" : "uninsulated") cavity walls
+                                    </p>
+                                }
+                                else if (Model.UserDataModel.YearBuilt.HasValue)
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model.UserDataModel) ? "insulated" : "uninsulated") cavity walls
+                                    </p>
+                                }
+                            }
+                         </text>)
+            },
+            Actions = new()
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Items = new()
+                {
+                    new()
+                    {
+                        Href = Url.Action(nameof(EnergyEfficiencyController.CavityWallsInsulated_Get), "EnergyEfficiency", new { reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.CavityWallsInsulated }),
+                        Text = "Change",
+                        VisuallyHiddenText = "are cavity walls insulated"
+                    }
+                }
+            }
+        });
+    }
+    
+    if (Model.UserDataModel.WallConstruction is WallConstruction.Solid or WallConstruction.Mixed)
+    {
+        rows.Add(new()
+        {
+            Key = new() 
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Text = "Are your solid walls insulated?"
+            },
+            Value = new()
+            {
+                Classes = "govuk-!-width-one-half",
+                Html = (@<text>
+                            @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.SolidWallsInsulated))
+                            @if (Model.UserDataModel.SolidWallsInsulated is SolidWallsInsulated.DoNotKnow)
+                            {
+                                if (Model.UserDataModel.Epc is not null && (Model.UserDataModel.Epc.SolidWallsInsulated != null || Model.UserDataModel.Epc.ConstructionAgeBand != null))
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                        Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model.UserDataModel) ? "insulated" : "uninsulated") solid walls
+                                    </p>
+                                }
+                                else if (Model.UserDataModel.YearBuilt.HasValue)
+                                {
+                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-1">
+                                        Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model.UserDataModel) ? "insulated" : "uninsulated") solid walls
+                                    </p>
+                                }
+                            }
+                         </text>)
+            },
+            Actions = new()
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Items = new()
+                {
+                    new()
+                    {
+                        Href = Url.Action(nameof(EnergyEfficiencyController.SolidWallsInsulated_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.SolidWallsInsulated}),
+                        Text = "Change",
+                        VisuallyHiddenText = "are solid walls insulated"
+                    }
+                }
+            }
+        });
+    }
+
+    if (Model.UserDataModel.PropertyType is not PropertyType.ApartmentFlatOrMaisonette || Model.UserDataModel.FlatType is FlatType.GroundFloor)
+    {
+        rows.Add(new()
+        {
+            Key = new() 
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Text = "Floor construction"
+            },
+            Value = new()
+            {
+                Classes = "govuk-!-width-one-half",
+                Html = (@<text>
+                            @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.FloorConstruction))
+                            @if (Model.UserDataModel.FloorConstruction is FloorConstruction.DoNotKnow)
+                            {
+                                if (Model.UserDataModel.Epc?.FloorConstruction is not null || !Model.UserDataModel.YearBuilt.HasValue && Model.UserDataModel.Epc?.ConstructionAgeBand is not null)
+                                {
+                                    if (UserDataHelper.HasSolidFloor(Model.UserDataModel))
+                                    {
+                                        <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                            Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model.UserDataModel) ? "insulated" : "uninsulated") solid concrete floor
+                                        </p>
+                                    }
+                                    else if (UserDataHelper.HasSuspendedFloor(Model.UserDataModel))
+                                    {
+                                        <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                            Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model.UserDataModel) ? "insulated" : "uninsulated") suspended timber floor
+                                        </p>
+                                    }
+                                }
+                                else if (Model.UserDataModel.YearBuilt.HasValue)
+                                {
+                                    if (UserDataHelper.HasSolidFloor(Model.UserDataModel))
+                                    {
+                                        <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                            Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model.UserDataModel) ? "insulated" : "uninsulated") solid concrete floor
+                                        </p>
+                                    }
+                                    else if (UserDataHelper.HasSuspendedFloor(Model.UserDataModel))
+                                    {
+                                        <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                            Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model.UserDataModel) ? "insulated" : "uninsulated") suspended timber floor
+                                        </p>                                
+                                    }
+                                }
+                            }
+                         </text>)
+            },
+            Actions = new()
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Items = new()
+                {
+                    new()
+                    {
+                        Href = Url.Action(nameof(EnergyEfficiencyController.FloorConstruction_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.FloorConstruction}),
+                        Text = "Change",
+                        VisuallyHiddenText = "floor construction"
+                    }
+                }
+            }
+        });
+        
+        if (Model.UserDataModel.FloorConstruction is not FloorConstruction.DoNotKnow and not FloorConstruction.Other)
+        {
+            rows.Add(new()
+            {
+                Key = new() 
+                {
+                    Classes = "govuk-!-width-one-quarter",
+                    Text = "Is your ground floor insulated?"
+                },
+                Value = new()
+                {
+                    Classes = "govuk-!-width-one-half",
+                    Html = (@<text>
+                                @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.FloorInsulated))
+                                @if (Model.UserDataModel.FloorInsulated is FloorInsulated.DoNotKnow)
+                                {
+                                    if (Model.UserDataModel.Epc?.FloorConstruction is not null || !Model.UserDataModel.YearBuilt.HasValue && Model.UserDataModel.Epc?.ConstructionAgeBand is not null)
+                                    {
+                                        <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
+                                            Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model.UserDataModel) ? "insulated" : "uninsulated") floor
+                                        </p>
+                                    }
+                                    else if (Model.UserDataModel.YearBuilt.HasValue)
+                                    {
+                                        <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-1">
+                                            Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model.UserDataModel) ? "insulated" : "uninsulated") floor
+                                        </p>
+                                    }
+                                }
+                             </text>)
+                },
+                Actions = new()
+                {
+                    Classes = "govuk-!-width-one-quarter",
+                    Items = new()
+                    {
+                        new()
+                        {
+                            Href = Url.Action(nameof(EnergyEfficiencyController.FloorInsulated_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.FloorInsulated}),
+                            Text = "Change",
+                            VisuallyHiddenText = "is floor insulated"
+                        }
+                    }
+                }
+            });
+        }
+    }
+    
+    @if (Model.UserDataModel.PropertyType is not PropertyType.ApartmentFlatOrMaisonette || Model.UserDataModel.FlatType is FlatType.TopFloor)
+    {
+        rows.Add(new()
+        {
+            Key = new() 
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Text = "Is any part of your roof flat?"
+            },
+            Value = new()
+            {
+                Classes = "govuk-!-width-one-half",
+                Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.RoofConstruction)
+            },
+            Actions = new()
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Items = new()
+                {
+                    new()
+                    {
+                        Href = Url.Action(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.RoofConstruction}),
+                        Text = "Change",
+                        VisuallyHiddenText = "is roof flat"
+                    }
+                }
+            }
+        });
+
+        if (Model.UserDataModel.RoofConstruction is not RoofConstruction.Flat)
+        {
+            rows.Add(new()
+            {
+                Key = new() 
+                {
+                    Classes = "govuk-!-width-one-quarter",
+                    Text = "Do you have accessible loft space?"
+                },
+                Value = new()
+                {
+                    Classes = "govuk-!-width-one-half",
+                    Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.AccessibleLoftSpace)
+                },
+                Actions = new()
+                {
+                    Classes = "govuk-!-width-one-quarter",
+                    Items = new()
+                    {
+                        new()
+                        {
+                            Href = Url.Action(nameof(EnergyEfficiencyController.AccessibleLoftSpace_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.AccessibleLoftSpace}),
+                            Text = "Change",
+                            VisuallyHiddenText = "accessible loft space"
+                        }
+                    }
+                }
+            });
+
+            if (Model.UserDataModel.AccessibleLoftSpace is AccessibleLoftSpace.Yes)
+            {
+                rows.Add(new()
+                {
+                    Key = new() 
+                    {
+                        Classes = "govuk-!-width-one-quarter",
+                        Text = "Is your loft fully insulated?"
+                    },
+                    Value = new()
+                    {
+                        Classes = "govuk-!-width-one-half",
+                        Html = (@<text>
+                                    @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.RoofInsulated))
+                                    @if (Model.UserDataModel.RoofInsulated is RoofInsulated.DoNotKnow || Model.UserDataModel.AccessibleLoftSpace is AccessibleLoftSpace.DoNotKnow)
+                                    {
+                                        if (Model.UserDataModel.YearBuilt.HasValue)
+                                        {
+                                            <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-1">
+                                                Based on your type of property, we will assume that you @(UserDataHelper.HasRoofInsulation(Model.UserDataModel) ? "have " : "do not have") a fully insulated loft
+                                            </p>
+                                        }
+                                    }
+                                 </text>)
+                    },
+                    Actions = new()
+                    {
+                        Classes = "govuk-!-width-one-quarter",
+                        Items = new()
+                        {
+                            new()
+                            {
+                                Href = Url.Action(nameof(EnergyEfficiencyController.RoofInsulated_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.RoofInsulated}),
+                                Text = "Change",
+                                VisuallyHiddenText = "is roof insulated"
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    }
+    
+    rows.Add(new()
+    {
+        Key = new() 
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Text = "Glazing type "
+        },
+        Value = new()
+        {
+            Classes = "govuk-!-width-one-half",
+            Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.GlazingType)
+        },
+        Actions = new()
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Items = new()
+            {
+                new()
+                {
+                    Href = Url.Action(nameof(EnergyEfficiencyController.GlazingType_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.GlazingType}),
+                    Text = "Change",
+                    VisuallyHiddenText = "type of glazing"
+                }
+            }
+        }
+    });
+    
+    rows.Add(new()
+    {
+        Key = new() 
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Text = "Outdoor space for heat pump"
+        },
+        Value = new()
+        {
+            Classes = "govuk-!-width-one-half",
+            Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HasOutdoorSpace)
+        },
+        Actions = new()
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Items = new()
+            {
+                new()
+                {
+                    Href = Url.Action(nameof(EnergyEfficiencyController.OutdoorSpace_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.OutdoorSpace}),
+                    Text = "Change",
+                    VisuallyHiddenText = "outdoor space"
+                }
+            }
+        }
+    });
+    
+    rows.Add(new()
+    {
+        Key = new() 
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Text = "Heating system "
+        },
+        Value = new()
+        {
+            Classes = "govuk-!-width-one-half",
+            Html = (@<text>
+                        @{
+                            <span>
+                                @(Model.UserDataModel.HeatingType == HeatingType.Other 
+                                    ? $"{GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HeatingType)} - {GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.OtherHeatingType)}" 
+                                    : GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HeatingType))
+                            </span>
+                        }
+                     </text>)
+        },
+        Actions = new()
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Items = new()
+            {
+                new()
+                {
+                    Href = Url.Action(nameof(EnergyEfficiencyController.HeatingType_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.HeatingType}),
+                    Text = "Change",
+                    VisuallyHiddenText = "how you heat your home"
+                }
+            }
+        }
+    });
+    
+    rows.Add(new()
+    {
+        Key = new() 
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Text = "Hot water cylinder "
+        },
+        Value = new()
+        {
+            Classes = "govuk-!-width-one-half",
+            Html = (@<text>
+                        @if (Model.UserDataModel.HasHotWaterCylinder.HasValue)
+                        {
+                            @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HasHotWaterCylinder))
+                        }
+                        else
+                        {
+                            if (Model.UserDataModel.HeatingType is HeatingType.GasBoiler or HeatingType.OilBoiler or HeatingType.LpgBoiler)
+                            {
+                                @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HasHotWaterCylinder))
+                            }
+                            else
+                            {
+                                @:Yes
+                            }
+                        }
+                     </text>)
+        },
+        Actions = new()
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Items = new()
+            {
+                new()
+                {
+                    Href = Url.Action(nameof(EnergyEfficiencyController.HotWaterCylinder_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.HotWaterCylinder}),
+                    Text = "Change",
+                    VisuallyHiddenText = "do you have a hot water cylinder"
+                }
+            }
+        }
+    });
+    
+    rows.Add(new()
+    {
+        Key = new() 
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Text = "Size of household"
+        },
+        Value = new()
+        {
+            Classes = "govuk-!-width-one-half",
+            Text = Model.UserDataModel.NumberOfOccupants?.ToString() ?? "Question skipped"
+        },
+        Actions = new()
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Items = new()
+            {
+                new()
+                {
+                    Href = Url.Action(nameof(EnergyEfficiencyController.NumberOfOccupants_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.NumberOfOccupants}),
+                    Text = "Change",
+                    VisuallyHiddenText = "number of people over 5 in the home"
+                }
+            }
+        }
+    });
+    
+    rows.Add(new()
+    {
+        Key = new() 
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Text = "Heating pattern"
+        },
+        Value = new()
+        {
+            Classes = "govuk-!-width-one-half",
+            Html = (@<text>
+                        @{
+                            <span>
+                                @(Model.UserDataModel.HeatingPattern == HeatingPattern.Other 
+                                    ? $"{GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HeatingPattern)} - {Model.UserDataModel.HoursOfHeating.ToString()} hours" 
+                                    : GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HeatingPattern))
+                            </span>
+                        }
+                     </text>)
+        },
+        Actions = new()
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Items = new()
+            {
+                new()
+                {
+                    Href = Url.Action(nameof(EnergyEfficiencyController.HeatingPattern_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.HeatingPattern}),
+                    Text = "Change",
+                    VisuallyHiddenText = "heating pattern"
+                }
+            }
+        }
+    });
+
+    rows.Add(new()
+    {
+        Key = new() 
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Text = "Temperature"
+        },
+        Value = new()
+        {
+            Classes = "govuk-!-width-one-half",
+            Text = Model.UserDataModel.Temperature.HasValue ? Model.UserDataModel.Temperature.Value + "°C" : "Question skipped"
+        },
+        Actions = new()
+        {
+            Classes = "govuk-!-width-one-quarter",
+            Items = new()
+            {
+                new()
+                {
+                    Href = Url.Action(nameof(EnergyEfficiencyController.Temperature_Get), "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.Temperature}),
+                    Text = "Change",
+                    VisuallyHiddenText = "temperature"
+                }
+            }
+        }
+    });
+}
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">
@@ -30,409 +684,10 @@
             Please review the information we have gathered. You can still change your answers if anything looks wrong.
         </div>
     
-        <dl class="govuk-summary-list">
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                    Building type
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @(Model.UserDataModel.PropertyType == PropertyType.House ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HouseType) : null)
-                    @(Model.UserDataModel.PropertyType == PropertyType.Bungalow ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.BungalowType) : null)
-                    @(Model.UserDataModel.PropertyType == PropertyType.ApartmentFlatOrMaisonette ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.FlatType) : null)
-                    @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.PropertyType))
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.PropertyType})">
-                        Change<span class="govuk-visually-hidden"> address</span>
-                    </a>
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                    Year home was built
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @(Model.UserDataModel.YearBuilt?.ToString() ?? "I'm not sure")
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.HomeAge})">
-                        Change<span class="govuk-visually-hidden"> home type</span>
-                    </a>
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                    Wall type 
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.WallConstruction))
-                    @if (Model.UserDataModel.WallConstruction == WallConstruction.DoNotKnow)
-                    {
-                        if (Model.UserDataModel.Epc?.WallConstruction != null || !Model.UserDataModel.YearBuilt.HasValue &&  Model.UserDataModel.Epc?.ConstructionAgeBand != null)
-                        {
-                            if (UserDataHelper.HasCavityWalls(Model.UserDataModel))
-                            {
-                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model.UserDataModel) ? "insulated" : "uninsulated") cavity walls
-                                </p>
-                            }
-                            else if (UserDataHelper.HasSolidWalls(Model.UserDataModel))
-                            {
-                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model.UserDataModel) ? "insulated" : "uninsulated") solid walls
-                                </p>
-                            }
-                        }
-                        else if (Model.UserDataModel.YearBuilt.HasValue)
-                        {
-                            if (UserDataHelper.HasCavityWalls(Model.UserDataModel))
-                            {
-                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model.UserDataModel) ? "insulated" : "uninsulated") cavity walls
-                                </p>
-                            }
-                            else if (UserDataHelper.HasSolidWalls(Model.UserDataModel))
-                            {
-                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model.UserDataModel) ? "insulated" : "uninsulated") solid walls
-                                </p>                                
-                            }
-                        }
-                    }
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("WallConstruction_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.WallConstruction})">
-                        Change<span class="govuk-visually-hidden"> type of walls
-                        </span>
-                    </a>
-                </dd>
-            </div>
-
-            @if (Model.UserDataModel.WallConstruction == WallConstruction.Cavity ||
-                 Model.UserDataModel.WallConstruction == WallConstruction.Mixed)
-            {
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                        Are your cavity walls insulated? 
-                    </dt>
-                    <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.CavityWallsInsulated))
-                        @if (Model.UserDataModel.CavityWallsInsulated == CavityWallsInsulated.DoNotKnow)
-                        {
-                            if (Model.UserDataModel.Epc != null && (Model.UserDataModel.Epc.CavityWallsInsulated != null || Model.UserDataModel.Epc.ConstructionAgeBand != null))
-                            {
-                                <p class="govuk-body-s sea-assumed-answers">
-                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model.UserDataModel) ? "insulated" : "uninsulated") cavity walls
-                                </p>
-                            }
-                            else if (Model.UserDataModel.YearBuilt.HasValue)
-                            {
-                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedCavityWalls(Model.UserDataModel) ? "insulated" : "uninsulated") cavity walls
-                                </p>
-                            }
-                        }
-                    </dd>
-                    <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                        <a class="govuk-link" href="@Url.Action("CavityWallsInsulated_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.CavityWallsInsulated})">
-                            Change<span class="govuk-visually-hidden"> are cavity walls insulated
-                            </span>
-                        </a>
-                    </dd>
-                </div>
-            }
-            @if (Model.UserDataModel.WallConstruction == WallConstruction.Solid ||
-                 Model.UserDataModel.WallConstruction == WallConstruction.Mixed)
-            {
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                        Are your solid walls insulated? 
-                    </dt>
-                    <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.SolidWallsInsulated))
-                        @if (Model.UserDataModel.SolidWallsInsulated == SolidWallsInsulated.DoNotKnow)
-                        {
-                            if (Model.UserDataModel.Epc != null && (Model.UserDataModel.Epc.SolidWallsInsulated != null || Model.UserDataModel.Epc.ConstructionAgeBand != null))
-                            {
-                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                    Based on your Energy Performance Certificate, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model.UserDataModel) ? "insulated" : "uninsulated") solid walls
-                                </p>
-                            }
-                            else if (Model.UserDataModel.YearBuilt.HasValue)
-                            {
-                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-1">
-                                    Based on your type of property, we will assume that you have @(UserDataHelper.HasInsulatedSolidWalls(Model.UserDataModel) ? "insulated" : "uninsulated") solid walls
-                                </p>
-                            }
-                        }
-                    </dd>
-                    <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                        <a class="govuk-link" href="@Url.Action("SolidWallsInsulated_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.SolidWallsInsulated})">
-                            Change<span class="govuk-visually-hidden"> are solid walls insulated
-                            </span>
-                        </a>
-                    </dd>
-                </div>
-            }
-            
-            @if (Model.UserDataModel.PropertyType != PropertyType.ApartmentFlatOrMaisonette || Model.UserDataModel.FlatType == FlatType.GroundFloor)
-            {
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                        Floor construction 
-                    </dt>
-                    <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.FloorConstruction))
-                        @if (Model.UserDataModel.FloorConstruction == FloorConstruction.DoNotKnow)
-                        {
-                            if (Model.UserDataModel.Epc?.FloorConstruction != null || !Model.UserDataModel.YearBuilt.HasValue && Model.UserDataModel.Epc?.ConstructionAgeBand != null)
-                            {
-                                if (UserDataHelper.HasSolidFloor(Model.UserDataModel))
-                                {
-                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                        Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model.UserDataModel) ? "insulated" : "uninsulated") solid concrete floor
-                                    </p>
-                                }
-                                else if (UserDataHelper.HasSuspendedFloor(Model.UserDataModel))
-                                {
-                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                        Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model.UserDataModel) ? "insulated" : "uninsulated") suspended timber floor
-                                    </p>
-                                }
-                            }
-                            else if (Model.UserDataModel.YearBuilt.HasValue)
-                            {
-                                if (UserDataHelper.HasSolidFloor(Model.UserDataModel))
-                                {
-                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                        Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model.UserDataModel) ? "insulated" : "uninsulated") solid concrete floor
-                                    </p>
-                                }
-                                else if (UserDataHelper.HasSuspendedFloor(Model.UserDataModel))
-                                {
-                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                        Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model.UserDataModel) ? "insulated" : "uninsulated") suspended timber floor
-                                    </p>                                
-                                }
-                            }
-                        }
-                    </dd>
-                    <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                        <a class="govuk-link" href="@Url.Action("FloorConstruction_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.FloorConstruction})">
-                            Change<span class="govuk-visually-hidden"> floor construction</span>
-                        </a>
-                    </dd>
-                </div>
-                @if (Model.UserDataModel.FloorConstruction != FloorConstruction.DoNotKnow && Model.UserDataModel.FloorConstruction != FloorConstruction.Other)
-                {
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                            Is your ground floor insulated?
-                        </dt>
-                        <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                            @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.FloorInsulated))
-                            @if (Model.UserDataModel.FloorInsulated == FloorInsulated.DoNotKnow)
-                            {
-                                if (Model.UserDataModel.Epc?.FloorConstruction != null || !Model.UserDataModel.YearBuilt.HasValue && Model.UserDataModel.Epc?.ConstructionAgeBand != null)
-                                {
-                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-2">
-                                        Based on your Energy Performance Certificate, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model.UserDataModel) ? "insulated" : "uninsulated") floor
-                                    </p>
-                                }
-                                else if (Model.UserDataModel.YearBuilt.HasValue)
-                                {
-                                    <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-1">
-                                        Based on your type of property, we will assume that you have an @(UserDataHelper.HasInsulatedFloor(Model.UserDataModel) ? "insulated" : "uninsulated") floor
-                                    </p>
-                                }
-                            }
-                        </dd>
-                        <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                            <a class="govuk-link" href="@Url.Action("FloorInsulated_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.FloorInsulated})">
-                                Change<span class="govuk-visually-hidden"> is floor insulated</span>
-                            </a>
-                        </dd>
-                    </div>
-                }
-            }
-
-            @if (Model.UserDataModel.PropertyType != PropertyType.ApartmentFlatOrMaisonette || Model.UserDataModel.FlatType == FlatType.TopFloor)
-            {
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                        Is any part of your roof flat? 
-                    </dt>
-                    <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.RoofConstruction))
-                    </dd>
-                    <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                        <a class="govuk-link" href="@Url.Action("RoofConstruction_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.RoofConstruction})">
-                            Change<span class="govuk-visually-hidden"> is roof flat</span>
-                        </a>
-                    </dd>
-                </div>
-                @if (Model.UserDataModel.RoofConstruction != RoofConstruction.Flat)
-                {
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                            Do you have accessible loft space?
-                        </dt>
-                        <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                            @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.AccessibleLoftSpace))
-                        </dd>
-                        <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                            <a class="govuk-link" href="@Url.Action("AccessibleLoftSpace_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.AccessibleLoftSpace})">
-                                Change<span class="govuk-visually-hidden"> accessible loft space</span>
-                            </a>
-                        </dd>
-                    </div>
-                    @if (Model.UserDataModel.AccessibleLoftSpace == AccessibleLoftSpace.Yes || Model.UserDataModel.AccessibleLoftSpace == AccessibleLoftSpace.DoNotKnow)
-                    {
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                                Is your loft fully insulated?
-                            </dt>
-                            <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                                @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.RoofInsulated))
-                                @if (Model.UserDataModel.RoofInsulated == RoofInsulated.DoNotKnow || Model.UserDataModel.AccessibleLoftSpace == AccessibleLoftSpace.DoNotKnow)
-                                {
-                                    if (Model.UserDataModel.YearBuilt.HasValue)
-                                    {
-                                        <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-1">
-                                            Based on your type of property, we will assume that you @(UserDataHelper.HasRoofInsulation(Model.UserDataModel) ? "have " : "do not have") a fully insulated loft
-                                        </p>
-                                    }
-                                }
-                            </dd>
-                            <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                                <a class="govuk-link" href="@Url.Action("RoofInsulated_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.RoofInsulated})">
-                                    Change<span class="govuk-visually-hidden"> is roof insulated</span>
-                                </a>
-                            </dd>
-                        </div>
-                    }
-                }
-            }
-
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                    Glazing type 
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.GlazingType))
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("GlazingType_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.GlazingType})">
-                        Change<span class="govuk-visually-hidden"> type of glazing</span>
-                    </a>
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                    Outdoor space for heat pump
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HasOutdoorSpace))
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("OutdoorSpace_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.OutdoorSpace})">
-                        Change<span class="govuk-visually-hidden"> outdoor space</span>
-                    </a>
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                    Heating system 
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @{
-                        var heatingTypeText = "";
-                        if (Model.UserDataModel.HeatingType == HeatingType.Other)
-                        {
-                            heatingTypeText = $"{GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HeatingType)} - {GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.OtherHeatingType)}";
-                        }
-                        else
-                        {
-                            heatingTypeText = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HeatingType);
-                        }
-                        <span>@(heatingTypeText)</span>
-                    }
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("HeatingType_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.HeatingType})">
-                        Change<span class="govuk-visually-hidden"> how you heat your home</span>
-                    </a>
-                </dd>
-            </div>
-            
-            @if (Model.UserDataModel.HeatingType is HeatingType.GasBoiler or HeatingType.OilBoiler or HeatingType.LpgBoiler)
-            {
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                        Hot water cylinder
-                    </dt>
-                    <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HasHotWaterCylinder))
-                    </dd>
-                    <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                        <a class="govuk-link" href="@Url.Action("HotWaterCylinder_Get", "EnergyEfficiency", new { reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.HotWaterCylinder })">
-                            Change<span class="govuk-visually-hidden"> do you have a hot water cylinder</span>
-                        </a>
-                    </dd>
-                </div>
-            }
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                    Size of household 
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @(Model.UserDataModel.NumberOfOccupants?.ToString() ?? "Question skipped")
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("NumberOfOccupants_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.NumberOfOccupants})">
-                        Change<span class="govuk-visually-hidden"> number of people over 5 in the home</span>
-                    </a>
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                    Heating pattern
-                </dt>
-                <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                    @{
-                        var heatingPatternText = "";
-                        if (Model.UserDataModel.HeatingPattern == HeatingPattern.Other)
-                        {
-                            heatingPatternText = $"{GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HeatingPattern)} - {Model.UserDataModel.HoursOfHeating.ToString()} hours";
-                        }
-                        else
-                        {
-                            heatingPatternText = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HeatingPattern);
-                        }
-                        <span>@(heatingPatternText)</span>
-                    }
-                </dd>
-                <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                    <a class="govuk-link" href="@Url.Action("HeatingPattern_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.HeatingPattern})">
-                        Change<span class="govuk-visually-hidden"> heating pattern</span>
-                    </a>
-                </dd>
-            </div>
-        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                Temperature
-            </dt>
-            <dd class="govuk-summary-list__value govuk-!-width-one-half">
-                @(Model.UserDataModel.Temperature.HasValue ? Model.UserDataModel.Temperature.Value + "°C" : "Question skipped")
-            </dd>
-            <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                <a class="govuk-link" href="@Url.Action("Temperature_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference, entryPoint = QuestionFlowPage.Temperature})">
-                    Change<span class="govuk-visually-hidden"> temperature</span>
-                </a>
-            </dd>
-        </div>
-
-        </dl>
+        @(await Html.GovUkSummaryList(new SummaryListViewModel
+        {
+            Rows = rows
+        }))
 
         <a href="@Url.Action("YourRecommendations_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference})" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
             See results

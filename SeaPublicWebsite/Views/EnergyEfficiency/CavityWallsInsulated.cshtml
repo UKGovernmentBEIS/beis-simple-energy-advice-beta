@@ -24,6 +24,7 @@
         
         <form action="@Url.Action("CavityWallsInsulated_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
+            @Html.AntiForgeryToken()
             
             @(await Html.GovUkRadiosFor(m => m.CavityWallsInsulated,
                 fieldsetOptions: new FieldsetViewModel

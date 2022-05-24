@@ -21,6 +21,7 @@
     <div class="govuk-grid-column-two-thirds">
         
         <form action="@Url.Action("HomeAge_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+            @Html.AntiForgeryToken()
             @(Html.HiddenFor(m => m.EntryPoint))
 
             <div class="govuk-form-group">

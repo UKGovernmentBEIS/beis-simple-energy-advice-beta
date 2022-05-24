@@ -18,7 +18,7 @@ public class QuestionFlowServiceTests
 
     private IQuestionFlowService QuestionFlowService;
 
-    [TestCaseSource(nameof(BackTesCases))]
+    [TestCaseSource(nameof(BackTestCases))]
     public void RunBackLinkTestCases(QuestionFlowServiceTestCase testCase)
     {
         // Act
@@ -57,11 +57,11 @@ public class QuestionFlowServiceTests
         output.Should().BeEquivalentTo(testCase.ExpectedOutput);
     }
 
-    private static QuestionFlowServiceTestCase[] BackTesCases =
+    private static QuestionFlowServiceTestCase[] BackTestCases =
     {
         new(
             "A new or returning user goes back to the Index page",
-                        new Input(
+            new Input(
                 QuestionFlowPage.NewOrReturningUser
             ),
             new PathByActionArguments(
@@ -70,7 +70,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Country goes back to new or returning user",
-                        new Input(
+            new Input(
                 QuestionFlowPage.Country
             ),
             new PathByActionArguments(
@@ -79,7 +79,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing country goes to Summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.Country,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.Country
@@ -91,7 +91,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Ownership status goes back to Country",
-                        new Input(
+            new Input(
                 QuestionFlowPage.OwnershipStatus,
                 "ABCDEFGH"
             ),
@@ -102,7 +102,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing ownership status goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.OwnershipStatus,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.OwnershipStatus
@@ -114,7 +114,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Service unsuitable goes back to the country you came from",
-                        new Input(
+            new Input(
                 QuestionFlowPage.ServiceUnsuitable,
                 "ABCDEFGH",
                 country: Country.Other
@@ -126,7 +126,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Service unsuitable goes back to ownership status if user is a private tenant",
-                        new Input(
+            new Input(
                 QuestionFlowPage.ServiceUnsuitable,
                 "ABCDEFGH",
                 country: Country.England,
@@ -139,7 +139,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Postcode goes back to ownership status",
-                        new Input(
+            new Input(
                 QuestionFlowPage.AskForPostcode,
                 "ABCDEFGH"
             ),
@@ -150,7 +150,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Confirm address goes back to postcode",
-                        new Input(
+            new Input(
                 QuestionFlowPage.ConfirmAddress,
                 "ABCDEFGH"
             ),
@@ -162,7 +162,7 @@ public class QuestionFlowServiceTests
 
         new(
             "Property type goes back to Postcode",
-                        new Input(
+            new Input(
                 QuestionFlowPage.PropertyType,
                 "ABCDEFGH"
             ),
@@ -173,7 +173,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Change property type goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.PropertyType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.PropertyType
@@ -185,7 +185,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "House type goes back to property type and preserves entry point",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HouseType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.HouseType
@@ -197,7 +197,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Bungalow type goes back to property type and preserves entry point",
-                        new Input(
+            new Input(
                 QuestionFlowPage.BungalowType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.BungalowType
@@ -209,7 +209,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Flat type goes back to property type and preserves entry point",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FlatType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.FlatType
@@ -221,7 +221,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Home age goes back to the property type it came from (house)",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HomeAge,
                 "ABCDEFGH",
                 propertyType: PropertyType.House
@@ -233,7 +233,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Home age goes back to the property type it came from (bungalow)",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HomeAge,
                 "ABCDEFGH",
                 propertyType: PropertyType.Bungalow
@@ -245,7 +245,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Home age goes back to the property type it came from (flat)",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HomeAge,
                 "ABCDEFGH",
                 propertyType: PropertyType.ApartmentFlatOrMaisonette
@@ -257,7 +257,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing home age goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HomeAge,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.HomeAge
@@ -269,7 +269,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Wall construction goes back to home age",
-                        new Input(
+            new Input(
                 QuestionFlowPage.WallConstruction,
                 "ABCDEFGH"
             ),
@@ -280,7 +280,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing wall construction goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.WallConstruction,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.WallConstruction
@@ -292,7 +292,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Cavity walls insulated goes back to wall construction",
-                        new Input(
+            new Input(
                 QuestionFlowPage.CavityWallsInsulated,
                 "ABCDEFGH"
             ),
@@ -303,7 +303,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing cavity walls insulated goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.CavityWallsInsulated,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.CavityWallsInsulated
@@ -315,7 +315,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Solid walls insulated goes back to cavity walls insulated if user has mixed walls",
-                        new Input(
+            new Input(
                 QuestionFlowPage.SolidWallsInsulated,
                 "ABCDEFGH",
                 wallConstruction: WallConstruction.Mixed
@@ -327,7 +327,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Solid walls insulated goes back to wall construction if user does not have mixed walls",
-                        new Input(
+            new Input(
                 QuestionFlowPage.SolidWallsInsulated,
                 "ABCDEFGH",
                 wallConstruction: WallConstruction.Solid
@@ -339,7 +339,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing solid walls insulated goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.SolidWallsInsulated,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.SolidWallsInsulated
@@ -351,7 +351,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Floor construction goes back to the wall insulation the user answered last",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FloorConstruction,
                 "ABCDEFGH",
                 wallConstruction: WallConstruction.Solid
@@ -363,7 +363,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Floor construction goes back to the wall insulation the user answered last",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FloorConstruction,
                 "ABCDEFGH",
                 wallConstruction: WallConstruction.Cavity
@@ -375,7 +375,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Floor construction goes back to wall construction if user has neither cavity not solid walls",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FloorConstruction,
                 "ABCDEFGH",
                 wallConstruction: WallConstruction.Other
@@ -387,7 +387,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing floor construction goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FloorConstruction,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.FloorConstruction
@@ -399,7 +399,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Floor insulated goes back to floor construction",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FloorInsulated,
                 "ABCDEFGH"
             ),
@@ -410,7 +410,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing floor insulated goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FloorInsulated,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.FloorInsulated
@@ -422,7 +422,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Roof construction goes back to floor insulation if the user has timber or concrete floors",
-                        new Input(
+            new Input(
                 QuestionFlowPage.RoofConstruction,
                 propertyType: PropertyType.House,
                 floorConstruction: FloorConstruction.SuspendedTimber,
@@ -435,7 +435,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Roof construction goes back to floor construction if the user has different floors",
-                        new Input(
+            new Input(
                 QuestionFlowPage.RoofConstruction,
                 propertyType: PropertyType.House,
                 floorConstruction: FloorConstruction.Other,
@@ -448,7 +448,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Roof construction goes back to wall insulation if user was not asked about their floor but has insulated walls",
-                        new Input(
+            new Input(
                 QuestionFlowPage.RoofConstruction,
                 propertyType: PropertyType.ApartmentFlatOrMaisonette,
                 flatType: FlatType.TopFloor,
@@ -462,7 +462,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Roof construction goes back to wall construction if user was not asked about their floor and has other walls",
-                        new Input(
+            new Input(
                 QuestionFlowPage.RoofConstruction,
                 propertyType: PropertyType.ApartmentFlatOrMaisonette,
                 flatType: FlatType.TopFloor,
@@ -476,7 +476,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing roof construction goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.RoofConstruction,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.RoofConstruction
@@ -488,7 +488,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Accessible loft space goes back to roof construction",
-                        new Input(
+            new Input(
                 QuestionFlowPage.AccessibleLoftSpace,
                 "ABCDEFGH"
             ),
@@ -499,7 +499,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing accessible loft space goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.AccessibleLoftSpace,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.AccessibleLoftSpace
@@ -511,7 +511,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Roof insulated goes back to accessible loft space",
-                        new Input(
+            new Input(
                 QuestionFlowPage.RoofInsulated,
                 "ABCDEFGH"
             ),
@@ -522,7 +522,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing roof insulated goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.RoofInsulated,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.RoofInsulated
@@ -534,7 +534,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Glazing type goes back to roof construction if the user has flat roof",
-                        new Input(
+            new Input(
                 QuestionFlowPage.GlazingType,
                 "ABCDEFGH",
                 propertyType: PropertyType.House,
@@ -547,7 +547,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Glazing type goes back to accessible loft space if the user does not have flat roof nor accessible loft space",
-                        new Input(
+            new Input(
                 QuestionFlowPage.GlazingType,
                 "ABCDEFGH",
                 propertyType: PropertyType.House,
@@ -561,7 +561,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Glazing type goes back to roof insulation if the user does not have flat roof but has accessible loft space",
-                        new Input(
+            new Input(
                 QuestionFlowPage.GlazingType,
                 "ABCDEFGH",
                 propertyType: PropertyType.House,
@@ -575,7 +575,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Glazing type goes back to floor construction if the user was not asked about their roof",
-                        new Input(
+            new Input(
                 QuestionFlowPage.GlazingType,
                 propertyType: PropertyType.ApartmentFlatOrMaisonette,
                 flatType: FlatType.GroundFloor,
@@ -588,7 +588,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Glazing type goes back to wall construction if the user was not asked about neither their roof or floor",
-                        new Input(
+            new Input(
                 QuestionFlowPage.GlazingType,
                 propertyType: PropertyType.ApartmentFlatOrMaisonette,
                 flatType: FlatType.MiddleFloor,
@@ -601,7 +601,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing glazing type goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.GlazingType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.GlazingType
@@ -613,7 +613,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Outdoor space goes back to glazing type",
-                        new Input(
+            new Input(
                 QuestionFlowPage.OutdoorSpace,
                 "ABCDEFGH"
             ),
@@ -624,7 +624,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing outdoor space goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.OutdoorSpace,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.OutdoorSpace
@@ -636,7 +636,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Heating type goes back to outdoor space",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HeatingType,
                 "ABCDEFGH"
             ),
@@ -647,7 +647,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing heating type goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HeatingType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.HeatingType
@@ -659,7 +659,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Other heating type goes back to outdoor space",
-                        new Input(
+            new Input(
                 QuestionFlowPage.OtherHeatingType,
                 "ABCDEFGH"
             ),
@@ -670,7 +670,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing other heating type goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.OtherHeatingType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.OtherHeatingType
@@ -682,7 +682,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Hot water cylinder goes back to heating type",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HotWaterCylinder,
                 "ABCDEFGH"
             ),
@@ -693,7 +693,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing hot water cylinder goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HotWaterCylinder,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.HotWaterCylinder
@@ -705,7 +705,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Number of occupants goes back to hot water cylinder if user has boiler",
-                        new Input(
+            new Input(
                 QuestionFlowPage.NumberOfOccupants,
                 "ABCDEFGH",
                 heatingType: HeatingType.GasBoiler
@@ -717,7 +717,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Number of occupants goes back to other heating type if the user selected so",
-                        new Input(
+            new Input(
                 QuestionFlowPage.NumberOfOccupants,
                 "ABCDEFGH",
                 heatingType: HeatingType.Other
@@ -729,7 +729,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Number of occupants goes back to heating type if the user does not have a boiler",
-                        new Input(
+            new Input(
                 QuestionFlowPage.NumberOfOccupants,
                 "ABCDEFGH",
                 heatingType: HeatingType.HeatPump
@@ -741,7 +741,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing number of occupants goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.NumberOfOccupants,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.NumberOfOccupants
@@ -753,7 +753,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Heating pattern goes back to number of occupants",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HeatingPattern,
                 "ABCDEFGH"
             ),
@@ -764,7 +764,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing heating pattern goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HeatingPattern,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.HeatingPattern
@@ -776,7 +776,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Temperature goes back to heating pattern",
-                        new Input(
+            new Input(
                 QuestionFlowPage.Temperature,
                 "ABCDEFGH"
             ),
@@ -787,7 +787,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing temperature goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.Temperature,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.Temperature
@@ -799,7 +799,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Answer summary goes back to temperature",
-                        new Input(
+            new Input(
                 QuestionFlowPage.AnswerSummary,
                 "ABCDEFGH"
             ),
@@ -810,7 +810,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Your recommendations goes back to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.YourRecommendations,
                 "ABCDEFGH"
             ),
@@ -825,7 +825,7 @@ public class QuestionFlowServiceTests
     {
         new(
             "Country continues to service unsuitable if the service is not available",
-                        new Input(
+            new Input(
                 QuestionFlowPage.Country,
                 "ABCDEFGH",
                 country: Country.Other
@@ -837,7 +837,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Country continues to ownership status",
-                        new Input(
+            new Input(
                 QuestionFlowPage.Country,
                 "ABCDEFGH",
                 country: Country.England
@@ -849,7 +849,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing country continues to answer summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.Country,
                 "ABCDEFGH",
                 country: Country.England,
@@ -862,7 +862,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Ownership status continue to service unsuitable if user is a private tenant",
-                        new Input(
+            new Input(
                 QuestionFlowPage.OwnershipStatus,
                 "ABCDEFGH",
                 OwnershipStatus.PrivateTenancy
@@ -874,7 +874,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Ownership status continue to postcode",
-                        new Input(
+            new Input(
                 QuestionFlowPage.OwnershipStatus,
                 "ABCDEFGH",
                 OwnershipStatus.OwnerOccupancy
@@ -886,7 +886,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing ownership status continue to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.OwnershipStatus,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.OwnershipStatus
@@ -898,7 +898,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Postcode continues to confirm address",
-                        new Input(
+            new Input(
                 QuestionFlowPage.AskForPostcode,
                 "ABCDEFGH"
             ),
@@ -909,7 +909,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Confirm address continues to property type",
-                        new Input(
+            new Input(
                 QuestionFlowPage.ConfirmAddress,
                 "ABCDEFGH"
             ),
@@ -920,7 +920,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Property type continues to the relevant specific type of property (house)",
-                        new Input(
+            new Input(
                 QuestionFlowPage.PropertyType,
                 "ABCDEFGH",
                 propertyType: PropertyType.House
@@ -932,7 +932,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Property type continues to the relevant specific type of property (bungalow)",
-                        new Input(
+            new Input(
                 QuestionFlowPage.PropertyType,
                 "ABCDEFGH",
                 propertyType: PropertyType.Bungalow
@@ -944,7 +944,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Property type continues to the relevant specific type of property (flat)",
-                        new Input(
+            new Input(
                 QuestionFlowPage.PropertyType,
                 "ABCDEFGH",
                 propertyType: PropertyType.ApartmentFlatOrMaisonette
@@ -956,7 +956,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "House type continues to home age",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HouseType,
                 "ABCDEFGH"
             ),
@@ -967,7 +967,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing house type continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HouseType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.PropertyType
@@ -979,7 +979,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Bungalow type continues to home age",
-                        new Input(
+            new Input(
                 QuestionFlowPage.BungalowType,
                 "ABCDEFGH"
             ),
@@ -990,7 +990,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing bungalow type continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.BungalowType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.PropertyType
@@ -1002,7 +1002,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Flat type continues to home age",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FlatType,
                 "ABCDEFGH"
             ),
@@ -1013,7 +1013,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing flat type continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FlatType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.PropertyType
@@ -1025,7 +1025,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Home age continues to wall construction",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HomeAge,
                 "ABCDEFGH"
             ),
@@ -1036,7 +1036,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing home age continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HomeAge,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.HomeAge
@@ -1048,7 +1048,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Wall construction continues to the respective type of wall insulation",
-                        new Input(
+            new Input(
                 QuestionFlowPage.WallConstruction,
                 "ABCDEFGH",
                 wallConstruction: WallConstruction.Solid
@@ -1060,7 +1060,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Wall construction continues to floor construction if user's walls are not known and the user can answer floor questions",
-                        new Input(
+            new Input(
                 QuestionFlowPage.WallConstruction,
                 "ABCDEFGH",
                 propertyType: PropertyType.House,
@@ -1073,7 +1073,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Wall construction continues to roof construction if user's walls are not known, can not answer floor questions but can answer roof ones",
-                        new Input(
+            new Input(
                 QuestionFlowPage.WallConstruction,
                 "ABCDEFGH",
                 propertyType: PropertyType.ApartmentFlatOrMaisonette,
@@ -1087,7 +1087,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Wall construction continues to glazing type if user's walls are not known and can not answer neither floor questions nor roof ones",
-                        new Input(
+            new Input(
                 QuestionFlowPage.WallConstruction,
                 "ABCDEFGH",
                 propertyType: PropertyType.ApartmentFlatOrMaisonette,
@@ -1101,7 +1101,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing wall construction continues to summary if walls are not known",
-                        new Input(
+            new Input(
                 QuestionFlowPage.WallConstruction,
                 "ABCDEFGH",
                 wallConstruction: WallConstruction.Other,
@@ -1114,7 +1114,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing cavity walls insulated continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.CavityWallsInsulated,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.CavityWallsInsulated
@@ -1126,7 +1126,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Cavity walls insulated continue to solid walls insulated if user has mixed walls",
-                        new Input(
+            new Input(
                 QuestionFlowPage.CavityWallsInsulated,
                 "ABCDEFGH",
                 wallConstruction: WallConstruction.Mixed
@@ -1138,7 +1138,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Cavity walls insulated continue to floor construction if user only does not have solid walls and can answer floor questions",
-                        new Input(
+            new Input(
                 QuestionFlowPage.CavityWallsInsulated,
                 "ABCDEFGH",
                 propertyType: PropertyType.House,
@@ -1151,7 +1151,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Cavity walls insulated continue to roof construction if user only does not have solid walls, can not answer floor questions but can answer roof questions",
-                        new Input(
+            new Input(
                 QuestionFlowPage.CavityWallsInsulated,
                 "ABCDEFGH",
                 propertyType: PropertyType.ApartmentFlatOrMaisonette,
@@ -1165,7 +1165,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Cavity walls insulated continue to glazing type if user only does not have solid walls and can not answer neither floor questions nor roof questions",
-                        new Input(
+            new Input(
                 QuestionFlowPage.CavityWallsInsulated,
                 "ABCDEFGH",
                 propertyType: PropertyType.ApartmentFlatOrMaisonette,
@@ -1179,7 +1179,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing solid walls insulated continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.SolidWallsInsulated,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.SolidWallsInsulated
@@ -1191,7 +1191,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Solid walls insulated continue to floor construction if user can answer floor questions",
-                        new Input(
+            new Input(
                 QuestionFlowPage.SolidWallsInsulated,
                 "ABCDEFGH",
                 propertyType: PropertyType.House
@@ -1203,7 +1203,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Solid walls insulated continue to roof construction if user can not answer floor questions but can answer roof ones",
-                        new Input(
+            new Input(
                 QuestionFlowPage.SolidWallsInsulated,
                 "ABCDEFGH",
                 propertyType: PropertyType.ApartmentFlatOrMaisonette,
@@ -1216,7 +1216,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Solid walls insulated continue to glazing type if user can not answer neither floor questions nor roof ones",
-                        new Input(
+            new Input(
                 QuestionFlowPage.SolidWallsInsulated,
                 "ABCDEFGH",
                 propertyType: PropertyType.ApartmentFlatOrMaisonette,
@@ -1229,7 +1229,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Floor construction continues to floor insulated if the floors are known",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FloorConstruction,
                 "ABCDEFGH",
                 floorConstruction: FloorConstruction.Mix
@@ -1241,7 +1241,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing floor construction continues to summary if floor are not known",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FloorConstruction,
                 "ABCDEFGH",
                 floorConstruction: FloorConstruction.Other,
@@ -1254,7 +1254,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Floor construction continues to roof construction if floors are unknown and the user can answer roof questions",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FloorConstruction,
                 "ABCDEFGH",
                 propertyType: PropertyType.House,
@@ -1267,7 +1267,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Floor construction continues to glazing type if floor are unknown and the user can not answer roof questions",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FloorConstruction,
                 "ABCDEFGH",
                 propertyType: PropertyType.ApartmentFlatOrMaisonette,
@@ -1281,7 +1281,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing floor insulated continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FloorInsulated,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.FloorInsulated
@@ -1293,7 +1293,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Floor insulated continues to roof construction if user can answer roof questions",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FloorInsulated,
                 "ABCDEFGH",
                 propertyType: PropertyType.House
@@ -1305,7 +1305,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Floor insulated continues to glazing type if user can not answer roof questions",
-                        new Input(
+            new Input(
                 QuestionFlowPage.FloorInsulated,
                 "ABCDEFGH",
                 propertyType: PropertyType.ApartmentFlatOrMaisonette,
@@ -1318,7 +1318,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Roof construction continues to accessible loft space if roof is pitched",
-                        new Input(
+            new Input(
                 QuestionFlowPage.RoofConstruction,
                 "ABCDEFGH",
                 roofConstruction: RoofConstruction.Mixed
@@ -1330,7 +1330,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing roof construction continues to summary if roof is not pitched",
-                        new Input(
+            new Input(
                 QuestionFlowPage.RoofConstruction,
                 "ABCDEFGH",
                 roofConstruction: RoofConstruction.Flat,
@@ -1343,7 +1343,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Roof construction continues to glazing type space if roof is not pitched",
-                        new Input(
+            new Input(
                 QuestionFlowPage.RoofConstruction,
                 "ABCDEFGH",
                 roofConstruction: RoofConstruction.Flat
@@ -1355,7 +1355,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Accessible loft space continues to roof insulated if user has it",
-                        new Input(
+            new Input(
                 QuestionFlowPage.AccessibleLoftSpace,
                 "ABCDEFGH",
                 accessibleLoftSpace: AccessibleLoftSpace.Yes
@@ -1367,7 +1367,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing accessible loft space continues to answer summary if user does not have loft space",
-                        new Input(
+            new Input(
                 QuestionFlowPage.AccessibleLoftSpace,
                 "ABCDEFGH",
                 accessibleLoftSpace: AccessibleLoftSpace.No,
@@ -1380,7 +1380,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Accessible loft space continues to glazing type if user does not have it",
-                        new Input(
+            new Input(
                 QuestionFlowPage.AccessibleLoftSpace,
                 "ABCDEFGH",
                 accessibleLoftSpace: AccessibleLoftSpace.No
@@ -1392,7 +1392,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Roof insulated continues to glazing type",
-                        new Input(
+            new Input(
                 QuestionFlowPage.RoofInsulated,
                 "ABCDEFGH"
             ),
@@ -1403,7 +1403,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing roof insulated continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.RoofInsulated,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.RoofInsulated
@@ -1415,7 +1415,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Glazing type continues to outdoor space",
-                        new Input(
+            new Input(
                 QuestionFlowPage.GlazingType,
                 "ABCDEFGH"
             ),
@@ -1426,7 +1426,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing glazing type continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.GlazingType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.GlazingType
@@ -1438,7 +1438,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Outdoor space continues to heating type",
-                        new Input(
+            new Input(
                 QuestionFlowPage.OutdoorSpace,
                 "ABCDEFGH"
             ),
@@ -1449,7 +1449,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing outdoor space continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.OutdoorSpace,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.OutdoorSpace
@@ -1461,7 +1461,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Heating type continues to other heating type in that scenario",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HeatingType,
                 "ABCDEFGH",
                 heatingType: HeatingType.Other
@@ -1473,7 +1473,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Heating type continues to hot water cylinder if user has a boiler",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HeatingType,
                 "ABCDEFGH",
                 heatingType: HeatingType.GasBoiler
@@ -1485,7 +1485,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing heating type continues to summary if user doesn't have a boiler or other heating type",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HeatingType,
                 "ABCDEFGH",
                 heatingType: HeatingType.HeatPump,
@@ -1498,7 +1498,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Heating type continues to number of occupants if user doesn't have a boiler or other heating",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HeatingType,
                 "ABCDEFGH",
                 heatingType: HeatingType.HeatPump
@@ -1510,7 +1510,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Other heating type continues to number of occupants",
-                        new Input(
+            new Input(
                 QuestionFlowPage.OtherHeatingType,
                 "ABCDEFGH"
             ),
@@ -1521,7 +1521,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing other heating type continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.OtherHeatingType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.OtherHeatingType
@@ -1533,7 +1533,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Hot water cylinder continues to number of occupants",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HotWaterCylinder,
                 "ABCDEFGH"
             ),
@@ -1544,7 +1544,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing hot water cylinder continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HotWaterCylinder,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.HotWaterCylinder
@@ -1556,7 +1556,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Number of occupants continues to heating pattern",
-                        new Input(
+            new Input(
                 QuestionFlowPage.NumberOfOccupants,
                 "ABCDEFGH"
             ),
@@ -1567,7 +1567,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing number of occupants continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.NumberOfOccupants,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.NumberOfOccupants
@@ -1579,7 +1579,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Heating pattern continues to temperature",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HeatingPattern,
                 "ABCDEFGH"
             ),
@@ -1590,7 +1590,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing heating pattern continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HeatingPattern,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.HeatingPattern
@@ -1602,7 +1602,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Temperature continues to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.Temperature,
                 "ABCDEFGH"
             ),
@@ -1617,7 +1617,7 @@ public class QuestionFlowServiceTests
     {
         new(
             "Postcode skips to property type",
-                        new Input(
+            new Input(
                 QuestionFlowPage.AskForPostcode,
                 "ABCDEFGH"
             ),
@@ -1628,7 +1628,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Home age skips to wall construction",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HomeAge,
                 "ABCDEFGH"
             ),
@@ -1639,7 +1639,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing home age and skipping skips to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.HomeAge,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.HomeAge
@@ -1651,7 +1651,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Number of occupants skips to heating pattern",
-                        new Input(
+            new Input(
                 QuestionFlowPage.NumberOfOccupants,
                 "ABCDEFGH"
             ),
@@ -1662,7 +1662,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Changing number of occupants and skipping skips to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.NumberOfOccupants,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.NumberOfOccupants
@@ -1674,7 +1674,7 @@ public class QuestionFlowServiceTests
             )),
         new(
             "Temperature skips to summary",
-                        new Input(
+            new Input(
                 QuestionFlowPage.Temperature,
                 "ABCDEFGH"
             ),
