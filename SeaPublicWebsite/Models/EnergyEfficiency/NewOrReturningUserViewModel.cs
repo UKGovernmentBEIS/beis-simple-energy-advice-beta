@@ -1,12 +1,9 @@
-﻿using GovUkDesignSystem;
-using GovUkDesignSystem.Attributes;
+﻿using GovUkDesignSystem.Attributes;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
-using SeaPublicWebsite.ExternalServices;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class NewOrReturningUserViewModel
+    public class NewOrReturningUserViewModel : QuestionFlowViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select if you have used this service before")]
         public NewOrReturningUser? NewOrReturningUser { get; set; }

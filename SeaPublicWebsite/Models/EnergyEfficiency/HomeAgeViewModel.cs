@@ -1,12 +1,9 @@
-﻿using GovUkDesignSystem;
-using GovUkDesignSystem.Attributes;
-using GovUkDesignSystem.Attributes.ValidationAttributes;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class HomeAgeViewModel
+    public class HomeAgeViewModel : QuestionFlowViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Enter the approximate year that your property was built")]
         [GovUkValidateIntRange("The year your property was build", 1000, 2022)]
@@ -15,6 +12,5 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Reference { get; set; }
         
         public PropertyType? PropertyType { get; set; }
-        public bool Change { get; set; }
     }
 }

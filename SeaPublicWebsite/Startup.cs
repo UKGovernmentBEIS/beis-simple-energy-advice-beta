@@ -36,6 +36,7 @@ namespace SeaPublicWebsite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserDataStore, UserDataStore>();
+            services.AddScoped<IQuestionFlowService, QuestionFlowService>();
             services.AddMemoryCache();
             services.AddSingleton<StaticAssetsVersioningService>();
 

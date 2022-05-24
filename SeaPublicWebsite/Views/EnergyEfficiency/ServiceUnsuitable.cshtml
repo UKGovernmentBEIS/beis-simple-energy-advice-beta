@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
+@model SeaPublicWebsite.Models.EnergyEfficiency.ServiceUnsuitableViewModel
 @{
     ViewBag.Title = "Only available to homeowners in England and Wales";
 }
@@ -9,7 +10,7 @@
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action($"{ViewBag.From}_Get", "EnergyEfficiency", new {reference = Model}),
+        Href = Model.BackLink,
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -29,11 +30,11 @@
             </div>
         </div>
         
-        @if (ViewBag.Country is Country.Scotland or Country.NorthernIreland)
+        @if (Model.Country is Country.Scotland or Country.NorthernIreland)
         {
             <h2 class="govuk-heading-m">Other services that might be helpful to you</h2>
 
-            @if (ViewBag.Country == Country.Scotland)
+            @if (Model.Country is Country.Scotland)
             {
                 <p class="govuk-body">
                     Visit <a href="https://www.homeenergyscotland.org/" target="_blank" class="govuk-link">Home Energy Scotland</a> to help you find ways to improve your property’s energy efficiency.
