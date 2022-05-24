@@ -10,7 +10,7 @@
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("Index", "EnergyEfficiency"),
+        Href = Model.BackLink,
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -23,6 +23,7 @@
         
         <form method="post" action="@Url.Action("NewOrReturningUser_Post", "EnergyEfficiency")">
 
+            @Html.AntiForgeryToken()
             @(await Html.GovUkRadiosFor(
                 m => m.NewOrReturningUser,
                 fieldsetOptions: new FieldsetViewModel

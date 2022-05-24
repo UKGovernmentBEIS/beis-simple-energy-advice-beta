@@ -1,16 +1,13 @@
-﻿using GovUkDesignSystem;
-using GovUkDesignSystem.Attributes.ValidationAttributes;
-using SeaPublicWebsite.ExternalServices;
+﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class PropertyTypeViewModel
+    public class PropertyTypeViewModel : QuestionFlowViewModel
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select property type")]
         public PropertyType? PropertyType { get; set; }
 
         public string Reference { get; set; }
-        public bool Change { get; set; }
     }
 }
