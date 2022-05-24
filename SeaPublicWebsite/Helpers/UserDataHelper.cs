@@ -114,7 +114,7 @@ namespace SeaPublicWebsite.Helpers
                            userData.YearBuilt > 2002));
         }
 
-        public static bool HasAnsweredFloorQuestions(UserDataModel userData)
+        public static bool HasFloor(UserDataModel userData)
         {
             return (userData.PropertyType, userData.FlatType) switch
             {
@@ -123,7 +123,7 @@ namespace SeaPublicWebsite.Helpers
             };
         }
         
-        public static bool HasAnsweredRoofQuestions(UserDataModel userData)
+        public static bool HasRoof(UserDataModel userData)
         {
             return (userData.PropertyType, userData.FlatType) switch
             {
@@ -159,7 +159,7 @@ namespace SeaPublicWebsite.Helpers
                 userData.SolidWallsInsulated = null;
             }
             
-            if (!HasAnsweredFloorQuestions(userData))
+            if (!HasFloor(userData))
             {
                 userData.FloorConstruction = null;
             }
@@ -170,7 +170,7 @@ namespace SeaPublicWebsite.Helpers
                 userData.FloorInsulated = null;
             }
 
-            if (!HasAnsweredRoofQuestions(userData))
+            if (!HasRoof(userData))
             {
                 userData.RoofConstruction = null;
             }

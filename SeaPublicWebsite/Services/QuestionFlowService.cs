@@ -257,7 +257,7 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
             }
 
-            if (UserDataHelper.HasAnsweredFloorQuestions(userData))
+            if (UserDataHelper.HasFloor(userData))
             {
                 return userData.FloorConstruction switch
                 {
@@ -301,7 +301,7 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
             }
 
-            if (UserDataHelper.HasAnsweredRoofQuestions(userData))
+            if (UserDataHelper.HasRoof(userData))
             {
                 return userData switch
                 {
@@ -313,7 +313,7 @@ namespace SeaPublicWebsite.Services
                 };
             }
 
-            if (UserDataHelper.HasAnsweredFloorQuestions(userData))
+            if (UserDataHelper.HasFloor(userData))
             {
                 return userData.FloorConstruction switch
                 {
@@ -530,12 +530,12 @@ namespace SeaPublicWebsite.Services
             }
 
             // These options below are for people who have chosen "Don't know" to "What type of walls do you have?"
-            if (UserDataHelper.HasAnsweredFloorQuestions(userData))
+            if (UserDataHelper.HasFloor(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.FloorConstruction_Get), "EnergyEfficiency", new { reference });
             }
 
-            if (UserDataHelper.HasAnsweredRoofQuestions(userData))
+            if (UserDataHelper.HasRoof(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency", new { reference });
             }
@@ -563,12 +563,12 @@ namespace SeaPublicWebsite.Services
             }
 
             // These options below are for people who have finished the "wall insulation" questions (e.g. who only have cavity walls)
-            if (UserDataHelper.HasAnsweredFloorQuestions(userData))
+            if (UserDataHelper.HasFloor(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.FloorConstruction_Get), "EnergyEfficiency",new { reference });
             }
 
-            if (UserDataHelper.HasAnsweredRoofQuestions(userData))
+            if (UserDataHelper.HasRoof(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency",new { reference });
             }
@@ -584,12 +584,12 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
             }
 
-            if (UserDataHelper.HasAnsweredFloorQuestions(userData))
+            if (UserDataHelper.HasFloor(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.FloorConstruction_Get), "EnergyEfficiency",new { reference });
             }
 
-            if (UserDataHelper.HasAnsweredRoofQuestions(userData))
+            if (UserDataHelper.HasRoof(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency",new { reference });
             }
@@ -611,7 +611,7 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
             }
 
-            if (UserDataHelper.HasAnsweredRoofQuestions(userData))
+            if (UserDataHelper.HasRoof(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency",new { reference });
             }
@@ -627,7 +627,7 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
             }
 
-            if (UserDataHelper.HasAnsweredRoofQuestions(userData))
+            if (UserDataHelper.HasRoof(userData))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency",new { reference });
             }
