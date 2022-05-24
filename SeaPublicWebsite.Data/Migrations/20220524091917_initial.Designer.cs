@@ -11,7 +11,7 @@ using SeaPublicWebsite.Data;
 namespace SeaPublicWebsite.Data.Migrations
 {
     [DbContext(typeof(SeaDbContext))]
-    [Migration("20220524083359_initial")]
+    [Migration("20220524091917_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Properties");
+                    b.ToTable("PropertyData");
                 });
 #pragma warning restore 612, 618
         }

@@ -31,7 +31,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Properties");
+                    b.ToTable("PropertyData");
                 });
 #pragma warning restore 612, 618
         }
