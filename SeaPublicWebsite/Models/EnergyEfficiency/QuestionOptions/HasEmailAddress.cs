@@ -4,9 +4,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
 {
     public enum HasEmailAddress
     {
-        [GovUkRadioCheckboxLabelText(Text = "Yes, I have an email address")]
-        Yes,
-        [GovUkRadioCheckboxLabelText(Text = "No")]
-        No
+        [GovUkRadioCheckboxLabelText(Text = "Yes, email a link and the reference number to me")]
+        Yes
     }
 }

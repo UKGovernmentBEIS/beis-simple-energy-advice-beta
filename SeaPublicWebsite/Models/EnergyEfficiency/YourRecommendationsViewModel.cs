@@ -12,7 +12,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select 'Yes' if you have an email address")]
         public HasEmailAddress? HasEmailAddress { get; set; }
         
-        [GovUkValidateRequiredIf(ErrorMessageIfMissing = "Enter your email address, or select 'No'", 
+        [GovUkValidateRequiredIf(ErrorMessageIfMissing = "Enter a valid email address", 
             IsRequiredPropertyName = nameof(IsRequiredEmailAddress))]
         public string EmailAddress { get; set; }
 
