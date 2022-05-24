@@ -24,6 +24,7 @@
         
         <form action="@Url.Action("AskForPostcode_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
 
+            @Html.AntiForgeryToken()
             <fieldset class="govuk-fieldset">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                     <h1 class="govuk-fieldset__heading">

@@ -26,6 +26,7 @@
         
         <form action="@Url.Action("OtherHeatingType_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
 
+            @Html.AntiForgeryToken()
             @(await Html.GovUkRadiosFor(m => m.OtherHeatingType,
                 fieldsetOptions: new FieldsetViewModel
                 {

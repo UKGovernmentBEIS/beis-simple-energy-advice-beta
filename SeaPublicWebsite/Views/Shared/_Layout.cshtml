@@ -1,10 +1,17 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using GovUkDesignSystem.GovUkDesignSystemComponents.Enums
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
 @using SeaPublicWebsite.Helpers
+@using SeaPublicWebsite.Models.Cookies
 @using SeaPublicWebsite.Services
+@using SeaPublicWebsite.Services.Cookies
 @inject StaticAssetsVersioningService StaticAssetsVersioning
+@inject CookieService CookieService
 @{
     string assetsPath = "/assets/images";
+    var bannerState = CookieService.GetAndUpdateBannerState(Context.Request, Context.Response);
 }
 <!DOCTYPE html>
 
@@ -14,7 +21,7 @@
 <html lang="en" class="govuk-template app-html-class">
 <head>
     <meta charset="utf-8" />
-    <title>@(ViewBag.Title != null ? ViewBag.Title + " -" : "") Improve your property's energy efficiency - Gov.UK</title>
+    <title>@(ViewBag.Title != null ? ViewBag.Title + " -" : "") @Constants.SERVICE_NAME - Gov.UK</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="blue" />
 
@@ -37,6 +44,15 @@
         document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     </script>
 
+    @await Html.GovUkCookieBanner(new CookieBannerViewModel
+    {
+        BannerState = bannerState,
+        CookieType = CookieType.Analytics,
+        ButtonClickAction = @Url.Action("CookieConsent", "Cookie"),
+        ViewCookiesLink = @Url.Action("CookieSettings_Get", "Cookie"),
+        ReturnUrl = Context.Request.GetEncodedPathAndQuery()
+    })
+
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
 
     @{
@@ -44,7 +60,7 @@
 
         @(await Html.GovUkHeader(new HeaderViewModel
         {
-            ServiceName = "Improve your property's energy efficiency",
+            ServiceName = Constants.SERVICE_NAME,
             AssetsPath = assetsPath,
             HomepageUrl = "https://www.gov.uk",
             ServiceUrl = "/energy-efficiency",
@@ -85,7 +101,7 @@
             new FooterLinksViewModel
             {
                 Text = "Cookies",
-                Href = Url.Action("Index", "Home")
+                Href = Url.Action("CookieSettings_Get", "Cookie")
             },
             new FooterLinksViewModel
             {
@@ -104,5 +120,14 @@
     <script src="@(StaticAssetsVersioning.GetAppJsFilename())"></script>
     <script>window.GOVUKFrontend.initAll()</script>
     @RenderSection("AfterLoadedCompiledScripts", false)
+
+@{
+    if (CookieService.HasAcceptedGoogleAnalytics(Context.Request))
+    {
+        <script>
+            // TODO: Google script
+        </script>
+    }
+}
 </body>
 </html>
