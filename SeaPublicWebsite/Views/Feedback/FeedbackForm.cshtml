@@ -2,7 +2,7 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @model SeaPublicWebsite.Models.Feedback.FeedbackFormViewModel
 @{
-    ViewBag.Title = "Help us improve GOV.UK";
+    ViewBag.Title = "Help us improve our service";
 }
 
 @section BeforeMain {
@@ -16,39 +16,42 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <form action="@Url.Action("FeedbackForm_Post", "Feedback")" method="post" novalidate>
+            @Html.AntiForgeryToken()
+            
             <fieldset class="govuk-fieldset">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                     <h1 class="govuk-fieldset__heading">
-                        Help us improve GOV.UK
+                        Help us improve our service
                     </h1>
                 </legend>
                 <p class="govuk-body">
                     Please note that we will not be able to reply to your feedback.
                 </p>
-                
+
                 @(await Html.GovUkTextAreaFor(
-                    m => m.WhatUserWasDoing, 
+                    m => m.WhatUserWasDoing,
                     labelOptions: new LabelViewModel
                     {
                         Html = (@<strong>What were you doing?</strong>)
                     }
                     ))
-                
+
                 @(await Html.GovUkTextAreaFor(
-                    m => m.WhatUserToldUs, 
+                    m => m.WhatUserToldUs,
                     labelOptions: new LabelViewModel
                     {
                         Html = (@<strong>What would you like to tell us?</strong>)
                     }
                     ))
-                
+
                 @(await Html.GovUkWarningText(new WarningTextViewModel
                 {
                     IconFallbackText = "Warning",
                     Text = "Don’t include personal or financial information like your National Insurance number or credit card details."
                 }))
+
             </fieldset>
-                
+
             @(await Html.GovUkButton(new ButtonViewModel
             {
                 Text = "Submit feedback"
