@@ -12,7 +12,7 @@
     {
         Text = "Back",
         Href = Model.BackLink,
-        
+
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
         OverrideWithJavascript = false
@@ -94,19 +94,19 @@
                     },
                 },
                 conditionalOption: new Conditional
-                        {
-                            Html = (@<text>
-                                        @await Html.GovUkTextInputFor(
-                                            m => m.EmailAddress,
-                                            labelOptions: new LabelViewModel
-                                            {
-                                                Text = "Please enter your email",
-                                            },
-                                            autocomplete: "email",
-                                            placeholder: "e.g. my.email@example.com"
-                                            )
-                                     </text>)
-                        }))
+                {
+                    Html = (@<text>
+                                @await Html.GovUkTextInputFor(
+                                    m => m.EmailAddress,
+                                    labelOptions: new LabelViewModel
+                                    {
+                                        Text = "Please enter your email",
+                                    },
+                                    autocomplete: "email",
+                                    placeholder: "e.g. my.email@example.com"
+                                    )
+                             </text>)
+                }))
 
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
