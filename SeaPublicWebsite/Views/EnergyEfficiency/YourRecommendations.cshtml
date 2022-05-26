@@ -74,7 +74,7 @@
             @Html.HiddenFor(m => m.FirstReferenceId)
             @Html.HiddenFor(m => m.NumberOfUserRecommendations)
             @(await Html.GovUkCheckboxFromBoolFor(
-                m => m.HasEmailAddressBool,
+                m => m.HasEmailAddress,
                 label: new LabelViewModel()
                 {
                     Text = "Yes, email a link and the reference number to me",
