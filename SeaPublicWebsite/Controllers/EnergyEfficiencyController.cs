@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Notify.Exceptions;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
@@ -1143,7 +1144,15 @@ namespace SeaPublicWebsite.Controllers
 
             if (viewModel.HasEmailAddress == HasEmailAddress.Yes)
             {
-                emailApi.SendReferenceNumberEmail(userDataModel.EmailAddress, userDataModel.Reference);
+                try
+                {
+                    emailApi.SendReferenceNumberEmail(userDataModel.EmailAddress, userDataModel.Reference);
+                }
+                catch (NotifyClientException)
+                {
+                    ModelState.AddModelError(nameof(viewModel.EmailAddress), "Enter a valid email address");
+                    return await YourRecommendations_GetAsync(viewModel.Reference);
+                }
             }
             
             return RedirectToAction("Recommendation_Get", new { id = viewModel.FirstReferenceId, reference = viewModel.Reference });
