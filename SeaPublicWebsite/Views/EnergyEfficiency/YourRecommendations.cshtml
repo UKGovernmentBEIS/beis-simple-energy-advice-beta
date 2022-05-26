@@ -12,7 +12,7 @@
     {
         Text = "Back",
         Href = Model.BackLink,
-        
+
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
         OverrideWithJavascript = false
@@ -73,42 +73,76 @@
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.FirstReferenceId)
             @Html.HiddenFor(m => m.NumberOfUserRecommendations)
-            @(await Html.GovUkRadiosFor(
-                m => m.HasEmailAddress,
-                fieldsetOptions: new FieldsetViewModel
+            @(await Html.GovUkCheckboxFromBoolFor(
+                m => m.HasEmailAddressBool,
+                label: new LabelViewModel()
                 {
-                    Legend = new LegendViewModel
-                    {
-                        Html = @<text>
-                                   <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-4">
-                                       Would you like us to email the above?
-                                   </h1>
-                                   <p class="govuk-body">We will send you a link to your recommendations and your reference number so you can quickly get back when you need to. If you do not wish to provide an email, make sure you make a note of your reference number.</p>
-                                </text>,
-                        Classes = "govuk-fieldset__legend--l",
-                        IsPageHeading = true,
-                    },
+                    Text = "Yes, email a link and the reference number to me",
                 },
-                conditionalOptions: new Dictionary<HasEmailAddress, Conditional>
-                {
+                fieldsetOptions:
+                    new FieldsetViewModel
                     {
-                        HasEmailAddress.Yes,
-                        new Conditional
+                        Legend = new LegendViewModel
                         {
-                            Html = (@<text>
-                                        @await Html.GovUkTextInputFor(
-                                            m => m.EmailAddress,
-                                            labelOptions: new LabelViewModel
-                                            {
-                                                Text = "Please enter your email",
-                                            },
-                                            autocomplete: "email",
-                                            placeholder: "e.g. my.email@example.com"
-                                            )
-                                     </text>)
-                        }
-                    }
+                            Html = @<text>
+                                       <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-4">
+                                           Would you like us to email the above?
+                                       </h1>
+                                       <p class="govuk-body">We will send you a link to your recommendations and your reference number so you can quickly get back when you need to. If you do not wish to provide an email, make sure you make a note of your reference number.</p>
+                                    </text>,
+                            Classes = "govuk-fieldset__legend--l",
+                            IsPageHeading = true,
+                        },
+                    },
+                conditionalOption: new Conditional
+                {
+                    Html = (@<text>
+                                @await Html.GovUkTextInputFor(
+                                    m => m.EmailAddress,
+                                    labelOptions: new LabelViewModel
+                                    {
+                                        Text = "Please enter your email",
+                                    },
+                                    autocomplete: "email",
+                                    placeholder: "e.g. my.email@example.com"
+                                    )
+                             </text>)
                 }))
+            @* @await Html.GovUkCheckboxesFor( *@
+            @*     m => m.HasEmailAddress != null ? new List<HasEmailAddress>() { HasEmailAddress.Yes } : new(), *@
+            @*     fieldsetOptions: *@
+            @*         new FieldsetViewModel *@
+            @*         { *@
+            @*             Legend = new LegendViewModel *@
+            @*             { *@
+            @*                 Html = @<text> *@
+            @*                            <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-4"> *@
+            @*                                Would you like us to email the above? *@
+            @*                            </h1> *@
+            @*                            <p class="govuk-body">We will send you a link to your recommendations and your reference number so you can quickly get back when you need to. If you do not wish to provide an email, make sure you make a note of your reference number.</p> *@
+            @*                         </text>, *@
+            @*                 Classes = "govuk-fieldset__legend--l", *@
+            @*                 IsPageHeading = true, *@
+            @*             }, *@
+            @*         }, *@
+            @*     conditionalOptions: new Dictionary<HasEmailAddress,Conditional>(){ *@
+            @*         { *@
+            @*             HasEmailAddress.Yes, *@
+            @*             new Conditional *@
+            @*             { *@
+            @*                 Html = (@<text> *@
+            @*                             @await Html.GovUkTextInputFor( *@
+            @*                                 m => m.EmailAddress, *@
+            @*                                 labelOptions: new LabelViewModel *@
+            @*                                 { *@
+            @*                                     Text = "Please enter your email", *@
+            @*                                 }, *@
+            @*                                 autocomplete: "email", *@
+            @*                                 placeholder: "e.g. my.email@example.com" *@
+            @*                                 ) *@
+            @*                          </text>) *@
+            @*             } *@
+            @*         }}) *@
 
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel

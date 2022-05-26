@@ -1093,6 +1093,7 @@ namespace SeaPublicWebsite.Controllers
                     NumberOfUserRecommendations = recommendationsForUser.Count,
                     FirstReferenceId = firstReferenceId,
                     HasEmailAddress = userDataModel.HasEmailAddress,
+                    HasEmailAddressBool = userDataModel.HasEmailAddress is HasEmailAddress.Yes,
                     EmailAddress = userDataModel.EmailAddress,
                     BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
                 };
