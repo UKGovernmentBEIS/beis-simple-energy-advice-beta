@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
+using SeaPublicWebsite.Data.EnergyEfficiency;
+using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
+using SeaPublicWebsite.Data.EnergyEfficiency.Recommendations;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
@@ -11,8 +12,6 @@ using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
-using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations;
 using SeaPublicWebsite.Services;
 
 namespace SeaPublicWebsite.Controllers

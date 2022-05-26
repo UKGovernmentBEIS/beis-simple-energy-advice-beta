@@ -2,8 +2,9 @@
 using System.Linq;
 using GovUkDesignSystem;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
+using SeaPublicWebsite.Data.EnergyEfficiency;
+using SeaPublicWebsite.Data.EnergyEfficiency.Recommendations;
 using SeaPublicWebsite.DataModels;
-using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
@@ -51,7 +52,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 
         public List<UserRecommendation> GetSavedRecommendations()
         {
-            return UserDataModel.UserRecommendations.Where(r => r.RecommendationAction == Recommendations.RecommendationAction.SaveToActionPlan).ToList();
+            return UserDataModel.UserRecommendations.Where(r => r.RecommendationAction == Data.EnergyEfficiency.Recommendations.RecommendationAction.SaveToActionPlan).ToList();
         }
         public string GetTotalInstallationCostText()
         {

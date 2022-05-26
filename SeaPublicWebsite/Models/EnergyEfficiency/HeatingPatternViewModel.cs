@@ -1,5 +1,5 @@
 ﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
@@ -14,6 +14,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 
         public string Reference { get; set; }
 
-        public bool IsRequiredHoursOfHeating => HeatingPattern == QuestionOptions.HeatingPattern.Other;
+        public bool IsRequiredHoursOfHeating => HeatingPattern == Data.EnergyEfficiency.QuestionOptions.HeatingPattern.Other;
     }
 }

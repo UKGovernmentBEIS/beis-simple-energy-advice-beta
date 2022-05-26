@@ -1,6 +1,5 @@
 ﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
-using Microsoft.CodeAnalysis.Operations;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
@@ -15,6 +14,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         
         public string Reference { get; set; }
 
-        public bool IsRequiredEmailAddress => HasEmailAddress == QuestionOptions.HasEmailAddress.Yes;
+        public bool IsRequiredEmailAddress => HasEmailAddress == Data.EnergyEfficiency.QuestionOptions.HasEmailAddress.Yes;
     }
 }

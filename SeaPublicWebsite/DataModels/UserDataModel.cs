@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using SeaPublicWebsite.Models.EnergyEfficiency;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.DataModels
 {

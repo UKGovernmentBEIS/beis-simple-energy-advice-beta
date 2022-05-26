@@ -9,4 +9,5 @@ public class SeaDbContext : DbContext
         
     }
     public DbSet<PropertyData> PropertyData { get; set; }
+    public DbSet<PropertyRecommendation> PropertyRecommendations { get; set; }
 }

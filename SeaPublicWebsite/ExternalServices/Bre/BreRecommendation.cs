@@ -1,4 +1,4 @@
-﻿using SeaPublicWebsite.Models.EnergyEfficiency;
+﻿using SeaPublicWebsite.Data.EnergyEfficiency;
 
 namespace SeaPublicWebsite.ExternalServices.Bre
 {

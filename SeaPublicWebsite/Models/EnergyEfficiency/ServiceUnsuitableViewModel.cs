@@ -1,4 +1,4 @@
-﻿using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+﻿using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {

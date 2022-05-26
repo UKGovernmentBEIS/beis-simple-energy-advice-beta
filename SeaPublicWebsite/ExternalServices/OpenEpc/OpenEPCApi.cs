@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Helpers;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.ExternalServices.OpenEpc
 {

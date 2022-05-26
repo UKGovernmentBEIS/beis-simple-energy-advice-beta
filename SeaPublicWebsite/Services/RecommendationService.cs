@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SeaPublicWebsite.Data.EnergyEfficiency;
+using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.Models;
 using SeaPublicWebsite.Models.EnergyEfficiency;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Services
 {

@@ -1,9 +1,7 @@
-﻿using System;
-using GovUkDesignSystem;
-using SeaPublicWebsite.DataModels;
+﻿using SeaPublicWebsite.DataModels;
 using System.Collections.Generic;
 using System.Linq;
-using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations;
+using SeaPublicWebsite.Data.EnergyEfficiency.Recommendations;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {

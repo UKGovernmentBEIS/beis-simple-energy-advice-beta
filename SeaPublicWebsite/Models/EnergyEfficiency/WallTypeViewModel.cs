@@ -1,5 +1,5 @@
 ﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.Services;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
