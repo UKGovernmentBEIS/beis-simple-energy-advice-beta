@@ -1116,15 +1116,14 @@ namespace SeaPublicWebsite.Controllers
             int firstReferenceId = recommendationsForUser.Count == 0 ? -1 : (int) recommendationsForUser[0].Key;
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.YourRecommendations, userDataModel);
             var viewModel = new YourRecommendationsViewModel
-                {
-                    Reference = reference,
-                    NumberOfUserRecommendations = recommendationsForUser.Count,
-                    FirstReferenceId = firstReferenceId,
-                    HasEmailAddress = userDataModel.HasEmailAddress,
-                    EmailAddress = userDataModel.EmailAddress,
-                    BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
-                }
-;            return View("YourRecommendations", viewModel);
+            {
+                Reference = reference,
+                NumberOfUserRecommendations = recommendationsForUser.Count,
+                FirstReferenceId = firstReferenceId,
+                HasEmailAddress = false,
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+            };
+            return View("YourRecommendations", viewModel);
         }
 
         [HttpPost("your-recommendations/{reference}")]
@@ -1137,11 +1136,9 @@ namespace SeaPublicWebsite.Controllers
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
-            userDataModel.HasEmailAddress = viewModel.HasEmailAddress;
-            userDataModel.EmailAddress = viewModel.HasEmailAddress == HasEmailAddress.Yes ? viewModel.EmailAddress : null;
             userDataStore.SaveUserData(userDataModel);
 
-            if (viewModel.HasEmailAddress == HasEmailAddress.Yes)
+            if (viewModel.HasEmailAddress)
             {
                 emailApi.SendReferenceNumberEmail(userDataModel.EmailAddress, userDataModel.Reference);
             }
