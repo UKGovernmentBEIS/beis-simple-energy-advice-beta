@@ -2,7 +2,7 @@
 
 namespace SeaPublicWebsite.ExternalServices.Models
 {
-    public class EpcDto
+    public class OpenEpcDto
     {
         // Individual lodgement identifier. Guaranteed to be unique and can be used to identify a
         // certificate in the downloads and the API.

@@ -73,7 +73,7 @@ namespace SeaPublicWebsite.ExternalServices.OpenEpc
             }
         }
 
-        public static List<Epc> FixFormatting(List<Epc> epcs)
+        private static List<Epc> FixFormatting(List<Epc> epcs)
         {
             epcs.ForEach(e =>
             {
@@ -85,7 +85,7 @@ namespace SeaPublicWebsite.ExternalServices.OpenEpc
             return epcs;
         }
 
-        public static List<Epc> RemoveDuplicates(List<Epc> epcs)
+        private static List<Epc> RemoveDuplicates(List<Epc> epcs)
         {
             return epcs
                 .GroupBy(e => e.BuildingReference)
@@ -100,7 +100,7 @@ namespace SeaPublicWebsite.ExternalServices.OpenEpc
                 .ToList();
         }
 
-        public static int SortEpcsByHouseNumberOrAlphabetically(Epc a, Epc b)
+        private static int SortEpcsByHouseNumberOrAlphabetically(Epc a, Epc b)
         {
             var houseNumberA = a.GetHouseNumber();
             var houseNumberB = b.GetHouseNumber();
@@ -132,7 +132,7 @@ namespace SeaPublicWebsite.ExternalServices.OpenEpc
             return SortEpcsAlphabetically(a, b);
         }
 
-        public static int SortEpcsAlphabetically(Epc a, Epc b)
+        private static int SortEpcsAlphabetically(Epc a, Epc b)
         {
             return string.Compare(a.Address2, b.Address2, StringComparison.OrdinalIgnoreCase) == 0
                 ? string.Compare(a.Address1, b.Address1, StringComparison.OrdinalIgnoreCase)
@@ -140,7 +140,7 @@ namespace SeaPublicWebsite.ExternalServices.OpenEpc
         }
 
 
-        public static HeatingType? GetHeatingTypeFromEpc(EpcDto epc)
+        private static HeatingType? GetHeatingTypeFromEpc(OpenEpcDto epc)
         {
             // This is not a complete mapping but there are too many options for mainHeatDescription and mainFuel to parse them all.
             // mainFuel is marked as deprecated in some places so we should try mainHeatDescription first
@@ -168,7 +168,7 @@ namespace SeaPublicWebsite.ExternalServices.OpenEpc
             }
         }
 
-        public static PropertyType? GetPropertyTypeFromEpc(EpcDto epc)
+        private static PropertyType? GetPropertyTypeFromEpc(OpenEpcDto epc)
         {
             if (epc.PropertyType != null && epc.PropertyType.Contains("House", StringComparison.OrdinalIgnoreCase))
             {
@@ -192,7 +192,7 @@ namespace SeaPublicWebsite.ExternalServices.OpenEpc
             }
         }
 
-        public static WallConstruction? GetWallConstructionFromEpc(EpcDto epc)
+        private static WallConstruction? GetWallConstructionFromEpc(OpenEpcDto epc)
         {
             if (epc.WallsDescription != null &&
                 epc.WallsDescription.Contains("cavity", StringComparison.OrdinalIgnoreCase))
@@ -211,7 +211,7 @@ namespace SeaPublicWebsite.ExternalServices.OpenEpc
             }
         }
 
-        public static CavityWallsInsulated? GetCavityWallsInsulatedFromEpc(EpcDto epc)
+        private static CavityWallsInsulated? GetCavityWallsInsulatedFromEpc(OpenEpcDto epc)
         {
             if (epc.WallsDescription != null &&
                 epc.WallsDescription.Contains("cavity", StringComparison.OrdinalIgnoreCase))
@@ -236,7 +236,7 @@ namespace SeaPublicWebsite.ExternalServices.OpenEpc
             }
         }
 
-        public static SolidWallsInsulated? GetSolidWallsInsulatedFromEpc(EpcDto epc)
+        private static SolidWallsInsulated? GetSolidWallsInsulatedFromEpc(OpenEpcDto epc)
         {
             if (epc.WallsDescription != null &&
                 epc.WallsDescription.Contains("solid", StringComparison.OrdinalIgnoreCase))
@@ -260,7 +260,7 @@ namespace SeaPublicWebsite.ExternalServices.OpenEpc
             }
         }
 
-        public static FloorConstruction? GetFloorConstructionFromEpc(EpcDto epc)
+        private static FloorConstruction? GetFloorConstructionFromEpc(OpenEpcDto epc)
         {
             if (epc.FloorDescription != null)
             {
@@ -278,7 +278,7 @@ namespace SeaPublicWebsite.ExternalServices.OpenEpc
             return null;
         }
 
-        public static FloorInsulated? GetFloorInsulationFromEpc(EpcDto epc)
+        private static FloorInsulated? GetFloorInsulationFromEpc(OpenEpcDto epc)
         {
             if (epc.FloorDescription != null && GetFloorConstructionFromEpc(epc).HasValue)
             {
@@ -296,68 +296,31 @@ namespace SeaPublicWebsite.ExternalServices.OpenEpc
             return null;
         }
 
-        private static HomeAge? GetConstructionAgeBandFromEpc(EpcDto epc)
+        private static HomeAge? GetConstructionAgeBandFromEpc(OpenEpcDto epc)
         {
-            if (epc.ConstructionAgeBand != null)
+            if (epc.ConstructionAgeBand == null) return null;
+            var ageBand = epc.ConstructionAgeBand.Replace("England and Wales: ", "");
+            return ageBand switch
             {
-                var ageBand = epc.ConstructionAgeBand.Replace("England and Wales: ", "");
-                switch (ageBand)
-                {
-                    case ("before 1900"):
-                    {
-                        return HomeAge.Pre1900;
-                    }
-                    case ("1900-1929"):
-                    {
-                        return HomeAge.From1900To1929;
-                    }
-                    case ("1930-1949"):
-                    {
-                        return HomeAge.From1930To1949;
-                    }
-                    case ("1950-1966"):
-                    {
-                        return HomeAge.From1950To1966;
-                    }
-                    case ("1967-1975"):
-                    {
-                        return HomeAge.From1967To1975;
-                    }
-                    case ("1976-1982"):
-                    {
-                        return HomeAge.From1976To1982;
-                    }
-                    case ("1983-1990"):
-                    {
-                        return HomeAge.From1983To1990;
-                    }
-                    case ("1991-1995"):
-                    {
-                        return HomeAge.From1991To1995;
-                    }
-                    case ("1996-2002"):
-                    {
-                        return HomeAge.From1996To2002;
-                    }
-                    case ("2003-2006"):
-                    {
-                        return HomeAge.From2003To2006;
-                    }
-                    case ("2007 onwards"):
-                    {
-                        return HomeAge.From2007ToPresent;
-                    }
-                    default:
-                        return null;
-                }
-            }
+                ("before 1900") => HomeAge.Pre1900,
+                ("1900-1929") => HomeAge.From1900To1929,
+                ("1930-1949") => HomeAge.From1930To1949,
+                ("1950-1966") => HomeAge.From1950To1966,
+                ("1967-1975") => HomeAge.From1967To1975,
+                ("1976-1982") => HomeAge.From1976To1982,
+                ("1983-1990") => HomeAge.From1983To1990,
+                ("1991-1995") => HomeAge.From1991To1995,
+                ("1996-2002") => HomeAge.From1996To2002,
+                ("2003-2006") => HomeAge.From2003To2006,
+                ("2007 onwards") => HomeAge.From2007ToPresent,
+                _ => null
+            };
 
-            return null;
         }
     }
 
     internal class OpenEpcResponse
     {
-        public List<EpcDto> rows { get; set; }
+        public List<OpenEpcDto> rows { get; set; }
     }
 }
