@@ -14,8 +14,6 @@ using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.EpbEpc;
 using SeaPublicWebsite.ExternalServices.FileRepositories;
-using SeaPublicWebsite.ExternalServices.OpenEpc;
-using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;

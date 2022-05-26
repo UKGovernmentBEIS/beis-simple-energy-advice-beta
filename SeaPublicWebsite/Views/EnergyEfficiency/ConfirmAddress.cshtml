@@ -25,7 +25,7 @@
         <form action="@Url.Action("ConfirmAddress_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
 
             @Html.AntiForgeryToken()
-            @if (Model.EPCList.Count == 1)
+            @if (Model.EpcInformationList.Count == 1)
             {
                 @Html.HiddenFor(m => m.SelectedEpcId)
                 <h1 class="govuk-heading-l">
@@ -38,13 +38,13 @@
                             Address
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            @(Model.EPCList[0].Address1)<br/>
-                            @if (!string.IsNullOrWhiteSpace(Model.EPCList[0].Address2))
+                            @(Model.EpcInformationList[0].Address1)<br/>
+                            @if (!string.IsNullOrWhiteSpace(Model.EpcInformationList[0].Address2))
                             {
-                                @(Model.EPCList[0].Address2)
+                                @(Model.EpcInformationList[0].Address2)
                                 <br/>
                             }
-                            @(Model.EPCList[0].Postcode)
+                            @(Model.EpcInformationList[0].Postcode)
                         </dd>
                         <dd class="govuk-summary-list__actions">
                             <a class="govuk-link" href="@Url.Action("AskForPostcode_Get", "EnergyEfficiency", new {reference = Model.Reference})">
@@ -83,7 +83,7 @@
                             Classes = "govuk-fieldset__legend--l"
                         }
                     },
-                    Items = Model.EPCList.Select(epc =>
+                    Items = Model.EpcInformationList.Select(epc =>
                     {
                         string fieldName = nameof(ConfirmAddressViewModel.SelectedEpcId);
                         string fieldValue = epc.EpcId;
@@ -111,12 +111,12 @@
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
                 {
-                    Text = (Model.EPCList.Count == 1 ? "Yes, continue" : "Continue"),
+                    Text = (Model.EpcInformationList.Count == 1 ? "Yes, continue" : "Continue"),
 
                 }))
                 <a href=@Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference})
                    class="govuk-link">
-                    @(Model.EPCList.Count == 1 ? "No, skip this question" : "Address not listed above")
+                    @(Model.EpcInformationList.Count == 1 ? "No, skip this question" : "Address not listed above")
                 </a>
             </div>
 

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace SeaPublicWebsite.ExternalServices.Models.Epb;
 
-public class EpcEpcDto
+public class EpbEpcDto
 {
     [JsonProperty(PropertyName = "data")]
     public EpbEpcDataDto Data { get; set; }

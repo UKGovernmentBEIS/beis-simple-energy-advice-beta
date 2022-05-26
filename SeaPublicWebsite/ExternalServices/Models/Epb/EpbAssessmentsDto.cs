@@ -12,10 +12,10 @@ public class EpbAssessmentsDto
 public class EpbAssessmentsDataDto
 {
     [JsonProperty(PropertyName = "assessments")]
-    public List<EpbAssessmentId> Assessments { get; set; }
+    public List<EpbAssessmentInformation> Assessments { get; set; }
 }
 
-public class EpbAssessmentId
+public class EpbAssessmentInformation
 {
     [JsonProperty(PropertyName = "epcRrn")]
     public string EpcId { get; set; }
