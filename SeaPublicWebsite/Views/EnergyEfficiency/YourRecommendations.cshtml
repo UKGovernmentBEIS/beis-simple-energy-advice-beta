@@ -69,7 +69,7 @@
             <h2 class="govuk-heading-l" id="subsection-title">@Model.Reference</h2>
         </aside>
 
-        <form method="post" action="@Url.Action("EmailAddress_Post", "EnergyEfficiency")">
+        <form method="post" action="@Url.Action("YourRecommendations_Post", "EnergyEfficiency")">
             
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.FirstReferenceId)
