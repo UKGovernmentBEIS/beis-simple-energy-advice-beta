@@ -1088,15 +1088,15 @@ namespace SeaPublicWebsite.Controllers
             int firstReferenceId = recommendationsForUser.Count == 0 ? -1 : (int) recommendationsForUser[0].Key;
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.YourRecommendations, userDataModel);
             var viewModel = new YourRecommendationsViewModel
-                {
-                    Reference = reference,
-                    NumberOfUserRecommendations = recommendationsForUser.Count,
-                    FirstReferenceId = firstReferenceId,
-                    HasEmailAddress = userDataModel.HasEmailAddress,
-                    EmailAddress = userDataModel.EmailAddress,
-                    BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
-                }
-;            return View("YourRecommendations", viewModel);
+            {
+                Reference = reference,
+                NumberOfUserRecommendations = recommendationsForUser.Count,
+                FirstReferenceId = firstReferenceId,
+                HasEmailAddress = userDataModel.HasEmailAddress,
+                EmailAddress = userDataModel.EmailAddress,
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+            };
+            return View("YourRecommendations", viewModel);
         }
 
         [HttpPost("your-recommendations/{reference}")]
