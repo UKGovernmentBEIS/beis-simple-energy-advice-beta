@@ -1092,8 +1092,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = reference,
                 NumberOfUserRecommendations = recommendationsForUser.Count,
                 FirstReferenceId = firstReferenceId,
-                HasEmailAddress = userDataModel.HasEmailAddress,
-                EmailAddress = userDataModel.EmailAddress,
+                HasEmailAddress = false,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
             return View("YourRecommendations", viewModel);
@@ -1109,11 +1108,9 @@ namespace SeaPublicWebsite.Controllers
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
-            userDataModel.HasEmailAddress = viewModel.HasEmailAddress;
-            userDataModel.EmailAddress = viewModel.HasEmailAddress == HasEmailAddress.Yes ? viewModel.EmailAddress : null;
             userDataStore.SaveUserData(userDataModel);
 
-            if (viewModel.HasEmailAddress == HasEmailAddress.Yes)
+            if (viewModel.HasEmailAddress)
             {
                 emailApi.SendReferenceNumberEmail(userDataModel.EmailAddress, userDataModel.Reference);
             }

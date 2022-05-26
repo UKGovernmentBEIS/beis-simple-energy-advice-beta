@@ -73,8 +73,12 @@
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.FirstReferenceId)
             @Html.HiddenFor(m => m.NumberOfUserRecommendations)
-            @(await Html.GovUkRadiosFor(
+            @(await Html.GovUkCheckboxFromBoolFor(
                 m => m.HasEmailAddress,
+                label: new()
+                {
+                    Text = "Yes, email a link and the reference number to me"
+                },
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
@@ -89,11 +93,7 @@
                         IsPageHeading = true,
                     },
                 },
-                conditionalOptions: new Dictionary<HasEmailAddress, Conditional>
-                {
-                    {
-                        HasEmailAddress.Yes,
-                        new Conditional
+                conditionalOption: new Conditional
                         {
                             Html = (@<text>
                                         @await Html.GovUkTextInputFor(
@@ -106,9 +106,7 @@
                                             placeholder: "e.g. my.email@example.com"
                                             )
                                      </text>)
-                        }
-                    }
-                }))
+                        }))
 
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
