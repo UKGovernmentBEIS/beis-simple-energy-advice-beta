@@ -3,7 +3,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class YourRecommendationsViewModel
+    public class YourRecommendationsViewModel : QuestionFlowViewModel
     {
         public int NumberOfUserRecommendations { get; set; }
         public string Reference { get; set; }

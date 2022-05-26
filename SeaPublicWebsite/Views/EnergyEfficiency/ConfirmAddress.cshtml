@@ -12,7 +12,7 @@
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("AskForPostcode_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        Href = Model.BackLink,
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -24,6 +24,7 @@
     <div class="govuk-grid-column-two-thirds">
         <form action="@Url.Action("ConfirmAddress_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
 
+            @Html.AntiForgeryToken()
             @if (Model.EPCList.Count == 1)
             {
                 @Html.HiddenFor(m => m.SelectedEpcId)
@@ -56,10 +57,7 @@
             else
             {
                 string error = null;
-                var errors = ViewData.ModelState
-                    .Where(n => n.Value.Errors.Count > 0)
-                    .ToList();
-                foreach (var (key, value) in ViewData.ModelState)
+                foreach (var (_, value) in ViewData.ModelState)
                 {
                     if (value.Errors.Count > 0)
                     {

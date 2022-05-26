@@ -11,7 +11,7 @@
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference}),
+        Href = Model.BackLink,
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -70,6 +70,8 @@
         </aside>
 
         <form method="post" action="@Url.Action("EmailAddress_Post", "EnergyEfficiency")">
+            
+            @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.FirstReferenceId)
             @Html.HiddenFor(m => m.NumberOfUserRecommendations)
             @(await Html.GovUkRadiosFor(
