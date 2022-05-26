@@ -1095,8 +1095,8 @@ namespace SeaPublicWebsite.Controllers
                     HasEmailAddress = userDataModel.HasEmailAddress,
                     EmailAddress = userDataModel.EmailAddress,
                     BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
-                };
-            return View("YourRecommendations", viewModel);
+                }
+;            return View("YourRecommendations", viewModel);
         }
 
         [HttpPost("your-recommendations/{reference}")]
