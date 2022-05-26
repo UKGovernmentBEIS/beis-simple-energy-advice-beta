@@ -12,7 +12,7 @@ using SeaPublicWebsite.Data;
 namespace SeaPublicWebsite.Data.Migrations
 {
     [DbContext(typeof(SeaDbContext))]
-    [Migration("20220526144453_PropertyDataAndRecommendations")]
+    [Migration("20220526162137_PropertyDataAndRecommendations")]
     partial class PropertyDataAndRecommendations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,11 +26,11 @@ namespace SeaPublicWebsite.Data.Migrations
 
             modelBuilder.Entity("SeaPublicWebsite.Data.PropertyData", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PropertyDataId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PropertyDataId"));
 
                     b.Property<int?>("AccessibleLoftSpace")
                         .HasColumnType("integer");
@@ -45,7 +45,6 @@ namespace SeaPublicWebsite.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("EpcLmkKey")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int?>("FlatType")
@@ -76,7 +75,6 @@ namespace SeaPublicWebsite.Data.Migrations
                         .HasColumnType("numeric");
 
                     b.Property<string>("HouseNameOrNumber")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int?>("HouseType")
@@ -92,14 +90,12 @@ namespace SeaPublicWebsite.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Postcode")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int?>("PropertyType")
                         .HasColumnType("integer");
 
                     b.Property<string>("Reference")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int?>("RoofConstruction")
@@ -120,18 +116,18 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("YearBuilt")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.HasKey("PropertyDataId");
 
                     b.ToTable("PropertyData");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.Data.PropertyRecommendation", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PropertyRecommendationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PropertyRecommendationId"));
 
                     b.Property<int>("Key")
                         .HasColumnType("integer");
@@ -148,7 +144,7 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int>("MinInstallCost")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("PropertyDataId")
+                    b.Property<int>("PropertyDataId")
                         .HasColumnType("integer");
 
                     b.Property<int?>("RecommendationAction")
@@ -158,14 +154,12 @@ namespace SeaPublicWebsite.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Summary")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("PropertyRecommendationId");
 
                     b.HasIndex("PropertyDataId");
 
@@ -174,9 +168,13 @@ namespace SeaPublicWebsite.Data.Migrations
 
             modelBuilder.Entity("SeaPublicWebsite.Data.PropertyRecommendation", b =>
                 {
-                    b.HasOne("SeaPublicWebsite.Data.PropertyData", null)
+                    b.HasOne("SeaPublicWebsite.Data.PropertyData", "PropertyData")
                         .WithMany("PropertyRecommendations")
-                        .HasForeignKey("PropertyDataId");
+                        .HasForeignKey("PropertyDataId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PropertyData");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.Data.PropertyData", b =>
