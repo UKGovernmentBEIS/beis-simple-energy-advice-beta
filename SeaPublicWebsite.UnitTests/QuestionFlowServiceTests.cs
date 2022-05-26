@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using SeaPublicWebsite.Controllers;
+using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.DataModels;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.Services;
 
 namespace Tests;

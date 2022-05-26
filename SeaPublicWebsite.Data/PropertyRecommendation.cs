@@ -1,6 +1,5 @@
-﻿
-using SeaPublicWebsite.Models.EnergyEfficiency;
-using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations;
+﻿using SeaPublicWebsite.Data.EnergyEfficiency;
+using SeaPublicWebsite.Data.EnergyEfficiency.Recommendations;
 
 namespace SeaPublicWebsite.Data;
 

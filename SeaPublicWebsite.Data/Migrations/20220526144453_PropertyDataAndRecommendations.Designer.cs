@@ -12,7 +12,7 @@ using SeaPublicWebsite.Data;
 namespace SeaPublicWebsite.Data.Migrations
 {
     [DbContext(typeof(SeaDbContext))]
-    [Migration("20220526125349_PropertyDataAndRecommendations")]
+    [Migration("20220526144453_PropertyDataAndRecommendations")]
     partial class PropertyDataAndRecommendations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
