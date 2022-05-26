@@ -5,7 +5,9 @@ namespace SeaPublicWebsite.Data;
 
 public class PropertyRecommendation
 {
-    public int Id { get; set; }
+    //PRIMARY KEY
+    public int PropertyRecommendationId { get; set; }
+    
     public RecommendationKey Key { get; set; }
     public int MinInstallCost { get; set; }
     public int MaxInstallCost { get; set; }
@@ -15,4 +17,7 @@ public class PropertyRecommendation
     public string Title { get; set; }
     public string Summary { get; set; }
     public RecommendationAction? RecommendationAction { get; set; }
+    
+    public int PropertyDataId { get; set; }
+    public PropertyData PropertyData { get; set; }
 }

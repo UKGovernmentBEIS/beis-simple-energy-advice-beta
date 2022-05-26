@@ -4,7 +4,9 @@ namespace SeaPublicWebsite.Data;
 
 public class PropertyData
 {
-    public int Id { get; set; }
+    //PRIMARY KEY
+    public int PropertyDataId { get; set; }
+    
     public string Reference { get; set; }
 
     public OwnershipStatus? OwnershipStatus { get; set; }
