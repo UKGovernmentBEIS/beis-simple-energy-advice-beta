@@ -1744,8 +1744,6 @@ public class QuestionFlowServiceTests
             HeatingPattern? heatingPattern = null,
             decimal? hoursOfHeating = null,
             decimal? temperature = null,
-            HasEmailAddress? hasEmailAddress = null,
-            string emailAddress = null,
             QuestionFlowPage? entryPoint = null)
         {
             Page = page;
@@ -1779,8 +1777,6 @@ public class QuestionFlowServiceTests
                 HeatingPattern = heatingPattern,
                 HoursOfHeating = hoursOfHeating,
                 Temperature = temperature,
-                HasEmailAddress = hasEmailAddress,
-                EmailAddress = emailAddress
             };
             EntryPoint = entryPoint;
         }

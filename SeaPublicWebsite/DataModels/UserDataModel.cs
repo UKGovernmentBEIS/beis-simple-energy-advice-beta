@@ -43,9 +43,6 @@ namespace SeaPublicWebsite.DataModels
         public HeatingPattern? HeatingPattern { get; set; }
         public decimal? HoursOfHeating { get; set; }
         public decimal? Temperature { get; set; }
-        
-        public HasEmailAddress? HasEmailAddress { get; set; }
-        public string EmailAddress { get; set; }
 
         public List<UserRecommendation> UserRecommendations { get; set; }
     }

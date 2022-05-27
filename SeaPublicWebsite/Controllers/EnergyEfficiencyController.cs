@@ -1101,7 +1101,7 @@ namespace SeaPublicWebsite.Controllers
 
             if (viewModel.HasEmailAddress)
             {
-                emailApi.SendReferenceNumberEmail(userDataModel.EmailAddress, userDataModel.Reference);
+                emailApi.SendReferenceNumberEmail(viewModel.EmailAddress, userDataModel.Reference);
             }
             
             return RedirectToAction("Recommendation_Get", new { id = viewModel.FirstReferenceId, reference = viewModel.Reference });
