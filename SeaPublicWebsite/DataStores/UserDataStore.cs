@@ -2,7 +2,7 @@
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices.FileRepositories;
-using SeaPublicWebsite.Helpers;
+using SeaPublicWebsite.Data.Helpers;
 
 namespace SeaPublicWebsite.DataStores
 {
