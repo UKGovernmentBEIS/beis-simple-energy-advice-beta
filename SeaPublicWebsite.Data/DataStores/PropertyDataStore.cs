@@ -1,4 +1,4 @@
-﻿using SeaPublicWebsite.Helpers;
+﻿using SeaPublicWebsite.Data.Helpers;
 
 namespace SeaPublicWebsite.Data.DataStores;
 
