@@ -1742,7 +1742,8 @@ public class QuestionFlowServiceTests
             HasHotWaterCylinder? hasHotWaterCylinder = null,
             int? numberOfOccupants = null,
             HeatingPattern? heatingPattern = null,
-            decimal? hoursOfHeating = null,
+            decimal? hoursOfHeatingMorning = null,
+            decimal? hoursOfHeatingEvening = null,
             decimal? temperature = null,
             QuestionFlowPage? entryPoint = null)
         {
@@ -1775,7 +1776,8 @@ public class QuestionFlowServiceTests
                 HasHotWaterCylinder = hasHotWaterCylinder,
                 NumberOfOccupants = numberOfOccupants,
                 HeatingPattern = heatingPattern,
-                HoursOfHeating = hoursOfHeating,
+                HoursOfHeatingMorning = hoursOfHeatingMorning,
+                HoursOfHeatingEvening = hoursOfHeatingEvening,
                 Temperature = temperature,
             };
             EntryPoint = entryPoint;

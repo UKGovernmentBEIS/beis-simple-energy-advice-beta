@@ -8,11 +8,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         AllDayAndNight,
         [GovUkRadioCheckboxLabelText(Text = "All day and off at night")]
         AllDayNotNight,
-        [GovUkRadioCheckboxLabelText(Text = "Morning and evening")]
-        MorningAndEvening,
-        [GovUkRadioCheckboxLabelText(Text = "Less frequently")]
-        OnceADay,
-        [GovUkRadioCheckboxLabelText (Text = "Something else")]
+        [GovUkRadioCheckboxLabelText (Text = "I'd like to input my hours")]
         Other
     }
 }

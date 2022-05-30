@@ -973,7 +973,8 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new HeatingPatternViewModel
             {
                 HeatingPattern = userDataModel.HeatingPattern,
-                HoursOfHeating = userDataModel.HoursOfHeating,
+                HoursOfHeatingMorning = userDataModel.HoursOfHeatingMorning,
+                HoursOfHeatingEvening = userDataModel.HoursOfHeatingEvening,
                 Reference = userDataModel.Reference,
                 EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
@@ -993,7 +994,16 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataModel.HeatingPattern = viewModel.HeatingPattern;
-            userDataModel.HoursOfHeating = viewModel.HeatingPattern == HeatingPattern.Other ? viewModel.HoursOfHeating : null;
+            if (viewModel.HeatingPattern is HeatingPattern.Other)
+            {
+                userDataModel.HoursOfHeatingMorning = viewModel.HoursOfHeatingMorning;
+                userDataModel.HoursOfHeatingEvening = viewModel.HoursOfHeatingEvening;
+            }
+            else
+            {
+                userDataModel.HoursOfHeatingMorning = null;
+                userDataModel.HoursOfHeatingEvening = null;
+            }
 
             UserDataHelper.ResetUnusedFields(userDataModel);
             userDataStore.SaveUserData(userDataModel);
