@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.Feedback;
 
 namespace SeaPublicWebsite.Controllers;
 
-[Route("energy-efficiency/feedback")]
+[Route("feedback")]
 public class FeedbackController : Controller
 {
     private readonly IEmailSender emailSender;
@@ -13,6 +13,7 @@ public class FeedbackController : Controller
     {
         this.emailSender = emailSender;
     }
+    
     [HttpGet("")]
     public IActionResult FeedbackForm_Get()
     {
