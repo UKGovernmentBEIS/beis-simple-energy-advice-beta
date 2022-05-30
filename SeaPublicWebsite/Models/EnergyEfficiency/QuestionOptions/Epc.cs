@@ -12,7 +12,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         public string Address2 { get; set; }
         public string Postcode { get; set; }
         public string EpcId { get; set; }
-        public string BuildingReference { get; set; }
         public string InspectionDate { get; set; }
         public PropertyType? PropertyType { get; set; }
         public HeatingType? HeatingType { get; set; }
