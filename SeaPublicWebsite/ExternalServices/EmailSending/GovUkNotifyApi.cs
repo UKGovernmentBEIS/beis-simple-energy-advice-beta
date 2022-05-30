@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Notify.Client;
 using Notify.Exceptions;
 using Notify.Models.Responses;
+using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.Helpers;
 
 namespace SeaPublicWebsite.ExternalServices.EmailSending
@@ -30,10 +31,14 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
                     emailModel.EmailReplyToId);
                 return response;
             }
-            catch (NotifyClientException)
+            catch (NotifyClientException e)
             {
-                // TODO: Logging, SEABETA-192
-                throw;
+                if (e.Message.Contains("Not a valid email address"))
+                {
+                    throw new EmailSenderException(EmailSenderExceptionType.InvalidEmailAddress);
+                }
+
+                throw new EmailSenderException(EmailSenderExceptionType.Other);
             }
         }
 

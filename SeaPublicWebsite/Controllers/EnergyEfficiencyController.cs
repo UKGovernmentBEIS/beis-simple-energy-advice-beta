@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Notify.Exceptions;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
+using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.PostcodesIo;
@@ -191,7 +193,7 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("postcode/{reference}")]
         public IActionResult AskForPostcode_Post(AskForPostcodeViewModel viewModel)
         {
-            if (!PostcodesIoApi.IsValidPostcode(viewModel.Postcode))
+            if (viewModel.Postcode is not null && !PostcodesIoApi.IsValidPostcode(viewModel.Postcode))
             {
                 ModelState.AddModelError(nameof(AskForPostcodeViewModel.Postcode), "Enter a valid UK post code");
             }
@@ -1098,10 +1100,28 @@ namespace SeaPublicWebsite.Controllers
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
             userDataStore.SaveUserData(userDataModel);
-
+            
             if (viewModel.HasEmailAddress)
             {
-                emailApi.SendReferenceNumberEmail(viewModel.EmailAddress, userDataModel.Reference);
+                try
+                {
+                    emailApi.SendReferenceNumberEmail(viewModel.EmailAddress, userDataModel.Reference);
+                }
+                catch (EmailSenderException e)
+                {
+                    switch (e.Type)
+                    {
+                        case EmailSenderExceptionType.InvalidEmailAddress:
+                            ModelState.AddModelError(nameof(viewModel.EmailAddress), "Enter a valid email address");
+                            break;
+                        case EmailSenderExceptionType.Other:
+                            ModelState.AddModelError(nameof(viewModel.EmailAddress), "Unable to send email due to unexpected error. Please uncheck this box and make a note of your reference number before you continue.");
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    return await YourRecommendations_GetAsync(viewModel.Reference);
+                }
             }
             
             return RedirectToAction("Recommendation_Get", new { id = viewModel.FirstReferenceId, reference = viewModel.Reference });
