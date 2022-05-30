@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SeaPublicWebsite.ErrorHandling;
+namespace SeaPublicWebsite.ExternalServices.EmailSending;
 
 public class EmailSenderException : Exception
 {
