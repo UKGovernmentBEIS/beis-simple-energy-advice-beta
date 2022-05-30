@@ -193,7 +193,7 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("postcode/{reference}")]
         public IActionResult AskForPostcode_Post(AskForPostcodeViewModel viewModel)
         {
-            if (!PostcodesIoApi.IsValidPostcode(viewModel.Postcode))
+            if (viewModel.Postcode is not null && !PostcodesIoApi.IsValidPostcode(viewModel.Postcode))
             {
                 ModelState.AddModelError(nameof(AskForPostcodeViewModel.Postcode), "Enter a valid UK post code");
             }

@@ -28,8 +28,7 @@
     
     <div class="govuk-grid-column-two-thirds">
         
-        @(await Html.GovUkErrorSummary(ViewData.ModelState))
-        
+                
         <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.UserRecommendation.Key, reference = Model.UserDataModel.Reference})" method="post" novalidate>
 
             @Html.AntiForgeryToken()

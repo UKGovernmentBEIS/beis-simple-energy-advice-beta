@@ -95,6 +95,7 @@
         @(RenderSection("BeforeMain", false))
 
         <main class="govuk-main-wrapper" id="main-content" role="main">
+            @(await Html.GovUkErrorSummary(ViewData.ModelState))
             @RenderBody()
         </main>
     </div>
