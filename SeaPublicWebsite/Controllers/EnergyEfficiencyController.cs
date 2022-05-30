@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Routing;
 using Notify.Exceptions;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.DataStores;
+using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.PostcodesIo;
@@ -1148,9 +1149,19 @@ namespace SeaPublicWebsite.Controllers
                 {
                     emailApi.SendReferenceNumberEmail(userDataModel.EmailAddress, userDataModel.Reference);
                 }
-                catch (NotifyClientException)
+                catch (EmailSenderException e)
                 {
-                    ModelState.AddModelError(nameof(viewModel.EmailAddress), "Enter a valid email address");
+                    switch (e.Type)
+                    {
+                        case EmailSenderExceptionType.InvalidEmailAddress:
+                            ModelState.AddModelError(nameof(viewModel.EmailAddress), "Enter a valid email address");
+                            break;
+                        case EmailSenderExceptionType.Other:
+                            ModelState.AddModelError(nameof(viewModel.EmailAddress), "An unexpected error occured");
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
                     return await YourRecommendations_GetAsync(viewModel.Reference);
                 }
             }
