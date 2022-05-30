@@ -461,8 +461,6 @@ namespace SeaPublicWebsite.Services
             {
                 HeatingPattern.AllDayAndNight => BreHeatingPatternType.AllDayAndAllNight,
                 HeatingPattern.AllDayNotNight => BreHeatingPatternType.AllDayButOffAtNight,
-                HeatingPattern.MorningAndEvening => BreHeatingPatternType.MorningAndEvening,
-                HeatingPattern.OnceADay => BreHeatingPatternType.JustOnceADay,
                 HeatingPattern.Other => BreHeatingPatternType.NoneOfTheAbove,
                 _ => throw new ArgumentOutOfRangeException()
             };
