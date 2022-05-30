@@ -1039,46 +1039,7 @@ namespace SeaPublicWebsite.Controllers
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.Temperature, userDataModel, viewModel.EntryPoint);
             return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
-        
-        [HttpGet("email-address/{reference}")]
-        public IActionResult EmailAddress_Get(string reference, QuestionFlowPage? entryPoint = null)
-        {
-            var userDataModel = userDataStore.LoadUserData(reference);
 
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.EmailAddress, userDataModel, entryPoint);
-            var skipArgs = questionFlowService.SkipLinkArguments(QuestionFlowPage.EmailAddress, userDataModel, entryPoint);
-            var viewModel = new EmailAddressViewModel
-            {
-                HasEmailAddress = userDataModel.HasEmailAddress,
-                EmailAddress = userDataModel.EmailAddress,
-                Reference = userDataModel.Reference,
-                EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
-                SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
-            };
-
-            return View("EmailAddress", viewModel);
-        }
-
-        [HttpPost("email-address/{reference}")]
-        public IActionResult EmailAddress_Post(EmailAddressViewModel viewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return EmailAddress_Get(viewModel.Reference, viewModel.EntryPoint);
-            }
-            
-            var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-
-            userDataModel.HasEmailAddress = viewModel.HasEmailAddress;
-            userDataModel.EmailAddress = viewModel.HasEmailAddress == HasEmailAddress.Yes ? viewModel.EmailAddress : null;
-            userDataStore.SaveUserData(userDataModel);
-
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.EmailAddress, userDataModel, viewModel.EntryPoint);
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
-        }
-
-        
         [HttpGet("answer-summary/{reference}")]
         public IActionResult AnswerSummary(string reference)
         {
@@ -1118,15 +1079,14 @@ namespace SeaPublicWebsite.Controllers
             int firstReferenceId = recommendationsForUser.Count == 0 ? -1 : (int) recommendationsForUser[0].Key;
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.YourRecommendations, userDataModel);
             var viewModel = new YourRecommendationsViewModel
-                {
-                    Reference = reference,
-                    NumberOfUserRecommendations = recommendationsForUser.Count,
-                    FirstReferenceId = firstReferenceId,
-                    HasEmailAddress = userDataModel.HasEmailAddress,
-                    EmailAddress = userDataModel.EmailAddress,
-                    BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
-                }
-;            return View("YourRecommendations", viewModel);
+            {
+                Reference = reference,
+                NumberOfUserRecommendations = recommendationsForUser.Count,
+                FirstReferenceId = firstReferenceId,
+                HasEmailAddress = false,
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+            };
+            return View("YourRecommendations", viewModel);
         }
 
         [HttpPost("your-recommendations/{reference}")]
@@ -1139,15 +1099,13 @@ namespace SeaPublicWebsite.Controllers
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
 
-            userDataModel.HasEmailAddress = viewModel.HasEmailAddress;
-            userDataModel.EmailAddress = viewModel.HasEmailAddress == HasEmailAddress.Yes ? viewModel.EmailAddress : null;
             userDataStore.SaveUserData(userDataModel);
-
-            if (viewModel.HasEmailAddress == HasEmailAddress.Yes)
+            
+            if (viewModel.HasEmailAddress)
             {
                 try
                 {
-                    emailApi.SendReferenceNumberEmail(userDataModel.EmailAddress, userDataModel.Reference);
+                    emailApi.SendReferenceNumberEmail(viewModel.EmailAddress, userDataModel.Reference);
                 }
                 catch (EmailSenderException e)
                 {

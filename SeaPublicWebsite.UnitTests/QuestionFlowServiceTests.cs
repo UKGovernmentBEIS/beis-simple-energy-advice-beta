@@ -1716,12 +1716,12 @@ public class QuestionFlowServiceTests
 
         public Input(
             QuestionFlowPage page,
-            string? reference = null,
+            string reference = null,
             OwnershipStatus? ownershipStatus = null,
             Country? country = null,
-            Epc? epc = null,
-            string? postcode = null,
-            string? houseNameOrNumber = null,
+            Epc epc = null,
+            string postcode = null,
+            string houseNameOrNumber = null,
             PropertyType? propertyType = null,
             HouseType? houseType = null,
             BungalowType? bungalowType = null,
@@ -1744,8 +1744,6 @@ public class QuestionFlowServiceTests
             HeatingPattern? heatingPattern = null,
             decimal? hoursOfHeating = null,
             decimal? temperature = null,
-            HasEmailAddress? hasEmailAddress = null,
-            string? emailAddress = null,
             QuestionFlowPage? entryPoint = null)
         {
             Page = page;
@@ -1779,8 +1777,6 @@ public class QuestionFlowServiceTests
                 HeatingPattern = heatingPattern,
                 HoursOfHeating = hoursOfHeating,
                 Temperature = temperature,
-                HasEmailAddress = hasEmailAddress,
-                EmailAddress = emailAddress
             };
             EntryPoint = entryPoint;
         }

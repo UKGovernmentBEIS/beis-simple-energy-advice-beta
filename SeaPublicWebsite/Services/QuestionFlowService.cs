@@ -11,6 +11,7 @@ namespace SeaPublicWebsite.Services
         public PathByActionArguments BackLinkArguments(QuestionFlowPage page, UserDataModel userData, QuestionFlowPage? entryPoint = null);
         
         public PathByActionArguments ForwardLinkArguments(QuestionFlowPage page, UserDataModel userData, QuestionFlowPage? entryPoint = null);
+        
         public PathByActionArguments SkipLinkArguments(QuestionFlowPage page, UserDataModel userData, QuestionFlowPage? entryPoint = null);
     }
 
@@ -50,7 +51,6 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.NumberOfOccupants => NumberOfOccupantsBackLinkArguments(userData, entryPoint),
                 QuestionFlowPage.HeatingPattern => HeatingPatternBackLinkArguments(userData, entryPoint),
                 QuestionFlowPage.Temperature => TemperatureBackLinkArguments(userData, entryPoint),
-                QuestionFlowPage.EmailAddress => EmailAddressBackLinkArguments(userData, entryPoint),
                 QuestionFlowPage.AnswerSummary => AnswerSummaryBackLinkArguments(userData),
                 QuestionFlowPage.YourRecommendations => YourRecommendationsBackLinkArguments(userData),
                 _ => throw new ArgumentOutOfRangeException()
@@ -87,7 +87,6 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.NumberOfOccupants => NumberOfOccupantsForwardLinkArguments(userData, entryPoint),
                 QuestionFlowPage.HeatingPattern => HeatingPatternForwardLinkArguments(userData, entryPoint),
                 QuestionFlowPage.Temperature => TemperatureForwardLinkArguments(userData),
-                QuestionFlowPage.EmailAddress => EmailAddressForwardLinkArguments(userData),
                 QuestionFlowPage.ServiceUnsuitable or QuestionFlowPage.AnswerSummary or QuestionFlowPage.YourRecommendations => throw new InvalidOperationException(),
                 _ => throw new ArgumentOutOfRangeException(nameof(page), page, null)
             };
@@ -101,7 +100,6 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.HomeAge => HomeAgeSkipLinkArguments(userData, entryPoint),
                 QuestionFlowPage.NumberOfOccupants => NumberOfOccupantsSkipLinkArguments(userData, entryPoint),
                 QuestionFlowPage.Temperature => TemperatureSkipLinkArguments(userData),
-                QuestionFlowPage.EmailAddress => EmailAddressSkipLinkArguments(userData),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
@@ -397,14 +395,6 @@ namespace SeaPublicWebsite.Services
             return entryPoint is QuestionFlowPage.Temperature
                 ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.HeatingPattern_Get), "EnergyEfficiency", new { reference, entryPoint });
-        }
-
-        private PathByActionArguments EmailAddressBackLinkArguments(UserDataModel userData, QuestionFlowPage? entryPoint)
-        {
-            var reference = userData.Reference;
-            return entryPoint is QuestionFlowPage.EmailAddress
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
-                : new PathByActionArguments(nameof(EnergyEfficiencyController.Temperature_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
         private PathByActionArguments AnswerSummaryBackLinkArguments(UserDataModel userData)
@@ -749,12 +739,6 @@ namespace SeaPublicWebsite.Services
             var reference = userData.Reference;
             return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency",new { reference });
         }
-
-        private PathByActionArguments EmailAddressForwardLinkArguments(UserDataModel userData)
-        {
-            var reference = userData.Reference;
-            return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency",new { reference });
-        }
         
         private PathByActionArguments AskForPostcodeSkipLinkArguments(UserDataModel userData)
         {
@@ -779,12 +763,6 @@ namespace SeaPublicWebsite.Services
         }
 
         private PathByActionArguments TemperatureSkipLinkArguments(UserDataModel userData)
-        {
-            var reference = userData.Reference;
-            return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference  });
-        }
-
-        private PathByActionArguments EmailAddressSkipLinkArguments(UserDataModel userData)
         {
             var reference = userData.Reference;
             return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference  });
@@ -820,7 +798,6 @@ namespace SeaPublicWebsite.Services
         NumberOfOccupants,
         HeatingPattern,
         Temperature,
-        EmailAddress,
         AnswerSummary,
         YourRecommendations
     }

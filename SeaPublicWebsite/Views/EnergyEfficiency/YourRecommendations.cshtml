@@ -12,7 +12,7 @@
     {
         Text = "Back",
         Href = Model.BackLink,
-        
+
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
         OverrideWithJavascript = false
@@ -47,68 +47,65 @@
             the available recommendations
         </p>
 
-        <div class="govuk-inset-text govuk-!-margin-bottom-7">
-            <p class="govuk-body">
-                The costs and savings we have provided for this service are estimates based on an average
-                home in England and Wales.
-            </p>
-            <p class="govuk-body">
-                They may not be the same as the costs and savings you see in practice, as every property is unique.
-            </p>
+        <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-warning-text__assistive">Note</span>
+                The costs and savings we have provided may not be the same in practice. These are estimates based on an average home in England and Wales.
+            </strong>
         </div>
 
-        <h2 class="govuk-heading-m">
-            Getting back to the service once you leave
+        <h2 class="govuk-heading-l">
+            Getting back to your recommendations once you leave
         </h2>
+
         <p class="govuk-body">
             You will need a reference number to return to your recommendations and action plan quickly if you leave the service.
         </p>
 
         <aside class="sea-user-reference govuk-!-margin-bottom-6" role="complementary">
-            <span class="govuk-caption-l">Your reference</span>
+            <span class="govuk-body-l">Your reference</span>
             <h2 class="govuk-heading-l" id="subsection-title">@Model.Reference</h2>
         </aside>
 
-        <form method="post" action="@Url.Action("EmailAddress_Post", "EnergyEfficiency")">
-            
+        <form method="post" action="@Url.Action("YourRecommendations_Post", "EnergyEfficiency")">
+
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.FirstReferenceId)
             @Html.HiddenFor(m => m.NumberOfUserRecommendations)
-            @(await Html.GovUkRadiosFor(
+            @(await Html.GovUkCheckboxFromBoolFor(
                 m => m.HasEmailAddress,
+                label: new()
+                {
+                    Text = "Yes, email a link and the reference number to me"
+                },
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
                     {
                         Html = @<text>
                                    <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-4">
-                                       Would you like us to email your reference to you?
+                                       Would you like us to email the above?
                                    </h1>
-                                   <p class="govuk-body">If you do not wish to provide an email, make sure you make a note of your reference number.</p>
+                                   <p class="govuk-body">We will send you a link to your recommendations and your reference number so you can quickly get back when you need to. If you do not wish to provide an email, make sure you make a note of your reference number.</p>
                                 </text>,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true,
                     },
                 },
-                conditionalOptions: new Dictionary<HasEmailAddress, Conditional>
+                conditionalOption: new Conditional
                 {
-                    {
-                        HasEmailAddress.Yes,
-                        new Conditional
-                        {
-                            Html = (@<text>
-                                        @await Html.GovUkTextInputFor(
-                                            m => m.EmailAddress,
-                                            labelOptions: new LabelViewModel
-                                            {
-                                                Text = "Please enter your email",
-                                            },
-                                            autocomplete: "email",
-                                            placeholder: "e.g. my.email@example.com"
-                                            )
-                                     </text>)
-                        }
-                    }
+                    Html = (@<text>
+                                @await Html.GovUkTextInputFor(
+                                    m => m.EmailAddress,
+                                    labelOptions: new LabelViewModel
+                                    {
+                                        Text = "Please enter your email",
+                                    },
+                                    autocomplete: "email",
+                                    placeholder: "e.g. my.email@example.com"
+                                    )
+                             </text>)
                 }))
 
             <div class="govuk-button-group">
