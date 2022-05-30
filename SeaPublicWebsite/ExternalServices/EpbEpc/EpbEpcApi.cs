@@ -351,8 +351,25 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
 
         private static GlazingType? GetGlazingTypeFromEpc(EpbEpcAssessmentDto epc)
         {
-            // TODO: Rebase and use glazing type
-            throw new NotImplementedException();
+            if (epc.WindowsDescription is null)
+            {
+                return null;
+            }
+
+            var hasSingle = epc.WindowsDescription.Any(description =>
+                description.Contains("single", StringComparison.OrdinalIgnoreCase));
+            var hasDoubleOrTriple = epc.WindowsDescription.Any(description =>
+                description.Contains("double", StringComparison.OrdinalIgnoreCase) ||
+                description.Contains("triple", StringComparison.OrdinalIgnoreCase) ||
+                description.Contains("secondary", StringComparison.OrdinalIgnoreCase));
+            
+            return (hasSingle, hasDoubleOrTriple) switch
+            {
+                (true, true) => GlazingType.Both,
+                (true, false) => GlazingType.SingleGlazed,
+                (false, true) => GlazingType.DoubleOrTripleGlazed,
+                (false, false) => null
+            };
         }
     }
 
