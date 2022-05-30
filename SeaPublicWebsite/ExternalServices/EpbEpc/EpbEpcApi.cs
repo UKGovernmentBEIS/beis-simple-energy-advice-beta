@@ -82,7 +82,10 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 CavityWallsInsulated = GetCavityWallsInsulatedFromEpc(epc),
                 FloorConstruction = GetFloorConstructionFromEpc(epc),
                 FloorInsulated = GetFloorInsulationFromEpc(epc),
-                ConstructionAgeBand = GetConstructionAgeBandFromEpc(epc)
+                ConstructionAgeBand = GetConstructionAgeBandFromEpc(epc),
+                RoofConstruction = GetRoofConstructionFromEpc(epc),
+                RoofInsulated = GetRoofInsulationFromEpc(epc),
+                GlazingType = GetGlazingTypeFromEpc(epc)
             };
         }
 
@@ -291,8 +294,8 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 return null;
             }
             
-            // TODO: Age bands?
-            var ageBand = epc.ConstructionAgeBand.Replace("England and Wales: ", "");
+            // TODO: Age bands? Rewrite this based on the age band encoding
+            var ageBand = epc.PropertyAgeBand.Replace("England and Wales: ", "");
             return ageBand switch
             {
                 ("before 1900") => HomeAge.Pre1900,
@@ -309,6 +312,47 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 _ => null
             };
 
+        }
+
+        private static RoofConstruction? GetRoofConstructionFromEpc(EpbEpcAssessmentDto epc)
+        {
+            if (epc.RoofDescription is null)
+            {
+                return null;
+            }
+
+            var hasFlat = epc.RoofDescription.Any(description =>
+                description.Contains("flat", StringComparison.OrdinalIgnoreCase));
+            var hasPitched = epc.RoofDescription.Any(description =>
+                description.Contains("pitched", StringComparison.OrdinalIgnoreCase));
+
+            return (hasFlat, hasPitched) switch
+            {
+                (true, true) => RoofConstruction.Mixed,
+                (true, false) => RoofConstruction.Flat,
+                (false, true) => RoofConstruction.Pitched,
+                (false, false) => null
+            };
+        }
+
+        private static RoofInsulated? GetRoofInsulationFromEpc(EpbEpcAssessmentDto epc)
+        {
+            if (epc.RoofDescription is null)
+            {
+                return null;
+            }
+
+            var hasInsulation = epc.RoofDescription.All(description =>
+                description.Contains("loft insulation", StringComparison.OrdinalIgnoreCase) ||
+                description.Contains("limited insulation", StringComparison.OrdinalIgnoreCase));
+
+            return hasInsulation ? RoofInsulated.Yes : RoofInsulated.No;
+        }
+
+        private static GlazingType? GetGlazingTypeFromEpc(EpbEpcAssessmentDto epc)
+        {
+            // TODO: Rebase and use glazing type
+            throw new NotImplementedException();
         }
     }
 

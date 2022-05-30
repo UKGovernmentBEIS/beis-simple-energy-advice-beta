@@ -21,6 +21,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         public FloorConstruction? FloorConstruction { get; set; }
         public FloorInsulated? FloorInsulated { get; set; }
         public HomeAge? ConstructionAgeBand { get; set; }
+        public RoofConstruction? RoofConstruction { get; set; }
+        public RoofInsulated? RoofInsulated { get; set; }
+        public GlazingType? GlazingType { get; set; }
     }
 
     public class EpcInformation
