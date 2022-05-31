@@ -49,3 +49,13 @@ Create a separate metrics space in GovPaaS to keep the metrics separate.
 - Run `cf add-network-policy grafana-server prometheus-server --protocol tcp --port 8080`
 - Run `cf apply-manifest -f manifest.yml`
 - Run `cf push grafana-server`
+
+## Configuration
+
+### Grafana
+
+- Login to the Grafana site
+- Create a dashboard
+- Go to the settings (cog icon)
+- Select `JSON Model`
+- Paste in the contents of `dev-dashboard.json`

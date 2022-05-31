@@ -30,3 +30,5 @@ cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" Bre__Password "<REAL_VALUE_HERE>"
 
 # GovUK Notify Credentials
 cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" GovUkNotify__ApiKey "<REAL_VALUE_HERE>"
+
+# Logit.io does not have credentials here, the endpoint is restricted by IP address instead
