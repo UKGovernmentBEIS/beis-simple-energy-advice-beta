@@ -1,0 +1,15 @@
+name: "Website Error or Fatal log"
+type: any
+index: "*-*"
+
+filter:
+- query:
+   query_string:
+      query: "level:Error OR level:Fatal"
+ 
+alert:
+- "email"
+
+email:
+- "homeenergyretrofitadvice@beis.gov.uk"
+- "dan.corder@softwire.com"
