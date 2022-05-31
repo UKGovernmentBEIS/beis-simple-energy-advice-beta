@@ -3,6 +3,7 @@
 # Start of configuration
 
 # Name - This is the bit after 'sea-beta-' - e.g. for sea-beta-DEV, PAAS_ENV_SHORTNAME would just be 'DEV'
+#        Note that for the production environment you must use "Production"
 echo "What name do you want to give to the new environment? (just the part after the 'sea-beta-' prefix please)"
 read PAAS_ENV_SHORTNAME
 
@@ -32,6 +33,9 @@ cf create-space "sea-beta-${PAAS_ENV_SHORTNAME}" -o "beis-domestic-energy-advice
 
 # - Target future commands at this space
 cf target -s "sea-beta-${PAAS_ENV_SHORTNAME}"
+
+# - Set the ASP.Net Core environment
+cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" ASPNETCORE_ENVIRONMENT ${PAAS_ENV_SHORTNAME}
 
 
 #---------------------------
