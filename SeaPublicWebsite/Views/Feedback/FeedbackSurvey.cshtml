@@ -36,14 +36,9 @@
                         Legend = new LegendViewModel
                         {
                             Html = @<text>
-                                       <h1 class="govuk-fieldset__heading">
-                                           Why did you come to the site today?
-                                       </h1>
-                                       <p>
-                                           Select all that apply
-                                       </p>
+                                       <strong>Why did you come to the site today?</strong>
+                                       <p>Select all that apply</p>
                                 </text>,
-                            Classes = "govuk-fieldset__legend--l"
                         }
                     }, 
                     conditionalOptions: new Dictionary<VisitReason, Conditional>
@@ -65,18 +60,15 @@
                         }
                     }))
 
-                @(await Html.GovUkRadiosFor<FeedbackSurveyViewModel, FoundInformation>(
+                @(await Html.GovUkRadiosFor(
                     m => m.FoundInformation,
                     fieldsetOptions: new FieldsetViewModel
                     {
                         Legend = new LegendViewModel
                         {
                             Html = @<text>
-                                       <h1 class="govuk-fieldset__heading">
-                                           Did you find the information you were looking for?
-                                       </h1>
+                                       <strong>Did you find the information you were looking for?</strong>
                                     </text>,
-                            Classes = "govuk-fieldset__legend--l"
                         }
                     },
                     conditionalOptions: new Dictionary<FoundInformation, Conditional>
@@ -103,14 +95,9 @@
                         Legend = new LegendViewModel
                         {
                             Html = @<text>
-                                       <h1 class="govuk-fieldset__heading">
-                                           How has the information helped you today?
-                                       </h1>
-                                       <p>
-                                           Select all that apply
-                                       </p>
+                                       <strong>How has the information helped you today?</strong>
+                                       <p>Select all that apply</p>
                                 </text>,
-                            Classes = "govuk-fieldset__legend--l"
                         }
                     }, 
                     conditionalOptions: new Dictionary<HowInformationHelped, Conditional>
@@ -139,14 +126,9 @@
                         Legend = new LegendViewModel
                         {
                             Html = @<text>
-                                       <h1 class="govuk-fieldset__heading">
-                                           What do you plan to do with the information?
-                                       </h1>
-                                       <p>
-                                           Select all that apply
-                                       </p>
+                                       <strong>What do you plan to do with the information?</strong>
+                                       <p>Select all that apply</p>
                                 </text>,
-                            Classes = "govuk-fieldset__legend--l"
                         }
                     }, 
                     conditionalOptions: new Dictionary<WhatPlannedToDo, Conditional>

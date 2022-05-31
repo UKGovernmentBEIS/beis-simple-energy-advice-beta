@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.Models.Feedback;
 
@@ -39,14 +40,28 @@ public class FeedbackController : Controller
     public IActionResult FeedbackSurvey_Get()
     {
         var viewModel = new FeedbackSurveyViewModel();
+        ViewBag.OnFeedbackPage = true;
         return View("FeedbackSurvey", viewModel);
     }
 
     [HttpPost("feedback-survey")]
     public IActionResult FeedbackSurvey_Post(FeedbackSurveyViewModel viewModel)
     {
+        if (!viewModel.VisitReasonList.Any())
+        {
+            ModelState.AddModelError(nameof(viewModel.VisitReasonList), "Please select at least one option");
+        }
+        if (!viewModel.HowInformationHelpedList.Any())
+        {
+            ModelState.AddModelError(nameof(viewModel.HowInformationHelpedList), "Please select at least one option");
+        }
+        if (!viewModel.WhatPlannedToDoList.Any())
+        {
+            ModelState.AddModelError(nameof(viewModel.WhatPlannedToDoList), "Please select at least one option");
+        }
         if (!ModelState.IsValid)
         {
+            ViewBag.OnFeedbackPage = true;
             return View("FeedbackSurvey", viewModel);
         }
         

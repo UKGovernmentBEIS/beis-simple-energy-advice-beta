@@ -119,7 +119,7 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
             };
             var emailModel = new GovUkNotifyEmailModel
             {
-                EmailAddress = "Codrin.Cotarlan@softwire.com",
+                EmailAddress = govUkNotifyConfig.FeedbackCollectingEmailAddress,
                 TemplateId = template.Id,
                 Personalisation = personalisation
             };
