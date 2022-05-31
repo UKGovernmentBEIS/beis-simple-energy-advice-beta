@@ -1,0 +1,200 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.Feedback
+@model SeaPublicWebsite.Models.Feedback.FeedbackSurveyViewModel
+@{
+    ViewBag.Title = "Help us improve our service";
+}
+
+@section BeforeMain {
+    @await Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        OverrideWithJavascript = true
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="@Url.Action("FeedbackSurvey_Post", "Feedback")" method="post" novalidate>
+            @Html.AntiForgeryToken()
+            
+            <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        Help us improve this service
+                    </h1>
+                </legend>
+                <p class="govuk-body">
+                    Please note that we will not be able to reply to your feedback.
+                </p>
+                
+                @(await Html.GovUkCheckboxesFor(
+                    m => m.VisitReasonList,
+                    fieldsetOptions: new FieldsetViewModel
+                    {
+                        Legend = new LegendViewModel
+                        {
+                            Html = @<text>
+                                       <h1 class="govuk-fieldset__heading">
+                                           Why did you come to the site today?
+                                       </h1>
+                                       <p>
+                                           Select all that apply
+                                       </p>
+                                </text>,
+                            Classes = "govuk-fieldset__legend--l"
+                        }
+                    }, 
+                    conditionalOptions: new Dictionary<VisitReason, Conditional>
+                    {
+                        {
+                            VisitReason.Other,
+                            new Conditional
+                            {
+                                Html = (@<text>
+                                        @await Html.GovUkTextAreaFor(
+                                            m => m.OtherReason,
+                                            labelOptions: new LabelViewModel
+                                            {
+                                                Text = "Please provide more information",
+                                            }
+                                            )
+                                     </text>)
+                            }
+                        }
+                    }))
+
+                @(await Html.GovUkRadiosFor<FeedbackSurveyViewModel, FoundInformation>(
+                    m => m.FoundInformation,
+                    fieldsetOptions: new FieldsetViewModel
+                    {
+                        Legend = new LegendViewModel
+                        {
+                            Html = @<text>
+                                       <h1 class="govuk-fieldset__heading">
+                                           Did you find the information you were looking for?
+                                       </h1>
+                                    </text>,
+                            Classes = "govuk-fieldset__legend--l"
+                        }
+                    },
+                    conditionalOptions: new Dictionary<FoundInformation, Conditional>
+                    {
+                        {
+                            FoundInformation.No,
+                            new Conditional
+                            {
+                                Html = (@<text>
+                                        @await Html.GovUkTextAreaFor(
+                                            m => m.NotFoundInformationDetails,
+                                            labelOptions: new LabelViewModel
+                                            {
+                                                Text = "Please provide more information",
+                                            })
+                                     </text>)
+                            }
+                        }
+                    }))
+                @(await Html.GovUkCheckboxesFor(
+                    m => m.HowInformationHelpedList,
+                    fieldsetOptions: new FieldsetViewModel
+                    {
+                        Legend = new LegendViewModel
+                        {
+                            Html = @<text>
+                                       <h1 class="govuk-fieldset__heading">
+                                           How has the information helped you today?
+                                       </h1>
+                                       <p>
+                                           Select all that apply
+                                       </p>
+                                </text>,
+                            Classes = "govuk-fieldset__legend--l"
+                        }
+                    }, 
+                    conditionalOptions: new Dictionary<HowInformationHelped, Conditional>
+                    {
+                        {
+                            HowInformationHelped.Other,
+                            new Conditional
+                            {
+                                Html = (@<text>
+                                        @await Html.GovUkTextAreaFor(
+                                            m => m.OtherHelp,
+                                            labelOptions: new LabelViewModel
+                                            {
+                                                Text = "Please provide more information",
+                                            }
+                                            )
+                                     </text>)
+                            }
+                        }
+                    }))
+                
+                @(await Html.GovUkCheckboxesFor(
+                    m => m.WhatPlannedToDoList,
+                    fieldsetOptions: new FieldsetViewModel
+                    {
+                        Legend = new LegendViewModel
+                        {
+                            Html = @<text>
+                                       <h1 class="govuk-fieldset__heading">
+                                           What do you plan to do with the information?
+                                       </h1>
+                                       <p>
+                                           Select all that apply
+                                       </p>
+                                </text>,
+                            Classes = "govuk-fieldset__legend--l"
+                        }
+                    }, 
+                    conditionalOptions: new Dictionary<WhatPlannedToDo, Conditional>
+                    {
+                        {
+                            WhatPlannedToDo.Other,
+                            new Conditional
+                            {
+                                Html = (@<text>
+                                        @await Html.GovUkTextAreaFor(
+                                            m => m.OtherPlan,
+                                            labelOptions: new LabelViewModel
+                                            {
+                                                Text = "Please provide more information",
+                                            }
+                                            )
+                                     </text>)
+                            }
+                        }
+                    }))
+            </fieldset>
+
+            @(await Html.GovUkButton(new ButtonViewModel
+            {
+                Text = "Submit feedback"
+            }))
+        </form>
+        
+        <h2 class="govuk-heading-m">
+            Were you looking for help?
+        </h2>
+        
+        <p class="govuk-body">
+            If you would like some help with the website, you can call us to talk to one of our support team. 
+        </p>
+        
+        <p class="govuk-body-l">
+            Telephone <br />
+            <span class="sea-telephone"><strong>0800 444 202</strong></span>
+        </p>
+        <p class="govuk-body">
+            Monday to Friday: 8am to 8pm<br>
+            Saturday and Sunday: 9am to 5pm
+        </p>
+        <p class="govuk-body">
+            <a class="govuk-link"  href="https://www.gov.uk/call-charges">
+                Find out more about call charges
+            </a>
+        </p>
+    </div>
+</div>
