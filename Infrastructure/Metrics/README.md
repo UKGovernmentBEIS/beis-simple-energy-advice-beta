@@ -40,6 +40,7 @@ Create a separate metrics space in GovPaaS to keep the metrics separate.
 - Run `cf create-service postgres small-11 grafana-postgresdb`
 
 ### Grafana
+- Cd to the Grafana directory
 - Run `cf create-app grafana-server --no-route`
 - Run `cf bind-service grafana-server grafana-postgresdb`
 - Run `cf map-route grafana-server cloudapps.digital --hostname grafana-server-sea-beta`

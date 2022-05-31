@@ -55,6 +55,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Conf", "Conf", "{10A4A1C1-7
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{B72D428D-D0C8-4910-B781-039FEF25523B}"
+	ProjectSection(SolutionItems) = preProject
+		Infrastructure\Logging\README.md = Infrastructure\Logging\README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logit.io", "Logit.io", "{94B8C042-6AF7-4B9C-93FC-BAA03A1A5492}"
 	ProjectSection(SolutionItems) = preProject
