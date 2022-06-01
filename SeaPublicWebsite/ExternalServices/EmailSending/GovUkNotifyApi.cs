@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using GovUkDesignSystem.Attributes;
 using Microsoft.Extensions.Options;
 using Notify.Client;
 using Notify.Exceptions;
 using Notify.Models.Responses;
-using SeaPublicWebsite.ErrorHandling;
-using SeaPublicWebsite.Helpers;
+using SeaPublicWebsite.Models.Feedback;
 
 namespace SeaPublicWebsite.ExternalServices.EmailSending
 {
@@ -81,6 +82,40 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
             {
                 { template.WhatUserWasDoingPlaceholder, whatUserWasDoing },
                 { template.WhatUserToldUsPlaceholder, whatUserToldUs }
+            };
+            var emailModel = new GovUkNotifyEmailModel
+            {
+                EmailAddress = govUkNotifyConfig.FeedbackCollectingEmailAddress,
+                TemplateId = template.Id,
+                Personalisation = personalisation
+            };
+            var response = SendEmail(emailModel);
+        }
+        
+        public void SendFeedbackSurveyResponseEmail(FeedbackSurveyViewModel feedback)
+        {
+            var template = govUkNotifyConfig.FeedbackSurveyResponseTemplate;
+            var visitReason = string.Join('\n', feedback.VisitReasonList.Select(
+                r => r is VisitReason.Other 
+                    ? feedback.OtherReason 
+                    : GovUkRadioCheckboxLabelTextAttribute.GetLabelText(r)));
+            var foundInformation = feedback.FoundInformation is FoundInformation.Yes
+                ? "Yes"
+                : "No. " + feedback.NotFoundInformationDetails;
+            var howInformationHelped = string.Join('\n', feedback.HowInformationHelpedList.Select(
+                r => r is HowInformationHelped.Other 
+                    ? feedback.OtherHelp 
+                    : GovUkRadioCheckboxLabelTextAttribute.GetLabelText(r)));
+            var whatPlannedToDo = string.Join('\n', feedback.WhatPlannedToDoList.Select(
+                r => r is WhatPlannedToDo.Other
+                    ? feedback.OtherPlan 
+                    : GovUkRadioCheckboxLabelTextAttribute.GetLabelText(r)));
+            var personalisation = new Dictionary<string, dynamic>
+            {
+                { template.VisitReasonPlaceholder, visitReason },
+                { template.FoundInformationPlaceholder, foundInformation},
+                { template.HowInformationHelpedPlaceholder, howInformationHelped },
+                { template.WhatPlannedToDoPlaceholder, whatPlannedToDo },
             };
             var emailModel = new GovUkNotifyEmailModel
             {
