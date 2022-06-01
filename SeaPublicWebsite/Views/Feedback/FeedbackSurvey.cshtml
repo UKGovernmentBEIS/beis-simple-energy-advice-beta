@@ -19,137 +19,133 @@
         <form action="@Url.Action("FeedbackSurvey_Post", "Feedback")" method="post" novalidate>
             @Html.AntiForgeryToken()
             
-            <fieldset class="govuk-fieldset">
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    <h1 class="govuk-fieldset__heading">
-                        Help us improve this service
-                    </h1>
-                </legend>
-                <p class="govuk-body">
-                    Please note that we will not be able to reply to your feedback.
-                </p>
-                
-                @(await Html.GovUkCheckboxesFor(
-                    m => m.VisitReasonList,
-                    fieldsetOptions: new FieldsetViewModel
+            <h1 class="govuk-heading-l">
+                Help us improve this service
+            </h1>
+            <p class="govuk-body">
+                Please note that we will not be able to reply to your feedback.
+            </p>
+            
+            @(await Html.GovUkCheckboxesFor(
+                m => m.VisitReasonList,
+                fieldsetOptions: new FieldsetViewModel
+                {
+                    Legend = new LegendViewModel
                     {
-                        Legend = new LegendViewModel
-                        {
-                            Html = @<text>
-                                       <strong>Why did you come to the site today?</strong>
-                                       <p>Select all that apply</p>
-                                </text>,
-                        }
-                    }, 
-                    conditionalOptions: new Dictionary<VisitReason, Conditional>
+                        Html = @<text>
+                                   <strong>Why did you come to the site today?</strong>
+                                   <p>Select all that apply</p>
+                            </text>,
+                    }
+                }, 
+                conditionalOptions: new Dictionary<VisitReason, Conditional>
+                {
                     {
+                        VisitReason.Other,
+                        new Conditional
                         {
-                            VisitReason.Other,
-                            new Conditional
-                            {
-                                Html = (@<text>
-                                        @await Html.GovUkTextAreaFor(
-                                            m => m.OtherReason,
-                                            labelOptions: new LabelViewModel
-                                            {
-                                                Text = "Please provide more information",
-                                            }
-                                            )
-                                     </text>)
-                            }
+                            Html = (@<text>
+                                    @await Html.GovUkTextAreaFor(
+                                        m => m.OtherReason,
+                                        labelOptions: new LabelViewModel
+                                        {
+                                            Text = "Please provide more information",
+                                        }
+                                        )
+                                 </text>)
                         }
-                    }))
+                    }
+                }))
 
-                @(await Html.GovUkRadiosFor(
-                    m => m.FoundInformation,
-                    fieldsetOptions: new FieldsetViewModel
+            @(await Html.GovUkRadiosFor(
+                m => m.FoundInformation,
+                fieldsetOptions: new FieldsetViewModel
+                {
+                    Legend = new LegendViewModel
                     {
-                        Legend = new LegendViewModel
-                        {
-                            Html = @<text>
-                                       <strong>Did you find the information you were looking for?</strong>
-                                    </text>,
-                        }
-                    },
-                    conditionalOptions: new Dictionary<FoundInformation, Conditional>
-                    {
-                        {
-                            FoundInformation.No,
-                            new Conditional
-                            {
-                                Html = (@<text>
-                                        @await Html.GovUkTextAreaFor(
-                                            m => m.NotFoundInformationDetails,
-                                            labelOptions: new LabelViewModel
-                                            {
-                                                Text = "Please provide more information",
-                                            })
-                                     </text>)
-                            }
-                        }
-                    }))
-                @(await Html.GovUkCheckboxesFor(
-                    m => m.HowInformationHelpedList,
-                    fieldsetOptions: new FieldsetViewModel
-                    {
-                        Legend = new LegendViewModel
-                        {
-                            Html = @<text>
-                                       <strong>How has the information helped you today?</strong>
-                                       <p>Select all that apply</p>
+                        Html = @<text>
+                                   <strong>Did you find the information you were looking for?</strong>
                                 </text>,
-                        }
-                    }, 
-                    conditionalOptions: new Dictionary<HowInformationHelped, Conditional>
+                    }
+                },
+                conditionalOptions: new Dictionary<FoundInformation, Conditional>
+                {
                     {
+                        FoundInformation.No,
+                        new Conditional
                         {
-                            HowInformationHelped.Other,
-                            new Conditional
-                            {
-                                Html = (@<text>
-                                        @await Html.GovUkTextAreaFor(
-                                            m => m.OtherHelp,
-                                            labelOptions: new LabelViewModel
-                                            {
-                                                Text = "Please provide more information",
-                                            }
-                                            )
-                                     </text>)
-                            }
+                            Html = (@<text>
+                                    @await Html.GovUkTextAreaFor(
+                                        m => m.NotFoundInformationDetails,
+                                        labelOptions: new LabelViewModel
+                                        {
+                                            Text = "Please provide more information",
+                                        })
+                                 </text>)
                         }
-                    }))
-                
-                @(await Html.GovUkCheckboxesFor(
-                    m => m.WhatPlannedToDoList,
-                    fieldsetOptions: new FieldsetViewModel
+                    }
+                }))
+            @(await Html.GovUkCheckboxesFor(
+                m => m.HowInformationHelpedList,
+                fieldsetOptions: new FieldsetViewModel
+                {
+                    Legend = new LegendViewModel
                     {
-                        Legend = new LegendViewModel
-                        {
-                            Html = @<text>
-                                       <strong>What do you plan to do with the information?</strong>
-                                       <p>Select all that apply</p>
-                                </text>,
-                        }
-                    }, 
-                    conditionalOptions: new Dictionary<WhatPlannedToDo, Conditional>
+                        Html = @<text>
+                                   <strong>How has the information helped you today?</strong>
+                                   <p>Select all that apply</p>
+                            </text>,
+                    }
+                }, 
+                conditionalOptions: new Dictionary<HowInformationHelped, Conditional>
+                {
                     {
+                        HowInformationHelped.Other,
+                        new Conditional
                         {
-                            WhatPlannedToDo.Other,
-                            new Conditional
-                            {
-                                Html = (@<text>
-                                        @await Html.GovUkTextAreaFor(
-                                            m => m.OtherPlan,
-                                            labelOptions: new LabelViewModel
-                                            {
-                                                Text = "Please provide more information",
-                                            }
-                                            )
-                                     </text>)
-                            }
+                            Html = (@<text>
+                                    @await Html.GovUkTextAreaFor(
+                                        m => m.OtherHelp,
+                                        labelOptions: new LabelViewModel
+                                        {
+                                            Text = "Please provide more information",
+                                        }
+                                        )
+                                 </text>)
                         }
-                    }))
-            </fieldset>
+                    }
+                }))
+            
+            @(await Html.GovUkCheckboxesFor(
+                m => m.WhatPlannedToDoList,
+                fieldsetOptions: new FieldsetViewModel
+                {
+                    Legend = new LegendViewModel
+                    {
+                        Html = @<text>
+                                   <strong>What do you plan to do with the information?</strong>
+                                   <p>Select all that apply</p>
+                            </text>,
+                    }
+                }, 
+                conditionalOptions: new Dictionary<WhatPlannedToDo, Conditional>
+                {
+                    {
+                        WhatPlannedToDo.Other,
+                        new Conditional
+                        {
+                            Html = (@<text>
+                                    @await Html.GovUkTextAreaFor(
+                                        m => m.OtherPlan,
+                                        labelOptions: new LabelViewModel
+                                        {
+                                            Text = "Please provide more information",
+                                        }
+                                        )
+                                 </text>)
+                        }
+                    }
+                }))
 
             @(await Html.GovUkButton(new ButtonViewModel
             {

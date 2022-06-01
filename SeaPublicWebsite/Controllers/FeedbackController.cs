@@ -19,6 +19,7 @@ public class FeedbackController : Controller
     public IActionResult FeedbackForm_Get()
     {
         var viewModel = new FeedbackFormViewModel();
+        ViewBag.OnFeedbackPage = true;
         return View("FeedbackForm", viewModel);
     }
 
@@ -27,7 +28,7 @@ public class FeedbackController : Controller
     {
         if (!ModelState.IsValid)
         {
-            return View("FeedbackForm", viewModel);
+            return FeedbackForm_Get();
         }
         
         emailSender.SendFeedbackFormResponseEmail(
@@ -49,20 +50,19 @@ public class FeedbackController : Controller
     {
         if (!viewModel.VisitReasonList.Any())
         {
-            ModelState.AddModelError(nameof(viewModel.VisitReasonList), "Please select at least one option");
+            ModelState.AddModelError(nameof(viewModel.VisitReasonList), "Select why you came to the site today");
         }
         if (!viewModel.HowInformationHelpedList.Any())
         {
-            ModelState.AddModelError(nameof(viewModel.HowInformationHelpedList), "Please select at least one option");
+            ModelState.AddModelError(nameof(viewModel.HowInformationHelpedList), "Select how has the information helped you today");
         }
         if (!viewModel.WhatPlannedToDoList.Any())
         {
-            ModelState.AddModelError(nameof(viewModel.WhatPlannedToDoList), "Please select at least one option");
+            ModelState.AddModelError(nameof(viewModel.WhatPlannedToDoList), "Select what you plan to do with the information");
         }
         if (!ModelState.IsValid)
         {
-            ViewBag.OnFeedbackPage = true;
-            return View("FeedbackSurvey", viewModel);
+            return FeedbackSurvey_Get();
         }
         
         emailSender.SendFeedbackSurveyResponseEmail(viewModel);
