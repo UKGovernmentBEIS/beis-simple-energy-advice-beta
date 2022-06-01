@@ -1,0 +1,32 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.DataModels
+@using SeaPublicWebsite.Models.EnergyEfficiency
+@using SeaPublicWebsite.Controllers
+@model SeaPublicWebsite.Models.EnergyEfficiency.NoRecommendationsViewModel;
+
+@{
+    ViewBag.Title = "Your home is energy efficient";
+}
+
+@section BeforeMain {
+    @await Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = Model.BackLink,
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = false
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        @await Html.GovUkPanel(new PanelViewModel
+        {
+            TitleText = "Your home is energy efficient",
+            Text = "Your home is well insulated"
+        })
+    </div>
+</div>

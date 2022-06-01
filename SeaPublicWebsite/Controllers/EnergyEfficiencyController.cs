@@ -1066,6 +1066,7 @@ namespace SeaPublicWebsite.Controllers
         }
 
         
+        
         [HttpGet("your-recommendations/{reference}")]
         public async Task<IActionResult> YourRecommendations_GetAsync(string reference)
         {
@@ -1086,8 +1087,16 @@ namespace SeaPublicWebsite.Controllers
             ).ToList();
             userDataStore.SaveUserData(userDataModel);
 
-            int firstReferenceId = recommendationsForUser.Count == 0 ? -1 : (int) recommendationsForUser[0].Key;
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.YourRecommendations, userDataModel);
+            if (!userDataModel.UserRecommendations.Any())
+            {
+                return View("NoRecommendations", new NoRecommendationsViewModel
+                {
+                    BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                });
+            }
+
+            int firstReferenceId = recommendationsForUser.Count == 0 ? -1 : (int) recommendationsForUser[0].Key;
             var viewModel = new YourRecommendationsViewModel
             {
                 Reference = reference,
