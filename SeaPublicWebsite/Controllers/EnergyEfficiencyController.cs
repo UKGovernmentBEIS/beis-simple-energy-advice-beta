@@ -76,8 +76,13 @@ namespace SeaPublicWebsite.Controllers
                     ModelState.AddModelError(nameof(NewOrReturningUserViewModel.Reference), "Check you have typed the reference correctly. Reference must be 8 characters.");
                     return NewOrReturningUser_Get();
                 }
+
+                var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
                 
-                return RedirectToAction("YourSavedRecommendations_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
+                // TODO: Seabeta-346 to combine this with magic link logic
+                return userDataModel.UserRecommendations.Any()
+                    ? RedirectToAction("Recommendation_Get", "EnergyEfficiency", new { reference = viewModel.Reference, id = (int) userDataModel.UserRecommendations[0].Key })
+                    : RedirectToAction("NoRecommendations_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
             }
 
             string reference = userDataStore.GenerateNewReferenceAndSaveEmptyUserData();
