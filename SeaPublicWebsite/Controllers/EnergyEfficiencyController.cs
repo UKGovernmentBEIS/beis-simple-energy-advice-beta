@@ -1125,7 +1125,7 @@ namespace SeaPublicWebsite.Controllers
                             ModelState.AddModelError(nameof(viewModel.EmailAddress), "Enter a valid email address");
                             break;
                         case EmailSenderExceptionType.Other:
-                            ModelState.AddModelError(nameof(viewModel.EmailAddress), "Unable to send email due to unexpected error. Please uncheck this box and make a note of your reference number before you continue.");
+                            ModelState.AddModelError(nameof(viewModel.EmailAddress), "Unable to send email due to unexpected error. Uncheck this box and make a note of your reference number before you continue.");
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
