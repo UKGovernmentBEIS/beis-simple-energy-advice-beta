@@ -1051,10 +1051,9 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpGet("answer-summary/{reference}")]
-        public IActionResult AnswerSummary(string reference)
+        public IActionResult AnswerSummary_Get(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
-
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.AnswerSummary, userDataModel);
             var viewModel = new AnswerSummaryViewModel
             {
@@ -1065,11 +1064,14 @@ namespace SeaPublicWebsite.Controllers
             return View("AnswerSummary", viewModel);
         }
 
-        
-        
-        [HttpGet("your-recommendations/{reference}")]
-        public async Task<IActionResult> YourRecommendations_GetAsync(string reference)
+        [HttpPost("answer-summary/{reference}")]
+        public async Task<IActionResult> AnswerSummary_PostAsync(string reference)
         {
+            if (!ModelState.IsValid)
+            {
+                return AnswerSummary_Get(reference);
+            }
+            
             var userDataModel = userDataStore.LoadUserData(reference);
             var recommendationsForUser = await recommendationService.GetRecommendationsForUserAsync(userDataModel);
             userDataModel.UserRecommendations = recommendationsForUser.Select(r => 
@@ -1086,22 +1088,32 @@ namespace SeaPublicWebsite.Controllers
                 }
             ).ToList();
             userDataStore.SaveUserData(userDataModel);
+            
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AnswerSummary, userDataModel);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+        }
 
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.YourRecommendations, userDataModel);
-            if (!userDataModel.UserRecommendations.Any())
+        [HttpGet("no-recommendations/{reference}")]
+        public IActionResult NoRecommendations_Get(string reference)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.NoRecommendations, userDataModel);
+            var viewModel = new NoRecommendationsViewModel
             {
-                return View("NoRecommendations", new NoRecommendationsViewModel
-                {
-                    BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
-                });
-            }
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+            };
+            return View("NoRecommendations", viewModel);
+        }
 
-            int firstReferenceId = recommendationsForUser.Count == 0 ? -1 : (int) recommendationsForUser[0].Key;
+        [HttpGet("your-recommendations/{reference}")]
+        public IActionResult YourRecommendations_Get(string reference)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.YourRecommendations, userDataModel);
             var viewModel = new YourRecommendationsViewModel
             {
                 Reference = reference,
-                NumberOfUserRecommendations = recommendationsForUser.Count,
-                FirstReferenceId = firstReferenceId,
+                NumberOfUserRecommendations = userDataModel.UserRecommendations.Count,
                 HasEmailAddress = false,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
@@ -1109,17 +1121,14 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpPost("your-recommendations/{reference}")]
-        public async Task<IActionResult> YourRecommendations_Post(YourRecommendationsViewModel viewModel)
+        public IActionResult YourRecommendations_Post(YourRecommendationsViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return await YourRecommendations_GetAsync(viewModel.Reference);
+                return YourRecommendations_Get(viewModel.Reference);
             }
 
             var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-
-            userDataStore.SaveUserData(userDataModel);
-            
             if (viewModel.HasEmailAddress)
             {
                 try
@@ -1139,11 +1148,11 @@ namespace SeaPublicWebsite.Controllers
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
-                    return await YourRecommendations_GetAsync(viewModel.Reference);
+                    return YourRecommendations_Get(viewModel.Reference);
                 }
             }
             
-            return RedirectToAction("Recommendation_Get", new { id = viewModel.FirstReferenceId, reference = viewModel.Reference });
+            return RedirectToAction("Recommendation_Get", new { id = (int) userDataModel.UserRecommendations[0].Key, reference = viewModel.Reference });
         }
 
         [HttpGet("your-recommendations/{id}/{reference}")]
