@@ -12,6 +12,7 @@ public class ErrorController: Controller
         return code switch
         {
             404 => View("PageNotFound"),
+            500 => View("ServiceIssue"),
             _ => throw new ArgumentOutOfRangeException()
         };
     }
