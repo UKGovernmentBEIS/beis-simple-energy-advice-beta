@@ -24,6 +24,8 @@
 
         public int heating_pattern_type { get; set; }
 
+        public decimal[] normal_days_off_hours { get; set; }
+        
         public int? occupants { get; set; }
 
         public bool measures { get; set; }
@@ -49,6 +51,7 @@
             bool? breHotWaterCylinder,
             int? breOccupants,
             BreHeatingPatternType breHeatingPatternType,
+            decimal[] breNormalDaysOffHours,
             decimal? breTemperature
         )
         {
@@ -66,6 +69,7 @@
             hot_water_cylinder = breHotWaterCylinder;
             occupants = breOccupants;
             heating_pattern_type = (int) breHeatingPatternType;
+            normal_days_off_hours = breNormalDaysOffHours;
             living_room_temperature = breTemperature;
             //assumption:
             num_storeys = brePropertyType == BrePropertyType.House ? 2 : 1;
