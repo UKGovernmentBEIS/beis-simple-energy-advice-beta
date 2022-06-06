@@ -476,7 +476,9 @@ namespace SeaPublicWebsite.Services
         {
             if (hoursOfHeatingMorning != null && hoursOfHeatingEvening != null)
             {
-                return new [] { 12 - (decimal) hoursOfHeatingMorning, 12 - (decimal) hoursOfHeatingEvening };
+                //assumption: time heating is turned on is not collected so this is a simplification of the BRE input complexity available
+                decimal averageOffPeriod = (24 - ((decimal) hoursOfHeatingMorning + (decimal) hoursOfHeatingEvening)) / 2;
+                return new [] { averageOffPeriod, averageOffPeriod };
             }
             return null;
         }
