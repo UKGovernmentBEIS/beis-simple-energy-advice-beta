@@ -30,7 +30,7 @@
 
         public string[] measures_package { get; set; }
 
-        public int roof_type { get; set; }
+        public int? roof_type { get; set; }
 
         public int wall_type { get; set; }
 
@@ -43,7 +43,7 @@
             BreFlatLevel? breFlatLevel,
             string breConstructionDate,
             BreWallType breWallType,
-            BreRoofType breRoofType,
+            BreRoofType? breRoofType,
             BreGlazingType breGlazingType,
             BreHeatingFuel breHeatingFuel,
             bool? breHotWaterCylinder,
@@ -59,7 +59,7 @@
             construction_date = breConstructionDate;
             wall_type = (int) breWallType;
             //no input for floor_type in BRE API
-            roof_type = (int) breRoofType;
+            roof_type = (int?) breRoofType;
             glazing_type = (int) breGlazingType;
             //no input for outdoor heater space in BRE API
             heating_fuel = ((int) breHeatingFuel).ToString();

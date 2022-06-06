@@ -204,7 +204,7 @@ namespace SeaPublicWebsite.Services
             BreWallType breWallType = GetBreWallType(userData.WallConstruction.Value, userData.SolidWallsInsulated,
                 userData.CavityWallsInsulated);
 
-            BreRoofType breRoofType = GetBreRoofType(userData.RoofConstruction.Value, userData.AccessibleLoftSpace, userData.RoofInsulated);
+            BreRoofType? breRoofType = GetBreRoofType(userData.RoofConstruction, userData.AccessibleLoftSpace, userData.RoofInsulated);
 
             BreGlazingType breGlazingType = GetBreGlazingType(userData.GlazingType.Value);
 
@@ -379,7 +379,7 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static BreRoofType GetBreRoofType(RoofConstruction roofConstruction,
+        private static BreRoofType? GetBreRoofType(RoofConstruction? roofConstruction,
             AccessibleLoftSpace? accessibleLoftSpace, RoofInsulated? roofInsulated)
         {
             return roofConstruction switch
@@ -401,7 +401,8 @@ namespace SeaPublicWebsite.Services
                     },
                     _ => throw new ArgumentOutOfRangeException()
                 },
-                _ => throw new ArgumentOutOfRangeException()
+                //assumption for ground and middle floor flats
+                _ => null
             };
         }
 
