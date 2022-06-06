@@ -24,7 +24,7 @@
 
         public int heating_pattern_type { get; set; }
 
-        public decimal[] normal_days_off_hours { get; set; }
+        public int[] normal_days_off_hours { get; set; }
         
         public int? occupants { get; set; }
 
@@ -51,7 +51,7 @@
             bool? breHotWaterCylinder,
             int? breOccupants,
             BreHeatingPatternType breHeatingPatternType,
-            decimal[] breNormalDaysOffHours,
+            int[] breNormalDaysOffHours,
             decimal? breTemperature
         )
         {

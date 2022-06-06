@@ -215,7 +215,7 @@ namespace SeaPublicWebsite.Services
 
             BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(userData.HeatingPattern.Value);
 
-            decimal[] breNormalDaysOffHours =
+            int[] breNormalDaysOffHours =
                 GetBreNormalDaysOffHours(userData.HoursOfHeatingMorning, userData.HoursOfHeatingEvening);
 
             BreRequest request = new(
@@ -472,12 +472,12 @@ namespace SeaPublicWebsite.Services
             };
         }
         
-        private static decimal[] GetBreNormalDaysOffHours(decimal? hoursOfHeatingMorning, decimal? hoursOfHeatingEvening)
+        private static int[] GetBreNormalDaysOffHours(decimal? hoursOfHeatingMorning, decimal? hoursOfHeatingEvening)
         {
             if (hoursOfHeatingMorning != null && hoursOfHeatingEvening != null)
             {
                 //assumption: time heating is turned on is not collected so this is a simplification of the BRE input complexity available
-                decimal averageOffPeriod = (24 - ((decimal) hoursOfHeatingMorning + (decimal) hoursOfHeatingEvening)) / 2;
+                int averageOffPeriod = (int) ((24 - (hoursOfHeatingMorning + hoursOfHeatingEvening)) / 2);
                 return new [] { averageOffPeriod, averageOffPeriod };
             }
             return null;
