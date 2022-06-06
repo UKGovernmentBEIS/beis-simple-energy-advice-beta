@@ -56,14 +56,7 @@
         document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     </script>
 
-    @await Html.GovUkCookieBanner(new CookieBannerViewModel
-    {
-        BannerState = bannerState,
-        CookieType = CookieType.Analytics,
-        ButtonClickAction = @Url.Action("CookieConsent", "Cookie"),
-        ViewCookiesLink = @Url.Action("CookieSettings_Get", "Cookie"),
-        ReturnUrl = Context.Request.GetEncodedPathAndQuery()
-    })
+    @{ await Html.RenderPartialAsync("CookieBanner"); }
 
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
 
