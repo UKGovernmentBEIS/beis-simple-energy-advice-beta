@@ -9,11 +9,11 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public HeatingPattern? HeatingPattern { get; set; }
         
         [GovUkValidateRequiredIf(ErrorMessageIfMissing = "Enter number of hours", IsRequiredPropertyName = nameof(IsRequiredHoursOfHeating))]
-        [GovUkValidateDecimalRange("Number of hours", 0, 12)]
+        [GovUkValidateIntRange("Number of hours", 0, 12)]
         public int? HoursOfHeatingMorning { get; set; }
         
         [GovUkValidateRequiredIf(ErrorMessageIfMissing = "Enter number of hours", IsRequiredPropertyName = nameof(IsRequiredHoursOfHeating))]
-        [GovUkValidateDecimalRange("Number of hours", 0, 12)]
+        [GovUkValidateIntRange("Number of hours", 0, 12)]
         public int? HoursOfHeatingEvening { get; set; }
 
         public string Reference { get; set; }
