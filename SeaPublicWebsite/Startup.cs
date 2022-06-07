@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SeaPublicWebsite.Controllers;
 using SeaPublicWebsite.Data;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ErrorHandling;
@@ -62,6 +63,8 @@ namespace SeaPublicWebsite
             
             services.AddDbContext<SeaDbContext>(opt =>
                 opt.UseNpgsql(configuration.GetConnectionString("PostgreSQLConnection")));
+            
+            services.Configure<TopLevelConfiguration>(configuration);
         }
         
         private void ConfigureCookieService(IServiceCollection services)

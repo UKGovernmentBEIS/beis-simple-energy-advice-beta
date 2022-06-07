@@ -29,7 +29,7 @@ namespace SeaPublicWebsite.Controllers
         private readonly RecommendationService recommendationService;
 
         public EnergyEfficiencyController(
-            UserDataStore userDataStore, 
+            UserDataStore userDataStore,
             IQuestionFlowService questionFlowService, 
             IEpcApi epcApi, 
             IEmailSender emailApi, 
