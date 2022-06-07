@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices.Models.Epb;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
@@ -16,12 +19,14 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
     {
         private readonly IMemoryCache memoryCache;
         private readonly EpbEpcConfiguration configuration;
+        private readonly ILogger<EpbEpcApi> logger;
         private readonly string cacheTokenKey = "EpbEpcToken";
         
-        public EpbEpcApi(IOptions<EpbEpcConfiguration> options, IMemoryCache memoryCache)
+        public EpbEpcApi(IOptions<EpbEpcConfiguration> options, IMemoryCache memoryCache, ILogger<EpbEpcApi> logger)
         {
             this.memoryCache = memoryCache;
             this.configuration = options.Value;
+            this.logger = logger;
         }
         
         public async Task<List<EpcInformation>> GetEpcsInformationForPostcodeAndBuildingNameOrNumber(string postcode, string buildingNameOrNumber = null)
@@ -30,15 +35,29 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             var query = $"postcode={postcode}";
             if (buildingNameOrNumber is not null)
             {
-                query += $"buildingNameOrNumber={buildingNameOrNumber}";
+                query += $"&buildingNameOrNumber={buildingNameOrNumber}";
             }
-            var response = await HttpRequestHelper.SendGetRequestAsync<EpbAssessmentsDto>(
-                new RequestParameters
+
+            EpbAssessmentsDto response = null;
+            try
+            {
+                response = await HttpRequestHelper.SendGetRequestAsync<EpbAssessmentsDto>(
+                    new RequestParameters
+                    {
+                        BaseAddress = configuration.BaseUrl,
+                        Path = $"/api/assessments/domestic-epcs/search?{query}",
+                        Auth = new AuthenticationHeaderValue("Bearer", token)
+                    });
+            } catch (ApiException e)
+            {
+                if (e.StatusCode is not HttpStatusCode.NotFound)
                 {
-                    BaseAddress = configuration.BaseUrl,
-                    Path = $"/api/assessments/domestic-epcs/search?{query}",
-                    Auth = new AuthenticationHeaderValue("Bearer", token)
-                });
+                    logger.Log(LogLevel.Warning, "{Message}", e.Message);
+                }
+
+                return null;
+            }
+            
             if (response is null)
             {
                 return null;
@@ -152,7 +171,7 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 return PropertyType.Bungalow;
             }
 
-            if (epc.PropertyType.Contains("Apartment", StringComparison.OrdinalIgnoreCase) ||
+            if (epc.PropertyType.Contains("Flat", StringComparison.OrdinalIgnoreCase) ||
                 epc.PropertyType.Contains("Maisonette", StringComparison.OrdinalIgnoreCase))
             {
                 return PropertyType.ApartmentFlatOrMaisonette;
@@ -309,7 +328,7 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             }
 
             if (epc.WallsDescription.Any(description =>
-                    description.Contains("cavity", StringComparison.OrdinalIgnoreCase) &&
+                    description.Contains("solid", StringComparison.OrdinalIgnoreCase) &&
                     (description.Contains("insulated", StringComparison.OrdinalIgnoreCase) ||
                      description.Contains("internal insulation", StringComparison.OrdinalIgnoreCase) ||
                      description.Contains("external insulation", StringComparison.OrdinalIgnoreCase))))
@@ -318,14 +337,14 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             }
             
             if (epc.WallsDescription.Any(description =>
-                    description.Contains("cavity", StringComparison.OrdinalIgnoreCase) &&
+                    description.Contains("solid", StringComparison.OrdinalIgnoreCase) &&
                     description.Contains("partial insulation", StringComparison.OrdinalIgnoreCase)))
             {
                 return SolidWallsInsulated.Some;
             }
             
             if (epc.WallsDescription.Any(description =>
-                    description.Contains("cavity", StringComparison.OrdinalIgnoreCase) &&
+                    description.Contains("solid", StringComparison.OrdinalIgnoreCase) &&
                     description.Contains("no insulation", StringComparison.OrdinalIgnoreCase)))
             {
                 return SolidWallsInsulated.No;

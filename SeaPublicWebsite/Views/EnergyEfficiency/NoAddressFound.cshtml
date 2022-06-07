@@ -1,0 +1,40 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@model SeaPublicWebsite.Models.EnergyEfficiency.NoAddressFoundViewModel
+@{
+    ViewBag.Title = "Confirm your address";
+}
+
+@section BeforeMain {
+    @await Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = Model.BackLink,
+        
+        // Note: some of the "Back" links in this journey can't use the default browser behaviour
+        //  so we should control all of them explicitly
+        OverrideWithJavascript = false
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+            We could not find an EPC for this address
+        </h1>
+        
+        <p class="govuk-body">
+            We were unable to find an EPC for this address or all previous EPCs have expired.
+        </p>
+        
+        <p class="govuk-body">
+            You can still continue using the service.
+        </p>
+
+        @await Html.GovUkButton(new ButtonViewModel
+        {
+            Href = Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+            Text = "Continue"
+        })
+    </div>
+</div>

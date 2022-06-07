@@ -219,27 +219,37 @@ namespace SeaPublicWebsite.Controllers
         public async Task<ViewResult> ConfirmAddress_Get(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
-            var epcInformationList = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(userDataModel.Postcode);
-            var houseNameOrNumber = userDataModel.HouseNameOrNumber;
-            
-            if (houseNameOrNumber != null)
+            List<EpcInformation> epcInformationList = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(userDataModel.Postcode, userDataModel.HouseNameOrNumber);
+            if (epcInformationList is null || !epcInformationList.Any())
             {
+                var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.NoAddressFound, userDataModel);
+                var viewModel = new NoAddressFoundViewModel
+                {
+                    Reference = reference,
+                    BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                };
+                return View("NoAddressFound", viewModel);
+            }
+            else
+            {
+                var houseNameOrNumber = userDataModel.HouseNameOrNumber;
                 var filteredEpcList = epcInformationList.Where(e =>
-                    e.Address1.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase) || e.Address2.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase)).ToList();
+                    e.Address1.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase) ||
+                    e.Address2.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase)).ToList();
 
                 epcInformationList = filteredEpcList.Any() ? filteredEpcList : epcInformationList;
+
+                var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.ConfirmAddress, userDataModel);
+                var viewModel = new ConfirmAddressViewModel
+                {
+                    Reference = reference,
+                    EpcInformationList = epcInformationList,
+                    SelectedEpcId = epcInformationList.Count == 1 ? epcInformationList[0].EpcId : null,
+                    BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                };
+
+                return View("ConfirmAddress", viewModel);
             }
-
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.ConfirmAddress, userDataModel);
-            var viewModel = new ConfirmAddressViewModel
-            {
-                Reference = reference,
-                EpcInformationList = epcInformationList,
-                SelectedEpcId = epcInformationList.Count == 1 ? epcInformationList[0].EpcId : null,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
-            };
-
-            return View("ConfirmAddress", viewModel);
         }
 
         [HttpPost("address/{reference}")]

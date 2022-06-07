@@ -30,6 +30,7 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.ServiceUnsuitable => ServiceUnsuitableBackLinkArguments(userData),
                 QuestionFlowPage.AskForPostcode => AskForPostcodeBackLinkArguments(userData),
                 QuestionFlowPage.ConfirmAddress => ConfirmAddressBackLinkArguments(userData),
+                QuestionFlowPage.NoAddressFound => NoAddressFoundBackLinkArguments(userData),
                 QuestionFlowPage.PropertyType => PropertyTypeBackLinkArguments(userData, entryPoint),
                 QuestionFlowPage.HouseType => HouseTypeBackLinkArguments(userData, entryPoint),
                 QuestionFlowPage.BungalowType => BungalowTypeBackLinkArguments(userData, entryPoint),
@@ -66,6 +67,7 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.Country => CountryForwardLinkArguments(userData, entryPoint),
                 QuestionFlowPage.AskForPostcode => AskForPostcodeForwardLinkArguments(userData),
                 QuestionFlowPage.ConfirmAddress => ConfirmAddressForwardLinkArguments(userData),
+                QuestionFlowPage.NoAddressFound => NoAddressFoundForwardLinkArguments(userData),
                 QuestionFlowPage.PropertyType => PropertyTypeForwardLinkArguments(userData, entryPoint),
                 QuestionFlowPage.HouseType => HouseTypeForwardLinkArguments(userData, entryPoint),
                 QuestionFlowPage.BungalowType => BungalowTypeForwardLinkArguments(userData, entryPoint),
@@ -145,6 +147,12 @@ namespace SeaPublicWebsite.Services
         }
 
         private PathByActionArguments ConfirmAddressBackLinkArguments(UserDataModel userData)
+        {
+            var reference = userData.Reference;
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference });
+        }
+        
+        private PathByActionArguments NoAddressFoundBackLinkArguments(UserDataModel userData)
         {
             var reference = userData.Reference;
             return new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference });
@@ -448,6 +456,12 @@ namespace SeaPublicWebsite.Services
         }
 
         private PathByActionArguments ConfirmAddressForwardLinkArguments(UserDataModel userData)
+        {
+            var reference = userData.Reference;
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new { reference });
+        }
+        
+        private PathByActionArguments NoAddressFoundForwardLinkArguments(UserDataModel userData)
         {
             var reference = userData.Reference;
             return new PathByActionArguments(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new { reference });
@@ -777,6 +791,7 @@ namespace SeaPublicWebsite.Services
         ServiceUnsuitable,
         AskForPostcode,
         ConfirmAddress,
+        NoAddressFound,
         PropertyType,
         HouseType,
         BungalowType,

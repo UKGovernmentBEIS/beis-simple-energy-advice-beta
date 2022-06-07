@@ -31,43 +31,56 @@
                 <h1 class="govuk-heading-l">
                     Is this your address?
                 </h1>
-
-                <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Address
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            @(Model.EpcInformationList[0].Address1)<br/>
-                            @if (!string.IsNullOrWhiteSpace(Model.EpcInformationList[0].Address2))
+                
+                @await Html.GovUkSummaryList(new SummaryListViewModel
+                {
+                    Rows = new List<SummaryListRowViewModel>
+                    {
+                        new()
+                        {
+                            Key = new()
                             {
-                                @(Model.EpcInformationList[0].Address2)
-                                <br/>
+                                Text = "Address"
+                            },
+                            Value = new()
+                            {
+                                Html = @<text>
+                                           @(Model.EpcInformationList[0].Address1)<br/>
+                                           @if (!string.IsNullOrWhiteSpace(Model.EpcInformationList[0].Address2))
+                                           {
+                                               @(Model.EpcInformationList[0].Address2)
+                                               <br/>
+                                           }
+                                           @(Model.EpcInformationList[0].Postcode)
+                                        </text>
+                            },
+                            Actions = new SummaryListRowActionViewModel
+                            {
+                                Items = new List<SummaryListRowActionItemViewModel>
+                                {
+                                    new()
+                                    {
+                                        Html = @<text>
+                                                   Change<span class="govuk-visually-hidden"> address</span>
+                                                </text>,
+                                        Href = @Url.Action("AskForPostcode_Get", "EnergyEfficiency", new {reference = Model.Reference})
+                                    }
+                                }
                             }
-                            @(Model.EpcInformationList[0].Postcode)
-                        </dd>
-                        <dd class="govuk-summary-list__actions">
-                            <a class="govuk-link" href="@Url.Action("AskForPostcode_Get", "EnergyEfficiency", new {reference = Model.Reference})">
-                                Change<span class="govuk-visually-hidden"> address</span>
-                            </a>
-                        </dd>
-                    </div>
-                </dl>
+                        }
+                        
+                    }
+                })
             }
             else
             {
-                string error = null;
-                foreach (var (_, value) in ViewData.ModelState)
+                ErrorMessageViewModel errorMessageViewModel = null;
+                if (ViewData.ModelState.TryGetValue(nameof(ConfirmAddressViewModel.SelectedEpcId), out var modelStateEntry) &&
+                    modelStateEntry.Errors.Count > 0)
                 {
-                    if (value.Errors.Count > 0)
-                    {
-                        error = value.Errors[0].ErrorMessage;
-                        break;
-                    }
+                    errorMessageViewModel = new ErrorMessageViewModel { Text = string.Join(", ", modelStateEntry.Errors.Select(e => e.ErrorMessage)) };
                 }
-                
-                ErrorMessageViewModel errorMessageViewModel = error != null ? new ErrorMessageViewModel {Text = error} : null;
-                
+
                 @await Html.GovUkRadios(new RadiosViewModel()
                 {
                     Name = nameof(ConfirmAddressViewModel.SelectedEpcId),
@@ -92,7 +105,7 @@
                         return (ItemViewModel) new RadioItemViewModel
                         {
                             Name = fieldName,
-                            Value = fieldValue.ToString(),
+                            Value = fieldValue,
                             Id = fieldId,
                             Checked = Model.SelectedEpcId == fieldValue,
                             Label = new LabelViewModel
@@ -104,9 +117,7 @@
                     })
                         .ToList(),
                     ErrorMessage = errorMessageViewModel
-                })
-                ;
-            }
+                })}
 
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
