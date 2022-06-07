@@ -1777,8 +1777,8 @@ public class QuestionFlowServiceTests
             HasHotWaterCylinder? hasHotWaterCylinder = null,
             int? numberOfOccupants = null,
             HeatingPattern? heatingPattern = null,
-            decimal? hoursOfHeatingMorning = null,
-            decimal? hoursOfHeatingEvening = null,
+            int? hoursOfHeatingMorning = null,
+            int? hoursOfHeatingEvening = null,
             decimal? temperature = null,
             QuestionFlowPage? entryPoint = null,
             List<UserRecommendation> userRecommendations = null)
