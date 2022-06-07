@@ -71,7 +71,6 @@
         <form method="post" action="@Url.Action("YourRecommendations_Post", "EnergyEfficiency")">
 
             @Html.AntiForgeryToken()
-            @Html.HiddenFor(m => m.FirstReferenceId)
             @Html.HiddenFor(m => m.NumberOfUserRecommendations)
             @(await Html.GovUkCheckboxFromBoolFor(
                 m => m.HasEmailAddress,
