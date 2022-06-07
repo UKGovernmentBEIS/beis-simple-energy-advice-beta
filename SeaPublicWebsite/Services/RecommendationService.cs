@@ -204,7 +204,8 @@ namespace SeaPublicWebsite.Services
             BreWallType breWallType = GetBreWallType(userData.WallConstruction.Value, userData.SolidWallsInsulated,
                 userData.CavityWallsInsulated);
 
-            BreRoofType? breRoofType = GetBreRoofType(userData.RoofConstruction, userData.AccessibleLoftSpace, userData.RoofInsulated);
+            BreRoofType? breRoofType = GetBreRoofType(userData.RoofConstruction, userData.AccessibleLoftSpace,
+                userData.RoofInsulated);
 
             BreGlazingType breGlazingType = GetBreGlazingType(userData.GlazingType.Value);
 
@@ -213,6 +214,9 @@ namespace SeaPublicWebsite.Services
             bool? breHotWaterCylinder = GetBreHotWaterCylinder(userData.HasHotWaterCylinder);
 
             BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(userData.HeatingPattern.Value);
+
+            int[] breNormalDaysOffHours =
+                GetBreNormalDaysOffHours(userData.HoursOfHeatingMorning, userData.HoursOfHeatingEvening);
 
             BreRequest request = new(
                 brePostcode: userData.Postcode,
@@ -227,6 +231,7 @@ namespace SeaPublicWebsite.Services
                 breHotWaterCylinder: breHotWaterCylinder,
                 breOccupants: userData.NumberOfOccupants,
                 breHeatingPatternType: breHeatingPatternType,
+                breNormalDaysOffHours: breNormalDaysOffHours,
                 breTemperature: userData.Temperature
             );
 
@@ -465,6 +470,17 @@ namespace SeaPublicWebsite.Services
                 HeatingPattern.Other => BreHeatingPatternType.NoneOfTheAbove,
                 _ => throw new ArgumentOutOfRangeException()
             };
+        }
+        
+        private static int[] GetBreNormalDaysOffHours(decimal? hoursOfHeatingMorning, decimal? hoursOfHeatingEvening)
+        {
+            if (hoursOfHeatingMorning != null && hoursOfHeatingEvening != null)
+            {
+                //assumption: time heating is turned on is not collected so this is a simplification of the BRE input complexity available
+                int averageOffPeriod = (int) ((24 - (hoursOfHeatingMorning + hoursOfHeatingEvening)) / 2);
+                return new [] { averageOffPeriod, averageOffPeriod };
+            }
+            return null;
         }
     }
 }
