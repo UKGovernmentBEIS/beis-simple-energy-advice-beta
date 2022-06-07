@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Notify.Exceptions;
+using SeaPublicWebsite.Data;
+using SeaPublicWebsite.Data.DataStores;
 using SeaPublicWebsite.Data.EnergyEfficiency;
 using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.Data.EnergyEfficiency.Recommendations;
@@ -62,8 +64,11 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpPost("new-or-returning-user")]
-        public IActionResult NewOrReturningUser_Post(NewOrReturningUserViewModel viewModel)
+        public async Task<IActionResult> NewOrReturningUser_Post(NewOrReturningUserViewModel viewModel)
         {
+            PropertyDataStore propertyDataStore = new ();
+            var task = propertyDataStore.SavePropertyData(new PropertyData() {PropertyDataId = 1, Reference = "1", Postcode = "1", EpcLmkKey = "1", HouseNameOrNumber = "1"});
+            await task;
             if (!ModelState.IsValid)
             {
                 return NewOrReturningUser_Get();

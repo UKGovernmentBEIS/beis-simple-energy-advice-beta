@@ -43,7 +43,8 @@ public class PropertyData
 
     public int? NumberOfOccupants { get; set; }
     public HeatingPattern? HeatingPattern { get; set; }
-    public decimal? HoursOfHeating { get; set; }
+    public int? HoursOfHeatingMorning { get; set; }
+    public int? HoursOfHeatingEvening { get; set; }
     public decimal? Temperature { get; set; }
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; }
