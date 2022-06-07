@@ -63,13 +63,11 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 return null;
             }
 
-            var epcsInformation = response.Data.Assessments.Select(epcInfo => new EpcInformation
-            {
-                EpcId = epcInfo.EpcId,
-                Address1 = epcInfo.Address.Address1,
-                Address2 = epcInfo.Address.Address2,
-                Postcode = epcInfo.Address.Postcode
-            }.FixFormatting()).ToList();
+            var epcsInformation = response.Data.Assessments.Select(epcInfo => new EpcInformation(
+                epcInfo.EpcId,
+                epcInfo.Address.Address1, 
+                epcInfo.Address.Address2, 
+                epcInfo.Address.Postcode)).ToList();
             
             return EpcInformation.SortEpcsInformation(epcsInformation);
         }
@@ -142,8 +140,6 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
 
         private static HeatingType? GetHeatingTypeFromEpc(EpbEpcAssessmentDto epc)
         {
-            // TODO: Main heating description: What do the numbers mean? 1-5
-            // TODO: Confirm these values
             return epc.MainFuelType switch
             {
                 "26" => HeatingType.GasBoiler,

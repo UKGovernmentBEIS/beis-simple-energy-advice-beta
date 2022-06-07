@@ -32,16 +32,26 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
     public class EpcInformation
     {
         public string EpcId { get; set; }
+
         public string Address1 { get; set; }
+
         public string Address2 { get; set; }
         public string Postcode { get; set; }
 
-        public EpcInformation FixFormatting()
+        public EpcInformation(string epcId, string address1, string address2, string postcode)
+        {
+            EpcId = epcId;
+            Address1 = address1;
+            Address2 = address2;
+            Postcode = postcode;
+            FixFormatting();
+        }
+
+        private void FixFormatting()
         {
             var tI = new CultureInfo("en-GB", false).TextInfo;
             Address1 = tI.ToTitleCase(Address1.ToLower().Replace(",", ""));
             Address2 = tI.ToTitleCase(Address2.ToLower().Replace(",", ""));
-            return this;
         }
 
         public static List<EpcInformation> SortEpcsInformation(List<EpcInformation> epcsInformation)
@@ -52,25 +62,28 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         
         private static int SortEpcsInformationByHouseNumberOrAlphabetically(EpcInformation epcInformation1, EpcInformation epcInformation2)
         {
-            return (epcInformation1.GetHouseNumber(), epcInformation2.GetHouseNumber()) switch
+            var x = (epcInformation1.GetHouseNumber(), epcInformation2.GetHouseNumber()) switch
             {
                 (null, null) => SortEpcsInformationAlphabetically(epcInformation1, epcInformation2),
                 (null, _) => 1,
                 (_, null) => -1,
-                var (houseNumber1, houseNumber2) => houseNumber1.Value - houseNumber2.Value switch
+                var (houseNumber1, houseNumber2) => (houseNumber1.Value - houseNumber2.Value) switch
                 {
                     <0 => -1,
                     >0 => 1,
                     _ => SortEpcsInformationAlphabetically(epcInformation1, epcInformation2)
                 }
             };
+            return x;
         }
 
         private static int SortEpcsInformationAlphabetically(EpcInformation epcInformation1, EpcInformation epcInformation2)
         {
-            return string.Compare(epcInformation1.Address2, epcInformation2.Address2, StringComparison.OrdinalIgnoreCase) == 0
-                ? string.Compare(epcInformation1.Address1, epcInformation2.Address1, StringComparison.OrdinalIgnoreCase)
-                : string.Compare(epcInformation1.Address2, epcInformation2.Address2, StringComparison.OrdinalIgnoreCase);
+            var comparedAddress1 = string.Compare(epcInformation1.Address1, epcInformation2.Address1,
+                StringComparison.OrdinalIgnoreCase);
+            var comparedAddress2 = string.Compare(epcInformation1.Address2, epcInformation2.Address2,
+                StringComparison.OrdinalIgnoreCase);
+            return comparedAddress1 != 0 ? comparedAddress1 : comparedAddress2;
         }
         
         
