@@ -6,7 +6,8 @@ namespace SeaPublicWebsite.ExternalServices
 {
     public interface IEpcApi
     {
-        public Task<List<EpcInformation>> GetEpcsInformationForPostcode(string postcode);
+        public Task<List<EpcInformation>> GetEpcsInformationForPostcodeAndBuildingNameOrNumber(string postcode,
+            string buildingNameOrNumber = null);
         public Task<Epc> GetEpcForId(string epcId);
     }
 }

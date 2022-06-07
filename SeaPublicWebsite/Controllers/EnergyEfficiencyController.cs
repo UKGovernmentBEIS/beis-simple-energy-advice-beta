@@ -219,7 +219,7 @@ namespace SeaPublicWebsite.Controllers
         public async Task<ViewResult> ConfirmAddress_Get(string reference)
         {
             var userDataModel = userDataStore.LoadUserData(reference);
-            var epcInformationList = await epcApi.GetEpcsInformationForPostcode(userDataModel.Postcode);
+            var epcInformationList = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(userDataModel.Postcode);
             var houseNameOrNumber = userDataModel.HouseNameOrNumber;
             
             if (houseNameOrNumber != null)

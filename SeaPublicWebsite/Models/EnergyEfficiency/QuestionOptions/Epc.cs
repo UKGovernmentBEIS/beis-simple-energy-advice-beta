@@ -12,8 +12,11 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
         public string Address2 { get; set; }
         public string Postcode { get; set; }
         public string EpcId { get; set; }
-        public string InspectionDate { get; set; }
+        public string LodgementDate { get; set; }
         public PropertyType? PropertyType { get; set; }
+        public HouseType? HouseType { get; set; }
+        public BungalowType? BungalowType { get; set; }
+        public FlatType? FlatType { get; set; }
         public HeatingType? HeatingType { get; set; }
         public WallConstruction? WallConstruction { get; set; }
         public SolidWallsInsulated? SolidWallsInsulated { get; set; }

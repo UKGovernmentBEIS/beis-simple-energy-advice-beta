@@ -24,14 +24,19 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             this.configuration = options.Value;
         }
         
-        public async Task<List<EpcInformation>> GetEpcsInformationForPostcode(string postcode)
+        public async Task<List<EpcInformation>> GetEpcsInformationForPostcodeAndBuildingNameOrNumber(string postcode, string buildingNameOrNumber = null)
         {
             var token = await RequestTokenIfNeeded();
+            var query = $"postcode={postcode}";
+            if (buildingNameOrNumber is not null)
+            {
+                query += $"buildingNameOrNumber={buildingNameOrNumber}";
+            }
             var response = await HttpRequestHelper.SendGetRequestAsync<EpbAssessmentsDto>(
                 new RequestParameters
                 {
                     BaseAddress = configuration.BaseUrl,
-                    Path = $"/api/assessments/domestic-epcs/search?postcode={postcode}",
+                    Path = $"/api/assessments/domestic-epcs/search?{query}",
                     Auth = new AuthenticationHeaderValue("Bearer", token)
                 });
             if (response is null)
@@ -65,8 +70,6 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 return null;
             }
 
-            // TODO: Convert dto to epc
-            // TODO: Add missing fields i.e. glazing type, roof
             var epc = response.Data.Assessment;
             return new Epc
             {
@@ -74,8 +77,11 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 Address1 = epc.Address.Address1,
                 Address2 = epc.Address.Address2,
                 Postcode = epc.Address.Postcode,
-                InspectionDate = epc.LodgementDate, // No inspection date; Lodgement instead
+                LodgementDate = epc.LodgementDate, // No inspection date; Lodgement instead
                 PropertyType = GetPropertyTypeFromEpc(epc),
+                HouseType = GetHouseTypeFromEpc(epc),
+                BungalowType = GetBungalowTypeFromEpc(epc),
+                FlatType = GetFlatTypeFromEpc(epc),
                 HeatingType = GetHeatingTypeFromEpc(epc),
                 WallConstruction = GetWallConstructionFromEpc(epc),
                 SolidWallsInsulated = GetSolidWallsInsulatedFromEpc(epc),
@@ -117,31 +123,16 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
 
         private static HeatingType? GetHeatingTypeFromEpc(EpbEpcAssessmentDto epc)
         {
-            // This is not a complete mapping but there are too many options for mainHeatDescription and mainFuel to parse them all.
-            // mainFuel is marked as deprecated in some places so we should try mainHeatDescription first
-            if (epc.MainHeatingDescription is not null &&
-                epc.MainHeatingDescription.Contains("mains gas", StringComparison.OrdinalIgnoreCase))
+            // TODO: Main heating description: What do the numbers mean? 1-5
+            // TODO: Confirm these values
+            return epc.MainFuelType switch
             {
-                return HeatingType.GasBoiler;
-            }
-            
-            if (epc.MainFuelType is not null && epc.MainFuelType.Contains("mains gas", StringComparison.OrdinalIgnoreCase))
-            {
-                return HeatingType.GasBoiler;
-            }
-            
-            if (epc.MainHeatingDescription is not null &&
-                epc.MainHeatingDescription.Contains("electric", StringComparison.OrdinalIgnoreCase))
-            {
-                return HeatingType.DirectActionElectric;
-            }
-            
-            if (epc.MainFuelType is not null && epc.MainFuelType.Contains("electric", StringComparison.OrdinalIgnoreCase))
-            {
-                return HeatingType.DirectActionElectric;
-            }
-            
-            return null;
+                "26" => HeatingType.GasBoiler,
+                "27" => HeatingType.LpgBoiler,
+                "28" => HeatingType.OilBoiler,
+                "29" => HeatingType.DirectActionElectric,
+                _ => null
+            };
         }
 
         private static PropertyType? GetPropertyTypeFromEpc(EpbEpcAssessmentDto epc)
@@ -165,6 +156,92 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 epc.PropertyType.Contains("Maisonette", StringComparison.OrdinalIgnoreCase))
             {
                 return PropertyType.ApartmentFlatOrMaisonette;
+            }
+
+            return null;
+        }
+        
+        private static HouseType? GetHouseTypeFromEpc(EpbEpcAssessmentDto epc)
+        {
+            if (GetPropertyTypeFromEpc(epc) is not PropertyType.House)
+            {
+                return null;
+            }
+            
+            if (epc.PropertyType.Contains("detached", StringComparison.OrdinalIgnoreCase))
+            {
+                return HouseType.Detached;
+            }
+
+            if (epc.PropertyType.Contains("semi-detached", StringComparison.OrdinalIgnoreCase))
+            {
+                return HouseType.SemiDetached;
+            }
+
+            if (epc.PropertyType.Contains("mid-terrace", StringComparison.OrdinalIgnoreCase))
+            {
+                return HouseType.Terraced;
+            }
+            
+            if (epc.PropertyType.Contains("end-terrace", StringComparison.OrdinalIgnoreCase))
+            {
+                return HouseType.EndTerrace;
+            }
+
+            return null;
+        }
+        
+        private static BungalowType? GetBungalowTypeFromEpc(EpbEpcAssessmentDto epc)
+        {
+            if (GetPropertyTypeFromEpc(epc) is not PropertyType.Bungalow)
+            {
+                return null;
+            }
+            
+            if (epc.PropertyType.Contains("detached", StringComparison.OrdinalIgnoreCase))
+            {
+                return BungalowType.Detached;
+            }
+
+            if (epc.PropertyType.Contains("semi-detached", StringComparison.OrdinalIgnoreCase))
+            {
+                return BungalowType.SemiDetached;
+            }
+
+            if (epc.PropertyType.Contains("mid-terrace", StringComparison.OrdinalIgnoreCase))
+            {
+                return BungalowType.Terraced;
+            }
+            
+            if (epc.PropertyType.Contains("end-terrace", StringComparison.OrdinalIgnoreCase))
+            {
+                return BungalowType.EndTerrace;
+            }
+
+            return null;
+        }
+        
+        private static FlatType? GetFlatTypeFromEpc(EpbEpcAssessmentDto epc)
+        {
+            if (GetPropertyTypeFromEpc(epc) is not PropertyType.ApartmentFlatOrMaisonette)
+            {
+                return null;
+            }
+            
+            if (epc.PropertyType.Contains("basement", StringComparison.OrdinalIgnoreCase) ||
+                epc.PropertyType.Contains("ground", StringComparison.OrdinalIgnoreCase))
+            {
+                return FlatType.GroundFloor;
+            }
+
+            if (epc.PropertyType.Contains("mid", StringComparison.OrdinalIgnoreCase))
+            {
+                return FlatType.MiddleFloor;
+            }
+            
+            if (epc.PropertyType.Contains("top", StringComparison.OrdinalIgnoreCase))
+            {
+                return FlatType.TopFloor;
             }
 
             return null;
@@ -200,7 +277,9 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
 
             if (epc.WallsDescription.Any(description =>
                     description.Contains("cavity", StringComparison.OrdinalIgnoreCase) &&
-                    description.Contains("insulated", StringComparison.OrdinalIgnoreCase)))
+                    (description.Contains("insulated", StringComparison.OrdinalIgnoreCase) ||
+                     description.Contains("internal insulation", StringComparison.OrdinalIgnoreCase) ||
+                     description.Contains("external insulation", StringComparison.OrdinalIgnoreCase))))
             {
                 return CavityWallsInsulated.All;
             }
@@ -231,7 +310,9 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
 
             if (epc.WallsDescription.Any(description =>
                     description.Contains("cavity", StringComparison.OrdinalIgnoreCase) &&
-                    description.Contains("insulated", StringComparison.OrdinalIgnoreCase)))
+                    (description.Contains("insulated", StringComparison.OrdinalIgnoreCase) ||
+                     description.Contains("internal insulation", StringComparison.OrdinalIgnoreCase) ||
+                     description.Contains("external insulation", StringComparison.OrdinalIgnoreCase))))
             {
                 return SolidWallsInsulated.All;
             }
@@ -281,10 +362,19 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 return null;
             }
 
-            var hasInsulation = epc.FloorDescription.All(description =>
-                description.Contains("insulated", StringComparison.OrdinalIgnoreCase));
+            if (epc.FloorDescription.All(description =>
+                    description.Contains("insulated", StringComparison.OrdinalIgnoreCase)))
+            {
+                return FloorInsulated.Yes;
+            }
+            
+            if (epc.FloorDescription.Any(description =>
+                    description.Contains("no insulation", StringComparison.OrdinalIgnoreCase)))
+            {
+                return FloorInsulated.No;
+            }
 
-            return hasInsulation ? FloorInsulated.Yes : FloorInsulated.No;
+            return null;
         }
 
         private static HomeAge? GetConstructionAgeBandFromEpc(EpbEpcAssessmentDto epc)
@@ -293,25 +383,22 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             {
                 return null;
             }
-            
-            // TODO: Age bands? Rewrite this based on the age band encoding
-            var ageBand = epc.PropertyAgeBand.Replace("England and Wales: ", "");
-            return ageBand switch
+
+            return epc.PropertyAgeBand switch
             {
-                ("before 1900") => HomeAge.Pre1900,
-                ("1900-1929") => HomeAge.From1900To1929,
-                ("1930-1949") => HomeAge.From1930To1949,
-                ("1950-1966") => HomeAge.From1950To1966,
-                ("1967-1975") => HomeAge.From1967To1975,
-                ("1976-1982") => HomeAge.From1976To1982,
-                ("1983-1990") => HomeAge.From1983To1990,
-                ("1991-1995") => HomeAge.From1991To1995,
-                ("1996-2002") => HomeAge.From1996To2002,
-                ("2003-2006") => HomeAge.From2003To2006,
-                ("2007 onwards") => HomeAge.From2007ToPresent,
+                "A" => HomeAge.Pre1900,
+                "B" => HomeAge.From1900To1929,
+                "C" => HomeAge.From1930To1949,
+                "D" => HomeAge.From1950To1966,
+                "E" => HomeAge.From1967To1975,
+                "F" => HomeAge.From1976To1982,
+                "G" => HomeAge.From1983To1990,
+                "H" => HomeAge.From1991To1995,
+                "I" => HomeAge.From1996To2002,
+                "J" => HomeAge.From2003To2006,
+                "K" or "L" => HomeAge.From2007ToPresent,
                 _ => null
             };
-
         }
 
         private static RoofConstruction? GetRoofConstructionFromEpc(EpbEpcAssessmentDto epc)
@@ -342,11 +429,21 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 return null;
             }
 
-            var hasInsulation = epc.RoofDescription.All(description =>
-                description.Contains("loft insulation", StringComparison.OrdinalIgnoreCase) ||
-                description.Contains("limited insulation", StringComparison.OrdinalIgnoreCase));
+            if (epc.RoofDescription.All(description =>
+                    description.Contains("insulated", StringComparison.OrdinalIgnoreCase) ||
+                    description.Contains("loft insulation", StringComparison.OrdinalIgnoreCase) ||
+                    description.Contains("limited insulation", StringComparison.OrdinalIgnoreCase)))
+            {
+                return RoofInsulated.Yes;
+            }
 
-            return hasInsulation ? RoofInsulated.Yes : RoofInsulated.No;
+            if (epc.RoofDescription.Any(description =>
+                    description.Contains("no insulation", StringComparison.OrdinalIgnoreCase)))
+            {
+                return RoofInsulated.No;
+            }
+
+            return null;
         }
 
         private static GlazingType? GetGlazingTypeFromEpc(EpbEpcAssessmentDto epc)
@@ -356,12 +453,18 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 return null;
             }
 
+            // We consider 'mostly' as the point where the number of single-glazed windows is insignificant
             var hasSingle = epc.WindowsDescription.Any(description =>
-                description.Contains("single", StringComparison.OrdinalIgnoreCase));
+                description.Contains("single", StringComparison.OrdinalIgnoreCase) ||
+                description.Contains("some", StringComparison.OrdinalIgnoreCase) ||
+                description.Contains("partial", StringComparison.OrdinalIgnoreCase));
             var hasDoubleOrTriple = epc.WindowsDescription.Any(description =>
-                description.Contains("double", StringComparison.OrdinalIgnoreCase) ||
-                description.Contains("triple", StringComparison.OrdinalIgnoreCase) ||
-                description.Contains("secondary", StringComparison.OrdinalIgnoreCase));
+                description.Contains("some", StringComparison.OrdinalIgnoreCase) ||
+                description.Contains("partial", StringComparison.OrdinalIgnoreCase) ||
+                description.Contains("mostly", StringComparison.OrdinalIgnoreCase) ||
+                description.Contains("full", StringComparison.OrdinalIgnoreCase) ||
+                description.Contains("high", StringComparison.OrdinalIgnoreCase) ||
+                description.Contains("multiple glazing throughout", StringComparison.OrdinalIgnoreCase));
             
             return (hasSingle, hasDoubleOrTriple) switch
             {
