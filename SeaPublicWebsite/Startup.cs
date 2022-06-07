@@ -15,7 +15,6 @@ using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.ExternalServices.OpenEpc;
-using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
@@ -63,8 +62,6 @@ namespace SeaPublicWebsite
             
             services.AddDbContext<SeaDbContext>(opt =>
                 opt.UseNpgsql(configuration.GetConnectionString("PostgreSQLConnection")));
-            
-            services.Configure<TopLevelConfiguration>(configuration);
         }
         
         private void ConfigureCookieService(IServiceCollection services)
