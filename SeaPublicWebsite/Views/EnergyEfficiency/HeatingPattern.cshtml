@@ -74,10 +74,18 @@
                         {
                             Html = (@<text>
                                         @await Html.GovUkTextInputFor(
-                                            m => m.HoursOfHeating,
+                                            m => m.HoursOfHeatingMorning,
                                             new LabelViewModel
                                             {
-                                                Text = "Type a number between 0 (no heating) to 24 hours (heating all day and all night). Enter the total hours, even if you have separate heating periods"
+                                                Text = "Total number of hours in the morning (12am until 12pm)"
+                                            },
+                                            placeholder: "e.g. 6"
+                                            )
+                                        @await Html.GovUkTextInputFor(
+                                            m => m.HoursOfHeatingEvening,
+                                            new LabelViewModel
+                                            {
+                                                Text = "Total number of hours in the afternoon and evening (12pm until 12am)"
                                             },
                                             placeholder: "e.g. 6"
                                             )

@@ -625,12 +625,20 @@
             Classes = "govuk-!-width-one-half",
             Html = (@<text>
                         @{
-                            <span>
-                                @(Model.UserDataModel.HeatingPattern == HeatingPattern.Other 
-                                    ? $"{GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HeatingPattern)} - {Model.UserDataModel.HoursOfHeating.ToString()} hours" 
-                                    : GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HeatingPattern))
-                            </span>
-                        }
+                            if (Model.UserDataModel.HeatingPattern is HeatingPattern.Other)
+                            {
+                                <span>
+                                    @Model.UserDataModel.HoursOfHeatingMorning.ToString() hours in the morning
+                                    <br />
+                                    @Model.UserDataModel.HoursOfHeatingEvening.ToString() hours in the afternoon and evening
+                                </span>
+                            }
+                            else
+                            {
+                                <span>
+                                    @GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.UserDataModel.HeatingPattern)
+                                </span>
+                            }}
                      </text>)
         },
         Actions = new()

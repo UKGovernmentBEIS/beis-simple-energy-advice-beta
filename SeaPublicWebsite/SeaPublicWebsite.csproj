@@ -8,7 +8,7 @@
 
     <ItemGroup>
       <PackageReference Include="AWSSDK.S3" Version="3.7.7.21" />
-      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.0-d899eac" />
+      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.0-ce7e22f" />
       <PackageReference Include="GovukNotify" Version="6.0.0" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.13" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.5">
@@ -17,6 +17,10 @@
       </PackageReference>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.4" />
+      <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+      <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
+      <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
+      <PackageReference Include="Serilog.Sinks.Network" Version="2.0.2.68" />
     </ItemGroup>
 
     <ItemGroup>

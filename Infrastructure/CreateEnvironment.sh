@@ -3,6 +3,7 @@
 # Start of configuration
 
 # Name - This is the bit after 'sea-beta-' - e.g. for sea-beta-DEV, PAAS_ENV_SHORTNAME would just be 'DEV'
+#        Note that for the production environment you must use "Production"
 echo "What name do you want to give to the new environment? (just the part after the 'sea-beta-' prefix please)"
 read PAAS_ENV_SHORTNAME
 
@@ -13,10 +14,6 @@ DATABASE_SIZE="small-13"
 APP_INSTANCES=2     # Use at least 2 so that we can do rolling deployments
 APP_DISK="1G"       # Not sure what this default should be - we'll have to test this and set a default later
 APP_MEMORY="4G"     # Not sure what this needs to be for live load. The alpha worked fine on 1GB
-
-# Logit settings - these are for dev. Do not commit the production settings to Git
-LOGIT_ENDPOINT="34ae15fb-5760-47f5-a1b8-93568b5df4d3-ls.logit.io"
-LOGIT_PORT="17202"
 
 #################
 # Start of script
@@ -32,6 +29,9 @@ cf create-space "sea-beta-${PAAS_ENV_SHORTNAME}" -o "beis-domestic-energy-advice
 
 # - Target future commands at this space
 cf target -s "sea-beta-${PAAS_ENV_SHORTNAME}"
+
+# - Set the ASP.Net Core environment
+cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" ASPNETCORE_ENVIRONMENT ${PAAS_ENV_SHORTNAME}
 
 
 #---------------------------
@@ -98,17 +98,6 @@ cf bind-service "sea-beta-${PAAS_ENV_SHORTNAME}" "sea-beta-${PAAS_ENV_SHORTNAME}
 
 # - Add health check
 cf set-health-check "sea-beta-${PAAS_ENV_SHORTNAME}" http --endpoint "/health-check"
-
-
-
-#-------------------
-# Logit.io log drain
-# - Create the log drain service (built by logit.io)
-cf create-user-provided-service "sea-beta-${PAAS_ENV_SHORTNAME}-logit-ssl-drain" -l syslog-tls://${LOGIT_ENDPOINT}:${LOGIT_PORT}
-
-# - Bind app to logit.io drain
-cf bind-service "sea-beta-${PAAS_ENV_SHORTNAME}" "sea-beta-${PAAS_ENV_SHORTNAME}-logit-ssl-drain"
-
 
 
 # Wait for user input - just to make sure the window doesn't close without them noticing

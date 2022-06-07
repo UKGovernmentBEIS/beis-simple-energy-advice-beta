@@ -40,7 +40,8 @@ namespace SeaPublicWebsite.DataModels
         
         public int? NumberOfOccupants { get; set; }
         public HeatingPattern? HeatingPattern { get; set; }
-        public decimal? HoursOfHeating { get; set; }
+        public decimal? HoursOfHeatingMorning { get; set; }
+        public decimal? HoursOfHeatingEvening { get; set; }
         public decimal? Temperature { get; set; }
 
         public List<UserRecommendation> UserRecommendations { get; set; }
