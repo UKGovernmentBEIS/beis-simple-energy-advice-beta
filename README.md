@@ -1,5 +1,23 @@
 # Improve Your Property's Energy Efficiency BETA
 
+## Deployment
+
+The site is deployed using github actions.
+
+### Database Migrations
+
+Migrations will be run automatically on deployment. If a migration needs to be rolled back for any reason there are two options:
+1. Create an new inverse migration and deploy that
+2. Generate and run a rollback script
+   1. Check out the same commit locally
+   2. [Install EF Core CLI tools](https://docs.microsoft.com/en-us/ef/core/cli/dotnet) if you haven't already
+   3. Generate a rollback script using `dotnet ef migrations script 2022010112345678_BadMigration 2022010112345678_LastGoodMigration` from the `SeaPublicWebsite` directory
+   4. Review the script 
+   5. Connect to the database using cf conduit
+       1. If you haven't used conduit before: `cf install-plugin conduit`
+       2. `cf conduit sea-beta-<Environment>-db`
+   6. Use pgAdmin or similar with the credentials from cf conduit to run the rollback script
+
 ## Development
 
 ### Pre-requisites
