@@ -83,7 +83,8 @@ Fill in the opened `secrets.json` file with:
 
 ### Creating/updating the local database
 
-- In the terminal (from the solution directory) run `dotnet ef database update --project .\SeaPublicWebsite`
+- You can just run the website project and it will create and update the database on startup
+- If you want to manually update the database (e.g. to test a new migration) in the terminal (from the solution directory) run `dotnet ef database update --project .\SeaPublicWebsite`
 
 ### Adding Migrations
 
