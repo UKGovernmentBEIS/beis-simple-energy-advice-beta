@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SeaPublicWebsite.Controllers;
 using SeaPublicWebsite.Data;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ErrorHandling;
