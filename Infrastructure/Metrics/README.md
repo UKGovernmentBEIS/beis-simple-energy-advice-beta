@@ -12,7 +12,7 @@ Create a separate metrics space in GovPaaS to keep the metrics separate.
 
 ### Prometheus Exporter
 
-- [Get someone with permissions to] create a GovPaaS user specifically for running the prometheus exporter app
+- [Get someone with permissions to] create a GovPaaS user specifically for running the prometheus exporter app. This user needs space auditor permissions for the space being monitored.
 - Check out the paas-prometheus-exporter repo - https://github.com/alphagov/paas-prometheus-exporter
 - CD into that directory
 - Set your Cloud Foundry target space to the right one for the exporter
