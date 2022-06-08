@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -47,15 +46,6 @@ namespace SeaPublicWebsite
             }
 
             app.Run();
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args)
-        {
-            IHostBuilder webHostBuilder = Host.CreateDefaultBuilder(args);
-
-            webHostBuilder.ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
-            
-            return webHostBuilder;
         }
     }
 }
