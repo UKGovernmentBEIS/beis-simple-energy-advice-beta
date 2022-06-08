@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using GovUkDesignSystem.ModelBinders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -60,6 +61,7 @@ namespace SeaPublicWebsite
             {
                 options.Filters.Add<ErrorHandlingFilter>();
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                options.ModelMetadataDetailsProviders.Add(new GovUkDataBindingErrorTextProvider());
             });
         }
 
