@@ -66,7 +66,7 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpPost("new-or-returning-user")]
-        public async Task<IActionResult> NewOrReturningUser_Post(NewOrReturningUserViewModel viewModel)
+        public IActionResult NewOrReturningUser_Post(NewOrReturningUserViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
