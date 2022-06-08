@@ -12,7 +12,7 @@ public class PropertyData
     public OwnershipStatus? OwnershipStatus { get; set; }
     public Country? Country { get; set; }
 
-    // public Epc Epc { get; set; }
+    public Epc Epc { get; set; }
 
     // public UserGoal? UserGoal { get; set; }
     // public List<UserInterests> UserInterests { get; set; }

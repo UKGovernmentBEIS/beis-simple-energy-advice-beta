@@ -1,9 +1,9 @@
-﻿using SeaPublicWebsite.DataModels;
+﻿using SeaPublicWebsite.Data;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class AnswerSummaryViewModel : QuestionFlowViewModel
     {
-        public UserDataModel UserDataModel { get; set; }
+        public PropertyData PropertyData { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SeaPublicWebsite.Data;
+using SeaPublicWebsite.Data.DataStores;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices;
@@ -35,7 +36,7 @@ namespace SeaPublicWebsite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<UserDataStore, UserDataStore>();
+            services.AddScoped<PropertyDataStore, PropertyDataStore>();
             services.AddScoped<IQuestionFlowService, QuestionFlowService>();
             services.AddMemoryCache();
             services.AddSingleton<StaticAssetsVersioningService>();
@@ -62,6 +63,8 @@ namespace SeaPublicWebsite
             
             services.AddDbContext<SeaDbContext>(opt =>
                 opt.UseNpgsql(configuration.GetConnectionString("PostgreSQLConnection")));
+            
+            services.AddScoped<IDataAccessProvider, DataAccessProvider>();  
         }
         
         private void ConfigureCookieService(IServiceCollection services)

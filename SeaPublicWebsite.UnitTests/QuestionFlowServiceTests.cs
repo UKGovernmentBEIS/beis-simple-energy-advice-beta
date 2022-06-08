@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using SeaPublicWebsite.Controllers;
+using SeaPublicWebsite.Data;
 using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.Services;
@@ -24,7 +25,7 @@ public class QuestionFlowServiceTests
         // Act
         var output = QuestionFlowService.BackLinkArguments(
             testCase.Input.Page,
-            testCase.Input.UserData,
+            testCase.Input.PropertyData,
             testCase.Input.EntryPoint);
 
         // Assert
@@ -37,7 +38,7 @@ public class QuestionFlowServiceTests
         // Act
         var output = QuestionFlowService.ForwardLinkArguments(
             testCase.Input.Page,
-            testCase.Input.UserData,
+            testCase.Input.PropertyData,
             testCase.Input.EntryPoint);
 
         // Assert
@@ -50,7 +51,7 @@ public class QuestionFlowServiceTests
         // Act
         var output = QuestionFlowService.SkipLinkArguments(
             testCase.Input.Page,
-            testCase.Input.UserData,
+            testCase.Input.PropertyData,
             testCase.Input.EntryPoint);
 
         // Assert
@@ -1711,7 +1712,7 @@ public class QuestionFlowServiceTests
     public class Input
     {
         public readonly QuestionFlowPage Page;
-        public readonly UserDataModel UserData;
+        public readonly PropertyData PropertyData;
         public QuestionFlowPage? EntryPoint;
 
         public Input(
@@ -1742,13 +1743,13 @@ public class QuestionFlowServiceTests
             HasHotWaterCylinder? hasHotWaterCylinder = null,
             int? numberOfOccupants = null,
             HeatingPattern? heatingPattern = null,
-            decimal? hoursOfHeatingMorning = null,
-            decimal? hoursOfHeatingEvening = null,
+            int? hoursOfHeatingMorning = null,
+            int? hoursOfHeatingEvening = null,
             decimal? temperature = null,
             QuestionFlowPage? entryPoint = null)
         {
             Page = page;
-            UserData = new UserDataModel
+            PropertyData = new PropertyData
             {
                 Reference = reference,
                 OwnershipStatus = ownershipStatus,

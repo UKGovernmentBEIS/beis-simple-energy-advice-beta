@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using SeaPublicWebsite.Data;
 using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.Helpers;
@@ -13,13 +14,13 @@ public class ResetUnusedFieldsTests
     public void RunResetUnusedFieldTestCases(ResetUnusedFieldsTestCase testCase)
     {
         // Arrange
-        var userData = testCase.Input;
+        PropertyData propertyData = testCase.Input;
         
         // Act
-        UserDataHelper.ResetUnusedFields(userData);
+        PropertyDataHelper.ResetUnusedFields(propertyData);
 
         // Assert
-        userData.Should().BeEquivalentTo(testCase.ExpectedOutput);
+        propertyData.Should().BeEquivalentTo(testCase.ExpectedOutput);
     }
 
     private static ResetUnusedFieldsTestCase[] TestCases =
@@ -223,10 +224,10 @@ public class ResetUnusedFieldsTests
     public class ResetUnusedFieldsTestCase
     {
         public readonly string Description;
-        public readonly UserDataModel Input;
+        public readonly PropertyData Input;
         public readonly UserDataModel ExpectedOutput;
 
-        public ResetUnusedFieldsTestCase(string description, UserDataModel input, UserDataModel expectedOutput)
+        public ResetUnusedFieldsTestCase(string description, PropertyData input, UserDataModel expectedOutput)
         {
             Description = description;
             Input = input;

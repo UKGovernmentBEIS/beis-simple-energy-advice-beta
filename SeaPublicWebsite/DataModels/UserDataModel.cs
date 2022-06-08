@@ -44,6 +44,6 @@ namespace SeaPublicWebsite.DataModels
         public decimal? HoursOfHeatingEvening { get; set; }
         public decimal? Temperature { get; set; }
 
-        public List<UserRecommendation> UserRecommendations { get; set; }
+        public List<PropertyRecommendation> UserRecommendations { get; set; }
     }
 }

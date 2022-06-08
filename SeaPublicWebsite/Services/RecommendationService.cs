@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SeaPublicWebsite.Data;
 using SeaPublicWebsite.Data.EnergyEfficiency;
 using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
-using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.Models;
-using SeaPublicWebsite.Models.EnergyEfficiency;
 
 namespace SeaPublicWebsite.Services
 {
@@ -184,39 +183,39 @@ namespace SeaPublicWebsite.Services
                 }
             };
 
-        public async Task<List<BreRecommendation>> GetRecommendationsForUserAsync(UserDataModel userData)
+        public async Task<List<BreRecommendation>> GetRecommendationsForPropertyAsync(PropertyData propertyData)
         {
-            BreRequest request = CreateRequest(userData);
+            BreRequest request = CreateRequest(propertyData);
 
-            return await breApi.GetRecommendationsForUserRequestAsync(request);
+            return await breApi.GetRecommendationsForPropertyRequestAsync(request);
         }
 
-        private static BreRequest CreateRequest(UserDataModel userData)
+        private static BreRequest CreateRequest(PropertyData propertyData)
         {
-            BrePropertyType brePropertyType = GetBrePropertyType(userData.PropertyType.Value);
+            BrePropertyType brePropertyType = GetBrePropertyType(propertyData.PropertyType.Value);
 
             BreBuiltForm breBuiltForm =
-                GetBreBuiltForm(userData.PropertyType.Value, userData.HouseType, userData.BungalowType);
+                GetBreBuiltForm(propertyData.PropertyType.Value, propertyData.HouseType, propertyData.BungalowType);
 
-            BreFlatLevel? breFlatLevel = GetBreFlatLevel(userData.PropertyType.Value, userData.FlatType);
+            BreFlatLevel? breFlatLevel = GetBreFlatLevel(propertyData.PropertyType.Value, propertyData.FlatType);
 
-            string breConstructionDate = GetBreConstructionDate(userData.YearBuilt);
+            string breConstructionDate = GetBreConstructionDate(propertyData.YearBuilt);
 
-            BreWallType breWallType = GetBreWallType(userData.WallConstruction.Value, userData.SolidWallsInsulated,
-                userData.CavityWallsInsulated);
+            BreWallType breWallType = GetBreWallType(propertyData.WallConstruction.Value, propertyData.SolidWallsInsulated,
+                propertyData.CavityWallsInsulated);
 
-            BreRoofType breRoofType = GetBreRoofType(userData.RoofConstruction.Value, userData.AccessibleLoftSpace, userData.RoofInsulated);
+            BreRoofType breRoofType = GetBreRoofType(propertyData.RoofConstruction.Value, propertyData.AccessibleLoftSpace, propertyData.RoofInsulated);
 
-            BreGlazingType breGlazingType = GetBreGlazingType(userData.GlazingType.Value);
+            BreGlazingType breGlazingType = GetBreGlazingType(propertyData.GlazingType.Value);
 
-            BreHeatingFuel breHeatingFuel = GetBreHeatingFuel(userData.HeatingType.Value, userData.OtherHeatingType);
+            BreHeatingFuel breHeatingFuel = GetBreHeatingFuel(propertyData.HeatingType.Value, propertyData.OtherHeatingType);
 
-            bool? breHotWaterCylinder = GetBreHotWaterCylinder(userData.HasHotWaterCylinder);
+            bool? breHotWaterCylinder = GetBreHotWaterCylinder(propertyData.HasHotWaterCylinder);
 
-            BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(userData.HeatingPattern.Value);
+            BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(propertyData.HeatingPattern.Value);
 
             BreRequest request = new(
-                brePostcode: userData.Postcode,
+                brePostcode: propertyData.Postcode,
                 brePropertyType: brePropertyType,
                 breBuiltForm: breBuiltForm,
                 breFlatLevel: breFlatLevel,
@@ -226,9 +225,9 @@ namespace SeaPublicWebsite.Services
                 breGlazingType: breGlazingType,
                 breHeatingFuel: breHeatingFuel,
                 breHotWaterCylinder: breHotWaterCylinder,
-                breOccupants: userData.NumberOfOccupants,
+                breOccupants: propertyData.NumberOfOccupants,
                 breHeatingPatternType: breHeatingPatternType,
-                breTemperature: userData.Temperature
+                breTemperature: propertyData.Temperature
             );
 
             return request;

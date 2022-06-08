@@ -4,7 +4,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency;
 
 namespace SeaPublicWebsite.DataModels
 {
-    public class UserRecommendation
+    public class PropertyRecommendation
     {       
         public RecommendationKey Key { get; set; }
         public int MinInstallCost { get; set; }

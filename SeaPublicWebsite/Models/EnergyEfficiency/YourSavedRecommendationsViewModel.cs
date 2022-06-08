@@ -1,13 +1,14 @@
-﻿using SeaPublicWebsite.DataModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using SeaPublicWebsite.Data;
 using SeaPublicWebsite.Data.EnergyEfficiency.Recommendations;
+using PropertyRecommendation = SeaPublicWebsite.Data.PropertyRecommendation;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class YourSavedRecommendationsViewModel
     {
-        public UserDataModel UserDataModel { get; set; }
+        public PropertyData PropertyData { get; set; }
 
         public string GetTotalInstallationCostText()
         {
@@ -16,17 +17,17 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
             return $"£{minCost:N0} - £{maxCost:N0}";
         }
 
-        public List<UserRecommendation> GetSavedRecommendations()
+        public List<PropertyRecommendation> GetSavedRecommendations()
         {
-            return UserDataModel.UserRecommendations.Where(r => r.RecommendationAction == RecommendationAction.SaveToActionPlan).ToList();
+            return PropertyData.PropertyRecommendations.Where(r => r.RecommendationAction == RecommendationAction.SaveToActionPlan).ToList();
         }
-        public List<UserRecommendation> GetDecideLaterRecommendations()
+        public List<PropertyRecommendation> GetDecideLaterRecommendations()
         {
-            return UserDataModel.UserRecommendations.Where(r => r.RecommendationAction == RecommendationAction.DecideLater).ToList();
+            return PropertyData.PropertyRecommendations.Where(r => r.RecommendationAction == RecommendationAction.DecideLater).ToList();
         }
-        public List<UserRecommendation> GetDiscardedRecommendations()
+        public List<PropertyRecommendation> GetDiscardedRecommendations()
         {
-            return UserDataModel.UserRecommendations.Where(r => r.RecommendationAction == RecommendationAction.Discard).ToList();
+            return PropertyData.PropertyRecommendations.Where(r => r.RecommendationAction == RecommendationAction.Discard).ToList();
         }
 
         public string GetTotalSavingText()
@@ -34,12 +35,12 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
             var saving = GetSavedRecommendations().Sum(r => r.Saving);
             return $"£{saving:N0} a year";
         }
-        public string GetInstallationCostText(UserRecommendation recommendation)
+        public string GetInstallationCostText(PropertyRecommendation recommendation)
         {
             return $"£{recommendation.MinInstallCost:N0} - £{recommendation.MaxInstallCost:N0}";
         }
 
-        public string GetSavingText(UserRecommendation recommendation)
+        public string GetSavingText(PropertyRecommendation recommendation)
         {
             return $"£{recommendation.Saving:N0}";
         }

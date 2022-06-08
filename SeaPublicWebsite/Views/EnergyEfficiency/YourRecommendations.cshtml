@@ -31,7 +31,7 @@
             installer could make to your home to reduce the amount of energy it needs to use.
         </p>
 
-        <p class="govuk-body">We’ve found <b>@Model.NumberOfUserRecommendations recommended improvement@(Model.NumberOfUserRecommendations == 1 ? "" : "s")</b> for you to consider.</p>
+        <p class="govuk-body">We’ve found <b>@Model.NumberOfPropertyRecommendations recommended improvement@(Model.NumberOfPropertyRecommendations == 1 ? "" : "s")</b> for you to consider.</p>
 
         <p class="govuk-body">
             We will advise you if your home needs to meet certain conditions for a given
@@ -73,7 +73,7 @@
 
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.FirstReferenceId)
-            @Html.HiddenFor(m => m.NumberOfUserRecommendations)
+            @Html.HiddenFor(m => m.NumberOfPropertyRecommendations)
             @(await Html.GovUkCheckboxFromBoolFor(
                 m => m.HasEmailAddress,
                 label: new()

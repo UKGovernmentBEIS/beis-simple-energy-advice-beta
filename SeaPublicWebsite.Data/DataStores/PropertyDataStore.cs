@@ -1,41 +1,36 @@
-﻿using Npgsql;
+﻿using SeaPublicWebsite.Data.ErrorHandling;
 using SeaPublicWebsite.Data.Helpers;
 
 namespace SeaPublicWebsite.Data.DataStores;
 
 public class PropertyDataStore
 {
-    private NpgsqlConnection connection;
-    private const string CONNECTION_STRING = "UserId=postgres;Password=postgres;Server=localhost;Port=5432;Database=seadev;Integrated Security=true;Pooling=true";
+    private readonly IDataAccessProvider dataAccessProvider;
 
-    public PropertyDataStore()
+    public PropertyDataStore(IDataAccessProvider dataAccessProvider)
     {
-        connection = new NpgsqlConnection(CONNECTION_STRING);
-        connection.Open();
+        this.dataAccessProvider = dataAccessProvider;
     }
     public PropertyData LoadPropertyData(string reference)
     {
-        return new PropertyData();
+        if (!IsReferenceValid(reference))
+        {
+            throw new PropertyReferenceNotFoundException
+            {
+                Reference = reference
+            };
+        }
+        return dataAccessProvider.GetSinglePropertyData(reference.ToUpper());
     }
 
     public bool IsReferenceValid(string reference)
     {
-        return true;
+        return dataAccessProvider.GetAllPropertyData().Exists(p => p.Reference == reference.ToUpper());
     }
 
-    public async Task SavePropertyData(PropertyData propertyData)
+    public void SavePropertyData(PropertyData propertyData)
     {
-        string commandText = $"INSERT INTO \"PropertyData\" (\"Id\", \"Reference\", \"Postcode\", \"EpcLmkKey\", \"HouseNameOrNumber\") VALUES (@propertyDataId, @reference, @postcode, @epcLmkKey, @houseNameOrNumber)";
-        await using (var cmd = new NpgsqlCommand(commandText, connection))
-        {
-            cmd.Parameters.AddWithValue("propertyDataId", propertyData.PropertyDataId);
-            cmd.Parameters.AddWithValue("reference", propertyData.Reference);
-            cmd.Parameters.AddWithValue("postcode", propertyData.Postcode);
-            cmd.Parameters.AddWithValue("epcLmkKey", propertyData.EpcLmkKey);
-            cmd.Parameters.AddWithValue("houseNameOrNumber", propertyData.HouseNameOrNumber);
-
-            await cmd.ExecuteNonQueryAsync();
-        }
+        dataAccessProvider.UpdatePropertyData(propertyData);
     }
 
     public string GenerateNewReferenceAndSaveEmptyPropertyData()
@@ -50,7 +45,8 @@ public class PropertyDataStore
         {
             Reference = reference
         };
-        SavePropertyData(propertyData);
+        
+        dataAccessProvider.AddPropertyData(propertyData);
 
         return reference;
     }

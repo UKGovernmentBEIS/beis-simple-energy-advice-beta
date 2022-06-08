@@ -24,7 +24,7 @@ namespace SeaPublicWebsite.ExternalServices.Bre
             configuration = options.Value;
         }
 
-        public async Task<List<BreRecommendation>> GetRecommendationsForUserRequestAsync(BreRequest request)
+        public async Task<List<BreRecommendation>> GetRecommendationsForPropertyRequestAsync(BreRequest request)
         {
             try
             {

@@ -1,4 +1,4 @@
-﻿@using SeaPublicWebsite.DataModels
+﻿@using PropertyRecommendation = SeaPublicWebsite.Data.PropertyRecommendation
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel
 
 <aside class="sea-recommendation-side-panel govuk-!-margin-bottom-9" role="complementary">
@@ -11,10 +11,10 @@
         </p>
         
         <ul class="govuk-list govuk-list--bullet">
-            @foreach (UserRecommendation userRecommendation in Model.GetSavedRecommendations())
+            @foreach (PropertyRecommendation propertyRecommendation in Model.GetSavedRecommendations())
             {
                 <li class="govuk-body-s">
-                    @(userRecommendation.Title)
+                    @(propertyRecommendation.Title)
                 </li>
             }
         </ul>

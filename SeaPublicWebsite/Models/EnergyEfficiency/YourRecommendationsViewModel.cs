@@ -6,7 +6,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class YourRecommendationsViewModel : QuestionFlowViewModel
     {
-        public int NumberOfUserRecommendations { get; set; }
+        public int NumberOfPropertyRecommendations { get; set; }
         public string Reference { get; set; }
         public int FirstReferenceId { get; set; }
 
