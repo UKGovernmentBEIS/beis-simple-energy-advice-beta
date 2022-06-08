@@ -43,7 +43,7 @@ namespace SeaPublicWebsite.DataStores
             string reference;
             do
             {
-                reference = RandomHelper.Generate8DigitReference();
+                reference = RandomHelper.Generate8CharacterReference();
             } while (IsReferenceValid(reference));
 
             var userDataModel = new UserDataModel
