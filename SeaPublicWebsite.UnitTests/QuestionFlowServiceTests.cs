@@ -159,7 +159,17 @@ public class QuestionFlowServiceTests
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
-
+        new(
+            "No address found goes back to postcode",
+            new Input(
+                QuestionFlowPage.NoAddressFound,
+                "ABCDEFGH"
+            ),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.AskForPostcode_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
+            )),
         new(
             "Property type goes back to Postcode",
             new Input(
@@ -911,6 +921,17 @@ public class QuestionFlowServiceTests
             "Confirm address continues to property type",
             new Input(
                 QuestionFlowPage.ConfirmAddress,
+                "ABCDEFGH"
+            ),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.PropertyType_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
+            )),
+        new(
+            "No address found continues to property type",
+            new Input(
+                QuestionFlowPage.NoAddressFound,
                 "ABCDEFGH"
             ),
             new PathByActionArguments(
