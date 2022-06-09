@@ -55,12 +55,7 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                     logger.Log(LogLevel.Warning, "{Message}", e.Message);
                 }
 
-                return null;
-            }
-            
-            if (response is null)
-            {
-                return null;
+                return new List<EpcInformation>();
             }
 
             var epcsInformation = response.Data.Assessments.Select(epcInfo => new EpcInformation(
@@ -75,15 +70,19 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
         public async Task<Epc> GetEpcForId(string epcId)
         {
             var token = await RequestTokenIfNeeded();
-            var response = await HttpRequestHelper.SendGetRequestAsync<EpbEpcDto>(
-                new RequestParameters
-                {
-                    BaseAddress = configuration.BaseUrl,
-                    Path = $"/api/retrofit-advice/assessments/{epcId}",
-                    Auth = new AuthenticationHeaderValue("Bearer", token)
-                });
-            if (response is null)
+            EpbEpcDto response = null;
+            try
             {
+                response = await HttpRequestHelper.SendGetRequestAsync<EpbEpcDto>(
+                    new RequestParameters
+                    {
+                        BaseAddress = configuration.BaseUrl,
+                        Path = $"/api/retrofit-advice/assessments/{epcId}",
+                        Auth = new AuthenticationHeaderValue("Bearer", token)
+                    });
+            } catch (ApiException e)
+            {
+                logger.Log(LogLevel.Warning, "{Message}", e.Message);
                 return null;
             }
 
@@ -94,7 +93,7 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 Address1 = epc.Address.Address1,
                 Address2 = epc.Address.Address2,
                 Postcode = epc.Address.Postcode,
-                LodgementDate = epc.LodgementDate, // No inspection date; Lodgement instead
+                LodgementDate = epc.LodgementDate,
                 PropertyType = GetPropertyTypeFromEpc(epc),
                 HouseType = GetHouseTypeFromEpc(epc),
                 BungalowType = GetBungalowTypeFromEpc(epc),
