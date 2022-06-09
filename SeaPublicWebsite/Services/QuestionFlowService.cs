@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using SeaPublicWebsite.Controllers;
 using SeaPublicWebsite.Data;
 using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.Helpers;
+using PropertyRecommendation = SeaPublicWebsite.Data.PropertyRecommendation;
 
 namespace SeaPublicWebsite.Services
 {
@@ -53,6 +55,7 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.HeatingPattern => HeatingPatternBackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.Temperature => TemperatureBackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.AnswerSummary => AnswerSummaryBackLinkArguments(propertyData),
+                QuestionFlowPage.NoRecommendations => NoRecommendationsBackLinkArguments(propertyData),
                 QuestionFlowPage.YourRecommendations => YourRecommendationsBackLinkArguments(propertyData),
                 _ => throw new ArgumentOutOfRangeException()
             };
@@ -88,7 +91,7 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.NumberOfOccupants => NumberOfOccupantsForwardLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.HeatingPattern => HeatingPatternForwardLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.Temperature => TemperatureForwardLinkArguments(propertyData),
-                QuestionFlowPage.ServiceUnsuitable or QuestionFlowPage.AnswerSummary or QuestionFlowPage.YourRecommendations => throw new InvalidOperationException(),
+                QuestionFlowPage.AnswerSummary => AnswerSummaryForwardLinkArguments(propertyData),
                 _ => throw new ArgumentOutOfRangeException(nameof(page), page, null)
             };
         }
@@ -114,7 +117,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.Country
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.NewOrReturningUser_Get), "EnergyEfficiency");
         }
 
@@ -122,7 +125,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.OwnershipStatus
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.Country_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
@@ -155,7 +158,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.PropertyType
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
@@ -181,7 +184,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.HomeAge
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : propertyData.PropertyType switch
                 {
                     PropertyType.House => 
@@ -198,7 +201,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.WallConstruction
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
@@ -206,7 +209,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.CavityWallsInsulated
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.WallConstruction_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
@@ -214,7 +217,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.SolidWallsInsulated
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : propertyData.WallConstruction switch
                 {
                     WallConstruction.Mixed => 
@@ -229,7 +232,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.FloorConstruction
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : propertyData.WallConstruction switch
                 {
                     WallConstruction.Solid or WallConstruction.Mixed =>
@@ -244,7 +247,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.FloorInsulated
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.FloorConstruction_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
@@ -253,7 +256,7 @@ namespace SeaPublicWebsite.Services
             var reference = propertyData.Reference;
             if (entryPoint is QuestionFlowPage.RoofConstruction)
             {
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
             if (PropertyDataHelper.HasFloor(propertyData))
@@ -280,7 +283,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.AccessibleLoftSpace
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
@@ -288,7 +291,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.RoofInsulated 
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.AccessibleLoftSpace_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
@@ -297,7 +300,7 @@ namespace SeaPublicWebsite.Services
             var reference = propertyData.Reference;
             if (entryPoint is QuestionFlowPage.GlazingType)
             {
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
             if (PropertyDataHelper.HasRoof(propertyData))
@@ -336,7 +339,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.OutdoorSpace
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.GlazingType_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
@@ -344,7 +347,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.HeatingType
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.OutdoorSpace_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
@@ -352,7 +355,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.OtherHeatingType
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference }) 
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference }) 
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.HeatingType_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
@@ -360,7 +363,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.HotWaterCylinder
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference }) 
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference }) 
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.HeatingType_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
@@ -368,7 +371,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.NumberOfOccupants
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : propertyData.HeatingType switch
                 {
                     HeatingType.Storage or HeatingType.DirectActionElectric or HeatingType.HeatPump
@@ -386,7 +389,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.HeatingPattern
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.NumberOfOccupants_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
@@ -394,7 +397,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.Temperature
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.HeatingPattern_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
@@ -404,10 +407,16 @@ namespace SeaPublicWebsite.Services
             return new PathByActionArguments(nameof(EnergyEfficiencyController.Temperature_Get), "EnergyEfficiency", new { reference });
         }
 
+        private PathByActionArguments NoRecommendationsBackLinkArguments(PropertyData propertyData)
+        {
+            var reference = propertyData.Reference;
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
+        }
+
         private PathByActionArguments YourRecommendationsBackLinkArguments(PropertyData propertyData)
         {
             var reference = propertyData.Reference;
-            return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
         }
 
         private PathByActionArguments NewOrReturningUserForwardLinkArguments()
@@ -425,7 +434,7 @@ namespace SeaPublicWebsite.Services
             }
 
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.OwnershipStatus_Get), "EnergyEfficiency", new { reference });
         }
 
@@ -438,7 +447,7 @@ namespace SeaPublicWebsite.Services
             }
 
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference });
         }
 
@@ -473,7 +482,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency",new { reference });
         }
 
@@ -481,7 +490,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency",new { reference });
         }
 
@@ -489,7 +498,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency",new { reference });
         }
 
@@ -497,7 +506,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.WallConstruction_Get), "EnergyEfficiency",new { reference });
         }
 
@@ -517,7 +526,7 @@ namespace SeaPublicWebsite.Services
             
             if (entryPoint is not null)
             {
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
             // These options below are for people who have chosen "Don't know" to "What type of walls do you have?"
@@ -540,7 +549,7 @@ namespace SeaPublicWebsite.Services
             
             if (entryPoint is QuestionFlowPage.CavityWallsInsulated)
             {
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
             if (propertyData.WallConstruction is WallConstruction.Mixed)
@@ -550,7 +559,7 @@ namespace SeaPublicWebsite.Services
             
             if (entryPoint is not null)
             {
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
             // These options below are for people who have finished the "wall insulation" questions (e.g. who only have cavity walls)
@@ -572,7 +581,7 @@ namespace SeaPublicWebsite.Services
             var reference = propertyData.Reference;
             if (entryPoint is not null)
             {
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
             if (PropertyDataHelper.HasFloor(propertyData))
@@ -599,7 +608,7 @@ namespace SeaPublicWebsite.Services
             
             if (entryPoint is not null)
             {
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
             if (PropertyDataHelper.HasRoof(propertyData))
@@ -615,7 +624,7 @@ namespace SeaPublicWebsite.Services
             var reference = propertyData.Reference;
             if (entryPoint is not null)
             {
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
             if (PropertyDataHelper.HasRoof(propertyData))
@@ -636,7 +645,7 @@ namespace SeaPublicWebsite.Services
 
             if (entryPoint is not null)
             {
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
             return new PathByActionArguments(nameof(EnergyEfficiencyController.GlazingType_Get), "EnergyEfficiency", new { reference });
@@ -652,7 +661,7 @@ namespace SeaPublicWebsite.Services
 
             if (entryPoint is not null)
             {
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference });
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
             return new PathByActionArguments(nameof(EnergyEfficiencyController.GlazingType_Get), "EnergyEfficiency", new { reference });
@@ -662,7 +671,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference})
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference})
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.GlazingType_Get), "EnergyEfficiency",new { reference});
         }
 
@@ -670,7 +679,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference})
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference})
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.OutdoorSpace_Get), "EnergyEfficiency",new { reference});
         }
 
@@ -678,7 +687,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference})
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference})
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.HeatingType_Get), "EnergyEfficiency",new { reference});
         }
 
@@ -697,7 +706,7 @@ namespace SeaPublicWebsite.Services
 
             if (entryPoint is not null)
             {
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference});
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference});
             }
 
             return new PathByActionArguments(nameof(EnergyEfficiencyController.NumberOfOccupants_Get), "EnergyEfficiency", new { reference });
@@ -707,7 +716,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.NumberOfOccupants_Get), "EnergyEfficiency",new { reference });
         }
 
@@ -715,7 +724,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference})
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference})
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.NumberOfOccupants_Get), "EnergyEfficiency",new { reference});
         }
 
@@ -723,7 +732,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference})
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference})
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.HeatingPattern_Get), "EnergyEfficiency",new { reference});
         }
 
@@ -731,14 +740,24 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference})
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference})
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.Temperature_Get), "EnergyEfficiency",new { reference});
         }
 
         private PathByActionArguments TemperatureForwardLinkArguments(PropertyData propertyData)
         {
             var reference = propertyData.Reference;
-            return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency",new { reference });
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency",new { reference });
+        }
+
+        private PathByActionArguments AnswerSummaryForwardLinkArguments(PropertyData propertyData)
+        {
+            var reference = propertyData.Reference;
+            return propertyData.PropertyRecommendations.Any()
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.YourRecommendations_Get),
+                    "EnergyEfficiency", new { reference })
+                : new PathByActionArguments(nameof(EnergyEfficiencyController.NoRecommendations_Get),
+                    "EnergyEfficiency", new { reference });
         }
         
         private PathByActionArguments AskForPostcodeSkipLinkArguments(PropertyData propertyData)
@@ -751,7 +770,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.WallConstruction_Get), "EnergyEfficiency", new { reference });
         }
 
@@ -759,14 +778,14 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.HeatingPattern_Get), "EnergyEfficiency", new { reference });
         }
 
         private PathByActionArguments TemperatureSkipLinkArguments(PropertyData propertyData)
         {
             var reference = propertyData.Reference;
-            return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary), "EnergyEfficiency", new { reference  });
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference  });
         }
     }
 
@@ -800,6 +819,7 @@ namespace SeaPublicWebsite.Services
         HeatingPattern,
         Temperature,
         AnswerSummary,
+        NoRecommendations,
         YourRecommendations
     }
 

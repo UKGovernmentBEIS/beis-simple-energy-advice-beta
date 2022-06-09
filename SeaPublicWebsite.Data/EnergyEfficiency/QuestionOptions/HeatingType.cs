@@ -12,7 +12,7 @@ namespace SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions
         OilBoiler,
         [GovUkRadioCheckboxLabelText(Text = "LPG boiler")]
         LpgBoiler,
-        [GovUkRadioCheckboxLabelText(Text = "Storage heater")]
+        [GovUkRadioCheckboxLabelText(Text = "Storage heaters")]
         Storage,
         [GovUkRadioCheckboxLabelText(Text = "Direct acting electric heating")]
         DirectActionElectric,

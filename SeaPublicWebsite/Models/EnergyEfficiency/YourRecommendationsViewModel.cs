@@ -8,7 +8,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public int NumberOfPropertyRecommendations { get; set; }
         public string Reference { get; set; }
-        public int FirstReferenceId { get; set; }
 
         [ModelBinder(typeof(GovUkCheckboxBoolBinder))]
         public bool HasEmailAddress { get; set; }

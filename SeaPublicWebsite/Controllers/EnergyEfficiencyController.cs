@@ -46,7 +46,6 @@ namespace SeaPublicWebsite.Controllers
             this.recommendationService = recommendationService;
         }
         
-        
         [HttpGet("")]
         public IActionResult Index()
         {
@@ -73,15 +72,15 @@ namespace SeaPublicWebsite.Controllers
                 return NewOrReturningUser_Get();
             }
 
-            if (viewModel.NewOrReturningUser == NewOrReturningUser.ReturningUser)
+            if (viewModel.NewOrReturningUser is NewOrReturningUser.ReturningUser)
             {
                 if (!propertyDataStore.IsReferenceValid(viewModel.Reference))
                 {
                     ModelState.AddModelError(nameof(NewOrReturningUserViewModel.Reference), "Check you have typed the reference correctly. Reference must be 8 characters.");
                     return NewOrReturningUser_Get();
                 }
-                
-                return RedirectToAction("YourSavedRecommendations_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
+
+                return ReturningUser_Get(viewModel.Reference);
             }
 
             string reference = propertyDataStore.GenerateNewReferenceAndSaveEmptyPropertyData();
@@ -1056,7 +1055,7 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpGet("answer-summary/{reference}")]
-        public IActionResult AnswerSummary(string reference)
+        public IActionResult AnswerSummary_Get(string reference)
         {
             var propertyData = propertyDataStore.LoadPropertyData(reference);
 
@@ -1070,13 +1069,17 @@ namespace SeaPublicWebsite.Controllers
             return View("AnswerSummary", viewModel);
         }
 
-        
-        [HttpGet("your-recommendations/{reference}")]
-        public async Task<IActionResult> YourRecommendations_GetAsync(string reference)
+        [HttpPost("answer-summary/{reference}")]
+        public async Task<IActionResult> AnswerSummary_PostAsync(string reference)
         {
+            if (!ModelState.IsValid)
+            {
+                return AnswerSummary_Get(reference);
+            }
+            
             var propertyData = propertyDataStore.LoadPropertyData(reference);
-            var recommendationsForProperty = await recommendationService.GetRecommendationsForPropertyAsync(propertyData);
-            propertyData.PropertyRecommendations = recommendationsForProperty.Select(r => 
+            var recommendationsForPropertyAsync = await recommendationService.GetRecommendationsForPropertyAsync(propertyData);
+            propertyData.PropertyRecommendations = recommendationsForPropertyAsync.Select(r => 
                 new PropertyRecommendation()
                 {
                     Key = r.Key,
@@ -1090,14 +1093,52 @@ namespace SeaPublicWebsite.Controllers
                 }
             ).ToList();
             propertyDataStore.SavePropertyData(propertyData);
+            
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AnswerSummary, propertyData);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+        }
 
-            int firstReferenceId = recommendationsForProperty.Count == 0 ? -1 : (int) recommendationsForProperty[0].Key;
+        [HttpGet("returning-user/{reference}")]
+        public IActionResult ReturningUser_Get(string reference)
+        {
+            var userDataModel = propertyDataStore.LoadPropertyData(reference);
+            var recommendations = userDataModel.PropertyRecommendations;
+            if (!recommendations.Any())
+            {
+                return RedirectToAction(nameof(NoRecommendations_Get), "EnergyEfficiency", new { reference });
+            }
+
+            var firstNotActionedRecommendation = recommendations.Find(recommendation => recommendation.RecommendationAction is null);
+            if (firstNotActionedRecommendation is not null)
+            {
+                return RedirectToAction(nameof(Recommendation_Get), "EnergyEfficiency",
+                    new { id = (int)firstNotActionedRecommendation.Key, reference = userDataModel.Reference });
+            }
+            
+            return RedirectToAction("YourSavedRecommendations_Get", new {reference = userDataModel.Reference});
+        }
+
+        [HttpGet("no-recommendations/{reference}")]
+        public IActionResult NoRecommendations_Get(string reference)
+        {
+            var userDataModel = propertyDataStore.LoadPropertyData(reference);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.NoRecommendations, userDataModel);
+            var viewModel = new NoRecommendationsViewModel
+            {
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+            };
+            return View("NoRecommendations", viewModel);
+        }
+
+        [HttpGet("your-recommendations/{reference}")]
+        public IActionResult YourRecommendations_Get(string reference)
+        {
+            var propertyData = propertyDataStore.LoadPropertyData(reference);
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.YourRecommendations, propertyData);
             var viewModel = new YourRecommendationsViewModel
             {
                 Reference = reference,
-                NumberOfPropertyRecommendations = recommendationsForProperty.Count,
-                FirstReferenceId = firstReferenceId,
+                NumberOfPropertyRecommendations = propertyData.PropertyRecommendations.Count,
                 HasEmailAddress = false,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
@@ -1105,17 +1146,14 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpPost("your-recommendations/{reference}")]
-        public async Task<IActionResult> YourRecommendations_Post(YourRecommendationsViewModel viewModel)
+        public IActionResult YourRecommendations_Post(YourRecommendationsViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return await YourRecommendations_GetAsync(viewModel.Reference);
+                return YourRecommendations_Get(viewModel.Reference);
             }
 
             var propertyData = propertyDataStore.LoadPropertyData(viewModel.Reference);
-
-            propertyDataStore.SavePropertyData(propertyData);
-            
             if (viewModel.HasEmailAddress)
             {
                 try
@@ -1130,16 +1168,16 @@ namespace SeaPublicWebsite.Controllers
                             ModelState.AddModelError(nameof(viewModel.EmailAddress), "Enter a valid email address");
                             break;
                         case EmailSenderExceptionType.Other:
-                            ModelState.AddModelError(nameof(viewModel.EmailAddress), "Unable to send email due to unexpected error. Uncheck this box and make a note of your reference number before you continue.");
+                            ModelState.AddModelError(nameof(viewModel.EmailAddress), "Unable to send email due to unexpected error. Uncheck this box and make a note of your reference code before you continue.");
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
-                    return await YourRecommendations_GetAsync(viewModel.Reference);
+                    return YourRecommendations_Get(viewModel.Reference);
                 }
             }
             
-            return RedirectToAction("Recommendation_Get", new { id = viewModel.FirstReferenceId, reference = viewModel.Reference });
+            return RedirectToAction("Recommendation_Get", new { id = (int) propertyData.PropertyRecommendations[0].Key, reference = viewModel.Reference });
         }
 
         [HttpGet("your-recommendations/{id}/{reference}")]

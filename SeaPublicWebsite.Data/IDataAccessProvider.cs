@@ -6,7 +6,6 @@ public interface IDataAccessProvider
 {
     void AddPropertyData(PropertyData propertyData);
     void UpdatePropertyData(PropertyData propertyData);
-    void DeletePropertyData(string reference);
     PropertyData GetSinglePropertyData(string reference);
     List<PropertyData> GetAllPropertyData();
 }

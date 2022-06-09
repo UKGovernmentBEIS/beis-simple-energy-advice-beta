@@ -38,7 +38,7 @@ public class PropertyDataStore
         string reference;
         do
         {
-            reference = RandomHelper.Generate8DigitReference();
+            reference = RandomHelper.Generate8CharacterReference();
         } while (IsReferenceValid(reference));
 
         PropertyData propertyData = new()

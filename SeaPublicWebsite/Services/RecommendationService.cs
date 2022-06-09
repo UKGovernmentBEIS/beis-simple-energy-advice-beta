@@ -204,7 +204,8 @@ namespace SeaPublicWebsite.Services
             BreWallType breWallType = GetBreWallType(propertyData.WallConstruction.Value, propertyData.SolidWallsInsulated,
                 propertyData.CavityWallsInsulated);
 
-            BreRoofType breRoofType = GetBreRoofType(propertyData.RoofConstruction.Value, propertyData.AccessibleLoftSpace, propertyData.RoofInsulated);
+            BreRoofType? breRoofType = GetBreRoofType(propertyData.RoofConstruction, propertyData.AccessibleLoftSpace,
+                propertyData.RoofInsulated);
 
             BreGlazingType breGlazingType = GetBreGlazingType(propertyData.GlazingType.Value);
 
@@ -213,6 +214,9 @@ namespace SeaPublicWebsite.Services
             bool? breHotWaterCylinder = GetBreHotWaterCylinder(propertyData.HasHotWaterCylinder);
 
             BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(propertyData.HeatingPattern.Value);
+
+            int[] breNormalDaysOffHours =
+                GetBreNormalDaysOffHours(propertyData.HoursOfHeatingMorning, propertyData.HoursOfHeatingEvening);
 
             BreRequest request = new(
                 brePostcode: propertyData.Postcode,
@@ -227,6 +231,7 @@ namespace SeaPublicWebsite.Services
                 breHotWaterCylinder: breHotWaterCylinder,
                 breOccupants: propertyData.NumberOfOccupants,
                 breHeatingPatternType: breHeatingPatternType,
+                breNormalDaysOffHours: breNormalDaysOffHours,
                 breTemperature: propertyData.Temperature
             );
 
@@ -379,7 +384,7 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static BreRoofType GetBreRoofType(RoofConstruction roofConstruction,
+        private static BreRoofType? GetBreRoofType(RoofConstruction? roofConstruction,
             AccessibleLoftSpace? accessibleLoftSpace, RoofInsulated? roofInsulated)
         {
             return roofConstruction switch
@@ -401,7 +406,8 @@ namespace SeaPublicWebsite.Services
                     },
                     _ => throw new ArgumentOutOfRangeException()
                 },
-                _ => throw new ArgumentOutOfRangeException()
+                //assumption for ground and middle floor flats
+                _ => null
             };
         }
 
@@ -464,6 +470,17 @@ namespace SeaPublicWebsite.Services
                 HeatingPattern.Other => BreHeatingPatternType.NoneOfTheAbove,
                 _ => throw new ArgumentOutOfRangeException()
             };
+        }
+        
+        private static int[] GetBreNormalDaysOffHours(decimal? hoursOfHeatingMorning, decimal? hoursOfHeatingEvening)
+        {
+            if (hoursOfHeatingMorning != null && hoursOfHeatingEvening != null)
+            {
+                //assumption: time heating is turned on is not collected so this is a simplification of the BRE input complexity available
+                int averageOffPeriod = (int) ((24 - (hoursOfHeatingMorning + hoursOfHeatingEvening)) / 2);
+                return new [] { averageOffPeriod, averageOffPeriod };
+            }
+            return null;
         }
     }
 }

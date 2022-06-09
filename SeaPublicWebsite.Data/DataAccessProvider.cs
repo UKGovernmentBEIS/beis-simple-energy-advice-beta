@@ -23,13 +23,6 @@ public class DataAccessProvider : IDataAccessProvider
         context.SaveChanges();
     }
 
-    public void DeletePropertyData(string reference)
-    {
-        var entity = context.PropertyData.FirstOrDefault(p => p.Reference == reference);
-        context.PropertyData.Remove(entity);
-        context.SaveChanges();
-    }
-
     public PropertyData GetSinglePropertyData(string reference)
     {
         return context.PropertyData
