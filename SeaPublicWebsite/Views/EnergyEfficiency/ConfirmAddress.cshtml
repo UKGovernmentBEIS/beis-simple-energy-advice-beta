@@ -74,17 +74,14 @@
             }
             else
             {
-                ErrorMessageViewModel errorMessageViewModel = null;
-                if (ViewData.ModelState.TryGetValue(nameof(ConfirmAddressViewModel.SelectedEpcId), out var modelStateEntry) &&
-                    modelStateEntry.Errors.Count > 0)
-                {
-                    errorMessageViewModel = new ErrorMessageViewModel { Text = string.Join(", ", modelStateEntry.Errors.Select(e => e.ErrorMessage)) };
-                }
-
-                @await Html.GovUkRadios(new RadiosViewModel()
-                {
-                    Name = nameof(ConfirmAddressViewModel.SelectedEpcId),
-                    Fieldset = new FieldsetViewModel
+                @await Html.GovUkRadiosFromStringsFor(m => m.SelectedEpcId,
+                    radioOptions: Model.EpcInformationList.ToDictionary(
+                        epc => epc.EpcId,
+                        epc => new LabelViewModel
+                        {
+                            Text = epc.Address1 + (epc.Address2 != "" ? ", " + epc.Address2 : "")
+                        }),
+                    fieldsetOptions: new FieldsetViewModel
                     {
                         Legend = new LegendViewModel
                         {
@@ -95,29 +92,7 @@
                                     </text>,
                             Classes = "govuk-fieldset__legend--l"
                         }
-                    },
-                    Items = Model.EpcInformationList.Select(epc =>
-                    {
-                        string fieldName = nameof(ConfirmAddressViewModel.SelectedEpcId);
-                        string fieldValue = epc.EpcId;
-                        string fieldId = $"{fieldName}_{fieldValue}";
-
-                        return (ItemViewModel) new RadioItemViewModel
-                        {
-                            Name = fieldName,
-                            Value = fieldValue,
-                            Id = fieldId,
-                            Checked = Model.SelectedEpcId == fieldValue,
-                            Label = new LabelViewModel
-                            {
-                                Text = epc.Address1 + (epc.Address2 != "" ? ", " + epc.Address2 : ""),
-                                For = fieldId
-                            }
-                        };
-                    })
-                        .ToList(),
-                    ErrorMessage = errorMessageViewModel
-                })}
+                    })}
 
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
