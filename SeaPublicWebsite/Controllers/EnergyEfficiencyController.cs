@@ -76,10 +76,7 @@ namespace SeaPublicWebsite.Controllers
                     return NewOrReturningUser_Get();
                 }
 
-                var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-                
-                return RedirectToAction(nameof(ReturningUser_Get), "EnergyEfficiency",
-                    new { reference = userDataModel.Reference });
+                return ReturningUser_Get(viewModel.Reference);
             }
 
             var reference = userDataStore.GenerateNewReferenceAndSaveEmptyUserData();
