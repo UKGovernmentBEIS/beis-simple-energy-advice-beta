@@ -52,7 +52,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
             return null;
         }
 
-        public List<Data.PropertyRecommendation> GetSavedRecommendations()
+        public List<PropertyRecommendation> GetSavedRecommendations()
         {
             return PropertyData.PropertyRecommendations.Where(r => r.RecommendationAction == Data.EnergyEfficiency.Recommendations.RecommendationAction.SaveToActionPlan).ToList();
         }

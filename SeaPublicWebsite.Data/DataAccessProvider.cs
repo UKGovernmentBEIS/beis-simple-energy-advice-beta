@@ -32,7 +32,10 @@ public class DataAccessProvider : IDataAccessProvider
 
     public PropertyData GetSinglePropertyData(string reference)
     {
-        return context.PropertyData.FirstOrDefault(p => p.Reference == reference);
+        return context.PropertyData
+            .Include(p => p.Epc)
+            .Include(p => p.PropertyRecommendations)
+            .FirstOrDefault(p => p.Reference == reference);
     }
 
     public List<PropertyData> GetAllPropertyData()

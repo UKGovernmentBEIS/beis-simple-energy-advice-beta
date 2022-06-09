@@ -25,7 +25,7 @@ public class PropertyDataStore
 
     public bool IsReferenceValid(string reference)
     {
-        return dataAccessProvider.GetAllPropertyData().Exists(p => p.Reference == reference.ToUpper());
+        return dataAccessProvider.GetAllPropertyData().Any(p => p.Reference == reference.ToUpper());
     }
 
     public void SavePropertyData(PropertyData propertyData)
