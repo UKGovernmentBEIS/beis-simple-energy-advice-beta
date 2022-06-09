@@ -42,7 +42,6 @@ namespace SeaPublicWebsite.Controllers
             this.recommendationService = recommendationService;
         }
         
-        
         [HttpGet("")]
         public IActionResult Index()
         {
@@ -69,7 +68,7 @@ namespace SeaPublicWebsite.Controllers
                 return NewOrReturningUser_Get();
             }
 
-            if (viewModel.NewOrReturningUser == NewOrReturningUser.ReturningUser)
+            if (viewModel.NewOrReturningUser is NewOrReturningUser.ReturningUser)
             {
                 if (!userDataStore.IsReferenceValid(viewModel.Reference))
                 {
@@ -77,17 +76,12 @@ namespace SeaPublicWebsite.Controllers
                     return NewOrReturningUser_Get();
                 }
 
-                var userDataModel = userDataStore.LoadUserData(viewModel.Reference);
-                
-                // TODO: Seabeta-346 to combine this with magic link logic
-                return userDataModel.UserRecommendations.Any()
-                    ? RedirectToAction("Recommendation_Get", "EnergyEfficiency", new { reference = viewModel.Reference, id = (int) userDataModel.UserRecommendations[0].Key })
-                    : RedirectToAction("NoRecommendations_Get", "EnergyEfficiency", new { reference = viewModel.Reference });
+                return ReturningUser_Get(viewModel.Reference);
             }
 
-            string reference = userDataStore.GenerateNewReferenceAndSaveEmptyUserData();
+            var reference = userDataStore.GenerateNewReferenceAndSaveEmptyUserData();
             
-            return RedirectToAction("Country_Get", "EnergyEfficiency", new { reference = reference });
+            return RedirectToAction("Country_Get", "EnergyEfficiency", new { reference });
         }
 
         
@@ -1096,6 +1090,26 @@ namespace SeaPublicWebsite.Controllers
             
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AnswerSummary, userDataModel);
             return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+        }
+
+        [HttpGet("returning-user/{reference}")]
+        public IActionResult ReturningUser_Get(string reference)
+        {
+            var userDataModel = userDataStore.LoadUserData(reference);
+            var recommendations = userDataModel.UserRecommendations;
+            if (!recommendations.Any())
+            {
+                return RedirectToAction(nameof(NoRecommendations_Get), "EnergyEfficiency", new { reference });
+            }
+
+            var firstNotActionedRecommendation = recommendations.Find(recommendation => recommendation.RecommendationAction is null);
+            if (firstNotActionedRecommendation is not null)
+            {
+                return RedirectToAction(nameof(Recommendation_Get), "EnergyEfficiency",
+                    new { id = (int)firstNotActionedRecommendation.Key, reference = userDataModel.Reference });
+            }
+            
+            return RedirectToAction("YourSavedRecommendations_Get", new {reference = userDataModel.Reference});
         }
 
         [HttpGet("no-recommendations/{reference}")]
