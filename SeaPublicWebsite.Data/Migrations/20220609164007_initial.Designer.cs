@@ -12,8 +12,8 @@ using SeaPublicWebsite.Data;
 namespace SeaPublicWebsite.Data.Migrations
 {
     [DbContext(typeof(SeaDbContext))]
-    [Migration("20220526162137_PropertyDataAndRecommendations")]
-    partial class PropertyDataAndRecommendations
+    [Migration("20220609164007_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,55 @@ namespace SeaPublicWebsite.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions.Epc", b =>
+                {
+                    b.Property<string>("EpcId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Address1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("BuildingReference")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("CavityWallsInsulated")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ConstructionAgeBand")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("FloorConstruction")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("FloorInsulated")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("HeatingType")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("InspectionDate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Postcode")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("PropertyType")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("SolidWallsInsulated")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("WallConstruction")
+                        .HasColumnType("integer");
+
+                    b.HasKey("EpcId");
+
+                    b.ToTable("Epc");
+                });
 
             modelBuilder.Entity("SeaPublicWebsite.Data.PropertyData", b =>
                 {
@@ -43,6 +92,9 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.Property<int?>("Country")
                         .HasColumnType("integer");
+
+                    b.Property<string>("EpcId")
+                        .HasColumnType("text");
 
                     b.Property<string>("EpcLmkKey")
                         .HasColumnType("text");
@@ -71,8 +123,11 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("HeatingType")
                         .HasColumnType("integer");
 
-                    b.Property<decimal?>("HoursOfHeating")
-                        .HasColumnType("numeric");
+                    b.Property<int?>("HoursOfHeatingEvening")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("HoursOfHeatingMorning")
+                        .HasColumnType("integer");
 
                     b.Property<string>("HouseNameOrNumber")
                         .HasColumnType("text");
@@ -117,6 +172,8 @@ namespace SeaPublicWebsite.Data.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("PropertyDataId");
+
+                    b.HasIndex("EpcId");
 
                     b.ToTable("PropertyData");
                 });
@@ -164,6 +221,15 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.HasIndex("PropertyDataId");
 
                     b.ToTable("PropertyRecommendations");
+                });
+
+            modelBuilder.Entity("SeaPublicWebsite.Data.PropertyData", b =>
+                {
+                    b.HasOne("SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions.Epc", "Epc")
+                        .WithMany()
+                        .HasForeignKey("EpcId");
+
+                    b.Navigation("Epc");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.Data.PropertyRecommendation", b =>
