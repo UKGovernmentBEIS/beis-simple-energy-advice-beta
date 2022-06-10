@@ -1,4 +1,4 @@
-﻿using SeaPublicWebsite.Data.DataModels;
+﻿using SeaPublicWebsite.BusinessLogic.Models;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {

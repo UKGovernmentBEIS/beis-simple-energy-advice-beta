@@ -1,12 +1,12 @@
 ﻿using GovUkDesignSystem.Attributes;
 
-namespace SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions
+namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
-    public enum HasOutdoorSpace
+    public enum HasHotWaterCylinder
     {
         [GovUkRadioCheckboxLabelText(Text = "I'm not sure")]
         DoNotKnow,
         Yes,
-        No,
+        No
     }
 }

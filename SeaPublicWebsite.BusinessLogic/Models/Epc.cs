@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
-using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
-namespace SeaPublicWebsite.Data.DataModels
+namespace SeaPublicWebsite.BusinessLogic.Models
 {
     public class Epc
     {

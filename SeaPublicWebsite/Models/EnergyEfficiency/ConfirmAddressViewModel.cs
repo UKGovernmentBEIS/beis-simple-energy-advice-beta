@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
-using SeaPublicWebsite.Data.DataModels;
+using SeaPublicWebsite.BusinessLogic.Models;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {

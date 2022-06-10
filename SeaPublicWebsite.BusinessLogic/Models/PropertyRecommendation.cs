@@ -1,7 +1,6 @@
-﻿using SeaPublicWebsite.Data.EnergyEfficiency;
-using SeaPublicWebsite.Data.EnergyEfficiency.Recommendations;
+﻿using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
-namespace SeaPublicWebsite.Data.DataModels;
+namespace SeaPublicWebsite.BusinessLogic.Models;
 
 public class PropertyRecommendation
 {

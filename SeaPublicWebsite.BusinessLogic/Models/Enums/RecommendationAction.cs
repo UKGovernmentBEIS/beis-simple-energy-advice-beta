@@ -1,6 +1,6 @@
 ﻿using GovUkDesignSystem.Attributes;
 
-namespace SeaPublicWebsite.Data.EnergyEfficiency.Recommendations
+namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum RecommendationAction
     {

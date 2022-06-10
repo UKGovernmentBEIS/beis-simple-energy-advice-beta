@@ -1,4 +1,4 @@
-﻿using SeaPublicWebsite.Data.EnergyEfficiency;
+﻿using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.ExternalServices.Bre
 {

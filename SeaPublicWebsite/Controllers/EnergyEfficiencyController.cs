@@ -2,10 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SeaPublicWebsite.Data.DataModels;
-using SeaPublicWebsite.Data.EnergyEfficiency;
-using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
-using SeaPublicWebsite.Data.EnergyEfficiency.Recommendations;
+using SeaPublicWebsite.BusinessLogic.Models;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.EmailSending;

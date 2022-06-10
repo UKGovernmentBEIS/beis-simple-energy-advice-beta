@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SeaPublicWebsite.Data.DataModels;
+using SeaPublicWebsite.BusinessLogic.Models;
 
 namespace SeaPublicWebsite.Data;
 

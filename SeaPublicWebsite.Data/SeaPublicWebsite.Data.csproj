@@ -6,9 +6,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.0-ce7e22f" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SeaPublicWebsite.BusinessLogic\SeaPublicWebsite.BusinessLogic.csproj" />
     </ItemGroup>
 
 </Project>

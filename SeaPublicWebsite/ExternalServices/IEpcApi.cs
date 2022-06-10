@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using SeaPublicWebsite.Data.DataModels;
+using SeaPublicWebsite.BusinessLogic.Models;
 
 namespace SeaPublicWebsite.ExternalServices
 {

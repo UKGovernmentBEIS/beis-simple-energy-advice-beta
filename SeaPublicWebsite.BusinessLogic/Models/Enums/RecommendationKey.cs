@@ -1,4 +1,4 @@
-﻿namespace SeaPublicWebsite.Data.EnergyEfficiency
+﻿namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum RecommendationKey
     { 

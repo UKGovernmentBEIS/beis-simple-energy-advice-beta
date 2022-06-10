@@ -1,6 +1,6 @@
-﻿using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
+﻿using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
-namespace SeaPublicWebsite.Data.DataModels;
+namespace SeaPublicWebsite.BusinessLogic.Models;
 
 public class PropertyData
 {
@@ -14,11 +14,8 @@ public class PropertyData
 
     public Epc Epc { get; set; }
 
-    // public UserGoal? UserGoal { get; set; }
-    // public List<UserInterests> UserInterests { get; set; }
     public string Postcode { get; set; }
 
-    public string EpcLmkKey { get; set; }
     public string HouseNameOrNumber { get; set; }
     public PropertyType? PropertyType { get; set; }
     public HouseType? HouseType { get; set; }

@@ -2,7 +2,7 @@
 using GovUkDesignSystem.Attributes;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 
-namespace SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions
+namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum PropertyType
     {
