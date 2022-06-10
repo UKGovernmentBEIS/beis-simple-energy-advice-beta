@@ -23,12 +23,12 @@ public class DataAccessProvider : IDataAccessProvider
         await context.SaveChangesAsync();
     }
 
-    public async Task<PropertyData> GetSinglePropertyDataAsync(string reference)
+    public async Task<PropertyData> GetPropertyDataAsync(string reference)
     {
         return await context.PropertyData
             .Include(p => p.Epc)
             .Include(p => p.PropertyRecommendations)
-            .FirstOrDefaultAsync(p => p.Reference == reference);
+            .SingleOrDefaultAsync(p => p.Reference == reference);
     }
 
     public async Task<bool> PropertyDataExistsAsync(string reference)

@@ -13,14 +13,17 @@ public class PropertyDataStore
     }
     public async Task<PropertyData> LoadPropertyDataAsync(string reference)
     {
-        if (!await IsReferenceValidAsync(reference))
+        var data = await dataAccessProvider.GetPropertyDataAsync(reference.ToUpper());
+        
+        if (data == null)
         {
             throw new PropertyReferenceNotFoundException
             {
                 Reference = reference
             };
         }
-        return await dataAccessProvider.GetSinglePropertyDataAsync(reference.ToUpper());
+        
+        return data;
     }
 
     public async Task<bool> IsReferenceValidAsync(string reference)
