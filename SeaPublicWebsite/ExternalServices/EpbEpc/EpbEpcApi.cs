@@ -108,7 +108,8 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 ConstructionAgeBand = GetConstructionAgeBandFromEpc(epc),
                 RoofConstruction = GetRoofConstructionFromEpc(epc),
                 RoofInsulated = GetRoofInsulationFromEpc(epc),
-                GlazingType = GetGlazingTypeFromEpc(epc)
+                GlazingType = GetGlazingTypeFromEpc(epc),
+                HasHotWaterCylinder = GetHasHotWaterCylinderFromEpc(epc)
             };
         }
 
@@ -490,6 +491,16 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 (false, true) => GlazingType.DoubleOrTripleGlazed,
                 (false, false) => null
             };
+        }
+
+        private static HasHotWaterCylinder? GetHasHotWaterCylinderFromEpc(EpbEpcAssessmentDto epc)
+        {
+            if (epc.HasHotWaterCylinder is null)
+            {
+                return null;
+            }
+
+            return epc.HasHotWaterCylinder.Value ? HasHotWaterCylinder.Yes : HasHotWaterCylinder.No;
         }
     }
 

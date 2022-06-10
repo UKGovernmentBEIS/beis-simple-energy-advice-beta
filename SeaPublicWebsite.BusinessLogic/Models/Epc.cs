@@ -25,6 +25,7 @@ namespace SeaPublicWebsite.BusinessLogic.Models
         public RoofConstruction? RoofConstruction { get; set; }
         public RoofInsulated? RoofInsulated { get; set; }
         public GlazingType? GlazingType { get; set; }
+        public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
     }
 
     public class EpcInformation

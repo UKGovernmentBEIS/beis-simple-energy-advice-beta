@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.BusinessLogic.Models.Enums
 @model SeaPublicWebsite.Models.EnergyEfficiency.HotWaterCylinderViewModel
 @{
     ViewBag.Title = "Hot water cylinder";
@@ -23,8 +24,26 @@
         
         <form action="@Url.Action("HotWaterCylinder_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
-            
             @Html.AntiForgeryToken()
+            
+            @{
+                Func<object, object> epcHint = null;
+                if (Model.Epc?.HasHotWaterCylinder is not null)
+                {
+                    epcHint = 
+                        @<p class="govuk-body">
+                            Your @Model.Epc?.LodgementDate Energy Performance Certificate suggests you
+                            <strong>
+                                @(Model.Epc?.HasHotWaterCylinder switch {
+                                    HasHotWaterCylinder.Yes => "have",
+                                    HasHotWaterCylinder.No => "do not have",
+                                    _ => throw new ArgumentOutOfRangeException()})
+                            </strong>
+                            a hot water cylinder.
+                        </p>;
+                }
+            }
+            
             @(await Html.GovUkRadiosFor(m => m.HasHotWaterCylinder,
                 fieldsetOptions: new FieldsetViewModel
                 {
@@ -44,6 +63,15 @@
                                <div class="govuk-hint">
                                    If you have a combi boiler, you will not have a hot water cylinder.
                                </div>
+                               
+                               @if (epcHint is not null)
+                               {
+                                   @await Html.GovUkInsetText(new InsetTextViewModel
+                                   {
+                                       Classes = "sea-epc-hint",
+                                       Html = epcHint
+                                   })
+                               }
                             </text>
                 }
             ))

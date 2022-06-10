@@ -9,5 +9,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
 
         public string Reference { get; set; }
+        public Epc Epc { get; set; }
     }
 }

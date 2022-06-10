@@ -53,7 +53,7 @@
                 if (Model.Epc?.HeatingType is not null)
                 {
                     epcHint = 
-                        @<p>
+                        @<p class="govuk-body">
                             Your @Model.Epc?.LodgementDate Energy Performance Certificate suggests your main heating system is
                             <strong>
                                 @(Model.Epc?.HeatingType switch {

@@ -42,7 +42,7 @@
                 if (Model.Epc?.CavityWallsInsulated is not null)
                 {
                     epcHint = 
-                        @<p>
+                        @<p class="govuk-body">
                             Your @Model.Epc?.LodgementDate Energy Performance Certificate suggests you have
                             <strong>
                                 @(Model.Epc?.SolidWallsInsulated switch {
