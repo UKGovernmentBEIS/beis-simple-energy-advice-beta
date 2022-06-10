@@ -37,7 +37,6 @@
         <None Update="manifest.yml">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <Content Remove="Views\Error\UserReferenceNotFound.cshtml" />
     </ItemGroup>
 
 </Project>

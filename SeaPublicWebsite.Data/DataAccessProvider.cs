@@ -23,16 +23,16 @@ public class DataAccessProvider : IDataAccessProvider
         context.SaveChanges();
     }
 
-    public PropertyData GetSinglePropertyData(string reference)
+    public async Task<PropertyData> GetSinglePropertyData(string reference)
     {
-        return context.PropertyData
+        return await context.PropertyData
             .Include(p => p.Epc)
             .Include(p => p.PropertyRecommendations)
-            .FirstOrDefault(p => p.Reference == reference);
+            .FirstOrDefaultAsync(p => p.Reference == reference);
     }
 
-    public List<PropertyData> GetAllPropertyData()
+    public async Task<List<PropertyData>> GetAllPropertyData()
     {
-        return context.PropertyData.ToList();
+        return await context.PropertyData.ToListAsync();
     }
 }

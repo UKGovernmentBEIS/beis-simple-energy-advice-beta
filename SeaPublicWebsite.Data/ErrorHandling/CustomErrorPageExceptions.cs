@@ -9,7 +9,7 @@
 
     public class PropertyReferenceNotFoundException : CustomErrorPageException
     {
-        public override string ViewName => "../Errors/PropertyReferenceNotFound";
+        public override string ViewName => "../Error/PropertyReferenceNotFound";
         public override int StatusCode => 404;
         public string Reference { get; set; }
     }

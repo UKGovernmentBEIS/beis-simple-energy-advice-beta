@@ -11,21 +11,22 @@ public class PropertyDataStore
     {
         this.dataAccessProvider = dataAccessProvider;
     }
-    public PropertyData LoadPropertyData(string reference)
+    public async Task<PropertyData> LoadPropertyData(string reference)
     {
-        if (!IsReferenceValid(reference))
+        if (!await IsReferenceValid(reference))
         {
             throw new PropertyReferenceNotFoundException
             {
                 Reference = reference
             };
         }
-        return dataAccessProvider.GetSinglePropertyData(reference.ToUpper());
+        return await dataAccessProvider.GetSinglePropertyData(reference.ToUpper());
     }
 
-    public bool IsReferenceValid(string reference)
+    public async Task<bool> IsReferenceValid(string reference)
     {
-        return dataAccessProvider.GetAllPropertyData().Any(p => p.Reference == reference.ToUpper());
+        var allPropertyData = await dataAccessProvider.GetAllPropertyData();
+        return allPropertyData.Any(p => p.Reference == reference.ToUpper());
     }
 
     public void SavePropertyData(PropertyData propertyData)
@@ -33,13 +34,13 @@ public class PropertyDataStore
         dataAccessProvider.UpdatePropertyData(propertyData);
     }
 
-    public string GenerateNewReferenceAndSaveEmptyPropertyData()
+    public async Task<string> GenerateNewReferenceAndSaveEmptyPropertyData()
     {
         string reference;
         do
         {
             reference = RandomHelper.Generate8CharacterReference();
-        } while (IsReferenceValid(reference));
+        } while (await IsReferenceValid(reference));
 
         PropertyData propertyData = new()
         {
