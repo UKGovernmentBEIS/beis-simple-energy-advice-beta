@@ -78,7 +78,7 @@ namespace SeaPublicWebsite.Controllers
                 return await ReturningUser_Get(viewModel.Reference);
             }
 
-            string reference = await propertyDataStore.GenerateNewReferenceAndSaveEmptyPropertyDataAsync();
+            string reference = await propertyDataStore.CreateNewPropertyDataAsync();
 
             return RedirectToAction("Country_Get", "EnergyEfficiency", new { reference = reference });
         }

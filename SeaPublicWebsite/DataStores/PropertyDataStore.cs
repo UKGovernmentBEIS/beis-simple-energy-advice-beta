@@ -46,7 +46,7 @@ public class PropertyDataStore
         await dataAccessProvider.UpdatePropertyDataAsync(propertyData);
     }
 
-    public async Task<string> GenerateNewReferenceAndSaveEmptyPropertyDataAsync()
+    public async Task<string> CreateNewPropertyDataAsync()
     {
         var saveCount = 0;
         var attemptedReferences = new List<string>();
