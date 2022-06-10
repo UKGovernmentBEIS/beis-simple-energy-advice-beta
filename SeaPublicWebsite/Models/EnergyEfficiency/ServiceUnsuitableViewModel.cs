@@ -1,4 +1,4 @@
-﻿using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+﻿using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {

@@ -1,13 +1,12 @@
 ﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
 using GovUkDesignSystem.ModelBinders;
 using Microsoft.AspNetCore.Mvc;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class YourRecommendationsViewModel : QuestionFlowViewModel
     {
-        public int NumberOfUserRecommendations { get; set; }
+        public int NumberOfPropertyRecommendations { get; set; }
         public string Reference { get; set; }
 
         [ModelBinder(typeof(GovUkCheckboxBoolBinder))]

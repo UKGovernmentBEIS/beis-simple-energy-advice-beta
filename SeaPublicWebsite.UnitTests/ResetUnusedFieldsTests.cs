@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using SeaPublicWebsite.DataModels;
+using SeaPublicWebsite.BusinessLogic.Models;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.Helpers;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace Tests;
 
@@ -13,13 +13,13 @@ public class ResetUnusedFieldsTests
     public void RunResetUnusedFieldTestCases(ResetUnusedFieldsTestCase testCase)
     {
         // Arrange
-        var userData = testCase.Input;
+        PropertyData propertyData = testCase.Input;
         
         // Act
-        UserDataHelper.ResetUnusedFields(userData);
+        PropertyDataHelper.ResetUnusedFields(propertyData);
 
         // Assert
-        userData.Should().BeEquivalentTo(testCase.ExpectedOutput);
+        propertyData.Should().BeEquivalentTo(testCase.ExpectedOutput);
     }
 
     private static ResetUnusedFieldsTestCase[] TestCases =
@@ -223,10 +223,10 @@ public class ResetUnusedFieldsTests
     public class ResetUnusedFieldsTestCase
     {
         public readonly string Description;
-        public readonly UserDataModel Input;
-        public readonly UserDataModel ExpectedOutput;
+        public readonly PropertyData Input;
+        public readonly PropertyData ExpectedOutput;
 
-        public ResetUnusedFieldsTestCase(string description, UserDataModel input, UserDataModel expectedOutput)
+        public ResetUnusedFieldsTestCase(string description, PropertyData input, PropertyData expectedOutput)
         {
             Description = description;
             Input = input;

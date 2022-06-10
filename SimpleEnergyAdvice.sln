@@ -69,6 +69,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AlertRules", "AlertRules", 
 		Infrastructure\Logging\Logit.io\AlertRules\WebsiteError.yaml = Infrastructure\Logging\Logit.io\AlertRules\WebsiteError.yaml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaPublicWebsite.BusinessLogic", "SeaPublicWebsite.BusinessLogic\SeaPublicWebsite.BusinessLogic.csproj", "{52A59A93-AC33-48E1-927D-FFCBB37A330E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{2829E31D-41AF-4B37-87C9-1F78BE84990A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2829E31D-41AF-4B37-87C9-1F78BE84990A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2829E31D-41AF-4B37-87C9-1F78BE84990A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A59A93-AC33-48E1-927D-FFCBB37A330E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A59A93-AC33-48E1-927D-FFCBB37A330E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A59A93-AC33-48E1-927D-FFCBB37A330E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A59A93-AC33-48E1-927D-FFCBB37A330E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9E875C15-E270-4952-8C83-3D2FA04C9D09} = {EE6BCE34-EE65-4B59-9310-3AD1608277BB}

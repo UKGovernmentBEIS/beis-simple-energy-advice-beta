@@ -1,8 +1,8 @@
-﻿using GovUkDesignSystem.Attributes.DataBinding;
+using GovUkDesignSystem.Attributes.DataBinding;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 using GovUkDesignSystem.ModelBinders;
 using Microsoft.AspNetCore.Mvc;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {

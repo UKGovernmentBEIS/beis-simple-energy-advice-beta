@@ -1,27 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GovUkDesignSystem;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
-using SeaPublicWebsite.DataModels;
-using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations;
+using SeaPublicWebsite.BusinessLogic.Models;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class RecommendationViewModel
     {
-        public UserRecommendation UserRecommendation { get; set; }
-        public UserDataModel UserDataModel { get; set; }
+        public PropertyRecommendation PropertyRecommendation { get; set; }
+        public PropertyData PropertyData { get; set; }
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select what to do with this recommendation")]
         public RecommendationAction? RecommendationAction { get; set; }
 
         public int GetCurrentIndex()
         {
-            return UserDataModel.UserRecommendations.FindIndex(r => r.Key == UserRecommendation.Key);
+            return PropertyData.PropertyRecommendations.FindIndex(r => r.Key == PropertyRecommendation.Key);
         }
         public bool HasNextIndex()
         {
             var nextIndex = GetCurrentIndex() + 1;
-            return nextIndex < UserDataModel.UserRecommendations.Count;
+            return nextIndex < PropertyData.PropertyRecommendations.Count;
         }
 
         public bool HasPreviousIndex()
@@ -34,7 +33,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         {
             if (HasNextIndex())
             {
-                return UserDataModel.UserRecommendations[GetCurrentIndex() + 1].Key;
+                return PropertyData.PropertyRecommendations[GetCurrentIndex() + 1].Key;
             }
             return null;
         }
@@ -43,15 +42,15 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         {
             if (HasPreviousIndex())
             {
-                return UserDataModel.UserRecommendations[GetCurrentIndex() - 1].Key;
+                return PropertyData.PropertyRecommendations[GetCurrentIndex() - 1].Key;
             }
 
             return null;
         }
 
-        public List<UserRecommendation> GetSavedRecommendations()
+        public List<PropertyRecommendation> GetSavedRecommendations()
         {
-            return UserDataModel.UserRecommendations.Where(r => r.RecommendationAction == Recommendations.RecommendationAction.SaveToActionPlan).ToList();
+            return PropertyData.PropertyRecommendations.Where(r => r.RecommendationAction == BusinessLogic.Models.Enums.RecommendationAction.SaveToActionPlan).ToList();
         }
         public string GetTotalInstallationCostText()
         {

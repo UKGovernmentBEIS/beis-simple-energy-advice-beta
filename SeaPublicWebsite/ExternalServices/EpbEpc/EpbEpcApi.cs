@@ -8,10 +8,11 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using SeaPublicWebsite.BusinessLogic.Models;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices.Models.Epb;
 using SeaPublicWebsite.Helpers;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.ExternalServices.EpbEpc
 {

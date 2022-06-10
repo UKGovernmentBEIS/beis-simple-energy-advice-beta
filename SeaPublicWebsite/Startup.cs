@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Text.RegularExpressions;
 using GovUkDesignSystem.ModelBinders;
 using Microsoft.AspNetCore.Builder;
@@ -16,7 +15,6 @@ using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.EpbEpc;
-using SeaPublicWebsite.ExternalServices.FileRepositories;
 using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
@@ -37,13 +35,13 @@ namespace SeaPublicWebsite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<UserDataStore, UserDataStore>();
+            services.AddScoped<PropertyDataStore, PropertyDataStore>();
             services.AddScoped<IQuestionFlowService, QuestionFlowService>();
             services.AddMemoryCache();
             services.AddSingleton<StaticAssetsVersioningService>();
             services.AddScoped<RecommendationService>();
+            services.AddScoped<IDataAccessProvider, DataAccessProvider>();
 
-            ConfigureFileRepository(services);
             ConfigureEpcApi(services);
             ConfigureBreApi(services);
             ConfigureGovUkNotify(services);
@@ -101,21 +99,6 @@ namespace SeaPublicWebsite
             services.Configure<CookieServiceConfiguration>(
                 configuration.GetSection(CookieServiceConfiguration.ConfigSection));
             services.AddScoped<CookieService, CookieService>();
-        }
-
-        private void ConfigureFileRepository(IServiceCollection services)
-        {
-            if (!webHostEnvironment.IsDevelopment())
-            {
-                var vcapServiceConfig = VcapServiceFactory.GetVcapServices(configuration);
-                VcapAwsS3Bucket fileStorageBucketConfiguration = vcapServiceConfig.AwsS3Bucket.First(b => b.Name.EndsWith("-filestorage"));
-
-                services.AddSingleton<IFileRepository>(s => new AwsFileRepository(fileStorageBucketConfiguration));
-            }
-            else
-            {
-                services.AddSingleton<IFileRepository>(s => new SystemFileRepository());
-            }
         }
 
         private void ConfigureEpcApi(IServiceCollection services)

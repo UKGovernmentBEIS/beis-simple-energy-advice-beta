@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
 
 namespace SeaPublicWebsite.ErrorHandling
 {
@@ -11,9 +10,9 @@ namespace SeaPublicWebsite.ErrorHandling
     }
 
 
-    public class UserReferenceNotFoundException : CustomErrorPageException
+    public class PropertyReferenceNotFoundException : CustomErrorPageException
     {
-        public override string ViewName => "../Error/UserReferenceNotFound";
+        public override string ViewName => "../Error/PropertyReferenceNotFound";
         public override int StatusCode => 404;
         public string Reference { get; set; }
     }

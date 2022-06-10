@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
+using SeaPublicWebsite.BusinessLogic.Models;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.Controllers;
-using SeaPublicWebsite.DataModels;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.Services;
 
 namespace Tests;
@@ -25,7 +25,7 @@ public class QuestionFlowServiceTests
         // Act
         var output = QuestionFlowService.BackLinkArguments(
             testCase.Input.Page,
-            testCase.Input.UserData,
+            testCase.Input.PropertyData,
             testCase.Input.EntryPoint);
 
         // Assert
@@ -38,7 +38,7 @@ public class QuestionFlowServiceTests
         // Act
         var output = QuestionFlowService.ForwardLinkArguments(
             testCase.Input.Page,
-            testCase.Input.UserData,
+            testCase.Input.PropertyData,
             testCase.Input.EntryPoint);
 
         // Assert
@@ -51,7 +51,7 @@ public class QuestionFlowServiceTests
         // Act
         var output = QuestionFlowService.SkipLinkArguments(
             testCase.Input.Page,
-            testCase.Input.UserData,
+            testCase.Input.PropertyData,
             testCase.Input.EntryPoint);
 
         // Assert
@@ -1627,7 +1627,7 @@ public class QuestionFlowServiceTests
             new Input(
                 QuestionFlowPage.AnswerSummary,
                 "ABCDEFGH",
-                userRecommendations: new List<UserRecommendation> {new()}
+                propertyRecommendations: new List<PropertyRecommendation> {new()}
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.YourRecommendations_Get),
@@ -1639,7 +1639,7 @@ public class QuestionFlowServiceTests
             new Input(
                 QuestionFlowPage.AnswerSummary,
                 "ABCDEFGH",
-                userRecommendations: new List<UserRecommendation>()),
+                propertyRecommendations: new List<PropertyRecommendation>()),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.NoRecommendations_Get),
                 "EnergyEfficiency",
@@ -1745,7 +1745,7 @@ public class QuestionFlowServiceTests
     public class Input
     {
         public readonly QuestionFlowPage Page;
-        public readonly UserDataModel UserData;
+        public readonly PropertyData PropertyData;
         public QuestionFlowPage? EntryPoint;
 
         public Input(
@@ -1780,10 +1780,10 @@ public class QuestionFlowServiceTests
             int? hoursOfHeatingEvening = null,
             decimal? temperature = null,
             QuestionFlowPage? entryPoint = null,
-            List<UserRecommendation> userRecommendations = null)
+            List<PropertyRecommendation> propertyRecommendations = null)
         {
             Page = page;
-            UserData = new UserDataModel
+            PropertyData = new PropertyData
             {
                 Reference = reference,
                 OwnershipStatus = ownershipStatus,
@@ -1814,7 +1814,7 @@ public class QuestionFlowServiceTests
                 HoursOfHeatingMorning = hoursOfHeatingMorning,
                 HoursOfHeatingEvening = hoursOfHeatingEvening,
                 Temperature = temperature,
-                UserRecommendations = userRecommendations
+                PropertyRecommendations = propertyRecommendations
             };
             EntryPoint = entryPoint;
         }
