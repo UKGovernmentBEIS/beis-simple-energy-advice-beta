@@ -641,6 +641,7 @@ namespace SeaPublicWebsite.Controllers
                 FlatType = propertyData.FlatType,
                 RoofConstruction = propertyData.RoofConstruction,
                 Reference = propertyData.Reference,
+                Epc = propertyData.Epc,
                 EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
@@ -676,6 +677,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 AccessibleLoftSpace = propertyData.AccessibleLoftSpace,
                 Reference = propertyData.Reference,
+                Epc = propertyData.Epc,
                 EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };

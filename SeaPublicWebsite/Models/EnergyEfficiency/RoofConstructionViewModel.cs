@@ -11,5 +11,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Reference { get; set; }
         public PropertyType? PropertyType { get; set; }
         public FlatType? FlatType { get; set; }
+        public Epc Epc { get; set; }
     }
 }

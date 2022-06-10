@@ -25,6 +25,32 @@
             @Html.AntiForgeryToken()
             @(Html.HiddenFor(m => m.EntryPoint))
             
+            @{
+                Func<object, object> details = 
+                    @<text>
+                        <p class="govuk-body">
+                            Most roofs are pitched, meaning they are built at an angle or with a slope.<br>
+                        </p>
+                        <p class="govuk-body">
+                            A flat roof is completely, or almost, level, with no obvious slope or angle.
+                        </p>
+                     </text>;
+                
+                Func<object, object> epcHint = null;
+                // TODO: EPC!!!
+                if (Model.Epc?.FloorInsulated is not null)
+                {
+                    epcHint = 
+                        @<p>
+                            Your @Model.Epc?.InspectionDate Energy Performance Certificate suggests you have
+                            <strong>
+                                TODO
+                            </strong>
+                            floor.
+                        </p>;
+                }
+            }
+            
             @(await Html.GovUkRadiosFor(m => m.RoofConstruction,
                 fieldsetOptions: new FieldsetViewModel
                 {
@@ -41,21 +67,20 @@
                 new HintViewModel
                 {
                     Html = @<text>
-                                <details class="govuk-details" data-module="govuk-details">
-                                    <summary class="govuk-details__summary">
-                                        <span class="govuk-details__summary-text">
-                                            Help me decide if any part of my roof is flat
-                                        </span>
-                                    </summary>
-                                    <div class="govuk-details__text">
-                                        <p class="govuk-body">
-                                            Most roofs are pitched, meaning they are built at an angle or with a slope.<br>
-                                        </p>
-                                        <p class="govuk-body">
-                                            A flat roof is completely, or almost, level, with no obvious slope or angle.
-                                        </p>
-                                    </div>
-                                </details>
+                               @await Html.GovUkDetails(new DetailsViewModel
+                               {
+                                   SummaryText = "Help me answer this question",
+                                   Html = details
+                               })
+                               
+                               @if (epcHint is not null)
+                               {
+                                   @await Html.GovUkInsetText(new InsetTextViewModel
+                                   {
+                                       Classes = "sea-epc-hint",
+                                       Html = epcHint
+                                   })
+                               }
                             </text>
                 }
             ))
