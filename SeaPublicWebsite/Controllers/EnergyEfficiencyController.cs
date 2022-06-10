@@ -1095,8 +1095,8 @@ namespace SeaPublicWebsite.Controllers
         [HttpGet("returning-user/{reference}")]
         public async Task<IActionResult> ReturningUser_Get(string reference)
         {
-            var userDataModel = await propertyDataStore.LoadPropertyData(reference);
-            var recommendations = userDataModel.PropertyRecommendations;
+            var propertyData = await propertyDataStore.LoadPropertyData(reference);
+            var recommendations = propertyData.PropertyRecommendations;
             if (!recommendations.Any())
             {
                 return RedirectToAction(nameof(NoRecommendations_Get), "EnergyEfficiency", new { reference });
@@ -1106,17 +1106,17 @@ namespace SeaPublicWebsite.Controllers
             if (firstNotActionedRecommendation is not null)
             {
                 return RedirectToAction(nameof(Recommendation_Get), "EnergyEfficiency",
-                    new { id = (int)firstNotActionedRecommendation.Key, reference = userDataModel.Reference });
+                    new { id = (int)firstNotActionedRecommendation.Key, reference = propertyData.Reference });
             }
             
-            return RedirectToAction("YourSavedRecommendations_Get", new {reference = userDataModel.Reference});
+            return RedirectToAction("YourSavedRecommendations_Get", new {reference = propertyData.Reference});
         }
 
         [HttpGet("no-recommendations/{reference}")]
         public async Task<IActionResult> NoRecommendations_Get(string reference)
         {
-            var userDataModel = await propertyDataStore.LoadPropertyData(reference);
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.NoRecommendations, userDataModel);
+            var propertyData = await propertyDataStore.LoadPropertyData(reference);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.NoRecommendations, propertyData);
             var viewModel = new NoRecommendationsViewModel
             {
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)

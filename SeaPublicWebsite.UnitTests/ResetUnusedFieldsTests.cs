@@ -225,9 +225,9 @@ public class ResetUnusedFieldsTests
     {
         public readonly string Description;
         public readonly PropertyData Input;
-        public readonly UserDataModel ExpectedOutput;
+        public readonly PropertyData ExpectedOutput;
 
-        public ResetUnusedFieldsTestCase(string description, PropertyData input, UserDataModel expectedOutput)
+        public ResetUnusedFieldsTestCase(string description, PropertyData input, PropertyData expectedOutput)
         {
             Description = description;
             Input = input;
