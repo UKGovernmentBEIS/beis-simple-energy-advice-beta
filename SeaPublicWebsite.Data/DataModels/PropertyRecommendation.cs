@@ -1,7 +1,7 @@
 ﻿using SeaPublicWebsite.Data.EnergyEfficiency;
 using SeaPublicWebsite.Data.EnergyEfficiency.Recommendations;
 
-namespace SeaPublicWebsite.Data;
+namespace SeaPublicWebsite.Data.DataModels;
 
 public class PropertyRecommendation
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using SeaPublicWebsite.Data;
+using SeaPublicWebsite.Data.DataModels;
 using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.Helpers;
 

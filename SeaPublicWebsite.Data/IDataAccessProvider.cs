@@ -1,4 +1,6 @@
-﻿namespace SeaPublicWebsite.Data;
+﻿using SeaPublicWebsite.Data.DataModels;
+
+namespace SeaPublicWebsite.Data;
 
 public interface IDataAccessProvider
 {

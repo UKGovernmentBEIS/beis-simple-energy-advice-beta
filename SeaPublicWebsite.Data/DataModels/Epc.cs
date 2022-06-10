@@ -1,8 +1,7 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using GovUkDesignSystem.Helpers;
+﻿using System.Text.RegularExpressions;
+using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 
-namespace SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions
+namespace SeaPublicWebsite.Data.DataModels
 {
     public class Epc
     {

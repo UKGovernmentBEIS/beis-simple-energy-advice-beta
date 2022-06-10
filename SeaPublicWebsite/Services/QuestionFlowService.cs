@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using SeaPublicWebsite.Controllers;
-using SeaPublicWebsite.Data;
+using SeaPublicWebsite.Data.DataModels;
 using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.Helpers;
 

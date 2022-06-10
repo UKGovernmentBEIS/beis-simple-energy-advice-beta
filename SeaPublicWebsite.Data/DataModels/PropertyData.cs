@@ -1,6 +1,6 @@
 ﻿using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 
-namespace SeaPublicWebsite.Data;
+namespace SeaPublicWebsite.Data.DataModels;
 
 public class PropertyData
 {

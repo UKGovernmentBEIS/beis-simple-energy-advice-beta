@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
+using SeaPublicWebsite.Data.DataModels;
 
 namespace SeaPublicWebsite.Data;
 

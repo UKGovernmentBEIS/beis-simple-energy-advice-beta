@@ -1,4 +1,4 @@
-﻿using SeaPublicWebsite.Data;
+﻿using SeaPublicWebsite.Data.DataModels;
 using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Helpers

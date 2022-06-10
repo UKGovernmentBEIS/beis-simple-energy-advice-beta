@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
+using SeaPublicWebsite.Data.DataModels;
 using SeaPublicWebsite.Helpers;
 
 namespace SeaPublicWebsite.ExternalServices.EpbEpc

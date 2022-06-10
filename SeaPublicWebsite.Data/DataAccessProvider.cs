@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SeaPublicWebsite.Data.DataModels;
 
 namespace SeaPublicWebsite.Data;
 

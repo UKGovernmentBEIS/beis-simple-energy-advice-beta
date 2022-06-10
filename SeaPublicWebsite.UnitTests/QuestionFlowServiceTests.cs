@@ -2,10 +2,9 @@
 using FluentAssertions;
 using NUnit.Framework;
 using SeaPublicWebsite.Controllers;
-using SeaPublicWebsite.Data;
+using SeaPublicWebsite.Data.DataModels;
 using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.Services;
-using PropertyRecommendation = SeaPublicWebsite.Data.PropertyRecommendation;
 
 namespace Tests;
 

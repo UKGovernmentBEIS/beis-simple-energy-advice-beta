@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
+using SeaPublicWebsite.Data.DataModels;
 
 namespace SeaPublicWebsite.ExternalServices
 {

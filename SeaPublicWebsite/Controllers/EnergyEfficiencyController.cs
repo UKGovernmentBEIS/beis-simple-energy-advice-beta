@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SeaPublicWebsite.Data;
+using SeaPublicWebsite.Data.DataModels;
 using SeaPublicWebsite.Data.EnergyEfficiency;
 using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
 using SeaPublicWebsite.Data.EnergyEfficiency.Recommendations;
@@ -13,7 +13,6 @@ using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Services;
-using PropertyRecommendation = SeaPublicWebsite.Data.PropertyRecommendation;
 
 namespace SeaPublicWebsite.Controllers
 {
