@@ -1,6 +1,4 @@
-﻿using GovUkDesignSystem;
-using GovUkDesignSystem.Attributes;
-using GovUkDesignSystem.Attributes.ValidationAttributes;
+﻿using GovUkDesignSystem.Attributes;
 
 namespace SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions
 {
@@ -12,9 +10,5 @@ namespace SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions
         No,
         [GovUkRadioCheckboxLabelText(Text = "Yes, my floor is insulated")]
         Yes,
-        // [GovUkRadioCheckboxLabelText(Text = "Yes, my solid floor is insulated but my suspended timber floor is not insulated")]
-        // SolidFloorOnly,
-        // [GovUkRadioCheckboxLabelText(Text = "Yes, my suspended timber floor is insulated but my solid floor is not insulated")]
-        // SuspendedTimberFloorOnly,
     }
 }
