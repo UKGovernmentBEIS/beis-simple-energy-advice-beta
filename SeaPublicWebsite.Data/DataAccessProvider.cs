@@ -31,8 +31,8 @@ public class DataAccessProvider : IDataAccessProvider
             .FirstOrDefaultAsync(p => p.Reference == reference);
     }
 
-    public async Task<List<PropertyData>> GetAllPropertyDataAsync()
+    public async Task<bool> PropertyDataExistsAsync(string reference)
     {
-        return await context.PropertyData.ToListAsync();
+        return await context.PropertyData.AnyAsync(p => p.Reference == reference);
     }
 }

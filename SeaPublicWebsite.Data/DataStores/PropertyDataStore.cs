@@ -25,8 +25,7 @@ public class PropertyDataStore
 
     public async Task<bool> IsReferenceValidAsync(string reference)
     {
-        var allPropertyData = await dataAccessProvider.GetAllPropertyDataAsync();
-        return allPropertyData.Any(p => p.Reference == reference.ToUpper());
+        return await dataAccessProvider.PropertyDataExistsAsync(reference);
     }
 
     public async Task SavePropertyDataAsync(PropertyData propertyData)

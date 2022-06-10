@@ -7,5 +7,5 @@ public interface IDataAccessProvider
     Task AddPropertyDataAsync(PropertyData propertyData);
     Task UpdatePropertyDataAsync(PropertyData propertyData);
     Task<PropertyData> GetSinglePropertyDataAsync(string reference);
-    Task<List<PropertyData>> GetAllPropertyDataAsync();
+    Task<bool> PropertyDataExistsAsync(string reference);
 }
