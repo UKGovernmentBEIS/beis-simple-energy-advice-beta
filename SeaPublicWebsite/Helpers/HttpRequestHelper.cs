@@ -50,7 +50,7 @@ namespace SeaPublicWebsite.Helpers
             if (!response.IsSuccessStatusCode)
             {
                 throw new ApiException($"Request to {response.RequestMessage?.RequestUri} failed. " +
-                                       $"Error message: {response.StatusCode}; {response.ReasonPhrase}");
+                                       $"Error message: {response.StatusCode}; {response.ReasonPhrase}", response.StatusCode);
             }
 
             var bodyString = response.Content.ReadAsStringAsync().Result;
