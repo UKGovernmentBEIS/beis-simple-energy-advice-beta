@@ -1,4 +1,6 @@
-namespace SeaPublicWebsite.Data.Helpers
+using System;
+
+namespace SeaPublicWebsite.Helpers
 {
     public class RandomHelper
     {

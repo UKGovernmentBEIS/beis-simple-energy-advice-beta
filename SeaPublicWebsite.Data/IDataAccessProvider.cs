@@ -1,6 +1,4 @@
-﻿using SeaPublicWebsite.Data.DataStores;
-
-namespace SeaPublicWebsite.Data;
+﻿namespace SeaPublicWebsite.Data;
 
 public interface IDataAccessProvider
 {

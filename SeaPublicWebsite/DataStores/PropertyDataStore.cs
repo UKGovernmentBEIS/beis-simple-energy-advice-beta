@@ -1,8 +1,12 @@
-﻿using Microsoft.Extensions.Logging;
-using SeaPublicWebsite.Data.ErrorHandling;
-using SeaPublicWebsite.Data.Helpers;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using SeaPublicWebsite.Data;
+using SeaPublicWebsite.ErrorHandling;
+using SeaPublicWebsite.Helpers;
 
-namespace SeaPublicWebsite.Data.DataStores;
+namespace SeaPublicWebsite.DataStores;
 
 public class PropertyDataStore
 {

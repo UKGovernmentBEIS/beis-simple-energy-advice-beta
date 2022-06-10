@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Text.RegularExpressions;
 using GovUkDesignSystem.ModelBinders;
 using Microsoft.AspNetCore.Builder;
@@ -10,8 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SeaPublicWebsite.Data;
-using SeaPublicWebsite.Data.DataStores;
-using SeaPublicWebsite.Data.ErrorHandling;
+using SeaPublicWebsite.DataStores;
+using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.EmailSending;
