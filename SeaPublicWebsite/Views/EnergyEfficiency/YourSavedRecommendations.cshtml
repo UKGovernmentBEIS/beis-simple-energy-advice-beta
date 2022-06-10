@@ -143,20 +143,6 @@
                     </li>
                     <li class="sea-step">
                         <div class="content">
-                            <h2 class="govuk-heading-m">Check for grants</h2>
-                            <p class="govuk-body">There may be grants available from central government or your local authority to help cover some or all of 
-                                the cost of improvements to your property.</p>
-                            <p class="govuk-body">
-                                <a class="govuk-link" href="javascript:void(0);">Check to see if there are grants available from central government</a>
-                            </p>
-                            <p class="govuk-body govuk-!-margin-bottom-8">
-                                <a class="govuk-link" href="javascript:void(0);">Check to see if there are grants available from your local authority</a>
-                            </p>
-                            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-                        </div>
-                    </li>
-                    <li class="sea-step">
-                        <div class="content">
                             <h2 class="govuk-heading-m">Consult with a qualified installer</h2>
                             <p class="govuk-body">We recommend speaking to qualified installers about making changes to your property.</p>
                             <p class="govuk-body">You can get help finding a qualified installer in your area by visiting the TrustMark website. <a class="govuk-link" target="_blank" href="https://www.trustmark.org.uk/">Find qualified installers</a> on the TrustMark website.</p>
@@ -325,15 +311,6 @@
 <div class="govuk-grid-row sea-action-plan-margin-right">
     <div class="govuk-grid-column-full">
         <h2 class="govuk-heading-m">
-            Keep a copy of your action plan
-        </h2>
-        <p class="govuk-body govuk-!-margin-bottom-7">
-            <a href="javascript:void(0);" class="govuk-link">
-                Print or download your action plan
-            </a>
-        </p>
-
-        <h2 class="govuk-heading-m">
             Find out more about energy efficiency
         </h2>
         <p class="govuk-body govuk-!-margin-bottom-7">
@@ -362,7 +339,7 @@
     </div>
 </div>
 
-<a href="@(Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference}))"
+<a href="@Url.Action("AnswerSummary_Get", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference})"
    class="govuk-link">
     Change your answers
 </a>

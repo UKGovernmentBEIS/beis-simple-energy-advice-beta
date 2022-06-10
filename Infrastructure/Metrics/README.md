@@ -12,7 +12,7 @@ Create a separate metrics space in GovPaaS to keep the metrics separate.
 
 ### Prometheus Exporter
 
-- [Get someone with permissions to] create a GovPaaS user specifically for running the prometheus exporter app
+- [Get someone with permissions to] create a GovPaaS user specifically for running the prometheus exporter app. This user needs space auditor permissions for the space being monitored.
 - Check out the paas-prometheus-exporter repo - https://github.com/alphagov/paas-prometheus-exporter
 - CD into that directory
 - Set your Cloud Foundry target space to the right one for the exporter
@@ -40,6 +40,7 @@ Create a separate metrics space in GovPaaS to keep the metrics separate.
 - Run `cf create-service postgres small-11 grafana-postgresdb`
 
 ### Grafana
+- Cd to the Grafana directory
 - Run `cf create-app grafana-server --no-route`
 - Run `cf bind-service grafana-server grafana-postgresdb`
 - Run `cf map-route grafana-server cloudapps.digital --hostname grafana-server-sea-beta`

@@ -38,13 +38,7 @@
         </p>
 
         <p class="govuk-body">
-            If you like one of these recommendations, you can save it to your action plan before
-            you move on.
-        </p>
-
-        <p class="govuk-body">
-            Your action plan can be printed or emailed to you when you are finished looking through
-            the available recommendations
+            If you like any of these recommendations, you can save them to your action plan before you move on.
         </p>
 
         <div class="govuk-warning-text">
@@ -60,24 +54,23 @@
         </h2>
 
         <p class="govuk-body">
-            You will need a reference number to return to your recommendations and action plan quickly if you leave the service.
+            You will need a reference code to return to your recommendations and action plan quickly if you leave the service.
         </p>
 
         <aside class="sea-user-reference govuk-!-margin-bottom-6" role="complementary">
-            <span class="govuk-body-l">Your reference</span>
+            <span class="govuk-body-l">Your reference code</span>
             <h2 class="govuk-heading-l" id="subsection-title">@Model.Reference</h2>
         </aside>
 
         <form method="post" action="@Url.Action("YourRecommendations_Post", "EnergyEfficiency")">
 
             @Html.AntiForgeryToken()
-            @Html.HiddenFor(m => m.FirstReferenceId)
             @Html.HiddenFor(m => m.NumberOfUserRecommendations)
             @(await Html.GovUkCheckboxFromBoolFor(
                 m => m.HasEmailAddress,
                 label: new()
                 {
-                    Text = "Yes, email a link and the reference number to me"
+                    Text = "Yes, email a link and the reference code to me"
                 },
                 fieldsetOptions: new FieldsetViewModel
                 {
@@ -87,7 +80,7 @@
                                    <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-4">
                                        Would you like us to email the above?
                                    </h1>
-                                   <p class="govuk-body">We will send you a link to your recommendations and your reference number so you can quickly get back when you need to. If you do not wish to provide an email, make sure you make a note of your reference number.</p>
+                                   <p class="govuk-body">We will send you a link to your recommendations and your reference code so you can quickly get back when you need to. If you do not wish to provide an email, make sure you make a note of your reference code.</p>
                                 </text>,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true,

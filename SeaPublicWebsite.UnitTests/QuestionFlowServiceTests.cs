@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 using SeaPublicWebsite.Controllers;
 using SeaPublicWebsite.DataModels;
@@ -85,7 +86,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.Country
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -108,7 +109,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.OwnershipStatus
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -178,7 +179,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.PropertyType
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -262,7 +263,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.HomeAge
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -285,7 +286,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.WallConstruction
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -308,7 +309,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.CavityWallsInsulated
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -344,7 +345,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.SolidWallsInsulated
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -392,7 +393,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.FloorConstruction
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -415,7 +416,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.FloorInsulated
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -481,7 +482,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.RoofConstruction
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -504,7 +505,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.AccessibleLoftSpace
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -527,7 +528,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.RoofInsulated
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -606,7 +607,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.GlazingType
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -629,7 +630,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.OutdoorSpace
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -652,7 +653,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.HeatingType
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -675,7 +676,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.OtherHeatingType
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -698,7 +699,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.HotWaterCylinder
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -746,7 +747,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.NumberOfOccupants
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -769,7 +770,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.HeatingPattern
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -792,7 +793,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.Temperature
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -808,13 +809,24 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
+            "No recommendations goes back to summary",
+            new Input(
+                QuestionFlowPage.NoRecommendations,
+                "ABCDEFGH"
+            ),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
+            )),
+        new(
             "Your recommendations goes back to summary",
             new Input(
                 QuestionFlowPage.YourRecommendations,
                 "ABCDEFGH"
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             ))
@@ -855,7 +867,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.Country
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -891,7 +903,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.OwnershipStatus
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -972,7 +984,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.PropertyType
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -995,7 +1007,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.PropertyType
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1018,7 +1030,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.PropertyType
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1041,7 +1053,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.HomeAge
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1107,7 +1119,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.WallConstruction
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1119,7 +1131,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.CavityWallsInsulated
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1184,7 +1196,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.SolidWallsInsulated
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1247,7 +1259,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.FloorConstruction
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1286,7 +1298,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.FloorInsulated
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1336,7 +1348,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.RoofConstruction
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1373,7 +1385,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.AccessibleLoftSpace
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1408,7 +1420,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.RoofInsulated
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1431,7 +1443,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.GlazingType
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1454,7 +1466,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.OutdoorSpace
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1491,7 +1503,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.HeatingType
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1526,7 +1538,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.OtherHeatingType
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1549,7 +1561,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.HotWaterCylinder
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1572,7 +1584,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.NumberOfOccupants
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1595,7 +1607,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.HeatingPattern
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1606,7 +1618,30 @@ public class QuestionFlowServiceTests
                 "ABCDEFGH"
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
+            )),
+        new(
+            "Answer summary continues to your recommendations if user has at least one",
+            new Input(
+                QuestionFlowPage.AnswerSummary,
+                "ABCDEFGH",
+                userRecommendations: new List<UserRecommendation> {new()}
+            ),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.YourRecommendations_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
+            )),
+        new(
+            "Answer summary continues to no recommendations if user has none",
+            new Input(
+                QuestionFlowPage.AnswerSummary,
+                "ABCDEFGH",
+                userRecommendations: new List<UserRecommendation>()),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.NoRecommendations_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             ))
@@ -1644,7 +1679,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.HomeAge
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1667,7 +1702,7 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.NumberOfOccupants
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1678,7 +1713,7 @@ public class QuestionFlowServiceTests
                 "ABCDEFGH"
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary),
+                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             ))
@@ -1741,10 +1776,11 @@ public class QuestionFlowServiceTests
             HasHotWaterCylinder? hasHotWaterCylinder = null,
             int? numberOfOccupants = null,
             HeatingPattern? heatingPattern = null,
-            decimal? hoursOfHeatingMorning = null,
-            decimal? hoursOfHeatingEvening = null,
+            int? hoursOfHeatingMorning = null,
+            int? hoursOfHeatingEvening = null,
             decimal? temperature = null,
-            QuestionFlowPage? entryPoint = null)
+            QuestionFlowPage? entryPoint = null,
+            List<UserRecommendation> userRecommendations = null)
         {
             Page = page;
             UserData = new UserDataModel
@@ -1778,6 +1814,7 @@ public class QuestionFlowServiceTests
                 HoursOfHeatingMorning = hoursOfHeatingMorning,
                 HoursOfHeatingEvening = hoursOfHeatingEvening,
                 Temperature = temperature,
+                UserRecommendations = userRecommendations
             };
             EntryPoint = entryPoint;
         }

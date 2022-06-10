@@ -1,4 +1,7 @@
-﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
+﻿using GovUkDesignSystem.Attributes.DataBinding;
+using GovUkDesignSystem.Attributes.ValidationAttributes;
+using GovUkDesignSystem.ModelBinders;
+using Microsoft.AspNetCore.Mvc;
 using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
@@ -8,13 +11,17 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select heating pattern")]
         public HeatingPattern? HeatingPattern { get; set; }
         
-        [GovUkValidateRequiredIf(ErrorMessageIfMissing = "Enter number of hours", IsRequiredPropertyName = nameof(IsRequiredHoursOfHeating))]
-        [GovUkValidateDecimalRange("Number of hours", 0, 12)]
-        public decimal? HoursOfHeatingMorning { get; set; }
+        [ModelBinder(typeof(GovUkOptionalIntBinder))]
+        [GovUkDataBindingOptionalIntErrorText("Number of hours in the morning")]
+        [GovUkValidateRequiredIf(ErrorMessageIfMissing = "Enter number of hours in the morning", IsRequiredPropertyName = nameof(IsRequiredHoursOfHeating))]
+        [GovUkValidateIntRange("Number of hours", 0, 12)]
+        public int? HoursOfHeatingMorning { get; set; }
         
-        [GovUkValidateRequiredIf(ErrorMessageIfMissing = "Enter number of hours", IsRequiredPropertyName = nameof(IsRequiredHoursOfHeating))]
-        [GovUkValidateDecimalRange("Number of hours", 0, 12)]
-        public decimal? HoursOfHeatingEvening { get; set; }
+        [ModelBinder(typeof(GovUkOptionalIntBinder))]
+        [GovUkDataBindingOptionalIntErrorText("Number of hours in the afternoon and evening")]
+        [GovUkValidateRequiredIf(ErrorMessageIfMissing = "Enter number of hours in the afternoon and evening", IsRequiredPropertyName = nameof(IsRequiredHoursOfHeating))]
+        [GovUkValidateIntRange("Number of hours", 0, 12)]
+        public int? HoursOfHeatingEvening { get; set; }
 
         public string Reference { get; set; }
 

@@ -46,7 +46,7 @@
                                    We know heating use can vary throughout the year and from one day to the next.
                                </p>
                                <p class="govuk-body">
-                                   Choose a number that best resembles the most common weekday in winter.
+                                   Choose an answer that best resembles an average weekday in winter, or let us know a specific number of hours.
                                </p>
                                <details class="govuk-details" data-module="govuk-details">
                                    <summary class="govuk-details__summary">
@@ -76,7 +76,7 @@
                                             m => m.HoursOfHeatingMorning,
                                             new LabelViewModel
                                             {
-                                                Text = "Total number of hours in the morning (12am until 12pm)"
+                                                Text = "Total whole number of hours in the morning (12am until 12pm)"
                                             },
                                             placeholder: "e.g. 6"
                                             )
@@ -84,7 +84,7 @@
                                             m => m.HoursOfHeatingEvening,
                                             new LabelViewModel
                                             {
-                                                Text = "Total number of hours in the afternoon and evening (12pm until 12am)"
+                                                Text = "Total whole number of hours in the afternoon and evening (12pm until 12am)"
                                             },
                                             placeholder: "e.g. 6"
                                             )
