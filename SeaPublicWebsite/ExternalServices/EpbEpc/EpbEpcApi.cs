@@ -466,12 +466,14 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             {
                 return null;
             }
-
-            // We consider 'mostly' as the point where the number of single-glazed windows is insignificant
+            
             var hasSingle = epc.WindowsDescription.Any(description =>
                 description.Contains("single", StringComparison.OrdinalIgnoreCase) ||
                 description.Contains("some", StringComparison.OrdinalIgnoreCase) ||
-                description.Contains("partial", StringComparison.OrdinalIgnoreCase));
+                description.Contains("partial", StringComparison.OrdinalIgnoreCase) ||
+                description.Contains("mostly", StringComparison.OrdinalIgnoreCase) ||
+                description.Contains("multiple glazing throughout", StringComparison.OrdinalIgnoreCase));
+            
             var hasDoubleOrTriple = epc.WindowsDescription.Any(description =>
                 description.Contains("some", StringComparison.OrdinalIgnoreCase) ||
                 description.Contains("partial", StringComparison.OrdinalIgnoreCase) ||
