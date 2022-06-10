@@ -65,9 +65,10 @@
                         hintOptions: new HintViewModel
                         {
                             Html = @<text>
-                                       <div class="govuk-hint">
-                                           Enter the year your property was built, approximately. It does not have to be exact.
-                                       </div>
+                                       @await Html.GovUkHint(new HintViewModel
+                                            {
+                                                Text = "Enter the year your property was built, approximately. It does not have to be exact."
+                                            })
                                     </text>
                         },
                         placeholder: "e.g. 1950"

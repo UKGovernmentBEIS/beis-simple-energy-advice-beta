@@ -39,7 +39,7 @@
                      </text>;
                 
                 Func<object, object> epcHint = null;
-                if (Model.Epc?.CavityWallsInsulated is not null)
+                if (Model.Epc?.SolidWallsInsulated is not null)
                 {
                     epcHint = 
                         @<p class="govuk-body">
@@ -61,12 +61,9 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Html = @<text>
-                                   <h1 class="govuk-fieldset__heading">
-                                       Are your solid walls insulated?
-                                   </h1>
-                                </text>,
-                        Classes = "govuk-fieldset__legend--l"
+                        Text = "Are your solid walls insulated?",
+                        Classes = "govuk-fieldset__legend--l",
+                        IsPageHeading = true
                     }
                 },
                 hintOptions: new HintViewModel
@@ -93,9 +90,10 @@
                             </text>
                     }))
 
-            <button class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+            @await Html.GovUkButton(new ButtonViewModel
+            {
+                Text = "Continue"
+            })
             
         </form>
         

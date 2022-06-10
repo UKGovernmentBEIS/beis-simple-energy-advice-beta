@@ -689,10 +689,12 @@
         <h1 class="govuk-heading-l">
             Check your answers
         </h1>
-        <div class="govuk-hint">
-            Please review the information we have gathered. You can still change your answers if anything looks wrong.
-        </div>
-    
+        
+        @await Html.GovUkHint(new HintViewModel
+        {
+            Text = "Please review the information we have gathered. You can still change your answers if anything looks wrong."
+        })
+        
         @(await Html.GovUkSummaryList(new SummaryListViewModel
         {
             Rows = rows
