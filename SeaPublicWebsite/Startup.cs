@@ -14,7 +14,7 @@ using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.EmailSending;
-using SeaPublicWebsite.ExternalServices.OpenEpc;
+using SeaPublicWebsite.ExternalServices.EpbEpc;
 using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
@@ -103,13 +103,9 @@ namespace SeaPublicWebsite
 
         private void ConfigureEpcApi(IServiceCollection services)
         {
-            services.Configure<OpenEpcConfiguration>(
-                configuration.GetSection(OpenEpcConfiguration.ConfigSection));
-            services.AddScoped<IEpcApi, OpenEpcApi>();
-            // TODO: When the EPB API is ready, uncomment this and remove the above:
-            // services.Configure<EpbEpcConfiguration>(
-            //     configuration.GetSection(EpbEpcConfiguration.ConfigSection));
-            // services.AddScoped<IEpcApi, EpbEpcApi>();
+            services.Configure<EpbEpcConfiguration>(
+                configuration.GetSection(EpbEpcConfiguration.ConfigSection));
+            services.AddScoped<IEpcApi, EpbEpcApi>();
         }
 
         private void ConfigureBreApi(IServiceCollection services)

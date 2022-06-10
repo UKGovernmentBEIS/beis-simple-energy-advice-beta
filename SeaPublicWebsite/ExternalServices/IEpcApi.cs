@@ -5,7 +5,9 @@ using SeaPublicWebsite.BusinessLogic.Models;
 namespace SeaPublicWebsite.ExternalServices
 {
     public interface IEpcApi
-    { 
-        public Task<List<Epc>> GetEpcsForPostcode(string postcode);
+    {
+        public Task<List<EpcInformation>> GetEpcsInformationForPostcodeAndBuildingNameOrNumber(string postcode,
+            string buildingNameOrNumber = null);
+        public Task<Epc> GetEpcForId(string epcId);
     }
 }

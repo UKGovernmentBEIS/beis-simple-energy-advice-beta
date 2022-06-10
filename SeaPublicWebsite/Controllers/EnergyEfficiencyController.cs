@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -214,27 +215,25 @@ namespace SeaPublicWebsite.Controllers
         public async Task<ViewResult> ConfirmAddress_Get(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            var epcList = await epcApi.GetEpcsForPostcode(propertyData.Postcode);
+            List<EpcInformation> epcInformationList = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(propertyData.Postcode, propertyData.HouseNameOrNumber);
             var houseNameOrNumber = propertyData.HouseNameOrNumber;
-            
-            if (houseNameOrNumber != null)
-            {
-                var filteredEpcList = epcList.Where(e =>
-                    e.Address1.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase) || e.Address2.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase)).ToList();
+            var filteredEpcList = epcInformationList.Where(e =>
+                e.Address1.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase) ||
+                e.Address2.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase)).ToList();
 
-                epcList = filteredEpcList.Any() ? filteredEpcList : epcList;
-            }
+            epcInformationList = filteredEpcList.Any() ? filteredEpcList : epcInformationList;
 
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.ConfirmAddress, propertyData);
             var viewModel = new ConfirmAddressViewModel
             {
                 Reference = reference,
-                EPCList = epcList,
-                SelectedEpcId = epcList.Count == 1 ? epcList[0].EpcId : null,
+                EpcInformationList = epcInformationList,
+                SelectedEpcId = epcInformationList.Count == 1 ? epcInformationList[0].EpcId : null,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("ConfirmAddress", viewModel);
+        
         }
 
         [HttpPost("address/{reference}")]
@@ -244,11 +243,9 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await ConfirmAddress_Get(viewModel.Reference);
             }
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
             
-            var epc = (await epcApi.GetEpcsForPostcode(propertyData.Postcode)).FirstOrDefault(e => e.EpcId == viewModel.SelectedEpcId);
-            propertyData.Epc = epc;
-
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
+            propertyData.Epc = await epcApi.GetEpcForId(viewModel.SelectedEpcId);;
             PropertyDataHelper.ResetUnusedFields(propertyData);
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 

@@ -160,7 +160,6 @@ public class QuestionFlowServiceTests
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
-
         new(
             "Property type goes back to Postcode",
             new Input(
