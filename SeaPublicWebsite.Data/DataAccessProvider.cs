@@ -11,19 +11,19 @@ public class DataAccessProvider : IDataAccessProvider
         this.context = context;
     }
     
-    public void AddPropertyData(PropertyData propertyData)
+    public async Task AddPropertyDataAsync(PropertyData propertyData)
     {
         context.PropertyData.Add(propertyData);
-        context.SaveChanges();
+        await context.SaveChangesAsync();
     }
 
-    public void UpdatePropertyData(PropertyData propertyData)
+    public async Task UpdatePropertyDataAsync(PropertyData propertyData)
     {
         context.PropertyData.Update(propertyData);
-        context.SaveChanges();
+        await context.SaveChangesAsync();
     }
 
-    public async Task<PropertyData> GetSinglePropertyData(string reference)
+    public async Task<PropertyData> GetSinglePropertyDataAsync(string reference)
     {
         return await context.PropertyData
             .Include(p => p.Epc)
@@ -31,7 +31,7 @@ public class DataAccessProvider : IDataAccessProvider
             .FirstOrDefaultAsync(p => p.Reference == reference);
     }
 
-    public async Task<List<PropertyData>> GetAllPropertyData()
+    public async Task<List<PropertyData>> GetAllPropertyDataAsync()
     {
         return await context.PropertyData.ToListAsync();
     }

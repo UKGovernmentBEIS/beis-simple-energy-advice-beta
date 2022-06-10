@@ -11,43 +11,43 @@ public class PropertyDataStore
     {
         this.dataAccessProvider = dataAccessProvider;
     }
-    public async Task<PropertyData> LoadPropertyData(string reference)
+    public async Task<PropertyData> LoadPropertyDataAsync(string reference)
     {
-        if (!await IsReferenceValid(reference))
+        if (!await IsReferenceValidAsync(reference))
         {
             throw new PropertyReferenceNotFoundException
             {
                 Reference = reference
             };
         }
-        return await dataAccessProvider.GetSinglePropertyData(reference.ToUpper());
+        return await dataAccessProvider.GetSinglePropertyDataAsync(reference.ToUpper());
     }
 
-    public async Task<bool> IsReferenceValid(string reference)
+    public async Task<bool> IsReferenceValidAsync(string reference)
     {
-        var allPropertyData = await dataAccessProvider.GetAllPropertyData();
+        var allPropertyData = await dataAccessProvider.GetAllPropertyDataAsync();
         return allPropertyData.Any(p => p.Reference == reference.ToUpper());
     }
 
-    public void SavePropertyData(PropertyData propertyData)
+    public async Task SavePropertyDataAsync(PropertyData propertyData)
     {
-        dataAccessProvider.UpdatePropertyData(propertyData);
+        await dataAccessProvider.UpdatePropertyDataAsync(propertyData);
     }
 
-    public async Task<string> GenerateNewReferenceAndSaveEmptyPropertyData()
+    public async Task<string> GenerateNewReferenceAndSaveEmptyPropertyDataAsync()
     {
         string reference;
         do
         {
             reference = RandomHelper.Generate8CharacterReference();
-        } while (await IsReferenceValid(reference));
+        } while (await IsReferenceValidAsync(reference));
 
         PropertyData propertyData = new()
         {
             Reference = reference
         };
         
-        dataAccessProvider.AddPropertyData(propertyData);
+        await dataAccessProvider.AddPropertyDataAsync(propertyData);
 
         return reference;
     }

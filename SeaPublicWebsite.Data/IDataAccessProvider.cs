@@ -4,8 +4,8 @@ namespace SeaPublicWebsite.Data;
 
 public interface IDataAccessProvider
 {
-    void AddPropertyData(PropertyData propertyData);
-    void UpdatePropertyData(PropertyData propertyData);
-    Task<PropertyData> GetSinglePropertyData(string reference);
-    Task<List<PropertyData>> GetAllPropertyData();
+    Task AddPropertyDataAsync(PropertyData propertyData);
+    Task UpdatePropertyDataAsync(PropertyData propertyData);
+    Task<PropertyData> GetSinglePropertyDataAsync(string reference);
+    Task<List<PropertyData>> GetAllPropertyDataAsync();
 }
