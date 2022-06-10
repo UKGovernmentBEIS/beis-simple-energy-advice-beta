@@ -37,16 +37,14 @@
                 Func<object, object> epcHint = null;
                 if (Model.Epc?.RoofInsulated is not null)
                 {
+                    var insulated = Model.Epc?.RoofInsulated is RoofInsulated.Yes;
                     epcHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc?.LodgementDate Energy Performance Certificate suggests you have an
+                            Your @Model.Epc?.LodgementDate Energy Performance Certificate suggests your
                             <strong>
-                                @(Model.Epc?.RoofInsulated switch {
-                                    RoofInsulated.Yes => "insulated",
-                                    RoofInsulated.No => "uninsulated",
-                                    _ => throw new ArgumentOutOfRangeException()})
+                                loft is @(insulated ? "" : "not") fully insulated
                             </strong>
-                            roof
+                            as it has @(insulated ? "at least" : "less than") 200mm of insulaion
                         </p>;
                 }
             }
