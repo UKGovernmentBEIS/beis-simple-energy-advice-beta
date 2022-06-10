@@ -3,9 +3,7 @@ using System.Linq;
 using SeaPublicWebsite.Controllers;
 using SeaPublicWebsite.Data;
 using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
-using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.Helpers;
-using PropertyRecommendation = SeaPublicWebsite.Data.PropertyRecommendation;
 
 namespace SeaPublicWebsite.Services
 {

@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using SeaPublicWebsite.Data;
 using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
-using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.Helpers;
 
 namespace Tests;

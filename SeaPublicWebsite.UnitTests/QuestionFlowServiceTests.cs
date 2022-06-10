@@ -4,7 +4,6 @@ using NUnit.Framework;
 using SeaPublicWebsite.Controllers;
 using SeaPublicWebsite.Data;
 using SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions;
-using SeaPublicWebsite.DataModels;
 using SeaPublicWebsite.Services;
 using PropertyRecommendation = SeaPublicWebsite.Data.PropertyRecommendation;
 

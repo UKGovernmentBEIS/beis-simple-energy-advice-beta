@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GovUkDesignSystem;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 using SeaPublicWebsite.Data;
 using SeaPublicWebsite.Data.EnergyEfficiency;
 using SeaPublicWebsite.Data.EnergyEfficiency.Recommendations;
-using SeaPublicWebsite.DataModels;
 using PropertyRecommendation = SeaPublicWebsite.Data.PropertyRecommendation;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
