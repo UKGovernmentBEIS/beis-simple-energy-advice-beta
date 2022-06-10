@@ -12,7 +12,7 @@ namespace SeaPublicWebsite.Data.EnergyEfficiency.QuestionOptions
         Cavity,
         [GovUkRadioCheckboxLabelText(Text = "Mix of solid and cavity walls")]
         Mixed,
-        [GovUkRadioCheckboxLabelText(Text = "I don’t see my option listed")]
+        [GovUkRadioCheckboxLabelText(Text = "I don’t see my option listed")]
         Other
     }
 }
