@@ -1,6 +1,7 @@
 ﻿@using SeaPublicWebsite.Data
 @using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Controllers
 @using SeaPublicWebsite.Data.EnergyEfficiency
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.YourSavedRecommendationsViewModel;
@@ -332,7 +333,7 @@
             Your feedback can help us to shape how the service develops so that it can best serve the needs of the public. 
         </p>
         <p class="govuk-body">
-            <a href="javascript:void(0);" class="govuk-link">
+            <a href="@Url.Action(nameof(FeedbackController.FeedbackSurvey_Get), "Feedback")" class="govuk-link">
                 Leave some feedback for this service
             </a>
         </p>
