@@ -751,6 +751,7 @@ namespace SeaPublicWebsite.Controllers
                 GlazingType = propertyData.GlazingType,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
+                Epc = userDataModel.Epc,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 

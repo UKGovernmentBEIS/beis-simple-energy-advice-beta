@@ -25,8 +25,19 @@
 
         <form action="@Url.Action("HeatingPattern_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
-
             @Html.AntiForgeryToken()
+            
+            @{
+                Func<object, object> details =
+                    @<text>
+                        <p class="govuk-body">
+                            You may have your heating on through the day but switch it off before you go to sleep at night.
+                        </p>
+                        <p class="govuk-body">
+                            Some people may run their heating all night, or for a few hours overnight.
+                        </p>
+                     </text>;
+            }
             @(await Html.GovUkRadiosFor(m => m.HeatingPattern,
                 fieldsetOptions: new FieldsetViewModel
                 {
@@ -49,21 +60,12 @@
                                <p class="govuk-body">
                                    Choose an answer that best resembles an average weekday in winter, or let us know a specific number of hours.
                                </p>
-                               <details class="govuk-details" data-module="govuk-details">
-                                   <summary class="govuk-details__summary">
-                                       <span class="govuk-details__summary-text">
-                                           Help me answer this question
-                                       </span>
-                                   </summary>
-                                   <div class="govuk-details__text">
-                                       <p class="govuk-body">
-                                           You may have your heating on through the day but switch it off before you go to sleep at night.
-                                       </p>
-                                       <p class="govuk-body">
-                                           Some people may run their heating all night, or for a few hours overnight.
-                                       </p>
-                                   </div>
-                               </details>
+                               
+                               @await Html.GovUkDetails(new DetailsViewModel
+                               {
+                                   SummaryText = "Help me answer this question",
+                                   Html = details
+                               })
                             </text>
                 },
                 conditionalOptions: new Dictionary<HeatingPattern, Conditional>

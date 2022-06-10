@@ -37,20 +37,6 @@
                             If all the space under your pitched roof, or nearly all the space, is used as living space with finished walls and ceilings then you don’t have an accessible loft.
                         </p>
                      </text>;
-                
-                Func<object, object> epcHint = null;
-                // TODO: EPC!!!
-                if (Model.Epc?.FloorConstruction is not null)
-                {
-                    epcHint = 
-                        @<p>
-                            Your @Model.Epc?.InspectionDate Energy Performance Certificate suggests you have
-                            <strong>
-                                TODO
-                            </strong>
-                            floor.
-                        </p>;
-                }
             }
             @Html.AntiForgeryToken()
             @(await Html.GovUkRadiosFor(m => m.AccessibleLoftSpace,
@@ -74,15 +60,6 @@
                                    SummaryText = "Help me answer this question",
                                    Html = details
                                })
-                               
-                               @if (epcHint is not null)
-                               {
-                                   @await Html.GovUkInsetText(new InsetTextViewModel
-                                   {
-                                       Classes = "sea-epc-hint",
-                                       Html = epcHint
-                                   })
-                               }
                             </text>
                 }
                 ))

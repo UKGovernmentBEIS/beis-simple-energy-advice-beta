@@ -26,7 +26,13 @@
         <form action="@Url.Action("RoofInsulated_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
             
-            
+            @{
+                Func<object, object> details = 
+                    @<p class="govuk-body">
+                        If your home was built after 2002, or you have installed loft insulation since 2002, 
+                        it is likely that it is fully insulated.
+                    </p>;
+            }
             @Html.AntiForgeryToken()
             @(await Html.GovUkRadiosFor(m => m.RoofInsulated,
                 fieldsetOptions: new FieldsetViewModel
@@ -49,51 +55,14 @@
                                    usually laid on the "floor" of the loft with one layer between the horizontal timbers and
                                    another layer going across them to bring the insulation up to the required level.
                                </p>
-                               <details class="govuk-details" data-module="govuk-details">
-                                   <summary class="govuk-details__summary">
-                                       <span class="govuk-details__summary-text">
-                                           Help me answer this question
-                                       </span>
-                                   </summary>
-                                   <div class="govuk-details__text">
-                                       <p class="govuk-body">
-                                           If your home was built after 2002, or you have installed loft insulation since 2002, 
-                                           it is likely that it is fully insulated.
-                                       </p>
-                                   </div>
-                               </details>
+                               
+                               @await Html.GovUkDetails(new DetailsViewModel
+                               {
+                                   SummaryText = "Help me answer this question",
+                                   Html = details
+                               })
                             </text>
-                },
-                conditionalOptions: new Dictionary<RoofInsulated, Conditional>
-                {
-                    {
-                        RoofInsulated.DoNotKnow,
-                        new Conditional
-                        {
-                            Html = (@<text>
-                                        @if (Model.YearBuilt.HasValue)
-                                        {
-                                            <p class="govuk-body">
-                                                Properties of your type typically
-                                                @if (Model.YearBuilt.Value > 2002)
-                                                {
-                                                    <b> do have </b>
-                                                }
-                                                else
-                                                {
-                                                    <b> do not have </b>
-                                                }
-                                                a fully insulated loft.
-                                            </p>
-                                            <p class="govuk-body">
-                                                We can generate recommendations based on this information.
-                                            </p>
-                                        }          
-                                     </text>)
-                        }
-                        }
-                }
-                ))
+                }))
 
             <button class="govuk-button" data-module="govuk-button">
                 Continue

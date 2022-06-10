@@ -37,16 +37,19 @@
                      </text>;
                 
                 Func<object, object> epcHint = null;
-                // TODO: EPC!!!
-                if (Model.Epc?.FloorInsulated is not null)
+                if (Model.Epc?.RoofConstruction is not null)
                 {
                     epcHint = 
                         @<p>
-                            Your @Model.Epc?.InspectionDate Energy Performance Certificate suggests you have
+                            Your @Model.Epc?.LodgementDate Energy Performance Certificate suggests you have a
                             <strong>
-                                TODO
+                                @(Model.Epc?.RoofConstruction switch {
+                                    RoofConstruction.Flat => "flat",
+                                    RoofConstruction.Mixed => "mixed flat and pitched",
+                                    RoofConstruction.Pitched => "pitched",
+                                    _ => throw new ArgumentOutOfRangeException()})
                             </strong>
-                            floor.
+                            roof.
                         </p>;
                 }
             }
