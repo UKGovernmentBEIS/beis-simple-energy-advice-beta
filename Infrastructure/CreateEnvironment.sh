@@ -34,19 +34,6 @@ cf target -s "sea-beta-${PAAS_ENV_SHORTNAME}"
 cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" ASPNETCORE_ENVIRONMENT ${PAAS_ENV_SHORTNAME}
 
 
-#---------------------------
-# Add AWS S3 backing service
-# - Create the service
-cf create-service aws-s3-bucket default "sea-beta-${PAAS_ENV_SHORTNAME}-filestorage"
-
-# - Create a key to access the service
-#   Note: this is only needed to access the S3 bucket from outside of Gov.UK PaaS (e.g. from Azure)
-cf create-service-key "sea-beta-${PAAS_ENV_SHORTNAME}-filestorage" "sea-beta-${PAAS_ENV_SHORTNAME}-filestorage-key" -c '{"allow_external_access": true}'
-
-# - Get the key (and print to the console)
-cf service-key "sea-beta-${PAAS_ENV_SHORTNAME}-filestorage" "sea-beta-${PAAS_ENV_SHORTNAME}-filestorage-key"
-
-
 #-----------------------------------------
 # Create Postgres database backing service
 # - Create the database itself
@@ -90,8 +77,6 @@ cf create-app "sea-beta-${PAAS_ENV_SHORTNAME}"
 cf scale "sea-beta-${PAAS_ENV_SHORTNAME}" -i ${APP_INSTANCES} -k ${APP_DISK} -m ${APP_MEMORY} -f
 echo "This will say FAILED, but it has probably worked (it failed to START the app because there isn't currently an app deployed)"
 
-# - Bind app to file storage
-cf bind-service "sea-beta-${PAAS_ENV_SHORTNAME}" "sea-beta-${PAAS_ENV_SHORTNAME}-filestorage"
 
 # - Bind app to database
 cf bind-service "sea-beta-${PAAS_ENV_SHORTNAME}" "sea-beta-${PAAS_ENV_SHORTNAME}-db"
