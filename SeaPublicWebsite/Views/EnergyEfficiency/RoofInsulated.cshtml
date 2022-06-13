@@ -40,7 +40,7 @@
                     var insulated = Model.Epc?.RoofInsulated is RoofInsulated.Yes;
                     epcHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc?.LodgementDate Energy Performance Certificate suggests your
+                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests your
                             <strong>
                                 loft is @(insulated ? "" : "not") fully insulated
                             </strong>

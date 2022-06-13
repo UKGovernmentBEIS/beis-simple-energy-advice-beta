@@ -43,7 +43,7 @@
                 {
                     epcHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc?.LodgementDate Energy Performance Certificate suggests your windows have
+                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests your windows have
                             <strong>
                                 @(Model.Epc?.GlazingType switch {
                                     GlazingType.SingleGlazed => "single",

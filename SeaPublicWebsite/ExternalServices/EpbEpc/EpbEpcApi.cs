@@ -94,7 +94,7 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 Address1 = epc.Address.Address1,
                 Address2 = epc.Address.Address2,
                 Postcode = epc.Address.Postcode,
-                LodgementDate = epc.LodgementDate,
+                LodgementDate = GetLodgementDateFromEpc(epc),
                 PropertyType = GetPropertyTypeFromEpc(epc),
                 HouseType = GetHouseTypeFromEpc(epc),
                 BungalowType = GetBungalowTypeFromEpc(epc),
@@ -137,6 +137,17 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
 
             memoryCache.Set(cacheTokenKey, token, cacheEntryOptions);
             return token;
+        }
+
+        private static DateTime? GetLodgementDateFromEpc(EpbEpcAssessmentDto epc)
+        {
+            if (epc.LodgementDate is null)
+            {
+                return null;
+            }
+            
+            var date = DateTime.Parse(epc.LodgementDate);
+            return DateTime.SpecifyKind(date, DateTimeKind.Utc);
         }
 
         private static HeatingType? GetHeatingTypeFromEpc(EpbEpcAssessmentDto epc)

@@ -54,7 +54,7 @@
                 {
                     epcHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc?.LodgementDate Energy Performance Certificate suggests your main heating system is
+                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests your main heating system is
                             <strong>
                                 @(Model.Epc?.HeatingType switch {
                                     HeatingType.GasBoiler => "gas boiler",
