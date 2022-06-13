@@ -127,6 +127,7 @@ async function fullRecompile(options) {
     deleteExistingCompiledCssAndJsFiles(options);
 
     compileSass('./wwwroot/css/app.scss', 'app', options);
+    compileSass('./wwwroot/css/app-ie8.scss', 'app-ie8', options);
 
     compileJs(options);
 }
