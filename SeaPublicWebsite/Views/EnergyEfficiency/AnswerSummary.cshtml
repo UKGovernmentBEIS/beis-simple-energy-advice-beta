@@ -389,12 +389,12 @@
                 Key = new() 
                 {
                     Classes = "govuk-!-width-one-quarter",
-                    Text = "Do you have accessible loft space?"
+                    Text = "Do you have a loft that hasn't been converted into a room?"
                 },
                 Value = new()
                 {
                     Classes = "govuk-!-width-one-half",
-                    Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.AccessibleLoftSpace)
+                    Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.LoftSpace)
                 },
                 Actions = new()
                 {
@@ -403,38 +403,27 @@
                     {
                         new()
                         {
-                            Href = Url.Action(nameof(EnergyEfficiencyController.AccessibleLoftSpace_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.AccessibleLoftSpace}),
+                            Href = Url.Action(nameof(EnergyEfficiencyController.LoftSpace_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.LoftSpace}),
                             Text = "Change",
-                            VisuallyHiddenText = "accessible loft space"
+                            VisuallyHiddenText = "loft space"
                         }
                     }
                 }
             });
 
-            if (Model.PropertyData.AccessibleLoftSpace is AccessibleLoftSpace.Yes)
+            if (Model.PropertyData.LoftSpace is LoftSpace.Yes)
             {
                 rows.Add(new()
                 {
                     Key = new() 
                     {
                         Classes = "govuk-!-width-one-quarter",
-                        Text = "Is your loft fully insulated?"
+                        Text = "Is there access to your loft?"
                     },
                     Value = new()
                     {
                         Classes = "govuk-!-width-one-half",
-                        Html = (@<text>
-                                    @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.RoofInsulated))
-                                    @if (Model.PropertyData.RoofInsulated is RoofInsulated.DoNotKnow || Model.PropertyData.AccessibleLoftSpace is AccessibleLoftSpace.DoNotKnow)
-                                    {
-                                        if (Model.PropertyData.YearBuilt.HasValue)
-                                        {
-                                            <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-1">
-                                                Based on your type of property, we will assume that you @(PropertyDataHelper.HasRoofInsulation(Model.PropertyData) ? "have " : "do not have") a fully insulated loft
-                                            </p>
-                                        }
-                                    }
-                                 </text>)
+                        Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.AccessibleLoft)
                     },
                     Actions = new()
                     {
@@ -443,13 +432,54 @@
                         {
                             new()
                             {
-                                Href = Url.Action(nameof(EnergyEfficiencyController.RoofInsulated_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.RoofInsulated}),
+                                Href = Url.Action(nameof(EnergyEfficiencyController.AccessibleLoft_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.AccessibleLoft}),
                                 Text = "Change",
-                                VisuallyHiddenText = "is roof insulated"
+                                VisuallyHiddenText = "accessible loft"
                             }
                         }
                     }
                 });
+                
+                if (Model.PropertyData.AccessibleLoft is AccessibleLoft.Yes)
+                {
+                    rows.Add(new()
+                    {
+                        Key = new()
+                        {
+                            Classes = "govuk-!-width-one-quarter",
+                            Text = "Is your loft fully insulated?"
+                        },
+                        Value = new()
+                        {
+                            Classes = "govuk-!-width-one-half",
+                            Html = (@<text>
+                                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.RoofInsulated))
+                                        @if (Model.PropertyData.RoofInsulated is RoofInsulated.DoNotKnow || Model.PropertyData.LoftSpace is LoftSpace.DoNotKnow)
+                                        {
+                                            if (Model.PropertyData.YearBuilt.HasValue)
+                                            {
+                                                <p class="govuk-body-s sea-assumed-answer govuk-!-padding-top-1">
+                                                    Based on your type of property, we will assume that you @(PropertyDataHelper.HasRoofInsulation(Model.PropertyData) ? "have " : "do not have") a fully insulated loft
+                                                </p>
+                                            }
+                                        }
+                                     </text>)
+                        },
+                        Actions = new()
+                        {
+                            Classes = "govuk-!-width-one-quarter",
+                            Items = new()
+                            {
+                                new()
+                                {
+                                    Href = Url.Action(nameof(EnergyEfficiencyController.RoofInsulated_Get), "EnergyEfficiency", new { reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.RoofInsulated }),
+                                    Text = "Change",
+                                    VisuallyHiddenText = "is roof insulated"
+                                }
+                            }
+                        }
+                    });
+                }
             }
         }
     }

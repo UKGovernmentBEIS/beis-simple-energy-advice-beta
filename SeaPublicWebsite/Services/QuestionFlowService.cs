@@ -42,7 +42,8 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.FloorConstruction => FloorConstructionBackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.FloorInsulated => FloorInsulatedBackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.RoofConstruction => RoofConstructionBackLinkArguments(propertyData, entryPoint),
-                QuestionFlowPage.AccessibleLoftSpace => AccessibleLoftSpaceBackLinkArguments(propertyData, entryPoint),
+                QuestionFlowPage.LoftSpace => LoftSpaceBackLinkArguments(propertyData, entryPoint),
+                QuestionFlowPage.AccessibleLoft => AccessibleLoftBackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.RoofInsulated => RoofInsulatedBackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.OutdoorSpace => OutdoorSpaceBackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.GlazingType => GlazingTypeBackLinkArguments(propertyData, entryPoint),
@@ -79,7 +80,8 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.FloorConstruction => FloorConstructionForwardLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.FloorInsulated => FloorInsulatedForwardLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.RoofConstruction => RoofConstructionForwardLinkArguments(propertyData, entryPoint),
-                QuestionFlowPage.AccessibleLoftSpace => AccessibleLoftSpaceForwardLinkArguments(propertyData, entryPoint),
+                QuestionFlowPage.LoftSpace => LoftSpaceForwardLinkArguments(propertyData, entryPoint),
+                QuestionFlowPage.AccessibleLoft => AccessibleLoftForwardLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.RoofInsulated => RoofInsulatedForwardLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.OutdoorSpace => OutdoorSpaceForwardLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.GlazingType => GlazingTypeForwardLinkArguments(propertyData, entryPoint),
@@ -277,12 +279,20 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private PathByActionArguments AccessibleLoftSpaceBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private PathByActionArguments LoftSpaceBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
-            return entryPoint is QuestionFlowPage.AccessibleLoftSpace
+            return entryPoint is QuestionFlowPage.LoftSpace
                 ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency", new { reference, entryPoint });
+        }
+        
+        private PathByActionArguments AccessibleLoftBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        {
+            var reference = propertyData.Reference;
+            return entryPoint is QuestionFlowPage.AccessibleLoft
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
+                : new PathByActionArguments(nameof(EnergyEfficiencyController.LoftSpace_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
         private PathByActionArguments RoofInsulatedBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
@@ -290,7 +300,7 @@ namespace SeaPublicWebsite.Services
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.RoofInsulated 
                 ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
-                : new PathByActionArguments(nameof(EnergyEfficiencyController.AccessibleLoftSpace_Get), "EnergyEfficiency", new { reference, entryPoint });
+                : new PathByActionArguments(nameof(EnergyEfficiencyController.AccessibleLoft_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
         private PathByActionArguments GlazingTypeBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
@@ -307,8 +317,10 @@ namespace SeaPublicWebsite.Services
                 {
                     { RoofConstruction: RoofConstruction.Flat }
                         => new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency", new { reference, entryPoint }),
-                    { AccessibleLoftSpace: not AccessibleLoftSpace.Yes }
-                        => new PathByActionArguments(nameof(EnergyEfficiencyController.AccessibleLoftSpace_Get), "EnergyEfficiency", new { reference, entryPoint }),
+                    { LoftSpace: not LoftSpace.Yes }
+                        => new PathByActionArguments(nameof(EnergyEfficiencyController.LoftSpace_Get), "EnergyEfficiency", new { reference, entryPoint }),
+                    { AccessibleLoft: not AccessibleLoft.Yes }
+                        => new PathByActionArguments(nameof(EnergyEfficiencyController.AccessibleLoft_Get), "EnergyEfficiency", new { reference, entryPoint }),
                     _ => new PathByActionArguments(nameof(EnergyEfficiencyController.RoofInsulated_Get), "EnergyEfficiency", new { reference, entryPoint }),
                 };
             }
@@ -638,7 +650,7 @@ namespace SeaPublicWebsite.Services
             var reference = propertyData.Reference;
             if (propertyData.RoofConstruction is RoofConstruction.Mixed or RoofConstruction.Pitched)
             {
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.AccessibleLoftSpace_Get), "EnergyEfficiency", new { reference, entryPoint });
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.LoftSpace_Get), "EnergyEfficiency", new { reference, entryPoint });
             }
 
             if (entryPoint is not null)
@@ -649,10 +661,26 @@ namespace SeaPublicWebsite.Services
             return new PathByActionArguments(nameof(EnergyEfficiencyController.GlazingType_Get), "EnergyEfficiency", new { reference });
         }
 
-        private PathByActionArguments AccessibleLoftSpaceForwardLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private PathByActionArguments LoftSpaceForwardLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
-            if (propertyData.AccessibleLoftSpace is AccessibleLoftSpace.Yes)
+            if (propertyData.LoftSpace is LoftSpace.Yes)
+            {
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AccessibleLoft_Get), "EnergyEfficiency", new { reference, entryPoint });
+            }
+
+            if (entryPoint is not null)
+            {
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
+            }
+
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.GlazingType_Get), "EnergyEfficiency", new { reference });
+        }
+        
+        private PathByActionArguments AccessibleLoftForwardLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        {
+            var reference = propertyData.Reference;
+            if (propertyData.AccessibleLoft is AccessibleLoft.Yes)
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofInsulated_Get), "EnergyEfficiency", new { reference, entryPoint });
             }
@@ -806,7 +834,8 @@ namespace SeaPublicWebsite.Services
         FloorConstruction,
         FloorInsulated,
         RoofConstruction,
-        AccessibleLoftSpace,
+        LoftSpace,
+        AccessibleLoft,
         RoofInsulated,
         GlazingType,
         OutdoorSpace,

@@ -667,38 +667,73 @@ namespace SeaPublicWebsite.Controllers
             return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
-        [HttpGet("accessible-loft-space/{reference}")]
-        public async Task<IActionResult> AccessibleLoftSpace_Get(string reference, QuestionFlowPage? entryPoint = null)
+        [HttpGet("loft-space/{reference}")]
+        public async Task<IActionResult> LoftSpace_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.AccessibleLoftSpace, propertyData, entryPoint);
-            var viewModel = new AccessibleLoftSpaceViewModel
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.LoftSpace, propertyData, entryPoint);
+            var viewModel = new LoftSpaceViewModel
             {
-                AccessibleLoftSpace = propertyData.AccessibleLoftSpace,
+                LoftSpace = propertyData.LoftSpace,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            return View("AccessibleLoftSpace", viewModel);
+            return View("LoftSpace", viewModel);
         }
 
-        [HttpPost("accessible-loft-space/{reference}")]
-        public async Task<IActionResult> AccessibleLoftSpace_Post(AccessibleLoftSpaceViewModel viewModel)
+        [HttpPost("loft-space/{reference}")]
+        public async Task<IActionResult> LoftSpace_Post(LoftSpaceViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return await AccessibleLoftSpace_Get(viewModel.Reference, viewModel.EntryPoint);
+                return await LoftSpace_Get(viewModel.Reference, viewModel.EntryPoint);
             }
 
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
 
-            propertyData.AccessibleLoftSpace = viewModel.AccessibleLoftSpace;
+            propertyData.LoftSpace = viewModel.LoftSpace;
             PropertyDataHelper.ResetUnusedFields(propertyData);
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AccessibleLoftSpace, propertyData, viewModel.EntryPoint);
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.LoftSpace, propertyData, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+        }
+
+        [HttpGet("accessible-loft/{reference}")]
+        public async Task<IActionResult> AccessibleLoft_Get(string reference, QuestionFlowPage? entryPoint = null)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.AccessibleLoft, propertyData, entryPoint);
+            var viewModel = new AccessibleLoftViewModel
+            {
+                AccessibleLoft = propertyData.AccessibleLoft,
+                Reference = propertyData.Reference,
+                EntryPoint = entryPoint,
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+            };
+
+            return View("AccessibleLoft", viewModel);
+        }
+        
+        [HttpPost("accessible-loft/{reference}")]
+        public async Task<IActionResult> AccessibleLoft_Post(AccessibleLoftViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await AccessibleLoft_Get(viewModel.Reference, viewModel.EntryPoint);
+            }
+
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
+
+            propertyData.AccessibleLoft = viewModel.AccessibleLoft;
+            PropertyDataHelper.ResetUnusedFields(propertyData);
+            await propertyDataStore.SavePropertyDataAsync(propertyData);
+
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AccessibleLoft, propertyData, viewModel.EntryPoint);
             return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
