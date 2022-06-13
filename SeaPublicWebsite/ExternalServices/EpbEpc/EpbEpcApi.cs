@@ -88,6 +88,13 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             }
 
             var epc = response.Data.Assessment;
+
+            // We do not surface "SAP" report data as it may interfere with the "RdSAP" ones.
+            if (epc.AssessmentType.Equals("SAP", StringComparison.OrdinalIgnoreCase))
+            {
+                return null;
+            }
+            
             return new Epc
             {
                 EpcId = epcId,
