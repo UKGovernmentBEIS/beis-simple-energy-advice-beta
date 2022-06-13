@@ -1,5 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.BusinessLogic.Models.Enums
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.RoofConstructionViewModel
 @{
@@ -25,44 +27,70 @@
             @Html.AntiForgeryToken()
             @(Html.HiddenFor(m => m.EntryPoint))
             
+            @{
+                Func<object, object> details = 
+                    @<text>
+                        <p class="govuk-body">
+                            Most roofs are pitched, meaning they are built at an angle or with a slope.<br>
+                        </p>
+                        <p class="govuk-body">
+                            A flat roof is completely, or almost, level, with no obvious slope or angle.
+                        </p>
+                     </text>;
+                
+                Func<object, object> epcHint = null;
+                if (Model.Epc?.RoofConstruction is not null)
+                {
+                    epcHint = 
+                        @<p class="govuk-body">
+                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests you have a
+                            <strong>
+                                @(Model.Epc?.RoofConstruction switch {
+                                    RoofConstruction.Flat => "flat",
+                                    RoofConstruction.Mixed => "mixed flat and pitched",
+                                    RoofConstruction.Pitched => "pitched",
+                                    _ => throw new ArgumentOutOfRangeException()})
+                            </strong>
+                            roof.
+                        </p>;
+                }
+            }
+            
             @(await Html.GovUkRadiosFor(m => m.RoofConstruction,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
                     {
-                        Html = @<text>
-                                   <h1 class="govuk-fieldset__heading">
-                                       Is any part of your roof flat?
-                                   </h1>
-                                </text>,
-                        Classes = "govuk-fieldset__legend--l"
+                        Text = "Is any part of your roof flat?",
+                        Classes = "govuk-fieldset__legend--l",
+                        IsPageHeading = true
                     }
                 },
                 new HintViewModel
                 {
                     Html = @<text>
-                                <details class="govuk-details" data-module="govuk-details">
-                                    <summary class="govuk-details__summary">
-                                        <span class="govuk-details__summary-text">
-                                            Help me decide if any part of my roof is flat
-                                        </span>
-                                    </summary>
-                                    <div class="govuk-details__text">
-                                        <p class="govuk-body">
-                                            Most roofs are pitched, meaning they are built at an angle or with a slope.<br>
-                                        </p>
-                                        <p class="govuk-body">
-                                            A flat roof is completely, or almost, level, with no obvious slope or angle.
-                                        </p>
-                                    </div>
-                                </details>
+                               @await Html.GovUkDetails(new DetailsViewModel
+                               {
+                                   SummaryText = "Help me answer this question",
+                                   Html = details
+                               })
+                               
+                               @if (epcHint is not null)
+                               {
+                                   @await Html.GovUkInsetText(new InsetTextViewModel
+                                   {
+                                       Classes = "sea-epc-hint",
+                                       Html = epcHint
+                                   })
+                               }
                             </text>
                 }
             ))
 
-            <button class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+            @await Html.GovUkButton(new ButtonViewModel
+            {
+                Text = "Continue"
+            })
             
         </form>
         

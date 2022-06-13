@@ -5,7 +5,7 @@ namespace SeaPublicWebsite.BusinessLogic.Models.Enums
     public enum HeatingType
     {
         [GovUkRadioCheckboxLabelText(Text = "I'm not sure")]
-        DoNotKnow, 
+        DoNotKnow,
         [GovUkRadioCheckboxLabelText(Text = "Gas boiler")]
         GasBoiler,
         [GovUkRadioCheckboxLabelText(Text = "Oil boiler")]

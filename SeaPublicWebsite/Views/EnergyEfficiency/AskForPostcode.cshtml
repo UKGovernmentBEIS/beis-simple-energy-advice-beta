@@ -22,66 +22,74 @@
     <div class="govuk-grid-column-two-thirds">
         
         <form action="@Url.Action("AskForPostcode_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post">
-
             @Html.AntiForgeryToken()
-            <fieldset class="govuk-fieldset">
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    <h1 class="govuk-fieldset__heading">
-                        What is the address of your property?
-                    </h1>
-                </legend>
-                <p class="govuk-body">
-                    You don’t need to provide this, but your address may allow us to access your Energy Performance Certificate 
-                    (EPC) that contains information about your property’s energy efficiency. 
-                </p>
-                <p class="govuk-body">
-                    This information could help you to answer if you’re not sure for some of the questions 
-                    we ask about your property.
-                </p>
-                <details class="govuk-details" data-module="govuk-details">
-                    <summary class="govuk-details__summary">
-                        <span class="govuk-details__summary-text">
-                            What is an Energy Performance Certificate (EPC)? 
-                        </span>
-                    </summary>
-                    <div class="govuk-details__text">
+            
+            @{
+                Func<object, object> details =
+                    @<text>
                         <p class="govuk-body">
-                            An Energy Performance Certificate (EPC) is needed whenever a property is built, sold or rented. 
+                            An Energy Performance Certificate (EPC) is needed whenever a property is built, sold or rented.
                         </p>
                         <p class="govuk-body">
-                            An accredited assessor surveys the property and produces the certificate. 
+                            An accredited assessor surveys the property and produces the certificate.
                         </p>
                         <p class="govuk-body">
                             The certificate contains information about the property’s construction,
                             energy use and typical energy costs.
                         </p>
-                    </div>
-                </details>
-                
-                @(await Html.GovUkTextInputFor(
-                    m => m.HouseNameOrNumber,
-                    labelOptions: new LabelViewModel
-                    {
-                        Text = "Building number or name",
-                    },
-                    classes: "govuk-input--width-10",
-                    formGroupOptions: new FormGroupViewModel
-                    {
-                        Classes = "govuk-!-margin-bottom-2"
-                    },
-                    placeholder: "e.g. 19 or Buckingham Palace"
-                    ))
+                     </text>;
+            }
+            
+            @await Html.GovUkFieldset(new FieldsetViewModel
+            {
+                Legend = new LegendViewModel
+                {
+                    Text = "What is the address of your property?",
+                    Classes = "govuk-fieldset__legend--l",
+                    IsPageHeading = true
+                },
+                InnerHtml = 
+                    @<text>
+                        <p class="govuk-body">
+                            You don’t need to provide this, but your address may allow us to access your Energy Performance Certificate
+                            (EPC) that contains information about your property’s energy efficiency.
+                        </p>
+                        <p class="govuk-body">
+                            This information could help you to answer if you’re not sure for some of the questions
+                            we ask about your property.
+                        </p>
+                        
+                        @await Html.GovUkDetails(new DetailsViewModel
+                        {
+                            SummaryText = "What is an Energy Performance Certificate (EPC)?", 
+                            Html = details
+                        })
+                        
+                        @(await Html.GovUkTextInputFor(
+                            m => m.HouseNameOrNumber, 
+                            labelOptions: new LabelViewModel
+                            {
+                                Text = "Building number or name",
+                            },
+                            classes: "govuk-input--width-10",
+                            formGroupOptions: new FormGroupViewModel
+                            {
+                                Classes = "govuk-!-margin-bottom-2"
+                            },
+                            placeholder: "e.g. 19 or Buckingham Palace"
+                            ))
 
-                @(await Html.GovUkTextInputFor(
-                    m => m.Postcode,
-                    labelOptions: new LabelViewModel
-                    {
-                        Text = "Postcode",
-                    },
-                    classes: "govuk-input--width-10",
-                    placeholder: "e.g. AB12 3CD"
-                    ))
-            </fieldset>
+                        @(await Html.GovUkTextInputFor(
+                            m => m.Postcode,
+                            labelOptions: new LabelViewModel
+                            {
+                                Text = "Postcode",
+                            },
+                            classes: "govuk-input--width-10",
+                            placeholder: "e.g. AB12 3CD"
+                            ))
+                     </text>
+            })
             
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel

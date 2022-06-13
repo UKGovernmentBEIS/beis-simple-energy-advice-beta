@@ -54,14 +54,17 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("GlazingType")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("HasHotWaterCylinder")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("HeatingType")
                         .HasColumnType("integer");
 
                     b.Property<int?>("HouseType")
                         .HasColumnType("integer");
 
-                    b.Property<string>("LodgementDate")
-                        .HasColumnType("text");
+                    b.Property<DateTime>("LodgementDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Postcode")
                         .HasColumnType("text");
