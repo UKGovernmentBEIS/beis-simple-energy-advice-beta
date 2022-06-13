@@ -50,6 +50,10 @@
     <link href="@(StaticAssetsVersioning.GetAppIe8CssFilename())" rel="stylesheet" />
     <![endif]-->
     
+    <!--[if lt IE 9]>
+        <script src="@(StaticAssetsVersioning.GetHtml5ShivJsFilename())"></script>
+    <![endif]-->
+    
     <meta property="og:image" content="@(assetsPath)/govuk-opengraph-image.png">
 </head>
 

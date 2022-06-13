@@ -16,7 +16,7 @@
 
     "update-govuk-images": "shx cp -r ./node_modules/govuk-frontend/govuk/assets/images/* ./wwwroot/assets/images/",
     "update-govuk-fonts": "shx cp -r ./node_modules/govuk-frontend/govuk/assets/fonts/* ./wwwroot/assets/fonts/",
-    "update-govuk-js": "shx cp -r ./node_modules/govuk-frontend/govuk/all.js ./wwwroot/js/gov_uk_front_end.js && shx cp -r ./node_modules/html5shiv/dist/html5shiv.js ./wwwroot/js/html5shiv.js",
+    "update-govuk-js": "shx cp -r ./node_modules/govuk-frontend/govuk/all.js ./wwwroot/js/bundle/gov_uk_front_end.js && shx cp -r ./node_modules/html5shiv/dist/html5shiv.js ./wwwroot/js/html5shiv.js",
     "update-govuk-assets": "npm run update-govuk-images && npm run update-govuk-fonts && npm run update-govuk-js"
   }
 }

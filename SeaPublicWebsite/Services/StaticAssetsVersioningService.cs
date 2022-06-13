@@ -24,12 +24,14 @@ namespace SeaPublicWebsite.Services
         private const string AppCssRegex = "app-[^-]*.css";
         private const string AppIe8CssRegex = "app-ie8-[^-]*.css";
         private const string AppJsRegex = "app-.*.js";
+        private const string Html5ShivJsRegex = "html5shiv-.*.js";
 
         private Dictionary<string, string> cachedFilenames = new Dictionary<string, string>();
 
         public string GetAppCssFilename() => GetStaticFile(CompiledDirectory, AppCssRegex);
         public string GetAppIe8CssFilename() => GetStaticFile(CompiledDirectory, AppIe8CssRegex);
         public string GetAppJsFilename() => GetStaticFile(CompiledDirectory, AppJsRegex);
+        public string GetHtml5ShivJsFilename() => GetStaticFile(CompiledDirectory, Html5ShivJsRegex);
 
         private string GetStaticFile(string directory, string fileRegex)
         {
