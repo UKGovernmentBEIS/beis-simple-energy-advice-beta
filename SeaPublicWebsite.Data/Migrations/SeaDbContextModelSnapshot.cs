@@ -54,6 +54,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("GlazingType")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("HasHotWaterCylinder")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("HeatingType")
                         .HasColumnType("integer");
 

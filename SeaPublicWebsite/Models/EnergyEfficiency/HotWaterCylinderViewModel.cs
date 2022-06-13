@@ -1,4 +1,5 @@
 ﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
+using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
