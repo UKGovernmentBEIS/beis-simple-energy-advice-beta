@@ -152,14 +152,23 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
 
         private static HeatingType? GetHeatingTypeFromEpc(EpbEpcAssessmentDto epc)
         {
-            return epc.MainFuelType switch
+            // Gas boiler check
+            if (epc.MainFuelType.Equals("1") ||
+                epc.MainFuelType.Equals("51") ||
+                epc.MainFuelType.Contains("Mains gas, StringComparison.OrdinalIgnoreCase"))
             {
-                "26" => HeatingType.GasBoiler,
-                "27" => HeatingType.LpgBoiler,
-                "28" => HeatingType.OilBoiler,
-                "29" => HeatingType.DirectActionElectric,
-                _ => null
-            };
+                return HeatingType.GasBoiler;
+            }
+            
+            // Oil boiler check
+            if (epc.MainFuelType.Equals("1") ||
+                epc.MainFuelType.Equals("51") ||
+                epc.MainFuelType.Contains("Mains gas, StringComparison.OrdinalIgnoreCase"))
+            {
+                return HeatingType.OilBoiler;
+            }
+
+            return null;
         }
 
         private static PropertyType? GetPropertyTypeFromEpc(EpbEpcAssessmentDto epc)
