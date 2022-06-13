@@ -23,6 +23,7 @@ Migrations will be run automatically on deployment. If a migration needs to be r
 ### Pre-requisites
 
 - .Net 6 (https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- Install EF Core CLI tools (https://docs.microsoft.com/en-us/ef/core/cli/dotnet)
 - Node v14+ (https://nodejs.org/en/)
 - If you're using Rider then you will need to install the ".net core user secrets" plugin
 
