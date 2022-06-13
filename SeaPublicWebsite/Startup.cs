@@ -2,6 +2,7 @@ using System;
 using System.Text.RegularExpressions;
 using GovUkDesignSystem.ModelBinders;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,7 @@ namespace SeaPublicWebsite
             services.AddSingleton<StaticAssetsVersioningService>();
             services.AddScoped<RecommendationService>();
             services.AddScoped<IDataAccessProvider, DataAccessProvider>();
+            services.AddDataProtection().PersistKeysToDbContext<SeaDbContext>();
 
             ConfigureEpcApi(services);
             ConfigureBreApi(services);
