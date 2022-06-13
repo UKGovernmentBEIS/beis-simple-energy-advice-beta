@@ -71,9 +71,9 @@
             heating_pattern_type = (int) breHeatingPatternType;
             normal_days_off_hours = breNormalDaysOffHours;
             living_room_temperature = breTemperature;
-            //assumption:
+            //peer-reviewed assumption:
             num_storeys = brePropertyType == BrePropertyType.House ? 2 : 1;
-            //assumption (question is being added for this):
+            //peer-reviewed assumption (question to be added for this):
             num_bedrooms = breOccupants ?? 1;
             measures = true;
             //measures_package consists of all measures implemented in the BRE API as of May 2021

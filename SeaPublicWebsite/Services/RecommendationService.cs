@@ -243,7 +243,7 @@ namespace SeaPublicWebsite.Services
             {
                 PropertyType.House => BrePropertyType.House,
                 PropertyType.Bungalow => BrePropertyType.Bungalow,
-                // assumption:
+                // peer-reviewed assumption:
                 PropertyType.ApartmentFlatOrMaisonette => BrePropertyType.Flat,
                 _ => throw new ArgumentNullException()
             };
@@ -258,9 +258,9 @@ namespace SeaPublicWebsite.Services
                 {
                     HouseType.Detached => BreBuiltForm.Detached,
                     HouseType.SemiDetached => BreBuiltForm.SemiDetached,
-                    //assumption:
+                    //peer-reviewed assumption:
                     HouseType.EndTerrace => BreBuiltForm.EndTerrace,
-                    //assumption:
+                    //peer-reviewed assumption:
                     HouseType.Terraced => BreBuiltForm.MidTerrace,
                     _ => throw new ArgumentOutOfRangeException()
                 },
@@ -268,9 +268,9 @@ namespace SeaPublicWebsite.Services
                 {
                     BungalowType.Detached => BreBuiltForm.Detached,
                     BungalowType.SemiDetached => BreBuiltForm.SemiDetached,
-                    //assumption:
+                    //peer-reviewed assumption:
                     BungalowType.EndTerrace => BreBuiltForm.EndTerrace,
-                    //assumption:
+                    //peer-reviewed assumption:
                     BungalowType.Terraced => BreBuiltForm.MidTerrace,
                     _ => throw new ArgumentOutOfRangeException()
                 },
@@ -316,7 +316,7 @@ namespace SeaPublicWebsite.Services
                 <= 2006 => "J",
                 <= 2011 => "K",
                 >= 2012 => "L",
-                //assumption:
+                //peer-reviewed assumption:
                 _ => "D"
             };
         }
@@ -332,7 +332,7 @@ namespace SeaPublicWebsite.Services
                 {
                     SolidWallsInsulated.DoNotKnow => BreWallType.DontKnow,
                     SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
-                    //assumption:
+                    //peer-reviewed assumption:
                     SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
                     SolidWallsInsulated.All => BreWallType.SolidWallsWithInsulation,
                     _ => throw new ArgumentOutOfRangeException()
@@ -341,7 +341,7 @@ namespace SeaPublicWebsite.Services
                 {
                     CavityWallsInsulated.DoNotKnow => BreWallType.DontKnow,
                     CavityWallsInsulated.No => BreWallType.CavityWallsWithoutInsulation,
-                    //assumption:
+                    //peer-reviewed assumption:
                     CavityWallsInsulated.Some => BreWallType.CavityWallsWithoutInsulation,
                     CavityWallsInsulated.All => BreWallType.CavityWallsWithInsulation,
                     _ => throw new ArgumentOutOfRangeException()
@@ -350,29 +350,29 @@ namespace SeaPublicWebsite.Services
                 {
                     CavityWallsInsulated.DoNotKnow => solidWallsInsulated switch
                     {
-                        //assumption:
+                        //peer-reviewed assumption:
                         SolidWallsInsulated.DoNotKnow => BreWallType.DontKnow,
-                        //assumption (may change to DontKnow if this can drive recommendations):
+                        //peer-reviewed assumption (may change to DontKnow if this can drive recommendations):
                         SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
-                        //assumption (may change to DontKnow if this can drive recommendations):
+                        //peer-reviewed assumption (may change to DontKnow if this can drive recommendations):
                         SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
-                        //assumption:
+                        //peer-reviewed assumption:
                         SolidWallsInsulated.All => BreWallType.DontKnow,
                         _ => throw new ArgumentOutOfRangeException()
                     },
-                    //assumption:
+                    //peer-reviewed assumption:
                     CavityWallsInsulated.No => BreWallType.CavityWallsWithoutInsulation,
-                    //assumption:
+                    //peer-reviewed assumption:
                     CavityWallsInsulated.Some => BreWallType.CavityWallsWithoutInsulation,
                     CavityWallsInsulated.All => solidWallsInsulated switch
                     {
-                        //assumption (may change to DontKnow if this can drive recommendations):
+                        //peer-reviewed assumption (may change to DontKnow if this can drive recommendations):
                         SolidWallsInsulated.DoNotKnow => BreWallType.SolidWallsWithoutInsulation,
-                        //assumption:
+                        //peer-reviewed assumption:
                         SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
-                        //assumption:
+                        //peer-reviewed assumption:
                         SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
-                        //assumption:
+                        //peer-reviewed assumption:
                         SolidWallsInsulated.All => BreWallType.SolidWallsWithInsulation,
                         _ => throw new ArgumentOutOfRangeException()
                     },
@@ -389,7 +389,7 @@ namespace SeaPublicWebsite.Services
             return roofConstruction switch
             {
                 RoofConstruction.Flat =>
-                    //assumption:
+                    //peer-reviewed assumption:
                     BreRoofType.FlatRoofWithInsulation,
                 RoofConstruction.Pitched or RoofConstruction.Mixed => accessibleLoftSpace switch
                 {
@@ -397,15 +397,15 @@ namespace SeaPublicWebsite.Services
                     AccessibleLoftSpace.Yes => roofInsulated switch
                     {
                         RoofInsulated.DoNotKnow => BreRoofType.DontKnow,
-                        //assumption in case RoofConstruction.Mixed:
+                        //peer-reviewed assumption in case RoofConstruction.Mixed:
                         RoofInsulated.Yes => BreRoofType.PitchedRoofWithInsulation,
-                        //assumption in case RoofConstruction.Mixed:
+                        //peer-reviewed assumption in case RoofConstruction.Mixed:
                         RoofInsulated.No => BreRoofType.PitchedRoofWithoutInsulation,
                         _ => throw new ArgumentOutOfRangeException()
                     },
                     _ => throw new ArgumentOutOfRangeException()
                 },
-                //assumption for ground and middle floor flats
+                //peer-reviewed assumption for ground and middle floor flats
                 _ => null
             };
         }
@@ -416,9 +416,9 @@ namespace SeaPublicWebsite.Services
             {
                 GlazingType.DoNotKnow => BreGlazingType.DontKnow,
                 GlazingType.SingleGlazed => BreGlazingType.SingleGlazed,
-                //assumption:
+                //peer-reviewed assumption:
                 GlazingType.DoubleOrTripleGlazed => BreGlazingType.DoubleGlazed,
-                //assumption:
+                //peer-reviewed assumption:
                 GlazingType.Both => BreGlazingType.SingleGlazed,
                 _ => throw new ArgumentOutOfRangeException()
             };
@@ -428,7 +428,7 @@ namespace SeaPublicWebsite.Services
         {
             return heatingType switch
             {
-                //assumption:
+                //peer-reviewed assumption:
                 HeatingType.DoNotKnow => BreHeatingFuel.MainsGas,
                 HeatingType.GasBoiler => BreHeatingFuel.MainsGas,
                 HeatingType.OilBoiler => BreHeatingFuel.HeatingOil,
@@ -438,10 +438,10 @@ namespace SeaPublicWebsite.Services
                 HeatingType.HeatPump => BreHeatingFuel.Electricity,
                 HeatingType.Other => otherHeatingType switch
                 {
-                    //assumption:
+                    //peer-reviewed assumption:
                     OtherHeatingType.Biomass => BreHeatingFuel.MainsGas,
                     OtherHeatingType.CoalOrSolidFuel => BreHeatingFuel.SolidFuel,
-                    //assumption:
+                    //peer-reviewed assumption:
                     OtherHeatingType.Other => BreHeatingFuel.MainsGas,
                     _ => throw new ArgumentOutOfRangeException()
                 },
@@ -475,7 +475,7 @@ namespace SeaPublicWebsite.Services
         {
             if (hoursOfHeatingMorning != null && hoursOfHeatingEvening != null)
             {
-                //assumption: time heating is turned on is not collected so this is a simplification of the BRE input complexity available
+                //peer-reviewed assumption: time heating is turned on is not collected so this is a simplification of the BRE input complexity available
                 int averageOffPeriod = (int) ((24 - (hoursOfHeatingMorning + hoursOfHeatingEvening)) / 2);
                 return new [] { averageOffPeriod, averageOffPeriod };
             }
