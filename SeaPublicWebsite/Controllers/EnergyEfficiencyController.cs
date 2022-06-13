@@ -713,6 +713,7 @@ namespace SeaPublicWebsite.Controllers
                 RoofInsulated = propertyData.RoofInsulated,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
+                Epc = propertyData.Epc,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
