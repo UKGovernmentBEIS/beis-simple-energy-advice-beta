@@ -109,6 +109,18 @@ Fill in the opened `secrets.json` file with:
 - In the terminal (from the solution directory) run `dotnet ef migrations add <YOUR_MIGRATION_NAME> --project .\SeaPublicWebsite.Data --startup-project .\SeaPublicWebsite`
 - Then update the local database
 
+#### Merging Migrations
+
+We cannot merge branches both containing different migrations. We have marked the EF Core snapshot file as binary in git. This should mean that git throws up an error if we try to merge branches with different migrations
+(because git will try to merge two sets of changes into the snapshot file and it can't merge changes in binary files).
+The solution is unfortunately tedious. Given branch 1 with migration A and branch 2 with migration B:
+- One branch is merged to main as normal (let's say branch 1)
+- On branch 2
+- Revert and remove migration B
+- Merge main into branch 2
+- Recreate migration B (which will now be on top of migation A)
+- Merge branch 2 into main
+
 ## Environments
 
 This app is deployed to GOV.UK Platform as a Service (https://docs.cloud.service.gov.uk/)
