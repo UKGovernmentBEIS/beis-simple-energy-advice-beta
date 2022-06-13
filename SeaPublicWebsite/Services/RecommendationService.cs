@@ -300,22 +300,16 @@ namespace SeaPublicWebsite.Services
             }
         }
 
-        private static string GetBreConstructionDate(int? yearBuilt)
+        private static string GetBreConstructionDate(YearBuilt? yearBuilt)
         {
             return yearBuilt switch
             {
-                <= 1899 => "A",
-                <= 1929 => "B",
-                <= 1949 => "C",
-                <= 1966 => "D",
-                <= 1975 => "E",
-                <= 1982 => "F",
-                <= 1990 => "G",
-                <= 1995 => "H",
-                <= 2002 => "I",
-                <= 2006 => "J",
-                <= 2011 => "K",
-                >= 2012 => "L",
+                YearBuilt.Pre1930 => "B",
+                YearBuilt.From1930To1966 => "D",
+                YearBuilt.From1967To1982 => "F",
+                YearBuilt.From1983To1995 => "H",
+                YearBuilt.From1996To2011 => "K",
+                YearBuilt.From2012ToPresent => "L",
                 //peer-reviewed assumption:
                 _ => "D"
             };

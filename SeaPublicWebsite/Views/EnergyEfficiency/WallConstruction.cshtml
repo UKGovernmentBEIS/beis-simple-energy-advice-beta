@@ -49,7 +49,7 @@
                     string expectedWallType = null;
                     if (Model.YearBuilt.HasValue)
                     {
-                        expectedWallType = Model.YearBuilt.Value < 1930 ? "solid" : "cavity";
+                        expectedWallType = Model.YearBuilt.Value < YearBuilt.From1930To1966 ? "solid" : "cavity";
                     }
                     else if (Model.Epc?.ConstructionAgeBand != null)
                     {

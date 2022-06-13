@@ -16,7 +16,7 @@ namespace SeaPublicWebsite.Helpers
                    && (propertyData.Epc?.FloorConstruction == FloorConstruction.SolidConcrete
                        || propertyData.Epc?.FloorConstruction == null
                        && (!propertyData.YearBuilt.HasValue &&
-                           propertyData.Epc?.ConstructionAgeBand >= HomeAge.From1950To1966 || propertyData.YearBuilt >= 1950));
+                           propertyData.Epc?.ConstructionAgeBand >= HomeAge.From1950To1966 || propertyData.YearBuilt >= YearBuilt.From1967To1982));
         }
 
         // User has a suspended floor
@@ -30,7 +30,7 @@ namespace SeaPublicWebsite.Helpers
                    && (propertyData.Epc?.FloorConstruction == FloorConstruction.SuspendedTimber
                        || propertyData.Epc?.FloorConstruction == null
                        && (!propertyData.YearBuilt.HasValue && propertyData.Epc?.ConstructionAgeBand < HomeAge.From1950To1966 ||
-                           propertyData.YearBuilt < 1950));
+                           propertyData.YearBuilt < YearBuilt.From1930To1966));
         }
 
         // User has an insulated floor
@@ -44,7 +44,7 @@ namespace SeaPublicWebsite.Helpers
                    && (propertyData.Epc?.FloorInsulated == FloorInsulated.Yes
                        || propertyData.Epc?.FloorInsulated == null
                        && (!propertyData.YearBuilt.HasValue &&
-                           propertyData.Epc?.ConstructionAgeBand >= HomeAge.From1996To2002 || propertyData.YearBuilt >= 1996));
+                           propertyData.Epc?.ConstructionAgeBand >= HomeAge.From1996To2002 || propertyData.YearBuilt >= YearBuilt.From1996To2011));
         }
 
         // User has cavity walls
@@ -58,7 +58,7 @@ namespace SeaPublicWebsite.Helpers
                    && (propertyData.Epc?.WallConstruction == WallConstruction.Cavity
                        || propertyData.Epc?.WallConstruction == null
                        && (!propertyData.YearBuilt.HasValue &&
-                           propertyData.Epc?.ConstructionAgeBand >= HomeAge.From1930To1949 || propertyData.YearBuilt >= 1930));
+                           propertyData.Epc?.ConstructionAgeBand >= HomeAge.From1930To1949 || propertyData.YearBuilt >= YearBuilt.From1930To1966));
         }
 
         // User has solid walls
@@ -71,7 +71,7 @@ namespace SeaPublicWebsite.Helpers
                    || propertyData.WallConstruction == WallConstruction.DoNotKnow 
                    && (propertyData.Epc?.WallConstruction == WallConstruction.Solid
                        || propertyData.Epc?.WallConstruction == null 
-                       && (!propertyData.YearBuilt.HasValue && propertyData.Epc?.ConstructionAgeBand < HomeAge.From1930To1949 || propertyData.YearBuilt < 1930));
+                       && (!propertyData.YearBuilt.HasValue && propertyData.Epc?.ConstructionAgeBand < HomeAge.From1930To1949 || propertyData.YearBuilt == YearBuilt.Pre1930));
         }
 
         // User has solid walls
@@ -98,7 +98,7 @@ namespace SeaPublicWebsite.Helpers
                            || propertyData.Epc?.CavityWallsInsulated == null
                            && (!propertyData.YearBuilt.HasValue &&
                                propertyData.Epc?.ConstructionAgeBand > HomeAge.From1991To1995 ||
-                               propertyData.YearBuilt > 1991)));
+                               propertyData.YearBuilt > YearBuilt.From1983To1995)));
         }
 
         // User has a pitched roof (or some pitched)
@@ -111,7 +111,7 @@ namespace SeaPublicWebsite.Helpers
                    && propertyData.AccessibleLoftSpace is AccessibleLoftSpace.Yes or AccessibleLoftSpace.DoNotKnow
                    && (propertyData.RoofInsulated == RoofInsulated.Yes || propertyData.RoofInsulated == RoofInsulated.DoNotKnow
                        && (!propertyData.YearBuilt.HasValue && propertyData.Epc?.ConstructionAgeBand > HomeAge.From1996To2002 ||
-                           propertyData.YearBuilt > 2002));
+                           propertyData.YearBuilt > YearBuilt.From1996To2011));
         }
 
         public static bool HasFloor(PropertyData propertyData)

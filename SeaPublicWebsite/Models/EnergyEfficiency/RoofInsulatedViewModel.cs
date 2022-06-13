@@ -9,6 +9,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public RoofInsulated? RoofInsulated { get; set; }
 
         public string Reference { get; set; }
-        public int? YearBuilt { get; set; }
+        public YearBuilt? YearBuilt { get; set; }
     }
 }

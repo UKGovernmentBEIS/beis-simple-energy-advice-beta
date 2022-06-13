@@ -114,7 +114,7 @@
                                 }
                                 else if (Model.YearBuilt.HasValue)
                                 {
-                                    if (Model.YearBuilt.Value < 1950)
+                                    if (Model.YearBuilt.Value < YearBuilt.From1930To1966)
                                     {
                                         <p>
                                             Properties of your type typically have a <b>suspended timber</b> floor.

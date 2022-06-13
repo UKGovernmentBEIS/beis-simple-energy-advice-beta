@@ -1760,7 +1760,7 @@ public class QuestionFlowServiceTests
             HouseType? houseType = null,
             BungalowType? bungalowType = null,
             FlatType? flatType = null,
-            int? yearBuilt = null,
+            YearBuilt? yearBuilt = null,
             WallConstruction? wallConstruction = null,
             CavityWallsInsulated? cavityWallsInsulated = null,
             SolidWallsInsulated? solidWallsInsulated = null,
