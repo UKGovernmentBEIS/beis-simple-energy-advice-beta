@@ -3,12 +3,19 @@
 # Start of configuration
 
 # Name - This is the bit after 'sea-beta-' - e.g. for sea-beta-DEV, PAAS_ENV_SHORTNAME would just be 'DEV'
-#        Note that for the production environment you must use "Production"
+#
+#        **** NOTE: For the production environment you must use "Production" ****
+#
 echo "What name do you want to give to the new environment? (just the part after the 'sea-beta-' prefix please)"
 read PAAS_ENV_SHORTNAME
 
 # Database size - we normally use 'small-13' for testing and 'small-ha-13' for production
-DATABASE_SIZE="small-13"
+if [ "$PAAS_ENV_SHORTNAME" == "Production" ]
+then
+  DATABASE_SIZE="small-ha-13"
+else
+  DATABASE_SIZE="small-13"
+fi
 
 # App scale settings
 APP_INSTANCES=2     # Use at least 2 so that we can do rolling deployments
