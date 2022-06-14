@@ -100,6 +100,7 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 BungalowType = GetBungalowTypeFromEpc(epc),
                 FlatType = GetFlatTypeFromEpc(epc),
                 HeatingType = GetHeatingTypeFromEpc(epc),
+                OtherHeatingType = GetOtherHeatingTypeFromEpc(epc),
                 WallConstruction = GetWallConstructionFromEpc(epc),
                 SolidWallsInsulated = GetSolidWallsInsulatedFromEpc(epc),
                 CavityWallsInsulated = GetCavityWallsInsulatedFromEpc(epc),
@@ -187,17 +188,32 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 return HeatingType.DirectActionElectric;
             }
             
-            // coal or biomass check (for other)
-            if (epc.MainFuelType.Equals("14") ||
-                epc.MainFuelType.Equals("15") ||
-                epc.MainFuelType.Contains("coal", StringComparison.OrdinalIgnoreCase) ||
-                epc.MainFuelType.Equals("??") ||
-                epc.MainFuelType.Equals("??") ||
-                epc.MainFuelType.Contains("??", StringComparison.OrdinalIgnoreCase) )
+            return null;
+        }
+
+        private static OtherHeatingType? GetOtherHeatingTypeFromEpc(EpbEpcAssessmentDto epc)
+        {
+            if (epc.MainFuelType is null)
             {
-                return HeatingType.Other;
+                return null;
             }
             
+            // coal check
+            if (epc.MainFuelType.Equals("14") ||
+                epc.MainFuelType.Equals("15") ||
+                epc.MainFuelType.Contains("coal", StringComparison.OrdinalIgnoreCase))
+            {
+                return OtherHeatingType.CoalOrSolidFuel;
+            }
+            
+            // biomass boiler check
+            if (epc.MainFuelType.Equals("??") ||
+                epc.MainFuelType.Equals("??") ||
+                epc.MainFuelType.Contains("??", StringComparison.OrdinalIgnoreCase))
+            {
+                return OtherHeatingType.Biomass;
+            }
+
             return null;
         }
 

@@ -85,6 +85,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<DateTime?>("LodgementDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int?>("OtherHeatingType")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Postcode")
                         .HasColumnType("text");
 
@@ -105,7 +108,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasKey("EpcId");
 
-                    b.ToTable("Epc", (string)null);
+                    b.ToTable("Epc");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
@@ -210,7 +213,7 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.HasIndex("Reference")
                         .IsUnique();
 
-                    b.ToTable("PropertyData", (string)null);
+                    b.ToTable("PropertyData");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyRecommendation", b =>
@@ -255,7 +258,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasIndex("PropertyDataId");
 
-                    b.ToTable("PropertyRecommendations", (string)null);
+                    b.ToTable("PropertyRecommendations");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
