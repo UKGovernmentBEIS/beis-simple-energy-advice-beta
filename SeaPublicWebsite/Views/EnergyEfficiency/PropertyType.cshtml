@@ -23,48 +23,46 @@
         
         <form action="@Url.Action("PropertyType_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
-            
-            
             @Html.AntiForgeryToken()
+            
+            @{
+                Func<object, object> details =
+                    @<text>
+                        <p class="govuk-body">
+                            Energy use varies between different buildings, particularly for heating.
+                        </p>
+                        <p class="govuk-body">
+                            Some home improvements are only possible or appropriate for certain buildings.
+                        </p>
+                     </text>;
+            }
+            
             @(await Html.GovUkRadiosFor(m => m.PropertyType,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
                     {
-                        Html = @<text>
-                                   <h1 class="govuk-fieldset__heading">
-                                       What kind of property do you have?
-                                   </h1>
-                                </text>,
-                        Classes = "govuk-fieldset__legend--l"
+                        Text = "What kind of property do you have?",
+                        Classes = "govuk-fieldset__legend--l",
+                        IsPageHeading = true
                     }
                 },
                 hintOptions: new HintViewModel
                 {
                     Html = @<text>
-                                <details class="govuk-details" data-module="govuk-details">
-                                    <summary class="govuk-details__summary">
-                                        <span class="govuk-details__summary-text">
-                                            Why do we need to know this?
-                                        </span>
-                                    </summary>
-                                    <div class="govuk-details__text">
-                                        <p class="govuk-body">
-                                            Energy use varies between different buildings, particularly for heating.  
-                                        </p>
-                                        <p class="govuk-body">
-                                            Some home improvements are only possible or appropriate for certain buildings.
-                                        </p>
-                                    </div>
-                                </details>
+                               @await Html.GovUkDetails(new DetailsViewModel
+                               {
+                                   SummaryText = "Why do we need to know this?",
+                                   Html = details
+                               })
                             </text>
                 }
-            ))
-
-            <button class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+                ))
             
+            @await Html.GovUkButton(new ButtonViewModel
+            {
+                Text = "Continue"
+            })
         </form>
         
     </div>

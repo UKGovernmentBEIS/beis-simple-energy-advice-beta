@@ -25,20 +25,16 @@
         
         <form action="@Url.Action("OtherHeatingType_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
-            
-
             @Html.AntiForgeryToken()
+            
             @(await Html.GovUkRadiosFor(m => m.OtherHeatingType,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
                     {
-                        Html = @<text>
-                                   <h1 class="govuk-fieldset__heading">
-                                       What is your main heating system?
-                                   </h1>
-                                </text>,
-                        Classes = "govuk-fieldset__legend--l"
+                        Text = "What is your main heating system?",
+                        Classes = "govuk-fieldset__legend--l",
+                        IsPageHeading = true
                     }
                 },
                 radioHints: new Dictionary<OtherHeatingType, HintViewModel>
@@ -59,9 +55,10 @@
                     },
                 }))
 
-            <button class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+            @await Html.GovUkButton(new ButtonViewModel
+            {
+                Text = "Continue"
+            })
             
         </form>
         

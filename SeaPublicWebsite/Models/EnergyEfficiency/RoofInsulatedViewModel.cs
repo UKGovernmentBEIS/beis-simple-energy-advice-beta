@@ -1,4 +1,5 @@
 ﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
+using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
@@ -9,6 +10,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public RoofInsulated? RoofInsulated { get; set; }
 
         public string Reference { get; set; }
-        public YearBuilt? YearBuilt { get; set; }
+        public Epc Epc { get; set; }
     }
 }

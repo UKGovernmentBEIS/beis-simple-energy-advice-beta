@@ -57,5 +57,5 @@ public class EpbEpcAssessmentDto
     public string MainFuelType { get; set; }
     
     [JsonProperty(PropertyName = "hasHotWaterCylinder")]
-    public bool HasHotWaterCylinder { get; set; }
+    public bool? HasHotWaterCylinder { get; set; }
 }

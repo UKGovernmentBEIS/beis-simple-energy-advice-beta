@@ -1,5 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.BusinessLogic.Models.Enums
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.GlazingTypeViewModel;
 @{
@@ -23,46 +25,72 @@
         
         <form action="@Url.Action("GlazingType_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
-            
             @Html.AntiForgeryToken()
+            
+            @{
+                Func<object, object> details = 
+                    @<text>
+                        <p class="govuk-body">
+                            A single glazed window has a single pane of glass.
+                        </p>
+                        <p class="govuk-body">
+                            A double glazed window has two panes of glass, separated by air or gas, to make up a single window. A triple glazed window has three panes of glass.
+                        </p>
+                     </text>;
+                
+                Func<object, object> epcHint = null;
+                if (Model.Epc?.GlazingType is not null)
+                {
+                    epcHint = 
+                        @<p class="govuk-body">
+                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests your windows have
+                            <strong>
+                                @(Model.Epc?.GlazingType switch {
+                                    GlazingType.SingleGlazed => "single",
+                                    GlazingType.Both => "mixed",
+                                    GlazingType.DoubleOrTripleGlazed => "double or triple",
+                                    _ => throw new ArgumentOutOfRangeException()})
+                            </strong>
+                            glazing.
+                        </p>;
+                }
+            }
+            
             @(await Html.GovUkRadiosFor(m => m.GlazingType,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
                     {
-                        Html = @<text>
-                                   <h1 class="govuk-fieldset__heading">
-                                       Are any of your windows single glazed?
-                                   </h1>
-                                </text>,
-                        Classes = "govuk-fieldset__legend--l"
+                        Text = "Are any of your windows single glazed?",
+                        Classes = "govuk-fieldset__legend--l",
+                        IsPageHeading = true
                     }
                 },
                 hintOptions: new HintViewModel
                 {
                     Html = @<text>
-                               <details class="govuk-details" data-module="govuk-details">
-                                   <summary class="govuk-details__summary">
-                                       <span class="govuk-details__summary-text">
-                                           Help me answer this question
-                                       </span>
-                                   </summary>
-                                   <div class="govuk-details__text">
-                                       <p class="govuk-body">
-                                           A single glazed window has a single pane of glass.
-                                       </p>
-                                       <p class="govuk-body">
-                                           A double glazed window has two panes of glass, separated by air or gas, to make up a single window. A triple glazed window has three panes of glass.
-                                       </p>
-                                   </div>
-                               </details>
+                               @await Html.GovUkDetails(new DetailsViewModel
+                               {
+                                   SummaryText = "Help me answer this question",
+                                   Html = details
+                               })
+                               
+                               @if (epcHint is not null)
+                               {
+                                   @await Html.GovUkInsetText(new InsetTextViewModel
+                                   {
+                                       Classes = "sea-epc-hint",
+                                       Html = epcHint
+                                   })
+                               }
                             </text>
                 }
             ))
 
-            <button class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+            @await Html.GovUkButton(new ButtonViewModel
+            {
+                Text = "Continue"
+            })
             
         </form>
         

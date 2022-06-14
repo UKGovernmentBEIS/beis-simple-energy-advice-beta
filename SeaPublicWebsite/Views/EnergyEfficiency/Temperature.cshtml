@@ -23,34 +23,34 @@
         
         <form action="@Url.Action("Temperature_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
-            
-
             @Html.AntiForgeryToken()
-            <div class="govuk-form-group">
-                <fieldset class="govuk-fieldset">
-                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                        What temperature do you heat your home to?
-                    </legend>
             
-                    <div class="govuk-body">
-                        If you have a room thermostat, this will be the temperature that is usually set to. 
-                    </div>
-            
-                    @(await Html.GovUkTextInputFor(
-                        m => m.Temperature,
-                        classes: "govuk-input--width-5",
-                        hintOptions: new HintViewModel
-                        {
-                            Html = @<text>
-                                       <div class="govuk-hint">
-                                           Enter the temperature you heat your home to in degrees Celcius (&deg;C).
-                                       </div>
-                                    </text>
-                        },
-                        placeholder: "e.g. 20"
-                        ))
-                </fieldset>
-            </div>
+            @await Html.GovUkFieldset(new FieldsetViewModel
+            {
+                Legend = new LegendViewModel
+                {
+                    Text = "What temperature do you heat your home to?",
+                    Classes = "govuk-fieldset__legend--l",
+                    IsPageHeading = true
+                },
+                
+                InnerHtml = 
+                    @<text>
+                        <div class="govuk-body">
+                            If you have a room thermostat, this will be the temperature that is usually set to.
+                        </div>
+                        
+                        @await Html.GovUkTextInputFor(
+                            m => m.Temperature,
+                            hintOptions: new HintViewModel
+                            {
+                                Text = "Enter the temperature you heat your home to in degrees Celcius (°C)."
+                            },
+                            classes: "govuk-input--width-5",
+                            placeholder: "e.g. 20")
+                     </text>
+                
+            })
             
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel

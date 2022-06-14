@@ -641,6 +641,7 @@ namespace SeaPublicWebsite.Controllers
                 FlatType = propertyData.FlatType,
                 RoofConstruction = propertyData.RoofConstruction,
                 Reference = propertyData.Reference,
+                Epc = propertyData.Epc,
                 EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
@@ -712,7 +713,7 @@ namespace SeaPublicWebsite.Controllers
                 RoofInsulated = propertyData.RoofInsulated,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
-                YearBuilt = propertyData.YearBuilt,
+                Epc = propertyData.Epc,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
@@ -749,6 +750,7 @@ namespace SeaPublicWebsite.Controllers
                 GlazingType = propertyData.GlazingType,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
+                Epc = propertyData.Epc,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
@@ -892,6 +894,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 HasHotWaterCylinder = propertyData.HasHotWaterCylinder,
                 Reference = propertyData.Reference,
+                Epc = propertyData.Epc,
                 EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
