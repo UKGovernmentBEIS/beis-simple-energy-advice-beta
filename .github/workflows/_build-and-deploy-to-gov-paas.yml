@@ -57,5 +57,5 @@ jobs:
       run: |
         cf login -a api.cloud.service.gov.uk -u team-beisesassupport@softwire.com -p '${{ secrets.gov_paas_password }}' -o 'beis-domestic-energy-advice-service'
         cf target -s sea-beta-${{ inputs.environment_name }}
-        cf push sea-beta-${{ inputs.environment_name }} --manifest manifest.yml
+        cf push sea-beta-${{ inputs.environment_name }} --manifest manifest.yml --strategy rolling
       working-directory: ./ci-server-build/

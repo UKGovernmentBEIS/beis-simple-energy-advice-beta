@@ -3,12 +3,19 @@
 # Start of configuration
 
 # Name - This is the bit after 'sea-beta-' - e.g. for sea-beta-DEV, PAAS_ENV_SHORTNAME would just be 'DEV'
-#        Note that for the production environment you must use "Production"
+#
+#        **** NOTE: For the production environment you must use "Production" ****
+#
 echo "What name do you want to give to the new environment? (just the part after the 'sea-beta-' prefix please)"
 read PAAS_ENV_SHORTNAME
 
 # Database size - we normally use 'small-13' for testing and 'small-ha-13' for production
-DATABASE_SIZE="small-13"
+if [ "$PAAS_ENV_SHORTNAME" == "Production" ]
+then
+  DATABASE_SIZE="small-ha-13"
+else
+  DATABASE_SIZE="small-13"
+fi
 
 # App scale settings
 APP_INSTANCES=2     # Use at least 2 so that we can do rolling deployments
@@ -32,19 +39,6 @@ cf target -s "sea-beta-${PAAS_ENV_SHORTNAME}"
 
 # - Set the ASP.Net Core environment
 cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" ASPNETCORE_ENVIRONMENT ${PAAS_ENV_SHORTNAME}
-
-
-#---------------------------
-# Add AWS S3 backing service
-# - Create the service
-cf create-service aws-s3-bucket default "sea-beta-${PAAS_ENV_SHORTNAME}-filestorage"
-
-# - Create a key to access the service
-#   Note: this is only needed to access the S3 bucket from outside of Gov.UK PaaS (e.g. from Azure)
-cf create-service-key "sea-beta-${PAAS_ENV_SHORTNAME}-filestorage" "sea-beta-${PAAS_ENV_SHORTNAME}-filestorage-key" -c '{"allow_external_access": true}'
-
-# - Get the key (and print to the console)
-cf service-key "sea-beta-${PAAS_ENV_SHORTNAME}-filestorage" "sea-beta-${PAAS_ENV_SHORTNAME}-filestorage-key"
 
 
 #-----------------------------------------
@@ -90,8 +84,6 @@ cf create-app "sea-beta-${PAAS_ENV_SHORTNAME}"
 cf scale "sea-beta-${PAAS_ENV_SHORTNAME}" -i ${APP_INSTANCES} -k ${APP_DISK} -m ${APP_MEMORY} -f
 echo "This will say FAILED, but it has probably worked (it failed to START the app because there isn't currently an app deployed)"
 
-# - Bind app to file storage
-cf bind-service "sea-beta-${PAAS_ENV_SHORTNAME}" "sea-beta-${PAAS_ENV_SHORTNAME}-filestorage"
 
 # - Bind app to database
 cf bind-service "sea-beta-${PAAS_ENV_SHORTNAME}" "sea-beta-${PAAS_ENV_SHORTNAME}-db"
