@@ -6,15 +6,15 @@ namespace SeaPublicWebsite.Controllers;
 [Route("error")]
 public class ErrorController: Controller
 {
-    [HttpGet("")]
-    [HttpPost("")]
+    [HttpGet]
+    [HttpPost]
     public IActionResult HandleException()
     {
         return View("ServiceIssue");
     }
     
     [HttpGet("{code:int}")]
-    public IActionResult HandlePageNotFound(int code)
+    public IActionResult HandleErrorsWithStatusCode(int code)
     {
         return code switch
         {
