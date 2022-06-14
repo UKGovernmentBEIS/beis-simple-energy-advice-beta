@@ -50,6 +50,12 @@ namespace SeaPublicWebsite.ExternalServices.Bre
                 );
                 
                 List<BreRecommendation> recommendations = new List<BreRecommendation>();
+
+                if (response.Measures is null)
+                {
+                    return recommendations;
+                }
+                
                 Dictionary<string, BreRecommendation> recommendationDictionary =
                     RecommendationService.RecommendationDictionary;
                 foreach (KeyValuePair<string, BreMeasure> entry in response.Measures)
