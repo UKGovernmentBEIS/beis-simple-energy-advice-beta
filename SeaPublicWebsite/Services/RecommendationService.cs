@@ -200,7 +200,8 @@ namespace SeaPublicWebsite.Services
 
             string breConstructionDate = GetBreConstructionDate(propertyData.YearBuilt);
 
-            BreWallType breWallType = GetBreWallType(propertyData.WallConstruction.Value, propertyData.SolidWallsInsulated,
+            BreWallType breWallType = GetBreWallType(propertyData.WallConstruction.Value,
+                propertyData.SolidWallsInsulated,
                 propertyData.CavityWallsInsulated);
 
             BreRoofType? breRoofType = GetBreRoofType(propertyData.RoofConstruction, propertyData.AccessibleLoftSpace,
@@ -208,7 +209,8 @@ namespace SeaPublicWebsite.Services
 
             BreGlazingType breGlazingType = GetBreGlazingType(propertyData.GlazingType.Value);
 
-            BreHeatingFuel breHeatingFuel = GetBreHeatingFuel(propertyData.HeatingType.Value, propertyData.OtherHeatingType);
+            BreHeatingFuel breHeatingFuel =
+                GetBreHeatingFuel(propertyData.HeatingType.Value, propertyData.OtherHeatingType);
 
             bool? breHotWaterCylinder = GetBreHotWaterCylinder(propertyData.HasHotWaterCylinder);
 
@@ -470,15 +472,18 @@ namespace SeaPublicWebsite.Services
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
-        
+
         private static int[] GetBreNormalDaysOffHours(decimal? hoursOfHeatingMorning, decimal? hoursOfHeatingEvening)
         {
             if (hoursOfHeatingMorning != null && hoursOfHeatingEvening != null)
             {
-                //peer-reviewed assumption: time heating is turned on is not collected so this is a simplification of the BRE input complexity available
-                int averageOffPeriod = (int) ((24 - (hoursOfHeatingMorning + hoursOfHeatingEvening)) / 2);
-                return new [] { averageOffPeriod, averageOffPeriod };
+                //(to be) peer-reviewed assumption: time heating is turned on is not collected so this is a
+                //simplification of the BRE input complexity available, also BRE's max allowed value for the sum of
+                //normalDaysOffHours is 23 hence the Max function
+                int averageOffPeriod = Math.Max(11, (int) ((24 - (hoursOfHeatingMorning + hoursOfHeatingEvening)) / 2));
+                return new[] { averageOffPeriod, averageOffPeriod };
             }
+
             return null;
         }
     }
