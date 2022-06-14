@@ -510,9 +510,9 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "AccessibleLoft goes back to loft space",
+            "Loft access goes back to loft space",
             new Input(
-                QuestionFlowPage.AccessibleLoft,
+                QuestionFlowPage.LoftAccess,
                 "ABCDEFGH"
             ),
             new PathByActionArguments(
@@ -521,11 +521,11 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Changing accessible loft goes back to summary",
+            "Changing loft access goes back to summary",
             new Input(
-                QuestionFlowPage.AccessibleLoft,
+                QuestionFlowPage.LoftAccess,
                 "ABCDEFGH",
-                entryPoint: QuestionFlowPage.AccessibleLoft
+                entryPoint: QuestionFlowPage.LoftAccess
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.AnswerSummary_Get),
@@ -533,13 +533,13 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Roof insulated goes back to accessible loft",
+            "Roof insulated goes back to loft access",
             new Input(
                 QuestionFlowPage.RoofInsulated,
                 "ABCDEFGH"
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AccessibleLoft_Get),
+                nameof(EnergyEfficiencyController.LoftAccess_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -583,17 +583,17 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Glazing type goes back to accessible loft if the user does not have flat roof and has unaccessible loft space",
+            "Glazing type goes back to loft access if the user does not have flat roof and has inaccessible loft space",
             new Input(
                 QuestionFlowPage.GlazingType,
                 "ABCDEFGH",
                 propertyType: PropertyType.House,
                 roofConstruction: RoofConstruction.Pitched,
                 loftSpace: LoftSpace.Yes,
-                accessibleLoft: AccessibleLoft.No
+                accessibleLoft: LoftAccess.No
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AccessibleLoft_Get),
+                nameof(EnergyEfficiencyController.LoftAccess_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -605,7 +605,7 @@ public class QuestionFlowServiceTests
                 propertyType: PropertyType.House,
                 roofConstruction: RoofConstruction.Pitched,
                 loftSpace: LoftSpace.Yes,
-                accessibleLoft: AccessibleLoft.Yes
+                accessibleLoft: LoftAccess.Yes
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.RoofInsulated_Get),
@@ -1404,14 +1404,14 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Loft space continues to accessible loft if user has it",
+            "Loft space continues to loft access if user has it",
             new Input(
                 QuestionFlowPage.LoftSpace,
                 "ABCDEFGH",
                 loftSpace: LoftSpace.Yes
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AccessibleLoft_Get),
+                nameof(EnergyEfficiencyController.LoftAccess_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1441,11 +1441,11 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Accessible loft continues to roof insulation if user has it",
+            "Loft access continues to roof insulation if user has it",
             new Input(
-                QuestionFlowPage.AccessibleLoft,
+                QuestionFlowPage.LoftAccess,
                 "ABCDEFGH",
-                accessibleLoft: AccessibleLoft.Yes
+                accessibleLoft: LoftAccess.Yes
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.RoofInsulated_Get),
@@ -1453,12 +1453,25 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Changing accessible loft continues to answer summary if user does not have it",
+            "Changing loft access continues to roof insulation if user has it",
             new Input(
-                QuestionFlowPage.AccessibleLoft,
+                QuestionFlowPage.LoftAccess,
                 "ABCDEFGH",
-                accessibleLoft: AccessibleLoft.No,
-                entryPoint: QuestionFlowPage.AccessibleLoft
+                accessibleLoft: LoftAccess.Yes,
+                entryPoint: QuestionFlowPage.LoftAccess
+            ),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.RoofInsulated_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
+            )),
+        new(
+            "Changing loft access continues to answer summary if user does not have it",
+            new Input(
+                QuestionFlowPage.LoftAccess,
+                "ABCDEFGH",
+                accessibleLoft: LoftAccess.No,
+                entryPoint: QuestionFlowPage.LoftAccess
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.AnswerSummary_Get),
@@ -1466,9 +1479,9 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Accessible loft continues to glazing type if user does not have it",
+            "Loft access continues to glazing type if user does not have it",
             new Input(
-                QuestionFlowPage.AccessibleLoft,
+                QuestionFlowPage.LoftAccess,
                 "ABCDEFGH",
                 loftSpace: LoftSpace.No
             ),
@@ -1844,7 +1857,7 @@ public class QuestionFlowServiceTests
             FloorInsulated? floorInsulated = null,
             RoofConstruction? roofConstruction = null,
             LoftSpace? loftSpace = null,
-            AccessibleLoft? accessibleLoft = null,
+            LoftAccess? accessibleLoft = null,
             RoofInsulated? roofInsulated = null,
             HasOutdoorSpace? hasOutdoorSpace = null,
             GlazingType? glazingType = null,
@@ -1880,7 +1893,7 @@ public class QuestionFlowServiceTests
                 FloorInsulated = floorInsulated,
                 RoofConstruction = roofConstruction,
                 LoftSpace = loftSpace,
-                AccessibleLoft = accessibleLoft,
+                LoftAccess = accessibleLoft,
                 RoofInsulated = roofInsulated,
                 HasOutdoorSpace = hasOutdoorSpace,
                 GlazingType = glazingType,

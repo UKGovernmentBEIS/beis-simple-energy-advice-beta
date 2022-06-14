@@ -1,9 +1,9 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 
-@model SeaPublicWebsite.Models.EnergyEfficiency.AccessibleLoftViewModel
+@model SeaPublicWebsite.Models.EnergyEfficiency.LoftAccessViewModel
 @{
-    ViewBag.Title = "Accessible loft";
+    ViewBag.Title = "Loft access";
 }
 
 @section BeforeMain {
@@ -21,7 +21,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("AccessibleLoft_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+        <form action="@Url.Action("LoftAccess_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
             @Html.AntiForgeryToken()
             
@@ -34,7 +34,7 @@
                      </text>;
             }
             
-            @(await Html.GovUkRadiosFor(m => m.AccessibleLoft,
+            @(await Html.GovUkRadiosFor(m => m.LoftAccess,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel

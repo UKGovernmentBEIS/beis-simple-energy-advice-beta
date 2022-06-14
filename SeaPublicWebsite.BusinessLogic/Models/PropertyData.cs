@@ -31,7 +31,7 @@ public class PropertyData
     public FloorInsulated? FloorInsulated { get; set; }
     public RoofConstruction? RoofConstruction { get; set; }
     public LoftSpace? LoftSpace { get; set; }
-    public AccessibleLoft? AccessibleLoft { get; set; }
+    public LoftAccess? LoftAccess { get; set; }
     public RoofInsulated? RoofInsulated { get; set; }
     public HasOutdoorSpace? HasOutdoorSpace { get; set; }
     public GlazingType? GlazingType { get; set; }

@@ -182,10 +182,10 @@ namespace SeaPublicWebsite.Helpers
 
             if (propertyData.LoftSpace is not LoftSpace.Yes and not LoftSpace.No)
             {
-                propertyData.AccessibleLoft = null;
+                propertyData.LoftAccess = null;
             }
 
-            if (propertyData.AccessibleLoft is not AccessibleLoft.Yes and not AccessibleLoft.DoNotKnow)
+            if (propertyData.LoftAccess is not LoftAccess.Yes and not LoftAccess.DoNotKnow)
             {
                 propertyData.RoofInsulated = null;
             }

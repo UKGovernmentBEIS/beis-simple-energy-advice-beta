@@ -105,7 +105,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasKey("EpcId");
 
-                    b.ToTable("Epc", (string)null);
+                    b.ToTable("Epc");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
@@ -115,9 +115,6 @@ namespace SeaPublicWebsite.Data.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PropertyDataId"));
-
-                    b.Property<int?>("AccessibleLoft")
-                        .HasColumnType("integer");
 
                     b.Property<int?>("BungalowType")
                         .HasColumnType("integer");
@@ -167,6 +164,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("HouseType")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("LoftAccess")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("LoftSpace")
                         .HasColumnType("integer");
 
@@ -213,7 +213,7 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.HasIndex("Reference")
                         .IsUnique();
 
-                    b.ToTable("PropertyData", (string)null);
+                    b.ToTable("PropertyData");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyRecommendation", b =>
@@ -258,7 +258,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasIndex("PropertyDataId");
 
-                    b.ToTable("PropertyRecommendations", (string)null);
+                    b.ToTable("PropertyRecommendations");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>

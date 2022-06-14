@@ -2,7 +2,7 @@
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
-    public enum AccessibleLoft
+    public enum LoftAccess
     {
         [GovUkRadioCheckboxLabelText(Text = "I'm not sure")]
         DoNotKnow,

@@ -423,7 +423,7 @@
                     Value = new()
                     {
                         Classes = "govuk-!-width-one-half",
-                        Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.AccessibleLoft)
+                        Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.LoftAccess)
                     },
                     Actions = new()
                     {
@@ -432,7 +432,7 @@
                         {
                             new()
                             {
-                                Href = Url.Action(nameof(EnergyEfficiencyController.AccessibleLoft_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.AccessibleLoft}),
+                                Href = Url.Action(nameof(EnergyEfficiencyController.LoftAccess_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.LoftAccess}),
                                 Text = "Change",
                                 VisuallyHiddenText = "accessible loft"
                             }
@@ -440,7 +440,7 @@
                     }
                 });
                 
-                if (Model.PropertyData.AccessibleLoft is AccessibleLoft.Yes)
+                if (Model.PropertyData.LoftAccess is LoftAccess.Yes)
                 {
                     rows.Add(new()
                     {

@@ -204,7 +204,7 @@ namespace SeaPublicWebsite.Services
                 propertyData.CavityWallsInsulated);
 
             BreRoofType? breRoofType = GetBreRoofType(propertyData.RoofConstruction, propertyData.LoftSpace, 
-                propertyData.AccessibleLoft, propertyData.RoofInsulated);
+                propertyData.LoftAccess, propertyData.RoofInsulated);
 
             BreGlazingType breGlazingType = GetBreGlazingType(propertyData.GlazingType.Value);
 
@@ -384,7 +384,7 @@ namespace SeaPublicWebsite.Services
         }
 
         private static BreRoofType? GetBreRoofType(RoofConstruction? roofConstruction,
-            LoftSpace? loftSpace, AccessibleLoft? accessibleLoft, RoofInsulated? roofInsulated)
+            LoftSpace? loftSpace, LoftAccess? loftAccess, RoofInsulated? roofInsulated)
         {
             return roofConstruction switch
             {
@@ -394,10 +394,10 @@ namespace SeaPublicWebsite.Services
                 RoofConstruction.Pitched or RoofConstruction.Mixed => loftSpace switch
                 {
                     LoftSpace.No or LoftSpace.DoNotKnow => BreRoofType.DontKnow,
-                    LoftSpace.Yes => accessibleLoft switch
+                    LoftSpace.Yes => loftAccess switch
                     {
-                        AccessibleLoft.No or AccessibleLoft.DoNotKnow => BreRoofType.DontKnow,
-                        AccessibleLoft.Yes => roofInsulated switch
+                        LoftAccess.No or LoftAccess.DoNotKnow => BreRoofType.DontKnow,
+                        LoftAccess.Yes => roofInsulated switch
                         {
                             RoofInsulated.DoNotKnow => BreRoofType.DontKnow,
                             //peer-reviewed assumption in case RoofConstruction.Mixed:
