@@ -62,8 +62,15 @@ function compileSass(inputFile, outputFileNamePrefix, options) {
 
     console.log(`Compiling SASS from file [${inputFile}]`);
 
-    // Render the SASS to string
-    var renderResult = sass.compile(inputFile);
+    // The GovUk frontend SASS currently causes build warnings when built with
+    // Dart SASS. There are plans to eventually fix this, but they can't be
+    // enacted right now.
+    // So our only other option is to use a load path so that we can also use
+    // the Quiet Deps option.
+    var renderResult = sass.compile(inputFile, {
+        loadPaths: [ 'node_modules/govuk-frontend' ],
+        quietDeps: true
+    });
 
     if (renderResult) {
         // Compute the hash of the compiled SASS
