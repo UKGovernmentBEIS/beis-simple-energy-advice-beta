@@ -245,7 +245,7 @@ namespace SeaPublicWebsite.Controllers
             }
             
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            propertyData.Epc = await epcApi.GetEpcForId(viewModel.SelectedEpcId);;
+            propertyData.Epc = await epcApi.GetEpcForId(viewModel.SelectedEpcId);
             PropertyDataHelper.ResetUnusedFields(propertyData);
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 

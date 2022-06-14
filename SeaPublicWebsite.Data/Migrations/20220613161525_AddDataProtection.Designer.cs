@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SeaPublicWebsite.Data;
@@ -11,9 +12,10 @@ using SeaPublicWebsite.Data;
 namespace SeaPublicWebsite.Data.Migrations
 {
     [DbContext(typeof(SeaDbContext))]
-    partial class SeaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220613161525_AddDataProtection")]
+    partial class AddDataProtection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +107,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasKey("EpcId");
 
-                    b.ToTable("Epc", (string)null);
+                    b.ToTable("Epc");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
@@ -210,7 +212,7 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.HasIndex("Reference")
                         .IsUnique();
 
-                    b.ToTable("PropertyData", (string)null);
+                    b.ToTable("PropertyData");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyRecommendation", b =>
@@ -255,7 +257,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasIndex("PropertyDataId");
 
-                    b.ToTable("PropertyRecommendations", (string)null);
+                    b.ToTable("PropertyRecommendations");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
