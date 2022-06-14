@@ -153,21 +153,51 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
         private static HeatingType? GetHeatingTypeFromEpc(EpbEpcAssessmentDto epc)
         {
             // Gas boiler check
-            if (epc.MainFuelType.Equals("1") ||
-                epc.MainFuelType.Equals("51") ||
-                epc.MainFuelType.Contains("Mains gas, StringComparison.OrdinalIgnoreCase"))
+            if (epc.MainFuelType.Equals("20") ||
+                epc.MainFuelType.Equals("26") ||
+                epc.MainFuelType.Contains("mains gas", StringComparison.OrdinalIgnoreCase))
             {
                 return HeatingType.GasBoiler;
             }
             
             // Oil boiler check
-            if (epc.MainFuelType.Equals("1") ||
-                epc.MainFuelType.Equals("51") ||
-                epc.MainFuelType.Contains("Mains gas, StringComparison.OrdinalIgnoreCase"))
+            if (epc.MainFuelType.Equals("22") ||
+                epc.MainFuelType.Equals("28") ||
+                epc.MainFuelType.Contains("oil", StringComparison.OrdinalIgnoreCase))
             {
                 return HeatingType.OilBoiler;
             }
-
+            
+            // Lpg boiler check
+            if (epc.MainFuelType.Equals("17") ||
+                epc.MainFuelType.Equals("21") ||
+                epc.MainFuelType.Equals("27") ||
+                epc.MainFuelType.Contains("lpg", StringComparison.OrdinalIgnoreCase))
+            {
+                return HeatingType.LpgBoiler;
+            }
+            
+            // electric heating check
+            // storage heating and heat pumps do not appear in RdSAPs and are considered as electric
+            if (epc.MainFuelType.Equals("10") ||
+                epc.MainFuelType.Equals("25") ||
+                epc.MainFuelType.Equals("29") ||
+                epc.MainFuelType.Contains("electricity", StringComparison.OrdinalIgnoreCase))
+            {
+                return HeatingType.DirectActionElectric;
+            }
+            
+            // coal or biomass check (for other)
+            if (epc.MainFuelType.Equals("14") ||
+                epc.MainFuelType.Equals("15") ||
+                epc.MainFuelType.Contains("coal", StringComparison.OrdinalIgnoreCase) ||
+                epc.MainFuelType.Equals("??") ||
+                epc.MainFuelType.Equals("??") ||
+                epc.MainFuelType.Contains("??", StringComparison.OrdinalIgnoreCase) )
+            {
+                return HeatingType.Other;
+            }
+            
             return null;
         }
 
@@ -315,7 +345,8 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                     description.Contains("cavity", StringComparison.OrdinalIgnoreCase) &&
                     (description.Contains("insulated", StringComparison.OrdinalIgnoreCase) ||
                      description.Contains("internal insulation", StringComparison.OrdinalIgnoreCase) ||
-                     description.Contains("external insulation", StringComparison.OrdinalIgnoreCase))))
+                     description.Contains("external insulation", StringComparison.OrdinalIgnoreCase) ||
+                     description.Contains("filled cavity", StringComparison.OrdinalIgnoreCase))))
             {
                 return CavityWallsInsulated.All;
             }
