@@ -30,7 +30,7 @@
             @{
                 Func<object, object> details = 
                     @<text>
-                       @if (Model.YearBuilt is >= 1991)
+                       @if (Model.YearBuilt is >= YearBuilt.From1996To2011)
                        {
                            <p class="govuk-body">
                                Homes built after 1991 were typically built with insulating material between the outer and inner walls. 
@@ -87,7 +87,7 @@
                     Html = @<text>
                                @if (Model.YearBuilt.HasValue)
                                {
-                                   @if (Model.YearBuilt.Value < 1991)
+                                   @if (Model.YearBuilt.Value < YearBuilt.From1983To1995)
                                    {
                                        <p class="govuk-body">
                                            Cavity walls built before 1991 are typically uninsulated, unless you or someone before you had insulation installed.
