@@ -154,6 +154,8 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
         private static HeatingType? GetHeatingTypeFromEpc(EpbEpcAssessmentDto epc)
         {
             // Gas boiler check
+            // 20 - mains gas (community)
+            // 26 - mains gas (not community)
             if (epc.MainFuelType.Equals("20") ||
                 epc.MainFuelType.Equals("26") ||
                 epc.MainFuelType.Contains("mains gas", StringComparison.OrdinalIgnoreCase))
@@ -162,6 +164,8 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             }
             
             // Oil boiler check
+            // 22 - oil (community)
+            // 28 - oil (not community)
             if (epc.MainFuelType.Equals("22") ||
                 epc.MainFuelType.Equals("28") ||
                 epc.MainFuelType.Contains("oil", StringComparison.OrdinalIgnoreCase))
@@ -170,6 +174,9 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             }
             
             // Lpg boiler check
+            // 17 - LPG special condition
+            // 21 - LPG (community)
+            // 27 - LPG (not community)
             if (epc.MainFuelType.Equals("17") ||
                 epc.MainFuelType.Equals("21") ||
                 epc.MainFuelType.Equals("27") ||
@@ -180,6 +187,9 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             
             // electric heating check
             // storage heating and heat pumps do not appear in RdSAPs and are considered as electric
+            // 10 - electricity
+            // 25 - electricity (community)
+            // 29 - electricity (not community)
             if (epc.MainFuelType.Equals("10") ||
                 epc.MainFuelType.Equals("25") ||
                 epc.MainFuelType.Equals("29") ||
@@ -199,6 +209,8 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             }
             
             // coal check
+            // 14 - house coal
+            // 15 - smokeless coal
             if (epc.MainFuelType.Equals("14") ||
                 epc.MainFuelType.Equals("15") ||
                 epc.MainFuelType.Contains("coal", StringComparison.OrdinalIgnoreCase))
@@ -207,6 +219,7 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             }
             
             // biomass boiler check
+            // 7 - bulk wood pellets
             if (epc.MainFuelType.Equals("7") ||
                 epc.MainFuelType.Contains("biomass", StringComparison.OrdinalIgnoreCase))
             {
