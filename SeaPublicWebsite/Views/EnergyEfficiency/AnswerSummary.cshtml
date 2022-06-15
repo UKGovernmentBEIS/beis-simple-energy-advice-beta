@@ -112,7 +112,7 @@
         }
     });
 
-    if (Model.PropertyData.WallConstruction is WallConstruction.Cavity or WallConstruction.Mixed)
+    if (Model.PropertyData.CavityWallsInsulated is not null)
     {
         rows.Add(new()
         {
@@ -142,7 +142,7 @@
         });
     }
     
-    if (Model.PropertyData.WallConstruction is WallConstruction.Solid or WallConstruction.Mixed)
+    if (Model.PropertyData.SolidWallsInsulated is not null)
     {
         rows.Add(new()
         {
@@ -172,7 +172,7 @@
         });
     }
 
-    if (Model.PropertyData.PropertyType is not PropertyType.ApartmentFlatOrMaisonette || Model.PropertyData.FlatType is FlatType.GroundFloor)
+    if (Model.PropertyData.FloorConstruction is not null)
     {
         rows.Add(new()
         {
@@ -200,39 +200,39 @@
                 }
             }
         });
-        
-        if (Model.PropertyData.FloorConstruction is not FloorConstruction.DoNotKnow and not FloorConstruction.Other)
-        {
-            rows.Add(new()
-            {
-                Key = new() 
-                {
-                    Classes = "govuk-!-width-one-quarter",
-                    Text = "Is your ground floor insulated?"
-                },
-                Value = new()
-                {
-                    Classes = "govuk-!-width-one-half",
-                    Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.FloorInsulated)
-                },
-                Actions = new()
-                {
-                    Classes = "govuk-!-width-one-quarter",
-                    Items = new()
-                    {
-                        new()
-                        {
-                            Href = Url.Action(nameof(EnergyEfficiencyController.FloorInsulated_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.FloorInsulated}),
-                            Text = "Change",
-                            VisuallyHiddenText = "is floor insulated"
-                        }
-                    }
-                }
-            });
-        }
     }
     
-    @if (Model.PropertyData.PropertyType is not PropertyType.ApartmentFlatOrMaisonette || Model.PropertyData.FlatType is FlatType.TopFloor)
+    if (Model.PropertyData.FloorInsulated is not null)
+    {
+        rows.Add(new()
+        {
+            Key = new() 
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Text = "Is your ground floor insulated?"
+            },
+            Value = new()
+            {
+                Classes = "govuk-!-width-one-half",
+                Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.FloorInsulated)
+            },
+            Actions = new()
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Items = new()
+                {
+                    new()
+                    {
+                        Href = Url.Action(nameof(EnergyEfficiencyController.FloorInsulated_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.FloorInsulated}),
+                        Text = "Change",
+                        VisuallyHiddenText = "is floor insulated"
+                    }
+                }
+            }
+        });
+    }
+    
+    if (Model.PropertyData.RoofConstruction is not null)
     {
         rows.Add(new()
         {
@@ -260,96 +260,96 @@
                 }
             }
         });
-
-        if (Model.PropertyData.RoofConstruction is not RoofConstruction.Flat)
+    }
+    
+    if (Model.PropertyData.LoftSpace is not null)
+    {
+        rows.Add(new()
         {
-            rows.Add(new()
+            Key = new() 
             {
-                Key = new() 
-                {
-                    Classes = "govuk-!-width-one-quarter",
-                    Text = "Do you have a loft that hasn't been converted into a room?"
-                },
-                Value = new()
-                {
-                    Classes = "govuk-!-width-one-half",
-                    Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.LoftSpace)
-                },
-                Actions = new()
-                {
-                    Classes = "govuk-!-width-one-quarter",
-                    Items = new()
-                    {
-                        new()
-                        {
-                            Href = Url.Action(nameof(EnergyEfficiencyController.LoftSpace_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.LoftSpace}),
-                            Text = "Change",
-                            VisuallyHiddenText = "loft space"
-                        }
-                    }
-                }
-            });
-
-            if (Model.PropertyData.LoftSpace is LoftSpace.Yes)
+                Classes = "govuk-!-width-one-quarter",
+                Text = "Do you have a loft that hasn't been converted into a room?"
+            },
+            Value = new()
             {
-                rows.Add(new()
+                Classes = "govuk-!-width-one-half",
+                Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.LoftSpace)
+            },
+            Actions = new()
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Items = new()
                 {
-                    Key = new() 
+                    new()
                     {
-                        Classes = "govuk-!-width-one-quarter",
-                        Text = "Is there access to your loft?"
-                    },
-                    Value = new()
-                    {
-                        Classes = "govuk-!-width-one-half",
-                        Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.LoftAccess)
-                    },
-                    Actions = new()
-                    {
-                        Classes = "govuk-!-width-one-quarter",
-                        Items = new()
-                        {
-                            new()
-                            {
-                                Href = Url.Action(nameof(EnergyEfficiencyController.LoftAccess_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.LoftAccess}),
-                                Text = "Change",
-                                VisuallyHiddenText = "accessible loft"
-                            }
-                        }
+                        Href = Url.Action(nameof(EnergyEfficiencyController.LoftSpace_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.LoftSpace}),
+                        Text = "Change",
+                        VisuallyHiddenText = "loft space"
                     }
-                });
-                
-                if (Model.PropertyData.LoftAccess is LoftAccess.Yes)
-                {
-                    rows.Add(new()
-                    {
-                        Key = new()
-                        {
-                            Classes = "govuk-!-width-one-quarter",
-                            Text = "Is your loft fully insulated?"
-                        },
-                        Value = new()
-                        {
-                            Classes = "govuk-!-width-one-half",
-                            Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.RoofInsulated)
-                        },
-                        Actions = new()
-                        {
-                            Classes = "govuk-!-width-one-quarter",
-                            Items = new()
-                            {
-                                new()
-                                {
-                                    Href = Url.Action(nameof(EnergyEfficiencyController.RoofInsulated_Get), "EnergyEfficiency", new { reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.RoofInsulated }),
-                                    Text = "Change",
-                                    VisuallyHiddenText = "is roof insulated"
-                                }
-                            }
-                        }
-                    });
                 }
             }
-        }
+        });
+    }
+    
+    if (Model.PropertyData.LoftAccess is not null)
+    {
+        rows.Add(new()
+        {
+            Key = new() 
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Text = "Is there access to your loft?"
+            },
+            Value = new()
+            {
+                Classes = "govuk-!-width-one-half",
+                Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.LoftAccess)
+            },
+            Actions = new()
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Items = new()
+                {
+                    new()
+                    {
+                        Href = Url.Action(nameof(EnergyEfficiencyController.LoftAccess_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.LoftAccess}),
+                        Text = "Change",
+                        VisuallyHiddenText = "accessible loft"
+                    }
+                }
+            }
+        });
+    }
+    
+    if (Model.PropertyData.RoofInsulated is not null)
+    {
+        rows.Add(new()
+        {
+            Key = new()
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Text = "Is your loft fully insulated?"
+            },
+            Value = new()
+            {
+                Classes = "govuk-!-width-one-half",
+                Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.RoofInsulated)
+            },
+            Actions = new()
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Items = new()
+                {
+                    new()
+                    {
+                        Href = Url.Action(nameof(EnergyEfficiencyController.RoofInsulated_Get), "EnergyEfficiency", new { reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.RoofInsulated }),
+                        Text = "Change",
+                        VisuallyHiddenText = "is roof insulated"
+                    }
+                }
+            }
+        });
     }
     
     rows.Add(new()
