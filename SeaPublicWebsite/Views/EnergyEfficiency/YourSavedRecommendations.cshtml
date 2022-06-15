@@ -1,7 +1,9 @@
-﻿@using SeaPublicWebsite.DataModels
-@using GovUkDesignSystem
+﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Models.EnergyEfficiency
+@using SeaPublicWebsite.BusinessLogic.Models
+@using SeaPublicWebsite.BusinessLogic.Models.Enums
+@using SeaPublicWebsite.Controllers
+
 @model SeaPublicWebsite.Models.EnergyEfficiency.YourSavedRecommendationsViewModel;
 
 @{
@@ -33,7 +35,7 @@
                                     <p class="govuk-body govuk-!-margin-bottom-6">You told us you would like some more information on one or more of the recommendations before considering them for your property.</p>
                                     <div class="sea-action-plan-margin-right govuk-!-margin-bottom-7">
                                         <dl class="govuk-summary-list">
-                                            @foreach (UserRecommendation recommendation in Model.GetDecideLaterRecommendations())
+                                            @foreach (PropertyRecommendation recommendation in Model.GetDecideLaterRecommendations())
                                             {
                                                 <div class="govuk-summary-list__row sea-decide-later-summary-list">
                                                     <dt class="govuk-summary-list__key sea-decide-summary-list-cell">
@@ -120,7 +122,7 @@
                                                     </dt>
                                                     <dd class="govuk-summary-list__actions sea-decide-summary-list-cell govuk-!-margin-bottom-7">
                                                         <div class="sea-decide-later-action-links">
-                                                            <a href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})
+                                                            <a href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference})
                                                                class="govuk-link">
                                                                 Change my decision
                                                             </a>
@@ -137,20 +139,6 @@
                                         Your responses to the recommendations indicated that you didn’t need any further information about any of the improvements.
                                     </p>
                                 }
-                            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-                        </div>
-                    </li>
-                    <li class="sea-step">
-                        <div class="content">
-                            <h2 class="govuk-heading-m">Check for grants</h2>
-                            <p class="govuk-body">There may be grants available from central government or your local authority to help cover some or all of 
-                                the cost of improvements to your property.</p>
-                            <p class="govuk-body">
-                                <a class="govuk-link" href="javascript:void(0);">Check to see if there are grants available from central government</a>
-                            </p>
-                            <p class="govuk-body govuk-!-margin-bottom-8">
-                                <a class="govuk-link" href="javascript:void(0);">Check to see if there are grants available from your local authority</a>
-                            </p>
                             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
                         </div>
                     </li>
@@ -207,7 +195,7 @@
                                         </tr>
                                         </thead>
                                         <tbody class="govuk-table__body">
-                                        @foreach (UserRecommendation recommendation in @Model.GetSavedRecommendations())
+                                        @foreach (PropertyRecommendation recommendation in @Model.GetSavedRecommendations())
                                         {
                                             <tr class="govuk-table__row">
                                                 <td class="govuk-table__cell govuk-!-padding-top-4 sea-saved-recommendations-table-headers">
@@ -221,14 +209,14 @@
                                                 <td class="govuk-table__cell govuk-!-padding-top-4 sea-saved-recommendations-table-headers">@Model.GetSavingText(recommendation)</td>
                                                 <td class="govuk-table__cell govuk-!-padding-top-4 sea-saved-recommendations-table-headers">@Model.GetInstallationCostText(recommendation)</td>
                                                 <td class="govuk-table__cell govuk-!-padding-top-4 sea-saved-recommendations-table-headers-hide sea-change-decision-link">
-                                                    <a class="govuk-link" href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})>
+                                                    <a class="govuk-link" href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference})>
                                                         Change my decision
                                                     </a>
                                                 </td>
                                             </tr>
                                             <tr class="govuk-table__row sea-saved-recommendations-secondary-row">
                                                 <td colspan="3" class="govuk-table__cell">
-                                                    <a href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})
+                                                    <a href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference})
                                                        class="govuk-link govuk-!-margin-right-3">
                                                         Change my decision
                                                     </a>
@@ -260,7 +248,7 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody class="govuk-table__body">
-                                                @foreach (UserRecommendation recommendation in @Model.GetDiscardedRecommendations())
+                                                @foreach (PropertyRecommendation recommendation in @Model.GetDiscardedRecommendations())
                                                 {
                                                     <tr class="govuk-table__row">
                                                         <td class="govuk-table__cell govuk-!-padding-top-4 sea-saved-recommendations-table-headers">
@@ -274,14 +262,14 @@
                                                         <td class="govuk-table__cell govuk-!-padding-top-4 sea-saved-recommendations-table-headers">@Model.GetSavingText(recommendation)</td>
                                                         <td class="govuk-table__cell govuk-!-padding-top-4 sea-saved-recommendations-table-headers">@Model.GetInstallationCostText(recommendation)</td>
                                                         <td class="govuk-table__cell govuk-!-padding-top-4 sea-saved-recommendations-table-headers-hide sea-change-decision-link">
-                                                            <a class="govuk-link" href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})>
+                                                            <a class="govuk-link" href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference})>
                                                                 Change my decision
                                                             </a>
                                                         </td>
                                                     </tr>
                                                     <tr class="govuk-table__row sea-saved-recommendations-secondary-row">
                                                         <td colspan="3" class="govuk-table__cell">
-                                                            <a href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.UserDataModel.Reference})
+                                                            <a href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference})
                                                                class="govuk-link govuk-!-margin-right-3">
                                                                 Change my decision
                                                             </a>
@@ -324,15 +312,6 @@
 <div class="govuk-grid-row sea-action-plan-margin-right">
     <div class="govuk-grid-column-full">
         <h2 class="govuk-heading-m">
-            Keep a copy of your action plan
-        </h2>
-        <p class="govuk-body govuk-!-margin-bottom-7">
-            <a href="javascript:void(0);" class="govuk-link">
-                Print or download your action plan
-            </a>
-        </p>
-
-        <h2 class="govuk-heading-m">
             Find out more about energy efficiency
         </h2>
         <p class="govuk-body govuk-!-margin-bottom-7">
@@ -354,14 +333,14 @@
             Your feedback can help us to shape how the service develops so that it can best serve the needs of the public. 
         </p>
         <p class="govuk-body">
-            <a href="javascript:void(0);" class="govuk-link">
+            <a href="@Url.Action(nameof(FeedbackController.FeedbackSurvey_Get), "Feedback")" class="govuk-link">
                 Leave some feedback for this service
             </a>
         </p>
     </div>
 </div>
 
-<a href="@(Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.UserDataModel.Reference}))"
+<a href="@Url.Action("AnswerSummary_Get", "EnergyEfficiency", new {reference = Model.PropertyData.Reference})"
    class="govuk-link">
     Change your answers
 </a>

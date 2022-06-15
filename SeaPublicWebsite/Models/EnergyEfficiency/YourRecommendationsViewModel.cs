@@ -1,21 +1,19 @@
 ﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+using GovUkDesignSystem.ModelBinders;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class YourRecommendationsViewModel
+    public class YourRecommendationsViewModel : QuestionFlowViewModel
     {
-        public int NumberOfUserRecommendations { get; set; }
+        public int NumberOfPropertyRecommendations { get; set; }
         public string Reference { get; set; }
-        public int FirstReferenceId { get; set; }
 
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Select 'Yes' if you have an email address")]
-        public HasEmailAddress? HasEmailAddress { get; set; }
+        [ModelBinder(typeof(GovUkCheckboxBoolBinder))]
+        public bool HasEmailAddress { get; set; }
         
-        [GovUkValidateRequiredIf(ErrorMessageIfMissing = "Enter your email address, or select 'No'", 
-            IsRequiredPropertyName = nameof(IsRequiredEmailAddress))]
+        [GovUkValidateRequiredIf(ErrorMessageIfMissing = "Enter a valid email address", 
+            IsRequiredPropertyName = nameof(HasEmailAddress))]
         public string EmailAddress { get; set; }
-
-        public bool IsRequiredEmailAddress => HasEmailAddress == QuestionOptions.HasEmailAddress.Yes;
     }
 }

@@ -1,16 +1,17 @@
-﻿using GovUkDesignSystem;
-using GovUkDesignSystem.Attributes;
+﻿using GovUkDesignSystem.Attributes.DataBinding;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
+using GovUkDesignSystem.ModelBinders;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class NumberOfOccupantsViewModel
+    public class NumberOfOccupantsViewModel : QuestionFlowViewModel
     {
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Enter the number of people who live in the property")]
-        [GovUkValidateIntRange("Number of occupants", 1, 9)]
+        [ModelBinder(typeof(GovUkMandatoryIntBinder))]
+        [GovUkDataBindingMandatoryIntErrorText("Enter the number of people who live in the property", "The number of people who live in the property")]
+        [GovUkValidateIntRange("The number of people who live in the property", 1, 9)]
         public int? NumberOfOccupants { get; set; }
 
         public string Reference { get; set; }
-        public bool Change { get; set; }
     }
 }

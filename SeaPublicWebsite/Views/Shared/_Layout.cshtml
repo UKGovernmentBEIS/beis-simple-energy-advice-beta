@@ -2,9 +2,12 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Services
+@using SeaPublicWebsite.Services.Cookies
 @inject StaticAssetsVersioningService StaticAssetsVersioning
+@inject CookieService CookieService
 @{
     string assetsPath = "/assets/images";
+    var bannerState = CookieService.GetAndUpdateBannerState(Context.Request, Context.Response);
 }
 <!DOCTYPE html>
 
@@ -13,10 +16,22 @@
 
 <html lang="en" class="govuk-template app-html-class">
 <head>
-    <meta charset="utf-8" />
-    <title>@(ViewBag.Title != null ? ViewBag.Title + " -" : "") Improve your property's energy efficiency - Gov.UK</title>
+    @if (CookieService.HasAcceptedGoogleAnalytics(Context.Request))
+    {
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJC885GHSW"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+    
+            gtag('config', 'G-RJC885GHSW');
+        </script>
+    }
+    <meta charset="utf-8"/>
+    <title>@(ViewBag.Title != null ? ViewBag.Title + " -" : "") @Constants.SERVICE_NAME - Gov.UK</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="blue" />
+    <meta name="theme-color" content="#0b0c0c">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
@@ -27,8 +42,18 @@
     <link rel="apple-touch-icon" sizes="152x152" href="@(assetsPath)/govuk-apple-touch-icon-152x152.png">
     <link rel="apple-touch-icon" href="@(assetsPath)/govuk-apple-touch-icon.png">
 
+    <!--[if !IE 8]><!-->
     <link href="@(StaticAssetsVersioning.GetAppCssFilename())" rel="stylesheet" />
+    <!--<![endif]-->
 
+    <!--[if IE 8]>
+    <link href="@(StaticAssetsVersioning.GetAppIe8CssFilename())" rel="stylesheet" />
+    <![endif]-->
+    
+    <!--[if lt IE 9]>
+        <script src="@(StaticAssetsVersioning.GetHtml5ShivJsFilename())"></script>
+    <![endif]-->
+    
     <meta property="og:image" content="@(assetsPath)/govuk-opengraph-image.png">
 </head>
 
@@ -37,14 +62,16 @@
         document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     </script>
 
-    <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+    @{ await Html.RenderPartialAsync("CookieBanner"); }
+
+    <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
 
     @{
         List<HeaderNavigationViewModel> headerNavigationLinks = new List<HeaderNavigationViewModel>();
 
         @(await Html.GovUkHeader(new HeaderViewModel
         {
-            ServiceName = "Improve your property's energy efficiency",
+            ServiceName = Constants.SERVICE_NAME,
             AssetsPath = assetsPath,
             HomepageUrl = "https://www.gov.uk",
             ServiceUrl = "/energy-efficiency",
@@ -55,54 +82,64 @@
 
     <div class="govuk-width-container">
         
-        @if (ViewBag.ServiceUnavailable != true)
+        @(await Html.GovUkPhaseBanner(new PhaseBannerViewModel
         {
-            @(await Html.GovUkPhaseBanner(new PhaseBannerViewModel
-            {
-                Phase = "Beta",
-                Html = @<text>This is a new service – your feedback will help us to improve it.</text>
-            }))
-        }
+            Phase = "Beta",
+            Html = @<text>
+                       This is a new service – your
+                       @{
+                           if (ViewBag.OnFeedbackPage is true)
+                           {
+                               @:feedback
+                           }
+                           else
+                           {
+                               <a class="govuk-link" href="@Url.Action("FeedbackForm_Get", "Feedback")">feedback</a>
+                           }
+                       }
+                       will help us to improve it.
+                    </text>
+        }))
 
         @(RenderSection("BeforeMain", false))
 
         <main class="govuk-main-wrapper" id="main-content" role="main">
+            @(await Html.GovUkErrorSummary(ViewData.ModelState))
             @RenderBody()
         </main>
     </div>
 
-@await Html.GovUkFooter(new FooterViewModel
-{
-    MetaNavigation = new FooterMetaNavigationViewModel
+    @await Html.GovUkFooter(new FooterViewModel
     {
-        Links = new[]
+        MetaNavigation = new FooterMetaNavigationViewModel
         {
-            new FooterLinksViewModel
+            Links = new[]
             {
-                Text = "Contact Us",
-                Href = Url.Action("Index", "Home")
+                new FooterLinksViewModel
+                {
+                    Text = "Contact Us",
+                    Href = Url.Action("Index", "Home")
+                    },
+                new FooterLinksViewModel
+                {
+                    Text = "Cookies",
+                    Href = Url.Action("CookieSettings_Get", "Cookie")
                 },
-            new FooterLinksViewModel
-            {
-                Text = "Cookies",
-                Href = Url.Action("Index", "Home")
-            },
-            new FooterLinksViewModel
-            {
-                Text = "Privacy Policy",
-                Href = Url.Action("Index", "Home")
-            },
-            new FooterLinksViewModel
-            {
-                Text = "Accessibility Statement",
-                Href = Url.Action("Index", "Home")
+                new FooterLinksViewModel
+                {
+                    Text = "Privacy Policy",
+                    Href = Url.Action("Index", "Home")
+                },
+                new FooterLinksViewModel
+                {
+                    Text = "Accessibility Statement",
+                    Href = Url.Action("Index", "Home")
+                }
             }
         }
-    }
-})
+    })
 
     <script src="@(StaticAssetsVersioning.GetAppJsFilename())"></script>
     <script>window.GOVUKFrontend.initAll()</script>
-    @RenderSection("AfterLoadedCompiledScripts", false)
 </body>
 </html>

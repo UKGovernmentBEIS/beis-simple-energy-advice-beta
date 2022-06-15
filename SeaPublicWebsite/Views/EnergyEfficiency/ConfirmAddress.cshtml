@@ -1,8 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Models.EnergyEfficiency
-@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
+
 @model SeaPublicWebsite.Models.EnergyEfficiency.ConfirmAddressViewModel
 @{
     ViewBag.Title = "Confirm your address";
@@ -12,7 +11,7 @@
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action("AskForPostcode_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        Href = Model.BackLink,
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -22,106 +21,114 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form action="@Url.Action("ConfirmAddress_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+        @if (!Model.EpcInformationList.Any())
+        {
+            <h1 class="govuk-heading-l">
+                We could not find an EPC for this address
+            </h1>
+        
+            <p class="govuk-body">
+                We were unable to find an EPC for this address or all previous EPCs have expired.
+            </p>
+        
+            <p class="govuk-body">
+                You can still continue using the service.
+            </p>
 
-            @if (Model.EPCList.Count == 1)
+            @await Html.GovUkButton(new ButtonViewModel
             {
-                @Html.HiddenFor(m => m.SelectedEpcId)
-                <h1 class="govuk-heading-l">
-                    Is this your address?
-                </h1>
+                Href = Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+                Text = "Continue"
+            })
+        }
+        else
+        {
+            <form action="@Url.Action("ConfirmAddress_Post", "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
 
-                <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-                    <div class="govuk-summary-list__row">
-                        <dt class="govuk-summary-list__key">
-                            Address
-                        </dt>
-                        <dd class="govuk-summary-list__value">
-                            @(Model.EPCList[0].Address1)<br/>
-                            @if (!string.IsNullOrWhiteSpace(Model.EPCList[0].Address2))
-                            {
-                                @(Model.EPCList[0].Address2)
-                                <br/>
-                            }
-                            @(Model.EPCList[0].Postcode)
-                        </dd>
-                        <dd class="govuk-summary-list__actions">
-                            <a class="govuk-link" href="@Url.Action("AskForPostcode_Get", "EnergyEfficiency", new {reference = Model.Reference})">
-                                Change<span class="govuk-visually-hidden"> address</span>
-                            </a>
-                        </dd>
-                    </div>
-                </dl>
-            }
-            else
-            {
-                string error = null;
-                var errors = ViewData.ModelState
-                    .Where(n => n.Value.Errors.Count > 0)
-                    .ToList();
-                foreach (var (key, value) in ViewData.ModelState)
+                @Html.AntiForgeryToken()
+                @if (Model.EpcInformationList.Count == 1)
                 {
-                    if (value.Errors.Count > 0)
+                    @Html.HiddenFor(m => m.SelectedEpcId)
+                    <h1 class="govuk-heading-l">
+                        Is this your address?
+                    </h1>
+
+                    @await Html.GovUkSummaryList(new SummaryListViewModel
                     {
-                        error = value.Errors[0].ErrorMessage;
-                        break;
-                    }
-                }
-                
-                ErrorMessageViewModel errorMessageViewModel = error != null ? new ErrorMessageViewModel {Text = error} : null;
-                
-                @await Html.GovUkRadios(new RadiosViewModel()
-                {
-                    Name = nameof(ConfirmAddressViewModel.SelectedEpcId),
-                    Fieldset = new FieldsetViewModel
-                    {
-                        Legend = new LegendViewModel
+                        Rows = new List<SummaryListRowViewModel>
                         {
-                            Html = @<text>
-                                       <h1 class="govuk-fieldset__heading">
-                                           Select your address
-                                       </h1>
-                                    </text>,
-                            Classes = "govuk-fieldset__legend--l"
+                            new()
+                            {
+                                Key = new()
+                                {
+                                    Text = "Address"
+                                },
+                                Value = new()
+                                {
+                                    Html = @<text>
+                                               @(Model.EpcInformationList[0].Address1)<br/>
+                                               @if (!string.IsNullOrWhiteSpace(Model.EpcInformationList[0].Address2))
+                                               {
+                                                   @(Model.EpcInformationList[0].Address2)
+                                                   <br/>
+                                               }
+                                               @(Model.EpcInformationList[0].Postcode)
+                                            </text>
+                                },
+                                Actions = new SummaryListRowActionViewModel
+                                {
+                                    Items = new List<SummaryListRowActionItemViewModel>
+                                    {
+                                        new()
+                                        {
+                                            Html = @<text>
+                                                       Change<span class="govuk-visually-hidden"> address</span>
+                                                    </text>,
+                                            Href = @Url.Action("AskForPostcode_Get", "EnergyEfficiency", new { reference = Model.Reference })
+                                        }
+                                    }
+                                }
+                            }
+
                         }
-                    },
-                    Items = Model.EPCList.Select(epc =>
-                    {
-                        string fieldName = nameof(ConfirmAddressViewModel.SelectedEpcId);
-                        string fieldValue = epc.EpcId;
-                        string fieldId = $"{fieldName}_{fieldValue}";
-
-                        return (ItemViewModel) new RadioItemViewModel
-                        {
-                            Name = fieldName,
-                            Value = fieldValue.ToString(),
-                            Id = fieldId,
-                            Checked = Model.SelectedEpcId == fieldValue,
-                            Label = new LabelViewModel
-                            {
-                                Text = epc.Address1 + (epc.Address2 != "" ? ", " + epc.Address2 : ""),
-                                For = fieldId
-                            }
-                        };
                     })
-                        .ToList(),
-                    ErrorMessage = errorMessageViewModel
-                })
-                ;
-            }
-
-            <div class="govuk-button-group">
-                @(await Html.GovUkButton(new ButtonViewModel
+                }
+                else
                 {
-                    Text = (Model.EPCList.Count == 1 ? "Yes, continue" : "Continue"),
+                    @await Html.GovUkRadiosFromStringsFor(m => m.SelectedEpcId,
+                        radioOptions: Model.EpcInformationList.ToDictionary(
+                            epc => epc.EpcId,
+                            epc => new LabelViewModel
+                            {
+                                Text = epc.Address1 + (epc.Address2 != "" ? ", " + epc.Address2 : "")
+                            }),
+                        fieldsetOptions: new FieldsetViewModel
+                        {
+                            Legend = new LegendViewModel
+                            {
+                                Html = @<text>
+                                           <h1 class="govuk-fieldset__heading">
+                                               Select your address
+                                           </h1>
+                                        </text>,
+                                Classes = "govuk-fieldset__legend--l"
+                            }
+                        })
+                }
 
-                }))
-                <a href=@Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference})
-                   class="govuk-link">
-                    @(Model.EPCList.Count == 1 ? "No, skip this question" : "Address not listed above")
-                </a>
-            </div>
+                <div class="govuk-button-group">
+                    @(await Html.GovUkButton(new ButtonViewModel
+                    {
+                        Text = (Model.EpcInformationList.Count == 1 ? "Yes, continue" : "Continue"),
 
-        </form>
+                    }))
+                    <a href=@Url.Action("PropertyType_Get", "EnergyEfficiency", new { reference = Model.Reference })
+                       class="govuk-link">
+                        @(Model.EpcInformationList.Count == 1 ? "No, skip this question" : "Address not listed above")
+                    </a>
+                </div>
+                
+            </form>
+        }
     </div>
 </div>

@@ -1,7 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Helpers
-@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
+
 @model SeaPublicWebsite.Models.EnergyEfficiency.NumberOfOccupantsViewModel
 @{
     ViewBag.Title = "Number of occupants";
@@ -11,9 +10,7 @@
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = Model.Change
-            ? @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
-            : @Url.Action("HotWaterCylinder_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        Href = Model.BackLink,
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -24,43 +21,59 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("NumberOfOccupants_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
-
-            <fieldset class="govuk-fieldset">
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    How many people live in your home?
-                </legend>
-                
-                <p class="govuk-body">
-                    Count all adults and any children over 5 years old.
-                </p>
-
-                <details class="govuk-details" data-module="govuk-details">
-                    <summary class="govuk-details__summary">
-                        <span class="govuk-details__summary-text">
-                            Why do we need to know this?
-                        </span>
-                    </summary>
-                    <div class="govuk-details__text">
+        <form action="@Url.Action("NumberOfOccupants_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+            @(Html.HiddenFor(m => m.EntryPoint))
+            @Html.AntiForgeryToken()
+            
+            @{
+                Func<object, object> details =
+                    @<p class="govuk-body">
                         This information allows us to estimate how much energy your household uses.
-                    </div>
-                </details>
+                    </p>;
+                
+                Func<object, object> hint = 
+                    @<text>
+                        <p class="govuk-body">
+                            Count all adults and any children over 5 years old.
+                        </p>
 
-                @(await Html.GovUkTextInputFor(
-                    m => m.NumberOfOccupants,
-                    classes: "govuk-input--width-5",
-                    placeholder: "e.g. 3"
-                    ))
-            </fieldset>
+                        @await Html.GovUkDetails(new DetailsViewModel
+                        {
+                            SummaryText = "Help me answer this question",
+                            Html = details
+                        })
+                     </text>;
+            }
+            
+            @await Html.GovUkFieldset(new FieldsetViewModel
+            {
+                Legend = new LegendViewModel
+                {
+                    Text = "How many people live in your home?",
+                    Classes = "govuk-fieldset__legend--l",
+                    IsPageHeading = true
+                },
+                
+                InnerHtml = 
+                    @<text>
+                        @await Html.GovUkTextInputFor(
+                            m => m.NumberOfOccupants,
+                            hintOptions: new HintViewModel
+                            {
+                                Html = hint
+                            },
+                            classes: "govuk-input--width-5",
+                            placeholder: "e.g. 3")
+                     </text>
+                
+            })
             
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
                 {
                     Text = "Continue",
                 }))
-                <a href="@(Model.Change
-                             ? Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
-                             : Url.Action("HeatingPattern_Get", "EnergyEfficiency", new {reference = Model.Reference}))"
+                <a href="@Model.SkipLink"
                    class="govuk-link">
                     Skip this question
                 </a>

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using SeaPublicWebsite.DataModels;
+using SeaPublicWebsite.BusinessLogic.Models;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.Models;
-using SeaPublicWebsite.Models.EnergyEfficiency;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
 
 namespace SeaPublicWebsite.Services
 {
@@ -183,39 +182,43 @@ namespace SeaPublicWebsite.Services
                 }
             };
 
-        public async Task<List<BreRecommendation>> GetRecommendationsForUserAsync(UserDataModel userData)
+        public async Task<List<BreRecommendation>> GetRecommendationsForPropertyAsync(PropertyData propertyData)
         {
-            BreRequest request = CreateRequest(userData);
+            BreRequest request = CreateRequest(propertyData);
 
-            return await breApi.GetRecommendationsForUserRequestAsync(request);
+            return await breApi.GetRecommendationsForPropertyRequestAsync(request);
         }
 
-        private static BreRequest CreateRequest(UserDataModel userData)
+        private static BreRequest CreateRequest(PropertyData propertyData)
         {
-            BrePropertyType brePropertyType = GetBrePropertyType(userData.PropertyType.Value);
+            BrePropertyType brePropertyType = GetBrePropertyType(propertyData.PropertyType.Value);
 
             BreBuiltForm breBuiltForm =
-                GetBreBuiltForm(userData.PropertyType.Value, userData.HouseType, userData.BungalowType);
+                GetBreBuiltForm(propertyData.PropertyType.Value, propertyData.HouseType, propertyData.BungalowType);
 
-            BreFlatLevel? breFlatLevel = GetBreFlatLevel(userData.PropertyType.Value, userData.FlatType);
+            BreFlatLevel? breFlatLevel = GetBreFlatLevel(propertyData.PropertyType.Value, propertyData.FlatType);
 
-            string breConstructionDate = GetBreConstructionDate(userData.YearBuilt);
+            string breConstructionDate = GetBreConstructionDate(propertyData.YearBuilt);
 
-            BreWallType breWallType = GetBreWallType(userData.WallConstruction.Value, userData.SolidWallsInsulated,
-                userData.CavityWallsInsulated);
+            BreWallType breWallType = GetBreWallType(propertyData.WallConstruction.Value, propertyData.SolidWallsInsulated,
+                propertyData.CavityWallsInsulated);
 
-            BreRoofType breRoofType = GetBreRoofType(userData.RoofConstruction.Value, userData.RoofInsulated);
+            BreRoofType? breRoofType = GetBreRoofType(propertyData.RoofConstruction, propertyData.LoftSpace, 
+                propertyData.LoftAccess, propertyData.RoofInsulated);
 
-            BreGlazingType breGlazingType = GetBreGlazingType(userData.GlazingType.Value);
+            BreGlazingType breGlazingType = GetBreGlazingType(propertyData.GlazingType.Value);
 
-            BreHeatingFuel breHeatingFuel = GetBreHeatingFuel(userData.HeatingType.Value, userData.OtherHeatingType);
+            BreHeatingFuel breHeatingFuel = GetBreHeatingFuel(propertyData.HeatingType.Value, propertyData.OtherHeatingType);
 
-            bool? breHotWaterCylinder = GetBreHotWaterCylinder(userData.HasHotWaterCylinder);
+            bool? breHotWaterCylinder = GetBreHotWaterCylinder(propertyData.HasHotWaterCylinder);
 
-            BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(userData.HeatingPattern.Value);
+            BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(propertyData.HeatingPattern.Value);
+
+            int[] breNormalDaysOffHours =
+                GetBreNormalDaysOffHours(propertyData.HoursOfHeatingMorning, propertyData.HoursOfHeatingEvening);
 
             BreRequest request = new(
-                brePostcode: userData.Postcode,
+                brePostcode: propertyData.Postcode,
                 brePropertyType: brePropertyType,
                 breBuiltForm: breBuiltForm,
                 breFlatLevel: breFlatLevel,
@@ -225,9 +228,10 @@ namespace SeaPublicWebsite.Services
                 breGlazingType: breGlazingType,
                 breHeatingFuel: breHeatingFuel,
                 breHotWaterCylinder: breHotWaterCylinder,
-                breOccupants: userData.NumberOfOccupants,
+                breOccupants: propertyData.NumberOfOccupants,
                 breHeatingPatternType: breHeatingPatternType,
-                breTemperature: userData.Temperature
+                breNormalDaysOffHours: breNormalDaysOffHours,
+                breTemperature: propertyData.Temperature
             );
 
             return request;
@@ -239,7 +243,7 @@ namespace SeaPublicWebsite.Services
             {
                 PropertyType.House => BrePropertyType.House,
                 PropertyType.Bungalow => BrePropertyType.Bungalow,
-                // assumption:
+                // peer-reviewed assumption:
                 PropertyType.ApartmentFlatOrMaisonette => BrePropertyType.Flat,
                 _ => throw new ArgumentNullException()
             };
@@ -254,9 +258,9 @@ namespace SeaPublicWebsite.Services
                 {
                     HouseType.Detached => BreBuiltForm.Detached,
                     HouseType.SemiDetached => BreBuiltForm.SemiDetached,
-                    //assumption:
+                    //peer-reviewed assumption:
                     HouseType.EndTerrace => BreBuiltForm.EndTerrace,
-                    //assumption:
+                    //peer-reviewed assumption:
                     HouseType.Terraced => BreBuiltForm.MidTerrace,
                     _ => throw new ArgumentOutOfRangeException()
                 },
@@ -264,9 +268,9 @@ namespace SeaPublicWebsite.Services
                 {
                     BungalowType.Detached => BreBuiltForm.Detached,
                     BungalowType.SemiDetached => BreBuiltForm.SemiDetached,
-                    //assumption:
+                    //peer-reviewed assumption:
                     BungalowType.EndTerrace => BreBuiltForm.EndTerrace,
-                    //assumption:
+                    //peer-reviewed assumption:
                     BungalowType.Terraced => BreBuiltForm.MidTerrace,
                     _ => throw new ArgumentOutOfRangeException()
                 },
@@ -312,7 +316,7 @@ namespace SeaPublicWebsite.Services
                 <= 2006 => "J",
                 <= 2011 => "K",
                 >= 2012 => "L",
-                //assumption:
+                //peer-reviewed assumption:
                 _ => "D"
             };
         }
@@ -328,7 +332,7 @@ namespace SeaPublicWebsite.Services
                 {
                     SolidWallsInsulated.DoNotKnow => BreWallType.DontKnow,
                     SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
-                    //assumption:
+                    //peer-reviewed assumption:
                     SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
                     SolidWallsInsulated.All => BreWallType.SolidWallsWithInsulation,
                     _ => throw new ArgumentOutOfRangeException()
@@ -337,7 +341,7 @@ namespace SeaPublicWebsite.Services
                 {
                     CavityWallsInsulated.DoNotKnow => BreWallType.DontKnow,
                     CavityWallsInsulated.No => BreWallType.CavityWallsWithoutInsulation,
-                    //assumption:
+                    //peer-reviewed assumption:
                     CavityWallsInsulated.Some => BreWallType.CavityWallsWithoutInsulation,
                     CavityWallsInsulated.All => BreWallType.CavityWallsWithInsulation,
                     _ => throw new ArgumentOutOfRangeException()
@@ -346,29 +350,29 @@ namespace SeaPublicWebsite.Services
                 {
                     CavityWallsInsulated.DoNotKnow => solidWallsInsulated switch
                     {
-                        //assumption:
+                        //peer-reviewed assumption:
                         SolidWallsInsulated.DoNotKnow => BreWallType.DontKnow,
-                        //assumption (may change to DontKnow if this can drive recommendations):
+                        //peer-reviewed assumption (may change to DontKnow if this can drive recommendations):
                         SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
-                        //assumption (may change to DontKnow if this can drive recommendations):
+                        //peer-reviewed assumption (may change to DontKnow if this can drive recommendations):
                         SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
-                        //assumption:
+                        //peer-reviewed assumption:
                         SolidWallsInsulated.All => BreWallType.DontKnow,
                         _ => throw new ArgumentOutOfRangeException()
                     },
-                    //assumption:
+                    //peer-reviewed assumption:
                     CavityWallsInsulated.No => BreWallType.CavityWallsWithoutInsulation,
-                    //assumption:
+                    //peer-reviewed assumption:
                     CavityWallsInsulated.Some => BreWallType.CavityWallsWithoutInsulation,
                     CavityWallsInsulated.All => solidWallsInsulated switch
                     {
-                        //assumption (may change to DontKnow if this can drive recommendations):
+                        //peer-reviewed assumption (may change to DontKnow if this can drive recommendations):
                         SolidWallsInsulated.DoNotKnow => BreWallType.SolidWallsWithoutInsulation,
-                        //assumption:
+                        //peer-reviewed assumption:
                         SolidWallsInsulated.No => BreWallType.SolidWallsWithoutInsulation,
-                        //assumption:
+                        //peer-reviewed assumption:
                         SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
-                        //assumption:
+                        //peer-reviewed assumption:
                         SolidWallsInsulated.All => BreWallType.SolidWallsWithInsulation,
                         _ => throw new ArgumentOutOfRangeException()
                     },
@@ -379,23 +383,35 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static BreRoofType GetBreRoofType(RoofConstruction roofConstruction, RoofInsulated? roofInsulated)
+        private static BreRoofType? GetBreRoofType(RoofConstruction? roofConstruction,
+            LoftSpace? loftSpace, LoftAccess? loftAccess, RoofInsulated? roofInsulated)
         {
             return roofConstruction switch
             {
                 RoofConstruction.Flat =>
-                    //assumption:
+                    //peer-reviewed assumption:
                     BreRoofType.FlatRoofWithInsulation,
-                RoofConstruction.Pitched or RoofConstruction.Mixed => roofInsulated switch
+                RoofConstruction.Pitched or RoofConstruction.Mixed => loftSpace switch
                 {
-                    RoofInsulated.DoNotKnow => BreRoofType.DontKnow,
-                    //assumption in case RoofConstruction.Mixed:
-                    RoofInsulated.Yes => BreRoofType.PitchedRoofWithInsulation,
-                    //assumption in case RoofConstruction.Mixed:
-                    RoofInsulated.No => BreRoofType.PitchedRoofWithoutInsulation,
+                    LoftSpace.No => BreRoofType.DontKnow,
+                    LoftSpace.Yes => loftAccess switch
+                    {
+                        LoftAccess.No => BreRoofType.DontKnow,
+                        LoftAccess.Yes => roofInsulated switch
+                        {
+                            RoofInsulated.DoNotKnow => BreRoofType.DontKnow,
+                            //peer-reviewed assumption in case RoofConstruction.Mixed:
+                            RoofInsulated.Yes => BreRoofType.PitchedRoofWithInsulation,
+                            //peer-reviewed assumption in case RoofConstruction.Mixed:
+                            RoofInsulated.No => BreRoofType.PitchedRoofWithoutInsulation,
+                            _ => throw new ArgumentOutOfRangeException()
+                        },
+                        _ => throw new ArgumentOutOfRangeException()
+                    },
                     _ => throw new ArgumentOutOfRangeException()
                 },
-                _ => throw new ArgumentOutOfRangeException()
+                //peer-reviewed assumption for ground and middle floor flats
+                _ => null
             };
         }
 
@@ -405,9 +421,9 @@ namespace SeaPublicWebsite.Services
             {
                 GlazingType.DoNotKnow => BreGlazingType.DontKnow,
                 GlazingType.SingleGlazed => BreGlazingType.SingleGlazed,
-                //assumption:
+                //peer-reviewed assumption:
                 GlazingType.DoubleOrTripleGlazed => BreGlazingType.DoubleGlazed,
-                //assumption:
+                //peer-reviewed assumption:
                 GlazingType.Both => BreGlazingType.SingleGlazed,
                 _ => throw new ArgumentOutOfRangeException()
             };
@@ -417,7 +433,7 @@ namespace SeaPublicWebsite.Services
         {
             return heatingType switch
             {
-                //assumption:
+                //peer-reviewed assumption:
                 HeatingType.DoNotKnow => BreHeatingFuel.MainsGas,
                 HeatingType.GasBoiler => BreHeatingFuel.MainsGas,
                 HeatingType.OilBoiler => BreHeatingFuel.HeatingOil,
@@ -427,10 +443,10 @@ namespace SeaPublicWebsite.Services
                 HeatingType.HeatPump => BreHeatingFuel.Electricity,
                 HeatingType.Other => otherHeatingType switch
                 {
-                    //assumption:
+                    //peer-reviewed assumption:
                     OtherHeatingType.Biomass => BreHeatingFuel.MainsGas,
                     OtherHeatingType.CoalOrSolidFuel => BreHeatingFuel.SolidFuel,
-                    //assumption:
+                    //peer-reviewed assumption:
                     OtherHeatingType.Other => BreHeatingFuel.MainsGas,
                     _ => throw new ArgumentOutOfRangeException()
                 },
@@ -455,11 +471,20 @@ namespace SeaPublicWebsite.Services
             {
                 HeatingPattern.AllDayAndNight => BreHeatingPatternType.AllDayAndAllNight,
                 HeatingPattern.AllDayNotNight => BreHeatingPatternType.AllDayButOffAtNight,
-                HeatingPattern.MorningAndEvening => BreHeatingPatternType.MorningAndEvening,
-                HeatingPattern.OnceADay => BreHeatingPatternType.JustOnceADay,
                 HeatingPattern.Other => BreHeatingPatternType.NoneOfTheAbove,
                 _ => throw new ArgumentOutOfRangeException()
             };
+        }
+        
+        private static int[] GetBreNormalDaysOffHours(decimal? hoursOfHeatingMorning, decimal? hoursOfHeatingEvening)
+        {
+            if (hoursOfHeatingMorning != null && hoursOfHeatingEvening != null)
+            {
+                //peer-reviewed assumption: time heating is turned on is not collected so this is a simplification of the BRE input complexity available
+                int averageOffPeriod = (int) ((24 - (hoursOfHeatingMorning + hoursOfHeatingEvening)) / 2);
+                return new [] { averageOffPeriod, averageOffPeriod };
+            }
+            return null;
         }
     }
 }

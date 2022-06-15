@@ -1,12 +1,9 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using Microsoft.CodeAnalysis.CSharp.Syntax
-@using SeaPublicWebsite.DataModels
-@using SeaPublicWebsite.Models.EnergyEfficiency.Recommendations
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
-    ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.UserDataModel.UserRecommendations.Count;
+    ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.PropertyData.PropertyRecommendations.Count;
 }
 
 @section BeforeMain {
@@ -28,14 +25,13 @@
     
     <div class="govuk-grid-column-two-thirds">
         
-        @(await Html.GovUkErrorSummary(ViewData.ModelState))
-        
-        <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.UserRecommendation.Key, reference = Model.UserDataModel.Reference})" method="post" novalidate>
+        <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.PropertyRecommendation.Key})" method="post" novalidate>
 
-            @Html.HiddenFor(m => m.UserDataModel.Reference)
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.PropertyData.Reference)
 
             <span class="govuk-caption-l">
-                Recommendation @(Model.GetCurrentIndex() + 1) of @Model.UserDataModel.UserRecommendations.Count
+                Recommendation @(Model.GetCurrentIndex() + 1) of @Model.PropertyData.PropertyRecommendations.Count
             </span>
             <h1 class="govuk-heading-l">
                 @Model.UserRecommendation.Title
@@ -77,7 +73,7 @@
                 What you could save
             </h2>
 
-            <p class="govuk-body">Loft insulation is typically expected to last <b>around @Model.UserRecommendation.Lifetime years</b></p>
+            <p class="govuk-body">Loft insulation is typically expected to last <b>around @Model.PropertyRecommendation.Lifetime years</b></p>
 
             @{ await Html.RenderPartialAsync("Partials/WhatYouCouldSavePartial.cshtml", Model); }
             
@@ -109,8 +105,6 @@
                     </dd>
                 </div>
             </dl>
-
-            @{ await Html.RenderPartialAsync("Partials/KeepACopyPartial.cshtml"); }
 
             @(await Html.GovUkRadiosFor(m => m.RecommendationAction,
                 fieldsetOptions: new FieldsetViewModel

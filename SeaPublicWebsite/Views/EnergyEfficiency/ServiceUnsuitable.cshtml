@@ -1,6 +1,8 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
+@using SeaPublicWebsite.BusinessLogic.Models.Enums
+
+@model SeaPublicWebsite.Models.EnergyEfficiency.ServiceUnsuitableViewModel
 @{
     ViewBag.Title = "Only available to homeowners in England and Wales";
 }
@@ -9,7 +11,7 @@
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = @Url.Action($"{ViewBag.From}_Get", "EnergyEfficiency", new {reference = Model}),
+        Href = Model.BackLink,
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -20,20 +22,16 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <div class="govuk-panel govuk-panel--confirmation sea-service-unsuitable">
-            <h1 class="govuk-panel__title">
-                Sorry...
-            </h1>
-            <div class="govuk-panel__body">
-                This service currently can only provide advice for people who own their own home in England and Wales
-            </div>
-        </div>
-        
-        @if (ViewBag.Country is Country.Scotland or Country.NorthernIreland)
+        <h1 class="govuk-heading-l">Sorry, this service isn't for you</h1>
+        <p class="govuk-body">This service only provides advice for people who own their own home in England and Wales.</p>
+        <p class="govuk-body">
+            For general energy efficiency advice and to find out ways to reduce your energy bill, visit <a href="https://energysavingtrust.org.uk/" class="govuk-link">the Energy Saving Trust</a> website
+        </p>
+        @if (Model.Country is Country.Scotland or Country.NorthernIreland)
         {
             <h2 class="govuk-heading-m">Other services that might be helpful to you</h2>
 
-            @if (ViewBag.Country == Country.Scotland)
+            @if (Model.Country is Country.Scotland)
             {
                 <p class="govuk-body">
                     Visit <a href="https://www.homeenergyscotland.org/" target="_blank" class="govuk-link">Home Energy Scotland</a> to help you find ways to improve your property’s energy efficiency.

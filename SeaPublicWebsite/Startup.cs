@@ -1,18 +1,24 @@
-using System.Linq;
+using System;
+using System.Text.RegularExpressions;
+using GovUkDesignSystem.ModelBinders;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SeaPublicWebsite.Data;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.EmailSending;
-using SeaPublicWebsite.ExternalServices.FileRepositories;
-using SeaPublicWebsite.ExternalServices.OpenEpc;
+using SeaPublicWebsite.ExternalServices.EpbEpc;
 using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
+using SeaPublicWebsite.Services.Cookies;
 
 namespace SeaPublicWebsite
 {
@@ -30,53 +36,78 @@ namespace SeaPublicWebsite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<UserDataStore, UserDataStore>();
+            services.AddScoped<PropertyDataStore, PropertyDataStore>();
+            services.AddScoped<IQuestionFlowService, QuestionFlowService>();
             services.AddMemoryCache();
             services.AddSingleton<StaticAssetsVersioningService>();
+            services.AddScoped<RecommendationService>();
+            services.AddScoped<IDataAccessProvider, DataAccessProvider>();
+            services.AddDataProtection().PersistKeysToDbContext<SeaDbContext>();
 
-            ConfigureFileRepository(services);
             ConfigureEpcApi(services);
             ConfigureBreApi(services);
             ConfigureGovUkNotify(services);
+            ConfigureCookieService(services);
+            ConfigureDatabaseContext(services);
 
             if (!webHostEnvironment.IsProduction())
             {
                 services.Configure<BasicAuthMiddlewareConfiguration>(
                     configuration.GetSection(BasicAuthMiddlewareConfiguration.ConfigSection));
             }
-            
+
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add<ErrorHandlingFilter>();
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                options.ModelMetadataDetailsProviders.Add(new GovUkDataBindingErrorTextProvider());
             });
-
-            services.AddScoped<RecommendationService>();
         }
 
-        private void ConfigureFileRepository(IServiceCollection services)
+        private void ConfigureDatabaseContext(IServiceCollection services)
         {
+            var databaseConnectionString = configuration.GetConnectionString("PostgreSQLConnection");
             if (!webHostEnvironment.IsDevelopment())
             {
-                var vcapServiceConfig = VcapServiceFactory.GetVcapServices(configuration);
-                VcapAwsS3Bucket fileStorageBucketConfiguration = vcapServiceConfig.AwsS3Bucket.First(b => b.Name.EndsWith("-filestorage"));
+                // In Gov.PaaS the Database URL is automatically put into the DATABASE_URL environment variable
+                databaseConnectionString = DatabaseUrlToConnectionString(configuration["DATABASE_URL"]);
+            }
+            services.AddDbContext<SeaDbContext>(opt =>
+                opt.UseNpgsql(databaseConnectionString));
+        }
 
-                services.AddSingleton<IFileRepository>(s => new AwsFileRepository(fileStorageBucketConfiguration));
-            }
-            else
+        private string DatabaseUrlToConnectionString(string url)
+        {
+            // The DATABASE_URL environment variable has the following form
+            // postgres://<username>:<password>@<host>:<port>/<name>
+            var urlPattern = new Regex(@"postgres\:\/\/(.*)\:(.*)@(.*)\:(\d+)\/(.*)");
+            var match = urlPattern.Match(url);
+            if (!match.Success)
             {
-                services.AddSingleton<IFileRepository>(s => new SystemFileRepository());
+                throw new Exception("Database URL was not in the expected format, cannot connect to database");
             }
+
+            var username = match.Groups[1].Captures[0].Value;
+            var password = match.Groups[2].Captures[0].Value;
+            var host = match.Groups[3].Captures[0].Value;
+            var port = match.Groups[4].Captures[0].Value;
+            var name = match.Groups[5].Captures[0].Value;
+
+            return $"Host={host};Port={port};Username={username};Password={password};Database={name}";
+        }
+
+        private void ConfigureCookieService(IServiceCollection services)
+        {
+            services.Configure<CookieServiceConfiguration>(
+                configuration.GetSection(CookieServiceConfiguration.ConfigSection));
+            services.AddScoped<CookieService, CookieService>();
         }
 
         private void ConfigureEpcApi(IServiceCollection services)
         {
-            services.Configure<OpenEpcConfiguration>(
-                configuration.GetSection(OpenEpcConfiguration.ConfigSection));
-            services.AddScoped<IEpcApi, OpenEpcApi>();
-            // TODO: When the EPB API is ready, uncomment this and remove the above:
-            // services.Configure<EpbEpcConfiguration>(
-            //     configuration.GetSection(EpbEpcConfiguration.ConfigSection));
-            // services.AddScoped<IEpcApi, EpbEpcApi>();
+            services.Configure<EpbEpcConfiguration>(
+                configuration.GetSection(EpbEpcConfiguration.ConfigSection));
+            services.AddScoped<IEpcApi, EpbEpcApi>();
         }
 
         private void ConfigureBreApi(IServiceCollection services)
@@ -98,10 +129,15 @@ namespace SeaPublicWebsite
         {
             if (!webHostEnvironment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler(new ExceptionHandlerOptions
+                {
+                    ExceptionHandlingPath = "/error"
+                });
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 // app.UseHsts();
             }
+
+            app.UseStatusCodePagesWithReExecute("/error/{0}");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -1,20 +1,20 @@
-﻿using GovUkDesignSystem;
-using GovUkDesignSystem.Attributes;
+using GovUkDesignSystem.Attributes.DataBinding;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions;
+using GovUkDesignSystem.ModelBinders;
+using Microsoft.AspNetCore.Mvc;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class HomeAgeViewModel
+    public class HomeAgeViewModel : QuestionFlowViewModel
     {
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Enter the approximate year that your property was built")]
-        [GovUkValidateIntRange("The year your property was build", 1000, 2022)]
+        [ModelBinder(typeof(GovUkMandatoryIntBinder))]
+        [GovUkDataBindingMandatoryIntErrorText("Enter the approximate year that your property was built", "The year your property was built")]
+        [GovUkValidateIntRange("The year your property was built", 1000, 2022)]
         public int? YearBuilt { get; set; }
 
         public string Reference { get; set; }
         
         public PropertyType? PropertyType { get; set; }
-        public bool Change { get; set; }
     }
 }

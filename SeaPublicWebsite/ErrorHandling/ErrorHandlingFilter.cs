@@ -7,7 +7,6 @@ namespace SeaPublicWebsite.ErrorHandling
 {
     public class ErrorHandlingFilter : ExceptionFilterAttribute
     {
-        
         public override void OnException(ExceptionContext context)
         {
             if (context.Exception is CustomErrorPageException customErrorPageException)
@@ -25,6 +24,6 @@ namespace SeaPublicWebsite.ErrorHandling
                 };
             }
         }
-        
+
     }
 }

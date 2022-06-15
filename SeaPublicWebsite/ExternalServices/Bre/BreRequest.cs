@@ -24,13 +24,15 @@
 
         public int heating_pattern_type { get; set; }
 
+        public int[] normal_days_off_hours { get; set; }
+        
         public int? occupants { get; set; }
 
         public bool measures { get; set; }
 
         public string[] measures_package { get; set; }
 
-        public int roof_type { get; set; }
+        public int? roof_type { get; set; }
 
         public int wall_type { get; set; }
 
@@ -43,12 +45,13 @@
             BreFlatLevel? breFlatLevel,
             string breConstructionDate,
             BreWallType breWallType,
-            BreRoofType breRoofType,
+            BreRoofType? breRoofType,
             BreGlazingType breGlazingType,
             BreHeatingFuel breHeatingFuel,
             bool? breHotWaterCylinder,
             int? breOccupants,
             BreHeatingPatternType breHeatingPatternType,
+            int[] breNormalDaysOffHours,
             decimal? breTemperature
         )
         {
@@ -59,24 +62,24 @@
             construction_date = breConstructionDate;
             wall_type = (int) breWallType;
             //no input for floor_type in BRE API
-            roof_type = (int) breRoofType;
+            roof_type = (int?) breRoofType;
             glazing_type = (int) breGlazingType;
             //no input for outdoor heater space in BRE API
             heating_fuel = ((int) breHeatingFuel).ToString();
             hot_water_cylinder = breHotWaterCylinder;
             occupants = breOccupants;
             heating_pattern_type = (int) breHeatingPatternType;
+            normal_days_off_hours = breNormalDaysOffHours;
             living_room_temperature = breTemperature;
-            //assumption:
+            //peer-reviewed assumption:
             num_storeys = brePropertyType == BrePropertyType.House ? 2 : 1;
-            //assumption (question is being added for this):
+            //peer-reviewed assumption (question to be added for this):
             num_bedrooms = breOccupants ?? 1;
             measures = true;
             //measures_package consists of all measures implemented in the BRE API as of May 2021
             measures_package = new[]
             {
-                "A", "A2", "B", "Q", "Q1", "W1", "W2", "D", "C", "F", "G", "I", "T", "L2", "N", "Y", "O", "O3", "X",
-                "U"
+                "A", "B", "Q", "Q1", "W1", "W2", "D", "C", "F", "G", "L2", "N", "O", "O3", "X", "U"
             };
         }
     }

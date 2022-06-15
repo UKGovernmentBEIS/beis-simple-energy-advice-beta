@@ -3,7 +3,7 @@
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
-    ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.UserDataModel.UserRecommendations.Count;
+    ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.PropertyData.PropertyRecommendations.Count;
 }
 
 @section BeforeMain {
@@ -24,14 +24,15 @@
     </div>
     
     <div class="govuk-grid-column-two-thirds">
-
-        @(await Html.GovUkErrorSummary(ViewData.ModelState))
         
-        <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.UserRecommendation.Key, reference = Model.UserDataModel.Reference})" method="post" novalidate>
-            @Html.HiddenFor(m => m.UserDataModel.Reference)
+                
+        <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.PropertyRecommendation.Key, reference = Model.PropertyData.Reference})" method="post" novalidate>
+
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.PropertyData.Reference)
 
             <span class="govuk-caption-l">
-                Recommendation @(Model.GetCurrentIndex() + 1) of @Model.UserDataModel.UserRecommendations.Count
+                Recommendation @(Model.GetCurrentIndex() + 1) of @Model.PropertyData.PropertyRecommendations.Count
             </span>
             <h1 class="govuk-heading-l">Insulate the ground floor</h1>
 
@@ -109,8 +110,6 @@
                     </dd>
                 </div>
             </dl>
-            
-            @{ await Html.RenderPartialAsync("Partials/KeepACopyPartial.cshtml"); }
 
             @(await Html.GovUkRadiosFor(m => m.RecommendationAction,
                 fieldsetOptions: new FieldsetViewModel

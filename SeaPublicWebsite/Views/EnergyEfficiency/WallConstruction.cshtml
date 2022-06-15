@@ -1,7 +1,8 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Models.EnergyEfficiency
-@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.BusinessLogic.Models.Enums
+
 @model SeaPublicWebsite.Models.EnergyEfficiency.WallConstructionViewModel;
 @{
     ViewBag.Title = "Wall Construction";
@@ -11,9 +12,7 @@
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = Model.Change
-            ? @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
-            : @Url.Action("HomeAge_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        Href = Model.BackLink,
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -24,134 +23,103 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("WallConstruction_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
+        <form action="@Url.Action("WallConstruction_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+            @(Html.HiddenFor(m => m.EntryPoint))
+            @Html.AntiForgeryToken()
+            
+            @{
+                Func<object,object> details = 
+                    @<text>
+                        <p class="govuk-body">
+                            Solid brick walls will have an alternating pattern, with some bricks laid across the wall so you can see the smaller ends from the outside.
+                        </p>
+                        <p class="govuk-body">
+                            If your home has cavity walls, the bricks typically have an even pattern with all bricks laid lengthways.
+                        </p>
+                        <p class="govuk-body">
+                            If the brickwork has been covered, you may be able to tell by measuring the width of the wall.
+                            Measure the depth of the wall by a window or door on one of your external walls.
+                        </p>
+                        <p class="govuk-body">
+                            If a brick wall is more than 260mm thick, then it is probably a cavity wall.
+                        </p>
+                        <p class="govuk-body">
+                            A narrower wall is probably a solid wall. Stone walls may be thicker still but are usually solid.
+                        </p>
+                     </text>;
 
-            <fieldset class="govuk-fieldset">
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    <h1 class="govuk-fieldset__heading">
-                        What kind of walls does your property have?
-                    </h1>
-                </legend>
-                
-                <div class="govuk-body">
-                    Solid walls may be made from brick or stone. If your home was built before 1930, it’s likely to have solid walls.
-                </div>
-                <div class="govuk-body">
-                    Most homes built after 1930 have cavity walls. Cavity walls have a gap, or cavity, between the wall outside and wall inside. 
-                </div>
-                <div class="govuk-body">
-                    You may have both types. For example, you have a pre-1930 home with an extension built later than 1930.
-                </div>
-                
-                @{
-                    string expectedWallType = null;
-                    if (Model.YearBuilt.HasValue)
-                    {
-                        expectedWallType = Model.YearBuilt.Value < 1930 ? "solid" : "cavity";
-                    }
-                    else if (Model.Epc?.ConstructionAgeBand != null)
-                    {
-                        expectedWallType = Model.Epc.ConstructionAgeBand < HomeAge.From1930To1949 ? "solid" : "cavity";
-                    }
-                    else
-                    {
-                        expectedWallType = "cavity";
-                    }
+                Func<object, object> epcHint = null;
+                if (Model.Epc?.WallConstruction is not null)
+                {
+                    epcHint = 
+                        @<p class="govuk-body">
+                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests you have
+                            <strong>
+                                @(Model.Epc?.WallConstruction switch {
+                                    WallConstruction.Solid => "solid",
+                                    WallConstruction.Cavity => "cavity",
+                                    WallConstruction.Mixed => "mixed solid and cavity",
+                                    WallConstruction.Other => "another type of",
+                                    _ => throw new ArgumentOutOfRangeException()})
+                            </strong>
+                            walls.
+                        </p>;
                 }
-                @(await Html.GovUkRadiosFor(m => m.WallConstruction,
-                    hintOptions: new HintViewModel
+            }
+            @(await Html.GovUkRadiosFor(m => m.WallConstruction,
+                fieldsetOptions: new FieldsetViewModel
+                {
+                    Legend = new LegendViewModel
                     {
-                        Html = @<text>
-                                   <details class="govuk-details" data-module="govuk-details">
-                                       <summary class="govuk-details__summary">
-                                           <span class="govuk-details__summary-text">
-                                               Help me choose which wall type I have
-                                           </span>
-                                       </summary>
-                                       <div class="govuk-details__text">
-                                           <p class="govuk-body">
-                                               Solid brick walls will have an alternating pattern, with some bricks laid across the wall so you can see the smaller ends from the outside. 
-                                           </p>
-                                           <p class="govuk-body">
-                                               If your home has cavity walls, the bricks typically have an even pattern with all bricks laid lengthways. 
-                                           </p>
-                                           <p class="govuk-body">
-                                               If the brickwork has been covered, you may be able to tell by measuring the width of the wall. 
-                                               Measure the depth of the wall by a window or door on one of your external walls. 
-                                           </p>
-                                           <p class="govuk-body">
-                                               If a brick wall is more than 260mm thick, then it is probably a cavity wall. 
-                                           </p>
-                                           <p class="govuk-body">
-                                               A narrower wall is probably a solid wall. Stone walls may be thicker still but are usually solid.
-                                           </p>
-                                       </div>
-                                   </details>
-                                </text>
-                    },
-                    radioHints: new Dictionary<WallConstruction, HintViewModel>
-                    {
-                        {
-                            WallConstruction.Other,
-                            new HintViewModel
-                            {
-                                Text = "Other wall types could include cob walls, timber framed, system built, steel framed or other non-traditional build types"
-                            }
-                        }
-                    },
-                    conditionalOptions: new Dictionary<WallConstruction, Conditional>
-                    {
-                        {
-                            WallConstruction.DoNotKnow,
-                            new Conditional
-                            {
-                                Html = (@<text>
-                                @if (Model.Epc?.WallConstruction != null)
-                                {
-                                    if (Model.Epc.WallConstruction == WallConstruction.Solid)
-                                    {
-                                        <div class="govuk-hint">
-                                            <p>
-                                                Your Energy Performance Certificate suggests you have <b>solid</b> walls.
-                                            </p>
-                                            <p>
-                                                We can generate recommendations based on this information.
-                                            </p>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="govuk-hint">
-                                            <p>
-                                                Your Energy Performance Certificate suggests you have <b>cavity</b> walls.<br/>
-                                            </p>
-                                            <p>
-                                                We can generate recommendations based on this information.
-                                            </p>
-                                        </div>
-                                    }
-                                }
-                                else
-                                {
-                                    <div class="govuk-hint">
-                                    <p>
-                                        Properties of your type typically have <b>@(expectedWallType)</b> walls.
-                                    </p>
-                                    <p>
-                                        We can generate recommendations based on this information.
-                                    </p>
-                                    </div>
-                                }
-                             </text>)
-                            }
-                        }
-                    }))
+                        Text = "What kind of walls does your property have?",
+                        Classes = "govuk-fieldset__legend--l",
+                        IsPageHeading = true
+                    }
+                },
+                hintOptions: new HintViewModel
+                {
+                    Html = @<text>
+                               <p class="govuk-body">
+                                   Solid walls may be made from brick or stone. If your home was built before 1930, it’s likely to have solid walls.
+                               </p>
+                               <p class="govuk-body">
+                                   Most homes built after 1930 have cavity walls. Cavity walls have a gap, or cavity, between the wall outside and wall inside. 
+                               </p>
+                               <p class="govuk-body">
+                                   You may have both types. For example, you have a pre-1930 home with an extension built later than 1930.
+                               </p>
+                               
+                               @await Html.GovUkDetails(new DetailsViewModel
+                               {
+                                   SummaryText = "Help me choose which wall type I have",
+                                   Html = details
+                               })
 
-            </fieldset>
+                               @if (epcHint is not null)
+                               {
+                                   @await Html.GovUkInsetText(new InsetTextViewModel
+                                   {
+                                       Classes = "sea-epc-hint",
+                                       Html = epcHint
+                                   })
+                               }
+                            </text>
+                },
+                radioHints: new Dictionary<WallConstruction, HintViewModel>
+                {
+                    {
+                        WallConstruction.Other,
+                        new HintViewModel
+                        {
+                            Text = "Other wall types could include cob walls, timber framed, system built, steel framed or other non-traditional build types"
+                        }
+                    }
+                }))
 
-            <button class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+            @await Html.GovUkButton(new ButtonViewModel
+            {
+                Text = "Continue"
+            })
             
         </form>
         

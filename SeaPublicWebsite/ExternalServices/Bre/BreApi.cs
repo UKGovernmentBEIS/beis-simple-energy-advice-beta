@@ -24,7 +24,7 @@ namespace SeaPublicWebsite.ExternalServices.Bre
             configuration = options.Value;
         }
 
-        public async Task<List<BreRecommendation>> GetRecommendationsForUserRequestAsync(BreRequest request)
+        public async Task<List<BreRecommendation>> GetRecommendationsForPropertyRequestAsync(BreRequest request)
         {
             try
             {
@@ -50,6 +50,12 @@ namespace SeaPublicWebsite.ExternalServices.Bre
                 );
                 
                 List<BreRecommendation> recommendations = new List<BreRecommendation>();
+
+                if (response.Measures is null)
+                {
+                    return recommendations;
+                }
+                
                 Dictionary<string, BreRecommendation> recommendationDictionary =
                     RecommendationService.RecommendationDictionary;
                 foreach (KeyValuePair<string, BreMeasure> entry in response.Measures)

@@ -4,7 +4,7 @@
 
 /* Imported from Gov.UK Frontend */
 $govuk-new-link-styles: true;
-@import "../../node_modules/govuk-frontend/govuk/all";
+@import "govuk/all";
 
 /* Simple Energy Advice service custom styles */
 @import "_simple-energy-advice-custom";

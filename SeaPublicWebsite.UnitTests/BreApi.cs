@@ -30,6 +30,7 @@ public class BreApi
             breHotWaterCylinder: null,
             breOccupants: null,
             breHeatingPatternType: BreHeatingPatternType.MorningAndEvening,
+            breNormalDaysOffHours: null,
             breTemperature: null
         );
         

@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 
 namespace SeaPublicWebsite.Helpers
 {
     public class RandomHelper
     {
-        public static string Generate8DigitReference()
+        public static string Generate8CharacterReference()
         {
             string characters = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
             string reference = "";

@@ -1,7 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Helpers
-@using SeaPublicWebsite.Models.EnergyEfficiency.QuestionOptions
+
 @model SeaPublicWebsite.Models.EnergyEfficiency.OutdoorSpaceViewModel
 @{
     ViewBag.Title = "Outdoor space for heat pump";
@@ -11,9 +10,7 @@
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = Model.Change
-            ? @Url.Action("AnswerSummary", "EnergyEfficiency", new {reference = Model.Reference})
-            : @Url.Action("GlazingType_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+        Href = Model.BackLink,
         
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
@@ -24,19 +21,31 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("OutdoorSpace_Post", "EnergyEfficiency", new {reference = Model.Reference, change = Model.Change})" method="post" novalidate>
+        <form action="@Url.Action("OutdoorSpace_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+            @(Html.HiddenFor(m => m.EntryPoint))
+            @Html.AntiForgeryToken()
+            
+            @{
+                Func<object, object> details = 
+                    @<text>
+                        <p class="govuk-body">
+                            A heat pump is a heating technology transferring heat from outside to heat your rooms and hot water.
+                        </p>
+                        <p class="govuk-body">
+                            The most common type in the UK are air-to-water heat pumps, meaning they transfer heat energy in the
+                            air to water that is sent to your radiators or underfloor heating, as well as a hot water cylinder for providing hot water.
+                        </p>
+                     </text>;
+            }
             
             @(await Html.GovUkRadiosFor(m => m.HasOutdoorSpace,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
                     {
-                        Html = @<text>
-                                   <h1 class="govuk-fieldset__heading">
-                                       Do you have anywhere outside your home where you could fit a heat pump?                                  
-                                   </h1>
-                                </text>,
-                        Classes = "govuk-fieldset__legend--l"
+                        Text = "Do you have anywhere outside your home where you could fit a heat pump?", 
+                        Classes = "govuk-fieldset__legend--l",
+                        IsPageHeading = true
                     }
                 },
                 hintOptions: new HintViewModel
@@ -54,29 +63,20 @@
                                    If you don’t have a garden or don’t own any land next to your home, then you may not 
                                    have anywhere that could fit the external unit of a heat pump.
                                </p>
-                               <details class="govuk-details" data-module="govuk-details">
-                                   <summary class="govuk-details__summary">
-                                       <span class="govuk-details__summary-text">
-                                           What is a heat pump?
-                                       </span>
-                                   </summary>
-                                   <div class="govuk-details__text">
-                                       <p class="govuk-body">
-                                           A heat pump is a heating technology transferring heat from outside to heat your rooms and hot water.
-                                       </p>
-                                       <p class="govuk-body">
-                                           The most common type in the UK are air-to-water heat pumps, meaning they transfer heat energy in the 
-                                           air to water that is sent to your radiators or underfloor heating, as well as a hot water cylinder for providing hot water.
-                                       </p>
-                                   </div>
-                               </details>
+                               
+                               @await Html.GovUkDetails(new DetailsViewModel
+                               {
+                                   SummaryText = "What is a heat pump?",
+                                   Html = details
+                               })
                             </text>
                 }
             ))
 
-            <button class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+            @await Html.GovUkButton(new ButtonViewModel
+            {
+                Text = "Continue"
+            })
             
         </form>
         
