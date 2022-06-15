@@ -311,50 +311,36 @@ namespace SeaPublicWebsite.Services
                 YearBuilt.From1996To2011 => "K",
                 YearBuilt.From2012ToPresent => "L",
                 //peer-reviewed assumptions:
-                _ => wallConstruction switch
+                _ => epcConstructionAgeBand switch
                 {
-                    WallConstruction.DoNotKnow => epcConstructionAgeBand switch
+                    HomeAge.Pre1900 => "A",
+                    HomeAge.From1900To1929 => "B",
+                    HomeAge.From1930To1949 => "C",
+                    HomeAge.From1950To1966 => "D",
+                    HomeAge.From1967To1975 => "E",
+                    HomeAge.From1976To1982 => "F",
+                    HomeAge.From1983To1990 => "G",
+                    HomeAge.From1991To1995 => "H",
+                    HomeAge.From1996To2002 => "I",
+                    HomeAge.From2003To2006 => "J",
+                    HomeAge.From2007ToPresent => "L",
+                    _ => wallConstruction switch
                     {
-                        HomeAge.Pre1900 => "A",
-                        HomeAge.From1900To1929 => "B",
-                        HomeAge.From1930To1949 => "C",
-                        HomeAge.From1950To1966 => "D",
-                        HomeAge.From1967To1975 => "E",
-                        HomeAge.From1976To1982 => "F",
-                        HomeAge.From1983To1990 => "G",
-                        HomeAge.From1991To1995 => "H",
-                        HomeAge.From1996To2002 => "I",
-                        HomeAge.From2003To2006 => "J",
-                        HomeAge.From2007ToPresent => "L",
-                        _ => "D",
-                    },
-                    WallConstruction.Solid => "B",
-                    WallConstruction.Cavity => cavityWallsInsulated switch
-                    {
-                        CavityWallsInsulated.DoNotKnow => epcConstructionAgeBand switch
+                        WallConstruction.DoNotKnow => "D",
+                        WallConstruction.Solid => "B",
+                        WallConstruction.Cavity => cavityWallsInsulated switch
                         {
-                            HomeAge.Pre1900 => "A",
-                            HomeAge.From1900To1929 => "B",
-                            HomeAge.From1930To1949 => "C",
-                            HomeAge.From1950To1966 => "D",
-                            HomeAge.From1967To1975 => "E",
-                            HomeAge.From1976To1982 => "F",
-                            HomeAge.From1983To1990 => "G",
-                            HomeAge.From1991To1995 => "H",
-                            HomeAge.From1996To2002 => "I",
-                            HomeAge.From2003To2006 => "J",
-                            HomeAge.From2007ToPresent => "L",
-                            _ => "D",
+                            CavityWallsInsulated.DoNotKnow => "D",
+                            CavityWallsInsulated.No => "D",
+                            CavityWallsInsulated.Some => "D",
+                            CavityWallsInsulated.All => "K",
+                            _ => throw new ArgumentOutOfRangeException()
                         },
-                        CavityWallsInsulated.No => "D",
-                        CavityWallsInsulated.Some => "D",
-                        CavityWallsInsulated.All => "K",
+                        WallConstruction.Mixed => "B",
+                        WallConstruction.Other => "D",
                         _ => throw new ArgumentOutOfRangeException()
                     },
-                    WallConstruction.Mixed => "B",
-                    WallConstruction.Other => "D",
-                    _ => throw new ArgumentOutOfRangeException()
-                }
+                },
             };
         }
 
