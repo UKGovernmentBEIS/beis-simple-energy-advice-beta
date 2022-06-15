@@ -1371,6 +1371,18 @@ public class QuestionFlowServiceTests
             new Input(
                 QuestionFlowPage.RoofConstruction,
                 "ABCDEFGH",
+                roofConstruction: RoofConstruction.Pitched
+            ),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.LoftSpace_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
+            )),
+        new(
+            "Roof construction continues to loft space if roof is mixed",
+            new Input(
+                QuestionFlowPage.RoofConstruction,
+                "ABCDEFGH",
                 roofConstruction: RoofConstruction.Mixed
             ),
             new PathByActionArguments(
@@ -1429,11 +1441,11 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Loft space continues to glazing type if user does not know it",
+            "Loft space continues to glazing type if user does not have it",
             new Input(
                 QuestionFlowPage.LoftSpace,
                 "ABCDEFGH",
-                loftSpace: LoftSpace.DoNotKnow
+                loftSpace: LoftSpace.No
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.GlazingType_Get),
