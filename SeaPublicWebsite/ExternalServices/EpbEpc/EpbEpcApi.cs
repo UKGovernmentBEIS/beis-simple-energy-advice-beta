@@ -88,6 +88,13 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             }
 
             var epc = response.Data.Assessment;
+
+            // We do not surface "SAP" report data since we can't convert it to our questions answers.
+            if (epc.AssessmentType.Equals("SAP", StringComparison.OrdinalIgnoreCase))
+            {
+                return null;
+            }
+            
             return new Epc
             {
                 EpcId = epcId,
