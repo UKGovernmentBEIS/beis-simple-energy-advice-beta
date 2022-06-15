@@ -393,10 +393,10 @@ namespace SeaPublicWebsite.Services
                     BreRoofType.FlatRoofWithInsulation,
                 RoofConstruction.Pitched or RoofConstruction.Mixed => loftSpace switch
                 {
-                    LoftSpace.No or LoftSpace.DoNotKnow => BreRoofType.DontKnow,
+                    LoftSpace.No => BreRoofType.DontKnow,
                     LoftSpace.Yes => loftAccess switch
                     {
-                        LoftAccess.No or LoftAccess.DoNotKnow => BreRoofType.DontKnow,
+                        LoftAccess.No => BreRoofType.DontKnow,
                         LoftAccess.Yes => roofInsulated switch
                         {
                             RoofInsulated.DoNotKnow => BreRoofType.DontKnow,
