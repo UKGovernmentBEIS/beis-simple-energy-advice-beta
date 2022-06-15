@@ -207,9 +207,8 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             }
             
             // biomass boiler check
-            if (epc.MainFuelType.Equals("??") ||
-                epc.MainFuelType.Equals("??") ||
-                epc.MainFuelType.Contains("??", StringComparison.OrdinalIgnoreCase))
+            if (epc.MainFuelType.Equals("7") ||
+                epc.MainFuelType.Contains("biomass", StringComparison.OrdinalIgnoreCase))
             {
                 return OtherHeatingType.Biomass;
             }
