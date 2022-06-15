@@ -85,37 +85,19 @@
                 hintOptions: new HintViewModel
                 {
                     Html = @<text>
-                               @if (Model.YearBuilt.HasValue)
-                               {
-                                   @if (Model.YearBuilt.Value < YearBuilt.From1983To1995)
-                                   {
-                                       <p class="govuk-body">
-                                           Cavity walls built before 1991 are typically uninsulated, unless you or someone before you had insulation installed.
-                                       </p>
-                                   }
-                                   else
-                                   {
-                                       <p class="govuk-body">
-                                           Cavity walls built after 1991 are typically insulated.
-                                       </p>
-                                   }
-                               }
-                               else
-                               {
-                                   <p class="govuk-body">
-                                       Cavity walls built before 1991 are typically uninsulated, unless you or someone before you had insulation installed. 
-                                   </p>
-                                   <p class="govuk-body">
-                                       Cavity walls built after 1991 were typically built with insulating material between the outer and inner walls.
-                                   </p>
-                               }
-                               
+                               <p class="govuk-body">
+                                   Cavity walls built before 1991 are typically uninsulated, unless you or someone before you had insulation installed.
+                               </p>
+                               <p class="govuk-body">
+                                   Cavity walls built after 1991 were typically built with insulating material between the outer and inner walls.
+                               </p>
+
                                @await Html.GovUkDetails(new DetailsViewModel
                                {
                                    SummaryText = "Help me answer this question",
                                    Html = details
                                })
-                               
+
                                @if (epcHint is not null)
                                {
                                    @await Html.GovUkInsetText(new InsetTextViewModel

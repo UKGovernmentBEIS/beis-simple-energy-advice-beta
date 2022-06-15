@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SeaPublicWebsite.Data;
@@ -11,13 +12,14 @@ using SeaPublicWebsite.Data;
 namespace SeaPublicWebsite.Data.Migrations
 {
     [DbContext(typeof(SeaDbContext))]
-    partial class SeaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220613161525_AddDataProtection")]
+    partial class AddDataProtection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -43,11 +45,8 @@ namespace SeaPublicWebsite.Data.Migrations
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.Epc", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<string>("EpcId")
+                        .HasColumnType("text");
 
                     b.Property<string>("Address1")
                         .HasColumnType("text");
@@ -63,9 +62,6 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.Property<int?>("ConstructionAgeBand")
                         .HasColumnType("integer");
-
-                    b.Property<string>("EpcId")
-                        .HasColumnType("text");
 
                     b.Property<int?>("FlatType")
                         .HasColumnType("integer");
@@ -109,7 +105,7 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("WallConstruction")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.HasKey("EpcId");
 
                     b.ToTable("Epc");
                 });
@@ -134,8 +130,8 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("Country")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("EpcId")
-                        .HasColumnType("integer");
+                    b.Property<string>("EpcId")
+                        .HasColumnType("text");
 
                     b.Property<int?>("FlatType")
                         .HasColumnType("integer");

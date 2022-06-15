@@ -29,13 +29,10 @@
                 Func<object, object> details = 
                     @<text>
                         <p class="govuk-body">
-                            A loft area is an unheated space without walls and ceilings, immediately beneath the pitched roof. You will usually be able to see the roof timbers.
+                            A loft is an unheated space without walls and ceilings, immediately beneath the pitched roof. You will usually be able to see the roof timbers.
                         </p>
                         <p class="govuk-body">
-                            It is accessible if an installer could easily get into it to do some work – for example, if there is an existing loft hatch and some of the space is big enough for someone to stand up in it.
-                        </p>
-                        <p class="govuk-body">
-                            If all the space under your pitched roof, or nearly all the space, is used as living space with finished walls and ceilings then you don’t have an accessible loft.
+                            If all the space under your pitched roof, or nearly all the space, is used as living space with finished walls and ceilings then the loft has been converted into a room.
                         </p>
                      </text>;
             }
@@ -45,7 +42,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "Do you have an accessible loft area that hasn’t been converted into a room?",
+                        Text = "Do you have a loft loft that hasn’t been converted into a room?",
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -55,7 +52,7 @@
                     Html = @<text>
                                @await Html.GovUkDetails(new DetailsViewModel
                                {
-                                   SummaryText = "Help me answer this question",
+                                   SummaryText = "Help me decide if I have a loft",
                                    Html = details
                                })
                             </text>

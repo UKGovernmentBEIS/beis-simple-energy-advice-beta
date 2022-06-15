@@ -79,8 +79,7 @@
             //measures_package consists of all measures implemented in the BRE API as of May 2021
             measures_package = new[]
             {
-                "A", "A2", "B", "Q", "Q1", "W1", "W2", "D", "C", "F", "G", "I", "T", "L2", "N", "Y", "O", "O3", "X",
-                "U"
+                "A", "B", "Q", "Q1", "W1", "W2", "D", "C", "F", "G", "L2", "N", "O", "O3", "X", "U"
             };
         }
     }

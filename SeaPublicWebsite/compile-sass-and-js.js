@@ -11,6 +11,7 @@ var pathToVisualStudioDebugDirectory = './bin/Debug/net6.0/';
 
 var inputDirectory = './wwwroot';
 var inputJsDirectory = './wwwroot/js';
+var inputJsBundleDirectory = './wwwroot/js/bundle';
 var outputDirectory = './wwwroot/compiled';
 
 
@@ -61,8 +62,15 @@ function compileSass(inputFile, outputFileNamePrefix, options) {
 
     console.log(`Compiling SASS from file [${inputFile}]`);
 
-    // Render the SASS to string
-    var renderResult = sass.compile(inputFile);
+    // The GovUk frontend SASS currently causes build warnings when built with
+    // Dart SASS. There are plans to eventually fix this, but they can't be
+    // enacted right now.
+    // So our only other option is to use a load path so that we can also use
+    // the Quiet Deps option.
+    var renderResult = sass.compile(inputFile, {
+        loadPaths: [ 'node_modules/govuk-frontend' ],
+        quietDeps: true
+    });
 
     if (renderResult) {
         // Compute the hash of the compiled SASS
@@ -79,23 +87,35 @@ function compileSass(inputFile, outputFileNamePrefix, options) {
 }
 
 function compileJs(options) {
-    function saveAction(directory) {
+    function saveAction(directory, hashResult, prefix) {
         // Generate the filename, based on the hash
-        var outputFilePath = `${directory + outputDirectory}/app-${hashResult}.js`;
+        var outputFilePath = `${directory + outputDirectory}/${prefix ?? 'app'}-${hashResult}.js`;
         console.log(`Saving JS to file [${outputFilePath}]`);
 
         // Save the JS
         fs.writeFileSync(outputFilePath, minifyResult.code);
     }
+    
+    function saveToUniqueFile(code, prefix) {
+        // Compute the hash of the compiled JS
+        var hash = crypto.createHash('sha256');
+        hash.update(code);
+        var hashResult = hash.digest('hex');
 
-    console.log(`Compiling JS`);
-    var files = fs.readdirSync(inputJsDirectory);
+        saveAction(pathToCurrentDirectory, hashResult, prefix);
+        if (options.runningLocally) {
+            saveAction(pathToVisualStudioDebugDirectory, hashResult, prefix);
+        }
+    }
+
+    console.log(`Compiling JS bundle`);
+    var bundleFiles = fs.readdirSync(inputJsBundleDirectory);
 
     var code = {};
 
-    files.forEach(function (fileName) {
+    bundleFiles.forEach(function (fileName) {
         if (fileName.endsWith('.js')) {
-            var filePath = path.join(inputJsDirectory, fileName);
+            var filePath = path.join(inputJsBundleDirectory, fileName);
             var fileContents = fs.readFileSync(filePath, { encoding: 'utf8' });
             code[fileName] = fileContents;
         }
@@ -108,18 +128,21 @@ function compileJs(options) {
     var minifyResult = UglifyJS.minify(code, minifyOptions);
 
     if (minifyResult.code) {
-        // Compute the hash of the compiled JS
-        var hash = crypto.createHash('sha256');
-        hash.update(minifyResult.code);
-        var hashResult = hash.digest('hex');
-
-        saveAction(pathToCurrentDirectory);
-        if (options.runningLocally) {
-            saveAction(pathToVisualStudioDebugDirectory);
-        }
+        saveToUniqueFile(minifyResult.code)
     } else {
         console.log("MINIFY ERROR: " + minifyResult.error)
     }
+
+    console.log(`Compiling individual JS files`);
+    var files = fs.readdirSync(inputJsDirectory);
+
+    files.forEach(function (fileName) {
+        if (fileName.endsWith('.js')) {
+            var filePath = path.join(inputJsDirectory, fileName);
+            var fileContents = fs.readFileSync(filePath, { encoding: 'utf8' });
+            saveToUniqueFile(fileContents, fileName.slice(0, -3));
+        }
+    });
 }
 
 async function fullRecompile(options) {
@@ -127,6 +150,7 @@ async function fullRecompile(options) {
     deleteExistingCompiledCssAndJsFiles(options);
 
     compileSass('./wwwroot/css/app.scss', 'app', options);
+    compileSass('./wwwroot/css/app-ie8.scss', 'app-ie8', options);
 
     compileJs(options);
 }
