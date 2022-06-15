@@ -27,6 +27,23 @@
             @(Html.HiddenFor(m => m.EntryPoint))
             @Html.AntiForgeryToken()
             
+            @{
+                Func<object, object> epcHint = null;
+                if (Model.Epc?.OtherHeatingType is not null)
+                {
+                    epcHint = 
+                        @<p class="govuk-body">
+                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests your main heating system is
+                            <strong>
+                                @(Model.Epc?.OtherHeatingType switch {
+                                    OtherHeatingType.Biomass => "biomass boiler",
+                                    OtherHeatingType.CoalOrSolidFuel => "coal or solid fuel heating",
+                                    _ => throw new ArgumentOutOfRangeException()})
+                            </strong>
+                        </p>;
+                }
+            }
+            
             @(await Html.GovUkRadiosFor(m => m.OtherHeatingType,
                 fieldsetOptions: new FieldsetViewModel
                 {
@@ -36,6 +53,19 @@
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
+                },
+                hintOptions: new HintViewModel
+                {
+                    Html = @<text>
+                               @if (epcHint is not null)
+                               {
+                                   @await Html.GovUkInsetText(new InsetTextViewModel
+                                   {
+                                       Classes = "sea-epc-hint",
+                                       Html = epcHint
+                                   })
+                               }
+                            </text>
                 },
                 radioHints: new Dictionary<OtherHeatingType, HintViewModel>
                 {

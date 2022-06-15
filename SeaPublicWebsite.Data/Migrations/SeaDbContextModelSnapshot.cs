@@ -91,6 +91,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<DateTime?>("LodgementDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int?>("OtherHeatingType")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Postcode")
                         .HasColumnType("text");
 

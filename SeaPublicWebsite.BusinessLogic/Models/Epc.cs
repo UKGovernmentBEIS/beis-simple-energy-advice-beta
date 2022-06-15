@@ -18,6 +18,7 @@ namespace SeaPublicWebsite.BusinessLogic.Models
         public BungalowType? BungalowType { get; set; }
         public FlatType? FlatType { get; set; }
         public HeatingType? HeatingType { get; set; }
+        public OtherHeatingType? OtherHeatingType { get; set; }
         public WallConstruction? WallConstruction { get; set; }
         public SolidWallsInsulated? SolidWallsInsulated { get; set; }
         public CavityWallsInsulated? CavityWallsInsulated { get; set; }
