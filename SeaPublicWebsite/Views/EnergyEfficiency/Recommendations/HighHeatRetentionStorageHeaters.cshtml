@@ -62,7 +62,8 @@
             </p>
             
             <p class="govuk-body govuk-!-margin-bottom-6">
-                Under Development
+                You can find more information on high heat retention storage heaters on the
+                <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/electric-heating/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
             </p>
 
             <h2 class="govuk-heading-m">Who this improvement is suitable for</h2>
@@ -85,7 +86,7 @@
                 What you could save
             </h2>
 
-            <p class="govuk-body">High heat retention storage heaters are typically expected to last <b>around @Model.UserRecommendation.Lifetime years</b></p>
+            <p class="govuk-body">High heat retention storage heaters are typically expected to last <b>around @Model.PropertyRecommendation.Lifetime years</b></p>
 
             @{ await Html.RenderPartialAsync("Partials/WhatYouCouldSavePartial.cshtml", Model); }
             

@@ -29,14 +29,6 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "A2", new BreRecommendation
-                    {
-                        Key = RecommendationKey.FlatRoofInsulation,
-                        Title = "Flat roof insulation",
-                        Summary = "Under Development"
-                    }
-                },
-                {
                     "B", new BreRecommendation
                     {
                         Key = RecommendationKey.InsulateCavityWalls,
@@ -109,22 +101,6 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "I", new BreRecommendation
-                    {
-                        Key = RecommendationKey.ReplaceCondensingBoiler,
-                        Title = "Replace your gas boiler",
-                        Summary = "Under Development"
-                    }
-                },
-                {
-                    "T", new BreRecommendation
-                    {
-                        Key = RecommendationKey.CondensingGasBoiler,
-                        Title = "Condensing gas boiler (fuel switch)",
-                        Summary = "Under Development"
-                    }
-                },
-                {
                     "L2", new BreRecommendation
                     {
                         Key = RecommendationKey.HighHeatRetentionStorageHeaters,
@@ -137,14 +113,6 @@ namespace SeaPublicWebsite.Services
                     {
                         Key = RecommendationKey.SolarWaterHeating,
                         Title = "Solar water heating",
-                        Summary = "Under Development"
-                    }
-                },
-                {
-                    "Y", new BreRecommendation
-                    {
-                        Key = RecommendationKey.MixerShowerHeatRecoverySystem,
-                        Title = "Heat recovery system for mixer showers",
                         Summary = "Under Development"
                     }
                 },
