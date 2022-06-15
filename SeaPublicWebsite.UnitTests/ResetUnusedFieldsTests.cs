@@ -161,12 +161,13 @@ public class ResetUnusedFieldsTests
             }
         ),
         new(
-            "Setting roof construction to flat type resets accessible loft space and roof insulation",
+            "Setting roof construction to flat type resets loft space, loft access and roof insulation",
             new()
             {
                 PropertyType = PropertyType.House,
                 RoofConstruction = RoofConstruction.Flat,
                 LoftSpace = LoftSpace.Yes,
+                LoftAccess = LoftAccess.Yes,
                 RoofInsulated = RoofInsulated.Yes
             },
             new()
@@ -176,19 +177,38 @@ public class ResetUnusedFieldsTests
             }
         ),
         new(
-            "Setting accessible loft space to not be 'Yes' resets roof insulation",
+            "Setting loft space to 'No' resets loft access roof insulation",
             new()
             {
                 PropertyType = PropertyType.House,
                 RoofConstruction = RoofConstruction.Mixed,
-                LoftSpace = LoftSpace.DoNotKnow,
+                LoftSpace = LoftSpace.No,
+                LoftAccess = LoftAccess.Yes,
                 RoofInsulated = RoofInsulated.Yes
             },
             new()
             {
                 PropertyType = PropertyType.House,
                 RoofConstruction = RoofConstruction.Mixed,
-                LoftSpace = LoftSpace.DoNotKnow,
+                LoftSpace = LoftSpace.No,
+            }
+        ),
+        new(
+            "Setting loft access to 'No' resets roof insulation",
+            new()
+            {
+                PropertyType = PropertyType.House,
+                RoofConstruction = RoofConstruction.Mixed,
+                LoftSpace = LoftSpace.Yes,
+                LoftAccess = LoftAccess.No,
+                RoofInsulated = RoofInsulated.Yes
+            },
+            new()
+            {
+                PropertyType = PropertyType.House,
+                RoofConstruction = RoofConstruction.Mixed,
+                LoftSpace = LoftSpace.Yes,
+                LoftAccess = LoftAccess.No,
             }
         ),
         new(
