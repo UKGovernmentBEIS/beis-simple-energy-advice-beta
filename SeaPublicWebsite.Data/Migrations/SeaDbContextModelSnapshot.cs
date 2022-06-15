@@ -122,9 +122,6 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PropertyDataId"));
 
-                    b.Property<int?>("AccessibleLoftSpace")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("BungalowType")
                         .HasColumnType("integer");
 
@@ -171,6 +168,12 @@ namespace SeaPublicWebsite.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<int?>("HouseType")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoftAccess")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoftSpace")
                         .HasColumnType("integer");
 
                     b.Property<int?>("NumberOfOccupants")

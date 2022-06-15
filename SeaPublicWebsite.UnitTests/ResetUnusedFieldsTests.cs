@@ -119,7 +119,7 @@ public class ResetUnusedFieldsTests
                 PropertyType = PropertyType.ApartmentFlatOrMaisonette,
                 FlatType = FlatType.GroundFloor,
                 RoofConstruction = RoofConstruction.Mixed,
-                AccessibleLoftSpace = AccessibleLoftSpace.Yes,
+                LoftSpace = LoftSpace.Yes,
                 RoofInsulated = RoofInsulated.Yes
             },
             new()
@@ -137,7 +137,7 @@ public class ResetUnusedFieldsTests
                 FloorConstruction = FloorConstruction.Mix,
                 FloorInsulated = FloorInsulated.Yes,
                 RoofConstruction = RoofConstruction.Mixed,
-                AccessibleLoftSpace = AccessibleLoftSpace.Yes,
+                LoftSpace = LoftSpace.Yes,
                 RoofInsulated = RoofInsulated.Yes
             },
             new()
@@ -166,7 +166,7 @@ public class ResetUnusedFieldsTests
             {
                 PropertyType = PropertyType.House,
                 RoofConstruction = RoofConstruction.Flat,
-                AccessibleLoftSpace = AccessibleLoftSpace.Yes,
+                LoftSpace = LoftSpace.Yes,
                 RoofInsulated = RoofInsulated.Yes
             },
             new()
@@ -181,14 +181,14 @@ public class ResetUnusedFieldsTests
             {
                 PropertyType = PropertyType.House,
                 RoofConstruction = RoofConstruction.Mixed,
-                AccessibleLoftSpace = AccessibleLoftSpace.DoNotKnow,
+                LoftSpace = LoftSpace.DoNotKnow,
                 RoofInsulated = RoofInsulated.Yes
             },
             new()
             {
                 PropertyType = PropertyType.House,
                 RoofConstruction = RoofConstruction.Mixed,
-                AccessibleLoftSpace = AccessibleLoftSpace.DoNotKnow,
+                LoftSpace = LoftSpace.DoNotKnow,
             }
         ),
         new(

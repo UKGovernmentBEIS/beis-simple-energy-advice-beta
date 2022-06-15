@@ -108,7 +108,7 @@ namespace SeaPublicWebsite.Helpers
         public static bool HasRoofInsulation(PropertyData propertyData)
         {
             return propertyData.RoofConstruction is RoofConstruction.Pitched or RoofConstruction.Mixed
-                   && propertyData.AccessibleLoftSpace is AccessibleLoftSpace.Yes or AccessibleLoftSpace.DoNotKnow
+                   && propertyData.LoftSpace is LoftSpace.Yes or LoftSpace.DoNotKnow
                    && (propertyData.RoofInsulated == RoofInsulated.Yes || propertyData.RoofInsulated == RoofInsulated.DoNotKnow
                        && (!propertyData.YearBuilt.HasValue && propertyData.Epc?.ConstructionAgeBand > HomeAge.From1996To2002 ||
                            propertyData.YearBuilt > 2002));
@@ -177,10 +177,15 @@ namespace SeaPublicWebsite.Helpers
 
             if (propertyData.RoofConstruction is not RoofConstruction.Mixed and not RoofConstruction.Pitched)
             {
-                propertyData.AccessibleLoftSpace = null;
+                propertyData.LoftSpace = null;
             }
 
-            if (propertyData.AccessibleLoftSpace is not AccessibleLoftSpace.Yes)
+            if (propertyData.LoftSpace is not LoftSpace.Yes and not LoftSpace.No)
+            {
+                propertyData.LoftAccess = null;
+            }
+
+            if (propertyData.LoftAccess is not LoftAccess.Yes and not LoftAccess.DoNotKnow)
             {
                 propertyData.RoofInsulated = null;
             }
