@@ -6,6 +6,8 @@ namespace SeaPublicWebsite.BusinessLogic.Models
 {
     public class Epc
     {
+        // PRIMARY KEY
+        public int Id { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string Postcode { get; set; }
