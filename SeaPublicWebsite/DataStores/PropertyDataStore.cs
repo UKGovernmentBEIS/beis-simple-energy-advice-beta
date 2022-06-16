@@ -25,6 +25,7 @@ public class PropertyDataStore
     public async Task<PropertyData> LoadPropertyDataAsync(string reference)
     {
         var data = await dataAccessProvider.GetPropertyDataAsync(reference.ToUpper());
+        data.PropertyRecommendations.Sort(Comparer<PropertyRecommendation>.Create((p1, p2) => p1.Key.CompareTo(p2.Key)));
         
         if (data == null)
         {
