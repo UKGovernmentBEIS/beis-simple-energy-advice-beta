@@ -333,7 +333,7 @@ namespace SeaPublicWebsite.Services
                             CavityWallsInsulated.DoNotKnow => "D",
                             CavityWallsInsulated.No => "D",
                             CavityWallsInsulated.Some => "D",
-                            CavityWallsInsulated.All => "K",
+                            CavityWallsInsulated.All => "I",
                             _ => throw new ArgumentOutOfRangeException()
                         },
                         WallConstruction.Mixed => "B",
