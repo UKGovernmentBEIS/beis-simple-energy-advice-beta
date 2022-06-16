@@ -24,16 +24,8 @@ namespace SeaPublicWebsite.Services
                     "A", new BreRecommendation
                     {
                         Key = RecommendationKey.AddLoftInsulation,
-                        Title = "Add some loft insulation",
+                        Title = "Add some more loft insulation",
                         Summary = "Increase the level of insulation in your loft to the recommended level of 300mm"
-                    }
-                },
-                {
-                    "A2", new BreRecommendation
-                    {
-                        Key = RecommendationKey.FlatRoofInsulation,
-                        Title = "Flat roof insulation",
-                        Summary = "Under Development"
                     }
                 },
                 {
@@ -47,57 +39,33 @@ namespace SeaPublicWebsite.Services
                 {
                     "Q", new BreRecommendation
                     {
-                        Key = RecommendationKey.WallInsulationBrickAgeAToD,
-                        Title = "Wall insulation Brick age A-D",
-                        Summary = "Under Development"
+                        Key = RecommendationKey.InsulateSolidWalls,
+                        Title = "Insulate your solid walls",
+                        Summary = "Insulate your solid walls (brick walls age A-D)"
                     }
                 },
                 {
                     "Q1", new BreRecommendation
                     {
-                        Key = RecommendationKey.WallInsulationOther,
-                        Title = "Wall insulation Other",
-                        Summary = "Under Development"
+                        Key = RecommendationKey.InsulateSolidWalls,
+                        Title = "Insulate your solid walls",
+                        Summary = "Insulate your solid walls (other wall types)"
                     }
                 },
                 {
                     "W1", new BreRecommendation
                     {
                         Key = RecommendationKey.FloorInsulationSuspendedFloor,
-                        Title = "Floor insulation suspended floor",
-                        Summary = "Under Development"
-                    }
-                },
-                {
-                    "W2", new BreRecommendation
-                    {
-                        Key = RecommendationKey.FloorInsulationSolidFloor,
-                        Title = "Floor insulation solid floor",
-                        Summary = "Under Development"
-                    }
-                },
-                {
-                    "D", new BreRecommendation
-                    {
-                        Key = RecommendationKey.DraughtproofWindowsAndDoors,
-                        Title = "Draughtproof 100% of windows and doors",
-                        Summary = "Under Development"
+                        Title = "Insulate the ground floor",
+                        Summary = "Insulate the ground floor"
                     }
                 },
                 {
                     "C", new BreRecommendation
                     {
                         Key = RecommendationKey.HotWaterCylinderInsulation,
-                        Title = "Hot water cylinder insulation",
-                        Summary = "Under Development"
-                    }
-                },
-                {
-                    "F", new BreRecommendation
-                    {
-                        Key = RecommendationKey.HotWaterCylinderThermostat,
-                        Title = "Hot water cylinder thermostat",
-                        Summary = "Under Development"
+                        Title = "Insulate your hot water cylinder",
+                        Summary = "Insulate your hot water cylinder"
                     }
                 },
                 {
@@ -109,51 +77,11 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "I", new BreRecommendation
-                    {
-                        Key = RecommendationKey.ReplaceCondensingBoiler,
-                        Title = "Replacement condensing boiler",
-                        Summary = "Under Development"
-                    }
-                },
-                {
-                    "T", new BreRecommendation
-                    {
-                        Key = RecommendationKey.CondensingGasBoiler,
-                        Title = "Condensing gas boiler (fuel switch)",
-                        Summary = "Under Development"
-                    }
-                },
-                {
                     "L2", new BreRecommendation
                     {
                         Key = RecommendationKey.HighHeatRetentionStorageHeaters,
-                        Title = "High heat retention storage heaters",
-                        Summary = "Under Development"
-                    }
-                },
-                {
-                    "N", new BreRecommendation
-                    {
-                        Key = RecommendationKey.SolarWaterHeating,
-                        Title = "Solar water heating",
-                        Summary = "Under Development"
-                    }
-                },
-                {
-                    "Y", new BreRecommendation
-                    {
-                        Key = RecommendationKey.MixerShowerHeatRecoverySystem,
-                        Title = "Heat recovery system for mixer showers",
-                        Summary = "Under Development"
-                    }
-                },
-                {
-                    "O", new BreRecommendation
-                    {
-                        Key = RecommendationKey.ReplaceSingleGlazedWindowsWithLowEDoubleGlazing,
-                        Title = "Replace single glazed windows with low-E double glazing",
-                        Summary = "Under Development"
+                        Title = "Upgrade to high heat retention storage heaters",
+                        Summary = "Upgrade to high heat retention storage heaters"
                     }
                 },
                 {
@@ -162,14 +90,6 @@ namespace SeaPublicWebsite.Services
                         Key = RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
                         Title = "Fit new windows",
                         Summary = "Replace old single glazed windows with new double or triple glazing"
-                    }
-                },
-                {
-                    "X", new BreRecommendation
-                    {
-                        Key = RecommendationKey.HighPerformanceExternalDoors,
-                        Title = "High performance external doors",
-                        Summary = "Under Development"
                     }
                 },
                 {

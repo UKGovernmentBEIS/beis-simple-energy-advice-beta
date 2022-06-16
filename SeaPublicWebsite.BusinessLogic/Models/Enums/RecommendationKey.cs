@@ -3,15 +3,15 @@
     public enum RecommendationKey
     { 
         AddLoftInsulation,
-        GroundFloorInsulation,
+        FloorInsulationSuspendedFloor,
         UpgradeHeatingControls,
-        FitNewWindows,
+        ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
         InsulateCavityWalls,
         SolarElectricPanels,
         FlatRoofInsulation,
         WallInsulationBrickAgeAToD,
         WallInsulationOther,
-        FloorInsulationSuspendedFloor,
+        InsulateSolidWalls,
         FloorInsulationSolidFloor,
         DraughtproofWindowsAndDoors,
         HotWaterCylinderInsulation,
@@ -22,7 +22,6 @@
         SolarWaterHeating,
         MixerShowerHeatRecoverySystem,
         ReplaceSingleGlazedWindowsWithLowEDoubleGlazing,
-        ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
         HighPerformanceExternalDoors
     }
 }
