@@ -486,21 +486,74 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 return null;
             }
 
-            return epc.PropertyAgeBand switch
+            if (epc.PropertyAgeBand.Equals("A", StringComparison.OrdinalIgnoreCase) ||
+                epc.PropertyAgeBand.Contains("before 1900"))
             {
-                "A" => HomeAge.Pre1900,
-                "B" => HomeAge.From1900To1929,
-                "C" => HomeAge.From1930To1949,
-                "D" => HomeAge.From1950To1966,
-                "E" => HomeAge.From1967To1975,
-                "F" => HomeAge.From1976To1982,
-                "G" => HomeAge.From1983To1990,
-                "H" => HomeAge.From1991To1995,
-                "I" => HomeAge.From1996To2002,
-                "J" => HomeAge.From2003To2006,
-                "K" or "L" => HomeAge.From2007ToPresent,
-                _ => null
-            };
+                return HomeAge.Pre1900;
+            }
+            
+            if (epc.PropertyAgeBand.Equals("B", StringComparison.OrdinalIgnoreCase) ||
+                epc.PropertyAgeBand.Contains("1900-1929"))
+            {
+                return HomeAge.From1900To1929;
+            }
+            
+            if (epc.PropertyAgeBand.Equals("C", StringComparison.OrdinalIgnoreCase) ||
+                epc.PropertyAgeBand.Contains("1930-1949"))
+            {
+                return HomeAge.From1930To1949;
+            }
+            
+            if (epc.PropertyAgeBand.Equals("D", StringComparison.OrdinalIgnoreCase) ||
+                epc.PropertyAgeBand.Contains("1950-1966"))
+            {
+                return HomeAge.From1950To1966;
+            }
+            
+            if (epc.PropertyAgeBand.Equals("E", StringComparison.OrdinalIgnoreCase) ||
+                epc.PropertyAgeBand.Contains("1967-1975"))
+            {
+                return HomeAge.From1967To1975;
+            }
+            
+            if (epc.PropertyAgeBand.Equals("F", StringComparison.OrdinalIgnoreCase) ||
+                epc.PropertyAgeBand.Contains("1976-1982"))
+            {
+                return HomeAge.From1976To1982;
+            }
+            
+            if (epc.PropertyAgeBand.Equals("G", StringComparison.OrdinalIgnoreCase) ||
+                epc.PropertyAgeBand.Contains("1983-1990"))
+            {
+                return HomeAge.From1983To1990;
+            }
+            
+            if (epc.PropertyAgeBand.Equals("H", StringComparison.OrdinalIgnoreCase) ||
+                epc.PropertyAgeBand.Contains("1991-1995"))
+            {
+                return HomeAge.From1991To1995;
+            }
+            
+            if (epc.PropertyAgeBand.Equals("I", StringComparison.OrdinalIgnoreCase) ||
+                epc.PropertyAgeBand.Contains("1996-2002"))
+            {
+                return HomeAge.From1996To2002;
+            }
+            
+            if (epc.PropertyAgeBand.Equals("J", StringComparison.OrdinalIgnoreCase) ||
+                epc.PropertyAgeBand.Contains("2003-2006"))
+            {
+                return HomeAge.From1900To1929;
+            }
+            
+            if (epc.PropertyAgeBand.Equals("B", StringComparison.OrdinalIgnoreCase) ||
+                epc.PropertyAgeBand.Contains("2007-2011") ||
+                epc.PropertyAgeBand.Contains("2012 onwards"))
+            {
+                return HomeAge.From2007ToPresent;
+            }
+
+            return null;
         }
 
         private static RoofConstruction? GetRoofConstructionFromEpc(EpbEpcAssessmentDto epc)

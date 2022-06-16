@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.BusinessLogic.Models.Enums
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.HomeAgeViewModel
 @{
@@ -24,56 +25,80 @@
         <form action="@Url.Action("HomeAge_Post", "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
             @Html.AntiForgeryToken()
             @(Html.HiddenFor(m => m.EntryPoint))
+            
+            @{
+                Func<object,object> details = 
+                    @<text>
+                        <p class="govuk-body">
+                            You may find information about the age of the property in title deeds or other paperwork you received when
+                            you bought your home, or home insurance paperwork.
+                        </p>
+                        <p class="govuk-body">
+                            If your property is a conversion, enter the year the building was originally built, regardless of
+                            what the building was used for before it was your home.
+                        </p>
+                        <p class="govuk-body">
+                            If your property has been extended, enter the year of the oldest part of the building.
+                        </p>
+                     </text>;
 
-            <div class="govuk-form-group">
-                <fieldset class="govuk-fieldset">
-                    @(await Html.GovUkRadiosFor(m => m.YearBuilt,
-                        fieldsetOptions: new FieldsetViewModel
-                        {
-                            Legend = new LegendViewModel
-                            {
-                                Html = @<text>
-                                           <h1 class="govuk-fieldset__heading">
-                                               Roughly what year was your property built?
-                                           </h1>
-                                           <p class="govuk-body">
-                                               If you’re not sure when the property was built just pick an age band that seems about right.
-                                           </p>
-                                           <p class="govuk-body">
-                                               If you don’t know, you can skip this question. We will take a best guess based on other information you provide.
-                                           </p>
-                                        </text>,
-                                Classes = "govuk-fieldset__legend--l"
-                            }
-                        },
-                        new HintViewModel
-                        {
-                            Html = @<text>
-                                       <details class="govuk-details" data-module="govuk-details">
-                                           <summary class="govuk-details__summary">
-                                               <span class="govuk-details__summary-text">
-                                                   Help me answer this question
-                                               </span>
-                                           </summary>
-                                           <div class="govuk-details__text">
-                                               <p class="govuk-body">
-                                                   You may find information about the age of the property in title deeds or other paperwork you received when
-                                                   you bought your home, or home insurance paperwork.
-                                               </p>
-                                               <p class="govuk-body">
-                                                   If your property is a conversion, enter the year the building was originally built, regardless of
-                                                   what the building was used for before it was your home.
-                                               </p>
-                                               <p class="govuk-body">
-                                                   If your property has been extended, enter the year of the oldest part of the building.
-                                               </p>
-                                           </div>
-                                       </details>
-                                    </text>
-                        }
-                        ))
-                </fieldset>
-            </div>
+                Func<object, object> epcHint = null;
+                if (Model.Epc?.ConstructionAgeBand is not null)
+                {
+                    epcHint = 
+                        @<p class="govuk-body">
+                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests your property was built
+                            <strong>
+                                @(Model.Epc?.ConstructionAgeBand switch {
+                                    HomeAge.Pre1900 or HomeAge.From1900To1929 => "before 1900.",
+                                    HomeAge.From1930To1949 or HomeAge.From1950To1966 => "between 1930 and 1966.",
+                                    HomeAge.From1967To1975 or HomeAge.From1976To1982 => "between 1967 and 1982.",
+                                    HomeAge.From1983To1990 or HomeAge.From1991To1995 => "between 1983 and 1995.",
+                                    HomeAge.From1996To2002 or HomeAge.From2003To2006 => "between 1996 and 2011.",
+                                    HomeAge.From2007ToPresent => "on or after 2012.",
+                                    _ => throw new ArgumentOutOfRangeException()})
+                            </strong>
+                        </p>;
+                }
+            }
+
+            @(await Html.GovUkRadiosFor(m => m.YearBuilt,
+                fieldsetOptions: new FieldsetViewModel
+                {
+                    Legend = new LegendViewModel
+                    {
+                        Text = "Roughly what year was your property built?",
+                        Classes = "govuk-fieldset__legend--l",
+                        IsPageHeading = true
+                    }
+                },
+                new HintViewModel
+                {
+                    Html = @<text>
+                               <p class="govuk-body">
+                                   If you’re not sure when the property was built just pick an age band that seems about right.
+                               </p>
+                               <p class="govuk-body">
+                                   If you don’t know, you can skip this question. We will take a best guess based on other information you provide.
+                               </p>
+                               
+                               @await Html.GovUkDetails(new DetailsViewModel
+                               {
+                                   SummaryText = "Help me answer this question",
+                                   Html = details
+                               })
+
+                               @if (epcHint is not null)
+                               {
+                                   @await Html.GovUkInsetText(new InsetTextViewModel
+                                   {
+                                       Classes = "sea-epc-hint",
+                                       Html = epcHint
+                                   })
+                               }
+                               
+                            </text>
+                    }))
 
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
