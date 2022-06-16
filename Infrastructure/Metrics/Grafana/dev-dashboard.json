@@ -34,42 +34,6 @@
       "type": "row"
     },
     {
-      "alert": {
-        "alertRuleTags": {},
-        "conditions": [
-          {
-            "evaluator": {
-              "params": [
-                0
-              ],
-              "type": "gt"
-            },
-            "operator": {
-              "type": "and"
-            },
-            "query": {
-              "params": [
-                "A",
-                "30s",
-                "now"
-              ]
-            },
-            "reducer": {
-              "params": [],
-              "type": "max"
-            },
-            "type": "query"
-          }
-        ],
-        "executionErrorState": "alerting",
-        "for": "0m",
-        "frequency": "10s",
-        "handler": 1,
-        "message": "SEA Beta Dev website user saw a 500 error\n\nhttps://grafana-server-sea-beta.cloudapps.digital/",
-        "name": "Dev Website Errors alert",
-        "noDataState": "no_data",
-        "notifications": []
-      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -122,15 +86,7 @@
           "refId": "A"
         }
       ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": true,
-          "line": true,
-          "op": "gt",
-          "value": 0
-        }
-      ],
+      "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -204,7 +160,7 @@
         "frequency": "10s",
         "handler": 1,
         "message": "SEA Beta Dev website server crashed\n\nhttps://grafana-server-sea-beta.cloudapps.digital/",
-        "name": "Website crashes alert",
+        "name": "Dev Website crashes alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -706,7 +662,7 @@
         "frequency": "1m",
         "handler": 1,
         "message": "The SEA Beta Dev database CPU usage is high:\n\nhttps://grafana-server-sea-beta.cloudapps.digital/",
-        "name": "Database CPU alert",
+        "name": "Dev Database CPU alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -1026,5 +982,5 @@
   "timezone": "",
   "title": "SEA-BETA-DEV",
   "uid": "XQ1Gfp97z",
-  "version": 14
+  "version": 18
 }
