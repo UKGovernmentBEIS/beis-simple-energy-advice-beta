@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SeaPublicWebsite.Data;
@@ -11,9 +12,10 @@ using SeaPublicWebsite.Data;
 namespace SeaPublicWebsite.Data.Migrations
 {
     [DbContext(typeof(SeaDbContext))]
-    partial class SeaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220614163252_AddDedicatedPrimaryKeyToEpcTable")]
+    partial class AddDedicatedPrimaryKeyToEpcTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,9 +93,6 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<DateTime?>("LodgementDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("OtherHeatingType")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Postcode")
                         .HasColumnType("text");
 
@@ -124,6 +123,9 @@ namespace SeaPublicWebsite.Data.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PropertyDataId"));
+
+                    b.Property<int?>("AccessibleLoftSpace")
+                        .HasColumnType("integer");
 
                     b.Property<int?>("BungalowType")
                         .HasColumnType("integer");
@@ -171,12 +173,6 @@ namespace SeaPublicWebsite.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<int?>("HouseType")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("LoftAccess")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("LoftSpace")
                         .HasColumnType("integer");
 
                     b.Property<int?>("NumberOfOccupants")

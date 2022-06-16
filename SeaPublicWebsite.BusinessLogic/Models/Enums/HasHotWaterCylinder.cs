@@ -4,9 +4,11 @@ namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum HasHotWaterCylinder
     {
-        [GovUkRadioCheckboxLabelText(Text = "I'm not sure")]
-        DoNotKnow,
+        [GovUkRadioCheckboxLabelText(Text = "Yes, I have a got water cylinder")]
         Yes,
-        No
+        [GovUkRadioCheckboxLabelText(Text = "No, I do not have a hot water cylinder")]
+        No,
+        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
+        DoNotKnow,
     }
 }

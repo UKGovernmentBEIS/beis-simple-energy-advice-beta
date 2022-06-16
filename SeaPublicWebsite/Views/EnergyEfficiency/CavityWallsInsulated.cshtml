@@ -30,7 +30,7 @@
             @{
                 Func<object, object> details = 
                     @<text>
-                       @if (Model.YearBuilt is >= 1991)
+                       @if (Model.YearBuilt is >= YearBuilt.From1996To2011)
                        {
                            <p class="govuk-body">
                                Homes built after 1991 were typically built with insulating material between the outer and inner walls. 

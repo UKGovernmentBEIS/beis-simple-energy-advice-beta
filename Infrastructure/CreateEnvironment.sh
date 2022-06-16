@@ -37,9 +37,6 @@ cf create-space "sea-beta-${PAAS_ENV_SHORTNAME}" -o "beis-domestic-energy-advice
 # - Target future commands at this space
 cf target -s "sea-beta-${PAAS_ENV_SHORTNAME}"
 
-# - Set the ASP.Net Core environment
-cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" ASPNETCORE_ENVIRONMENT ${PAAS_ENV_SHORTNAME}
-
 
 #-----------------------------------------
 # Create Postgres database backing service
@@ -85,6 +82,9 @@ cf scale "sea-beta-${PAAS_ENV_SHORTNAME}" -i ${APP_INSTANCES} -k ${APP_DISK} -m 
 echo "This will say FAILED, but it has probably worked (it failed to START the app because there isn't currently an app deployed)"
 
 
+# - Set the ASP.Net Core environment
+cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" ASPNETCORE_ENVIRONMENT ${PAAS_ENV_SHORTNAME}
+
 # - Bind app to database
 cf bind-service "sea-beta-${PAAS_ENV_SHORTNAME}" "sea-beta-${PAAS_ENV_SHORTNAME}-db"
 
@@ -95,6 +95,7 @@ cf set-health-check "sea-beta-${PAAS_ENV_SHORTNAME}" http --endpoint "/health-ch
 # Wait for user input - just to make sure the window doesn't close without them noticing
 echo ""
 echo "NOTE: Now give the Github build action user the SpaceDeveloper permission on this space"
+echo "NOTE: Now give the monitoring user the SpaceAuditor permission on this space"
 # e.g. cf set-space-role test@example.com beis-domestic-energy-advice-service sea-beta-DEV SpaceDeveloper
 echo ""
 read  -n 1 -p "Press Enter to finish:" unused
