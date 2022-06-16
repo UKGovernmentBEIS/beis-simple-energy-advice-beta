@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using GovUkDesignSystem.GovUkDesignSystemComponents.SubComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 
@@ -60,7 +61,8 @@
                         _ => throw new ArgumentOutOfRangeException()};
                     epcHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests @suggestion(new object())
+                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests 
+                            @await Html.GovUkHtmlText(new HtmlText(suggestion, null))
                         </p>;
                 }
             }
