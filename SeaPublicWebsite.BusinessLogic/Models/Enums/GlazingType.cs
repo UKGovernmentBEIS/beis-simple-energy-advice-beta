@@ -10,7 +10,7 @@ namespace SeaPublicWebsite.BusinessLogic.Models.Enums
         Both,
         [GovUkRadioCheckboxLabelText(Text = "No, all my windows are double, triple or secondary glazed")]
         DoubleOrTripleGlazed,
-        [GovUkRadioCheckboxLabelText(Text = "I'm not sure")]
+        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
         DoNotKnow
     }
 }

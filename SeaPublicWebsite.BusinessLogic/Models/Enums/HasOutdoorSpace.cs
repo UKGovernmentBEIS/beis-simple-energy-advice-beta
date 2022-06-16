@@ -4,9 +4,9 @@ namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum HasOutdoorSpace
     {
-        [GovUkRadioCheckboxLabelText(Text = "I'm not sure")]
-        DoNotKnow,
         Yes,
         No,
+        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
+        DoNotKnow,
     }
 }

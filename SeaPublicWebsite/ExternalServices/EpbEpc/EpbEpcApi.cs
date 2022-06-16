@@ -88,6 +88,13 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             }
 
             var epc = response.Data.Assessment;
+
+            // We do not surface "SAP" report data since we can't convert it to our questions answers.
+            if (epc.AssessmentType.Equals("SAP", StringComparison.OrdinalIgnoreCase))
+            {
+                return null;
+            }
+            
             return new Epc
             {
                 EpcId = epcId,
@@ -100,6 +107,7 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 BungalowType = GetBungalowTypeFromEpc(epc),
                 FlatType = GetFlatTypeFromEpc(epc),
                 HeatingType = GetHeatingTypeFromEpc(epc),
+                OtherHeatingType = GetOtherHeatingTypeFromEpc(epc),
                 WallConstruction = GetWallConstructionFromEpc(epc),
                 SolidWallsInsulated = GetSolidWallsInsulatedFromEpc(epc),
                 CavityWallsInsulated = GetCavityWallsInsulatedFromEpc(epc),
@@ -152,14 +160,80 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
 
         private static HeatingType? GetHeatingTypeFromEpc(EpbEpcAssessmentDto epc)
         {
-            return epc.MainFuelType switch
+            // Gas boiler check
+            // 20 - mains gas (community)
+            // 26 - mains gas (not community)
+            if (epc.MainFuelType.Equals("20") ||
+                epc.MainFuelType.Equals("26") ||
+                epc.MainFuelType.Contains("mains gas", StringComparison.OrdinalIgnoreCase))
             {
-                "26" => HeatingType.GasBoiler,
-                "27" => HeatingType.LpgBoiler,
-                "28" => HeatingType.OilBoiler,
-                "29" => HeatingType.DirectActionElectric,
-                _ => null
-            };
+                return HeatingType.GasBoiler;
+            }
+            
+            // Oil boiler check
+            // 22 - oil (community)
+            // 28 - oil (not community)
+            if (epc.MainFuelType.Equals("22") ||
+                epc.MainFuelType.Equals("28") ||
+                epc.MainFuelType.Contains("oil", StringComparison.OrdinalIgnoreCase))
+            {
+                return HeatingType.OilBoiler;
+            }
+            
+            // Lpg boiler check
+            // 17 - LPG special condition
+            // 21 - LPG (community)
+            // 27 - LPG (not community)
+            if (epc.MainFuelType.Equals("17") ||
+                epc.MainFuelType.Equals("21") ||
+                epc.MainFuelType.Equals("27") ||
+                epc.MainFuelType.Contains("lpg", StringComparison.OrdinalIgnoreCase))
+            {
+                return HeatingType.LpgBoiler;
+            }
+            
+            // electric heating check
+            // storage heating and heat pumps do not appear in RdSAPs and are considered as electric
+            // 10 - electricity
+            // 25 - electricity (community)
+            // 29 - electricity (not community)
+            if (epc.MainFuelType.Equals("10") ||
+                epc.MainFuelType.Equals("25") ||
+                epc.MainFuelType.Equals("29") ||
+                epc.MainFuelType.Contains("electricity", StringComparison.OrdinalIgnoreCase))
+            {
+                return HeatingType.DirectActionElectric;
+            }
+            
+            return null;
+        }
+
+        private static OtherHeatingType? GetOtherHeatingTypeFromEpc(EpbEpcAssessmentDto epc)
+        {
+            if (epc.MainFuelType is null)
+            {
+                return null;
+            }
+            
+            // coal check
+            // 14 - house coal
+            // 15 - smokeless coal
+            if (epc.MainFuelType.Equals("14") ||
+                epc.MainFuelType.Equals("15") ||
+                epc.MainFuelType.Contains("coal", StringComparison.OrdinalIgnoreCase))
+            {
+                return OtherHeatingType.CoalOrSolidFuel;
+            }
+            
+            // biomass boiler check
+            // 7 - bulk wood pellets
+            if (epc.MainFuelType.Equals("7") ||
+                epc.MainFuelType.Contains("biomass", StringComparison.OrdinalIgnoreCase))
+            {
+                return OtherHeatingType.Biomass;
+            }
+
+            return null;
         }
 
         private static PropertyType? GetPropertyTypeFromEpc(EpbEpcAssessmentDto epc)
@@ -306,7 +380,8 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                     description.Contains("cavity", StringComparison.OrdinalIgnoreCase) &&
                     (description.Contains("insulated", StringComparison.OrdinalIgnoreCase) ||
                      description.Contains("internal insulation", StringComparison.OrdinalIgnoreCase) ||
-                     description.Contains("external insulation", StringComparison.OrdinalIgnoreCase))))
+                     description.Contains("external insulation", StringComparison.OrdinalIgnoreCase) ||
+                     description.Contains("filled cavity", StringComparison.OrdinalIgnoreCase))))
             {
                 return CavityWallsInsulated.All;
             }

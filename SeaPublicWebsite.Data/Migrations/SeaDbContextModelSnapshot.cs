@@ -91,6 +91,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<DateTime?>("LodgementDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int?>("OtherHeatingType")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Postcode")
                         .HasColumnType("text");
 
@@ -121,9 +124,6 @@ namespace SeaPublicWebsite.Data.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PropertyDataId"));
-
-                    b.Property<int?>("AccessibleLoftSpace")
-                        .HasColumnType("integer");
 
                     b.Property<int?>("BungalowType")
                         .HasColumnType("integer");
@@ -171,6 +171,12 @@ namespace SeaPublicWebsite.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<int?>("HouseType")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoftAccess")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LoftSpace")
                         .HasColumnType("integer");
 
                     b.Property<int?>("NumberOfOccupants")

@@ -20,10 +20,6 @@ cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" BasicAuth__Password "<REAL_VALUE_HER
 cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" EpbEpc__Username "<REAL_VALUE_HERE>"
 cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" EpbEpc__Password "<REAL_VALUE_HERE>"
 
-# Open EPC API Credentials
-cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" OpenEpc__Username "<REAL_VALUE_HERE>"
-cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" OpenEpc__Password "<REAL_VALUE_HERE>"
-
 # BRE API Credentials
 cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" Bre__Username "<REAL_VALUE_HERE>"
 cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" Bre__Password "<REAL_VALUE_HERE>"

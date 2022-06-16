@@ -1,9 +1,9 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 
-@model SeaPublicWebsite.Models.EnergyEfficiency.AccessibleLoftSpaceViewModel
+@model SeaPublicWebsite.Models.EnergyEfficiency.LoftSpaceViewModel
 @{
-    ViewBag.Title = "Accessible loft space";
+    ViewBag.Title = "Loft space";
 }
 
 @section BeforeMain {
@@ -21,7 +21,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("AccessibleLoftSpace_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+        <form action="@Url.Action("LoftSpace_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
             @Html.AntiForgeryToken()
             
@@ -37,12 +37,12 @@
                      </text>;
             }
             
-            @(await Html.GovUkRadiosFor(m => m.AccessibleLoftSpace,
+            @(await Html.GovUkRadiosFor(m => m.LoftSpace,
                 fieldsetOptions: new FieldsetViewModel
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "Do you have a loft loft that hasn’t been converted into a room?",
+                        Text = "Do you have a loft that hasn’t been converted into a room?",
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }

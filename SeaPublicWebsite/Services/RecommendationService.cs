@@ -203,8 +203,8 @@ namespace SeaPublicWebsite.Services
             BreWallType breWallType = GetBreWallType(propertyData.WallConstruction.Value, propertyData.SolidWallsInsulated,
                 propertyData.CavityWallsInsulated);
 
-            BreRoofType? breRoofType = GetBreRoofType(propertyData.RoofConstruction, propertyData.AccessibleLoftSpace,
-                propertyData.RoofInsulated);
+            BreRoofType? breRoofType = GetBreRoofType(propertyData.RoofConstruction, propertyData.LoftSpace, 
+                propertyData.LoftAccess, propertyData.RoofInsulated);
 
             BreGlazingType breGlazingType = GetBreGlazingType(propertyData.GlazingType.Value);
 
@@ -407,23 +407,28 @@ namespace SeaPublicWebsite.Services
         }
 
         private static BreRoofType? GetBreRoofType(RoofConstruction? roofConstruction,
-            AccessibleLoftSpace? accessibleLoftSpace, RoofInsulated? roofInsulated)
+            LoftSpace? loftSpace, LoftAccess? loftAccess, RoofInsulated? roofInsulated)
         {
             return roofConstruction switch
             {
                 RoofConstruction.Flat =>
                     //peer-reviewed assumption:
                     BreRoofType.FlatRoofWithInsulation,
-                RoofConstruction.Pitched or RoofConstruction.Mixed => accessibleLoftSpace switch
+                RoofConstruction.Pitched or RoofConstruction.Mixed => loftSpace switch
                 {
-                    AccessibleLoftSpace.No or AccessibleLoftSpace.DoNotKnow => BreRoofType.DontKnow,
-                    AccessibleLoftSpace.Yes => roofInsulated switch
+                    LoftSpace.No => BreRoofType.DontKnow,
+                    LoftSpace.Yes => loftAccess switch
                     {
-                        RoofInsulated.DoNotKnow => BreRoofType.DontKnow,
-                        //peer-reviewed assumption in case RoofConstruction.Mixed:
-                        RoofInsulated.Yes => BreRoofType.PitchedRoofWithInsulation,
-                        //peer-reviewed assumption in case RoofConstruction.Mixed:
-                        RoofInsulated.No => BreRoofType.PitchedRoofWithoutInsulation,
+                        LoftAccess.No => BreRoofType.DontKnow,
+                        LoftAccess.Yes => roofInsulated switch
+                        {
+                            RoofInsulated.DoNotKnow => BreRoofType.DontKnow,
+                            //peer-reviewed assumption in case RoofConstruction.Mixed:
+                            RoofInsulated.Yes => BreRoofType.PitchedRoofWithInsulation,
+                            //peer-reviewed assumption in case RoofConstruction.Mixed:
+                            RoofInsulated.No => BreRoofType.PitchedRoofWithoutInsulation,
+                            _ => throw new ArgumentOutOfRangeException()
+                        },
                         _ => throw new ArgumentOutOfRangeException()
                     },
                     _ => throw new ArgumentOutOfRangeException()
