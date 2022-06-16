@@ -19,6 +19,7 @@ using SeaPublicWebsite.ExternalServices.EpbEpc;
 using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
+using Serilog;
 
 namespace SeaPublicWebsite
 {
@@ -141,6 +142,8 @@ namespace SeaPublicWebsite
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 

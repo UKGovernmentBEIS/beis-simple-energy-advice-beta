@@ -3,9 +3,10 @@ type: any
 index: "*-*"
 
 filter:
-- query:
-   query_string:
-      query: "level:Error OR level:Fatal"
+- term:
+     environmentName: "Production"
+- terms:
+     level: ["Error", "Fatal"]
  
 alert:
 - "email"

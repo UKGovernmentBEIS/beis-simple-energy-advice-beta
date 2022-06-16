@@ -12,11 +12,11 @@
       }
     ]
   },
-  "description": "Dev site monitoring",
+  "description": "Production site monitoring",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 5,
+  "id": 6,
   "links": [],
   "panels": [
     {
@@ -30,10 +30,46 @@
       },
       "id": 18,
       "panels": [],
-      "title": "Dev Site",
+      "title": "Production Site",
       "type": "row"
     },
     {
+      "alert": {
+        "alertRuleTags": {},
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "30s",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "max"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "0m",
+        "frequency": "10s",
+        "handler": 1,
+        "message": "SEA Beta Production website user saw a 500 error\n\nhttps://grafana-server-sea-beta.cloudapps.digital/",
+        "name": "Production Website Errors alerts",
+        "noDataState": "no_data",
+        "notifications": []
+      },
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -80,17 +116,25 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(requests{app=\"sea-beta-DEV\",status_range=\"5xx\"}[30s])",
+          "expr": "rate(requests{app=\"sea-beta-Production\",status_range=\"5xx\"}[30s])",
           "interval": "",
           "legendFormat": "Exported instance {{exported_instance}}",
           "refId": "A"
         }
       ],
-      "thresholds": [],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0
+        }
+      ],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Dev Website Errors",
+      "title": "Production Website Errors",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -159,8 +203,8 @@
         "for": "0m",
         "frequency": "10s",
         "handler": 1,
-        "message": "SEA Beta Dev website server crashed\n\nhttps://grafana-server-sea-beta.cloudapps.digital/",
-        "name": "Dev Website crashes alert",
+        "message": "SEA Beta Production website server crashed\n\nhttps://grafana-server-sea-beta.cloudapps.digital/",
+        "name": "Production website crashes alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -211,7 +255,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "crash{app=\"sea-beta-DEV\"}",
+          "expr": "crash{app=\"sea-beta-Production\"}",
           "interval": "",
           "legendFormat": "Exported instance {{exported_instance}}",
           "refId": "A"
@@ -229,7 +273,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Dev Website Crashes",
+      "title": "Production Website Crashes",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -321,8 +365,8 @@
         "for": "3m",
         "frequency": "1m",
         "handler": 1,
-        "message": "SEA Beta Dev website CPU and/or memory usage is high\n\nhttps://grafana-server-sea-beta.cloudapps.digital/",
-        "name": "Dev Website CPU and Memory % alert",
+        "message": "SEA Beta Production website CPU and/or memory usage is high\n\nhttps://grafana-server-sea-beta.cloudapps.digital/",
+        "name": "Production Website CPU and Memory % alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -372,7 +416,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "cpu{app=\"sea-beta-DEV\"}",
+          "expr": "cpu{app=\"sea-beta-Production\"}",
           "instant": false,
           "interval": "",
           "legendFormat": "CPU for exported instance {{exported_instance}}",
@@ -397,7 +441,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Dev Website CPU and Memory %",
+      "title": "Production Website CPU and Memory %",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -481,14 +525,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(requests{app=\"sea-beta-DEV\"}[30s]))",
+          "expr": "sum(rate(requests{app=\"sea-beta-Production\"}[30s]))",
           "format": "time_series",
           "interval": "",
           "legendFormat": "Total",
           "refId": "A"
         },
         {
-          "expr": "rate(requests{app=\"sea-beta-DEV\"}[30s])",
+          "expr": "rate(requests{app=\"sea-beta-Production\"}[30s])",
           "interval": "",
           "legendFormat": "{{status_range}}",
           "refId": "B"
@@ -498,7 +542,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Dev Website Requests",
+      "title": "Production Website Requests",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -582,7 +626,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "deadlocks{service=\"sea-beta-DEV-db\"}",
+          "expr": "deadlocks{service=\"sea-beta-Production-db\"}",
           "interval": "",
           "legendFormat": "Deadlocks",
           "refId": "A"
@@ -592,7 +636,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Dev Database Deadlocks",
+      "title": "Production Database Deadlocks",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -661,8 +705,8 @@
         "for": "3m",
         "frequency": "1m",
         "handler": 1,
-        "message": "The SEA Beta Dev database CPU usage is high:\n\nhttps://grafana-server-sea-beta.cloudapps.digital/",
-        "name": "Dev Database CPU alert",
+        "message": "The SEA Beta Production database CPU usage is high:\n\nhttps://grafana-server-sea-beta.cloudapps.digital/",
+        "name": "Production Database CPU alert",
         "noDataState": "no_data",
         "notifications": []
       },
@@ -712,7 +756,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "cpu_percent{service=\"sea-beta-DEV-db\"}",
+          "expr": "cpu_percent{service=\"sea-beta-Production-db\"}",
           "interval": "",
           "legendFormat": "CPU Percent",
           "refId": "A"
@@ -730,7 +774,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Dev Database CPU",
+      "title": "Production Database CPU",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -814,7 +858,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "connections{service=\"sea-beta-DEV-db\"}",
+          "expr": "connections{service=\"sea-beta-Production-db\"}",
           "interval": "",
           "legendFormat": "Connections",
           "refId": "A"
@@ -824,7 +868,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Dev Database Connections",
+      "title": "Production Database Connections",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -908,7 +952,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "dbsize_byte{service=\"sea-beta-DEV-db\"}",
+          "expr": "dbsize_byte{service=\"sea-beta-Production-db\"}",
           "interval": "",
           "legendFormat": "Size",
           "refId": "A"
@@ -918,7 +962,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Dev Database Size (bytes)",
+      "title": "Production Database Size (bytes)",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -980,7 +1024,7 @@
     ]
   },
   "timezone": "",
-  "title": "SEA-BETA-DEV",
-  "uid": "XQ1Gfp97z",
-  "version": 18
+  "title": "SEA-BETA-Production",
+  "uid": "XQ1Gfp98z",
+  "version": 4
 }

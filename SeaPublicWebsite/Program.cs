@@ -29,7 +29,9 @@ namespace SeaPublicWebsite
                 .ReadFrom.Configuration(context.Configuration)
                 .ReadFrom.Services(services)
                 .WriteTo.Console()
-                .Enrich.FromLogContext());
+                .Enrich.FromLogContext()
+                .Enrich.WithEnvironmentName()
+                .Enrich.WithMachineName());
 
             var app = builder.Build();
 

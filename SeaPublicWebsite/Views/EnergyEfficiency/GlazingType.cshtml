@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using GovUkDesignSystem.GovUkDesignSystemComponents.SubComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 
@@ -36,22 +37,32 @@
                         <p class="govuk-body">
                             A double glazed window has two panes of glass, separated by air or gas, to make up a single window. A triple glazed window has three panes of glass.
                         </p>
+                        <p class="govuk-body">
+                            Secondary glazing is when an additional independent window is fitted inside, behind the main window. This is commonly used in conservation areas to improve the energy efficiency of the window without replacing it.
+                        </p>
                      </text>;
                 
                 Func<object, object> epcHint = null;
                 if (Model.Epc?.GlazingType is not null)
                 {
+                    Func<object, object> suggestion = Model.Epc?.GlazingType switch {
+                        GlazingType.SingleGlazed => 
+                            @<text>
+                                all your windows are <strong>single glazed</strong>.
+                             </text>,
+                        GlazingType.Both => 
+                            @<text>
+                                at least one of your windows is <strong>single glazed</strong>.
+                             </text>,
+                        GlazingType.DoubleOrTripleGlazed => 
+                            @<text>
+                                all your windows are <strong>double, triple or secondary glazed</strong>.
+                             </text>,
+                        _ => throw new ArgumentOutOfRangeException()};
                     epcHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests your windows have
-                            <strong>
-                                @(Model.Epc?.GlazingType switch {
-                                    GlazingType.SingleGlazed => "single",
-                                    GlazingType.Both => "mixed",
-                                    GlazingType.DoubleOrTripleGlazed => "double or triple",
-                                    _ => throw new ArgumentOutOfRangeException()})
-                            </strong>
-                            glazing.
+                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests 
+                            @await Html.GovUkHtmlText(new HtmlText(suggestion, null))
                         </p>;
                 }
             }

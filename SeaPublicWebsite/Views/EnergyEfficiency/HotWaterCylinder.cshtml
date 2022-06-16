@@ -57,10 +57,12 @@
                 hintOptions: new HintViewModel
                 {
                     Html = @<text>
-                               @await Html.GovUkHint(new HintViewModel
-                               {
-                                   Text = "If you have a combi boiler, you will not have a hot water cylinder."
-                               })
+                               <p class="govuk-body">
+                                   If you have a combi boiler, you will not have a hot water cylinder.
+                               </p>
+                               <p class="govuk-body">
+                                   If you’re not sure what a hot water cylinder is, we’ve provided some guidance on this page that could help.
+                               </p>
 
                                @if (epcHint is not null)
                                {
