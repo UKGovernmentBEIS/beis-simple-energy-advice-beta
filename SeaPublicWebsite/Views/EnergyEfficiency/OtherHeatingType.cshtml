@@ -36,7 +36,7 @@
                             Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests your main heating system is
                             <strong>
                                 @(Model.Epc?.OtherHeatingType switch {
-                                    OtherHeatingType.Biomass => "biomass boiler",
+                                    OtherHeatingType.Biomass => "a biomass boiler",
                                     OtherHeatingType.CoalOrSolidFuel => "coal or solid fuel heating",
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
