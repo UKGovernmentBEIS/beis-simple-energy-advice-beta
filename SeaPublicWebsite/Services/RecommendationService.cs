@@ -93,14 +93,6 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "X", new BreRecommendation
-                    {
-                        Key = RecommendationKey.HighPerformanceExternalDoors,
-                        Title = "High performance external doors",
-                        Summary = "High performance external doors"
-                    }
-                },
-                {
                     "U", new BreRecommendation
                     {
                         Key = RecommendationKey.SolarElectricPanels,
