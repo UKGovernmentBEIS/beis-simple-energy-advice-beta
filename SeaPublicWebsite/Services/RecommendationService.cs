@@ -47,9 +47,9 @@ namespace SeaPublicWebsite.Services
                 {
                     "Q1", new BreRecommendation
                     {
-                        Key = RecommendationKey.WallInsulationOther,
+                        Key = RecommendationKey.InsulateSolidWalls,
                         Title = "Wall insulation Other",
-                        Summary = "Under Development"
+                        Summary = "Insulate your solid walls"
                     }
                 },
                 {
