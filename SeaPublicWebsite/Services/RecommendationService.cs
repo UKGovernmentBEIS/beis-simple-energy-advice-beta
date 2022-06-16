@@ -40,16 +40,16 @@ namespace SeaPublicWebsite.Services
                     "Q", new BreRecommendation
                     {
                         Key = RecommendationKey.InsulateSolidWalls,
-                        Title = "Wall insulation Brick age A-D",
-                        Summary = "Insulate your solid walls"
+                        Title = "Insulate your solid walls",
+                        Summary = "Insulate your solid walls (brick walls age A-D)"
                     }
                 },
                 {
                     "Q1", new BreRecommendation
                     {
                         Key = RecommendationKey.InsulateSolidWalls,
-                        Title = "Wall insulation Other",
-                        Summary = "Insulate your solid walls"
+                        Title = "Insulate your solid walls",
+                        Summary = "Insulate your solid walls (other wall types)"
                     }
                 },
                 {
