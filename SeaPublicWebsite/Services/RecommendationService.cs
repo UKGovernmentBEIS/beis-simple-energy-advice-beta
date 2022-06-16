@@ -531,10 +531,10 @@ namespace SeaPublicWebsite.Services
                 //Peer-reviewed assumptions: time heating is turned on is not collected so we assume morning heating
                 //starts at 7am, evening heating starts at 6pm. If morning/evening hours is greater than 5/6
                 //(hence reaching 12 pm/am) then the extra hours are added on before 7am/6pm.
-                int hoursOnFrom12amTo7am = Math.Max(0, (int) hoursOfHeatingMorning - 5);
-                int hoursOnFrom7amTo12pm = Math.Min(5, (int) hoursOfHeatingMorning);
-                int hoursOnFrom12pmTo6pm = Math.Max(0, (int) hoursOfHeatingEvening - 6);
-                int hoursOnFrom6pmTo12am = Math.Min(6, (int) hoursOfHeatingEvening);
+                int hoursOnFrom12amTo7am = Math.Max(0, hoursOfHeatingMorning.Value - 5);
+                int hoursOnFrom7amTo12pm = Math.Min(5, hoursOfHeatingMorning.Value);
+                int hoursOnFrom12pmTo6pm = Math.Max(0, hoursOfHeatingEvening.Value - 6);
+                int hoursOnFrom6pmTo12am = Math.Min(6, hoursOfHeatingEvening.Value);
                 //Hours between heating turning off in the morning and turning on in the evening
                 int firstOffPeriod = (18 - hoursOnFrom12pmTo6pm) - (7 + hoursOnFrom7amTo12pm);
                 //Hours between midnight and heating turning on in the morning, plus hours between heating turning off
