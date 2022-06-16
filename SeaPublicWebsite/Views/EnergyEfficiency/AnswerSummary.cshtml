@@ -68,7 +68,7 @@
         Value = new()
         {
             Classes = "govuk-!-width-one-half",
-            Text = Model.PropertyData.YearBuilt?.ToString() ?? "Question skipped"
+            Text = Model.PropertyData.YearBuilt.HasValue ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.YearBuilt) : "Question skipped",
         },
         Actions = new()
         {

@@ -8,10 +8,8 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class HomeAgeViewModel : QuestionFlowViewModel
     {
-        [ModelBinder(typeof(GovUkMandatoryIntBinder))]
-        [GovUkDataBindingMandatoryIntErrorText("Enter the approximate year that your property was built", "The year your property was built")]
-        [GovUkValidateIntRange("The year your property was built", 1000, 2022)]
-        public int? YearBuilt { get; set; }
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Select what year your property was built")]
+        public YearBuilt? YearBuilt { get; set; }
 
         public string Reference { get; set; }
         

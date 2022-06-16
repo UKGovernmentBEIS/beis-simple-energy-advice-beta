@@ -22,7 +22,7 @@ public class PropertyData
     public BungalowType? BungalowType { get; set; }
     public FlatType? FlatType { get; set; }
 
-    public int? YearBuilt { get; set; }
+    public YearBuilt? YearBuilt { get; set; }
 
     public WallConstruction? WallConstruction { get; set; }
     public CavityWallsInsulated? CavityWallsInsulated { get; set; }

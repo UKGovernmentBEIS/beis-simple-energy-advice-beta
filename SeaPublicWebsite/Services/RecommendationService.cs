@@ -198,7 +198,7 @@ namespace SeaPublicWebsite.Services
 
             BreFlatLevel? breFlatLevel = GetBreFlatLevel(propertyData.PropertyType.Value, propertyData.FlatType);
 
-            string breConstructionDate = GetBreConstructionDate(propertyData.YearBuilt);
+            string breConstructionDate = GetBreConstructionDate(propertyData.YearBuilt, propertyData.WallConstruction, propertyData.CavityWallsInsulated, propertyData.Epc?.ConstructionAgeBand);
 
             BreWallType breWallType = GetBreWallType(propertyData.WallConstruction.Value, propertyData.SolidWallsInsulated,
                 propertyData.CavityWallsInsulated);
@@ -300,24 +300,47 @@ namespace SeaPublicWebsite.Services
             }
         }
 
-        private static string GetBreConstructionDate(int? yearBuilt)
+        private static string GetBreConstructionDate(YearBuilt? yearBuilt, WallConstruction? wallConstruction, CavityWallsInsulated? cavityWallsInsulated,  HomeAge? epcConstructionAgeBand)
         {
             return yearBuilt switch
             {
-                <= 1899 => "A",
-                <= 1929 => "B",
-                <= 1949 => "C",
-                <= 1966 => "D",
-                <= 1975 => "E",
-                <= 1982 => "F",
-                <= 1990 => "G",
-                <= 1995 => "H",
-                <= 2002 => "I",
-                <= 2006 => "J",
-                <= 2011 => "K",
-                >= 2012 => "L",
-                //peer-reviewed assumption:
-                _ => "D"
+                YearBuilt.Pre1930 => "B",
+                YearBuilt.From1930To1966 => "D",
+                YearBuilt.From1967To1982 => "F",
+                YearBuilt.From1983To1995 => "H",
+                YearBuilt.From1996To2011 => "K",
+                YearBuilt.From2012ToPresent => "L",
+                //peer-reviewed assumptions:
+                _ => epcConstructionAgeBand switch
+                {
+                    HomeAge.Pre1900 => "A",
+                    HomeAge.From1900To1929 => "B",
+                    HomeAge.From1930To1949 => "C",
+                    HomeAge.From1950To1966 => "D",
+                    HomeAge.From1967To1975 => "E",
+                    HomeAge.From1976To1982 => "F",
+                    HomeAge.From1983To1990 => "G",
+                    HomeAge.From1991To1995 => "H",
+                    HomeAge.From1996To2002 => "I",
+                    HomeAge.From2003To2006 => "J",
+                    HomeAge.From2007ToPresent => "L",
+                    _ => wallConstruction switch
+                    {
+                        WallConstruction.DoNotKnow => "D",
+                        WallConstruction.Solid => "B",
+                        WallConstruction.Cavity => cavityWallsInsulated switch
+                        {
+                            CavityWallsInsulated.DoNotKnow => "D",
+                            CavityWallsInsulated.No => "D",
+                            CavityWallsInsulated.Some => "D",
+                            CavityWallsInsulated.All => "I",
+                            _ => throw new ArgumentOutOfRangeException()
+                        },
+                        WallConstruction.Mixed => "B",
+                        WallConstruction.Other => "D",
+                        _ => throw new ArgumentOutOfRangeException()
+                    },
+                },
             };
         }
 
