@@ -200,7 +200,8 @@ namespace SeaPublicWebsite.Services
 
             string breConstructionDate = GetBreConstructionDate(propertyData.YearBuilt, propertyData.WallConstruction, propertyData.CavityWallsInsulated, propertyData.Epc?.ConstructionAgeBand);
 
-            BreWallType breWallType = GetBreWallType(propertyData.WallConstruction.Value, propertyData.SolidWallsInsulated,
+            BreWallType breWallType = GetBreWallType(propertyData.WallConstruction.Value,
+                propertyData.SolidWallsInsulated,
                 propertyData.CavityWallsInsulated);
 
             BreRoofType? breRoofType = GetBreRoofType(propertyData.RoofConstruction, propertyData.LoftSpace, 
@@ -208,11 +209,13 @@ namespace SeaPublicWebsite.Services
 
             BreGlazingType breGlazingType = GetBreGlazingType(propertyData.GlazingType.Value);
 
-            BreHeatingFuel breHeatingFuel = GetBreHeatingFuel(propertyData.HeatingType.Value, propertyData.OtherHeatingType);
+            BreHeatingFuel breHeatingFuel =
+                GetBreHeatingFuel(propertyData.HeatingType.Value, propertyData.OtherHeatingType);
 
             bool? breHotWaterCylinder = GetBreHotWaterCylinder(propertyData.HasHotWaterCylinder);
 
-            BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(propertyData.HeatingPattern.Value);
+            BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(propertyData.HeatingPattern.Value,
+                propertyData.HoursOfHeatingEvening, propertyData.HoursOfHeatingEvening);
 
             int[] breNormalDaysOffHours =
                 GetBreNormalDaysOffHours(propertyData.HoursOfHeatingMorning, propertyData.HoursOfHeatingEvening);
@@ -488,8 +491,21 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private static BreHeatingPatternType GetBreHeatingPatternType(HeatingPattern? heatingPattern)
+        private static BreHeatingPatternType GetBreHeatingPatternType(HeatingPattern? heatingPattern,
+            int? hoursOfHeatingMorning, int? hoursOfHeatingEvening)
         {
+            if (hoursOfHeatingMorning == 0 && hoursOfHeatingEvening == 0)
+            {
+                //User has input values that correspond to a pre-existing BreHeatingPatternType
+                return BreHeatingPatternType.NoneOfTheAbove;
+            }
+
+            if (hoursOfHeatingMorning == 12 && hoursOfHeatingEvening == 12)
+            {
+                //User has input values that correspond to a pre-existing BreHeatingPatternType
+                return BreHeatingPatternType.AllDayAndAllNight;
+            }
+
             return heatingPattern switch
             {
                 HeatingPattern.AllDayAndNight => BreHeatingPatternType.AllDayAndAllNight,
@@ -498,15 +514,35 @@ namespace SeaPublicWebsite.Services
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
-        
-        private static int[] GetBreNormalDaysOffHours(decimal? hoursOfHeatingMorning, decimal? hoursOfHeatingEvening)
+
+        private static int[] GetBreNormalDaysOffHours(int? hoursOfHeatingMorning, int? hoursOfHeatingEvening)
         {
             if (hoursOfHeatingMorning != null && hoursOfHeatingEvening != null)
             {
-                //peer-reviewed assumption: time heating is turned on is not collected so this is a simplification of the BRE input complexity available
-                int averageOffPeriod = (int) ((24 - (hoursOfHeatingMorning + hoursOfHeatingEvening)) / 2);
-                return new [] { averageOffPeriod, averageOffPeriod };
+                //This condition has the secondary purpose of guaranteeing that the sum of the two off periods returned
+                //later is no more than 23 as is required by BRE 
+                if ((hoursOfHeatingMorning == 0 && hoursOfHeatingEvening == 0)
+                    || (hoursOfHeatingMorning == 12 && hoursOfHeatingEvening == 12))
+                {
+                    //User has input values that correspond to a pre-existing BreHeatingPatternType
+                    return null;
+                }
+
+                //Peer-reviewed assumptions: time heating is turned on is not collected so we assume morning heating
+                //starts at 7am, evening heating starts at 6pm. If morning/evening hours is greater than 5/6
+                //(hence reaching 12 pm/am) then the extra hours are added on before 7am/6pm.
+                int hoursOnFrom12amTo7am = Math.Max(0, hoursOfHeatingMorning.Value - 5);
+                int hoursOnFrom7amTo12pm = Math.Min(5, hoursOfHeatingMorning.Value);
+                int hoursOnFrom12pmTo6pm = Math.Max(0, hoursOfHeatingEvening.Value - 6);
+                int hoursOnFrom6pmTo12am = Math.Min(6, hoursOfHeatingEvening.Value);
+                //Hours between heating turning off in the morning and turning on in the evening
+                int firstOffPeriod = (18 - hoursOnFrom12pmTo6pm) - (7 + hoursOnFrom7amTo12pm);
+                //Hours between midnight and heating turning on in the morning, plus hours between heating turning off
+                //in the evening and midnight 
+                int secondOffPeriod = (7 - hoursOnFrom12amTo7am) + (6 - hoursOnFrom6pmTo12am);
+                return new[] { firstOffPeriod, secondOffPeriod };
             }
+
             return null;
         }
     }
