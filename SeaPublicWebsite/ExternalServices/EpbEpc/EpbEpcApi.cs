@@ -546,7 +546,8 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 return HomeAge.From1900To1929;
             }
             
-            if (epc.PropertyAgeBand.Equals("B", StringComparison.OrdinalIgnoreCase) ||
+            if (epc.PropertyAgeBand.Equals("K", StringComparison.OrdinalIgnoreCase) || 
+                epc.PropertyAgeBand.Equals("L", StringComparison.OrdinalIgnoreCase) ||
                 epc.PropertyAgeBand.Contains("2007-2011") ||
                 epc.PropertyAgeBand.Contains("2012 onwards"))
             {
