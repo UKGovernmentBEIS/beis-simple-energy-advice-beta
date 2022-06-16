@@ -39,9 +39,9 @@ namespace SeaPublicWebsite.Services
                 {
                     "Q", new BreRecommendation
                     {
-                        Key = RecommendationKey.WallInsulationBrickAgeAToD,
+                        Key = RecommendationKey.InsulateSolidWalls,
                         Title = "Wall insulation Brick age A-D",
-                        Summary = "Under Development"
+                        Summary = "Insulate your solid walls"
                     }
                 },
                 {
@@ -57,39 +57,15 @@ namespace SeaPublicWebsite.Services
                     {
                         Key = RecommendationKey.FloorInsulationSuspendedFloor,
                         Title = "Insulate the ground floor",
-                        Summary = "Under Development"
-                    }
-                },
-                {
-                    "W2", new BreRecommendation
-                    {
-                        Key = RecommendationKey.FloorInsulationSolidFloor,
-                        Title = "Floor insulation solid floor",
-                        Summary = "Under Development"
-                    }
-                },
-                {
-                    "D", new BreRecommendation
-                    {
-                        Key = RecommendationKey.DraughtproofWindowsAndDoors,
-                        Title = "Draughtproof 100% of windows and doors",
-                        Summary = "Under Development"
+                        Summary = "Insulate the ground floor"
                     }
                 },
                 {
                     "C", new BreRecommendation
                     {
                         Key = RecommendationKey.HotWaterCylinderInsulation,
-                        Title = "Hot water cylinder insulation",
-                        Summary = "Under Development"
-                    }
-                },
-                {
-                    "F", new BreRecommendation
-                    {
-                        Key = RecommendationKey.HotWaterCylinderThermostat,
-                        Title = "Hot water cylinder thermostat",
-                        Summary = "Under Development"
+                        Title = "Insulate your hot water cylinder",
+                        Summary = "Insulate your hot water cylinder"
                     }
                 },
                 {
@@ -105,23 +81,7 @@ namespace SeaPublicWebsite.Services
                     {
                         Key = RecommendationKey.HighHeatRetentionStorageHeaters,
                         Title = "Upgrade to high heat retention storage heaters",
-                        Summary = "Under Development"
-                    }
-                },
-                {
-                    "N", new BreRecommendation
-                    {
-                        Key = RecommendationKey.SolarWaterHeating,
-                        Title = "Solar water heating",
-                        Summary = "Under Development"
-                    }
-                },
-                {
-                    "O", new BreRecommendation
-                    {
-                        Key = RecommendationKey.ReplaceSingleGlazedWindowsWithLowEDoubleGlazing,
-                        Title = "Replace single glazed windows with low-E double glazing",
-                        Summary = "Under Development"
+                        Summary = "Upgrade to high heat retention storage heaters"
                     }
                 },
                 {
@@ -137,7 +97,7 @@ namespace SeaPublicWebsite.Services
                     {
                         Key = RecommendationKey.HighPerformanceExternalDoors,
                         Title = "High performance external doors",
-                        Summary = "Under Development"
+                        Summary = "High performance external doors"
                     }
                 },
                 {

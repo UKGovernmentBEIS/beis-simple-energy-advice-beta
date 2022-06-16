@@ -13,6 +13,7 @@
         FlatRoofInsulation,
         WallInsulationBrickAgeAToD,
         WallInsulationOther,
+        InsulateSolidWalls,
         FloorInsulationSolidFloor,
         DraughtproofWindowsAndDoors,
         HotWaterCylinderInsulation,

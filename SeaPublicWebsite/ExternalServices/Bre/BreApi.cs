@@ -58,36 +58,21 @@ namespace SeaPublicWebsite.ExternalServices.Bre
                 
                 Dictionary<string, BreRecommendation> recommendationDictionary =
                     RecommendationService.RecommendationDictionary;
-                // foreach (KeyValuePair<string, BreMeasure> entry in response.Measures)
-                // {
-                //     string key = entry.Key;
-                //     BreMeasure measure = entry.Value;
-                //     BreRecommendation dictEntry = recommendationDictionary[key];
-                //     recommendations.Add(new BreRecommendation()
-                //     {
-                //         Key = dictEntry.Key,
-                //         Title = dictEntry.Title,
-                //         MinInstallCost = measure.MinInstallationCost,
-                //         MaxInstallCost = measure.MaxInstallationCost,
-                //         Saving = (int) measure.Saving,
-                //         LifetimeSaving = (int) (measure.Lifetime * measure.Saving),
-                //         Lifetime = measure.Lifetime,
-                //         Summary = dictEntry.Summary
-                //     });
-                // }
-                // TODO: remove this foreach (it's for testing only) and uncomment the previous block:
-                foreach (BreRecommendation entry in recommendationDictionary.Values)
+                foreach (KeyValuePair<string, BreMeasure> entry in response.Measures)
                 {
+                    string key = entry.Key;
+                    BreMeasure measure = entry.Value;
+                    BreRecommendation dictEntry = recommendationDictionary[key];
                     recommendations.Add(new BreRecommendation()
                     {
-                        Key = entry.Key,
-                        Title = entry.Title,
-                        MinInstallCost = 1,
-                        MaxInstallCost = 2,
-                        Saving = 3,
-                        LifetimeSaving = 4,
-                        Lifetime = 5,
-                        Summary = entry.Summary
+                        Key = dictEntry.Key,
+                        Title = dictEntry.Title,
+                        MinInstallCost = measure.MinInstallationCost,
+                        MaxInstallCost = measure.MaxInstallationCost,
+                        Saving = (int) measure.Saving,
+                        LifetimeSaving = (int) (measure.Lifetime * measure.Saving),
+                        Lifetime = measure.Lifetime,
+                        Summary = dictEntry.Summary
                     });
                 }
                 return recommendations;
