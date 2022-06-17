@@ -26,7 +26,7 @@
     <div class="govuk-grid-column-two-thirds">
 
 
-        <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new { id = (int) Model.PropertyRecommendation.Key, reference = Model.PropertyData.Reference })" method="post" novalidate>
+        <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new { id = (int) Model.PropertyRecommendation.Key })" method="post" novalidate>
 
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.PropertyData.Reference)
@@ -34,32 +34,37 @@
             <span class="govuk-caption-l">
                 Recommendation @(Model.GetCurrentIndex() + 1) of @Model.PropertyData.PropertyRecommendations.Count
             </span>
-            <h1 class="govuk-heading-l">
-                @Model.PropertyRecommendation.Title
-            </h1>
+            <h1 class="govuk-heading-l">@Model.PropertyRecommendation.Title</h1>
 
             <p class="govuk-body">
-                Based on the information we have collected; it looks like you could save money by adding an insulating jacket to your hot water cylinder. By insulating your hot water cylinder, you will retain more heat. It will mean your hot water stays hotter for longer, and you spend less money heating water up.
+                Based on the information we have collected; it looks like you have solid walls without a cavity, and that these are not insulated. You could consider insulating these walls to help trap the heat inside your property so your heating doesn’t need to be on as much.
             </p>
 
-            <p class="govuk-body">
-                If you feel comfortable fitting this yourself, you can buy a British Standard jacket from most DIY shops and fit it snugly around the tank. These jackets will have heavy duty fixings and a flame retardant cover.
-            </p>
-
-            <p class="govuk-body">
-                You may also want to consider using foam collars around any exposed hot water pipes to save even more energy.
-            </p>
-
+            <div class="govuk-inset-text">
+                <p>
+                    Solid wall insulation can be fitted internally (internal wall insulation) or externally (external wall insulation).
+                </p>
+                <p>
+                    Internal wall insulation will slightly reduce the size of any rooms that have an external wall, and you will need to redecorate afterwards.
+                </p>
+                <p>
+                    External wall insulation is less disruptive to the inside of your home, but will change the external appearance of your home, so you will usually need planning permission. It’s unlikely to be allowed on the front of your property if you live in a conservation area.
+                </p>
+            </div>
+            
             <p class="govuk-body govuk-!-margin-bottom-6">
                 You can find more information on solid wall insulation on the
-                <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/insulating-tanks-pipes-and-radiators/`">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
+                <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/solid-wall-insulation/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
             </p>
 
             <h2 class="govuk-heading-m">Who this improvement is suitable for</h2>
             <p class="govuk-body">You should consider this improvement for your property if:</p>
             <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
                 <li>
-                    You have a hot water cylinder that isn’t factory insulated or has less than 80 mm thick insulating jacket 
+                    You have solid brick or stone walls with no cavity (this is common for homes built before 1920).
+                </li>
+                <li>
+                    Your home is a non-standard construction such as steel frame, timber frame or concrete. 
                 </li>
             </ul>
 
@@ -67,15 +72,15 @@
                 <span class="govuk-warning-text__icon  sea-warning-text__icon--long" aria-hidden="true">!</span>
                 <strong class="govuk-warning-text__text">
                     <span class="govuk-warning-text__assistive">Caution</span>
-                    If you are reasonably confident with DIY, this could be a task you can complete yourself. If not, this is a job for a handyperson. 
+                    You will need a specialist contractor to assess what the best way is to insulate your walls, and to carry out the work. This is not a DIY job, or one for a general builder.
                 </strong>
             </div>
-            
-            <h2 class="govuk-heading-m">
+
+            <h2 class="govuk-heading-m ">
                 What you could save
             </h2>
 
-            <p class="govuk-body">Insulating hot water cylinder jackets typically last <b>around @Model.PropertyRecommendation.Lifetime years</b></p>
+            <p class="govuk-body">Solid wall insulation is expected to last <b>around @Model.PropertyRecommendation.Lifetime years</b></p>
 
             @{ await Html.RenderPartialAsync("Partials/WhatYouCouldSavePartial.cshtml", Model); }
 
@@ -95,7 +100,7 @@
                         Will this cause disruption during installation?
                     </dt>
                     <dd class="govuk-summary-list__value sea-recommendation-impact govuk-!-padding-right-0">
-                        <strong class="govuk-tag govuk-tag--green">MINIMAL</strong>
+                        <strong class="govuk-tag govuk-tag--red">MEDIUM TO VERY SIGNIFICANT</strong>
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
@@ -103,7 +108,7 @@
                         How long could this take to install?
                     </dt>
                     <dd class="govuk-summary-list__value sea-recommendation-impact govuk-!-padding-right-0">
-                        <strong class="govuk-tag govuk-tag--green">LESS THAN A DAY</strong>
+                        <strong class="govuk-tag govuk-tag--red">SEVERAL DAYS</strong>
                     </dd>
                 </div>
             </dl>
@@ -120,8 +125,7 @@
                                 </text>,
                         Classes = "govuk-fieldset__legend--l"
                     }
-                },
-                classes: "govuk-!-margin-bottom-7"
+                }
                 ))
 
             @{ await Html.RenderPartialAsync("Partials/ActionButtonsPartial.cshtml"); }
