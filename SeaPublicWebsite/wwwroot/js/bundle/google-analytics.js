@@ -1,9 +1,13 @@
-﻿// Send a hit when text is copied
+﻿// Send a hit when text is copied or pasted
 function selectAndCopy() {
     document.addEventListener("copy", () => {
-        let copiedText = document.getSelection().toString();
         gtag("event", "copy_text", {
-            "copied_text": copiedText
+            "value": document.getSelection().toString()
+        });
+    });
+    document.addEventListener("paste", (e) => {
+        gtag("event", "paste_text", {
+            "value": e.clipboardData.getData("text")
         });
     });
 }
@@ -46,7 +50,9 @@ function backLink() {
     const backButton = document.getElementById("back-link");
     if (backButton !== null) {
         backButton.addEventListener("click", () => {
-            gtag("event", "back_button_pressed")
+            gtag("event", "back_button_pressed", {
+                "value": backButton.innerText
+            })
         });
     }
 }
