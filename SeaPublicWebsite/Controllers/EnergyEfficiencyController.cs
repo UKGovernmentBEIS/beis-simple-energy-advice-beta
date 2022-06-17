@@ -409,6 +409,7 @@ namespace SeaPublicWebsite.Controllers
                 PropertyType = propertyData.PropertyType,
                 YearBuilt = propertyData.YearBuilt,
                 Reference = propertyData.Reference,
+                Epc = propertyData.Epc,
                 EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
                 SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
