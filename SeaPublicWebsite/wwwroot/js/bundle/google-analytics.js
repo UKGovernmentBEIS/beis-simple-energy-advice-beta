@@ -1,4 +1,5 @@
-﻿function selectAndCopy() {
+﻿// Send a hit when text is copied
+function selectAndCopy() {
     document.addEventListener("copy", () => {
         let copiedText = document.getSelection().toString();
         gtag("event", "copy_text", {
@@ -7,6 +8,8 @@
     });
 }
 
+// For checkboxes: Send a hit when a checkbox becomes unchecked
+// For radios and text inputs: Send a hit when the value of the input is changed (excluding when no value exists or none was selected)
 function changeInputValue() {
     const inputs = document.getElementsByTagName("input");
     const inputAnswers = new Map();
@@ -18,7 +21,6 @@ function changeInputValue() {
             let type = input.type;
             
             if (type === "checkbox") {
-                // Send a hit when a checkbox is unchecked
                 if (!input.checked) {
                     gtag("event", `change_input_${type}`, {
                         "name": name,
@@ -26,7 +28,6 @@ function changeInputValue() {
                     });
                 }
             } else if (type === "radio" || type === "text") {
-                // Send a hit if the inputs corresponding to that name already had a value
                 if (inputAnswers.has(name)) {
                     gtag("event", `change_input_${type}`, {
                         "name": name,
@@ -40,6 +41,7 @@ function changeInputValue() {
     }
 }
 
+// Send a hit when the custom back link is clicked
 function backLink() {
     const backButton = document.getElementById("back-link");
     if (backButton !== null) {
@@ -49,6 +51,7 @@ function backLink() {
     }
 }
 
+// Send a hit when a drop down list is expanded
 function expandDropDown() {
     const details = document.getElementsByTagName("details");
     for (const detail of details) {
@@ -68,11 +71,11 @@ function expandDropDown() {
     }
 }
 
+// Send a hit when a link is clicked and redirects to an external site
 function clickExternalLink() {
     const anchors = document.getElementsByTagName("a");
     for (const anchor of anchors) {
         if (!anchor.href.includes(document.location.hostname)) {
-            // Send a hit if the link is clicked and redirects to an external site
             anchor.addEventListener("click", () => {
                 gtag("event", "visit_external_site", {
                     "name": anchor.innerText,
@@ -83,12 +86,29 @@ function clickExternalLink() {
     }
 }
 
+// Send a hit if the page contains error messages
+// The error summary component includes an <ul> element with the 'govuk-error-summary__list' class
+function errorMessageDisplayed() {
+    const unorderedLists = document.getElementsByTagName("ul");
+    for (const unorderedList of unorderedLists) {
+        if (unorderedList.className.includes("govuk-error-summary__list")) {
+            gtag("event", "error_displayed", {
+                "value": unorderedList.innerText
+            });
+            
+            // No need to iterate further
+            return;
+        }
+    }
+}
+
 function setUpGoogleAnalytics() {
     selectAndCopy();
     changeInputValue();
     backLink();
     expandDropDown();
     clickExternalLink();
+    errorMessageDisplayed();
 }
 
 setUpGoogleAnalytics();
