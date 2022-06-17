@@ -543,7 +543,7 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             if (epc.PropertyAgeBand.Equals("J", StringComparison.OrdinalIgnoreCase) ||
                 epc.PropertyAgeBand.Contains("2003-2006"))
             {
-                return HomeAge.From1900To1929;
+                return HomeAge.From2003To2006;
             }
             
             if (epc.PropertyAgeBand.Equals("K", StringComparison.OrdinalIgnoreCase) || 
