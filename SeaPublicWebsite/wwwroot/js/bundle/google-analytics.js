@@ -102,6 +102,18 @@ function errorMessageDisplayed() {
     }
 }
 
+// Send a hit when the user skips a question using the 'skip this question' link
+function skipQuestion() {
+    const anchors = document.getElementsByTagName("a");
+    for (const anchor of anchors) {
+        if (anchor.innerText.toLowerCase().includes("skip this question")) {
+            anchor.addEventListener("click", () => {
+                gtag("event", "skip_question");
+            });
+        }
+    }
+}
+
 function setUpGoogleAnalytics() {
     selectAndCopy();
     changeInputValue();
@@ -109,6 +121,7 @@ function setUpGoogleAnalytics() {
     expandDropDown();
     clickExternalLink();
     errorMessageDisplayed();
+    skipQuestion();
 }
 
 setUpGoogleAnalytics();
