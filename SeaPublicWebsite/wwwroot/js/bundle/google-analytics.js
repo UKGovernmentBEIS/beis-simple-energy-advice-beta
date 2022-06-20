@@ -98,8 +98,16 @@ function errorMessageDisplayed() {
     const unorderedLists = document.getElementsByTagName("ul");
     for (const unorderedList of unorderedLists) {
         if (unorderedList.className.includes("govuk-error-summary__list")) {
+            const inputs = document.getElementsByTagName("input");
+            let value = "";
+            for (const input of inputs) {
+                if (input.type === "hidden") {
+                    continue;
+                }
+                value = value.concat(`${input.name}=${input.value};`);
+            }
             gtag("event", "error_displayed", {
-                "value": unorderedList.innerText
+                "value": value
             });
             
             // No need to iterate further
