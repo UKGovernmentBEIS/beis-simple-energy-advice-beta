@@ -72,6 +72,7 @@ namespace SeaPublicWebsite
             {
                 // In Gov.PaaS the Database URL is automatically put into the DATABASE_URL environment variable
                 databaseConnectionString = DatabaseUrlToConnectionString(configuration["DATABASE_URL"]);
+                
             }
             services.AddDbContext<SeaDbContext>(opt =>
                 opt.UseNpgsql(databaseConnectionString));

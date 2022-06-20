@@ -44,6 +44,47 @@ public class PropertyData
     public int? HoursOfHeatingMorning { get; set; }
     public int? HoursOfHeatingEvening { get; set; }
     public decimal? Temperature { get; set; }
+    public PropertyData Backup { get; set; }
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; }
+
+    public void CreateBackup()
+    {
+        Backup = new PropertyData();
+        CopyAnswersTo(Backup);
+    }
+    
+    public void ApplyBackup()
+    {
+        Backup.CopyAnswersTo(this);
+    }
+    
+    public void ResetBackup()
+    {
+        Backup = null;
+    }
+
+    private void CopyAnswersTo(PropertyData other)
+    {
+        other.YearBuilt = YearBuilt;
+        other.WallConstruction = WallConstruction;
+        other.CavityWallsInsulated = CavityWallsInsulated;
+        other.SolidWallsInsulated = SolidWallsInsulated;
+        other.FloorConstruction = FloorConstruction;
+        other.FloorInsulated = FloorInsulated;
+        other.RoofConstruction = RoofConstruction;
+        other.LoftSpace = LoftSpace;
+        other.LoftAccess = LoftAccess;
+        other.RoofInsulated = RoofInsulated;
+        other.HasOutdoorSpace = HasOutdoorSpace;
+        other.GlazingType = GlazingType;
+        other.HeatingType = HeatingType;
+        other.OtherHeatingType = OtherHeatingType;
+        other.HasHotWaterCylinder = HasHotWaterCylinder;
+        other.NumberOfOccupants = NumberOfOccupants;
+        other.HeatingPattern = HeatingPattern;
+        other.HoursOfHeatingMorning = HoursOfHeatingMorning;
+        other.HoursOfHeatingEvening = HoursOfHeatingEvening;
+        other.Temperature = Temperature;
+    }
 }
