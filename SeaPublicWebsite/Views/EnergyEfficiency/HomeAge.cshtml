@@ -76,10 +76,7 @@
                 {
                     Html = @<text>
                                <p class="govuk-body">
-                                   If you’re not sure when the property was built just pick an age band that seems about right.
-                               </p>
-                               <p class="govuk-body">
-                                   If you don’t know, you can skip this question. We will take a best guess based on other information you provide.
+                                   If you are unsure, choose 'I don't know'. We will take a best guess based on other information you provide.
                                </p>
                                
                                @await Html.GovUkDetails(new DetailsViewModel
@@ -99,17 +96,10 @@
                                
                             </text>
                     }))
-
-            <div class="govuk-button-group">
-                @(await Html.GovUkButton(new ButtonViewModel
-                {
-                    Text = "Continue",
-                }))
-                <a href="@Model.SkipLink"
-                   class="govuk-link">
-                    Skip this question
-                </a>
-            </div>
+            @(await Html.GovUkButton(new ButtonViewModel
+            {
+                Text = "Continue",
+            }))
 
         </form>
 
