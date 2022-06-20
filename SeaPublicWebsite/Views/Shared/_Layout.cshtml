@@ -1,12 +1,13 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.Extensions.Hosting
+@using SeaPublicWebsite.ExternalServices.GoogleAnalytics
 @using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Services
 @using SeaPublicWebsite.Services.Cookies
 @inject StaticAssetsVersioningService StaticAssetsVersioning
 @inject CookieService CookieService
-@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+@inject GoogleAnalyticsService GoogleAnalytics
 @{
     string assetsPath = "/assets/images";
     var bannerState = CookieService.GetAndUpdateBannerState(Context.Request, Context.Response);
@@ -20,7 +21,7 @@
 <head>
     @if (CookieService.HasAcceptedGoogleAnalytics(Context.Request))
     {
-        var id = env.IsProduction() ? Constants.GOOGLE_ANALYTICS_TAG_PRODUCTION : Constants.GOOGLE_ANALYTICS_TAG_TEST;
+        var id = GoogleAnalytics.Configuration.MeasurementId;
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=@id"></script>
         <script>
