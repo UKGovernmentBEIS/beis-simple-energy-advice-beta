@@ -85,7 +85,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "O3", new BreRecommendation
+                    "O", new BreRecommendation
                     {
                         Key = RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
                         Title = "Fit new windows",
@@ -365,9 +365,10 @@ namespace SeaPublicWebsite.Services
         {
             return glazingType switch
             {
-                GlazingType.DoNotKnow => BreGlazingType.DontKnow,
+                //peer-reviewed assumption (BreGlazingType.DontKnow would return recommendation O3 rather than O, which we don't want):
+                GlazingType.DoNotKnow => BreGlazingType.SingleGlazed,
                 GlazingType.SingleGlazed => BreGlazingType.SingleGlazed,
-                //peer-reviewed assumption:
+                //peer-reviewed assumption, this will return recommendation O3, currently not whitelisted in BreRequest.cs:
                 GlazingType.DoubleOrTripleGlazed => BreGlazingType.DoubleGlazed,
                 //peer-reviewed assumption:
                 GlazingType.Both => BreGlazingType.SingleGlazed,
