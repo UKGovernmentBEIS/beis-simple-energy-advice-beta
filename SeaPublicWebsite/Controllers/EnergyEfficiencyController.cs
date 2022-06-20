@@ -1150,7 +1150,7 @@ namespace SeaPublicWebsite.Controllers
                             Name = "user_returned",
                             Parameters = new
                             {
-                                from_magic_link = fromMagicLink ? "yes" : "no"
+                                value = fromMagicLink ? "link" : "code"
                             }
                         }
                     }
