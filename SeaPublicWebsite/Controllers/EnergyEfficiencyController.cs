@@ -167,6 +167,39 @@ namespace SeaPublicWebsite.Controllers
             return View("ServiceUnsuitable", viewModel);
         }
 
+        [HttpGet("find-epc-1/{reference}")]
+        public async Task<IActionResult> FindEpc1_Get(string reference)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.FindEpc1, propertyData);
+
+            var viewModel = new FindEpc1ViewModel
+            {
+                Reference = propertyData.Reference,
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
+            };
+            return View("FindEpc1", viewModel);
+        }
+
+        [HttpPost("find-epc-1/{reference}")]
+        public async Task<IActionResult> FindEpc1_Post(FindEpc1ViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await FindEpc1_Get(viewModel.Reference);
+            }
+
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
+
+            // propertyData.FindEpc = viewModel.FindEpc;
+            // PropertyDataHelper.ResetUnusedFields(propertyData);
+            // await propertyDataStore.SavePropertyDataAsync(propertyData);
+
+            var forwardArgs =
+                questionFlowService.ForwardLinkArguments(QuestionFlowPage.FindEpc1, propertyData, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+        }
+
         [HttpGet("postcode/{reference}")]
         public async Task<IActionResult> AskForPostcode_Get(string reference)
         {
