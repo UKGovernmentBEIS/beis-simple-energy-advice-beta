@@ -83,17 +83,16 @@ namespace SeaPublicWebsite.Controllers
 
         
         [HttpGet("ownership-status/{reference}")]
-        public async Task<IActionResult> OwnershipStatus_Get(string reference, QuestionFlowPage? entryPoint = null)
+        public async Task<IActionResult> OwnershipStatus_Get(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
             var backArgs =
-                questionFlowService.BackLinkArguments(QuestionFlowPage.OwnershipStatus, propertyData, entryPoint);
+                questionFlowService.BackLinkArguments(QuestionFlowPage.OwnershipStatus, propertyData);
             var viewModel = new OwnershipStatusViewModel
             {
                 OwnershipStatus = propertyData.OwnershipStatus,
                 Reference = propertyData.Reference,
-                EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
@@ -105,28 +104,26 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return await OwnershipStatus_Get(viewModel.Reference, viewModel.EntryPoint);
+                return await OwnershipStatus_Get(viewModel.Reference);
             }
             
             return await UpdatePropertyAndRedirect(
                 p => p.OwnershipStatus = viewModel.OwnershipStatus,
                 viewModel.Reference,
-                QuestionFlowPage.OwnershipStatus, 
-                viewModel.EntryPoint);
+                QuestionFlowPage.OwnershipStatus);
         }
 
         
         [HttpGet("country/{reference}")]
-        public async Task<IActionResult> Country_Get(string reference, QuestionFlowPage? entryPoint = null)
+        public async Task<IActionResult> Country_Get(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.Country, propertyData, entryPoint);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.Country, propertyData);
             var viewModel = new CountryViewModel
             {
                 Country = propertyData.Country,
                 Reference = propertyData.Reference,
-                EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
@@ -138,14 +135,13 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return await Country_Get(viewModel.Reference, viewModel.EntryPoint);
+                return await Country_Get(viewModel.Reference);
             }
             
             return await UpdatePropertyAndRedirect(
                 p => p.Country = viewModel.Country,
                 viewModel.Reference,
-                QuestionFlowPage.Country, 
-                viewModel.EntryPoint);
+                QuestionFlowPage.Country);
         }
 
 
@@ -203,8 +199,7 @@ namespace SeaPublicWebsite.Controllers
                     p.HouseNameOrNumber = viewModel.HouseNameOrNumber;
                 },
                 viewModel.Reference,
-                QuestionFlowPage.AskForPostcode, 
-                viewModel.EntryPoint);
+                QuestionFlowPage.AskForPostcode);
         }
 
         
@@ -245,22 +240,20 @@ namespace SeaPublicWebsite.Controllers
             return await UpdatePropertyAndRedirect(
                 p => p.Epc = epc,
                 viewModel.Reference,
-                QuestionFlowPage.ConfirmAddress, 
-                viewModel.EntryPoint);
+                QuestionFlowPage.ConfirmAddress);
         }
 
 
         [HttpGet("property-type/{reference}")]
-        public async Task<IActionResult> PropertyType_Get(string reference, QuestionFlowPage? entryPoint = null)
+        public async Task<IActionResult> PropertyType_Get(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.PropertyType, propertyData, entryPoint);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.PropertyType, propertyData);
             var viewModel = new PropertyTypeViewModel
             {
                 PropertyType = propertyData.PropertyType,
                 Reference = reference,
-                EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
@@ -272,27 +265,25 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return await PropertyType_Get(viewModel.Reference, viewModel.EntryPoint);
+                return await PropertyType_Get(viewModel.Reference);
             }
             
             return await UpdatePropertyAndRedirect(
                 p => p.PropertyType = viewModel.PropertyType,
                 viewModel.Reference,
-                QuestionFlowPage.PropertyType, 
-                viewModel.EntryPoint);
+                QuestionFlowPage.PropertyType);
         }
 
         [HttpGet("house-type/{reference}")]
-        public async Task<IActionResult> HouseType_Get(string reference, QuestionFlowPage? entryPoint = null)
+        public async Task<IActionResult> HouseType_Get(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.HouseType, propertyData, entryPoint);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.HouseType, propertyData);
             var viewModel = new HouseTypeViewModel
             {
                 HouseType = propertyData.HouseType,
                 Reference = propertyData.Reference,
-                EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
@@ -304,28 +295,26 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return await HouseType_Get(viewModel.Reference, viewModel.EntryPoint);
+                return await HouseType_Get(viewModel.Reference);
             }
             
             return await UpdatePropertyAndRedirect(
                 p => p.HouseType = viewModel.HouseType,
                 viewModel.Reference,
-                QuestionFlowPage.HouseType, 
-                viewModel.EntryPoint);
+                QuestionFlowPage.HouseType);
         }
 
         
         [HttpGet("bungalow-type/{reference}")]
-        public async Task<IActionResult> BungalowType_Get(string reference, QuestionFlowPage? entryPoint = null)
+        public async Task<IActionResult> BungalowType_Get(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.BungalowType, propertyData, entryPoint);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.BungalowType, propertyData);
             var viewModel = new BungalowTypeViewModel
             {
                 BungalowType = propertyData.BungalowType,
                 Reference = reference,
-                EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
@@ -337,28 +326,26 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return await BungalowType_Get(viewModel.Reference, viewModel.EntryPoint);
+                return await BungalowType_Get(viewModel.Reference);
             }
             
             return await UpdatePropertyAndRedirect(
                 p => p.BungalowType = viewModel.BungalowType,
                 viewModel.Reference,
-                QuestionFlowPage.BungalowType, 
-                viewModel.EntryPoint);
+                QuestionFlowPage.BungalowType);
         }
 
         
         [HttpGet("flat-type/{reference}")]
-        public async Task<IActionResult> FlatType_Get(string reference, QuestionFlowPage? entryPoint = null)
+        public async Task<IActionResult> FlatType_Get(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.FlatType, propertyData, entryPoint);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.FlatType, propertyData);
             var viewModel = new FlatTypeViewModel
             {
                 FlatType = propertyData.FlatType,
                 Reference = propertyData.Reference,
-                EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
@@ -370,14 +357,13 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return await FlatType_Get(viewModel.Reference, viewModel.EntryPoint);
+                return await FlatType_Get(viewModel.Reference);
             }
             
             return await UpdatePropertyAndRedirect(
                 p => p.FlatType = viewModel.FlatType,
                 viewModel.Reference,
-                QuestionFlowPage.FlatType, 
-                viewModel.EntryPoint);
+                QuestionFlowPage.FlatType);
         }
 
         
@@ -427,7 +413,6 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new WallConstructionViewModel
             {
                 WallConstruction = propertyData.WallConstruction,
-                YearBuilt = propertyData.YearBuilt,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -462,7 +447,6 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new CavityWallsInsulatedViewModel
             {
                 CavityWallsInsulated = propertyData.CavityWallsInsulated,
-                WallConstruction = propertyData.WallConstruction,
                 YearBuilt = propertyData.YearBuilt,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
@@ -498,8 +482,6 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new SolidWallsInsulatedViewModel
             {
                 SolidWallsInsulated = propertyData.SolidWallsInsulated,
-                WallConstruction = propertyData.WallConstruction,
-                YearBuilt = propertyData.YearBuilt,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -534,8 +516,6 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new FloorConstructionViewModel
             {
                 FloorConstruction = propertyData.FloorConstruction,
-                WallConstruction = propertyData.WallConstruction,
-                YearBuilt = propertyData.YearBuilt,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -570,7 +550,6 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new FloorInsulatedViewModel
             {
                 FloorInsulated = propertyData.FloorInsulated,
-                YearBuilt = propertyData.YearBuilt,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -603,8 +582,6 @@ namespace SeaPublicWebsite.Controllers
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.RoofConstruction, propertyData, entryPoint);
             var viewModel = new RoofConstructionViewModel
             {
-                PropertyType = propertyData.PropertyType,
-                FlatType = propertyData.FlatType,
                 RoofConstruction = propertyData.RoofConstruction,
                 Reference = propertyData.Reference,
                 Epc = propertyData.Epc,

@@ -10,9 +10,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public SolidWallsInsulated? SolidWallsInsulated { get; set; }
 
         public string Reference { get; set; }
-        
-        public YearBuilt? YearBuilt { get; set; }
-        public WallConstruction? WallConstruction { get; set; }
         public Epc Epc { get; set; }
     }
 }
