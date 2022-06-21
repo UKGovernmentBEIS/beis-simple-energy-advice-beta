@@ -1,6 +1,5 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using Microsoft.Extensions.Hosting
 @using SeaPublicWebsite.ExternalServices.GoogleAnalytics
 @using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Services
@@ -10,7 +9,6 @@
 @inject GoogleAnalyticsService GoogleAnalytics
 @{
     string assetsPath = "/assets/images";
-    var bannerState = CookieService.GetAndUpdateBannerState(Context.Request, Context.Response);
 }
 <!DOCTYPE html>
 
@@ -30,6 +28,7 @@
             gtag('js', new Date());
     
             gtag('config', '@id');
+            setUpGoogleAnalytics();
         </script>
     }
     <meta charset="utf-8"/>

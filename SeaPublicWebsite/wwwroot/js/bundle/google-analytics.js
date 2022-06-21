@@ -137,5 +137,3 @@ function setUpGoogleAnalytics() {
     errorMessageDisplayed();
     skipQuestion();
 }
-
-setUpGoogleAnalytics();
