@@ -246,7 +246,8 @@ namespace SeaPublicWebsite.Services
                     HomeAge.From1991To1995 => "H",
                     HomeAge.From1996To2002 => "I",
                     HomeAge.From2003To2006 => "J",
-                    HomeAge.From2007ToPresent => "L",
+                    HomeAge.From2007To2011 => "K",
+                    HomeAge.From2012ToPresent => "L",
                     _ => wallConstruction switch
                     {
                         WallConstruction.DoNotKnow => "D",
