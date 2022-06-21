@@ -11,6 +11,8 @@ public class PropertyData
 
     public OwnershipStatus? OwnershipStatus { get; set; }
     public Country? Country { get; set; }
+    
+    public FindEpc? FindEpc { get; set; }
 
     public Epc Epc { get; set; }
 

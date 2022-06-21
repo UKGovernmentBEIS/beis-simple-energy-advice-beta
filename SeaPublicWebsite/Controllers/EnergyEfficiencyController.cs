@@ -176,6 +176,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new FindEpc1ViewModel
             {
                 Reference = propertyData.Reference,
+                FindEpc = propertyData.FindEpc,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
             };
             return View("FindEpc1", viewModel);
@@ -191,9 +192,9 @@ namespace SeaPublicWebsite.Controllers
 
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
 
-            // propertyData.FindEpc = viewModel.FindEpc;
-            // PropertyDataHelper.ResetUnusedFields(propertyData);
-            // await propertyDataStore.SavePropertyDataAsync(propertyData);
+            propertyData.FindEpc = viewModel.FindEpc;
+            PropertyDataHelper.ResetUnusedFields(propertyData);
+            await propertyDataStore.SavePropertyDataAsync(propertyData);
 
             var forwardArgs =
                 questionFlowService.ForwardLinkArguments(QuestionFlowPage.FindEpc1, propertyData, viewModel.EntryPoint);

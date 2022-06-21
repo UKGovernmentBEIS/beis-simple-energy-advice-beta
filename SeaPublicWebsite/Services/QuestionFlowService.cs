@@ -28,7 +28,7 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.NewOrReturningUser => NewOrReturningUserBackLinkArguments(),
                 QuestionFlowPage.Country => CountryBackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.OwnershipStatus => OwnershipStatusBackLinkArguments(propertyData, entryPoint),
-                QuestionFlowPage.FindEpc1 => FindEpc1BackLinkArguments(propertyData),
+                QuestionFlowPage.FindEpc1 => FindEpc1BackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.ServiceUnsuitable => ServiceUnsuitableBackLinkArguments(propertyData),
                 QuestionFlowPage.AskForPostcode => AskForPostcodeBackLinkArguments(propertyData),
                 QuestionFlowPage.ConfirmAddress => ConfirmAddressBackLinkArguments(propertyData),
@@ -68,7 +68,7 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.NewOrReturningUser => NewOrReturningUserForwardLinkArguments(),
                 QuestionFlowPage.Country => CountryForwardLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.OwnershipStatus => OwnershipStatusForwardLinkArguments(propertyData, entryPoint),
-                QuestionFlowPage.FindEpc1 => FindEpc1ForwardLinkArguments(propertyData),
+                QuestionFlowPage.FindEpc1 => FindEpc1ForwardLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.AskForPostcode => AskForPostcodeForwardLinkArguments(propertyData),
                 QuestionFlowPage.ConfirmAddress => ConfirmAddressForwardLinkArguments(propertyData),
                 QuestionFlowPage.PropertyType => PropertyTypeForwardLinkArguments(propertyData, entryPoint),
@@ -144,10 +144,10 @@ namespace SeaPublicWebsite.Services
             };
         }
 
-        private PathByActionArguments FindEpc1BackLinkArguments(PropertyData propertyData)
+        private PathByActionArguments FindEpc1BackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
-            return new PathByActionArguments(nameof(EnergyEfficiencyController.OwnershipStatus_Get), "EnergyEfficiency", new { reference });
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.OwnershipStatus_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
         
         private PathByActionArguments AskForPostcodeBackLinkArguments(PropertyData propertyData)
@@ -165,9 +165,11 @@ namespace SeaPublicWebsite.Services
         private PathByActionArguments PropertyTypeBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
-            return entryPoint is QuestionFlowPage.PropertyType
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
-                : new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference, entryPoint });
+            if (propertyData.FindEpc == FindEpc.Yes)
+            {
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference, entryPoint });
+            }
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.FindEpc1_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
         private PathByActionArguments HouseTypeBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
@@ -469,10 +471,17 @@ namespace SeaPublicWebsite.Services
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.FindEpc1_Get), "EnergyEfficiency", new { reference });
         }
 
-        private PathByActionArguments FindEpc1ForwardLinkArguments(PropertyData propertyData)
+        private PathByActionArguments FindEpc1ForwardLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
-            return new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference });
+            if (propertyData.FindEpc is FindEpc.Yes)
+            {
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference });
+            }
+            
+            return entryPoint is not null
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
+                : new PathByActionArguments(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new { reference });
         }
         
         private PathByActionArguments AskForPostcodeForwardLinkArguments(PropertyData propertyData)
