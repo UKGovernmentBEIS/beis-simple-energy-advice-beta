@@ -108,12 +108,11 @@ namespace SeaPublicWebsite.Controllers
                 return await OwnershipStatus_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            
-            propertyData.OwnershipStatus = viewModel.OwnershipStatus;
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.OwnershipStatus, propertyData, viewModel.EntryPoint);
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.OwnershipStatus = viewModel.OwnershipStatus,
+                viewModel.Reference,
+                QuestionFlowPage.OwnershipStatus, 
+                viewModel.EntryPoint);
         }
 
         
@@ -142,13 +141,11 @@ namespace SeaPublicWebsite.Controllers
                 return await Country_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-
-            propertyData.Country = viewModel.Country;
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-            
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.Country, propertyData, viewModel.EntryPoint);
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.Country = viewModel.Country,
+                viewModel.Reference,
+                QuestionFlowPage.Country, 
+                viewModel.EntryPoint);
         }
 
 
@@ -199,15 +196,15 @@ namespace SeaPublicWebsite.Controllers
                 return await AskForPostcode_Get(viewModel.Reference);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-
-            propertyData.Postcode = viewModel.Postcode;
-            propertyData.HouseNameOrNumber = viewModel.HouseNameOrNumber;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AskForPostcode, propertyData);
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p =>
+                {
+                    p.Postcode = viewModel.Postcode;
+                    p.HouseNameOrNumber = viewModel.HouseNameOrNumber;
+                },
+                viewModel.Reference,
+                QuestionFlowPage.AskForPostcode, 
+                viewModel.EntryPoint);
         }
 
         
@@ -244,13 +241,12 @@ namespace SeaPublicWebsite.Controllers
                 return await ConfirmAddress_Get(viewModel.Reference);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            propertyData.Epc = await epcApi.GetEpcForId(viewModel.SelectedEpcId);
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.ConfirmAddress, propertyData);
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            var epc = await epcApi.GetEpcForId(viewModel.SelectedEpcId);
+            return await UpdatePropertyAndRedirect(
+                p => p.Epc = epc,
+                viewModel.Reference,
+                QuestionFlowPage.ConfirmAddress, 
+                viewModel.EntryPoint);
         }
 
 
@@ -279,14 +275,11 @@ namespace SeaPublicWebsite.Controllers
                 return await PropertyType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-
-            propertyData.PropertyType = viewModel.PropertyType;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.PropertyType, propertyData, viewModel.EntryPoint);
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.PropertyType = viewModel.PropertyType,
+                viewModel.Reference,
+                QuestionFlowPage.PropertyType, 
+                viewModel.EntryPoint);
         }
 
         [HttpGet("house-type/{reference}")]
@@ -314,14 +307,11 @@ namespace SeaPublicWebsite.Controllers
                 return await HouseType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-
-            propertyData.HouseType = viewModel.HouseType;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HouseType, propertyData, viewModel.EntryPoint);
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.HouseType = viewModel.HouseType,
+                viewModel.Reference,
+                QuestionFlowPage.HouseType, 
+                viewModel.EntryPoint);
         }
 
         
@@ -350,14 +340,11 @@ namespace SeaPublicWebsite.Controllers
                 return await BungalowType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            
-            propertyData.BungalowType = viewModel.BungalowType;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.BungalowType, propertyData, viewModel.EntryPoint);
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.BungalowType = viewModel.BungalowType,
+                viewModel.Reference,
+                QuestionFlowPage.BungalowType, 
+                viewModel.EntryPoint);
         }
 
         
@@ -386,14 +373,11 @@ namespace SeaPublicWebsite.Controllers
                 return await FlatType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-
-            propertyData.FlatType = viewModel.FlatType;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.FlatType, propertyData, viewModel.EntryPoint);
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.FlatType = viewModel.FlatType,
+                viewModel.Reference,
+                QuestionFlowPage.FlatType, 
+                viewModel.EntryPoint);
         }
 
         
@@ -426,25 +410,11 @@ namespace SeaPublicWebsite.Controllers
                 return await HomeAge_Get(viewModel.Reference, viewModel.EntryPoint);
             }
 
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
-            
-            propertyData.YearBuilt = viewModel.YearBuilt;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HomeAge, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.YearBuilt = viewModel.YearBuilt,
+                viewModel.Reference,
+                QuestionFlowPage.HomeAge, 
+                viewModel.EntryPoint);
         }
 
         
@@ -475,24 +445,11 @@ namespace SeaPublicWebsite.Controllers
                 return await WallConstruction_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
-            
-            propertyData.WallConstruction = viewModel.WallConstruction;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.WallConstruction, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-            
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.WallConstruction = viewModel.WallConstruction,
+                viewModel.Reference,
+                QuestionFlowPage.WallConstruction, 
+                viewModel.EntryPoint);
         }
 
         
@@ -524,24 +481,11 @@ namespace SeaPublicWebsite.Controllers
                 return await CavityWallsInsulated_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
-            
-            propertyData.CavityWallsInsulated = viewModel.CavityWallsInsulated;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.CavityWallsInsulated, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.CavityWallsInsulated = viewModel.CavityWallsInsulated,
+                viewModel.Reference,
+                QuestionFlowPage.CavityWallsInsulated, 
+                viewModel.EntryPoint);
         }
 
 
@@ -573,24 +517,11 @@ namespace SeaPublicWebsite.Controllers
                 return await SolidWallsInsulated_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
-            
-            propertyData.SolidWallsInsulated = viewModel.SolidWallsInsulated;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.SolidWallsInsulated, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.SolidWallsInsulated = viewModel.SolidWallsInsulated,
+                viewModel.Reference,
+                QuestionFlowPage.SolidWallsInsulated, 
+                viewModel.EntryPoint);
         }
 
 
@@ -622,24 +553,11 @@ namespace SeaPublicWebsite.Controllers
                 return await FloorConstruction_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
-            
-            propertyData.FloorConstruction = viewModel.FloorConstruction;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.FloorConstruction, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.FloorConstruction = viewModel.FloorConstruction,
+                viewModel.Reference,
+                QuestionFlowPage.FloorConstruction, 
+                viewModel.EntryPoint);
         }
 
         
@@ -669,25 +587,12 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await FloorInsulated_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
             
-            propertyData.FloorInsulated = viewModel.FloorInsulated;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.FloorInsulated, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.FloorInsulated = viewModel.FloorInsulated,
+                viewModel.Reference,
+                QuestionFlowPage.FloorInsulated, 
+                viewModel.EntryPoint);
         }
 
         [HttpGet("roof-construction/{reference}")]
@@ -717,25 +622,12 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await RoofConstruction_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
             
-            propertyData.RoofConstruction = viewModel.RoofConstruction;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.RoofConstruction, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.RoofConstruction = viewModel.RoofConstruction,
+                viewModel.Reference,
+                QuestionFlowPage.RoofConstruction, 
+                viewModel.EntryPoint);
         }
 
         [HttpGet("loft-space/{reference}")]
@@ -762,25 +654,12 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await LoftSpace_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
             
-            propertyData.LoftSpace = viewModel.LoftSpace;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.LoftSpace, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.LoftSpace = viewModel.LoftSpace,
+                viewModel.Reference,
+                QuestionFlowPage.LoftSpace, 
+                viewModel.EntryPoint);
         }
 
         [HttpGet("loft-access/{reference}")]
@@ -807,25 +686,12 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await LoftAccess_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
             
-            propertyData.LoftAccess = viewModel.LoftAccess;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.LoftAccess, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.LoftAccess = viewModel.LoftAccess,
+                viewModel.Reference,
+                QuestionFlowPage.LoftAccess, 
+                viewModel.EntryPoint);
         }
 
         [HttpGet("roof-insulated/{reference}")]
@@ -853,25 +719,12 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await RoofInsulated_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
             
-            propertyData.RoofInsulated = viewModel.RoofInsulated;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.RoofInsulated, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.RoofInsulated = viewModel.RoofInsulated,
+                viewModel.Reference,
+                QuestionFlowPage.RoofInsulated, 
+                viewModel.EntryPoint);
         }
 
         
@@ -900,25 +753,12 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await GlazingType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
             
-            propertyData.GlazingType = viewModel.GlazingType;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.GlazingType, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.GlazingType = viewModel.GlazingType,
+                viewModel.Reference,
+                QuestionFlowPage.GlazingType, 
+                viewModel.EntryPoint);
         }
 
         [HttpGet("outdoor-space/{reference}")]
@@ -945,25 +785,12 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await OutdoorSpace_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
             
-            propertyData.HasOutdoorSpace = viewModel.HasOutdoorSpace;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.OutdoorSpace, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.HasOutdoorSpace = viewModel.HasOutdoorSpace,
+                viewModel.Reference,
+                QuestionFlowPage.OutdoorSpace, 
+                viewModel.EntryPoint);
         }
 
         
@@ -992,25 +819,12 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await HeatingType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
             
-            propertyData.HeatingType = viewModel.HeatingType;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HeatingType, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.HeatingType = viewModel.HeatingType,
+                viewModel.Reference,
+                QuestionFlowPage.HeatingType, 
+                viewModel.EntryPoint);
         }
 
         [HttpGet("other-heating-type/{reference}")]
@@ -1038,25 +852,12 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await OtherHeatingType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
             
-            propertyData.OtherHeatingType = viewModel.OtherHeatingType;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.OtherHeatingType, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.OtherHeatingType = viewModel.OtherHeatingType,
+                viewModel.Reference,
+                QuestionFlowPage.OtherHeatingType, 
+                viewModel.EntryPoint);
         }
 
 
@@ -1085,25 +886,12 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await HotWaterCylinder_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
             
-            propertyData.HasHotWaterCylinder = viewModel.HasHotWaterCylinder;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HotWaterCylinder, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.HasHotWaterCylinder = viewModel.HasHotWaterCylinder,
+                viewModel.Reference,
+                QuestionFlowPage.HotWaterCylinder, 
+                viewModel.EntryPoint);
         }
 
         
@@ -1133,25 +921,12 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await NumberOfOccupants_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
             
-            propertyData.NumberOfOccupants = viewModel.NumberOfOccupants;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.NumberOfOccupants, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.NumberOfOccupants = viewModel.NumberOfOccupants,
+                viewModel.Reference,
+                QuestionFlowPage.NumberOfOccupants, 
+                viewModel.EntryPoint);
         }
 
         
@@ -1182,24 +957,11 @@ namespace SeaPublicWebsite.Controllers
                 return await HeatingPattern_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
-            
-            propertyData.HeatingPattern = viewModel.HeatingPattern;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.HeatingPattern, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.HeatingPattern = viewModel.HeatingPattern,
+                viewModel.Reference,
+                QuestionFlowPage.HeatingPattern, 
+                viewModel.EntryPoint);
         }
 
         
@@ -1229,25 +991,12 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await Temperature_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EntryPoint is not null && propertyData.Backup is null)
-            {
-                propertyData.CreateBackup();
-            }
             
-            propertyData.Temperature = viewModel.Temperature;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.Temperature, propertyData, viewModel.EntryPoint);
-
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
-            {
-                propertyData.ResetBackup();
-            }
-
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return await UpdatePropertyAndRedirect(
+                p => p.Temperature = viewModel.Temperature,
+                viewModel.Reference,
+                QuestionFlowPage.Temperature, 
+                viewModel.EntryPoint);
         }
 
         [HttpGet("answer-summary/{reference}")]
@@ -1464,6 +1213,28 @@ namespace SeaPublicWebsite.Controllers
             await propertyDataStore.SavePropertyDataAsync(propertyData);
             
             return RedirectToAction("YourSavedRecommendations_Get", new { reference = propertyData.Reference });
+        }
+
+        private async Task<RedirectToActionResult> UpdatePropertyAndRedirect(
+            Func<PropertyData, object> update,
+            string reference,
+            QuestionFlowPage currentPage,
+            QuestionFlowPage? entryPoint = null)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            if (entryPoint is not null & propertyData.Backup is null)
+            {
+                propertyData.CreateBackup();
+            }
+            update(propertyData);
+            PropertyDataHelper.ResetUnusedFields(propertyData);
+            var forwardArgs = questionFlowService.ForwardLinkArguments(currentPage, propertyData, entryPoint);
+            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
+            {
+                propertyData.ResetBackup();
+            }
+            await propertyDataStore.SavePropertyDataAsync(propertyData);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
     }
 }
