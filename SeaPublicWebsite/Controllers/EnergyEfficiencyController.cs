@@ -1216,7 +1216,7 @@ namespace SeaPublicWebsite.Controllers
         }
 
         private async Task<RedirectToActionResult> UpdatePropertyAndRedirect(
-            Func<PropertyData, object> update,
+            Action<PropertyData> update,
             string reference,
             QuestionFlowPage currentPage,
             QuestionFlowPage? entryPoint = null)

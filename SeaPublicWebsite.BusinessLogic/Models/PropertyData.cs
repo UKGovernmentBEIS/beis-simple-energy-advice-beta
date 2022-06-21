@@ -66,6 +66,15 @@ public class PropertyData
 
     private void CopyAnswersTo(PropertyData other)
     {
+        other.OwnershipStatus = OwnershipStatus;
+        other.Country = Country;
+        other.Epc = Epc;
+        other.Postcode = Postcode;
+        other.HouseNameOrNumber = HouseNameOrNumber;
+        other.PropertyType = PropertyType;
+        other.HouseType = HouseType;
+        other.BungalowType = BungalowType;
+        other.FlatType = FlatType;
         other.YearBuilt = YearBuilt;
         other.WallConstruction = WallConstruction;
         other.CavityWallsInsulated = CavityWallsInsulated;
