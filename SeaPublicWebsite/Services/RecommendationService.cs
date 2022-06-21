@@ -85,7 +85,7 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "O3", new BreRecommendation
+                    "O", new BreRecommendation
                     {
                         Key = RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
                         Title = "Fit new windows",
@@ -246,7 +246,8 @@ namespace SeaPublicWebsite.Services
                     HomeAge.From1991To1995 => "H",
                     HomeAge.From1996To2002 => "I",
                     HomeAge.From2003To2006 => "J",
-                    HomeAge.From2007ToPresent => "L",
+                    HomeAge.From2007To2011 => "K",
+                    HomeAge.From2012ToPresent => "L",
                     _ => wallConstruction switch
                     {
                         WallConstruction.DoNotKnow => "D",
@@ -339,7 +340,8 @@ namespace SeaPublicWebsite.Services
                     BreRoofType.FlatRoofWithInsulation,
                 RoofConstruction.Pitched or RoofConstruction.Mixed => loftSpace switch
                 {
-                    LoftSpace.No => BreRoofType.DontKnow,
+                    //peer-reviewed assumption:
+                    LoftSpace.No => BreRoofType.PitchedRoofWithInsulation,
                     LoftSpace.Yes => loftAccess switch
                     {
                         LoftAccess.No => BreRoofType.DontKnow,
@@ -365,9 +367,10 @@ namespace SeaPublicWebsite.Services
         {
             return glazingType switch
             {
-                GlazingType.DoNotKnow => BreGlazingType.DontKnow,
+                //peer-reviewed assumption (BreGlazingType.DontKnow would return recommendation O3 rather than O, which we don't want):
+                GlazingType.DoNotKnow => BreGlazingType.SingleGlazed,
                 GlazingType.SingleGlazed => BreGlazingType.SingleGlazed,
-                //peer-reviewed assumption:
+                //peer-reviewed assumption, this will return recommendation O3, currently not whitelisted in BreRequest.cs:
                 GlazingType.DoubleOrTripleGlazed => BreGlazingType.DoubleGlazed,
                 //peer-reviewed assumption:
                 GlazingType.Both => BreGlazingType.SingleGlazed,

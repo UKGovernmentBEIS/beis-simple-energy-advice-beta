@@ -1017,6 +1017,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("heating-pattern/{reference}")]
         public async Task<IActionResult> HeatingPattern_Post(HeatingPatternViewModel viewModel)
         {
+            if (viewModel.HeatingPattern != HeatingPattern.Other)
+            {
+                ModelState.Remove("HoursOfHeatingMorning");
+                ModelState.Remove("HoursOfHeatingEvening");
+            }
+            
             if (!ModelState.IsValid)
             {
                 return await HeatingPattern_Get(viewModel.Reference, viewModel.EntryPoint);
