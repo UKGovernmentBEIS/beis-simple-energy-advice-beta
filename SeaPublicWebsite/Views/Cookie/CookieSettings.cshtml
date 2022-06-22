@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
 @model SeaPublicWebsite.Models.Cookies.CookieSettingsViewModel
 @{
     ViewBag.Title = $"Cookies on our service";
@@ -8,18 +10,11 @@
     <div class="govuk-grid-column-two-thirds">
         @if (Model.ChangesHaveBeenSaved)
         {
-            <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
-              <div class="govuk-notification-banner__header">
-                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
-                  Success
-                </h2>
-              </div>
-              <div class="govuk-notification-banner__content">
-                <p class="govuk-notification-banner__heading">
-                  You’ve set your cookie preferences.
-                </p>
-              </div>
-            </div>
+            @await Html.GovUkNotificationBanner(new NotificationBannerViewModel
+            {
+                Text = "You’ve set your cookie preferences.",
+                Type = "success"
+            })
         }
 
         <form method="POST" action="@Url.Action("CookieSettings_Post", "Cookie")">
