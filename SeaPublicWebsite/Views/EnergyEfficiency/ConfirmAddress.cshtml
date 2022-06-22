@@ -1,7 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.ExternalServices.Models
-@using SeaPublicWebsite.Models.EnergyEfficiency
+@using SeaPublicWebsite.BusinessLogic.Models
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.ConfirmAddressViewModel
 @{
@@ -25,15 +24,11 @@
         @if (!Model.EpcInformationList.Any())
         {
             <h1 class="govuk-heading-l">
-                We could not find an EPC for this address
+                We weren't able to find an Energy Performance Certificate for your property
             </h1>
 
             <p class="govuk-body">
-                We were unable to find an EPC for this address or all previous EPCs have expired.
-            </p>
-
-            <p class="govuk-body">
-                You can still continue using the service.
+                We will need to ask you some questions to work out which of the available energy efficiency measures are most likely to be helpful to you.
             </p>
 
             @await Html.GovUkButton(new ButtonViewModel
@@ -54,7 +49,7 @@
                         <p class="govuk-caption-l">
                             Find your EPC
                         </p>
-                        
+
                         <h1 class="govuk-heading-l">
                             We found an Energy Performance Certificate that might be yours
                         </h1>
@@ -65,7 +60,7 @@
 
                         <p>Certificate Component Under Construction</p>
                     </text>
-                                                                       
+
                     @await Html.GovUkSummaryList(new SummaryListViewModel
                     {
                         Rows = new List<SummaryListRowViewModel>
@@ -103,7 +98,7 @@
                                 }
                             }
                         }
-                    });
+                    })
                     @(await Html.GovUkRadiosFor(m => m.AddressConfirmed,
                         fieldsetOptions: new FieldsetViewModel
                         {
@@ -117,25 +112,52 @@
                 }
                 else
                 {
-                    @await Html.GovUkRadiosFromStringsFor(m => m.SelectedEpcId,
-                        radioOptions: Model.EpcInformationList.ToDictionary(
-                            epc => epc.EpcId,
-                            epc => new LabelViewModel
-                            {
-                                Text = epc.Address1 + (epc.Address2 != "" ? ", " + epc.Address2 : "")
-                            }),
-                        fieldsetOptions: new FieldsetViewModel
+                    <p class="govuk-caption-l">
+                        Find your EPC
+                    </p>
+                    @await Html.GovUkFieldset(new FieldsetViewModel
+                    {
+                        Legend = new LegendViewModel
                         {
-                            Legend = new LegendViewModel
-                            {
-                                Html = @<text>
-                                           <h1 class="govuk-fieldset__heading">
-                                               Select your address
-                                           </h1>
-                                        </text>,
-                                Classes = "govuk-fieldset__legend--l"
-                            }
-                        })
+                            Text = "We found multiple Energy Performance Certificates that might be yours",
+                            Classes = "govuk-fieldset__legend--l",
+                            IsPageHeading = true
+                        },
+                        InnerHtml =
+                            @<text>
+                                <p class="govuk-body">
+                                    One of these certificates may be registered to your property or to the properties nearby that share part of your address.
+                                </p>
+                                <p class="govuk-body">
+                                    Your address may not be listed here if it does not have a registered certificate.
+                                </p>
+                                <p class="govuk-heading-m">
+                                    Choose your address
+                                </p>
+                                @await Html.GovUkRadiosFromStringsFor(m => m.SelectedEpcId,
+                                    radioOptions: Model.EpcInformationList.Append(new EpcInformation("unlisted", "My address is not listed here", "", "")).ToDictionary(
+                                        epc => epc.EpcId,
+                                        epc => new LabelViewModel
+                                        {
+                                            Text = epc.Address1 + (epc.Address2 != "" ? ", " + epc.Address2 : "")
+                                        }),
+                                    hintOptions: new HintViewModel
+                                    {
+                                        Text = "Please choose your address if it is listed, otherwise choose ‘My address is not listed here’"
+                                    },
+                                    conditionalOptions: new Dictionary<string, Conditional>
+                                    {
+                                        {
+                                            "unlisted",
+                                            new Conditional
+                                            {
+                                                Text = "You can still continue to use this service as there are further questions that can help determine the kind of measures you can take."
+                                            }
+                                        }
+                                    }
+                                    )
+                             </text>
+                    })
                 }
 
                 <div class="govuk-button-group">
