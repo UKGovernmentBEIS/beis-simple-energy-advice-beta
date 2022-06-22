@@ -3,7 +3,7 @@ using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency;
 
-public class FindEpc1ViewModel : QuestionFlowViewModel
+public class FindEpcViewModel : QuestionFlowViewModel
 {
     [GovUkValidateRequired(ErrorMessageIfMissing =
         "Please confirm whether or not you would like to search for your EPC before continuing")]

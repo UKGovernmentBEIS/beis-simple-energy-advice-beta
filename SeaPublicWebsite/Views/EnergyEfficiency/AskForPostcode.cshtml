@@ -23,19 +23,18 @@
         
         <form action="@Url.Action("AskForPostcode_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post">
             @Html.AntiForgeryToken()
+            <text>
+                <p class="govuk-caption-l">
+                Find your EPC
+                </p>
+            </text>
+            
             
             @{
                 Func<object, object> details =
                     @<text>
                         <p class="govuk-body">
-                            An Energy Performance Certificate (EPC) is needed whenever a property is built, sold or rented.
-                        </p>
-                        <p class="govuk-body">
-                            An accredited assessor surveys the property and produces the certificate.
-                        </p>
-                        <p class="govuk-body">
-                            The certificate contains information about the property’s construction,
-                            energy use and typical energy costs.
+                            Content TBD
                         </p>
                      </text>;
             }
@@ -50,18 +49,9 @@
                 },
                 InnerHtml = 
                     @<text>
-                        <p class="govuk-body">
-                            You don’t need to provide this, but your address may allow us to access your Energy Performance Certificate
-                            (EPC) that contains information about your property’s energy efficiency.
-                        </p>
-                        <p class="govuk-body">
-                            This information could help you to answer if you’re not sure for some of the questions
-                            we ask about your property.
-                        </p>
-                        
                         @await Html.GovUkDetails(new DetailsViewModel
                         {
-                            SummaryText = "What is an Energy Performance Certificate (EPC)?", 
+                            SummaryText = "What we do with your address", 
                             Html = details
                         })
                         
@@ -98,7 +88,7 @@
                 }))
                 <a href="@Model.SkipLink"
                    class="govuk-link">
-                    Skip this question
+                    Cancel and continue without an EPC
                 </a>
             </div>
             

@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.ExternalServices.Models
 @using SeaPublicWebsite.Models.EnergyEfficiency
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.ConfirmAddressViewModel
@@ -12,7 +13,7 @@
     {
         Text = "Back",
         Href = Model.BackLink,
-        
+
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
         OverrideWithJavascript = false
@@ -26,18 +27,18 @@
             <h1 class="govuk-heading-l">
                 We could not find an EPC for this address
             </h1>
-        
+
             <p class="govuk-body">
                 We were unable to find an EPC for this address or all previous EPCs have expired.
             </p>
-        
+
             <p class="govuk-body">
                 You can still continue using the service.
             </p>
 
             @await Html.GovUkButton(new ButtonViewModel
             {
-                Href = Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+                Href = Url.Action("PropertyType_Get", "EnergyEfficiency", new { reference = Model.Reference }),
                 Text = "Continue"
             })
         }
@@ -49,10 +50,22 @@
                 @if (Model.EpcInformationList.Count == 1)
                 {
                     @Html.HiddenFor(m => m.SelectedEpcId)
-                    <h1 class="govuk-heading-l">
-                        Is this your address?
-                    </h1>
+                    <text>
+                        <p class="govuk-caption-l">
+                            Find your EPC
+                        </p>
+                        
+                        <h1 class="govuk-heading-l">
+                            We found an Energy Performance Certificate that might be yours
+                        </h1>
 
+                        <p class="govuk-body">
+                            This certificate may be registered to your property or one of the properties nearby that shares part of your address.
+                        </p>
+
+                        <p>Certificate Component Under Construction</p>
+                    </text>
+                                                                       
                     @await Html.GovUkSummaryList(new SummaryListViewModel
                     {
                         Rows = new List<SummaryListRowViewModel>
@@ -89,9 +102,18 @@
                                     }
                                 }
                             }
-
                         }
-                    })
+                    });
+                    @(await Html.GovUkRadiosFor(m => m.AddressConfirmed,
+                        fieldsetOptions: new FieldsetViewModel
+                        {
+                            Legend = new LegendViewModel
+                            {
+                                Text = "Is this your address?",
+                                Classes = "govuk-fieldset__legend--m",
+                                IsPageHeading = false
+                            }
+                        }))
                 }
                 else
                 {
@@ -119,15 +141,10 @@
                 <div class="govuk-button-group">
                     @(await Html.GovUkButton(new ButtonViewModel
                     {
-                        Text = (Model.EpcInformationList.Count == 1 ? "Yes, continue" : "Continue"),
-
+                        Text = "Continue",
                     }))
-                    <a href=@Url.Action("PropertyType_Get", "EnergyEfficiency", new { reference = Model.Reference })
-                       class="govuk-link">
-                        @(Model.EpcInformationList.Count == 1 ? "No, skip this question" : "Address not listed above")
-                    </a>
                 </div>
-                
+
             </form>
         }
     </div>

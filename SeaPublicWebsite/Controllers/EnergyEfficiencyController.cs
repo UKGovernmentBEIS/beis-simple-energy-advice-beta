@@ -167,27 +167,27 @@ namespace SeaPublicWebsite.Controllers
             return View("ServiceUnsuitable", viewModel);
         }
 
-        [HttpGet("find-epc-1/{reference}")]
-        public async Task<IActionResult> FindEpc1_Get(string reference)
+        [HttpGet("find-epc/{reference}")]
+        public async Task<IActionResult> FindEpc_Get(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.FindEpc1, propertyData);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.FindEpc, propertyData);
 
-            var viewModel = new FindEpc1ViewModel
+            var viewModel = new FindEpcViewModel
             {
                 Reference = propertyData.Reference,
                 FindEpc = propertyData.FindEpc,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
             };
-            return View("FindEpc1", viewModel);
+            return View("FindEpc", viewModel);
         }
 
-        [HttpPost("find-epc-1/{reference}")]
-        public async Task<IActionResult> FindEpc1_Post(FindEpc1ViewModel viewModel)
+        [HttpPost("find-epc/{reference}")]
+        public async Task<IActionResult> FindEpc_Post(FindEpcViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return await FindEpc1_Get(viewModel.Reference);
+                return await FindEpc_Get(viewModel.Reference);
             }
 
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
@@ -197,7 +197,7 @@ namespace SeaPublicWebsite.Controllers
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
             var forwardArgs =
-                questionFlowService.ForwardLinkArguments(QuestionFlowPage.FindEpc1, propertyData, viewModel.EntryPoint);
+                questionFlowService.ForwardLinkArguments(QuestionFlowPage.FindEpc, propertyData, viewModel.EntryPoint);
             return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
@@ -225,7 +225,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (viewModel.Postcode is not null && !PostcodesIoApi.IsValidPostcode(viewModel.Postcode))
             {
-                ModelState.AddModelError(nameof(AskForPostcodeViewModel.Postcode), "Enter a valid UK post code");
+                ModelState.AddModelError(nameof(AskForPostcodeViewModel.Postcode), "Please enter a valid postcode e.g. AB12 3CD");
             }
             
             if (!ModelState.IsValid)

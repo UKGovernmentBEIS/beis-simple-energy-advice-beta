@@ -1,9 +1,9 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 
-@model SeaPublicWebsite.Models.EnergyEfficiency.FindEpc1ViewModel
+@model SeaPublicWebsite.Models.EnergyEfficiency.FindEpcViewModel
 @{
-    ViewBag.Title = "Find Epc 1";
+    ViewBag.Title = "Find Epc";
 }
 
 @section BeforeMain {
@@ -21,7 +21,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-        <form action="@Url.Action("FindEpc1_Post", "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
+        <form action="@Url.Action("FindEpc_Post", "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
             @Html.AntiForgeryToken()
 
