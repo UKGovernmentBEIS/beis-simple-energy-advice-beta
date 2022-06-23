@@ -7,7 +7,7 @@
 </h2>
 
 <div class="sea-user-reference govuk-!-margin-bottom-6" role="complementary">
-    <h2 class="govuk-body-l">Your reference code</h2>
+    <h2 class="govuk-body-l govuk-!-margin-0">Your reference code</h2>
     <span class="govuk-heading-l" id="subsection-title">@Model.PropertyData.Reference</span>
 </div>
 
@@ -39,9 +39,11 @@
 <p class="govuk-body">
     Your feedback can help us to shape how the service develops so that it can best serve the needs of the public.  
 </p>
-<a class="govuk-link" href="@Url.Action("FeedbackSurvey_Get", "Feedback")">
-    Leave some feedback for this service
-</a>
+<p class="govuk-body">
+    <a class="govuk-link" href="@Url.Action("FeedbackSurvey_Get", "Feedback")">
+        Leave some feedback for this service
+    </a>
+</p>
 
 <h2 class="govuk-heading-m">
     Change your answers

@@ -1270,7 +1270,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 PropertyData = propertyData
             };
-            return View("YourSavedRecommendations", viewModel);
+            return View("ActionPlan/ActionPlanWithSavedRecommendations", viewModel);
         }
 
         [HttpGet("recommendation/add-to-plan/{id}/{reference}")]

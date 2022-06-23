@@ -12,7 +12,7 @@
 }
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
         <h1 class="govuk-heading-l">
             Your Action Plan
         </h1>
@@ -29,13 +29,13 @@
         </p>
 
         <div class="govuk-!-padding-left-4 sea-total-savings govuk-!-margin-bottom-6">
-            <h2 class="govuk-caption-m">You could save up to</h2>
+            <h2 class="govuk-caption-m govuk-!-margin-0">You could save up to</h2>
             <span class="govuk-heading-l sea-total-savings-text">@Model.GetTotalSavingText()</span>
         </div>
         <div class="govuk-grid-row govuk-!-margin-bottom-4">
             <div class="govuk-grid-column-one-half">
                 <div class="govuk-!-padding-left-4 sea-total-installation-cost">
-                    <h2 class="govuk-caption-m">The total cost of the improvements could be</h2>
+                    <h2 class="govuk-caption-m govuk-!-margin-0">The total cost of the improvements could be</h2>
                     <span class="govuk-heading-l">@Model.GetTotalInstallationCostText()</span>
                 </div>
             </div>
@@ -61,7 +61,10 @@
                 Classes = "govuk-!-margin-bottom-9",
                 Head = new List<TableCellViewModel>
                 {
-                    new(),
+                    new()
+                    {
+                        Text = "Recommendation"
+                    },
                     new()
                     {
                         Text = "Typical savings per year"
@@ -125,7 +128,7 @@
         <h2 class="govuk-heading-m">
             1. Find out if you can apply for support
         </h2>
-        @{ await Html.RenderPartialAsync("Partials/AvailabelSchemesOrGrantsPartial", Model); }
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/AvailableSchemesOrGrantsPartial", Model); }
         
         <h2 class="govuk-heading-m">
             2. Consult with a qualified installer
@@ -141,8 +144,8 @@
         <h2 class="govuk-heading-m">
             3. Research improvements you are unsure about
         </h2>
-        @{ await Html.RenderPartialAsync("Partials/ImprovementsUnsureAboutPartial", Model)}
-        @{ await Html.RenderPartialAsync("Partials/DiscardedRecommendationsPartial", Model)}
-        @{ await Html.RenderPartialAsync("Partials/ReturnToActionPlanPartial", Model)}
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/ImprovementsUnsureAboutPartial", Model); }
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/DiscardedRecommendationsPartial", Model); }
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/ReturnToActionPlanPartial", Model); }
     </div>
 </div>
