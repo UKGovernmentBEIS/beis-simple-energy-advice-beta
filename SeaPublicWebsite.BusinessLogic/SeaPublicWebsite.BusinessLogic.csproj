@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.0-35e3956" />
+      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.0-1dd1b5d" />
     </ItemGroup>
 
 </Project>
