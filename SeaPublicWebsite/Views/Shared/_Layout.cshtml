@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Controllers
 @using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Services
 @using SeaPublicWebsite.Services.Cookies
@@ -94,7 +95,7 @@
                            }
                            else
                            {
-                               <a class="govuk-link" href="@Url.Action("FeedbackForm_Get", "Feedback")">feedback</a>
+                               <a class="govuk-link" href="@Url.Action(nameof(FeedbackController.FeedbackForm_Get), "Feedback")">feedback</a>
                            }
                        }
                        will help us to improve it.
@@ -118,22 +119,22 @@
                 new FooterLinksViewModel
                 {
                     Text = "Contact Us",
-                    Href = Url.Action("FeedbackForm_Get", "Feedback")
-                    },
+                    Href = Url.Action(nameof(FeedbackController.FeedbackForm_Get), "Feedback")
+                },
                 new FooterLinksViewModel
                 {
                     Text = "Cookies",
-                    Href = Url.Action("CookieSettings_Get", "Cookie")
+                    Href = Url.Action(nameof(CookieController.CookieSettings_Get), "Cookie")
                 },
                 new FooterLinksViewModel
                 {
                     Text = "Privacy Policy",
-                    Href = Url.Action("Index", "Home")
+                    Href = Url.Action(nameof(StaticPagesController.PrivacyPolicy), "StaticPages")
                 },
                 new FooterLinksViewModel
                 {
                     Text = "Accessibility Statement",
-                    Href = Url.Action("AccessibilityStatement", "StaticPages")
+                    Href = Url.Action(nameof(StaticPagesController.AccessibilityStatement), "StaticPages")
                 }
             }
         }
