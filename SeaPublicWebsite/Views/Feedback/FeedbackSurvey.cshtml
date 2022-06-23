@@ -1,5 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.Controllers
 @using SeaPublicWebsite.Models.Feedback
 @model SeaPublicWebsite.Models.Feedback.FeedbackSurveyViewModel
 @{
@@ -16,7 +18,7 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form action="@Url.Action("FeedbackSurvey_Post", "Feedback")" method="post" novalidate>
+        <form action="@Url.Action(nameof(FeedbackController.FeedbackSurvey_Post), "Feedback")" method="post" novalidate>
             @Html.AntiForgeryToken()
             
             <h1 class="govuk-heading-l">

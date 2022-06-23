@@ -1,5 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.Controllers
 @using SeaPublicWebsite.Models.EnergyEfficiency
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.NewOrReturningUserViewModel
@@ -22,7 +24,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form method="post" action="@Url.Action("NewOrReturningUser_Post", "EnergyEfficiency")">
+        <form method="post" action="@Url.Action(nameof(EnergyEfficiencyController.NewOrReturningUser_Post), "EnergyEfficiency")">
 
             @Html.AntiForgeryToken()
             @(await Html.GovUkRadiosFor(

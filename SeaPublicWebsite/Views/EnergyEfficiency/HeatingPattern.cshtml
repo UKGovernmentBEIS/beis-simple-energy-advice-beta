@@ -2,6 +2,7 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
+@using SeaPublicWebsite.Controllers
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.HeatingPatternViewModel
 @{
@@ -23,7 +24,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-        <form action="@Url.Action("HeatingPattern_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.HeatingPattern_Post), "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
             @Html.AntiForgeryToken()
             
