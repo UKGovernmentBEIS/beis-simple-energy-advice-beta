@@ -57,5 +57,5 @@ public class GaEvent
     public string Name { get; set; }
     
     [JsonProperty(PropertyName = "params")]
-    public object Parameters { get; set; }
+    public Dictionary<string, object> Parameters { get; set; }
 }

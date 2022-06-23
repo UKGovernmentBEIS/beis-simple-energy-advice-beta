@@ -1148,9 +1148,9 @@ namespace SeaPublicWebsite.Controllers
                         new()
                         {
                             Name = "user_returned",
-                            Parameters = new
+                            Parameters = new Dictionary<string, object>
                             {
-                                value = fromMagicLink ? "link" : "code"
+                                {"value", fromMagicLink ? "link" : "code"}
                             }
                         }
                     }
