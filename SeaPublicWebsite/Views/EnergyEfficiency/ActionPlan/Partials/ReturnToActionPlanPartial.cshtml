@@ -1,0 +1,57 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@model SeaPublicWebsite.Models.EnergyEfficiency.YourSavedRecommendationsViewModel;
+
+<h2 class="govuk-heading-m">
+    Returning to your Action Plan
+</h2>
+
+<div class="sea-user-reference govuk-!-margin-bottom-6" role="complementary">
+    <h2 class="govuk-body-l">Your reference code</h2>
+    <span class="govuk-heading-l" id="subsection-title">@Model.PropertyData.Reference</span>
+</div>
+
+<p class="govuk-body">
+    You can come back to this action plan using your reference number or we can send  a link to your email.
+</p>
+
+@await Html.GovUkTextInput(new TextInputViewModel
+{
+    Label = new LabelViewModel
+    {
+        Text = "Enter your email address"
+    },
+    Autocomplete = "email",
+    Placeholder = "e.g. my.email@example.com"
+})
+
+@await Html.GovUkButton(new ButtonViewModel
+{
+    Text = "Email a link to this Action Plan"
+})
+    
+<h2 class="govuk-heading-m">
+    Give feedback
+</h2>
+<p class="govuk-body">
+    This service is still in its early stages and under active development. 
+</p>
+<p class="govuk-body">
+    Your feedback can help us to shape how the service develops so that it can best serve the needs of the public.  
+</p>
+<a class="govuk-link" href="@Url.Action("FeedbackSurvey_Get", "Feedback")">
+    Leave some feedback for this service
+</a>
+
+<h2 class="govuk-heading-m">
+    Change your answers
+</h2>
+<p class="govuk-body">
+    We have provided recommendations that are most suitable for your home based on the answers you provided earlier.
+</p>
+<p class="govuk-body">
+    If something doesn’t look right you can 
+    <a href="@Url.Action("AnswerSummary_Get", "EnergyEfficiency", new { reference = Model.PropertyData.Reference })">
+        view and change your answers here.
+    </a> 
+</p>
