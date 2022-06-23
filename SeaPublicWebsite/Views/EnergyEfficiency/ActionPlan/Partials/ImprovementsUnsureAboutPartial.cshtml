@@ -5,7 +5,7 @@
 </p>
 
 <ul class="govuk-list govuk-list--bullet">
-    @foreach(var recommendation in Model.GetSavedRecommendations())
+    @foreach(var recommendation in Model.GetDecideLaterRecommendations())
     {
         <li>
             <a href="@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference})">
@@ -14,12 +14,6 @@
         </li>
     }
 </ul>
-
-<p class="govuk-body">
-    You can find out more by visiting the 
-    <a href="https://energysavingtrust.org.uk/">Energy Saving Trust</a> 
-    website for other ways to save energy and reduce your bills.
-</p>
 
 
                                                                                                                               

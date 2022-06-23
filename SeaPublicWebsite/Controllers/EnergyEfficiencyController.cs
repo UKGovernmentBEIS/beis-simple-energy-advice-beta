@@ -1270,7 +1270,18 @@ namespace SeaPublicWebsite.Controllers
             {
                 PropertyData = propertyData
             };
-            return View("ActionPlan/ActionPlanWithSavedRecommendations", viewModel);
+
+            if (viewModel.GetSavedRecommendations().Any())
+            {
+                return View("ActionPlan/ActionPlanWithSavedRecommendations", viewModel);
+            } else if (viewModel.GetDecideLaterRecommendations().Any())
+            {
+                return View("ActionPlan/ActionPlanWithMaybeRecommendations", viewModel);
+            }
+            else
+            {
+                return View("ActionPlan/ActionPlanWithDiscardedRecommendations", viewModel);
+            }
         }
 
         [HttpGet("recommendation/add-to-plan/{id}/{reference}")]

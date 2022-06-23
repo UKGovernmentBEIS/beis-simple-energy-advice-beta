@@ -8,7 +8,7 @@
     {
         SummaryText = "Recommendations you discarded",
         Html = @<ul class="govuk-list govuk-list--bullet">
-                   @foreach(var recommendation in Model.GetSavedRecommendations())
+                   @foreach(var recommendation in Model.GetDiscardedRecommendations())
                    {
                        <li>
                            <a href="@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference})">
