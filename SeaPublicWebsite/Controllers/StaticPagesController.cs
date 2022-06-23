@@ -9,4 +9,10 @@ public class StaticPagesController : Controller
     {
         return View("AccessibilityStatement");
     }
+    
+    [HttpGet("/privacy-policy")]
+    public IActionResult PrivacyPolicy()
+    {
+        return View("PrivacyPolicy");
+    }
 }
