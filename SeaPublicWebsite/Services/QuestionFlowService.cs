@@ -167,7 +167,7 @@ namespace SeaPublicWebsite.Services
             var reference = propertyData.Reference;
             if (propertyData.FindEpc == FindEpc.Yes)
             {
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference, entryPoint });
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference, entryPoint });
             }
             return new PathByActionArguments(nameof(EnergyEfficiencyController.FindEpc_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
@@ -210,6 +210,10 @@ namespace SeaPublicWebsite.Services
         private PathByActionArguments WallConstructionBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
+            if (propertyData.Epc != null)
+            {
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference, entryPoint });
+            }
             return entryPoint is QuestionFlowPage.WallConstruction
                 ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency", new { reference, entryPoint });
@@ -474,7 +478,7 @@ namespace SeaPublicWebsite.Services
         private PathByActionArguments FindEpcForwardLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
-            if (propertyData.FindEpc is FindEpc.Yes)
+            if (propertyData.FindEpc == FindEpc.Yes)
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference });
             }
@@ -493,6 +497,10 @@ namespace SeaPublicWebsite.Services
         private PathByActionArguments ConfirmAddressForwardLinkArguments(PropertyData propertyData)
         {
             var reference = propertyData.Reference;
+            if (propertyData.Epc != null)
+            {
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.WallConstruction_Get), "EnergyEfficiency", new { reference });
+            }
             return new PathByActionArguments(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new { reference });
         }
 

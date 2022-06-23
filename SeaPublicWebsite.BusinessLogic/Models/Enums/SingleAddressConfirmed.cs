@@ -1,6 +1,6 @@
 ﻿namespace SeaPublicWebsite.BusinessLogic.Models.Enums;
 
-public enum AddressConfirmed
+public enum SingleAddressConfirmed
 {
     Yes,
     No

@@ -271,15 +271,27 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpPost("address/{reference}")]
-        public async Task<IActionResult> ConfirmAddress_Post(ConfirmAddressViewModel viewModel)
+        public async Task<IActionResult> ConfirmAddress_Post(ConfirmAddressViewModel viewModel, int epcCount)
         {
+            if (epcCount != 1)
+            {
+                ModelState.Remove("SingleAddressConfirmed");
+            }
+            
             if (!ModelState.IsValid)
             {
                 return await ConfirmAddress_Get(viewModel.Reference);
             }
             
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            propertyData.Epc = await epcApi.GetEpcForId(viewModel.SelectedEpcId);
+            if (viewModel.SelectedEpcId != "unlisted" && viewModel.SingleAddressConfirmed != SingleAddressConfirmed.No)
+            {
+                propertyData.Epc = await epcApi.GetEpcForId(viewModel.SelectedEpcId);
+            }
+            else
+            {
+                propertyData.Epc = null;
+            }
             PropertyDataHelper.ResetUnusedFields(propertyData);
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
