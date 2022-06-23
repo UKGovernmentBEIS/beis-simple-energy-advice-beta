@@ -32,6 +32,7 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.ServiceUnsuitable => ServiceUnsuitableBackLinkArguments(propertyData),
                 QuestionFlowPage.AskForPostcode => AskForPostcodeBackLinkArguments(propertyData),
                 QuestionFlowPage.ConfirmAddress => ConfirmAddressBackLinkArguments(propertyData),
+                QuestionFlowPage.ConfirmEpcDetails => ConfirmEpcDetailsBackLinkArguments(propertyData),
                 QuestionFlowPage.PropertyType => PropertyTypeBackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.HouseType => HouseTypeBackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.BungalowType => BungalowTypeBackLinkArguments(propertyData, entryPoint),
@@ -71,6 +72,7 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.FindEpc => FindEpcForwardLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.AskForPostcode => AskForPostcodeForwardLinkArguments(propertyData),
                 QuestionFlowPage.ConfirmAddress => ConfirmAddressForwardLinkArguments(propertyData),
+                QuestionFlowPage.ConfirmEpcDetails => ConfirmEpcDetailsForwardLinkArguments(propertyData),
                 QuestionFlowPage.PropertyType => PropertyTypeForwardLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.HouseType => HouseTypeForwardLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.BungalowType => BungalowTypeForwardLinkArguments(propertyData, entryPoint),
@@ -162,11 +164,21 @@ namespace SeaPublicWebsite.Services
             return new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference });
         }
 
+        private PathByActionArguments ConfirmEpcDetailsBackLinkArguments(PropertyData propertyData)
+        {
+            var reference = propertyData.Reference;
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference });
+        }
+
         private PathByActionArguments PropertyTypeBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
             if (propertyData.FindEpc == FindEpc.Yes)
             {
+                if (propertyData.Epc != null)
+                {
+                    return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get), "EnergyEfficiency", new { reference, entryPoint });
+                }
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference, entryPoint });
             }
             return new PathByActionArguments(nameof(EnergyEfficiencyController.FindEpc_Get), "EnergyEfficiency", new { reference, entryPoint });
@@ -495,6 +507,16 @@ namespace SeaPublicWebsite.Services
         }
 
         private PathByActionArguments ConfirmAddressForwardLinkArguments(PropertyData propertyData)
+        {
+            var reference = propertyData.Reference;
+            if (propertyData.Epc != null)
+            {
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get), "EnergyEfficiency", new { reference });
+            }
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new { reference });
+        }
+
+        private PathByActionArguments ConfirmEpcDetailsForwardLinkArguments(PropertyData propertyData)
         {
             var reference = propertyData.Reference;
             if (propertyData.Epc != null)
@@ -855,6 +877,7 @@ namespace SeaPublicWebsite.Services
         FindEpc,
         AskForPostcode,
         ConfirmAddress,
+        ConfirmEpcDetails,
         PropertyType,
         HouseType,
         BungalowType,

@@ -299,6 +299,39 @@ namespace SeaPublicWebsite.Controllers
             return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
+        [HttpGet("confirm-epc-details/{reference}")]
+        public async Task<IActionResult> ConfirmEpcDetails_Get(string reference)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.ConfirmEpcDetails, propertyData);
+
+            var viewModel = new ConfirmEpcDetailsViewModel
+            {
+                Reference = propertyData.Reference,
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
+            };
+            return View("ConfirmEpcDetails", viewModel);
+        }
+
+        [HttpPost("confirm-epc-details/{reference}")]
+        public async Task<IActionResult> ConfirmEpcDetails_Post(ConfirmEpcDetailsViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await ConfirmEpcDetails_Get(viewModel.Reference);
+            }
+            
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
+            if (viewModel.EpcDetailsConfirmed == EpcDetailsConfirmed.No)
+            {
+                propertyData.Epc = null;
+            }
+            PropertyDataHelper.ResetUnusedFields(propertyData);
+            await propertyDataStore.SavePropertyDataAsync(propertyData);
+
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.ConfirmEpcDetails, propertyData);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+        }
 
         [HttpGet("property-type/{reference}")]
         public async Task<IActionResult> PropertyType_Get(string reference, QuestionFlowPage? entryPoint = null)
