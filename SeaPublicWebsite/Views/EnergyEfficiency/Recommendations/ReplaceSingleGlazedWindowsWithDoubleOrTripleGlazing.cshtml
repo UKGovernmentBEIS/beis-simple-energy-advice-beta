@@ -1,5 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.Controllers
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
@@ -26,7 +28,7 @@
     <div class="govuk-grid-column-two-thirds">
         
                 
-        <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.PropertyRecommendation.Key, reference = Model.PropertyData.Reference})" method="post" novalidate>
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.Recommendation_Post), "EnergyEfficiency", new {id = (int) Model.PropertyRecommendation.Key, reference = Model.PropertyData.Reference})" method="post" novalidate>
 
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.PropertyData.Reference)
