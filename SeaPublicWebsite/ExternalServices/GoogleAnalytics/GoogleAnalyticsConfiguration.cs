@@ -7,4 +7,5 @@ public class GoogleAnalyticsConfiguration
     public string BaseUrl { get; set; }
     public string ApiSecret { get; set; }
     public string MeasurementId { get; set; }
+    public string CookieName { get; set; }
 }

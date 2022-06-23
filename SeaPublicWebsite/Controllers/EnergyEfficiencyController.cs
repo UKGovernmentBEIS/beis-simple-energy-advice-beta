@@ -1142,7 +1142,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 await googleAnalyticsService.SendEvent(new GaRequestBody
                 {
-                    ClientId = Guid.NewGuid().ToString(),
+                    ClientId = googleAnalyticsService.GetClientId(Request),
                     GaEvents = new List<GaEvent>
                     {
                         new()
