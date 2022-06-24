@@ -284,7 +284,7 @@
                         {
                             Href = Url.Action(nameof(EnergyEfficiencyController.LoftSpace_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.LoftSpace}),
                             Text = "Change",
-                            VisuallyHiddenText = "loft space"
+                            VisuallyHiddenText = "do you have a loft that hasn't been converted into a room"
                         }
                     }
                 }
@@ -313,7 +313,7 @@
                             {
                                 Href = Url.Action(nameof(EnergyEfficiencyController.LoftAccess_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.LoftAccess}),
                                 Text = "Change",
-                                VisuallyHiddenText = "loft access"
+                                VisuallyHiddenText = "is there access to your loft"
                             }
                         }
                     }
@@ -342,7 +342,7 @@
                                 {
                                     Href = Url.Action(nameof(EnergyEfficiencyController.RoofInsulated_Get), "EnergyEfficiency", new { reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.RoofInsulated }),
                                     Text = "Change",
-                                    VisuallyHiddenText = "is your loft insulated"
+                                    VisuallyHiddenText = "is your loft fully insulated"
                                 }
                             }
                         }
@@ -373,7 +373,7 @@
                 {
                     Href = Url.Action(nameof(EnergyEfficiencyController.GlazingType_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.GlazingType}),
                     Text = "Change",
-                    VisuallyHiddenText = "type of glazing"
+                    VisuallyHiddenText = "glazing type"
                 }
             }
         }
@@ -429,7 +429,7 @@
                 {
                     Href = Url.Action(nameof(EnergyEfficiencyController.HeatingType_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.HeatingType}),
                     Text = "Change",
-                    VisuallyHiddenText = "how you heat your home"
+                    VisuallyHiddenText = "heating system"
                 }
             }
         }
@@ -458,7 +458,7 @@
                     {
                         Href = Url.Action(nameof(EnergyEfficiencyController.HotWaterCylinder_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.HotWaterCylinder}),
                         Text = "Change",
-                        VisuallyHiddenText = "do you have a hot water cylinder"
+                        VisuallyHiddenText = "hot water cylinder"
                     }
                 }
             }
