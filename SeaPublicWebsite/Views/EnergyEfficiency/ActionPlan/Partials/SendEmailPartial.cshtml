@@ -1,0 +1,21 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@model SeaPublicWebsite.Models.EnergyEfficiency.YourSavedRecommendationsEmailViewModel;
+
+<form action="@Url.Action("YourSavedRecommendations_Get", "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
+    @Html.AntiForgeryToken()
+    
+    @await Html.GovUkTextInputFor(m => m.EmailAddress,
+        labelOptions: new LabelViewModel
+        {
+            Text = "Enter your email address"
+        },
+        autocomplete: "email",
+        placeholder: "e.g. my.email@example.com")
+
+    @await Html.GovUkButton(new ButtonViewModel
+    {
+        Text = "Email a link to this Action Plan"
+    })
+
+</form>

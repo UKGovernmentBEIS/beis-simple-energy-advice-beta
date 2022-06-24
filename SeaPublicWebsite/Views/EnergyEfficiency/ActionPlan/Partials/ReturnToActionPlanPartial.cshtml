@@ -1,5 +1,4 @@
-﻿@using GovUkDesignSystem
-@using GovUkDesignSystem.GovUkDesignSystemComponents
+﻿@using SeaPublicWebsite.Models.EnergyEfficiency
 @model SeaPublicWebsite.Models.EnergyEfficiency.YourSavedRecommendationsViewModel;
 
 <h2 class="govuk-heading-m">
@@ -15,21 +14,15 @@
     You can come back to this action plan using your reference number or we can send  a link to your email.
 </p>
 
-@await Html.GovUkTextInput(new TextInputViewModel
+@if (Model.EmailAddress is not null)
 {
-    Label = new LabelViewModel
-    {
-        Text = "Enter your email address"
-    },
-    Autocomplete = "email",
-    Placeholder = "e.g. my.email@example.com"
-})
+    <p class="govuk-body sea-email-sent">
+        Email sent to @Model.EmailAddress
+    </p>
+}
 
-@await Html.GovUkButton(new ButtonViewModel
-{
-    Text = "Email a link to this Action Plan"
-})
-    
+@{ await Html.RenderPartialAsync("SendEmailPartial.cshtml", new YourSavedRecommendationsEmailViewModel()); }
+
 <h2 class="govuk-heading-m">
     Give feedback
 </h2>
