@@ -173,14 +173,6 @@ namespace SeaPublicWebsite.Services
         private PathByActionArguments PropertyTypeBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
-            if (propertyData.FindEpc == FindEpc.Yes)
-            {
-                if (propertyData.Epc != null)
-                {
-                    return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get), "EnergyEfficiency", new { reference, entryPoint });
-                }
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference, entryPoint });
-            }
             return new PathByActionArguments(nameof(EnergyEfficiencyController.FindEpc_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
@@ -224,7 +216,7 @@ namespace SeaPublicWebsite.Services
             var reference = propertyData.Reference;
             if (propertyData.Epc != null)
             {
-                return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference, entryPoint });
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.FindEpc_Get), "EnergyEfficiency", new { reference, entryPoint });
             }
             return entryPoint is QuestionFlowPage.WallConstruction
                 ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })

@@ -192,6 +192,9 @@ namespace SeaPublicWebsite.Controllers
 
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
 
+            propertyData.Epc = null;
+            propertyData.PropertyType = null;
+            propertyData.YearBuilt = null;
             propertyData.FindEpc = viewModel.FindEpc;
             PropertyDataHelper.ResetUnusedFields(propertyData);
             await propertyDataStore.SavePropertyDataAsync(propertyData);
@@ -251,12 +254,28 @@ namespace SeaPublicWebsite.Controllers
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             List<EpcInformation> epcInformationList = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(propertyData.Postcode, propertyData.HouseNameOrNumber);
             var houseNameOrNumber = propertyData.HouseNameOrNumber;
-            var filteredEpcList = epcInformationList.Where(e =>
+            var filteredEpcInformationList = epcInformationList.Where(e =>
                 e.Address1.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase) ||
                 e.Address2.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase)).ToList();
 
-            epcInformationList = filteredEpcList.Any() ? filteredEpcList : epcInformationList;
-
+            epcInformationList = filteredEpcInformationList.Any() ? filteredEpcInformationList : epcInformationList;
+            
+            //return only EPCs that contain all the data we want to assume
+            var filteredEpcList = epcInformationList.Select(async e  =>
+                await epcApi.GetEpcForId(e.EpcId));
+            epcInformationList = filteredEpcList
+                .Select(e => e.Result)
+                .Where(e => e?.ConstructionAgeBand != null
+                            && ((e.PropertyType == PropertyType.House && e.HouseType != null)
+                            || (e.PropertyType == PropertyType.Bungalow && e.BungalowType != null)
+                            || (e.PropertyType == PropertyType.ApartmentFlatOrMaisonette && e.FlatType != null)))
+                .Select(e => new EpcInformation(
+                    e.EpcId,
+                    e.Address1,
+                    e.Address2,
+                    e.Postcode
+                )).ToList();
+            
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.ConfirmAddress, propertyData);
             var viewModel = new ConfirmAddressViewModel
             {
@@ -315,7 +334,7 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpPost("confirm-epc-details/{reference}")]
-        public async Task<IActionResult> ConfirmEpcDetails_Post(ConfirmEpcDetailsViewModel viewModel)
+        public async Task<IActionResult> ConfirmEpcDetails_Post(ConfirmEpcDetailsViewModel viewModel, PropertyType propertyType, HomeAge constructionAgeBand, HouseType houseType, BungalowType bungalowType, FlatType flatType)
         {
             if (!ModelState.IsValid)
             {
@@ -323,9 +342,34 @@ namespace SeaPublicWebsite.Controllers
             }
             
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.EpcDetailsConfirmed == EpcDetailsConfirmed.No)
+            if (viewModel.EpcDetailsConfirmed == EpcDetailsConfirmed.Yes)
+            {
+                propertyData.PropertyType = propertyType;
+                propertyData.HouseType = houseType;
+                propertyData.BungalowType = bungalowType;
+                propertyData.FlatType = flatType;
+                propertyData.YearBuilt = constructionAgeBand switch
+                {
+                    HomeAge.Pre1900 => YearBuilt.Pre1930,
+                    HomeAge.From1900To1929 => YearBuilt.Pre1930,
+                    HomeAge.From1930To1949 => YearBuilt.From1930To1966,
+                    HomeAge.From1950To1966 => YearBuilt.From1930To1966,
+                    HomeAge.From1967To1975 => YearBuilt.From1967To1982,
+                    HomeAge.From1976To1982 => YearBuilt.From1967To1982,
+                    HomeAge.From1983To1990 => YearBuilt.From1983To1995,
+                    HomeAge.From1991To1995 => YearBuilt.From1983To1995,
+                    HomeAge.From1996To2002 => YearBuilt.From1996To2011,
+                    HomeAge.From2003To2006 => YearBuilt.From1996To2011,
+                    HomeAge.From2007To2011 => YearBuilt.From1996To2011,
+                    HomeAge.From2012ToPresent => YearBuilt.From2012ToPresent,
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+            }
+            else
             {
                 propertyData.Epc = null;
+                propertyData.PropertyType = null;
+                propertyData.YearBuilt = null;
             }
             PropertyDataHelper.ResetUnusedFields(propertyData);
             await propertyDataStore.SavePropertyDataAsync(propertyData);

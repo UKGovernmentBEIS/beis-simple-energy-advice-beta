@@ -38,7 +38,7 @@
                         @(Model.Epc.PropertyType == PropertyType.House ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.Epc.HouseType) : null)
                         @(Model.Epc.PropertyType == PropertyType.Bungalow ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.Epc.BungalowType) : null)
                         @(Model.Epc.PropertyType == PropertyType.ApartmentFlatOrMaisonette ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.Epc.FlatType) : null)
-                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.Epc.PropertyType))
+                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.Epc.PropertyType).ToLower())
                      </text>)
         }
     });
@@ -60,7 +60,7 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form action="@Url.Action("ConfirmEpcDetails_Post", "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
+        <form action="@Url.Action("ConfirmEpcDetails_Post", "EnergyEfficiency", new { reference = Model.Reference, propertyType = Model.Epc.PropertyType})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
             @Html.AntiForgeryToken()
 
