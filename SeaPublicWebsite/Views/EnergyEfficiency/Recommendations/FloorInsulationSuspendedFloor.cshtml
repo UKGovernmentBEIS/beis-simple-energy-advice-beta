@@ -22,7 +22,7 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
-        @{ await Html.RenderPartialAsync("Partials/YourActionPlanPartial.cshtml", Model); }
+        @{ await Html.RenderPartialAsync("Partials/_YourActionPlan.cshtml", Model); }
     </div>
     
     <div class="govuk-grid-column-two-thirds">
@@ -82,7 +82,7 @@
 
             <p class="govuk-body">Floor insulation is typically expected to last <b>around @Model.PropertyRecommendation.Lifetime years</b></p>
 
-            @{ await Html.RenderPartialAsync("Partials/WhatYouCouldSavePartial.cshtml", Model); }
+            @{ await Html.RenderPartialAsync("Partials/_WhatYouCouldSave.cshtml", Model); }
             
             <div class="govuk-warning-text">
                 <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
@@ -128,7 +128,7 @@
                 }
                 ))
 
-            @{ await Html.RenderPartialAsync("Partials/ActionButtonsPartial.cshtml"); }
+            @{ await Html.RenderPartialAsync("Partials/_ActionButtons.cshtml"); }
 
         </form>
         
