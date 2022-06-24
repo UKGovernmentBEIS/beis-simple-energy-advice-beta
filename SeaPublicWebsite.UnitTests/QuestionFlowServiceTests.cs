@@ -79,14 +79,14 @@ public class QuestionFlowServiceTests
                 "EnergyEfficiency"
             )),
         new(
-            "Changing country goes to Summary",
+            "Changing country goes to check your unchangeable answers",
             new Input(
                 QuestionFlowPage.Country,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.Country
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
+                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -102,14 +102,14 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Changing ownership status goes back to summary",
+            "Changing ownership status goes back to check your unchangeable answers",
             new Input(
                 QuestionFlowPage.OwnershipStatus,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.OwnershipStatus
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
+                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -139,13 +139,13 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Postcode goes back to ownership status",
+            "Postcode goes back to find EPC",
             new Input(
                 QuestionFlowPage.AskForPostcode,
                 "ABCDEFGH"
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.OwnershipStatus_Get),
+                nameof(EnergyEfficiencyController.FindEpc_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -161,25 +161,25 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Property type goes back to Postcode",
+            "Property type goes back to find EPC",
             new Input(
                 QuestionFlowPage.PropertyType,
                 "ABCDEFGH"
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AskForPostcode_Get),
+                nameof(EnergyEfficiencyController.FindEpc_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Change property type goes back to summary",
+            "Change property type goes back to check your unchangeable answers",
             new Input(
                 QuestionFlowPage.PropertyType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.PropertyType
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
+                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -256,25 +256,25 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Changing home age goes back to summary",
+            "Changing home age goes back to check your unchangeable answers",
             new Input(
                 QuestionFlowPage.HomeAge,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.HomeAge
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
+                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Wall construction goes back to home age",
+            "Wall construction goes back to check your unchangeable answers",
             new Input(
                 QuestionFlowPage.WallConstruction,
                 "ABCDEFGH"
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.HomeAge_Get),
+                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -898,7 +898,7 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Changing country continues to answer summary",
+            "Changing country continues to check your unchangeable answers",
             new Input(
                 QuestionFlowPage.Country,
                 "ABCDEFGH",
@@ -906,12 +906,12 @@ public class QuestionFlowServiceTests
                 entryPoint: QuestionFlowPage.Country
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
+                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Ownership status continue to service unsuitable if user is a private tenant",
+            "Ownership status continues to service unsuitable if user is a private tenant",
             new Input(
                 QuestionFlowPage.OwnershipStatus,
                 "ABCDEFGH",
@@ -923,26 +923,26 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Ownership status continue to postcode",
+            "Ownership status continues to find EPC",
             new Input(
                 QuestionFlowPage.OwnershipStatus,
                 "ABCDEFGH",
                 OwnershipStatus.OwnerOccupancy
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AskForPostcode_Get),
+                nameof(EnergyEfficiencyController.FindEpc_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Changing ownership status continue to summary",
+            "Changing ownership status continues to check your unchangeable answers",
             new Input(
                 QuestionFlowPage.OwnershipStatus,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.OwnershipStatus
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
+                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1016,14 +1016,14 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Changing house type continues to summary",
+            "Changing house type continues to check your unchangeable answers",
             new Input(
                 QuestionFlowPage.HouseType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.PropertyType
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
+                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1039,14 +1039,14 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Changing bungalow type continues to summary",
+            "Changing bungalow type continues to check your unchangeable answers",
             new Input(
                 QuestionFlowPage.BungalowType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.PropertyType
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
+                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1062,37 +1062,37 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Changing flat type continues to summary",
+            "Changing flat type continues to check your unchangeable answers",
             new Input(
                 QuestionFlowPage.FlatType,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.PropertyType
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
+                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Home age continues to wall construction",
+            "Home age continues to check your unchangeable answers",
             new Input(
                 QuestionFlowPage.HomeAge,
                 "ABCDEFGH"
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.WallConstruction_Get),
+                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Changing home age continues to summary",
+            "Changing home age continues to check your unchangeable answers",
             new Input(
                 QuestionFlowPage.HomeAge,
                 "ABCDEFGH",
                 entryPoint: QuestionFlowPage.HomeAge
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
+                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),

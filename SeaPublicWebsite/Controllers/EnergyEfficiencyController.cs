@@ -238,6 +238,7 @@ namespace SeaPublicWebsite.Controllers
             
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
 
+            propertyData.Epc = null;
             propertyData.Postcode = viewModel.Postcode;
             propertyData.HouseNameOrNumber = viewModel.HouseNameOrNumber;
             PropertyDataHelper.ResetUnusedFields(propertyData);
@@ -259,23 +260,7 @@ namespace SeaPublicWebsite.Controllers
                 e.Address2.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase)).ToList();
 
             epcInformationList = filteredEpcInformationList.Any() ? filteredEpcInformationList : epcInformationList;
-            
-            //return only EPCs that contain all the data we want to assume
-            var filteredEpcList = epcInformationList.Select(async e  =>
-                await epcApi.GetEpcForId(e.EpcId));
-            epcInformationList = filteredEpcList
-                .Select(e => e.Result)
-                .Where(e => e?.ConstructionAgeBand != null
-                            && ((e.PropertyType == PropertyType.House && e.HouseType != null)
-                            || (e.PropertyType == PropertyType.Bungalow && e.BungalowType != null)
-                            || (e.PropertyType == PropertyType.ApartmentFlatOrMaisonette && e.FlatType != null)))
-                .Select(e => new EpcInformation(
-                    e.EpcId,
-                    e.Address1,
-                    e.Address2,
-                    e.Postcode
-                )).ToList();
-            
+
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.ConfirmAddress, propertyData);
             var viewModel = new ConfirmAddressViewModel
             {
@@ -367,7 +352,6 @@ namespace SeaPublicWebsite.Controllers
             }
             else
             {
-                propertyData.Epc = null;
                 propertyData.PropertyType = null;
                 propertyData.YearBuilt = null;
             }

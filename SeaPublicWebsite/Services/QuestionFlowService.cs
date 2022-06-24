@@ -511,7 +511,8 @@ namespace SeaPublicWebsite.Services
         private PathByActionArguments ConfirmAddressForwardLinkArguments(PropertyData propertyData)
         {
             var reference = propertyData.Reference;
-            if (propertyData.Epc != null)
+            var epc = propertyData.Epc;
+            if (epc?.PropertyType != null && (epc.HouseType != null || epc.BungalowType != null || epc.FlatType != null) && epc.ConstructionAgeBand != null)
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get), "EnergyEfficiency", new { reference });
             }
