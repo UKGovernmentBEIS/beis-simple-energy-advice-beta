@@ -58,47 +58,24 @@
                         <p class="govuk-body">
                             This certificate may be registered to your property or one of the properties nearby that shares part of your address.
                         </p>
-
-                        <p>Certificate Component Under Construction</p>
                     </text>
 
-                    @await Html.GovUkSummaryList(new SummaryListViewModel
+                    @await Html.GovUkNotificationBanner(new NotificationBannerViewModel
                     {
-                        Rows = new List<SummaryListRowViewModel>
-                        {
-                            new()
-                            {
-                                Key = new()
-                                {
-                                    Text = "Address"
-                                },
-                                Value = new()
-                                {
-                                    Html = @<text>
-                                               @(Model.EpcInformationList[0].Address1)<br/>
-                                               @if (!string.IsNullOrWhiteSpace(Model.EpcInformationList[0].Address2))
-                                               {
-                                                   @(Model.EpcInformationList[0].Address2)
-                                                   <br/>
-                                               }
-                                               @(Model.EpcInformationList[0].Postcode)
-                                            </text>
-                                },
-                                Actions = new SummaryListRowActionViewModel
-                                {
-                                    Items = new List<SummaryListRowActionItemViewModel>
-                                    {
-                                        new()
-                                        {
-                                            Html = @<text>
-                                                       Change<span class="govuk-visually-hidden"> address</span>
-                                                    </text>,
-                                            Href = @Url.Action("AskForPostcode_Get", "EnergyEfficiency", new { reference = Model.Reference})
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        Type = "null",
+                        TitleHtml = @<text>
+                                        <div>Certificate</div>
+                                     </text>,
+                        Html = @<text>
+                                   <div class="govuk-!-font-weight-bold">Registered address</div>
+                                   @(Model.EpcInformationList[0].Address1)<br/>
+                                   @if (!string.IsNullOrWhiteSpace(Model.EpcInformationList[0].Address2))
+                                   {
+                                       @(Model.EpcInformationList[0].Address2)
+                                       <br/>
+                                   }
+                                   @(Model.EpcInformationList[0].Postcode)
+                                </text>,
                     })
                     @(await Html.GovUkRadiosFor(m => m.SingleAddressConfirmed,
                         fieldsetOptions: new FieldsetViewModel
