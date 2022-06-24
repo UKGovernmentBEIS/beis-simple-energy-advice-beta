@@ -86,20 +86,7 @@
         @(await Html.GovUkPhaseBanner(new PhaseBannerViewModel
         {
             Phase = "Beta",
-            Html = @<text>
-                       This is a new service – your
-                       @{
-                           if (ViewBag.OnFeedbackPage is true)
-                           {
-                               @:feedback
-                           }
-                           else
-                           {
-                               <a class="govuk-link" href="@Url.Action(nameof(FeedbackController.FeedbackForm_Get), "Feedback")">feedback</a>
-                           }
-                       }
-                       will help us to improve it.
-                    </text>
+            Html = @<text>This is a new service – your <a class="govuk-link" href="@Constants.FEEDBACK_URL">feedback</a> will help us to improve it.</text>
         }))
 
         @(RenderSection("BeforeMain", false))
@@ -119,7 +106,7 @@
                 new FooterLinksViewModel
                 {
                     Text = "Contact Us",
-                    Href = Url.Action(nameof(FeedbackController.FeedbackForm_Get), "Feedback")
+                    Href = Constants.FEEDBACK_URL
                 },
                 new FooterLinksViewModel
                 {
