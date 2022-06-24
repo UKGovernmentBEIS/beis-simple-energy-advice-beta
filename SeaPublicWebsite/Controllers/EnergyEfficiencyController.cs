@@ -1214,14 +1214,15 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpGet("your-recommendations/{id}/{reference}")]
-        public async Task<IActionResult> Recommendation_Get(int id, string reference)
+        public async Task<IActionResult> Recommendation_Get(int id, string reference, bool fromActionPlan = false)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             var viewModel = new RecommendationViewModel
             {
                 PropertyData = propertyData,
                 PropertyRecommendation = propertyData.PropertyRecommendations.First(r => r.Key == (RecommendationKey) id),
-                RecommendationAction = propertyData.PropertyRecommendations.First(r => r.Key == (RecommendationKey)id).RecommendationAction
+                RecommendationAction = propertyData.PropertyRecommendations.First(r => r.Key == (RecommendationKey)id).RecommendationAction,
+                FromActionPlan = fromActionPlan
             };
 
             var recommendationKey = (RecommendationKey) id;
