@@ -560,7 +560,39 @@ namespace SeaPublicWebsite.Controllers
             return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
-        
+        [HttpGet("check-your-unchangeable-answers/{reference}")]
+        public async Task<IActionResult> CheckYourUnchangeableAnswers_Get(string reference, QuestionFlowPage? entryPoint = null)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.CheckYourUnchangeableAnswers, propertyData, entryPoint);
+            var viewModel = new CheckYourUnchangeableAnswersViewModel()
+            {
+                Reference = reference,
+                PropertyData = propertyData,
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+            };
+            
+            return View("CheckYourUnchangeableAnswers", viewModel);
+        }
+
+        [HttpPost("check-your-unchangeable-answers/{reference}")]
+        public async Task<IActionResult> CheckYourUnchangeableAnswers_Post(CheckYourUnchangeableAnswersViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await CheckYourUnchangeableAnswers_Get(viewModel.Reference, viewModel.EntryPoint);
+            }
+
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
+            PropertyDataHelper.ResetUnusedFields(propertyData);
+            await propertyDataStore.SavePropertyDataAsync(propertyData);
+
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.CheckYourUnchangeableAnswers, propertyData, viewModel.EntryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+        }
+
+
         [HttpGet("wall-construction/{reference}")]
         public async Task<IActionResult> WallConstruction_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
