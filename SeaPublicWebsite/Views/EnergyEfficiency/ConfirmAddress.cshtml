@@ -1,6 +1,9 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using System.Globalization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.Controllers
+@using SeaPublicWebsite.Models.EnergyEfficiency
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.ConfirmAddressViewModel
 @{
@@ -34,13 +37,13 @@
 
             @await Html.GovUkButton(new ButtonViewModel
             {
-                Href = Url.Action("PropertyType_Get", "EnergyEfficiency", new { reference = Model.Reference}),
+                Href = Url.Action(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new {reference = Model.Reference}),
                 Text = "Continue"
             })
         }
         else
         {
-            <form action="@Url.Action("ConfirmAddress_Post", "EnergyEfficiency", new { reference = Model.Reference, epcCount = Model.EpcInformationList.Count })" method="post" novalidate>
+            <form action="@Url.Action(nameof(EnergyEfficiencyController.ConfirmAddress_Post), "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
 
                 @Html.AntiForgeryToken()
                 @if (Model.EpcInformationList.Count == 1)

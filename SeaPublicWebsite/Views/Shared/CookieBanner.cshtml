@@ -3,13 +3,14 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents.SubComponents
 @using Microsoft.AspNetCore.Http.Extensions
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.Controllers
 @using SeaPublicWebsite.Services.Cookies
 @inject CookieService CookieService
 @{
     var bannerState = CookieService.GetAndUpdateBannerState(Context.Request, Context.Response);
 }
 
-<form method="POST" action="@Url.Action("CookieConsent", "Cookie")">
+<form method="POST" action="@Url.Action(nameof(CookieController.CookieConsent), "Cookie")">
     @Html.Hidden("ReturnUrl", Context.Request.GetEncodedPathAndQuery())
     @Html.AntiForgeryToken()
     @await Html.GovUkCookieBanner(new CookieBannerViewModel
@@ -45,7 +46,7 @@
                     new ()
                     {
                         Text = "View cookies",
-                        Href = @Url.Action("CookieSettings_Get", "Cookie")
+                        Href = @Url.Action(nameof(CookieController.CookieSettings_Get), "Cookie")
                     }
                 }
             },
@@ -54,7 +55,7 @@
                 Html = @<text>
                            <p class="govuk-body">
                                You’ve @(bannerState is BannerState.ShowAccepted ? "accepted" : "rejected") additional cookies. You can
-                               <a class="govuk-link" href="@Url.Action("CookieSettings_Get", "Cookie")">
+                               <a class="govuk-link" href="@Url.Action(nameof(CookieController.CookieSettings_Get), "Cookie")">
                                    change your cookie settings
                                </a>
                                at any time.

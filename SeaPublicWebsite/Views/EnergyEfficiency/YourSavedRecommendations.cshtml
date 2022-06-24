@@ -58,15 +58,22 @@
                                                                         </ul>
                                                                     </p>
                                                                     break;
-                                                                case RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing:
+                                                                case RecommendationKey.InsulateCavityWalls:
                                                                     <p class="govuk-body">
-                                                                        You can find more information on efficient windows and how to choose them at the
+                                                                        You can find more information on cavity wall insulation on:
                                                                         <ul class="govuk-list govuk-list--bullet">
                                                                             <li>
-                                                                                The
-                                                                                <a class="govuk-link" target="_blank" href="https://www.bfrc.org/homeowners">
-                                                                                    British Fenestration Rating Council.<span class="govuk-visually-hidden">(opens in a new window)</span>
-                                                                                </a>
+                                                                                The <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/cavity-wall-insulation/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </p>
+                                                                    break;
+                                                                case RecommendationKey.InsulateSolidWalls:
+                                                                    <p class="govuk-body">
+                                                                        You can find more information on solid wall insulation on:
+                                                                        <ul class="govuk-list govuk-list--bullet">
+                                                                            <li>
+                                                                                The <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/solid-wall-insulation/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
                                                                             </li>
                                                                         </ul>
                                                                     </p>
@@ -81,22 +88,12 @@
                                                                         </ul>
                                                                     </p>
                                                                     break;
-                                                                case RecommendationKey.InsulateCavityWalls:
+                                                                case RecommendationKey.HotWaterCylinderInsulation:
                                                                     <p class="govuk-body">
-                                                                        You can find more information on cavity wall insulation on:
+                                                                        You can find more information on insulating your hot water cylinder and pipes on:
                                                                         <ul class="govuk-list govuk-list--bullet">
                                                                             <li>
-                                                                                The <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/cavity-wall-insulation/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </p>
-                                                                    break;
-                                                                case RecommendationKey.SolarElectricPanels:
-                                                                    <p class="govuk-body">
-                                                                        You can find more information on solar PV on:
-                                                                        <ul class="govuk-list govuk-list--bullet">
-                                                                            <li>
-                                                                                The <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/solar-panels/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
+                                                                                The <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/insulating-tanks-pipes-and-radiators/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
                                                                             </li>
                                                                         </ul>
                                                                     </p>
@@ -111,13 +108,42 @@
                                                                         </ul>
                                                                     </p>
                                                                     break;
-                                                                default:
-                                                                    <p class = "govuk-body">
-                                                                        Under Development
+                                                                case RecommendationKey.HighHeatRetentionStorageHeaters:
+                                                                    <p class="govuk-body">
+                                                                        You can find more information on high heat retention storage heaters on:
+                                                                        <ul class="govuk-list govuk-list--bullet">
+                                                                            <li>
+                                                                                The <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/electric-heating/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
+                                                                            </li>
+                                                                        </ul>
                                                                     </p>
                                                                     break;
+                                                                case RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing:
+                                                                    <p class="govuk-body">
+                                                                        You can find more information on efficient windows and how to choose them at the
+                                                                        <ul class="govuk-list govuk-list--bullet">
+                                                                            <li>
+                                                                                The
+                                                                                <a class="govuk-link" target="_blank" href="https://www.bfrc.org/homeowners">
+                                                                                    British Fenestration Rating Council.<span class="govuk-visually-hidden">(opens in a new window)</span>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </p>
+                                                                    break;
+                                                                case RecommendationKey.SolarElectricPanels:
+                                                                    <p class="govuk-body">
+                                                                        You can find more information on solar PV on:
+                                                                        <ul class="govuk-list govuk-list--bullet">
+                                                                            <li>
+                                                                                The <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/solar-panels/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </p>
+                                                                    break;
+                                                                default:
+                                                                    throw new ArgumentOutOfRangeException();
                                                             }
-                                                            ;
                                                         }
                                                     </dt>
                                                     <dd class="govuk-summary-list__actions sea-decide-summary-list-cell govuk-!-margin-bottom-7">
@@ -340,7 +366,7 @@
     </div>
 </div>
 
-<a href="@Url.Action("AnswerSummary_Get", "EnergyEfficiency", new {reference = Model.PropertyData.Reference})"
+<a href="@Url.Action(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference})"
    class="govuk-link">
     Change your answers
 </a>

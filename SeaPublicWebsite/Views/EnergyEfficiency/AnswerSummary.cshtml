@@ -1,9 +1,9 @@
 @using GovUkDesignSystem
 @using GovUkDesignSystem.Attributes
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
-@using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Services
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.AnswerSummaryViewModel
@@ -520,7 +520,7 @@
             Rows = rows
         }))
         
-        <form action="@Url.Action("AnswerSummary_Post", "EnergyEfficiency", new { reference = Model.PropertyData.Reference })" method="post" novalidate>
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.AnswerSummary_Post), "EnergyEfficiency", new { reference = Model.PropertyData.Reference })" method="post" novalidate>
             @Html.AntiForgeryToken()
             @await Html.GovUkButton(new ButtonViewModel
             {

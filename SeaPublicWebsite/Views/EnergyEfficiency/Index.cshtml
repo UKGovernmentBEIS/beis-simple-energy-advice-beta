@@ -1,4 +1,5 @@
-﻿@{
+﻿@using SeaPublicWebsite.Controllers
+@{
     ViewBag.Title = "Energy Efficiency Questionnaire";
 }
 
@@ -62,32 +63,33 @@
             Each recommendation will explain what’s involved, and where to go to for further advice.
         </p>
 
-        <a href="@Url.Action("NewOrReturningUser_Get", "EnergyEfficiency")" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
+        <a href="@Url.Action(nameof(EnergyEfficiencyController.NewOrReturningUser_Get), "EnergyEfficiency")" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
             Start now
             <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
                 <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
             </svg>
         </a>
         
-        <h2 class="govuk-heading-m">
-            Other ways to get support
-        </h2>
-        <p class="govuk-body">
-            If you would like some help with the website, you can call us to talk to one of our digital support assistants.
-        </p>
-        <p class="govuk-body-l">
-            Telephone <br />
-            <span class="sea-telephone"><strong>0800 444 202</strong></span>
-        </p>
-        <p class="govuk-body">
-            Monday to Friday: 8am to 8pm<br>
-            Saturday and Sunday: 9am to 5pm
-        </p>
-        <p class="govuk-body">
-            <a class="govuk-link"  href="https://www.gov.uk/call-charges">
-                Find out more about call charges
-            </a>
-        </p>
+        @* seabeta-555 uncomment this after private beta *@
+        @* <h2 class="govuk-heading-m"> *@
+        @*     Other ways to get support *@
+        @* </h2> *@
+        @* <p class="govuk-body"> *@
+        @*     If you would like some help with the website, you can call us to talk to one of our digital support assistants. *@
+        @* </p> *@
+        @* <p class="govuk-body-l"> *@
+        @*     Telephone <br /> *@
+        @*     <span class="sea-telephone"><strong>0800 444 202</strong></span> *@
+        @* </p> *@
+        @* <p class="govuk-body"> *@
+        @*     Monday to Friday: 8am to 8pm<br> *@
+        @*     Saturday and Sunday: 9am to 5pm *@
+        @* </p> *@
+        @* <p class="govuk-body"> *@
+        @*     <a class="govuk-link"  href="https://www.gov.uk/call-charges"> *@
+        @*         Find out more about call charges *@
+        @*     </a> *@
+        @* </p> *@
     </div>
     @await Html.PartialAsync("/Views/EnergyEfficiency/Sections/RelatedContent.cshtml")
 </div>
