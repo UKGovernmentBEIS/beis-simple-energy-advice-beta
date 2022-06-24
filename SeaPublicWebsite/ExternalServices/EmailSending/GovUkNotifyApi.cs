@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GovUkDesignSystem.Attributes;
 using Microsoft.Extensions.Options;
@@ -48,7 +49,10 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
             var template = govUkNotifyConfig.ApplicationReferenceNumberTemplate;
             var personalisation = new Dictionary<string, dynamic>
             {
-                { template.ReferencePlaceholder, reference }
+                { template.ReferencePlaceholder, reference },
+                { template.MagicLinkPlaceholder, govUkNotifyConfig.BaseUrl + "returning-user/" + reference },
+                { template.ReturningUserLinkPlaceholder, govUkNotifyConfig.BaseUrl + "new-or-returning-user" },
+                { template.FeedbackLinkPlaceholder, Constants.FEEDBACK_URL }
             };
             var emailModel = new GovUkNotifyEmailModel
             {

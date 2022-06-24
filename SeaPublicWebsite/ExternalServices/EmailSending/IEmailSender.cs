@@ -1,4 +1,5 @@
-﻿using SeaPublicWebsite.Models.Feedback;
+﻿using System;
+using SeaPublicWebsite.Models.Feedback;
 
 namespace SeaPublicWebsite.ExternalServices.EmailSending
 {
