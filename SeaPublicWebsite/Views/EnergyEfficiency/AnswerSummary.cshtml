@@ -52,7 +52,7 @@
                 {
                     Href = Url.Action(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.PropertyType}),
                     Text = "Change",
-                    VisuallyHiddenText = "address"
+                    VisuallyHiddenText = "building type"
                 }
             }
         }
@@ -79,7 +79,7 @@
                 {
                     Href = @Url.Action(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.HomeAge}),
                     Text = "Change",
-                    VisuallyHiddenText = "home type"
+                    VisuallyHiddenText = "year home was built"
                 }
             }
         }
@@ -106,7 +106,7 @@
                 {
                     Href = @Url.Action(nameof(EnergyEfficiencyController.WallConstruction_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.WallConstruction}),
                     Text = "Change",
-                    VisuallyHiddenText = "home type"
+                    VisuallyHiddenText = "wall type"
                 }
             }
         }
@@ -135,7 +135,7 @@
                     {
                         Href = Url.Action(nameof(EnergyEfficiencyController.CavityWallsInsulated_Get), "EnergyEfficiency", new { reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.CavityWallsInsulated }),
                         Text = "Change",
-                        VisuallyHiddenText = "are cavity walls insulated"
+                        VisuallyHiddenText = "are your cavity walls insulated"
                     }
                 }
             }
@@ -165,7 +165,7 @@
                     {
                         Href = Url.Action(nameof(EnergyEfficiencyController.SolidWallsInsulated_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.SolidWallsInsulated}),
                         Text = "Change",
-                        VisuallyHiddenText = "are solid walls insulated"
+                        VisuallyHiddenText = "are your solid walls insulated"
                     }
                 }
             }
@@ -224,7 +224,7 @@
                         {
                             Href = Url.Action(nameof(EnergyEfficiencyController.FloorInsulated_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.FloorInsulated}),
                             Text = "Change",
-                            VisuallyHiddenText = "is floor insulated"
+                            VisuallyHiddenText = "is your ground floor insulated"
                         }
                     }
                 }
@@ -255,7 +255,7 @@
                     {
                         Href = Url.Action(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.RoofConstruction}),
                         Text = "Change",
-                        VisuallyHiddenText = "is roof flat"
+                        VisuallyHiddenText = "is any part of your roof flat"
                     }
                 }
             }
@@ -313,7 +313,7 @@
                             {
                                 Href = Url.Action(nameof(EnergyEfficiencyController.LoftAccess_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.LoftAccess}),
                                 Text = "Change",
-                                VisuallyHiddenText = "accessible loft"
+                                VisuallyHiddenText = "loft access"
                             }
                         }
                     }
@@ -342,7 +342,7 @@
                                 {
                                     Href = Url.Action(nameof(EnergyEfficiencyController.RoofInsulated_Get), "EnergyEfficiency", new { reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.RoofInsulated }),
                                     Text = "Change",
-                                    VisuallyHiddenText = "is roof insulated"
+                                    VisuallyHiddenText = "is your loft insulated"
                                 }
                             }
                         }
@@ -400,7 +400,7 @@
                 {
                     Href = Url.Action(nameof(EnergyEfficiencyController.OutdoorSpace_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.OutdoorSpace}),
                     Text = "Change",
-                    VisuallyHiddenText = "outdoor space"
+                    VisuallyHiddenText = "outdoor space for heat pump"
                 }
             }
         }
@@ -411,7 +411,7 @@
         Key = new() 
         {
             Classes = "govuk-!-width-one-quarter",
-            Text = "Heating system "
+            Text = "Heating system"
         },
         Value = new()
         {
@@ -486,7 +486,7 @@
                 {
                     Href = Url.Action(nameof(EnergyEfficiencyController.NumberOfOccupants_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.NumberOfOccupants}),
                     Text = "Change",
-                    VisuallyHiddenText = "number of people over 5 in the home"
+                    VisuallyHiddenText = "size of household"
                 }
             }
         }
