@@ -327,6 +327,7 @@ namespace SeaPublicWebsite.Controllers
             }
             
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
+            propertyData.EpcDetailsConfirmed = viewModel.EpcDetailsConfirmed;
             if (viewModel.EpcDetailsConfirmed == EpcDetailsConfirmed.Yes)
             {
                 propertyData.PropertyType = propertyType;

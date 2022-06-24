@@ -134,6 +134,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("Country")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("EpcDetailsConfirmed")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("EpcId")
                         .HasColumnType("integer");
 

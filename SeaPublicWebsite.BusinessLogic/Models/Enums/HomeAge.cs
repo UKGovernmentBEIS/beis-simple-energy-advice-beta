@@ -26,7 +26,7 @@ namespace SeaPublicWebsite.BusinessLogic.Models.Enums
         From2003To2006,
         [GovUkRadioCheckboxLabelText(Text = "2007 to 2011")]
         From2007To2011,
-        [GovUkRadioCheckboxLabelText(Text = "2012 to present")]
+        [GovUkRadioCheckboxLabelText(Text = "2012 or newer")]
         From2012ToPresent
     }
 }

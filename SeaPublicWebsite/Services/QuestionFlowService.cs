@@ -224,7 +224,7 @@ namespace SeaPublicWebsite.Services
         private PathByActionArguments WallConstructionBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
-            if (propertyData.Epc != null)
+            if (propertyData.EpcDetailsConfirmed == EpcDetailsConfirmed.Yes)
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.FindEpc_Get), "EnergyEfficiency", new { reference, entryPoint });
             }
@@ -522,7 +522,7 @@ namespace SeaPublicWebsite.Services
         private PathByActionArguments ConfirmEpcDetailsForwardLinkArguments(PropertyData propertyData)
         {
             var reference = propertyData.Reference;
-            if (propertyData.Epc != null)
+            if (propertyData.EpcDetailsConfirmed == EpcDetailsConfirmed.Yes)
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.WallConstruction_Get), "EnergyEfficiency", new { reference });
             }

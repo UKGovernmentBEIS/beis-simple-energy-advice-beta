@@ -13,6 +13,8 @@ public class PropertyData
     public Country? Country { get; set; }
     
     public FindEpc? FindEpc { get; set; }
+    
+    public EpcDetailsConfirmed? EpcDetailsConfirmed { get; set; }
 
     public Epc Epc { get; set; }
 
