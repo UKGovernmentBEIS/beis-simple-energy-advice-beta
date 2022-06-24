@@ -58,6 +58,8 @@
 }
 
 @{
-    ViewBag.Distruption = @<strong class="govuk-tag govuk-tag--red">MEDIUM TO VERY SIGNIFICANT</strong>;
-    ViewBag.Duration = @<strong class="govuk-tag govuk-tag--red">SEVERAL DAYS</strong>;
+    Func<object, object> distruption = @<strong class="govuk-tag govuk-tag--red">MEDIUM TO VERY SIGNIFICANT</strong>;
+    ViewBag.Distruption = distruption;
+    Func<object, object> duration = @<strong class="govuk-tag govuk-tag--red">SEVERAL DAYS</strong>;
+    ViewBag.Duration = duration;
 }
