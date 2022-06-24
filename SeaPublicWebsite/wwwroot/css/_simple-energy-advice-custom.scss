@@ -246,6 +246,10 @@
     }
 }
 
+.sea-saved-recommendations-table {
+    overflow-x: auto;
+}
+
 .sea-saved-recommendations-table-headers {
     @media (max-width: 640px) {
         border: none;

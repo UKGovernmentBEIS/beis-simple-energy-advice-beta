@@ -55,7 +55,7 @@
                     </text>
         })
         
-        <div class="sea-action-plan-margin-right">
+        <div class="sea-action-plan-margin- sea-saved-recommendations-table">
             @await Html.GovUkTable(new TableGovUkViewModel
             {
                 Classes = "govuk-!-margin-bottom-9",
@@ -76,12 +76,9 @@
                     },
                     new()
                     {
-                        Classes = "sea-saved-recommendations-table-headers"
+                        Classes = "sea-saved-recommendations-table-headers",
+                        Html = @<span hidden>Change my decision</span>
                     },
-                    new()
-                    {
-                        Classes = "sea-saved-recommendations-table-headers"
-                    }
                 },
                 Rows = Model.GetSavedRecommendations().Select(recommendation => new TableRowViewModel
                 {
@@ -111,7 +108,7 @@
                         },
                         new()
                         {
-                            Classes = "sea-saved-recommendations-table-headers-hide sea-change-decision-link",
+                            Classes = "sea-saved-recommendations-table-headers sea-change-decision-link",
                             Html = @<a class="govuk-link" href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference})>
                                        Change my decision
                                    </a>
