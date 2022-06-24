@@ -41,7 +41,7 @@ public class CookieController: Controller
     }
 
     [HttpPost("cookie-consent")]
-    public IActionResult CookieConsent(CookieConsent cookieConsent)
+    public IActionResult CookieConsent(CookieConsentViewModel cookieConsent)
     {
         if (cookieConsent.Consent == "hide")
         {
