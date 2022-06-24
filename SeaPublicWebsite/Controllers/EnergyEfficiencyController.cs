@@ -308,6 +308,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new ConfirmEpcDetailsViewModel
             {
                 Reference = propertyData.Reference,
+                Epc = propertyData.Epc,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
             };
             return View("ConfirmEpcDetails", viewModel);
