@@ -1,9 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using System.Globalization
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.Controllers
-@using SeaPublicWebsite.Models.EnergyEfficiency
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.ConfirmAddressViewModel
 @{
@@ -43,7 +41,7 @@
         }
         else
         {
-            <form action="@Url.Action(nameof(EnergyEfficiencyController.ConfirmAddress_Post), "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
+            <form action="@Url.Action(nameof(EnergyEfficiencyController.ConfirmAddress_Post), "EnergyEfficiency", new { reference = Model.Reference, epcCount = Model.EpcInformationList.Count })" method="post" novalidate>
 
                 @Html.AntiForgeryToken()
                 @if (Model.EpcInformationList.Count == 1)

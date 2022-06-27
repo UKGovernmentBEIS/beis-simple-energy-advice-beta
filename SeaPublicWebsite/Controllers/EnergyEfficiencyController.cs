@@ -319,7 +319,7 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpPost("confirm-epc-details/{reference}")]
-        public async Task<IActionResult> ConfirmEpcDetails_Post(ConfirmEpcDetailsViewModel viewModel, PropertyType propertyType, HomeAge constructionAgeBand, HouseType houseType, BungalowType bungalowType, FlatType flatType)
+        public async Task<IActionResult> ConfirmEpcDetails_Post(ConfirmEpcDetailsViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -328,13 +328,14 @@ namespace SeaPublicWebsite.Controllers
             
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
             propertyData.EpcDetailsConfirmed = viewModel.EpcDetailsConfirmed;
+            Epc epc = propertyData.Epc;
             if (viewModel.EpcDetailsConfirmed == EpcDetailsConfirmed.Yes)
             {
-                propertyData.PropertyType = propertyType;
-                propertyData.HouseType = houseType;
-                propertyData.BungalowType = bungalowType;
-                propertyData.FlatType = flatType;
-                propertyData.YearBuilt = constructionAgeBand switch
+                propertyData.PropertyType = epc.PropertyType;
+                propertyData.HouseType = epc.HouseType;
+                propertyData.BungalowType = epc.BungalowType;
+                propertyData.FlatType = epc.FlatType;
+                propertyData.YearBuilt = epc.ConstructionAgeBand switch
                 {
                     HomeAge.Pre1900 => YearBuilt.Pre1930,
                     HomeAge.From1900To1929 => YearBuilt.Pre1930,
