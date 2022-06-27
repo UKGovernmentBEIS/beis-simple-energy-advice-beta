@@ -472,13 +472,13 @@ namespace SeaPublicWebsite.Services
 
         private static BreFloorType GetBreFloorType(FloorConstruction? floorConstruction, FloorInsulated? floorInsulated)
         {
-            //assumptions pending peer review:
             return floorConstruction switch
             {
                 FloorConstruction.SuspendedTimber => floorInsulated switch
                 {
                     FloorInsulated.Yes => BreFloorType.SuspendedFloorWithInsulation,
                     FloorInsulated.No => BreFloorType.SuspendedFloorWithoutInsulation,
+                    //peer-reviewed assumption:
                     FloorInsulated.DoNotKnow => BreFloorType.SuspendedFloorWithoutInsulation,
                     _ => throw new ArgumentOutOfRangeException()
                 },
@@ -486,11 +486,13 @@ namespace SeaPublicWebsite.Services
                 {
                     FloorInsulated.Yes => BreFloorType.SolidFloorWithInsulation,
                     FloorInsulated.No => BreFloorType.SolidFloorWithoutInsulation,
+                    //peer-reviewed assumption:
                     FloorInsulated.DoNotKnow => BreFloorType.SolidFloorWithoutInsulation,
                     _ => throw new ArgumentOutOfRangeException()
                 },
                 FloorConstruction.Mix => floorInsulated switch
                 {
+                    //peer-reviewed assumptions:
                     FloorInsulated.Yes => BreFloorType.SuspendedFloorWithInsulation,
                     FloorInsulated.No => BreFloorType.SuspendedFloorWithoutInsulation,
                     FloorInsulated.DoNotKnow => BreFloorType.SuspendedFloorWithoutInsulation,
