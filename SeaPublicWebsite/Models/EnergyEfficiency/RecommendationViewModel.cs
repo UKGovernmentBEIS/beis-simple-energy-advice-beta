@@ -12,6 +12,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public PropertyData PropertyData { get; set; }
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select what to do with this recommendation")]
         public RecommendationAction? RecommendationAction { get; set; }
+        public bool FromActionPlan { get; set; }
 
         public int GetCurrentIndex()
         {

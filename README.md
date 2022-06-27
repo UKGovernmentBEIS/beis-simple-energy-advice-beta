@@ -82,6 +82,10 @@ Fill in the opened `secrets.json` file with:
 
     "GovUkNotify": {
         "ApiKey": "<REAL_VALUE_HERE>"
+    },
+   
+    "GoogleAnalytics": {
+        "ApiSecret": "REAL_VALUE_HERE"
     }
 }
 ```

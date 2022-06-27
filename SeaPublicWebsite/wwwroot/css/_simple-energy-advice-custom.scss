@@ -246,6 +246,10 @@
     }
 }
 
+.sea-saved-recommendations-table {
+    overflow-x: auto;
+}
+
 .sea-saved-recommendations-table-headers {
     @media (max-width: 640px) {
         border: none;
@@ -291,4 +295,9 @@
 .sea-epc-hint {
     background: #EFF4F9;
     border-left: 10px solid #1D70B8;
+}
+
+.sea-email-sent {
+    color: govuk-colour("green");
+    font-weight: 700;
 }
