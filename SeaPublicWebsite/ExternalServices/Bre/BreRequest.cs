@@ -6,7 +6,7 @@
 
         public int num_storeys { get; set; }
 
-        public string heating_system { get; set; }
+        public int heating_system { get; set; }
 
         public string property_type { get; set; }
 
@@ -68,7 +68,7 @@
             roof_type = (int?) breRoofType;
             glazing_type = (int) breGlazingType;
             //no input for outdoor heater space in BRE API
-            heating_system = ((int) breHeatingSystem).ToString();
+            heating_system = (int) breHeatingSystem;
             hot_water_cylinder = breHotWaterCylinder;
             occupants = breOccupants;
             heating_pattern_type = (int) breHeatingPatternType;
