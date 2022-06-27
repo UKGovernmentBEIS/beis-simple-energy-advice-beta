@@ -1,6 +1,8 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
+@using SeaPublicWebsite.Controllers
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.HomeAgeViewModel
 @{
@@ -22,7 +24,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-        <form action="@Url.Action("HomeAge_Post", "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.HomeAge_Post), "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
             @Html.AntiForgeryToken()
             @(Html.HiddenFor(m => m.EntryPoint))
             
@@ -54,8 +56,8 @@
                                     HomeAge.From1930To1949 or HomeAge.From1950To1966 => "between 1930 and 1966.",
                                     HomeAge.From1967To1975 or HomeAge.From1976To1982 => "between 1967 and 1982.",
                                     HomeAge.From1983To1990 or HomeAge.From1991To1995 => "between 1983 and 1995.",
-                                    HomeAge.From1996To2002 or HomeAge.From2003To2006 => "between 1996 and 2011.",
-                                    HomeAge.From2007ToPresent => "on or after 2012.",
+                                    HomeAge.From1996To2002 or HomeAge.From2003To2006 or HomeAge.From2007To2011 => "between 1996 and 2011.",
+                                    HomeAge.From2012ToPresent => "on or after 2012.",
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;
@@ -76,10 +78,7 @@
                 {
                     Html = @<text>
                                <p class="govuk-body">
-                                   If you’re not sure when the property was built just pick an age band that seems about right.
-                               </p>
-                               <p class="govuk-body">
-                                   If you don’t know, you can skip this question. We will take a best guess based on other information you provide.
+                                   If you are unsure, choose 'I don't know'. We will take a best guess based on other information you provide.
                                </p>
                                
                                @await Html.GovUkDetails(new DetailsViewModel
@@ -99,17 +98,10 @@
                                
                             </text>
                     }))
-
-            <div class="govuk-button-group">
-                @(await Html.GovUkButton(new ButtonViewModel
-                {
-                    Text = "Continue",
-                }))
-                <a href="@Model.SkipLink"
-                   class="govuk-link">
-                    Skip this question
-                </a>
-            </div>
+            @(await Html.GovUkButton(new ButtonViewModel
+            {
+                Text = "Continue",
+            }))
 
         </form>
 

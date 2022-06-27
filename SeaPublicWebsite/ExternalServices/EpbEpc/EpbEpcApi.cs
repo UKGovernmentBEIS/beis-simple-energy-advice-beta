@@ -546,12 +546,16 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 return HomeAge.From2003To2006;
             }
             
-            if (epc.PropertyAgeBand.Equals("K", StringComparison.OrdinalIgnoreCase) || 
-                epc.PropertyAgeBand.Equals("L", StringComparison.OrdinalIgnoreCase) ||
-                epc.PropertyAgeBand.Contains("2007-2011") ||
+            if (epc.PropertyAgeBand.Equals("K", StringComparison.OrdinalIgnoreCase) ||
+                epc.PropertyAgeBand.Contains("2007-2011"))
+            {
+                return HomeAge.From2007To2011;
+            }
+            
+            if (epc.PropertyAgeBand.Equals("L", StringComparison.OrdinalIgnoreCase) ||
                 epc.PropertyAgeBand.Contains("2012 onwards"))
             {
-                return HomeAge.From2007ToPresent;
+                return HomeAge.From2012ToPresent;
             }
 
             return null;

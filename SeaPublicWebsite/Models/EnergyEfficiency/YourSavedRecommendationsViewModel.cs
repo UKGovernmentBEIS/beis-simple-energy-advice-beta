@@ -8,6 +8,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     public class YourSavedRecommendationsViewModel
     {
         public PropertyData PropertyData { get; set; }
+        public string EmailAddress { get; set; }
 
         public string GetTotalInstallationCostText()
         {

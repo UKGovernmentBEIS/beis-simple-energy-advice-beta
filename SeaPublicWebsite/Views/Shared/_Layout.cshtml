@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.ExternalServices.GoogleAnalytics
+@using SeaPublicWebsite.Controllers
 @using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Services
 @using SeaPublicWebsite.Services.Cookies
@@ -65,7 +66,7 @@
         document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     </script>
 
-    @{ await Html.RenderPartialAsync("CookieBanner"); }
+    @{ await Html.RenderPartialAsync("_CookieBanner"); }
 
     <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
 
@@ -88,20 +89,7 @@
         @(await Html.GovUkPhaseBanner(new PhaseBannerViewModel
         {
             Phase = "Beta",
-            Html = @<text>
-                       This is a new service – your
-                       @{
-                           if (ViewBag.OnFeedbackPage is true)
-                           {
-                               @:feedback
-                           }
-                           else
-                           {
-                               <a class="govuk-link" href="@Url.Action("FeedbackForm_Get", "Feedback")">feedback</a>
-                           }
-                       }
-                       will help us to improve it.
-                    </text>
+            Html = @<text>This is a new service – your <a class="govuk-link" href="@Constants.FEEDBACK_URL">feedback</a> will help us to improve it.</text>
         }))
 
         @(RenderSection("BeforeMain", false))
@@ -121,22 +109,22 @@
                 new FooterLinksViewModel
                 {
                     Text = "Contact Us",
-                    Href = Url.Action("FeedbackForm_Get", "Feedback")
-                    },
+                    Href = Constants.FEEDBACK_URL
+                },
                 new FooterLinksViewModel
                 {
                     Text = "Cookies",
-                    Href = Url.Action("CookieSettings_Get", "Cookie")
+                    Href = Url.Action(nameof(CookieController.CookieSettings_Get), "Cookie")
                 },
                 new FooterLinksViewModel
                 {
                     Text = "Privacy Policy",
-                    Href = Url.Action("Index", "Home")
+                    Href = Url.Action(nameof(StaticPagesController.PrivacyPolicy), "StaticPages")
                 },
                 new FooterLinksViewModel
                 {
                     Text = "Accessibility Statement",
-                    Href = Url.Action("Index", "Home")
+                    Href = Url.Action(nameof(StaticPagesController.AccessibilityStatement), "StaticPages")
                 }
             }
         }

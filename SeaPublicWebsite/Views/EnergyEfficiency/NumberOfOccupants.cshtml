@@ -1,5 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.Controllers
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.NumberOfOccupantsViewModel
 @{
@@ -21,7 +23,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("NumberOfOccupants_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.NumberOfOccupants_Post), "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
             @Html.AntiForgeryToken()
             
@@ -45,28 +47,20 @@
                      </text>;
             }
             
-            @await Html.GovUkFieldset(new FieldsetViewModel
-            {
-                Legend = new LegendViewModel
+            @await Html.GovUkTextInputFor(
+                m => m.NumberOfOccupants,
+                labelOptions: new LabelViewModel
                 {
                     Text = "How many people live in your home?",
-                    Classes = "govuk-fieldset__legend--l",
+                    Classes = "govuk-label--l",
                     IsPageHeading = true
                 },
-                
-                InnerHtml = 
-                    @<text>
-                        @await Html.GovUkTextInputFor(
-                            m => m.NumberOfOccupants,
-                            hintOptions: new HintViewModel
-                            {
-                                Html = hint
-                            },
-                            classes: "govuk-input--width-5",
-                            placeholder: "e.g. 3")
-                     </text>
-                
-            })
+                hintOptions: new HintViewModel
+                {
+                    Html = hint
+                },
+                classes: "govuk-input--width-5",
+                placeholder: "e.g. 3")
             
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel

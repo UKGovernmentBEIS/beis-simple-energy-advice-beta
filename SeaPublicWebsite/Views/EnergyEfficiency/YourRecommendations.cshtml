@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.Controllers
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.YourRecommendationsViewModel
 @{
@@ -57,12 +58,12 @@
             You will need a reference code to return to your recommendations and action plan quickly if you leave the service.
         </p>
 
-        <aside class="sea-user-reference govuk-!-margin-bottom-6" role="complementary">
-            <span class="govuk-body-l">Your reference code</span>
-            <h2 class="govuk-heading-l" id="subsection-title">@Model.Reference</h2>
-        </aside>
+        <div class="sea-user-reference govuk-!-margin-bottom-6" role="complementary">
+            <h2 class="govuk-body-l govuk-!-margin-bottom-0">Your reference code</h2>
+            <span class="govuk-heading-l" id="subsection-title">@Model.Reference</span>
+        </div>
 
-        <form method="post" action="@Url.Action("YourRecommendations_Post", "EnergyEfficiency")">
+        <form method="post" action="@Url.Action(nameof(EnergyEfficiencyController.YourRecommendations_Post), "EnergyEfficiency")">
 
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.NumberOfPropertyRecommendations)
@@ -77,9 +78,9 @@
                     Legend = new LegendViewModel
                     {
                         Html = @<text>
-                                   <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-4">
+                                   <h3 class="govuk-fieldset__heading govuk-!-margin-bottom-4">
                                        Would you like us to email the above?
-                                   </h1>
+                                   </h3>
                                    <p class="govuk-body">We will send you a link to your recommendations and your reference code so you can quickly get back when you need to. If you do not wish to provide an email, make sure you make a note of your reference code.</p>
                                 </text>,
                         Classes = "govuk-fieldset__legend--l",

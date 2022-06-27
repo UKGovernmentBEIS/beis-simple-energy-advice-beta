@@ -1027,6 +1027,12 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("heating-pattern/{reference}")]
         public async Task<IActionResult> HeatingPattern_Post(HeatingPatternViewModel viewModel)
         {
+            if (viewModel.HeatingPattern != HeatingPattern.Other)
+            {
+                ModelState.Remove("HoursOfHeatingMorning");
+                ModelState.Remove("HoursOfHeatingEvening");
+            }
+            
             if (!ModelState.IsValid)
             {
                 return await HeatingPattern_Get(viewModel.Reference, viewModel.EntryPoint);
@@ -1107,7 +1113,7 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpPost("answer-summary/{reference}")]
-        public async Task<IActionResult> AnswerSummary_PostAsync(string reference)
+        public async Task<IActionResult> AnswerSummary_Post(string reference)
         {
             if (!ModelState.IsValid)
             {
@@ -1224,7 +1230,7 @@ namespace SeaPublicWebsite.Controllers
                             ModelState.AddModelError(nameof(viewModel.EmailAddress), "Enter a valid email address");
                             break;
                         case EmailSenderExceptionType.Other:
-                            ModelState.AddModelError(nameof(viewModel.EmailAddress), "Unable to send email due to unexpected error. Uncheck this box and make a note of your reference code before you continue.");
+                            ModelState.AddModelError(nameof(viewModel.EmailAddress), "Unable to send email due to unexpected error. Please make a note of your reference code");
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -1237,14 +1243,15 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpGet("your-recommendations/{id}/{reference}")]
-        public async Task<IActionResult> Recommendation_Get(int id, string reference)
+        public async Task<IActionResult> Recommendation_Get(int id, string reference, bool fromActionPlan = false)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             var viewModel = new RecommendationViewModel
             {
                 PropertyData = propertyData,
-                PropertyRecommendation = propertyData.PropertyRecommendations.First(r => r.Key == (RecommendationKey) id),
-                RecommendationAction = propertyData.PropertyRecommendations.First(r => r.Key == (RecommendationKey)id).RecommendationAction
+                PropertyRecommendation = propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey) id),
+                RecommendationAction = propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey)id).RecommendationAction,
+                FromActionPlan = fromActionPlan
             };
 
             var recommendationKey = (RecommendationKey) id;
@@ -1258,14 +1265,14 @@ namespace SeaPublicWebsite.Controllers
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.PropertyData.Reference);
             viewModel.PropertyData = propertyData;
             viewModel.PropertyRecommendation =
-                propertyData.PropertyRecommendations.First(r => r.Key == (RecommendationKey)id);
+                propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey)id);
             
             if (!ModelState.IsValid)
             {
                 return View("recommendations/" + Enum.GetName(viewModel.PropertyRecommendation.Key), viewModel);
             }
 
-            propertyData.PropertyRecommendations.First(r => r.Key == (RecommendationKey) id).RecommendationAction =
+            propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey) id).RecommendationAction =
                 viewModel.RecommendationAction;
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
@@ -1285,39 +1292,57 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpGet("your-saved-recommendations/{reference}")]
-        public async Task<IActionResult> YourSavedRecommendations_Get(string reference)
+        public async Task<IActionResult> YourSavedRecommendations_Get(string reference, string emailAddress = null)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
             var viewModel = new YourSavedRecommendationsViewModel
             {
-                PropertyData = propertyData
+                PropertyData = propertyData,
+                EmailAddress = emailAddress
             };
-            return View("YourSavedRecommendations", viewModel);
+
+            if (viewModel.GetSavedRecommendations().Any())
+            {
+                return View("ActionPlan/ActionPlanWithSavedRecommendations", viewModel);
+            }
+
+            if (viewModel.GetDecideLaterRecommendations().Any())
+            {
+                return View("ActionPlan/ActionPlanWithMaybeRecommendations", viewModel);
+            }
+
+            return View("ActionPlan/ActionPlanWithDiscardedRecommendations", viewModel);
         }
-
-        [HttpGet("recommendation/add-to-plan/{id}/{reference}")]
-        public async Task<IActionResult> AddToPlan_Get(int id, string reference)
+        
+        [HttpPost("your-saved-recommendations/{reference}")]
+        public async Task<IActionResult> YourSavedRecommendations_Post(YourSavedRecommendationsEmailViewModel viewModel)
         {
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-
-            var recommendationToUpdate = propertyData.PropertyRecommendations.First(r => r.Key == (RecommendationKey) id);
-            recommendationToUpdate.RecommendationAction = RecommendationAction.SaveToActionPlan;
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
+            if (!ModelState.IsValid)
+            {
+                return await YourSavedRecommendations_Get(viewModel.Reference);
+            }
             
-            return RedirectToAction("YourSavedRecommendations_Get", new { reference = propertyData.Reference });
-        }
-
-        [HttpGet("recommendation/remove-from-plan/{id}/{reference}")]
-        public async Task<IActionResult> RemoveFromPlan_Get(int id, string reference)
-        {
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-
-            var recommendationToUpdate = propertyData.PropertyRecommendations.First(r => r.Key == (RecommendationKey)id);
-            recommendationToUpdate.RecommendationAction = RecommendationAction.Discard;
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-            
-            return RedirectToAction("YourSavedRecommendations_Get", new { reference = propertyData.Reference });
+            try
+            {
+                emailApi.SendReferenceNumberEmail(viewModel.EmailAddress, viewModel.Reference);
+            }
+            catch (EmailSenderException e)
+            {
+                switch (e.Type)
+                {
+                    case EmailSenderExceptionType.InvalidEmailAddress:
+                        ModelState.AddModelError(nameof(viewModel.EmailAddress), "Enter a valid email address");
+                        break;
+                    case EmailSenderExceptionType.Other:
+                        ModelState.AddModelError(nameof(viewModel.EmailAddress), "Unable to send email due to unexpected error. Please make a note of your reference code.");
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                return await YourSavedRecommendations_Get(viewModel.Reference);
+            }
+            return await YourSavedRecommendations_Get(viewModel.Reference, emailAddress: viewModel.EmailAddress);
         }
     }
 }

@@ -4,7 +4,7 @@
     <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
     <div class="govuk-button-group govuk-grid-column-full">
         <div class="govuk-grid-column-one-half govuk-!-padding-left-0">
-            @if (Model.HasPreviousIndex())
+            @if (!Model.FromActionPlan && Model.HasPreviousIndex())
             {
                 <button name="command" value="goBackwards" class="sea-nav-button sea-previous-recommendation govuk-!-width-full govuk-!-margin-0 govuk-!-text-align-left">
                     <span class="sea-nav-button-caption govuk-body govuk-!-padding-bottom-0">
@@ -22,7 +22,7 @@
             }
         </div>
         <div class="govuk-grid-column-one-half govuk-!-padding-right-0">
-            @if (Model.HasNextIndex())
+            @if (!Model.FromActionPlan && Model.HasNextIndex())
             {
                 <button name="command" value="goForwards" class="sea-nav-button sea-next-recommendation govuk-!-width-full govuk-!-padding-right-0 govuk-!-text-align-right">
                     <span class="sea-nav-button-caption govuk-body govuk-!-padding-bottom-0">
@@ -42,7 +42,7 @@
             {
                 <button name="command" value="goToActionPlan" class="sea-nav-button sea-go-to-plan govuk-!-width-full govuk-!-text-align-right">
                     <span class="sea-nav-button-caption govuk-body govuk-!-padding-bottom-0">
-                        Continue to
+                        @(Model.FromActionPlan ? "Back to" : "Continue to")
                     </span>
                     <span class="sea-nav-button-title govuk-heading-m govuk-!-padding-top-0">
                         Action plan
