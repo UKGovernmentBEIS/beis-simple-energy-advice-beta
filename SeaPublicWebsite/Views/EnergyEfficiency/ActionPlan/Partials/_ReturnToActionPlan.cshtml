@@ -21,7 +21,7 @@
     </p>
 }
 
-@{ await Html.RenderPartialAsync("SendEmailPartial.cshtml", new YourSavedRecommendationsEmailViewModel()); }
+@{ await Html.RenderPartialAsync("_SendEmail.cshtml", new YourSavedRecommendationsEmailViewModel()); }
 
 <h2 class="govuk-heading-m">
     Give feedback

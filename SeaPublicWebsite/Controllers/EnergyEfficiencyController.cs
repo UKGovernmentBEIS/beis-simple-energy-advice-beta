@@ -1220,8 +1220,8 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new RecommendationViewModel
             {
                 PropertyData = propertyData,
-                PropertyRecommendation = propertyData.PropertyRecommendations.First(r => r.Key == (RecommendationKey) id),
-                RecommendationAction = propertyData.PropertyRecommendations.First(r => r.Key == (RecommendationKey)id).RecommendationAction,
+                PropertyRecommendation = propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey) id),
+                RecommendationAction = propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey)id).RecommendationAction,
                 FromActionPlan = fromActionPlan
             };
 
@@ -1236,14 +1236,14 @@ namespace SeaPublicWebsite.Controllers
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.PropertyData.Reference);
             viewModel.PropertyData = propertyData;
             viewModel.PropertyRecommendation =
-                propertyData.PropertyRecommendations.First(r => r.Key == (RecommendationKey)id);
+                propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey)id);
             
             if (!ModelState.IsValid)
             {
                 return View("recommendations/" + Enum.GetName(viewModel.PropertyRecommendation.Key), viewModel);
             }
 
-            propertyData.PropertyRecommendations.First(r => r.Key == (RecommendationKey) id).RecommendationAction =
+            propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey) id).RecommendationAction =
                 viewModel.RecommendationAction;
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
@@ -1306,7 +1306,7 @@ namespace SeaPublicWebsite.Controllers
                         ModelState.AddModelError(nameof(viewModel.EmailAddress), "Enter a valid email address");
                         break;
                     case EmailSenderExceptionType.Other:
-                        ModelState.AddModelError(nameof(viewModel.EmailAddress), "Unable to send email due to unexpected error. Uncheck this box and make a note of your reference code before you continue.");
+                        ModelState.AddModelError(nameof(viewModel.EmailAddress), "Unable to send email due to unexpected error. Please make a note of your reference code.");
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

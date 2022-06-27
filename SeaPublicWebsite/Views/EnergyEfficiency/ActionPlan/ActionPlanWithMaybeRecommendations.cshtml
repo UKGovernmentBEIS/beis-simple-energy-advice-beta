@@ -9,10 +9,10 @@
         <h2 class="govuk-heading-l">
             Research improvements you are unsure about
         </h2>
-        @{ await Html.RenderPartialAsync("ActionPlan/Partials/ImprovementsUnsureAboutPartial", Model); }
-        @{ await Html.RenderPartialAsync("ActionPlan/Partials/AvailableSchemesOrGrantsPartial", Model); }
-        @{ await Html.RenderPartialAsync("ActionPlan/Partials/LowCostMeasuresPartial", Model); }
-        @{ await Html.RenderPartialAsync("ActionPlan/Partials/DiscardedRecommendationsPartial", Model); }
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_ImprovementsUnsureAbout", Model); }
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_AvailableSchemesOrGrants", Model); }
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_LowCostMeasures", Model); }
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_DiscardedRecommendations", Model); }
         
         <h2 class="govuk-heading-m">Still need help?</h2>
         <p class="govuk-body">
@@ -21,6 +21,6 @@
             website for other ways to save energy and reduce your bills.
         </p>
         
-        @{ await Html.RenderPartialAsync("ActionPlan/Partials/ReturnToActionPlanPartial", Model); }
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_ReturnToActionPlan", Model); }
     </div>
 </div>

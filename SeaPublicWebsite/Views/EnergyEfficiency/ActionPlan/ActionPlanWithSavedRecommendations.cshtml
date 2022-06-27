@@ -117,7 +117,7 @@
         <h2 class="govuk-heading-m">
             1. Find out if you can apply for support
         </h2>
-        @{ await Html.RenderPartialAsync("ActionPlan/Partials/AvailableSchemesOrGrantsPartial", Model); }
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_AvailableSchemesOrGrants", Model); }
         
         <h2 class="govuk-heading-m">
             2. Consult with a qualified installer
@@ -135,14 +135,14 @@
             <h2 class="govuk-heading-m">
                 3. Research improvements you are unsure about
             </h2>
-            await Html.RenderPartialAsync("ActionPlan/Partials/ImprovementsUnsureAboutPartial", Model);
+            await Html.RenderPartialAsync("ActionPlan/Partials/_ImprovementsUnsureAbout", Model);
             <p class="govuk-body">
                 You can find out more by visiting the 
                 <a href="https://energysavingtrust.org.uk/">Energy Saving Trust</a> 
                 website for other ways to save energy and reduce your bills.
             </p>
         }
-        @{ await Html.RenderPartialAsync("ActionPlan/Partials/DiscardedRecommendationsPartial", Model); }
-        @{ await Html.RenderPartialAsync("ActionPlan/Partials/ReturnToActionPlanPartial", Model); }
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_DiscardedRecommendations", Model); }
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_ReturnToActionPlan", Model); }
     </div>
 </div>
