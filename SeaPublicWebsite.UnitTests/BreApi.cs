@@ -26,12 +26,13 @@ public class BreApi
             breWallType: BreWallType.CavityWallsWithoutInsulation,
             breRoofType: BreRoofType.PitchedRoofWithoutInsulation,
             breGlazingType: BreGlazingType.SingleGlazed,
-            breHeatingFuel: BreHeatingFuel.MainsGas,
+            breHeatingSystem: BreHeatingSystem.GasBoiler,
             breHotWaterCylinder: null,
             breOccupants: null,
             breHeatingPatternType: BreHeatingPatternType.MorningAndEvening,
             breNormalDaysOffHours: null,
-            breTemperature: null
+            breTemperature: null,
+            breFloorType: BreFloorType.DontKnow
         );
         
         //Assert
