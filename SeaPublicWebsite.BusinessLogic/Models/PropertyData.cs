@@ -44,24 +44,25 @@ public class PropertyData
     public int? HoursOfHeatingMorning { get; set; }
     public int? HoursOfHeatingEvening { get; set; }
     public decimal? Temperature { get; set; }
-    public PropertyData Backup { get; set; }
+    public PropertyData UneditedData { get; set; }
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; }
 
-    public void CreateBackup()
+    public void CreateUneditedData()
     {
-        Backup = new PropertyData();
-        CopyAnswersTo(Backup);
+        UneditedData = new PropertyData();
+        CopyAnswersTo(UneditedData);
     }
     
-    public void ApplyBackup()
+    public void RevertToUneditedData()
     {
-        Backup.CopyAnswersTo(this);
+        UneditedData.CopyAnswersTo(this);
+        DeleteUneditedData();
     }
     
-    public void ResetBackup()
+    public void DeleteUneditedData()
     {
-        Backup = null;
+        UneditedData = null;
     }
 
     private void CopyAnswersTo(PropertyData other)

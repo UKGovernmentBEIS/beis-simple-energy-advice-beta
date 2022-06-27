@@ -980,10 +980,12 @@ namespace SeaPublicWebsite.Controllers
         public async Task<IActionResult> AnswerSummary_Get(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            if (propertyData.Backup is not null)
+            
+            // If the user comes back to this page and their changes haven't been saved,
+            // we need to revert to their old answers.
+            if (propertyData.UneditedData is not null)
             {
-                propertyData.ApplyBackup();
-                propertyData.ResetBackup();
+                propertyData.RevertToUneditedData();
                 await propertyDataStore.SavePropertyDataAsync(propertyData);
             }
 
@@ -1199,16 +1201,21 @@ namespace SeaPublicWebsite.Controllers
             QuestionFlowPage? entryPoint = null)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            if (entryPoint is not null & propertyData.Backup is null)
+            
+            // If entryPoint is set then the user is editing their answers, so we need to take a copy of the current answers
+            if (entryPoint is not null && propertyData.UneditedData is null)
             {
-                propertyData.CreateBackup();
+                propertyData.CreateUneditedData();
             }
             update(propertyData);
             PropertyDataHelper.ResetUnusedFields(propertyData);
             var forwardArgs = questionFlowService.ForwardLinkArguments(currentPage, propertyData, entryPoint);
+            
+            // If the user is going back to the answer summary page then they finished editing and we
+            // can get rid of the old answers
             if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
             {
-                propertyData.ResetBackup();
+                propertyData.DeleteUneditedData();
             }
             await propertyDataStore.SavePropertyDataAsync(propertyData);
             return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
