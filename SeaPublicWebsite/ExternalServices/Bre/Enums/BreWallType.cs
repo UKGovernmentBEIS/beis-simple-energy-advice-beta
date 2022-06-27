@@ -8,5 +8,6 @@
         CavityWallsWithInsulation = 2,
         SolidWallsWithoutInsulation = 3,
         SolidWallsWithInsulation = 4,
+        OtherWallType = 5,
     }
 }
