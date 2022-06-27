@@ -45,28 +45,20 @@
                      </text>;
             }
             
-            @await Html.GovUkFieldset(new FieldsetViewModel
-            {
-                Legend = new LegendViewModel
+            @await Html.GovUkTextInputFor(
+                m => m.NumberOfOccupants,
+                labelOptions: new LabelViewModel
                 {
                     Text = "How many people live in your home?",
-                    Classes = "govuk-fieldset__legend--l",
+                    Classes = "govuk-label--l",
                     IsPageHeading = true
                 },
-                
-                InnerHtml = 
-                    @<text>
-                        @await Html.GovUkTextInputFor(
-                            m => m.NumberOfOccupants,
-                            hintOptions: new HintViewModel
-                            {
-                                Html = hint
-                            },
-                            classes: "govuk-input--width-5",
-                            placeholder: "e.g. 3")
-                     </text>
-                
-            })
+                hintOptions: new HintViewModel
+                {
+                    Html = hint
+                },
+                classes: "govuk-input--width-5",
+                placeholder: "e.g. 3")
             
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
