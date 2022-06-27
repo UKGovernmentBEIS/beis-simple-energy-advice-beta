@@ -472,6 +472,7 @@ namespace SeaPublicWebsite.Services
 
         private static BreFloorType GetBreFloorType(FloorConstruction? floorConstruction, FloorInsulated? floorInsulated)
         {
+            //assumptions pending peer review:
             return floorConstruction switch
             {
                 FloorConstruction.SuspendedTimber => floorInsulated switch
