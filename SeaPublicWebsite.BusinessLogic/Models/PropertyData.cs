@@ -46,4 +46,21 @@ public class PropertyData
     public decimal? Temperature { get; set; }
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; }
+
+    public RecommendationKey GetNextRecommendationKey(RecommendationKey currentRecommendationKey)
+    {
+        var currentIndex = GetRecommendationIndex(currentRecommendationKey);
+        return PropertyRecommendations[currentIndex + 1].Key;
+    }
+    
+    public RecommendationKey GetPreviousRecommendationKey(RecommendationKey currentRecommendationKey)
+    {
+        var currentIndex = GetRecommendationIndex(currentRecommendationKey);
+        return PropertyRecommendations[currentIndex - 1].Key;
+    }
+
+    public int GetRecommendationIndex(RecommendationKey currentRecommendationKey)
+    {
+        return PropertyRecommendations.FindIndex(r => r.Key == currentRecommendationKey);
+    }
 }

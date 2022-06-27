@@ -1245,47 +1245,45 @@ namespace SeaPublicWebsite.Controllers
         [HttpGet("your-recommendations/{id}/{reference}")]
         public async Task<IActionResult> Recommendation_Get(int id, string reference, bool fromActionPlan = false)
         {
+            var recommendationKey = (RecommendationKey)id;
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            var recommendationIndex = propertyData.GetRecommendationIndex(recommendationKey);
             var viewModel = new RecommendationViewModel
             {
-                PropertyData = propertyData,
-                PropertyRecommendation = propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey) id),
-                RecommendationAction = propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey)id).RecommendationAction,
+                RecommendationIndex = recommendationIndex,
+                PropertyRecommendations = propertyData.PropertyRecommendations,
+                RecommendationAction = propertyData.PropertyRecommendations[recommendationIndex].RecommendationAction,
                 FromActionPlan = fromActionPlan
             };
-
-            var recommendationKey = (RecommendationKey) id;
 
             return View("recommendations/" + Enum.GetName(recommendationKey), viewModel);
         }
 
         [HttpPost("your-recommendations/{id}/{reference}")]
-        public async Task<IActionResult> Recommendation_Post(RecommendationViewModel viewModel, string command, int id)
+        public async Task<IActionResult> Recommendation_Post(RecommendationViewModel viewModel, string command, int id, string reference)
         {
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.PropertyData.Reference);
-            viewModel.PropertyData = propertyData;
-            viewModel.PropertyRecommendation =
-                propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey)id);
-            
             if (!ModelState.IsValid)
             {
-                return View("recommendations/" + Enum.GetName(viewModel.PropertyRecommendation.Key), viewModel);
+                return await Recommendation_Get(id, reference, viewModel.FromActionPlan);
             }
 
-            propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey) id).RecommendationAction =
+            var recommendationKey = (RecommendationKey)id;
+
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            propertyData.PropertyRecommendations.Single(r => r.Key == recommendationKey).RecommendationAction =
                 viewModel.RecommendationAction;
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
             switch(command)
             {
                 case "goForwards":
-                    return RedirectToAction("Recommendation_Get",
-                        new {id = (int) viewModel.NextRecommendationKey(), reference = propertyData.Reference});
+                    return RedirectToAction(nameof(Recommendation_Get),
+                        new {id = (int)propertyData.GetNextRecommendationKey(recommendationKey), reference = propertyData.Reference});
                 case "goBackwards":
-                    return RedirectToAction("Recommendation_Get",
-                        new {id = (int) viewModel.PreviousRecommendationKey(), reference = propertyData.Reference});
+                    return RedirectToAction(nameof(Recommendation_Get),
+                        new {id = (int)propertyData.GetPreviousRecommendationKey(recommendationKey), reference = propertyData.Reference});
                 case "goToActionPlan":
-                    return RedirectToAction("YourSavedRecommendations_Get", new {reference = propertyData.Reference});
+                    return RedirectToAction(nameof(YourSavedRecommendations_Get), new {reference = propertyData.Reference});
                 default:
                     throw new ArgumentOutOfRangeException();
             }
