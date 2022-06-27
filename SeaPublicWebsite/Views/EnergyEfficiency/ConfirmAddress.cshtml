@@ -1,5 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.Controllers
 @using SeaPublicWebsite.Models.EnergyEfficiency
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.ConfirmAddressViewModel
@@ -37,13 +39,13 @@
 
             @await Html.GovUkButton(new ButtonViewModel
             {
-                Href = Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference}),
+                Href = Url.Action(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new {reference = Model.Reference}),
                 Text = "Continue"
             })
         }
         else
         {
-            <form action="@Url.Action("ConfirmAddress_Post", "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
+            <form action="@Url.Action(nameof(EnergyEfficiencyController.ConfirmAddress_Post), "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
 
                 @Html.AntiForgeryToken()
                 @if (Model.EpcInformationList.Count == 1)
@@ -84,7 +86,7 @@
                                             Html = @<text>
                                                        Change<span class="govuk-visually-hidden"> address</span>
                                                     </text>,
-                                            Href = @Url.Action("AskForPostcode_Get", "EnergyEfficiency", new { reference = Model.Reference })
+                                            Href = @Url.Action(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference = Model.Reference })
                                         }
                                     }
                                 }
@@ -122,7 +124,7 @@
                         Text = (Model.EpcInformationList.Count == 1 ? "Yes, continue" : "Continue"),
 
                     }))
-                    <a href=@Url.Action("PropertyType_Get", "EnergyEfficiency", new { reference = Model.Reference })
+                    <a href=@Url.Action(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new { reference = Model.Reference })
                        class="govuk-link">
                         @(Model.EpcInformationList.Count == 1 ? "No, skip this question" : "Address not listed above")
                     </a>

@@ -1103,7 +1103,7 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpPost("answer-summary/{reference}")]
-        public async Task<IActionResult> AnswerSummary_PostAsync(string reference)
+        public async Task<IActionResult> AnswerSummary_Post(string reference)
         {
             if (!ModelState.IsValid)
             {

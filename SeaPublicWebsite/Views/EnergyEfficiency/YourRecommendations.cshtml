@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.Controllers
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.YourRecommendationsViewModel
 @{
@@ -62,7 +63,7 @@
             <h2 class="govuk-heading-l" id="subsection-title">@Model.Reference</h2>
         </aside>
 
-        <form method="post" action="@Url.Action("YourRecommendations_Post", "EnergyEfficiency")">
+        <form method="post" action="@Url.Action(nameof(EnergyEfficiencyController.YourRecommendations_Post), "EnergyEfficiency")">
 
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.NumberOfPropertyRecommendations)
