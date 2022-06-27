@@ -9,7 +9,7 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
-        @{ await Html.RenderPartialAsync("../EnergyEfficiency/Recommendations/Partials/YourActionPlanPartial.cshtml", Model); }
+        @{ await Html.RenderPartialAsync("../EnergyEfficiency/Recommendations/Partials/_YourActionPlan.cshtml", Model); }
     </div>
     
     <div class="govuk-grid-column-two-thirds">
@@ -36,7 +36,7 @@
                 What you could save
             </h2>
             @await RenderSectionAsync("RecommendationLifetime", true)
-            @{ await Html.RenderPartialAsync("../EnergyEfficiency/Recommendations/Partials/WhatYouCouldSavePartial.cshtml", Model); }
+            @{ await Html.RenderPartialAsync("../EnergyEfficiency/Recommendations/Partials/_WhatYouCouldSave.cshtml", Model); }
             
             @await Html.GovUkWarningText(new WarningTextViewModel
             {
@@ -96,7 +96,7 @@
                 classes: "govuk-!-margin-bottom-7"
                 ))
 
-            @{ await Html.RenderPartialAsync("../EnergyEfficiency/Recommendations/Partials/ActionButtonsPartial.cshtml"); }
+            @{ await Html.RenderPartialAsync("../EnergyEfficiency/Recommendations/Partials/_ActionButtons.cshtml"); }
 
         </form>
 
