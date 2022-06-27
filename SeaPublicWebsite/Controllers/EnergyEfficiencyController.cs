@@ -10,8 +10,10 @@ using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Helpers;
+using SeaPublicWebsite.Models.Cookies;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Services;
+using SeaPublicWebsite.Services.Cookies;
 
 namespace SeaPublicWebsite.Controllers
 {
@@ -23,13 +25,15 @@ namespace SeaPublicWebsite.Controllers
         private readonly IEpcApi epcApi;
         private readonly IEmailSender emailApi;
         private readonly RecommendationService recommendationService;
+        private readonly CookieService cookieService;
 
         public EnergyEfficiencyController(
             PropertyDataStore propertyDataStore,
             IQuestionFlowService questionFlowService, 
             IEpcApi epcApi,
             IEmailSender emailApi, 
-            RecommendationService recommendationService)
+            RecommendationService recommendationService,
+            CookieService cookieService)
         {
             this.propertyDataStore = propertyDataStore;
             this.propertyDataStore = propertyDataStore;
@@ -37,12 +41,19 @@ namespace SeaPublicWebsite.Controllers
             this.emailApi = emailApi;
             this.epcApi = epcApi;
             this.recommendationService = recommendationService;
+            this.cookieService = cookieService;
         }
         
         [HttpGet("")]
         public IActionResult Index()
         {
-           return View("Index");
+            // TODO: When private beta finishes, this section should be removed.
+            if (!cookieService.HasAcceptedGoogleAnalytics(Request))
+            {
+                return RedirectToAction(nameof(PrivateBeta_Get), "EnergyEfficiency");
+            }
+            
+            return View("Index");
         }
 
         
@@ -1314,6 +1325,38 @@ namespace SeaPublicWebsite.Controllers
                 return await YourSavedRecommendations_Get(viewModel.Reference);
             }
             return await YourSavedRecommendations_Get(viewModel.Reference, emailAddress: viewModel.EmailAddress);
+        }
+        
+        [HttpGet("/private-beta")]
+        public IActionResult PrivateBeta_Get()
+        {
+            return View("PrivateBeta", new PrivateBetaViewModel());
+        }
+        
+        [HttpPost("/private-beta")]
+        public IActionResult PrivateBeta_Post(PrivateBetaViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PrivateBeta_Get();
+            }
+
+            if (!viewModel.HasAcceptedCookies)
+            {
+                ModelState.AddModelError(nameof(viewModel.HasAcceptedCookies), 
+                    "We need your consent to enable analytics cookies on your device before you can proceed to the service.");
+                return PrivateBeta_Get();
+            }
+            
+            var cookieSettings = new CookieSettings
+            {
+                Version = cookieService.Configuration.CurrentCookieMessageVersion,
+                ConfirmationShown = true,
+                GoogleAnalytics = true
+            };
+            cookieService.SetCookie(Response, cookieService.Configuration.CookieSettingsCookieName, cookieSettings);
+
+            return RedirectToAction("Index", "EnergyEfficiency");
         }
     }
 }
