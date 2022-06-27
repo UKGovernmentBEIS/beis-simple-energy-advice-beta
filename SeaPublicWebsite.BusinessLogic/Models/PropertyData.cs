@@ -67,6 +67,7 @@ public class PropertyData
 
     private void CopyAnswersTo(PropertyData other)
     {
+        other.Reference = Reference;
         other.OwnershipStatus = OwnershipStatus;
         other.Country = Country;
         other.Epc = Epc;
@@ -96,5 +97,6 @@ public class PropertyData
         other.HoursOfHeatingMorning = HoursOfHeatingMorning;
         other.HoursOfHeatingEvening = HoursOfHeatingEvening;
         other.Temperature = Temperature;
+        other.PropertyRecommendations = PropertyRecommendations;
     }
 }
