@@ -191,11 +191,12 @@ namespace SeaPublicWebsite.Controllers
             }
 
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-
+            
+            propertyData.FindEpc = viewModel.FindEpc;
             propertyData.Epc = null;
             propertyData.PropertyType = null;
             propertyData.YearBuilt = null;
-            propertyData.FindEpc = viewModel.FindEpc;
+            propertyData.EpcDetailsConfirmed = null;
             PropertyDataHelper.ResetUnusedFields(propertyData);
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
@@ -237,8 +238,7 @@ namespace SeaPublicWebsite.Controllers
             }
             
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-
-            propertyData.Epc = null;
+            
             propertyData.Postcode = viewModel.Postcode;
             propertyData.HouseNameOrNumber = viewModel.HouseNameOrNumber;
             PropertyDataHelper.ResetUnusedFields(propertyData);
@@ -292,10 +292,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 propertyData.Epc = await epcApi.GetEpcForId(viewModel.SelectedEpcId);
             }
-            else
-            {
-                propertyData.Epc = null;
-            }
+
             PropertyDataHelper.ResetUnusedFields(propertyData);
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
@@ -351,12 +348,7 @@ namespace SeaPublicWebsite.Controllers
                     HomeAge.From2012ToPresent => YearBuilt.From2012ToPresent,
                     _ => throw new ArgumentOutOfRangeException()
                 };
-            }
-            else
-            {
-                propertyData.PropertyType = null;
-                propertyData.YearBuilt = null;
-            }
+            } 
             PropertyDataHelper.ResetUnusedFields(propertyData);
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 

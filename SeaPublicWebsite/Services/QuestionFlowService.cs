@@ -512,7 +512,9 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             var epc = propertyData.Epc;
-            if (epc?.PropertyType != null && (epc.HouseType != null || epc.BungalowType != null || epc.FlatType != null) && epc.ConstructionAgeBand != null)
+            if (epc?.ConstructionAgeBand != null && ((epc.PropertyType == PropertyType.House && epc.HouseType != null)
+                                                     || (epc.PropertyType == PropertyType.Bungalow && epc.BungalowType != null)
+                                                     || (epc.PropertyType == PropertyType.ApartmentFlatOrMaisonette && epc.FlatType != null)))
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get), "EnergyEfficiency", new { reference });
             }
