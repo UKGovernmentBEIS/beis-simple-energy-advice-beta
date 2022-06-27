@@ -1,134 +1,55 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using Microsoft.AspNetCore.Mvc.TagHelpers
-@using SeaPublicWebsite.Controllers
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
-    ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.PropertyData.PropertyRecommendations.Count;
+    Layout = "_Recommendation";
 }
 
-@section BeforeMain {
-    @await Html.GovUkBackLink(new BackLinkViewModel
+@section RecommendationBody
+{
+    <p class="govuk-body">
+        Based on the information we have collected, it looks like you have an old gas boiler that may not be operating efficiently. You could consider replacing this with a modern condensing boiler, which will use less gas to provide the same amount of heat, helping to cut your fuel bills and carbon dioxide emissions.
+    </p>
+
+    <p class="govuk-inset-text">
+        You may well need to fit new or additional controls when you fit a new gas boiler to comply with building regulations. These will help to maximise the system’s efficiency, saving you even more money.
+    </p>
+
+    <p class="govuk-body govuk-!-margin-bottom-6">
+        You can find more information on replacing your gas boiler on the
+        <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/boilers/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
+    </p>
+}
+
+@section RecommendationSuitableFor
+{
+    <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+        <li>
+            You have an old or inefficient gas boiler, or your boiler is broken
+        </li>
+    </ul>
+
+    <p class="govuk-body">
+        Alternatively, you may want to consider fitting a low carbon heating sustem such as a heat pump.
+    </p>
+
+    @await Html.GovUkWarningText(new WarningTextViewModel
     {
-        Text = "Back",
-        Href = "#",
-        
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = true
+        IconFallbackText = "Note",
+        Text = "Gas boiler installations, and any work on a gas heating system, " +
+               "can only be carried out by an installer on the Gas Safe Register."
     })
 }
 
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-third">
-        @{ await Html.RenderPartialAsync("Partials/_YourActionPlan.cshtml", Model); }
-    </div>
-    
-    <div class="govuk-grid-column-two-thirds">
-        
-                
-        <form action="@Url.Action(nameof(EnergyEfficiencyController.Recommendation_Post), "EnergyEfficiency", new {id = (int) Model.PropertyRecommendation.Key, reference = Model.PropertyData.Reference})" method="post" novalidate>
+@section RecommendationLifetime
+{
+    <p class="govuk-body">New gas boilers are typically expected to last <b>around @Model.PropertyRecommendation.Lifetime years</b></p>
+}
 
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(m => m.PropertyData.Reference)
-
-            <span class="govuk-caption-l">
-                Recommendation @(Model.GetCurrentIndex() + 1) of @Model.PropertyData.PropertyRecommendations.Count
-            </span>
-            <h1 class="govuk-heading-l">
-                @Model.PropertyRecommendation.Title
-            </h1>
-
-            <p class="govuk-body">
-                Based on the information we have collected, it looks like you have an old gas boiler that may not be operating efficiently. You could consider replacing this with a modern condensing boiler, which will use less gas to provide the same amount of heat, helping to cut your fuel bills and carbon dioxide emissions.
-            </p>
-
-            <p class="govuk-inset-text">
-                You may well need to fit new or additional controls when you fit a new gas boiler to comply with building regulations. These will help to maximise the system’s efficiency, saving you even more money.
-            </p>
-
-            <p class="govuk-body govuk-!-margin-bottom-6">
-                You can find more information on replacing your gas boiler on the
-                <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/boilers/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
-            </p>
-
-            <h2 class="govuk-heading-m">Who this improvement is suitable for</h2>
-            <p class="govuk-body">You should consider this improvement for your property if:</p>
-            <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
-                <li>
-                    You have an old or inefficient gas boiler, or your boiler is broken
-                </li>
-            </ul>
-            
-            <p class="govuk-body">
-                Alternatively, you may want to consider fitting a low carbon heating sustem such as a heat pump.
-            </p>
-            
-            <div class="govuk-warning-text">
-                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                <strong class="govuk-warning-text__text">
-                    <span class="govuk-warning-text__assistive">Note</span>
-                    Gas boiler installations, and any work on a gas heating system, can only be carried out by an installer on the Gas Safe Register. 
-                </strong>
-            </div>
-
-            <h2 class="govuk-heading-m">
-                What you could save
-            </h2>
-
-            <p class="govuk-body">New gas boilers are typically expected to last <b>around @Model.PropertyRecommendation.Lifetime years</b></p>
-
-            @{ await Html.RenderPartialAsync("Partials/_WhatYouCouldSave.cshtml", Model); }
-            
-            <div class="govuk-warning-text">
-                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                <strong class="govuk-warning-text__text">
-                    <span class="govuk-warning-text__assistive">Note</span>
-                    These figures are for a typical installation in a home like yours. 
-                    The costs and savings you experience will be affected by your circumstances, 
-                    the details of the installations, and future energy tariffs.
-                </strong>
-            </div>
-
-            <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
-                        Will this cause disruption during installation?
-                    </dt>
-                    <dd class="govuk-summary-list__value sea-recommendation-impact govuk-!-padding-right-0">
-                        <strong class="govuk-tag govuk-tag--green">Low to medium</strong>
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
-                        How long could this take to install?
-                    </dt>
-                    <dd class="govuk-summary-list__value sea-recommendation-impact govuk-!-padding-right-0">
-                        <strong class="govuk-tag govuk-tag--green">Typically one day</strong>
-                    </dd>
-                </div>
-            </dl>
-
-            @(await Html.GovUkRadiosFor(m => m.RecommendationAction,
-                fieldsetOptions: new FieldsetViewModel
-                {
-                    Legend = new LegendViewModel
-                    {
-                        Html = @<text>
-                                   <h1 class="govuk-fieldset__heading">
-                                       Would you consider this improvement for your property?
-                                   </h1>
-                                </text>,
-                        Classes = "govuk-fieldset__legend--l"
-                    }
-                },
-                classes: "govuk-!-margin-bottom-7"
-                ))
-
-            @{ await Html.RenderPartialAsync("Partials/_ActionButtons.cshtml"); }
-
-        </form>
-
-    </div>
-</div>
+@{
+    Func<object, object> distruption = @<strong class="govuk-tag govuk-tag--green">LOW TO MEDIUM</strong>;
+    ViewBag.Distruption = distruption;
+    Func<object, object> duration = @<strong class="govuk-tag govuk-tag--green">TYPICALLY ONE DAY</strong>;
+    ViewBag.Duration = duration;
+}

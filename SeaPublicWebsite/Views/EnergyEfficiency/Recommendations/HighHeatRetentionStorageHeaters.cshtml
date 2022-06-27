@@ -1,145 +1,57 @@
-﻿@using GovUkDesignSystem
-@using GovUkDesignSystem.GovUkDesignSystemComponents
-@using Microsoft.AspNetCore.Mvc.TagHelpers
-@using SeaPublicWebsite.Controllers
-@model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
+﻿@model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
-    ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.PropertyData.PropertyRecommendations.Count;
+    Layout = "_Recommendation";
 }
 
-@section BeforeMain {
-    @await Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        Href = "#",
-        
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = true
-    })
-}
+@section RecommendationBody
+{
+    <p class="govuk-body">
+        Based on the information we have collected; it looks like you have manual storage heaters. Consider upgrading to high heat retention storage heaters with automatic controls.
+    </p>
 
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-third">
-        @{ await Html.RenderPartialAsync("Partials/_YourActionPlan.cshtml", Model); }
-    </div>
+    <p class="govuk-body">
+        Compared to older storage heaters, modern high heat retention storage heaters:
+    </p>
+    <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+        <li>
+            Hold more heat
+        </li>
+        <li>
+            Have better insulation
+        </li>
+        <li>
+            Release heat more quickly when needed
+        </li>
+    </ul>
     
-    <div class="govuk-grid-column-two-thirds">
-        
-                
-        <form action="@Url.Action(nameof(EnergyEfficiencyController.Recommendation_Post), "EnergyEfficiency", new {id = (int) Model.PropertyRecommendation.Key, reference = Model.PropertyData.Reference})" method="post" novalidate>
+    <p class="govuk-body">
+        Their improved controls, including automatic charge control, thermostat and programmer, allowing you to set the temperature you want the room to be heated and when, with the heater only drawing the electricity needed to meet that programme.
+    </p>
+    
+    <p class="govuk-body govuk-!-margin-bottom-6">
+        You can find more information on high heat retention storage heaters on the
+        <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/electric-heating/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
+    </p>
+}
 
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(m => m.PropertyData.Reference)
+@section RecommendationSuitableFor
+{
+    <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+        <li>
+            You have older, manually controlled storage heaters  
+        </li>
+    </ul>
+}
 
-            <span class="govuk-caption-l">
-                Recommendation @(Model.GetCurrentIndex() + 1) of @Model.PropertyData.PropertyRecommendations.Count
-            </span>
-            <h1 class="govuk-heading-l">
-                @Model.PropertyRecommendation.Title
-            </h1>
+@section RecommendationLifetime
+{
+    <p class="govuk-body">High heat retention storage heaters are typically expected to last <b>around @Model.PropertyRecommendation.Lifetime years</b></p>
+}
 
-            <p class="govuk-body">
-                Based on the information we have collected; it looks like you have manual storage heaters. Consider upgrading to high heat retention storage heaters with automatic controls.
-            </p>
-
-            <p class="govuk-body">
-                Compared to older storage heaters, modern high heat retention storage heaters:
-            </p>
-            <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
-                <li>
-                    Hold more heat
-                </li>
-                <li>
-                    Have better insulation
-                </li>
-                <li>
-                    Release heat more quickly when needed
-                </li>
-            </ul>
-            
-            <p class="govuk-body">
-                Their improved controls, including automatic charge control, thermostat and programmer, allowing you to set the temperature you want the room to be heated and when, with the heater only drawing the electricity needed to meet that programme.
-            </p>
-            
-            <p class="govuk-body govuk-!-margin-bottom-6">
-                You can find more information on high heat retention storage heaters on the
-                <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/electric-heating/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
-            </p>
-
-            <h2 class="govuk-heading-m">Who this improvement is suitable for</h2>
-            <p class="govuk-body">You should consider this improvement for your property if:</p>
-            <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
-                <li>
-                    You have older, manually controlled storage heaters  
-                </li>
-            </ul>
-            
-            <div class="govuk-warning-text">
-                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                <strong class="govuk-warning-text__text">
-                    <span class="govuk-warning-text__assistive">Note</span>
-                     You will need a qualified electrician to install new high heat retention storage heaters. If your current storage heaters are very old, you many need to contact a certified asbestos contractor to remove them.
-                </strong>
-            </div>
-            
-            <h2 class="govuk-heading-m">
-                What you could save
-            </h2>
-
-            <p class="govuk-body">High heat retention storage heaters are typically expected to last <b>around @Model.PropertyRecommendation.Lifetime years</b></p>
-
-            @{ await Html.RenderPartialAsync("Partials/_WhatYouCouldSave.cshtml", Model); }
-            
-            <div class="govuk-warning-text">
-                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                <strong class="govuk-warning-text__text">
-                    <span class="govuk-warning-text__assistive">Note</span>
-                    These figures are for a typical installation in a home like yours. 
-                    The costs and savings you experience will be affected by your circumstances, 
-                    the details of the installations, and future energy tariffs.
-                </strong>
-            </div>
-
-            <dl class="govuk-summary-list govuk-!-margin-bottom-9">
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
-                        Will this cause disruption during installation?
-                    </dt>
-                    <dd class="govuk-summary-list__value sea-recommendation-impact govuk-!-padding-right-0">
-                        <strong class="govuk-tag govuk-tag--green">Minimal</strong>
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
-                        How long could this take to install?
-                    </dt>
-                    <dd class="govuk-summary-list__value sea-recommendation-impact govuk-!-padding-right-0">
-                        <strong class="govuk-tag govuk-tag--green">Less than a day</strong>
-                    </dd>
-                </div>
-            </dl>
-
-            @(await Html.GovUkRadiosFor(m => m.RecommendationAction,
-                fieldsetOptions: new FieldsetViewModel
-                {
-                    Legend = new LegendViewModel
-                    {
-                        Html = @<text>
-                                   <h1 class="govuk-fieldset__heading">
-                                       Would you consider this improvement for your property?
-                                   </h1>
-                                </text>,
-                        Classes = "govuk-fieldset__legend--l"
-                    }
-                },
-                classes: "govuk-!-margin-bottom-7"
-                ))
-
-            @{ await Html.RenderPartialAsync("Partials/_ActionButtons.cshtml"); }
-
-        </form>
-
-    </div>
-</div>
+@{
+    Func<object, object> distruption = @<strong class="govuk-tag govuk-tag--green">MINIMAL</strong>;
+    ViewBag.Distruption = distruption;
+    Func<object, object> duration = @<strong class="govuk-tag govuk-tag--green">LESS THAN A DAY</strong>;
+    ViewBag.Duration = duration;
+}
