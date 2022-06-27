@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.EmailSending;
+using SeaPublicWebsite.ExternalServices.GoogleAnalytics;
 using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Services;
+using SeaPublicWebsite.Services.Cookies;
 
 namespace SeaPublicWebsite.Controllers
 {
@@ -23,13 +27,17 @@ namespace SeaPublicWebsite.Controllers
         private readonly IEpcApi epcApi;
         private readonly IEmailSender emailApi;
         private readonly RecommendationService recommendationService;
+        private readonly CookieService cookieService;
+        private readonly GoogleAnalyticsService googleAnalyticsService;
 
         public EnergyEfficiencyController(
             PropertyDataStore propertyDataStore,
             IQuestionFlowService questionFlowService, 
             IEpcApi epcApi,
             IEmailSender emailApi, 
-            RecommendationService recommendationService)
+            RecommendationService recommendationService,
+            CookieService cookieService,
+            GoogleAnalyticsService googleAnalyticsService)
         {
             this.propertyDataStore = propertyDataStore;
             this.propertyDataStore = propertyDataStore;
@@ -37,6 +45,8 @@ namespace SeaPublicWebsite.Controllers
             this.emailApi = emailApi;
             this.epcApi = epcApi;
             this.recommendationService = recommendationService;
+            this.cookieService = cookieService;
+            this.googleAnalyticsService = googleAnalyticsService;
         }
         
         [HttpGet("")]
@@ -73,7 +83,7 @@ namespace SeaPublicWebsite.Controllers
                     return NewOrReturningUser_Get();
                 }
 
-                return await ReturningUser_Get(viewModel.Reference);
+                return await ReturningUser_Get(viewModel.Reference, fromMagicLink: false);
             }
 
             string reference = await propertyDataStore.CreateNewPropertyDataAsync();
@@ -1132,8 +1142,27 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpGet("returning-user/{reference}")]
-        public async Task<IActionResult> ReturningUser_Get(string reference)
+        public async Task<IActionResult> ReturningUser_Get(string reference, bool fromMagicLink = true)
         {
+            if (cookieService.HasAcceptedGoogleAnalytics(Request))
+            {
+                await googleAnalyticsService.SendEvent(new GaRequestBody
+                {
+                    ClientId = googleAnalyticsService.GetClientId(Request),
+                    GaEvents = new List<GaEvent>
+                    {
+                        new()
+                        {
+                            Name = "user_returned",
+                            Parameters = new Dictionary<string, object>
+                            {
+                                {"value", fromMagicLink ? "link" : "code"}
+                            }
+                        }
+                    }
+                });
+            }
+            
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             var recommendations = propertyData.PropertyRecommendations;
             if (!recommendations.Any())

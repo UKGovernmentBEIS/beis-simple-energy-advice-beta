@@ -43,7 +43,9 @@ public class CookieService
 
     public bool HasAcceptedGoogleAnalytics(HttpRequest request)
     {
-        return TryGetCookie<CookieSettings>(request, Configuration.CookieSettingsCookieName, out var cookie) && cookie.GoogleAnalytics;
+        return CookieSettingsAreUpToDate(request) 
+               && TryGetCookie<CookieSettings>(request, Configuration.CookieSettingsCookieName, out var cookie) 
+               && cookie.GoogleAnalytics;
     }
 
     public BannerState GetAndUpdateBannerState(HttpRequest request, HttpResponse response)
