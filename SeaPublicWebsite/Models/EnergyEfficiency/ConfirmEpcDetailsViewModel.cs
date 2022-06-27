@@ -13,7 +13,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         
         public Epc Epc { get; set; }
         public string Reference { get; set; }
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Please confirm whether or not this certificate belongs to your address before continuing")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Confirm whether or not this certificate belongs to your address before continuing")]
         public EpcDetailsConfirmed? EpcDetailsConfirmed { get; set; }
     }
 }

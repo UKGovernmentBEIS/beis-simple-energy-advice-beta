@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 using GovUkDesignSystem.GovUkDesignSystemComponents;
@@ -13,7 +14,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select your address")]
         public string SelectedEpcId { get; set; }
         public string Reference { get; set; }
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Please confirm whether or not this certificate belongs to your address before continuing")]
+        [GovUkValidateRequired(ErrorMessageIfMissing = "Confirm whether or not this certificate belongs to your address before continuing")]
         public SingleAddressConfirmed? SingleAddressConfirmed { get; set; }
 
         public Dictionary<string, LabelViewModel> EpcOptionsWithUnlistedOption()
@@ -22,7 +23,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
                 epc => epc.EpcId,
                 epc => new LabelViewModel
                 {
-                    Text = epc.Address1 + (epc.Address2 != "" ? ", " + epc.Address2 : "")
+                    Text = epc.Address1 + (!String.IsNullOrWhiteSpace(epc.Address2) ? ", " + epc.Address2 : "")
                 });
             dict.Add("unlisted", new LabelViewModel
             {

@@ -6,7 +6,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency;
 public class FindEpcViewModel : QuestionFlowViewModel
 {
     [GovUkValidateRequired(ErrorMessageIfMissing =
-        "Please confirm whether or not you would like to search for your EPC before continuing")]
+        "Confirm whether or not you would like to search for your EPC before continuing")]
     public FindEpc? FindEpc { get; set; }
 
     public string Reference { get; set; }

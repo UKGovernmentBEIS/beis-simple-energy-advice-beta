@@ -229,7 +229,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (viewModel.Postcode is not null && !PostcodesIoApi.IsValidPostcode(viewModel.Postcode))
             {
-                ModelState.AddModelError(nameof(AskForPostcodeViewModel.Postcode), "Please enter a valid postcode e.g. AB12 3CD");
+                ModelState.AddModelError(nameof(AskForPostcodeViewModel.Postcode), "Enter a valid postcode in the format AB12 3CD");
             }
             
             if (!ModelState.IsValid)
@@ -563,8 +563,6 @@ namespace SeaPublicWebsite.Controllers
             }
 
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            PropertyDataHelper.ResetUnusedFields(propertyData);
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.CheckYourUnchangeableAnswers, propertyData, viewModel.EntryPoint);
             return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);

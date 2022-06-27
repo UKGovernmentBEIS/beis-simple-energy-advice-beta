@@ -175,7 +175,7 @@ namespace SeaPublicWebsite.Services
         private PathByActionArguments PropertyTypeBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
-            return entryPoint is not null
+            return entryPoint is QuestionFlowPage.PropertyType
                 ? new PathByActionArguments(nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get), "EnergyEfficiency", new { reference })
                 : new PathByActionArguments(nameof(EnergyEfficiencyController.FindEpc_Get), "EnergyEfficiency", new { reference });
         }
@@ -497,9 +497,7 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference });
             }
             
-            return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get), "EnergyEfficiency", new { reference })
-                : new PathByActionArguments(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new { reference });
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new { reference });
         }
         
         private PathByActionArguments AskForPostcodeForwardLinkArguments(PropertyData propertyData)
