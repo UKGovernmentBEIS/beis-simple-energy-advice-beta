@@ -78,6 +78,10 @@ public class PropertyData
         other.OwnershipStatus = OwnershipStatus;
         other.Country = Country;
         other.Epc = Epc;
+        other.FindEpc = FindEpc;
+        other.EpcAddressConfirmed = EpcAddressConfirmed;
+        other.EpcDetailsConfirmed = EpcDetailsConfirmed;
+        other.EpcCount = EpcCount;
         other.Postcode = Postcode;
         other.HouseNameOrNumber = HouseNameOrNumber;
         other.PropertyType = PropertyType;
