@@ -171,12 +171,17 @@ namespace SeaPublicWebsite.Services
         private PathByActionArguments ConfirmEpcDetailsBackLinkArguments(PropertyData propertyData)
         {
             var reference = propertyData.Reference;
-            return new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference });
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference });
         }
 
         private PathByActionArguments NoEpcFoundBackLinkArguments(PropertyData propertyData)
         {
             var reference = propertyData.Reference;
+            if (propertyData.EpcAddressConfirmed == EpcAddressConfirmed.No)
+            {
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference });
+
+            }
             return new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference });
         }
 

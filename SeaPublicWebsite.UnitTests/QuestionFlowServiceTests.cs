@@ -183,6 +183,29 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
+            "No EPC found goes back to confirm address if address not confirmed",
+            new Input(
+                QuestionFlowPage.NoEpcFound,
+                "ABCDEFGH",
+                epcAddressConfirmed: EpcAddressConfirmed.No
+            ),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.ConfirmAddress_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
+            )),
+        new(
+            "No EPC found goes back to postcode if address confirmed is null",
+            new Input(
+                QuestionFlowPage.NoEpcFound,
+                "ABCDEFGH"
+            ),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.AskForPostcode_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
+            )),
+        new(
             "Property type goes back to find EPC",
             new Input(
                 QuestionFlowPage.PropertyType,
@@ -303,14 +326,14 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Wall construction goes back to find EPC if EPC details were confirmed",
+            "Wall construction goes back to confirm EPC details if EPC details were confirmed",
             new Input(
                 QuestionFlowPage.WallConstruction,
                 "ABCDEFGH",
                 epcDetailsConfirmed: EpcDetailsConfirmed.Yes
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.FindEpc_Get),
+                nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1018,18 +1041,18 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Confirm address continues to property type if no epc found/epc not added",
+            "Confirm address continues to no EPC found if no epc found/epc not added",
             new Input(
                 QuestionFlowPage.ConfirmAddress,
                 "ABCDEFGH"
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.PropertyType_Get),
+                nameof(EnergyEfficiencyController.NoEpcFound_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Confirm address continues to confirm EPC details if epc added contains property type and age",
+            "Confirm address continues to no EPC found if epc added contains property type and age",
             new Input(
                 QuestionFlowPage.ConfirmAddress,
                 "ABCDEFGH",
@@ -1041,12 +1064,12 @@ public class QuestionFlowServiceTests
                 }
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get),
+                nameof(EnergyEfficiencyController.NoEpcFound_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Confirm address continues to property type if property type is missing from epc",
+            "Confirm address continues to no EPC found if property type is missing from epc",
             new Input(
                 QuestionFlowPage.ConfirmAddress,
                 "ABCDEFGH",
@@ -1056,12 +1079,12 @@ public class QuestionFlowServiceTests
                 }
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.PropertyType_Get),
+                nameof(EnergyEfficiencyController.NoEpcFound_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Confirm address continues to property type if age is missing from epc",
+            "Confirm address continues to no EPC found if age is missing from epc",
             new Input(
                 QuestionFlowPage.ConfirmAddress,
                 "ABCDEFGH",
@@ -1072,7 +1095,7 @@ public class QuestionFlowServiceTests
                 }
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.PropertyType_Get),
+                nameof(EnergyEfficiencyController.NoEpcFound_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1094,6 +1117,17 @@ public class QuestionFlowServiceTests
                 QuestionFlowPage.ConfirmEpcDetails,
                 "ABCDEFGH",
                 epcDetailsConfirmed: EpcDetailsConfirmed.No
+            ),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.PropertyType_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
+            )),
+        new(
+            "No EPC found continues to property type",
+            new Input(
+                QuestionFlowPage.NoEpcFound,
+                "ABCDEFGH"
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.PropertyType_Get),
@@ -2000,6 +2034,7 @@ public class QuestionFlowServiceTests
             Epc epc = null,
             FindEpc? findEpc = null,
             EpcDetailsConfirmed? epcDetailsConfirmed = null,
+            EpcAddressConfirmed? epcAddressConfirmed = null,
             string postcode = null,
             string houseNameOrNumber = null,
             PropertyType? propertyType = null,
@@ -2038,6 +2073,7 @@ public class QuestionFlowServiceTests
                 Epc = epc,
                 FindEpc = findEpc,
                 EpcDetailsConfirmed = epcDetailsConfirmed,
+                EpcAddressConfirmed = epcAddressConfirmed,
                 Postcode = postcode,
                 HouseNameOrNumber = houseNameOrNumber,
                 PropertyType = propertyType,
