@@ -16,6 +16,7 @@ using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.EpbEpc;
+using SeaPublicWebsite.ExternalServices.GoogleAnalytics;
 using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
@@ -50,6 +51,7 @@ namespace SeaPublicWebsite
             ConfigureGovUkNotify(services);
             ConfigureCookieService(services);
             ConfigureDatabaseContext(services);
+            ConfigureGoogleAnalyticsService(services);
 
             if (!webHostEnvironment.IsProduction())
             {
@@ -63,6 +65,13 @@ namespace SeaPublicWebsite
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                 options.ModelMetadataDetailsProviders.Add(new GovUkDataBindingErrorTextProvider());
             });
+        }
+
+        private void ConfigureGoogleAnalyticsService(IServiceCollection services)
+        {
+            services.Configure<GoogleAnalyticsConfiguration>(
+                configuration.GetSection(GoogleAnalyticsConfiguration.ConfigSection));
+            services.AddScoped<GoogleAnalyticsService, GoogleAnalyticsService>();
         }
 
         private void ConfigureDatabaseContext(IServiceCollection services)
