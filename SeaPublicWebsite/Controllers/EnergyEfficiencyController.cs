@@ -1311,6 +1311,7 @@ namespace SeaPublicWebsite.Controllers
             // can get rid of the old answers
             if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
             {
+                propertyData.SetDataWasEdited();
                 propertyData.DeleteUneditedData();
             }
             await propertyDataStore.SavePropertyDataAsync(propertyData);

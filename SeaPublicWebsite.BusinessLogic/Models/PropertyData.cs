@@ -67,6 +67,43 @@ public class PropertyData
         UneditedData = null;
     }
 
+    public void SetDataWasEdited()
+    {
+        if (UneditedData is null)
+        {
+            return;
+        }
+
+        HasEditedData = OwnershipStatus != UneditedData.OwnershipStatus
+                        || Country != UneditedData.Country
+                        || Postcode != UneditedData.Postcode
+                        || HouseNameOrNumber != UneditedData.HouseNameOrNumber
+                        || PropertyType != UneditedData.PropertyType
+                        || HouseType != UneditedData.HouseType
+                        || BungalowType != UneditedData.BungalowType
+                        || FlatType != UneditedData.FlatType
+                        || YearBuilt != UneditedData.YearBuilt
+                        || WallConstruction != UneditedData.WallConstruction
+                        || CavityWallsInsulated != UneditedData.CavityWallsInsulated
+                        || SolidWallsInsulated != UneditedData.SolidWallsInsulated
+                        || FloorConstruction != UneditedData.FloorConstruction
+                        || FloorInsulated != UneditedData.FloorInsulated
+                        || RoofConstruction != UneditedData.RoofConstruction
+                        || LoftSpace != UneditedData.LoftSpace
+                        || LoftAccess != UneditedData.LoftAccess
+                        || RoofInsulated != UneditedData.RoofInsulated
+                        || HasOutdoorSpace != UneditedData.HasOutdoorSpace
+                        || GlazingType != UneditedData.GlazingType
+                        || HeatingType != UneditedData.HeatingType
+                        || OtherHeatingType != UneditedData.OtherHeatingType
+                        || HasHotWaterCylinder != UneditedData.HasHotWaterCylinder
+                        || NumberOfOccupants != UneditedData.NumberOfOccupants
+                        || HeatingPattern != UneditedData.HeatingPattern
+                        || HoursOfHeatingMorning != UneditedData.HoursOfHeatingMorning
+                        || HoursOfHeatingEvening != UneditedData.HoursOfHeatingEvening
+                        || Temperature != UneditedData.Temperature;
+    }
+
     private void CopyAnswersTo(PropertyData other)
     {
         other.Reference = Reference;
