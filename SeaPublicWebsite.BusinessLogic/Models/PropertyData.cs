@@ -71,6 +71,7 @@ public class PropertyData
     {
         if (UneditedData is null)
         {
+            HasEditedData = true;
             return;
         }
 

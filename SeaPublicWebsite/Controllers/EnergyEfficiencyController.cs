@@ -1031,20 +1031,25 @@ namespace SeaPublicWebsite.Controllers
             }
             
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            var recommendationsForPropertyAsync = await recommendationService.GetRecommendationsForPropertyAsync(propertyData);
-            propertyData.PropertyRecommendations = recommendationsForPropertyAsync.Select(r => 
-                new PropertyRecommendation()
-                {
-                    Key = r.Key,
-                    Title = r.Title,
-                    MinInstallCost = r.MinInstallCost,
-                    MaxInstallCost = r.MaxInstallCost,
-                    Saving = r.Saving,
-                    LifetimeSaving = r.LifetimeSaving,
-                    Lifetime = r.Lifetime,
-                    Summary = r.Summary
-                }
-            ).ToList();
+            if (propertyData.HasEditedData is true)
+            {
+                var recommendationsForPropertyAsync = await recommendationService.GetRecommendationsForPropertyAsync(propertyData);
+                propertyData.PropertyRecommendations = recommendationsForPropertyAsync.Select(r => 
+                    new PropertyRecommendation()
+                    {
+                        Key = r.Key,
+                        Title = r.Title,
+                        MinInstallCost = r.MinInstallCost,
+                        MaxInstallCost = r.MaxInstallCost,
+                        Saving = r.Saving,
+                        LifetimeSaving = r.LifetimeSaving,
+                        Lifetime = r.Lifetime,
+                        Summary = r.Summary
+                    }
+                ).ToList();
+            }
+
+            propertyData.HasEditedData = false;
             propertyData.HasSeenRecommendations = true;
             await propertyDataStore.SavePropertyDataAsync(propertyData);
             
@@ -1304,6 +1309,12 @@ namespace SeaPublicWebsite.Controllers
                 propertyData.CreateUneditedData();
             }
             update(propertyData);
+            
+            // If entryPoint is null the user is answering the questions for the first time, and is actively editing data.
+            if (entryPoint is null)
+            {
+                propertyData.SetDataWasEdited();
+            }
             PropertyDataHelper.ResetUnusedFields(propertyData);
             var forwardArgs = questionFlowService.ForwardLinkArguments(currentPage, propertyData, entryPoint);
             
