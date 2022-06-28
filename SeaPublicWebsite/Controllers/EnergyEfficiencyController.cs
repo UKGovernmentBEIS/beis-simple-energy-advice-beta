@@ -30,6 +30,7 @@ namespace SeaPublicWebsite.Controllers
         private readonly RecommendationService recommendationService;
         private readonly CookieService cookieService;
         private readonly GoogleAnalyticsService googleAnalyticsService;
+        private readonly PostcodesIoApi postcodesIoApi;
 
         public EnergyEfficiencyController(
             PropertyDataStore propertyDataStore,
@@ -38,7 +39,8 @@ namespace SeaPublicWebsite.Controllers
             IEmailSender emailApi, 
             RecommendationService recommendationService,
             CookieService cookieService,
-            GoogleAnalyticsService googleAnalyticsService)
+            GoogleAnalyticsService googleAnalyticsService,
+            PostcodesIoApi postcodesIoApi)
         {
             this.propertyDataStore = propertyDataStore;
             this.propertyDataStore = propertyDataStore;
@@ -48,6 +50,7 @@ namespace SeaPublicWebsite.Controllers
             this.recommendationService = recommendationService;
             this.cookieService = cookieService;
             this.googleAnalyticsService = googleAnalyticsService;
+            this.postcodesIoApi = postcodesIoApi;
         }
         
         [HttpGet("")]
@@ -199,7 +202,7 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("postcode/{reference}")]
         public async Task<IActionResult> AskForPostcode_Post(AskForPostcodeViewModel viewModel)
         {
-            if (viewModel.Postcode is not null && !PostcodesIoApi.IsValidPostcode(viewModel.Postcode))
+            if (viewModel.Postcode is not null && !(await postcodesIoApi.IsValidPostcode(viewModel.Postcode)))
             {
                 ModelState.AddModelError(nameof(AskForPostcodeViewModel.Postcode), "Enter a valid UK post code");
             }

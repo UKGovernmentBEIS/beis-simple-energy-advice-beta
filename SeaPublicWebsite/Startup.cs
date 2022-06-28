@@ -17,6 +17,7 @@ using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.EpbEpc;
 using SeaPublicWebsite.ExternalServices.GoogleAnalytics;
+using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
@@ -40,6 +41,7 @@ namespace SeaPublicWebsite
         {
             services.AddScoped<PropertyDataStore, PropertyDataStore>();
             services.AddScoped<IQuestionFlowService, QuestionFlowService>();
+            services.AddScoped<PostcodesIoApi>();
             services.AddMemoryCache();
             services.AddSingleton<StaticAssetsVersioningService>();
             services.AddScoped<RecommendationService>();
