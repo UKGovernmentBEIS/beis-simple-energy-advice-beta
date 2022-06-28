@@ -1177,7 +1177,7 @@ namespace SeaPublicWebsite.Controllers
                     new { id = (int)firstNotActionedRecommendation.Key, reference = propertyData.Reference });
             }
             
-            return RedirectToAction("YourSavedRecommendations_Get", new {reference = propertyData.Reference});
+            return RedirectToAction("ActionPlan_Get", new {reference = propertyData.Reference});
         }
 
         [HttpGet("no-recommendations/{reference}")]
@@ -1252,7 +1252,7 @@ namespace SeaPublicWebsite.Controllers
 
             if (fromActionPlan)
             {
-                backLink = Url.Action(nameof(YourSavedRecommendations_Get), new { reference });
+                backLink = Url.Action(nameof(ActionPlan_Get), new { reference });
             }
             else if (recommendationIndex == 0)
             {
@@ -1300,18 +1300,18 @@ namespace SeaPublicWebsite.Controllers
                     return RedirectToAction(nameof(Recommendation_Get),
                         new {id = (int)propertyData.GetPreviousRecommendationKey(recommendationKey), reference = propertyData.Reference});
                 case "goToActionPlan":
-                    return RedirectToAction(nameof(YourSavedRecommendations_Get), new {reference = propertyData.Reference});
+                    return RedirectToAction(nameof(ActionPlan_Get), new {reference = propertyData.Reference});
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
-        [HttpGet("your-saved-recommendations/{reference}")]
-        public async Task<IActionResult> YourSavedRecommendations_Get(string reference, string emailAddress = null)
+        [HttpGet("action-plan/{reference}")]
+        public async Task<IActionResult> ActionPlan_Get(string reference, string emailAddress = null)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var viewModel = new YourSavedRecommendationsViewModel
+            var viewModel = new ActionPlanViewModel
             {
                 PropertyData = propertyData,
                 EmailAddress = emailAddress
@@ -1330,12 +1330,12 @@ namespace SeaPublicWebsite.Controllers
             return View("ActionPlan/ActionPlanWithDiscardedRecommendations", viewModel);
         }
         
-        [HttpPost("your-saved-recommendations/{reference}")]
-        public async Task<IActionResult> YourSavedRecommendations_Post(YourSavedRecommendationsEmailViewModel viewModel)
+        [HttpPost("action-plan/{reference}")]
+        public async Task<IActionResult> ActionPlan_Post(YourSavedRecommendationsEmailViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return await YourSavedRecommendations_Get(viewModel.Reference);
+                return await ActionPlan_Get(viewModel.Reference);
             }
             
             try
@@ -1355,9 +1355,9 @@ namespace SeaPublicWebsite.Controllers
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-                return await YourSavedRecommendations_Get(viewModel.Reference);
+                return await ActionPlan_Get(viewModel.Reference);
             }
-            return await YourSavedRecommendations_Get(viewModel.Reference, emailAddress: viewModel.EmailAddress);
+            return await ActionPlan_Get(viewModel.Reference, emailAddress: viewModel.EmailAddress);
         }
     }
 }
