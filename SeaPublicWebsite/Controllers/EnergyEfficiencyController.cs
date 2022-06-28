@@ -253,6 +253,9 @@ namespace SeaPublicWebsite.Controllers
             propertyData.HouseNameOrNumber = viewModel.HouseNameOrNumber;
             List<EpcInformation> epcInformationList = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(propertyData.Postcode, propertyData.HouseNameOrNumber);
             propertyData.EpcCount = epcInformationList.Count;
+            propertyData.Epc = null;
+            propertyData.EpcDetailsConfirmed = null;
+            propertyData.EpcAddressConfirmed = EpcAddressConfirmed.No;
             PropertyDataHelper.ResetUnusedFields(propertyData);
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 

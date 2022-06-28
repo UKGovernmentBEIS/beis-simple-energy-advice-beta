@@ -177,7 +177,7 @@ namespace SeaPublicWebsite.Services
         private PathByActionArguments NoEpcFoundBackLinkArguments(PropertyData propertyData)
         {
             var reference = propertyData.Reference;
-            if (propertyData.EpcAddressConfirmed == EpcAddressConfirmed.No)
+            if (propertyData.EpcCount != 0)
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference });
 
@@ -189,14 +189,20 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.PropertyType
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get), "EnergyEfficiency", new { reference })
-                : propertyData.EpcAddressConfirmed == null
-                    ? new PathByActionArguments(nameof(EnergyEfficiencyController.FindEpc_Get), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
+                    "EnergyEfficiency", new { reference })
+                : propertyData.FindEpc == FindEpc.No
+                    ? new PathByActionArguments(nameof(EnergyEfficiencyController.FindEpc_Get), "EnergyEfficiency",
+                        new { reference })
                     : propertyData.EpcDetailsConfirmed == EpcDetailsConfirmed.No
-                        ? new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get), "EnergyEfficiency", new { reference })
-                        : propertyData.EpcAddressConfirmed == EpcAddressConfirmed.Yes
-                            ? new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference })
-                            : new PathByActionArguments(nameof(EnergyEfficiencyController.NoEpcFound_Get), "EnergyEfficiency", new { reference });
+                        ? new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get),
+                            "EnergyEfficiency", new { reference })
+                        : propertyData.EpcAddressConfirmed switch
+                        {
+                            EpcAddressConfirmed.Yes => new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference}),
+                            EpcAddressConfirmed.No => new PathByActionArguments(nameof(EnergyEfficiencyController.NoEpcFound_Get), "EnergyEfficiency", new { reference}),
+                            _ => new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference})
+                        };
         }
 
         private PathByActionArguments HouseTypeBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)

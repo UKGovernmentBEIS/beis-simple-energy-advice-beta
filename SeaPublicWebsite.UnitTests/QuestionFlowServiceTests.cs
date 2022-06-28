@@ -183,11 +183,11 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "No EPC found goes back to confirm address if address not confirmed",
+            "No EPC found goes back to confirm address if epc count is not 0",
             new Input(
                 QuestionFlowPage.NoEpcFound,
                 "ABCDEFGH",
-                epcAddressConfirmed: EpcAddressConfirmed.No
+                epcCount: 1
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.ConfirmAddress_Get),
@@ -195,10 +195,11 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "No EPC found goes back to postcode if address confirmed is null",
+            "No EPC found goes back to postcode if epc count is 0",
             new Input(
                 QuestionFlowPage.NoEpcFound,
-                "ABCDEFGH"
+                "ABCDEFGH",
+                epcCount: 0
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.AskForPostcode_Get),
@@ -245,7 +246,7 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Property type goes back to find EPC if find epc is No",
+            "Property type goes back to find EPC if FindEpc is No",
             new Input(
                 QuestionFlowPage.PropertyType,
                 "ABCDEFGH",
