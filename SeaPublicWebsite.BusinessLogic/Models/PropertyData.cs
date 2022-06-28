@@ -44,8 +44,61 @@ public class PropertyData
     public int? HoursOfHeatingMorning { get; set; }
     public int? HoursOfHeatingEvening { get; set; }
     public decimal? Temperature { get; set; }
+    public PropertyData UneditedData { get; set; }
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; }
+
+    public void CreateUneditedData()
+    {
+        UneditedData = new PropertyData();
+        CopyAnswersTo(UneditedData);
+    }
+    
+    public void RevertToUneditedData()
+    {
+        UneditedData.CopyAnswersTo(this);
+        DeleteUneditedData();
+    }
+    
+    public void DeleteUneditedData()
+    {
+        UneditedData = null;
+    }
+
+    private void CopyAnswersTo(PropertyData other)
+    {
+        other.Reference = Reference;
+        other.OwnershipStatus = OwnershipStatus;
+        other.Country = Country;
+        other.Epc = Epc;
+        other.Postcode = Postcode;
+        other.HouseNameOrNumber = HouseNameOrNumber;
+        other.PropertyType = PropertyType;
+        other.HouseType = HouseType;
+        other.BungalowType = BungalowType;
+        other.FlatType = FlatType;
+        other.YearBuilt = YearBuilt;
+        other.WallConstruction = WallConstruction;
+        other.CavityWallsInsulated = CavityWallsInsulated;
+        other.SolidWallsInsulated = SolidWallsInsulated;
+        other.FloorConstruction = FloorConstruction;
+        other.FloorInsulated = FloorInsulated;
+        other.RoofConstruction = RoofConstruction;
+        other.LoftSpace = LoftSpace;
+        other.LoftAccess = LoftAccess;
+        other.RoofInsulated = RoofInsulated;
+        other.HasOutdoorSpace = HasOutdoorSpace;
+        other.GlazingType = GlazingType;
+        other.HeatingType = HeatingType;
+        other.OtherHeatingType = OtherHeatingType;
+        other.HasHotWaterCylinder = HasHotWaterCylinder;
+        other.NumberOfOccupants = NumberOfOccupants;
+        other.HeatingPattern = HeatingPattern;
+        other.HoursOfHeatingMorning = HoursOfHeatingMorning;
+        other.HoursOfHeatingEvening = HoursOfHeatingEvening;
+        other.Temperature = Temperature;
+        other.PropertyRecommendations = PropertyRecommendations;
+    }
 
     public RecommendationKey GetFirstRecommendationKey()
     {

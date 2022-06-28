@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Notify.Client;
 using Notify.Exceptions;
@@ -10,11 +11,13 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
     {
         private readonly NotificationClient client;
         private readonly GovUkNotifyConfiguration govUkNotifyConfig;
-
-        public GovUkNotifyApi(IOptions<GovUkNotifyConfiguration> config)
+        private readonly ILogger<GovUkNotifyApi> logger;
+        
+        public GovUkNotifyApi(IOptions<GovUkNotifyConfiguration> config, ILogger<GovUkNotifyApi> logger)
         {
             govUkNotifyConfig = config.Value;
             client = new NotificationClient(govUkNotifyConfig.ApiKey);
+            this.logger = logger;
         }
 
         private EmailNotificationResponse SendEmail(GovUkNotifyEmailModel emailModel)
@@ -36,6 +39,7 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
                     throw new EmailSenderException(EmailSenderExceptionType.InvalidEmailAddress);
                 }
 
+                logger.LogError("GOV.UK Notify returned an error: " + e.Message);
                 throw new EmailSenderException(EmailSenderExceptionType.Other);
             }
         }

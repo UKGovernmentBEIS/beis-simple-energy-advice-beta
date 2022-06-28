@@ -209,6 +209,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<decimal?>("Temperature")
                         .HasColumnType("numeric");
 
+                    b.Property<int?>("UneditedDataPropertyDataId")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("WallConstruction")
                         .HasColumnType("integer");
 
@@ -221,6 +224,8 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasIndex("Reference")
                         .IsUnique();
+
+                    b.HasIndex("UneditedDataPropertyDataId");
 
                     b.ToTable("PropertyData");
                 });
@@ -276,7 +281,13 @@ namespace SeaPublicWebsite.Data.Migrations
                         .WithMany()
                         .HasForeignKey("EpcId");
 
+                    b.HasOne("SeaPublicWebsite.BusinessLogic.Models.PropertyData", "UneditedData")
+                        .WithMany()
+                        .HasForeignKey("UneditedDataPropertyDataId");
+
                     b.Navigation("Epc");
+
+                    b.Navigation("UneditedData");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyRecommendation", b =>
