@@ -47,7 +47,7 @@ namespace SeaPublicWebsite.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            // TODO: When private beta finishes, this section should be removed.
+            // TODO: seabeta-576 When private beta finishes, this section should be removed.
             if (!cookieService.HasAcceptedGoogleAnalytics(Request))
             {
                 return RedirectToAction(nameof(PrivateBeta_Get), "EnergyEfficiency");
@@ -1327,12 +1327,14 @@ namespace SeaPublicWebsite.Controllers
             return await YourSavedRecommendations_Get(viewModel.Reference, emailAddress: viewModel.EmailAddress);
         }
         
+        // TODO: seabeta-576 When private beta finishes, this section should be removed. (View included)
         [HttpGet("/private-beta")]
         public IActionResult PrivateBeta_Get()
         {
             return View("PrivateBeta", new PrivateBetaViewModel());
         }
         
+        // TODO: seabeta-576 When private beta finishes, this section should be removed.
         [HttpPost("/private-beta")]
         public IActionResult PrivateBeta_Post(PrivateBetaViewModel viewModel)
         {
