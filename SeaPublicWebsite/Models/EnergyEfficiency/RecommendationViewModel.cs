@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
+using GovUkDesignSystem.GovUkDesignSystemComponents;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
@@ -13,6 +14,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select what to do with this recommendation")]
         public RecommendationAction? RecommendationAction { get; set; }
         public bool FromActionPlan { get; set; }
+
+        public TagViewModel DisruptionTagViewModel { get; set;  }
+        public TagViewModel DurationTagViewModel { get; set;  }
 
         public int GetCurrentIndex()
         {
