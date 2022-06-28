@@ -79,18 +79,6 @@ public class QuestionFlowServiceTests
                 "EnergyEfficiency"
             )),
         new(
-            "Changing country goes to Summary",
-            new Input(
-                QuestionFlowPage.Country,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.Country
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
             "Ownership status goes back to Country",
             new Input(
                 QuestionFlowPage.OwnershipStatus,
@@ -98,18 +86,6 @@ public class QuestionFlowServiceTests
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.Country_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
-            "Changing ownership status goes back to summary",
-            new Input(
-                QuestionFlowPage.OwnershipStatus,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.OwnershipStatus
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -172,52 +148,37 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Change property type goes back to summary",
+            "House type goes back to property type",
             new Input(
-                QuestionFlowPage.PropertyType,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.PropertyType
+                QuestionFlowPage.HouseType,
+                "ABCDEFGH"
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
+                nameof(EnergyEfficiencyController.PropertyType_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "House type goes back to property type and preserves entry point",
-            new Input(
-                QuestionFlowPage.HouseType,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.HouseType
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.PropertyType_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH", entryPoint = QuestionFlowPage.HouseType }
-            )),
-        new(
-            "Bungalow type goes back to property type and preserves entry point",
+            "Bungalow type goes back to property type",
             new Input(
                 QuestionFlowPage.BungalowType,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.BungalowType
+                "ABCDEFGH"
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.PropertyType_Get),
                 "EnergyEfficiency",
-                new { reference = "ABCDEFGH", entryPoint = QuestionFlowPage.BungalowType }
+                new { reference = "ABCDEFGH" }
             )),
         new(
-            "Flat type goes back to property type and preserves entry point",
+            "Flat type goes back to property type",
             new Input(
                 QuestionFlowPage.FlatType,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.FlatType
+                "ABCDEFGH"
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.PropertyType_Get),
                 "EnergyEfficiency",
-                new { reference = "ABCDEFGH", entryPoint = QuestionFlowPage.FlatType }
+                new { reference = "ABCDEFGH" }
             )),
         new(
             "Home age goes back to the property type it came from (house)",
@@ -898,19 +859,6 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Changing country continues to answer summary",
-            new Input(
-                QuestionFlowPage.Country,
-                "ABCDEFGH",
-                country: Country.England,
-                entryPoint: QuestionFlowPage.Country
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
             "Ownership status continue to service unsuitable if user is a private tenant",
             new Input(
                 QuestionFlowPage.OwnershipStatus,
@@ -931,18 +879,6 @@ public class QuestionFlowServiceTests
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.AskForPostcode_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
-            "Changing ownership status continue to summary",
-            new Input(
-                QuestionFlowPage.OwnershipStatus,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.OwnershipStatus
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -1016,18 +952,6 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Changing house type continues to summary",
-            new Input(
-                QuestionFlowPage.HouseType,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.PropertyType
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
             "Bungalow type continues to home age",
             new Input(
                 QuestionFlowPage.BungalowType,
@@ -1039,18 +963,6 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Changing bungalow type continues to summary",
-            new Input(
-                QuestionFlowPage.BungalowType,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.PropertyType
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
             "Flat type continues to home age",
             new Input(
                 QuestionFlowPage.FlatType,
@@ -1058,18 +970,6 @@ public class QuestionFlowServiceTests
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.HomeAge_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
-            "Changing flat type continues to summary",
-            new Input(
-                QuestionFlowPage.FlatType,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.PropertyType
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
