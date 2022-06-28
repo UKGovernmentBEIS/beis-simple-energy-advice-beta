@@ -1248,12 +1248,29 @@ namespace SeaPublicWebsite.Controllers
             var recommendationKey = (RecommendationKey)id;
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             var recommendationIndex = propertyData.GetRecommendationIndex(recommendationKey);
+            string backLink = null;
+
+            if (fromActionPlan)
+            {
+                backLink = Url.Action(nameof(YourSavedRecommendations_Get), new { reference });
+            }
+            else if (recommendationIndex == 0)
+            {
+                backLink = Url.Action(nameof(YourRecommendations_Get), "EnergyEfficiency", new { reference });
+            }
+            else
+            {
+                backLink = Url.Action(nameof(Recommendation_Get), "EnergyEfficiency",
+                    new { id = (int)propertyData.GetPreviousRecommendationKey(recommendationKey), reference });
+            }
+            
             var viewModel = new RecommendationViewModel
             {
                 RecommendationIndex = recommendationIndex,
                 PropertyRecommendations = propertyData.PropertyRecommendations,
                 RecommendationAction = propertyData.PropertyRecommendations[recommendationIndex].RecommendationAction,
-                FromActionPlan = fromActionPlan
+                FromActionPlan = fromActionPlan,
+                BackLink = backLink
             };
 
             return View("recommendations/" + Enum.GetName(recommendationKey), viewModel);

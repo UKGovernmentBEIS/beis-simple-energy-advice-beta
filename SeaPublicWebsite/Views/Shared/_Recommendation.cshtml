@@ -8,6 +8,14 @@
     Layout = "_Layout";
 }
 
+@section BeforeMain {
+    @await Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = Model.BackLink
+    })
+}
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
         @{ await Html.RenderPartialAsync("../EnergyEfficiency/Recommendations/Partials/_YourActionPlan.cshtml", Model); }
