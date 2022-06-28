@@ -22,26 +22,7 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        @if (!Model.EpcInformationList.Any())
-        {
-            <h1 class="govuk-heading-l">
-                @* changed "an" => "a complete" to cover the case that an epc is found but doesn't contain both property type and age built, hence is not shown to the user for confirmation*@
-                We weren't able to find a complete Energy Performance Certificate for your property
-            </h1>
-
-            <p class="govuk-body">
-                We will need to ask you some questions to work out which of the available energy efficiency measures are most likely to be helpful to you.
-            </p>
-
-            @await Html.GovUkButton(new ButtonViewModel
-            {
-                Href = Url.Action(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new {reference = Model.Reference}),
-                Text = "Continue"
-            })
-        }
-        else
-        {
-            <form action="@Url.Action(nameof(EnergyEfficiencyController.ConfirmAddress_Post), "EnergyEfficiency", new { reference = Model.Reference, epcCount = Model.EpcInformationList.Count })" method="post" novalidate>
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.ConfirmAddress_Post), "EnergyEfficiency", new { reference = Model.Reference, epcCount = Model.EpcInformationList.Count })" method="post" novalidate>
 
                 @Html.AntiForgeryToken()
                 @if (Model.EpcInformationList.Count == 1)
@@ -78,7 +59,7 @@
                                    @(Model.EpcInformationList[0].Postcode)
                                 </text>,
                     })
-                    @(await Html.GovUkRadiosFor(m => m.SingleAddressConfirmed,
+                    @(await Html.GovUkRadiosFor(m => m.EpcAddressConfirmed,
                         fieldsetOptions: new FieldsetViewModel
                         {
                             Legend = new LegendViewModel
@@ -146,6 +127,5 @@
                 </div>
 
             </form>
-        }
     </div>
 </div>

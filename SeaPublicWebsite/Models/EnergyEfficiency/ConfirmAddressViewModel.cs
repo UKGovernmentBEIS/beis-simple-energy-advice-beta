@@ -15,7 +15,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string SelectedEpcId { get; set; }
         public string Reference { get; set; }
         [GovUkValidateRequired(ErrorMessageIfMissing = "Confirm whether or not this certificate belongs to your address before continuing")]
-        public SingleAddressConfirmed? SingleAddressConfirmed { get; set; }
+        public EpcAddressConfirmed? EpcAddressConfirmed { get; set; }
 
         public Dictionary<string, LabelViewModel> EpcOptionsWithUnlistedOption()
         {

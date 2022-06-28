@@ -201,10 +201,12 @@ namespace SeaPublicWebsite.Controllers
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
             
             propertyData.FindEpc = viewModel.FindEpc;
+            propertyData.EpcAddressConfirmed = null;
+            propertyData.EpcDetailsConfirmed = null;
+            propertyData.EpcCount = null;
             propertyData.Epc = null;
             propertyData.PropertyType = null;
             propertyData.YearBuilt = null;
-            propertyData.EpcDetailsConfirmed = null;
             PropertyDataHelper.ResetUnusedFields(propertyData);
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
@@ -249,6 +251,8 @@ namespace SeaPublicWebsite.Controllers
             
             propertyData.Postcode = viewModel.Postcode;
             propertyData.HouseNameOrNumber = viewModel.HouseNameOrNumber;
+            List<EpcInformation> epcInformationList = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(propertyData.Postcode, propertyData.HouseNameOrNumber);
+            propertyData.EpcCount = epcInformationList.Count;
             PropertyDataHelper.ResetUnusedFields(propertyData);
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
@@ -287,7 +291,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (epcCount != 1)
             {
-                ModelState.Remove("SingleAddressConfirmed");
+                ModelState.Remove("EpcAddressConfirmed");
             }
             
             if (!ModelState.IsValid)
@@ -296,10 +300,16 @@ namespace SeaPublicWebsite.Controllers
             }
             
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.SelectedEpcId != "unlisted" && viewModel.SingleAddressConfirmed != SingleAddressConfirmed.No)
+            if (viewModel.SelectedEpcId != "unlisted" && viewModel.EpcAddressConfirmed != EpcAddressConfirmed.No)
             {
+                propertyData.EpcAddressConfirmed = EpcAddressConfirmed.Yes;
                 propertyData.Epc = await epcApi.GetEpcForId(viewModel.SelectedEpcId);
             }
+            else
+            {
+                propertyData.EpcAddressConfirmed = EpcAddressConfirmed.No;
+            }
+            propertyData.EpcDetailsConfirmed = null;
 
             PropertyDataHelper.ResetUnusedFields(propertyData);
             await propertyDataStore.SavePropertyDataAsync(propertyData);
@@ -360,6 +370,34 @@ namespace SeaPublicWebsite.Controllers
             PropertyDataHelper.ResetUnusedFields(propertyData);
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.ConfirmEpcDetails, propertyData);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+        }
+
+        [HttpGet("no-epc-found/{reference}")]
+        public async Task<IActionResult> NoEpcFound_Get(string reference)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.NoEpcFound, propertyData);
+
+            var viewModel = new NoEpcFoundViewModel
+            {
+                Reference = propertyData.Reference,
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
+            };
+            return View("NoEpcFound", viewModel);
+        }
+
+        [HttpPost("no-epc-found/{reference}")]
+        public async Task<IActionResult> NoEpcFound_Post(NoEpcFoundViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await NoEpcFound_Get(viewModel.Reference);
+            }
+            
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference); 
+            
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.ConfirmEpcDetails, propertyData);
             return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }

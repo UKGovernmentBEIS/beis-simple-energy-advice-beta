@@ -14,6 +14,10 @@ public class PropertyData
     
     public FindEpc? FindEpc { get; set; }
     
+    public int? EpcCount { get; set; }
+
+    public EpcAddressConfirmed? EpcAddressConfirmed { get; set; }
+
     public EpcDetailsConfirmed? EpcDetailsConfirmed { get; set; }
 
     public Epc Epc { get; set; }
