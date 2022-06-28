@@ -1,4 +1,4 @@
-@model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
+﻿@model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
     Layout = "_Recommendation";
@@ -43,7 +43,7 @@
 
 @section RecommendationLifetime
 {
-    <p class="govuk-body">Loft insulation is typically expected to last <b>around @Model.PropertyRecommendation.Lifetime years</b></p>
+    <p class="govuk-body">Loft insulation is typically expected to last <b>around @Model.GetCurrentPropertyRecommendation().Lifetime years</b></p>
 }
 
 @{

@@ -1090,7 +1090,7 @@ namespace SeaPublicWebsite.Controllers
                     new { id = (int)firstNotActionedRecommendation.Key, reference = propertyData.Reference });
             }
             
-            return RedirectToAction("YourSavedRecommendations_Get", new {reference = propertyData.Reference});
+            return RedirectToAction("ActionPlan_Get", new {reference = propertyData.Reference});
         }
 
         [HttpGet("no-recommendations/{reference}")]
@@ -1152,65 +1152,81 @@ namespace SeaPublicWebsite.Controllers
                 }
             }
             
-            return RedirectToAction("Recommendation_Get", new { id = (int) propertyData.PropertyRecommendations[0].Key, reference = viewModel.Reference });
+            return RedirectToAction("Recommendation_Get", new { id = (int)propertyData.GetFirstRecommendationKey(), reference = viewModel.Reference });
         }
 
         [HttpGet("your-recommendations/{id}/{reference}")]
         public async Task<IActionResult> Recommendation_Get(int id, string reference, bool fromActionPlan = false)
         {
+            var recommendationKey = (RecommendationKey)id;
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            var recommendationIndex = propertyData.GetRecommendationIndex(recommendationKey);
+            string backLink = null;
+
+            if (fromActionPlan)
+            {
+                backLink = Url.Action(nameof(ActionPlan_Get), new { reference });
+            }
+            else if (recommendationIndex == 0)
+            {
+                backLink = Url.Action(nameof(YourRecommendations_Get), "EnergyEfficiency", new { reference });
+            }
+            else
+            {
+                backLink = Url.Action(nameof(Recommendation_Get), "EnergyEfficiency",
+                    new { id = (int)propertyData.GetPreviousRecommendationKey(recommendationKey), reference });
+            }
+            
             var viewModel = new RecommendationViewModel
             {
-                PropertyData = propertyData,
-                PropertyRecommendation = propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey) id),
-                RecommendationAction = propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey)id).RecommendationAction,
-                FromActionPlan = fromActionPlan
+                RecommendationIndex = recommendationIndex,
+                PropertyRecommendations = propertyData.PropertyRecommendations,
+                RecommendationAction = propertyData.PropertyRecommendations[recommendationIndex].RecommendationAction,
+                FromActionPlan = fromActionPlan,
+                BackLink = backLink
             };
-
-            var recommendationKey = (RecommendationKey) id;
 
             return View("recommendations/" + Enum.GetName(recommendationKey), viewModel);
         }
 
         [HttpPost("your-recommendations/{id}/{reference}")]
-        public async Task<IActionResult> Recommendation_Post(RecommendationViewModel viewModel, string command, int id)
+        public async Task<IActionResult> Recommendation_Post(RecommendationViewModel viewModel, string command, int id, string reference)
         {
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.PropertyData.Reference);
-            viewModel.PropertyData = propertyData;
-            viewModel.PropertyRecommendation =
-                propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey)id);
-            
             if (!ModelState.IsValid)
             {
-                return View("recommendations/" + Enum.GetName(viewModel.PropertyRecommendation.Key), viewModel);
+                return await Recommendation_Get(id, reference, viewModel.FromActionPlan);
             }
 
-            propertyData.PropertyRecommendations.Single(r => r.Key == (RecommendationKey) id).RecommendationAction =
+            var recommendationKey = (RecommendationKey)id;
+
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            propertyData.PropertyRecommendations.Single(r => r.Key == recommendationKey).RecommendationAction =
                 viewModel.RecommendationAction;
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
             switch(command)
             {
                 case "goForwards":
-                    return RedirectToAction("Recommendation_Get",
-                        new {id = (int) viewModel.NextRecommendationKey(), reference = propertyData.Reference});
+                    return RedirectToAction(nameof(Recommendation_Get),
+                        new {id = (int)propertyData.GetNextRecommendationKey(recommendationKey), reference = propertyData.Reference});
                 case "goBackwards":
-                    return RedirectToAction("Recommendation_Get",
-                        new {id = (int) viewModel.PreviousRecommendationKey(), reference = propertyData.Reference});
+                    return RedirectToAction(nameof(Recommendation_Get),
+                        new {id = (int)propertyData.GetPreviousRecommendationKey(recommendationKey), reference = propertyData.Reference});
                 case "goToActionPlan":
-                    return RedirectToAction("YourSavedRecommendations_Get", new {reference = propertyData.Reference});
+                    return RedirectToAction(nameof(ActionPlan_Get), new {reference = propertyData.Reference});
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
-        [HttpGet("your-saved-recommendations/{reference}")]
-        public async Task<IActionResult> YourSavedRecommendations_Get(string reference, string emailAddress = null)
+        [HttpGet("action-plan/{reference}")]
+        public async Task<IActionResult> ActionPlan_Get(string reference, string emailAddress = null)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var viewModel = new YourSavedRecommendationsViewModel
+            var viewModel = new ActionPlanViewModel
             {
+                BackLink = Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference }),
                 PropertyData = propertyData,
                 EmailAddress = emailAddress
             };
@@ -1228,12 +1244,12 @@ namespace SeaPublicWebsite.Controllers
             return View("ActionPlan/ActionPlanWithDiscardedRecommendations", viewModel);
         }
         
-        [HttpPost("your-saved-recommendations/{reference}")]
-        public async Task<IActionResult> YourSavedRecommendations_Post(YourSavedRecommendationsEmailViewModel viewModel)
+        [HttpPost("action-plan/{reference}")]
+        public async Task<IActionResult> ActionPlan_Post(YourSavedRecommendationsEmailViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return await YourSavedRecommendations_Get(viewModel.Reference);
+                return await ActionPlan_Get(viewModel.Reference);
             }
             
             try
@@ -1253,9 +1269,9 @@ namespace SeaPublicWebsite.Controllers
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-                return await YourSavedRecommendations_Get(viewModel.Reference);
+                return await ActionPlan_Get(viewModel.Reference);
             }
-            return await YourSavedRecommendations_Get(viewModel.Reference, emailAddress: viewModel.EmailAddress);
+            return await ActionPlan_Get(viewModel.Reference, emailAddress: viewModel.EmailAddress);
         }
         
         // TODO: seabeta-576 When private beta finishes, this section should be removed. (View included)
