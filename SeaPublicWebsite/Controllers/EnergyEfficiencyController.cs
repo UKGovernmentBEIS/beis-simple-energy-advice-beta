@@ -401,7 +401,7 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpGet("property-type/{reference}")]
-        public async Task<IActionResult> PropertyType_Get(string reference)
+        public async Task<IActionResult> PropertyType_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
@@ -410,6 +410,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 PropertyType = propertyData.PropertyType,
                 Reference = reference,
+                EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
@@ -421,17 +422,18 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return await PropertyType_Get(viewModel.Reference);
+                return await PropertyType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
             return await UpdatePropertyAndRedirect(
                 p => p.PropertyType = viewModel.PropertyType,
                 viewModel.Reference,
-                QuestionFlowPage.PropertyType);
+                QuestionFlowPage.PropertyType,
+                viewModel.EntryPoint);
         }
 
         [HttpGet("house-type/{reference}")]
-        public async Task<IActionResult> HouseType_Get(string reference)
+        public async Task<IActionResult> HouseType_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
@@ -440,6 +442,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 HouseType = propertyData.HouseType,
                 Reference = propertyData.Reference,
+                EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
@@ -451,18 +454,19 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return await HouseType_Get(viewModel.Reference);
+                return await HouseType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
             return await UpdatePropertyAndRedirect(
                 p => p.HouseType = viewModel.HouseType,
                 viewModel.Reference,
-                QuestionFlowPage.HouseType);
+                QuestionFlowPage.HouseType,
+                viewModel.EntryPoint);
         }
 
         
         [HttpGet("bungalow-type/{reference}")]
-        public async Task<IActionResult> BungalowType_Get(string reference)
+        public async Task<IActionResult> BungalowType_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
@@ -471,6 +475,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 BungalowType = propertyData.BungalowType,
                 Reference = reference,
+                EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
@@ -482,18 +487,19 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return await BungalowType_Get(viewModel.Reference);
+                return await BungalowType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
             return await UpdatePropertyAndRedirect(
                 p => p.BungalowType = viewModel.BungalowType,
                 viewModel.Reference,
-                QuestionFlowPage.BungalowType);
+                QuestionFlowPage.BungalowType, 
+                viewModel.EntryPoint);
         }
 
         
         [HttpGet("flat-type/{reference}")]
-        public async Task<IActionResult> FlatType_Get(string reference)
+        public async Task<IActionResult> FlatType_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
@@ -502,6 +508,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 FlatType = propertyData.FlatType,
                 Reference = propertyData.Reference,
+                EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
@@ -513,13 +520,14 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return await FlatType_Get(viewModel.Reference);
+                return await FlatType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
             return await UpdatePropertyAndRedirect(
                 p => p.FlatType = viewModel.FlatType,
                 viewModel.Reference,
-                QuestionFlowPage.FlatType);
+                QuestionFlowPage.FlatType, 
+                viewModel.EntryPoint);
         }
 
         
@@ -1475,9 +1483,9 @@ namespace SeaPublicWebsite.Controllers
             PropertyDataHelper.ResetUnusedFields(propertyData);
             var forwardArgs = questionFlowService.ForwardLinkArguments(currentPage, propertyData, entryPoint);
             
-            // If the user is going back to the answer summary page then they finished editing and we
+            // If the user is going back to the answer summary page or the check your unchangeable answers page then they finished editing and we
             // can get rid of the old answers
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
+            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)) || forwardArgs.Action.Equals(nameof(CheckYourUnchangeableAnswers_Get)))
             {
                 propertyData.DeleteUneditedData();
             }

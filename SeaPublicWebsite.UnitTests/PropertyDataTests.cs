@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http.Headers;
 using FluentAssertions;
 using NUnit.Framework;
 using SeaPublicWebsite.BusinessLogic.Models;
@@ -61,7 +62,8 @@ public class PropertyDataTests
         foreach (var propertyInfo in propertyData.GetType().GetProperties())
         {
             if (propertyInfo.Name.Equals(nameof(PropertyData.PropertyDataId)) ||
-                propertyInfo.Name.Equals(nameof(PropertyData.UneditedData)))
+                propertyInfo.Name.Equals(nameof(PropertyData.UneditedData)) ||
+                propertyInfo.Name.Equals(nameof(propertyData.Reference)))
             {
                 continue;
             }
