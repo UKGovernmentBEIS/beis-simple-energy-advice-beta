@@ -47,6 +47,16 @@ public class PropertyData
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; }
 
+    public RecommendationKey GetFirstRecommendationKey()
+    {
+        return PropertyRecommendations[0].Key;
+    }
+    
+    public RecommendationKey GetLastRecommendationKey()
+    {
+        return PropertyRecommendations[^1].Key;
+    }
+    
     public RecommendationKey GetNextRecommendationKey(RecommendationKey currentRecommendationKey)
     {
         var currentIndex = GetRecommendationIndex(currentRecommendationKey);

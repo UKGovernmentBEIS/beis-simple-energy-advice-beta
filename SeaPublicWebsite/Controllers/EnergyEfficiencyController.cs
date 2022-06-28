@@ -1239,7 +1239,7 @@ namespace SeaPublicWebsite.Controllers
                 }
             }
             
-            return RedirectToAction("Recommendation_Get", new { id = (int) propertyData.PropertyRecommendations[0].Key, reference = viewModel.Reference });
+            return RedirectToAction("Recommendation_Get", new { id = (int)propertyData.GetFirstRecommendationKey(), reference = viewModel.Reference });
         }
 
         [HttpGet("your-recommendations/{id}/{reference}")]
@@ -1313,6 +1313,7 @@ namespace SeaPublicWebsite.Controllers
             
             var viewModel = new ActionPlanViewModel
             {
+                BackLink = Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference }),
                 PropertyData = propertyData,
                 EmailAddress = emailAddress
             };
