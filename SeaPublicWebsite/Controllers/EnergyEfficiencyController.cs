@@ -1045,6 +1045,7 @@ namespace SeaPublicWebsite.Controllers
                     Summary = r.Summary
                 }
             ).ToList();
+            propertyData.HasSeenRecommendations = true;
             await propertyDataStore.SavePropertyDataAsync(propertyData);
             
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AnswerSummary, propertyData);
