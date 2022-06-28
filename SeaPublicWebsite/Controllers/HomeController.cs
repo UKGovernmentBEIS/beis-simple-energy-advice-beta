@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SeaPublicWebsite.Models.Cookies;
+using SeaPublicWebsite.Services.Cookies;
 
 namespace SeaPublicWebsite.Controllers
 {
@@ -16,7 +18,7 @@ namespace SeaPublicWebsite.Controllers
         [HttpGet("/")]
         public IActionResult Index()
         {
-            return RedirectToAction("Index", "EnergyEfficiency");
+            return RedirectToAction(nameof(EnergyEfficiencyController.Index), "EnergyEfficiency");
         }
     }
 }

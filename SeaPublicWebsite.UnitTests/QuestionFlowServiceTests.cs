@@ -79,18 +79,6 @@ public class QuestionFlowServiceTests
                 "EnergyEfficiency"
             )),
         new(
-            "Changing country goes to check your unchangeable answers",
-            new Input(
-                QuestionFlowPage.Country,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.Country
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
             "Ownership status goes back to Country",
             new Input(
                 QuestionFlowPage.OwnershipStatus,
@@ -98,18 +86,6 @@ public class QuestionFlowServiceTests
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.Country_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
-            "Changing ownership status goes back to check your unchangeable answers",
-            new Input(
-                QuestionFlowPage.OwnershipStatus,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.OwnershipStatus
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -270,40 +246,37 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "House type goes back to property type and preserves entry point",
+            "House type goes back to property type",
             new Input(
                 QuestionFlowPage.HouseType,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.HouseType
+                "ABCDEFGH"
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.PropertyType_Get),
                 "EnergyEfficiency",
-                new { reference = "ABCDEFGH", entryPoint = QuestionFlowPage.HouseType }
+                new { reference = "ABCDEFGH" }
             )),
         new(
-            "Bungalow type goes back to property type and preserves entry point",
+            "Bungalow type goes back to property type",
             new Input(
                 QuestionFlowPage.BungalowType,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.BungalowType
+                "ABCDEFGH"
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.PropertyType_Get),
                 "EnergyEfficiency",
-                new { reference = "ABCDEFGH", entryPoint = QuestionFlowPage.BungalowType }
+                new { reference = "ABCDEFGH" }
             )),
         new(
-            "Flat type goes back to property type and preserves entry point",
+            "Flat type goes back to property type",
             new Input(
                 QuestionFlowPage.FlatType,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.FlatType
+                "ABCDEFGH"
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.PropertyType_Get),
                 "EnergyEfficiency",
-                new { reference = "ABCDEFGH", entryPoint = QuestionFlowPage.FlatType }
+                new { reference = "ABCDEFGH" }
             )),
         new(
             "Home age goes back to the property type it came from (house)",
@@ -998,19 +971,6 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Changing country continues to check your unchangeable answers",
-            new Input(
-                QuestionFlowPage.Country,
-                "ABCDEFGH",
-                country: Country.England,
-                entryPoint: QuestionFlowPage.Country
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
             "Ownership status continues to service unsuitable if user is a private tenant",
             new Input(
                 QuestionFlowPage.OwnershipStatus,
@@ -1031,18 +991,6 @@ public class QuestionFlowServiceTests
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.FindEpc_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
-            "Changing ownership status continues to check your unchangeable answers",
-            new Input(
-                QuestionFlowPage.OwnershipStatus,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.OwnershipStatus
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),

@@ -29,6 +29,7 @@ public class DataAccessProvider : IDataAccessProvider
         return await context.PropertyData
             .Include(p => p.Epc)
             .Include(p => p.PropertyRecommendations)
+            .Include(p => p.UneditedData)
             .SingleOrDefaultAsync(p => p.Reference == reference);
     }
 
