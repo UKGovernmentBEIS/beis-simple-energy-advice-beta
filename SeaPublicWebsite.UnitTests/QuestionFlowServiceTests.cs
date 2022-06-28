@@ -206,10 +206,50 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Property type goes back to find EPC",
+            "Property type goes back to confirm EPC details if not confirmed",
             new Input(
                 QuestionFlowPage.PropertyType,
-                "ABCDEFGH"
+                "ABCDEFGH",
+                epcDetailsConfirmed: EpcDetailsConfirmed.No,
+                epcAddressConfirmed: EpcAddressConfirmed.Yes
+            ),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
+            )),
+        new(
+            "Property type goes back to no EPC found if details confirmed null but address confirmed",
+            new Input(
+                QuestionFlowPage.PropertyType,
+                "ABCDEFGH",
+                epcDetailsConfirmed: null,
+                epcAddressConfirmed: EpcAddressConfirmed.No
+            ),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.NoEpcFound_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
+            )),
+        new(
+            "Property type goes back to confirm address if address confirmed but details confirmed is null",
+            new Input(
+                QuestionFlowPage.PropertyType,
+                "ABCDEFGH",
+                epcAddressConfirmed: EpcAddressConfirmed.Yes,
+                epcDetailsConfirmed: null
+            ),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.ConfirmAddress_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
+            )),
+        new(
+            "Property type goes back to find EPC if find epc is No",
+            new Input(
+                QuestionFlowPage.PropertyType,
+                "ABCDEFGH",
+                findEpc: FindEpc.No
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.FindEpc_Get),
@@ -1030,10 +1070,11 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Postcode continues to confirm address",
+            "Postcode continues to confirm address if epcs found",
             new Input(
                 QuestionFlowPage.AskForPostcode,
-                "ABCDEFGH"
+                "ABCDEFGH",
+                epcCount: 1
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.ConfirmAddress_Get),
@@ -1041,10 +1082,11 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Confirm address continues to no EPC found if no epc found/epc not added",
+            "Postcode continues to no EPCS found if no epcs found",
             new Input(
-                QuestionFlowPage.ConfirmAddress,
-                "ABCDEFGH"
+                QuestionFlowPage.AskForPostcode,
+                "ABCDEFGH",
+                epcCount: 0
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.NoEpcFound_Get),
@@ -1052,10 +1094,23 @@ public class QuestionFlowServiceTests
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Confirm address continues to no EPC found if epc added contains property type and age",
+            "Confirm address continues to no EPC found if address not confirmed",
             new Input(
                 QuestionFlowPage.ConfirmAddress,
                 "ABCDEFGH",
+                epcAddressConfirmed: EpcAddressConfirmed.No
+            ),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.NoEpcFound_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
+            )),
+        new(
+            "Confirm address continues to confirm EPC details if address confirmed and epc added contains property type and age",
+            new Input(
+                QuestionFlowPage.ConfirmAddress,
+                "ABCDEFGH",
+                epcAddressConfirmed: EpcAddressConfirmed.Yes,
                 epc: new Epc()
                 {
                     PropertyType = PropertyType.House,
@@ -1064,30 +1119,32 @@ public class QuestionFlowServiceTests
                 }
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.NoEpcFound_Get),
+                nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Confirm address continues to no EPC found if property type is missing from epc",
+            "Confirm address continues to property type if address confirmed but property type is missing from epc",
             new Input(
                 QuestionFlowPage.ConfirmAddress,
                 "ABCDEFGH",
+                epcAddressConfirmed: EpcAddressConfirmed.Yes,
                 epc: new Epc()
                 {
                     ConstructionAgeBand = HomeAge.From1950To1966
                 }
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.NoEpcFound_Get),
+                nameof(EnergyEfficiencyController.PropertyType_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
         new(
-            "Confirm address continues to no EPC found if age is missing from epc",
+            "Confirm address continues to property type if address confirmed but age is missing from epc",
             new Input(
                 QuestionFlowPage.ConfirmAddress,
                 "ABCDEFGH",
+                epcAddressConfirmed: EpcAddressConfirmed.Yes,
                 epc: new Epc()
                 {
                     PropertyType = PropertyType.House,
@@ -1095,7 +1152,7 @@ public class QuestionFlowServiceTests
                 }
             ),
             new PathByActionArguments(
-                nameof(EnergyEfficiencyController.NoEpcFound_Get),
+                nameof(EnergyEfficiencyController.PropertyType_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
             )),
@@ -2035,6 +2092,7 @@ public class QuestionFlowServiceTests
             FindEpc? findEpc = null,
             EpcDetailsConfirmed? epcDetailsConfirmed = null,
             EpcAddressConfirmed? epcAddressConfirmed = null,
+            int? epcCount = null,
             string postcode = null,
             string houseNameOrNumber = null,
             PropertyType? propertyType = null,
@@ -2074,6 +2132,7 @@ public class QuestionFlowServiceTests
                 FindEpc = findEpc,
                 EpcDetailsConfirmed = epcDetailsConfirmed,
                 EpcAddressConfirmed = epcAddressConfirmed,
+                EpcCount = epcCount,
                 Postcode = postcode,
                 HouseNameOrNumber = houseNameOrNumber,
                 PropertyType = propertyType,

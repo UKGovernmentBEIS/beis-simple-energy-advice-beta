@@ -195,7 +195,7 @@ namespace SeaPublicWebsite.Services
                     : propertyData.EpcDetailsConfirmed == EpcDetailsConfirmed.No
                         ? new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get), "EnergyEfficiency", new { reference })
                         : propertyData.EpcAddressConfirmed == EpcAddressConfirmed.Yes
-                            ? new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference })
+                            ? new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference })
                             : new PathByActionArguments(nameof(EnergyEfficiencyController.NoEpcFound_Get), "EnergyEfficiency", new { reference });
         }
 
