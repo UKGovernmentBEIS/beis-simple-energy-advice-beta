@@ -1,4 +1,15 @@
-﻿@model SeaPublicWebsite.Models.EnergyEfficiency.YourSavedRecommendationsViewModel;
+﻿
+@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
+
+@section BeforeMain {
+    @await Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = Model.BackLink,
+    })
+}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
