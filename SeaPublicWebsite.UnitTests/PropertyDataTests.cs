@@ -44,6 +44,8 @@ public class PropertyDataTests
             HoursOfHeatingEvening = 2,
             Temperature = 20,
             UneditedData = new PropertyData(),
+            HasSeenRecommendations = false,
+            HasEditedData = true,
             PropertyRecommendations = new List<PropertyRecommendation>()
         };
     }
@@ -61,7 +63,9 @@ public class PropertyDataTests
         foreach (var propertyInfo in propertyData.GetType().GetProperties())
         {
             if (propertyInfo.Name.Equals(nameof(PropertyData.PropertyDataId)) ||
-                propertyInfo.Name.Equals(nameof(PropertyData.UneditedData)))
+                propertyInfo.Name.Equals(nameof(PropertyData.UneditedData)) ||
+                propertyInfo.Name.Equals(nameof(PropertyData.HasSeenRecommendations)) ||
+                propertyInfo.Name.Equals(nameof(propertyData.HasEditedData)))
             {
                 continue;
             }
