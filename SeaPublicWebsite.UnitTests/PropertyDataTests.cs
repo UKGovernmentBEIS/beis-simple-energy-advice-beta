@@ -63,7 +63,7 @@ public class PropertyDataTests
         {
             if (propertyInfo.Name.Equals(nameof(PropertyData.PropertyDataId)) ||
                 propertyInfo.Name.Equals(nameof(PropertyData.UneditedData)) ||
-                propertyInfo.Name.Equals(nameof(propertyData.Reference)))
+                propertyInfo.Name.Equals(nameof(PropertyData.Reference)))
             {
                 continue;
             }
