@@ -67,7 +67,6 @@ public class PropertyData
 
     private void CopyAnswersTo(PropertyData other)
     {
-        other.Reference = Reference;
         other.OwnershipStatus = OwnershipStatus;
         other.Country = Country;
         other.Epc = Epc;

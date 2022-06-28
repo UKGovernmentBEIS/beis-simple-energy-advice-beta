@@ -61,7 +61,8 @@ public class PropertyDataTests
         foreach (var propertyInfo in propertyData.GetType().GetProperties())
         {
             if (propertyInfo.Name.Equals(nameof(PropertyData.PropertyDataId)) ||
-                propertyInfo.Name.Equals(nameof(PropertyData.UneditedData)))
+                propertyInfo.Name.Equals(nameof(PropertyData.UneditedData)) ||
+                propertyInfo.Name.Equals(nameof(PropertyData.Reference)))
             {
                 continue;
             }
