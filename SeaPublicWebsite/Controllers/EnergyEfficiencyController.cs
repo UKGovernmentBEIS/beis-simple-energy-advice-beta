@@ -1031,7 +1031,7 @@ namespace SeaPublicWebsite.Controllers
             }
             
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            if (propertyData.HasEditedData is true)
+            if (propertyData.PropertyRecommendations is null || propertyData.PropertyRecommendations.Count == 0)
             {
                 var recommendationsForPropertyAsync = await recommendationService.GetRecommendationsForPropertyAsync(propertyData);
                 propertyData.PropertyRecommendations = recommendationsForPropertyAsync.Select(r => 
@@ -1049,7 +1049,6 @@ namespace SeaPublicWebsite.Controllers
                 ).ToList();
             }
 
-            propertyData.HasEditedData = false;
             propertyData.HasSeenRecommendations = true;
             await propertyDataStore.SavePropertyDataAsync(propertyData);
             
@@ -1309,12 +1308,6 @@ namespace SeaPublicWebsite.Controllers
                 propertyData.CreateUneditedData();
             }
             update(propertyData);
-            
-            // If entryPoint is null the user is answering the questions for the first time, and is actively editing data.
-            if (entryPoint is null)
-            {
-                propertyData.SetDataWasEdited();
-            }
             PropertyDataHelper.ResetUnusedFields(propertyData);
             var forwardArgs = questionFlowService.ForwardLinkArguments(currentPage, propertyData, entryPoint);
             
@@ -1322,8 +1315,7 @@ namespace SeaPublicWebsite.Controllers
             // can get rid of the old answers
             if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)))
             {
-                propertyData.SetDataWasEdited();
-                propertyData.DeleteUneditedData();
+                propertyData.CommitEdits();
             }
             await propertyDataStore.SavePropertyDataAsync(propertyData);
             return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);

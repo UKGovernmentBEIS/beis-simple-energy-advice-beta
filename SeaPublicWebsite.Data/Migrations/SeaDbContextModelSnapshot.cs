@@ -149,11 +149,17 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("GlazingType")
                         .HasColumnType("integer");
 
+                    b.Property<bool?>("HasEditedData")
+                        .HasColumnType("boolean");
+
                     b.Property<int?>("HasHotWaterCylinder")
                         .HasColumnType("integer");
 
                     b.Property<int?>("HasOutdoorSpace")
                         .HasColumnType("integer");
+
+                    b.Property<bool?>("HasSeenRecommendations")
+                        .HasColumnType("boolean");
 
                     b.Property<int?>("HeatingPattern")
                         .HasColumnType("integer");

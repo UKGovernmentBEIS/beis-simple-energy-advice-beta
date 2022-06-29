@@ -45,8 +45,7 @@ public class PropertyData
     public int? HoursOfHeatingEvening { get; set; }
     public decimal? Temperature { get; set; }
     public PropertyData UneditedData { get; set; }
-    public bool? HasSeenRecommendations { get; set; }
-    public bool? HasEditedData { get; set; }
+    public bool HasSeenRecommendations { get; set; }
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; }
 
@@ -56,26 +55,31 @@ public class PropertyData
         CopyAnswersTo(UneditedData);
     }
     
+    public void CommitEdits()
+    {
+        // If a user has made changes to their answers we have to delete any recommendations they have as they may now
+        // be incorrect.
+        if (EditedDataIsDifferent())
+        {
+            PropertyRecommendations.Clear();
+        }
+        DeleteUneditedData();
+    }
+    
     public void RevertToUneditedData()
     {
         UneditedData.CopyAnswersTo(this);
         DeleteUneditedData();
     }
     
-    public void DeleteUneditedData()
+    private void DeleteUneditedData()
     {
         UneditedData = null;
     }
 
-    public void SetDataWasEdited()
+    private bool EditedDataIsDifferent()
     {
-        if (UneditedData is null)
-        {
-            HasEditedData = true;
-            return;
-        }
-
-        HasEditedData = OwnershipStatus != UneditedData.OwnershipStatus
+        return OwnershipStatus != UneditedData.OwnershipStatus
                         || Country != UneditedData.Country
                         || Postcode != UneditedData.Postcode
                         || HouseNameOrNumber != UneditedData.HouseNameOrNumber
