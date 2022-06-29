@@ -143,7 +143,6 @@ namespace SeaPublicWebsite.Services
             BreFloorType? breFloorType = GetBreFloorType(propertyData.FloorConstruction, propertyData.FloorInsulated);
 
             BreRequest request = new(
-                brePostcode: propertyData.Postcode,
                 brePropertyType: brePropertyType,
                 breBuiltForm: breBuiltForm,
                 breFlatLevel: breFlatLevel,

@@ -58,7 +58,7 @@
                         _ => throw new ArgumentOutOfRangeException()};
                     epcHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests 
+                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests 
                             @await Html.GovUkHtmlText(new HtmlText(suggestion, null))
                         </p>;
                 }

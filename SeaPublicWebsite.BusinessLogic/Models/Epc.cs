@@ -6,11 +6,7 @@ namespace SeaPublicWebsite.BusinessLogic.Models
     {
         // PRIMARY KEY
         public int Id { get; set; }
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
-        public string Postcode { get; set; }
-        public string EpcId { get; set; }
-        public DateTime? LodgementDate { get; set; }
+        public int? LodgementYear { get; set; }
         public PropertyType? PropertyType { get; set; }
         public HouseType? HouseType { get; set; }
         public BungalowType? BungalowType { get; set; }
@@ -27,6 +23,14 @@ namespace SeaPublicWebsite.BusinessLogic.Models
         public RoofInsulated? RoofInsulated { get; set; }
         public GlazingType? GlazingType { get; set; }
         public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
+
+        public bool ContainsPropertyTypeAndAge()
+        {
+            return ConstructionAgeBand != null
+                   && ((PropertyType == Enums.PropertyType.House && HouseType != null)
+                       || (PropertyType == Enums.PropertyType.Bungalow && BungalowType != null)
+                       || (PropertyType == Enums.PropertyType.ApartmentFlatOrMaisonette && FlatType != null));
+        }
     }
 }
 

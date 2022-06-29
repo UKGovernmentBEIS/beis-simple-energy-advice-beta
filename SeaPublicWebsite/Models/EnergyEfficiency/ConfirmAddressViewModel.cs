@@ -4,7 +4,6 @@ using System.Linq;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 using GovUkDesignSystem.GovUkDesignSystemComponents;
 using SeaPublicWebsite.BusinessLogic.Models;
-using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
@@ -14,8 +13,8 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select your address")]
         public string SelectedEpcId { get; set; }
         public string Reference { get; set; }
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Confirm whether or not this certificate belongs to your address before continuing")]
-        public EpcAddressConfirmed? EpcAddressConfirmed { get; set; }
+        public string Postcode { get; set; }
+        public string Number { get; set; }
 
         public Dictionary<string, LabelViewModel> EpcOptionsWithUnlistedOption()
         {
@@ -31,6 +30,5 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
             });
             return dict;
         }
-        
     }
 }

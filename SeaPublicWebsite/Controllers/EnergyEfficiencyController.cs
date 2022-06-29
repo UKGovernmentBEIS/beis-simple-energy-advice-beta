@@ -187,7 +187,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new FindEpcViewModel
             {
                 Reference = propertyData.Reference,
-                FindEpc = propertyData.FindEpc,
+                FindEpc = propertyData.SearchForEpc,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
             };
             return View("FindEpc", viewModel);
@@ -203,10 +203,8 @@ namespace SeaPublicWebsite.Controllers
 
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
             
-            propertyData.FindEpc = viewModel.FindEpc;
-            propertyData.EpcAddressConfirmed = null;
+            propertyData.SearchForEpc = viewModel.FindEpc;
             propertyData.EpcDetailsConfirmed = null;
-            propertyData.EpcCount = null;
             propertyData.Epc = null;
             propertyData.PropertyType = null;
             propertyData.YearBuilt = null;
@@ -227,9 +225,6 @@ namespace SeaPublicWebsite.Controllers
             var skipArgs = questionFlowService.SkipLinkArguments(QuestionFlowPage.AskForPostcode, propertyData);
             var viewModel = new AskForPostcodeViewModel
             {
-                Postcode = propertyData.Postcode,
-                HouseNameOrNumber = propertyData.HouseNameOrNumber,
-                Reference = propertyData.Reference,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
                 SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
             };
@@ -249,72 +244,98 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await AskForPostcode_Get(viewModel.Reference);
             }
-            List<EpcSearchResult> epcSearchResults = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(viewModel.Postcode, viewModel.HouseNameOrNumber);
+            
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AskForPostcode, propertyData);
 
-            return await UpdatePropertyAndRedirect(
-                p =>
-                {
-                    p.Postcode = viewModel.Postcode;
-                    p.HouseNameOrNumber = viewModel.HouseNameOrNumber;
-                    p.EpcCount = epcSearchResults.Count;
-                    p.Epc = null;
-                    p.EpcDetailsConfirmed = null;
-                    p.EpcAddressConfirmed = EpcAddressConfirmed.No;
-                },
-                viewModel.Reference,
-                QuestionFlowPage.AskForPostcode);
+            return RedirectToAction(
+                forwardArgs.Action,
+                forwardArgs.Controller,
+                // TODO: seabeta-579 we'd rather use the values from the question flow service
+                new { reference = viewModel.Reference, postcode = viewModel.Postcode, number = viewModel.HouseNameOrNumber });
         }
 
         
-        [HttpGet("address/{reference}")]
-        public async Task<ViewResult> ConfirmAddress_Get(string reference)
+        [HttpGet("address/{reference}/{postcode}/{number}")]
+        public async Task<ViewResult> ConfirmAddress_Get(string reference, string postcode, string number)
         {
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            List<EpcSearchResult> epcSearchResults = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(propertyData.Postcode, propertyData.HouseNameOrNumber);
-            var houseNameOrNumber = propertyData.HouseNameOrNumber;
+            List<EpcSearchResult> epcSearchResults = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(postcode, number);
+            
             var filteredEpcSearchResults = epcSearchResults.Where(e =>
-                e.Address1.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase) ||
-                e.Address2.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase)).ToList();
+                e.Address1.Contains(number, StringComparison.OrdinalIgnoreCase) ||
+                e.Address2.Contains(number, StringComparison.OrdinalIgnoreCase)).ToList();
 
             epcSearchResults = filteredEpcSearchResults.Any() ? filteredEpcSearchResults : epcSearchResults;
 
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.ConfirmAddress, propertyData);
-            var viewModel = new ConfirmAddressViewModel
-            {
-                Reference = reference,
-                EpcSearchResults = epcSearchResults,
-                SelectedEpcId = epcSearchResults.Count == 1 ? epcSearchResults[0].EpcId : null,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
-            };
+            var backLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values);
 
-            return View("ConfirmAddress", viewModel);
-        
+            if (epcSearchResults.Count == 0)
+            {
+                var viewModel = new NoEpcFoundViewModel
+                {
+                    Reference = reference,
+                    BackLink = backLink
+                };
+                return View("NoEpcFound", viewModel);
+            }
+            else if (epcSearchResults.Count == 1)
+            {
+                var viewModel = new ConfirmSingleAddressViewModel
+                {
+                    Reference = reference,
+                    BackLink = backLink,
+                    EpcSearchResult = epcSearchResults[0],
+                    Number = number,
+                    Postcode = postcode,
+                    EpcId = epcSearchResults[0].EpcId
+                };
+                return View("ConfirmSingleAddress", viewModel);
+            }
+            else
+            {
+                var viewModel = new ConfirmAddressViewModel
+                {
+                    Reference = reference,
+                    EpcSearchResults = epcSearchResults,
+                    Postcode = postcode,
+                    Number = number,
+                    BackLink = backLink
+                };
+
+                return View("ConfirmAddress", viewModel);
+            }
         }
 
-        [HttpPost("address/{reference}")]
-        public async Task<IActionResult> ConfirmAddress_Post(ConfirmAddressViewModel viewModel, int epcCount)
+        [HttpPost("address/{reference}/{postcode}/{number}")]
+        public async Task<IActionResult> ConfirmAddress_Post(ConfirmAddressViewModel viewModel)
         {
-            if (epcCount != 1)
-            {
-                ModelState.Remove("EpcAddressConfirmed");
-            }
-            
             if (!ModelState.IsValid)
             {
-                return await ConfirmAddress_Get(viewModel.Reference);
+                return await ConfirmAddress_Get(viewModel.Reference, viewModel.Postcode, viewModel.Number);
             }
-
-            EpcAddressConfirmed epcAddressConfirmed = 
-                viewModel.SelectedEpcId != "unlisted" && viewModel.EpcAddressConfirmed != EpcAddressConfirmed.No
-                    ? EpcAddressConfirmed.Yes : EpcAddressConfirmed.No;
-            var epc = await epcApi.GetEpcForId(viewModel.SelectedEpcId);
+            
+            var epc = viewModel.SelectedEpcId == "unlisted" ? null : await epcApi.GetEpcForId(viewModel.SelectedEpcId);
+            
             return await UpdatePropertyAndRedirect(
-                p =>
-                {
-                    p.Epc = epc;
-                    p.EpcAddressConfirmed = epcAddressConfirmed;
-                    p.EpcDetailsConfirmed = null;
-                },
+                p => { p.Epc = epc;},
+                viewModel.Reference,
+                QuestionFlowPage.ConfirmAddress);
+        }
+        
+        [HttpPost("single-address/{reference}/{postcode}/{number}")]
+        public async Task<IActionResult> ConfirmSingleAddress_Post(ConfirmSingleAddressViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await ConfirmAddress_Get(viewModel.Reference, viewModel.Postcode, viewModel.Number);
+            }
+            
+            var epc = viewModel.EpcAddressConfirmed == EpcAddressConfirmed.Yes ? await epcApi.GetEpcForId(viewModel.EpcId) : null;
+
+            return await UpdatePropertyAndRedirect(
+                p => { p.Epc = epc; },
                 viewModel.Reference,
                 QuestionFlowPage.ConfirmAddress);
         }
@@ -408,7 +429,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.PropertyType, propertyData);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.PropertyType, propertyData, entryPoint);
             var viewModel = new PropertyTypeViewModel
             {
                 PropertyType = propertyData.PropertyType,

@@ -97,11 +97,7 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             
             return new Epc
             {
-                EpcId = epcId,
-                Address1 = epc.Address.Address1,
-                Address2 = epc.Address.Address2,
-                Postcode = epc.Address.Postcode,
-                LodgementDate = GetLodgementDateFromEpc(epc),
+                LodgementYear = GetLodgementDateFromEpc(epc)?.Year,
                 PropertyType = GetPropertyTypeFromEpc(epc),
                 HouseType = GetHouseTypeFromEpc(epc),
                 BungalowType = GetBungalowTypeFromEpc(epc),
