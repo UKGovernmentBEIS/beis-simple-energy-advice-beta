@@ -31,7 +31,7 @@ namespace SeaPublicWebsite.BusinessLogic.Models
         public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
     }
 
-    public class EpcInformation
+    public class EpcSearchResult
     {
         public string EpcId { get; set; }
 
@@ -40,7 +40,7 @@ namespace SeaPublicWebsite.BusinessLogic.Models
         public string Address2 { get; set; }
         public string Postcode { get; set; }
 
-        public EpcInformation(string epcId, string address1, string address2, string postcode)
+        public EpcSearchResult(string epcId, string address1, string address2, string postcode)
         {
             EpcId = epcId;
             Address1 = address1;
@@ -56,13 +56,13 @@ namespace SeaPublicWebsite.BusinessLogic.Models
             Address2 = tI.ToTitleCase(Address2.ToLower().Replace(",", ""));
         }
 
-        public static List<EpcInformation> SortEpcsInformation(List<EpcInformation> epcsInformation)
+        public static List<EpcSearchResult> SortEpcsInformation(List<EpcSearchResult> epcsInformation)
         {
             epcsInformation.Sort(SortEpcsInformationByHouseNumberOrAlphabetically);
             return epcsInformation;
         }
         
-        private static int SortEpcsInformationByHouseNumberOrAlphabetically(EpcInformation epcInformation1, EpcInformation epcInformation2)
+        private static int SortEpcsInformationByHouseNumberOrAlphabetically(EpcSearchResult epcInformation1, EpcSearchResult epcInformation2)
         {
             var x = (epcInformation1.GetHouseNumber(), epcInformation2.GetHouseNumber()) switch
             {
@@ -79,7 +79,7 @@ namespace SeaPublicWebsite.BusinessLogic.Models
             return x;
         }
 
-        private static int SortEpcsInformationAlphabetically(EpcInformation epcInformation1, EpcInformation epcInformation2)
+        private static int SortEpcsInformationAlphabetically(EpcSearchResult epcInformation1, EpcSearchResult epcInformation2)
         {
             var comparedAddress1 = string.Compare(epcInformation1.Address1, epcInformation2.Address1,
                 StringComparison.OrdinalIgnoreCase);

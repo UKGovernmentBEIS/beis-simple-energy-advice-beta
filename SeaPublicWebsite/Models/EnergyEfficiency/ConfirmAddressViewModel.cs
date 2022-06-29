@@ -10,7 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class ConfirmAddressViewModel : QuestionFlowViewModel
     {
-        public List<EpcInformation> EpcInformationList { get; set; }
+        public List<EpcSearchResult> EpcSearchResults { get; set; }
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select your address")]
         public string SelectedEpcId { get; set; }
         public string Reference { get; set; }
@@ -19,7 +19,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 
         public Dictionary<string, LabelViewModel> EpcOptionsWithUnlistedOption()
         {
-            Dictionary<string, LabelViewModel> dict = EpcInformationList.ToDictionary(
+            Dictionary<string, LabelViewModel> dict = EpcSearchResults.ToDictionary(
                 epc => epc.EpcId,
                 epc => new LabelViewModel
                 {

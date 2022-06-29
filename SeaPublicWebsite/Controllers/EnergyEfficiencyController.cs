@@ -249,14 +249,14 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await AskForPostcode_Get(viewModel.Reference);
             }
-            List<EpcInformation> epcInformationList = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(viewModel.Postcode, viewModel.HouseNameOrNumber);
+            List<EpcSearchResult> epcSearchResults = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(viewModel.Postcode, viewModel.HouseNameOrNumber);
 
             return await UpdatePropertyAndRedirect(
                 p =>
                 {
                     p.Postcode = viewModel.Postcode;
                     p.HouseNameOrNumber = viewModel.HouseNameOrNumber;
-                    p.EpcCount = epcInformationList.Count;
+                    p.EpcCount = epcSearchResults.Count;
                     p.Epc = null;
                     p.EpcDetailsConfirmed = null;
                     p.EpcAddressConfirmed = EpcAddressConfirmed.No;
@@ -270,20 +270,20 @@ namespace SeaPublicWebsite.Controllers
         public async Task<ViewResult> ConfirmAddress_Get(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            List<EpcInformation> epcInformationList = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(propertyData.Postcode, propertyData.HouseNameOrNumber);
+            List<EpcSearchResult> epcSearchResults = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(propertyData.Postcode, propertyData.HouseNameOrNumber);
             var houseNameOrNumber = propertyData.HouseNameOrNumber;
-            var filteredEpcInformationList = epcInformationList.Where(e =>
+            var filteredEpcSearchResults = epcSearchResults.Where(e =>
                 e.Address1.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase) ||
                 e.Address2.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase)).ToList();
 
-            epcInformationList = filteredEpcInformationList.Any() ? filteredEpcInformationList : epcInformationList;
+            epcSearchResults = filteredEpcSearchResults.Any() ? filteredEpcSearchResults : epcSearchResults;
 
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.ConfirmAddress, propertyData);
             var viewModel = new ConfirmAddressViewModel
             {
                 Reference = reference,
-                EpcInformationList = epcInformationList,
-                SelectedEpcId = epcInformationList.Count == 1 ? epcInformationList[0].EpcId : null,
+                EpcSearchResults = epcSearchResults,
+                SelectedEpcId = epcSearchResults.Count == 1 ? epcSearchResults[0].EpcId : null,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 

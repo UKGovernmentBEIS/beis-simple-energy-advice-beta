@@ -18,10 +18,10 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form action="@Url.Action(nameof(EnergyEfficiencyController.ConfirmAddress_Post), "EnergyEfficiency", new { reference = Model.Reference, epcCount = Model.EpcInformationList.Count })" method="post" novalidate>
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.ConfirmAddress_Post), "EnergyEfficiency", new { reference = Model.Reference, epcCount = Model.EpcSearchResults.Count })" method="post" novalidate>
 
                 @Html.AntiForgeryToken()
-                @if (Model.EpcInformationList.Count == 1)
+                @if (Model.EpcSearchResults.Count == 1)
                 {
                     @Html.HiddenFor(m => m.SelectedEpcId)
                     <text>
@@ -46,13 +46,13 @@
                                      </text>,
                         Html = @<text>
                                    <div class="govuk-!-font-weight-bold">Registered address</div>
-                                   @(Model.EpcInformationList[0].Address1)<br/>
-                                   @if (!string.IsNullOrWhiteSpace(Model.EpcInformationList[0].Address2))
+                                   @(Model.EpcSearchResults[0].Address1)<br/>
+                                   @if (!string.IsNullOrWhiteSpace(Model.EpcSearchResults[0].Address2))
                                    {
-                                       @(Model.EpcInformationList[0].Address2)
+                                       @(Model.EpcSearchResults[0].Address2)
                                        <br/>
                                    }
-                                   @(Model.EpcInformationList[0].Postcode)
+                                   @(Model.EpcSearchResults[0].Postcode)
                                 </text>,
                     })
                     @(await Html.GovUkRadiosFor(m => m.EpcAddressConfirmed,
