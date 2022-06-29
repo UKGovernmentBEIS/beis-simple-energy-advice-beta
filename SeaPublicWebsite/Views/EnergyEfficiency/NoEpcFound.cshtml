@@ -1,0 +1,35 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Controllers
+
+@model SeaPublicWebsite.Models.EnergyEfficiency.NoEpcFoundViewModel
+@{
+    ViewBag.Title = "No EPC found";
+}
+
+@section BeforeMain {
+    @await Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = Model.BackLink,
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+            @* changed "an" => "a complete" to cover the case that an epc is found but doesn't contain both property type and age built, hence is not shown to the user for confirmation*@
+            We weren't able to find a complete Energy Performance Certificate for your property
+        </h1>
+
+        <p class="govuk-body">
+            We will need to ask you some questions to work out which of the available energy efficiency measures are most likely to be helpful to you.
+        </p>
+
+        @await Html.GovUkButton(new ButtonViewModel
+        {
+            Href = Url.Action(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new {reference = Model.Reference}),
+            Text = "Continue"
+        })
+    </div>
+</div>

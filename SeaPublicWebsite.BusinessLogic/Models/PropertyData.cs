@@ -11,6 +11,14 @@ public class PropertyData
 
     public OwnershipStatus? OwnershipStatus { get; set; }
     public Country? Country { get; set; }
+    
+    public FindEpc? FindEpc { get; set; }
+    
+    public int? EpcCount { get; set; }
+
+    public EpcAddressConfirmed? EpcAddressConfirmed { get; set; }
+
+    public EpcDetailsConfirmed? EpcDetailsConfirmed { get; set; }
 
     public Epc Epc { get; set; }
 
@@ -67,10 +75,13 @@ public class PropertyData
 
     private void CopyAnswersTo(PropertyData other)
     {
-        other.Reference = Reference;
         other.OwnershipStatus = OwnershipStatus;
         other.Country = Country;
         other.Epc = Epc;
+        other.FindEpc = FindEpc;
+        other.EpcAddressConfirmed = EpcAddressConfirmed;
+        other.EpcDetailsConfirmed = EpcDetailsConfirmed;
+        other.EpcCount = EpcCount;
         other.Postcode = Postcode;
         other.HouseNameOrNumber = HouseNameOrNumber;
         other.PropertyType = PropertyType;
