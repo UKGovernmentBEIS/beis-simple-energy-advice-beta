@@ -1538,7 +1538,9 @@ namespace SeaPublicWebsite.Controllers
             
             // If the user is going back to the answer summary page or the check your unchangeable answers page then they finished editing and we
             // can get rid of the old answers
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)) || forwardArgs.Action.Equals(nameof(CheckYourUnchangeableAnswers_Get)))
+            if (entryPoint is not null &&
+                (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)) ||
+                 forwardArgs.Action.Equals(nameof(CheckYourUnchangeableAnswers_Get))))
             {
                 propertyData.CommitEdits();
             }
