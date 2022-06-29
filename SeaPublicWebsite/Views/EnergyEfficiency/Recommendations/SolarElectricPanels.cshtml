@@ -50,8 +50,15 @@
 }
 
 @{
-    Func<object, object> distruption = @<strong class="govuk-tag govuk-tag--yellow">MODERATE</strong>;
-    ViewBag.Distruption = distruption;
-    Func<object, object> duration = @<strong class="govuk-tag govuk-tag--orange">2 DAYS</strong>;
-    ViewBag.Duration = duration;
+    Model.DisruptionTagViewModel = new TagViewModel
+    {
+        Classes = "govuk-tag--yellow",
+        Text = "MODERATE"
+    };
+    
+    Model.DurationTagViewModel = new TagViewModel
+    {
+        Classes = "govuk-tag--orange",
+        Text = "2 DAYS"
+    };
 }

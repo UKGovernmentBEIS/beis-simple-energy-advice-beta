@@ -72,8 +72,9 @@
                         Value = new SummaryListRowValue
                         {
                             Classes = "sea-recommendation-impact govuk-!-padding-right-0",
-                            // TODO: Change this. seabeta-569
-                            Html = ViewBag.Distruption
+                            Html = @<text>
+                                       @await Html.GovUkTag(Model.DisruptionTagViewModel)
+                                    </text>
                         }
                     },
                     new()
@@ -86,8 +87,9 @@
                         Value = new SummaryListRowValue
                         {
                             Classes = "sea-recommendation-impact govuk-!-padding-right-0",
-                            // TODO: Change this. seabeta-569
-                            Html = ViewBag.Duration
+                            Html = @<text>
+                                       @await Html.GovUkTag(Model.DurationTagViewModel)
+                                    </text>
                         }
                     }
                 }
