@@ -45,7 +45,10 @@ public class PropertyDataTests
             Temperature = 20,
             UneditedData = new PropertyData(),
             HasSeenRecommendations = false,
-            PropertyRecommendations = new List<PropertyRecommendation>()
+            PropertyRecommendations = new List<PropertyRecommendation>
+            {
+                new()
+            }
         };
     }
 
@@ -70,5 +73,47 @@ public class PropertyDataTests
             
             propertyInfo.GetValue(propertyData.UneditedData).Should().NotBeNull();
         }
+    }
+    
+    [Test]
+    public void CommitEditsResetsUneditedData()
+    {
+        // Arrange
+        var propertyData = InitializePropertyData();
+        
+        // Act
+        propertyData.CommitEdits();
+        
+        // Assert
+        propertyData.UneditedData.Should().BeNull();
+    }
+    
+    [Test]
+    public void CommitEditsResetsPropertyRecommendationsIfThereIsAChange()
+    {
+        // Arrange
+        var propertyData = InitializePropertyData();
+        propertyData.CreateUneditedData();
+        propertyData.WallConstruction = null;
+        
+        // Act
+        propertyData.CommitEdits();
+        
+        // Assert
+        propertyData.PropertyRecommendations.Should().BeNullOrEmpty();
+    }
+    
+    public void CommitEditsKeepsPropertyRecommendationsIfThereAreNoChange()
+    {
+        // Arrange
+        var propertyData = InitializePropertyData();
+        propertyData.CreateUneditedData();
+        propertyData.WallConstruction = null;
+        
+        // Act
+        propertyData.CommitEdits();
+        
+        // Assert
+        propertyData.PropertyRecommendations.Should().Equal(propertyData.UneditedData.PropertyRecommendations);
     }
 }
