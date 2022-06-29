@@ -242,7 +242,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (viewModel.Postcode is not null && !(await postcodesIoApi.IsValidPostcode(viewModel.Postcode)))
             {
-                ModelState.AddModelError(nameof(AskForPostcodeViewModel.Postcode), "Enter a valid postcode in the format AB12 3CD");
+                ModelState.AddModelError(nameof(AskForPostcodeViewModel.Postcode), "Enter a valid UK postcode");
             }
             
             if (!ModelState.IsValid)
