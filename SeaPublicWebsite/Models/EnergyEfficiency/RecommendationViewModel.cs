@@ -9,54 +9,32 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class RecommendationViewModel
     {
-        public PropertyRecommendation PropertyRecommendation { get; set; }
-        public PropertyData PropertyData { get; set; }
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select what to do with this recommendation")]
         public RecommendationAction? RecommendationAction { get; set; }
+        public int RecommendationIndex { get; set; }
+        public List<PropertyRecommendation> PropertyRecommendations { get; set; }
         public bool FromActionPlan { get; set; }
-
+        public string BackLink { get; set; }
         public TagViewModel DisruptionTagViewModel { get; set;  }
         public TagViewModel DurationTagViewModel { get; set;  }
 
-        public int GetCurrentIndex()
-        {
-            return PropertyData.PropertyRecommendations.FindIndex(r => r.Key == PropertyRecommendation.Key);
-        }
-        public bool HasNextIndex()
-        {
-            var nextIndex = GetCurrentIndex() + 1;
-            return nextIndex < PropertyData.PropertyRecommendations.Count;
-        }
+        public PropertyRecommendation GetCurrentPropertyRecommendation() => PropertyRecommendations[RecommendationIndex];
 
         public bool HasPreviousIndex()
         {
-            var previousIndex = GetCurrentIndex() - 1;
-            return previousIndex >= 0;
+            return RecommendationIndex > 0;
         }
-
-        public RecommendationKey? NextRecommendationKey()
+        
+        public bool HasNextIndex()
         {
-            if (HasNextIndex())
-            {
-                return PropertyData.PropertyRecommendations[GetCurrentIndex() + 1].Key;
-            }
-            return null;
-        }
-
-        public RecommendationKey? PreviousRecommendationKey()
-        {
-            if (HasPreviousIndex())
-            {
-                return PropertyData.PropertyRecommendations[GetCurrentIndex() - 1].Key;
-            }
-
-            return null;
+            return RecommendationIndex < PropertyRecommendations.Count - 1;
         }
 
         public List<PropertyRecommendation> GetSavedRecommendations()
         {
-            return PropertyData.PropertyRecommendations.Where(r => r.RecommendationAction == BusinessLogic.Models.Enums.RecommendationAction.SaveToActionPlan).ToList();
+            return PropertyRecommendations.Where(r => r.RecommendationAction == BusinessLogic.Models.Enums.RecommendationAction.SaveToActionPlan).ToList();
         }
+        
         public string GetTotalInstallationCostText()
         {
             var minCost = GetSavedRecommendations().Sum(r => r.MinInstallCost);

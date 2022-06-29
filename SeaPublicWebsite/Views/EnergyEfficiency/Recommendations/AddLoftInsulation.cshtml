@@ -1,4 +1,4 @@
-﻿@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using GovUkDesignSystem.GovUkDesignSystemComponents
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
@@ -44,7 +44,7 @@
 
 @section RecommendationLifetime
 {
-    <p class="govuk-body">Loft insulation is typically expected to last <b>around @Model.PropertyRecommendation.Lifetime years</b></p>
+    <p class="govuk-body">Loft insulation is typically expected to last <b>around @Model.GetCurrentPropertyRecommendation().Lifetime years</b></p>
 }
 
 @{

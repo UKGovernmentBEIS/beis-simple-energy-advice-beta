@@ -2,7 +2,7 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @model SeaPublicWebsite.Models.EnergyEfficiency.YourSavedRecommendationsEmailViewModel;
 
-<form action="@Url.Action("YourSavedRecommendations_Get", "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
+<form action="@Url.Action("ActionPlan_Post", "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
     @Html.AntiForgeryToken()
     
     @await Html.GovUkTextInputFor(m => m.EmailAddress,

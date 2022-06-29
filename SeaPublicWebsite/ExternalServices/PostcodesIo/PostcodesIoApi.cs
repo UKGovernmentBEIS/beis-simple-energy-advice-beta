@@ -1,12 +1,21 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace SeaPublicWebsite.ExternalServices.PostcodesIo
 {
     public class PostcodesIoApi
     {
-        public static bool IsValidPostcode(string postcode)
+        private readonly ILogger<PostcodesIoApi> logger;
+        
+        public PostcodesIoApi(ILogger<PostcodesIoApi> logger)
+        {
+            this.logger = logger;
+        }
+        
+        public async Task<bool> IsValidPostcode(string postcode)
         {
             if (string.IsNullOrWhiteSpace(postcode))
             {
@@ -25,20 +34,24 @@ namespace SeaPublicWebsite.ExternalServices.PostcodesIo
                     string path = $"/postcodes/{postcode}/validate";
 
                     HttpResponseMessage response = httpClient.GetAsync(path).Result;
+                    string bodyString = await response.Content.ReadAsStringAsync();
 
                     if (response.IsSuccessStatusCode)
                     {
-                        string bodyString = response.Content.ReadAsStringAsync().Result;
                         var body = JsonConvert.DeserializeObject<PostcodesIoApiValidateResponse>(bodyString);
                         return body.result;
                     }
-
-                    return false;
+                    
+                    // If postcodes.io has issues we don't want to block users from continuing
+                    logger.LogError($"PostcodesIo returned an error. Code: {response.StatusCode} Content: {bodyString}");
+                    return true;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return false;
+                // If postcodes.io has issues we don't want to block users from continuing
+                logger.LogError($"Exception thrown communicating with postcodesIo: {e.Message}");
+                return true;
             }
         }
     }

@@ -5,10 +5,11 @@ using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
-    public class YourSavedRecommendationsViewModel
+    public class ActionPlanViewModel
     {
         public PropertyData PropertyData { get; set; }
         public string EmailAddress { get; set; }
+        public string BackLink { get; set; }
 
         public string GetTotalInstallationCostText()
         {
