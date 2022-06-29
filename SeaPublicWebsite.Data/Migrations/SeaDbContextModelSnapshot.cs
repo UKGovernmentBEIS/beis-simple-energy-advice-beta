@@ -38,7 +38,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DataProtectionKeys", (string)null);
+                    b.ToTable("DataProtectionKeys");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.Epc", b =>
@@ -114,7 +114,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Epc", (string)null);
+                    b.ToTable("Epc");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
@@ -166,6 +166,9 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.Property<int?>("HasOutdoorSpace")
                         .HasColumnType("integer");
+
+                    b.Property<bool>("HasSeenRecommendations")
+                        .HasColumnType("boolean");
 
                     b.Property<int?>("HeatingPattern")
                         .HasColumnType("integer");
@@ -239,7 +242,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasIndex("UneditedDataPropertyDataId");
 
-                    b.ToTable("PropertyData", (string)null);
+                    b.ToTable("PropertyData");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyRecommendation", b =>
@@ -284,7 +287,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasIndex("PropertyDataId");
 
-                    b.ToTable("PropertyRecommendations", (string)null);
+                    b.ToTable("PropertyRecommendations");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
