@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http.Headers;
 using FluentAssertions;
 using NUnit.Framework;
 using SeaPublicWebsite.BusinessLogic.Models;
@@ -17,6 +18,10 @@ public class PropertyDataTests
             OwnershipStatus = OwnershipStatus.Landlord,
             Country = Country.England,
             Epc = new Epc(),
+            FindEpc = FindEpc.Yes,
+            EpcCount = 1,
+            EpcAddressConfirmed = EpcAddressConfirmed.Yes,
+            EpcDetailsConfirmed = EpcDetailsConfirmed.Yes,
             Postcode = "postcode",
             HouseNameOrNumber = "House Name",
             PropertyType = PropertyType.Bungalow,
@@ -61,7 +66,8 @@ public class PropertyDataTests
         foreach (var propertyInfo in propertyData.GetType().GetProperties())
         {
             if (propertyInfo.Name.Equals(nameof(PropertyData.PropertyDataId)) ||
-                propertyInfo.Name.Equals(nameof(PropertyData.UneditedData)))
+                propertyInfo.Name.Equals(nameof(PropertyData.UneditedData)) ||
+                propertyInfo.Name.Equals(nameof(PropertyData.Reference)))
             {
                 continue;
             }

@@ -28,14 +28,18 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.NewOrReturningUser => NewOrReturningUserBackLinkArguments(),
                 QuestionFlowPage.OwnershipStatus => OwnershipStatusBackLinkArguments(propertyData),
                 QuestionFlowPage.Country => CountryBackLinkArguments(),
+                QuestionFlowPage.FindEpc => FindEpcBackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.ServiceUnsuitable => ServiceUnsuitableBackLinkArguments(propertyData),
                 QuestionFlowPage.AskForPostcode => AskForPostcodeBackLinkArguments(propertyData),
                 QuestionFlowPage.ConfirmAddress => ConfirmAddressBackLinkArguments(propertyData),
-                QuestionFlowPage.PropertyType => PropertyTypeBackLinkArguments(propertyData),
+                QuestionFlowPage.ConfirmEpcDetails => ConfirmEpcDetailsBackLinkArguments(propertyData),
+                QuestionFlowPage.NoEpcFound => NoEpcFoundBackLinkArguments(propertyData),
+                QuestionFlowPage.PropertyType => PropertyTypeBackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.HouseType => HouseTypeBackLinkArguments(propertyData),
                 QuestionFlowPage.BungalowType => BungalowTypeBackLinkArguments(propertyData),
                 QuestionFlowPage.FlatType => FlatTypeBackLinkArguments(propertyData),
                 QuestionFlowPage.HomeAge => HomeAgeBackLinkArguments(propertyData, entryPoint),
+                QuestionFlowPage.CheckYourUnchangeableAnswers => CheckYourUnchangeableAnswersBackLinkArguments(propertyData),
                 QuestionFlowPage.WallConstruction => WallConstructionBackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.CavityWallsInsulated => CavityWallsInsulatedBackLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.SolidWallsInsulated => SolidWallsInsulatedBackLinkArguments(propertyData, entryPoint),
@@ -67,13 +71,17 @@ namespace SeaPublicWebsite.Services
                 QuestionFlowPage.NewOrReturningUser => NewOrReturningUserForwardLinkArguments(),
                 QuestionFlowPage.OwnershipStatus => OwnershipStatusForwardLinkArguments(propertyData),
                 QuestionFlowPage.Country => CountryForwardLinkArguments(propertyData),
+                QuestionFlowPage.FindEpc => FindEpcForwardLinkArguments(propertyData),
                 QuestionFlowPage.AskForPostcode => AskForPostcodeForwardLinkArguments(propertyData),
                 QuestionFlowPage.ConfirmAddress => ConfirmAddressForwardLinkArguments(propertyData),
-                QuestionFlowPage.PropertyType => PropertyTypeForwardLinkArguments(propertyData),
-                QuestionFlowPage.HouseType => HouseTypeForwardLinkArguments(propertyData),
-                QuestionFlowPage.BungalowType => BungalowTypeForwardLinkArguments(propertyData),
-                QuestionFlowPage.FlatType => FlatTypeForwardLinkArguments(propertyData),
-                QuestionFlowPage.HomeAge => HomeAgeForwardLinkArguments(propertyData, entryPoint),
+                QuestionFlowPage.ConfirmEpcDetails => ConfirmEpcDetailsForwardLinkArguments(propertyData),
+                QuestionFlowPage.NoEpcFound => NoEpcFoundForwardLinkArguments(propertyData),
+                QuestionFlowPage.PropertyType => PropertyTypeForwardLinkArguments(propertyData, entryPoint),
+                QuestionFlowPage.HouseType => HouseTypeForwardLinkArguments(propertyData, entryPoint),
+                QuestionFlowPage.BungalowType => BungalowTypeForwardLinkArguments(propertyData, entryPoint),
+                QuestionFlowPage.FlatType => FlatTypeForwardLinkArguments(propertyData, entryPoint),
+                QuestionFlowPage.HomeAge => HomeAgeForwardLinkArguments(propertyData),
+                QuestionFlowPage.CheckYourUnchangeableAnswers => CheckYourUnchangeableAnswersForwardLinkArguments(propertyData),
                 QuestionFlowPage.WallConstruction => WallConstructionForwardLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.CavityWallsInsulated => CavityWallsInsulatedForwardLinkArguments(propertyData, entryPoint),
                 QuestionFlowPage.SolidWallsInsulated => SolidWallsInsulatedForwardLinkArguments(propertyData, entryPoint),
@@ -137,10 +145,16 @@ namespace SeaPublicWebsite.Services
             };
         }
 
+        private PathByActionArguments FindEpcBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        {
+            var reference = propertyData.Reference;
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.OwnershipStatus_Get), "EnergyEfficiency", new { reference, entryPoint });
+        }
+        
         private PathByActionArguments AskForPostcodeBackLinkArguments(PropertyData propertyData)
         {
             var reference = propertyData.Reference;
-            return new PathByActionArguments(nameof(EnergyEfficiencyController.OwnershipStatus_Get), "EnergyEfficiency", new { reference });
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.FindEpc_Get), "EnergyEfficiency", new { reference });
         }
 
         private PathByActionArguments ConfirmAddressBackLinkArguments(PropertyData propertyData)
@@ -149,10 +163,41 @@ namespace SeaPublicWebsite.Services
             return new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference });
         }
 
-        private PathByActionArguments PropertyTypeBackLinkArguments(PropertyData propertyData)
+        private PathByActionArguments ConfirmEpcDetailsBackLinkArguments(PropertyData propertyData)
         {
             var reference = propertyData.Reference;
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference });
+        }
+
+        private PathByActionArguments NoEpcFoundBackLinkArguments(PropertyData propertyData)
+        {
+            var reference = propertyData.Reference;
+            if (propertyData.EpcCount != 0)
+            {
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference });
+
+            }
             return new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference });
+        }
+
+        private PathByActionArguments PropertyTypeBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        {
+            var reference = propertyData.Reference;
+            return entryPoint is QuestionFlowPage.PropertyType
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
+                    "EnergyEfficiency", new { reference })
+                : propertyData.FindEpc == FindEpc.No
+                    ? new PathByActionArguments(nameof(EnergyEfficiencyController.FindEpc_Get), "EnergyEfficiency",
+                        new { reference })
+                    : propertyData.EpcDetailsConfirmed == EpcDetailsConfirmed.No
+                        ? new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get),
+                            "EnergyEfficiency", new { reference })
+                        : propertyData.EpcAddressConfirmed switch
+                        {
+                            EpcAddressConfirmed.Yes => new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference}),
+                            EpcAddressConfirmed.No => new PathByActionArguments(nameof(EnergyEfficiencyController.NoEpcFound_Get), "EnergyEfficiency", new { reference}),
+                            _ => new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference})
+                        };
         }
 
         private PathByActionArguments HouseTypeBackLinkArguments(PropertyData propertyData)
@@ -177,7 +222,7 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return entryPoint is QuestionFlowPage.HomeAge
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get), "EnergyEfficiency", new { reference })
                 : propertyData.PropertyType switch
                 {
                     PropertyType.House => 
@@ -189,13 +234,23 @@ namespace SeaPublicWebsite.Services
                     _ => throw new ArgumentOutOfRangeException()
                 };
         }
+        
+        private PathByActionArguments CheckYourUnchangeableAnswersBackLinkArguments(PropertyData propertyData)
+        {
+            var reference = propertyData.Reference;
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency", new { reference });
+        }
 
         private PathByActionArguments WallConstructionBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
+            if (propertyData.EpcDetailsConfirmed == EpcDetailsConfirmed.Yes)
+            {
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get), "EnergyEfficiency", new { reference, entryPoint });
+            }
             return entryPoint is QuestionFlowPage.WallConstruction
                 ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
-                : new PathByActionArguments(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency", new { reference, entryPoint });
+                : new PathByActionArguments(nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get), "EnergyEfficiency", new { reference, entryPoint });
         }
 
         private PathByActionArguments CavityWallsInsulatedBackLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
@@ -441,62 +496,115 @@ namespace SeaPublicWebsite.Services
             var reference = propertyData.Reference;
             return propertyData.OwnershipStatus is OwnershipStatus.PrivateTenancy 
                 ? new PathByActionArguments(nameof(EnergyEfficiencyController.ServiceUnsuitable), "EnergyEfficiency", new { reference }) 
-                : new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference });
+                : new PathByActionArguments(nameof(EnergyEfficiencyController.FindEpc_Get), "EnergyEfficiency", new { reference });
+        }
+
+        private PathByActionArguments FindEpcForwardLinkArguments(PropertyData propertyData)
+        {
+            var reference = propertyData.Reference;
+            if (propertyData.FindEpc == FindEpc.Yes)
+            {
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.AskForPostcode_Get), "EnergyEfficiency", new { reference });
+            }
+            
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new { reference });
         }
 
         private PathByActionArguments AskForPostcodeForwardLinkArguments(PropertyData propertyData)
         {
             var reference = propertyData.Reference;
+            if (propertyData.EpcCount == 0)
+            {
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.NoEpcFound_Get), "EnergyEfficiency", new { reference });
+            }
             return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", new { reference });
         }
 
         private PathByActionArguments ConfirmAddressForwardLinkArguments(PropertyData propertyData)
         {
             var reference = propertyData.Reference;
+            var epc = propertyData.Epc;
+            if (propertyData.EpcAddressConfirmed == EpcAddressConfirmed.Yes)
+            {
+                if (epc?.ConstructionAgeBand != null && ((epc.PropertyType == PropertyType.House && epc.HouseType != null)
+                                                         || (epc.PropertyType == PropertyType.Bungalow && epc.BungalowType != null)
+                                                         || (epc.PropertyType == PropertyType.ApartmentFlatOrMaisonette && epc.FlatType != null)))
+                {
+                    return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmEpcDetails_Get), "EnergyEfficiency", new { reference });
+                }
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new { reference });
+            }
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.NoEpcFound_Get), "EnergyEfficiency", new { reference });
+        }
+
+        private PathByActionArguments ConfirmEpcDetailsForwardLinkArguments(PropertyData propertyData)
+        {
+            var reference = propertyData.Reference;
+            if (propertyData.EpcDetailsConfirmed == EpcDetailsConfirmed.Yes)
+            {
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.WallConstruction_Get), "EnergyEfficiency", new { reference });
+            }
             return new PathByActionArguments(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new { reference });
         }
 
-        private PathByActionArguments PropertyTypeForwardLinkArguments(PropertyData propertyData)
+        private PathByActionArguments NoEpcFoundForwardLinkArguments(PropertyData propertyData)
+        {
+            var reference = propertyData.Reference;
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new { reference });
+        }
+        
+        private PathByActionArguments PropertyTypeForwardLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
             return propertyData.PropertyType switch
             {
                 PropertyType.House =>
-                    new PathByActionArguments(nameof(EnergyEfficiencyController.HouseType_Get), "EnergyEfficiency", new { reference }),
+                    new PathByActionArguments(nameof(EnergyEfficiencyController.HouseType_Get), "EnergyEfficiency", new { reference, entryPoint }),
                 PropertyType.Bungalow =>
-                    new PathByActionArguments(nameof(EnergyEfficiencyController.BungalowType_Get), "EnergyEfficiency", new { reference }),
+                    new PathByActionArguments(nameof(EnergyEfficiencyController.BungalowType_Get), "EnergyEfficiency", new { reference, entryPoint }),
                 PropertyType.ApartmentFlatOrMaisonette =>
-                    new PathByActionArguments(nameof(EnergyEfficiencyController.FlatType_Get), "EnergyEfficiency", new { reference }),
+                    new PathByActionArguments(nameof(EnergyEfficiencyController.FlatType_Get), "EnergyEfficiency", new { reference, entryPoint }),
                 _ => throw new ArgumentOutOfRangeException(),
             };
         }
 
-        private PathByActionArguments HouseTypeForwardLinkArguments(PropertyData propertyData)
-        {
-            var reference = propertyData.Reference;
-            return new PathByActionArguments(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency",new { reference });
-        }
-
-        private PathByActionArguments BungalowTypeForwardLinkArguments(PropertyData propertyData)
-        {
-            var reference = propertyData.Reference;
-            return new PathByActionArguments(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency",new { reference });
-        }
-
-        private PathByActionArguments FlatTypeForwardLinkArguments(PropertyData propertyData)
-        {
-            var reference = propertyData.Reference;
-            return new PathByActionArguments(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency",new { reference });
-        }
-
-        private PathByActionArguments HomeAgeForwardLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private PathByActionArguments HouseTypeForwardLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
             return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
-                : new PathByActionArguments(nameof(EnergyEfficiencyController.WallConstruction_Get), "EnergyEfficiency",new { reference });
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get), "EnergyEfficiency", new { reference })
+                : new PathByActionArguments(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency",new { reference });
         }
 
+        private PathByActionArguments BungalowTypeForwardLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        {
+            var reference = propertyData.Reference;
+            return entryPoint is not null
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get), "EnergyEfficiency", new { reference })
+                : new PathByActionArguments(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency",new { reference });
+        }
+
+        private PathByActionArguments FlatTypeForwardLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        {
+            var reference = propertyData.Reference;
+            return entryPoint is not null
+                ? new PathByActionArguments(nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get), "EnergyEfficiency", new { reference })
+                : new PathByActionArguments(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency",new { reference });
+        }
+
+        private PathByActionArguments HomeAgeForwardLinkArguments(PropertyData propertyData)
+        {
+            var reference = propertyData.Reference;
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.CheckYourUnchangeableAnswers_Get),
+                "EnergyEfficiency", new { reference });
+        }
+
+        private PathByActionArguments CheckYourUnchangeableAnswersForwardLinkArguments(PropertyData propertyData)
+        {
+            var reference = propertyData.Reference;
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.WallConstruction_Get), "EnergyEfficiency",new { reference });
+        }
+        
         private PathByActionArguments WallConstructionForwardLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
         {
             var reference = propertyData.Reference;
@@ -798,13 +906,17 @@ namespace SeaPublicWebsite.Services
         Country,
         OwnershipStatus,
         ServiceUnsuitable,
+        FindEpc,
         AskForPostcode,
         ConfirmAddress,
+        ConfirmEpcDetails,
+        NoEpcFound,
         PropertyType,
         HouseType,
         BungalowType,
         FlatType,
         HomeAge,
+        CheckYourUnchangeableAnswers,
         WallConstruction,
         CavityWallsInsulated,
         SolidWallsInsulated,

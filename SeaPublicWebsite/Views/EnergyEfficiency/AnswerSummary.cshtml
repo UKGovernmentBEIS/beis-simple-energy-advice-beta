@@ -21,66 +21,7 @@
 
 @{
     var rows = new List<SummaryListRowViewModel>();
-    
-    rows.Add(new()
-    {
-        Key = new() 
-        {
-            Classes = "govuk-!-width-one-quarter",
-            Text = "Building type"
-        },
-        Value = new()
-        {
-            Classes = "govuk-!-width-one-half",
-            Html = (@<text>
-                        @(Model.PropertyData.PropertyType == PropertyType.House ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.HouseType) : null)
-                        @(Model.PropertyData.PropertyType == PropertyType.Bungalow ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.BungalowType) : null)
-                        @(Model.PropertyData.PropertyType == PropertyType.ApartmentFlatOrMaisonette ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.FlatType) : null)
-                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.PropertyType))
-                     </text>)
-        },
-        Actions = new()
-        {
-            Classes = "govuk-!-width-one-quarter",
-            Items = new()
-            {
-                new()
-                {
-                    Href = Url.Action(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.PropertyType}),
-                    Text = "Change",
-                    VisuallyHiddenText = "building type"
-                }
-            }
-        }
-    });
-    
-    rows.Add(new()
-    {
-        Key = new() 
-        {
-            Classes = "govuk-!-width-one-quarter",
-            Text = "Year home was built"
-        },
-        Value = new()
-        {
-            Classes = "govuk-!-width-one-half",
-            Text = Model.PropertyData.YearBuilt.HasValue ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.YearBuilt) : "Question skipped",
-        },
-        Actions = new()
-        {
-            Classes = "govuk-!-width-one-quarter",
-            Items = new()
-            {
-                new()
-                {
-                    Href = @Url.Action(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.HomeAge}),
-                    Text = "Change",
-                    VisuallyHiddenText = "year home was built"
-                }
-            }
-        }
-    });
-    
+
     rows.Add(new()
     {
         Key = new() 
