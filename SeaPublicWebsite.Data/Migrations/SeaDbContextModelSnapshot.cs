@@ -167,6 +167,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("HasOutdoorSpace")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("HasSeenRecommendations")
+                        .HasColumnType("boolean");
+
                     b.Property<int?>("HeatingPattern")
                         .HasColumnType("integer");
 

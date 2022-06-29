@@ -502,20 +502,30 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+        @if (Model.PropertyData.HasSeenRecommendations is true)
+        {
+            @await Html.GovUkNotificationBanner(new NotificationBannerViewModel
+            {
+                TitleText = "Important",
+                Text = "Your saved recommendations will be reset if you change any of your answers"
+            })
+        }
+        
+
         <h1 class="govuk-heading-l">
             Check your answers
         </h1>
-        
+
         @await Html.GovUkHint(new HintViewModel
         {
             Text = "Please review the information we have gathered. You can still change your answers if anything looks wrong."
         })
-        
+
         @(await Html.GovUkSummaryList(new SummaryListViewModel
         {
             Rows = rows
         }))
-        
+
         <form action="@Url.Action(nameof(EnergyEfficiencyController.AnswerSummary_Post), "EnergyEfficiency", new { reference = Model.PropertyData.Reference })" method="post" novalidate>
             @Html.AntiForgeryToken()
             @await Html.GovUkButton(new ButtonViewModel

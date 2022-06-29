@@ -1211,20 +1211,25 @@ namespace SeaPublicWebsite.Controllers
             }
             
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            var recommendationsForPropertyAsync = await recommendationService.GetRecommendationsForPropertyAsync(propertyData);
-            propertyData.PropertyRecommendations = recommendationsForPropertyAsync.Select(r => 
-                new PropertyRecommendation()
-                {
-                    Key = r.Key,
-                    Title = r.Title,
-                    MinInstallCost = r.MinInstallCost,
-                    MaxInstallCost = r.MaxInstallCost,
-                    Saving = r.Saving,
-                    LifetimeSaving = r.LifetimeSaving,
-                    Lifetime = r.Lifetime,
-                    Summary = r.Summary
-                }
-            ).ToList();
+            if (propertyData.PropertyRecommendations is null || propertyData.PropertyRecommendations.Count == 0)
+            {
+                var recommendationsForPropertyAsync = await recommendationService.GetRecommendationsForPropertyAsync(propertyData);
+                propertyData.PropertyRecommendations = recommendationsForPropertyAsync.Select(r => 
+                    new PropertyRecommendation()
+                    {
+                        Key = r.Key,
+                        Title = r.Title,
+                        MinInstallCost = r.MinInstallCost,
+                        MaxInstallCost = r.MaxInstallCost,
+                        Saving = r.Saving,
+                        LifetimeSaving = r.LifetimeSaving,
+                        Lifetime = r.Lifetime,
+                        Summary = r.Summary
+                    }
+                ).ToList();
+            }
+
+            propertyData.HasSeenRecommendations = true;
             await propertyDataStore.SavePropertyDataAsync(propertyData);
             
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AnswerSummary, propertyData);
@@ -1506,7 +1511,7 @@ namespace SeaPublicWebsite.Controllers
             // can get rid of the old answers
             if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)) || forwardArgs.Action.Equals(nameof(CheckYourUnchangeableAnswers_Get)))
             {
-                propertyData.DeleteUneditedData();
+                propertyData.CommitEdits();
             }
             await propertyDataStore.SavePropertyDataAsync(propertyData);
             return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);

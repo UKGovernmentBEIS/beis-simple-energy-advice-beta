@@ -1,4 +1,5 @@
-﻿using SeaPublicWebsite.BusinessLogic.Models.Enums;
+﻿using System.Reflection;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.BusinessLogic.Models;
 
@@ -53,6 +54,7 @@ public class PropertyData
     public int? HoursOfHeatingEvening { get; set; }
     public decimal? Temperature { get; set; }
     public PropertyData UneditedData { get; set; }
+    public bool HasSeenRecommendations { get; set; }
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; }
 
@@ -62,53 +64,65 @@ public class PropertyData
         CopyAnswersTo(UneditedData);
     }
     
+    public void CommitEdits()
+    {
+        // If a user has made changes to their answers we have to delete any recommendations they have as they may now
+        // be incorrect.
+        if (EditedDataIsDifferent())
+        {
+            PropertyRecommendations.Clear();
+        }
+        DeleteUneditedData();
+    }
+    
     public void RevertToUneditedData()
     {
         UneditedData.CopyAnswersTo(this);
         DeleteUneditedData();
     }
     
-    public void DeleteUneditedData()
+    private void DeleteUneditedData()
     {
         UneditedData = null;
     }
 
+    private bool EditedDataIsDifferent()
+    {
+        foreach (var propertyInfo in GetType().GetProperties())
+        {
+            if (propertyInfo.Name.Equals(nameof(PropertyDataId)) ||
+                propertyInfo.Name.Equals(nameof(Reference)) ||
+                propertyInfo.Name.Equals(nameof(Epc)) ||
+                propertyInfo.Name.Equals(nameof(UneditedData)) ||
+                propertyInfo.Name.Equals(nameof(PropertyRecommendations)))
+            {
+                continue;
+            }
+
+            if (propertyInfo.GetValue(this) != propertyInfo.GetValue(UneditedData))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private void CopyAnswersTo(PropertyData other)
     {
-        other.OwnershipStatus = OwnershipStatus;
-        other.Country = Country;
-        other.Epc = Epc;
-        other.FindEpc = FindEpc;
-        other.EpcAddressConfirmed = EpcAddressConfirmed;
-        other.EpcDetailsConfirmed = EpcDetailsConfirmed;
-        other.EpcCount = EpcCount;
-        other.Postcode = Postcode;
-        other.HouseNameOrNumber = HouseNameOrNumber;
-        other.PropertyType = PropertyType;
-        other.HouseType = HouseType;
-        other.BungalowType = BungalowType;
-        other.FlatType = FlatType;
-        other.YearBuilt = YearBuilt;
-        other.WallConstruction = WallConstruction;
-        other.CavityWallsInsulated = CavityWallsInsulated;
-        other.SolidWallsInsulated = SolidWallsInsulated;
-        other.FloorConstruction = FloorConstruction;
-        other.FloorInsulated = FloorInsulated;
-        other.RoofConstruction = RoofConstruction;
-        other.LoftSpace = LoftSpace;
-        other.LoftAccess = LoftAccess;
-        other.RoofInsulated = RoofInsulated;
-        other.HasOutdoorSpace = HasOutdoorSpace;
-        other.GlazingType = GlazingType;
-        other.HeatingType = HeatingType;
-        other.OtherHeatingType = OtherHeatingType;
-        other.HasHotWaterCylinder = HasHotWaterCylinder;
-        other.NumberOfOccupants = NumberOfOccupants;
-        other.HeatingPattern = HeatingPattern;
-        other.HoursOfHeatingMorning = HoursOfHeatingMorning;
-        other.HoursOfHeatingEvening = HoursOfHeatingEvening;
-        other.Temperature = Temperature;
-        other.PropertyRecommendations = PropertyRecommendations;
+        foreach (var propertyInfo in GetType().GetProperties())
+        {
+            if (propertyInfo.Name.Equals(nameof(PropertyDataId)) ||
+                propertyInfo.Name.Equals(nameof(Reference)) ||
+                propertyInfo.Name.Equals(nameof(Epc)) ||
+                propertyInfo.Name.Equals(nameof(UneditedData)) ||
+                propertyInfo.Name.Equals(nameof(PropertyRecommendations)))
+            {
+                continue;
+            }
+            
+            propertyInfo.SetValue(other, propertyInfo.GetValue(this));
+        }
     }
 
     public RecommendationKey GetFirstRecommendationKey()
