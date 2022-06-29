@@ -65,8 +65,10 @@ public class PropertyDataTests
         foreach (var propertyInfo in propertyData.GetType().GetProperties())
         {
             if (propertyInfo.Name.Equals(nameof(PropertyData.PropertyDataId)) ||
+                propertyInfo.Name.Equals(nameof(PropertyData.Reference)) ||
+                propertyInfo.Name.Equals(nameof(PropertyData.Epc)) ||
                 propertyInfo.Name.Equals(nameof(PropertyData.UneditedData)) ||
-                propertyInfo.Name.Equals(nameof(PropertyData.HasSeenRecommendations)))
+                propertyInfo.Name.Equals(nameof(PropertyData.PropertyRecommendations)))
             {
                 continue;
             }
@@ -103,17 +105,18 @@ public class PropertyDataTests
         propertyData.PropertyRecommendations.Should().BeNullOrEmpty();
     }
     
+    [Test]
     public void CommitEditsKeepsPropertyRecommendationsIfThereAreNoChange()
     {
         // Arrange
         var propertyData = InitializePropertyData();
         propertyData.CreateUneditedData();
-        propertyData.WallConstruction = null;
+        var previousRecommendations = propertyData.PropertyRecommendations;
         
         // Act
         propertyData.CommitEdits();
         
         // Assert
-        propertyData.PropertyRecommendations.Should().Equal(propertyData.UneditedData.PropertyRecommendations);
+        propertyData.PropertyRecommendations.Should().Equal(previousRecommendations);
     }
 }

@@ -1,4 +1,5 @@
-﻿using SeaPublicWebsite.BusinessLogic.Models.Enums;
+﻿using System.Reflection;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.BusinessLogic.Models;
 
@@ -79,68 +80,40 @@ public class PropertyData
 
     private bool EditedDataIsDifferent()
     {
-        return OwnershipStatus != UneditedData.OwnershipStatus
-                        || Country != UneditedData.Country
-                        || Postcode != UneditedData.Postcode
-                        || HouseNameOrNumber != UneditedData.HouseNameOrNumber
-                        || PropertyType != UneditedData.PropertyType
-                        || HouseType != UneditedData.HouseType
-                        || BungalowType != UneditedData.BungalowType
-                        || FlatType != UneditedData.FlatType
-                        || YearBuilt != UneditedData.YearBuilt
-                        || WallConstruction != UneditedData.WallConstruction
-                        || CavityWallsInsulated != UneditedData.CavityWallsInsulated
-                        || SolidWallsInsulated != UneditedData.SolidWallsInsulated
-                        || FloorConstruction != UneditedData.FloorConstruction
-                        || FloorInsulated != UneditedData.FloorInsulated
-                        || RoofConstruction != UneditedData.RoofConstruction
-                        || LoftSpace != UneditedData.LoftSpace
-                        || LoftAccess != UneditedData.LoftAccess
-                        || RoofInsulated != UneditedData.RoofInsulated
-                        || HasOutdoorSpace != UneditedData.HasOutdoorSpace
-                        || GlazingType != UneditedData.GlazingType
-                        || HeatingType != UneditedData.HeatingType
-                        || OtherHeatingType != UneditedData.OtherHeatingType
-                        || HasHotWaterCylinder != UneditedData.HasHotWaterCylinder
-                        || NumberOfOccupants != UneditedData.NumberOfOccupants
-                        || HeatingPattern != UneditedData.HeatingPattern
-                        || HoursOfHeatingMorning != UneditedData.HoursOfHeatingMorning
-                        || HoursOfHeatingEvening != UneditedData.HoursOfHeatingEvening
-                        || Temperature != UneditedData.Temperature;
+        foreach (var propertyInfo in GetType().GetProperties())
+        {
+            if (propertyInfo.Name.Equals(nameof(PropertyDataId)) ||
+                propertyInfo.Name.Equals(nameof(Reference)) ||
+                propertyInfo.Name.Equals(nameof(Epc)) ||
+                propertyInfo.Name.Equals(nameof(UneditedData)) ||
+                propertyInfo.Name.Equals(nameof(PropertyRecommendations)))
+            {
+                continue;
+            }
+
+            if (propertyInfo.GetValue(this) != propertyInfo.GetValue(UneditedData))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void CopyAnswersTo(PropertyData other)
     {
-        other.Reference = Reference;
-        other.OwnershipStatus = OwnershipStatus;
-        other.Country = Country;
-        other.Epc = Epc;
-        other.Postcode = Postcode;
-        other.HouseNameOrNumber = HouseNameOrNumber;
-        other.PropertyType = PropertyType;
-        other.HouseType = HouseType;
-        other.BungalowType = BungalowType;
-        other.FlatType = FlatType;
-        other.YearBuilt = YearBuilt;
-        other.WallConstruction = WallConstruction;
-        other.CavityWallsInsulated = CavityWallsInsulated;
-        other.SolidWallsInsulated = SolidWallsInsulated;
-        other.FloorConstruction = FloorConstruction;
-        other.FloorInsulated = FloorInsulated;
-        other.RoofConstruction = RoofConstruction;
-        other.LoftSpace = LoftSpace;
-        other.LoftAccess = LoftAccess;
-        other.RoofInsulated = RoofInsulated;
-        other.HasOutdoorSpace = HasOutdoorSpace;
-        other.GlazingType = GlazingType;
-        other.HeatingType = HeatingType;
-        other.OtherHeatingType = OtherHeatingType;
-        other.HasHotWaterCylinder = HasHotWaterCylinder;
-        other.NumberOfOccupants = NumberOfOccupants;
-        other.HeatingPattern = HeatingPattern;
-        other.HoursOfHeatingMorning = HoursOfHeatingMorning;
-        other.HoursOfHeatingEvening = HoursOfHeatingEvening;
-        other.Temperature = Temperature;
-        other.PropertyRecommendations = PropertyRecommendations;
+        foreach (var propertyInfo in GetType().GetProperties())
+        {
+            if (propertyInfo.Name.Equals(nameof(PropertyDataId)) ||
+                propertyInfo.Name.Equals(nameof(Reference)) ||
+                propertyInfo.Name.Equals(nameof(Epc)) ||
+                propertyInfo.Name.Equals(nameof(UneditedData)) ||
+                propertyInfo.Name.Equals(nameof(PropertyRecommendations)))
+            {
+                continue;
+            }
+            
+            propertyInfo.SetValue(other, propertyInfo.GetValue(this));
+        }
     }
 }
