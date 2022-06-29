@@ -109,9 +109,6 @@ namespace SeaPublicWebsite.Services
             return page switch
             {
                 QuestionFlowPage.AskForPostcode => AskForPostcodeSkipLinkArguments(propertyData),
-                QuestionFlowPage.HomeAge => HomeAgeSkipLinkArguments(propertyData, entryPoint),
-                QuestionFlowPage.NumberOfOccupants => NumberOfOccupantsSkipLinkArguments(propertyData, entryPoint),
-                QuestionFlowPage.Temperature => TemperatureSkipLinkArguments(propertyData),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
@@ -875,28 +872,6 @@ namespace SeaPublicWebsite.Services
         {
             var reference = propertyData.Reference;
             return new PathByActionArguments(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new { reference  });
-        }
-
-        private PathByActionArguments HomeAgeSkipLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
-        {
-            var reference = propertyData.Reference;
-            return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
-                : new PathByActionArguments(nameof(EnergyEfficiencyController.WallConstruction_Get), "EnergyEfficiency", new { reference });
-        }
-
-        private PathByActionArguments NumberOfOccupantsSkipLinkArguments(PropertyData propertyData, QuestionFlowPage? entryPoint)
-        {
-            var reference = propertyData.Reference;
-            return entryPoint is not null
-                ? new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference })
-                : new PathByActionArguments(nameof(EnergyEfficiencyController.HeatingPattern_Get), "EnergyEfficiency", new { reference });
-        }
-
-        private PathByActionArguments TemperatureSkipLinkArguments(PropertyData propertyData)
-        {
-            var reference = propertyData.Reference;
-            return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference  });
         }
     }
 
