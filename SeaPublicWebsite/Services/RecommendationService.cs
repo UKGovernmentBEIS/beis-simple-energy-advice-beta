@@ -140,7 +140,7 @@ namespace SeaPublicWebsite.Services
             int[] breNormalDaysOffHours =
                 GetBreNormalDaysOffHours(propertyData.HoursOfHeatingMorning, propertyData.HoursOfHeatingEvening);
 
-            BreFloorType breFloorType = GetBreFloorType(propertyData.FloorConstruction, propertyData.FloorInsulated);
+            BreFloorType? breFloorType = GetBreFloorType(propertyData.FloorConstruction, propertyData.FloorInsulated);
 
             BreRequest request = new(
                 brePostcode: propertyData.Postcode,
@@ -470,7 +470,7 @@ namespace SeaPublicWebsite.Services
             return null;
         }
 
-        private static BreFloorType GetBreFloorType(FloorConstruction? floorConstruction, FloorInsulated? floorInsulated)
+        private static BreFloorType? GetBreFloorType(FloorConstruction? floorConstruction, FloorInsulated? floorInsulated)
         {
             return floorConstruction switch
             {
@@ -500,7 +500,7 @@ namespace SeaPublicWebsite.Services
                 },
                 FloorConstruction.Other => BreFloorType.DontKnow,
                 FloorConstruction.DoNotKnow => BreFloorType.DontKnow,
-                _ => throw new ArgumentOutOfRangeException()
+                _ => null
             };
         }
     }
