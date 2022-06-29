@@ -1,10 +1,19 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Controllers
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
-    ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.PropertyData.PropertyRecommendations.Count;
+    ViewBag.Title = "Recommendation " + (Model.RecommendationIndex + 1) + " of " + Model.PropertyRecommendations.Count;
     Layout = "_Layout";
+}
+
+@section BeforeMain {
+    @await Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = Model.BackLink
+    })
 }
 
 <div class="govuk-grid-row">
@@ -14,16 +23,18 @@
     
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.PropertyRecommendation.Key})" method="post" novalidate>
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.Recommendation_Post),
+                          "EnergyEfficiency",
+                          new {id = (int) Model.GetCurrentPropertyRecommendation().Key})" method="post" novalidate>
 
             @Html.AntiForgeryToken()
-            @Html.HiddenFor(m => m.PropertyData.Reference)
+            @Html.HiddenFor(m => m.FromActionPlan)
 
             <span class="govuk-caption-l">
-                Recommendation @(Model.GetCurrentIndex() + 1) of @Model.PropertyData.PropertyRecommendations.Count
+                Recommendation @(Model.RecommendationIndex + 1) of @Model.PropertyRecommendations.Count
             </span>
             <h1 class="govuk-heading-l">
-                @Model.PropertyRecommendation.Title
+                @Model.GetCurrentPropertyRecommendation().Title
             </h1>
 
             @await RenderSectionAsync("RecommendationBody", true)
@@ -61,8 +72,9 @@
                         Value = new SummaryListRowValue
                         {
                             Classes = "sea-recommendation-impact govuk-!-padding-right-0",
-                            // TODO: Change this. seabeta-569
-                            Html = ViewBag.Distruption
+                            Html = @<text>
+                                       @await Html.GovUkTag(Model.DisruptionTagViewModel)
+                                    </text>
                         }
                     },
                     new()
@@ -75,8 +87,9 @@
                         Value = new SummaryListRowValue
                         {
                             Classes = "sea-recommendation-impact govuk-!-padding-right-0",
-                            // TODO: Change this. seabeta-569
-                            Html = ViewBag.Duration
+                            Html = @<text>
+                                       @await Html.GovUkTag(Model.DurationTagViewModel)
+                                    </text>
                         }
                     }
                 }

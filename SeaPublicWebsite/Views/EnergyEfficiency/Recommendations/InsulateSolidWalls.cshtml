@@ -54,12 +54,19 @@
 
 @section RecommendationLifetime
 {
-    <p class="govuk-body">Solid wall insulation is expected to last <b>around @Model.PropertyRecommendation.Lifetime years</b></p>
+    <p class="govuk-body">Solid wall insulation is expected to last <b>around @Model.GetCurrentPropertyRecommendation().Lifetime years</b></p>
 }
 
 @{
-    Func<object, object> distruption = @<strong class="govuk-tag govuk-tag--red">MEDIUM TO VERY SIGNIFICANT</strong>;
-    ViewBag.Distruption = distruption;
-    Func<object, object> duration = @<strong class="govuk-tag govuk-tag--red">SEVERAL DAYS</strong>;
-    ViewBag.Duration = duration;
+    Model.DisruptionTagViewModel = new TagViewModel
+    {
+        Classes = "govuk-tag--red",
+        Text = "MEDIUM TO VERY SIGNIFICANT"
+    };
+    
+    Model.DurationTagViewModel = new TagViewModel
+    {
+        Classes = "govuk-tag--red",
+        Text = "SEVERAL DAYS"
+    };
 }

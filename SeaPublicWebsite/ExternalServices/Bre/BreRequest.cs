@@ -38,7 +38,7 @@
 
         public int glazing_type { get; set; }
         
-        public int floor_type { get; set; }
+        public int? floor_type { get; set; }
 
         public BreRequest(
             string brePostcode,
@@ -55,7 +55,7 @@
             BreHeatingPatternType breHeatingPatternType,
             int[] breNormalDaysOffHours,
             decimal? breTemperature,
-            BreFloorType breFloorType
+            BreFloorType? breFloorType
         )
         {
             postcode = brePostcode;
@@ -84,7 +84,7 @@
             {
                 "A", "B", "Q", "Q1", breFloorType != BreFloorType.DontKnow ? "W1": null, "C", "G", "L2", "O", "U"
             };
-            floor_type = (int) breFloorType;
+            floor_type = (int?) breFloorType;
         }
     }
 }

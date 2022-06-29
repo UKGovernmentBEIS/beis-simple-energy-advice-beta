@@ -1,16 +1,5 @@
-@using GovUkDesignSystem
-@using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Controllers
 @{
     ViewBag.Title = $"Accessibility statement on {Constants.SERVICE_NAME}";
-}
-
-@section BeforeMain {
-    @await Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        OverrideWithJavascript = true
-    })
 }
 
 <div class="govuk-grid-row">

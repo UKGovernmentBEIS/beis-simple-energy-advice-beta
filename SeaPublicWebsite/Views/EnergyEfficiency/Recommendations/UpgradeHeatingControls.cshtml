@@ -49,12 +49,19 @@
 
 @section RecommendationLifetime
 {
-    <p class="govuk-body">Heating controls are typically expected to last <b>around @Model.PropertyRecommendation.Lifetime years</b></p>
+    <p class="govuk-body">Heating controls are typically expected to last <b>around @Model.GetCurrentPropertyRecommendation().Lifetime years</b></p>
 }
 
 @{
-    Func<object, object> distruption = @<strong class="govuk-tag govuk-tag--green">MINIMAL</strong>;
-    ViewBag.Distruption = distruption;
-    Func<object, object> duration = @<strong class="govuk-tag govuk-tag--green">LESS THAN A DAY</strong>;
-    ViewBag.Duration = duration;
+    Model.DisruptionTagViewModel = new TagViewModel
+    {
+        Classes = "govuk-tag--green",
+        Text = "MINIMAL"
+    };
+    
+    Model.DurationTagViewModel = new TagViewModel
+    {
+        Classes = "govuk-tag--green",
+        Text = "LESS THAN A DAY"
+    };
 }
