@@ -114,6 +114,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("OwnershipStatus", viewModel);
         }
 
@@ -145,6 +148,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("Country", viewModel);
         }
 
@@ -175,6 +181,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
             
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("ServiceUnsuitable", viewModel);
         }
 
@@ -190,6 +199,10 @@ namespace SeaPublicWebsite.Controllers
                 FindEpc = propertyData.FindEpc,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
             };
+            
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("FindEpc", viewModel);
         }
 
@@ -234,6 +247,9 @@ namespace SeaPublicWebsite.Controllers
                 SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("AskForPostcode", viewModel);
         }
 
@@ -287,6 +303,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("ConfirmAddress", viewModel);
         
         }
@@ -331,6 +350,10 @@ namespace SeaPublicWebsite.Controllers
                 Epc = propertyData.Epc,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
             };
+            
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("ConfirmEpcDetails", viewModel);
         }
 
@@ -386,6 +409,10 @@ namespace SeaPublicWebsite.Controllers
                 Reference = propertyData.Reference,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
             };
+            
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("NoEpcFound", viewModel);
         }
 
@@ -417,6 +444,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("PropertyType", viewModel);
         }
 
@@ -449,6 +479,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("HouseType", viewModel);
         }
 
@@ -482,6 +515,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("BungalowType", viewModel);
         }
 
@@ -515,6 +551,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("FlatType", viewModel);
         }
 
@@ -550,6 +589,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("HomeAge", viewModel);
         }
 
@@ -581,6 +623,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
             
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("CheckYourUnchangeableAnswers", viewModel);
         }
 
@@ -614,6 +659,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("WallConstruction", viewModel);
         }
 
@@ -649,6 +697,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("CavityWallsInsulated", viewModel);
         }
 
@@ -683,6 +734,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("SolidWallsInsulated", viewModel);
         }
 
@@ -717,6 +771,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("FloorConstruction", viewModel);
         }
 
@@ -751,6 +808,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("FloorInsulated", viewModel);
         }
 
@@ -784,6 +844,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("RoofConstruction", viewModel);
         }
 
@@ -816,6 +879,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("LoftSpace", viewModel);
         }
 
@@ -848,6 +914,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("LoftAccess", viewModel);
         }
         
@@ -881,6 +950,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("RoofInsulated", viewModel);
         }
 
@@ -915,6 +987,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("GlazingType", viewModel);
         }
 
@@ -947,6 +1022,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("OutdoorSpace", viewModel);
         }
 
@@ -981,6 +1059,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("HeatingType", viewModel);
         }
 
@@ -1014,6 +1095,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("OtherHeatingType", viewModel);
         }
 
@@ -1048,6 +1132,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("HotWaterCylinder", viewModel);
         }
 
@@ -1065,7 +1152,6 @@ namespace SeaPublicWebsite.Controllers
                 QuestionFlowPage.HotWaterCylinder, 
                 viewModel.EntryPoint);
         }
-
         
         [HttpGet("number-of-occupants/{reference}")]
         public async Task<IActionResult> NumberOfOccupants_Get(string reference, QuestionFlowPage? entryPoint = null)
@@ -1081,6 +1167,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("NumberOfOccupants", viewModel);
         }
 
@@ -1107,7 +1196,6 @@ namespace SeaPublicWebsite.Controllers
                 QuestionFlowPage.NumberOfOccupants, 
                 viewModel.EntryPoint);
         }
-
         
         [HttpGet("heating-pattern/{reference}")]
         public async Task<IActionResult> HeatingPattern_Get(string reference, QuestionFlowPage? entryPoint = null)
@@ -1125,6 +1213,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("HeatingPattern", viewModel);
         }
 
@@ -1148,7 +1239,6 @@ namespace SeaPublicWebsite.Controllers
                 QuestionFlowPage.HeatingPattern, 
                 viewModel.EntryPoint);
         }
-
         
         [HttpGet("temperature/{reference}")]
         public async Task<IActionResult> Temperature_Get(string reference, QuestionFlowPage? entryPoint = null)
@@ -1164,6 +1254,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("Temperature", viewModel);
         }
 
@@ -1211,6 +1304,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
             
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("AnswerSummary", viewModel);
         }
 
@@ -1271,6 +1367,12 @@ namespace SeaPublicWebsite.Controllers
             }
             
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            
+            // Arriving here means the user used the reference code or the magic link,
+            // so we mark the user as a returning user
+            propertyData.ReturningUser = true;
+            await propertyDataStore.SavePropertyDataAsync(propertyData);
+            
             var recommendations = propertyData.PropertyRecommendations;
             if (!recommendations.Any())
             {
@@ -1296,6 +1398,10 @@ namespace SeaPublicWebsite.Controllers
             {
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
+            
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_AFTER_ANSWER_SUMMARY;
             return View("NoRecommendations", viewModel);
         }
 
@@ -1311,6 +1417,10 @@ namespace SeaPublicWebsite.Controllers
                 HasEmailAddress = false,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
+            
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_AFTER_ANSWER_SUMMARY;
             return View("YourRecommendations", viewModel);
         }
 
@@ -1380,6 +1490,9 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = backLink
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_AFTER_ANSWER_SUMMARY;
             return View("recommendations/" + Enum.GetName(recommendationKey), viewModel);
         }
 
@@ -1425,6 +1538,9 @@ namespace SeaPublicWebsite.Controllers
                 EmailAddress = emailAddress
             };
 
+            ViewBag.FeedbackUrl = propertyData.ReturningUser
+                ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
+                : Constants.FEEDBACK_URL_BANNER_AFTER_ANSWER_SUMMARY;
             if (viewModel.GetSavedRecommendations().Any())
             {
                 return View("ActionPlan/ActionPlanWithSavedRecommendations", viewModel);
