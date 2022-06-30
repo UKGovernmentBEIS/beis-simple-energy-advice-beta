@@ -12,10 +12,6 @@
     {
         Text = "Back",
         Href = Model.BackLink,
-        
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = false
     })
 }
 
@@ -66,7 +62,7 @@
         <p class="govuk-body">This service is still in its early stages and under active development. </p>
         <p class="govuk-body">Your feedback can help us to shape how the service develops so that it can best serve the needs of the public.  </p>
         <p class="govuk-body">
-            <a href="@Url.Action(nameof(FeedbackController.FeedbackSurvey_Get), "Feedback")" class="govuk-link">
+            <a href="@Constants.FEEDBACK_URL" class="govuk-link">
                 Leave some feedback for this service
             </a>
         </p>

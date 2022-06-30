@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.Controllers
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.YourRecommendationsViewModel
 @{
@@ -12,10 +13,6 @@
     {
         Text = "Back",
         Href = Model.BackLink,
-
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = false
     })
 }
 
@@ -62,7 +59,7 @@
             <span class="govuk-heading-l" id="subsection-title">@Model.Reference</span>
         </div>
 
-        <form method="post" action="@Url.Action("YourRecommendations_Post", "EnergyEfficiency")">
+        <form method="post" action="@Url.Action(nameof(EnergyEfficiencyController.YourRecommendations_Post), "EnergyEfficiency")">
 
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.NumberOfPropertyRecommendations)

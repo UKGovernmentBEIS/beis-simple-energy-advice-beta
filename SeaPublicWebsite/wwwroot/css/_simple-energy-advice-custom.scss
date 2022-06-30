@@ -246,6 +246,10 @@
     }
 }
 
+.sea-saved-recommendations-table {
+    overflow-x: auto;
+}
+
 .sea-saved-recommendations-table-headers {
     @media (max-width: 640px) {
         border: none;
@@ -291,4 +295,32 @@
 .sea-epc-hint {
     background: #EFF4F9;
     border-left: 10px solid #1D70B8;
+}
+
+.sea-email-sent {
+    color: govuk-colour("green");
+    font-weight: 700;
+}
+
+// Source: https://stackoverflow.com/questions/1367409/how-to-make-button-look-like-a-link
+.sea-button-as-link {
+    align-items: normal;
+    background-color: rgba(0,0,0,0);
+    border-color: rgb(29, 112, 184);
+    border-style: none;
+    box-sizing: content-box;
+    color: rgb(29, 112, 184);
+    cursor: pointer;
+    display: inline;
+    font: inherit;
+    height: auto;
+    padding: 0;
+    perspective-origin: 0 0;
+    text-align: start;
+    text-decoration: underline;
+    transform-origin: 0 0;
+    width: auto;
+    -moz-appearance: none;
+    -webkit-logical-height: 1em; /* Chrome ignores auto, so we have to use this hack to set the correct height  */
+    -webkit-logical-width: auto; /* Chrome ignores auto, but here for completeness */
 }

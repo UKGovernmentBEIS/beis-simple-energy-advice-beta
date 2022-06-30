@@ -1,0 +1,37 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
+
+@section BeforeMain {
+    @await Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = Model.BackLink,
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-xl">
+            Your Action Plan
+        </h1>
+        
+        <p class="govuk-body">
+            You told us that you don’t want to proceed with any of the recommendations suggested to you. 
+            There are still some options for you to consider.
+        </p>
+        
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_AvailableSchemesOrGrants", Model); }
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_LowCostMeasures", Model); }
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_DiscardedRecommendations", Model); }
+        
+        <h2 class="govuk-heading-m">Still need help?</h2>
+        <p class="govuk-body">
+            You can find out more by visiting the
+            <a href="https://energysavingtrust.org.uk/">Energy Saving Trust</a>
+            website for other ways to save energy and reduce your bills.
+        </p>
+        
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_ReturnToActionPlan", Model); }
+    </div>
+</div>

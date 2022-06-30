@@ -91,6 +91,12 @@ namespace SeaPublicWebsite.Helpers
             {
                 propertyData.HasHotWaterCylinder = null;
             }
+
+            if (propertyData.HeatingPattern is not HeatingPattern.Other)
+            {
+                propertyData.HoursOfHeatingMorning = null;
+                propertyData.HoursOfHeatingEvening = null;
+            }
         }
     }
 }

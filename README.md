@@ -82,6 +82,10 @@ Fill in the opened `secrets.json` file with:
 
     "GovUkNotify": {
         "ApiKey": "<REAL_VALUE_HERE>"
+    },
+   
+    "GoogleAnalytics": {
+        "ApiSecret": "REAL_VALUE_HERE"
     }
 }
 ```
@@ -109,6 +113,12 @@ Fill in the opened `secrets.json` file with:
 
 - In the terminal (from the solution directory) run `dotnet ef migrations add <YOUR_MIGRATION_NAME> --project .\SeaPublicWebsite.Data --startup-project .\SeaPublicWebsite`
 - Then update the local database
+
+### Reverting Migrations
+
+You may want to revert a migration on your local database as part of a merge, or just because it's wrong and you need to fix it (only do this for migrations that haven't been merged to main yet)
+- Run `dotnet ef database update <MIGRATION_BEFORE_YOURS> --project .\SeaPublicWebsite` to rollback your local database
+- Run `dotnet ef migrations remove --project .\SeaPublicWebsite.Data --startup-project .\SeaPublicWebsite` to delete the migration and undo the snapshot changes
 
 #### Merging Migrations
 

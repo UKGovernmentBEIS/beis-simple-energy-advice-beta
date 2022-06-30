@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Models.EnergyEfficiency
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.Controllers
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.ConfirmAddressViewModel
 @{
@@ -12,123 +13,68 @@
     {
         Text = "Back",
         Href = Model.BackLink,
-        
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = false
     })
 }
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        @if (!Model.EpcInformationList.Any())
-        {
-            <h1 class="govuk-heading-l">
-                We could not find an EPC for this address
-            </h1>
-        
-            <p class="govuk-body">
-                We were unable to find an EPC for this address or all previous EPCs have expired.
-            </p>
-        
-            <p class="govuk-body">
-                You can still continue using the service.
-            </p>
-
-            @await Html.GovUkButton(new ButtonViewModel
-            {
-                Href = Url.Action("PropertyType_Get", "EnergyEfficiency", new {reference = Model.Reference}),
-                Text = "Continue"
-            })
-        }
-        else
-        {
-            <form action="@Url.Action("ConfirmAddress_Post", "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.ConfirmAddress_Post), "EnergyEfficiency", new { reference = Model.Reference, postcode = Model.Postcode, number = Model.Number })" method="post" novalidate>
 
                 @Html.AntiForgeryToken()
-                @if (Model.EpcInformationList.Count == 1)
-                {
-                    @Html.HiddenFor(m => m.SelectedEpcId)
-                    <h1 class="govuk-heading-l">
-                        Is this your address?
-                    </h1>
+                
+                <p class="govuk-caption-l">
+                    Find your EPC
+                </p>
 
-                    @await Html.GovUkSummaryList(new SummaryListViewModel
+                @await Html.GovUkRadiosFromStringsFor(m => m.SelectedEpcId,
+                    radioOptions: Model.EpcOptionsWithUnlistedOption(),
+                    fieldsetOptions: new FieldsetViewModel
                     {
-                        Rows = new List<SummaryListRowViewModel>
+                        Legend = new LegendViewModel
                         {
-                            new()
-                            {
-                                Key = new()
-                                {
-                                    Text = "Address"
-                                },
-                                Value = new()
-                                {
-                                    Html = @<text>
-                                               @(Model.EpcInformationList[0].Address1)<br/>
-                                               @if (!string.IsNullOrWhiteSpace(Model.EpcInformationList[0].Address2))
-                                               {
-                                                   @(Model.EpcInformationList[0].Address2)
-                                                   <br/>
-                                               }
-                                               @(Model.EpcInformationList[0].Postcode)
-                                            </text>
-                                },
-                                Actions = new SummaryListRowActionViewModel
-                                {
-                                    Items = new List<SummaryListRowActionItemViewModel>
-                                    {
-                                        new()
-                                        {
-                                            Html = @<text>
-                                                       Change<span class="govuk-visually-hidden"> address</span>
-                                                    </text>,
-                                            Href = @Url.Action("AskForPostcode_Get", "EnergyEfficiency", new { reference = Model.Reference })
-                                        }
-                                    }
-                                }
-                            }
-
+                            Text = "We found multiple Energy Performance Certificates that might be yours",
+                            Classes = "govuk-fieldset__legend--l",
+                            IsPageHeading = true
                         }
-                    })
-                }
-                else
-                {
-                    @await Html.GovUkRadiosFromStringsFor(m => m.SelectedEpcId,
-                        radioOptions: Model.EpcInformationList.ToDictionary(
-                            epc => epc.EpcId,
-                            epc => new LabelViewModel
-                            {
-                                Text = epc.Address1 + (epc.Address2 != "" ? ", " + epc.Address2 : "")
-                            }),
-                        fieldsetOptions: new FieldsetViewModel
+                    },
+                    new HintViewModel
+                    {
+                        Html = @<text>
+                                   <p class="govuk-body">
+                                       One of these certificates may be registered to your property or to the properties nearby that share part of your address.
+                                   </p>
+                                   <p class="govuk-body">
+                                       Your address may not be listed here if it does not have a registered certificate.
+                                   </p>
+                                   <p class="govuk-heading-m">
+                                       Choose your address
+                                   </p>
+                                   <p class="govuk-hint">
+                                       Please choose your address if it is listed, otherwise choose ‘My address is not listed here’
+                                   </p>
+                                </text>
+                    },
+                    conditionalOptions: new Dictionary<string, Conditional>
+                    {
                         {
-                            Legend = new LegendViewModel
+                            "unlisted",
+                            new Conditional
                             {
-                                Html = @<text>
-                                           <h1 class="govuk-fieldset__heading">
-                                               Select your address
-                                           </h1>
-                                        </text>,
-                                Classes = "govuk-fieldset__legend--l"
+                                Html = (@<text>
+                                            <p class="govuk-hint">You can still continue to use this service as there are further questions that can help determine the kind of measures you can take.</p>
+                                         </text>)
                             }
-                        })
-                }
+                        }
+                    }
+                )
 
                 <div class="govuk-button-group">
                     @(await Html.GovUkButton(new ButtonViewModel
                     {
-                        Text = (Model.EpcInformationList.Count == 1 ? "Yes, continue" : "Continue"),
-
+                        Text = "Continue",
                     }))
-                    <a href=@Url.Action("PropertyType_Get", "EnergyEfficiency", new { reference = Model.Reference })
-                       class="govuk-link">
-                        @(Model.EpcInformationList.Count == 1 ? "No, skip this question" : "Address not listed above")
-                    </a>
                 </div>
-                
+
             </form>
-        }
     </div>
 </div>

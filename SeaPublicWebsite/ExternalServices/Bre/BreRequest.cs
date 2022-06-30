@@ -6,7 +6,7 @@
 
         public int num_storeys { get; set; }
 
-        public string heating_fuel { get; set; }
+        public int heating_system { get; set; }
 
         public string property_type { get; set; }
 
@@ -15,8 +15,6 @@
         public int num_bedrooms { get; set; }
 
         public string flat_level { get; set; }
-
-        public string postcode { get; set; }
 
         public bool? hot_water_cylinder { get; set; }
 
@@ -37,9 +35,10 @@
         public int wall_type { get; set; }
 
         public int glazing_type { get; set; }
+        
+        public int? floor_type { get; set; }
 
         public BreRequest(
-            string brePostcode,
             BrePropertyType brePropertyType,
             BreBuiltForm breBuiltForm,
             BreFlatLevel? breFlatLevel,
@@ -47,15 +46,15 @@
             BreWallType breWallType,
             BreRoofType? breRoofType,
             BreGlazingType breGlazingType,
-            BreHeatingFuel breHeatingFuel,
+            BreHeatingSystem breHeatingSystem,
             bool? breHotWaterCylinder,
             int? breOccupants,
             BreHeatingPatternType breHeatingPatternType,
             int[] breNormalDaysOffHours,
-            decimal? breTemperature
+            decimal? breTemperature,
+            BreFloorType? breFloorType
         )
         {
-            postcode = brePostcode;
             property_type = ((int) brePropertyType).ToString();
             built_form = ((int) breBuiltForm).ToString();
             flat_level = ((int?) breFlatLevel).ToString();
@@ -65,7 +64,7 @@
             roof_type = (int?) breRoofType;
             glazing_type = (int) breGlazingType;
             //no input for outdoor heater space in BRE API
-            heating_fuel = ((int) breHeatingFuel).ToString();
+            heating_system = (int) breHeatingSystem;
             hot_water_cylinder = breHotWaterCylinder;
             occupants = breOccupants;
             heating_pattern_type = (int) breHeatingPatternType;
@@ -76,11 +75,12 @@
             //peer-reviewed assumption (question to be added for this):
             num_bedrooms = breOccupants ?? 1;
             measures = true;
-            //measures_package consists of all measures implemented in the BRE API as of May 2021
+            //measures_package consists of all measures implemented in the BRE API as of May 2021, W1 being conditionally blocked is peer-reviewed
             measures_package = new[]
             {
-                "A", "B", "Q", "Q1", "W1", "C", "G", "L2", "O", "U"
+                "A", "B", "Q", "Q1", breFloorType != BreFloorType.DontKnow ? "W1": null, "C", "G", "L2", "O", "U"
             };
+            floor_type = (int?) breFloorType;
         }
     }
 }

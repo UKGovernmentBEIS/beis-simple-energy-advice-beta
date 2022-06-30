@@ -2,6 +2,7 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
+@using SeaPublicWebsite.Controllers
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.RoofInsulatedViewModel
 @{
@@ -13,17 +14,13 @@
     {
         Text = "Back",
         Href = Model.BackLink,
-        
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = false
     })
 }
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("RoofInsulated_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.RoofInsulated_Post), "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
             @Html.AntiForgeryToken()
             
@@ -40,7 +37,7 @@
                     var insulated = Model.Epc?.RoofInsulated is RoofInsulated.Yes;
                     epcHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests your
+                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your
                             <strong>
                                 loft is @(insulated ? "" : "not") fully insulated
                             </strong>

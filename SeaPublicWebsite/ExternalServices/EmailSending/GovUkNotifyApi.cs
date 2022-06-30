@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using GovUkDesignSystem.Attributes;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Notify.Client;
 using Notify.Exceptions;
 using Notify.Models.Responses;
-using SeaPublicWebsite.Models.Feedback;
 
 namespace SeaPublicWebsite.ExternalServices.EmailSending
 {
@@ -13,11 +11,13 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
     {
         private readonly NotificationClient client;
         private readonly GovUkNotifyConfiguration govUkNotifyConfig;
-
-        public GovUkNotifyApi(IOptions<GovUkNotifyConfiguration> config)
+        private readonly ILogger<GovUkNotifyApi> logger;
+        
+        public GovUkNotifyApi(IOptions<GovUkNotifyConfiguration> config, ILogger<GovUkNotifyApi> logger)
         {
             govUkNotifyConfig = config.Value;
             client = new NotificationClient(govUkNotifyConfig.ApiKey);
+            this.logger = logger;
         }
 
         private EmailNotificationResponse SendEmail(GovUkNotifyEmailModel emailModel)
@@ -39,6 +39,7 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
                     throw new EmailSenderException(EmailSenderExceptionType.InvalidEmailAddress);
                 }
 
+                logger.LogError("GOV.UK Notify returned an error: " + e.Message);
                 throw new EmailSenderException(EmailSenderExceptionType.Other);
             }
         }
@@ -48,7 +49,10 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
             var template = govUkNotifyConfig.ApplicationReferenceNumberTemplate;
             var personalisation = new Dictionary<string, dynamic>
             {
-                { template.ReferencePlaceholder, reference }
+                { template.ReferencePlaceholder, reference },
+                { template.MagicLinkPlaceholder, govUkNotifyConfig.BaseUrl + "returning-user/" + reference },
+                { template.ReturningUserLinkPlaceholder, govUkNotifyConfig.BaseUrl + "new-or-returning-user" },
+                { template.FeedbackLinkPlaceholder, Constants.FEEDBACK_URL }
             };
             var emailModel = new GovUkNotifyEmailModel
             {
@@ -74,57 +78,6 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
             };
             var response = SendEmail(emailModel);
         }
-
-        public void SendFeedbackFormResponseEmail(string whatUserWasDoing, string whatUserToldUs)
-        {
-            var template = govUkNotifyConfig.FeedbackFormResponseTemplate;
-            var personalisation = new Dictionary<string, dynamic>
-            {
-                { template.WhatUserWasDoingPlaceholder, whatUserWasDoing },
-                { template.WhatUserToldUsPlaceholder, whatUserToldUs }
-            };
-            var emailModel = new GovUkNotifyEmailModel
-            {
-                EmailAddress = govUkNotifyConfig.FeedbackCollectingEmailAddress,
-                TemplateId = template.Id,
-                Personalisation = personalisation
-            };
-            var response = SendEmail(emailModel);
-        }
-        
-        public void SendFeedbackSurveyResponseEmail(FeedbackSurveyViewModel feedback)
-        {
-            var template = govUkNotifyConfig.FeedbackSurveyResponseTemplate;
-            var visitReason = string.Join('\n', feedback.VisitReasonList.Select(
-                r => r is VisitReason.Other 
-                    ? feedback.OtherReason 
-                    : GovUkRadioCheckboxLabelTextAttribute.GetLabelText(r)));
-            var foundInformation = feedback.FoundInformation is FoundInformation.Yes
-                ? "Yes"
-                : "No. " + feedback.NotFoundInformationDetails;
-            var howInformationHelped = string.Join('\n', feedback.HowInformationHelpedList.Select(
-                r => r is HowInformationHelped.Other 
-                    ? feedback.OtherHelp 
-                    : GovUkRadioCheckboxLabelTextAttribute.GetLabelText(r)));
-            var whatPlannedToDo = string.Join('\n', feedback.WhatPlannedToDoList.Select(
-                r => r is WhatPlannedToDo.Other
-                    ? feedback.OtherPlan 
-                    : GovUkRadioCheckboxLabelTextAttribute.GetLabelText(r)));
-            var personalisation = new Dictionary<string, dynamic>
-            {
-                { template.VisitReasonPlaceholder, visitReason },
-                { template.FoundInformationPlaceholder, foundInformation},
-                { template.HowInformationHelpedPlaceholder, howInformationHelped },
-                { template.WhatPlannedToDoPlaceholder, whatPlannedToDo },
-            };
-            var emailModel = new GovUkNotifyEmailModel
-            {
-                EmailAddress = govUkNotifyConfig.FeedbackCollectingEmailAddress,
-                TemplateId = template.Id,
-                Personalisation = personalisation
-            };
-            var response = SendEmail(emailModel);
-        }
     }
 
     internal class GovUkNotifyEmailModel
@@ -135,6 +88,4 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
         public string Reference { get; set; }
         public string EmailReplyToId { get; set; }
     }
-    
-    
 }
