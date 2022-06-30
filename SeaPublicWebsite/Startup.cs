@@ -170,7 +170,7 @@ namespace SeaPublicWebsite
 
         private void ConfigureHttpBasicAuth(IApplicationBuilder app)
         {
-            if (!webHostEnvironment.IsProduction())
+            if (!webHostEnvironment.IsProduction() && !webHostEnvironment.IsEnvironment("loadtest"))
             {
                 // Add HTTP Basic Authentication in our non-production environments to make sure people don't accidentally stumble across the site
                 app.UseMiddleware<BasicAuthMiddleware>();
