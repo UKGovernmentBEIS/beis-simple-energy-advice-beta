@@ -55,7 +55,7 @@ namespace SeaPublicWebsite
             ConfigureDatabaseContext(services);
             ConfigureGoogleAnalyticsService(services);
 
-            if (!webHostEnvironment.IsProduction())
+            if (!webHostEnvironment.IsProduction() && !webHostEnvironment.IsEnvironment("loadtest"))
             {
                 services.Configure<BasicAuthMiddlewareConfiguration>(
                     configuration.GetSection(BasicAuthMiddlewareConfiguration.ConfigSection));
