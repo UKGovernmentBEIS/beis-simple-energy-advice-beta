@@ -45,7 +45,7 @@
                 {
                     epcHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests your property was built
+                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your property was built
                             <strong>
                                 @(Model.Epc?.ConstructionAgeBand switch {
                                     HomeAge.Pre1900 or HomeAge.From1900To1929 => "before 1930.",

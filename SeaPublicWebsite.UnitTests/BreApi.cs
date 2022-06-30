@@ -18,7 +18,6 @@ public class BreApi
         
         //Act
         BreRequest request = new(
-            brePostcode: "",
             brePropertyType: BrePropertyType.House,
             breBuiltForm: BreBuiltForm.Detached,
             breFlatLevel: null,

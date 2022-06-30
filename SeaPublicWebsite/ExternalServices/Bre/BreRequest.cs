@@ -16,8 +16,6 @@
 
         public string flat_level { get; set; }
 
-        public string postcode { get; set; }
-
         public bool? hot_water_cylinder { get; set; }
 
         public decimal? living_room_temperature { get; set; }
@@ -41,7 +39,6 @@
         public int? floor_type { get; set; }
 
         public BreRequest(
-            string brePostcode,
             BrePropertyType brePropertyType,
             BreBuiltForm breBuiltForm,
             BreFlatLevel? breFlatLevel,
@@ -58,7 +55,6 @@
             BreFloorType? breFloorType
         )
         {
-            postcode = brePostcode;
             property_type = ((int) brePropertyType).ToString();
             built_form = ((int) breBuiltForm).ToString();
             flat_level = ((int?) breFlatLevel).ToString();
