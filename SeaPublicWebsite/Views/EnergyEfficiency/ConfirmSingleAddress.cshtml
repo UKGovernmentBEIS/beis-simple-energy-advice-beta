@@ -39,9 +39,7 @@
                 @await Html.GovUkNotificationBanner(new NotificationBannerViewModel
                 {
                     Type = "null",
-                    TitleHtml = @<text>
-                                    <div>Certificate</div>
-                                 </text>,
+                    TitleHtml = @<div>Certificate</div>,
                     Html = @<text>
                                <div class="govuk-!-font-weight-bold">Registered address</div>
                                @(Model.EpcSearchResult.Address1)<br/>
