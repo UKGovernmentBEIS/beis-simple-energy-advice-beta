@@ -43,7 +43,7 @@ namespace SeaPublicWebsite.ExternalServices.Bre
                     new RequestParameters
                     {
                         BaseAddress = configuration.BaseUrl,
-                        Path = "/bemapi/energy_use",
+                        Path = "/v2/energy_use",
                         Auth = new AuthenticationHeaderValue("Basic", wsseHeader),
                         Body = stringContent
                     }

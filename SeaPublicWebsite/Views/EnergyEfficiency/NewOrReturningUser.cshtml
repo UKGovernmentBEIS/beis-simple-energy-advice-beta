@@ -1,5 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.Controllers
 @using SeaPublicWebsite.Models.EnergyEfficiency
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.NewOrReturningUserViewModel
@@ -12,17 +14,13 @@
     {
         Text = "Back",
         Href = Model.BackLink,
-        
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = false
     })
 }
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form method="post" action="@Url.Action("NewOrReturningUser_Post", "EnergyEfficiency")">
+        <form method="post" action="@Url.Action(nameof(EnergyEfficiencyController.NewOrReturningUser_Post), "EnergyEfficiency")">
 
             @Html.AntiForgeryToken()
             @(await Html.GovUkRadiosFor(
@@ -73,8 +71,8 @@
             </p>
         </aside>
         <aside class="sea-user-reference" role="complementary">
-            <span class="govuk-caption-l">Example reference code</span>
-            <h2 class="govuk-heading-l govuk-!-padding-bottom-3" id="subsection-title">ABC123DE</h2>
+            <h2 class="govuk-caption-l govuk-!-margin-top-1">Example reference code</h2>
+            <span class="govuk-heading-l govuk-!-padding-bottom-3" id="subsection-title">ABC123DE</span>
         </aside>
     </div>
 </div>

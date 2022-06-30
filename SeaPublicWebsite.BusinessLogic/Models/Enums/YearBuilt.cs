@@ -16,4 +16,6 @@ public enum YearBuilt
     From1996To2011,
     [GovUkRadioCheckboxLabelText(Text = "2012 or newer")]
     From2012ToPresent,
+    [GovUkRadioCheckboxLabelText(Text = "I don't know")]
+    DoNotKnow
 }

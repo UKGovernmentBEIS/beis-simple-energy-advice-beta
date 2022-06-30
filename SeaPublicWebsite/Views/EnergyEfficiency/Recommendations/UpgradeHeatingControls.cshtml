@@ -3,133 +3,65 @@
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
-    ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.PropertyData.PropertyRecommendations.Count;
+    Layout = "_Recommendation";
 }
 
-@section BeforeMain {
-    @await Html.GovUkBackLink(new BackLinkViewModel
+@section RecommendationBody
+{
+    <p class="govuk-body">
+        If you have a central heating system then it’s important you can control it effectively,
+        so that you can stay warm without wasting energy.
+    </p>
+
+    <p class="govuk-body">
+        The standard way to do that is to have a central programmer and thermostat to
+        manage when the heating is on and how much, as well as thermostatic radiator valves
+        (TRVs) to control the heating in each room.
+    </p>
+
+    <p class="govuk-body">
+        Alternatively, you may want to choose a smart heating controller to make it easier
+        to adjust the settings.
+    </p>
+
+    <p class="govuk-body govuk-!-margin-bottom-6">
+        You can find more information on heating controls on the
+        <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/thermostats-and-heating-controls/">
+            Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span>
+        </a>
+    </p>
+    
+    @await Html.GovUkWarningText(new WarningTextViewModel
     {
-        Text = "Back",
-        Href = "#",
-        
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = true
+        IconFallbackText = "Caution",
+        Text = "You will need a competent installer to fit new controls to your heating system."
     })
 }
 
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-third">
-        @{ await Html.RenderPartialAsync("Partials/YourActionPlanPartial.cshtml", Model); }
-    </div>
+@section RecommendationSuitableFor
+{
+    <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+        <li>
+            You have a central heating system with radiators and you do not already have a full set of controls.
+        </li>
+    </ul>
+}
+
+@section RecommendationLifetime
+{
+    <p class="govuk-body">Heating controls are typically expected to last <b>around @Model.GetCurrentPropertyRecommendation().Lifetime years</b></p>
+}
+
+@{
+    Model.DisruptionTagViewModel = new TagViewModel
+    {
+        Classes = "govuk-tag--green",
+        Text = "MINIMAL"
+    };
     
-    <div class="govuk-grid-column-two-thirds">
-
-                
-        <form action="@Url.Action("Recommendation_Post", "EnergyEfficiency", new {id = (int) Model.PropertyRecommendation.Key})" method="post" novalidate>
-
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(m => m.PropertyData.Reference)
-
-            <span class="govuk-caption-l">
-                Recommendation @(Model.GetCurrentIndex() + 1) of @Model.PropertyData.PropertyRecommendations.Count
-            </span>
-            <h1 class="govuk-heading-l">Upgrade your heating controls</h1>
-
-            <p class="govuk-body">
-                If you have a central heating system then it’s important you can control it effectively,
-                so that you can stay warm without wasting energy.
-            </p>
-
-            <p class="govuk-body">
-                The standard way to do that is to have a central programmer and thermostat to
-                manage when the heating is on and how much, as well as thermostatic radiator valves
-                (TRVs) to control the heating in each room.
-            </p>
-
-            <p class="govuk-body">
-                Alternatively, you may want to choose a smart heating controller to make it easier
-                to adjust the settings.
-            </p>
-
-            <p class="govuk-body govuk-!-margin-bottom-6">
-                You can find more information on heating controls on the
-                <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/thermostats-and-heating-controls/">
-                    Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span>
-                </a>
-            </p>
-
-            <div class="govuk-warning-text govuk-!-margin-bottom-7">
-                <span class="govuk-warning-text__icon  sea-warning-text__icon--long" aria-hidden="true">!</span>
-                <strong class="govuk-warning-text__text">
-                    <span class="govuk-warning-text__assistive">Caution</span>
-                    You will need a competent installer to fit new controls to your heating system.
-                </strong>
-            </div>
-
-            <h2 class="govuk-heading-m">Who this improvement is suitable for</h2>
-            <p class="govuk-body">You should consider this improvement for your property if:</p>
-            <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
-                <li>
-                    You have a central heating system with radiators and you do not already have a full set of controls.
-                </li>
-            </ul>
-            
-            <h2 class="govuk-heading-m ">
-                What you could save
-            </h2>
-
-            <p class="govuk-body">Heating controls are typically expected to last <b>around @Model.PropertyRecommendation.Lifetime years</b></p>
-
-            @{ await Html.RenderPartialAsync("Partials/WhatYouCouldSavePartial.cshtml", Model); }
-            
-            <div class="govuk-warning-text">
-                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                <strong class="govuk-warning-text__text">
-                    <span class="govuk-warning-text__assistive">Note</span>
-                    These figures are for a typical installation in a home like yours. 
-                    The costs and savings you experience will be affected by your circumstances, 
-                    the details of the installations, and future energy tariffs.
-                </strong>
-            </div>
-
-            <dl class="govuk-summary-list  govuk-!-margin-bottom-7">
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
-                        Will this cause disruption during installation?
-                    </dt>
-                    <dd class="govuk-summary-list__value sea-recommendation-impact govuk-!-padding-right-0">
-                        <strong class="govuk-tag govuk-tag--green">MINIMAL</strong>
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key govuk-!-width-two-thirds">
-                        How long could this take to install?
-                    </dt>
-                    <dd class="govuk-summary-list__value sea-recommendation-impact govuk-!-padding-right-0">
-                        <strong class="govuk-tag govuk-tag--green">LESS THAN A DAY</strong>
-                    </dd>
-                </div>
-            </dl>
-
-            @(await Html.GovUkRadiosFor(m => m.RecommendationAction,
-                fieldsetOptions: new FieldsetViewModel
-                {
-                    Legend = new LegendViewModel
-                    {
-                        Html = @<text>
-                                   <h1 class="govuk-fieldset__heading">
-                                       Would you consider this improvement for your property?
-                                   </h1>
-                                </text>,
-                        Classes = "govuk-fieldset__legend--l govuk-!-margin-bottom-4"
-                    }
-                }
-                ))
-
-            @{ await Html.RenderPartialAsync("Partials/ActionButtonsPartial.cshtml"); }
-
-        </form>
-        
-    </div>
-</div>
+    Model.DurationTagViewModel = new TagViewModel
+    {
+        Classes = "govuk-tag--green",
+        Text = "LESS THAN A DAY"
+    };
+}

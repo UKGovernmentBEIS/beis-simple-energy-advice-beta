@@ -1,4 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Controllers
 @model SeaPublicWebsite.Models.Cookies.CookieSettingsViewModel
 @{
     ViewBag.Title = $"Cookies on our service";
@@ -8,21 +11,14 @@
     <div class="govuk-grid-column-two-thirds">
         @if (Model.ChangesHaveBeenSaved)
         {
-            <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
-              <div class="govuk-notification-banner__header">
-                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
-                  Success
-                </h2>
-              </div>
-              <div class="govuk-notification-banner__content">
-                <p class="govuk-notification-banner__heading">
-                  You’ve set your cookie preferences.
-                </p>
-              </div>
-            </div>
+            @await Html.GovUkNotificationBanner(new NotificationBannerViewModel
+            {
+                Text = "You’ve set your cookie preferences.",
+                Type = "success"
+            })
         }
 
-        <form method="POST" action="@Url.Action("CookieSettings_Post", "Cookie")">
+        <form method="POST" action="@Url.Action(nameof(CookieController.CookieSettings_Post), "Cookie")">
             
             @Html.AntiForgeryToken()
             <h1 class="govuk-heading-xl">Cookies on our service</h1>
@@ -30,7 +26,7 @@
             <p class="govuk-body">We use cookies to store information about how you use our service, such as the pages you visit.</p>
             <p class="govuk-body">
                 This page has a brief explanation of each type of cookie we use. If you want more details,
-                <a href="@Url.Action("CookieDetails", "Cookie")" class="govuk-link"> read our detailed cookie information</a>
+                <a href="@Url.Action(nameof(CookieController.CookieDetails), "Cookie")" class="govuk-link"> read our detailed cookie information</a>
             </p>
 
             <h2 class="govuk-heading-l">Cookie settings</h2>
