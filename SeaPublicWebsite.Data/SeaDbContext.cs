@@ -20,5 +20,14 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
         modelBuilder.Entity<PropertyData>()
             .HasIndex(p => p.Reference)
             .IsUnique();
+        
+        modelBuilder.Entity<Epc>()
+            .Property<int>("PropertyDataId");
+        
+        modelBuilder.Entity<Epc>()
+            .HasOne<PropertyData>()
+            .WithOne(d => d.Epc)
+            .HasForeignKey<Epc>("PropertyDataId")
+            .IsRequired();
     }
 }
