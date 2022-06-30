@@ -89,10 +89,11 @@
                 {
                     Text = "Continue",
                 }))
-                <a href="@Model.SkipLink"
-                   class="govuk-link">
+                
+                <!-- We don't want to use the design library component since it adds additional styles we do not want -->
+                <button type="submit" class="sea-button-as-link govuk-link" name="cancel" value="true">
                     Cancel and continue without an EPC
-                </a>
+                </button>
             </div>
             
         </form>

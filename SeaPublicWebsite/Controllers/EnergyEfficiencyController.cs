@@ -181,7 +181,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new FindEpcViewModel
             {
                 Reference = propertyData.Reference,
-                FindEpc = propertyData.FindEpc,
+                FindEpc = propertyData.SearchForEpc,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
             };
             return View("FindEpc", viewModel);
@@ -197,10 +197,8 @@ namespace SeaPublicWebsite.Controllers
 
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
             
-            propertyData.FindEpc = viewModel.FindEpc;
-            propertyData.EpcAddressConfirmed = null;
+            propertyData.SearchForEpc = viewModel.FindEpc;
             propertyData.EpcDetailsConfirmed = null;
-            propertyData.EpcCount = null;
             propertyData.Epc = null;
             propertyData.PropertyType = null;
             propertyData.YearBuilt = null;
@@ -221,9 +219,6 @@ namespace SeaPublicWebsite.Controllers
             var skipArgs = questionFlowService.SkipLinkArguments(QuestionFlowPage.AskForPostcode, propertyData);
             var viewModel = new AskForPostcodeViewModel
             {
-                Postcode = propertyData.Postcode,
-                HouseNameOrNumber = propertyData.HouseNameOrNumber,
-                Reference = propertyData.Reference,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
                 SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
             };
@@ -232,8 +227,19 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpPost("postcode/{reference}")]
-        public async Task<IActionResult> AskForPostcode_Post(AskForPostcodeViewModel viewModel)
+        public async Task<IActionResult> AskForPostcode_Post(AskForPostcodeViewModel viewModel, bool cancel = false)
         {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
+            
+            if (cancel)
+            {
+                return await UpdatePropertyAndRedirect(
+                    // Behave as if the user had selected "No" on the page before
+                    p => { p.SearchForEpc = SearchForEpc.No; },
+                    viewModel.Reference,
+                    QuestionFlowPage.AskForPostcode);
+            }
+            
             if (viewModel.Postcode is not null && !(await postcodesIoApi.IsValidPostcode(viewModel.Postcode)))
             {
                 ModelState.AddModelError(nameof(AskForPostcodeViewModel.Postcode), "Enter a valid UK postcode");
@@ -243,72 +249,97 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await AskForPostcode_Get(viewModel.Reference);
             }
-            List<EpcInformation> epcInformationList = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(viewModel.Postcode, viewModel.HouseNameOrNumber);
-
-            return await UpdatePropertyAndRedirect(
-                p =>
-                {
-                    p.Postcode = viewModel.Postcode;
-                    p.HouseNameOrNumber = viewModel.HouseNameOrNumber;
-                    p.EpcCount = epcInformationList.Count;
-                    p.Epc = null;
-                    p.EpcDetailsConfirmed = null;
-                    p.EpcAddressConfirmed = EpcAddressConfirmed.No;
-                },
-                viewModel.Reference,
-                QuestionFlowPage.AskForPostcode);
-        }
-
-        
-        [HttpGet("address/{reference}")]
-        public async Task<ViewResult> ConfirmAddress_Get(string reference)
-        {
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            List<EpcInformation> epcInformationList = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(propertyData.Postcode, propertyData.HouseNameOrNumber);
-            var houseNameOrNumber = propertyData.HouseNameOrNumber;
-            var filteredEpcInformationList = epcInformationList.Where(e =>
-                e.Address1.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase) ||
-                e.Address2.Contains(houseNameOrNumber, StringComparison.OrdinalIgnoreCase)).ToList();
-
-            epcInformationList = filteredEpcInformationList.Any() ? filteredEpcInformationList : epcInformationList;
-
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.ConfirmAddress, propertyData);
-            var viewModel = new ConfirmAddressViewModel
-            {
-                Reference = reference,
-                EpcInformationList = epcInformationList,
-                SelectedEpcId = epcInformationList.Count == 1 ? epcInformationList[0].EpcId : null,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
-            };
-
-            return View("ConfirmAddress", viewModel);
-        
-        }
-
-        [HttpPost("address/{reference}")]
-        public async Task<IActionResult> ConfirmAddress_Post(ConfirmAddressViewModel viewModel, int epcCount)
-        {
-            if (epcCount != 1)
-            {
-                ModelState.Remove("EpcAddressConfirmed");
-            }
             
+            var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AskForPostcode, propertyData);
+
+            return RedirectToAction(
+                forwardArgs.Action,
+                forwardArgs.Controller,
+                // TODO: seabeta-579 we'd rather use the values from the question flow service
+                new { reference = viewModel.Reference, postcode = viewModel.Postcode, number = viewModel.HouseNameOrNumber });
+        }
+
+        
+        [HttpGet("address/{reference}/{postcode}/{number}")]
+        public async Task<ViewResult> ConfirmAddress_Get(string reference, string postcode, string number)
+        {
+            List<EpcSearchResult> epcSearchResults = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(postcode, number);
+            
+            var filteredEpcSearchResults = epcSearchResults.Where(e =>
+                e.Address1.Contains(number, StringComparison.OrdinalIgnoreCase) ||
+                e.Address2.Contains(number, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            epcSearchResults = filteredEpcSearchResults.Any() ? filteredEpcSearchResults : epcSearchResults;
+
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.ConfirmAddress, propertyData);
+            var backLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values);
+
+            if (epcSearchResults.Count == 0)
+            {
+                var viewModel = new NoEpcFoundViewModel
+                {
+                    Reference = reference,
+                    BackLink = backLink
+                };
+                return View("NoEpcFound", viewModel);
+            }
+            else if (epcSearchResults.Count == 1)
+            {
+                var viewModel = new ConfirmSingleAddressViewModel
+                {
+                    Reference = reference,
+                    BackLink = backLink,
+                    EpcSearchResult = epcSearchResults[0],
+                    Number = number,
+                    Postcode = postcode,
+                    EpcId = epcSearchResults[0].EpcId
+                };
+                return View("ConfirmSingleAddress", viewModel);
+            }
+            else
+            {
+                var viewModel = new ConfirmAddressViewModel
+                {
+                    Reference = reference,
+                    EpcSearchResults = epcSearchResults,
+                    Postcode = postcode,
+                    Number = number,
+                    BackLink = backLink
+                };
+
+                return View("ConfirmAddress", viewModel);
+            }
+        }
+
+        [HttpPost("address/{reference}/{postcode}/{number}")]
+        public async Task<IActionResult> ConfirmAddress_Post(ConfirmAddressViewModel viewModel)
+        {
             if (!ModelState.IsValid)
             {
-                return await ConfirmAddress_Get(viewModel.Reference);
+                return await ConfirmAddress_Get(viewModel.Reference, viewModel.Postcode, viewModel.Number);
             }
-
-            EpcAddressConfirmed epcAddressConfirmed = 
-                viewModel.SelectedEpcId != "unlisted" && viewModel.EpcAddressConfirmed != EpcAddressConfirmed.No
-                    ? EpcAddressConfirmed.Yes : EpcAddressConfirmed.No;
-            var epc = await epcApi.GetEpcForId(viewModel.SelectedEpcId);
+            
+            var epc = viewModel.SelectedEpcId == "unlisted" ? null : await epcApi.GetEpcForId(viewModel.SelectedEpcId);
+            
             return await UpdatePropertyAndRedirect(
-                p =>
-                {
-                    p.Epc = epc;
-                    p.EpcAddressConfirmed = epcAddressConfirmed;
-                    p.EpcDetailsConfirmed = null;
-                },
+                p => { p.Epc = epc;},
+                viewModel.Reference,
+                QuestionFlowPage.ConfirmAddress);
+        }
+        
+        [HttpPost("single-address/{reference}/{postcode}/{number}")]
+        public async Task<IActionResult> ConfirmSingleAddress_Post(ConfirmSingleAddressViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await ConfirmAddress_Get(viewModel.Reference, viewModel.Postcode, viewModel.Number);
+            }
+            
+            var epc = viewModel.EpcAddressConfirmed == EpcAddressConfirmed.Yes ? await epcApi.GetEpcForId(viewModel.EpcId) : null;
+
+            return await UpdatePropertyAndRedirect(
+                p => { p.Epc = epc; },
                 viewModel.Reference,
                 QuestionFlowPage.ConfirmAddress);
         }
@@ -402,7 +433,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.PropertyType, propertyData);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.PropertyType, propertyData, entryPoint);
             var viewModel = new PropertyTypeViewModel
             {
                 PropertyType = propertyData.PropertyType,
@@ -434,7 +465,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.HouseType, propertyData);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.HouseType, propertyData, entryPoint);
             var viewModel = new HouseTypeViewModel
             {
                 HouseType = propertyData.HouseType,
@@ -467,7 +498,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.BungalowType, propertyData);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.BungalowType, propertyData, entryPoint);
             var viewModel = new BungalowTypeViewModel
             {
                 BungalowType = propertyData.BungalowType,
@@ -500,7 +531,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.FlatType, propertyData);
+            var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.FlatType, propertyData, entryPoint);
             var viewModel = new FlatTypeViewModel
             {
                 FlatType = propertyData.FlatType,
@@ -534,7 +565,6 @@ namespace SeaPublicWebsite.Controllers
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.HomeAge, propertyData, entryPoint);
-            var skipArgs = questionFlowService.SkipLinkArguments(QuestionFlowPage.HomeAge, propertyData, entryPoint);
             var viewModel = new HomeAgeViewModel
             {
                 PropertyType = propertyData.PropertyType,
@@ -542,8 +572,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = propertyData.Reference,
                 Epc = propertyData.Epc,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
-                SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("HomeAge", viewModel);
@@ -568,6 +597,14 @@ namespace SeaPublicWebsite.Controllers
         public async Task<IActionResult> CheckYourUnchangeableAnswers_Get(string reference, QuestionFlowPage? entryPoint = null)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            
+            // If the user comes back to this page and their changes haven't been saved,
+            // we need to revert to their old answers.
+            if (propertyData.UneditedData is not null)
+            {
+                propertyData.RevertToUneditedData();
+                await propertyDataStore.SavePropertyDataAsync(propertyData);
+            }
             
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.CheckYourUnchangeableAnswers, propertyData, entryPoint);
             var viewModel = new CheckYourUnchangeableAnswersViewModel()
@@ -1069,22 +1106,29 @@ namespace SeaPublicWebsite.Controllers
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.NumberOfOccupants, propertyData, entryPoint);
-            var skipArgs = questionFlowService.SkipLinkArguments(QuestionFlowPage.NumberOfOccupants, propertyData, entryPoint);
             var viewModel = new NumberOfOccupantsViewModel
             {
                 NumberOfOccupants = propertyData.NumberOfOccupants,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
-                SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("NumberOfOccupants", viewModel);
         }
 
         [HttpPost("number-of-occupants/{reference}")]
-        public async Task<IActionResult> NumberOfOccupants_Post(NumberOfOccupantsViewModel viewModel)
+        public async Task<IActionResult> NumberOfOccupants_Post(NumberOfOccupantsViewModel viewModel, bool? skip = null)
         {
+            if (skip is true)
+            {
+                return await UpdatePropertyAndRedirect(
+                    p => p.NumberOfOccupants = null,
+                    viewModel.Reference,
+                    QuestionFlowPage.NumberOfOccupants, 
+                    viewModel.EntryPoint);
+            }
+            
             if (!ModelState.IsValid)
             {
                 return await NumberOfOccupants_Get(viewModel.Reference, viewModel.EntryPoint);
@@ -1145,22 +1189,29 @@ namespace SeaPublicWebsite.Controllers
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.Temperature, propertyData, entryPoint);
-            var skipArgs = questionFlowService.SkipLinkArguments(QuestionFlowPage.Temperature, propertyData, entryPoint);
             var viewModel = new TemperatureViewModel
             {
                 Temperature = propertyData.Temperature,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
-                SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("Temperature", viewModel);
         }
 
         [HttpPost("temperature/{reference}")]
-        public async Task<IActionResult> Temperature_Post(TemperatureViewModel viewModel)
+        public async Task<IActionResult> Temperature_Post(TemperatureViewModel viewModel, bool? skip = null)
         {
+            if (skip is true)
+            {
+                return await UpdatePropertyAndRedirect(
+                    p => p.Temperature = null,
+                    viewModel.Reference,
+                    QuestionFlowPage.Temperature, 
+                    viewModel.EntryPoint);
+            }
+            
             if (!ModelState.IsValid)
             {
                 return await Temperature_Get(viewModel.Reference, viewModel.EntryPoint);
@@ -1469,7 +1520,9 @@ namespace SeaPublicWebsite.Controllers
             
             // If the user is going back to the answer summary page or the check your unchangeable answers page then they finished editing and we
             // can get rid of the old answers
-            if (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)) || forwardArgs.Action.Equals(nameof(CheckYourUnchangeableAnswers_Get)))
+            if (entryPoint is not null &&
+                (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)) ||
+                 forwardArgs.Action.Equals(nameof(CheckYourUnchangeableAnswers_Get))))
             {
                 propertyData.CommitEdits();
             }

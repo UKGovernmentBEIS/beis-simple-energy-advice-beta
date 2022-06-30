@@ -13,19 +13,12 @@ public class PropertyData
     public OwnershipStatus? OwnershipStatus { get; set; }
     public Country? Country { get; set; }
     
-    public FindEpc? FindEpc { get; set; }
-    
-    public int? EpcCount { get; set; }
-
-    public EpcAddressConfirmed? EpcAddressConfirmed { get; set; }
+    public SearchForEpc? SearchForEpc { get; set; }
 
     public EpcDetailsConfirmed? EpcDetailsConfirmed { get; set; }
 
     public Epc Epc { get; set; }
 
-    public string Postcode { get; set; }
-
-    public string HouseNameOrNumber { get; set; }
     public PropertyType? PropertyType { get; set; }
     public HouseType? HouseType { get; set; }
     public BungalowType? BungalowType { get; set; }

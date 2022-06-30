@@ -43,7 +43,7 @@
                 {
                     epcHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests you have
+                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests you have
                             <strong>
                                 @(Model.Epc?.FloorConstruction switch {
                                     FloorConstruction.SuspendedTimber => "suspended timber",
