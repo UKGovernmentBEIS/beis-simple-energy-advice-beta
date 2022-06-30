@@ -1031,12 +1031,25 @@ public class QuestionFlowServiceTests
             "Postcode continues to confirm address",
             new Input(
                 QuestionFlowPage.AskForPostcode,
-                "ABCDEFGH"
+                "ABCDEFGH",
+                searchForEpc: SearchForEpc.Yes
             ),
             new PathByActionArguments(
                 nameof(EnergyEfficiencyController.ConfirmAddress_Get),
                 "EnergyEfficiency",
                 null
+            )),
+        new(
+            "Postcode continues to property type on cancel",
+            new Input(
+                QuestionFlowPage.AskForPostcode,
+                "ABCDEFGH",
+                searchForEpc: SearchForEpc.No
+            ),
+            new PathByActionArguments(
+                nameof(EnergyEfficiencyController.PropertyType_Get),
+                "EnergyEfficiency",
+                new { reference = "ABCDEFGH" }
             )),
         new(
             "Confirm address continues to no EPC found if no EPC set",

@@ -233,8 +233,19 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpPost("postcode/{reference}")]
-        public async Task<IActionResult> AskForPostcode_Post(AskForPostcodeViewModel viewModel)
+        public async Task<IActionResult> AskForPostcode_Post(AskForPostcodeViewModel viewModel, bool cancel = false)
         {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
+            
+            if (cancel)
+            {
+                return await UpdatePropertyAndRedirect(
+                    // Behave as if the user had selected "No" on the page before
+                    p => { p.SearchForEpc = SearchForEpc.No; },
+                    viewModel.Reference,
+                    QuestionFlowPage.AskForPostcode);
+            }
+            
             if (viewModel.Postcode is not null && !(await postcodesIoApi.IsValidPostcode(viewModel.Postcode)))
             {
                 ModelState.AddModelError(nameof(AskForPostcodeViewModel.Postcode), "Enter a valid UK postcode");
@@ -245,7 +256,6 @@ namespace SeaPublicWebsite.Controllers
                 return await AskForPostcode_Get(viewModel.Reference);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.AskForPostcode, propertyData);
 
             return RedirectToAction(

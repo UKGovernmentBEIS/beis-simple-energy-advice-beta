@@ -513,7 +513,12 @@ namespace SeaPublicWebsite.Services
 
         private PathByActionArguments AskForPostcodeForwardLinkArguments(PropertyData propertyData)
         {
-            return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", null);
+            var reference = propertyData.Reference;
+            if (propertyData.SearchForEpc == SearchForEpc.Yes)
+            {
+                return new PathByActionArguments(nameof(EnergyEfficiencyController.ConfirmAddress_Get), "EnergyEfficiency", null);
+            }
+            return new PathByActionArguments(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new { reference });
         }
 
         private PathByActionArguments ConfirmAddressForwardLinkArguments(PropertyData propertyData)
