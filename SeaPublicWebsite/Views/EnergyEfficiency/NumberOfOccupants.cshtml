@@ -61,12 +61,13 @@
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
                 {
-                    Text = "Continue",
+                    Text = "Continue"
                 }))
-                <a href="@Model.SkipLink"
-                   class="govuk-link">
+                
+                <!-- We don't want to use the design library component since it adds additional styles we do not want -->
+                <button type="submit" class="sea-button-as-link govuk-link" name="skip" value="true">
                     Skip this question
-                </a>
+                </button>
             </div>
             
         </form>
