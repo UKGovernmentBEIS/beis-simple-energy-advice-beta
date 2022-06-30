@@ -1943,63 +1943,6 @@ public class QuestionFlowServiceTests
                 nameof(EnergyEfficiencyController.PropertyType_Get),
                 "EnergyEfficiency",
                 new { reference = "ABCDEFGH" }
-            )),
-        new(
-            "Home age skips to wall construction",
-            new Input(
-                QuestionFlowPage.HomeAge,
-                "ABCDEFGH"
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.WallConstruction_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
-            "Changing home age and skipping skips to summary",
-            new Input(
-                QuestionFlowPage.HomeAge,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.HomeAge
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
-            "Number of occupants skips to heating pattern",
-            new Input(
-                QuestionFlowPage.NumberOfOccupants,
-                "ABCDEFGH"
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.HeatingPattern_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
-            "Changing number of occupants and skipping skips to summary",
-            new Input(
-                QuestionFlowPage.NumberOfOccupants,
-                "ABCDEFGH",
-                entryPoint: QuestionFlowPage.NumberOfOccupants
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
-            )),
-        new(
-            "Temperature skips to summary",
-            new Input(
-                QuestionFlowPage.Temperature,
-                "ABCDEFGH"
-            ),
-            new PathByActionArguments(
-                nameof(EnergyEfficiencyController.AnswerSummary_Get),
-                "EnergyEfficiency",
-                new { reference = "ABCDEFGH" }
             ))
     };
 

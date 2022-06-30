@@ -540,7 +540,6 @@ namespace SeaPublicWebsite.Controllers
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.HomeAge, propertyData, entryPoint);
-            var skipArgs = questionFlowService.SkipLinkArguments(QuestionFlowPage.HomeAge, propertyData, entryPoint);
             var viewModel = new HomeAgeViewModel
             {
                 PropertyType = propertyData.PropertyType,
@@ -548,8 +547,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = propertyData.Reference,
                 Epc = propertyData.Epc,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
-                SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("HomeAge", viewModel);
@@ -1075,22 +1073,29 @@ namespace SeaPublicWebsite.Controllers
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.NumberOfOccupants, propertyData, entryPoint);
-            var skipArgs = questionFlowService.SkipLinkArguments(QuestionFlowPage.NumberOfOccupants, propertyData, entryPoint);
             var viewModel = new NumberOfOccupantsViewModel
             {
                 NumberOfOccupants = propertyData.NumberOfOccupants,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
-                SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("NumberOfOccupants", viewModel);
         }
 
         [HttpPost("number-of-occupants/{reference}")]
-        public async Task<IActionResult> NumberOfOccupants_Post(NumberOfOccupantsViewModel viewModel)
+        public async Task<IActionResult> NumberOfOccupants_Post(NumberOfOccupantsViewModel viewModel, bool? skip = null)
         {
+            if (skip is true)
+            {
+                return await UpdatePropertyAndRedirect(
+                    p => p.NumberOfOccupants = null,
+                    viewModel.Reference,
+                    QuestionFlowPage.NumberOfOccupants, 
+                    viewModel.EntryPoint);
+            }
+            
             if (!ModelState.IsValid)
             {
                 return await NumberOfOccupants_Get(viewModel.Reference, viewModel.EntryPoint);
@@ -1151,22 +1156,29 @@ namespace SeaPublicWebsite.Controllers
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.Temperature, propertyData, entryPoint);
-            var skipArgs = questionFlowService.SkipLinkArguments(QuestionFlowPage.Temperature, propertyData, entryPoint);
             var viewModel = new TemperatureViewModel
             {
                 Temperature = propertyData.Temperature,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
-                SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
             return View("Temperature", viewModel);
         }
 
         [HttpPost("temperature/{reference}")]
-        public async Task<IActionResult> Temperature_Post(TemperatureViewModel viewModel)
+        public async Task<IActionResult> Temperature_Post(TemperatureViewModel viewModel, bool? skip = null)
         {
+            if (skip is true)
+            {
+                return await UpdatePropertyAndRedirect(
+                    p => p.Temperature = null,
+                    viewModel.Reference,
+                    QuestionFlowPage.Temperature, 
+                    viewModel.EntryPoint);
+            }
+            
             if (!ModelState.IsValid)
             {
                 return await Temperature_Get(viewModel.Reference, viewModel.EntryPoint);
