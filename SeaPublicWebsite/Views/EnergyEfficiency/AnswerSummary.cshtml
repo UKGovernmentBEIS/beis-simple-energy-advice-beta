@@ -11,11 +11,11 @@
     ViewBag.Title = "Your answers";
 }
 
-@section BeforeMain {
+@section BackLink {
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",
-        Href = Model.BeforeMain,
+        Href = Model.BackLink,
 
         // Note: some of the "Back" links in this journey can't use the default browser behaviour
         //  so we should control all of them explicitly
