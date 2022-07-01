@@ -647,6 +647,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new WallConstructionViewModel
             {
                 WallConstruction = propertyData.WallConstruction,
+                YearBuilt = propertyData.YearBuilt,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -750,6 +751,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new FloorConstructionViewModel
             {
                 FloorConstruction = propertyData.FloorConstruction,
+                YearBuilt = propertyData.YearBuilt,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -784,6 +786,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new FloorInsulatedViewModel
             {
                 FloorInsulated = propertyData.FloorInsulated,
+                YearBuilt = propertyData.YearBuilt,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -850,6 +853,8 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new LoftSpaceViewModel
             {
                 LoftSpace = propertyData.LoftSpace,
+                PropertyType = propertyData.PropertyType,
+                FlatType = propertyData.FlatType,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
@@ -882,6 +887,8 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new LoftAccessViewModel
             {
                 LoftAccess = propertyData.LoftAccess,
+                PropertyType = propertyData.PropertyType,
+                FlatType = propertyData.FlatType,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
@@ -914,6 +921,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new RoofInsulatedViewModel
             {
                 RoofInsulated = propertyData.RoofInsulated,
+                YearBuilt = propertyData.YearBuilt,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -948,6 +956,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new GlazingTypeViewModel
             {
                 GlazingType = propertyData.GlazingType,
+                YearBuilt = propertyData.YearBuilt,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -981,6 +990,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new OutdoorSpaceViewModel
             {
                 HasOutdoorSpace = propertyData.HasOutdoorSpace,
+                PropertyType = propertyData.PropertyType,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)

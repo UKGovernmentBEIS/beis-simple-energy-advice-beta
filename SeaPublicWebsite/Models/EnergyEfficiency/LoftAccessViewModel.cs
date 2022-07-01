@@ -7,6 +7,8 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select if you have loft access")]
         public LoftAccess? LoftAccess { get; set; }
+        public PropertyType? PropertyType { get; set; }
+        public FlatType? FlatType { get; set; }
 
         public string Reference { get; set; }
     }

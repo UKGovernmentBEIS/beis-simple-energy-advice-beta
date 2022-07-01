@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.LoftAccessViewModel
@@ -30,6 +31,18 @@
                             You may have a loft hatch, access ladder or stairs that could allow an insulation installer to get into the loft space.
                         </p>
                      </text>;
+                
+                Func<object, object> blueBannerHint =
+                    @<p class="govuk-body">
+                        Homes of your type typically
+                        <strong>
+                            @((Model.PropertyType, Model.FlatType) switch {
+                                (PropertyType.House or PropertyType.Bungalow, _) => "have access to their loft.",
+                                (PropertyType.ApartmentFlatOrMaisonette, FlatType.TopFloor) => "do not have access to their loft.",
+                                _ => throw new ArgumentOutOfRangeException()
+                                })
+                        </strong>
+                    </p>;
             }
             
             @(await Html.GovUkRadiosFor(m => m.LoftAccess,
@@ -44,9 +57,17 @@
                 },
                 new HintViewModel
                 {
-                    Html = @<p class="govuk-body">
-                               You may have a loft hatch, access ladder or stairs that could allow an insulation installer to get into the loft space.
-                           </p>
+                    Html = @<text>
+                               <p class="govuk-body">
+                                   You may have a loft hatch, access ladder or stairs that could allow an insulation installer to get into the loft space.
+                               </p>
+                               
+                               @await Html.GovUkInsetText(new InsetTextViewModel
+                               {
+                                   Classes = "sea-epc-hint",
+                                   Html = blueBannerHint
+                               })
+                            </text>
                 }
                 ))
 

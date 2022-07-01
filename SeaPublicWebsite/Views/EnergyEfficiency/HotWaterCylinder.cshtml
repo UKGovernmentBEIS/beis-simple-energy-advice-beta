@@ -24,19 +24,25 @@
             @Html.AntiForgeryToken()
             
             @{
-                Func<object, object> epcHint = null;
+                Func<object, object> blueBannerHint = null;
                 if (Model.Epc?.HasHotWaterCylinder is not null)
                 {
-                    epcHint = 
+                    blueBannerHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests you
+                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your home
                             <strong>
                                 @(Model.Epc?.HasHotWaterCylinder switch {
-                                    HasHotWaterCylinder.Yes => "have",
-                                    HasHotWaterCylinder.No => "do not have",
+                                    HasHotWaterCylinder.Yes => "does have a hot water cylinder.",
+                                    HasHotWaterCylinder.No => "does not have a hot water cylinder.",
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
-                            a hot water cylinder.
+                        </p>;
+                }
+                else
+                {
+                    blueBannerHint =
+                        @<p class="govuk-body">
+                            Most homes in England and Wales do not have a hot water cylinder.
                         </p>;
                 }
             }
@@ -61,14 +67,11 @@
                                    If you’re not sure what a hot water cylinder is, we’ve provided some guidance on this page that could help.
                                </p>
 
-                               @if (epcHint is not null)
+                               @await Html.GovUkInsetText(new InsetTextViewModel
                                {
-                                   @await Html.GovUkInsetText(new InsetTextViewModel
-                                   {
-                                       Classes = "sea-epc-hint",
-                                       Html = epcHint
-                                   })
-                               }
+                                   Classes = "sea-epc-hint",
+                                   Html = blueBannerHint
+                               })
                             </text>
                 }
             ))

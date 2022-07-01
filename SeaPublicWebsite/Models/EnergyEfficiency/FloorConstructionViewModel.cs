@@ -8,6 +8,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select how your floor is built")]
         public FloorConstruction? FloorConstruction { get; set; }
+        public YearBuilt? YearBuilt { get; set; }
 
         public string Reference { get; set; }
         public Epc Epc { get; set; }

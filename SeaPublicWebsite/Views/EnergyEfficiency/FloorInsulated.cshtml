@@ -41,19 +41,27 @@
                         </p>
                      </text>;
                 
-                Func<object, object> epcHint = null;
+                Func<object, object> blueBannerHint = null;
                 if (Model.Epc?.FloorInsulated is not null)
                 {
-                    epcHint = 
+                    blueBannerHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests you have an
+                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your home's ground floor
                             <strong>
                                 @(Model.Epc?.FloorInsulated switch {
-                                    FloorInsulated.No => "uninsulated",
-                                    FloorInsulated.Yes => "insulated",
+                                    FloorInsulated.No => "is not insulated.",
+                                    FloorInsulated.Yes => "is insulated.",
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
-                            floor.
+                        </p>;
+                } else if (Model.YearBuilt is not null and not YearBuilt.DoNotKnow)
+                {
+                    blueBannerHint =
+                        @<p class="govuk-body">
+                            Homes of your type typically have a
+                            <strong>
+                                @(Model.YearBuilt < YearBuilt.From1996To2011 ? "do not have insulated floors." : "have insulated floors.")
+                            </strong>
                         </p>;
                 }
             }
@@ -81,12 +89,12 @@
                                    Html = details
                                })
                                
-                               @if (epcHint is not null)
+                               @if (blueBannerHint is not null)
                                {
                                    @await Html.GovUkInsetText(new InsetTextViewModel
                                    {
                                        Classes = "sea-epc-hint",
-                                       Html = epcHint
+                                       Html = blueBannerHint
                                    })
                                }
                             </text>

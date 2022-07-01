@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.OutdoorSpaceViewModel
@@ -34,6 +35,17 @@
                             air to water that is sent to your radiators or underfloor heating, as well as a hot water cylinder for providing hot water.
                         </p>
                      </text>;
+                Func<object, object> blueBannerHint = 
+                    @<p class="govuk-body">
+                        Homes of your type typically
+                        <strong>
+                            @(Model.PropertyType switch {
+                                PropertyType.House or PropertyType.Bungalow => "have some outdoor space",
+                                PropertyType.ApartmentFlatOrMaisonette => "do not have any outdoor space"
+                                })
+                            that could fit a heat pump.
+                        </strong>
+                    </p>;
             }
             
             @(await Html.GovUkRadiosFor(m => m.HasOutdoorSpace,
@@ -66,6 +78,12 @@
                                {
                                    SummaryText = "What is a heat pump?",
                                    Html = details
+                               })
+                               
+                               @await Html.GovUkInsetText(new InsetTextViewModel
+                               {
+                                   Classes = "sea-epc-hint",
+                                   Html = blueBannerHint
                                })
                             </text>
                 }

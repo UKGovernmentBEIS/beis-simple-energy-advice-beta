@@ -7,7 +7,8 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select if you have a loft space")]
         public LoftSpace? LoftSpace { get; set; }
-
+        public PropertyType? PropertyType { get; set; }
+        public FlatType? FlatType { get; set; }
         public string Reference { get; set; }
     }
 }

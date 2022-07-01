@@ -31,17 +31,28 @@
                         it is likely that it is fully insulated.
                     </p>;
                 
-                Func<object, object> epcHint = null;
+                Func<object, object> blueBannerHint = null;
                 if (Model.Epc?.RoofInsulated is not null)
                 {
                     var insulated = Model.Epc?.RoofInsulated is RoofInsulated.Yes;
-                    epcHint = 
+                    blueBannerHint = 
                         @<p class="govuk-body">
                             Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your
                             <strong>
                                 loft is @(insulated ? "" : "not") fully insulated
                             </strong>
-                            as it has @(insulated ? "at least" : "less than") 200mm of insulaion
+                            as it has @(insulated ? "at least" : "less than") 200mm of insulation.
+                        </p>;
+                } else if (Model.YearBuilt is not null and not YearBuilt.DoNotKnow)
+                {
+                    blueBannerHint =
+                        @<p class="govuk-body">
+                            Homes of your type
+                            <strong>
+                                @(Model.YearBuilt < YearBuilt.From2012ToPresent 
+                                    ? "typically have less than 200mm of insulation." 
+                                    : "are typically fully insulated with at least 200mm of insulation.")
+                            </strong>
                         </p>;
                 }
             }
@@ -71,12 +82,12 @@
                                    Html = details
                                })
                                
-                               @if (epcHint is not null)
+                               @if (blueBannerHint is not null)
                                {
                                    @await Html.GovUkInsetText(new InsetTextViewModel
                                    {
                                        Classes = "sea-epc-hint",
-                                       Html = epcHint
+                                       Html = blueBannerHint
                                    })
                                }
                             </text>
