@@ -37,6 +37,7 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
         modelBuilder.Entity<PropertyData>()
             .HasOne<PropertyData>()
             .WithOne(d => d.UneditedData)
-            .HasForeignKey<PropertyData>("EditedDataId");
+            .HasForeignKey<PropertyData>("EditedDataId")
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
