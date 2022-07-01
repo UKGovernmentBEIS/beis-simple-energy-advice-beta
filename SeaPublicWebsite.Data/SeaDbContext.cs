@@ -29,5 +29,14 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
             .WithOne(d => d.Epc)
             .HasForeignKey<Epc>("PropertyDataId")
             .IsRequired();
+        
+        // Set up the PropertyData <-> UneditedData relationship in the database
+        modelBuilder.Entity<PropertyData>()
+            .Property<int?>("EditedDataId");
+
+        modelBuilder.Entity<PropertyData>()
+            .HasOne<PropertyData>()
+            .WithOne(d => d.UneditedData)
+            .HasForeignKey<PropertyData>("EditedDataId");
     }
 }
