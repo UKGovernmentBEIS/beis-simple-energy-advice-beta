@@ -20,10 +20,10 @@ public class QuestionFlowServiceTests
     private IQuestionFlowService QuestionFlowService;
 
     [TestCaseSource(nameof(BackTestCases))]
-    public void RunBackLinkTestCases(QuestionFlowServiceTestCase testCase)
+    public void RunBeforeMainTestCases(QuestionFlowServiceTestCase testCase)
     {
         // Act
-        var output = QuestionFlowService.BackLinkArguments(
+        var output = QuestionFlowService.BeforeMainArguments(
             testCase.Input.Page,
             testCase.Input.PropertyData,
             testCase.Input.EntryPoint);

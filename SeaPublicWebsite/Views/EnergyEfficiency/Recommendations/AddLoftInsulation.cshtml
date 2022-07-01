@@ -6,7 +6,7 @@
     ViewBag.Title = "Recommendation " + (Model.GetCurrentIndex() + 1) + " of " + Model.PropertyData.PropertyRecommendations.Count;
 }
 
-@section BackLink {
+@section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
         Text = "Back",

@@ -102,12 +102,11 @@
         }))
 
 
-        <main id="main-content" role="main">
-            @(RenderSection("BackLink", false))
-            <div class="govuk-main-wrapper">
-                @(await Html.GovUkErrorSummary(ViewData.ModelState))
-                @RenderBody()
-            </div>
+        @(RenderSection("BeforeMain", false))
+
+        <main class = "govuk-main-wrapper" id="main-content" role="main">
+            @(await Html.GovUkErrorSummary(ViewData.ModelState))
+            @RenderBody()
         </main>
     </div>
 
