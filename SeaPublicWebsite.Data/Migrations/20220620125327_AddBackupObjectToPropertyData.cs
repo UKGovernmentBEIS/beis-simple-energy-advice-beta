@@ -24,12 +24,12 @@ namespace SeaPublicWebsite.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "BackupPropertyDataId",
-                table: "PropertyData");
-
             migrationBuilder.DropForeignKey(
                 name: "FK_PropertyData_PropertyData_BackupPropertyDataId",
+                table: "PropertyData");
+            
+            migrationBuilder.DropColumn(
+                name: "BackupPropertyDataId",
                 table: "PropertyData");
         }
     }
