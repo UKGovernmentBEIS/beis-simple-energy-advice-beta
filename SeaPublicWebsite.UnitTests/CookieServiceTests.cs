@@ -126,6 +126,7 @@ public class CookieServiceTests
     {
         // Arrange
         var value = testCase.CookieSettings;
+        var analytics = value.Version == LatestVersion && value.GoogleAnalytics;
         var context = new DefaultHttpContext();
         var request = context.Request;
         request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderSrting(value)}";
@@ -134,7 +135,7 @@ public class CookieServiceTests
         var success = CookieService.HasAcceptedGoogleAnalytics(request);
         
         // Assert
-        success.Should().Be(value.GoogleAnalytics);
+        success.Should().Be(analytics);
     }
     
     [Test]

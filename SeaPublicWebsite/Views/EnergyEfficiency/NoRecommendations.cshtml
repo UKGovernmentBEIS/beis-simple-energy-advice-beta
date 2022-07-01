@@ -12,10 +12,6 @@
     {
         Text = "Back",
         Href = Model.BackLink,
-        
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = false
     })
 }
 
@@ -30,7 +26,7 @@
         <p class="govuk-body">From the information collected, it seems like your home is already energy efficient and may not significantly benefit from further measures.</p>
         <p class="govuk-body">You may be able to make changes to how you use energy to help reduce your bills.</p>
         
-        <h1 class="govuk-heading-l">What else you can do</h1>
+        <h2 class="govuk-heading-l">What else you can do</h2>
         
         <h3 class="govuk-heading-s">Water efficient showerhead</h3>
         <p class="govuk-body">Replace your showerhead to reduce how much hot water you use.</p>
@@ -50,10 +46,10 @@
         
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
         
-        <h1 class="govuk-heading-l">Still need help?</h1>
-        <p class="govuk-body">You can visit the <a href="https://energysavingtrust.org.uk/" class="govuk-link">Energy Saving Trust website</a> for more information on reducing your home’s energy use.</p>
+        <h2 class="govuk-heading-l">Still need help?</h2>
+        <p class="govuk-body">You can visit the <a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">Energy Saving Trust website</a> for more information on reducing your home’s energy use.</p>
 
-        <h1 class="govuk-heading-l">Start over</h1>
+        <h2 class="govuk-heading-l">Start over</h2>
         <p class="govuk-body">See if there are improvements you can make to another property.</p>
 
         @await Html.GovUkButton(new ButtonViewModel
@@ -62,11 +58,11 @@
             Href = Url.Action(nameof(EnergyEfficiencyController.Index), "EnergyEfficiency")
         })
         
-        <h1 class="govuk-heading-l">Give feedback</h1>
+        <h2 class="govuk-heading-l">Give feedback</h2>
         <p class="govuk-body">This service is still in its early stages and under active development. </p>
         <p class="govuk-body">Your feedback can help us to shape how the service develops so that it can best serve the needs of the public.  </p>
         <p class="govuk-body">
-            <a href="@Url.Action(nameof(FeedbackController.FeedbackSurvey_Get), "Feedback")" class="govuk-link">
+            <a href="@Constants.FEEDBACK_URL" class="govuk-link">
                 Leave some feedback for this service
             </a>
         </p>

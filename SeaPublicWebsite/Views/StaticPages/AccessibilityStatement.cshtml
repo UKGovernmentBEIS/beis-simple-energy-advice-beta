@@ -1,15 +1,5 @@
-@using GovUkDesignSystem
-@using GovUkDesignSystem.GovUkDesignSystemComponents
 @{
     ViewBag.Title = $"Accessibility statement on {Constants.SERVICE_NAME}";
-}
-
-@section BeforeMain {
-    @await Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        OverrideWithJavascript = true
-    })
 }
 
 <div class="govuk-grid-row">
@@ -44,7 +34,7 @@
         <p class="govuk-body">
             We’re always looking to improve the accessibility of this website. If you find any problems not listed on this page 
             or think we’re not meeting accessibility requirements please 
-            <a class="govuk-link" href="@Url.Action("FeedbackForm_Get", "Feedback")">give feedback</a>.
+            <a class="govuk-link" href="@Constants.FEEDBACK_URL">give feedback</a>.
         </p>
         
         <h2 class="govuk-heading-l">
@@ -68,9 +58,8 @@
             Compliance status
         </h3>
         <p class="govuk-body">
-            This website is partially compliant with the 
-            <a class="govuk-link" href="https://www.w3.org/TR/WCAG21/">Web Content Accessibility Guidelines version 2.1 AA standard</a>, 
-            due to the non-compliances listed below.
+            This website is compliant with the 
+            <a class="govuk-link" href="https://www.w3.org/TR/WCAG21/">Web Content Accessibility Guidelines version 2.1 AA standard</a>.
         </p>
         <h3 class="govuk-heading-m">
             Content that’s not within the scope of the accessibility regulations

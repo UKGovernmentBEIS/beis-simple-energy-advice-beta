@@ -1,5 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.Controllers
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.AskForPostcodeViewModel
 @{
@@ -11,31 +13,29 @@
     {
         Text = "Back",
         Href = Model.BackLink,
-        
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = false
     })
 }
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("AskForPostcode_Post", "EnergyEfficiency", new {reference = Model.Reference})" method="post">
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.AskForPostcode_Post), "EnergyEfficiency", new {reference = Model.Reference})" method="post">
             @Html.AntiForgeryToken()
+            <text>
+                <p class="govuk-caption-l">
+                Find your EPC
+                </p>
+            </text>
             
             @{
                 Func<object, object> details =
                     @<text>
                         <p class="govuk-body">
-                            An Energy Performance Certificate (EPC) is needed whenever a property is built, sold or rented.
-                        </p>
-                        <p class="govuk-body">
-                            An accredited assessor surveys the property and produces the certificate.
-                        </p>
-                        <p class="govuk-body">
-                            The certificate contains information about the property’s construction,
-                            energy use and typical energy costs.
+                            We use this information to search the Energy Performance of Buildings Register for an Energy
+                            Performance Certificate that matches your address. The Energy Performance of Buildings
+                            Register is an open register and you can find more details from the 
+                            <a href="https://epc.opendatacommunities.org/" target="_blank">Department for Levelling Up,
+                                Housing and Communities</a>.
                         </p>
                      </text>;
             }
@@ -50,18 +50,9 @@
                 },
                 InnerHtml = 
                     @<text>
-                        <p class="govuk-body">
-                            You don’t need to provide this, but your address may allow us to access your Energy Performance Certificate
-                            (EPC) that contains information about your property’s energy efficiency.
-                        </p>
-                        <p class="govuk-body">
-                            This information could help you to answer if you’re not sure for some of the questions
-                            we ask about your property.
-                        </p>
-                        
                         @await Html.GovUkDetails(new DetailsViewModel
                         {
-                            SummaryText = "What is an Energy Performance Certificate (EPC)?", 
+                            SummaryText = "What we do with your address", 
                             Html = details
                         })
                         
@@ -86,7 +77,9 @@
                                 Text = "Postcode",
                             },
                             classes: "govuk-input--width-10",
-                            placeholder: "e.g. AB12 3CD"
+
+                            placeholder: "e.g. AB12 3CD",
+                            autocomplete: "postal-code"
                             ))
                      </text>
             })
@@ -96,10 +89,11 @@
                 {
                     Text = "Continue",
                 }))
-                <a href="@Model.SkipLink"
-                   class="govuk-link">
-                    Skip this question
-                </a>
+                
+                <!-- We don't want to use the design library component since it adds additional styles we do not want -->
+                <button type="submit" class="sea-button-as-link govuk-link" name="cancel" value="true">
+                    Cancel and continue without an EPC
+                </button>
             </div>
             
         </form>

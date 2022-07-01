@@ -1,7 +1,9 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.Controllers
 @model SeaPublicWebsite.Models.EnergyEfficiency.CountryViewModel
+
 @{
     ViewBag.Title = "Country";
 }
@@ -11,17 +13,13 @@
     {
         Text = "Back",
         Href = Model.BackLink,
-        
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = false
     })
 }
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <form action="@Url.Action("Country_Post", "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.Country_Post), "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
             @(Html.HiddenFor(m => m.EntryPoint))
             @Html.AntiForgeryToken()
             

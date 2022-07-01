@@ -1,10 +1,12 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
+@using SeaPublicWebsite.Controllers
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.HomeAgeViewModel
 @{
-    ViewBag.Title = "Ownership status";
+    ViewBag.Title = "Property age";
 }
 
 @section BeforeMain {
@@ -12,17 +14,13 @@
     {
         Text = "Back",
         Href = Model.BackLink,
-
-        // Note: some of the "Back" links in this journey can't use the default browser behaviour
-        //  so we should control all of them explicitly
-        OverrideWithJavascript = false
     })
 }
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-        <form action="@Url.Action("HomeAge_Post", "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.HomeAge_Post), "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
             @Html.AntiForgeryToken()
             @(Html.HiddenFor(m => m.EntryPoint))
             
@@ -47,10 +45,10 @@
                 {
                     epcHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc?.LodgementDate?.Year Energy Performance Certificate suggests your property was built
+                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your property was built
                             <strong>
                                 @(Model.Epc?.ConstructionAgeBand switch {
-                                    HomeAge.Pre1900 or HomeAge.From1900To1929 => "before 1900.",
+                                    HomeAge.Pre1900 or HomeAge.From1900To1929 => "before 1930.",
                                     HomeAge.From1930To1949 or HomeAge.From1950To1966 => "between 1930 and 1966.",
                                     HomeAge.From1967To1975 or HomeAge.From1976To1982 => "between 1967 and 1982.",
                                     HomeAge.From1983To1990 or HomeAge.From1991To1995 => "between 1983 and 1995.",

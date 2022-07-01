@@ -1,4 +1,5 @@
-﻿@{
+﻿@using SeaPublicWebsite.Controllers
+@{
     ViewBag.Title = $"Details about cookies on our service";
 }
 
@@ -69,6 +70,6 @@
         </table>
 
         <h2 class="govuk-heading-l">Change your settings</h2>
-        <p class="govuk-body">You can <a href="@Url.Action("CookieSettings_Get", "Cookie")" class="govuk-link">change which cookies you’re happy for us to use</a>.</p>
+        <p class="govuk-body">You can <a href="@Url.Action(nameof(CookieController.CookieSettings_Get), "Cookie")" class="govuk-link">change which cookies you’re happy for us to use</a>.</p>
     </div>
 </div>

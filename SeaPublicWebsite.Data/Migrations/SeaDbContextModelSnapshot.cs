@@ -49,12 +49,6 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address1")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Address2")
-                        .HasColumnType("text");
-
                     b.Property<int?>("BungalowType")
                         .HasColumnType("integer");
 
@@ -63,9 +57,6 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.Property<int?>("ConstructionAgeBand")
                         .HasColumnType("integer");
-
-                    b.Property<string>("EpcId")
-                        .HasColumnType("text");
 
                     b.Property<int?>("FlatType")
                         .HasColumnType("integer");
@@ -88,14 +79,14 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("HouseType")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("LodgementDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<int?>("LodgementYear")
+                        .HasColumnType("integer");
 
                     b.Property<int?>("OtherHeatingType")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Postcode")
-                        .HasColumnType("text");
+                    b.Property<int>("PropertyDataId")
+                        .HasColumnType("integer");
 
                     b.Property<int?>("PropertyType")
                         .HasColumnType("integer");
@@ -113,6 +104,9 @@ namespace SeaPublicWebsite.Data.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PropertyDataId")
+                        .IsUnique();
 
                     b.ToTable("Epc");
                 });
@@ -134,7 +128,10 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("Country")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("EpcId")
+                    b.Property<int?>("EditedDataId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("EpcDetailsConfirmed")
                         .HasColumnType("integer");
 
                     b.Property<int?>("FlatType")
@@ -155,6 +152,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("HasOutdoorSpace")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("HasSeenRecommendations")
+                        .HasColumnType("boolean");
+
                     b.Property<int?>("HeatingPattern")
                         .HasColumnType("integer");
 
@@ -166,9 +166,6 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.Property<int?>("HoursOfHeatingMorning")
                         .HasColumnType("integer");
-
-                    b.Property<string>("HouseNameOrNumber")
-                        .HasColumnType("text");
 
                     b.Property<int?>("HouseType")
                         .HasColumnType("integer");
@@ -188,9 +185,6 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("OwnershipStatus")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Postcode")
-                        .HasColumnType("text");
-
                     b.Property<int?>("PropertyType")
                         .HasColumnType("integer");
 
@@ -201,6 +195,9 @@ namespace SeaPublicWebsite.Data.Migrations
                         .HasColumnType("integer");
 
                     b.Property<int?>("RoofInsulated")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("SearchForEpc")
                         .HasColumnType("integer");
 
                     b.Property<int?>("SolidWallsInsulated")
@@ -217,7 +214,8 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasKey("PropertyDataId");
 
-                    b.HasIndex("EpcId");
+                    b.HasIndex("EditedDataId")
+                        .IsUnique();
 
                     b.HasIndex("Reference")
                         .IsUnique();
@@ -270,13 +268,20 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.ToTable("PropertyRecommendations");
                 });
 
+            modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.Epc", b =>
+                {
+                    b.HasOne("SeaPublicWebsite.BusinessLogic.Models.PropertyData", null)
+                        .WithOne("Epc")
+                        .HasForeignKey("SeaPublicWebsite.BusinessLogic.Models.Epc", "PropertyDataId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
                 {
-                    b.HasOne("SeaPublicWebsite.BusinessLogic.Models.Epc", "Epc")
-                        .WithMany()
-                        .HasForeignKey("EpcId");
-
-                    b.Navigation("Epc");
+                    b.HasOne("SeaPublicWebsite.BusinessLogic.Models.PropertyData", null)
+                        .WithOne("UneditedData")
+                        .HasForeignKey("SeaPublicWebsite.BusinessLogic.Models.PropertyData", "EditedDataId");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyRecommendation", b =>
@@ -292,7 +297,11 @@ namespace SeaPublicWebsite.Data.Migrations
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
                 {
+                    b.Navigation("Epc");
+
                     b.Navigation("PropertyRecommendations");
+
+                    b.Navigation("UneditedData");
                 });
 #pragma warning restore 612, 618
         }
