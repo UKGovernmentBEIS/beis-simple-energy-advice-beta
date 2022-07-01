@@ -1419,14 +1419,19 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("your-recommendations/{id}/{reference}")]
         public async Task<IActionResult> Recommendation_Post(RecommendationViewModel viewModel, string command, int id, string reference)
         {
+            var recommendationKey = (RecommendationKey)id;
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            if (command == "goBackwards")
+            {
+                return RedirectToAction(nameof(Recommendation_Get),
+                    new {id = (int)propertyData.GetPreviousRecommendationKey(recommendationKey), reference = propertyData.Reference});
+            }
+            
             if (!ModelState.IsValid)
             {
                 return await Recommendation_Get(id, reference, viewModel.FromActionPlan);
             }
-
-            var recommendationKey = (RecommendationKey)id;
-
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            
             propertyData.PropertyRecommendations.Single(r => r.Key == recommendationKey).RecommendationAction =
                 viewModel.RecommendationAction;
             await propertyDataStore.SavePropertyDataAsync(propertyData);
@@ -1436,9 +1441,6 @@ namespace SeaPublicWebsite.Controllers
                 case "goForwards":
                     return RedirectToAction(nameof(Recommendation_Get),
                         new {id = (int)propertyData.GetNextRecommendationKey(recommendationKey), reference = propertyData.Reference});
-                case "goBackwards":
-                    return RedirectToAction(nameof(Recommendation_Get),
-                        new {id = (int)propertyData.GetPreviousRecommendationKey(recommendationKey), reference = propertyData.Reference});
                 case "goToActionPlan":
                     return RedirectToAction(nameof(ActionPlan_Get), new {reference = propertyData.Reference});
                 default:
