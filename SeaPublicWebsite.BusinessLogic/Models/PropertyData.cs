@@ -5,9 +5,6 @@ namespace SeaPublicWebsite.BusinessLogic.Models;
 
 public class PropertyData
 {
-    //PRIMARY KEY
-    public int PropertyDataId { get; set; }
-    
     public string Reference { get; set; }
 
     public OwnershipStatus? OwnershipStatus { get; set; }
@@ -83,8 +80,7 @@ public class PropertyData
     {
         foreach (var propertyInfo in GetType().GetProperties())
         {
-            if (propertyInfo.Name.Equals(nameof(PropertyDataId)) ||
-                propertyInfo.Name.Equals(nameof(Reference)) ||
+            if (propertyInfo.Name.Equals(nameof(Reference)) ||
                 propertyInfo.Name.Equals(nameof(Epc)) ||
                 propertyInfo.Name.Equals(nameof(UneditedData)) ||
                 propertyInfo.Name.Equals(nameof(PropertyRecommendations)))
@@ -105,8 +101,7 @@ public class PropertyData
     {
         foreach (var propertyInfo in GetType().GetProperties())
         {
-            if (propertyInfo.Name.Equals(nameof(PropertyDataId)) ||
-                propertyInfo.Name.Equals(nameof(Reference)) ||
+            if (propertyInfo.Name.Equals(nameof(Reference)) ||
                 propertyInfo.Name.Equals(nameof(Epc)) ||
                 propertyInfo.Name.Equals(nameof(UneditedData)) ||
                 propertyInfo.Name.Equals(nameof(PropertyRecommendations)))
