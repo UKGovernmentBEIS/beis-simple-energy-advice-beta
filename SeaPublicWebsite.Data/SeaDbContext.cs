@@ -21,6 +21,7 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
             .HasIndex(p => p.Reference)
             .IsUnique();
         
+        // Set up the PropertyData <-> EPC relationship in the database
         modelBuilder.Entity<Epc>()
             .Property<int>("PropertyDataId");
         
