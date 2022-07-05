@@ -39,6 +39,7 @@ public class PropertyData
     public decimal? Temperature { get; set; }
     public PropertyData UneditedData { get; set; }
     public bool HasSeenRecommendations { get; set; }
+    public bool ReturningUser { get; set; }
     public List<PropertyRecommendation> PropertyRecommendations { get; set; }
     [Timestamp]
     public byte[] Timestamp { get; set; }
