@@ -8,7 +8,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select if the floor is insulated")]
         public FloorInsulated? FloorInsulated { get; set; }
-        public YearBuilt? YearBuilt { get; set; }
+        public bool? HintUninsulatedFloor { get; set; }
 
         public string Reference { get; set; }
         public Epc Epc { get; set; }

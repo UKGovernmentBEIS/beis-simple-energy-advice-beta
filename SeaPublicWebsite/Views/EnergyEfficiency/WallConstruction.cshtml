@@ -60,13 +60,13 @@
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;
-                } else if (Model.YearBuilt is not null and not YearBuilt.DoNotKnow)
+                } else if (Model.HintSolidWalls is not null)
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
                             Homes of your type typically have
                             <strong>
-                                @(Model.YearBuilt <= YearBuilt.Pre1930 ? "solid walls." : "cavity walls.")
+                                @(Model.HintSolidWalls is true ? "solid walls." : "cavity walls.")
                             </strong>
                         </p>;
                 }

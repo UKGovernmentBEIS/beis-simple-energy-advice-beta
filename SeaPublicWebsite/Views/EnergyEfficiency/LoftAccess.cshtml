@@ -36,11 +36,7 @@
                     @<p class="govuk-body">
                         Homes of your type typically
                         <strong>
-                            @((Model.PropertyType, Model.FlatType) switch {
-                                (PropertyType.House or PropertyType.Bungalow, _) => "have access to their loft.",
-                                (PropertyType.ApartmentFlatOrMaisonette, FlatType.TopFloor) => "do not have access to their loft.",
-                                _ => throw new ArgumentOutOfRangeException()
-                                })
+                            @(Model.HintHaveLoftAndAccess ? "have access to their loft" : "do not have access to their loft.")
                         </strong>
                     </p>;
             }

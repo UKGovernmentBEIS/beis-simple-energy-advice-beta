@@ -39,11 +39,7 @@
                     @<p class="govuk-body">
                         Homes of your type typically
                         <strong>
-                            @(Model.PropertyType switch {
-                                PropertyType.House or PropertyType.Bungalow => "have some outdoor space",
-                                PropertyType.ApartmentFlatOrMaisonette => "do not have any outdoor space",
-                                _ => throw new ArgumentOutOfRangeException()
-                                })
+                            @(Model.HintHasOutdoorSpace ? "have some outdoor space" : "do not have any outdoor space")
                             that could fit a heat pump.
                         </strong>
                     </p>;

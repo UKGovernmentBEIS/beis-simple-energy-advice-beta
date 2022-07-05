@@ -53,13 +53,13 @@
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;
-                } else if (Model.YearBuilt is not null and not YearBuilt.DoNotKnow)
+                } else if (Model.HintSingleGlazing is not null)
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
                             Windows in homes of your type
                             <strong>
-                                @(Model.YearBuilt < YearBuilt.From1983To1995 
+                                @(Model.HintSingleGlazing is true
                                     ? "were typically originally built with single glazing, but they may have been replaced." 
                                     : "typically all have double, triple or secondary glazing.")
                             </strong>

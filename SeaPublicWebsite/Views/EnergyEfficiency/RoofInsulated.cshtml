@@ -43,13 +43,13 @@
                             </strong>
                             as it has @(insulated ? "at least" : "less than") 200mm of insulation.
                         </p>;
-                } else if (Model.YearBuilt is not null and not YearBuilt.DoNotKnow)
+                } else if (Model.HintUninsulatedRoof is not null)
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
                             Homes of your type
                             <strong>
-                                @(Model.YearBuilt < YearBuilt.From2012ToPresent 
+                                @(Model.HintUninsulatedRoof is true
                                     ? "typically have less than 200mm of insulation." 
                                     : "are typically fully insulated with at least 200mm of insulation.")
                             </strong>

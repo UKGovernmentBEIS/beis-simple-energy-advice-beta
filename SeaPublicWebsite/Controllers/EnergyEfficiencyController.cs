@@ -647,7 +647,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new WallConstructionViewModel
             {
                 WallConstruction = propertyData.WallConstruction,
-                YearBuilt = propertyData.YearBuilt,
+                HintSolidWalls = propertyData.HintSolidWalls,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -683,6 +683,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 CavityWallsInsulated = propertyData.CavityWallsInsulated,
                 YearBuilt = propertyData.YearBuilt,
+                HintUninsulatedCavityWalls = propertyData.HintUninsulatedCavityWalls,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -751,7 +752,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new FloorConstructionViewModel
             {
                 FloorConstruction = propertyData.FloorConstruction,
-                YearBuilt = propertyData.YearBuilt,
+                HintSuspendedTimber = propertyData.HintSuspendedTimber,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -786,7 +787,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new FloorInsulatedViewModel
             {
                 FloorInsulated = propertyData.FloorInsulated,
-                YearBuilt = propertyData.YearBuilt,
+                HintUninsulatedFloor = propertyData.HintUninsulatedFloor,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -853,8 +854,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new LoftSpaceViewModel
             {
                 LoftSpace = propertyData.LoftSpace,
-                PropertyType = propertyData.PropertyType,
-                FlatType = propertyData.FlatType,
+                HintHaveLoftAndAccess = propertyData.HintHaveLoftAndAccess,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
@@ -887,8 +887,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new LoftAccessViewModel
             {
                 LoftAccess = propertyData.LoftAccess,
-                PropertyType = propertyData.PropertyType,
-                FlatType = propertyData.FlatType,
+                HintHaveLoftAndAccess = propertyData.HintHaveLoftAndAccess,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
@@ -921,7 +920,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new RoofInsulatedViewModel
             {
                 RoofInsulated = propertyData.RoofInsulated,
-                YearBuilt = propertyData.YearBuilt,
+                HintUninsulatedRoof = propertyData.HintUninsulatedRoof,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -956,7 +955,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new GlazingTypeViewModel
             {
                 GlazingType = propertyData.GlazingType,
-                YearBuilt = propertyData.YearBuilt,
+                HintSingleGlazing = propertyData.HintSingleGlazing,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
@@ -990,7 +989,7 @@ namespace SeaPublicWebsite.Controllers
             var viewModel = new OutdoorSpaceViewModel
             {
                 HasOutdoorSpace = propertyData.HasOutdoorSpace,
-                PropertyType = propertyData.PropertyType,
+                HintHasOutdoorSpace = propertyData.HintHasOutdoorSpace,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)

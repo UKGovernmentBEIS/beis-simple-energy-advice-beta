@@ -8,7 +8,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select glazing type")]
         public GlazingType? GlazingType { get; set; }
-        public YearBuilt? YearBuilt { get; set; }
+        public bool? HintSingleGlazing { get; set; }
 
         public string Reference { get; set; }
         public Epc Epc { get; set; }
