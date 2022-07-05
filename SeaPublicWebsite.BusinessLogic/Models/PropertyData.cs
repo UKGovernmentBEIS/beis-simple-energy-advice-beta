@@ -123,8 +123,11 @@ public class PropertyData
             {
                 continue;
             }
-            
-            propertyInfo.SetValue(other, propertyInfo.GetValue(this));
+
+            if (propertyInfo.CanWrite)
+            {
+                propertyInfo.SetValue(other, propertyInfo.GetValue(this));
+            }
         }
     }
 
