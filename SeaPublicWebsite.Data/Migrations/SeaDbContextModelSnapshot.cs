@@ -38,7 +38,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DataProtectionKeys");
+                    b.ToTable("DataProtectionKeys", (string)null);
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.Epc", b =>
@@ -114,7 +114,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Epc");
+                    b.ToTable("Epc", (string)null);
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
@@ -242,7 +242,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasIndex("UneditedDataPropertyDataId");
 
-                    b.ToTable("PropertyData");
+                    b.ToTable("PropertyData", (string)null);
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyRecommendation", b =>
@@ -287,7 +287,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasIndex("PropertyDataId");
 
-                    b.ToTable("PropertyRecommendations");
+                    b.ToTable("PropertyRecommendations", (string)null);
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
