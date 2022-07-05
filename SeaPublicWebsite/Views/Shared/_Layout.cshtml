@@ -30,7 +30,6 @@
             gtag('js', new Date());
     
             gtag('config', '@id');
-            setUpGoogleAnalytics();
         </script>
     }
     <meta charset="utf-8"/>
@@ -133,5 +132,10 @@
 
     <script src="@(StaticAssetsVersioning.GetAppJsFilename())"></script>
     <script>window.GOVUKFrontend.initAll()</script>
+    
+    @if (CookieService.HasAcceptedGoogleAnalytics(Context.Request))
+    {
+        <script>setUpGoogleAnalytics()</script>   
+    }
 </body>
 </html>
