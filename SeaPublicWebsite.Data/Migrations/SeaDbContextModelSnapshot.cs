@@ -100,6 +100,11 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("SolidWallsInsulated")
                         .HasColumnType("integer");
 
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("bytea");
+
                     b.Property<int?>("WallConstruction")
                         .HasColumnType("integer");
 
@@ -209,6 +214,11 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<decimal?>("Temperature")
                         .HasColumnType("numeric");
 
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("bytea");
+
                     b.Property<int?>("WallConstruction")
                         .HasColumnType("integer");
 
@@ -260,6 +270,11 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.Property<string>("Summary")
                         .HasColumnType("text");
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("bytea");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
