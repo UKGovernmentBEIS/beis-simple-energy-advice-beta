@@ -191,6 +191,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<string>("Reference")
                         .HasColumnType("text");
 
+                    b.Property<bool>("ReturningUser")
+                        .HasColumnType("boolean");
+
                     b.Property<int?>("RoofConstruction")
                         .HasColumnType("integer");
 
@@ -281,7 +284,8 @@ namespace SeaPublicWebsite.Data.Migrations
                 {
                     b.HasOne("SeaPublicWebsite.BusinessLogic.Models.PropertyData", null)
                         .WithOne("UneditedData")
-                        .HasForeignKey("SeaPublicWebsite.BusinessLogic.Models.PropertyData", "EditedDataId");
+                        .HasForeignKey("SeaPublicWebsite.BusinessLogic.Models.PropertyData", "EditedDataId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyRecommendation", b =>
