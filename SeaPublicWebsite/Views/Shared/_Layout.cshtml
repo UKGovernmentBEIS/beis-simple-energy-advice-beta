@@ -131,6 +131,10 @@
 
     <script src="@(StaticAssetsVersioning.GetAppJsFilename())"></script>
     <script>window.GOVUKFrontend.initAll()</script>
-    <script>setUpGoogleAnalytics()</script>
+    
+    @if (CookieService.HasAcceptedGoogleAnalytics(Context.Request))
+    {
+        <script>setUpGoogleAnalytics()</script>   
+    }
 </body>
 </html>
