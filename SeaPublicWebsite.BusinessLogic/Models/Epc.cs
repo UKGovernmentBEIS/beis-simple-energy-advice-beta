@@ -1,4 +1,5 @@
-﻿using SeaPublicWebsite.BusinessLogic.Models.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.BusinessLogic.Models
 {
@@ -23,6 +24,8 @@ namespace SeaPublicWebsite.BusinessLogic.Models
         public RoofInsulated? RoofInsulated { get; set; }
         public GlazingType? GlazingType { get; set; }
         public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
+        [Timestamp]
+        public byte[] Timestamp { get; set; }
 
         public bool ContainsPropertyTypeAndAge()
         {
