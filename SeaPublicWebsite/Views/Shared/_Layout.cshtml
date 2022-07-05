@@ -10,6 +10,7 @@
 @inject GoogleAnalyticsService GoogleAnalytics
 @{
     string assetsPath = "/assets/images";
+    ViewBag.FeedbackUrl ??= Constants.FEEDBACK_URL_DEFAULT;
 }
 <!DOCTYPE html>
 
@@ -89,7 +90,7 @@
         @(await Html.GovUkPhaseBanner(new PhaseBannerViewModel
         {
             Phase = "Beta",
-            Html = @<text>This is a new service – your <a class="govuk-link" href="@Constants.FEEDBACK_URL">feedback</a> will help us to improve it.</text>
+            Html = @<text>This is a new service – your <a class="govuk-link" href="@ViewBag.FeedbackUrl">feedback</a> will help us to improve it.</text>
         }))
 
         @(RenderSection("BeforeMain", false))
@@ -109,7 +110,7 @@
                 new FooterLinksViewModel
                 {
                     Text = "Contact Us",
-                    Href = Constants.FEEDBACK_URL
+                    Href = ViewBag.FeedbackUrl
                 },
                 new FooterLinksViewModel
                 {
