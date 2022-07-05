@@ -217,15 +217,15 @@ public class EpbEpcAssessmentDto
         {
             return null;
         }
-        
-        if (PropertyType.Contains("detached", StringComparison.OrdinalIgnoreCase))
-        {
-            return HouseType.Detached;
-        }
 
         if (PropertyType.Contains("semi-detached", StringComparison.OrdinalIgnoreCase))
         {
             return HouseType.SemiDetached;
+        }
+        
+        if (PropertyType.Contains("detached", StringComparison.OrdinalIgnoreCase))
+        {
+            return HouseType.Detached;
         }
 
         if (PropertyType.Contains("mid-terrace", StringComparison.OrdinalIgnoreCase))
@@ -247,15 +247,15 @@ public class EpbEpcAssessmentDto
         {
             return null;
         }
-        
-        if (PropertyType.Contains("detached", StringComparison.OrdinalIgnoreCase))
-        {
-            return BungalowType.Detached;
-        }
 
         if (PropertyType.Contains("semi-detached", StringComparison.OrdinalIgnoreCase))
         {
             return BungalowType.SemiDetached;
+        }
+        
+        if (PropertyType.Contains("detached", StringComparison.OrdinalIgnoreCase))
+        {
+            return BungalowType.Detached;
         }
 
         if (PropertyType.Contains("mid-terrace", StringComparison.OrdinalIgnoreCase))
