@@ -6,7 +6,7 @@
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.NewOrReturningUserViewModel
 @{
-    ViewBag.Title = "Energy Efficiency Questionnaire";
+    ViewBag.Title = "New or returning user";
 }
 
 @section BeforeMain {
@@ -63,14 +63,14 @@
 
     </div>
     <div class="govuk-grid-column-one-third">
-        <aside class="app-related-items" role="complementary">
-            <h2 class="govuk-heading-m" id="subsection-title">What does this mean?</h2>
+        <aside class="app-related-items" role="complementary" aria-label="helper text">
+            <h2 class="govuk-heading-m">What does this mean?</h2>
             <p class="govuk-body-s">
                 If you have visited the service before, you can get your recommendations with the 
                 8-character reference code provided to you during your last visit.
             </p>
         </aside>
-        <aside class="sea-user-reference" role="complementary">
+        <aside class="sea-user-reference" role="complementary" aria-label="example reference code">
             <h2 class="govuk-caption-l govuk-!-margin-top-1">Example reference code</h2>
             <span class="govuk-heading-l govuk-!-padding-bottom-3" id="subsection-title">ABC123DE</span>
         </aside>

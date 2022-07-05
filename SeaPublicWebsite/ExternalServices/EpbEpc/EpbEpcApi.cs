@@ -30,7 +30,7 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             this.logger = logger;
         }
         
-        public async Task<List<EpcInformation>> GetEpcsInformationForPostcodeAndBuildingNameOrNumber(string postcode, string buildingNameOrNumber = null)
+        public async Task<List<EpcSearchResult>> GetEpcsInformationForPostcodeAndBuildingNameOrNumber(string postcode, string buildingNameOrNumber = null)
         {
             var token = await RequestTokenIfNeeded();
             var query = $"postcode={postcode}";
@@ -56,16 +56,16 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                     logger.Log(LogLevel.Warning, "{Message}", e.Message);
                 }
 
-                return new List<EpcInformation>();
+                return new List<EpcSearchResult>();
             }
 
-            var epcsInformation = response.Data.Assessments.Select(epcInfo => new EpcInformation(
+            var epcsInformation = response.Data.Assessments.Select(epcInfo => new EpcSearchResult(
                 epcInfo.EpcId,
                 epcInfo.Address.Address1, 
                 epcInfo.Address.Address2, 
                 epcInfo.Address.Postcode)).ToList();
             
-            return EpcInformation.SortEpcsInformation(epcsInformation);
+            return EpcSearchResult.SortEpcsInformation(epcsInformation);
         }
 
         public async Task<Epc> GetEpcForId(string epcId)
@@ -97,11 +97,7 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
             
             return new Epc
             {
-                EpcId = epcId,
-                Address1 = epc.Address.Address1,
-                Address2 = epc.Address.Address2,
-                Postcode = epc.Address.Postcode,
-                LodgementDate = GetLodgementDateFromEpc(epc),
+                LodgementYear = GetLodgementDateFromEpc(epc)?.Year,
                 PropertyType = GetPropertyTypeFromEpc(epc),
                 HouseType = GetHouseTypeFromEpc(epc),
                 BungalowType = GetBungalowTypeFromEpc(epc),

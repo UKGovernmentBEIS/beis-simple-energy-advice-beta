@@ -8,68 +8,93 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        
+
         <h1 class="govuk-heading-l">
             @Constants.SERVICE_NAME
         </h1>
-        
+
         <p class="govuk-body">
-            Find ways to reduce your energy bills and make your home more energy efficient.
+            Get advice on which home improvements could be installed by you or a
+            tradesperson to improve the energy efficiency of your home.
         </p>
-        
+
         <h2 class="govuk-heading-s">Who can use this service</h2>
         <p class="govuk-body">
             This service is for people who own their own property in England and Wales.
         </p>
-        
-        <h2 class="govuk-heading-s">If your property is outside of England and Wales</h2>
+
+        <div class="govuk-inset-text">
+            <p>
+                If you live in Scotland, visit
+                <a class="govuk-link" href="https://www.homeenergyscotland.org/">Home Energy Scotland</a>
+                to help you find ways to reduce your energy bills.
+            </p>
+            <p>
+                If you live in Northern Ireland, visit
+                <a class="govuk-link" href="https://www.nidirect.gov.uk/">NI Direct</a>
+                for help.
+            </p>
+        </div>
+
+        <h2 class="govuk-heading-s">What you get from this service</h2>
         <p class="govuk-body">
-            If you live in Scotland, visit
-            <a class="govuk-link" href="https://www.homeenergyscotland.org/">Home Energy Scotland</a>
-            to help you find ways to reduce your energy bills.
+            This service recommends the improvements most likely to be suitable for you based
+            on information about your home and energy use. For example, you may receive
+            advice on:
+        </p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>insulating your loft, walls and floor</li>
+            <li>upgrading your heating</li>
+            <li>fitting double glazing</li>
+            <li>installing solar panels</li>
+        </ul>
+        @* seabeta-555 uncomment this after private beta *@
+        @* <p class="govuk-inset-text"> *@
+        @*     If you’re wondering whether your property may be suitable for a heat pump,  *@
+        @*     our heat pump service offers in-depth advice *@
+        @* </p> *@
+        <p class="govuk-body">
+            Each recommendation will explain what’s involved, how much it could cost you and
+            how much it could save on typical energy bills. You will also receive information
+            about where to go to for more advice.
         </p>
         <p class="govuk-body">
-            If you live in Northern Ireland, visit
-            <a class="govuk-link" href="https://www.nidirect.gov.uk/">NI Direct</a>
-            for help.
+            You can then build an action plan of the recommendations you would like to act on.
+            There will be advice on where to find accredited tradespeople to do the work, and
+            information on where to go for further support.
+        </p>
+
+        <h2 class="govuk-heading-s">
+            What you will need
+        </h2>
+        <p class="govuk-body">
+            You will need to answer some questions about your home and how much energy you use.
+        </p>
+        <p class="govuk-body">
+            There is guidance available to help you answer the questions.
+            If you’re still unsure, take your best guess. The service can still give you useful information.
         </p>
 
         <h2 class="govuk-heading-s">
             How long it takes
         </h2>
         <p class="govuk-body">
-            You will need to answer some questions about your home and how much energy you use.
+            If this is your first visit, it takes around <strong>10 minutes</strong> to answer the questions and
+            receive recommendations tailored to you and your home.
         </p>
         <p class="govuk-body">
-            We will use this information to make sure the recommendations to improve your property’s energy efficiency
-            are relevant and suitable for your home.
-        </p>
-
-        <div class="govuk-inset-text govuk-!-margin-top-4 govuk-!-margin-bottom-4">
-            It takes around <strong>10 minutes</strong> to answer the questions and receive recommendations tailored to you.
-            You can then build an action plan of the recommendations you would like to take forward.
-        </div>
-        
-        <p class="govuk-body">
-            You could receive advice on ways to save energy, such as:
-        </p>
-        <ul class="govuk-list govuk-list--bullet">
-            <li>insulating your loft and cavity walls</li>
-            <li>draught-proofing windows and doors</li>
-            <li>upgrading your heating</li>
-            <li>installing double glazing</li>
-        </ul>
-        <p class="govuk-body">
-            Each recommendation will explain what’s involved, and where to go to for further advice.
+            You can
+            <a href="@Url.Action(nameof(EnergyEfficiencyController.NewOrReturningUser_Get), "EnergyEfficiency")">return to your recommendations and action plan</a>
+            if you need to.
         </p>
 
         <a href="@Url.Action(nameof(EnergyEfficiencyController.NewOrReturningUser_Get), "EnergyEfficiency")" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
             Start now
             <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
-                <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
+                <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/>
             </svg>
         </a>
-        
+
         @* seabeta-555 uncomment this after private beta *@
         @* <h2 class="govuk-heading-m"> *@
         @*     Other ways to get support *@

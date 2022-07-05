@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SeaPublicWebsite.Data;
@@ -11,9 +12,10 @@ using SeaPublicWebsite.Data;
 namespace SeaPublicWebsite.Data.Migrations
 {
     [DbContext(typeof(SeaDbContext))]
-    partial class SeaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220630183653_FixPropertyDataEpcRelationship")]
+    partial class FixPropertyDataEpcRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,9 +130,6 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("Country")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("EditedDataId")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("EpcDetailsConfirmed")
                         .HasColumnType("integer");
 
@@ -206,6 +205,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<decimal?>("Temperature")
                         .HasColumnType("numeric");
 
+                    b.Property<int?>("UneditedDataPropertyDataId")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("WallConstruction")
                         .HasColumnType("integer");
 
@@ -214,11 +216,10 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasKey("PropertyDataId");
 
-                    b.HasIndex("EditedDataId")
-                        .IsUnique();
-
                     b.HasIndex("Reference")
                         .IsUnique();
+
+                    b.HasIndex("UneditedDataPropertyDataId");
 
                     b.ToTable("PropertyData");
                 });
@@ -279,9 +280,11 @@ namespace SeaPublicWebsite.Data.Migrations
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
                 {
-                    b.HasOne("SeaPublicWebsite.BusinessLogic.Models.PropertyData", null)
-                        .WithOne("UneditedData")
-                        .HasForeignKey("SeaPublicWebsite.BusinessLogic.Models.PropertyData", "EditedDataId");
+                    b.HasOne("SeaPublicWebsite.BusinessLogic.Models.PropertyData", "UneditedData")
+                        .WithMany()
+                        .HasForeignKey("UneditedDataPropertyDataId");
+
+                    b.Navigation("UneditedData");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyRecommendation", b =>
@@ -300,8 +303,6 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Navigation("Epc");
 
                     b.Navigation("PropertyRecommendations");
-
-                    b.Navigation("UneditedData");
                 });
 #pragma warning restore 612, 618
         }

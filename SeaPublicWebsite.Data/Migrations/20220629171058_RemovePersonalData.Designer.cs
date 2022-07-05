@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SeaPublicWebsite.Data;
@@ -11,9 +12,10 @@ using SeaPublicWebsite.Data;
 namespace SeaPublicWebsite.Data.Migrations
 {
     [DbContext(typeof(SeaDbContext))]
-    partial class SeaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220629171058_RemovePersonalData")]
+    partial class RemovePersonalData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,9 +87,6 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("OtherHeatingType")
                         .HasColumnType("integer");
 
-                    b.Property<int>("PropertyDataId")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("PropertyType")
                         .HasColumnType("integer");
 
@@ -104,9 +103,6 @@ namespace SeaPublicWebsite.Data.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PropertyDataId")
-                        .IsUnique();
 
                     b.ToTable("Epc");
                 });
@@ -128,10 +124,10 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("Country")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("EditedDataId")
+                    b.Property<int?>("EpcDetailsConfirmed")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("EpcDetailsConfirmed")
+                    b.Property<int?>("EpcId")
                         .HasColumnType("integer");
 
                     b.Property<int?>("FlatType")
@@ -206,6 +202,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<decimal?>("Temperature")
                         .HasColumnType("numeric");
 
+                    b.Property<int?>("UneditedDataPropertyDataId")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("WallConstruction")
                         .HasColumnType("integer");
 
@@ -214,11 +213,12 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasKey("PropertyDataId");
 
-                    b.HasIndex("EditedDataId")
-                        .IsUnique();
+                    b.HasIndex("EpcId");
 
                     b.HasIndex("Reference")
                         .IsUnique();
+
+                    b.HasIndex("UneditedDataPropertyDataId");
 
                     b.ToTable("PropertyData");
                 });
@@ -268,20 +268,19 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.ToTable("PropertyRecommendations");
                 });
 
-            modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.Epc", b =>
-                {
-                    b.HasOne("SeaPublicWebsite.BusinessLogic.Models.PropertyData", null)
-                        .WithOne("Epc")
-                        .HasForeignKey("SeaPublicWebsite.BusinessLogic.Models.Epc", "PropertyDataId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
                 {
-                    b.HasOne("SeaPublicWebsite.BusinessLogic.Models.PropertyData", null)
-                        .WithOne("UneditedData")
-                        .HasForeignKey("SeaPublicWebsite.BusinessLogic.Models.PropertyData", "EditedDataId");
+                    b.HasOne("SeaPublicWebsite.BusinessLogic.Models.Epc", "Epc")
+                        .WithMany()
+                        .HasForeignKey("EpcId");
+
+                    b.HasOne("SeaPublicWebsite.BusinessLogic.Models.PropertyData", "UneditedData")
+                        .WithMany()
+                        .HasForeignKey("UneditedDataPropertyDataId");
+
+                    b.Navigation("Epc");
+
+                    b.Navigation("UneditedData");
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyRecommendation", b =>
@@ -297,11 +296,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
                 {
-                    b.Navigation("Epc");
-
                     b.Navigation("PropertyRecommendations");
-
-                    b.Navigation("UneditedData");
                 });
 #pragma warning restore 612, 618
         }
