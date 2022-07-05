@@ -41,7 +41,8 @@
                         <strong>
                             @(Model.PropertyType switch {
                                 PropertyType.House or PropertyType.Bungalow => "have some outdoor space",
-                                PropertyType.ApartmentFlatOrMaisonette => "do not have any outdoor space"
+                                PropertyType.ApartmentFlatOrMaisonette => "do not have any outdoor space",
+                                _ => throw new ArgumentOutOfRangeException()
                                 })
                             that could fit a heat pump.
                         </strong>
