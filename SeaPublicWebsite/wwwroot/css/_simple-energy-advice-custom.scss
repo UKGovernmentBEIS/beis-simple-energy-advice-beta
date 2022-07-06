@@ -324,3 +324,7 @@
     -webkit-logical-height: 1em; /* Chrome ignores auto, so we have to use this hack to set the correct height  */
     -webkit-logical-width: auto; /* Chrome ignores auto, but here for completeness */
 }
+
+.govuk-warning-text__icon {
+    top: 33.3%;
+}
