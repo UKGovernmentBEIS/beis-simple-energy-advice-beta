@@ -1,4 +1,7 @@
 ﻿@using SeaPublicWebsite.Models.EnergyEfficiency
+@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using GovUkDesignSystem.GovUkDesignSystemComponents.Enums
 @model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
 
 <h2 class="govuk-heading-m">
@@ -24,21 +27,6 @@
 @{ await Html.RenderPartialAsync("_SendEmail.cshtml", new YourSavedRecommendationsEmailViewModel()); }
 
 <h2 class="govuk-heading-m">
-    Give feedback
-</h2>
-<p class="govuk-body">
-    This service is still in its early stages and under active development. 
-</p>
-<p class="govuk-body">
-    Your feedback can help us to shape how the service develops so that it can best serve the needs of the public.  
-</p>
-<p class="govuk-body">
-    <a class="govuk-link" href="@Constants.FEEDBACK_URL_ACTION_PLAN">
-        Leave some feedback for this service
-    </a>
-</p>
-
-<h2 class="govuk-heading-m">
     Change your answers
 </h2>
 <p class="govuk-body">
@@ -50,3 +38,22 @@
         view and change your answers here.
     </a> 
 </p>
+
+@await Html.GovUkNotificationBanner(new NotificationBannerViewModel
+{
+    TitleText = "Give feedback",
+    TitleHeadingLevel = HeadingLevel.h2,
+    Html = @<text>
+               <p class="govuk-body">
+                   <strong>
+                       This service is still in development. Your feedback will help us understand
+                       how well the service is working and what can be improved.
+                   </strong>
+               </p>
+               <a href=@Constants.FEEDBACK_URL_ACTION_PLAN>
+                   <strong>
+                       Leave your feedback
+                   </strong>
+               </a>
+            </text>
+})
