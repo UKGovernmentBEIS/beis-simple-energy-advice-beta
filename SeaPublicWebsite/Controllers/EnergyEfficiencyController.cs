@@ -1273,7 +1273,12 @@ namespace SeaPublicWebsite.Controllers
             }
             
             return await UpdatePropertyAndRedirect(
-                p => p.HeatingPattern = viewModel.HeatingPattern,
+                p =>
+                {
+                    p.HeatingPattern = viewModel.HeatingPattern;
+                    p.HoursOfHeatingMorning = viewModel.HoursOfHeatingMorning;
+                    p.HoursOfHeatingEvening = viewModel.HoursOfHeatingEvening;
+                },
                 viewModel.Reference,
                 QuestionFlowPage.HeatingPattern, 
                 viewModel.EntryPoint);
