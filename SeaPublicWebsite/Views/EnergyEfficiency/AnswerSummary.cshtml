@@ -121,7 +121,9 @@
             Value = new()
             {
                 Classes = "govuk-!-width-one-half",
-                Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.FloorConstruction)
+                Text = Model.PropertyData.FloorConstruction is FloorConstruction.Mix
+                    ? "A mix of both suspended timber and solid concrete"
+                    : GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.FloorConstruction)
             },
             Actions = new()
             {
