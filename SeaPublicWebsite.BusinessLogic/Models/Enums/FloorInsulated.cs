@@ -6,7 +6,7 @@ namespace SeaPublicWebsite.BusinessLogic.Models.Enums
     {
         [GovUkRadioCheckboxLabelText(Text = "Yes, my floor is insulated")]
         Yes,
-        [GovUkRadioCheckboxLabelText(Text = "No, my floors are not insulated")]
+        [GovUkRadioCheckboxLabelText(Text = "No, my floor is not insulated")]
         No,
         [GovUkRadioCheckboxLabelText(Text = "I don't know")]
         DoNotKnow,

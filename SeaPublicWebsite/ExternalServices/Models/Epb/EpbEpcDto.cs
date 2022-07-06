@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
@@ -456,18 +457,35 @@ public class EpbEpcAssessmentDto
             return null;
         }
 
-        if (RoofDescription.All(description =>
-                description.Contains("insulated", StringComparison.OrdinalIgnoreCase) ||
-                description.Contains("loft insulation", StringComparison.OrdinalIgnoreCase) ||
-                description.Contains("limited insulation", StringComparison.OrdinalIgnoreCase)))
-        {
-            return RoofInsulated.Yes;
-        }
-
         if (RoofDescription.Any(description =>
-                description.Contains("no insulation", StringComparison.OrdinalIgnoreCase)))
+            {
+                if (description.Contains("limited insulation", StringComparison.OrdinalIgnoreCase) ||
+                    description.Contains("no insulation", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+
+                // Extract number xxx from 'xxx mm loft insulation'
+                var thickness = Regex.Match(description, @"\d+");
+                return thickness.Success && int.Parse(thickness.Value) < 200;
+            }))
         {
             return RoofInsulated.No;
+        }
+            
+        if (RoofDescription.All(description =>
+            {
+                if (description.Contains("insulated", StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+
+                // Extract number xxx from 'xxx mm loft insulation'
+                var thickness = Regex.Match(description, @"\d+");
+                return thickness.Success && int.Parse(thickness.Value) >= 200;
+            }))
+        {
+            return RoofInsulated.Yes;
         }
 
         return null;
