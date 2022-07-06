@@ -1,10 +1,25 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@model SeaPublicWebsite.Models.EnergyEfficiency.YourSavedRecommendationsEmailViewModel;
+@using SeaPublicWebsite.Controllers
+@model SeaPublicWebsite.Models.EnergyEfficiency.YourSavedRecommendationsEmailViewModel
 
-<form action="@Url.Action("ActionPlan_Post", "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
+@{
+    var action = Model.FromActionPlan
+        ? nameof(EnergyEfficiencyController.ActionPlan_Post) 
+        : nameof(EnergyEfficiencyController.NoRecommendations_Post);
+}
+
+<form action="@Url.Action(action, "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
+    
     @Html.AntiForgeryToken()
     
+    @if (Model.EmailSent)
+    {
+        <p id="email-sent" class="govuk-body sea-email-sent">
+            Email sent to @Model.EmailAddress
+        </p>
+    }
+
     @await Html.GovUkTextInputFor(m => m.EmailAddress,
         labelOptions: new LabelViewModel
         {

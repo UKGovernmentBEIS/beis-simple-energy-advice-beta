@@ -2,7 +2,8 @@
 @using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using GovUkDesignSystem.GovUkDesignSystemComponents.Enums
-@model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
+@using SeaPublicWebsite.Controllers
+@model SeaPublicWebsite.Models.EnergyEfficiency.ReturnToActionPlanViewModel;
 
 <h2 class="govuk-heading-m">
     Returning to your Action Plan
@@ -10,34 +11,51 @@
 
 <div class="sea-user-reference govuk-!-margin-bottom-6" role="complementary">
     <h2 class="govuk-body-l govuk-!-margin-0">Your reference code</h2>
-    <span class="govuk-heading-l" id="subsection-title">@Model.PropertyData.Reference</span>
+    <span class="govuk-heading-l" id="subsection-title">@Model.Reference</span>
 </div>
 
 <p class="govuk-body">
     You can come back to this action plan using your reference number or we can send a link to your email.
 </p>
 
-@if (Model.EmailAddress is not null)
+@{ await Html.RenderPartialAsync("_SendEmail.cshtml", new YourSavedRecommendationsEmailViewModel
+   {
+       Reference = Model.Reference,
+       EmailAddress = Model.EmailAddress,
+       EmailSent = Model.EmailSent,
+       FromActionPlan = Model.FromActionPlan
+   }); }
+
+@if (Model.FromActionPlan)
 {
-    <p class="govuk-body sea-email-sent">
-        Email sent to @Model.EmailAddress
+    <h2 class="govuk-heading-m">
+        Start over
+    </h2>
+    <p class="govuk-body">
+        See if there are improvements you can make to another property.
+    </p>
+    <p class="govuk-body">
+        <a class="govuk-link" href="@Url.Action(nameof(EnergyEfficiencyController.Index), "EnergyEfficiency")">
+            Start again for another property
+        </a>
+    </p>
+}
+else
+{
+    <h2 class="govuk-heading-m">
+        Change your answers
+    </h2>
+    <p class="govuk-body">
+        We have provided recommendations that are most suitable for your home based on the answers you provided earlier.
+    </p>
+    <p class="govuk-body">
+        If something doesn’t look right you can 
+        <a href="@Url.Action(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference = Model.Reference })">
+            view and change your answers here.
+        </a> 
     </p>
 }
 
-@{ await Html.RenderPartialAsync("_SendEmail.cshtml", new YourSavedRecommendationsEmailViewModel()); }
-
-<h2 class="govuk-heading-m">
-    Change your answers
-</h2>
-<p class="govuk-body">
-    We have provided recommendations that are most suitable for your home based on the answers you provided earlier.
-</p>
-<p class="govuk-body">
-    If something doesn’t look right you can 
-    <a href="@Url.Action("AnswerSummary_Get", "EnergyEfficiency", new { reference = Model.PropertyData.Reference })">
-        view and change your answers here.
-    </a> 
-</p>
 
 @await Html.GovUkNotificationBanner(new NotificationBannerViewModel
 {
@@ -50,9 +68,9 @@
                        how well the service is working and what can be improved.
                    </strong>
                </p>
-               <a class="govuk-link" href="@Constants.FEEDBACK_URL_ACTION_PLAN" target="_blank">
+               <a href=@Constants.FEEDBACK_URL_ACTION_PLAN>
                    <strong>
-                       Leave your feedback (opens in new tab)
+                       Leave your feedback
                    </strong>
                </a>
             </text>

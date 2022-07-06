@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Controllers
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @model SeaPublicWebsite.Models.EnergyEfficiency.NoRecommendationsViewModel;
 
 @{
@@ -26,50 +27,19 @@
         <p class="govuk-body">From the information collected, it seems like your home is already energy efficient and may not significantly benefit from further measures.</p>
         <p class="govuk-body">You may be able to make changes to how you use energy to help reduce your bills.</p>
         
-        <h2 class="govuk-heading-l">What else you can do</h2>
-        
-        <h3 class="govuk-heading-s">Water efficient showerhead</h3>
-        <p class="govuk-body">Replace your showerhead to reduce how much hot water you use.</p>
-        <p class="govuk-body"><a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">Read more (opens in new tab)</a></p>
-        
-        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-        
-        <h3 class="govuk-heading-s">Tap aerators</h3>
-        <p class="govuk-body">A small device you can attach to your tap to  reduce how much hot water you use.</p>
-        <p class="govuk-body"><a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">Read more (opens in new tab)</a></p>
-        
-        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-        
-        <h3 class="govuk-heading-s">Upgrade to energy efficient appliances</h3>
-        <p class="govuk-body">When it’s time to replace your appliances, use the energy label to help you choose. </p>
-        <p class="govuk-body"><a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">Read more (opens in new tab)</a></p>
-        
-        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_LowCostMeasures", new LowCostMeasuresViewModel()); }
         
         <h2 class="govuk-heading-l">Still need help?</h2>
         <p class="govuk-body">You can visit the <a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">Energy Saving Trust website</a> for more information on reducing your home’s energy use.</p>
 
-        <p class="govuk-body">If you are worried about affording your energy bills, Ofgem has a 
-            <a class="govuk-link" href="https://www.ofgem.gov.uk/find-schemes-grants-and-benefits-help-home-energy" target="_blank">helpful guide</a> to the schemes, grants and benefits that may be available to you.
-        </p>
-
-        <h2 class="govuk-heading-l">Start over</h2>
-        <p class="govuk-body">See if there are improvements you can make to another property.</p>
-
-        @await Html.GovUkButton(new ButtonViewModel
-        {
-            Text = "Start again for another property",
-            Href = Url.Action(nameof(EnergyEfficiencyController.Index), "EnergyEfficiency")
-        })
-        
-        <h2 class="govuk-heading-l">Give feedback</h2>
-        <p class="govuk-body">This service is still in its early stages and under active development. </p>
-        <p class="govuk-body">Your feedback can help us to shape how the service develops so that it can best serve the needs of the public.  </p>
-        <p class="govuk-body">
-            <a href="@Constants.FEEDBACK_URL_BANNER_AFTER_ANSWER_SUMMARY" target="_blank" class="govuk-link">
-                Leave some feedback for this service (opens in new tab)
-            </a>
-        </p>
+        @{
+            await Html.RenderPartialAsync("ActionPlan/Partials/_ReturnToActionPlan", new ReturnToActionPlanViewModel
+            {
+                Reference = Model.Reference,
+                EmailAddress = Model.EmailAddress,
+                EmailSent = Model.EmailSent,
+                FromActionPlan = false
+            }); }
 
     </div>
 </div>

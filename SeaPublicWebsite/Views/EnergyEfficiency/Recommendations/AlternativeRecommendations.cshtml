@@ -1,0 +1,56 @@
+﻿@using SeaPublicWebsite.Models.EnergyEfficiency
+@using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@model SeaPublicWebsite.Models.EnergyEfficiency.AlternativeRecommendationsViewModel
+
+@{
+    ViewBag.Title = "Alternative Recommendations";
+}
+
+@section BeforeMain {
+    @await Html.GovUkBackLink(new BackLinkViewModel
+    {
+        Text = "Back",
+        Href = Model.BackLink
+    })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.AlternativeRecommendations_Post), 
+                          "EnergyEfficiency")" method="post" novalidate>
+            
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.FromActionPlan)
+            
+            <h1 class="govuk-heading-l">
+                Other ways to save energy
+            </h1>
+            
+            <p class="govuk-body">
+                If you are looking for some easy to implements reccomendations or some alternatives incase the ones we 
+                presented were not suitable, here are some other actions  you could consider.
+            </p>
+            <p class="govuk-body">
+                Or you can proceed straight to your action plan for a summary of the recommendations 
+                you would like to act on and advice on your next steps.
+            </p>
+            
+            @{ await Html.RenderPartialAsync("ActionPlan/Partials/_LowCostMeasures", new LowCostMeasuresViewModel
+               {
+                   Heading = "Even more ways to save on energy bills"
+               }); }
+            
+            @{ await Html.RenderPartialAsync("Recommendations/Partials/_ActionButtons", new ActionButtonsViewModel
+               {
+                   BackTitle = Model.FromActionPlan ? null : "Go back to",
+                   BackText = Model.FromActionPlan ? null : $"Recommendation {Model.LastIndex}", //TODO
+                   ForwardTitle = Model.FromActionPlan ? "Back to" : "Continue to",
+                   ForwardText = "Action Plan"
+               }); }
+        </form>
+    </div>
+</div>
