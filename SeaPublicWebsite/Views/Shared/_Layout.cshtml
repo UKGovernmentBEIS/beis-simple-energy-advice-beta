@@ -89,7 +89,7 @@
         @(await Html.GovUkPhaseBanner(new PhaseBannerViewModel
         {
             Phase = "Beta",
-            Html = @<text>This is a new service – your <a class="govuk-link" href="@ViewBag.FeedbackUrl">feedback</a> will help us to improve it.</text>
+            Html = @<text>This is a new service – your <a class="govuk-link" href="@ViewBag.FeedbackUrl" target="_blank">feedback</a> will help us to improve it.</text>
         }))
 
         @(RenderSection("BeforeMain", false))
