@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http.Headers;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
@@ -585,18 +586,35 @@ namespace SeaPublicWebsite.ExternalServices.EpbEpc
                 return null;
             }
 
-            if (epc.RoofDescription.All(description =>
-                    description.Contains("insulated", StringComparison.OrdinalIgnoreCase) ||
-                    description.Contains("loft insulation", StringComparison.OrdinalIgnoreCase) ||
-                    description.Contains("limited insulation", StringComparison.OrdinalIgnoreCase)))
-            {
-                return RoofInsulated.Yes;
-            }
-
             if (epc.RoofDescription.Any(description =>
-                    description.Contains("no insulation", StringComparison.OrdinalIgnoreCase)))
+                {
+                    if (description.Contains("limited insulation", StringComparison.OrdinalIgnoreCase) ||
+                        description.Contains("no insulation", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return true;
+                    }
+
+                    // Extract number xxx from 'xxx mm loft insulation'
+                    var thickness = Regex.Match(description, @"\d+");
+                    return thickness.Success && int.Parse(thickness.Value) < 200;
+                }))
             {
                 return RoofInsulated.No;
+            }
+            
+            if (epc.RoofDescription.All(description =>
+                {
+                    if (description.Contains("insulated", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return true;
+                    }
+
+                    // Extract number xxx from 'xxx mm loft insulation'
+                    var thickness = Regex.Match(description, @"\d+");
+                    return thickness.Success && int.Parse(thickness.Value) >= 200;
+                }))
+            {
+                return RoofInsulated.Yes;
             }
 
             return null;
