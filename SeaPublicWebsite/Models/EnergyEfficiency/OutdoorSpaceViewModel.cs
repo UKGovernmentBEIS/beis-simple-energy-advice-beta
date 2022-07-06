@@ -7,6 +7,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select whether you have outdoor space")]
         public HasOutdoorSpace? HasOutdoorSpace { get; set; }
+        public bool HintHasOutdoorSpace { get; set; }
 
         public string Reference { get; set; }
     }

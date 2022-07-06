@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.LoftSpaceViewModel
@@ -33,6 +34,14 @@
                             If all the space under your pitched roof, or nearly all the space, is used as living space with finished walls and ceilings then the loft has been converted into a room.
                         </p>
                      </text>;
+                
+                Func<object, object> blueBannerHint =
+                    @<p class="govuk-body">
+                        Homes of your type typically
+                        <strong>
+                            @(Model.HintHaveLoftAndAccess ? "have a loft." : "do not have a loft.")
+                        </strong>
+                    </p>;
             }
             
             @(await Html.GovUkRadiosFor(m => m.LoftSpace,
@@ -52,6 +61,12 @@
                                {
                                    SummaryText = "Help me decide if I have a loft",
                                    Html = details
+                               })
+                               
+                               @await Html.GovUkInsetText(new InsetTextViewModel
+                               {
+                                   Classes = "sea-epc-hint",
+                                   Html = blueBannerHint
                                })
                             </text>
                 }

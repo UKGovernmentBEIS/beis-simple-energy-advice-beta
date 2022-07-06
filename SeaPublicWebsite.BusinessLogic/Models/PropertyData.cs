@@ -52,6 +52,16 @@ public class PropertyData
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; }
 
+    public bool? HintSolidWalls => YearBuilt is null ? null : YearBuilt <= Enums.YearBuilt.Pre1930;
+    public bool? HintUninsulatedCavityWalls => YearBuilt is null ? null : YearBuilt <= Enums.YearBuilt.Pre1930;
+    public bool? HintSuspendedTimber => YearBuilt is null ? null : YearBuilt < Enums.YearBuilt.From1967To1982;
+    public bool? HintUninsulatedFloor => YearBuilt is null ? null : YearBuilt < Enums.YearBuilt.From1996To2011;
+    public bool HintHaveLoftAndAccess => PropertyType is Enums.PropertyType.House or Enums.PropertyType.Bungalow;
+    public bool? HintUninsulatedRoof => YearBuilt is null ? null : YearBuilt < Enums.YearBuilt.From2012ToPresent;
+    public bool? HintSingleGlazing => YearBuilt is null ? null : YearBuilt < Enums.YearBuilt.From1983To1995;
+    public bool HintHasOutdoorSpace => PropertyType is Enums.PropertyType.House or Enums.PropertyType.Bungalow;
+    
+
     public void CreateUneditedData()
     {
         UneditedData = new PropertyData();
@@ -114,8 +124,11 @@ public class PropertyData
             {
                 continue;
             }
-            
-            propertyInfo.SetValue(other, propertyInfo.GetValue(this));
+
+            if (propertyInfo.CanWrite)
+            {
+                propertyInfo.SetValue(other, propertyInfo.GetValue(this));
+            }
         }
     }
 

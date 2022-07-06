@@ -45,21 +45,29 @@
                         </p>
                      </text>;
 
-                Func<object, object> epcHint = null;
+                Func<object, object> blueBannerHint = null;
                 if (Model.Epc?.WallConstruction is not null)
                 {
-                    epcHint = 
+                    blueBannerHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests you have
+                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your home has
                             <strong>
                                 @(Model.Epc?.WallConstruction switch {
-                                    WallConstruction.Solid => "solid",
-                                    WallConstruction.Cavity => "cavity",
-                                    WallConstruction.Mixed => "mixed solid and cavity",
-                                    WallConstruction.Other => "another type of",
+                                    WallConstruction.Solid => "solid walls.",
+                                    WallConstruction.Cavity => "cavity walls.",
+                                    WallConstruction.Mixed => "mixed solid and cavity walls.",
+                                    WallConstruction.Other => "another type of walls.",
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
-                            walls.
+                        </p>;
+                } else if (Model.HintSolidWalls is not null)
+                {
+                    blueBannerHint =
+                        @<p class="govuk-body">
+                            Homes of your type typically have
+                            <strong>
+                                @(Model.HintSolidWalls is true ? "solid walls." : "cavity walls.")
+                            </strong>
                         </p>;
                 }
             }
@@ -92,12 +100,12 @@
                                    Html = details
                                })
 
-                               @if (epcHint is not null)
+                               @if (blueBannerHint is not null)
                                {
                                    @await Html.GovUkInsetText(new InsetTextViewModel
                                    {
                                        Classes = "sea-epc-hint",
-                                       Html = epcHint
+                                       Html = blueBannerHint
                                    })
                                }
                             </text>
