@@ -324,3 +324,9 @@
     -webkit-logical-height: 1em; /* Chrome ignores auto, so we have to use this hack to set the correct height  */
     -webkit-logical-width: auto; /* Chrome ignores auto, but here for completeness */
 }
+
+// Link to discussion about issue and workaround:
+// https://github.com/alphagov/govuk-design-system-backlog/issues/71#issuecomment-492667019
+.govuk-warning-text__icon {
+    top: 33.3%;
+}
