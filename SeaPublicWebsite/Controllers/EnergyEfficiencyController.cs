@@ -1672,8 +1672,8 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            // If entryPoint is set then the user is editing their answers, so we need to take a copy of the current answers
-            if (entryPoint is not null && propertyData.UneditedData is null)
+            // If entryPoint is set then the user is editing their answers (and if HasSeenRecommendations then they have already generated recommendations that may now need to change), so we need to take a copy of the current answers
+            if ((entryPoint is not null || propertyData.HasSeenRecommendations) && propertyData.UneditedData is null)
             {
                 propertyData.CreateUneditedData();
             }
@@ -1683,7 +1683,7 @@ namespace SeaPublicWebsite.Controllers
             
             // If the user is going back to the answer summary page or the check your unchangeable answers page then they finished editing and we
             // can get rid of the old answers
-            if (entryPoint is not null &&
+            if ((entryPoint is not null || propertyData.HasSeenRecommendations) &&
                 (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)) ||
                  forwardArgs.Action.Equals(nameof(CheckYourUnchangeableAnswers_Get))))
             {
