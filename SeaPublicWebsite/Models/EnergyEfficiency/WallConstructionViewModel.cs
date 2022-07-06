@@ -8,6 +8,8 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select wall type")]
         public WallConstruction? WallConstruction { get; set; }
+        
+        public bool? HintSolidWalls { get; set; }
 
         public string Reference { get; set; }
         public Epc Epc { get; set; }

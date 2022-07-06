@@ -45,6 +45,15 @@
                         </p>
                         @await Html.GovUkRadiosFor(
                             m => m.FindEpc,
+                            fieldsetOptions: new FieldsetViewModel
+                            {
+                                Legend = new LegendViewModel
+                                {
+                                    Text = "Would you like to see if your property has a registered Energy Performance Certificate?",
+                                    Classes = "govuk-fieldset__legend--m",
+                                    IsPageHeading = false
+                                }
+                            },
                             hintOptions: new HintViewModel
                             {
                                 Text = "If your property does not have an Energy Performance Certificate, please choose ‘No’."
