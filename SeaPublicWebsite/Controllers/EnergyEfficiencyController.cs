@@ -1607,12 +1607,11 @@ namespace SeaPublicWebsite.Controllers
             {
                 Reference = reference,
                 FromActionPlan = fromActionPlan,
-                ShowAltRadiatorPanels = propertyData.PropertyRecommendations.Exists(r => 
-                    r.Key is RecommendationKey.InsulateSolidWalls or RecommendationKey.InsulateCavityWalls),
-                ShowAltHeatPump =  propertyData.HeatingType is not HeatingType.HeatPump,
-                ShowAltDraughtProofFloors = propertyData.FloorInsulated is FloorInsulated.No,
-                ShowAltDraughtProofWindowsAndDoors = propertyData.GlazingType is GlazingType.SingleGlazed or GlazingType.Both,
-                ShowAltDraughtProofLoftAccess = propertyData.LoftAccess is LoftAccess.Yes,
+                ShowAltRadiatorPanels = propertyData.ShowAltRadiatorPanels,
+                ShowAltHeatPump =  propertyData.ShowAltHeatPump,
+                ShowAltDraughtProofFloors = propertyData.ShowAltDraughtProofFloors,
+                ShowAltDraughtProofWindowsAndDoors = propertyData.ShowAltDraughtProofWindowsAndDoors,
+                ShowAltDraughtProofLoftAccess = propertyData.ShowAltDraughtProofLoftAccess,
                 LastIndex = propertyData.PropertyRecommendations.Count,
                 BackLink = fromActionPlan
                     ? Url.Action(nameof(ActionPlan_Get), new { reference })
