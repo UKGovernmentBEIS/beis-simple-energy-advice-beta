@@ -50,7 +50,7 @@ public class PropertyData
     public bool HasSeenRecommendations { get; set; }
     public bool ReturningUser { get; set; }
 
-    public List<PropertyRecommendation> PropertyRecommendations { get; set; }
+    public List<PropertyRecommendation> PropertyRecommendations { get; set; } = new();
 
     public bool? HintSolidWalls => YearBuilt is null ? null : YearBuilt <= Enums.YearBuilt.Pre1930;
     public bool? HintUninsulatedCavityWalls => YearBuilt is null ? null : YearBuilt <= Enums.YearBuilt.From1996To2011;
