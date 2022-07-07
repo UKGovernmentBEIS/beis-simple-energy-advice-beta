@@ -50,8 +50,7 @@
             </p>
         }
         
-        @if (Model.PropertyData.PropertyRecommendations.Exists(r => 
-            r.Key is RecommendationKey.HighHeatRetentionStorageHeaters or RecommendationKey.CondensingGasBoiler or RecommendationKey.ReplaceCondensingBoiler))
+        @if (Model.PropertyData.HeatingType is not HeatingType.HeatPump)
         {
             <h2 class="govuk-heading-m">
                 Heat your home with a heat pump
@@ -64,8 +63,7 @@
             </p>
         }
         
-        @if (Model.PropertyData.PropertyRecommendations.Exists(r =>
-            r.Key is RecommendationKey.FloorInsulationSolidFloor or RecommendationKey.FloorInsulationSuspendedFloor))
+        @if (Model.PropertyData.FloorInsulated is FloorInsulated.No)
         {
             <h2 class="govuk-heading-m">
                 Draught-proof your floors
@@ -78,8 +76,7 @@
             </p>
         }
         
-        @if (Model.PropertyData.PropertyRecommendations.Exists(r => 
-            r.Key is RecommendationKey.ReplaceSingleGlazedWindowsWithLowEDoubleGlazing or RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing))
+        @if (Model.PropertyData.GlazingType is GlazingType.SingleGlazed or GlazingType.Both)
         {
             <h2 class="govuk-heading-m">
                 Draught-proof your windows and doors
