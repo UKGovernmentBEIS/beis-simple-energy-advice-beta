@@ -1606,7 +1606,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 Reference = reference,
                 FromActionPlan = fromActionPlan,
-                LastIndex = propertyData.PropertyRecommendations.Count,
+                PropertyData = propertyData,
                 BackLink = fromActionPlan
                     ? Url.Action(nameof(ActionPlan_Get), new { reference })
                     : Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference })
@@ -1620,7 +1620,7 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return await AlternativeRecommendations_Get(viewModel.Reference);
+                return await AlternativeRecommendations_Get(viewModel.Reference, viewModel.FromActionPlan);
             }
             
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
@@ -1632,6 +1632,41 @@ namespace SeaPublicWebsite.Controllers
                         new {id = (int)propertyData.GetLastRecommendationKey(), reference = propertyData.Reference});
                 case "goForwards":
                     return RedirectToAction(nameof(ActionPlan_Get), new {reference = propertyData.Reference});
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        [HttpGet("water-and-energy-efficiency/{reference}")]
+        public async Task<IActionResult> WaterAndElectricityEfficiency_Get(string reference, bool fromActionPlan = false)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+
+            var viewModel = new WaterAndEnergyEfficiencyViewModel
+            {
+                Reference = reference,
+                FromActionPlan = fromActionPlan,
+                BackLink = Url.Action(nameof(AlternativeRecommendations_Get), new { reference, fromActionPlan})
+            };
+            
+            return View("Recommendations/WaterAndEnergyEfficiency", viewModel);
+        }
+        
+        [HttpPost("water-and-energy-efficiency/{reference}")]
+        public async Task<IActionResult> WaterAndElectricityEfficiency_Post(WaterAndEnergyEfficiencyViewModel viewModel, string command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await WaterAndElectricityEfficiency_Get(viewModel.Reference, viewModel.FromActionPlan);
+            }
+            
+            switch (command)
+            {
+                case "goBackwards":
+                    return RedirectToAction(nameof(AlternativeRecommendations_Get), 
+                        new {reference = viewModel.Reference, fromActionPlan = viewModel.FromActionPlan});
+                case "goForwards":
+                    return RedirectToAction(nameof(ActionPlan_Get), new {reference = viewModel.Reference});
                 default:
                     throw new ArgumentOutOfRangeException();
             }

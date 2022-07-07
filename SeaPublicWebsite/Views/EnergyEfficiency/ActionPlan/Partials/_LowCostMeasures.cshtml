@@ -1,7 +1,14 @@
 ﻿@model SeaPublicWebsite.Models.EnergyEfficiency.LowCostMeasuresViewModel
 
 <h2 class="govuk-heading-l">@(Model.Heading ?? "What else you can do")</h2>
-        
+
+@if (Model.Text is not null)
+{
+    <p class="govuk-body">
+        @Model.Text
+    </p>
+}
+
 <h3 class="govuk-heading-s">Water efficient showerhead</h3>
 <p class="govuk-body">Replace your showerhead to reduce how much hot water you use.</p>
 <p class="govuk-body"><a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">Read more (opens in new tab)</a></p>
@@ -16,12 +23,6 @@
 
 <h3 class="govuk-heading-s">Upgrade to energy efficient appliances</h3>
 <p class="govuk-body">When it’s time to replace your appliances, use the energy label to help you choose. </p>
-<p class="govuk-body"><a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">Read more (opens in new tab)</a></p>
-
-<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-
-<h3 class="govuk-heading-s">Draught-proofing</h3>
-<p class="govuk-body">Block up unwanted gaps that let cold air in and warm air out. </p>
 <p class="govuk-body"><a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">Read more (opens in new tab)</a></p>
 
 <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
