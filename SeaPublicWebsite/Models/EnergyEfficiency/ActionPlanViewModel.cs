@@ -9,6 +9,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public PropertyData PropertyData { get; set; }
         public string EmailAddress { get; set; }
+        public bool EmailSent { get; set; }
         public string BackLink { get; set; }
 
         public string GetTotalInstallationCostText()
