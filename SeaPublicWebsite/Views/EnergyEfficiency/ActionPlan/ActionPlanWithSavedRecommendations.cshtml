@@ -122,12 +122,12 @@
             Next we have steps to help you action these recommendations.
         </p>
         
-        <h2 class="govuk-heading-m">
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-6">
             1. Find out if you can apply for support
         </h2>
         @{ await Html.RenderPartialAsync("ActionPlan/Partials/_AvailableSchemesOrGrants", Model); }
         
-        <h2 class="govuk-heading-m">
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-6">
             2. Consult with a qualified installer
         </h2>
         <p class="govuk-body">
@@ -140,7 +140,7 @@
         
         @if (Model.GetDecideLaterRecommendations().Any())
         {
-            <h2 class="govuk-heading-m">
+            <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-6">
                 3. Research improvements you are unsure about
             </h2>
             await Html.RenderPartialAsync("ActionPlan/Partials/_ImprovementsUnsureAbout", Model);
@@ -151,7 +151,7 @@
             </p>
         }
         
-        <h2 class="govuk-heading-m">
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-6">
             @(Model.GetDecideLaterRecommendations().Any() ? "4." : "3.") Other ways to save energy
         </h2>
         
