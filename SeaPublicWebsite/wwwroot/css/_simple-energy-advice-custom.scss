@@ -276,6 +276,7 @@
 }
 
 .sea-saved-recommendations-table-desktop-hide {
+    border-top: 1px solid $govuk-border-colour;
     @media (min-width: 641px) {
         display: none;
     }
