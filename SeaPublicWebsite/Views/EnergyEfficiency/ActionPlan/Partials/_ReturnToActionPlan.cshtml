@@ -23,7 +23,7 @@
        Reference = Model.Reference,
        EmailAddress = Model.EmailAddress,
        EmailSent = Model.EmailSent,
-       FromActionPlan = true
+       PostAction = Url.Action(nameof(EnergyEfficiencyController.ActionPlan_Post), "EnergyEfficiency", new {reference = Model.Reference})
    }); }
 
 <h2 class="govuk-heading-m">

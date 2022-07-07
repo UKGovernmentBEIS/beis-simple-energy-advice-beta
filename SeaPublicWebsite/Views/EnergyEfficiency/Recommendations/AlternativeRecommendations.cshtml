@@ -36,8 +36,7 @@
             you would like to act on and advice on your next steps.
         </p>
         
-        @if (Model.PropertyData.PropertyRecommendations.Exists(r => 
-            r.Key is RecommendationKey.InsulateSolidWalls or RecommendationKey.InsulateCavityWalls))
+        @if (Model.ShowAltRadiatorPanels)
         {
             <h2 class="govuk-heading-m">
                 Reflective radiator panels
@@ -50,7 +49,7 @@
             </p>
         }
         
-        @if (Model.PropertyData.HeatingType is not HeatingType.HeatPump)
+        @if (Model.ShowAltHeatPump)
         {
             <h2 class="govuk-heading-m">
                 Heat your home with a heat pump
@@ -63,7 +62,7 @@
             </p>
         }
         
-        @if (Model.PropertyData.FloorInsulated is FloorInsulated.No)
+        @if (Model.ShowAltDraughtProofFloors)
         {
             <h2 class="govuk-heading-m">
                 Draught-proof your floors
@@ -76,7 +75,7 @@
             </p>
         }
         
-        @if (Model.PropertyData.GlazingType is GlazingType.SingleGlazed or GlazingType.Both)
+        @if (Model.ShowAltDraughtProofWindowsAndDoors)
         {
             <h2 class="govuk-heading-m">
                 Draught-proof your windows and doors
@@ -89,7 +88,7 @@
             </p>
         }
         
-        @if (Model.PropertyData.LoftAccess is LoftAccess.Yes)
+        @if (Model.ShowAltDraughtProofLoftAccess)
         {
             <h2 class="govuk-heading-m">
                 Draught-proof your loft access
@@ -119,7 +118,7 @@
             @{ await Html.RenderPartialAsync("Recommendations/Partials/_ActionButtons", new ActionButtonsViewModel
                {
                    BackTitle = Model.FromActionPlan ? null : "Go back to",
-                   BackText = Model.FromActionPlan ? null : $"Recommendation {Model.PropertyData.PropertyRecommendations.Count}",
+                   BackText = Model.FromActionPlan ? null : $"Recommendation {Model.LastIndex}",
                    ForwardTitle = Model.FromActionPlan ? "Back to" : "Continue to",
                    ForwardText = "Action Plan"
                }); }

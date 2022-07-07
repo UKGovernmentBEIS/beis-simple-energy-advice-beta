@@ -3,13 +3,7 @@
 @using SeaPublicWebsite.Controllers
 @model SeaPublicWebsite.Models.EnergyEfficiency.YourSavedRecommendationsEmailViewModel
 
-@{
-    var action = Model.FromActionPlan
-        ? nameof(EnergyEfficiencyController.ActionPlan_Post) 
-        : nameof(EnergyEfficiencyController.NoRecommendations_Post);
-}
-
-<form action="@Url.Action(action, "EnergyEfficiency", new { reference = Model.Reference })" method="post" novalidate>
+<form action="@Model.PostAction" method="post" novalidate>
     
     @Html.AntiForgeryToken()
     

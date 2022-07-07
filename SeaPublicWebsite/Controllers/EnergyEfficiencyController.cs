@@ -1480,7 +1480,8 @@ namespace SeaPublicWebsite.Controllers
             return RedirectToAction(nameof(NoRecommendations_Get), "EnergyEfficiency",
                 new
                 {
-                    reference = viewModel.Reference, emailAddress = viewModel.EmailAddress,
+                    reference = viewModel.Reference, 
+                    emailAddress = viewModel.EmailAddress,
                     emailSent = true
                 }, "email-sent");
         }
@@ -1606,7 +1607,13 @@ namespace SeaPublicWebsite.Controllers
             {
                 Reference = reference,
                 FromActionPlan = fromActionPlan,
-                PropertyData = propertyData,
+                ShowAltRadiatorPanels = propertyData.PropertyRecommendations.Exists(r => 
+                    r.Key is RecommendationKey.InsulateSolidWalls or RecommendationKey.InsulateCavityWalls),
+                ShowAltHeatPump =  propertyData.HeatingType is not HeatingType.HeatPump,
+                ShowAltDraughtProofFloors = propertyData.FloorInsulated is FloorInsulated.No,
+                ShowAltDraughtProofWindowsAndDoors = propertyData.GlazingType is GlazingType.SingleGlazed or GlazingType.Both,
+                ShowAltDraughtProofLoftAccess = propertyData.LoftAccess is LoftAccess.Yes,
+                LastIndex = propertyData.PropertyRecommendations.Count,
                 BackLink = fromActionPlan
                     ? Url.Action(nameof(ActionPlan_Get), new { reference })
                     : Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference })
@@ -1670,7 +1677,9 @@ namespace SeaPublicWebsite.Controllers
                     return RedirectToAction(nameof(AlternativeRecommendations_Get), 
                         new {reference = viewModel.Reference, fromActionPlan = viewModel.FromActionPlan});
                 case "goForwards":
-                    return RedirectToAction(nameof(ActionPlan_Get), new {reference = viewModel.Reference});
+                    return viewModel.FromNoRecommendations
+                        ? RedirectToAction(nameof(NoRecommendations_Get), new {reference = viewModel.Reference})
+                        : RedirectToAction(nameof(ActionPlan_Get), new {reference = viewModel.Reference});
                 default:
                     throw new ArgumentOutOfRangeException();
             }
