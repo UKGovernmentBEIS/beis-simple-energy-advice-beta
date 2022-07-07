@@ -50,7 +50,7 @@ public class PropertyData
     public bool HasSeenRecommendations { get; set; }
     public bool ReturningUser { get; set; }
 
-    public List<PropertyRecommendation> PropertyRecommendations { get; set; }
+    public List<PropertyRecommendation> PropertyRecommendations { get; set; } = new();
 
     public bool? HintSolidWalls => YearBuilt is null ? null : YearBuilt <= Enums.YearBuilt.Pre1930;
     public bool? HintUninsulatedCavityWalls => YearBuilt is null ? null : YearBuilt <= Enums.YearBuilt.From1996To2011;
@@ -60,7 +60,17 @@ public class PropertyData
     public bool? HintUninsulatedRoof => YearBuilt is null ? null : YearBuilt < Enums.YearBuilt.From2012ToPresent;
     public bool? HintSingleGlazing => YearBuilt is null ? null : YearBuilt < Enums.YearBuilt.From1983To1995;
     public bool HintHasOutdoorSpace => PropertyType is Enums.PropertyType.House or Enums.PropertyType.Bungalow;
-    
+
+    public bool ShowAltRadiatorPanels => PropertyRecommendations.Exists(r =>
+        r.Key is RecommendationKey.InsulateSolidWalls or RecommendationKey.InsulateCavityWalls);
+
+    public bool ShowAltHeatPump => HeatingType is not Enums.HeatingType.HeatPump;
+    public bool ShowAltDraughtProofFloors => FloorInsulated is Enums.FloorInsulated.No;
+
+    public bool ShowAltDraughtProofWindowsAndDoors =>
+        GlazingType is Enums.GlazingType.SingleGlazed or Enums.GlazingType.Both;
+
+    public bool ShowAltDraughtProofLoftAccess => LoftAccess is Enums.LoftAccess.Yes;
 
     public void CreateUneditedData()
     {

@@ -1,19 +1,41 @@
-﻿<h2 class="govuk-heading-l">What else you can do</h2>
-        
+﻿@using SeaPublicWebsite.Controllers
+@model SeaPublicWebsite.Models.EnergyEfficiency.LowCostMeasuresViewModel
+
+<h2 class="govuk-heading-l">@(Model.Heading ?? "What else you can do")</h2>
+
+@if (Model.Text is not null)
+{
+    <p class="govuk-body">
+        @Model.Text
+    </p>
+}
+
 <h3 class="govuk-heading-s">Water efficient showerhead</h3>
 <p class="govuk-body">Replace your showerhead to reduce how much hot water you use.</p>
-<p class="govuk-body"><a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">Read more (opens in new tab)</a></p>
+<p class="govuk-body">
+    <a href="@Url.Action(nameof(EnergyEfficiencyController.WaterAndElectricityEfficiency_Get), "EnergyEfficiency", new { reference = Model.Reference, fromActionPlan = Model.FromActionPlan, fromNoRecommendations = Model.FromNoRecommendations }, null, null, "water-efficient-showerhead")" class="govuk-link">
+        Read more
+    </a>
+</p>
 
 <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
 <h3 class="govuk-heading-s">Tap aerators</h3>
 <p class="govuk-body">A small device you can attach to your tap to  reduce how much hot water you use.</p>
-<p class="govuk-body"><a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">Read more (opens in new tab)</a></p>
+<p class="govuk-body">
+    <a href="@Url.Action(nameof(EnergyEfficiencyController.WaterAndElectricityEfficiency_Get), "EnergyEfficiency", new { reference = Model.Reference, fromActionPlan = Model.FromActionPlan, fromNoRecommendations = Model.FromNoRecommendations }, null, null, "tap-aerators")" class="govuk-link">
+        Read more
+    </a>
+</p>
 
 <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
 <h3 class="govuk-heading-s">Upgrade to energy efficient appliances</h3>
 <p class="govuk-body">When it’s time to replace your appliances, use the energy label to help you choose. </p>
-<p class="govuk-body"><a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">Read more (opens in new tab)</a></p>
+<p class="govuk-body">
+    <a href="@Url.Action(nameof(EnergyEfficiencyController.WaterAndElectricityEfficiency_Get), "EnergyEfficiency", new { reference = Model.Reference, fromActionPlan = Model.FromActionPlan, fromNoRecommendations = Model.FromNoRecommendations }, null, null, "energy-efficient-appliances")" class="govuk-link">
+        Read more
+    </a>
+</p>
 
 <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
