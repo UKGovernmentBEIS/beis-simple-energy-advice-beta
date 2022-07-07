@@ -26,7 +26,7 @@
             less energy through reducing your hot water and electricity use.
         </p>
         
-        <h2 class="govuk-heading-l">
+        <h2 id="water-efficient-showerhead" class="govuk-heading-l">
             Water efficient showerhead
         </h2>
         <p class="govuk-body">
@@ -43,7 +43,7 @@
             <a class="govuk-link" href="https://www.water.org.uk/advice-for-customers/find-your-supplier/" target="_blank">this service hosted by Water UK.</a>
         </p>
         
-        <h2 class="govuk-heading-l">
+        <h2 id="tap-aerators" class="govuk-heading-l">
             Tap aerators
         </h2>
         <p class="govuk-body">
@@ -61,7 +61,7 @@
             <a class="govuk-link" href="https://www.water.org.uk/advice-for-customers/find-your-supplier/" target="_blank">this service hosted by Water UK.</a>
         </p>
         
-        <h2 class="govuk-heading-l">
+        <h2 id="energy-efficient-appliances" class="govuk-heading-l">
             Upgrade to energy efficient appliances
         </h2>
         <p class="govuk-body">
@@ -94,13 +94,15 @@
             
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.FromActionPlan)
+            @Html.HiddenFor(m => m.FromNoRecommendations)
             
             @{ await Html.RenderPartialAsync("Recommendations/Partials/_ActionButtons", new ActionButtonsViewModel
                {
-                   BackTitle = "Go back to",
-                   BackText = "Other ways to save energy",
-                   ForwardTitle = Model.FromActionPlan ? "Return to" : "Continue to",
-                   ForwardText = "Action Plan"
+                   BackTitle = Model.FromNoRecommendations ? null : "Go back to",
+                   BackText = Model.FromNoRecommendations ? null : "Other ways to save energy",
+                   ForwardTitle = Model.FromNoRecommendations ? "Back to" 
+                       : Model.FromActionPlan ? "Return to" : "Continue to",
+                   ForwardText = Model.FromNoRecommendations ? "Results" : "Action Plan"
                }); }
         </form>
     </div>

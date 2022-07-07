@@ -15,7 +15,16 @@
 </div>
 
 <p class="govuk-body">
-    You can come back to this action plan using your reference number or we can send a link to your email.
+    You can come back to this 
+    @if (Model.FromActionPlan)
+    {
+        <text>action plan</text>
+    }
+    else
+    {
+        <text>page</text>
+    }
+    using your reference number or we can send a link to your email.
 </p>
 
 @{ await Html.RenderPartialAsync("_SendEmail.cshtml", new YourSavedRecommendationsEmailViewModel
@@ -56,22 +65,39 @@ else
     </p>
 }
 
-
-@await Html.GovUkNotificationBanner(new NotificationBannerViewModel
+@if (Model.FromActionPlan)
 {
-    TitleText = "Give feedback",
-    TitleHeadingLevel = HeadingLevel.h2,
-    Html = @<text>
-               <p class="govuk-body">
-                   <strong>
-                       This service is still in development. Your feedback will help us understand
-                       how well the service is working and what can be improved.
-                   </strong>
-               </p>
-               <a href=@Constants.FEEDBACK_URL_ACTION_PLAN>
-                   <strong>
-                       Leave your feedback
-                   </strong>
-               </a>
-            </text>
-})
+    @await Html.GovUkNotificationBanner(new NotificationBannerViewModel
+    {
+        TitleText = "Give feedback",
+        TitleHeadingLevel = HeadingLevel.h2,
+        Html = @<text>
+                   <p class="govuk-body">
+                       <strong>
+                           This service is still in development. Your feedback will help us understand
+                           how well the service is working and what can be improved.
+                       </strong>
+                   </p>
+                   <a href=@Constants.FEEDBACK_URL_ACTION_PLAN>
+                       <strong>
+                           Leave your feedback
+                       </strong>
+                   </a>
+                </text>
+    })
+}
+else
+{
+    <h2 class="govuk-heading-m">
+        Give feedback
+    </h2>
+    <p class="govuk-body">
+        This service is still in its early stages and under active development. 
+    </p>
+    <p class="govuk-body">
+        Your feedback can help us to shape how the service develops so that it can best serve the needs of the public.
+    </p>
+    <a class="govuk-link" href=@Constants.FEEDBACK_URL_ACTION_PLAN target="_blank">
+        Leave some feedback for this service (opens in new tab)
+    </a>
+}

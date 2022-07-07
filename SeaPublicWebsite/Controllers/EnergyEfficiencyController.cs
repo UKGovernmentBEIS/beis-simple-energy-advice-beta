@@ -1638,7 +1638,7 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpGet("water-and-energy-efficiency/{reference}")]
-        public async Task<IActionResult> WaterAndElectricityEfficiency_Get(string reference, bool fromActionPlan = false)
+        public async Task<IActionResult> WaterAndElectricityEfficiency_Get(string reference, bool fromNoRecommendations, bool fromActionPlan = false)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
@@ -1646,7 +1646,11 @@ namespace SeaPublicWebsite.Controllers
             {
                 Reference = reference,
                 FromActionPlan = fromActionPlan,
-                BackLink = Url.Action(nameof(AlternativeRecommendations_Get), new { reference, fromActionPlan})
+                FromNoRecommendations = fromNoRecommendations,
+                BackLink = fromNoRecommendations
+                    ? Url.Action(nameof(NoRecommendations_Get), new { reference })
+                    : Url.Action(nameof(AlternativeRecommendations_Get), new { reference, fromActionPlan})
+                    
             };
             
             return View("Recommendations/WaterAndEnergyEfficiency", viewModel);

@@ -107,6 +107,9 @@
         
         @{ await Html.RenderPartialAsync("ActionPlan/Partials/_LowCostMeasures", new LowCostMeasuresViewModel
            {
+               Reference = Model.Reference,
+               FromActionPlan = Model.FromActionPlan,
+               FromNoRecommendations = false,
                Heading = "Improve your water and electricity efficiency",
                Text = "In addition to installing home improvements, the below recommendations could also help you use less energy through reducing your hot water and electricity use."
            }); }
