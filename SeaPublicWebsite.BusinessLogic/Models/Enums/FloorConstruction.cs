@@ -15,4 +15,6 @@ namespace SeaPublicWebsite.BusinessLogic.Models.Enums
         [GovUkRadioCheckboxLabelText(Text = "I don't know")]
         DoNotKnow,
     }
+
+    
 }
