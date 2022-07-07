@@ -53,7 +53,7 @@ public class PropertyData
     public List<PropertyRecommendation> PropertyRecommendations { get; set; } = new();
 
     public bool? HintSolidWalls => YearBuilt is null ? null : YearBuilt <= Enums.YearBuilt.Pre1930;
-    public bool? HintUninsulatedCavityWalls => YearBuilt is null ? null : YearBuilt <= Enums.YearBuilt.From1996To2011;
+    public bool? HintUninsulatedCavityWalls => YearBuilt is null ? null : YearBuilt < Enums.YearBuilt.From1996To2011;
     public bool? HintSuspendedTimber => YearBuilt is null ? null : YearBuilt < Enums.YearBuilt.From1967To1982;
     public bool? HintUninsulatedFloor => YearBuilt is null ? null : YearBuilt < Enums.YearBuilt.From1996To2011;
     public bool HintHaveLoftAndAccess => PropertyType is Enums.PropertyType.House or Enums.PropertyType.Bungalow;
