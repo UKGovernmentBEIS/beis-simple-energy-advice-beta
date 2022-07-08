@@ -26,15 +26,16 @@
             
             @{
                 Func<object, object> blueBannerHint = null;
-                if (Model.Epc?.OtherHeatingType is not null)
+                if (Model.Epc?.EpcHeatingType is EpcHeatingType.Biomass or EpcHeatingType.CoalOrSolidFuel or EpcHeatingType.Other)
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
                             Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your main heating system is
                             <strong>
-                                @(Model.Epc?.OtherHeatingType switch {
-                                    OtherHeatingType.Biomass => "a biomass boiler",
-                                    OtherHeatingType.CoalOrSolidFuel => "coal or solid fuel heating",
+                                @(Model.Epc?.EpcHeatingType switch {
+                                    EpcHeatingType.Biomass => "a biomass boiler.",
+                                    EpcHeatingType.CoalOrSolidFuel => "coal or solid fuel heating.",
+                                    EpcHeatingType.Other => "of another type.",
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;

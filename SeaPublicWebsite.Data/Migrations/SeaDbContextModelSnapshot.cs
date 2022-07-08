@@ -58,6 +58,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("ConstructionAgeBand")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("EpcHeatingType")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("FlatType")
                         .HasColumnType("integer");
 
@@ -73,16 +76,10 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("HasHotWaterCylinder")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("HeatingType")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("HouseType")
                         .HasColumnType("integer");
 
                     b.Property<int?>("LodgementYear")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("OtherHeatingType")
                         .HasColumnType("integer");
 
                     b.Property<int>("PropertyDataId")
