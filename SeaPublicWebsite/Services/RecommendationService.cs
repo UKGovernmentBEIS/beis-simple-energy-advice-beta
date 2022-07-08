@@ -99,6 +99,14 @@ namespace SeaPublicWebsite.Services
                         Title = "Fit solar electric panels",
                         Summary = "Install PV panels on your roof to generate electricity"
                     }
+                },
+                {
+                    "TODO", new BreRecommendation
+                    {
+                        Key = RecommendationKey.InstallHeatPump,
+                        Title = "Install a heat pump ",
+                        Summary = ""
+                    }
                 }
             };
 
