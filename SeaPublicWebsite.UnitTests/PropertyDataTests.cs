@@ -52,6 +52,28 @@ public class PropertyDataTests
         };
     }
 
+    public PropertyData PropertyDataWithRecommendations()
+    {
+        return new PropertyData
+        {
+            PropertyRecommendations = new List<PropertyRecommendation>
+            {
+                new()
+                {
+                    Key = RecommendationKey.InsulateCavityWalls
+                },
+                new()
+                {
+                    Key = RecommendationKey.InsulateSolidWalls
+                },
+                new()
+                {
+                    Key = RecommendationKey.AddLoftInsulation
+                }
+            }
+        };
+    }
+
     [Test]
     public void CopiesAllAnswers()
     {
@@ -563,5 +585,70 @@ public class PropertyDataTests
         
         // Assert
         propertyData.ShowAltDraughtProofLoftAccess.Should().BeFalse();
+    }
+
+    [Test]
+    public void CanGetFirstRecommendationKey()
+    {
+        // Arrange
+        var propertyData = PropertyDataWithRecommendations();
+        
+        // Act
+        var key = propertyData.GetFirstRecommendationKey();
+        
+        // Assert
+        key.Should().Be(RecommendationKey.InsulateCavityWalls);
+    }
+    
+    [Test]
+    public void CanGetLastRecommendationKey()
+    {
+        // Arrange
+        var propertyData = PropertyDataWithRecommendations();
+        
+        // Act
+        var key = propertyData.GetLastRecommendationKey();
+        
+        // Assert
+        key.Should().Be(RecommendationKey.AddLoftInsulation);
+    }
+    
+    [Test]
+    public void CanGetNextRecommendationKey()
+    {
+        // Arrange
+        var propertyData = PropertyDataWithRecommendations();
+        
+        // Act
+        var key = propertyData.GetNextRecommendationKey(RecommendationKey.InsulateCavityWalls);
+        
+        // Assert
+        key.Should().Be(RecommendationKey.InsulateSolidWalls);
+    }
+    
+    [Test]
+    public void CanGetPreviousRecommendationKey()
+    {
+        // Arrange
+        var propertyData = PropertyDataWithRecommendations();
+        
+        // Act
+        var key = propertyData.GetPreviousRecommendationKey(RecommendationKey.InsulateSolidWalls);
+        
+        // Assert
+        key.Should().Be(RecommendationKey.InsulateCavityWalls);
+    }
+    
+    [Test]
+    public void CanGetRecommendationIndex()
+    {
+        // Arrange
+        var propertyData = PropertyDataWithRecommendations();
+        
+        // Act
+        var index = propertyData.GetRecommendationIndex(RecommendationKey.AddLoftInsulation);
+        
+        // Assert
+        index.Should().Be(2);
     }
 }
