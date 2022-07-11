@@ -161,7 +161,7 @@ public class PropertyDataTests
         // Arrange
         var propertyData = new PropertyData
         {
-            YearBuilt = YearBuilt.From1983To1995
+            YearBuilt = YearBuilt.From1930To1966
         };
         
         // Assert
