@@ -314,7 +314,7 @@
     display: inline;
     font: inherit;
     height: auto;
-    padding: 8px 10px 7px; /* Use same padding as govuk-button */
+    padding: govuk-spacing(2); /* Use same padding as govuk-button */
     perspective-origin: 0 0;
     text-align: start;
     text-decoration: underline;
