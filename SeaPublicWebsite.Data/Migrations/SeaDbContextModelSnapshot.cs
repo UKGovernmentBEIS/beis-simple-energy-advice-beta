@@ -38,7 +38,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DataProtectionKeys");
+                    b.ToTable("DataProtectionKeys", (string)null);
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.Epc", b =>
@@ -58,9 +58,6 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("ConstructionAgeBand")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("EpcHeatingType")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("FlatType")
                         .HasColumnType("integer");
 
@@ -76,10 +73,16 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("HasHotWaterCylinder")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("HeatingType")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("HouseType")
                         .HasColumnType("integer");
 
                     b.Property<int?>("LodgementYear")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("OtherHeatingType")
                         .HasColumnType("integer");
 
                     b.Property<int>("PropertyDataId")
@@ -105,7 +108,7 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.HasIndex("PropertyDataId")
                         .IsUnique();
 
-                    b.ToTable("Epc");
+                    b.ToTable("Epc", (string)null);
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyData", b =>
@@ -220,7 +223,7 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.HasIndex("Reference")
                         .IsUnique();
 
-                    b.ToTable("PropertyData");
+                    b.ToTable("PropertyData", (string)null);
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.PropertyRecommendation", b =>
@@ -265,7 +268,7 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.HasIndex("PropertyDataId");
 
-                    b.ToTable("PropertyRecommendations");
+                    b.ToTable("PropertyRecommendations", (string)null);
                 });
 
             modelBuilder.Entity("SeaPublicWebsite.BusinessLogic.Models.Epc", b =>
