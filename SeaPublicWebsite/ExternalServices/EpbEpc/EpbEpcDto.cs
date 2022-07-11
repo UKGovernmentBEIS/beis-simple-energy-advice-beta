@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
-namespace SeaPublicWebsite.ExternalServices.Models.Epb;
+namespace SeaPublicWebsite.ExternalServices.EpbEpc;
 
 public class EpbEpcDto
 {

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SeaPublicWebsite.ExternalServices.Models.Epb;
+namespace SeaPublicWebsite.ExternalServices.EpbEpc;
 
 public class EpbAddressDto
 {

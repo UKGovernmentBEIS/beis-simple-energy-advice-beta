@@ -12,7 +12,6 @@ using Newtonsoft.Json;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.ErrorHandling;
-using SeaPublicWebsite.ExternalServices.Models.Epb;
 using SeaPublicWebsite.Helpers;
 
 namespace SeaPublicWebsite.ExternalServices.EpbEpc
