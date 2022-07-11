@@ -62,6 +62,12 @@ namespace SeaPublicWebsite.Data.Migrations
                 SET ""OtherHeatingType"" = ""Epc"".""EpcHeatingType"" - 8
                 WHERE ""Epc"".""EpcHeatingType"" IS NOT NULL AND ""Epc"".""EpcHeatingType"" >= 8");
             
+            // Treating the case when HeatingType and OtherHeatingType were both 'Other' (values 7 and 2)
+            migrationBuilder.Sql(@"
+                UPDATE public.""Epc""
+                SET ""OtherHeatingType"" = 2
+                WHERE ""Epc"".""EpcHeatingType"" = 7 AND ""Epc"".""OtherHeatingType"" IS NULL");
+            
             migrationBuilder.DropColumn(
                 name: "EpcHeatingType",
                 table: "Epc");
