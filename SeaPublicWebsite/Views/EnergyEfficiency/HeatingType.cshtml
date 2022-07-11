@@ -47,19 +47,20 @@
                      </text>;
                 
                 Func<object, object> epcHint = null;
-                if (Model.Epc?.HeatingType is not null)
+                if (Model.Epc?.EpcHeatingType is not null)
                 {
                     epcHint = 
                         @<p class="govuk-body">
                             Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your main heating system is
                             <strong>
-                                @(Model.Epc?.HeatingType switch {
-                                    HeatingType.GasBoiler => "a gas boiler",
-                                    HeatingType.OilBoiler => "an oil boiler",
-                                    HeatingType.LpgBoiler => "an LPG boiler",
-                                    HeatingType.Storage => "storage heating",
-                                    HeatingType.DirectActionElectric => "electric",
-                                    HeatingType.HeatPump => "a heat pump",
+                                @(Model.Epc?.EpcHeatingType switch {
+                                    EpcHeatingType.GasBoiler => "a gas boiler.",
+                                    EpcHeatingType.OilBoiler => "an oil boiler.",
+                                    EpcHeatingType.LpgBoiler => "an LPG boiler.",
+                                    EpcHeatingType.Storage => "storage heating.",
+                                    EpcHeatingType.DirectActionElectric => "direct action electric.",
+                                    EpcHeatingType.HeatPump => "a heat pump.",
+                                    EpcHeatingType.CoalOrSolidFuel or EpcHeatingType.Biomass or EpcHeatingType.Other => "of another type.",
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;
