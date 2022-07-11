@@ -50,6 +50,8 @@ public class PropertyData
     public bool HasSeenRecommendations { get; set; }
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; }
+    public DateTime Timestamp { get; set; }
+
 
     public void CreateUneditedData()
     {
