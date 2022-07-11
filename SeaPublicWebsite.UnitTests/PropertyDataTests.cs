@@ -415,5 +415,153 @@ public class PropertyDataTests
         // Assert
         propertyData.HintHasOutdoorSpace.Should().BeFalse();
     }
+
+    [Test]
+    public void ShowAlternativeRecommendationRadiatorPanelsIfUserShouldInsulateTheirWalls()
+    {
+        // Arrange
+        var propertyData1 = new PropertyData
+        {
+            PropertyRecommendations = new List<PropertyRecommendation>
+            {
+                new()
+                {
+                    Key = RecommendationKey.InsulateCavityWalls
+                }
+            }
+        };
+        var propertyData2 = new PropertyData
+        {
+            PropertyRecommendations = new List<PropertyRecommendation>
+            {
+                new()
+                {
+                    Key = RecommendationKey.InsulateSolidWalls
+                }
+            }
+        };
+        
+        // Assert
+        propertyData1.ShowAltRadiatorPanels.Should().BeTrue();
+        propertyData2.ShowAltRadiatorPanels.Should().BeTrue();
+    }
     
+    [Test]
+    public void DoNotShowAlternativeRecommendationRadiatorPanelsIfUserShouldNotInsulateTheirWalls()
+    {
+        // Arrange
+        var propertyData = new PropertyData();
+        
+        // Assert
+        propertyData.ShowAltRadiatorPanels.Should().BeFalse();
+    }
+
+    [Test]
+    public void ShowAlternativeRecommendationHeatPumpIfUserHeatingTypeIsNotHeatPump()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            HeatingType = HeatingType.GasBoiler
+        };
+        
+        // Assert
+        propertyData.ShowAltHeatPump.Should().BeTrue();
+    }
+    
+    [Test]
+    public void DoNotShowAlternativeRecommendationHeatPumpIfUserHeatingTypeIsHeatPump()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            HeatingType = HeatingType.HeatPump
+        };
+        
+        // Assert
+        propertyData.ShowAltHeatPump.Should().BeFalse();
+    }
+    
+    [Test]
+    public void ShowAlternativeRecommendationForFloorIfUserHasUninsulatedFloor()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            FloorInsulated = FloorInsulated.No
+        };
+        
+        // Assert
+        propertyData.ShowAltDraughtProofFloors.Should().BeTrue();
+    }
+    
+    [Test]
+    public void DoNotShowAlternativeRecommendationForFloorIfUserHasInsulatedFloor()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            FloorInsulated = FloorInsulated.Yes
+        };
+        
+        // Assert
+        propertyData.ShowAltDraughtProofFloors.Should().BeFalse();
+    }
+    
+    [Test]
+    public void ShowAlternativeRecommendationForGlazingIfUserHasAtLeastOneSingleGlazedWindow()
+    {
+        // Arrange
+        var propertyData1 = new PropertyData
+        {
+            GlazingType = GlazingType.SingleGlazed
+        };
+        var propertyData2 = new PropertyData
+        {
+            GlazingType = GlazingType.Both
+        };
+        
+        // Assert
+        propertyData1.ShowAltDraughtProofWindowsAndDoors.Should().BeTrue();
+        propertyData2.ShowAltDraughtProofWindowsAndDoors.Should().BeTrue();
+    }
+    
+    [Test]
+    public void DoNotShowAlternativeRecommendationForGlazingIfUserHasDoubleOrTripleGlazing()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            GlazingType = GlazingType.DoubleOrTripleGlazed
+        };
+        
+        // Assert
+        propertyData.ShowAltDraughtProofWindowsAndDoors.Should().BeFalse();
+    }
+    
+    [Test]
+    public void ShowAlternativeRecommendationForLoftIfUserHasAccessibleLoft()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            LoftAccess = LoftAccess.Yes
+        };
+        
+        // Assert
+        propertyData.ShowAltDraughtProofLoftAccess.Should().BeTrue();
+    }
+    
+    [Test]
+    public void DoNotShowAlternativeRecommendationForLoftIfUserDoesNotHaveAccessibleLoft()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            LoftAccess = LoftAccess.No
+        };
+        
+        // Assert
+        propertyData.ShowAltDraughtProofLoftAccess.Should().BeFalse();
+    }
 }
