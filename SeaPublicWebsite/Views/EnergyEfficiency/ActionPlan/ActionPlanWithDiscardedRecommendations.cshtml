@@ -25,16 +25,9 @@
         @{ await Html.RenderPartialAsync("ActionPlan/Partials/_AvailableSchemesOrGrants", Model); }
         @{ await Html.RenderPartialAsync("ActionPlan/Partials/_DiscardedRecommendations", Model); }
         
-        <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-6">
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
             Other ways to save energy
         </h2>
-        
-        <p class="govuk-body">
-            We have also compiled a list of reccomendations that are more easy to action. See the 
-            <a class="govuk-link" href="@Url.Action("AlternativeRecommendations_Get", "EnergyEfficiency", new {reference = Model.PropertyData.Reference, fromActionPlan = true})">
-                alternative recommendations here.
-            </a>
-        </p>
         
         <p class="govuk-body">
             You may want to revisit some

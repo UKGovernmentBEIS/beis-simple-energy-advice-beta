@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using SeaPublicWebsite.ExternalServices.Models;
@@ -18,14 +19,18 @@ namespace SeaPublicWebsite.ExternalServices.Bre
     public class BreApi
     {
         private readonly BreConfiguration configuration;
+        private readonly ILogger<BreApi> logger;
 
-        public BreApi(IOptions<BreConfiguration> options)
+        public BreApi(IOptions<BreConfiguration> options,
+            ILogger<BreApi> logger)
         {
             configuration = options.Value;
+            this.logger = logger;
         }
 
         public async Task<List<BreRecommendation>> GetRecommendationsForPropertyRequestAsync(BreRequest request)
         {
+            BreResponse response = null;
             try
             {
                 string username = configuration.Username;
@@ -39,7 +44,7 @@ namespace SeaPublicWebsite.ExternalServices.Bre
                 string requestString = JsonConvert.SerializeObject(request);
                 StringContent stringContent = new(requestString);
                 
-                var response = await HttpRequestHelper.SendPostRequestAsync<BreResponse>(
+                response = await HttpRequestHelper.SendPostRequestAsync<BreResponse>(
                     new RequestParameters
                     {
                         BaseAddress = configuration.BaseUrl,
@@ -79,8 +84,14 @@ namespace SeaPublicWebsite.ExternalServices.Bre
             }
             catch (Exception e)
             {
-                // TODO: seabeta-192 to add a log here
-                throw new Exception($"BRE API returned an error: {e.Message}");
+                // BRE requests and responses shouldn't contain any sensitive details so we are OK to log them as-is
+                logger.LogError(@$"There was an error calling the BRE API: {e.Message}
+
+BreRequest details: {JsonConvert.SerializeObject(request)}
+
+BreResponse details: {JsonConvert.SerializeObject(response)}");
+
+                throw;
             }
         }
 
