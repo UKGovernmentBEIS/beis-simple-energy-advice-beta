@@ -119,4 +119,301 @@ public class PropertyDataTests
         // Assert
         propertyData.PropertyRecommendations.Should().Equal(previousRecommendations);
     }
+
+    [Test]
+    public void ShowSolidWallsHintIfBuiltBefore1930()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = YearBuilt.Pre1930
+        };
+        
+        // Assert
+        propertyData.HintSolidWalls.Should().BeTrue();
+    }
+    
+    [Test]
+    public void ShowCavityWallsHintIfBuiltAfter1930()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = YearBuilt.From1983To1995
+        };
+        
+        // Assert
+        propertyData.HintSolidWalls.Should().BeFalse();
+    }
+    
+    [Test]
+    public void DoNotShowWallsHintIfNoYearBuilt()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = null
+        };
+        
+        // Assert
+        propertyData.HintSolidWalls.Should().BeNull();
+    }
+    
+    [Test]
+    public void ShowUninsulatedCavityWallsHintIfBuiltBefore1996()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = YearBuilt.From1983To1995
+        };
+        
+        // Assert
+        propertyData.HintUninsulatedCavityWalls.Should().BeTrue();
+    }
+    
+    [Test]
+    public void ShowInsulatedCavityWallsHintIfBuiltAfter1996()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = YearBuilt.From1996To2011
+        };
+        
+        // Assert
+        propertyData.HintUninsulatedCavityWalls.Should().BeFalse();
+    }
+    
+    [Test]
+    public void DoNotShowCavityWallsInsulatedHintIfNoYearBuilt()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = null
+        };
+        
+        // Assert
+        propertyData.HintUninsulatedCavityWalls.Should().BeNull();
+    }
+    
+    [Test]
+    public void ShowSuspendedTimberFloorHintIfBuiltBefore1967()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = YearBuilt.From1930To1966
+        };
+        
+        // Assert
+        propertyData.HintSuspendedTimber.Should().BeTrue();
+    }
+    
+    [Test]
+    public void ShowSolidConcreteFloorHintIfBuiltAfter1967()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = YearBuilt.From1967To1982
+        };
+        
+        // Assert
+        propertyData.HintSuspendedTimber.Should().BeFalse();
+    }
+    
+    [Test]
+    public void DoNotShowFloorHintIfNoYearBuilt()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = null
+        };
+        
+        // Assert
+        propertyData.HintSuspendedTimber.Should().BeNull();
+    }
+    
+    [Test]
+    public void ShowUninsulatedFloorHintIfBuiltBefore1996()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = YearBuilt.From1983To1995
+        };
+        
+        // Assert
+        propertyData.HintUninsulatedFloor.Should().BeTrue();
+    }
+    
+    [Test]
+    public void ShowInsulatedFloorHintIfBuiltAfter1996()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = YearBuilt.From1996To2011
+        };
+        
+        // Assert
+        propertyData.HintUninsulatedFloor.Should().BeFalse();
+    }
+    
+    [Test]
+    public void DoNotShowFloorInsulationHintIfNoYearBuilt()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = null
+        };
+        
+        // Assert
+        propertyData.HintUninsulatedFloor.Should().BeNull();
+    }
+    
+    [Test]
+    public void ShowLoftAccessHintIfPropertyIsHouseOrBungalow()
+    {
+        // Arrange
+        var propertyData1 = new PropertyData
+        {
+            PropertyType = PropertyType.House
+        };
+        var propertyData2 = new PropertyData
+        {
+            PropertyType = PropertyType.Bungalow
+        };
+
+        // Assert
+        propertyData1.HintHaveLoftAndAccess.Should().BeTrue();
+        propertyData2.HintHaveLoftAndAccess.Should().BeTrue();
+    }
+    
+    [Test]
+    public void ShowNoLoftAccessHintIfPropertyIsFlat()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            PropertyType = PropertyType.ApartmentFlatOrMaisonette
+        };
+
+        // Assert
+        propertyData.HintHaveLoftAndAccess.Should().BeFalse();
+    }
+    
+    [Test]
+    public void ShowUninsulatedRoofHintIfBuiltBefore2012()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = YearBuilt.From1996To2011
+        };
+        
+        // Assert
+        propertyData.HintUninsulatedRoof.Should().BeTrue();
+    }
+    
+    [Test]
+    public void ShowInsulatedRoofHintIfBuiltAfter2012()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = YearBuilt.From2012ToPresent
+        };
+        
+        // Assert
+        propertyData.HintUninsulatedRoof.Should().BeFalse();
+    }
+    
+    [Test]
+    public void DoNotShowRoofInsulationHintIfNoYearBuilt()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = null
+        };
+        
+        // Assert
+        propertyData.HintUninsulatedRoof.Should().BeNull();
+    }
+    
+    [Test]
+    public void ShowSingleGlazingHintIfBuiltBefore1983()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = YearBuilt.From1967To1982
+        };
+        
+        // Assert
+        propertyData.HintSingleGlazing.Should().BeTrue();
+    }
+    
+    [Test]
+    public void ShowDoubleOrTripleGlazingHintIfBuiltAfter1983()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = YearBuilt.From1983To1995
+        };
+        
+        // Assert
+        propertyData.HintSingleGlazing.Should().BeFalse();
+    }
+    
+    [Test]
+    public void DoNotShowGlazingHintIfNoYearBuilt()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            YearBuilt = null
+        };
+        
+        // Assert
+        propertyData.HintSingleGlazing.Should().BeNull();
+    }
+    
+    [Test]
+    public void ShowHasOutdoorSpaceHintIfPropertyIsHouseOrBungalow()
+    {
+        // Arrange
+        var propertyData1 = new PropertyData
+        {
+            PropertyType = PropertyType.House
+        };
+        var propertyData2 = new PropertyData
+        {
+            PropertyType = PropertyType.Bungalow
+        };
+
+        // Assert
+        propertyData1.HintHasOutdoorSpace.Should().BeTrue();
+        propertyData2.HintHasOutdoorSpace.Should().BeTrue();
+    }
+    
+    [Test]
+    public void ShowNoOutdoorSpaceHintIfPropertyIsFlat()
+    {
+        // Arrange
+        var propertyData = new PropertyData
+        {
+            PropertyType = PropertyType.ApartmentFlatOrMaisonette
+        };
+
+        // Assert
+        propertyData.HintHasOutdoorSpace.Should().BeFalse();
+    }
+    
 }
