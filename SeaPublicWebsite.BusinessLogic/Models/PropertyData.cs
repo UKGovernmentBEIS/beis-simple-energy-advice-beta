@@ -9,23 +9,16 @@ public class PropertyData
     public int PropertyDataId { get; set; }
     
     public string Reference { get; set; }
-
     public OwnershipStatus? OwnershipStatus { get; set; }
     public Country? Country { get; set; }
-    
     public SearchForEpc? SearchForEpc { get; set; }
-
     public EpcDetailsConfirmed? EpcDetailsConfirmed { get; set; }
-
     public Epc Epc { get; set; }
-
     public PropertyType? PropertyType { get; set; }
     public HouseType? HouseType { get; set; }
     public BungalowType? BungalowType { get; set; }
     public FlatType? FlatType { get; set; }
-
     public YearBuilt? YearBuilt { get; set; }
-
     public WallConstruction? WallConstruction { get; set; }
     public CavityWallsInsulated? CavityWallsInsulated { get; set; }
     public SolidWallsInsulated? SolidWallsInsulated { get; set; }
@@ -40,7 +33,6 @@ public class PropertyData
     public HeatingType? HeatingType { get; set; }
     public OtherHeatingType? OtherHeatingType { get; set; }
     public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
-
     public int? NumberOfOccupants { get; set; }
     public HeatingPattern? HeatingPattern { get; set; }
     public int? HoursOfHeatingMorning { get; set; }
@@ -49,9 +41,8 @@ public class PropertyData
     public PropertyData UneditedData { get; set; }
     public bool HasSeenRecommendations { get; set; }
     public bool ReturningUser { get; set; }
-
     public List<PropertyRecommendation> PropertyRecommendations { get; set; }
-    public DateTime Timestamp { get; set; }
+    public DateTime LastUpdated { get; set; }
 
 
     public bool? HintSolidWalls => YearBuilt is null ? null : YearBuilt <= Enums.YearBuilt.Pre1930;

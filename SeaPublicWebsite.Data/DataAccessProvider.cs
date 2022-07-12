@@ -41,7 +41,7 @@ public class DataAccessProvider : IDataAccessProvider
 
     public void DeleteOldPropertyData()
     {
-        var entities = context.PropertyData.Where(p => p.Timestamp <= DateTime.Now.AddMonths(-6));
+        var entities = context.PropertyData.Where(p => p.LastUpdated <= DateTime.Now.AddMonths(-6));
         context.PropertyData.RemoveRange(entities);
     }
 }
