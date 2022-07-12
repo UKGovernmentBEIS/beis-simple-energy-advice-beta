@@ -636,7 +636,7 @@ public class EpcTests
                 WallConstruction = WallConstruction.Cavity
             }),
         new(
-            "Can parse mixed walls",
+            "Can parse wall construction mixed walls",
             new EpbEpcAssessmentDto
             {
                 AssessmentType = "RdSAP",
@@ -1092,7 +1092,6 @@ public class EpcTests
             })
     };
     
-    // TODO: Comprehensive testing for this section
     private static readonly EpcTestCase[] HeatingTypeTestCases =
     {
         new(
@@ -1100,12 +1099,202 @@ public class EpcTests
             new EpbEpcAssessmentDto
             {
                 AssessmentType = "RdSAP",
-                MainHeatingDescription = null
+                MainFuelType = null
             },
             new Epc
             {
                 EpcHeatingType = null
             }),
+        new(
+            "Can parse heating type other (community)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "electricity (community)"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.Other
+            }),
+        new(
+            "Can parse heating type other (bioethanol)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "bioethanol"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.Other
+            }),
+        new(
+            "Can parse heating type other (biodiesel)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "biodiesel from any biomass source"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.Other
+            }),
+        new(
+            "Can parse heating type other (waste combustion)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "waste combustion"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.Other
+            }),
+        new(
+            "Can parse heating type other (wood pellets in bags for secondary heating)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "wood pellets in bags for secondary heating"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.Other
+            }),
+        new(
+            "Can parse heating type gas boiler (mains gas)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "mains gas (not community)"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.GasBoiler
+            }),
+        new(
+            "Can parse heating type gas boiler (biogas)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "biogas - landfill"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.GasBoiler
+            }),
+        new(
+            "Can parse heating type LPG boiler",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "LPG special condition"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.LpgBoiler
+            }),
+        new(
+            "Can parse heating type oil boiler (oil)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "appliances able to use mineral oil or liquid biofuel"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.OilBoiler
+            }),
+        new(
+            "Can parse heating type oil boiler (B30K)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "B30K (not community)"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.OilBoiler
+            }),
+        new(
+            "Can parse heating type coal or solid fuel (coal)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "smokeless coal"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.CoalOrSolidFuel
+            }),
+        new(
+            "Can parse heating type coal or solid fuel (anthracite)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "anthracite"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.CoalOrSolidFuel
+            }),
+        new(
+            "Can parse heating type biomass boiler (wood)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "bulk wood pellets"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.Biomass
+            }),
+        new(
+            "Can parse heating type biomass boiler (biomass)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "biomass"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.Biomass
+            }),
+        new(
+            "Can parse heating type direct action electric",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "electricity",
+                MainHeatingDescription = "electric underfloor heating"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.DirectActionElectric
+            }),
+        new(
+            "Can parse heating type heat pump",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "electricity",
+                MainHeatingDescription = "heat pump with warm air distribution"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.HeatPump
+            }),
+        new(
+            "Can parse heating type storage heater",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainFuelType = "electricity",
+                MainHeatingDescription = "electric storage heaters"
+            },
+            new Epc
+            {
+                EpcHeatingType = EpcHeatingType.Storage
+            })
     };
     
     private static readonly EpcTestCase[] HasHotWaterCylinderTestCases =

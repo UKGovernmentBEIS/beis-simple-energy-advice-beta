@@ -556,7 +556,8 @@ public class EpbEpcAssessmentDto
             MainFuelType.Equals("34") ||
             MainFuelType.Equals("35") ||
             MainFuelType.Equals("36") ||
-            MainFuelType.Contains("(community)", StringComparison.OrdinalIgnoreCase))
+            MainFuelType.Contains("bioethanol", StringComparison.OrdinalIgnoreCase) ||
+            MainFuelType.Contains("biodiesel", StringComparison.OrdinalIgnoreCase))
         {
             return EpcHeatingType.Other;
         }
@@ -666,7 +667,7 @@ public class EpbEpcAssessmentDto
             // Communal heating is treated as 'other heating'
             // 6 - community heating system
             if (MainHeatingDescription.Equals("6") ||
-                MainFuelType.Contains("community", StringComparison.OrdinalIgnoreCase))
+                MainHeatingDescription.Contains("community", StringComparison.OrdinalIgnoreCase))
             {
                 return EpcHeatingType.Other;
             }
@@ -682,11 +683,11 @@ public class EpbEpcAssessmentDto
                 MainHeatingDescription.Equals("9") ||
                 MainHeatingDescription.Equals("10") ||
                 MainHeatingDescription.Equals("11") ||
-                MainFuelType.Contains("boiler with radiators or underfloor heating", StringComparison.OrdinalIgnoreCase) ||
-                MainFuelType.Contains("electric underfloor heating", StringComparison.OrdinalIgnoreCase) ||
-                MainFuelType.Contains("warm air system (not heat pump)", StringComparison.OrdinalIgnoreCase) ||
-                MainFuelType.Contains("room heaters", StringComparison.OrdinalIgnoreCase) ||
-                MainFuelType.Contains("other system", StringComparison.OrdinalIgnoreCase))
+                MainHeatingDescription.Contains("boiler with radiators or underfloor heating", StringComparison.OrdinalIgnoreCase) ||
+                MainHeatingDescription.Contains("electric underfloor heating", StringComparison.OrdinalIgnoreCase) ||
+                MainHeatingDescription.Contains("warm air system (not heat pump)", StringComparison.OrdinalIgnoreCase) ||
+                MainHeatingDescription.Contains("room heaters", StringComparison.OrdinalIgnoreCase) ||
+                MainHeatingDescription.Contains("other system", StringComparison.OrdinalIgnoreCase))
             {
                 return EpcHeatingType.DirectActionElectric;
             }
@@ -696,7 +697,7 @@ public class EpbEpcAssessmentDto
             // 5 - heat pump with warm air distribution
             if (MainHeatingDescription.Equals("4") ||
                 MainHeatingDescription.Equals("5") ||
-                MainFuelType.Contains("heat pump with", StringComparison.OrdinalIgnoreCase))
+                MainHeatingDescription.Contains("heat pump with", StringComparison.OrdinalIgnoreCase))
             {
                 return EpcHeatingType.HeatPump;
             }
@@ -704,7 +705,7 @@ public class EpbEpcAssessmentDto
             // Storage heater check
             // 7 - electric storage heaters
             if (MainHeatingDescription.Equals("7") ||
-                MainFuelType.Contains("electric storage heaters", StringComparison.OrdinalIgnoreCase))
+                MainHeatingDescription.Contains("electric storage heaters", StringComparison.OrdinalIgnoreCase))
             {
                 return EpcHeatingType.Storage;
             }
@@ -712,7 +713,7 @@ public class EpbEpcAssessmentDto
             // Special case of micro combined heat and power
             // 3 - micro-cogeneration
             if (MainHeatingDescription.Equals("3") ||
-                MainFuelType.Contains("micro-cogeneration", StringComparison.OrdinalIgnoreCase))
+                MainHeatingDescription.Contains("micro-cogeneration", StringComparison.OrdinalIgnoreCase))
             {
                 return EpcHeatingType.GasBoiler;
             }
