@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.Data;
@@ -47,7 +48,16 @@ public class PropertyDataStore
 
     public async Task SavePropertyDataAsync(PropertyData propertyData)
     {
-        await dataAccessProvider.UpdatePropertyDataAsync(propertyData);
+        try
+        {
+            await dataAccessProvider.UpdatePropertyDataAsync(propertyData);
+        }
+        catch (DbUpdateConcurrencyException e)
+        {
+            // Most likely reason for this is that the user double-clicked a form submit button so just continue,
+            // the previous request should have updated the DB already.
+            logger.LogWarning($"DbUpdateConcurrencyException caught. This probably means that a user double-clicked a form submit. {e.Message}");
+        }
     }
 
     public async Task<string> CreateNewPropertyDataAsync()
