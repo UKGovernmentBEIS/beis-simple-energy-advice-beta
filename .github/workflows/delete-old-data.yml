@@ -7,16 +7,28 @@ on:
   workflow_dispatch:
 
 jobs:
-  call-build-and-deploy-workflow:
-    uses: ./.github/workflows/_build-and-deploy-to-gov-paas.yml
-    with:
-      environment_name: loadtest
-    secrets:
-      gov_paas_password: ${{ secrets.TEAM_BEISESASSUPPORT_GOV_PAAS_PASSWORD }}
-
   delete-data:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout code onto job runner
+      uses: actions/checkout@v2
+
+    - name: Install .Net (6.0)
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Install the Cloud Foundry CLI
+      run: |
+        wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+        echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+        sudo apt-get update
+        sudo apt-get install cf7-cli
+        
+    - name: Login to cf and target
+      run: |
+        cf login -a api.cloud.service.gov.uk -u team-beisesassupport@softwire.com -p '${{ secrets.TEAM_BEISESASSUPPORT_GOV_PAAS_PASSWORD }}' -o 'beis-domestic-energy-advice-service'
+        cf target -s sea-beta-loadtest
+        
     - name: Delete old data
       run: cf run-task sea-beta-loadtest --command "echo 1" --name delete-old-data-task
-
