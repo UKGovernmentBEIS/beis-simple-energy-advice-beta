@@ -7,7 +7,6 @@ on:
   workflow_dispatch:
 
 jobs:
-
   call-build-and-deploy-workflow:
     uses: ./.github/workflows/_build-and-deploy-to-gov-paas.yml
     with:
