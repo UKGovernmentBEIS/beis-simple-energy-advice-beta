@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
 
 @section BeforeMain {
@@ -22,16 +23,31 @@
         </p>
         
         @{ await Html.RenderPartialAsync("ActionPlan/Partials/_AvailableSchemesOrGrants", Model); }
-        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_LowCostMeasures", Model); }
         @{ await Html.RenderPartialAsync("ActionPlan/Partials/_DiscardedRecommendations", Model); }
         
-        <h2 class="govuk-heading-m">Still need help?</h2>
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
+            Other ways to save energy
+        </h2>
+        
         <p class="govuk-body">
-            You can find out more by visiting the
-            <a href="https://energysavingtrust.org.uk/" target="_blank">Energy Saving Trust</a>
-            website for other ways to save energy and reduce your bills.
+            You may want to revisit some
+            <a class="govuk-link" href="@Url.Action("AlternativeRecommendations_Get", "EnergyEfficiency", new { reference = Model.PropertyData.Reference, fromActionPlan = true })">
+                alternative recommendations
+            </a>
+            if those we presented are not suitable, or if you'd like to do more to improve the energy efficiency of your home.
         </p>
         
-        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_ReturnToActionPlan", Model); }
+        <p class="govuk-body">
+            You can also visit the
+            <a href="https://energysavingtrust.org.uk/" target="_blank">Energy Saving Trust</a>
+            website for even more ways to save energy and reduce your bills.
+        </p>
+        
+        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_ReturnToActionPlan", new ReturnToActionPlanViewModel
+           {
+               Reference = Model.PropertyData.Reference,
+               EmailAddress = Model.EmailAddress,
+               EmailSent = Model.EmailSent
+           }); }
     </div>
 </div>

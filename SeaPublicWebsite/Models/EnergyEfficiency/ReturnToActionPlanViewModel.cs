@@ -2,7 +2,7 @@
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency;
 
-public class NoRecommendationsViewModel: QuestionFlowViewModel
+public class ReturnToActionPlanViewModel
 {
     public string Reference { get; set; }
     [GovUkValidateRequired(ErrorMessageIfMissing = "Enter a valid email address")]

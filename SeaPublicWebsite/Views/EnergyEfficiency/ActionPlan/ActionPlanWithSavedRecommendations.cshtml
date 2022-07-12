@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
 
 @section BeforeMain {
@@ -121,12 +122,12 @@
             Next we have steps to help you action these recommendations.
         </p>
         
-        <h2 class="govuk-heading-m">
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
             1. Find out if you can apply for support
         </h2>
         @{ await Html.RenderPartialAsync("ActionPlan/Partials/_AvailableSchemesOrGrants", Model); }
         
-        <h2 class="govuk-heading-m">
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
             2. Consult with a qualified installer
         </h2>
         <p class="govuk-body">
@@ -139,7 +140,7 @@
         
         @if (Model.GetDecideLaterRecommendations().Any())
         {
-            <h2 class="govuk-heading-m">
+            <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
                 3. Research improvements you are unsure about
             </h2>
             await Html.RenderPartialAsync("ActionPlan/Partials/_ImprovementsUnsureAbout", Model);
@@ -149,7 +150,32 @@
                 website for other ways to save energy and reduce your bills.
             </p>
         }
+        
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
+            @(Model.GetDecideLaterRecommendations().Any() ? "4." : "3.") Other ways to save energy
+        </h2>
+        
+        <p class="govuk-body">
+            You may want to revisit some
+            <a class="govuk-link" href="@Url.Action("AlternativeRecommendations_Get", "EnergyEfficiency", new { reference = Model.PropertyData.Reference, fromActionPlan = true })">
+                alternative recommendations
+            </a>
+            if those we presented are not suitable, or if you'd like to do more to improve the energy efficiency of your home.
+        </p>
+        
+        <p class="govuk-body">
+            You can also visit the
+            <a href="https://energysavingtrust.org.uk/" target="_blank">Energy Saving Trust</a>
+            website for even more ways to save energy and reduce your bills.
+        </p>
+        
         @{ await Html.RenderPartialAsync("ActionPlan/Partials/_DiscardedRecommendations", Model); }
-        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_ReturnToActionPlan", Model); }
+        @{
+            await Html.RenderPartialAsync("ActionPlan/Partials/_ReturnToActionPlan", new ReturnToActionPlanViewModel
+            {
+                Reference = Model.PropertyData.Reference,
+                EmailAddress = Model.EmailAddress,
+                EmailSent = Model.EmailSent
+            }); }
     </div>
 </div>

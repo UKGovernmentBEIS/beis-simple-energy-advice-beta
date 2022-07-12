@@ -87,8 +87,7 @@ public class EpbEpcAssessmentDto
             RoofConstruction = ParseRoofConstruction(),
             RoofInsulated = ParseRoofInsulation(),
             GlazingType = ParseGlazingType(),
-            HeatingType = ParseHeatingType(),
-            OtherHeatingType = ParseOtherHeatingType(),
+            EpcHeatingType = ParseHeatingType(),
             HasHotWaterCylinder = ParseHasHotWaterCylinder()
         };
     }
@@ -522,81 +521,203 @@ public class EpbEpcAssessmentDto
         };
     }
 
-    private HeatingType? ParseHeatingType()
-    {
-        // Gas boiler check
-        // 20 - mains gas (community)
-        // 26 - mains gas (not community)
-        if (MainFuelType.Equals("20") ||
-            MainFuelType.Equals("26") ||
-            MainFuelType.Contains("mains gas", StringComparison.OrdinalIgnoreCase))
-        {
-            return HeatingType.GasBoiler;
-        }
-        
-        // Oil boiler check
-        // 22 - oil (community)
-        // 28 - oil (not community)
-        if (MainFuelType.Equals("22") ||
-            MainFuelType.Equals("28") ||
-            MainFuelType.Contains("oil", StringComparison.OrdinalIgnoreCase))
-        {
-            return HeatingType.OilBoiler;
-        }
-        
-        // Lpg boiler check
-        // 17 - LPG special condition
-        // 21 - LPG (community)
-        // 27 - LPG (not community)
-        if (MainFuelType.Equals("17") ||
-            MainFuelType.Equals("21") ||
-            MainFuelType.Equals("27") ||
-            MainFuelType.Contains("lpg", StringComparison.OrdinalIgnoreCase))
-        {
-            return HeatingType.LpgBoiler;
-        }
-        
-        // electric heating check
-        // storage heating and heat pumps do not appear in RdSAPs and are considered as electric
-        // 10 - electricity
-        // 25 - electricity (community)
-        // 29 - electricity (not community)
-        if (MainFuelType.Equals("10") ||
-            MainFuelType.Equals("25") ||
-            MainFuelType.Equals("29") ||
-            MainFuelType.Contains("electricity", StringComparison.OrdinalIgnoreCase))
-        {
-            return HeatingType.DirectActionElectric;
-        }
-        
-        return null;
-    }
-
-    private OtherHeatingType? ParseOtherHeatingType()
+    private EpcHeatingType? ParseHeatingType()
     {
         if (MainFuelType is null)
         {
             return null;
         }
         
+        // Anything ending in '(community)'
+        // Communal heating is treated as 'other heating'
+        if (
+            MainFuelType.Equals("20") ||
+            MainFuelType.Equals("21") ||
+            MainFuelType.Equals("22") ||
+            MainFuelType.Equals("23") ||
+            MainFuelType.Equals("25") ||
+            MainFuelType.Equals("30") ||
+            MainFuelType.Equals("31") ||
+            MainFuelType.Equals("32") ||
+            MainFuelType.Equals("56") ||
+            MainFuelType.Equals("57") ||
+            MainFuelType.Equals("58") ||
+            MainFuelType.Equals("99") ||
+            MainFuelType.Contains("(community)", StringComparison.OrdinalIgnoreCase))
+        {
+            return EpcHeatingType.Other;
+        }
+        
+        // 19 - bioethanol
+        // 34, 35, 36 - biodiesel from ...
+        // Biodiesel and bioethanol is treated as 'other heating'
+        if (
+            MainFuelType.Equals("19") ||
+            MainFuelType.Equals("34") ||
+            MainFuelType.Equals("35") ||
+            MainFuelType.Equals("36") ||
+            MainFuelType.Contains("(community)", StringComparison.OrdinalIgnoreCase))
+        {
+            return EpcHeatingType.Other;
+        }
+        
+        // 11 - waste combustion
+        // Treated as 'other heating'
+        if (MainFuelType.Equals("11") ||
+            MainFuelType.Contains("waste combustion", StringComparison.OrdinalIgnoreCase))
+        {
+            return EpcHeatingType.Other;
+        }
+        
+        // 16 - wood pellets in bags for secondary heating
+        // Treated as 'other heating'
+        if (MainFuelType.Equals("16") ||
+            MainFuelType.Contains("wood pellets in bags for secondary heating", StringComparison.OrdinalIgnoreCase))
+        {
+            return EpcHeatingType.Other;
+        }
+
+        // Gas boiler check
+        // 1, 26 - mains gas ...
+        // 13, 51 - biogas ...
+        if (MainFuelType.Equals("1") ||
+            MainFuelType.Equals("13") ||
+            MainFuelType.Equals("26") ||
+            MainFuelType.Equals("51") ||
+            MainFuelType.Contains("mains gas", StringComparison.OrdinalIgnoreCase) ||
+            MainFuelType.Contains("biogas", StringComparison.OrdinalIgnoreCase)
+           )
+        {
+            return EpcHeatingType.GasBoiler;
+        }
+        
+        // Lpg boiler check
+        // 3 - bottled LPG
+        // 2, 17, 27 - LPG ...
+        if (MainFuelType.Equals("2") ||
+            MainFuelType.Equals("3") ||
+            MainFuelType.Equals("17") ||
+            MainFuelType.Equals("27") ||
+            MainFuelType.Contains("LPG", StringComparison.OrdinalIgnoreCase))
+        {
+            return EpcHeatingType.LpgBoiler;
+        }
+        
+        // Oil boiler check
+        // 4 - oil - this is for backwards compatibility only and should not be used
+        // 18 - B30K (not community)
+        // 28 - oil (not community)
+        // 37 - appliances able to use mineral oil or liquid biofuel
+        if (MainFuelType.Equals("4") ||
+            MainFuelType.Equals("18") ||
+            MainFuelType.Equals("28") ||
+            MainFuelType.Equals("37") ||
+            MainFuelType.Contains("oil", StringComparison.OrdinalIgnoreCase) ||
+            MainFuelType.Contains("B30K", StringComparison.OrdinalIgnoreCase))
+        {
+            return EpcHeatingType.OilBoiler;
+        }
+        
         // coal check
+        // 5 - anthracite
         // 14 - house coal
         // 15 - smokeless coal
-        if (MainFuelType.Equals("14") ||
+        // 33 - house coal (not community)
+
+        if (MainFuelType.Equals("5") ||
+            MainFuelType.Equals("14") ||
             MainFuelType.Equals("15") ||
-            MainFuelType.Contains("coal", StringComparison.OrdinalIgnoreCase))
+            MainFuelType.Equals("33") ||
+            MainFuelType.Contains("coal", StringComparison.OrdinalIgnoreCase) ||
+            MainFuelType.Contains("anthracite", StringComparison.OrdinalIgnoreCase))
         {
-            return OtherHeatingType.CoalOrSolidFuel;
+            return EpcHeatingType.CoalOrSolidFuel;
         }
         
         // biomass boiler check
+        // 6 - wood logs
         // 7 - bulk wood pellets
-        if (MainFuelType.Equals("7") ||
+        // 8 - wood chips
+        // 9 - dual fuel - mineral + wood
+        // 12 - biomass
+
+        if (MainFuelType.Equals("6") || 
+            MainFuelType.Equals("7") ||
+            MainFuelType.Equals("8") ||
+            MainFuelType.Equals("9") ||
+            MainFuelType.Equals("12") ||
+            MainFuelType.Contains("wood logs", StringComparison.OrdinalIgnoreCase) ||
+            MainFuelType.Contains("bulk wood pellets", StringComparison.OrdinalIgnoreCase) ||
+            MainFuelType.Contains("wood chips", StringComparison.OrdinalIgnoreCase) ||
+            MainFuelType.Contains("dual fuel - mineral + wood", StringComparison.OrdinalIgnoreCase) ||
             MainFuelType.Contains("biomass", StringComparison.OrdinalIgnoreCase))
         {
-            return OtherHeatingType.Biomass;
+            return EpcHeatingType.Biomass;
         }
-
+        // electric heating check
+        // 10 - electricity
+        // 29 - electricity (not community)
+        if (MainFuelType.Equals("10") ||
+            MainFuelType.Equals("29") ||
+            MainFuelType.Contains("electricity", StringComparison.OrdinalIgnoreCase))
+        {
+            // We need to inspect the main heating description to decide
+            
+            // Communal heating is treated as 'other heating'
+            // 6 - community heating system
+            if (MainHeatingDescription.Equals("6") ||
+                MainFuelType.Contains("community", StringComparison.OrdinalIgnoreCase))
+            {
+                return EpcHeatingType.Other;
+            }
+            
+            // Direct action electric check
+            // 2 - boiler with radiators or underfloor heating
+            // 8 - electric underfloor heating
+            // 9 - warm air system (not heat pump)
+            // 10 - room heaters
+            // 11 - other system
+            if (MainHeatingDescription.Equals("2") ||
+                MainHeatingDescription.Equals("8") ||
+                MainHeatingDescription.Equals("9") ||
+                MainHeatingDescription.Equals("10") ||
+                MainHeatingDescription.Equals("11") ||
+                MainFuelType.Contains("boiler with radiators or underfloor heating", StringComparison.OrdinalIgnoreCase) ||
+                MainFuelType.Contains("electric underfloor heating", StringComparison.OrdinalIgnoreCase) ||
+                MainFuelType.Contains("warm air system (not heat pump)", StringComparison.OrdinalIgnoreCase) ||
+                MainFuelType.Contains("room heaters", StringComparison.OrdinalIgnoreCase) ||
+                MainFuelType.Contains("other system", StringComparison.OrdinalIgnoreCase))
+            {
+                return EpcHeatingType.DirectActionElectric;
+            }
+            
+            // Heat pump check
+            // 4 - heat pump with radiators or underfloor heating
+            // 5 - heat pump with warm air distribution
+            if (MainHeatingDescription.Equals("4") ||
+                MainHeatingDescription.Equals("5") ||
+                MainFuelType.Contains("heat pump with", StringComparison.OrdinalIgnoreCase))
+            {
+                return EpcHeatingType.HeatPump;
+            }
+            
+            // Storage heater check
+            // 7 - electric storage heaters
+            if (MainHeatingDescription.Equals("7") ||
+                MainFuelType.Contains("electric storage heaters", StringComparison.OrdinalIgnoreCase))
+            {
+                return EpcHeatingType.Storage;
+            }
+            
+            // Special case of micro combined heat and power
+            // 3 - micro-cogeneration
+            if (MainHeatingDescription.Equals("3") ||
+                MainFuelType.Contains("micro-cogeneration", StringComparison.OrdinalIgnoreCase))
+            {
+                return EpcHeatingType.GasBoiler;
+            }
+        }
+        
         return null;
     }
 

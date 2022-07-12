@@ -6,17 +6,10 @@ namespace Tests;
 
 public class BreApi
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
-
     [Test]
-    public void RequestsMeasures()
+    public void BreRequestMeasuresShouldBeTrue()
     {
-        //Arrange
-        
-        //Act
+        // Act
         BreRequest request = new(
             brePropertyType: BrePropertyType.House,
             breBuiltForm: BreBuiltForm.Detached,
@@ -34,7 +27,7 @@ public class BreApi
             breFloorType: BreFloorType.DontKnow
         );
         
-        //Assert
+        // Assert
         request.measures.Should().Be(true);
     }
 }

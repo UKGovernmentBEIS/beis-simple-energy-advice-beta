@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.DataStores;
@@ -1443,12 +1444,15 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpGet("no-recommendations/{reference}")]
-        public async Task<IActionResult> NoRecommendations_Get(string reference)
+        public async Task<IActionResult> NoRecommendations_Get(string reference, string emailAddress = null, bool emailSent = false)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             var backArgs = questionFlowService.BackLinkArguments(QuestionFlowPage.NoRecommendations, propertyData);
             var viewModel = new NoRecommendationsViewModel
             {
+                Reference = propertyData.Reference,
+                EmailAddress = emailAddress,
+                EmailSent = emailSent,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
             
@@ -1456,6 +1460,30 @@ namespace SeaPublicWebsite.Controllers
                 ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
                 : Constants.FEEDBACK_URL_BANNER_AFTER_ANSWER_SUMMARY;
             return View("NoRecommendations", viewModel);
+        }
+
+        [HttpPost("no-recommendations/{reference}")]
+        public async Task<IActionResult> NoRecommendations_Post(NoRecommendationsViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await NoRecommendations_Get(viewModel.Reference, emailAddress: viewModel.EmailAddress);
+            }
+
+            TrySendReferenceNumberEmail(viewModel.EmailAddress, viewModel.Reference);
+            
+            if (!ModelState.IsValid)
+            {
+                return await NoRecommendations_Get(viewModel.Reference, emailAddress: viewModel.EmailAddress);
+            }
+
+            return RedirectToAction(nameof(NoRecommendations_Get), "EnergyEfficiency",
+                new
+                {
+                    reference = viewModel.Reference, 
+                    emailAddress = viewModel.EmailAddress,
+                    emailSent = true
+                }, "email-sent");
         }
 
         [HttpGet("your-recommendations/{reference}")]
@@ -1480,35 +1508,17 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("your-recommendations/{reference}")]
         public async Task<IActionResult> YourRecommendations_Post(YourRecommendationsViewModel viewModel)
         {
+            if (ModelState.IsValid && viewModel.HasEmailAddress)
+            {
+                TrySendReferenceNumberEmail(viewModel.EmailAddress, viewModel.Reference);
+            }
+            
             if (!ModelState.IsValid)
             {
                 return await YourRecommendations_Get(viewModel.Reference);
             }
-
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-            if (viewModel.HasEmailAddress)
-            {
-                try
-                {
-                    emailApi.SendReferenceNumberEmail(viewModel.EmailAddress, propertyData.Reference);
-                }
-                catch (EmailSenderException e)
-                {
-                    switch (e.Type)
-                    {
-                        case EmailSenderExceptionType.InvalidEmailAddress:
-                            ModelState.AddModelError(nameof(viewModel.EmailAddress), "Enter a valid email address");
-                            break;
-                        case EmailSenderExceptionType.Other:
-                            ModelState.AddModelError(nameof(viewModel.EmailAddress), "Unable to send email due to unexpected error. Please make a note of your reference code");
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                    return await YourRecommendations_Get(viewModel.Reference);
-                }
-            }
             
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
             return RedirectToAction("Recommendation_Get", new { id = (int)propertyData.GetFirstRecommendationKey(), reference = viewModel.Reference });
         }
 
@@ -1569,28 +1579,122 @@ namespace SeaPublicWebsite.Controllers
                 viewModel.RecommendationAction;
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
-            switch(command)
+            if (command == "goForwards")
             {
+                if (viewModel.FromActionPlan)
+                {
+                    return RedirectToAction(nameof(ActionPlan_Get), new {reference = propertyData.Reference});
+                }
+                
+                if (propertyData.GetLastRecommendationKey() == recommendationKey)
+                {
+                    return RedirectToAction(nameof(AlternativeRecommendations_Get), new {reference = propertyData.Reference});
+                }
+
+                return RedirectToAction(nameof(Recommendation_Get),
+                    new {id = (int)propertyData.GetNextRecommendationKey(recommendationKey), reference = propertyData.Reference});
+            }
+            
+            throw new ArgumentOutOfRangeException();
+        }
+
+        [HttpGet("alternative-recommendations/{reference}")]
+        public async Task<IActionResult> AlternativeRecommendations_Get(string reference, bool fromActionPlan = false)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+
+            var viewModel = new AlternativeRecommendationsViewModel
+            {
+                Reference = reference,
+                FromActionPlan = fromActionPlan,
+                ShowAltRadiatorPanels = propertyData.ShowAltRadiatorPanels,
+                ShowAltHeatPump =  propertyData.ShowAltHeatPump,
+                ShowAltDraughtProofFloors = propertyData.ShowAltDraughtProofFloors,
+                ShowAltDraughtProofWindowsAndDoors = propertyData.ShowAltDraughtProofWindowsAndDoors,
+                ShowAltDraughtProofLoftAccess = propertyData.ShowAltDraughtProofLoftAccess,
+                LastIndex = propertyData.PropertyRecommendations.Count,
+                BackLink = fromActionPlan
+                    ? Url.Action(nameof(ActionPlan_Get), new { reference })
+                    : Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference })
+            };
+            
+            return View("Recommendations/AlternativeRecommendations", viewModel);
+        }
+        
+        [HttpPost("alternative-recommendations/{reference}")]
+        public async Task<IActionResult> AlternativeRecommendations_Post(AlternativeRecommendationsViewModel viewModel, string command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await AlternativeRecommendations_Get(viewModel.Reference, viewModel.FromActionPlan);
+            }
+            
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
+
+            switch (command)
+            {
+                case "goBackwards":
+                    return RedirectToAction(nameof(Recommendation_Get), 
+                        new {id = (int)propertyData.GetLastRecommendationKey(), reference = propertyData.Reference});
                 case "goForwards":
-                    return RedirectToAction(nameof(Recommendation_Get),
-                        new {id = (int)propertyData.GetNextRecommendationKey(recommendationKey), reference = propertyData.Reference});
-                case "goToActionPlan":
                     return RedirectToAction(nameof(ActionPlan_Get), new {reference = propertyData.Reference});
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
+        [HttpGet("water-and-energy-efficiency/{reference}")]
+        public async Task<IActionResult> WaterAndElectricityEfficiency_Get(string reference, bool fromNoRecommendations, bool fromActionPlan = false)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+
+            var viewModel = new WaterAndEnergyEfficiencyViewModel
+            {
+                Reference = reference,
+                FromActionPlan = fromActionPlan,
+                FromNoRecommendations = fromNoRecommendations,
+                BackLink = fromNoRecommendations
+                    ? Url.Action(nameof(NoRecommendations_Get), new { reference })
+                    : Url.Action(nameof(AlternativeRecommendations_Get), new { reference, fromActionPlan})
+                    
+            };
+            
+            return View("Recommendations/WaterAndEnergyEfficiency", viewModel);
+        }
+        
+        [HttpPost("water-and-energy-efficiency/{reference}")]
+        public async Task<IActionResult> WaterAndElectricityEfficiency_Post(WaterAndEnergyEfficiencyViewModel viewModel, string command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await WaterAndElectricityEfficiency_Get(viewModel.Reference, viewModel.FromActionPlan);
+            }
+            
+            switch (command)
+            {
+                case "goBackwards":
+                    return RedirectToAction(nameof(AlternativeRecommendations_Get), 
+                        new {reference = viewModel.Reference, fromActionPlan = viewModel.FromActionPlan});
+                case "goForwards":
+                    return viewModel.FromNoRecommendations
+                        ? RedirectToAction(nameof(NoRecommendations_Get), new {reference = viewModel.Reference})
+                        : RedirectToAction(nameof(ActionPlan_Get), new {reference = viewModel.Reference});
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         [HttpGet("action-plan/{reference}")]
-        public async Task<IActionResult> ActionPlan_Get(string reference, string emailAddress = null)
+        public async Task<IActionResult> ActionPlan_Get(string reference, string emailAddress = null, bool emailSent = false)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
             var viewModel = new ActionPlanViewModel
             {
-                BackLink = Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference }),
+                BackLink = Url.Action(nameof(AlternativeRecommendations_Get), new { reference }),
                 PropertyData = propertyData,
-                EmailAddress = emailAddress
+                EmailAddress = emailAddress,
+                EmailSent = emailSent
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -1608,35 +1712,28 @@ namespace SeaPublicWebsite.Controllers
 
             return View("ActionPlan/ActionPlanWithDiscardedRecommendations", viewModel);
         }
-        
+
         [HttpPost("action-plan/{reference}")]
         public async Task<IActionResult> ActionPlan_Post(YourSavedRecommendationsEmailViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return await ActionPlan_Get(viewModel.Reference);
+                return await ActionPlan_Get(viewModel.Reference, emailAddress: viewModel.EmailAddress);
             }
+
+            TrySendReferenceNumberEmail(viewModel.EmailAddress, viewModel.Reference);
             
-            try
+            if (!ModelState.IsValid)
             {
-                emailApi.SendReferenceNumberEmail(viewModel.EmailAddress, viewModel.Reference);
+                return await ActionPlan_Get(viewModel.Reference, emailAddress: viewModel.EmailAddress);
             }
-            catch (EmailSenderException e)
-            {
-                switch (e.Type)
+
+            return RedirectToAction(nameof(ActionPlan_Get), "EnergyEfficiency",
+                new
                 {
-                    case EmailSenderExceptionType.InvalidEmailAddress:
-                        ModelState.AddModelError(nameof(viewModel.EmailAddress), "Enter a valid email address");
-                        break;
-                    case EmailSenderExceptionType.Other:
-                        ModelState.AddModelError(nameof(viewModel.EmailAddress), "Unable to send email due to unexpected error. Please make a note of your reference code.");
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-                return await ActionPlan_Get(viewModel.Reference);
-            }
-            return await ActionPlan_Get(viewModel.Reference, emailAddress: viewModel.EmailAddress);
+                    reference = viewModel.Reference, emailAddress = viewModel.EmailAddress,
+                    emailSent = true
+                }, "email-sent");
         }
         
         // TODO: seabeta-576 When private beta finishes, this section should be removed. (View included)
@@ -1681,8 +1778,8 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            // If entryPoint is set then the user is editing their answers, so we need to take a copy of the current answers
-            if (entryPoint is not null && propertyData.UneditedData is null)
+            // If entryPoint is set then the user is editing their answers (and if HasSeenRecommendations then they have already generated recommendations that may now need to change), so we need to take a copy of the current answers
+            if ((entryPoint is not null || propertyData.HasSeenRecommendations) && propertyData.UneditedData is null)
             {
                 propertyData.CreateUneditedData();
             }
@@ -1692,7 +1789,7 @@ namespace SeaPublicWebsite.Controllers
             
             // If the user is going back to the answer summary page or the check your unchangeable answers page then they finished editing and we
             // can get rid of the old answers
-            if (entryPoint is not null &&
+            if ((entryPoint is not null || propertyData.HasSeenRecommendations) &&
                 (forwardArgs.Action.Equals(nameof(AnswerSummary_Get)) ||
                  forwardArgs.Action.Equals(nameof(CheckYourUnchangeableAnswers_Get))))
             {
@@ -1700,6 +1797,28 @@ namespace SeaPublicWebsite.Controllers
             }
             await propertyDataStore.SavePropertyDataAsync(propertyData);
             return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+        }
+
+        private void TrySendReferenceNumberEmail(string emailAddress, string reference)
+        {
+            try
+            {
+                emailApi.SendReferenceNumberEmail(emailAddress, reference);
+            }
+            catch (EmailSenderException e)
+            {
+                switch (e.Type)
+                {
+                    case EmailSenderExceptionType.InvalidEmailAddress:
+                        ModelState.AddModelError(nameof(emailAddress), "Enter a valid email address");
+                        return;
+                    case EmailSenderExceptionType.Other:
+                        ModelState.AddModelError(nameof(emailAddress), "Unable to send email due to unexpected error. Please make a note of your reference code.");
+                        return;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
         }
     }
 }
