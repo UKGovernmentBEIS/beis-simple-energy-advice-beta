@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete old data
-        run: cf run-task sea-beta-loadtest --command "dotnet run --project .\SeaPublicWebsite.DeleteOldData" --name delete-old-data-task
+        run: cf run-task sea-beta-loadtest --command "echo 1" --name delete-old-data-task
