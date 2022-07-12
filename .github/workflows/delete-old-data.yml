@@ -2,7 +2,7 @@ name: Delete old data
 
 on:
   schedule:
-    - cron:  '*/5 * * * *'
+    - cron:  '*/10 * * * *'
 
   workflow_dispatch:
 
@@ -11,5 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete old data
-        run: cf run-task sea-beta-loadtest --command "echo 1" --name delete-old-data-task
+        run: cf8 run-task sea-beta-loadtest --command "echo 1" --name delete-old-data-task
         
