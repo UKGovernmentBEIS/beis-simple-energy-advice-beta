@@ -25,6 +25,7 @@ ProjectSection(SolutionItems) = preProject
 	.github\workflows\build-and-run-tests.yml = .github\workflows\build-and-run-tests.yml
 	.github\workflows\build-and-deploy-to-gov-paas-production.yml = .github\workflows\build-and-deploy-to-gov-paas-production.yml
 	.github\workflows\build-and-deploy-to-gov-paas-loadtest.yml = .github\workflows\build-and-deploy-to-gov-paas-loadtest.yml
+	.github\workflows\delete-old-data.yml = .github\workflows\delete-old-data.yml
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaPublicWebsite.UnitTests", "SeaPublicWebsite.UnitTests\SeaPublicWebsite.UnitTests.csproj", "{BC27E00A-BCB1-40DD-872A-3FF0A46A5FFF}"
