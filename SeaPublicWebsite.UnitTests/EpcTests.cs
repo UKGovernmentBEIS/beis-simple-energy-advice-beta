@@ -743,6 +743,381 @@ public class EpcTests
             })
     };
     
+    private static EpcTestCase[] FloorConstructionTestCases =
+    {
+        new(
+            "Can handle null floor construction",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                FloorDescription = null
+            },
+            new Epc
+            {
+                FloorConstruction = null
+            }),
+        new(
+            "Can parse floor construction suspended timber",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                FloorDescription = new List<string>
+                {
+                    "suspended"
+                }
+            },
+            new Epc
+            {
+                FloorConstruction = FloorConstruction.SuspendedTimber
+            }),
+        new(
+            "Can parse floor construction solid concrete",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                FloorDescription = new List<string>
+                {
+                    "solid"
+                }
+            },
+            new Epc
+            {
+                FloorConstruction = FloorConstruction.SolidConcrete
+            }),
+        new(
+            "Can parse floor construction mixed",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                FloorDescription = new List<string>
+                {
+                    "suspended",
+                    "solid"
+                }
+            },
+            new Epc
+            {
+                FloorConstruction = FloorConstruction.Mix
+            })
+    };
+    
+    private static EpcTestCase[] FloorInsulationTestCases =
+    {
+        new(
+            "Can handle null floor insulation",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                FloorDescription = null
+            },
+            new Epc
+            {
+                FloorInsulated = null
+            }),
+        new(
+            "Can parse floor insulated",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                FloorDescription = new List<string>
+                {
+                    "solid, insulated"
+                }
+            },
+            new Epc
+            {
+                FloorConstruction = FloorConstruction.SolidConcrete,
+                FloorInsulated = FloorInsulated.Yes
+            }),
+        new(
+            "Can parse floor uninsulated",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                FloorDescription = new List<string>
+                {
+                    "solid, no insulation (assumed)"
+                }
+            },
+            new Epc
+            {
+                FloorConstruction = FloorConstruction.SolidConcrete,
+                FloorInsulated = FloorInsulated.No
+            }),
+    };
+    
+    private static EpcTestCase[] RoofConstructionTestCases =
+    {
+        new(
+            "Can handle null roof construction",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                RoofDescription = null
+            },
+            new Epc
+            {
+                RoofConstruction = null
+            }),
+        new(
+            "Can parse roof construction pitched",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                RoofDescription = new List<string>
+                {
+                    "pitched"
+                }
+            },
+            new Epc
+            {
+                RoofConstruction = RoofConstruction.Pitched
+            }),
+        new(
+            "Can parse roof construction flat",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                RoofDescription = new List<string>
+                {
+                    "flat"
+                }
+            },
+            new Epc
+            {
+                RoofConstruction = RoofConstruction.Flat
+            }),
+        new(
+            "Can parse roof construction mixed",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                RoofDescription = new List<string>
+                {
+                    "pitched",
+                    "flat"
+                }
+            },
+            new Epc
+            {
+                RoofConstruction = RoofConstruction.Mixed
+            }),
+    };
+    
+    private static EpcTestCase[] RoofInsulationTestCases =
+    {
+        new(
+            "Can handle null roof insulation",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                RoofDescription = null
+            },
+            new Epc
+            {
+                RoofInsulated = null
+            }),
+        new(
+            "Can parse roof insulated",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                RoofDescription = new List<string>
+                {
+                    "flat, insulated"
+                }
+            },
+            new Epc
+            {
+                RoofConstruction = RoofConstruction.Flat,
+                RoofInsulated = RoofInsulated.Yes
+            }),
+        new(
+            "Can parse roof insulated >= 200mm",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                RoofDescription = new List<string>
+                {
+                    "flat, 200 mm loft insulation"
+                }
+            },
+            new Epc
+            {
+                RoofConstruction = RoofConstruction.Flat,
+                RoofInsulated = RoofInsulated.Yes
+            }),
+        new(
+            "Can parse roof uninsulated",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                RoofDescription = new List<string>
+                {
+                    "flat, no insulation"
+                }
+            },
+            new Epc
+            {
+                RoofConstruction = RoofConstruction.Flat,
+                RoofInsulated = RoofInsulated.No
+            }),
+        new(
+            "Can parse roof uninsulated < 200mm",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                RoofDescription = new List<string>
+                {
+                    "flat, 150 mm loft insulation"
+                }
+            },
+            new Epc
+            {
+                RoofConstruction = RoofConstruction.Flat,
+                RoofInsulated = RoofInsulated.No
+            }),
+    };
+    
+    private static EpcTestCase[] GlazingTypeTestCases =
+    {
+        new(
+            "Can handle null glazing type",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WindowsDescription = null
+            },
+            new Epc
+            {
+                GlazingType = null
+            }),
+        new(
+            "Can parse glazing type single glazing",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WindowsDescription = new List<string>
+                {
+                    "single glazed"
+                }
+            },
+            new Epc
+            {
+                GlazingType = GlazingType.SingleGlazed
+            }),
+        new(
+            "Can parse glazing type both (some)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WindowsDescription = new List<string>
+                {
+                    "some double glazing"
+                }
+            },
+            new Epc
+            {
+                GlazingType = GlazingType.Both
+            }),
+        new(
+            "Can parse glazing type both (partial)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WindowsDescription = new List<string>
+                {
+                    "partial triple glazing"
+                }
+            },
+            new Epc
+            {
+                GlazingType = GlazingType.Both
+            }),
+        new(
+            "Can parse glazing type both (mostly)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WindowsDescription = new List<string>
+                {
+                    "mostly multiple glazing"
+                }
+            },
+            new Epc
+            {
+                GlazingType = GlazingType.Both
+            }),
+        new(
+            "Can parse glazing type both (throughout)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WindowsDescription = new List<string>
+                {
+                    "multiple glazing throughout"
+                }
+            },
+            new Epc
+            {
+                GlazingType = GlazingType.Both
+            }),
+        new(
+            "Can parse glazing type double or triple (full)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WindowsDescription = new List<string>
+                {
+                    "fully double glazed"
+                }
+            },
+            new Epc
+            {
+                GlazingType = GlazingType.DoubleOrTripleGlazed
+            }),
+        new(
+            "Can parse glazing type double or triple (high)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WindowsDescription = new List<string>
+                {
+                    "High performance glazing"
+                }
+            },
+            new Epc
+            {
+                GlazingType = GlazingType.DoubleOrTripleGlazed
+            })
+    };
+    
+    // private static EpcTestCase[] TestCases =
+    // {
+    //     new(
+    //         "",
+    //         new EpbEpcAssessmentDto
+    //         {
+    //             AssessmentType = "RdSAP"
+    //         },
+    //         new Epc
+    //         {
+    //         }),
+    // };
+    
+    // private static EpcTestCase[] TestCases =
+    // {
+    //     new(
+    //         "",
+    //         new EpbEpcAssessmentDto
+    //         {
+    //             AssessmentType = "RdSAP"
+    //         },
+    //         new Epc
+    //         {
+    //         }),
+    // };
+    
     // private static EpcTestCase[] TestCases =
     // {
     //     new(
@@ -768,6 +1143,11 @@ public class EpcTests
             .Concat(WallConstructionTestCases)
             .Concat(SolidWallsInsulatedTestCases)
             .Concat(CavityWallsInsulatedTestCases)
+            .Concat(FloorConstructionTestCases)
+            .Concat(FloorInsulationTestCases)
+            .Concat(RoofConstructionTestCases)
+            .Concat(RoofInsulationTestCases)
+            .Concat(GlazingTypeTestCases)
             .ToArray();
 
     public class EpcTestCase
