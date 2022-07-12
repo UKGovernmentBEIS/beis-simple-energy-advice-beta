@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SeaPublicWebsite.BusinessLogic.Models;
 
 namespace SeaPublicWebsite.Data;
@@ -33,6 +34,9 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
         modelBuilder.Entity<PropertyData>()
             .HasKey("PropertyDataId");
         
+        // Property data row versioning
+        AddRowVersionColumn(modelBuilder.Entity<PropertyData>());
+
         modelBuilder.Entity<PropertyData>()
             .HasIndex(p => p.Reference)
             .IsUnique();
@@ -47,6 +51,9 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
             .ValueGeneratedOnAdd();
         modelBuilder.Entity<PropertyRecommendation>()
             .HasKey("PropertyRecommendationId");
+        
+        // Property recommendations row versioning
+        AddRowVersionColumn(modelBuilder.Entity<PropertyRecommendation>());
     }
 
     private void SetupEpc(ModelBuilder modelBuilder)
@@ -58,6 +65,9 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
             .ValueGeneratedOnAdd();
         modelBuilder.Entity<Epc>()
             .HasKey("Id");
+        
+        // Epc row versioning
+        AddRowVersionColumn(modelBuilder.Entity<Epc>());
     }
 
     private void SetupRelations(ModelBuilder modelBuilder)
@@ -81,5 +91,11 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
             .WithOne(d => d.UneditedData)
             .HasForeignKey<PropertyData>("EditedDataId")
             .OnDelete(DeleteBehavior.Cascade);
+    }
+
+    private void AddRowVersionColumn<T>(EntityTypeBuilder<T> builder) where T : class
+    {
+        // This is a PostgreSQL specific implementation of row versioning
+        builder.UseXminAsConcurrencyToken();
     }
 }
