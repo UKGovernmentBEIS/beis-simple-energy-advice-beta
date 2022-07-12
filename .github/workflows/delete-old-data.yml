@@ -10,6 +10,18 @@ jobs:
   delete-data:
     runs-on: ubuntu-latest
     steps:
-      - name: Delete old data
-        run: cf8 run-task sea-beta-loadtest --command "echo 1" --name delete-old-data-task
+    - name: Install .Net (6.0)
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
         
+    - name: Install the Cloud Foundry CLI
+      run: |
+        wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+        echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+        sudo apt-get update
+        sudo apt-get install cf7-cli
+        
+    - name: Delete old data
+      run: cf run-task sea-beta-loadtest --command "echo 1" --name delete-old-data-task
+
