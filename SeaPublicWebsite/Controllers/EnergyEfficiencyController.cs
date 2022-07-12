@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.DataStores;
@@ -35,7 +34,7 @@ namespace SeaPublicWebsite.Controllers
             PropertyDataStore propertyDataStore,
             IQuestionFlowService questionFlowService, 
             IEpcApi epcApi,
-            IEmailSender emailApi, 
+            IEmailSender emailApi,
             RecommendationService recommendationService,
             CookieService cookieService,
             GoogleAnalyticsService googleAnalyticsService,
