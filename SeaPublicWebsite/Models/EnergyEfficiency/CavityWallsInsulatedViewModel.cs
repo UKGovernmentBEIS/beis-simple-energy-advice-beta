@@ -8,10 +8,10 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         [GovUkValidateRequired(ErrorMessageIfMissing = "Select if your cavity walls are insulated")]
         public CavityWallsInsulated? CavityWallsInsulated { get; set; }
-
+        public YearBuilt? YearBuilt { get; set; }
         public string Reference { get; set; }
         
-        public YearBuilt? YearBuilt { get; set; }
+        public bool? HintUninsulatedCavityWalls { get; set; }
         public Epc Epc { get; set; }
     }
 }

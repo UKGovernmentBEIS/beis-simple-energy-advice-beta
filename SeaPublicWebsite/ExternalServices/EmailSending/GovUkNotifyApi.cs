@@ -52,7 +52,7 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
                 { template.ReferencePlaceholder, reference },
                 { template.MagicLinkPlaceholder, govUkNotifyConfig.BaseUrl + "returning-user/" + reference },
                 { template.ReturningUserLinkPlaceholder, govUkNotifyConfig.BaseUrl + "new-or-returning-user" },
-                { template.FeedbackLinkPlaceholder, Constants.FEEDBACK_URL }
+                { template.FeedbackLinkPlaceholder, Constants.FEEDBACK_URL_REFERENCE_CODE_EMAIL }
             };
             var emailModel = new GovUkNotifyEmailModel
             {

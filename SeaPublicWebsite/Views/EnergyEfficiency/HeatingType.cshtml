@@ -64,6 +64,16 @@
                             </strong>
                         </p>;
                 }
+                else
+                {
+                    epcHint =
+                        @<p class="govuk-body">
+                            The most common method of heating is with 
+                            <strong>
+                                a gas boiler.
+                            </strong>
+                        </p>;
+                }
             }
             
             @(await Html.GovUkRadiosFor(m => m.HeatingType,

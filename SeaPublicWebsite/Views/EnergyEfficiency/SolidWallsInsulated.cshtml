@@ -35,20 +35,28 @@
                         </p>
                      </text>;
                 
-                Func<object, object> epcHint = null;
+                Func<object, object> blueBannerHint = null;
                 if (Model.Epc?.SolidWallsInsulated is not null)
                 {
-                    epcHint = 
+                    blueBannerHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests you have
+                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests
                             <strong>
                                 @(Model.Epc?.SolidWallsInsulated switch {
-                                    SolidWallsInsulated.No => "uninsulated",
-                                    SolidWallsInsulated.Some => "some insulated",
-                                    SolidWallsInsulated.All => "insulated",
+                                    SolidWallsInsulated.No => "your solid walls are uninsulated.",
+                                    SolidWallsInsulated.Some => "some of your solid walls are insulated.",
+                                    SolidWallsInsulated.All => "your solid walls are insulated.",
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
-                            solid walls.
+                        </p>;
+                } else
+                {
+                    blueBannerHint =
+                        @<p class="govuk-body">
+                            Homes of your type typically have
+                            <strong>
+                                uninsulated solid walls
+                            </strong>
                         </p>;
                 }
             }
@@ -76,14 +84,11 @@
                                    Html = details
                                })
                                
-                               @if (epcHint is not null)
+                               @await Html.GovUkInsetText(new InsetTextViewModel
                                {
-                                   @await Html.GovUkInsetText(new InsetTextViewModel
-                                   {
-                                       Classes = "sea-epc-hint",
-                                       Html = epcHint
-                                   })
-                               }
+                                   Classes = "sea-epc-hint",
+                                   Html = blueBannerHint
+                               })
                             </text>
                     }))
 
