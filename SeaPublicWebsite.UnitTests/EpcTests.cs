@@ -21,7 +21,7 @@ public class EpcTests
         epc.Should().BeEquivalentTo(testCase.Output);
     }
 
-    private static EpcTestCase[] AssessmentTypeTestCases =
+    private static readonly EpcTestCase[] AssessmentTypeTestCases =
     {
         new(
             "Can parse an RdSAP assessment",
@@ -39,7 +39,7 @@ public class EpcTests
             null),
     };
 
-    private static EpcTestCase[] LodgementDateTestCases =
+    private static readonly EpcTestCase[] LodgementDateTestCases =
     {
         
         new(
@@ -66,7 +66,7 @@ public class EpcTests
             })
     };
     
-    private static EpcTestCase[] ConstructionAgeBandTestCases =
+    private static readonly EpcTestCase[] ConstructionAgeBandTestCases =
     {
         new(
             "Can handle null home age",
@@ -346,7 +346,7 @@ public class EpcTests
             }),
     };
 
-    private static EpcTestCase[] PropertyTypeTestCases =
+    private static readonly EpcTestCase[] PropertyTypeTestCases =
     {
         new(
             "Can handle null property type",
@@ -405,7 +405,7 @@ public class EpcTests
             }),
     };
 
-    private static EpcTestCase[] HouseTypeTestCases =
+    private static readonly EpcTestCase[] HouseTypeTestCases =
     {
         new(
             "Can handle null house type",
@@ -468,7 +468,7 @@ public class EpcTests
             }),
     };
     
-    private static EpcTestCase[] BungalowTypeTestCases =
+    private static readonly EpcTestCase[] BungalowTypeTestCases =
     {
         new(
             "Can handle null bungalow type",
@@ -531,7 +531,7 @@ public class EpcTests
             }),
     };
     
-    private static EpcTestCase[] FlatTypeTestCases =
+    private static readonly EpcTestCase[] FlatTypeTestCases =
     {
         new(
             "Can handle null flat type",
@@ -594,7 +594,7 @@ public class EpcTests
             }),
     };
     
-    private static EpcTestCase[] WallConstructionTestCases =
+    private static readonly EpcTestCase[] WallConstructionTestCases =
     {
         new(
             "Can handle null wall construction",
@@ -653,7 +653,7 @@ public class EpcTests
     };
     
     // TODO: Investigate solid brick outcomes. Sharepoint document only specifies this option.
-    private static EpcTestCase[] SolidWallsInsulatedTestCases =
+    private static readonly EpcTestCase[] SolidWallsInsulatedTestCases =
     {
         new(
             "Can handle null solid walls insulated",
@@ -683,7 +683,7 @@ public class EpcTests
             })
     };
     
-    private static EpcTestCase[] CavityWallsInsulatedTestCases =
+    private static readonly EpcTestCase[] CavityWallsInsulatedTestCases =
     {
         new(
             "Can handle null cavity walls insulated",
@@ -743,7 +743,7 @@ public class EpcTests
             })
     };
     
-    private static EpcTestCase[] FloorConstructionTestCases =
+    private static readonly EpcTestCase[] FloorConstructionTestCases =
     {
         new(
             "Can handle null floor construction",
@@ -801,7 +801,7 @@ public class EpcTests
             })
     };
     
-    private static EpcTestCase[] FloorInsulationTestCases =
+    private static readonly EpcTestCase[] FloorInsulationTestCases =
     {
         new(
             "Can handle null floor insulation",
@@ -846,7 +846,7 @@ public class EpcTests
             }),
     };
     
-    private static EpcTestCase[] RoofConstructionTestCases =
+    private static readonly EpcTestCase[] RoofConstructionTestCases =
     {
         new(
             "Can handle null roof construction",
@@ -904,7 +904,7 @@ public class EpcTests
             }),
     };
     
-    private static EpcTestCase[] RoofInsulationTestCases =
+    private static readonly EpcTestCase[] RoofInsulationTestCases =
     {
         new(
             "Can handle null roof insulation",
@@ -979,7 +979,7 @@ public class EpcTests
             }),
     };
     
-    private static EpcTestCase[] GlazingTypeTestCases =
+    private static readonly EpcTestCase[] GlazingTypeTestCases =
     {
         new(
             "Can handle null glazing type",
@@ -1092,46 +1092,60 @@ public class EpcTests
             })
     };
     
-    // private static EpcTestCase[] TestCases =
-    // {
-    //     new(
-    //         "",
-    //         new EpbEpcAssessmentDto
-    //         {
-    //             AssessmentType = "RdSAP"
-    //         },
-    //         new Epc
-    //         {
-    //         }),
-    // };
+    // TODO: Comprehensive testing for this section
+    private static readonly EpcTestCase[] HeatingTypeTestCases =
+    {
+        new(
+            "Can handle null heating type",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                MainHeatingDescription = null
+            },
+            new Epc
+            {
+                EpcHeatingType = null
+            }),
+    };
     
-    // private static EpcTestCase[] TestCases =
-    // {
-    //     new(
-    //         "",
-    //         new EpbEpcAssessmentDto
-    //         {
-    //             AssessmentType = "RdSAP"
-    //         },
-    //         new Epc
-    //         {
-    //         }),
-    // };
-    
-    // private static EpcTestCase[] TestCases =
-    // {
-    //     new(
-    //         "",
-    //         new EpbEpcAssessmentDto
-    //         {
-    //             AssessmentType = "RdSAP"
-    //         },
-    //         new Epc
-    //         {
-    //         }),
-    // };
+    private static readonly EpcTestCase[] HasHotWaterCylinderTestCases =
+    {
+        new(
+            "Can handle null has hot water cylinder",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                HasHotWaterCylinder = null
+            },
+            new Epc
+            {
+                HasHotWaterCylinder = null
+            }),
+        new(
+            "Can parse has hot water cylinder (true)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                HasHotWaterCylinder = true
+            },
+            new Epc
+            {
+                HasHotWaterCylinder = HasHotWaterCylinder.Yes
+            }),
+        new(
+            "Can parse has hot water cylinder (false)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                HasHotWaterCylinder = false
+            },
+            new Epc
+            {
+                HasHotWaterCylinder = HasHotWaterCylinder.No
+            }),
+    };
 
-    private static EpcTestCase[] EpcParseTestCases =
+    private static readonly EpcTestCase[] EpcParseTestCases =
         Array.Empty<EpcTestCase>()
             .Concat(AssessmentTypeTestCases)
             .Concat(LodgementDateTestCases)
@@ -1148,6 +1162,8 @@ public class EpcTests
             .Concat(RoofConstructionTestCases)
             .Concat(RoofInsulationTestCases)
             .Concat(GlazingTypeTestCases)
+            .Concat(HeatingTypeTestCases)
+            .Concat(HasHotWaterCylinderTestCases)
             .ToArray();
 
     public class EpcTestCase
