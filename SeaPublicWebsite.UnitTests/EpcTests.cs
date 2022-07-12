@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
@@ -40,17 +41,7 @@ public class EpcTests
 
     private static EpcTestCase[] LodgementDateTestCases =
     {
-        new(
-            "Can parse lodgement year",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                LodgementDate = "2012-12-22"
-            },
-            new Epc
-            {
-                LodgementYear = 2012
-            }),
+        
         new(
             "Can handle null lodgement year",
             new EpbEpcAssessmentDto
@@ -61,11 +52,33 @@ public class EpcTests
             new Epc
             {
                 LodgementYear = null
+            }),
+        new(
+            "Can parse lodgement year",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                LodgementDate = "2012-12-22"
+            },
+            new Epc
+            {
+                LodgementYear = 2012
             })
     };
     
     private static EpcTestCase[] ConstructionAgeBandTestCases =
     {
+        new(
+            "Can handle null home age",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                PropertyAgeBand = null
+            },
+            new Epc
+            {
+                ConstructionAgeBand = null
+            }),
         new(
             "Can parse home age before 1900",
             new EpbEpcAssessmentDto
@@ -336,6 +349,17 @@ public class EpcTests
     private static EpcTestCase[] PropertyTypeTestCases =
     {
         new(
+            "Can handle null property type",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                PropertyType = null
+            },
+            new Epc
+            {
+                PropertyType = null
+            }),
+        new(
             "Can parse property type house",
             new EpbEpcAssessmentDto
             {
@@ -383,6 +407,17 @@ public class EpcTests
 
     private static EpcTestCase[] HouseTypeTestCases =
     {
+        new(
+            "Can handle null house type",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                PropertyType = null
+            },
+            new Epc
+            {
+                HouseType = null
+            }),
         new(
             "Can parse house type detached",
             new EpbEpcAssessmentDto
@@ -436,6 +471,17 @@ public class EpcTests
     private static EpcTestCase[] BungalowTypeTestCases =
     {
         new(
+            "Can handle null bungalow type",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                PropertyType = null
+            },
+            new Epc
+            {
+                BungalowType = null
+            }),
+        new(
             "Can parse bungalow type detached",
             new EpbEpcAssessmentDto
             {
@@ -485,44 +531,217 @@ public class EpcTests
             }),
     };
     
-    // private static EpcTestCase[] TestCases =
-    // {
-    //     new(
-    //         "",
-    //         new EpbEpcAssessmentDto
-    //         {
-    //             AssessmentType = "RdSAP"
-    //         },
-    //         new Epc
-    //         {
-    //         }),
-    // };
+    private static EpcTestCase[] FlatTypeTestCases =
+    {
+        new(
+            "Can handle null flat type",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                PropertyType = null
+            },
+            new Epc
+            {
+                FlatType = null
+            }),
+        new(
+            "Can parse flat type detached",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                PropertyType = "basement flat"
+            },
+            new Epc
+            {
+                PropertyType = PropertyType.ApartmentFlatOrMaisonette,
+                FlatType = FlatType.GroundFloor
+            }),
+        new(
+            "Can parse flat type semi-detached",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                PropertyType = "ground flat"
+            },
+            new Epc
+            {
+                PropertyType = PropertyType.ApartmentFlatOrMaisonette,
+                FlatType = FlatType.GroundFloor
+            }),
+        new(
+            "Can parse flat type mid-terrace",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                PropertyType = "mid flat"
+            },
+            new Epc
+            {
+                PropertyType = PropertyType.ApartmentFlatOrMaisonette,
+                FlatType = FlatType.MiddleFloor
+            }),
+        new(
+            "Can parse flat type end terrace",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                PropertyType = "top flat"
+            },
+            new Epc
+            {
+                PropertyType = PropertyType.ApartmentFlatOrMaisonette,
+                FlatType = FlatType.TopFloor
+            }),
+    };
     
-    // private static EpcTestCase[] TestCases =
-    // {
-    //     new(
-    //         "",
-    //         new EpbEpcAssessmentDto
-    //         {
-    //             AssessmentType = "RdSAP"
-    //         },
-    //         new Epc
-    //         {
-    //         }),
-    // };
+    private static EpcTestCase[] WallConstructionTestCases =
+    {
+        new(
+            "Can handle null wall construction",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WallsDescription = null
+            },
+            new Epc
+            {
+                WallConstruction = null
+            }),
+        new(
+            "Can parse wall construction solid",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WallsDescription = new List<string>
+                {
+                    "solid brick"
+                }
+            },
+            new Epc
+            {
+                WallConstruction = WallConstruction.Solid
+            }),
+        new(
+            "Can parse wall construction cavity",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WallsDescription = new List<string>
+                {
+                    "cavity wall"
+                }
+            },
+            new Epc
+            {
+                WallConstruction = WallConstruction.Cavity
+            }),
+        new(
+            "Can parse mixed walls",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WallsDescription = new List<string>
+                {
+                    "solid brick",
+                    "cavity wall"
+                }
+            },
+            new Epc
+            {
+                WallConstruction = WallConstruction.Mixed
+            }),
+    };
     
-    // private static EpcTestCase[] TestCases =
-    // {
-    //     new(
-    //         "",
-    //         new EpbEpcAssessmentDto
-    //         {
-    //             AssessmentType = "RdSAP"
-    //         },
-    //         new Epc
-    //         {
-    //         }),
-    // };
+    // TODO: Investigate solid brick outcomes. Sharepoint document only specifies this option.
+    private static EpcTestCase[] SolidWallsInsulatedTestCases =
+    {
+        new(
+            "Can handle null solid walls insulated",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WallsDescription = null
+            },
+            new Epc
+            {
+                SolidWallsInsulated = null
+            }),
+        new(
+            "Can parse solid walls insulated",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WallsDescription = new List<string>
+                {
+                    "solid brick, as built, insulated (assumed)"
+                }
+            },
+            new Epc
+            {
+                WallConstruction = WallConstruction.Solid,
+                SolidWallsInsulated = SolidWallsInsulated.All
+            })
+    };
+    
+    private static EpcTestCase[] CavityWallsInsulatedTestCases =
+    {
+        new(
+            "Can handle null cavity walls insulated",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WallsDescription = null
+            },
+            new Epc
+            {
+                CavityWallsInsulated = null
+            }),
+        new(
+            "Can parse cavity walls insulated",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WallsDescription = new List<string>
+                {
+                    "cavity wall, as built, insulated (assumed)"
+                }
+            },
+            new Epc
+            {
+                WallConstruction = WallConstruction.Cavity,
+                CavityWallsInsulated = CavityWallsInsulated.All
+            }),
+        new(
+            "Can parse cavity walls partially insulated",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WallsDescription = new List<string>
+                {
+                    "cavity wall, as built, partial insulation (assumed)"
+                }
+            },
+            new Epc
+            {
+                WallConstruction = WallConstruction.Cavity,
+                CavityWallsInsulated = CavityWallsInsulated.Some
+            }),
+        new(
+            "Can parse cavity walls no insulation",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WallsDescription = new List<string>
+                {
+                    "cavity wall, as built, no insulation (assumed)"
+                }
+            },
+            new Epc
+            {
+                WallConstruction = WallConstruction.Cavity,
+                CavityWallsInsulated = CavityWallsInsulated.No
+            })
+    };
     
     // private static EpcTestCase[] TestCases =
     // {
@@ -545,6 +764,10 @@ public class EpcTests
             .Concat(PropertyTypeTestCases)
             .Concat(HouseTypeTestCases)
             .Concat(BungalowTypeTestCases)
+            .Concat(FlatTypeTestCases)
+            .Concat(WallConstructionTestCases)
+            .Concat(SolidWallsInsulatedTestCases)
+            .Concat(CavityWallsInsulatedTestCases)
             .ToArray();
 
     public class EpcTestCase
