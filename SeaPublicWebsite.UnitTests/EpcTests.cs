@@ -652,7 +652,7 @@ public class EpcTests
             }),
     };
     
-    // TODO: Investigate solid brick outcomes. Sharepoint document only specifies this option.
+    // Could not find other types of wall description for solid walls
     private static readonly EpcTestCase[] SolidWallsInsulatedTestCases =
     {
         new(
