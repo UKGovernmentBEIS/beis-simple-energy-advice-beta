@@ -1,0 +1,12 @@
+﻿name: Delete old data
+
+on:
+  schedule:
+    - cron:  '0 0 * * *'
+
+jobs:
+  delete-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete old data
+        run: cf run-task sea-beta-DEV --command "dotnet run --project .\SeaPublicWebsite.DeleteOldData\" --name delete-old-data-task

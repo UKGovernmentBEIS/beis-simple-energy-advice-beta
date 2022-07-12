@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SeaPublicWebsite.BusinessLogic.Models;
 
 namespace SeaPublicWebsite.Data;
@@ -36,5 +37,11 @@ public class DataAccessProvider : IDataAccessProvider
     public async Task<bool> PropertyDataExistsAsync(string reference)
     {
         return await context.PropertyData.AnyAsync(p => p.Reference == reference);
+    }
+
+    public void DeleteOldPropertyData()
+    {
+        var entities = context.PropertyData.Where(p => p.Timestamp <= DateTime.Now.AddMonths(-6));
+        context.PropertyData.RemoveRange(entities);
     }
 }
