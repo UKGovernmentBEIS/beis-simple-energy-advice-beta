@@ -30,6 +30,9 @@ namespace SeaPublicWebsite.ExternalServices.Bre
 
         public async Task<List<BreRecommendation>> GetRecommendationsForPropertyRequestAsync(BreRequest request)
         {
+            // BRE requests and responses shouldn't contain any sensitive details so we are OK to log them as-is
+            logger.LogInformation($"Sending BRE request: {JsonConvert.SerializeObject(request)}");
+
             BreResponse response = null;
             try
             {
@@ -54,45 +57,51 @@ namespace SeaPublicWebsite.ExternalServices.Bre
                     }
                 );
                 
-                List<BreRecommendation> recommendations = new List<BreRecommendation>();
-
+                // BRE requests and responses shouldn't contain any sensitive details so we are OK to log them as-is
+                logger.LogInformation($"Received BRE response: {JsonConvert.SerializeObject(response)}");
+                
                 if (response.Measures is null)
                 {
-                    return recommendations;
+                    return new List<BreRecommendation>();
                 }
-                
-                Dictionary<string, BreRecommendation> recommendationDictionary =
-                    RecommendationService.RecommendationDictionary;
-                foreach (KeyValuePair<string, BreMeasure> entry in response.Measures)
-                {
-                    string key = entry.Key;
-                    BreMeasure measure = entry.Value;
-                    BreRecommendation dictEntry = recommendationDictionary[key];
-                    recommendations.Add(new BreRecommendation()
-                    {
-                        Key = dictEntry.Key,
-                        Title = dictEntry.Title,
-                        MinInstallCost = measure.MinInstallationCost,
-                        MaxInstallCost = measure.MaxInstallationCost,
-                        Saving = (int) measure.Saving,
-                        LifetimeSaving = (int) (measure.Lifetime * measure.Saving),
-                        Lifetime = measure.Lifetime,
-                        Summary = dictEntry.Summary
-                    });
-                }
-                return recommendations;
+
+                return response
+                    .Measures
+                    .Select(kvp => CreateRecommendation(kvp.Key, kvp.Value))
+                    .Where(r => r != null)
+                    .ToList();
             }
             catch (Exception e)
             {
-                // BRE requests and responses shouldn't contain any sensitive details so we are OK to log them as-is
-                logger.LogError(@$"There was an error calling the BRE API: {e.Message}
-
-BreRequest details: {JsonConvert.SerializeObject(request)}
-
-BreResponse details: {JsonConvert.SerializeObject(response)}");
-
+                logger.LogError($"There was an error calling the BRE API: {e.Message}");
                 throw;
             }
+        }
+
+        private BreRecommendation CreateRecommendation(string measureCode, BreMeasure measure)
+        {
+            try
+            {
+                BreRecommendation dictEntry = RecommendationService.RecommendationDictionary[measureCode];
+                return new BreRecommendation
+                {
+                    Key = dictEntry.Key,
+                    Title = dictEntry.Title,
+                    MinInstallCost = measure.MinInstallationCost,
+                    MaxInstallCost = measure.MaxInstallationCost,
+                    Saving = (int) measure.Saving,
+                    LifetimeSaving = (int) (measure.Lifetime * measure.Saving),
+                    Lifetime = measure.Lifetime,
+                    Summary = dictEntry.Summary
+                };
+            }
+            catch (Exception e)
+            {
+                // We would prefer to return some recommendations rather than show the error page to the user.
+                logger.LogError($"There was an error parsing a BRE recommendation. Code: {measureCode} Details: {JsonConvert.SerializeObject(measure)} Error: {e.Message}");
+                return null;
+            }
+            
         }
 
         private static string GenerateToken(string input)
