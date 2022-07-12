@@ -10,6 +10,9 @@ jobs:
   delete-data:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout code onto job runner
+      uses: actions/checkout@v2
+
     - name: Install .Net (6.0)
       uses: actions/setup-dotnet@v1
       with:
