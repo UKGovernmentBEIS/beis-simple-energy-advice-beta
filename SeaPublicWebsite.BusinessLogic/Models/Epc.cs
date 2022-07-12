@@ -4,8 +4,6 @@ namespace SeaPublicWebsite.BusinessLogic.Models
 {
     public class Epc
     {
-        // PRIMARY KEY
-        public int Id { get; set; }
         public int? LodgementYear { get; set; }
         public PropertyType? PropertyType { get; set; }
         public HouseType? HouseType { get; set; }

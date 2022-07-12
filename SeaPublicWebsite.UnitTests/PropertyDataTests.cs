@@ -12,7 +12,6 @@ public class PropertyDataTests
     {
         return new PropertyData
         {
-            PropertyDataId = 0,
             Reference = "ABCDEFGH",
             OwnershipStatus = OwnershipStatus.Landlord,
             Country = Country.England,
@@ -86,8 +85,7 @@ public class PropertyDataTests
         // Assert
         foreach (var propertyInfo in propertyData.GetType().GetProperties())
         {
-            if (propertyInfo.Name.Equals(nameof(PropertyData.PropertyDataId)) ||
-                propertyInfo.Name.Equals(nameof(PropertyData.Reference)) ||
+            if (propertyInfo.Name.Equals(nameof(PropertyData.Reference)) ||
                 propertyInfo.Name.Equals(nameof(PropertyData.Epc)) ||
                 propertyInfo.Name.Equals(nameof(PropertyData.UneditedData)) ||
                 propertyInfo.Name.Equals(nameof(PropertyData.PropertyRecommendations)))
