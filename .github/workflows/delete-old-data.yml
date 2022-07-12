@@ -22,6 +22,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install cf7-cli
         
+    - name: Login to cf and target
+      run: |
+        cf login -a api.cloud.service.gov.uk -u team-beisesassupport@softwire.com -p '${{ secrets.gov_paas_password }}' -o 'beis-domestic-energy-advice-service'
+        cf target -s sea-beta-${{ inputs.environment_name }}
+        
     - name: Delete old data
       run: cf run-task sea-beta-loadtest --command "echo 1" --name delete-old-data-task
 
