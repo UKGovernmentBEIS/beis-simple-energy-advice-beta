@@ -221,7 +221,7 @@ namespace SeaPublicWebsite.Controllers
             propertyData.Epc = null;
             propertyData.PropertyType = null;
             propertyData.YearBuilt = null;
-            PropertyDataHelper.ResetUnusedFields(propertyData);
+            propertyData.ResetUnusedFields();
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
             var forwardArgs =
@@ -422,7 +422,7 @@ namespace SeaPublicWebsite.Controllers
                     _ => throw new ArgumentOutOfRangeException()
                 };
             } 
-            PropertyDataHelper.ResetUnusedFields(propertyData);
+            propertyData.ResetUnusedFields();
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
             var forwardArgs = questionFlowService.ForwardLinkArguments(QuestionFlowPage.ConfirmEpcDetails, propertyData);
@@ -1783,7 +1783,7 @@ namespace SeaPublicWebsite.Controllers
                 propertyData.CreateUneditedData();
             }
             update(propertyData);
-            PropertyDataHelper.ResetUnusedFields(propertyData);
+            propertyData.ResetUnusedFields();
             var forwardArgs = questionFlowService.ForwardLinkArguments(currentPage, propertyData, entryPoint);
             
             // If the user is going back to the answer summary page or the check your unchangeable answers page then they finished editing and we

@@ -308,7 +308,7 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
-            if (PropertyDataHelper.HasFloor(propertyData))
+            if (propertyData.HasFloor())
             {
                 return propertyData.FloorConstruction switch
                 {
@@ -360,7 +360,7 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
-            if (PropertyDataHelper.HasRoof(propertyData))
+            if (propertyData.HasRoof())
             {
                 return propertyData switch
                 {
@@ -374,7 +374,7 @@ namespace SeaPublicWebsite.Services
                 };
             }
 
-            if (PropertyDataHelper.HasFloor(propertyData))
+            if (propertyData.HasFloor())
             {
                 return propertyData.FloorConstruction switch
                 {
@@ -624,12 +624,12 @@ namespace SeaPublicWebsite.Services
             }
 
             // These options below are for people who have chosen "Don't know" to "What type of walls do you have?"
-            if (PropertyDataHelper.HasFloor(propertyData))
+            if (propertyData.HasFloor())
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.FloorConstruction_Get), "EnergyEfficiency", new { reference });
             }
 
-            if (PropertyDataHelper.HasRoof(propertyData))
+            if (propertyData.HasRoof())
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency", new { reference });
             }
@@ -657,12 +657,12 @@ namespace SeaPublicWebsite.Services
             }
 
             // These options below are for people who have finished the "wall insulation" questions (e.g. who only have cavity walls)
-            if (PropertyDataHelper.HasFloor(propertyData))
+            if (propertyData.HasFloor())
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.FloorConstruction_Get), "EnergyEfficiency",new { reference });
             }
 
-            if (PropertyDataHelper.HasRoof(propertyData))
+            if (propertyData.HasRoof())
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency",new { reference });
             }
@@ -678,12 +678,12 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
-            if (PropertyDataHelper.HasFloor(propertyData))
+            if (propertyData.HasFloor())
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.FloorConstruction_Get), "EnergyEfficiency",new { reference });
             }
 
-            if (PropertyDataHelper.HasRoof(propertyData))
+            if (propertyData.HasRoof())
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency",new { reference });
             }
@@ -705,7 +705,7 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
-            if (PropertyDataHelper.HasRoof(propertyData))
+            if (propertyData.HasRoof())
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency",new { reference });
             }
@@ -721,7 +721,7 @@ namespace SeaPublicWebsite.Services
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference });
             }
 
-            if (PropertyDataHelper.HasRoof(propertyData))
+            if (propertyData.HasRoof())
             {
                 return new PathByActionArguments(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency",new { reference });
             }
