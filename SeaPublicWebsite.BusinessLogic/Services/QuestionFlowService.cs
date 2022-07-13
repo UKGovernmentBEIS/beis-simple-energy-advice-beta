@@ -442,7 +442,6 @@ namespace SeaPublicWebsite.BusinessLogic.Services
 
         private QuestionFlowStep NewOrReturningUserForwardDestination()
         {
-            // TODO: Routing for the next step of returning user?
             return QuestionFlowStep.Country;
         }
         

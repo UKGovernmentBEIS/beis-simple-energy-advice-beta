@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.BusinessLogic.Services;
@@ -271,14 +272,12 @@ namespace SeaPublicWebsite.Controllers
             }
 
             var nextStep = questionFlowService.NextStep(QuestionFlowStep.AskForPostcode, propertyData);
-            var forwardArgs = GetActionArgumentsForQuestion(nextStep, viewModel.Reference);
+            var forwardArgs = GetActionArgumentsForQuestion(
+                nextStep,
+                viewModel.Reference,
+                extraRouteValues: new Dictionary<string, object> { { "postcode", viewModel.Postcode}, { "number", viewModel.HouseNameOrNumber } });
 
-            return RedirectToAction(
-                forwardArgs.Action,
-                forwardArgs.Controller,
-                // It would be nice to find a way to get GetActionArgumentsForQuestion() to include the postcode and
-                // house number.
-                new { reference = viewModel.Reference, postcode = viewModel.Postcode, number = viewModel.HouseNameOrNumber });
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         
@@ -1788,7 +1787,7 @@ namespace SeaPublicWebsite.Controllers
                 propertyData.CommitEdits();
             }
             await propertyDataStore.SavePropertyDataAsync(propertyData);
-            
+
             var forwardArgs = GetActionArgumentsForQuestion(nextStep, propertyData.Reference, entryPoint);
             return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
@@ -1824,72 +1823,85 @@ namespace SeaPublicWebsite.Controllers
             return GetActionArgumentsForQuestion(backStep, propertyData?.Reference, entryPoint);
         }
 
-        private PathByActionArguments GetActionArgumentsForQuestion(QuestionFlowStep question, string reference = null, QuestionFlowStep? entryPoint = null)
+        private PathByActionArguments GetActionArgumentsForQuestion(
+            QuestionFlowStep question,
+            string reference = null,
+            QuestionFlowStep? entryPoint = null,
+            IDictionary<string, object> extraRouteValues = null)
         {
             return question switch
             {
                 QuestionFlowStep.Start => new PathByActionArguments(nameof(Index), "EnergyEfficiency"),
                 QuestionFlowStep.NewOrReturningUser => new PathByActionArguments(nameof(NewOrReturningUser_Get), "EnergyEfficiency"),
-                QuestionFlowStep.OwnershipStatus => new PathByActionArguments(nameof(OwnershipStatus_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.Country => new PathByActionArguments(nameof(Country_Get), "EnergyEfficiency", GetPathValues(reference)),
-                QuestionFlowStep.FindEpc => new PathByActionArguments(nameof(FindEpc_Get), "EnergyEfficiency", GetPathValues(reference)),
-                QuestionFlowStep.ServiceUnsuitable => new PathByActionArguments(nameof(ServiceUnsuitable), "EnergyEfficiency", GetPathValues(reference)),
-                QuestionFlowStep.AskForPostcode => new PathByActionArguments(nameof(AskForPostcode_Get), "EnergyEfficiency", GetPathValues(reference)),
-                QuestionFlowStep.ConfirmAddress => new PathByActionArguments(nameof(ConfirmAddress_Get), "EnergyEfficiency"),
-                QuestionFlowStep.ConfirmEpcDetails => new PathByActionArguments(nameof(ConfirmEpcDetails_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.NoEpcFound => new PathByActionArguments(nameof(NoEpcFound_Get), "EnergyEfficiency", GetPathValues(reference)),
-                QuestionFlowStep.PropertyType => new PathByActionArguments(nameof(PropertyType_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.HouseType => new PathByActionArguments(nameof(HouseType_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.BungalowType => new PathByActionArguments(nameof(BungalowType_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.FlatType => new PathByActionArguments(nameof(FlatType_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.HomeAge => new PathByActionArguments(nameof(HomeAge_Get), "EnergyEfficiency", GetPathValues(reference)),
-                QuestionFlowStep.CheckYourUnchangeableAnswers => new PathByActionArguments(nameof(CheckYourUnchangeableAnswers_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.WallConstruction => new PathByActionArguments(nameof(WallConstruction_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.CavityWallsInsulated => new PathByActionArguments(nameof(CavityWallsInsulated_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.SolidWallsInsulated => new PathByActionArguments(nameof(SolidWallsInsulated_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.FloorConstruction => new PathByActionArguments(nameof(FloorConstruction_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.FloorInsulated => new PathByActionArguments(nameof(FloorInsulated_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.RoofConstruction => new PathByActionArguments(nameof(RoofConstruction_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.LoftSpace => new PathByActionArguments(nameof(LoftSpace_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.LoftAccess => new PathByActionArguments(nameof(LoftAccess_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.RoofInsulated => new PathByActionArguments(nameof(RoofInsulated_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.OutdoorSpace => new PathByActionArguments(nameof(OutdoorSpace_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.GlazingType => new PathByActionArguments(nameof(GlazingType_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.HeatingType => new PathByActionArguments(nameof(HeatingType_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.OtherHeatingType => new PathByActionArguments(nameof(OtherHeatingType_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.HotWaterCylinder => new PathByActionArguments(nameof(HotWaterCylinder_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.NumberOfOccupants => new PathByActionArguments(nameof(NumberOfOccupants_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.HeatingPattern => new PathByActionArguments(nameof(HeatingPattern_Get), "EnergyEfficiency", GetPathValues(reference, entryPoint)),
-                QuestionFlowStep.Temperature => new PathByActionArguments(nameof(Temperature_Get), "EnergyEfficiency", GetPathValues(reference)),
-                QuestionFlowStep.AnswerSummary => new PathByActionArguments(nameof(AnswerSummary_Get), "EnergyEfficiency", GetPathValues(reference)),
-                QuestionFlowStep.NoRecommendations => new PathByActionArguments(nameof(NoRecommendations_Get), "EnergyEfficiency", GetPathValues(reference)),
-                QuestionFlowStep.YourRecommendations => new PathByActionArguments(nameof(YourRecommendations_Get), "EnergyEfficiency", GetPathValues(reference)),
+                QuestionFlowStep.OwnershipStatus => new PathByActionArguments(nameof(OwnershipStatus_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues)),
+                QuestionFlowStep.Country => new PathByActionArguments(nameof(Country_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues)),
+                QuestionFlowStep.FindEpc => new PathByActionArguments(nameof(FindEpc_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues)),
+                QuestionFlowStep.ServiceUnsuitable => new PathByActionArguments(nameof(ServiceUnsuitable), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues)),
+                QuestionFlowStep.AskForPostcode => new PathByActionArguments(nameof(AskForPostcode_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues)),
+                QuestionFlowStep.ConfirmAddress => new PathByActionArguments(nameof(ConfirmAddress_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues)),
+                QuestionFlowStep.ConfirmEpcDetails => new PathByActionArguments(nameof(ConfirmEpcDetails_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues)),
+                QuestionFlowStep.NoEpcFound => new PathByActionArguments(nameof(NoEpcFound_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues)),
+                QuestionFlowStep.PropertyType => new PathByActionArguments(nameof(PropertyType_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.HouseType => new PathByActionArguments(nameof(HouseType_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.BungalowType => new PathByActionArguments(nameof(BungalowType_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.FlatType => new PathByActionArguments(nameof(FlatType_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.HomeAge => new PathByActionArguments(nameof(HomeAge_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.CheckYourUnchangeableAnswers => new PathByActionArguments(nameof(CheckYourUnchangeableAnswers_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues)),
+                QuestionFlowStep.WallConstruction => new PathByActionArguments(nameof(WallConstruction_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.CavityWallsInsulated => new PathByActionArguments(nameof(CavityWallsInsulated_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.SolidWallsInsulated => new PathByActionArguments(nameof(SolidWallsInsulated_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.FloorConstruction => new PathByActionArguments(nameof(FloorConstruction_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.FloorInsulated => new PathByActionArguments(nameof(FloorInsulated_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.RoofConstruction => new PathByActionArguments(nameof(RoofConstruction_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.LoftSpace => new PathByActionArguments(nameof(LoftSpace_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.LoftAccess => new PathByActionArguments(nameof(LoftAccess_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.RoofInsulated => new PathByActionArguments(nameof(RoofInsulated_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.OutdoorSpace => new PathByActionArguments(nameof(OutdoorSpace_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.GlazingType => new PathByActionArguments(nameof(GlazingType_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.HeatingType => new PathByActionArguments(nameof(HeatingType_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.OtherHeatingType => new PathByActionArguments(nameof(OtherHeatingType_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.HotWaterCylinder => new PathByActionArguments(nameof(HotWaterCylinder_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.NumberOfOccupants => new PathByActionArguments(nameof(NumberOfOccupants_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.HeatingPattern => new PathByActionArguments(nameof(HeatingPattern_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.Temperature => new PathByActionArguments(nameof(Temperature_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.AnswerSummary => new PathByActionArguments(nameof(AnswerSummary_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues)),
+                QuestionFlowStep.NoRecommendations => new PathByActionArguments(nameof(NoRecommendations_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues)),
+                QuestionFlowStep.YourRecommendations => new PathByActionArguments(nameof(YourRecommendations_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues)),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        private object GetPathValues(string reference, QuestionFlowStep? entryPoint = null)
+        private RouteValueDictionary GetRouteValues(
+            string reference,
+            IDictionary<string, object> extraRouteValues,
+            QuestionFlowStep? entryPoint = null)
         {
             if (reference == null)
             {
                 throw new ArgumentException("Reference must be provided");
             }
-            
-            if (entryPoint == null)
+
+            // If entryPoint is null then it won't appear in the URL
+            var ret = new RouteValueDictionary { { "reference", reference }, { "entryPoint", entryPoint } };
+
+            if (extraRouteValues != null)
             {
-                return new { reference };
+                foreach (var extraRouteValue in extraRouteValues)
+                {
+                    ret[extraRouteValue.Key] = extraRouteValue.Value;
+                }
             }
 
-            return new { reference, entryPoint };
+            return ret;
         }
         
         private class PathByActionArguments
         {
             public readonly string Action;
             public readonly string Controller;
-            public readonly object Values;
+            public readonly RouteValueDictionary Values;
         
-            public PathByActionArguments(string action, string controller, object values = null)
+            public PathByActionArguments(string action, string controller, RouteValueDictionary values = null)
             {
                 Action = action;
                 Controller = controller;
