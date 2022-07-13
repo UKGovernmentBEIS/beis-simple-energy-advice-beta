@@ -101,11 +101,11 @@ namespace SeaPublicWebsite.Services
                     }
                 },
                 {
-                    "TODO", new BreRecommendation
+                    "Z1", new BreRecommendation
                     {
                         Key = RecommendationKey.InstallHeatPump,
                         Title = "Install a heat pump ",
-                        Summary = ""
+                        Summary = "Heat pumps use the energy outside to heat your home and hot water"
                     }
                 }
             };
