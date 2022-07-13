@@ -5,283 +5,283 @@ namespace SeaPublicWebsite.BusinessLogic.Services
 {
     public interface IQuestionFlowService
     { 
-        public QuestionFlowPage BackDestination(QuestionFlowPage page, PropertyData propertyData, QuestionFlowPage? entryPoint = null);
+        public QuestionFlowStep PreviousStep(QuestionFlowStep page, PropertyData propertyData, QuestionFlowStep? entryPoint = null);
         
-        public QuestionFlowPage ForwardDestination(QuestionFlowPage page, PropertyData propertyData, QuestionFlowPage? entryPoint = null);
+        public QuestionFlowStep NextStep(QuestionFlowStep page, PropertyData propertyData, QuestionFlowStep? entryPoint = null);
         
-        public QuestionFlowPage SkipDestination(QuestionFlowPage page, PropertyData propertyData, QuestionFlowPage? entryPoint = null);
+        public QuestionFlowStep SkipDestination(QuestionFlowStep page, PropertyData propertyData, QuestionFlowStep? entryPoint = null);
     }
 
     public class QuestionFlowService: IQuestionFlowService
     {
-        public QuestionFlowPage BackDestination(
-            QuestionFlowPage page, 
+        public QuestionFlowStep PreviousStep(
+            QuestionFlowStep page, 
             PropertyData propertyData, 
-            QuestionFlowPage? entryPoint = null)
+            QuestionFlowStep? entryPoint = null)
         {
             return page switch
             {
-                QuestionFlowPage.NewOrReturningUser => NewOrReturningUserBackDestination(),
-                QuestionFlowPage.OwnershipStatus => OwnershipStatusBackDestination(),
-                QuestionFlowPage.Country => CountryBackDestination(),
-                QuestionFlowPage.FindEpc => FindEpcBackDestination(),
-                QuestionFlowPage.ServiceUnsuitable => ServiceUnsuitableBackDestination(propertyData),
-                QuestionFlowPage.AskForPostcode => AskForPostcodeBackDestination(),
-                QuestionFlowPage.ConfirmAddress => ConfirmAddressBackDestination(),
-                QuestionFlowPage.ConfirmEpcDetails => ConfirmEpcDetailsBackDestination(),
-                QuestionFlowPage.NoEpcFound => NoEpcFoundBackDestination(),
-                QuestionFlowPage.PropertyType => PropertyTypeBackDestination(propertyData, entryPoint),
-                QuestionFlowPage.HouseType => HouseTypeBackDestination(),
-                QuestionFlowPage.BungalowType => BungalowTypeBackDestination(),
-                QuestionFlowPage.FlatType => FlatTypeBackDestination(),
-                QuestionFlowPage.HomeAge => HomeAgeBackDestination(propertyData, entryPoint),
-                QuestionFlowPage.CheckYourUnchangeableAnswers => CheckYourUnchangeableAnswersBackDestination(),
-                QuestionFlowPage.WallConstruction => WallConstructionBackDestination(propertyData, entryPoint),
-                QuestionFlowPage.CavityWallsInsulated => CavityWallsInsulatedBackDestination(entryPoint),
-                QuestionFlowPage.SolidWallsInsulated => SolidWallsInsulatedBackDestination(propertyData, entryPoint),
-                QuestionFlowPage.FloorConstruction => FloorConstructionBackDestination(propertyData, entryPoint),
-                QuestionFlowPage.FloorInsulated => FloorInsulatedBackDestination(entryPoint),
-                QuestionFlowPage.RoofConstruction => RoofConstructionBackDestination(propertyData, entryPoint),
-                QuestionFlowPage.LoftSpace => LoftSpaceBackDestination(entryPoint),
-                QuestionFlowPage.LoftAccess => LoftAccessBackDestination(entryPoint),
-                QuestionFlowPage.RoofInsulated => RoofInsulatedBackDestination(entryPoint),
-                QuestionFlowPage.OutdoorSpace => OutdoorSpaceBackDestination(entryPoint),
-                QuestionFlowPage.GlazingType => GlazingTypeBackDestination(propertyData, entryPoint),
-                QuestionFlowPage.HeatingType => HeatingTypeBackDestination(entryPoint),
-                QuestionFlowPage.OtherHeatingType => OtherHeatingTypeBackDestination(entryPoint),
-                QuestionFlowPage.HotWaterCylinder => HotWaterCylinderBackDestination(entryPoint),
-                QuestionFlowPage.NumberOfOccupants => NumberOfOccupantsBackDestination(propertyData, entryPoint),
-                QuestionFlowPage.HeatingPattern => HeatingPatternBackDestination(entryPoint),
-                QuestionFlowPage.Temperature => TemperatureBackDestination(entryPoint),
-                QuestionFlowPage.AnswerSummary => AnswerSummaryBackDestination(),
-                QuestionFlowPage.NoRecommendations => NoRecommendationsBackDestination(),
-                QuestionFlowPage.YourRecommendations => YourRecommendationsBackDestination(),
+                QuestionFlowStep.NewOrReturningUser => NewOrReturningUserBackDestination(),
+                QuestionFlowStep.OwnershipStatus => OwnershipStatusBackDestination(),
+                QuestionFlowStep.Country => CountryBackDestination(),
+                QuestionFlowStep.FindEpc => FindEpcBackDestination(),
+                QuestionFlowStep.ServiceUnsuitable => ServiceUnsuitableBackDestination(propertyData),
+                QuestionFlowStep.AskForPostcode => AskForPostcodeBackDestination(),
+                QuestionFlowStep.ConfirmAddress => ConfirmAddressBackDestination(),
+                QuestionFlowStep.ConfirmEpcDetails => ConfirmEpcDetailsBackDestination(),
+                QuestionFlowStep.NoEpcFound => NoEpcFoundBackDestination(),
+                QuestionFlowStep.PropertyType => PropertyTypeBackDestination(propertyData, entryPoint),
+                QuestionFlowStep.HouseType => HouseTypeBackDestination(),
+                QuestionFlowStep.BungalowType => BungalowTypeBackDestination(),
+                QuestionFlowStep.FlatType => FlatTypeBackDestination(),
+                QuestionFlowStep.HomeAge => HomeAgeBackDestination(propertyData, entryPoint),
+                QuestionFlowStep.CheckYourUnchangeableAnswers => CheckYourUnchangeableAnswersBackDestination(),
+                QuestionFlowStep.WallConstruction => WallConstructionBackDestination(propertyData, entryPoint),
+                QuestionFlowStep.CavityWallsInsulated => CavityWallsInsulatedBackDestination(entryPoint),
+                QuestionFlowStep.SolidWallsInsulated => SolidWallsInsulatedBackDestination(propertyData, entryPoint),
+                QuestionFlowStep.FloorConstruction => FloorConstructionBackDestination(propertyData, entryPoint),
+                QuestionFlowStep.FloorInsulated => FloorInsulatedBackDestination(entryPoint),
+                QuestionFlowStep.RoofConstruction => RoofConstructionBackDestination(propertyData, entryPoint),
+                QuestionFlowStep.LoftSpace => LoftSpaceBackDestination(entryPoint),
+                QuestionFlowStep.LoftAccess => LoftAccessBackDestination(entryPoint),
+                QuestionFlowStep.RoofInsulated => RoofInsulatedBackDestination(entryPoint),
+                QuestionFlowStep.OutdoorSpace => OutdoorSpaceBackDestination(entryPoint),
+                QuestionFlowStep.GlazingType => GlazingTypeBackDestination(propertyData, entryPoint),
+                QuestionFlowStep.HeatingType => HeatingTypeBackDestination(entryPoint),
+                QuestionFlowStep.OtherHeatingType => OtherHeatingTypeBackDestination(entryPoint),
+                QuestionFlowStep.HotWaterCylinder => HotWaterCylinderBackDestination(entryPoint),
+                QuestionFlowStep.NumberOfOccupants => NumberOfOccupantsBackDestination(propertyData, entryPoint),
+                QuestionFlowStep.HeatingPattern => HeatingPatternBackDestination(entryPoint),
+                QuestionFlowStep.Temperature => TemperatureBackDestination(entryPoint),
+                QuestionFlowStep.AnswerSummary => AnswerSummaryBackDestination(),
+                QuestionFlowStep.NoRecommendations => NoRecommendationsBackDestination(),
+                QuestionFlowStep.YourRecommendations => YourRecommendationsBackDestination(),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        public QuestionFlowPage ForwardDestination(QuestionFlowPage page, PropertyData propertyData, QuestionFlowPage? entryPoint = null)
+        public QuestionFlowStep NextStep(QuestionFlowStep page, PropertyData propertyData, QuestionFlowStep? entryPoint = null)
         {
             return page switch
             {
-                QuestionFlowPage.NewOrReturningUser => NewOrReturningUserForwardDestination(),
-                QuestionFlowPage.OwnershipStatus => OwnershipStatusForwardDestination(propertyData),
-                QuestionFlowPage.Country => CountryForwardDestination(propertyData),
-                QuestionFlowPage.FindEpc => FindEpcForwardDestination(propertyData),
-                QuestionFlowPage.AskForPostcode => AskForPostcodeForwardDestination(propertyData),
-                QuestionFlowPage.ConfirmAddress => ConfirmAddressForwardDestination(propertyData),
-                QuestionFlowPage.ConfirmEpcDetails => ConfirmEpcDetailsForwardDestination(propertyData),
-                QuestionFlowPage.NoEpcFound => NoEpcFoundForwardDestination(),
-                QuestionFlowPage.PropertyType => PropertyTypeForwardDestination(propertyData),
-                QuestionFlowPage.HouseType => HouseTypeForwardDestination(entryPoint),
-                QuestionFlowPage.BungalowType => BungalowTypeForwardDestination(entryPoint),
-                QuestionFlowPage.FlatType => FlatTypeForwardDestination(entryPoint),
-                QuestionFlowPage.HomeAge => HomeAgeForwardDestination(),
-                QuestionFlowPage.CheckYourUnchangeableAnswers => CheckYourUnchangeableAnswersForwardDestination(),
-                QuestionFlowPage.WallConstruction => WallConstructionForwardDestination(propertyData, entryPoint),
-                QuestionFlowPage.CavityWallsInsulated => CavityWallsInsulatedForwardDestination(propertyData, entryPoint),
-                QuestionFlowPage.SolidWallsInsulated => SolidWallsInsulatedForwardDestination(propertyData, entryPoint),
-                QuestionFlowPage.FloorConstruction => FloorConstructionForwardDestination(propertyData, entryPoint),
-                QuestionFlowPage.FloorInsulated => FloorInsulatedForwardDestination(propertyData, entryPoint),
-                QuestionFlowPage.RoofConstruction => RoofConstructionForwardDestination(propertyData, entryPoint),
-                QuestionFlowPage.LoftSpace => LoftSpaceForwardDestination(propertyData, entryPoint),
-                QuestionFlowPage.LoftAccess => LoftAccessForwardDestination(propertyData, entryPoint),
-                QuestionFlowPage.RoofInsulated => RoofInsulatedForwardDestination(entryPoint),
-                QuestionFlowPage.OutdoorSpace => OutdoorSpaceForwardDestination(entryPoint),
-                QuestionFlowPage.GlazingType => GlazingTypeForwardDestination(entryPoint),
-                QuestionFlowPage.HeatingType => HeatingTypeForwardDestination(propertyData, entryPoint),
-                QuestionFlowPage.OtherHeatingType => OtherHeatingTypeForwardDestination(entryPoint),
-                QuestionFlowPage.HotWaterCylinder => HotWaterCylinderForwardDestination(entryPoint),
-                QuestionFlowPage.NumberOfOccupants => NumberOfOccupantsForwardDestination(entryPoint),
-                QuestionFlowPage.HeatingPattern => HeatingPatternForwardDestination(entryPoint),
-                QuestionFlowPage.Temperature => TemperatureForwardDestination(),
-                QuestionFlowPage.AnswerSummary => AnswerSummaryForwardDestination(propertyData),
+                QuestionFlowStep.NewOrReturningUser => NewOrReturningUserForwardDestination(),
+                QuestionFlowStep.OwnershipStatus => OwnershipStatusForwardDestination(propertyData),
+                QuestionFlowStep.Country => CountryForwardDestination(propertyData),
+                QuestionFlowStep.FindEpc => FindEpcForwardDestination(propertyData),
+                QuestionFlowStep.AskForPostcode => AskForPostcodeForwardDestination(propertyData),
+                QuestionFlowStep.ConfirmAddress => ConfirmAddressForwardDestination(propertyData),
+                QuestionFlowStep.ConfirmEpcDetails => ConfirmEpcDetailsForwardDestination(propertyData),
+                QuestionFlowStep.NoEpcFound => NoEpcFoundForwardDestination(),
+                QuestionFlowStep.PropertyType => PropertyTypeForwardDestination(propertyData),
+                QuestionFlowStep.HouseType => HouseTypeForwardDestination(entryPoint),
+                QuestionFlowStep.BungalowType => BungalowTypeForwardDestination(entryPoint),
+                QuestionFlowStep.FlatType => FlatTypeForwardDestination(entryPoint),
+                QuestionFlowStep.HomeAge => HomeAgeForwardDestination(),
+                QuestionFlowStep.CheckYourUnchangeableAnswers => CheckYourUnchangeableAnswersForwardDestination(),
+                QuestionFlowStep.WallConstruction => WallConstructionForwardDestination(propertyData, entryPoint),
+                QuestionFlowStep.CavityWallsInsulated => CavityWallsInsulatedForwardDestination(propertyData, entryPoint),
+                QuestionFlowStep.SolidWallsInsulated => SolidWallsInsulatedForwardDestination(propertyData, entryPoint),
+                QuestionFlowStep.FloorConstruction => FloorConstructionForwardDestination(propertyData, entryPoint),
+                QuestionFlowStep.FloorInsulated => FloorInsulatedForwardDestination(propertyData, entryPoint),
+                QuestionFlowStep.RoofConstruction => RoofConstructionForwardDestination(propertyData, entryPoint),
+                QuestionFlowStep.LoftSpace => LoftSpaceForwardDestination(propertyData, entryPoint),
+                QuestionFlowStep.LoftAccess => LoftAccessForwardDestination(propertyData, entryPoint),
+                QuestionFlowStep.RoofInsulated => RoofInsulatedForwardDestination(entryPoint),
+                QuestionFlowStep.OutdoorSpace => OutdoorSpaceForwardDestination(entryPoint),
+                QuestionFlowStep.GlazingType => GlazingTypeForwardDestination(entryPoint),
+                QuestionFlowStep.HeatingType => HeatingTypeForwardDestination(propertyData, entryPoint),
+                QuestionFlowStep.OtherHeatingType => OtherHeatingTypeForwardDestination(entryPoint),
+                QuestionFlowStep.HotWaterCylinder => HotWaterCylinderForwardDestination(entryPoint),
+                QuestionFlowStep.NumberOfOccupants => NumberOfOccupantsForwardDestination(entryPoint),
+                QuestionFlowStep.HeatingPattern => HeatingPatternForwardDestination(entryPoint),
+                QuestionFlowStep.Temperature => TemperatureForwardDestination(),
+                QuestionFlowStep.AnswerSummary => AnswerSummaryForwardDestination(propertyData),
                 _ => throw new ArgumentOutOfRangeException(nameof(page), page, null)
             };
         }
 
-        public QuestionFlowPage SkipDestination(QuestionFlowPage page, PropertyData propertyData, QuestionFlowPage? entryPoint = null)
+        public QuestionFlowStep SkipDestination(QuestionFlowStep page, PropertyData propertyData, QuestionFlowStep? entryPoint = null)
         {
             return page switch
             {
-                QuestionFlowPage.AskForPostcode => AskForPostcodeSkipDestination(),
+                QuestionFlowStep.AskForPostcode => AskForPostcodeSkipDestination(),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        private QuestionFlowPage NewOrReturningUserBackDestination()
+        private QuestionFlowStep NewOrReturningUserBackDestination()
         {
-            return QuestionFlowPage.Start;
+            return QuestionFlowStep.Start;
         }
 
-        private QuestionFlowPage CountryBackDestination()
+        private QuestionFlowStep CountryBackDestination()
         {
-            return QuestionFlowPage.NewOrReturningUser;
+            return QuestionFlowStep.NewOrReturningUser;
         }
 
-        private QuestionFlowPage OwnershipStatusBackDestination()
+        private QuestionFlowStep OwnershipStatusBackDestination()
         {
-            return QuestionFlowPage.Country;
+            return QuestionFlowStep.Country;
         }
 
-        private QuestionFlowPage ServiceUnsuitableBackDestination(PropertyData propertyData)
+        private QuestionFlowStep ServiceUnsuitableBackDestination(PropertyData propertyData)
         {
             return propertyData switch
             {
                 { Country: not Country.England and not Country.Wales }
-                    => QuestionFlowPage.Country,
+                    => QuestionFlowStep.Country,
                 { OwnershipStatus: OwnershipStatus.PrivateTenancy }
-                    => QuestionFlowPage.OwnershipStatus,
+                    => QuestionFlowStep.OwnershipStatus,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        private QuestionFlowPage FindEpcBackDestination()
+        private QuestionFlowStep FindEpcBackDestination()
         {
-            return QuestionFlowPage.OwnershipStatus;
+            return QuestionFlowStep.OwnershipStatus;
         }
         
-        private QuestionFlowPage AskForPostcodeBackDestination()
+        private QuestionFlowStep AskForPostcodeBackDestination()
         {
-            return QuestionFlowPage.FindEpc;
+            return QuestionFlowStep.FindEpc;
         }
 
-        private QuestionFlowPage ConfirmAddressBackDestination()
+        private QuestionFlowStep ConfirmAddressBackDestination()
         {
-            return QuestionFlowPage.AskForPostcode;
+            return QuestionFlowStep.AskForPostcode;
         }
 
-        private QuestionFlowPage ConfirmEpcDetailsBackDestination()
+        private QuestionFlowStep ConfirmEpcDetailsBackDestination()
         {
-            return QuestionFlowPage.AskForPostcode;
+            return QuestionFlowStep.AskForPostcode;
         }
 
-        private QuestionFlowPage NoEpcFoundBackDestination()
+        private QuestionFlowStep NoEpcFoundBackDestination()
         {
-            return QuestionFlowPage.AskForPostcode;
+            return QuestionFlowStep.AskForPostcode;
         }
 
-        private QuestionFlowPage PropertyTypeBackDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep PropertyTypeBackDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
-            if (entryPoint is QuestionFlowPage.PropertyType)
+            if (entryPoint is QuestionFlowStep.PropertyType)
             {
-                return QuestionFlowPage.CheckYourUnchangeableAnswers;
+                return QuestionFlowStep.CheckYourUnchangeableAnswers;
             }
             
             if (propertyData.Epc != null)
             {
                 if (propertyData.Epc.ContainsPropertyTypeAndAge())
                 {
-                    return QuestionFlowPage.ConfirmEpcDetails;
+                    return QuestionFlowStep.ConfirmEpcDetails;
                 }
-                return QuestionFlowPage.AskForPostcode;
+                return QuestionFlowStep.AskForPostcode;
             }
 
             if (propertyData.SearchForEpc == SearchForEpc.Yes)
             {
-                return QuestionFlowPage.NoEpcFound;    
+                return QuestionFlowStep.NoEpcFound;    
             }
 
-            return QuestionFlowPage.FindEpc;
+            return QuestionFlowStep.FindEpc;
         }
 
-        private QuestionFlowPage HouseTypeBackDestination()
+        private QuestionFlowStep HouseTypeBackDestination()
         {
-            return QuestionFlowPage.PropertyType;
+            return QuestionFlowStep.PropertyType;
         }
 
-        private QuestionFlowPage BungalowTypeBackDestination()
+        private QuestionFlowStep BungalowTypeBackDestination()
         {
-            return QuestionFlowPage.PropertyType;
+            return QuestionFlowStep.PropertyType;
         }
 
-        private QuestionFlowPage FlatTypeBackDestination()
+        private QuestionFlowStep FlatTypeBackDestination()
         {
-            return QuestionFlowPage.PropertyType;
+            return QuestionFlowStep.PropertyType;
         }
 
-        private QuestionFlowPage HomeAgeBackDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep HomeAgeBackDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.HomeAge
-                ? QuestionFlowPage.CheckYourUnchangeableAnswers
+            return entryPoint is QuestionFlowStep.HomeAge
+                ? QuestionFlowStep.CheckYourUnchangeableAnswers
                 : propertyData.PropertyType switch
                 {
                     PropertyType.House => 
-                        QuestionFlowPage.HouseType,
+                        QuestionFlowStep.HouseType,
                     PropertyType.Bungalow => 
-                        QuestionFlowPage.BungalowType,
+                        QuestionFlowStep.BungalowType,
                     PropertyType.ApartmentFlatOrMaisonette => 
-                        QuestionFlowPage.FlatType,
+                        QuestionFlowStep.FlatType,
                     _ => throw new ArgumentOutOfRangeException()
                 };
         }
         
-        private QuestionFlowPage CheckYourUnchangeableAnswersBackDestination()
+        private QuestionFlowStep CheckYourUnchangeableAnswersBackDestination()
         {
-            return QuestionFlowPage.HomeAge;
+            return QuestionFlowStep.HomeAge;
         }
 
-        private QuestionFlowPage WallConstructionBackDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep WallConstructionBackDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
-            if (entryPoint is QuestionFlowPage.WallConstruction)
+            if (entryPoint is QuestionFlowStep.WallConstruction)
             {
-                return QuestionFlowPage.AnswerSummary;
+                return QuestionFlowStep.AnswerSummary;
             }
 
             if (propertyData.EpcDetailsConfirmed == EpcDetailsConfirmed.Yes)
             {
-                return QuestionFlowPage.ConfirmEpcDetails;
+                return QuestionFlowStep.ConfirmEpcDetails;
             }
-            return QuestionFlowPage.CheckYourUnchangeableAnswers;
+            return QuestionFlowStep.CheckYourUnchangeableAnswers;
         }
 
-        private QuestionFlowPage CavityWallsInsulatedBackDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep CavityWallsInsulatedBackDestination(QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.CavityWallsInsulated
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.WallConstruction;
+            return entryPoint is QuestionFlowStep.CavityWallsInsulated
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.WallConstruction;
         }
 
-        private QuestionFlowPage SolidWallsInsulatedBackDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep SolidWallsInsulatedBackDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.SolidWallsInsulated
-                ? QuestionFlowPage.AnswerSummary
+            return entryPoint is QuestionFlowStep.SolidWallsInsulated
+                ? QuestionFlowStep.AnswerSummary
                 : propertyData.WallConstruction switch
                 {
                     WallConstruction.Mixed => 
-                        QuestionFlowPage.CavityWallsInsulated,
+                        QuestionFlowStep.CavityWallsInsulated,
                     WallConstruction.Solid => 
-                        QuestionFlowPage.WallConstruction,
+                        QuestionFlowStep.WallConstruction,
                     _ => throw new ArgumentOutOfRangeException()
                 };
         }
 
-        private QuestionFlowPage FloorConstructionBackDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep FloorConstructionBackDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.FloorConstruction
-                ? QuestionFlowPage.AnswerSummary
+            return entryPoint is QuestionFlowStep.FloorConstruction
+                ? QuestionFlowStep.AnswerSummary
                 : propertyData.WallConstruction switch
                 {
                     WallConstruction.Solid or WallConstruction.Mixed =>
-                        QuestionFlowPage.SolidWallsInsulated,
+                        QuestionFlowStep.SolidWallsInsulated,
                     WallConstruction.Cavity =>
-                        QuestionFlowPage.CavityWallsInsulated,
-                    _ => QuestionFlowPage.WallConstruction
+                        QuestionFlowStep.CavityWallsInsulated,
+                    _ => QuestionFlowStep.WallConstruction
                 };
         }
 
-        private QuestionFlowPage FloorInsulatedBackDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep FloorInsulatedBackDestination(QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.FloorInsulated
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.FloorConstruction;
+            return entryPoint is QuestionFlowStep.FloorInsulated
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.FloorConstruction;
         }
 
-        private QuestionFlowPage RoofConstructionBackDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep RoofConstructionBackDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
-            if (entryPoint is QuestionFlowPage.RoofConstruction)
+            if (entryPoint is QuestionFlowStep.RoofConstruction)
             {
-                return QuestionFlowPage.AnswerSummary;
+                return QuestionFlowStep.AnswerSummary;
             }
 
             if (propertyData.HasFloor())
@@ -289,47 +289,47 @@ namespace SeaPublicWebsite.BusinessLogic.Services
                 return propertyData.FloorConstruction switch
                 {
                     FloorConstruction.SuspendedTimber or FloorConstruction.SolidConcrete or FloorConstruction.Mix =>
-                        QuestionFlowPage.FloorInsulated,
-                    _ => QuestionFlowPage.FloorConstruction
+                        QuestionFlowStep.FloorInsulated,
+                    _ => QuestionFlowStep.FloorConstruction
                 };
             }
             
             return propertyData.WallConstruction switch
             {
                 WallConstruction.Solid or WallConstruction.Mixed =>
-                    QuestionFlowPage.SolidWallsInsulated,
+                    QuestionFlowStep.SolidWallsInsulated,
                 WallConstruction.Cavity =>
-                    QuestionFlowPage.CavityWallsInsulated,
-                _ => QuestionFlowPage.WallConstruction
+                    QuestionFlowStep.CavityWallsInsulated,
+                _ => QuestionFlowStep.WallConstruction
             };
         }
 
-        private QuestionFlowPage LoftSpaceBackDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep LoftSpaceBackDestination(QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.LoftSpace
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.RoofConstruction;
+            return entryPoint is QuestionFlowStep.LoftSpace
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.RoofConstruction;
         }
         
-        private QuestionFlowPage LoftAccessBackDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep LoftAccessBackDestination(QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.LoftAccess
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.LoftSpace;
+            return entryPoint is QuestionFlowStep.LoftAccess
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.LoftSpace;
         }
 
-        private QuestionFlowPage RoofInsulatedBackDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep RoofInsulatedBackDestination(QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.RoofInsulated
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.LoftAccess;
+            return entryPoint is QuestionFlowStep.RoofInsulated
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.LoftAccess;
         }
 
-        private QuestionFlowPage GlazingTypeBackDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep GlazingTypeBackDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
-            if (entryPoint is QuestionFlowPage.GlazingType)
+            if (entryPoint is QuestionFlowStep.GlazingType)
             {
-                return QuestionFlowPage.AnswerSummary;
+                return QuestionFlowStep.AnswerSummary;
             }
 
             if (propertyData.HasRoof())
@@ -337,12 +337,12 @@ namespace SeaPublicWebsite.BusinessLogic.Services
                 return propertyData switch
                 {
                     { RoofConstruction: RoofConstruction.Flat }
-                        => QuestionFlowPage.RoofConstruction,
+                        => QuestionFlowStep.RoofConstruction,
                     { LoftSpace: not LoftSpace.Yes }
-                        => QuestionFlowPage.LoftSpace,
+                        => QuestionFlowStep.LoftSpace,
                     { LoftAccess: not LoftAccess.Yes }
-                        => QuestionFlowPage.LoftAccess,
-                    _ => QuestionFlowPage.RoofInsulated
+                        => QuestionFlowStep.LoftAccess,
+                    _ => QuestionFlowStep.RoofInsulated
                 };
             }
 
@@ -351,496 +351,456 @@ namespace SeaPublicWebsite.BusinessLogic.Services
                 return propertyData.FloorConstruction switch
                 {
                     FloorConstruction.SuspendedTimber or FloorConstruction.SolidConcrete or FloorConstruction.Mix =>
-                        QuestionFlowPage.FloorInsulated,
-                    _ => QuestionFlowPage.FloorConstruction
+                        QuestionFlowStep.FloorInsulated,
+                    _ => QuestionFlowStep.FloorConstruction
                 };
             }
             
             return propertyData.WallConstruction switch
             {
                 WallConstruction.Solid or WallConstruction.Mixed =>
-                    QuestionFlowPage.SolidWallsInsulated,
+                    QuestionFlowStep.SolidWallsInsulated,
                 WallConstruction.Cavity =>
-                    QuestionFlowPage.CavityWallsInsulated,
-                _ => QuestionFlowPage.WallConstruction
+                    QuestionFlowStep.CavityWallsInsulated,
+                _ => QuestionFlowStep.WallConstruction
             };
         }
 
-        private QuestionFlowPage OutdoorSpaceBackDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep OutdoorSpaceBackDestination(QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.OutdoorSpace
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.GlazingType;
+            return entryPoint is QuestionFlowStep.OutdoorSpace
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.GlazingType;
         }
 
-        private QuestionFlowPage HeatingTypeBackDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep HeatingTypeBackDestination(QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.HeatingType
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.OutdoorSpace;
+            return entryPoint is QuestionFlowStep.HeatingType
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.OutdoorSpace;
         }
 
-        private QuestionFlowPage OtherHeatingTypeBackDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep OtherHeatingTypeBackDestination(QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.OtherHeatingType
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.HeatingType;
+            return entryPoint is QuestionFlowStep.OtherHeatingType
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.HeatingType;
         }
 
-        private QuestionFlowPage HotWaterCylinderBackDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep HotWaterCylinderBackDestination(QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.HotWaterCylinder
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.HeatingType;
+            return entryPoint is QuestionFlowStep.HotWaterCylinder
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.HeatingType;
         }
 
-        private QuestionFlowPage NumberOfOccupantsBackDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep NumberOfOccupantsBackDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.NumberOfOccupants
-                ? QuestionFlowPage.AnswerSummary
+            return entryPoint is QuestionFlowStep.NumberOfOccupants
+                ? QuestionFlowStep.AnswerSummary
                 : propertyData.HeatingType switch
                 {
                     HeatingType.Storage or HeatingType.DirectActionElectric or HeatingType.HeatPump
                         or HeatingType.DoNotKnow
-                        => QuestionFlowPage.HeatingType,
+                        => QuestionFlowStep.HeatingType,
                     HeatingType.GasBoiler or HeatingType.OilBoiler or HeatingType.LpgBoiler
-                        => QuestionFlowPage.HotWaterCylinder,
+                        => QuestionFlowStep.HotWaterCylinder,
                     HeatingType.Other
-                        => QuestionFlowPage.OtherHeatingType,
+                        => QuestionFlowStep.OtherHeatingType,
                     _ => throw new ArgumentOutOfRangeException()
                 };
         }
 
-        private QuestionFlowPage HeatingPatternBackDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep HeatingPatternBackDestination(QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.HeatingPattern
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.NumberOfOccupants;
+            return entryPoint is QuestionFlowStep.HeatingPattern
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.NumberOfOccupants;
         }
 
-        private QuestionFlowPage TemperatureBackDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep TemperatureBackDestination(QuestionFlowStep? entryPoint)
         {
-            return entryPoint is QuestionFlowPage.Temperature
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.HeatingPattern;
+            return entryPoint is QuestionFlowStep.Temperature
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.HeatingPattern;
         }
 
-        private QuestionFlowPage AnswerSummaryBackDestination()
+        private QuestionFlowStep AnswerSummaryBackDestination()
         {
-            return QuestionFlowPage.Temperature;
+            return QuestionFlowStep.Temperature;
         }
 
-        private QuestionFlowPage NoRecommendationsBackDestination()
+        private QuestionFlowStep NoRecommendationsBackDestination()
         {
-            return QuestionFlowPage.AnswerSummary;
+            return QuestionFlowStep.AnswerSummary;
         }
 
-        private QuestionFlowPage YourRecommendationsBackDestination()
+        private QuestionFlowStep YourRecommendationsBackDestination()
         {
-            return QuestionFlowPage.AnswerSummary;
+            return QuestionFlowStep.AnswerSummary;
         }
 
-        private QuestionFlowPage NewOrReturningUserForwardDestination()
+        private QuestionFlowStep NewOrReturningUserForwardDestination()
         {
-            // TODO: Routing for the first step?
-            throw new InvalidOperationException();
+            // TODO: Routing for the next step of returning user?
+            return QuestionFlowStep.Country;
         }
         
-        private QuestionFlowPage CountryForwardDestination(PropertyData propertyData)
+        private QuestionFlowStep CountryForwardDestination(PropertyData propertyData)
         {
             return propertyData.Country is not Country.England and not Country.Wales 
-                ? QuestionFlowPage.ServiceUnsuitable
-                : QuestionFlowPage.OwnershipStatus;
+                ? QuestionFlowStep.ServiceUnsuitable
+                : QuestionFlowStep.OwnershipStatus;
         }
 
-        private QuestionFlowPage OwnershipStatusForwardDestination(PropertyData propertyData)
+        private QuestionFlowStep OwnershipStatusForwardDestination(PropertyData propertyData)
         {
             return propertyData.OwnershipStatus is OwnershipStatus.PrivateTenancy 
-                ? QuestionFlowPage.ServiceUnsuitable
-                : QuestionFlowPage.FindEpc;
+                ? QuestionFlowStep.ServiceUnsuitable
+                : QuestionFlowStep.FindEpc;
         }
 
-        private QuestionFlowPage FindEpcForwardDestination(PropertyData propertyData)
+        private QuestionFlowStep FindEpcForwardDestination(PropertyData propertyData)
         {
             if (propertyData.SearchForEpc == SearchForEpc.Yes)
             {
-                return QuestionFlowPage.AskForPostcode;
+                return QuestionFlowStep.AskForPostcode;
             }
             
-            return QuestionFlowPage.PropertyType;
+            return QuestionFlowStep.PropertyType;
         }
 
-        private QuestionFlowPage AskForPostcodeForwardDestination(PropertyData propertyData)
+        private QuestionFlowStep AskForPostcodeForwardDestination(PropertyData propertyData)
         {
             if (propertyData.SearchForEpc == SearchForEpc.Yes)
             {
-                return QuestionFlowPage.ConfirmAddress;
+                return QuestionFlowStep.ConfirmAddress;
             }
-            return QuestionFlowPage.PropertyType;
+            return QuestionFlowStep.PropertyType;
         }
 
-        private QuestionFlowPage ConfirmAddressForwardDestination(PropertyData propertyData)
+        private QuestionFlowStep ConfirmAddressForwardDestination(PropertyData propertyData)
         {
             var epc = propertyData.Epc;
             if (epc != null)
             {
                 if (epc.ContainsPropertyTypeAndAge())
                 {
-                    return QuestionFlowPage.ConfirmEpcDetails;
+                    return QuestionFlowStep.ConfirmEpcDetails;
                 }
-                return QuestionFlowPage.PropertyType;
+                return QuestionFlowStep.PropertyType;
             }
-            return QuestionFlowPage.NoEpcFound;
+            return QuestionFlowStep.NoEpcFound;
         }
 
-        private QuestionFlowPage ConfirmEpcDetailsForwardDestination(PropertyData propertyData)
+        private QuestionFlowStep ConfirmEpcDetailsForwardDestination(PropertyData propertyData)
         {
             if (propertyData.EpcDetailsConfirmed == EpcDetailsConfirmed.Yes)
             {
-                return QuestionFlowPage.WallConstruction;
+                return QuestionFlowStep.WallConstruction;
             }
-            return QuestionFlowPage.PropertyType;
+            return QuestionFlowStep.PropertyType;
         }
 
-        private QuestionFlowPage NoEpcFoundForwardDestination()
+        private QuestionFlowStep NoEpcFoundForwardDestination()
         {
-            return QuestionFlowPage.PropertyType;
+            return QuestionFlowStep.PropertyType;
         }
         
-        private QuestionFlowPage PropertyTypeForwardDestination(PropertyData propertyData)
+        private QuestionFlowStep PropertyTypeForwardDestination(PropertyData propertyData)
         {
             return propertyData.PropertyType switch
             {
                 PropertyType.House =>
-                    QuestionFlowPage.HouseType,
+                    QuestionFlowStep.HouseType,
                 PropertyType.Bungalow =>
-                    QuestionFlowPage.BungalowType,
+                    QuestionFlowStep.BungalowType,
                 PropertyType.ApartmentFlatOrMaisonette =>
-                    QuestionFlowPage.FlatType,
+                    QuestionFlowStep.FlatType,
                 _ => throw new ArgumentOutOfRangeException(),
             };
         }
 
-        private QuestionFlowPage HouseTypeForwardDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep HouseTypeForwardDestination(QuestionFlowStep? entryPoint)
         {
             return entryPoint is not null
-                ? QuestionFlowPage.CheckYourUnchangeableAnswers
-                : QuestionFlowPage.HomeAge;
+                ? QuestionFlowStep.CheckYourUnchangeableAnswers
+                : QuestionFlowStep.HomeAge;
         }
 
-        private QuestionFlowPage BungalowTypeForwardDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep BungalowTypeForwardDestination(QuestionFlowStep? entryPoint)
         {
             return entryPoint is not null
-                ? QuestionFlowPage.CheckYourUnchangeableAnswers
-                : QuestionFlowPage.HomeAge;
+                ? QuestionFlowStep.CheckYourUnchangeableAnswers
+                : QuestionFlowStep.HomeAge;
         }
 
-        private QuestionFlowPage FlatTypeForwardDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep FlatTypeForwardDestination(QuestionFlowStep? entryPoint)
         {
             return entryPoint is not null
-                ? QuestionFlowPage.CheckYourUnchangeableAnswers
-                : QuestionFlowPage.HomeAge;
+                ? QuestionFlowStep.CheckYourUnchangeableAnswers
+                : QuestionFlowStep.HomeAge;
         }
 
-        private QuestionFlowPage HomeAgeForwardDestination()
+        private QuestionFlowStep HomeAgeForwardDestination()
         {
-            return QuestionFlowPage.CheckYourUnchangeableAnswers;
+            return QuestionFlowStep.CheckYourUnchangeableAnswers;
         }
 
-        private QuestionFlowPage CheckYourUnchangeableAnswersForwardDestination()
+        private QuestionFlowStep CheckYourUnchangeableAnswersForwardDestination()
         {
-            return QuestionFlowPage.WallConstruction;
+            return QuestionFlowStep.WallConstruction;
         }
         
-        private QuestionFlowPage WallConstructionForwardDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep WallConstructionForwardDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
 
             if (propertyData.WallConstruction is WallConstruction.Cavity or WallConstruction.Mixed)
             {
-                return QuestionFlowPage.CavityWallsInsulated;
+                return QuestionFlowStep.CavityWallsInsulated;
             }
 
             if (propertyData.WallConstruction == WallConstruction.Solid)
             {
-                return QuestionFlowPage.SolidWallsInsulated;
+                return QuestionFlowStep.SolidWallsInsulated;
             }
             
             if (entryPoint is not null)
             {
-                return QuestionFlowPage.AnswerSummary;
+                return QuestionFlowStep.AnswerSummary;
             }
 
             // These options below are for people who have chosen "Don't know" to "What type of walls do you have?"
             if (propertyData.HasFloor())
             {
-                return QuestionFlowPage.FloorConstruction;
+                return QuestionFlowStep.FloorConstruction;
             }
 
             if (propertyData.HasRoof())
             {
-                return QuestionFlowPage.RoofConstruction;
+                return QuestionFlowStep.RoofConstruction;
             }
 
-            return QuestionFlowPage.GlazingType;
+            return QuestionFlowStep.GlazingType;
         }
 
-        private QuestionFlowPage CavityWallsInsulatedForwardDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep CavityWallsInsulatedForwardDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
             
-            if (entryPoint is QuestionFlowPage.CavityWallsInsulated)
+            if (entryPoint is QuestionFlowStep.CavityWallsInsulated)
             {
-                return QuestionFlowPage.AnswerSummary;
+                return QuestionFlowStep.AnswerSummary;
             }
 
             if (propertyData.WallConstruction is WallConstruction.Mixed)
             {
-                return QuestionFlowPage.SolidWallsInsulated;
+                return QuestionFlowStep.SolidWallsInsulated;
             }
             
             if (entryPoint is not null)
             {
-                return QuestionFlowPage.AnswerSummary;
+                return QuestionFlowStep.AnswerSummary;
             }
 
             // These options below are for people who have finished the "wall insulation" questions (e.g. who only have cavity walls)
             if (propertyData.HasFloor())
             {
-                return QuestionFlowPage.FloorConstruction;
+                return QuestionFlowStep.FloorConstruction;
             }
 
             if (propertyData.HasRoof())
             {
-                return QuestionFlowPage.RoofConstruction;
+                return QuestionFlowStep.RoofConstruction;
             }
 
-            return QuestionFlowPage.GlazingType;
+            return QuestionFlowStep.GlazingType;
         }
 
-        private QuestionFlowPage SolidWallsInsulatedForwardDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep SolidWallsInsulatedForwardDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
             if (entryPoint is not null)
             {
-                return QuestionFlowPage.AnswerSummary;
+                return QuestionFlowStep.AnswerSummary;
             }
 
             if (propertyData.HasFloor())
             {
-                return QuestionFlowPage.FloorConstruction;
+                return QuestionFlowStep.FloorConstruction;
             }
 
             if (propertyData.HasRoof())
             {
-                return QuestionFlowPage.RoofConstruction;
+                return QuestionFlowStep.RoofConstruction;
             }
 
-            return QuestionFlowPage.GlazingType;
+            return QuestionFlowStep.GlazingType;
         }
 
-        private QuestionFlowPage FloorConstructionForwardDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep FloorConstructionForwardDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
 
             if (propertyData.FloorConstruction is FloorConstruction.SolidConcrete or FloorConstruction.SuspendedTimber or FloorConstruction.Mix ) 
             {
-                return QuestionFlowPage.FloorInsulated;
+                return QuestionFlowStep.FloorInsulated;
             }
             
             if (entryPoint is not null)
             {
-                return QuestionFlowPage.AnswerSummary;
+                return QuestionFlowStep.AnswerSummary;
             }
 
             if (propertyData.HasRoof())
             {
-                return QuestionFlowPage.RoofConstruction;
+                return QuestionFlowStep.RoofConstruction;
             }
 
-            return QuestionFlowPage.GlazingType;
+            return QuestionFlowStep.GlazingType;
         }
 
-        private QuestionFlowPage FloorInsulatedForwardDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep FloorInsulatedForwardDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
             if (entryPoint is not null)
             {
-                return QuestionFlowPage.AnswerSummary;
+                return QuestionFlowStep.AnswerSummary;
             }
 
             if (propertyData.HasRoof())
             {
-                return QuestionFlowPage.RoofConstruction;
+                return QuestionFlowStep.RoofConstruction;
             }
 
-            return QuestionFlowPage.GlazingType;
+            return QuestionFlowStep.GlazingType;
         }
 
-        private QuestionFlowPage RoofConstructionForwardDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep RoofConstructionForwardDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
             if (propertyData.RoofConstruction is RoofConstruction.Mixed or RoofConstruction.Pitched)
             {
-                return QuestionFlowPage.LoftSpace;
+                return QuestionFlowStep.LoftSpace;
             }
 
             if (entryPoint is not null)
             {
-                return QuestionFlowPage.AnswerSummary;
+                return QuestionFlowStep.AnswerSummary;
             }
 
-            return QuestionFlowPage.GlazingType;
+            return QuestionFlowStep.GlazingType;
         }
 
-        private QuestionFlowPage LoftSpaceForwardDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep LoftSpaceForwardDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
             if (propertyData.LoftSpace is LoftSpace.Yes)
             {
-                return QuestionFlowPage.LoftAccess;
+                return QuestionFlowStep.LoftAccess;
             }
 
             if (entryPoint is not null)
             {
-                return QuestionFlowPage.AnswerSummary;
+                return QuestionFlowStep.AnswerSummary;
             }
 
-            return QuestionFlowPage.GlazingType;
+            return QuestionFlowStep.GlazingType;
         }
         
-        private QuestionFlowPage LoftAccessForwardDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep LoftAccessForwardDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
             if (propertyData.LoftAccess is LoftAccess.Yes)
             {
-                return QuestionFlowPage.RoofInsulated;
+                return QuestionFlowStep.RoofInsulated;
             }
 
             if (entryPoint is not null)
             {
-                return QuestionFlowPage.AnswerSummary;
+                return QuestionFlowStep.AnswerSummary;
             }
 
-            return QuestionFlowPage.GlazingType;
+            return QuestionFlowStep.GlazingType;
         }
 
-        private QuestionFlowPage RoofInsulatedForwardDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep RoofInsulatedForwardDestination(QuestionFlowStep? entryPoint)
         {
             return entryPoint is not null
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.GlazingType;
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.GlazingType;
         }
 
-        private QuestionFlowPage GlazingTypeForwardDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep GlazingTypeForwardDestination(QuestionFlowStep? entryPoint)
         {
             return entryPoint is not null
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.OutdoorSpace;
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.OutdoorSpace;
         }
 
-        private QuestionFlowPage OutdoorSpaceForwardDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep OutdoorSpaceForwardDestination(QuestionFlowStep? entryPoint)
         {
             return entryPoint is not null
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.HeatingType;
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.HeatingType;
         }
 
-        private QuestionFlowPage HeatingTypeForwardDestination(PropertyData propertyData, QuestionFlowPage? entryPoint)
+        private QuestionFlowStep HeatingTypeForwardDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
             if (propertyData.HeatingType == HeatingType.Other)
             {
-                return QuestionFlowPage.OtherHeatingType;
+                return QuestionFlowStep.OtherHeatingType;
             }
 
             if (propertyData.HeatingType is HeatingType.GasBoiler or HeatingType.OilBoiler or HeatingType.LpgBoiler)
             {
-                return QuestionFlowPage.HotWaterCylinder;
+                return QuestionFlowStep.HotWaterCylinder;
             }
 
             if (entryPoint is not null)
             {
-                return QuestionFlowPage.AnswerSummary;
+                return QuestionFlowStep.AnswerSummary;
             }
 
-            return QuestionFlowPage.NumberOfOccupants;
+            return QuestionFlowStep.NumberOfOccupants;
         }
 
-        private QuestionFlowPage OtherHeatingTypeForwardDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep OtherHeatingTypeForwardDestination(QuestionFlowStep? entryPoint)
         {
             return entryPoint is not null
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.NumberOfOccupants;
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.NumberOfOccupants;
         }
 
-        private QuestionFlowPage HotWaterCylinderForwardDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep HotWaterCylinderForwardDestination(QuestionFlowStep? entryPoint)
         {
             return entryPoint is not null
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.NumberOfOccupants;
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.NumberOfOccupants;
         }
 
-        private QuestionFlowPage NumberOfOccupantsForwardDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep NumberOfOccupantsForwardDestination(QuestionFlowStep? entryPoint)
         {
             return entryPoint is not null
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.HeatingPattern;
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.HeatingPattern;
         }
 
-        private QuestionFlowPage HeatingPatternForwardDestination(QuestionFlowPage? entryPoint)
+        private QuestionFlowStep HeatingPatternForwardDestination(QuestionFlowStep? entryPoint)
         {
             return entryPoint is not null
-                ? QuestionFlowPage.AnswerSummary
-                : QuestionFlowPage.Temperature;
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.Temperature;
         }
 
-        private QuestionFlowPage TemperatureForwardDestination()
+        private QuestionFlowStep TemperatureForwardDestination()
         {
-            return QuestionFlowPage.AnswerSummary;
+            return QuestionFlowStep.AnswerSummary;
         }
 
-        private QuestionFlowPage AnswerSummaryForwardDestination(PropertyData propertyData)
+        private QuestionFlowStep AnswerSummaryForwardDestination(PropertyData propertyData)
         {
             return propertyData.PropertyRecommendations.Any()
-                ? QuestionFlowPage.YourRecommendations
-                : QuestionFlowPage.NoRecommendations;
+                ? QuestionFlowStep.YourRecommendations
+                : QuestionFlowStep.NoRecommendations;
         }
         
-        private QuestionFlowPage AskForPostcodeSkipDestination()
+        private QuestionFlowStep AskForPostcodeSkipDestination()
         {
-            return QuestionFlowPage.PropertyType;
+            return QuestionFlowStep.PropertyType;
         }
-    }
-
-    public enum QuestionFlowPage
-    {
-        Start,
-        NewOrReturningUser,
-        Country,
-        OwnershipStatus,
-        ServiceUnsuitable,
-        FindEpc,
-        AskForPostcode,
-        ConfirmAddress,
-        ConfirmEpcDetails,
-        NoEpcFound,
-        PropertyType,
-        HouseType,
-        BungalowType,
-        FlatType,
-        HomeAge,
-        CheckYourUnchangeableAnswers,
-        WallConstruction,
-        CavityWallsInsulated,
-        SolidWallsInsulated,
-        FloorConstruction,
-        FloorInsulated,
-        RoofConstruction,
-        LoftSpace,
-        LoftAccess,
-        RoofInsulated,
-        GlazingType,
-        OutdoorSpace,
-        HeatingType,
-        OtherHeatingType,
-        HotWaterCylinder,
-        NumberOfOccupants,
-        HeatingPattern,
-        Temperature,
-        AnswerSummary,
-        NoRecommendations,
-        YourRecommendations
     }
 }
