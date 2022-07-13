@@ -97,14 +97,10 @@
             Rows = rows
         }))
         
-        <form action="@Url.Action("CheckYourUnchangeableAnswers_Post", "EnergyEfficiency", new { reference = Model.PropertyData.Reference })" method="post" novalidate>
-            @Html.AntiForgeryToken()
-            <div class="govuk-button-group">
-                @(await Html.GovUkButton(new ButtonViewModel
-                {
-                    Text = "Continue",
-                }))
-            </div>
-        </form>
+        @await Html.GovUkButton(new ButtonViewModel
+        {
+            Href = Model.ForwardLink,
+            Text = "Continue"
+        })
     </div>
 </div>
