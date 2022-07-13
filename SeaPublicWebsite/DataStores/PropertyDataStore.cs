@@ -60,7 +60,7 @@ public class PropertyDataStore
         }
     }
 
-    public async Task<string> CreateNewPropertyDataAsync()
+    public async Task<PropertyData> CreateNewPropertyDataAsync()
     {
         var saveCount = 0;
         var attemptedReferences = new List<string>();
@@ -76,7 +76,7 @@ public class PropertyDataStore
             try
             {
                 await dataAccessProvider.AddPropertyDataAsync(propertyData);
-                return propertyData.Reference;
+                return propertyData;
             }
             catch (Exception)
             {
