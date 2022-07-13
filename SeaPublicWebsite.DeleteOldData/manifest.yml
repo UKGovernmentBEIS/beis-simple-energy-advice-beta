@@ -1,7 +1,7 @@
 ﻿---
 applications:
 - name: DeleteOldData
-  path: SeaPublicWebsite.DeleteOldData/bin/Debug/net6.0/
+  path: bin/Debug/net6.0/
   instances: 0
   memory: 256M
   no-route: true
