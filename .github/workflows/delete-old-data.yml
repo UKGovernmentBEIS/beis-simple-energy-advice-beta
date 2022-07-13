@@ -10,14 +10,6 @@ jobs:
   delete-data:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code onto job runner
-      uses: actions/checkout@v2
-
-    - name: Install .Net (6.0)
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 6.0.x
-
     - name: Install the Cloud Foundry CLI
       run: |
         wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
