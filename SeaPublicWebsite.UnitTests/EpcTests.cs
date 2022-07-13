@@ -622,6 +622,34 @@ public class EpcTests
                 WallConstruction = WallConstruction.Solid
             }),
         new(
+            "Can parse wall construction solid (sandstone or limestone)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WallsDescription = new List<string>
+                {
+                    "Sandstone or limestone"
+                }
+            },
+            new Epc
+            {
+                WallConstruction = WallConstruction.Solid
+            }),
+        new(
+            "Can parse wall construction solid (Granite or whinstone)",
+            new EpbEpcAssessmentDto
+            {
+                AssessmentType = "RdSAP",
+                WallsDescription = new List<string>
+                {
+                    "Granite or whinstone"
+                }
+            },
+            new Epc
+            {
+                WallConstruction = WallConstruction.Solid
+            }),
+        new(
             "Can parse wall construction cavity",
             new EpbEpcAssessmentDto
             {
