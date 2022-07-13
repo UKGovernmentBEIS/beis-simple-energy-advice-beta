@@ -298,10 +298,12 @@ namespace SeaPublicWebsite.Controllers
 
             if (epcSearchResults.Count == 0)
             {
+                var forwardArgs = GetForwardArgs(QuestionFlowStep.NoEpcFound, propertyData);
                 var viewModel = new NoEpcFoundViewModel
                 {
                     Reference = reference,
-                    BackLink = backLink
+                    BackLink = backLink,
+                    ForwardLink = Url.Action(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values)
                 };
                 return View("NoEpcFound", viewModel);
             }
@@ -433,28 +435,19 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             var backArgs = GetBackArgs(QuestionFlowStep.NoEpcFound, propertyData);
+            var forwardArgs = GetForwardArgs(QuestionFlowStep.NoEpcFound, propertyData);
 
             var viewModel = new NoEpcFoundViewModel
             {
                 Reference = propertyData.Reference,
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
+                ForwardLink = Url.Action(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values)
             };
             
             ViewBag.FeedbackUrl = propertyData.ReturningUser
                 ? Constants.FEEDBACK_URL_BANNER_RETURNING_USER
                 : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("NoEpcFound", viewModel);
-        }
-
-        [HttpPost("no-epc-found/{reference}")]
-        public async Task<IActionResult> NoEpcFound_Post(NoEpcFoundViewModel viewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return await NoEpcFound_Get(viewModel.Reference);
-            }
-
-            return await UpdatePropertyAndRedirect(p => { }, viewModel.Reference, QuestionFlowStep.NoEpcFound);
         }
 
         [HttpGet("property-type/{reference}")]
@@ -651,11 +644,13 @@ namespace SeaPublicWebsite.Controllers
             }
             
             var backArgs = GetBackArgs(QuestionFlowStep.CheckYourUnchangeableAnswers, propertyData, entryPoint);
+            var forwardArgs = GetForwardArgs(QuestionFlowStep.CheckYourUnchangeableAnswers, propertyData, entryPoint);
             var viewModel = new CheckYourUnchangeableAnswersViewModel()
             {
                 Reference = reference,
                 PropertyData = propertyData,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
+                ForwardLink = Url.Action(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values)
             };
             
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -663,18 +658,6 @@ namespace SeaPublicWebsite.Controllers
                 : Constants.FEEDBACK_URL_BANNER_BEFORE_ANSWER_SUMMARY;
             return View("CheckYourUnchangeableAnswers", viewModel);
         }
-
-        [HttpPost("check-your-unchangeable-answers/{reference}")]
-        public async Task<IActionResult> CheckYourUnchangeableAnswers_Post(CheckYourUnchangeableAnswersViewModel viewModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return await CheckYourUnchangeableAnswers_Get(viewModel.Reference, viewModel.EntryPoint);
-            }
-
-            return await UpdatePropertyAndRedirect(p => { }, viewModel.Reference, QuestionFlowStep.CheckYourUnchangeableAnswers);
-        }
-
 
         [HttpGet("wall-construction/{reference}")]
         public async Task<IActionResult> WallConstruction_Get(string reference, QuestionFlowStep? entryPoint = null)
@@ -1821,6 +1804,15 @@ namespace SeaPublicWebsite.Controllers
         {
             var backStep = questionFlowService.PreviousStep(currentStep, propertyData, entryPoint);
             return GetActionArgumentsForQuestion(backStep, propertyData?.Reference, entryPoint);
+        }
+        
+        private PathByActionArguments GetForwardArgs(
+            QuestionFlowStep currentStep,
+            PropertyData propertyData,
+            QuestionFlowStep? entryPoint = null)
+        {
+            var nextStep = questionFlowService.NextStep(currentStep, propertyData, entryPoint);
+            return GetActionArgumentsForQuestion(nextStep, propertyData?.Reference, entryPoint);
         }
 
         private PathByActionArguments GetActionArgumentsForQuestion(
