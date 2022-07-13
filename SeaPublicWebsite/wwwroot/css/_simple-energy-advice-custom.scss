@@ -269,6 +269,19 @@
     }
 }
 
+.sea-saved-recommendations-table-mobile-hide {
+    @media (max-width: 640px) {
+        display: none;
+    }
+}
+
+.sea-saved-recommendations-table-desktop-hide {
+    border-top: 1px solid $govuk-border-colour;
+    @media (min-width: 641px) {
+        display: none;
+    }
+}
+
 .sea-change-decision-link {
     white-space: nowrap;
 }
