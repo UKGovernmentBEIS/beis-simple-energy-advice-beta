@@ -297,17 +297,25 @@ public class EpbEpcAssessmentDto
         return null;
     }
 
+    private static bool HasSolidWalls(string description)
+    {
+        return description.Contains("solid", StringComparison.OrdinalIgnoreCase) ||
+               description.Contains("granite", StringComparison.OrdinalIgnoreCase) ||
+               description.Contains("whinstone", StringComparison.OrdinalIgnoreCase) ||
+               description.Contains("sandstone", StringComparison.OrdinalIgnoreCase) ||
+               description.Contains("limestone", StringComparison.OrdinalIgnoreCase);
+    }
+
     private WallConstruction? ParseWallConstruction()
     {
         if (WallsDescription is null)
         {
             return null;
         }
-        
+
         var hasCavity = WallsDescription.Any(description => 
             description.Contains("cavity", StringComparison.OrdinalIgnoreCase));
-        var hasSolid = WallsDescription.Any(description => 
-            description.Contains("solid", StringComparison.OrdinalIgnoreCase));
+        var hasSolid = WallsDescription.Any(HasSolidWalls);
 
         return (hasCavity, hasSolid) switch
         {
@@ -326,7 +334,7 @@ public class EpbEpcAssessmentDto
         }
 
         if (WallsDescription.Any(description =>
-                description.Contains("solid", StringComparison.OrdinalIgnoreCase) &&
+                HasSolidWalls(description) &&
                 (description.Contains("insulated", StringComparison.OrdinalIgnoreCase) ||
                  description.Contains("internal insulation", StringComparison.OrdinalIgnoreCase) ||
                  description.Contains("external insulation", StringComparison.OrdinalIgnoreCase))))
@@ -335,14 +343,14 @@ public class EpbEpcAssessmentDto
         }
         
         if (WallsDescription.Any(description =>
-                description.Contains("solid", StringComparison.OrdinalIgnoreCase) &&
+                HasSolidWalls(description) &&
                 description.Contains("partial insulation", StringComparison.OrdinalIgnoreCase)))
         {
             return SolidWallsInsulated.Some;
         }
         
         if (WallsDescription.Any(description =>
-                description.Contains("solid", StringComparison.OrdinalIgnoreCase) &&
+                HasSolidWalls(description) &&
                 description.Contains("no insulation", StringComparison.OrdinalIgnoreCase)))
         {
             return SolidWallsInsulated.No;
