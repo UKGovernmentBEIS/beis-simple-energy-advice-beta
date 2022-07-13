@@ -623,7 +623,6 @@ public class EpbEpcAssessmentDto
         // 14 - house coal
         // 15 - smokeless coal
         // 33 - house coal (not community)
-
         if (MainFuelType.Equals("5") ||
             MainFuelType.Equals("14") ||
             MainFuelType.Equals("15") ||
@@ -640,7 +639,6 @@ public class EpbEpcAssessmentDto
         // 8 - wood chips
         // 9 - dual fuel - mineral + wood
         // 12 - biomass
-
         if (MainFuelType.Equals("6") || 
             MainFuelType.Equals("7") ||
             MainFuelType.Equals("8") ||
@@ -654,6 +652,7 @@ public class EpbEpcAssessmentDto
         {
             return EpcHeatingType.Biomass;
         }
+
         // electric heating check
         // 10 - electricity
         // 29 - electricity (not community)

@@ -45,7 +45,7 @@
             {
                 new()
                 {
-                    Href = Url.Action(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.PropertyType}),
+                    Href = Url.Action(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.PropertyType}),
                     Text = "Change",
                     VisuallyHiddenText = "address"
                 }
@@ -72,7 +72,7 @@
             {
                 new()
                 {
-                    Href = @Url.Action(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowPage.HomeAge}),
+                    Href = @Url.Action(nameof(EnergyEfficiencyController.HomeAge_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.HomeAge}),
                     Text = "Change",
                     VisuallyHiddenText = "home type"
                 }
@@ -97,14 +97,10 @@
             Rows = rows
         }))
         
-        <form action="@Url.Action("CheckYourUnchangeableAnswers_Post", "EnergyEfficiency", new { reference = Model.PropertyData.Reference })" method="post" novalidate>
-            @Html.AntiForgeryToken()
-            <div class="govuk-button-group">
-                @(await Html.GovUkButton(new ButtonViewModel
-                {
-                    Text = "Continue",
-                }))
-            </div>
-        </form>
+        @await Html.GovUkButton(new ButtonViewModel
+        {
+            Href = Model.ForwardLink,
+            Text = "Continue"
+        })
     </div>
 </div>

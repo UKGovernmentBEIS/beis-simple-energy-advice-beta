@@ -2,9 +2,8 @@
 using NUnit.Framework;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
-using SeaPublicWebsite.Helpers;
 
-namespace Tests;
+namespace Tests.BusinessLogic.Models;
 
 public class ResetUnusedFieldsTests
 {
@@ -16,7 +15,7 @@ public class ResetUnusedFieldsTests
         PropertyData propertyData = testCase.Input;
         
         // Act
-        PropertyDataHelper.ResetUnusedFields(propertyData);
+        propertyData.ResetUnusedFields();
 
         // Assert
         propertyData.Should().BeEquivalentTo(testCase.ExpectedOutput);

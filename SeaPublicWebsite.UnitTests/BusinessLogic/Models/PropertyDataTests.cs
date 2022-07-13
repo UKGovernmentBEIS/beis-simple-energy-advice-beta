@@ -4,7 +4,7 @@ using NUnit.Framework;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
-namespace Tests;
+namespace Tests.BusinessLogic.Models;
 
 public class PropertyDataTests
 {
