@@ -22,665 +22,191 @@ public class EpcTests
     }
 
     private static readonly EpcTestCase[] AssessmentTypeTestCases =
-    {
-        new(
-            "Can parse an RdSAP assessment",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP"
-            },
-            new Epc()),
-        new(
-            "Does not parse a SAP assessment",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "SAP"
-            },
-            null),
-    };
-
+        new (string Descrption, string inputAssessmentType, Epc outputEpc)[]
+        {
+            ("Can parse an RdSAP assessment", "RdSAP", new Epc()),
+            ("Does not parse a SAP assessment", "SAP", null)
+        }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = p.inputAssessmentType 
+                }, 
+                p.outputEpc))
+            .ToArray();
+    
     private static readonly EpcTestCase[] LodgementDateTestCases =
-    {
-        
-        new(
-            "Can handle null lodgement year",
-            new EpbEpcAssessmentDto
+        new (string Descrption, string inputLodgementDate, int? outputLodgementYear)[]
             {
-                AssessmentType = "RdSAP",
-                LodgementDate = null
-            },
-            new Epc
-            {
-                LodgementYear = null
-            }),
-        new(
-            "Can parse lodgement year",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                LodgementDate = "2012-12-22"
-            },
-            new Epc
-            {
-                LodgementYear = 2012
-            })
-    };
+                ("Can handle null lodgement year", null, null),
+                ("Can parse lodgement year", "2012-12-22", 2012),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    LodgementDate = p.inputLodgementDate
+                }, 
+                new Epc
+                {
+                    LodgementYear = p.outputLodgementYear
+                }))
+            .ToArray();
     
     private static readonly EpcTestCase[] ConstructionAgeBandTestCases =
-    {
-        new(
-            "Can handle null home age",
-            new EpbEpcAssessmentDto
+        new (string Descrption, string inputPropertyAgeBand, HomeAge? outputConstructionAgeBand)[]
             {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = null
-            },
-            new Epc
-            {
-                ConstructionAgeBand = null
-            }),
-        new(
-            "Can parse home age before 1900",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "before 1900"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.Pre1900
-            }),
-        new(
-            "Can parse home age band A",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "A"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.Pre1900
-            }),
-        
-        new(
-            "Can parse home age 1900-1929",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "1900-1929"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1900To1929
-            }),
-        new(
-            "Can parse home age band B",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "B"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1900To1929
-            }),
-        new(
-            "Can parse home age 1930-1949",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "1930-1949"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1930To1949
-            }),
-        new(
-            "Can parse home age band C",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "C"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1930To1949
-            }),
-        new(
-            "Can parse home age 1950-1966",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "1950-1966"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1950To1966
-            }),
-        new(
-            "Can parse home age band D",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "D"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1950To1966
-            }),
-        new(
-            "Can parse home age 1967-1975",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "1967-1975"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1967To1975
-            }),
-        new(
-            "Can parse home age band E",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "E"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1967To1975
-            }),
-        new(
-            "Can parse home age 1976-1982",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "1976-1982"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1976To1982
-            }),
-        new(
-            "Can parse home age band F",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "F"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1976To1982
-            }),
-        new(
-            "Can parse home age 1983-1990",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "1983-1990"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1983To1990
-            }),
-        new(
-            "Can parse home age band G",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "G"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1983To1990
-            }),
-        new(
-            "Can parse home age 1991-1995",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "1991-1995"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1991To1995
-            }),
-        new(
-            "Can parse home age band H",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "H"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1991To1995
-            }),
-        new(
-            "Can parse home age 1996-2002",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "1996-2002"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1996To2002
-            }),
-        new(
-            "Can parse home age band I",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "I"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From1996To2002
-            }),
-        new(
-            "Can parse home age 2003-2006",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "2003-2006"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From2003To2006
-            }),
-        new(
-            "Can parse home age band J",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "J"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From2003To2006
-            }),
-        new(
-            "Can parse home age 2007-2011",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "2007-2011"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From2007To2011
-            }),
-        new(
-            "Can parse home age band K",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "K"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From2007To2011
-            }),
-        new(
-            "Can parse home age 2012 onwards",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "2012 onwards"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From2012ToPresent
-            }),
-        new(
-            "Can parse home age band L",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyAgeBand = "L"
-            },
-            new Epc
-            {
-                ConstructionAgeBand = HomeAge.From2012ToPresent
-            }),
-    };
-
+                ("Can handle null home age", null, null),
+                ("Can parse home age before 1900", "before 1900", HomeAge.Pre1900),
+                ("Can parse home age band A", "A", HomeAge.Pre1900),
+                ("Can parse home age 1900-1929", "1900-1929", HomeAge.From1900To1929),
+                ("Can parse home age band B", "B", HomeAge.From1900To1929),
+                ("Can parse home age 1930-1949", "1930-1949", HomeAge.From1930To1949),
+                ("Can parse home age band C", "C", HomeAge.From1930To1949),
+                ("Can parse home age 1950-1966", "1950-1966", HomeAge.From1950To1966),
+                ("Can parse home age band D", "D", HomeAge.From1950To1966),
+                ("Can parse home age 1967-1975", "1967-1975", HomeAge.From1967To1975),
+                ("Can parse home age band E", "E", HomeAge.From1967To1975),
+                ("Can parse home age 1976-1982", "1976-1982", HomeAge.From1976To1982),
+                ("Can parse home age band F", "F", HomeAge.From1976To1982),
+                ("Can parse home age 1983-1990", "1983-1990", HomeAge.From1983To1990),
+                ("Can parse home age band G", "G", HomeAge.From1983To1990),
+                ("Can parse home age 1991-1995", "1991-1995", HomeAge.From1991To1995),
+                ("Can parse home age band H", "H", HomeAge.From1991To1995),
+                ("Can parse home age 1996-2002", "1996-2002", HomeAge.From1996To2002),
+                ("Can parse home age band I", "I", HomeAge.From1996To2002),
+                ("Can parse home age 2003-2006", "2003-2006", HomeAge.From2003To2006),
+                ("Can parse home age band J", "J", HomeAge.From2003To2006),
+                ("Can parse home age 2007-2011", "2007-2011", HomeAge.From2007To2011),
+                ("Can parse home age band K", "K", HomeAge.From2007To2011),
+                ("Can parse home age 2012 onwards", "2012 onwards", HomeAge.From2012ToPresent),
+                ("Can parse home age band L", "L", HomeAge.From2012ToPresent),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    PropertyAgeBand = p.inputPropertyAgeBand
+                }, 
+                new Epc
+                {
+                    ConstructionAgeBand = p.outputConstructionAgeBand
+                }))
+            .ToArray();
+    
     private static readonly EpcTestCase[] PropertyTypeTestCases =
-    {
-        new(
-            "Can handle null property type",
-            new EpbEpcAssessmentDto
+        new (string Descrption, string inputPropertyType, PropertyType? outputPropertyType)[]
             {
-                AssessmentType = "RdSAP",
-                PropertyType = null
-            },
-            new Epc
-            {
-                PropertyType = null
-            }),
-        new(
-            "Can parse property type house",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "house"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.House
-            }),
-        new(
-            "Can parse property type bungalow",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "bungalow"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.Bungalow
-            }),
-        new(
-            "Can parse property type flat",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "flat"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.ApartmentFlatOrMaisonette
-            }),
-        new(
-            "Can parse property type maisonette",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "maisonette"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.ApartmentFlatOrMaisonette
-            }),
-    };
-
+                ("Can handle null property type", null, null),
+                ("Can parse property type house", "house", PropertyType.House),
+                ("Can parse property type bungalow", "bungalow", PropertyType.Bungalow),
+                ("Can parse property type flat", "flat", PropertyType.ApartmentFlatOrMaisonette),
+                ("Can parse property type maisonette", "maisonette", PropertyType.ApartmentFlatOrMaisonette),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    PropertyType = p.inputPropertyType
+                }, 
+                new Epc
+                {
+                    PropertyType = p.outputPropertyType
+                }))
+            .ToArray();
+    
     private static readonly EpcTestCase[] HouseTypeTestCases =
-    {
-        new(
-            "Can handle null house type",
-            new EpbEpcAssessmentDto
+        new (string Descrption, string inputPropertyType, HouseType? outputHouseType)[]
             {
-                AssessmentType = "RdSAP",
-                PropertyType = null
-            },
-            new Epc
-            {
-                HouseType = null
-            }),
-        new(
-            "Can parse house type detached",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "detached house"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.House,
-                HouseType = HouseType.Detached
-            }),
-        new(
-            "Can parse house type semi-detached",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "semi-detached house"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.House,
-                HouseType = HouseType.SemiDetached
-            }),
-        new(
-            "Can parse house type mid-terrace",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "mid-terrace house"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.House,
-                HouseType = HouseType.Terraced
-            }),
-        new(
-            "Can parse house type end terrace",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "end-terrace house"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.House,
-                HouseType = HouseType.EndTerrace
-            }),
-    };
+                ("Can parse house type detached", "detached house", HouseType.Detached),
+                ("Can parse house type semi-detached", "semi-detached house", HouseType.SemiDetached),
+                ("Can parse house type mid-terrace", "mid-terrace house", HouseType.Terraced),
+                ("Can parse house type end terrace", "end-terrace house", HouseType.EndTerrace),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    PropertyType = p.inputPropertyType
+                }, 
+                new Epc
+                {
+                    PropertyType = PropertyType.House,
+                    HouseType = p.outputHouseType
+                }))
+            .ToArray();
     
     private static readonly EpcTestCase[] BungalowTypeTestCases =
-    {
-        new(
-            "Can handle null bungalow type",
-            new EpbEpcAssessmentDto
+        new (string Descrption, string inputPropertyType, BungalowType? outputBungalowType)[]
             {
-                AssessmentType = "RdSAP",
-                PropertyType = null
-            },
-            new Epc
-            {
-                BungalowType = null
-            }),
-        new(
-            "Can parse bungalow type detached",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "detached bungalow"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.Bungalow,
-                BungalowType = BungalowType.Detached
-            }),
-        new(
-            "Can parse bungalow type semi-detached",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "semi-detached bungalow"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.Bungalow,
-                BungalowType = BungalowType.SemiDetached
-            }),
-        new(
-            "Can parse bungalow type mid-terrace",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "mid-terrace bungalow"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.Bungalow,
-                BungalowType = BungalowType.Terraced
-            }),
-        new(
-            "Can parse bungalow type end terrace",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "end-terrace bungalow"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.Bungalow,
-                BungalowType = BungalowType.EndTerrace
-            }),
-    };
+                ("Can parse bungalow type detached", "detached bungalow", BungalowType.Detached),
+                ("Can parse bungalow type semi-detached", "semi-detached bungalow", BungalowType.SemiDetached),
+                ("Can parse bungalow type mid-terrace", "mid-terrace bungalow", BungalowType.Terraced),
+                ("Can parse bungalow type end terrace", "end-terrace bungalow", BungalowType.EndTerrace),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    PropertyType = p.inputPropertyType
+                }, 
+                new Epc
+                {
+                    PropertyType = PropertyType.Bungalow,
+                    BungalowType = p.outputBungalowType
+                }))
+            .ToArray();
     
     private static readonly EpcTestCase[] FlatTypeTestCases =
-    {
-        new(
-            "Can handle null flat type",
-            new EpbEpcAssessmentDto
+        new (string Descrption, string inputPropertyType, FlatType? outputFlatType)[]
             {
-                AssessmentType = "RdSAP",
-                PropertyType = null
-            },
-            new Epc
-            {
-                FlatType = null
-            }),
-        new(
-            "Can parse flat type detached",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "basement flat"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.ApartmentFlatOrMaisonette,
-                FlatType = FlatType.GroundFloor
-            }),
-        new(
-            "Can parse flat type semi-detached",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "ground flat"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.ApartmentFlatOrMaisonette,
-                FlatType = FlatType.GroundFloor
-            }),
-        new(
-            "Can parse flat type mid-terrace",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "mid flat"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.ApartmentFlatOrMaisonette,
-                FlatType = FlatType.MiddleFloor
-            }),
-        new(
-            "Can parse flat type end terrace",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                PropertyType = "top flat"
-            },
-            new Epc
-            {
-                PropertyType = PropertyType.ApartmentFlatOrMaisonette,
-                FlatType = FlatType.TopFloor
-            }),
-    };
+                ("Can parse flat type ground flat (basement)", "basement flat", FlatType.GroundFloor),
+                ("Can parse flat type ground flat", "ground flat", FlatType.GroundFloor),
+                ("Can parse flat type middle flat", "mid flat", FlatType.MiddleFloor),
+                ("Can parse flat type top flat", "top flat", FlatType.TopFloor),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    PropertyType = p.inputPropertyType
+                }, 
+                new Epc
+                {
+                    PropertyType = PropertyType.ApartmentFlatOrMaisonette,
+                    FlatType = p.outputFlatType
+                }))
+            .ToArray();
     
     private static readonly EpcTestCase[] WallConstructionTestCases =
-    {
-        new(
-            "Can handle null wall construction",
-            new EpbEpcAssessmentDto
+        new (string Descrption, string[] inputWallsDescription, WallConstruction? outputWallConstruction)[]
             {
-                AssessmentType = "RdSAP",
-                WallsDescription = null
-            },
-            new Epc
-            {
-                WallConstruction = null
-            }),
-        new(
-            "Can parse wall construction solid",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WallsDescription = new List<string>
+                ("Can handle null wall construction", null, null),
+                ("Can parse wall construction solid", new[] {"solid brick"}, WallConstruction.Solid),
+                ("Can parse wall construction solid (sandstone or limestone)", new[] {"Sandstone or limestone"}, WallConstruction.Solid),
+                ("Can parse wall construction solid (granite or whinstone)", new[] {"Granite or whinstone"}, WallConstruction.Solid),
+                ("Can parse wall construction mixed walls", new[] {"solid brick", "cavity wall"}, WallConstruction.Mixed),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    WallsDescription = p.inputWallsDescription?.ToList()
+                }, 
+                new Epc
                 {
-                    "solid brick"
-                }
-            },
-            new Epc
-            {
-                WallConstruction = WallConstruction.Solid
-            }),
-        new(
-            "Can parse wall construction solid (sandstone or limestone)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WallsDescription = new List<string>
-                {
-                    "Sandstone or limestone"
-                }
-            },
-            new Epc
-            {
-                WallConstruction = WallConstruction.Solid
-            }),
-        new(
-            "Can parse wall construction solid (Granite or whinstone)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WallsDescription = new List<string>
-                {
-                    "Granite or whinstone"
-                }
-            },
-            new Epc
-            {
-                WallConstruction = WallConstruction.Solid
-            }),
-        new(
-            "Can parse wall construction cavity",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WallsDescription = new List<string>
-                {
-                    "cavity wall"
-                }
-            },
-            new Epc
-            {
-                WallConstruction = WallConstruction.Cavity
-            }),
-        new(
-            "Can parse wall construction mixed walls",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WallsDescription = new List<string>
-                {
-                    "solid brick",
-                    "cavity wall"
-                }
-            },
-            new Epc
-            {
-                WallConstruction = WallConstruction.Mixed
-            }),
-    };
-    
-    // Could not find other types of wall description for solid walls
+                    WallConstruction = p.outputWallConstruction
+                }))
+            .ToArray();
+
     private static readonly EpcTestCase[] SolidWallsInsulatedTestCases =
     {
         new(
