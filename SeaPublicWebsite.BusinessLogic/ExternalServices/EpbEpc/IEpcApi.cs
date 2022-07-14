@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using SeaPublicWebsite.BusinessLogic.Models;
+﻿using SeaPublicWebsite.BusinessLogic.Models;
 
-namespace SeaPublicWebsite.ExternalServices
+namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc
 {
     public interface IEpcApi
     {

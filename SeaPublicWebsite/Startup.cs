@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SeaPublicWebsite.BusinessLogic;
+using SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 using SeaPublicWebsite.BusinessLogic.Services;
 using SeaPublicWebsite.Data;
 using SeaPublicWebsite.DataStores;
@@ -16,7 +18,6 @@ using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.Bre;
 using SeaPublicWebsite.ExternalServices.EmailSending;
-using SeaPublicWebsite.ExternalServices.EpbEpc;
 using SeaPublicWebsite.ExternalServices.GoogleAnalytics;
 using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Middleware;
@@ -42,6 +43,7 @@ namespace SeaPublicWebsite
         {
             services.AddScoped<AnswerService>();
             services.AddScoped<PropertyDataStore>();
+            services.AddScoped<PropertyDataUpdater>();
             services.AddScoped<IQuestionFlowService, QuestionFlowService>();
             services.AddScoped<PostcodesIoApi>();
             services.AddMemoryCache();
