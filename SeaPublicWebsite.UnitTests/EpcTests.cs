@@ -206,688 +206,211 @@ public class EpcTests
                     WallConstruction = p.outputWallConstruction
                 }))
             .ToArray();
-
+    
     private static readonly EpcTestCase[] SolidWallsInsulatedTestCases =
-    {
-        new(
-            "Can handle null solid walls insulated",
-            new EpbEpcAssessmentDto
+        new (string Descrption, string[] inputWallsDescription, SolidWallsInsulated? outputSolidWallsInsulated)[]
             {
-                AssessmentType = "RdSAP",
-                WallsDescription = null
-            },
-            new Epc
-            {
-                SolidWallsInsulated = null
-            }),
-        new(
-            "Can parse solid walls insulated",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WallsDescription = new List<string>
+                ("Can parse solid walls insulated", new[] {"solid brick, as built, insulated (assumed)"}, SolidWallsInsulated.All),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    WallsDescription = p.inputWallsDescription?.ToList()
+                }, 
+                new Epc
                 {
-                    "solid brick, as built, insulated (assumed)"
-                }
-            },
-            new Epc
-            {
-                WallConstruction = WallConstruction.Solid,
-                SolidWallsInsulated = SolidWallsInsulated.All
-            })
-    };
+                    WallConstruction = WallConstruction.Solid,
+                    SolidWallsInsulated = p.outputSolidWallsInsulated
+                }))
+            .ToArray();
     
     private static readonly EpcTestCase[] CavityWallsInsulatedTestCases =
-    {
-        new(
-            "Can handle null cavity walls insulated",
-            new EpbEpcAssessmentDto
+        new (string Descrption, string[] inputWallsDescription, CavityWallsInsulated? outputCavityWallsInsulated)[]
             {
-                AssessmentType = "RdSAP",
-                WallsDescription = null
-            },
-            new Epc
-            {
-                CavityWallsInsulated = null
-            }),
-        new(
-            "Can parse cavity walls insulated",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WallsDescription = new List<string>
+                ("Can parse Cavity walls insulated", new[] {"cavity wall, as built, insulated (assumed)"}, CavityWallsInsulated.All),
+                ("Can parse cavity walls partially insulated", new[] {"cavity wall, as built, partial insulation (assumed)"}, CavityWallsInsulated.Some),
+                ("Can parse cavity walls no insulation", new[] {"cavity wall, as built, no insulation (assumed)"}, CavityWallsInsulated.No),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    WallsDescription = p.inputWallsDescription?.ToList()
+                }, 
+                new Epc
                 {
-                    "cavity wall, as built, insulated (assumed)"
-                }
-            },
-            new Epc
-            {
-                WallConstruction = WallConstruction.Cavity,
-                CavityWallsInsulated = CavityWallsInsulated.All
-            }),
-        new(
-            "Can parse cavity walls partially insulated",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WallsDescription = new List<string>
-                {
-                    "cavity wall, as built, partial insulation (assumed)"
-                }
-            },
-            new Epc
-            {
-                WallConstruction = WallConstruction.Cavity,
-                CavityWallsInsulated = CavityWallsInsulated.Some
-            }),
-        new(
-            "Can parse cavity walls no insulation",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WallsDescription = new List<string>
-                {
-                    "cavity wall, as built, no insulation (assumed)"
-                }
-            },
-            new Epc
-            {
-                WallConstruction = WallConstruction.Cavity,
-                CavityWallsInsulated = CavityWallsInsulated.No
-            })
-    };
+                    WallConstruction = WallConstruction.Cavity,
+                    CavityWallsInsulated = p.outputCavityWallsInsulated
+                }))
+            .ToArray();
     
     private static readonly EpcTestCase[] FloorConstructionTestCases =
-    {
-        new(
-            "Can handle null floor construction",
-            new EpbEpcAssessmentDto
+        new (string Descrption, string[] inputFloorDescription, FloorConstruction? outputFloorConstruction)[]
             {
-                AssessmentType = "RdSAP",
-                FloorDescription = null
-            },
-            new Epc
-            {
-                FloorConstruction = null
-            }),
-        new(
-            "Can parse floor construction suspended timber",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                FloorDescription = new List<string>
+                ("Can handle null floor construction", null, null),
+                ("Can parse floor construction suspended timber", new[] {"suspended"}, FloorConstruction.SuspendedTimber),
+                ("Can parse floor construction solid concrete", new[] {"solid"}, FloorConstruction.SolidConcrete),
+                ("Can parse floor construction mixed", new[] {"suspended", "solid"}, FloorConstruction.Mix)
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    FloorDescription = p.inputFloorDescription?.ToList()
+                }, 
+                new Epc
                 {
-                    "suspended"
-                }
-            },
-            new Epc
-            {
-                FloorConstruction = FloorConstruction.SuspendedTimber
-            }),
-        new(
-            "Can parse floor construction solid concrete",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                FloorDescription = new List<string>
-                {
-                    "solid"
-                }
-            },
-            new Epc
-            {
-                FloorConstruction = FloorConstruction.SolidConcrete
-            }),
-        new(
-            "Can parse floor construction mixed",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                FloorDescription = new List<string>
-                {
-                    "suspended",
-                    "solid"
-                }
-            },
-            new Epc
-            {
-                FloorConstruction = FloorConstruction.Mix
-            })
-    };
+                    FloorConstruction = p.outputFloorConstruction
+                }))
+            .ToArray();
     
-    private static readonly EpcTestCase[] FloorInsulationTestCases =
-    {
-        new(
-            "Can handle null floor insulation",
-            new EpbEpcAssessmentDto
+    private static readonly EpcTestCase[] FloorInsulatedTestCases =
+        new (string Descrption, string[] inputFloorDescription, FloorInsulated? outputFloorInsulation)[]
             {
-                AssessmentType = "RdSAP",
-                FloorDescription = null
-            },
-            new Epc
-            {
-                FloorInsulated = null
-            }),
-        new(
-            "Can parse floor insulated",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                FloorDescription = new List<string>
+                ("Can parse floor insulated", new[] {"solid, insulated"}, FloorInsulated.Yes),
+                ("Can parse floor uninsulated", new[] {"solid, no insulation (assumed)"}, FloorInsulated.No),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    FloorDescription = p.inputFloorDescription?.ToList()
+                }, 
+                new Epc
                 {
-                    "solid, insulated"
-                }
-            },
-            new Epc
-            {
-                FloorConstruction = FloorConstruction.SolidConcrete,
-                FloorInsulated = FloorInsulated.Yes
-            }),
-        new(
-            "Can parse floor uninsulated",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                FloorDescription = new List<string>
-                {
-                    "solid, no insulation (assumed)"
-                }
-            },
-            new Epc
-            {
-                FloorConstruction = FloorConstruction.SolidConcrete,
-                FloorInsulated = FloorInsulated.No
-            }),
-    };
+                    FloorConstruction = FloorConstruction.SolidConcrete,
+                    FloorInsulated = p.outputFloorInsulation
+                }))
+            .ToArray();
     
     private static readonly EpcTestCase[] RoofConstructionTestCases =
-    {
-        new(
-            "Can handle null roof construction",
-            new EpbEpcAssessmentDto
+        new (string Descrption, string[] inputRoofDescription, RoofConstruction? outputRoofConstruction)[]
             {
-                AssessmentType = "RdSAP",
-                RoofDescription = null
-            },
-            new Epc
-            {
-                RoofConstruction = null
-            }),
-        new(
-            "Can parse roof construction pitched",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                RoofDescription = new List<string>
+                ("Can handle null roof construction", null, null),
+                ("Can parse roof construction pitched", new[] {"pitched"}, RoofConstruction.Pitched),
+                ("Can parse roof construction flat", new[] {"flat"}, RoofConstruction.Flat),
+                ("Can parse roof construction mixed", new[] {"pitched", "flat"}, RoofConstruction.Mixed),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    RoofDescription = p.inputRoofDescription?.ToList()
+                }, 
+                new Epc
                 {
-                    "pitched"
-                }
-            },
-            new Epc
-            {
-                RoofConstruction = RoofConstruction.Pitched
-            }),
-        new(
-            "Can parse roof construction flat",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                RoofDescription = new List<string>
-                {
-                    "flat"
-                }
-            },
-            new Epc
-            {
-                RoofConstruction = RoofConstruction.Flat
-            }),
-        new(
-            "Can parse roof construction mixed",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                RoofDescription = new List<string>
-                {
-                    "pitched",
-                    "flat"
-                }
-            },
-            new Epc
-            {
-                RoofConstruction = RoofConstruction.Mixed
-            }),
-    };
+                    RoofConstruction = p.outputRoofConstruction
+                }))
+            .ToArray();
     
-    private static readonly EpcTestCase[] RoofInsulationTestCases =
-    {
-        new(
-            "Can handle null roof insulation",
-            new EpbEpcAssessmentDto
+    private static readonly EpcTestCase[] RoofInsulatedTestCases =
+        new (string Descrption, string[] inputRoofDescription, RoofInsulated? outputRoofInsulated)[]
             {
-                AssessmentType = "RdSAP",
-                RoofDescription = null
-            },
-            new Epc
-            {
-                RoofInsulated = null
-            }),
-        new(
-            "Can parse roof insulated",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                RoofDescription = new List<string>
+                ("Can parse roof insulated", new[] {"pitched, insulated"}, RoofInsulated.Yes),
+                ("Can parse roof insulated >= 200mm", new[] {"pitched, 200 mm loft insulation"}, RoofInsulated.Yes),
+                ("Can parse roof uninsulated", new[] {"pitched, no insulation"}, RoofInsulated.No),
+                ("Can parse roof uninsulated < 200mm", new[] {"pitched, 150 mm loft insulation"}, RoofInsulated.No),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    RoofDescription = p.inputRoofDescription?.ToList()
+                }, 
+                new Epc
                 {
-                    "flat, insulated"
-                }
-            },
-            new Epc
-            {
-                RoofConstruction = RoofConstruction.Flat,
-                RoofInsulated = RoofInsulated.Yes
-            }),
-        new(
-            "Can parse roof insulated >= 200mm",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                RoofDescription = new List<string>
-                {
-                    "flat, 200 mm loft insulation"
-                }
-            },
-            new Epc
-            {
-                RoofConstruction = RoofConstruction.Flat,
-                RoofInsulated = RoofInsulated.Yes
-            }),
-        new(
-            "Can parse roof uninsulated",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                RoofDescription = new List<string>
-                {
-                    "flat, no insulation"
-                }
-            },
-            new Epc
-            {
-                RoofConstruction = RoofConstruction.Flat,
-                RoofInsulated = RoofInsulated.No
-            }),
-        new(
-            "Can parse roof uninsulated < 200mm",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                RoofDescription = new List<string>
-                {
-                    "flat, 150 mm loft insulation"
-                }
-            },
-            new Epc
-            {
-                RoofConstruction = RoofConstruction.Flat,
-                RoofInsulated = RoofInsulated.No
-            }),
-    };
+                    RoofConstruction = RoofConstruction.Pitched,
+                    RoofInsulated = p.outputRoofInsulated
+                }))
+            .ToArray();
     
     private static readonly EpcTestCase[] GlazingTypeTestCases =
-    {
-        new(
-            "Can handle null glazing type",
-            new EpbEpcAssessmentDto
+        new (string Descrption, string[] inputWindowsDescription, GlazingType? outputGlazingType)[]
             {
-                AssessmentType = "RdSAP",
-                WindowsDescription = null
-            },
-            new Epc
-            {
-                GlazingType = null
-            }),
-        new(
-            "Can parse glazing type single glazing",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WindowsDescription = new List<string>
+                ("Can handle null glazing type", null, null),
+                ("Can parse glazing type single glazing", new[] {"single glazed"}, GlazingType.SingleGlazed),
+                ("Can parse glazing type both (some)", new[] {"some double glazing"}, GlazingType.Both),
+                ("Can parse glazing type both (partial)", new[] {"partial triple glazing"}, GlazingType.Both),
+                ("Can parse glazing type both (mostly)", new[] {"mostly multiple glazing"}, GlazingType.Both),
+                ("Can parse glazing type both (throughout)", new[] {"multiple glazing throughout"}, GlazingType.Both),
+                ("Can parse glazing type double or triple (full)", new[] {"fully double glazed"}, GlazingType.DoubleOrTripleGlazed),
+                ("Can parse glazing type double or triple (high)", new[] {"High performance glazing"}, GlazingType.DoubleOrTripleGlazed),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    WindowsDescription = p.inputWindowsDescription?.ToList()
+                }, 
+                new Epc
                 {
-                    "single glazed"
-                }
-            },
-            new Epc
-            {
-                GlazingType = GlazingType.SingleGlazed
-            }),
-        new(
-            "Can parse glazing type both (some)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WindowsDescription = new List<string>
-                {
-                    "some double glazing"
-                }
-            },
-            new Epc
-            {
-                GlazingType = GlazingType.Both
-            }),
-        new(
-            "Can parse glazing type both (partial)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WindowsDescription = new List<string>
-                {
-                    "partial triple glazing"
-                }
-            },
-            new Epc
-            {
-                GlazingType = GlazingType.Both
-            }),
-        new(
-            "Can parse glazing type both (mostly)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WindowsDescription = new List<string>
-                {
-                    "mostly multiple glazing"
-                }
-            },
-            new Epc
-            {
-                GlazingType = GlazingType.Both
-            }),
-        new(
-            "Can parse glazing type both (throughout)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WindowsDescription = new List<string>
-                {
-                    "multiple glazing throughout"
-                }
-            },
-            new Epc
-            {
-                GlazingType = GlazingType.Both
-            }),
-        new(
-            "Can parse glazing type double or triple (full)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WindowsDescription = new List<string>
-                {
-                    "fully double glazed"
-                }
-            },
-            new Epc
-            {
-                GlazingType = GlazingType.DoubleOrTripleGlazed
-            }),
-        new(
-            "Can parse glazing type double or triple (high)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                WindowsDescription = new List<string>
-                {
-                    "High performance glazing"
-                }
-            },
-            new Epc
-            {
-                GlazingType = GlazingType.DoubleOrTripleGlazed
-            })
-    };
+                    GlazingType = p.outputGlazingType
+                }))
+            .ToArray();
     
     private static readonly EpcTestCase[] HeatingTypeTestCases =
-    {
-        new(
-            "Can handle null heating type",
-            new EpbEpcAssessmentDto
+        new (string Descrption, string inputMainFuelType, string inputMainHeatingDescription, EpcHeatingType? outputEpcHeatingType)[]
             {
-                AssessmentType = "RdSAP",
-                MainFuelType = null
-            },
-            new Epc
-            {
-                EpcHeatingType = null
-            }),
-        new(
-            "Can parse heating type other (community)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "electricity (community)"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.Other
-            }),
-        new(
-            "Can parse heating type other (bioethanol)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "bioethanol"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.Other
-            }),
-        new(
-            "Can parse heating type other (biodiesel)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "biodiesel from any biomass source"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.Other
-            }),
-        new(
-            "Can parse heating type other (waste combustion)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "waste combustion"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.Other
-            }),
-        new(
-            "Can parse heating type other (wood pellets in bags for secondary heating)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "wood pellets in bags for secondary heating"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.Other
-            }),
-        new(
-            "Can parse heating type gas boiler (mains gas)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "mains gas (not community)"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.GasBoiler
-            }),
-        new(
-            "Can parse heating type gas boiler (biogas)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "biogas - landfill"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.GasBoiler
-            }),
-        new(
-            "Can parse heating type LPG boiler",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "LPG special condition"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.LpgBoiler
-            }),
-        new(
-            "Can parse heating type oil boiler (oil)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "appliances able to use mineral oil or liquid biofuel"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.OilBoiler
-            }),
-        new(
-            "Can parse heating type oil boiler (B30K)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "B30K (not community)"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.OilBoiler
-            }),
-        new(
-            "Can parse heating type coal or solid fuel (coal)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "smokeless coal"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.CoalOrSolidFuel
-            }),
-        new(
-            "Can parse heating type coal or solid fuel (anthracite)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "anthracite"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.CoalOrSolidFuel
-            }),
-        new(
-            "Can parse heating type biomass boiler (wood)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "bulk wood pellets"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.Biomass
-            }),
-        new(
-            "Can parse heating type biomass boiler (biomass)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "biomass"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.Biomass
-            }),
-        new(
-            "Can parse heating type direct action electric",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "electricity",
-                MainHeatingDescription = "electric underfloor heating"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.DirectActionElectric
-            }),
-        new(
-            "Can parse heating type heat pump",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "electricity",
-                MainHeatingDescription = "heat pump with warm air distribution"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.HeatPump
-            }),
-        new(
-            "Can parse heating type storage heater",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                MainFuelType = "electricity",
-                MainHeatingDescription = "electric storage heaters"
-            },
-            new Epc
-            {
-                EpcHeatingType = EpcHeatingType.Storage
-            })
-    };
+                ("Can handle null heating type", null, null, null),
+                ("Can parse heating type other (community)", "electricity (community)", null, EpcHeatingType.Other),
+                ("Can parse heating type other (biodiesel)", "biodiesel from any biomass source", null, EpcHeatingType.Other),
+                ("Can parse heating type other (waste combustion)", "waste combustion", null, EpcHeatingType.Other),
+                ("Can parse heating type other (wood pellets in bags for secondary heating)", "wood pellets in bags for secondary heating", null, EpcHeatingType.Other),
+                ("Can parse heating type gas boiler (mains gas)", "mains gas (not community)", null, EpcHeatingType.GasBoiler),
+                ("Can parse heating type gas boiler (biogas)", "biogas - landfill", null, EpcHeatingType.GasBoiler),
+                ("Can parse heating type LPG boiler", "LPG special condition", null, EpcHeatingType.LpgBoiler),
+                ("Can parse heating type oil boiler (oil)", "appliances able to use mineral oil or liquid biofuel", null, EpcHeatingType.OilBoiler),
+                ("Can parse heating type oil boiler (B30K)", "B30K (not community)", null, EpcHeatingType.OilBoiler),
+                ("Can parse heating type coal or solid fuel (coal)", "smokeless coal", null, EpcHeatingType.CoalOrSolidFuel),
+                ("Can parse heating type coal or solid fuel (anthracite)", "anthracite", null, EpcHeatingType.CoalOrSolidFuel),
+                ("Can parse heating type biomass boiler (wood)", "bulk wood pellets", null, EpcHeatingType.Biomass),
+                ("Can parse heating type biomass boiler (biomass)", "biomass", null, EpcHeatingType.Biomass),
+                ("Can parse heating type direct action electric", "electricity", "electric underfloor heating", EpcHeatingType.DirectActionElectric),
+                ("Can parse heating type heat pump", "electricity", "heat pump with warm air distribution", EpcHeatingType.HeatPump),
+                ("Can parse heating type storage heater", "electricity", "electric storage heaters", EpcHeatingType.Storage),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    MainFuelType = p.inputMainFuelType,
+                    MainHeatingDescription = p.inputMainHeatingDescription
+                }, 
+                new Epc
+                {
+                    EpcHeatingType = p.outputEpcHeatingType
+                }))
+            .ToArray();
     
     private static readonly EpcTestCase[] HasHotWaterCylinderTestCases =
-    {
-        new(
-            "Can handle null has hot water cylinder",
-            new EpbEpcAssessmentDto
+        new (string Descrption, bool? inputHasHotWaterCylinder, HasHotWaterCylinder? outputHasHotWaterCylinder)[]
             {
-                AssessmentType = "RdSAP",
-                HasHotWaterCylinder = null
-            },
-            new Epc
-            {
-                HasHotWaterCylinder = null
-            }),
-        new(
-            "Can parse has hot water cylinder (true)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                HasHotWaterCylinder = true
-            },
-            new Epc
-            {
-                HasHotWaterCylinder = HasHotWaterCylinder.Yes
-            }),
-        new(
-            "Can parse has hot water cylinder (false)",
-            new EpbEpcAssessmentDto
-            {
-                AssessmentType = "RdSAP",
-                HasHotWaterCylinder = false
-            },
-            new Epc
-            {
-                HasHotWaterCylinder = HasHotWaterCylinder.No
-            }),
-    };
-
+                ("Can handle null has hot water cylinder", null, null),
+                ("Can parse has hot water cylinder (true)", true, HasHotWaterCylinder.Yes),
+                ("Can parse has hot water cylinder (false)", false, HasHotWaterCylinder.No),
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption, 
+                new EpbEpcAssessmentDto 
+                { 
+                    AssessmentType = "RdSAP",
+                    HasHotWaterCylinder = p.inputHasHotWaterCylinder
+                }, 
+                new Epc
+                {
+                    HasHotWaterCylinder = p.outputHasHotWaterCylinder
+                }))
+            .ToArray();
+    
     private static readonly EpcTestCase[] EpcParseTestCases =
         Array.Empty<EpcTestCase>()
             .Concat(AssessmentTypeTestCases)
@@ -901,9 +424,9 @@ public class EpcTests
             .Concat(SolidWallsInsulatedTestCases)
             .Concat(CavityWallsInsulatedTestCases)
             .Concat(FloorConstructionTestCases)
-            .Concat(FloorInsulationTestCases)
+            .Concat(FloorInsulatedTestCases)
             .Concat(RoofConstructionTestCases)
-            .Concat(RoofInsulationTestCases)
+            .Concat(RoofInsulatedTestCases)
             .Concat(GlazingTypeTestCases)
             .Concat(HeatingTypeTestCases)
             .Concat(HasHotWaterCylinderTestCases)
