@@ -139,7 +139,7 @@
                         },
                         new()
                         {
-                            Classes = "sea-saved-recommendations-table-headers sea-change-decision-link",
+                            Classes = "sea-saved-recommendations-table-headers",
                             Html = @<a class="govuk-link" href=@Url.Action("Recommendation_Get", new { id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true })>
                                        Revisit recommendation
                                    </a>
