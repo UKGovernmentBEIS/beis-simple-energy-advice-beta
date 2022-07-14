@@ -8,4 +8,5 @@ public interface IDataAccessProvider
     Task UpdatePropertyDataAsync(PropertyData propertyData);
     Task<PropertyData> GetPropertyDataAsync(string reference);
     Task<bool> PropertyDataExistsAsync(string reference);
+    void DeleteOldPropertyData();
 }
