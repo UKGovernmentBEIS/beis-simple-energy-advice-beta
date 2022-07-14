@@ -422,7 +422,9 @@ public class EpbEpcAssessmentDto
         }
 
         if (FloorDescription.All(description =>
-                description.Contains("insulated", StringComparison.OrdinalIgnoreCase)))
+                description.Contains("insulated", StringComparison.OrdinalIgnoreCase) ||
+                description.Contains("limited", StringComparison.OrdinalIgnoreCase)
+                ))
         {
             return FloorInsulated.Yes;
         }
@@ -466,8 +468,7 @@ public class EpbEpcAssessmentDto
 
         if (RoofDescription.Any(description =>
             {
-                if (description.Contains("limited insulation", StringComparison.OrdinalIgnoreCase) ||
-                    description.Contains("no insulation", StringComparison.OrdinalIgnoreCase))
+                if (description.Contains("no insulation", StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }
@@ -482,7 +483,8 @@ public class EpbEpcAssessmentDto
             
         if (RoofDescription.All(description =>
             {
-                if (description.Contains("insulated", StringComparison.OrdinalIgnoreCase))
+                if (description.Contains("limited", StringComparison.OrdinalIgnoreCase) ||
+                    description.Contains("insulated", StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }

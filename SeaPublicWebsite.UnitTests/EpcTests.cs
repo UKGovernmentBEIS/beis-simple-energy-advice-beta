@@ -211,6 +211,10 @@ public class EpcTests
         new (string Descrption, string[] inputWallsDescription, SolidWallsInsulated? outputSolidWallsInsulated)[]
             {
                 ("Can parse solid walls insulated", new[] {"solid brick, as built, insulated (assumed)"}, SolidWallsInsulated.All),
+                ("Can parse solid walls insulated (internal)", new[] {"solid brick, with internal insulation"}, SolidWallsInsulated.All),
+                ("Can parse solid walls insulated (external)", new[] {"solid brick, with external insulation"}, SolidWallsInsulated.All),
+                ("Can parse solid walls partially insulated", new[] {"solid brick, as built, partial insulation (assumed)"}, SolidWallsInsulated.Some),
+                ("Can parse solid walls no insulation", new[] {"solid brick, as built, no insulation (assumed)"}, SolidWallsInsulated.No),
             }
             .Select(p => new EpcTestCase(
                 p.Descrption, 
@@ -229,7 +233,10 @@ public class EpcTests
     private static readonly EpcTestCase[] CavityWallsInsulatedTestCases =
         new (string Descrption, string[] inputWallsDescription, CavityWallsInsulated? outputCavityWallsInsulated)[]
             {
-                ("Can parse Cavity walls insulated", new[] {"cavity wall, as built, insulated (assumed)"}, CavityWallsInsulated.All),
+                ("Can parse cavity walls insulated", new[] {"cavity wall, as built, insulated (assumed)"}, CavityWallsInsulated.All),
+                ("Can parse cavity walls insulated (filled cavity)", new[] {"cavity wall, filled cavity"}, CavityWallsInsulated.All),
+                ("Can parse cavity walls insulated (internal)", new[] {"cavity wall, with internal insulation"}, CavityWallsInsulated.All),
+                ("Can parse cavity walls insulated (external)", new[] {"cavity wall, with external insulation"}, CavityWallsInsulated.All),
                 ("Can parse cavity walls partially insulated", new[] {"cavity wall, as built, partial insulation (assumed)"}, CavityWallsInsulated.Some),
                 ("Can parse cavity walls no insulation", new[] {"cavity wall, as built, no insulation (assumed)"}, CavityWallsInsulated.No),
             }
@@ -272,6 +279,7 @@ public class EpcTests
         new (string Descrption, string[] inputFloorDescription, FloorInsulated? outputFloorInsulation)[]
             {
                 ("Can parse floor insulated", new[] {"solid, insulated"}, FloorInsulated.Yes),
+                ("Can parse floor insulated (limited)", new[] {"solid, limited insulation (assumed)"}, FloorInsulated.Yes),
                 ("Can parse floor uninsulated", new[] {"solid, no insulation (assumed)"}, FloorInsulated.No),
             }
             .Select(p => new EpcTestCase(
@@ -313,6 +321,7 @@ public class EpcTests
         new (string Descrption, string[] inputRoofDescription, RoofInsulated? outputRoofInsulated)[]
             {
                 ("Can parse roof insulated", new[] {"pitched, insulated"}, RoofInsulated.Yes),
+                ("Can parse roof insulated (limited)", new[] {"pitched, limited insulation (assumed)"}, RoofInsulated.Yes),
                 ("Can parse roof insulated >= 200mm", new[] {"pitched, 200 mm loft insulation"}, RoofInsulated.Yes),
                 ("Can parse roof uninsulated", new[] {"pitched, no insulation"}, RoofInsulated.No),
                 ("Can parse roof uninsulated < 200mm", new[] {"pitched, 150 mm loft insulation"}, RoofInsulated.No),
@@ -371,9 +380,16 @@ public class EpcTests
                 ("Can parse heating type oil boiler (B30K)", "B30K (not community)", null, EpcHeatingType.OilBoiler),
                 ("Can parse heating type coal or solid fuel (coal)", "smokeless coal", null, EpcHeatingType.CoalOrSolidFuel),
                 ("Can parse heating type coal or solid fuel (anthracite)", "anthracite", null, EpcHeatingType.CoalOrSolidFuel),
-                ("Can parse heating type biomass boiler (wood)", "bulk wood pellets", null, EpcHeatingType.Biomass),
+                ("Can parse heating type biomass boiler (wood logs)", "wood logs", null, EpcHeatingType.Biomass),
+                ("Can parse heating type biomass boiler (bulk wood pellets)", "bulk wood pellets", null, EpcHeatingType.Biomass),
+                ("Can parse heating type biomass boiler (wood chips)", "wood chips", null, EpcHeatingType.Biomass),
+                ("Can parse heating type biomass boiler (dual fuel)", "dual fuel - mineral + wood", null, EpcHeatingType.Biomass),
                 ("Can parse heating type biomass boiler (biomass)", "biomass", null, EpcHeatingType.Biomass),
-                ("Can parse heating type direct action electric", "electricity", "electric underfloor heating", EpcHeatingType.DirectActionElectric),
+                ("Can parse heating type direct action electric (boiler with radiators)", "electricity", "boiler with radiators or underfloor heating", EpcHeatingType.DirectActionElectric),
+                ("Can parse heating type direct action electric (underflow heating)", "electricity", "electric underfloor heating", EpcHeatingType.DirectActionElectric),
+                ("Can parse heating type direct action electric (warm air system)", "electricity", "warm air system (not heat pump)", EpcHeatingType.DirectActionElectric),
+                ("Can parse heating type direct action electric (room heaters)", "electricity", "room heaters", EpcHeatingType.DirectActionElectric),
+                ("Can parse heating type direct action electric (other)", "electricity", "other system", EpcHeatingType.DirectActionElectric),
                 ("Can parse heating type heat pump", "electricity", "heat pump with warm air distribution", EpcHeatingType.HeatPump),
                 ("Can parse heating type storage heater", "electricity", "electric storage heaters", EpcHeatingType.Storage),
             }
