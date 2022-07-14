@@ -104,7 +104,7 @@ namespace SeaPublicWebsite.Services
                     "Z1", new BreRecommendation
                     {
                         Key = RecommendationKey.InstallHeatPump,
-                        Title = "Install a heat pump ",
+                        Title = "Install a heat pump",
                         Summary = "Heat pumps use the energy outside to heat your home and hot water"
                     }
                 }
