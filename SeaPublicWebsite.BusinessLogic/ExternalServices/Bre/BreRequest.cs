@@ -80,7 +80,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
             //measures_package consists of all measures implemented in the BRE API as of May 2021, W1 being conditionally blocked is peer-reviewed
             measures_package = new[]
             {
-                "A", "B", "Q", "Q1", breFloorType != BreFloorType.DontKnow ? "W1": null, "C", "G", "L2", "O", "U"
+                "A", "B", "Q", "Q1", breFloorType != BreFloorType.DontKnow ? "W1": null, "C", "G", "L2", "O", "U", "Z1"
             };
             floor_type = (int?) breFloorType;
         }

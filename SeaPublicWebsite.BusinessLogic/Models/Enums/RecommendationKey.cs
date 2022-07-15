@@ -22,6 +22,7 @@
         SolarWaterHeating,
         MixerShowerHeatRecoverySystem,
         ReplaceSingleGlazedWindowsWithLowEDoubleGlazing,
-        HighPerformanceExternalDoors
+        HighPerformanceExternalDoors,
+        InstallHeatPump
     }
 }
