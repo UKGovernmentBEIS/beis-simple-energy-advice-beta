@@ -1,4 +1,4 @@
-# Find energy improvements suitable to your home BETA
+# Find energy improvements suitable for your home BETA
 
 ## Deployment
 
