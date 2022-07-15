@@ -1,6 +1,5 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
-@using SeaPublicWebsite.Controllers
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.NoEpcFoundViewModel
 @{
@@ -31,7 +30,7 @@
 
         @await Html.GovUkButton(new ButtonViewModel
         {
-            Href = Url.Action(nameof(EnergyEfficiencyController.PropertyType_Get), "EnergyEfficiency", new {reference = Model.Reference}),
+            Href = Model.ForwardLink,
             Text = "Continue"
         })
     </div>

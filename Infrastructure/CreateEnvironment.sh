@@ -88,6 +88,22 @@ cf set-env "sea-beta-${PAAS_ENV_SHORTNAME}" ASPNETCORE_ENVIRONMENT ${PAAS_ENV_SH
 # - Bind app to database
 cf bind-service "sea-beta-${PAAS_ENV_SHORTNAME}" "sea-beta-${PAAS_ENV_SHORTNAME}-db"
 
+# - Bind an autoscaling policy for production
+if [ "$PAAS_ENV_SHORTNAME" == "Production" ]
+then
+  # - Install autoscaling plugin
+  cf install-plugin -r CF-Community app-autoscaler-plugin
+  
+  # - Create autoscaling service
+  cf create-service autoscaler autoscaler-free-plan scale-sea-beta-Production
+  
+  # - Bind autoscaling service
+  cf bind-service sea-beta-Production scale-sea-beta-Production
+  
+  # - Attach autoscaling policy 
+  cf attach-autoscaling-policy sea-beta-Production autoscaling-policy.Production.json
+fi
+
 # - Add health check
 cf set-health-check "sea-beta-${PAAS_ENV_SHORTNAME}" http --endpoint "/health-check"
 

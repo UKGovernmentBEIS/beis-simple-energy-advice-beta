@@ -1,13 +1,9 @@
-﻿using System.Reflection;
-using SeaPublicWebsite.BusinessLogic.Models.Enums;
+﻿using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.BusinessLogic.Models;
 
 public class PropertyData
 {
-    //PRIMARY KEY
-    public int PropertyDataId { get; set; }
-    
     public string Reference { get; set; }
 
     public OwnershipStatus? OwnershipStatus { get; set; }
@@ -71,6 +67,104 @@ public class PropertyData
         GlazingType is Enums.GlazingType.SingleGlazed or Enums.GlazingType.Both;
 
     public bool ShowAltDraughtProofLoftAccess => LoftAccess is Enums.LoftAccess.Yes;
+    
+    public bool HasFloor()
+    {
+        return (PropertyType, FlatType) switch
+        {
+            (Enums.PropertyType.House, _)
+                or (Enums.PropertyType.Bungalow, _)
+                or (Enums.PropertyType.ApartmentFlatOrMaisonette, Enums.FlatType.GroundFloor) => true,
+            _ => false
+        };
+    }
+    
+    public bool HasRoof()
+    {
+        return (PropertyType, FlatType) switch
+        {
+            (Enums.PropertyType.House, _)
+                or (Enums.PropertyType.Bungalow, _)
+                or (Enums.PropertyType.ApartmentFlatOrMaisonette, Enums.FlatType.TopFloor) => true,
+            _ => false
+        };
+    }
+    
+    public void ResetUnusedFields()
+    {
+        if (PropertyType is not Enums.PropertyType.House)
+        {
+            HouseType = null;
+        }
+        
+        if (PropertyType is not Enums.PropertyType.Bungalow)
+        {
+            BungalowType = null;
+        }
+        
+        if (PropertyType is not Enums.PropertyType.ApartmentFlatOrMaisonette)
+        {
+            FlatType = null;
+        }
+        
+        if (WallConstruction is not Enums.WallConstruction.Cavity and not Enums.WallConstruction.Mixed)
+        {
+            CavityWallsInsulated = null;
+        }
+        
+        if (WallConstruction is not Enums.WallConstruction.Solid and not Enums.WallConstruction.Mixed)
+        {
+            SolidWallsInsulated = null;
+        }
+        
+        if (!HasFloor())
+        {
+            FloorConstruction = null;
+        }
+
+        if (FloorConstruction is not Enums.FloorConstruction.SolidConcrete
+            and not Enums.FloorConstruction.SuspendedTimber and not Enums.FloorConstruction.Mix)
+        {
+            FloorInsulated = null;
+        }
+
+        if (!HasRoof())
+        {
+            RoofConstruction = null;
+        }
+
+        if (RoofConstruction is not Enums.RoofConstruction.Mixed and not Enums.RoofConstruction.Pitched)
+        {
+            LoftSpace = null;
+        }
+
+        if (LoftSpace is not Enums.LoftSpace.Yes)
+        {
+            LoftAccess = null;
+        }
+
+        if (LoftAccess is not Enums.LoftAccess.Yes)
+        {
+            RoofInsulated = null;
+        }
+
+        if (HeatingType is not Enums.HeatingType.Other)
+        {
+            OtherHeatingType = null;
+        }
+
+        if (HeatingType is not Enums.HeatingType.GasBoiler and not Enums.HeatingType.OilBoiler
+            and not Enums.HeatingType.LpgBoiler)
+        {
+            HasHotWaterCylinder = null;
+        }
+
+        if (HeatingPattern is not Enums.HeatingPattern.Other)
+        {
+            HoursOfHeatingMorning = null;
+            HoursOfHeatingEvening = null;
+        }
+    }
 
     public void CreateUneditedData()
     {
@@ -104,8 +198,7 @@ public class PropertyData
     {
         foreach (var propertyInfo in GetType().GetProperties())
         {
-            if (propertyInfo.Name.Equals(nameof(PropertyDataId)) ||
-                propertyInfo.Name.Equals(nameof(Reference)) ||
+            if (propertyInfo.Name.Equals(nameof(Reference)) ||
                 propertyInfo.Name.Equals(nameof(Epc)) ||
                 propertyInfo.Name.Equals(nameof(UneditedData)) ||
                 propertyInfo.Name.Equals(nameof(PropertyRecommendations)))
@@ -126,8 +219,7 @@ public class PropertyData
     {
         foreach (var propertyInfo in GetType().GetProperties())
         {
-            if (propertyInfo.Name.Equals(nameof(PropertyDataId)) ||
-                propertyInfo.Name.Equals(nameof(Reference)) ||
+            if (propertyInfo.Name.Equals(nameof(Reference)) ||
                 propertyInfo.Name.Equals(nameof(Epc)) ||
                 propertyInfo.Name.Equals(nameof(UneditedData)) ||
                 propertyInfo.Name.Equals(nameof(PropertyRecommendations)))
