@@ -294,6 +294,15 @@ public class EpbEpcAssessmentDto
         return null;
     }
 
+    private static bool HasSolidWalls(string description)
+    {
+        return description.Contains("solid", StringComparison.OrdinalIgnoreCase) ||
+               description.Contains("granite", StringComparison.OrdinalIgnoreCase) ||
+               description.Contains("whinstone", StringComparison.OrdinalIgnoreCase) ||
+               description.Contains("sandstone", StringComparison.OrdinalIgnoreCase) ||
+               description.Contains("limestone", StringComparison.OrdinalIgnoreCase);
+    }
+
     private WallConstruction? ParseWallConstruction()
     {
         if (WallsDescription is null)
@@ -301,10 +310,20 @@ public class EpbEpcAssessmentDto
             return null;
         }
         
+        var hasOther = WallsDescription.Any(description =>
+            description.Contains("System built", StringComparison.OrdinalIgnoreCase) ||
+            description.Contains("Cob", StringComparison.OrdinalIgnoreCase) ||
+            description.Contains("Timber frame", StringComparison.OrdinalIgnoreCase) ||
+            description.Contains("Park home wall", StringComparison.OrdinalIgnoreCase));
+
+        if (hasOther)
+        {
+            return WallConstruction.Other;
+        }
+
         var hasCavity = WallsDescription.Any(description => 
             description.Contains("cavity", StringComparison.OrdinalIgnoreCase));
-        var hasSolid = WallsDescription.Any(description => 
-            description.Contains("solid", StringComparison.OrdinalIgnoreCase));
+        var hasSolid = WallsDescription.Any(HasSolidWalls);
 
         return (hasCavity, hasSolid) switch
         {
@@ -323,7 +342,7 @@ public class EpbEpcAssessmentDto
         }
 
         if (WallsDescription.Any(description =>
-                description.Contains("solid", StringComparison.OrdinalIgnoreCase) &&
+                HasSolidWalls(description) &&
                 (description.Contains("insulated", StringComparison.OrdinalIgnoreCase) ||
                  description.Contains("internal insulation", StringComparison.OrdinalIgnoreCase) ||
                  description.Contains("external insulation", StringComparison.OrdinalIgnoreCase))))
@@ -332,14 +351,14 @@ public class EpbEpcAssessmentDto
         }
         
         if (WallsDescription.Any(description =>
-                description.Contains("solid", StringComparison.OrdinalIgnoreCase) &&
+                HasSolidWalls(description) &&
                 description.Contains("partial insulation", StringComparison.OrdinalIgnoreCase)))
         {
             return SolidWallsInsulated.Some;
         }
         
         if (WallsDescription.Any(description =>
-                description.Contains("solid", StringComparison.OrdinalIgnoreCase) &&
+                HasSolidWalls(description) &&
                 description.Contains("no insulation", StringComparison.OrdinalIgnoreCase)))
         {
             return SolidWallsInsulated.No;
@@ -411,7 +430,9 @@ public class EpbEpcAssessmentDto
         }
 
         if (FloorDescription.All(description =>
-                description.Contains("insulated", StringComparison.OrdinalIgnoreCase)))
+                description.Contains("insulated", StringComparison.OrdinalIgnoreCase) ||
+                description.Contains("limited", StringComparison.OrdinalIgnoreCase)
+                ))
         {
             return FloorInsulated.Yes;
         }
@@ -433,7 +454,8 @@ public class EpbEpcAssessmentDto
         }
 
         var hasFlat = RoofDescription.Any(description =>
-            description.Contains("flat", StringComparison.OrdinalIgnoreCase));
+            description.Contains("flat", StringComparison.OrdinalIgnoreCase) ||
+            description.Contains("thatched", StringComparison.OrdinalIgnoreCase));
         var hasPitched = RoofDescription.Any(description =>
             description.Contains("pitched", StringComparison.OrdinalIgnoreCase));
 
@@ -455,8 +477,7 @@ public class EpbEpcAssessmentDto
 
         if (RoofDescription.Any(description =>
             {
-                if (description.Contains("limited insulation", StringComparison.OrdinalIgnoreCase) ||
-                    description.Contains("no insulation", StringComparison.OrdinalIgnoreCase))
+                if (description.Contains("no insulation", StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }
@@ -471,7 +492,8 @@ public class EpbEpcAssessmentDto
             
         if (RoofDescription.All(description =>
             {
-                if (description.Contains("insulated", StringComparison.OrdinalIgnoreCase))
+                if (description.Contains("limited", StringComparison.OrdinalIgnoreCase) ||
+                    description.Contains("insulated", StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }
@@ -553,7 +575,8 @@ public class EpbEpcAssessmentDto
             MainFuelType.Equals("34") ||
             MainFuelType.Equals("35") ||
             MainFuelType.Equals("36") ||
-            MainFuelType.Contains("(community)", StringComparison.OrdinalIgnoreCase))
+            MainFuelType.Contains("bioethanol", StringComparison.OrdinalIgnoreCase) ||
+            MainFuelType.Contains("biodiesel", StringComparison.OrdinalIgnoreCase))
         {
             return EpcHeatingType.Other;
         }
@@ -662,7 +685,7 @@ public class EpbEpcAssessmentDto
             // Communal heating is treated as 'other heating'
             // 6 - community heating system
             if (MainHeatingDescription.Equals("6") ||
-                MainFuelType.Contains("community", StringComparison.OrdinalIgnoreCase))
+                MainHeatingDescription.Contains("community", StringComparison.OrdinalIgnoreCase))
             {
                 return EpcHeatingType.Other;
             }
@@ -678,11 +701,11 @@ public class EpbEpcAssessmentDto
                 MainHeatingDescription.Equals("9") ||
                 MainHeatingDescription.Equals("10") ||
                 MainHeatingDescription.Equals("11") ||
-                MainFuelType.Contains("boiler with radiators or underfloor heating", StringComparison.OrdinalIgnoreCase) ||
-                MainFuelType.Contains("electric underfloor heating", StringComparison.OrdinalIgnoreCase) ||
-                MainFuelType.Contains("warm air system (not heat pump)", StringComparison.OrdinalIgnoreCase) ||
-                MainFuelType.Contains("room heaters", StringComparison.OrdinalIgnoreCase) ||
-                MainFuelType.Contains("other system", StringComparison.OrdinalIgnoreCase))
+                MainHeatingDescription.Contains("boiler with radiators or underfloor heating", StringComparison.OrdinalIgnoreCase) ||
+                MainHeatingDescription.Contains("electric underfloor heating", StringComparison.OrdinalIgnoreCase) ||
+                MainHeatingDescription.Contains("warm air system (not heat pump)", StringComparison.OrdinalIgnoreCase) ||
+                MainHeatingDescription.Contains("room heaters", StringComparison.OrdinalIgnoreCase) ||
+                MainHeatingDescription.Contains("other system", StringComparison.OrdinalIgnoreCase))
             {
                 return EpcHeatingType.DirectActionElectric;
             }
@@ -692,7 +715,7 @@ public class EpbEpcAssessmentDto
             // 5 - heat pump with warm air distribution
             if (MainHeatingDescription.Equals("4") ||
                 MainHeatingDescription.Equals("5") ||
-                MainFuelType.Contains("heat pump with", StringComparison.OrdinalIgnoreCase))
+                MainHeatingDescription.Contains("heat pump with", StringComparison.OrdinalIgnoreCase))
             {
                 return EpcHeatingType.HeatPump;
             }
@@ -700,7 +723,7 @@ public class EpbEpcAssessmentDto
             // Storage heater check
             // 7 - electric storage heaters
             if (MainHeatingDescription.Equals("7") ||
-                MainFuelType.Contains("electric storage heaters", StringComparison.OrdinalIgnoreCase))
+                MainHeatingDescription.Contains("electric storage heaters", StringComparison.OrdinalIgnoreCase))
             {
                 return EpcHeatingType.Storage;
             }
@@ -708,7 +731,7 @@ public class EpbEpcAssessmentDto
             // Special case of micro combined heat and power
             // 3 - micro-cogeneration
             if (MainHeatingDescription.Equals("3") ||
-                MainFuelType.Contains("micro-cogeneration", StringComparison.OrdinalIgnoreCase))
+                MainHeatingDescription.Contains("micro-cogeneration", StringComparison.OrdinalIgnoreCase))
             {
                 return EpcHeatingType.GasBoiler;
             }
