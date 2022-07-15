@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre.Enums;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
-using SeaPublicWebsite.ExternalServices.Bre;
-using SeaPublicWebsite.ExternalServices.Models;
 
-namespace SeaPublicWebsite.Services
+namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 {
     public class RecommendationService
     {
@@ -98,6 +94,14 @@ namespace SeaPublicWebsite.Services
                         Key = RecommendationKey.SolarElectricPanels,
                         Title = "Fit solar electric panels",
                         Summary = "Install PV panels on your roof to generate electricity"
+                    }
+                },
+                {
+                    "Z1", new BreRecommendation
+                    {
+                        Key = RecommendationKey.InstallHeatPump,
+                        Title = "Install a heat pump",
+                        Summary = "Heat pumps use the energy outside to heat your home and hot water"
                     }
                 }
             };

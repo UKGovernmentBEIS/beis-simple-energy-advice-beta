@@ -6,9 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using SeaPublicWebsite.ErrorHandling;
-using SeaPublicWebsite.ExternalServices.Bre;
-using SeaPublicWebsite.Helpers;
+using SeaPublicWebsite.BusinessLogic.ExternalServices.Common;
 using SeaPublicWebsite.Services.Cookies;
 
 namespace SeaPublicWebsite.ExternalServices.GoogleAnalytics;

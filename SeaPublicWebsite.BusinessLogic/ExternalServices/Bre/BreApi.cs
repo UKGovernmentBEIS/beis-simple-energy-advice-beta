@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Globalization;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using SeaPublicWebsite.ExternalServices.Models;
-using SeaPublicWebsite.Helpers;
-using SeaPublicWebsite.Services;
+using SeaPublicWebsite.BusinessLogic.ExternalServices.Common;
 
-namespace SeaPublicWebsite.ExternalServices.Bre
+namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 {
     public class BreApi
     {
