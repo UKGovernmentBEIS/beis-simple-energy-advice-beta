@@ -42,6 +42,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Grafana", "Grafana", "{7886
 		Infrastructure\Metrics\Grafana\manifest.yml = Infrastructure\Metrics\Grafana\manifest.yml
 		Infrastructure\Metrics\Grafana\runtime.txt = Infrastructure\Metrics\Grafana\runtime.txt
 		Infrastructure\Metrics\Grafana\dev-dashboard.json = Infrastructure\Metrics\Grafana\dev-dashboard.json
+		Infrastructure\Metrics\Grafana\production-dashboard.json = Infrastructure\Metrics\Grafana\production-dashboard.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PrometheusServer", "PrometheusServer", "{835C7323-A422-4C2B-9BAE-082A665C338F}"

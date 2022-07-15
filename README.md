@@ -7,7 +7,7 @@ The site is deployed using github actions.
 ### Database Migrations
 
 Migrations will be run automatically on deployment. If a migration needs to be rolled back for any reason there are two options:
-1. Create an new inverse migration and deploy that
+1. Create a new inverse migration and deploy that
 2. Generate and run a rollback script
    1. Check out the same commit locally
    2. [Install EF Core CLI tools](https://docs.microsoft.com/en-us/ef/core/cli/dotnet) if you haven't already
