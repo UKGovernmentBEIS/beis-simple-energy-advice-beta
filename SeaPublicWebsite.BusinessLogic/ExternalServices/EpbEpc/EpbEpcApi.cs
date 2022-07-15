@@ -48,7 +48,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc
             {
                 if (e.StatusCode is not HttpStatusCode.NotFound)
                 {
-                    logger.Log(LogLevel.Warning, "{Message}", e.Message);
+                    logger.LogError("There was an error sending a request to the epc api: {}", e.Message);
                 }
 
                 return new List<EpcSearchResult>();
@@ -95,15 +95,25 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc
                 return token;
             }
 
-            var response = await HttpRequestHelper.SendPostRequestAsync<TokenRequestResponse>(
-                new RequestParameters
-                {
-                    BaseAddress = configuration.BaseUrl,
-                    Path = "/auth/oauth/token",
-                    Auth = new AuthenticationHeaderValue("Basic",
-                        HttpRequestHelper.ConvertToBase64(configuration.Username, configuration.Password))
-                }
-            );
+            TokenRequestResponse response;
+            try
+            {
+
+                response = await HttpRequestHelper.SendPostRequestAsync<TokenRequestResponse>(
+                    new RequestParameters
+                    {
+                        BaseAddress = configuration.BaseUrl,
+                        Path = "/auth/oauth/token",
+                        Auth = new AuthenticationHeaderValue("Basic",
+                            HttpRequestHelper.ConvertToBase64(configuration.Username, configuration.Password))
+                    }
+                );
+            }
+            catch(Exception e)
+            {
+                logger.LogError("There was an error requesting an access token for the epc api: {}", e.Message);
+                throw;
+            }
             // We divide by 2 to avoid edge cases of sending requests on the exact expiration time
             var expiryTimeInSeconds = response.ExpiryTimeInSeconds / 2;
             token = response.Token;

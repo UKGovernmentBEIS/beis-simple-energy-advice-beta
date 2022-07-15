@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Common;
-using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Services.Cookies;
 
 namespace SeaPublicWebsite.ExternalServices.GoogleAnalytics;
@@ -15,21 +15,33 @@ public class GoogleAnalyticsService
 {
     public readonly GoogleAnalyticsConfiguration Configuration;
     private readonly CookieService cookieService;
+    private readonly ILogger<GoogleAnalyticsService> logger;
     
-    public GoogleAnalyticsService(IOptions<GoogleAnalyticsConfiguration> options, CookieService cookieService)
+    public GoogleAnalyticsService(
+        IOptions<GoogleAnalyticsConfiguration> options,
+        CookieService cookieService,
+        ILogger<GoogleAnalyticsService> logger)
     {
         this.Configuration = options.Value;
         this.cookieService = cookieService;
+        this.logger = logger;
     }
     
     public async Task SendEvent(GaRequestBody body)
     {
-        await HttpRequestHelper.SendPostRequestAsync<string>(new RequestParameters
+        try
         {
-            BaseAddress = Configuration.BaseUrl,
-            Path = $"/mp/collect?api_secret={Configuration.ApiSecret}&measurement_id={Configuration.MeasurementId}",
-            Body = new StringContent(JsonConvert.SerializeObject(body))
-        });
+            await HttpRequestHelper.SendPostRequestAsync<string>(new RequestParameters
+            {
+                BaseAddress = Configuration.BaseUrl,
+                Path = $"/mp/collect?api_secret={Configuration.ApiSecret}&measurement_id={Configuration.MeasurementId}",
+                Body = new StringContent(JsonConvert.SerializeObject(body))
+            });
+        }
+        catch (Exception e)
+        {
+            logger.LogError("There was an error sending an event to google analytics: {}", e.Message);
+        }
     }
     
     // Cookie format: GAx.y.zzzzzzzzz.tttttttttt.
