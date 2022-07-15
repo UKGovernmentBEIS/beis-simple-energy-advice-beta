@@ -1,7 +1,6 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 
-namespace SeaPublicWebsite.ErrorHandling
+namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Common
 {
     public class ApiException : Exception
     {

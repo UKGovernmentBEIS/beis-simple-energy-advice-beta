@@ -1,4 +1,4 @@
-﻿namespace SeaPublicWebsite.ExternalServices.Bre
+﻿namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 {
     public class BreConfiguration
     {

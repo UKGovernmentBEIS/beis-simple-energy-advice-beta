@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
-namespace SeaPublicWebsite.ExternalServices.Models.Epb;
+namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 
 public class EpbEpcDto
 {
@@ -194,18 +191,18 @@ public class EpbEpcAssessmentDto
         
         if (PropertyType.Contains("House", StringComparison.OrdinalIgnoreCase))
         {
-            return BusinessLogic.Models.Enums.PropertyType.House;
+            return SeaPublicWebsite.BusinessLogic.Models.Enums.PropertyType.House;
         }
 
         if (PropertyType.Contains("Bungalow", StringComparison.OrdinalIgnoreCase))
         {
-            return BusinessLogic.Models.Enums.PropertyType.Bungalow;
+            return SeaPublicWebsite.BusinessLogic.Models.Enums.PropertyType.Bungalow;
         }
 
         if (PropertyType.Contains("Flat", StringComparison.OrdinalIgnoreCase) ||
             PropertyType.Contains("Maisonette", StringComparison.OrdinalIgnoreCase))
         {
-            return BusinessLogic.Models.Enums.PropertyType.ApartmentFlatOrMaisonette;
+            return SeaPublicWebsite.BusinessLogic.Models.Enums.PropertyType.ApartmentFlatOrMaisonette;
         }
 
         return null;
@@ -213,7 +210,7 @@ public class EpbEpcAssessmentDto
     
     private HouseType? ParseHouseType()
     {
-        if (ParsePropertyType() is not BusinessLogic.Models.Enums.PropertyType.House)
+        if (ParsePropertyType() is not SeaPublicWebsite.BusinessLogic.Models.Enums.PropertyType.House)
         {
             return null;
         }
@@ -243,7 +240,7 @@ public class EpbEpcAssessmentDto
     
     private BungalowType? ParseBungalowType()
     {
-        if (ParsePropertyType() is not BusinessLogic.Models.Enums.PropertyType.Bungalow)
+        if (ParsePropertyType() is not SeaPublicWebsite.BusinessLogic.Models.Enums.PropertyType.Bungalow)
         {
             return null;
         }
@@ -273,7 +270,7 @@ public class EpbEpcAssessmentDto
     
     private FlatType? ParseFlatType()
     {
-        if (ParsePropertyType() is not BusinessLogic.Models.Enums.PropertyType.ApartmentFlatOrMaisonette)
+        if (ParsePropertyType() is not SeaPublicWebsite.BusinessLogic.Models.Enums.PropertyType.ApartmentFlatOrMaisonette)
         {
             return null;
         }
@@ -728,8 +725,8 @@ public class EpbEpcAssessmentDto
         }
 
         return HasHotWaterCylinder.Value
-            ? BusinessLogic.Models.Enums.HasHotWaterCylinder.Yes
-            : BusinessLogic.Models.Enums.HasHotWaterCylinder.No;
+            ? SeaPublicWebsite.BusinessLogic.Models.Enums.HasHotWaterCylinder.Yes
+            : SeaPublicWebsite.BusinessLogic.Models.Enums.HasHotWaterCylinder.No;
     }
 
 

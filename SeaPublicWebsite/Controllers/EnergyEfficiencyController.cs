@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
+using SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.BusinessLogic.Services;
 using SeaPublicWebsite.DataStores;
-using SeaPublicWebsite.ExternalServices;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.GoogleAnalytics;
 using SeaPublicWebsite.ExternalServices.PostcodesIo;
@@ -30,6 +31,7 @@ namespace SeaPublicWebsite.Controllers
         private readonly CookieService cookieService;
         private readonly GoogleAnalyticsService googleAnalyticsService;
         private readonly PostcodesIoApi postcodesIoApi;
+        private readonly AnswerService answerService;
 
         public EnergyEfficiencyController(
             PropertyDataStore propertyDataStore,
@@ -39,7 +41,8 @@ namespace SeaPublicWebsite.Controllers
             RecommendationService recommendationService,
             CookieService cookieService,
             GoogleAnalyticsService googleAnalyticsService,
-            PostcodesIoApi postcodesIoApi)
+            PostcodesIoApi postcodesIoApi,
+            AnswerService answerService)
         {
             this.propertyDataStore = propertyDataStore;
             this.questionFlowService = questionFlowService;
@@ -49,6 +52,7 @@ namespace SeaPublicWebsite.Controllers
             this.cookieService = cookieService;
             this.googleAnalyticsService = googleAnalyticsService;
             this.postcodesIoApi = postcodesIoApi;
+            this.answerService = answerService;
         }
         
         [HttpGet("")]
@@ -66,10 +70,9 @@ namespace SeaPublicWebsite.Controllers
         [HttpGet("new-or-returning-user")]
         public IActionResult NewOrReturningUser_Get()
         {
-            var backArgs = GetBackArgs(QuestionFlowStep.NewOrReturningUser, null);
             var viewModel = new NewOrReturningUserViewModel
             {
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.NewOrReturningUser)
             };
             return View("NewOrReturningUser", viewModel);
         }
@@ -96,8 +99,7 @@ namespace SeaPublicWebsite.Controllers
             var propertyData = await propertyDataStore.CreateNewPropertyDataAsync();
 
             var nextStep = questionFlowService.NextStep(QuestionFlowStep.NewOrReturningUser, propertyData);
-            var forwardArgs = GetActionArgumentsForQuestion(nextStep, propertyData.Reference);
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
+            return RedirectToNextStep(nextStep, propertyData.Reference);
         }
 
         
@@ -106,12 +108,11 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
-            var backArgs = GetBackArgs(QuestionFlowStep.OwnershipStatus, propertyData);
             var viewModel = new OwnershipStatusViewModel
             {
                 OwnershipStatus = propertyData.OwnershipStatus,
                 Reference = propertyData.Reference,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.OwnershipStatus, propertyData)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -128,10 +129,9 @@ namespace SeaPublicWebsite.Controllers
                 return await OwnershipStatus_Get(viewModel.Reference);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.OwnershipStatus = viewModel.OwnershipStatus,
-                viewModel.Reference,
-                QuestionFlowStep.OwnershipStatus);
+            var nextStep = await answerService.UpdateOwnershipStatus(viewModel.Reference, viewModel.OwnershipStatus);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference);
         }
 
         [HttpGet("country/{reference}")]
@@ -139,12 +139,11 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
-            var backArgs = GetBackArgs(QuestionFlowStep.Country, propertyData);
             var viewModel = new CountryViewModel
             {
                 Country = propertyData.Country,
                 Reference = propertyData.Reference,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.Country, propertyData)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -161,23 +160,20 @@ namespace SeaPublicWebsite.Controllers
                 return await Country_Get(viewModel.Reference);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.Country = viewModel.Country,
-                viewModel.Reference,
-                QuestionFlowStep.Country);
+            var nextStep = await answerService.UpdateCountry(viewModel.Reference, viewModel.Country);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference);
         }
-
-
+        
         [HttpGet("service-unsuitable/{reference}")]
         public async Task<IActionResult> ServiceUnsuitable(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            var backArgs = GetBackArgs(QuestionFlowStep.ServiceUnsuitable, propertyData);
             var viewModel = new ServiceUnsuitableViewModel
             {
                 Reference = propertyData.Reference,
                 Country = propertyData.Country,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.ServiceUnsuitable, propertyData)
             };
             
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -190,13 +186,12 @@ namespace SeaPublicWebsite.Controllers
         public async Task<IActionResult> FindEpc_Get(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            var backArgs = GetBackArgs(QuestionFlowStep.FindEpc, propertyData);
 
             var viewModel = new FindEpcViewModel
             {
                 Reference = propertyData.Reference,
                 FindEpc = propertyData.SearchForEpc,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
+                BackLink = GetBackUrl(QuestionFlowStep.FindEpc, propertyData)
             };
             
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -213,18 +208,9 @@ namespace SeaPublicWebsite.Controllers
                 return await FindEpc_Get(viewModel.Reference);
             }
 
-            return await UpdatePropertyAndRedirect(
-                propertyData =>
-                {
-                    propertyData.SearchForEpc = viewModel.FindEpc;
-                    propertyData.EpcDetailsConfirmed = null;
-                    propertyData.Epc = null;
-                    propertyData.PropertyType = null;
-                    propertyData.YearBuilt = null;
-                },
-                viewModel.Reference,
-                QuestionFlowStep.FindEpc,
-                viewModel.EntryPoint);
+            var nextStep = await answerService.UpdateSearchForEpc(viewModel.Reference, viewModel.FindEpc);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference);
         }
 
         [HttpGet("postcode/{reference}")]
@@ -232,13 +218,10 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.AskForPostcode, propertyData);
-            var skipDestination = questionFlowService.SkipDestination(QuestionFlowStep.AskForPostcode, propertyData);
-            var skipArgs = GetActionArgumentsForQuestion(skipDestination, reference);
             var viewModel = new AskForPostcodeViewModel
             {
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
-                SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.AskForPostcode, propertyData),
+                SkipLink = GetSkipUrl(QuestionFlowStep.AskForPostcode, propertyData)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -254,11 +237,9 @@ namespace SeaPublicWebsite.Controllers
             
             if (cancel)
             {
-                return await UpdatePropertyAndRedirect(
-                    // Behave as if the user had selected "No" on the page before
-                    p => { p.SearchForEpc = SearchForEpc.No; },
-                    viewModel.Reference,
-                    QuestionFlowStep.AskForPostcode);
+                // Behave as if the user had selected "No" on the page before
+                var nextStepCancel = await answerService.UpdateSearchForEpc(viewModel.Reference, SearchForEpc.No);
+                return RedirectToNextStep(nextStepCancel, viewModel.Reference);
             }
             
             if (viewModel.Postcode is not null && !(await postcodesIoApi.IsValidPostcode(viewModel.Postcode)))
@@ -293,17 +274,15 @@ namespace SeaPublicWebsite.Controllers
             epcSearchResults = filteredEpcSearchResults.Any() ? filteredEpcSearchResults : epcSearchResults;
 
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            var backArgs = GetBackArgs(QuestionFlowStep.ConfirmAddress, propertyData);
-            var backLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values);
+            var backLink = GetBackUrl(QuestionFlowStep.ConfirmAddress, propertyData);
 
             if (epcSearchResults.Count == 0)
             {
-                var forwardArgs = GetForwardArgs(QuestionFlowStep.NoEpcFound, propertyData);
                 var viewModel = new NoEpcFoundViewModel
                 {
                     Reference = reference,
                     BackLink = backLink,
-                    ForwardLink = Url.Action(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values)
+                    ForwardLink = GetForwardUrl(QuestionFlowStep.NoEpcFound, propertyData)
                 };
                 return View("NoEpcFound", viewModel);
             }
@@ -345,13 +324,11 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await ConfirmAddress_Get(viewModel.Reference, viewModel.Postcode, viewModel.Number);
             }
+
+            var epcId = viewModel.SelectedEpcId == "unlisted" ? null : viewModel.SelectedEpcId;
+            var nextStep = await answerService.SetEpc(viewModel.Reference, epcId);
             
-            var epc = viewModel.SelectedEpcId == "unlisted" ? null : await epcApi.GetEpcForId(viewModel.SelectedEpcId);
-            
-            return await UpdatePropertyAndRedirect(
-                p => { p.Epc = epc;},
-                viewModel.Reference,
-                QuestionFlowStep.ConfirmAddress);
+            return RedirectToNextStep(nextStep, viewModel.Reference);
         }
         
         [HttpPost("single-address/{reference}/{postcode}/{number}")]
@@ -362,25 +339,22 @@ namespace SeaPublicWebsite.Controllers
                 return await ConfirmAddress_Get(viewModel.Reference, viewModel.Postcode, viewModel.Number);
             }
             
-            var epc = viewModel.EpcAddressConfirmed == EpcAddressConfirmed.Yes ? await epcApi.GetEpcForId(viewModel.EpcId) : null;
+            var epcId = viewModel.EpcAddressConfirmed == EpcAddressConfirmed.Yes ? viewModel.EpcId : null;
+            var nextStep = await answerService.SetEpc(viewModel.Reference, epcId);
 
-            return await UpdatePropertyAndRedirect(
-                p => { p.Epc = epc; },
-                viewModel.Reference,
-                QuestionFlowStep.ConfirmAddress);
+            return RedirectToNextStep(nextStep, viewModel.Reference);
         }
 
         [HttpGet("confirm-epc-details/{reference}")]
         public async Task<IActionResult> ConfirmEpcDetails_Get(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            var backArgs = GetBackArgs(QuestionFlowStep.ConfirmEpcDetails, propertyData);
 
             var viewModel = new ConfirmEpcDetailsViewModel
             {
                 Reference = propertyData.Reference,
                 Epc = propertyData.Epc,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
+                BackLink = GetBackUrl(QuestionFlowStep.ConfirmEpcDetails, propertyData)
             };
             
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -396,52 +370,22 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await ConfirmEpcDetails_Get(viewModel.Reference);
             }
-
-            return await UpdatePropertyAndRedirect(
-                propertyData =>
-                {
-                    propertyData.EpcDetailsConfirmed = viewModel.EpcDetailsConfirmed;
-                    Epc epc = propertyData.Epc;
-                    if (viewModel.EpcDetailsConfirmed == EpcDetailsConfirmed.Yes)
-                    {
-                        propertyData.PropertyType = epc.PropertyType;
-                        propertyData.HouseType = epc.HouseType;
-                        propertyData.BungalowType = epc.BungalowType;
-                        propertyData.FlatType = epc.FlatType;
-                        propertyData.YearBuilt = epc.ConstructionAgeBand switch
-                        {
-                            HomeAge.Pre1900 => YearBuilt.Pre1930,
-                            HomeAge.From1900To1929 => YearBuilt.Pre1930,
-                            HomeAge.From1930To1949 => YearBuilt.From1930To1966,
-                            HomeAge.From1950To1966 => YearBuilt.From1930To1966,
-                            HomeAge.From1967To1975 => YearBuilt.From1967To1982,
-                            HomeAge.From1976To1982 => YearBuilt.From1967To1982,
-                            HomeAge.From1983To1990 => YearBuilt.From1983To1995,
-                            HomeAge.From1991To1995 => YearBuilt.From1983To1995,
-                            HomeAge.From1996To2002 => YearBuilt.From1996To2011,
-                            HomeAge.From2003To2006 => YearBuilt.From1996To2011,
-                            HomeAge.From2007To2011 => YearBuilt.From1996To2011,
-                            HomeAge.From2012ToPresent => YearBuilt.From2012ToPresent,
-                            _ => throw new ArgumentOutOfRangeException()
-                        };
-                    }
-                },
-                viewModel.Reference,
-                QuestionFlowStep.ConfirmEpcDetails);
+            
+            var nextStep = await answerService.ConfirmEpcDetails(viewModel.Reference, viewModel.EpcDetailsConfirmed);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference);
         }
 
         [HttpGet("no-epc-found/{reference}")]
         public async Task<IActionResult> NoEpcFound_Get(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            var backArgs = GetBackArgs(QuestionFlowStep.NoEpcFound, propertyData);
-            var forwardArgs = GetForwardArgs(QuestionFlowStep.NoEpcFound, propertyData);
 
             var viewModel = new NoEpcFoundViewModel
             {
                 Reference = propertyData.Reference,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
-                ForwardLink = Url.Action(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.NoEpcFound, propertyData),
+                ForwardLink = GetForwardUrl(QuestionFlowStep.NoEpcFound, propertyData)
             };
             
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -455,13 +399,12 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.PropertyType, propertyData, entryPoint);
             var viewModel = new PropertyTypeViewModel
             {
                 PropertyType = propertyData.PropertyType,
                 Reference = reference,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.PropertyType, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -478,11 +421,12 @@ namespace SeaPublicWebsite.Controllers
                 return await PropertyType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.PropertyType = viewModel.PropertyType,
+            var nextStep = await answerService.UpdatePropertyType(
                 viewModel.Reference,
-                QuestionFlowStep.PropertyType,
+                viewModel.PropertyType,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
         [HttpGet("house-type/{reference}")]
@@ -490,13 +434,12 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.HouseType, propertyData, entryPoint);
             var viewModel = new HouseTypeViewModel
             {
                 HouseType = propertyData.HouseType,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.HouseType, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -513,11 +456,12 @@ namespace SeaPublicWebsite.Controllers
                 return await HouseType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.HouseType = viewModel.HouseType,
+            var nextStep = await answerService.UpdateHouseType(
                 viewModel.Reference,
-                QuestionFlowStep.HouseType,
+                viewModel.HouseType,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
         
@@ -526,13 +470,12 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.BungalowType, propertyData, entryPoint);
             var viewModel = new BungalowTypeViewModel
             {
                 BungalowType = propertyData.BungalowType,
                 Reference = reference,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.BungalowType, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -549,11 +492,12 @@ namespace SeaPublicWebsite.Controllers
                 return await BungalowType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.BungalowType = viewModel.BungalowType,
+            var nextStep = await answerService.UpdateBungalowType(
                 viewModel.Reference,
-                QuestionFlowStep.BungalowType, 
+                viewModel.BungalowType,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
         
@@ -562,13 +506,12 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.FlatType, propertyData, entryPoint);
             var viewModel = new FlatTypeViewModel
             {
                 FlatType = propertyData.FlatType,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.FlatType, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -585,11 +528,12 @@ namespace SeaPublicWebsite.Controllers
                 return await FlatType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.FlatType = viewModel.FlatType,
+            var nextStep = await answerService.UpdateFlatType(
                 viewModel.Reference,
-                QuestionFlowStep.FlatType, 
+                viewModel.FlatType,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
         
@@ -598,7 +542,6 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.HomeAge, propertyData, entryPoint);
             var viewModel = new HomeAgeViewModel
             {
                 PropertyType = propertyData.PropertyType,
@@ -606,7 +549,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = propertyData.Reference,
                 Epc = propertyData.Epc,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.HomeAge, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -622,12 +565,13 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await HomeAge_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-
-            return await UpdatePropertyAndRedirect(
-                p => p.YearBuilt = viewModel.YearBuilt,
+            
+            var nextStep = await answerService.UpdateYearBuilt(
                 viewModel.Reference,
-                QuestionFlowStep.HomeAge, 
+                viewModel.YearBuilt,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
         [HttpGet("check-your-unchangeable-answers/{reference}")]
@@ -643,14 +587,12 @@ namespace SeaPublicWebsite.Controllers
                 await propertyDataStore.SavePropertyDataAsync(propertyData);
             }
             
-            var backArgs = GetBackArgs(QuestionFlowStep.CheckYourUnchangeableAnswers, propertyData, entryPoint);
-            var forwardArgs = GetForwardArgs(QuestionFlowStep.CheckYourUnchangeableAnswers, propertyData, entryPoint);
             var viewModel = new CheckYourUnchangeableAnswersViewModel()
             {
                 Reference = reference,
                 PropertyData = propertyData,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
-                ForwardLink = Url.Action(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.CheckYourUnchangeableAnswers, propertyData, entryPoint),
+                ForwardLink = GetForwardUrl(QuestionFlowStep.CheckYourUnchangeableAnswers, propertyData, entryPoint)
             };
             
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -664,7 +606,6 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.WallConstruction, propertyData, entryPoint);
             var viewModel = new WallConstructionViewModel
             {
                 WallConstruction = propertyData.WallConstruction,
@@ -672,7 +613,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.WallConstruction, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -689,11 +630,12 @@ namespace SeaPublicWebsite.Controllers
                 return await WallConstruction_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.WallConstruction = viewModel.WallConstruction,
+            var nextStep = await answerService.UpdateWallConstruction(
                 viewModel.Reference,
-                QuestionFlowStep.WallConstruction, 
+                viewModel.WallConstruction,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
         
@@ -702,7 +644,6 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
-            var backArgs = GetBackArgs(QuestionFlowStep.CavityWallsInsulated, propertyData, entryPoint);
             var viewModel = new CavityWallsInsulatedViewModel
             {
                 CavityWallsInsulated = propertyData.CavityWallsInsulated,
@@ -711,7 +652,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.CavityWallsInsulated, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -728,11 +669,12 @@ namespace SeaPublicWebsite.Controllers
                 return await CavityWallsInsulated_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.CavityWallsInsulated = viewModel.CavityWallsInsulated,
+            var nextStep = await answerService.UpdateCavityWallInsulation(
                 viewModel.Reference,
-                QuestionFlowStep.CavityWallsInsulated, 
+                viewModel.CavityWallsInsulated,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
 
@@ -741,14 +683,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
-            var backArgs = GetBackArgs(QuestionFlowStep.SolidWallsInsulated, propertyData, entryPoint);
             var viewModel = new SolidWallsInsulatedViewModel
             {
                 SolidWallsInsulated = propertyData.SolidWallsInsulated,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.SolidWallsInsulated, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -765,11 +706,12 @@ namespace SeaPublicWebsite.Controllers
                 return await SolidWallsInsulated_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.SolidWallsInsulated = viewModel.SolidWallsInsulated,
+            var nextStep = await answerService.UpdateSolidWallInsulation(
                 viewModel.Reference,
-                QuestionFlowStep.SolidWallsInsulated, 
+                viewModel.SolidWallsInsulated,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
 
@@ -778,7 +720,6 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.FloorConstruction, propertyData, entryPoint);
             var viewModel = new FloorConstructionViewModel
             {
                 FloorConstruction = propertyData.FloorConstruction,
@@ -786,7 +727,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.FloorConstruction, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -803,20 +744,19 @@ namespace SeaPublicWebsite.Controllers
                 return await FloorConstruction_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.FloorConstruction = viewModel.FloorConstruction,
+            var nextStep = await answerService.UpdateFloorConstruction(
                 viewModel.Reference,
-                QuestionFlowStep.FloorConstruction, 
+                viewModel.FloorConstruction,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
-
         
         [HttpGet("floor-insulated/{reference}")]
         public async Task<IActionResult> FloorInsulated_Get(string reference, QuestionFlowStep? entryPoint = null)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.FloorInsulated, propertyData, entryPoint);
             var viewModel = new FloorInsulatedViewModel
             {
                 FloorInsulated = propertyData.FloorInsulated,
@@ -824,7 +764,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.FloorInsulated, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -841,11 +781,12 @@ namespace SeaPublicWebsite.Controllers
                 return await FloorInsulated_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.FloorInsulated = viewModel.FloorInsulated,
+            var nextStep = await answerService.UpdateFloorInsulated(
                 viewModel.Reference,
-                QuestionFlowStep.FloorInsulated, 
+                viewModel.FloorInsulated,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
         [HttpGet("roof-construction/{reference}")]
@@ -853,14 +794,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.RoofConstruction, propertyData, entryPoint);
             var viewModel = new RoofConstructionViewModel
             {
                 RoofConstruction = propertyData.RoofConstruction,
                 Reference = propertyData.Reference,
                 Epc = propertyData.Epc,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.RoofConstruction, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -877,11 +817,12 @@ namespace SeaPublicWebsite.Controllers
                 return await RoofConstruction_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.RoofConstruction = viewModel.RoofConstruction,
+            var nextStep = await answerService.UpdateRoofConstruction(
                 viewModel.Reference,
-                QuestionFlowStep.RoofConstruction, 
+                viewModel.RoofConstruction,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
         [HttpGet("loft-space/{reference}")]
@@ -889,14 +830,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
-            var backArgs = GetBackArgs(QuestionFlowStep.LoftSpace, propertyData, entryPoint);
             var viewModel = new LoftSpaceViewModel
             {
                 LoftSpace = propertyData.LoftSpace,
                 HintHaveLoftAndAccess = propertyData.HintHaveLoftAndAccess,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.LoftSpace, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -913,11 +853,12 @@ namespace SeaPublicWebsite.Controllers
                 return await LoftSpace_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.LoftSpace = viewModel.LoftSpace,
+            var nextStep = await answerService.UpdateLoftSpace(
                 viewModel.Reference,
-                QuestionFlowStep.LoftSpace, 
+                viewModel.LoftSpace,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
         [HttpGet("loft-access/{reference}")]
@@ -925,14 +866,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
-            var backArgs = GetBackArgs(QuestionFlowStep.LoftAccess, propertyData, entryPoint);
             var viewModel = new LoftAccessViewModel
             {
                 LoftAccess = propertyData.LoftAccess,
                 HintHaveLoftAndAccess = propertyData.HintHaveLoftAndAccess,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.LoftAccess, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -948,12 +888,13 @@ namespace SeaPublicWebsite.Controllers
             {
                 return await LoftAccess_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-            
-            return await UpdatePropertyAndRedirect(
-                p => p.LoftAccess = viewModel.LoftAccess,
+
+            var nextStep = await answerService.UpdateLoftAccess(
                 viewModel.Reference,
-                QuestionFlowStep.LoftAccess, 
+                viewModel.LoftAccess,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
         [HttpGet("roof-insulated/{reference}")]
@@ -961,7 +902,6 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.RoofInsulated, propertyData, entryPoint);
             var viewModel = new RoofInsulatedViewModel
             {
                 RoofInsulated = propertyData.RoofInsulated,
@@ -969,7 +909,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.RoofInsulated, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -986,20 +926,19 @@ namespace SeaPublicWebsite.Controllers
                 return await RoofInsulated_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.RoofInsulated = viewModel.RoofInsulated,
+            var nextStep = await answerService.UpdateRoofInsulated(
                 viewModel.Reference,
-                QuestionFlowStep.RoofInsulated, 
+                viewModel.RoofInsulated,
                 viewModel.EntryPoint);
+
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
-        
         [HttpGet("glazing-type/{reference}")]
         public async Task<IActionResult> GlazingType_Get(string reference, QuestionFlowStep? entryPoint = null)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.GlazingType, propertyData, entryPoint);
             var viewModel = new GlazingTypeViewModel
             {
                 GlazingType = propertyData.GlazingType,
@@ -1007,7 +946,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.GlazingType, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -1024,11 +963,12 @@ namespace SeaPublicWebsite.Controllers
                 return await GlazingType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.GlazingType = viewModel.GlazingType,
+            var nextStep = await answerService.UpdateGlazingType(
                 viewModel.Reference,
-                QuestionFlowStep.GlazingType, 
+                viewModel.GlazingType,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
         [HttpGet("outdoor-space/{reference}")]
@@ -1036,14 +976,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.OutdoorSpace, propertyData, entryPoint);
             var viewModel = new OutdoorSpaceViewModel
             {
                 HasOutdoorSpace = propertyData.HasOutdoorSpace,
                 HintHasOutdoorSpace = propertyData.HintHasOutdoorSpace,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.OutdoorSpace, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -1060,27 +999,26 @@ namespace SeaPublicWebsite.Controllers
                 return await OutdoorSpace_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.HasOutdoorSpace = viewModel.HasOutdoorSpace,
+            var nextStep = await answerService.UpdateHasOutdoorSpace(
                 viewModel.Reference,
-                QuestionFlowStep.OutdoorSpace, 
+                viewModel.HasOutdoorSpace,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
-
         
         [HttpGet("heating-type/{reference}")]
         public async Task<IActionResult> HeatingType_Get(string reference, QuestionFlowStep? entryPoint = null)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.HeatingType, propertyData, entryPoint);
             var viewModel = new HeatingTypeViewModel
             {
                 HeatingType = propertyData.HeatingType,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.HeatingType, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -1097,11 +1035,12 @@ namespace SeaPublicWebsite.Controllers
                 return await HeatingType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.HeatingType = viewModel.HeatingType,
+            var nextStep = await answerService.UpdateHeatingType(
                 viewModel.Reference,
-                QuestionFlowStep.HeatingType, 
+                viewModel.HeatingType,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
         [HttpGet("other-heating-type/{reference}")]
@@ -1109,14 +1048,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
-            var backArgs = GetBackArgs(QuestionFlowStep.OtherHeatingType, propertyData, entryPoint);
             var viewModel = new OtherHeatingTypeViewModel
             {
                 OtherHeatingType = propertyData.OtherHeatingType,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
                 Epc = propertyData.Epc,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.OtherHeatingType, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -1133,11 +1071,12 @@ namespace SeaPublicWebsite.Controllers
                 return await OtherHeatingType_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.OtherHeatingType = viewModel.OtherHeatingType,
+            var nextStep = await answerService.UpdateOtherHeatingType(
                 viewModel.Reference,
-                QuestionFlowStep.OtherHeatingType, 
+                viewModel.OtherHeatingType,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
 
@@ -1146,14 +1085,13 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
-            var backArgs = GetBackArgs(QuestionFlowStep.HotWaterCylinder, propertyData, entryPoint);
             var viewModel = new HotWaterCylinderViewModel
             {
                 HasHotWaterCylinder = propertyData.HasHotWaterCylinder,
                 Reference = propertyData.Reference,
                 Epc = propertyData.Epc,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.HotWaterCylinder, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -1170,11 +1108,12 @@ namespace SeaPublicWebsite.Controllers
                 return await HotWaterCylinder_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.HasHotWaterCylinder = viewModel.HasHotWaterCylinder,
+            var nextStep = await answerService.UpdateHasHotWaterCylinder(
                 viewModel.Reference,
-                QuestionFlowStep.HotWaterCylinder, 
+                viewModel.HasHotWaterCylinder,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
         
         [HttpGet("number-of-occupants/{reference}")]
@@ -1182,13 +1121,12 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
-            var backArgs = GetBackArgs(QuestionFlowStep.NumberOfOccupants, propertyData, entryPoint);
             var viewModel = new NumberOfOccupantsViewModel
             {
                 NumberOfOccupants = propertyData.NumberOfOccupants,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.NumberOfOccupants, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -1200,25 +1138,18 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("number-of-occupants/{reference}")]
         public async Task<IActionResult> NumberOfOccupants_Post(NumberOfOccupantsViewModel viewModel, bool? skip = null)
         {
-            if (skip is true)
-            {
-                return await UpdatePropertyAndRedirect(
-                    p => p.NumberOfOccupants = null,
-                    viewModel.Reference,
-                    QuestionFlowStep.NumberOfOccupants, 
-                    viewModel.EntryPoint);
-            }
-            
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid && skip != true)
             {
                 return await NumberOfOccupants_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p => p.NumberOfOccupants = viewModel.NumberOfOccupants,
+            var numberOfOccupants = skip == true ? null : viewModel.NumberOfOccupants;
+            var nextStep = await answerService.UpdateNumberOfOccupants(
                 viewModel.Reference,
-                QuestionFlowStep.NumberOfOccupants, 
+                numberOfOccupants,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
         
         [HttpGet("heating-pattern/{reference}")]
@@ -1226,7 +1157,6 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.HeatingPattern, propertyData, entryPoint);
             var viewModel = new HeatingPatternViewModel
             {
                 HeatingPattern = propertyData.HeatingPattern,
@@ -1234,7 +1164,7 @@ namespace SeaPublicWebsite.Controllers
                 HoursOfHeatingEvening = propertyData.HoursOfHeatingEvening,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.HeatingPattern, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -1257,16 +1187,14 @@ namespace SeaPublicWebsite.Controllers
                 return await HeatingPattern_Get(viewModel.Reference, viewModel.EntryPoint);
             }
             
-            return await UpdatePropertyAndRedirect(
-                p =>
-                {
-                    p.HeatingPattern = viewModel.HeatingPattern;
-                    p.HoursOfHeatingMorning = viewModel.HoursOfHeatingMorning;
-                    p.HoursOfHeatingEvening = viewModel.HoursOfHeatingEvening;
-                },
+            var nextStep = await answerService.UpdateHeatingPattern(
                 viewModel.Reference,
-                QuestionFlowStep.HeatingPattern, 
+                viewModel.HeatingPattern,
+                viewModel.HoursOfHeatingMorning,
+                viewModel.HoursOfHeatingEvening,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
         
         [HttpGet("temperature/{reference}")]
@@ -1274,13 +1202,12 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
             
-            var backArgs = GetBackArgs(QuestionFlowStep.Temperature, propertyData, entryPoint);
             var viewModel = new TemperatureViewModel
             {
                 Temperature = propertyData.Temperature,
                 Reference = propertyData.Reference,
                 EntryPoint = entryPoint,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.Temperature, propertyData, entryPoint)
             };
 
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -1292,25 +1219,18 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("temperature/{reference}")]
         public async Task<IActionResult> Temperature_Post(TemperatureViewModel viewModel, bool? skip = null)
         {
-            if (skip is true)
-            {
-                return await UpdatePropertyAndRedirect(
-                    p => p.Temperature = null,
-                    viewModel.Reference,
-                    QuestionFlowStep.Temperature, 
-                    viewModel.EntryPoint);
-            }
-            
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid && skip != true)
             {
                 return await Temperature_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-            
-            return await UpdatePropertyAndRedirect(
-                p => p.Temperature = viewModel.Temperature,
+
+            var temperature = skip == true ? null : viewModel.Temperature;
+            var nextStep = await answerService.UpdateTemperature(
                 viewModel.Reference,
-                QuestionFlowStep.Temperature, 
+                temperature,
                 viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
 
         [HttpGet("answer-summary/{reference}")]
@@ -1326,11 +1246,10 @@ namespace SeaPublicWebsite.Controllers
                 await propertyDataStore.SavePropertyDataAsync(propertyData);
             }
 
-            var backArgs = GetBackArgs(QuestionFlowStep.AnswerSummary, propertyData);
             var viewModel = new AnswerSummaryViewModel
             {
                 PropertyData = propertyData,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.AnswerSummary, propertyData)
             };
             
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -1423,13 +1342,12 @@ namespace SeaPublicWebsite.Controllers
         public async Task<IActionResult> NoRecommendations_Get(string reference, string emailAddress = null, bool emailSent = false)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            var backArgs = GetBackArgs(QuestionFlowStep.NoRecommendations, propertyData);
             var viewModel = new NoRecommendationsViewModel
             {
                 Reference = propertyData.Reference,
                 EmailAddress = emailAddress,
                 EmailSent = emailSent,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.NoRecommendations, propertyData)
             };
             
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -1466,13 +1384,12 @@ namespace SeaPublicWebsite.Controllers
         public async Task<IActionResult> YourRecommendations_Get(string reference)
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            var backArgs = GetBackArgs(QuestionFlowStep.YourRecommendations, propertyData);
             var viewModel = new YourRecommendationsViewModel
             {
                 Reference = reference,
                 NumberOfPropertyRecommendations = propertyData.PropertyRecommendations.Count,
                 HasEmailAddress = false,
-                BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
+                BackLink = GetBackUrl(QuestionFlowStep.YourRecommendations, propertyData)
             };
             
             ViewBag.FeedbackUrl = propertyData.ReturningUser
@@ -1744,37 +1661,6 @@ namespace SeaPublicWebsite.Controllers
             return RedirectToAction("Index", "EnergyEfficiency");
         }
 
-        private async Task<RedirectToActionResult> UpdatePropertyAndRedirect(
-            Action<PropertyData> update,
-            string reference,
-            QuestionFlowStep currentPage,
-            QuestionFlowStep? entryPoint = null)
-        {
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            
-            // If entryPoint is set then the user is editing their answers (and if HasSeenRecommendations then they have already generated recommendations that may now need to change), so we need to take a copy of the current answers
-            if ((entryPoint is not null || propertyData.HasSeenRecommendations) && propertyData.UneditedData is null)
-            {
-                propertyData.CreateUneditedData();
-            }
-            update(propertyData);
-            propertyData.ResetUnusedFields();
-            var nextStep = questionFlowService.NextStep(currentPage, propertyData, entryPoint);
-            
-            // If the user is going back to the answer summary page or the check your unchangeable answers page then they finished editing and we
-            // can get rid of the old answers
-            if ((entryPoint is not null || propertyData.HasSeenRecommendations) &&
-                (nextStep == QuestionFlowStep.AnswerSummary ||
-                 nextStep == QuestionFlowStep.CheckYourUnchangeableAnswers))
-            {
-                propertyData.CommitEdits();
-            }
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
-
-            var forwardArgs = GetActionArgumentsForQuestion(nextStep, propertyData.Reference, entryPoint);
-            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
-        }
-
         private void TrySendReferenceNumberEmail(string emailAddress, string reference)
         {
             try
@@ -1796,23 +1682,40 @@ namespace SeaPublicWebsite.Controllers
                 }
             }
         }
-        
-        private PathByActionArguments GetBackArgs(
+
+        private string GetBackUrl(
             QuestionFlowStep currentStep,
-            PropertyData propertyData,
+            PropertyData propertyData = null,
             QuestionFlowStep? entryPoint = null)
         {
             var backStep = questionFlowService.PreviousStep(currentStep, propertyData, entryPoint);
-            return GetActionArgumentsForQuestion(backStep, propertyData?.Reference, entryPoint);
+            var args = GetActionArgumentsForQuestion(backStep, propertyData?.Reference, entryPoint);
+            return Url.Action(args.Action, args.Controller, args.Values);
         }
         
-        private PathByActionArguments GetForwardArgs(
+        private string GetSkipUrl(
+            QuestionFlowStep currentStep,
+            PropertyData propertyData)
+        {
+            var skipDestination = questionFlowService.SkipDestination(currentStep, propertyData);
+            var args = GetActionArgumentsForQuestion(skipDestination, propertyData?.Reference);
+            return Url.Action(args.Action, args.Controller, args.Values);
+        }
+
+        private string GetForwardUrl(
             QuestionFlowStep currentStep,
             PropertyData propertyData,
             QuestionFlowStep? entryPoint = null)
         {
             var nextStep = questionFlowService.NextStep(currentStep, propertyData, entryPoint);
-            return GetActionArgumentsForQuestion(nextStep, propertyData?.Reference, entryPoint);
+            var args = GetActionArgumentsForQuestion(nextStep, propertyData?.Reference, entryPoint);
+            return Url.Action(args.Action, args.Controller, args.Values);
+        }
+        
+        private RedirectToActionResult RedirectToNextStep(QuestionFlowStep nextStep, string reference, QuestionFlowStep? entryPoint = null)
+        {
+            var forwardArgs = GetActionArgumentsForQuestion(nextStep, reference, entryPoint);
+            return RedirectToAction(forwardArgs.Action, forwardArgs.Controller, forwardArgs.Values);
         }
 
         private PathByActionArguments GetActionArgumentsForQuestion(

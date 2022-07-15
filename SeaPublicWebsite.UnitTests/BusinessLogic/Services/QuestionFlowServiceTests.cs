@@ -712,18 +712,9 @@ public class QuestionFlowServiceTests
             "Postcode continues to confirm address",
             new Input(
                 QuestionFlowStep.AskForPostcode,
-                "ABCDEFGH",
-                searchForEpc: SearchForEpc.Yes
+                "ABCDEFGH"
             ),
             QuestionFlowStep.ConfirmAddress),
-        new(
-            "Postcode continues to property type on cancel",
-            new Input(
-                QuestionFlowStep.AskForPostcode,
-                "ABCDEFGH",
-                searchForEpc: SearchForEpc.No
-            ),
-            QuestionFlowStep.PropertyType),
         new(
             "Confirm address continues to no EPC found if no EPC set",
             new Input(

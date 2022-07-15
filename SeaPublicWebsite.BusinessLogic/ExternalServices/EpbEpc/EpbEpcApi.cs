@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http.Headers;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using SeaPublicWebsite.BusinessLogic.ExternalServices.Common;
 using SeaPublicWebsite.BusinessLogic.Models;
-using SeaPublicWebsite.BusinessLogic.Models.Enums;
-using SeaPublicWebsite.ErrorHandling;
-using SeaPublicWebsite.ExternalServices.Models.Epb;
-using SeaPublicWebsite.Helpers;
 
-namespace SeaPublicWebsite.ExternalServices.EpbEpc
+namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc
 {
     public class EpbEpcApi : IEpcApi
     {

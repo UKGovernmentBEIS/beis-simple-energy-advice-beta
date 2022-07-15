@@ -1,6 +1,6 @@
 ﻿using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
-namespace SeaPublicWebsite.ExternalServices.Bre
+namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 {
     public class BreRecommendation
     {

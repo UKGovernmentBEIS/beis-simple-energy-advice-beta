@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre.Enums;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
-using SeaPublicWebsite.ExternalServices.Bre;
-using SeaPublicWebsite.ExternalServices.Models;
 
-namespace SeaPublicWebsite.Services
+namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 {
     public class RecommendationService
     {

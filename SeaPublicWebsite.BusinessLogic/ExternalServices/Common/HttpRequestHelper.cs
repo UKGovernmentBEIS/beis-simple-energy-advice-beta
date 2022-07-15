@@ -1,11 +1,7 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
+﻿using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using SeaPublicWebsite.ErrorHandling;
 
-namespace SeaPublicWebsite.Helpers
+namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Common
 {
     public static class HttpRequestHelper
     {

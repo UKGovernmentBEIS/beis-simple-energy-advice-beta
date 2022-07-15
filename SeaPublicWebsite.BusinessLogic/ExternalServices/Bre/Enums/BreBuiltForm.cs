@@ -1,4 +1,4 @@
-﻿namespace SeaPublicWebsite.ExternalServices.Models
+﻿namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre.Enums
 {
     public enum BreBuiltForm
     {

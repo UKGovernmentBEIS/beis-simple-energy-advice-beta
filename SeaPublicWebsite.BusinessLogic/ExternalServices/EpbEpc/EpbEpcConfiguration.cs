@@ -1,4 +1,4 @@
-﻿namespace SeaPublicWebsite.ExternalServices.EpbEpc
+﻿namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc
 {
     public class EpbEpcConfiguration
     {

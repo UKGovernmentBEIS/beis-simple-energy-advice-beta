@@ -1,4 +1,6 @@
-﻿namespace SeaPublicWebsite.ExternalServices.Models
+﻿using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre.Enums;
+
+namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 {
     public class BreRequest
     {

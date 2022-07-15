@@ -471,11 +471,7 @@ namespace SeaPublicWebsite.BusinessLogic.Services
 
         private QuestionFlowStep AskForPostcodeForwardDestination(PropertyData propertyData)
         {
-            if (propertyData.SearchForEpc == SearchForEpc.Yes)
-            {
-                return QuestionFlowStep.ConfirmAddress;
-            }
-            return QuestionFlowStep.PropertyType;
+            return QuestionFlowStep.ConfirmAddress;
         }
 
         private QuestionFlowStep ConfirmAddressForwardDestination(PropertyData propertyData)
