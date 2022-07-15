@@ -312,6 +312,17 @@ public class EpbEpcAssessmentDto
         {
             return null;
         }
+        
+        var hasOther = WallsDescription.Any(description =>
+            description.Contains("System built", StringComparison.OrdinalIgnoreCase) ||
+            description.Contains("Cob", StringComparison.OrdinalIgnoreCase) ||
+            description.Contains("Timber frame", StringComparison.OrdinalIgnoreCase) ||
+            description.Contains("Park home wall", StringComparison.OrdinalIgnoreCase));
+
+        if (hasOther)
+        {
+            return WallConstruction.Other;
+        }
 
         var hasCavity = WallsDescription.Any(description => 
             description.Contains("cavity", StringComparison.OrdinalIgnoreCase));
@@ -446,7 +457,8 @@ public class EpbEpcAssessmentDto
         }
 
         var hasFlat = RoofDescription.Any(description =>
-            description.Contains("flat", StringComparison.OrdinalIgnoreCase));
+            description.Contains("flat", StringComparison.OrdinalIgnoreCase) ||
+            description.Contains("thatched", StringComparison.OrdinalIgnoreCase));
         var hasPitched = RoofDescription.Any(description =>
             description.Contains("pitched", StringComparison.OrdinalIgnoreCase));
 
