@@ -59,7 +59,7 @@ namespace SeaPublicWebsite.Middleware
         private static void SendUnauthorisedResponse(HttpContext httpContext)
         {
             httpContext.Response.StatusCode = 401;
-            AddOrUpdateHeader(httpContext, "WWW-Authenticate", "Basic realm=\"Improve Your Property's Energy Efficiency\"");
+            AddOrUpdateHeader(httpContext, "WWW-Authenticate", $"Basic realm=\"{Constants.SERVICE_NAME}\"");
         }
 
         private static void AddOrUpdateHeader(HttpContext httpContext, string headerName, string headerValue)
