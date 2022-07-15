@@ -20,6 +20,27 @@ Migrations will be run automatically on deployment. If a migration needs to be r
 
 ## Development
 
+### Process
+
+For normal development:
+- Create a branch from main
+- Make changes on the branch
+- Raise a PR back to main once the feature is complete
+- If the PR is accepted merge the branch into main
+
+Doing a release:
+- Create a release branch from main
+- Deploy this branch to an environment
+- Run manual tests against this environment and gain sign-off to deploy
+- Merge the branch into production
+
+For critical bug fixes on production
+- Create a branch from production
+- Make changes on the branch
+- Raise a PR back to production once the bug is fixed
+- If the PR is accepted merge the branch into production
+- Then also merge the branch into main
+
 ### Pre-requisites
 
 - .Net 6 (https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
@@ -96,7 +117,7 @@ Fill in the opened `secrets.json` file with:
 - In `SeaPublicWebsite` run `npm run watch`
 - In Visual Studio / Rider run the `SeaPublicWebsite` project
 
-## Local Database
+## Database
 
 ### Local Database Setup
 
