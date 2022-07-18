@@ -117,11 +117,9 @@
                    BackTitle = hasBack ? "Go back to" : null,
                    BackText = hasBack ? $"Recommendation {Model.RecommendationIndex}" : null,
                    ForwardTitle = Model.FromActionPlan ? "Back to" : "Continue to",
-                   ForwardText = Model.FromActionPlan 
-                       ? "Action Plan" 
-                       : Model.HasNextIndex() 
+                   ForwardText = Model.HasNextIndex() 
                            ? $"Recommendation {Model.RecommendationIndex + 2}" 
-                           : "Other ways to save energy"
+                           : "Action Plan"
                }); }
 
         </form>
