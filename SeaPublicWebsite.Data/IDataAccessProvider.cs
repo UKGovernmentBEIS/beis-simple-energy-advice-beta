@@ -9,5 +9,5 @@ public interface IDataAccessProvider
     Task<PropertyData> GetPropertyDataAsync(string reference);
     Task<bool> PropertyDataExistsAsync(string reference);
     void DeleteOldPropertyData();
-    PropertyData SetTimestamp(PropertyData propertyData);
+    PropertyData SetDaysSinceEpoch(PropertyData propertyData);
 }

@@ -14,14 +14,14 @@ public class DataAccessProvider : IDataAccessProvider
     
     public async Task AddPropertyDataAsync(PropertyData propertyData)
     {
-        SetTimestamp(propertyData);
+        SetDaysSinceEpoch(propertyData);
         context.PropertyData.Add(propertyData);
         await context.SaveChangesAsync();
     }
 
     public async Task UpdatePropertyDataAsync(PropertyData propertyData)
     {
-        SetTimestamp(propertyData);
+        SetDaysSinceEpoch(propertyData);
         context.PropertyData.Update(propertyData);
         await context.SaveChangesAsync();
     }
@@ -42,14 +42,15 @@ public class DataAccessProvider : IDataAccessProvider
 
     public void DeleteOldPropertyData()
     {
-        var entities = context.PropertyData.Where(p => p.Timestamp <= DateTime.Now.AddMonths(-6));
+        var daysSinceEpochSixMonthsAgo = DateTime.UtcNow.AddMonths(-6).Subtract(DateTime.UnixEpoch).Days;
+        var entities = context.PropertyData.Where(p => p.DaysSinceEpochWhenUpdated <= daysSinceEpochSixMonthsAgo);
         context.RemoveRange(entities);
         context.SaveChanges();
     }
 
-    public PropertyData SetTimestamp(PropertyData propertyData)
+    public PropertyData SetDaysSinceEpoch(PropertyData propertyData)
     {
-        propertyData.Timestamp = DateTime.Now;
+        propertyData.DaysSinceEpochWhenUpdated = DateTime.UtcNow.Subtract(DateTime.UnixEpoch).Days;
         return propertyData;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SeaPublicWebsite.Data;
@@ -7,26 +8,36 @@ namespace SeaPublicWebsite.DeleteOldData
 {
     class Program
     {
-        static Task Main(string[] args)
+        static void Main(string[] args)
         {
             using IHost host = CreateHostBuilder(args).Build();
-
-            ExemplifyScoping(host.Services);
-
-            return host.RunAsync();
+            DeleteOldData(host.Services);
         }
 
-        static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
                 .ConfigureServices((_, services) =>
+                {
                     services.AddScoped<IDataAccessProvider, DataAccessProvider>()
-        .AddDbContext<SeaDbContext>(opt =>
-        opt.UseNpgsql("UserId=postgres;Password=postgres;Server=localhost;Port=5432;Database=seadev;Integrated Security=true;Include Error Detail=true;Pooling=true")));
+                        .AddDbContext<SeaDbContext>(opt =>
+                        {
+                            IConfiguration configuration = new ConfigurationBuilder()
+                                .AddJsonFile("appsettings.json", optional: true,
+                                    reloadOnChange: true)
+                                .AddEnvironmentVariables()
+                                .AddCommandLine(args)
+                                .Build();
+                            //TODO: add db connection string for prod env
+                            var databaseConnectionString = configuration.GetConnectionString("PostgreSQLConnection");
+                            opt.UseNpgsql(databaseConnectionString);
+                        });
+                });
+        }
 
-        static void ExemplifyScoping(IServiceProvider services)
+        static void DeleteOldData(IServiceProvider services)
         {
             using IServiceScope serviceScope = services.CreateScope();
-            IServiceProvider provider = serviceScope.ServiceProvider;
             services.GetRequiredService<IDataAccessProvider>().DeleteOldPropertyData();
         }
     }

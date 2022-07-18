@@ -1,4 +1,5 @@
-﻿using SeaPublicWebsite.BusinessLogic.Models.Enums;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.BusinessLogic.Models;
 
@@ -47,7 +48,7 @@ public class PropertyData
     public bool ReturningUser { get; set; }
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; } = new();
-    public DateTime? Timestamp { get; set; }
+    public int DaysSinceEpochWhenUpdated { get; set; }
 
 
     public bool? HintSolidWalls => YearBuilt is null or Enums.YearBuilt.DoNotKnow ? null : YearBuilt <= Enums.YearBuilt.Pre1930;
