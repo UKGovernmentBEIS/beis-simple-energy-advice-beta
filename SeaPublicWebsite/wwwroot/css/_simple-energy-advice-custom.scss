@@ -269,8 +269,17 @@
     }
 }
 
-.sea-change-decision-link {
-    white-space: nowrap;
+.sea-saved-recommendations-table-mobile-hide {
+    @media (max-width: 640px) {
+        display: none;
+    }
+}
+
+.sea-saved-recommendations-table-desktop-hide {
+    border-top: 1px solid $govuk-border-colour;
+    @media (min-width: 641px) {
+        display: none;
+    }
 }
 
 .sea-decide-later-summary-list {
@@ -314,7 +323,7 @@
     display: inline;
     font: inherit;
     height: auto;
-    padding: 0;
+    padding: govuk-spacing(2); /* Use same padding as govuk-button */
     perspective-origin: 0 0;
     text-align: start;
     text-decoration: underline;

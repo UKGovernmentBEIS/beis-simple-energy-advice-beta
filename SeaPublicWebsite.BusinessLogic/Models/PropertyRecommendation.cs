@@ -4,9 +4,6 @@ namespace SeaPublicWebsite.BusinessLogic.Models;
 
 public class PropertyRecommendation
 {
-    //PRIMARY KEY
-    public int PropertyRecommendationId { get; set; }
-    
     public RecommendationKey Key { get; set; }
     public int MinInstallCost { get; set; }
     public int MaxInstallCost { get; set; }

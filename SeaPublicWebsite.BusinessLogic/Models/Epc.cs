@@ -4,15 +4,12 @@ namespace SeaPublicWebsite.BusinessLogic.Models
 {
     public class Epc
     {
-        // PRIMARY KEY
-        public int Id { get; set; }
         public int? LodgementYear { get; set; }
         public PropertyType? PropertyType { get; set; }
         public HouseType? HouseType { get; set; }
         public BungalowType? BungalowType { get; set; }
         public FlatType? FlatType { get; set; }
-        public HeatingType? HeatingType { get; set; }
-        public OtherHeatingType? OtherHeatingType { get; set; }
+        public EpcHeatingType? EpcHeatingType { get; set; }
         public WallConstruction? WallConstruction { get; set; }
         public SolidWallsInsulated? SolidWallsInsulated { get; set; }
         public CavityWallsInsulated? CavityWallsInsulated { get; set; }

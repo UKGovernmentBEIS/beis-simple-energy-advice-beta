@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Controllers
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
@@ -109,7 +110,19 @@
                 classes: "govuk-!-margin-bottom-7"
                 ))
 
-            @{ await Html.RenderPartialAsync("../EnergyEfficiency/Recommendations/Partials/_ActionButtons.cshtml"); }
+            @{
+                var hasBack = Model.HasPreviousIndex() && !Model.FromActionPlan;
+                await Html.RenderPartialAsync("../EnergyEfficiency/Recommendations/Partials/_ActionButtons.cshtml", new ActionButtonsViewModel
+               {
+                   BackTitle = hasBack ? "Go back to" : null,
+                   BackText = hasBack ? $"Recommendation {Model.RecommendationIndex}" : null,
+                   ForwardTitle = Model.FromActionPlan ? "Back to" : "Continue to",
+                   ForwardText = Model.FromActionPlan 
+                       ? "Action Plan" 
+                       : Model.HasNextIndex() 
+                           ? $"Recommendation {Model.RecommendationIndex + 2}" 
+                           : "Other ways to save energy"
+               }); }
 
         </form>
 

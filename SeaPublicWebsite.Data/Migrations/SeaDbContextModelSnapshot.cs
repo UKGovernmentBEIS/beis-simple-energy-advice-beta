@@ -58,6 +58,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("ConstructionAgeBand")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("EpcHeatingType")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("FlatType")
                         .HasColumnType("integer");
 
@@ -73,16 +76,10 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("HasHotWaterCylinder")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("HeatingType")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("HouseType")
                         .HasColumnType("integer");
 
                     b.Property<int?>("LodgementYear")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("OtherHeatingType")
                         .HasColumnType("integer");
 
                     b.Property<int>("PropertyDataId")
@@ -102,6 +99,11 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.Property<int?>("WallConstruction")
                         .HasColumnType("integer");
+
+                    b.Property<uint>("xmin")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid");
 
                     b.HasKey("Id");
 
@@ -215,6 +217,11 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("YearBuilt")
                         .HasColumnType("integer");
 
+                    b.Property<uint>("xmin")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid");
+
                     b.HasKey("PropertyDataId");
 
                     b.HasIndex("EditedDataId")
@@ -263,6 +270,11 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
+
+                    b.Property<uint>("xmin")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid");
 
                     b.HasKey("PropertyRecommendationId");
 
