@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SeaPublicWebsite.BusinessLogic.Models;
 
 namespace SeaPublicWebsite.Data;
@@ -15,12 +14,14 @@ public class DataAccessProvider : IDataAccessProvider
     
     public async Task AddPropertyDataAsync(PropertyData propertyData)
     {
+        SetTimestamp(propertyData);
         context.PropertyData.Add(propertyData);
         await context.SaveChangesAsync();
     }
 
     public async Task UpdatePropertyDataAsync(PropertyData propertyData)
     {
+        SetTimestamp(propertyData);
         context.PropertyData.Update(propertyData);
         await context.SaveChangesAsync();
     }
@@ -42,6 +43,13 @@ public class DataAccessProvider : IDataAccessProvider
     public void DeleteOldPropertyData()
     {
         var entities = context.PropertyData.Where(p => p.Timestamp <= DateTime.Now.AddMonths(-6));
-        context.PropertyData.RemoveRange(entities);
+        context.RemoveRange(entities);
+        context.SaveChanges();
+    }
+
+    public PropertyData SetTimestamp(PropertyData propertyData)
+    {
+        propertyData.Timestamp = DateTime.Now;
+        return propertyData;
     }
 }

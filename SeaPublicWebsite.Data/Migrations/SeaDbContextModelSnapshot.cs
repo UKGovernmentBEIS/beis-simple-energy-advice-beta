@@ -211,6 +211,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<decimal?>("Temperature")
                         .HasColumnType("numeric");
 
+                    b.Property<DateTime?>("Timestamp")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<int?>("WallConstruction")
                         .HasColumnType("integer");
 

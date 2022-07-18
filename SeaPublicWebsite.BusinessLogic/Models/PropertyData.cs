@@ -47,7 +47,7 @@ public class PropertyData
     public bool ReturningUser { get; set; }
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; } = new();
-    public DateTime Timestamp { get; set; }
+    public DateTime? Timestamp { get; set; }
 
 
     public bool? HintSolidWalls => YearBuilt is null or Enums.YearBuilt.DoNotKnow ? null : YearBuilt <= Enums.YearBuilt.Pre1930;
