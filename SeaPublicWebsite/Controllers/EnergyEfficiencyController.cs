@@ -1581,14 +1581,9 @@ namespace SeaPublicWebsite.Controllers
 
             if (command == "goForwards")
             {
-                if (viewModel.FromActionPlan)
+                if (propertyData.GetLastRecommendationKey() == recommendationKey || viewModel.FromActionPlan)
                 {
                     return RedirectToAction(nameof(ActionPlan_Get), new {reference = propertyData.Reference});
-                }
-                
-                if (propertyData.GetLastRecommendationKey() == recommendationKey)
-                {
-                    return RedirectToAction(nameof(AlternativeRecommendations_Get), new {reference = propertyData.Reference});
                 }
 
                 return RedirectToAction(nameof(Recommendation_Get),
@@ -1691,7 +1686,7 @@ namespace SeaPublicWebsite.Controllers
             
             var viewModel = new ActionPlanViewModel
             {
-                BackLink = Url.Action(nameof(AlternativeRecommendations_Get), new { reference }),
+                BackLink = Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference }),
                 PropertyData = propertyData,
                 EmailAddress = emailAddress,
                 EmailSent = emailSent
