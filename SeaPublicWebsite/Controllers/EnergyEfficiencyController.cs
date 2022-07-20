@@ -115,7 +115,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("OwnershipStatus", viewModel);
         }
 
@@ -147,7 +146,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("Country", viewModel);
         }
 
@@ -178,7 +176,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
             
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("ServiceUnsuitable", viewModel);
         }
 
@@ -195,7 +192,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
             };
             
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("FindEpc", viewModel);
         }
 
@@ -235,7 +231,6 @@ namespace SeaPublicWebsite.Controllers
                 SkipLink = Url.Action(skipArgs.Action, skipArgs.Controller, skipArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("AskForPostcode", viewModel);
         }
 
@@ -321,8 +316,7 @@ namespace SeaPublicWebsite.Controllers
                     BackLink = backLink
                 };
 
-                ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
-                return View("ConfirmAddress", viewModel);
+                    return View("ConfirmAddress", viewModel);
             }
         }
 
@@ -371,7 +365,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
             };
             
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("ConfirmEpcDetails", viewModel);
         }
 
@@ -428,7 +421,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values),
             };
             
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("NoEpcFound", viewModel);
         }
 
@@ -460,7 +452,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("PropertyType", viewModel);
         }
 
@@ -493,7 +484,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("HouseType", viewModel);
         }
 
@@ -527,7 +517,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("BungalowType", viewModel);
         }
 
@@ -561,7 +550,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("FlatType", viewModel);
         }
 
@@ -597,7 +585,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("HomeAge", viewModel);
         }
 
@@ -637,7 +624,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
             
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("CheckYourUnchangeableAnswers", viewModel);
         }
 
@@ -672,7 +658,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("WallConstruction", viewModel);
         }
 
@@ -709,7 +694,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("CavityWallsInsulated", viewModel);
         }
 
@@ -744,7 +728,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("SolidWallsInsulated", viewModel);
         }
 
@@ -780,7 +763,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("FloorConstruction", viewModel);
         }
 
@@ -816,7 +798,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("FloorInsulated", viewModel);
         }
 
@@ -850,7 +831,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("RoofConstruction", viewModel);
         }
 
@@ -884,7 +864,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("LoftSpace", viewModel);
         }
 
@@ -918,7 +897,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("LoftAccess", viewModel);
         }
         
@@ -953,7 +931,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("RoofInsulated", viewModel);
         }
 
@@ -989,7 +966,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("GlazingType", viewModel);
         }
 
@@ -1023,7 +999,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("OutdoorSpace", viewModel);
         }
 
@@ -1058,7 +1033,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("HeatingType", viewModel);
         }
 
@@ -1092,7 +1066,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("OtherHeatingType", viewModel);
         }
 
@@ -1127,7 +1100,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("HotWaterCylinder", viewModel);
         }
 
@@ -1160,7 +1132,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("NumberOfOccupants", viewModel);
         }
 
@@ -1204,7 +1175,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("HeatingPattern", viewModel);
         }
 
@@ -1248,7 +1218,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("Temperature", viewModel);
         }
 
@@ -1296,7 +1265,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
             
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("AnswerSummary", viewModel);
         }
 
@@ -1392,7 +1360,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
             
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("NoRecommendations", viewModel);
         }
 
@@ -1433,7 +1400,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(backArgs.Action, backArgs.Controller, backArgs.Values)
             };
             
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("YourRecommendations", viewModel);
         }
 
@@ -1485,7 +1451,6 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = backLink
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             return View("recommendations/" + Enum.GetName(recommendationKey), viewModel);
         }
 
@@ -1627,7 +1592,6 @@ namespace SeaPublicWebsite.Controllers
                 EmailSent = emailSent
             };
 
-            ViewBag.FeedbackUrl = Constants.FEEDBACK_URL_DEFAULT;
             if (viewModel.GetSavedRecommendations().Any())
             {
                 return View("ActionPlan/ActionPlanWithSavedRecommendations", viewModel);
