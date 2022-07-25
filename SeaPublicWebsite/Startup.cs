@@ -112,6 +112,7 @@ namespace SeaPublicWebsite
         {
             services.Configure<CookieServiceConfiguration>(
                 configuration.GetSection(CookieServiceConfiguration.ConfigSection));
+            services.AddAntiforgery(options => options.Cookie.Name = "Antiforgery");
             services.AddScoped<CookieService, CookieService>();
         }
 
