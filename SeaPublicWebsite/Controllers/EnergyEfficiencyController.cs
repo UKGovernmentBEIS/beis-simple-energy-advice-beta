@@ -1474,14 +1474,9 @@ namespace SeaPublicWebsite.Controllers
 
             if (command == "goForwards")
             {
-                if (viewModel.FromActionPlan)
+                if (propertyData.GetLastRecommendationKey() == recommendationKey || viewModel.FromActionPlan)
                 {
                     return RedirectToAction(nameof(ActionPlan_Get), new {reference = propertyData.Reference});
-                }
-                
-                if (propertyData.GetLastRecommendationKey() == recommendationKey)
-                {
-                    return RedirectToAction(nameof(AlternativeRecommendations_Get), new {reference = propertyData.Reference});
                 }
 
                 return RedirectToAction(nameof(Recommendation_Get),
@@ -1491,90 +1486,6 @@ namespace SeaPublicWebsite.Controllers
             throw new ArgumentOutOfRangeException();
         }
 
-        [HttpGet("alternative-recommendations/{reference}")]
-        public async Task<IActionResult> AlternativeRecommendations_Get(string reference, bool fromActionPlan = false)
-        {
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-
-            var viewModel = new AlternativeRecommendationsViewModel
-            {
-                Reference = reference,
-                FromActionPlan = fromActionPlan,
-                ShowAltRadiatorPanels = propertyData.ShowAltRadiatorPanels,
-                ShowAltHeatPump =  propertyData.ShowAltHeatPump,
-                ShowAltDraughtProofFloors = propertyData.ShowAltDraughtProofFloors,
-                ShowAltDraughtProofWindowsAndDoors = propertyData.ShowAltDraughtProofWindowsAndDoors,
-                ShowAltDraughtProofLoftAccess = propertyData.ShowAltDraughtProofLoftAccess,
-                LastIndex = propertyData.PropertyRecommendations.Count,
-                BackLink = fromActionPlan
-                    ? Url.Action(nameof(ActionPlan_Get), new { reference })
-                    : Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference })
-            };
-            
-            return View("Recommendations/AlternativeRecommendations", viewModel);
-        }
-        
-        [HttpPost("alternative-recommendations/{reference}")]
-        public async Task<IActionResult> AlternativeRecommendations_Post(AlternativeRecommendationsViewModel viewModel, string command)
-        {
-            if (!ModelState.IsValid)
-            {
-                return await AlternativeRecommendations_Get(viewModel.Reference, viewModel.FromActionPlan);
-            }
-            
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference);
-
-            switch (command)
-            {
-                case "goBackwards":
-                    return RedirectToAction(nameof(Recommendation_Get), 
-                        new {id = (int)propertyData.GetLastRecommendationKey(), reference = propertyData.Reference});
-                case "goForwards":
-                    return RedirectToAction(nameof(ActionPlan_Get), new {reference = propertyData.Reference});
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        [HttpGet("water-and-energy-efficiency/{reference}")]
-        public IActionResult WaterAndElectricityEfficiency_Get(string reference, bool fromNoRecommendations, bool fromActionPlan = false)
-        {
-            var viewModel = new WaterAndEnergyEfficiencyViewModel
-            {
-                Reference = reference,
-                FromActionPlan = fromActionPlan,
-                FromNoRecommendations = fromNoRecommendations,
-                BackLink = fromNoRecommendations
-                    ? Url.Action(nameof(NoRecommendations_Get), new { reference })
-                    : Url.Action(nameof(AlternativeRecommendations_Get), new { reference, fromActionPlan})
-                    
-            };
-            
-            return View("Recommendations/WaterAndEnergyEfficiency", viewModel);
-        }
-        
-        [HttpPost("water-and-energy-efficiency/{reference}")]
-        public IActionResult WaterAndElectricityEfficiency_Post(WaterAndEnergyEfficiencyViewModel viewModel, string command)
-        {
-            if (!ModelState.IsValid)
-            {
-                return WaterAndElectricityEfficiency_Get(viewModel.Reference, viewModel.FromActionPlan);
-            }
-            
-            switch (command)
-            {
-                case "goBackwards":
-                    return RedirectToAction(nameof(AlternativeRecommendations_Get), 
-                        new {reference = viewModel.Reference, fromActionPlan = viewModel.FromActionPlan});
-                case "goForwards":
-                    return viewModel.FromNoRecommendations
-                        ? RedirectToAction(nameof(NoRecommendations_Get), new {reference = viewModel.Reference})
-                        : RedirectToAction(nameof(ActionPlan_Get), new {reference = viewModel.Reference});
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
         [HttpGet("action-plan/{reference}")]
         public async Task<IActionResult> ActionPlan_Get(string reference, string emailAddress = null, bool emailSent = false)
         {
@@ -1582,7 +1493,7 @@ namespace SeaPublicWebsite.Controllers
             
             var viewModel = new ActionPlanViewModel
             {
-                BackLink = Url.Action(nameof(AlternativeRecommendations_Get), new { reference }),
+                BackLink = Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference }),
                 PropertyData = propertyData,
                 EmailAddress = emailAddress,
                 EmailSent = emailSent
