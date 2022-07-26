@@ -15,7 +15,7 @@ public class SecurityHeadersMiddleware
     public Task Invoke(HttpContext context)
     {
         context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-        context.Response.Headers.Add("Content-Security-Policy", "default-src 'self");
+        context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'");
         context.Response.Headers.Add("Referrer-Policy", "no-referrer");
 
         return next(context);
