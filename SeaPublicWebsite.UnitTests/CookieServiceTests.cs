@@ -2,6 +2,8 @@
 using NUnit.Framework;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using SeaPublicWebsite.Models.Cookies;
@@ -55,7 +57,7 @@ public class CookieServiceTests
             DefaultDaysUntilExpiry = 365
         };
         var options = Options.Create(config);
-        CookieService = new CookieService(options);
+        CookieService = new CookieService(options, new NullLogger<CookieService>());
         Key = CookieService.Configuration.CookieSettingsCookieName;
     }
     

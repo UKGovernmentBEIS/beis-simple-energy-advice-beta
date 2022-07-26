@@ -100,6 +100,11 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("WallConstruction")
                         .HasColumnType("integer");
 
+                    b.Property<uint>("xmin")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PropertyDataId")
@@ -212,6 +217,11 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("YearBuilt")
                         .HasColumnType("integer");
 
+                    b.Property<uint>("xmin")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid");
+
                     b.HasKey("PropertyDataId");
 
                     b.HasIndex("EditedDataId")
@@ -260,6 +270,11 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
+
+                    b.Property<uint>("xmin")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid");
 
                     b.HasKey("PropertyRecommendationId");
 
