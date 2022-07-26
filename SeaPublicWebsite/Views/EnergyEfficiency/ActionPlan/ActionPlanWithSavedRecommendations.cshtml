@@ -54,6 +54,41 @@
                        </a>
                     </text>
         })
+
+        <div class="sea-action-plan-margin-right sea-saved-recommendations-table sea-saved-recommendations-table-desktop-hide">
+            @await Html.GovUkTable(new TableGovUkViewModel
+            {
+                Classes = "govuk-!-margin-bottom-9",
+                Head = new(),
+                Rows = Model.GetSavedRecommendations().Select(recommendation => new TableRowViewModel
+                {
+                    Row = new List<TableCellViewModel>
+                    {
+                        new()
+                        {
+                            Classes = "govuk-!-padding-top-4",
+                            Html = @<text>
+                                       <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
+                                           @(recommendation.Title)
+                                       </p>
+                                       <p class="govuk-body-s govuk-!-margin-bottom-0">
+                                           @(recommendation.Summary)
+                                       </p>
+                                       <p>
+                                           Typical savings per year: @Model.GetSavingText(recommendation)
+                                       </p>
+                                       <p>
+                                           Typical costs: @Model.GetInstallationCostText(recommendation)
+                                       </p>
+                                       <a class="govuk-link" href=@Url.Action("Recommendation_Get", new { id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true })>
+                                           Revisit recommendation
+                                       </a>
+                                    </text>
+                        }
+                    }
+                }).ToList()
+            })
+        </div>
         
         <div class="sea-action-plan-margin-right sea-saved-recommendations-table sea-saved-recommendations-table-mobile-hide">
             @await Html.GovUkTable(new TableGovUkViewModel
