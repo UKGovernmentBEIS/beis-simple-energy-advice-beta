@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using SeaPublicWebsite.Models.Cookies;
@@ -10,10 +11,12 @@ namespace SeaPublicWebsite.Services.Cookies;
 public class CookieService
 {
     public readonly CookieServiceConfiguration Configuration;
+    private readonly ILogger<CookieService> logger;
     
-    public CookieService(IOptions<CookieServiceConfiguration> options)
+    public CookieService(IOptions<CookieServiceConfiguration> options, ILogger<CookieService> logger)
     {
         Configuration = options.Value;
+        this.logger = logger;
     }
 
     public bool TryGetCookie<T>(HttpRequest request, string cookieName, out T cookie)
@@ -27,6 +30,7 @@ public class CookieService
             }
             catch (JsonException)
             {
+                logger.LogWarning("There was an error in deserializing the cookie string '{}' to the type '{}'", cookieString, nameof(T));
                 // In case of failure, return false as if there was no cookie
             }
         }
@@ -50,13 +54,6 @@ public class CookieService
 
     public BannerState GetAndUpdateBannerState(HttpRequest request, HttpResponse response)
     {
-        // We don't show the banner on this page since we ask the user for consent on he page anyway
-        // TODO: seabeta-576 When private beta finishes, this section should be removed.
-        if (request.GetEncodedUrl().Contains("/private-beta"))
-        {
-            return BannerState.Hide;
-        }
-        
         // Cookie settings page doesn't display the banner
         if (request.GetEncodedUrl().Contains("/cookies"))
         {
