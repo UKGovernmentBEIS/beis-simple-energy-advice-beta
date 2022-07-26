@@ -1244,6 +1244,7 @@ namespace SeaPublicWebsite.Controllers
                 Reference = propertyData.Reference,
                 EmailAddress = emailAddress,
                 EmailSent = emailSent,
+                HasOutdoorSpace = propertyData.HasOutdoorSpace,
                 BackLink = GetBackUrl(QuestionFlowStep.NoRecommendations, propertyData)
             };
             
