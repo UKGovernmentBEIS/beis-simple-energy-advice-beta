@@ -1,0 +1,64 @@
+﻿@using GovUkDesignSystem.GovUkDesignSystemComponents
+@model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
+
+@{
+    Layout = "_Recommendation";
+}
+
+@section RecommendationBody
+{
+    <p class="govuk-body">
+        Based on the information we have collected, it looks like you could save money on your energy bills 
+        and reduce your home‘s carbon emissions by replacing your current heating system with a heat pump. 
+        A heat pump captures heat from outside and moves it into your home. 
+        It uses electricity to do this, but the heat energy delivered to your home is much
+        more than the electrical energy used to power the system.   
+    </p>
+
+    <p class="govuk-body">
+        There are different types of heat pump so it is important to 
+        <a class="govuk-link" href="https://www.heat-pump-check.service.gov.uk/" target="_blank">
+            check if your home is suitable for a heat pump
+        </a>
+        on our dedicated heat pump service. 
+    </p>
+
+    <p class="govuk-body govuk-!-margin-bottom-6">
+        You can find more information on heat pumps on the 
+        <a class="govuk-link" href="https://energysavingtrust.org.uk/" target="_blank">
+            Energy Saving Trust
+        </a>
+        website.
+    </p>
+}
+
+@section RecommendationSuitableFor
+{
+    <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
+        <li>
+            You have or are prepared to install radiators or underfloor heating 
+        </li>
+        <li>
+            You have some outdoor space where the external unit could sit
+        </li>
+    </ul>
+}
+
+@section RecommendationLifetime
+{
+    <p class="govuk-body">Heat pumps are typically expected to last <b>@Model.GetCurrentPropertyRecommendation().Lifetime years</b></p>
+}
+
+@{
+    Model.DisruptionTagViewModel = new TagViewModel
+    {
+        Classes = "govuk-tag--yellow",
+        Text = "MODERATE"
+    };
+    
+    Model.DurationTagViewModel = new TagViewModel
+    {
+        Classes = "govuk-tag--red",
+        Text = "SEVERAL DAYS"
+    };
+}

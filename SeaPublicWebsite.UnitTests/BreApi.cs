@@ -1,6 +1,7 @@
 using NUnit.Framework;
-using SeaPublicWebsite.ExternalServices.Models;
 using FluentAssertions;
+using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
+using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre.Enums;
 
 namespace Tests;
 

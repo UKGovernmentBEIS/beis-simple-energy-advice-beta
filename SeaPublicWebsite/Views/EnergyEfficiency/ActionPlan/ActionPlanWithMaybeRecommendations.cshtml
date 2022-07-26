@@ -30,19 +30,20 @@
         </h2>
         
         <p class="govuk-body">
-            You may want to revisit some
-            <a class="govuk-link" href="@Url.Action("AlternativeRecommendations_Get", "EnergyEfficiency", new { reference = Model.PropertyData.Reference, fromActionPlan = true })">
-                alternative recommendations
-            </a>
-            if those we presented are not suitable, or if you'd like to do more to improve the energy efficiency of your home.
+            If you’d like to do more to improve the energy efficiency of your home, consider the following:
         </p>
-        
+
+        <ul class="govuk-list govuk-list--bullet">
+            <li>When buying new appliances, upgrade to an energy efficient one - <a class="govuk-link" target="_blank" href="https://energylabel.org.uk/">Learn about energy labels</a></li>
+            <li>Install a heat pump - <a class="govuk-link" target="_blank" href="https://www.heat-pump-check.service.gov.uk/">Check if your home may be suitable</a></li>
+        </ul>
+
         <p class="govuk-body">
             You can also visit the
             <a href="https://energysavingtrust.org.uk/" target="_blank">Energy Saving Trust</a>
             website for even more ways to save energy and reduce your bills.
         </p>
-        
+
         @{ await Html.RenderPartialAsync("ActionPlan/Partials/_ReturnToActionPlan", new ReturnToActionPlanViewModel
            {
                Reference = Model.PropertyData.Reference,
