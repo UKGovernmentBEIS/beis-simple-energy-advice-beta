@@ -110,14 +110,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
         {
             BreRequest request = CreateRequest(propertyData);
 
-            List<BreRecommendation> recomms1 = await breApi.GetRecommendationsForPropertyRequestAsync(request);
-            recomms1.Add(new()
-            {
-                Key = RecommendationKey.InstallHeatPump,
-                Title = "Install a heat pump"
-            });
-            return recomms1;
-
+            return await breApi.GetRecommendationsForPropertyRequestAsync(request);
         }
 
         private static BreRequest CreateRequest(PropertyData propertyData)
