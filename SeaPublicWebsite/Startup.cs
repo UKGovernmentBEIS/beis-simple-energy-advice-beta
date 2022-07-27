@@ -166,7 +166,9 @@ namespace SeaPublicWebsite
             app.UseAuthorization();
 
             ConfigureHttpBasicAuth(app);
-            
+
+            app.UseMiddleware<SecurityHeadersMiddleware>();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
