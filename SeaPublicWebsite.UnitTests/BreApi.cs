@@ -25,7 +25,8 @@ public class BreApi
             breHeatingPatternType: BreHeatingPatternType.MorningAndEvening,
             breNormalDaysOffHours: null,
             breTemperature: null,
-            breFloorType: BreFloorType.DontKnow
+            breFloorType: BreFloorType.DontKnow,
+            breOutsideSpace: true
         );
         
         // Assert

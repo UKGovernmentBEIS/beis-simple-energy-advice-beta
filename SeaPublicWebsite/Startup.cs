@@ -115,6 +115,8 @@ namespace SeaPublicWebsite
         {
             services.Configure<CookieServiceConfiguration>(
                 configuration.GetSection(CookieServiceConfiguration.ConfigSection));
+            // Change the default antiforgery cookie name so it doesn't include Asp.Net for security reasons
+            services.AddAntiforgery(options => options.Cookie.Name = "Antiforgery");
             services.AddScoped<CookieService, CookieService>();
         }
 
@@ -164,7 +166,9 @@ namespace SeaPublicWebsite
             app.UseAuthorization();
 
             ConfigureHttpBasicAuth(app);
-            
+
+            app.UseMiddleware<SecurityHeadersMiddleware>();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

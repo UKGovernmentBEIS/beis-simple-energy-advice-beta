@@ -146,6 +146,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 
             BreFloorType? breFloorType = GetBreFloorType(propertyData.FloorConstruction, propertyData.FloorInsulated);
 
+            bool? breOutsideSpace = GetBreOutsideSpace(propertyData.HasOutdoorSpace);
+
             BreRequest request = new(
                 brePropertyType: brePropertyType,
                 breBuiltForm: breBuiltForm,
@@ -160,7 +162,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 breHeatingPatternType: breHeatingPatternType,
                 breNormalDaysOffHours: breNormalDaysOffHours,
                 breTemperature: propertyData.Temperature,
-                breFloorType: breFloorType
+                breFloorType: breFloorType,
+                breOutsideSpace: breOutsideSpace
             );
 
             return request;
@@ -504,6 +507,17 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 FloorConstruction.Other => BreFloorType.DontKnow,
                 FloorConstruction.DoNotKnow => BreFloorType.DontKnow,
                 _ => null
+            };
+        }
+
+        private static bool GetBreOutsideSpace(HasOutdoorSpace? hasOutdoorSpace)
+        {
+            return hasOutdoorSpace switch
+            {
+                HasOutdoorSpace.Yes => true,
+                HasOutdoorSpace.No => false,
+                HasOutdoorSpace.DoNotKnow => true,
+                _ => throw new ArgumentOutOfRangeException()
             };
         }
     }

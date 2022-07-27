@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
 @using SeaPublicWebsite.Models.EnergyEfficiency
 @model SeaPublicWebsite.Models.EnergyEfficiency.NoRecommendationsViewModel;
@@ -27,14 +28,20 @@
         <p class="govuk-body">From the information collected, it seems like your home is already energy efficient and may not significantly benefit from further measures.</p>
         <p class="govuk-body">You may be able to make changes to how you use energy to help reduce your bills.</p>
         
-        @{ await Html.RenderPartialAsync("ActionPlan/Partials/_LowCostMeasures", new LowCostMeasuresViewModel
-           {
-               Heading = "What else you can do",
-               Text = "The below recommendations could help you use less energy through reducing your hot water and electricity use.",
-               FromNoRecommendations = true,
-               Reference = Model.Reference,
-           }); }
+        <h2 class="govuk-heading-l">What else you can do</h2>
         
+        <p class="govuk-body">
+            If you’d like to do more to improve the energy efficiency of your home, consider the following:
+        </p>
+
+        <ul class="govuk-list govuk-list--bullet">
+            <li>When buying new appliances, upgrade to an energy efficient one - <a class="govuk-link" target="_blank" href="https://energylabel.org.uk/">Learn about energy labels</a></li>
+            @if (Model?.HasOutdoorSpace != HasOutdoorSpace.No)
+            {
+                <li>Install a heat pump - <a class="govuk-link" target="_blank" href="https://www.heat-pump-check.service.gov.uk/">Check if your home may be suitable</a></li>
+            }
+        </ul>
+
         <h2 class="govuk-heading-l">Still need help?</h2>
         <p class="govuk-body">You can visit the <a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">Energy Saving Trust website</a> for more information on reducing your home’s energy use.</p>
 
@@ -80,7 +87,7 @@
         <p class="govuk-body">
             Your feedback can help us to shape how the service develops so that it can best serve the needs of the public.
         </p>
-        <a class="govuk-link" href=@Constants.FEEDBACK_URL_ACTION_PLAN target="_blank">
+        <a class="govuk-link" href=@Constants.FEEDBACK_URL_DEFAULT target="_blank">
             Leave some feedback for this service (opens in new tab)
         </a>
 

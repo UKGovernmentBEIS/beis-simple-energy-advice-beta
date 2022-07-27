@@ -5,7 +5,7 @@ index: "*-*"
 filter:
 - query:
     query_string:
-        query: "(level:Error OR level:Fatal) AND environmentName:Production"
+        query: "(level:Error OR level:Fatal OR level:Critical) AND environmentName:Production"
  
 alert:
 - "email"
