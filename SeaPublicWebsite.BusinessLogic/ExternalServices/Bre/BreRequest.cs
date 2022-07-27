@@ -39,6 +39,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
         public int glazing_type { get; set; }
         
         public int? floor_type { get; set; }
+        
+        public bool? outside_space { get; set; }
 
         public BreRequest(
             BrePropertyType brePropertyType,
@@ -54,7 +56,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
             BreHeatingPatternType breHeatingPatternType,
             int[] breNormalDaysOffHours,
             decimal? breTemperature,
-            BreFloorType? breFloorType
+            BreFloorType? breFloorType,
+            bool? breOutsideSpace
         )
         {
             property_type = ((int) brePropertyType).ToString();
@@ -83,6 +86,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 "A", "B", "Q", "Q1", breFloorType != BreFloorType.DontKnow ? "W1": null, "C", "G", "L2", "O", "U", "Z1"
             };
             floor_type = (int?) breFloorType;
+            outside_space = breOutsideSpace;
         }
     }
 }
