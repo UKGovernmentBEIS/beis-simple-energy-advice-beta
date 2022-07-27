@@ -4,9 +4,23 @@ on:
   schedule:
     - cron:  '0 0 * * *'
 
+  workflow_dispatch:
+
 jobs:
   delete-data:
     runs-on: ubuntu-latest
     steps:
+      - name: Install the Cloud Foundry CLI
+        run: |
+          wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+          echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+          sudo apt-get update
+          sudo apt-get install cf7-cli
+
+      - name: Login to cf and target
+        run: |
+          cf login -a api.cloud.service.gov.uk -u team-beisesassupport@softwire.com -p '${{ secrets.TEAM_BEISESASSUPPORT_GOV_PAAS_PASSWORD }}' -o 'beis-domestic-energy-advice-service'
+          cf target -s sea-beta-loadtest
+
       - name: Delete old data
-        run: cf run-task sea-beta-loadtest --command "dotnet run --project .\SeaPublicWebsite.DeleteOldData" --name delete-old-data-task
+        run: cf run-task delete-old-data --command "dotnet ./SeaPublicWebsite.DeleteOldData.dll" --name delete-old-data-task
