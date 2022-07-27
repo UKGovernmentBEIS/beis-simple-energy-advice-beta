@@ -8,19 +8,20 @@
 @section RecommendationBody
 {
     <p class="govuk-body">
-        Based on the information we have collected, it looks like you could save money on your energy bills 
-        and reduce your home‘s carbon emissions by replacing your current heating system with a heat pump. 
-        A heat pump captures heat from outside and moves it into your home. 
-        It uses electricity to do this, but the heat energy delivered to your home is much
-        more than the electrical energy used to power the system.   
+        A heat pump is a low carbon heating system and is much more efficient than a boiler. Rather than burning a fuel like gas or oil, it uses electricity to transfer heat from outside to heat your rooms and hot water.
+    </p>
+    <p class="govuk-body">
+        Heat pumps are suitable for many homes, will cut your carbon emissions and there are grants available through the 
+        <a class="govuk-link" href="https://www.gov.uk/guidance/check-if-you-may-be-eligible-for-the-boiler-upgrade-scheme-from-april-2022">Boiler Upgrade Scheme</a> 
+        for air source heat pumps and ground source heat pumps to reduce the upfront cost.
     </p>
 
     <p class="govuk-body">
-        There are different types of heat pump so it is important to 
+        There are different types of heat pump and you can 
         <a class="govuk-link" href="https://www.heat-pump-check.service.gov.uk/" target="_blank">
-            check if your home is suitable for a heat pump
+            check which might be suitable for your home 
         </a>
-        on our dedicated heat pump service. 
+        on our dedicated heat pump service.
     </p>
 
     <p class="govuk-body govuk-!-margin-bottom-6">
@@ -36,17 +37,18 @@
 {
     <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
         <li>
-            You have or are prepared to install radiators or underfloor heating 
+            You have some outdoor space
         </li>
         <li>
-            You have some outdoor space where the external unit could sit
+            You are looking to reduce your carbon footprint
         </li>
     </ul>
 }
 
 @section RecommendationLifetime
 {
-    <p class="govuk-body">Heat pumps are typically expected to last <b>@Model.GetCurrentPropertyRecommendation().Lifetime years</b></p>
+    <p class="govuk-body">Heat pumps are typically expected to last <b>12 - 15 years</b></p>
+    <p class="govuk-body">The running costs of heat pumps depend on a number of factors to do with your heating system and your property. Speak to a heat pump installer to find out more.</p>
 }
 
 @{
@@ -59,6 +61,6 @@
     Model.DurationTagViewModel = new TagViewModel
     {
         Classes = "govuk-tag--red",
-        Text = "SEVERAL DAYS"
+        Text = "3 DAYS"
     };
 }
