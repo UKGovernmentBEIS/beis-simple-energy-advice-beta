@@ -54,13 +54,6 @@ public class CookieService
 
     public BannerState GetAndUpdateBannerState(HttpRequest request, HttpResponse response)
     {
-        // We don't show the banner on this page since we ask the user for consent on he page anyway
-        // TODO: seabeta-576 When private beta finishes, this section should be removed.
-        if (request.GetEncodedUrl().Contains("/private-beta"))
-        {
-            return BannerState.Hide;
-        }
-        
         // Cookie settings page doesn't display the banner
         if (request.GetEncodedUrl().Contains("/cookies"))
         {

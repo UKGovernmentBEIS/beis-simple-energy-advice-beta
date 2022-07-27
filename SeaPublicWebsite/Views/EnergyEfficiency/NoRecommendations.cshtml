@@ -1,5 +1,6 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
 @using SeaPublicWebsite.Models.EnergyEfficiency
 @model SeaPublicWebsite.Models.EnergyEfficiency.NoRecommendationsViewModel;
@@ -35,7 +36,10 @@
 
         <ul class="govuk-list govuk-list--bullet">
             <li>When buying new appliances, upgrade to an energy efficient one - <a class="govuk-link" target="_blank" href="https://energylabel.org.uk/">Learn about energy labels</a></li>
-            <li>Install a heat pump - <a class="govuk-link" target="_blank" href="https://www.heat-pump-check.service.gov.uk/">Check if your home may be suitable</a></li>
+            @if (Model?.HasOutdoorSpace != HasOutdoorSpace.No)
+            {
+                <li>Install a heat pump - <a class="govuk-link" target="_blank" href="https://www.heat-pump-check.service.gov.uk/">Check if your home may be suitable</a></li>
+            }
         </ul>
 
         <h2 class="govuk-heading-l">Still need help?</h2>
@@ -83,7 +87,7 @@
         <p class="govuk-body">
             Your feedback can help us to shape how the service develops so that it can best serve the needs of the public.
         </p>
-        <a class="govuk-link" href=@Constants.FEEDBACK_URL_ACTION_PLAN target="_blank">
+        <a class="govuk-link" href=@Constants.FEEDBACK_URL_DEFAULT target="_blank">
             Leave some feedback for this service (opens in new tab)
         </a>
 

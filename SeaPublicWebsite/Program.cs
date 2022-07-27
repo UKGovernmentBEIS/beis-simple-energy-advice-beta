@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,6 +21,9 @@ namespace SeaPublicWebsite
                 .CreateBootstrapLogger();
             
             var builder = WebApplication.CreateBuilder(args);
+            
+            // Hide that we are using Kestrel for security reasons
+            builder.WebHost.ConfigureKestrel(serverOptions => serverOptions.AddServerHeader = false);
             
             var startup = new Startup(builder.Configuration, builder.Environment);
             startup.ConfigureServices(builder.Services);
