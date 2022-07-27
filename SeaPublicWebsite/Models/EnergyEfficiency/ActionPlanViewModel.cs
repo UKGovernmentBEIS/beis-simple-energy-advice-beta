@@ -39,13 +39,11 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         }
         public string GetInstallationCostText(PropertyRecommendation recommendation)
         {
-            //TODO: revert this conditional just to display the latter expression when energy prices stabilise
             return recommendation.Key == RecommendationKey.InstallHeatPump ? "-" : $"£{recommendation.MinInstallCost:N0} - £{recommendation.MaxInstallCost:N0}";
         }
 
         public string GetSavingText(PropertyRecommendation recommendation)
         {
-            //TODO: revert this conditional just to display the latter expression when energy prices stabilise
             return recommendation.Key == RecommendationKey.InstallHeatPump ? "-" : $"£{recommendation.Saving:N0}";
         }
     }
