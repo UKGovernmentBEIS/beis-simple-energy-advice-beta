@@ -22,6 +22,7 @@ namespace SeaPublicWebsite
             
             var builder = WebApplication.CreateBuilder(args);
             
+            //Hide that we are using Kestrel for security reasons
             builder.WebHost.ConfigureKestrel(serverOptions => serverOptions.AddServerHeader = false);
             
             var startup = new Startup(builder.Configuration, builder.Environment);
