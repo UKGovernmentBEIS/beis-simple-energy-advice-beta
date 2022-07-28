@@ -19,7 +19,7 @@ using SeaPublicWebsite.Services.Cookies;
 
 namespace SeaPublicWebsite.Controllers
 {
-    [Route("")]
+    [Route("energy-efficiency")]
     public class EnergyEfficiencyController : Controller
     {
         private readonly PropertyDataStore propertyDataStore;
