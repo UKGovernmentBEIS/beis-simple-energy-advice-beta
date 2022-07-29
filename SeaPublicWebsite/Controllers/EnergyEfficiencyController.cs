@@ -54,7 +54,7 @@ namespace SeaPublicWebsite.Controllers
             this.answerService = answerService;
         }
         
-        [HttpGet("/")]
+        [HttpGet("")]
         public IActionResult Index()
         {
             return View("Index");
