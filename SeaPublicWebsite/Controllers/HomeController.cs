@@ -15,7 +15,7 @@ namespace SeaPublicWebsite.Controllers
         [HttpGet("/")]
         public IActionResult Index()
         {
-            return RedirectToAction(nameof(EnergyEfficiencyController.Index), "EnergyEfficiency");
+            return Redirect("https://www.gov.uk/improve-energy-efficiency");
         }
     }
 }
