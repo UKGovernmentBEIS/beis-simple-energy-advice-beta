@@ -39,12 +39,12 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         }
         public string GetInstallationCostText(PropertyRecommendation recommendation)
         {
-            return $"£{recommendation.MinInstallCost:N0} - £{recommendation.MaxInstallCost:N0}";
+            return recommendation.Key == RecommendationKey.InstallHeatPump ? "-" : $"£{recommendation.MinInstallCost:N0} - £{recommendation.MaxInstallCost:N0}";
         }
 
         public string GetSavingText(PropertyRecommendation recommendation)
         {
-            return $"£{recommendation.Saving:N0}";
+            return recommendation.Key == RecommendationKey.InstallHeatPump ? "-" : $"£{recommendation.Saving:N0}";
         }
     }
 }
