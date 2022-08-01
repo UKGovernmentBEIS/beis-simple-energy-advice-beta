@@ -167,7 +167,7 @@ namespace SeaPublicWebsite
 
             ConfigureHttpBasicAuth(app);
 
-            ConfigureSecurityHeaders(app);
+            app.UseMiddleware<SecurityHeadersMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
@@ -182,18 +182,6 @@ namespace SeaPublicWebsite
                 // Add HTTP Basic Authentication in our non-production environments to make sure people don't accidentally stumble across the site
                 app.UseMiddleware<BasicAuthMiddleware>();
             }
-        }
-
-        private void ConfigureSecurityHeaders(IApplicationBuilder app)
-        {
-            app.Use(async (context, next) =>
-            {
-                context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src * 'unsafe-inline' 'unsafe-eval'");
-                context.Response.Headers.Add("Referrer-Policy", "no-referrer");
-                
-                await next();
-            });
         }
     }
 }
