@@ -1325,8 +1325,16 @@ namespace SeaPublicWebsite.Controllers
             }
             else
             {
-                backLink = Url.Action(nameof(Recommendation_Get), "EnergyEfficiency",
-                    new { id = (int)propertyData.GetPreviousRecommendationKey(recommendationKey), reference });
+                try
+                {
+                    backLink = Url.Action(nameof(Recommendation_Get), "EnergyEfficiency",
+                        new { id = (int) propertyData.GetPreviousRecommendationKey(recommendationKey), reference });
+                }
+                catch
+                {
+                    // In case user manually typed in an address with an incorrect recommendation id 
+                    return View("../Error/PageNotFound");
+                }
             }
             
             var viewModel = new RecommendationViewModel
