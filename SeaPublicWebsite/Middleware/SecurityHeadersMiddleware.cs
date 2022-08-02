@@ -21,7 +21,8 @@ public class SecurityHeadersMiddleware
         
         if (!context.Response.Headers.ContainsKey("Content-Security-Policy"))
         {
-            context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src * 'unsafe-inline' 'unsafe-eval'");
+            context.Response.Headers.Add("Content-Security-Policy",
+                "default-src 'self'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src  * 'unsafe-inline'"); 
 
         }
         
