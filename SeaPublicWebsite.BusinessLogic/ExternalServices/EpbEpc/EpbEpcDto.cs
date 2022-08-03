@@ -682,6 +682,11 @@ public class EpbEpcAssessmentDto
         {
             // We need to inspect the main heating description to decide
             
+            if (MainHeatingDescription is null)
+            {
+                return EpcHeatingType.DoNotKnow;
+            }
+            
             // Communal heating is treated as 'other heating'
             // 6 - community heating system
             if (MainHeatingDescription.Equals("6") ||
