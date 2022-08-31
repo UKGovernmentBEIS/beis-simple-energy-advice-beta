@@ -44,7 +44,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                     new RequestParameters
                     {
                         BaseAddress = configuration.BaseUrl,
-                        Path = "/v2/energy_use",
+                        Path = "/bemapi/v2/energy_use",
                         Auth = new AuthenticationHeaderValue("Basic", wsseHeader),
                         Body = stringContent
                     }
