@@ -17,19 +17,19 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
             new()
             {
                 {
-                    "A1", new BreRecommendation
+                    "A", new BreRecommendation
                     {
-                        Key = RecommendationKey.InsulateYourLoft,
-                        Title = "Insulate your loft",
-                        Summary = "Add loft insulation to reach the recommended level of 300mm"
+                        Key = RecommendationKey.AddLoftInsulation,
+                        Title = "Add some more loft insulation",
+                        Summary = "Increase the level of insulation in your loft to the recommended level of 300mm"
                     }
                 },
                 {
                     "A1", new BreRecommendation
                     {
-                        Key = RecommendationKey.AddLoftInsulation,
-                        Title = "Add some more loft insulation",
-                        Summary = "Increase the level of insulation in your loft to the recommended level of 300mm"
+                        Key = RecommendationKey.InsulateYourLoft,
+                        Title = "Insulate your loft",
+                        Summary = "Add loft insulation to reach the recommended level of 300mm"
                     }
                 },
                 {
