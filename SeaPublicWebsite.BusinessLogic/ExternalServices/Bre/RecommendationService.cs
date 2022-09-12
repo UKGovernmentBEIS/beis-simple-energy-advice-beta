@@ -25,6 +25,14 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                     }
                 },
                 {
+                    "A1", new BreRecommendation
+                    {
+                        Key = RecommendationKey.InsulateYourLoft,
+                        Title = "Insulate your loft",
+                        Summary = "Add loft insulation to reach the recommended level of 300mm"
+                    }
+                },
+                {
                     "B", new BreRecommendation
                     {
                         Key = RecommendationKey.InsulateCavityWalls,

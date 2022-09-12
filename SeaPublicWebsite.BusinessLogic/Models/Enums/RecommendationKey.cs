@@ -23,6 +23,7 @@
         MixerShowerHeatRecoverySystem,
         ReplaceSingleGlazedWindowsWithLowEDoubleGlazing,
         HighPerformanceExternalDoors,
-        InstallHeatPump
+        InstallHeatPump,
+        InsulateYourLoft
     }
 }
