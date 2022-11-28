@@ -684,7 +684,7 @@ public class EpbEpcAssessmentDto
             
             if (MainHeatingDescription is null)
             {
-                return EpcHeatingType.DoNotKnow;
+                return null;
             }
             
             // Communal heating is treated as 'other heating'
