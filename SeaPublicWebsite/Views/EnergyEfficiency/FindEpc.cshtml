@@ -8,10 +8,10 @@
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        Href = Model.BackLink,
-    })
+           {
+               Text = "Back",
+               Href = Model.BackLink,
+           })
 }
 
 <div class="govuk-grid-row">
@@ -22,44 +22,44 @@
             @Html.AntiForgeryToken()
 
             @await Html.GovUkFieldset(new FieldsetViewModel
-            {
-                Legend = new LegendViewModel
-                {
-                    Text = "You may be able to get help from your Energy Performance Certificate (EPC)",
-                    Classes = "govuk-fieldset__legend--l",
-                    IsPageHeading = true
-                },
-                InnerHtml =
-                    @<text>
-                        <p class="govuk-body">
-                            An Energy Performance Certificate contains information about a property and how energy efficient it was when the certificate was made.
-                        </p>
-                        <p class="govuk-body">
-                            We will use the information on your certificate to help you to answer our questions.
-                        </p>
-                        <p class="govuk-body">
-                            The information from the certificate can be used as a guide. You may select your preferred response to any question.
-                        </p>
-                        <p class="govuk-body">
-                            You will need to provide your property’s address to find out if has a current certificate.
-                        </p>
-                        @await Html.GovUkRadiosFor(
-                            m => m.FindEpc,
-                            fieldsetOptions: new FieldsetViewModel
-                            {
-                                Legend = new LegendViewModel
-                                {
-                                    Text = "Would you like to see if your property has a registered Energy Performance Certificate?",
-                                    Classes = "govuk-fieldset__legend--m",
-                                    IsPageHeading = false
-                                }
-                            },
-                            hintOptions: new HintViewModel
-                            {
-                                Text = "If your property does not have an Energy Performance Certificate, please choose ‘No’."
-                            })
-                     </text>
-            })
+                   {
+                       Legend = new LegendViewModel
+                       {
+                           Text = "You may be able to get help from your Energy Performance Certificate (EPC)",
+                           Classes = "govuk-fieldset__legend--l",
+                           IsPageHeading = true
+                       },
+                       InnerHtml =
+                           @<text>
+                               <p class="govuk-body">
+                                   An Energy Performance Certificate contains information about a property and how energy efficient it was when the certificate was made.
+                               </p>
+                               <p class="govuk-body">
+                                   We will use the information on your certificate to help you to answer our questions.
+                               </p>
+                               <p class="govuk-body">
+                                   The information from the certificate can be used as a guide. You may select your preferred response to any question.
+                               </p>
+                               <p class="govuk-body">
+                                   You will need to provide your property’s address to find out if has a current certificate.
+                               </p>
+                               @await Html.GovUkRadiosFor(
+                                          m => m.FindEpc,
+                                          fieldsetOptions: new FieldsetViewModel
+                                          {
+                                              Legend = new LegendViewModel
+                                              {
+                                                  Text = "Would you like to see if your property has a registered Energy Performance Certificate?",
+                                                  Classes = "govuk-fieldset__legend--m",
+                                                  IsPageHeading = false
+                                              }
+                                          },
+                                          hintOptions: new HintViewModel
+                                          {
+                                              Text = "If your property does not have an Energy Performance Certificate, please choose ‘No’."
+                                          })
+                            </text>
+                   })
 
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
@@ -68,5 +68,8 @@
                 }))
             </div>
         </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")
     </div>
 </div>

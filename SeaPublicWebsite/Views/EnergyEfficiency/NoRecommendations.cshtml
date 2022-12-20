@@ -11,19 +11,19 @@
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        Href = Model.BackLink,
-    })
+           {
+               Text = "Back",
+               Href = Model.BackLink,
+           })
 }
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         @await Html.GovUkPanel(new PanelViewModel
-        {
-            TitleText = "Your home is energy efficient",
-            Text = "Your home is well insulated"
-        })
+               {
+                   TitleText = "Your home is energy efficient",
+                   Text = "Your home is well insulated"
+               })
         
         <p class="govuk-body">From the information collected, it seems like your home is already energy efficient and may not significantly benefit from further measures.</p>
         <p class="govuk-body">You may be able to make changes to how you use energy to help reduce your bills.</p>
@@ -91,5 +91,8 @@
             Leave some feedback for this service (opens in new tab)
         </a>
 
+    </div>
+    <div class="govuk-grid-column-one-third">
+        @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")
     </div>
 </div>

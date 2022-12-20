@@ -14,10 +14,10 @@
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        Href = Model.BackLink,
-    })
+           {
+               Text = "Back",
+               Href = Model.BackLink,
+           })
 }
 
 @{
@@ -506,10 +506,10 @@
         @if (Model.PropertyData.HasSeenRecommendations is true)
         {
             @await Html.GovUkNotificationBanner(new NotificationBannerViewModel
-            {
-                TitleText = "Important",
-                Text = "Your saved recommendations will be reset if you change any of your answers"
-            })
+                   {
+                       TitleText = "Important",
+                       Text = "Your saved recommendations will be reset if you change any of your answers"
+                   })
         }
         
 
@@ -518,9 +518,9 @@
         </h1>
 
         @await Html.GovUkHint(new HintViewModel
-        {
-            Text = "Please review the information we have gathered. You can still change your answers if anything looks wrong."
-        })
+               {
+                   Text = "Please review the information we have gathered. You can still change your answers if anything looks wrong."
+               })
 
         @(await Html.GovUkSummaryList(new SummaryListViewModel
         {
@@ -530,15 +530,18 @@
         <form action="@Url.Action(nameof(EnergyEfficiencyController.AnswerSummary_Post), "EnergyEfficiency", new { reference = Model.PropertyData.Reference })" method="post" novalidate>
             @Html.AntiForgeryToken()
             @await Html.GovUkButton(new ButtonViewModel
-            {
-                Html = @<text>
-                           See results
-                           <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
-                               <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/>
-                           </svg>
-                        </text>,
-                Classes = "govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start"
-            })
+                   {
+                       Html = @<text>
+                                  See results
+                                  <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+                                      <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/>
+                                  </svg>
+                               </text>,
+                       Classes = "govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start"
+                   })
         </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")
     </div>
 </div>
