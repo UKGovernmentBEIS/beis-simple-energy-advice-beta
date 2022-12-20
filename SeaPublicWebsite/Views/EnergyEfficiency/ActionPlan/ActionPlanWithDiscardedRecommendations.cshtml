@@ -43,6 +43,10 @@
             {
                 <li>Install a heat pump - <a class="govuk-link" target="_blank" href="https://www.heat-pump-check.service.gov.uk/">Check if your home may be suitable</a></li>
             }
+            @if (Model.PropertyData?.YearBuilt == YearBuilt.Pre1930)
+            {
+                <li>Visit the <a class="govuk-link" target="_blank" href="https://historicengland.org.uk/advice/your-home/energy-efficiency/"> Heritage England </a> site for information specific to historic buildings.</li>
+            }
         </ul>
 
         @{ await Html.RenderPartialAsync("ActionPlan/Partials/_ReturnToActionPlan", new ReturnToActionPlanViewModel
