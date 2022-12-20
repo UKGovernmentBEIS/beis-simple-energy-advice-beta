@@ -154,13 +154,26 @@
     Next we have steps to help you action these recommendations.
 </p>
 
+@if (Model.PropertyData?.OwnershipStatus == OwnershipStatus.Landlord)
+{
+    <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
+        1. Research your responsibilities as a landlord
+    </h2>
+    <p class="govuk-body">
+        There is a requirement for any properties rented out in the private rented sector to have a minimum energy performance rating of E on an Energy Performance Certificate (EPC), unless there is an applicable exemption.
+    </p>
+    <p class="govuk-body">
+        Further information can be found on the National Landlord Association web page here and the legislation and guidance can be found <a class="govuk-link" href="https://www.gov.uk/guidance/domestic-private-rented-property-minimum-energy-efficiency-standard-landlord-guidance">here</a> and <a class="govuk-link" href="https://www.legislation.gov.uk/ukdsi/2015/9780111128350/contents">here</a>.
+    </p>
+}
+
 <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
-    1. Find out if you can apply for support
+    @(Model.PropertyData?.OwnershipStatus == OwnershipStatus.Landlord ? "2." : "1.") Find out if you can apply for support
 </h2>
 @{ await Html.RenderPartialAsync("ActionPlan/Partials/_AvailableSchemesOrGrants", Model); }
 
 <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
-    2. Consult with a qualified installer
+    @(Model.PropertyData?.OwnershipStatus == OwnershipStatus.Landlord ? "3." : "2.") Consult with a qualified installer
 </h2>
 <p class="govuk-body">
     We recommend consulting with a qualified installer to confirm what changes you can make to your property.
@@ -177,7 +190,7 @@
 @if (Model.GetDecideLaterRecommendations().Any())
 {
     <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
-        3. Research improvements you are unsure about
+        @(Model.PropertyData?.OwnershipStatus == OwnershipStatus.Landlord ? "4." : "3.") Research improvements you are unsure about
     </h2>
     await Html.RenderPartialAsync("ActionPlan/Partials/_ImprovementsUnsureAbout", Model);
 }
@@ -185,7 +198,7 @@
 @{ await Html.RenderPartialAsync("ActionPlan/Partials/_DiscardedRecommendations", Model); }
 
 <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
-    @(Model.GetDecideLaterRecommendations().Any() ? "4." : "3.") Other ways to save energy
+    @(Model.GetDecideLaterRecommendations().Any() ? Model.PropertyData?.OwnershipStatus == OwnershipStatus.Landlord ? "5." : "4." : Model.PropertyData?.OwnershipStatus == OwnershipStatus.Landlord ? "4." : "3.") Other ways to save energy
 </h2>
 
 <p class="govuk-body">

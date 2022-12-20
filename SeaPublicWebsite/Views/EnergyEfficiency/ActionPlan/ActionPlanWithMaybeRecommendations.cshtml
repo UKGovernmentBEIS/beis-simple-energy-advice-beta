@@ -19,6 +19,19 @@
             Your Action Plan
         </h1>
         
+        @if (Model.PropertyData?.OwnershipStatus == OwnershipStatus.Landlord)
+        {
+            <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
+                Research your responsibilities as a landlord
+            </h2>
+            <p class="govuk-body">
+                There is a requirement for any properties rented out in the private rented sector to have a minimum energy performance rating of E on an Energy Performance Certificate (EPC), unless there is an applicable exemption.
+            </p>
+            <p class="govuk-body">
+                Further information can be found on the National Landlord Association web page here and the legislation and guidance can be found <a class="govuk-link" href="https://www.gov.uk/guidance/domestic-private-rented-property-minimum-energy-efficiency-standard-landlord-guidance">here</a> and <a class="govuk-link" href="https://www.legislation.gov.uk/ukdsi/2015/9780111128350/contents">here</a>.
+            </p>
+        }
+        
         <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
             Research improvements you are unsure about
         </h2>

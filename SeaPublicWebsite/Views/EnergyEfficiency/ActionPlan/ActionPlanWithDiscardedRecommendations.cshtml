@@ -6,10 +6,10 @@
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        Href = Model.BackLink,
-    })
+           {
+               Text = "Back",
+               Href = Model.BackLink,
+           })
 }
 
 <div class="govuk-grid-row">
@@ -22,6 +22,13 @@
             You told us that you don’t want to proceed with any of the recommendations suggested to you. 
             There are still some options for you to consider.
         </p>
+        
+        @if (Model.PropertyData?.OwnershipStatus == OwnershipStatus.Landlord)
+        {
+            <p class="govuk-body">
+                We suggest you research your responsibilities as a landlord. The legislation and guidance can be found <a class="govuk-link" href="https://www.gov.uk/guidance/domestic-private-rented-property-minimum-energy-efficiency-standard-landlord-guidance">here</a> and <a class="govuk-link" href="https://www.legislation.gov.uk/ukdsi/2015/9780111128350/contents">here</a>.
+            </p>
+        }
         
         @{ await Html.RenderPartialAsync("ActionPlan/Partials/_AvailableSchemesOrGrants", Model); }
         @{ await Html.RenderPartialAsync("ActionPlan/Partials/_DiscardedRecommendations", Model); }
