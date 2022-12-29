@@ -45,6 +45,8 @@ public class PropertyData
     public PropertyData UneditedData { get; set; }
     public bool HasSeenRecommendations { get; set; }
     public bool ReturningUser { get; set; }
+    
+    /*public bool? IsListedBuilding { get; set; }*/
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; } = new();
 
@@ -67,7 +69,7 @@ public class PropertyData
         GlazingType is Enums.GlazingType.SingleGlazed or Enums.GlazingType.Both;
 
     public bool ShowAltDraughtProofLoftAccess => LoftAccess is Enums.LoftAccess.Yes;
-    
+
     public bool HasFloor()
     {
         return (PropertyType, FlatType) switch

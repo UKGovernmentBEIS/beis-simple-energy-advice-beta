@@ -304,6 +304,9 @@ namespace SeaPublicWebsite.Controllers
 
             var epcId = viewModel.SelectedEpcId == "unlisted" ? null : viewModel.SelectedEpcId;
             var nextStep = await answerService.SetEpc(viewModel.Reference, epcId);
+            
+            // List<EpcSearchResult> epcSearchResults = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(viewModel.Postcode, viewModel.Number);
+            // nextStep = await answerService.SetIsListedBuilding(viewModel.Reference, true);
 
             return RedirectToNextStep(nextStep, viewModel.Reference);
         }
@@ -1559,7 +1562,6 @@ namespace SeaPublicWebsite.Controllers
                     ret[extraRouteValue.Key] = extraRouteValue.Value;
                 }
             }
-
             return ret;
         }
         

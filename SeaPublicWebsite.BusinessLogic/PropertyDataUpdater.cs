@@ -59,6 +59,12 @@ public class PropertyDataUpdater
             QuestionFlowStep.ConfirmAddress);
     }
 
+    // public QuestionFlowStep SetIsListedBuildingAsync(PropertyData propertyData, bool isListedBuilding)
+    // {
+    //     return UpdatePropertyData(
+    //         p => { p.IsListedBuilding = isListedBuilding;}, propertyData, QuestionFlowStep.ConfirmAddress);
+    // }
+
     public QuestionFlowStep ConfirmEpcDetails(PropertyData propertyData, EpcDetailsConfirmed? confirmed)
     {
         return UpdatePropertyData(

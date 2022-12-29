@@ -48,6 +48,12 @@ public class AnswerService
             reference);
     }
 
+    // public async Task<QuestionFlowStep> SetIsListedBuilding(string reference, bool isListedBuilding)
+    // {
+    //     return await UpdatePropertyDataAsync( (b, p) => b.SetIsListedBuildingAsync(p, isListedBuilding),
+    //         reference);
+    // }
+
     public async Task<QuestionFlowStep> ConfirmEpcDetails(string reference, EpcDetailsConfirmed? confirmed)
     {
         return await UpdatePropertyDataAsync(
