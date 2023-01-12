@@ -61,36 +61,36 @@
             @Html.AntiForgeryToken()
 
             @await Html.GovUkFieldset(new FieldsetViewModel
-            {
-                Legend = new LegendViewModel
-                {
-                    Text = "Check your property's details",
-                    Classes = "govuk-fieldset__legend--l",
-                    IsPageHeading = true
-                },
-                InnerHtml =
-                    @<text>
-                        <p class="govuk-caption-m">
-                            Please confirm that this information about your property is correct. This information cannot be changed later once you continue.
-                        </p>
-                        @(await Html.GovUkSummaryList(new SummaryListViewModel
-                        {
-                            Rows = rows
-                        }))
+                   {
+                       Legend = new LegendViewModel
+                       {
+                           Text = "Check your property's details",
+                           Classes = "govuk-fieldset__legend--l",
+                           IsPageHeading = true
+                       },
+                       InnerHtml =
+                           @<text>
+                               <p class="govuk-caption-m">
+                                   Please confirm that this information about your property is correct. This information cannot be changed later once you continue.
+                               </p>
+                               @(await Html.GovUkSummaryList(new SummaryListViewModel
+                               {
+                                   Rows = rows
+                               }))
                         
-                        @await Html.GovUkRadiosFor(
-                            m => m.EpcDetailsConfirmed,
-                            fieldsetOptions: new FieldsetViewModel
-                            {
-                                Legend = new LegendViewModel
-                                {
-                                    Text = "Is this information correct?",
-                                    Classes = "govuk-fieldset__legend--m",
-                                    IsPageHeading = false
-                                }
-                            })
-                     </text>
-            })
+                               @await Html.GovUkRadiosFor(
+                                          m => m.EpcDetailsConfirmed,
+                                          fieldsetOptions: new FieldsetViewModel
+                                          {
+                                              Legend = new LegendViewModel
+                                              {
+                                                  Text = "Is this information correct?",
+                                                  Classes = "govuk-fieldset__legend--m",
+                                                  IsPageHeading = false
+                                              }
+                                          })
+                            </text>
+                   })
 
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
@@ -99,5 +99,8 @@
                 }))
             </div>
         </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")
     </div>
 </div>

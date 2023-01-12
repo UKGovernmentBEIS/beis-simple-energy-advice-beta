@@ -6,10 +6,10 @@
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        Href = Model.BackLink,
-    })
+           {
+               Text = "Back",
+               Href = Model.BackLink,
+           })
 }
 
 <div class="govuk-grid-row">
@@ -43,111 +43,111 @@
 </div>
 
 @await Html.GovUkDetails(new DetailsViewModel
-{
-    SummaryText = "How did we calculate these figures?",
-    Html = @<text>
-               The costs and savings you view using the services on this site are based on standards
-               developed for Government as a way of understanding how houses and flats use energy,
-               and how your home’s energy use could be improved. You can find out more information
-               about these standards with the guidance published on the
-               <a class="govuk-link" target="_blank" href="https://www.gov.uk/guidance/standard-assessment-procedure">
-                   Standard Assessment Procedure site.<span class="govuk-visually-hidden">(opens in a new window)</span>
-               </a>
-            </text>
-})
+       {
+           SummaryText = "How did we calculate these figures?",
+           Html = @<text>
+                      The costs and savings you view using the services on this site are based on standards
+                      developed for Government as a way of understanding how houses and flats use energy,
+                      and how your home’s energy use could be improved. You can find out more information
+                      about these standards with the guidance published on the
+                      <a class="govuk-link" target="_blank" href="https://www.gov.uk/guidance/standard-assessment-procedure">
+                          Standard Assessment Procedure site.<span class="govuk-visually-hidden">(opens in a new window)</span>
+                      </a>
+                   </text>
+       })
 
 <div class="sea-action-plan-margin-right sea-saved-recommendations-table sea-saved-recommendations-table-desktop-hide">
     @await Html.GovUkTable(new TableGovUkViewModel
-    {
-        Classes = "govuk-!-margin-bottom-9",
-        Head = new(),
-        Rows = Model.GetSavedRecommendations().Select(recommendation => new TableRowViewModel
-        {
-            Row = new List<TableCellViewModel>
-            {
-                new()
-                {
-                    Classes = "govuk-!-padding-top-4",
-                    Html = @<text>
-                               <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
-                                   @(recommendation.Title)
-                               </p>
-                               <p class="govuk-body-s govuk-!-margin-bottom-0">
-                                   @(recommendation.Summary)
-                               </p>
-                               <p>
-                                   Typical savings per year: @Model.GetSavingText(recommendation)
-                               </p>
-                               <p>
-                                   Typical costs: @Model.GetInstallationCostText(recommendation)
-                               </p>
-                               <a class="govuk-link" href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true})>
-                                   Revisit recommendation
-                               </a>
-                            </text>
-                }
-            }
-        }).ToList()
-    })
+           {
+               Classes = "govuk-!-margin-bottom-9",
+               Head = new(),
+               Rows = Model.GetSavedRecommendations().Select(recommendation => new TableRowViewModel
+               {
+                   Row = new List<TableCellViewModel>
+                   {
+                       new()
+                       {
+                           Classes = "govuk-!-padding-top-4",
+                           Html = @<text>
+                                      <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
+                                          @(recommendation.Title)
+                                      </p>
+                                      <p class="govuk-body-s govuk-!-margin-bottom-0">
+                                          @(recommendation.Summary)
+                                      </p>
+                                      <p>
+                                          Typical savings per year: @Model.GetSavingText(recommendation)
+                                      </p>
+                                      <p>
+                                          Typical costs: @Model.GetInstallationCostText(recommendation)
+                                      </p>
+                                      <a class="govuk-link" href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true})>
+                                          Revisit recommendation
+                                      </a>
+                                   </text>
+                       }
+                   }
+               }).ToList()
+           })
 </div>
 
 <div class="sea-action-plan-margin-right sea-saved-recommendations-table sea-saved-recommendations-table-mobile-hide">
     @await Html.GovUkTable(new TableGovUkViewModel
-    {
-        Classes = "govuk-!-margin-bottom-9",
-        Head = new List<TableCellViewModel>
-        {
-            new()
-            {
-                Text = "Recommendation"
-            },
-            new()
-            {
-                Text = "Typical savings per year"
-            },
-            new()
-            {
-                Classes = "govuk-!-padding-right-0",
-                Text = "Typical costs"
-            },
-            new()
-        },
-        Rows = Model.GetSavedRecommendations().Select(recommendation => new TableRowViewModel
-        {
-            Row = new List<TableCellViewModel>
-            {
-                new()
-                {
-                    Classes = "govuk-!-padding-top-4 sea-saved-recommendations-table-headers",
-                    Html = @<text>
-                               <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
-                                   @(recommendation.Title)
-                               </p>
-                               <p class="govuk-body-s govuk-!-margin-bottom-0">
-                                   @(recommendation.Summary)
-                               </p>
-                            </text>
-                },
-                new()
-                {
-                    Classes = "govuk-!-padding-top-4 sea-saved-recommendations-table-headers",
-                    Text = Model.GetSavingText(recommendation)
-                },
-                new()
-                {
-                    Classes = "govuk-!-padding-top-4 sea-saved-recommendations-table-headers",
-                    Text = Model.GetInstallationCostText(recommendation)
-                },
-                new()
-                {
-                    Classes = "sea-saved-recommendations-table-headers",
-                    Html = @<a class="govuk-link" href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true})>
-                               Revisit recommendation
-                           </a>
-                }
-            }
-        }).ToList()
-    })
+           {
+               Classes = "govuk-!-margin-bottom-9",
+               Head = new List<TableCellViewModel>
+               {
+                   new()
+                   {
+                       Text = "Recommendation"
+                   },
+                   new()
+                   {
+                       Text = "Typical savings per year"
+                   },
+                   new()
+                   {
+                       Classes = "govuk-!-padding-right-0",
+                       Text = "Typical costs"
+                   },
+                   new()
+               },
+               Rows = Model.GetSavedRecommendations().Select(recommendation => new TableRowViewModel
+               {
+                   Row = new List<TableCellViewModel>
+                   {
+                       new()
+                       {
+                           Classes = "govuk-!-padding-top-4 sea-saved-recommendations-table-headers",
+                           Html = @<text>
+                                      <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
+                                          @(recommendation.Title)
+                                      </p>
+                                      <p class="govuk-body-s govuk-!-margin-bottom-0">
+                                          @(recommendation.Summary)
+                                      </p>
+                                   </text>
+                       },
+                       new()
+                       {
+                           Classes = "govuk-!-padding-top-4 sea-saved-recommendations-table-headers",
+                           Text = Model.GetSavingText(recommendation)
+                       },
+                       new()
+                       {
+                           Classes = "govuk-!-padding-top-4 sea-saved-recommendations-table-headers",
+                           Text = Model.GetInstallationCostText(recommendation)
+                       },
+                       new()
+                       {
+                           Classes = "sea-saved-recommendations-table-headers",
+                           Html = @<a class="govuk-link" href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true})>
+                                      Revisit recommendation
+                                  </a>
+                       }
+                   }
+               }).ToList()
+           })
 </div>
 
 <p class="govuk-body">
@@ -167,11 +167,11 @@
 </p>
 <p class="govuk-body">
     You can get help finding a qualified installer of heat pumps or solar panels in your area by visiting the
-    <a href="https://mcscertified.com/find-an-installer/" target="_blank">MCS website.</a>
+    <a class="govuk-link" href="https://mcscertified.com/find-an-installer/" target="_blank">MCS website.</a>
 </p>
 <p class="govuk-body">
     For all other changes to your property, get help finding a qualified installer in your area by visiting the
-    <a href="https://www.trustmark.org.uk/" target="_blank">TrustMark website.</a>
+    <a class="govuk-link" href="https://www.trustmark.org.uk/" target="_blank">TrustMark website.</a>
 </p>
 
 @if (Model.GetDecideLaterRecommendations().Any())
@@ -200,6 +200,10 @@
     @if (Model.PropertyData?.HasOutdoorSpace != HasOutdoorSpace.No)
     {
         <li>Install a heat pump - <a class="govuk-link" target="_blank" href="https://www.heat-pump-check.service.gov.uk/">Check if your home may be suitable</a></li>
+    }
+    @if (Model.PropertyData?.YearBuilt == YearBuilt.Pre1930)
+    {
+        <li>Visit the <a class="govuk-link" target="_blank" href="https://historicengland.org.uk/advice/your-home/energy-efficiency/">Historic England</a> site for information specific to historic buildings.</li>
     }
 </ul>
 

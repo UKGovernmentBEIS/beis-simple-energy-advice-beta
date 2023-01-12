@@ -23,7 +23,7 @@
             @Html.AntiForgeryToken()
             <text>
                 <p class="govuk-caption-l">
-                Find your EPC
+                    Find your EPC
                 </p>
             </text>
             
@@ -41,48 +41,48 @@
             }
             
             @await Html.GovUkFieldset(new FieldsetViewModel
-            {
-                Legend = new LegendViewModel
-                {
-                    Text = "What is the address of your property?",
-                    Classes = "govuk-fieldset__legend--l",
-                    IsPageHeading = true
-                },
-                InnerHtml = 
-                    @<text>
-                        @await Html.GovUkDetails(new DetailsViewModel
-                        {
-                            SummaryText = "What we do with your address", 
-                            Html = details
-                        })
+                   {
+                       Legend = new LegendViewModel
+                       {
+                           Text = "What is the address of your property?",
+                           Classes = "govuk-fieldset__legend--l",
+                           IsPageHeading = true
+                       },
+                       InnerHtml = 
+                           @<text>
+                               @await Html.GovUkDetails(new DetailsViewModel
+                                      {
+                                          SummaryText = "What we do with your address", 
+                                          Html = details
+                                      })
                         
-                        @(await Html.GovUkTextInputFor(
-                            m => m.HouseNameOrNumber, 
-                            labelOptions: new LabelViewModel
-                            {
-                                Text = "Building number or name",
-                            },
-                            classes: "govuk-input--width-10",
-                            formGroupOptions: new FormGroupViewModel
-                            {
-                                Classes = "govuk-!-margin-bottom-2"
-                            },
-                            placeholder: "e.g. 19 or Buckingham Palace"
-                            ))
+                               @(await Html.GovUkTextInputFor(
+                                   m => m.HouseNameOrNumber, 
+                                   labelOptions: new LabelViewModel
+                                   {
+                                       Text = "Building number or name",
+                                   },
+                                   classes: "govuk-input--width-10",
+                                   formGroupOptions: new FormGroupViewModel
+                                   {
+                                       Classes = "govuk-!-margin-bottom-2"
+                                   },
+                                   placeholder: "e.g. 19 or Buckingham Palace"
+                                   ))
 
-                        @(await Html.GovUkTextInputFor(
-                            m => m.Postcode,
-                            labelOptions: new LabelViewModel
-                            {
-                                Text = "Postcode",
-                            },
-                            classes: "govuk-input--width-10",
+                               @(await Html.GovUkTextInputFor(
+                                   m => m.Postcode,
+                                   labelOptions: new LabelViewModel
+                                   {
+                                       Text = "Postcode",
+                                   },
+                                   classes: "govuk-input--width-10",
 
-                            placeholder: "e.g. AB12 3CD",
-                            autocomplete: "postal-code"
-                            ))
-                     </text>
-            })
+                                   placeholder: "e.g. AB12 3CD",
+                                   autocomplete: "postal-code"
+                                   ))
+                            </text>
+                   })
             
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
@@ -98,5 +98,8 @@
             
         </form>
         
+    </div>
+    <div class="govuk-grid-column-one-third">
+        @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")
     </div>
 </div>

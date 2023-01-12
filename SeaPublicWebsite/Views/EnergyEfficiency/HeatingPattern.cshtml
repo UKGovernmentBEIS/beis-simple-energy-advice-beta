@@ -11,10 +11,10 @@
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        Href = Model.BackLink,
-    })
+           {
+               Text = "Back",
+               Href = Model.BackLink,
+           })
 }
 
 <div class="govuk-grid-row">
@@ -56,10 +56,10 @@
                                </p>
                                
                                @await Html.GovUkDetails(new DetailsViewModel
-                               {
-                                   SummaryText = "Help me answer this question",
-                                   Html = details
-                               })
+                                      {
+                                          SummaryText = "Help me answer this question",
+                                          Html = details
+                                      })
                             </text>
                 },
                 conditionalOptions: new Dictionary<HeatingPattern, Conditional>
@@ -70,21 +70,21 @@
                         {
                             Html = (@<text>
                                         @await Html.GovUkTextInputFor(
-                                            m => m.HoursOfHeatingMorning,
-                                            new LabelViewModel
-                                            {
-                                                Text = "Total whole number of hours in the morning (12am until 12pm)"
-                                            },
-                                            placeholder: "e.g. 6"
-                                            )
+                                                   m => m.HoursOfHeatingMorning,
+                                                   new LabelViewModel
+                                                   {
+                                                       Text = "Total whole number of hours in the morning (12am until 12pm)"
+                                                   },
+                                                   placeholder: "e.g. 6"
+                                                   )
                                         @await Html.GovUkTextInputFor(
-                                            m => m.HoursOfHeatingEvening,
-                                            new LabelViewModel
-                                            {
-                                                Text = "Total whole number of hours in the afternoon and evening (12pm until 12am)"
-                                            },
-                                            placeholder: "e.g. 6"
-                                            )
+                                                   m => m.HoursOfHeatingEvening,
+                                                   new LabelViewModel
+                                                   {
+                                                       Text = "Total whole number of hours in the afternoon and evening (12pm until 12am)"
+                                                   },
+                                                   placeholder: "e.g. 6"
+                                                   )
                                      </text>)
                         }
                     }
@@ -97,5 +97,8 @@
 
         </form>
 
+    </div>
+    <div class="govuk-grid-column-one-third">
+        @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")
     </div>
 </div>

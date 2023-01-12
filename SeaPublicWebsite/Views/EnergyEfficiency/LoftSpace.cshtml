@@ -58,26 +58,29 @@
                 {
                     Html = @<text>
                                @await Html.GovUkDetails(new DetailsViewModel
-                               {
-                                   SummaryText = "Help me decide if I have a loft",
-                                   Html = details
-                               })
+                                      {
+                                          SummaryText = "Help me decide if I have a loft",
+                                          Html = details
+                                      })
                                
                                @await Html.GovUkInsetText(new InsetTextViewModel
-                               {
-                                   Classes = "sea-epc-hint",
-                                   Html = blueBannerHint
-                               })
+                                      {
+                                          Classes = "sea-epc-hint",
+                                          Html = blueBannerHint
+                                      })
                             </text>
                 }
                 ))
 
             @await Html.GovUkButton(new ButtonViewModel
-            {
-                Text = "Continue"
-            })
+                   {
+                       Text = "Continue"
+                   })
             
         </form>
         
+    </div>
+    <div class="govuk-grid-column-one-third">
+        @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")
     </div>
 </div>
