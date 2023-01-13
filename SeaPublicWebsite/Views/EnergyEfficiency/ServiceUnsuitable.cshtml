@@ -9,10 +9,10 @@
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        Href = Model.BackLink,
-    })
+           {
+               Text = "Back",
+               Href = Model.BackLink,
+           })
 }
 
 <div class="govuk-grid-row">
@@ -41,5 +41,8 @@
             }
         }
 
+    </div>
+    <div class="govuk-grid-column-one-third">
+        @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")
     </div>
 </div>

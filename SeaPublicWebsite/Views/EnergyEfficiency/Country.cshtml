@@ -37,10 +37,10 @@
                 {
                     Html = @<text>
                                @await Html.GovUkDetails(new DetailsViewModel
-                               {
-                                   SummaryText = "Why do we need to know this?",
-                                   Text = "This service is only available for those who live in England and Wales."
-                               })
+                                      {
+                                          SummaryText = "Why do we need to know this?",
+                                          Text = "This service is only available for those who live in England and Wales."
+                                      })
                             </text>
                 }
                 ))
@@ -52,5 +52,8 @@
 
         </form>
         
+    </div>
+    <div class="govuk-grid-column-one-third">
+        @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")
     </div>
 </div>

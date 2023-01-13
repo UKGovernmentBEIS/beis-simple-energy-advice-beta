@@ -11,10 +11,10 @@
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        Href = Model.BackLink,
-    })
+           {
+               Text = "Back",
+               Href = Model.BackLink,
+           })
 }
 
 <div class="govuk-grid-row">
@@ -91,25 +91,25 @@
                 {
                     Html = @<text>
                                @await Html.GovUkDetails(new DetailsViewModel
-                               {
-                                   SummaryText = "Help me answer this question",
-                                   Html = details
-                               })
+                                      {
+                                          SummaryText = "Help me answer this question",
+                                          Html = details
+                                      })
                                
                                @if (epcHint is not null)
                                {
                                    @await Html.GovUkInsetText(new InsetTextViewModel
-                                   {
-                                       Classes = "sea-epc-hint",
-                                       Html = epcHint
-                                   })
+                                          {
+                                              Classes = "sea-epc-hint",
+                                              Html = epcHint
+                                          })
                                }
                                
                                @await Html.GovUkWarningText(new WarningTextViewModel
-                               {
-                                   Text = "If you have more than one heating type, select the system that you use more often, or that is able to heat the whole home. For example, select ‘Oil boiler’ if you have an oil boiler and wood burning stove.",
-                                   IconFallbackText = "Note",
-                               })
+                                      {
+                                          Text = "If you have more than one heating type, select the system that you use more often, or that is able to heat the whole home. For example, select ‘Oil boiler’ if you have an oil boiler and wood burning stove.",
+                                          IconFallbackText = "Note",
+                                      })
                             </text>
                 },
                 radioHints: new Dictionary<HeatingType, HintViewModel>
@@ -129,14 +129,17 @@
                         }
                     },
                 }
-            ))
+                ))
 
             @await Html.GovUkButton(new ButtonViewModel
-            {
-                Text = "Continue"
-            })
+                   {
+                       Text = "Continue"
+                   })
             
         </form>
         
+    </div>
+    <div class="govuk-grid-column-one-third">
+        @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")
     </div>
 </div>

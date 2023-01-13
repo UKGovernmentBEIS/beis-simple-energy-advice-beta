@@ -10,10 +10,10 @@
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
-    {
-        Text = "Back",
-        Href = Model.BackLink,
-    })
+           {
+               Text = "Back",
+               Href = Model.BackLink,
+           })
 }
 
 <div class="govuk-grid-row">
@@ -49,19 +49,22 @@
                 {
                     Html = @<text>
                                @await Html.GovUkDetails(new DetailsViewModel
-                               {
-                                   SummaryText = "Why do we need to know this?",
-                                   Html = details
-                               })
+                                      {
+                                          SummaryText = "Why do we need to know this?",
+                                          Html = details
+                                      })
                             </text>
                 }
                 ))
             
             @await Html.GovUkButton(new ButtonViewModel
-            {
-                Text = "Continue"
-            })
+                   {
+                       Text = "Continue"
+                   })
         </form>
         
+    </div>
+    <div class="govuk-grid-column-one-third">
+        @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")
     </div>
 </div>
