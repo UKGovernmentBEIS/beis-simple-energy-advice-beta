@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -44,8 +45,10 @@ namespace SeaPublicWebsite
             // Migrate the database for local dev and for instance 0 on GOV.PaaS.
             // As we use rolling deployments there shouldn't be any chance of multiple instances of this running at the
             // same time anyway, but it's easy to check the instance index for extra safety.
+            Console.WriteLine("got here");
             if (app.Environment.IsDevelopment() || app.Configuration["CF_INSTANCE_INDEX"] == "0")
             {
+                Console.WriteLine("and we're in dev");
                 using var scope = app.Services.CreateScope();
                 var dbContext = scope.ServiceProvider.GetRequiredService<SeaDbContext>();
                 dbContext.Database.Migrate();

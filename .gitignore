@@ -9,6 +9,7 @@ node_modules/
 bin/
 obj/
 **/wwwroot/compiled
+SeaPublicWebsite/out
 
 # Secrets
 Infrastructure/LoginToGovPaas.sh

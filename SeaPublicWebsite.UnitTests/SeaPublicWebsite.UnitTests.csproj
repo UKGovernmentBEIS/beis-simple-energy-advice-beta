@@ -4,6 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <IsPackable>false</IsPackable>
         <RootNamespace>Tests</RootNamespace>
+        <RestoreSources>$(RestoreSources);../Lib;https://api.nuget.org/v3/index.json</RestoreSources>
     </PropertyGroup>
 
     <ItemGroup>
