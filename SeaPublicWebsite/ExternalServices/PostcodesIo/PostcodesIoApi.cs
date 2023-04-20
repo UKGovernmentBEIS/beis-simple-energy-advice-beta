@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace SeaPublicWebsite.ExternalServices.PostcodesIo
 {
@@ -38,7 +38,7 @@ namespace SeaPublicWebsite.ExternalServices.PostcodesIo
 
                     if (response.IsSuccessStatusCode)
                     {
-                        var body = JsonConvert.DeserializeObject<PostcodesIoApiValidateResponse>(bodyString);
+                        var body = JsonSerializer.Deserialize<PostcodesIoApiValidateResponse>(bodyString);
                         return body.result;
                     }
                     

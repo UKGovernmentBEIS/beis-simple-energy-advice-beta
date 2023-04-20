@@ -1,10 +1,12 @@
-﻿version: '3.8'
+version: '3.8'
 
 services:
   sea:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.debug
     ports:
-      - "80:80"
+      - "5001:80"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
     volumes:

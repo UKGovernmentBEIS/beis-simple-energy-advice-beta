@@ -4,6 +4,7 @@ WORKDIR /SeaPublicWebsite
 # Copy everything
 COPY . ./
 # Restore as distinct layers
+RUN dotnet restore
 
 # Build and publish a release
 RUN dotnet publish -c Release -o out
@@ -12,4 +13,5 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /SeaPublicWebsite
 COPY --from=build-env /SeaPublicWebsite/out .
+EXPOSE 80
 ENTRYPOINT ["dotnet", "SeaPublicWebsite.dll"]

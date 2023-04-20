@@ -1,0 +1,5 @@
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /SeaPublicWebsite
+EXPOSE 80
+ENTRYPOINT ["dotnet", "run"]
