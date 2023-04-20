@@ -4,7 +4,7 @@ services:
   sea:
     build: .
     ports:
-      - "80:80"
+      - "5001:80"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
     volumes:
