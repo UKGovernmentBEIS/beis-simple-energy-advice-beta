@@ -114,17 +114,7 @@ Fill in the opened `secrets.json` file with:
 
 ### Running Locally
 
-- In Visual Studio / Rider build the solution
-- In `SeaPublicWebsite` run `npm run watch`
-- In Visual Studio / Rider run the `SeaPublicWebsite` project
-
-## Database
-
-### Local Database Setup
-
-- For Windows: Download the installer and PostgreSQL 14 here: https://www.postgresql.org/download/windows/
-- Follow default installation steps (no additional software is required from Stack Builder upon completion)
-  - You may be prompted for a password for the postgres user and a port (good defaults are "postgres" and "5432", respectively). If you choose your own, you will have to update the connection string in appsettings.json
+- In Rider, select a new build configuration for docker-compose, selecting the docker-compose.yml file. You should then be able to debug by pressing F5.
 
 ### Creating/updating the local database
 
