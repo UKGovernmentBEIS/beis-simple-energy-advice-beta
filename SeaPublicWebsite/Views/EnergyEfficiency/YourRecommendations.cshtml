@@ -16,6 +16,11 @@
            })
 }
 
+@using (Html.BeginForm("GeneratePdf", "EnergyEfficiency"))
+{
+    <input type="submit" value="Download PDF" class="" />
+}
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -16,6 +18,8 @@ using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 
 namespace SeaPublicWebsite.Controllers
 {
@@ -54,6 +58,33 @@ namespace SeaPublicWebsite.Controllers
             this.answerService = answerService;
         }
         
+        public ActionResult GeneratePdf()
+        {
+            // Create a new PDF document
+            PdfDocument document = new PdfDocument();
+
+            // Add a page to the document
+            PdfPage page = document.AddPage();
+
+            // Create a PDF graphics object to draw on the page
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+
+            // Draw a text string on the page
+            /*XFont font = new XFont("Arial", 12);
+            gfx.DrawString("Hello, PDF!", font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.Center);*/
+
+            // Save the document to a memory stream
+            MemoryStream stream = new MemoryStream();
+            document.Save(stream, false);
+
+            // Set the position of the stream back to the beginning
+            stream.Position = 0;
+
+            // Set the response headers for the file download
+            string fileName = "example.pdf";
+            return File(stream, MediaTypeNames.Application.Pdf, fileName);
+        }
+
         [HttpGet("")]
         public IActionResult Index()
         {
@@ -1576,4 +1607,5 @@ namespace SeaPublicWebsite.Controllers
             }
         }
     }
+    
 }
