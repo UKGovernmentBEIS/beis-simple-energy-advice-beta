@@ -35,6 +35,7 @@
         </None>
         <Content Remove="wwwroot\assets\images\hot-water-tank.png" />
         <ProjectReference Include="..\SeaPublicWebsite.Data\SeaPublicWebsite.Data.csproj" />
+        <ProjectReference Include="..\SeaPublicWebsite.PdfGeneration\SeaPublicWebsite.PdfGeneration.csproj" />
         <None Update="manifest.yml">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>

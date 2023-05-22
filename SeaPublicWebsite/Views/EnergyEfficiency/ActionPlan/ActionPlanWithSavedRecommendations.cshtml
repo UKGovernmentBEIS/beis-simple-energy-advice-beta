@@ -4,12 +4,19 @@
 @using SeaPublicWebsite.Models.EnergyEfficiency
 @model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
 
+@{
+    Layout = Model.PdfVersion ? "_PdfLayout" : "_Layout";
+}
+
 @section BeforeMain {
-    @await Html.GovUkBackLink(new BackLinkViewModel
-           {
-               Text = "Back",
-               Href = Model.BackLink,
-           })
+    @if (!Model.PdfVersion)
+    {
+        @await Html.GovUkBackLink(new BackLinkViewModel
+        {
+            Text = "Back",
+            Href = Model.BackLink,
+        });
+    }
 }
 
 <div class="govuk-grid-row">
@@ -212,7 +219,8 @@
     {
         Reference = Model.PropertyData.Reference,
         EmailAddress = Model.EmailAddress,
-        EmailSent = Model.EmailSent
+        EmailSent = Model.EmailSent,
+        PdfVersion = Model.PdfVersion
     });
 }
 </div>

@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Options;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 using SeaPublicWebsite.BusinessLogic.Models;
@@ -13,9 +15,11 @@ using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.GoogleAnalytics;
 using SeaPublicWebsite.ExternalServices.PostcodesIo;
+using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
+using SeaPublicWebsite.PdfGeneration.Services;
 
 namespace SeaPublicWebsite.Controllers
 {
@@ -29,8 +33,10 @@ namespace SeaPublicWebsite.Controllers
         private readonly RecommendationService recommendationService;
         private readonly CookieService cookieService;
         private readonly GoogleAnalyticsService googleAnalyticsService;
+        private readonly PdfGenerationService pdfGenerationService;
         private readonly PostcodesIoApi postcodesIoApi;
         private readonly AnswerService answerService;
+        private readonly BasicAuthMiddlewareConfiguration basicAuthMiddlewareConfiguration;
 
         public EnergyEfficiencyController(
             PropertyDataStore propertyDataStore,
@@ -40,8 +46,10 @@ namespace SeaPublicWebsite.Controllers
             RecommendationService recommendationService,
             CookieService cookieService,
             GoogleAnalyticsService googleAnalyticsService,
+            PdfGenerationService pdfGenerationService,
             PostcodesIoApi postcodesIoApi,
-            AnswerService answerService)
+            AnswerService answerService,
+            IOptions<BasicAuthMiddlewareConfiguration> basicAuthOptions)
         {
             this.propertyDataStore = propertyDataStore;
             this.questionFlowService = questionFlowService;
@@ -50,10 +58,12 @@ namespace SeaPublicWebsite.Controllers
             this.recommendationService = recommendationService;
             this.cookieService = cookieService;
             this.googleAnalyticsService = googleAnalyticsService;
+            this.pdfGenerationService = pdfGenerationService;
             this.postcodesIoApi = postcodesIoApi;
             this.answerService = answerService;
+            basicAuthMiddlewareConfiguration = basicAuthOptions.Value;
         }
-        
+
         [HttpGet("")]
         public IActionResult Index()
         {
@@ -1308,6 +1318,28 @@ namespace SeaPublicWebsite.Controllers
             return RedirectToAction("Recommendation_Get", new { id = (int)propertyData.GetFirstRecommendationKey(), reference = viewModel.Reference });
         }
 
+        [HttpPost("your-recommendations-download/{reference}")]
+        public async Task<IActionResult> GenerateRecommendationsPdf_Post(string reference)
+        {
+            var stream = await pdfGenerationService.GeneratePdf(
+                "energy-efficiency/action-plan/" + reference,
+                basicAuthMiddlewareConfiguration.Username,
+                basicAuthMiddlewareConfiguration.Password
+            );
+            return File(stream, MediaTypeNames.Application.Pdf, "Recommendations.pdf");
+        }
+
+        [HttpPost("action-plan-download/{reference}")]
+        public async Task<IActionResult> GenerateActionPlanPdf_Post(string reference)
+        {
+            var stream = await pdfGenerationService.GeneratePdf(
+                $"energy-efficiency/pdf-generation/action-plan/{reference}",
+                basicAuthMiddlewareConfiguration.Username,
+                basicAuthMiddlewareConfiguration.Password
+            );
+            return File(stream, MediaTypeNames.Application.Pdf, "ActionPlan.pdf");
+        }
+
         [HttpGet("your-recommendations/{id}/{reference}")]
         public async Task<IActionResult> Recommendation_Get(int id, string reference, bool fromActionPlan = false)
         {
@@ -1384,6 +1416,33 @@ namespace SeaPublicWebsite.Controllers
             throw new ArgumentOutOfRangeException();
         }
 
+        [HttpGet("pdf-generation/action-plan/{reference}")]
+        public async Task<IActionResult> PdfActionPlan_Get(string reference)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+
+            var viewModel = new ActionPlanViewModel
+            {
+                BackLink = Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference }),
+                PropertyData = propertyData,
+                EmailAddress = null,
+                EmailSent = false,
+                PdfVersion = true
+            };
+
+            if (viewModel.GetSavedRecommendations().Any())
+            {
+                return View("ActionPlan/ActionPlanWithSavedRecommendations", viewModel);
+            }
+
+            if (viewModel.GetDecideLaterRecommendations().Any())
+            {
+                return View("ActionPlan/ActionPlanWithMaybeRecommendations", viewModel);
+            }
+
+            return View("ActionPlan/ActionPlanWithDiscardedRecommendations", viewModel);
+        }
+
         [HttpGet("action-plan/{reference}")]
         public async Task<IActionResult> ActionPlan_Get(string reference, string emailAddress = null, bool emailSent = false)
         {
@@ -1394,7 +1453,8 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference }),
                 PropertyData = propertyData,
                 EmailAddress = emailAddress,
-                EmailSent = emailSent
+                EmailSent = emailSent,
+                PdfVersion = false
             };
 
             if (viewModel.GetSavedRecommendations().Any())

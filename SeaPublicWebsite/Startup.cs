@@ -20,6 +20,7 @@ using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.GoogleAnalytics;
 using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Middleware;
+using SeaPublicWebsite.PdfGeneration.Services;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
 using Serilog;
@@ -30,7 +31,7 @@ namespace SeaPublicWebsite
     {
         private readonly IConfiguration configuration;
         private readonly IWebHostEnvironment webHostEnvironment;
-        
+
         public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             this.configuration = configuration;
@@ -41,6 +42,7 @@ namespace SeaPublicWebsite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<AnswerService>();
+            services.AddScoped<PdfGenerationService>();
             services.AddScoped<PropertyDataStore>();
             services.AddScoped<PropertyDataUpdater>();
             services.AddScoped<IQuestionFlowService, QuestionFlowService>();
@@ -57,6 +59,7 @@ namespace SeaPublicWebsite
             ConfigureCookieService(services);
             ConfigureDatabaseContext(services);
             ConfigureGoogleAnalyticsService(services);
+            ConfigurePdfGeneration(services);
 
             if (!webHostEnvironment.IsProduction())
             {
@@ -141,6 +144,11 @@ namespace SeaPublicWebsite
                 configuration.GetSection(GovUkNotifyConfiguration.ConfigSection));
         }
 
+        private void ConfigurePdfGeneration(IServiceCollection services)
+        {
+            services.AddScoped<PdfGenerationService>();
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -158,7 +166,7 @@ namespace SeaPublicWebsite
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            
+
             app.UseSerilogRequestLogging();
 
             app.UseRouting();

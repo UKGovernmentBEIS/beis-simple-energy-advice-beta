@@ -16,6 +16,16 @@
            })
 }
 
+@using (Html.BeginForm("GenerateRecommendationsPdf_Post", "EnergyEfficiency", new { reference = Model.Reference }))
+{
+    <input type="submit" value="Download Recommendations PDF" />
+}
+
+@using (Html.BeginForm("GenerateActionPlanPdf_Post", "EnergyEfficiency", new { reference = Model.Reference }))
+{
+    <input type="submit" value="Download Action Plan PDF" />
+}
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
