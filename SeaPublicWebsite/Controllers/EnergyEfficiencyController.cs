@@ -1322,7 +1322,7 @@ namespace SeaPublicWebsite.Controllers
         public async Task<IActionResult> GenerateRecommendationsPdf_Post(string reference)
         {
             var stream = await pdfGenerationService.GeneratePdf(
-                "energy-efficiency/action-plan/" + reference,
+                $"energy-efficiency/pdf-generation/your-recommendations/{reference}",
                 basicAuthMiddlewareConfiguration.Username,
                 basicAuthMiddlewareConfiguration.Password
             );
@@ -1379,7 +1379,19 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = backLink
             };
 
-            return View("recommendations/" + Enum.GetName(recommendationKey), viewModel);
+            return View("recommendations/YourRecommendation", viewModel);
+        }
+        
+        [HttpGet("pdf-generation/your-recommendations/{reference}")]
+        public async Task<IActionResult> PdfRecommendations_Get(string reference)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            var viewModel = new RecommendationsViewModel()
+            {
+                PropertyRecommendations = propertyData.PropertyRecommendations,
+            };
+
+            return View("Recommendations/RecommendationsPdf", viewModel);
         }
 
         [HttpPost("your-recommendations/{id}/{reference}")]

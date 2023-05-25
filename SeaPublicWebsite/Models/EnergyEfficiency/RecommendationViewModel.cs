@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
-using GovUkDesignSystem.GovUkDesignSystemComponents;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
@@ -15,9 +14,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public List<PropertyRecommendation> PropertyRecommendations { get; set; }
         public bool FromActionPlan { get; set; }
         public string BackLink { get; set; }
-        public TagViewModel DisruptionTagViewModel { get; set;  }
-        public TagViewModel DurationTagViewModel { get; set;  }
-
         public PropertyRecommendation GetCurrentPropertyRecommendation() => PropertyRecommendations[RecommendationIndex];
 
         public bool HasPreviousIndex()
