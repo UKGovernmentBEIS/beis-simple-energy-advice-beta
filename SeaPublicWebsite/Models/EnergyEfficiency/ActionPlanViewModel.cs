@@ -12,6 +12,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public bool EmailSent { get; set; }
         public string BackLink { get; set; }
         public bool PdfVersion { get; set; }
+        public string UrlPrefix { get; set; }
 
         public string GetTotalInstallationCostText()
         {

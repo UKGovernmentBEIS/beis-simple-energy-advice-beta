@@ -11,7 +11,7 @@
                    @foreach(var recommendation in Model.GetDiscardedRecommendations())
                    {
                        <li>
-                           <a href="@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true})">
+                           <a class="govuk-link" href="@Model.UrlPrefix@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true})">
                                @recommendation.Title
                            </a>
                        </li>

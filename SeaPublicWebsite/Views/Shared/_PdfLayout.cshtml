@@ -3,6 +3,7 @@
 @using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Services
 @inject StaticAssetsVersioningService StaticAssetsVersioning
+@inject FullHostnameService FullHostnameService
 @{
     string assetsPath = "/assets/images";
 }
@@ -42,7 +43,7 @@
             ServiceName = Constants.SERVICE_NAME,
             AssetsPath = assetsPath,
             HomepageUrl = "https://www.gov.uk",
-            ServiceUrl = "/energy-efficiency",
+            ServiceUrl = $"{FullHostnameService.GetHostname()}/energy-efficiency",
             Navigation = headerNavigationLinks
         }))
     }

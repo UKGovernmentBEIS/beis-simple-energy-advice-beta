@@ -5,7 +5,6 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Options;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 using SeaPublicWebsite.BusinessLogic.Models;
@@ -15,11 +14,10 @@ using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.GoogleAnalytics;
 using SeaPublicWebsite.ExternalServices.PostcodesIo;
-using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
-using SeaPublicWebsite.PdfGeneration.Services;
+using SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 
 namespace SeaPublicWebsite.Controllers
 {
@@ -36,7 +34,7 @@ namespace SeaPublicWebsite.Controllers
         private readonly PdfGenerationService pdfGenerationService;
         private readonly PostcodesIoApi postcodesIoApi;
         private readonly AnswerService answerService;
-        private readonly BasicAuthMiddlewareConfiguration basicAuthMiddlewareConfiguration;
+        private readonly FullHostnameService fullHostnameService;
 
         public EnergyEfficiencyController(
             PropertyDataStore propertyDataStore,
@@ -49,7 +47,7 @@ namespace SeaPublicWebsite.Controllers
             PdfGenerationService pdfGenerationService,
             PostcodesIoApi postcodesIoApi,
             AnswerService answerService,
-            IOptions<BasicAuthMiddlewareConfiguration> basicAuthOptions)
+            FullHostnameService fullHostnameService)
         {
             this.propertyDataStore = propertyDataStore;
             this.questionFlowService = questionFlowService;
@@ -61,7 +59,7 @@ namespace SeaPublicWebsite.Controllers
             this.pdfGenerationService = pdfGenerationService;
             this.postcodesIoApi = postcodesIoApi;
             this.answerService = answerService;
-            basicAuthMiddlewareConfiguration = basicAuthOptions.Value;
+            this.fullHostnameService = fullHostnameService;
         }
 
         [HttpGet("")]
@@ -1321,22 +1319,14 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("your-recommendations-download/{reference}")]
         public async Task<IActionResult> GenerateRecommendationsPdf_Post(string reference)
         {
-            var stream = await pdfGenerationService.GeneratePdf(
-                $"energy-efficiency/pdf-generation/your-recommendations/{reference}",
-                basicAuthMiddlewareConfiguration.Username,
-                basicAuthMiddlewareConfiguration.Password
-            );
+            var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/your-recommendations/{reference}");
             return File(stream, MediaTypeNames.Application.Pdf, "Recommendations.pdf");
         }
 
         [HttpPost("action-plan-download/{reference}")]
         public async Task<IActionResult> GenerateActionPlanPdf_Post(string reference)
         {
-            var stream = await pdfGenerationService.GeneratePdf(
-                $"energy-efficiency/pdf-generation/action-plan/{reference}",
-                basicAuthMiddlewareConfiguration.Username,
-                basicAuthMiddlewareConfiguration.Password
-            );
+            var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/action-plan/{reference}");
             return File(stream, MediaTypeNames.Application.Pdf, "ActionPlan.pdf");
         }
 
@@ -1429,57 +1419,15 @@ namespace SeaPublicWebsite.Controllers
         }
 
         [HttpGet("pdf-generation/action-plan/{reference}")]
-        public async Task<IActionResult> PdfActionPlan_Get(string reference)
+        public Task<IActionResult> PdfActionPlan_Get(string reference)
         {
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-
-            var viewModel = new ActionPlanViewModel
-            {
-                BackLink = Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference }),
-                PropertyData = propertyData,
-                EmailAddress = null,
-                EmailSent = false,
-                PdfVersion = true
-            };
-
-            if (viewModel.GetSavedRecommendations().Any())
-            {
-                return View("ActionPlan/ActionPlanWithSavedRecommendations", viewModel);
-            }
-
-            if (viewModel.GetDecideLaterRecommendations().Any())
-            {
-                return View("ActionPlan/ActionPlanWithMaybeRecommendations", viewModel);
-            }
-
-            return View("ActionPlan/ActionPlanWithDiscardedRecommendations", viewModel);
+            return RenderActionPlanView(reference, true);
         }
 
         [HttpGet("action-plan/{reference}")]
-        public async Task<IActionResult> ActionPlan_Get(string reference, string emailAddress = null, bool emailSent = false)
+        public Task<IActionResult> ActionPlan_Get(string reference, string emailAddress = null, bool emailSent = false)
         {
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            
-            var viewModel = new ActionPlanViewModel
-            {
-                BackLink = Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference }),
-                PropertyData = propertyData,
-                EmailAddress = emailAddress,
-                EmailSent = emailSent,
-                PdfVersion = false
-            };
-
-            if (viewModel.GetSavedRecommendations().Any())
-            {
-                return View("ActionPlan/ActionPlanWithSavedRecommendations", viewModel);
-            }
-
-            if (viewModel.GetDecideLaterRecommendations().Any())
-            {
-                return View("ActionPlan/ActionPlanWithMaybeRecommendations", viewModel);
-            }
-
-            return View("ActionPlan/ActionPlanWithDiscardedRecommendations", viewModel);
+            return RenderActionPlanView(reference, false);
         }
 
         [HttpPost("action-plan/{reference}")]
@@ -1525,6 +1473,33 @@ namespace SeaPublicWebsite.Controllers
                         throw new ArgumentOutOfRangeException();
                 }
             }
+        }
+
+        private async Task<IActionResult> RenderActionPlanView(string reference, bool isPdf)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+
+            var viewModel = new ActionPlanViewModel
+            {
+                BackLink = Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference }),
+                PropertyData = propertyData,
+                EmailAddress = null,
+                EmailSent = false,
+                PdfVersion = isPdf,
+                UrlPrefix = isPdf ? fullHostnameService.GetHostname() : ""
+            };
+
+            if (viewModel.GetSavedRecommendations().Any())
+            {
+                return View("ActionPlan/ActionPlanWithSavedRecommendations", viewModel);
+            }
+
+            if (viewModel.GetDecideLaterRecommendations().Any())
+            {
+                return View("ActionPlan/ActionPlanWithMaybeRecommendations", viewModel);
+            }
+
+            return View("ActionPlan/ActionPlanWithDiscardedRecommendations", viewModel);
         }
 
         private string GetBackUrl(
