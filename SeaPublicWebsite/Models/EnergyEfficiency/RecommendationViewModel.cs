@@ -14,6 +14,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public List<PropertyRecommendation> PropertyRecommendations { get; set; }
         public bool FromActionPlan { get; set; }
         public string BackLink { get; set; }
+        public string Reference { get; set; }
         public PropertyRecommendation GetCurrentPropertyRecommendation() => PropertyRecommendations[RecommendationIndex];
 
         public bool HasPreviousIndex()

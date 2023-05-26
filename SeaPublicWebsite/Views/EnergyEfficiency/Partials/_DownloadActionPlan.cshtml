@@ -1,0 +1,6 @@
+﻿@model SeaPublicWebsite.Models.EnergyEfficiency.DownloadPdfButtonViewModel
+
+@using (Html.BeginForm("GenerateActionPlanPdf_Post", "EnergyEfficiency", new { reference = Model.Reference }))
+{
+    <input type="submit" value="Download Action Plan PDF"/>
+}

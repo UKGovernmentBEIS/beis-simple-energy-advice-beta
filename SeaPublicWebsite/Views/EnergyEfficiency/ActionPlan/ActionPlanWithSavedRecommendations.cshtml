@@ -12,10 +12,12 @@
     @if (!Model.PdfVersion)
     {
         @await Html.GovUkBackLink(new BackLinkViewModel
-        {
-            Text = "Back",
-            Href = Model.BackLink,
-        });
+               {
+                   Text = "Back",
+                   Href = Model.BackLink,
+               })
+
+        await Html.RenderPartialAsync("Partials/_DownloadActionPlan", new DownloadPdfButtonViewModel { Reference = Model.PropertyData.Reference });
     }
 }
 

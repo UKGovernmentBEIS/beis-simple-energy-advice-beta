@@ -1362,6 +1362,7 @@ namespace SeaPublicWebsite.Controllers
             
             var viewModel = new RecommendationViewModel
             {
+                Reference = reference,
                 RecommendationIndex = recommendationIndex,
                 PropertyRecommendations = propertyData.PropertyRecommendations,
                 RecommendationAction = propertyData.PropertyRecommendations[recommendationIndex].RecommendationAction,
