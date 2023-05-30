@@ -48,5 +48,10 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         {
             return recommendation.Key == RecommendationKey.InstallHeatPump ? "-" : $"£{recommendation.Saving:N0}";
         }
+
+        public string GetUrlWithPrefix(string url)
+        {
+            return $"{UrlPrefix}{url}";
+        }
     }
 }
