@@ -8,5 +8,5 @@ public class ReturnToActionPlanViewModel
     [GovUkValidateRequired(ErrorMessageIfMissing = "Enter a valid email address")]
     public string EmailAddress { get; set; }
     public bool EmailSent { get; set; }
-    public bool PdfVersion { get; set; }
+    public bool IsPdf { get; set; }
 }

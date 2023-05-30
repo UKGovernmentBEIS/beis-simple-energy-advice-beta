@@ -1486,7 +1486,7 @@ namespace SeaPublicWebsite.Controllers
                 PropertyData = propertyData,
                 EmailAddress = null,
                 EmailSent = false,
-                PdfVersion = isPdf,
+                IsPdf = isPdf,
                 UrlPrefix = isPdf ? fullHostnameService.GetHostname() : ""
             };
 
