@@ -10,16 +10,7 @@
 }
 
 @section BeforeMain {
-    @if (!Model.IsPdf)
-    {
-        @await Html.GovUkBackLink(new BackLinkViewModel
-               {
-                   Text = "Back",
-                   Href = Model.BackLink,
-               })
-
-        await Html.RenderPartialAsync("Partials/_DownloadActionPlan", new DownloadPdfButtonViewModel { Reference = Model.PropertyData.Reference });
-    }
+    @{ await Html.RenderPartialAsync("ActionPlan/Partials/_ActionPlanBeforeMainLinks", Model); }
 }
 
 <div class="govuk-grid-row">

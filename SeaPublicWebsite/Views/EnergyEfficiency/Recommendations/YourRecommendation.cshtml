@@ -10,13 +10,22 @@
 }
 
 @section BeforeMain {
-    @await Html.GovUkBackLink(new BackLinkViewModel
-           {
-               Text = "Back",
-               Href = Model.BackLink
-           })
-
-    @{ await Html.RenderPartialAsync("Partials/_DownloadRecommendations", new DownloadPdfButtonViewModel { Reference = Model.Reference }); }
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+            @await Html.GovUkBackLink(new BackLinkViewModel
+                   {
+                       Text = "Back",
+                       Href = Model.BackLink,
+                   })
+        </div>
+        <div class="govuk-grid-column-one-half sea-download-link-container">
+            @{ await Html.RenderPartialAsync("Partials/_DownloadRecommendations", new DownloadPdfButtonViewModel
+               {
+                   Reference = Model.Reference,
+                   ButtonClass = "govuk-!-margin-top-3 govuk-!-margin-bottom-3"
+               }); }
+        </div>
+    </div>
 }
 
 <div class="govuk-grid-row">
@@ -34,8 +43,7 @@
                {
                    RecommendationIndex = Model.RecommendationIndex,
                    PropertyRecommendations = Model.PropertyRecommendations
-               });
-            }
+               }); }
 
             @(await Html.GovUkRadiosFor(m => m.RecommendationAction,
                 fieldsetOptions: new FieldsetViewModel

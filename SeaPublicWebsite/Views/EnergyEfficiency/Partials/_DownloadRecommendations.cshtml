@@ -2,5 +2,8 @@
 
 @using (Html.BeginForm("GenerateRecommendationsPdf_Post", "EnergyEfficiency", new { reference = Model.Reference }))
 {
-    <input type="submit" value="Download Recommendations PDF" />
+    <button type="submit" class="govuk-link sea-download-button @Model.ButtonClass">
+        <img src="/assets/images/download-icon.png" aria-hidden="true"/>
+        <span>Download Recommendations PDF</span>
+    </button>
 }

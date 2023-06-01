@@ -1,9 +1,10 @@
-﻿@using SeaPublicWebsite.Models.EnergyEfficiency
-@model SeaPublicWebsite.Models.EnergyEfficiency.DownloadPdfButtonViewModel;
+﻿@model SeaPublicWebsite.Models.EnergyEfficiency.DownloadPdfButtonViewModel;
 
 <h2 class="govuk-heading-m">
     Download your information
 </h2>
 
-@{ await Html.RenderPartialAsync("Partials/_DownloadActionPlan", Model); }
-@{ await Html.RenderPartialAsync("Partials/_DownloadRecommendations", Model); }
+<ul class="govuk-list">
+    <li>@{ await Html.RenderPartialAsync("Partials/_DownloadActionPlan", Model); }</li>
+    <li>@{ await Html.RenderPartialAsync("Partials/_DownloadRecommendations", Model); }</li>
+</ul>
