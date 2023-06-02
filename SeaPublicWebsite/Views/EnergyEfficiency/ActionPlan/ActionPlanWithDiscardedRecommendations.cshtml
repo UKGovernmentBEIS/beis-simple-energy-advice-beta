@@ -9,7 +9,10 @@
 }
 
 @section BeforeMain {
-    @{ await Html.RenderPartialAsync("ActionPlan/Partials/_ActionPlanBeforeMainLinks", Model); }
+    @if (!Model.IsPdf)
+    {
+        await Html.RenderPartialAsync("ActionPlan/Partials/_ActionPlanBeforeMainLinks", Model);
+    }
 }
 
 <div class="govuk-grid-row">
