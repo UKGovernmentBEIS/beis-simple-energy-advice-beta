@@ -1,9 +1,8 @@
 ﻿@model SeaPublicWebsite.Models.EnergyEfficiency.DownloadPdfButtonViewModel
 
-@using (Html.BeginForm("GenerateActionPlanPdf_Post", "EnergyEfficiency", new { reference = Model.Reference }))
-{
-    <button type="submit" class="govuk-link sea-download-button @Model.ButtonClass">
-        <img src="/assets/images/download-icon.png" aria-hidden="true" />
-        <span>Download Action Plan PDF</span>
-    </button>
-}
+<a
+    class="govuk-link sea-download-link @Model.DownloadLinkClass"
+    href="@Url.Action("GenerateActionPlanPdf_Get", "EnergyEfficiency", new { reference = Model.Reference })">
+    <img src="/assets/images/download-icon.png" aria-hidden="true"/>
+    <span>Download Action Plan PDF</span>
+</a>

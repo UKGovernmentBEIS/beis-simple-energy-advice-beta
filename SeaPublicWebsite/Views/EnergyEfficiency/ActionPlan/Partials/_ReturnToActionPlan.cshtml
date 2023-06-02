@@ -31,7 +31,7 @@ else
             PostAction = Url.Action(nameof(EnergyEfficiencyController.ActionPlan_Post), "EnergyEfficiency", new {reference = Model.Reference})
         });
 
-    await Html.RenderPartialAsync("_DownloadYourInformation.cshtml",  new DownloadPdfButtonViewModel { Reference = Model.Reference, ButtonClass = "govuk-!-margin-bottom-2"});
+    await Html.RenderPartialAsync("_DownloadYourInformation.cshtml",  new DownloadPdfButtonViewModel { Reference = Model.Reference, DownloadLinkClass = "govuk-!-margin-bottom-1"});
 
     <h2 class="govuk-heading-m">
         Change your answers

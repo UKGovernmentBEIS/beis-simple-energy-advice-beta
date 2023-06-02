@@ -1316,15 +1316,15 @@ namespace SeaPublicWebsite.Controllers
             return RedirectToAction("Recommendation_Get", new { id = (int)propertyData.GetFirstRecommendationKey(), reference = viewModel.Reference });
         }
 
-        [HttpPost("your-recommendations-download/{reference}")]
-        public async Task<IActionResult> GenerateRecommendationsPdf_Post(string reference)
+        [HttpGet("your-recommendations-download/{reference}")]
+        public async Task<IActionResult> GenerateRecommendationsPdf_Get(string reference)
         {
             var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/your-recommendations/{reference}");
             return File(stream, MediaTypeNames.Application.Pdf, "Recommendations.pdf");
         }
 
-        [HttpPost("action-plan-download/{reference}")]
-        public async Task<IActionResult> GenerateActionPlanPdf_Post(string reference)
+        [HttpGet("action-plan-download/{reference}")]
+        public async Task<IActionResult> GenerateActionPlanPdf_Get(string reference)
         {
             var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/action-plan/{reference}");
             return File(stream, MediaTypeNames.Application.Pdf, "ActionPlan.pdf");

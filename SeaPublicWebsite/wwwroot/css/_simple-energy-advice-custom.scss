@@ -311,11 +311,10 @@
     font-weight: 700;
 }
 
-.sea-download-button {
+.sea-download-link {
     @include govuk-font(16);
-    background: none;
-    border: none;
-    cursor: pointer;
+    padding: govuk-spacing(1);
+    display: inline-block;
 
     img {
         vertical-align: middle;
@@ -324,7 +323,7 @@
     }
 }
 
-.sea-download-button:hover {
+.sea-download-link, .sea-download-link:hover, .sea-download-link:visited {
     color: govuk-colour("black");
 }
 
