@@ -4,7 +4,5 @@
     Download your information
 </h2>
 
-<ul class="govuk-list">
-    <li>@{ await Html.RenderPartialAsync("Partials/_DownloadActionPlan", Model); }</li>
-    <li>@{ await Html.RenderPartialAsync("Partials/_DownloadRecommendations", Model); }</li>
-</ul>
+@{ await Html.RenderPartialAsync("Partials/_DownloadActionPlan", Model); }
+@{ await Html.RenderPartialAsync("Partials/_DownloadRecommendations", Model); }
