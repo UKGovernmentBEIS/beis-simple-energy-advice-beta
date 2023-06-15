@@ -1,9 +1,11 @@
-﻿@model SeaPublicWebsite.Models.EnergyEfficiency.DownloadPdfButtonViewModel
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@model SeaPublicWebsite.Models.EnergyEfficiency.DownloadPdfButtonViewModel
 
 @using (Html.BeginForm("GenerateRecommendationsPdf_Post", "EnergyEfficiency", new { reference = Model.Reference }))
 {
-    <button type="submit" class="govuk-link sea-download-button @Model.ButtonClass">
-        <img src="/assets/images/download-icon.png" aria-hidden="true"/>
-        <span>Download Recommendations PDF</span>
-    </button>
+    @await Html.GovUkButton(new ButtonViewModel
+           {
+               Text = "Download Recommendations"
+           })
 }
