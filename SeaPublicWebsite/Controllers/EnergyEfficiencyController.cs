@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -16,6 +17,7 @@ using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
+using SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 
 namespace SeaPublicWebsite.Controllers
 {
@@ -29,8 +31,10 @@ namespace SeaPublicWebsite.Controllers
         private readonly RecommendationService recommendationService;
         private readonly CookieService cookieService;
         private readonly GoogleAnalyticsService googleAnalyticsService;
+        private readonly PdfGenerationService pdfGenerationService;
         private readonly PostcodesIoApi postcodesIoApi;
         private readonly AnswerService answerService;
+        private readonly FullHostnameService fullHostnameService;
 
         public EnergyEfficiencyController(
             PropertyDataStore propertyDataStore,
@@ -40,8 +44,10 @@ namespace SeaPublicWebsite.Controllers
             RecommendationService recommendationService,
             CookieService cookieService,
             GoogleAnalyticsService googleAnalyticsService,
+            PdfGenerationService pdfGenerationService,
             PostcodesIoApi postcodesIoApi,
-            AnswerService answerService)
+            AnswerService answerService,
+            FullHostnameService fullHostnameService)
         {
             this.propertyDataStore = propertyDataStore;
             this.questionFlowService = questionFlowService;
@@ -50,10 +56,12 @@ namespace SeaPublicWebsite.Controllers
             this.recommendationService = recommendationService;
             this.cookieService = cookieService;
             this.googleAnalyticsService = googleAnalyticsService;
+            this.pdfGenerationService = pdfGenerationService;
             this.postcodesIoApi = postcodesIoApi;
             this.answerService = answerService;
+            this.fullHostnameService = fullHostnameService;
         }
-        
+
         [HttpGet("")]
         public IActionResult Index()
         {
@@ -1308,6 +1316,20 @@ namespace SeaPublicWebsite.Controllers
             return RedirectToAction("Recommendation_Get", new { id = (int)propertyData.GetFirstRecommendationKey(), reference = viewModel.Reference });
         }
 
+        [HttpPost("your-recommendations-download/{reference}")]
+        public async Task<IActionResult> GenerateRecommendationsPdf_Post(string reference)
+        {
+            var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/your-recommendations/{reference}");
+            return File(stream, MediaTypeNames.Application.Pdf, "Recommendations.pdf");
+        }
+
+        [HttpPost("action-plan-download/{reference}")]
+        public async Task<IActionResult> GenerateActionPlanPdf_Post(string reference)
+        {
+            var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/action-plan/{reference}");
+            return File(stream, MediaTypeNames.Application.Pdf, "ActionPlan.pdf");
+        }
+
         [HttpGet("your-recommendations/{id}/{reference}")]
         public async Task<IActionResult> Recommendation_Get(int id, string reference, bool fromActionPlan = false)
         {
@@ -1340,6 +1362,7 @@ namespace SeaPublicWebsite.Controllers
             
             var viewModel = new RecommendationViewModel
             {
+                Reference = reference,
                 RecommendationIndex = recommendationIndex,
                 PropertyRecommendations = propertyData.PropertyRecommendations,
                 RecommendationAction = propertyData.PropertyRecommendations[recommendationIndex].RecommendationAction,
@@ -1347,7 +1370,19 @@ namespace SeaPublicWebsite.Controllers
                 BackLink = backLink
             };
 
-            return View("recommendations/" + Enum.GetName(recommendationKey), viewModel);
+            return View("recommendations/YourRecommendation", viewModel);
+        }
+        
+        [HttpGet("pdf-generation/your-recommendations/{reference}")]
+        public async Task<IActionResult> PdfRecommendations_Get(string reference)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            var viewModel = new RecommendationsViewModel()
+            {
+                PropertyRecommendations = propertyData.PropertyRecommendations,
+            };
+
+            return View("Recommendations/RecommendationsPdf", viewModel);
         }
 
         [HttpPost("your-recommendations/{id}/{reference}")]
@@ -1384,30 +1419,16 @@ namespace SeaPublicWebsite.Controllers
             throw new ArgumentOutOfRangeException();
         }
 
-        [HttpGet("action-plan/{reference}")]
-        public async Task<IActionResult> ActionPlan_Get(string reference, string emailAddress = null, bool emailSent = false)
+        [HttpGet("pdf-generation/action-plan/{reference}")]
+        public Task<IActionResult> PdfActionPlan_Get(string reference)
         {
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            
-            var viewModel = new ActionPlanViewModel
-            {
-                BackLink = Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference }),
-                PropertyData = propertyData,
-                EmailAddress = emailAddress,
-                EmailSent = emailSent
-            };
+            return RenderActionPlanView(reference, true);
+        }
 
-            if (viewModel.GetSavedRecommendations().Any())
-            {
-                return View("ActionPlan/ActionPlanWithSavedRecommendations", viewModel);
-            }
-
-            if (viewModel.GetDecideLaterRecommendations().Any())
-            {
-                return View("ActionPlan/ActionPlanWithMaybeRecommendations", viewModel);
-            }
-
-            return View("ActionPlan/ActionPlanWithDiscardedRecommendations", viewModel);
+        [HttpGet("action-plan/{reference}")]
+        public Task<IActionResult> ActionPlan_Get(string reference, string emailAddress = null, bool emailSent = false)
+        {
+            return RenderActionPlanView(reference, false);
         }
 
         [HttpPost("action-plan/{reference}")]
@@ -1453,6 +1474,33 @@ namespace SeaPublicWebsite.Controllers
                         throw new ArgumentOutOfRangeException();
                 }
             }
+        }
+
+        private async Task<IActionResult> RenderActionPlanView(string reference, bool isPdf)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+
+            var viewModel = new ActionPlanViewModel
+            {
+                BackLink = Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference }),
+                PropertyData = propertyData,
+                EmailAddress = null,
+                EmailSent = false,
+                IsPdf = isPdf,
+                UrlPrefix = isPdf ? fullHostnameService.GetHostname() : ""
+            };
+
+            if (viewModel.GetSavedRecommendations().Any())
+            {
+                return View("ActionPlan/ActionPlanWithSavedRecommendations", viewModel);
+            }
+
+            if (viewModel.GetDecideLaterRecommendations().Any())
+            {
+                return View("ActionPlan/ActionPlanWithMaybeRecommendations", viewModel);
+            }
+
+            return View("ActionPlan/ActionPlanWithDiscardedRecommendations", viewModel);
         }
 
         private string GetBackUrl(

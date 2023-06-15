@@ -1,0 +1,11 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@model SeaPublicWebsite.Models.EnergyEfficiency.DownloadPdfButtonViewModel
+
+@using (Html.BeginForm("GenerateRecommendationsPdf_Post", "EnergyEfficiency", new { reference = Model.Reference }))
+{
+    @await Html.GovUkButton(new ButtonViewModel
+           {
+               Text = "Download Recommendations"
+           })
+}

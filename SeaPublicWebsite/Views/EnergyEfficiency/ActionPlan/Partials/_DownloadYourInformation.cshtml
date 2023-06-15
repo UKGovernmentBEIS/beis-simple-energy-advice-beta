@@ -1,0 +1,8 @@
+﻿@model SeaPublicWebsite.Models.EnergyEfficiency.DownloadPdfButtonViewModel;
+
+<h2 class="govuk-heading-m">
+    Download your information
+</h2>
+
+@{ await Html.RenderPartialAsync("Partials/_DownloadActionPlan", Model); }
+@{ await Html.RenderPartialAsync("Partials/_DownloadRecommendations", Model); }

@@ -22,6 +22,7 @@ using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
+using SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 using Serilog;
 
 namespace SeaPublicWebsite
@@ -30,7 +31,7 @@ namespace SeaPublicWebsite
     {
         private readonly IConfiguration configuration;
         private readonly IWebHostEnvironment webHostEnvironment;
-        
+
         public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             this.configuration = configuration;
@@ -57,12 +58,11 @@ namespace SeaPublicWebsite
             ConfigureCookieService(services);
             ConfigureDatabaseContext(services);
             ConfigureGoogleAnalyticsService(services);
+            ConfigurePdfGeneration(services);
+            ConfigureFullHostnameService(services);
 
-            if (!webHostEnvironment.IsProduction())
-            {
-                services.Configure<BasicAuthMiddlewareConfiguration>(
-                    configuration.GetSection(BasicAuthMiddlewareConfiguration.ConfigSection));
-            }
+            services.Configure<BasicAuthMiddlewareConfiguration>(
+                configuration.GetSection(BasicAuthMiddlewareConfiguration.ConfigSection));
 
             services.AddControllersWithViews(options =>
             {
@@ -87,6 +87,7 @@ namespace SeaPublicWebsite
                 // In Gov.PaaS the Database URL is automatically put into the DATABASE_URL environment variable
                 databaseConnectionString = DatabaseUrlToConnectionString(configuration["DATABASE_URL"]);
             }
+
             services.AddDbContext<SeaDbContext>(opt =>
                 opt.UseNpgsql(databaseConnectionString));
         }
@@ -141,6 +142,17 @@ namespace SeaPublicWebsite
                 configuration.GetSection(GovUkNotifyConfiguration.ConfigSection));
         }
 
+        private void ConfigurePdfGeneration(IServiceCollection services)
+        {
+            services.AddScoped<PdfGenerationService>();
+        }
+
+        private void ConfigureFullHostnameService(IServiceCollection services)
+        {
+            services.AddScoped<FullHostnameService>();
+            services.Configure<FullHostnameConfiguration>(configuration.GetSection(FullHostnameConfiguration.ConfigSection));
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -158,7 +170,7 @@ namespace SeaPublicWebsite
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            
+
             app.UseSerilogRequestLogging();
 
             app.UseRouting();
@@ -169,19 +181,14 @@ namespace SeaPublicWebsite
 
             app.UseMiddleware<SecurityHeadersMiddleware>();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
         private void ConfigureHttpBasicAuth(IApplicationBuilder app)
         {
-            if (!webHostEnvironment.IsProduction())
-            {
-                // Add HTTP Basic Authentication in our non-production environments to make sure people don't accidentally stumble across the site
-                app.UseMiddleware<BasicAuthMiddleware>();
-            }
+            // Add HTTP Basic Authentication in our non-production environments to make sure people don't accidentally stumble across the site
+            // and on production only for pdf generation endpoints
+            app.UseMiddleware<BasicAuthMiddleware>();
         }
     }
 }

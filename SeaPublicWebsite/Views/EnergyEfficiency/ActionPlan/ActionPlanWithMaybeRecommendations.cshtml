@@ -5,12 +5,15 @@
 @using SeaPublicWebsite.Models.EnergyEfficiency
 @model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
 
+@{
+    Layout = Model.IsPdf ? "_PdfLayout" : "_Layout";
+}
+
 @section BeforeMain {
-    @await Html.GovUkBackLink(new BackLinkViewModel
+    @if (!Model.IsPdf)
     {
-        Text = "Back",
-        Href = Model.BackLink,
-    })
+        await Html.RenderPartialAsync("ActionPlan/Partials/_ActionPlanBeforeMainLinks", Model);
+    }
 }
 
 <div class="govuk-grid-row">
@@ -53,7 +56,8 @@
            {
                Reference = Model.PropertyData.Reference,
                EmailAddress = Model.EmailAddress,
-               EmailSent = Model.EmailSent
+               EmailSent = Model.EmailSent,
+               IsPdf = Model.IsPdf
            }); }
     </div>
 </div>
