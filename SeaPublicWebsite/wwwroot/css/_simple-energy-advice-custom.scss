@@ -311,23 +311,6 @@
     font-weight: 700;
 }
 
-.sea-download-button {
-    @include govuk-font(16);
-    background: none;
-    border: none;
-    cursor: pointer;
-
-    img {
-        vertical-align: middle;
-        margin-right: govuk-spacing(1);
-        height: 1em;
-    }
-}
-
-.sea-download-button:hover {
-    color: govuk-colour("black");
-}
-
 .sea-download-link-container {
     @include govuk-media-query($from: tablet) {
         text-align: right;
