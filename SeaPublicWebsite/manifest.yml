@@ -1,6 +1,7 @@
 ﻿---
 applications:
  - buildpacks:
+     - https://github.com/cloudfoundry/apt-buildpack
      - dotnet_core_buildpack
    command: dotnet SeaPublicWebsite.dll
    health-check-http-endpoint: /health-check
