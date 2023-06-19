@@ -118,6 +118,11 @@ Fill in the opened `secrets.json` file with:
 - In `SeaPublicWebsite` run `npm run watch`
 - In Visual Studio / Rider run the `SeaPublicWebsite` project
 
+### Troubleshooting
+- Certificate error (e.g. `net::ERR_CERT_AUTHORITY_INVALID`)
+  - Try running `dotnet dev-certs https --trust`
+  - If you get the message “A valid HTTPS certificate is already present.” then you may need to run `dotnet dev-certs https --clean` and then `dotnet dev-certs https --trust` again
+
 ## Database
 
 ### Local Database Setup
