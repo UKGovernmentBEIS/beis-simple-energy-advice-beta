@@ -314,7 +314,7 @@
 .sea-download-link-container {
     @include govuk-media-query($from: tablet) {
         text-align: right;
-        padding-top: govuk-spacing(1);
+        padding-top: govuk-spacing(3);
     }
 }
 
