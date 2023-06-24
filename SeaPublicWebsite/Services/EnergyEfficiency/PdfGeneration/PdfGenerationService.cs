@@ -27,7 +27,14 @@ public class PdfGenerationService
     public async Task<Stream> GeneratePdf(string path)
     {
         await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultChromiumRevision);
-        var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+        var launchOptions = new LaunchOptions
+        {
+            Headless = true,
+            IgnoreDefaultArgs = true,
+            IgnoredDefaultArgs = new[] { "--disable-extensions" }
+        };
+        
+        var browser = await Puppeteer.LaunchAsync(launchOptions);
         var page = await browser.NewPageAsync();
         await page.AuthenticateAsync(new Credentials
             { Username = basicAuthConfiguration.Username, Password = basicAuthConfiguration.Password });
