@@ -1,3 +1,11 @@
 ---
 packages:
   - libnss3
+  - libnssutil3
+  - libsmime3
+  - libnspr4
+  - libatk-1.0
+  - libatk-bridge-2.0
+  - libcups
+  - libatspi
+  
