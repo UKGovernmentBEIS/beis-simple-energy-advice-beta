@@ -2,6 +2,4 @@
 packages:
   - libnss3
   - libnssutil3
-  - libsmime3
-  - libnspr4
   
