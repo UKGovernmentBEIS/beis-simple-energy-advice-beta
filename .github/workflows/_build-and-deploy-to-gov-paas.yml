@@ -54,8 +54,7 @@ jobs:
       run: dotnet build SeaPublicWebsite --no-restore --configuration Release --output ./ci-server-build/
       
     - name: Copy apt and manifest yaml to output folder
-      run: cp apt.yml manifest.yml ./ci-server-build/
-      working-directory: ./SeaPublicWebsite
+      run: cp ./SeaPublicWebsite/apt.yml ./SeaPublicWebsite/manifest.yml ./ci-server-build/
 
     - name: Push the app to Gov.UK PaaS
       run: |
