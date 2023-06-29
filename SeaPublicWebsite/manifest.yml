@@ -3,7 +3,7 @@ applications:
  - buildpacks:
      - https://github.com/cloudfoundry/apt-buildpack
      - dotnet_core_buildpack
-   command: dotnet SeaPublicWebsite.dll
+   command: sudo sysctl -w kernel.unprivileged_userns_clone=1 && exec dotnet SeaPublicWebsite.dll
    health-check-http-endpoint: /health-check
    health-check-type: http
    timeout: 60
