@@ -1,16 +1,14 @@
 ---
 packages:
-  - libnss3
-  - libnssutil3
-  - libsmime3
+  - libcups2
+  - libatspi2.0-0
+  - libxcomposite1
+  - libxdamage1
+  - libxrandr2
+  - libgbm1
+  - libxkbcommon0
+  - libasound2
   - libnspr4
-  - libatk-1.0
-  - libatk-bridge-2.0
-  - libcups
-  - libatspi
-  - libXcomposite
-  - libXdamage
-  - libXrandr
-  - libgbm
-  - libxkbcommon
-  - libasound
+  - libnss3
+  - libatk1.0-0
+  - libatk-bridge2.0-0

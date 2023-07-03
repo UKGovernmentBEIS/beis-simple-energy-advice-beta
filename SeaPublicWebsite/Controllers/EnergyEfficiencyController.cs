@@ -21,6 +21,9 @@ using SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 
 namespace SeaPublicWebsite.Controllers
 {
+    using System.Text.Encodings.Web;
+    using System.Web;
+
     [Route("energy-efficiency")]
     public class EnergyEfficiencyController : Controller
     {
@@ -1319,14 +1322,16 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("your-recommendations-download/{reference}")]
         public async Task<IActionResult> GenerateRecommendationsPdf_Post(string reference)
         {
-            var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/your-recommendations/{reference}");
+            var encodedReference = HttpUtility.UrlEncode(reference);
+            var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/your-recommendations/{encodedReference}");
             return File(stream, MediaTypeNames.Application.Pdf, "Recommendations.pdf");
         }
 
         [HttpPost("action-plan-download/{reference}")]
         public async Task<IActionResult> GenerateActionPlanPdf_Post(string reference)
         {
-            var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/action-plan/{reference}");
+            var encodedReference = HttpUtility.UrlEncode(reference);
+            var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/action-plan/{encodedReference}");
             return File(stream, MediaTypeNames.Application.Pdf, "ActionPlan.pdf");
         }
 
