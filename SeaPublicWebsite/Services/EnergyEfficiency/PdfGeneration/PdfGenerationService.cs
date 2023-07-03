@@ -31,7 +31,8 @@ public class PdfGenerationService
         {
             Headless = true,
             IgnoreDefaultArgs = true,
-            IgnoredDefaultArgs = new[] { "--disable-extensions" }
+            IgnoredDefaultArgs = new[] { "--disable-extensions" },
+            Args = new [] { "--no-sandbox" }
         };
         
         var browser = await Puppeteer.LaunchAsync(launchOptions);
