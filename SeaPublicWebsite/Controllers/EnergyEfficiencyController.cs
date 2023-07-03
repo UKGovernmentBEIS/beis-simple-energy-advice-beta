@@ -1322,7 +1322,7 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("your-recommendations-download/{reference}")]
         public async Task<IActionResult> GenerateRecommendationsPdf_Post(string reference)
         {
-            var encodedReference = HttpUtility.HtmlEncode(reference);
+            var encodedReference = HttpUtility.UrlEncode(reference);
             var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/your-recommendations/{encodedReference}");
             return File(stream, MediaTypeNames.Application.Pdf, "Recommendations.pdf");
         }
@@ -1330,7 +1330,7 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("action-plan-download/{reference}")]
         public async Task<IActionResult> GenerateActionPlanPdf_Post(string reference)
         {
-            var encodedReference = HttpUtility.HtmlEncode(reference);
+            var encodedReference = HttpUtility.UrlEncode(reference);
             var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/action-plan/{encodedReference}");
             return File(stream, MediaTypeNames.Application.Pdf, "ActionPlan.pdf");
         }
