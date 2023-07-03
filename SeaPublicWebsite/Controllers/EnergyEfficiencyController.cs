@@ -10,17 +10,15 @@ using SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.BusinessLogic.Services;
-using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices.EmailSending;
-using SeaPublicWebsite.ExternalServices.GoogleAnalytics;
 using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Services;
-using SeaPublicWebsite.Services.Cookies;
-using SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 
 namespace SeaPublicWebsite.Controllers
 {
+    using System.Web;
+
     [Route("energy-efficiency")]
     public class EnergyEfficiencyController : Controller
     {
@@ -1319,14 +1317,16 @@ namespace SeaPublicWebsite.Controllers
         [HttpPost("your-recommendations-download/{reference}")]
         public async Task<IActionResult> GenerateRecommendationsPdf_Post(string reference)
         {
-            var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/your-recommendations/{reference}");
+            var encodedReference = HttpUtility.HtmlEncode(reference);
+            var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/your-recommendations/{encodedReference}");
             return File(stream, MediaTypeNames.Application.Pdf, "Recommendations.pdf");
         }
 
         [HttpPost("action-plan-download/{reference}")]
         public async Task<IActionResult> GenerateActionPlanPdf_Post(string reference)
         {
-            var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/action-plan/{reference}");
+            var encodedReference = HttpUtility.HtmlEncode(reference);
+            var stream = await pdfGenerationService.GeneratePdf($"energy-efficiency/pdf-generation/action-plan/{encodedReference}");
             return File(stream, MediaTypeNames.Application.Pdf, "ActionPlan.pdf");
         }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting.Server;
@@ -24,6 +23,10 @@ public class PdfGenerationService
         this.server = server;
     }
 
+    // This function runs a headless chrome browser without a sandbox (--no-sandbox).
+    // This means whatever we run in that browser has access to the server's kernel
+    // There is a ticket to revisit this when we move to BEIS Digital's platform:
+    // https://softwiretech.atlassian.net/browse/BEISSEA-73
     public async Task<Stream> GeneratePdf(string path)
     {
         await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultChromiumRevision);
