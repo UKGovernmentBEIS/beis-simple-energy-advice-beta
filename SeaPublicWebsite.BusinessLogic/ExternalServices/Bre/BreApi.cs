@@ -4,8 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Common;
 
 namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
@@ -25,7 +24,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
         public async Task<List<BreRecommendation>> GetRecommendationsForPropertyRequestAsync(BreRequest request)
         {
             // BRE requests and responses shouldn't contain any sensitive details so we are OK to log them as-is
-            logger.LogInformation($"Sending BRE request: {JsonSerializer.Serialize(request)}");
+            logger.LogInformation($"Sending BRE request: {JsonConvert.SerializeObject(request)}");
 
             BreResponse response = null;
             try
@@ -38,7 +37,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 string token = GenerateToken(password + nonce + username + created);
                 string wsseHeader =
                     $"WSSE UsernameToken Token=\"{token}\", Nonce=\"{nonce}\", Username=\"{username}\", Created=\"{created}\"";
-                string requestString = JsonSerializer.Serialize(request);
+                string requestString = JsonConvert.SerializeObject(request);
                 StringContent stringContent = new(requestString);
                 
                 response = await HttpRequestHelper.SendPostRequestAsync<BreResponse>(
@@ -52,7 +51,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 );
                 
                 // BRE requests and responses shouldn't contain any sensitive details so we are OK to log them as-is
-                logger.LogInformation($"Received BRE response: {JsonSerializer.Serialize(response)}");
+                logger.LogInformation($"Received BRE response: {JsonConvert.SerializeObject(response)}");
                 
                 if (response.Measures is null)
                 {
@@ -92,7 +91,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
             catch (Exception e)
             {
                 // We would prefer to return some recommendations rather than show the error page to the user.
-                logger.LogError($"There was an error parsing a BRE recommendation. Code: {measureCode} Details: {JsonSerializer.Serialize(measure)} Error: {e.Message}");
+                logger.LogError($"There was an error parsing a BRE recommendation. Code: {measureCode} Details: {JsonConvert.SerializeObject(measure)} Error: {e.Message}");
                 return null;
             }
             
@@ -110,22 +109,22 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 
         internal class BreResponse
         {
-            [JsonPropertyName("measures")]
+            [JsonProperty(PropertyName = "measures")]
             public Dictionary<string, BreMeasure> Measures { get; set; }
         }
 
         internal class BreMeasure
         {
-            [JsonPropertyName("min_installation_cost")]
+            [JsonProperty(PropertyName = "min_installation_cost")]
             public int MinInstallationCost { get; set; }
 
-            [JsonPropertyName("max_installation_cost")]
+            [JsonProperty(PropertyName = "max_installation_cost")]
             public int MaxInstallationCost { get; set; }
 
-            [JsonPropertyName("cost_saving")]
+            [JsonProperty(PropertyName = "cost_saving")]
             public decimal Saving { get; set; }
 
-            [JsonPropertyName("lifetime")]
+            [JsonProperty(PropertyName = "lifetime")]
             public int Lifetime { get; set; }
         }
     }
