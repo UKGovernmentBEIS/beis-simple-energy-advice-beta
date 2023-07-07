@@ -52,6 +52,9 @@ jobs:
       
     - name: Build .Net code
       run: dotnet build SeaPublicWebsite --no-restore --configuration Release --output ./ci-server-build/
+      
+    - name: Copy apt yaml to output folder
+      run: cp ./SeaPublicWebsite/apt.yml ./ci-server-build/
 
     - name: Push the app to Gov.UK PaaS
       run: |

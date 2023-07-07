@@ -1,0 +1,22 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.BusinessLogic.Models.Enums
+@using SeaPublicWebsite.Models.EnergyEfficiency
+@model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+        @await Html.GovUkBackLink(new BackLinkViewModel
+               {
+                   Text = "Back",
+                   Href = Model.BackLink,
+               })
+    </div>
+    <div class="govuk-grid-column-one-half sea-download-link-container">
+        @{ await Html.RenderPartialAsync("Partials/_DownloadActionPlan", new DownloadPdfButtonViewModel
+           {
+               Reference = Model.PropertyData.Reference,
+               ButtonClass = "govuk-!-margin-top-3 govuk-!-margin-bottom-3"
+           }); }
+    </div>
+</div>

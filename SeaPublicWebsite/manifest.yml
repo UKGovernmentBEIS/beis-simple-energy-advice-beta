@@ -1,10 +1,12 @@
 ﻿---
 applications:
  - buildpacks:
+     - https://github.com/cloudfoundry/apt-buildpack
      - dotnet_core_buildpack
    command: dotnet SeaPublicWebsite.dll
    health-check-http-endpoint: /health-check
    health-check-type: http
    timeout: 60
+   disk_quota: 2GB
    env:
      TZ: Europe/London

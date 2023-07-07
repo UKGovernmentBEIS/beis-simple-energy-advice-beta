@@ -2,7 +2,9 @@
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
 namespace SeaPublicWebsite.Middleware
@@ -11,16 +13,21 @@ namespace SeaPublicWebsite.Middleware
     {
         private readonly RequestDelegate next;
         private readonly BasicAuthMiddlewareConfiguration configuration;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
-        public BasicAuthMiddleware(RequestDelegate next, IOptions<BasicAuthMiddlewareConfiguration> options)
+        public BasicAuthMiddleware(
+            RequestDelegate next,
+            IOptions<BasicAuthMiddlewareConfiguration> options,
+            IWebHostEnvironment webHostEnvironment)
         {
             this.next = next;
             configuration = options.Value;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         public async Task Invoke(HttpContext httpContext)
         {
-            if (httpContext.Request.Path.StartsWithSegments(new PathString("/health-check")))
+            if (!NeedsAuthorisation(httpContext))
             {
                 await next.Invoke(httpContext);
                 return;
@@ -34,6 +41,21 @@ namespace SeaPublicWebsite.Middleware
             {
                 SendUnauthorisedResponse(httpContext);
             }
+        }
+
+        private bool NeedsAuthorisation(HttpContext httpContext)
+        {
+            if (httpContext.Request.Path.StartsWithSegments(new PathString("/health-check")))
+            {
+                return false;
+            }
+
+            if (httpContext.Request.Path.StartsWithSegments(new PathString("/energy-efficiency/pdf-generation")))
+            {
+                return true;
+            }
+
+            return !webHostEnvironment.IsProduction();
         }
 
         private bool IsAuthorised(HttpContext httpContext)
@@ -73,7 +95,5 @@ namespace SeaPublicWebsite.Middleware
                 httpContext.Response.Headers.Add(headerName, headerValue);
             }
         }
-
-
     }
 }

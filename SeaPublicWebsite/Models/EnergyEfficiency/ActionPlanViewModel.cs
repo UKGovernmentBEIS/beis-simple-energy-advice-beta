@@ -11,6 +11,8 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string EmailAddress { get; set; }
         public bool EmailSent { get; set; }
         public string BackLink { get; set; }
+        public bool IsPdf { get; set; }
+        public string UrlPrefix { get; set; }
 
         public string GetTotalInstallationCostText()
         {
@@ -45,6 +47,11 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string GetSavingText(PropertyRecommendation recommendation)
         {
             return recommendation.Key == RecommendationKey.InstallHeatPump ? "-" : $"£{recommendation.Saving:N0}";
+        }
+
+        public string GetUrlWithPrefix(string url)
+        {
+            return $"{UrlPrefix}{url}";
         }
     }
 }
