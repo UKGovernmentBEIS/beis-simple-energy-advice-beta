@@ -50,7 +50,8 @@ namespace SeaPublicWebsite.Middleware
                 return false;
             }
 
-            if (httpContext.Request.Path.StartsWithSegments(new PathString("/energy-efficiency/pdf-generation")))
+            if (httpContext.Request.Path.StartsWithSegments(new PathString("/energy-efficiency/pdf-generation")) ||
+                httpContext.Request.Path.StartsWithSegments(new PathString("/error/401")))
             {
                 return true;
             }
