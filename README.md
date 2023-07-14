@@ -115,6 +115,7 @@ Fill in the opened `secrets.json` file with:
 ### Running Locally
 
 - In Rider, select a new build configuration for docker-compose, selecting the docker-compose.yml file. You should then be able to debug by pressing F5.
+- NOTE: The postgres instance runs on port 5432, which is the default postgres port. If you are running any other local postgres instance, it is likely they will fight for this port.
 
 ### Creating/updating the local database
 
