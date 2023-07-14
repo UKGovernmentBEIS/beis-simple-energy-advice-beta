@@ -4,8 +4,17 @@ WORKDIR /SeaPublicWebsite
 # Copy everything
 COPY . ./
 
+# Install NodeJS and NPM
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
+apt-get install -y nodejs
+
 # Build node assets
+WORKDIR /SeaPublicWebsite/SeaPublicWebsite
 RUN npm run build
+
+# Add Sources
+WORKDIR /SeaPublicWebsite
+RUN dotnet nuget add source /SeaPublicWebsite/Lib --name Local
 
 # Restore as distinct layers
 RUN dotnet restore
