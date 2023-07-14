@@ -177,3 +177,24 @@ To set up an environment for the first time:
 - Run `CreateEnvironment.sh`
 - Take a copy of `SetEnvironmentSecretsTemplate.sh`, rename it to `SetEnvironmentSecrets.sh`, and fill in the required credentials
 - Run `SetEnvironmentSecrets.sh`
+
+### Environment Variables
+The following is a list of environment variables required by the application. Most are set via the `SetEnvironmentSecrets.sh`
+script mentioned above. Any exceptions are noted.
+
+Other variables are needed, but these are set by `appsettings.json` and do not need to be environment variables.
+
+- ASPNETCORE_ENVIRONMENT
+  - Set automatically by .NET
+- BasicAuth__Password
+- BasicAuth__Username
+- Bre__Password
+- Bre__Username
+- DATABASE_URL
+  - Set automatically by .NET
+- DOTNET_ENVIRONMENT
+  - Set automatically by .NET
+- EpbEpc__Password
+- EpbEpc__Username
+- GoogleAnalytics__ApiSecret
+- GovUkNotify__ApiKey
