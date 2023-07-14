@@ -3,6 +3,10 @@ WORKDIR /SeaPublicWebsite
 
 # Copy everything
 COPY . ./
+
+# Build node assets
+RUN npm run build
+
 # Restore as distinct layers
 RUN dotnet restore
 
