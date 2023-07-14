@@ -1,5 +1,5 @@
 ﻿using System.Net.Http.Headers;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Common
 {
@@ -50,7 +50,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Common
             }
 
             var bodyString = response.Content.ReadAsStringAsync().Result;
-            return JsonConvert.DeserializeObject<T>(bodyString);
+            return JsonSerializer.Deserialize<T>(bodyString);
         }
     }
 

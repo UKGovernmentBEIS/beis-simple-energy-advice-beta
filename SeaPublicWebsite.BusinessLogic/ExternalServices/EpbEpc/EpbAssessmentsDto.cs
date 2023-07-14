@@ -1,24 +1,24 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 
 public class EpbAssessmentsDto
 {
-    [JsonProperty(PropertyName = "data")]
+    [JsonPropertyName("data")]
     public EpbAssessmentsDataDto Data { get; set; }
 }
 
 public class EpbAssessmentsDataDto
 {
-    [JsonProperty(PropertyName = "assessments")]
+    [JsonPropertyName("assessments")]
     public List<EpbAssessmentInformation> Assessments { get; set; }
 }
 
 public class EpbAssessmentInformation
 {
-    [JsonProperty(PropertyName = "epcRrn")]
+    [JsonPropertyName("epcRrn")]
     public string EpcId { get; set; }
     
-    [JsonProperty(PropertyName = "address")]
+    [JsonPropertyName("address")]
     public EpbAddressDto Address { get; set; }
 }

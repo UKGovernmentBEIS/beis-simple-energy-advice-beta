@@ -1,5 +1,5 @@
-﻿using System.Text.RegularExpressions;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
@@ -7,58 +7,58 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 
 public class EpbEpcDto
 {
-    [JsonProperty(PropertyName = "data")]
+    [JsonPropertyName("data")]
     public EpbEpcDataDto Data { get; set; }
 }
 
 public class EpbEpcDataDto
 {
-    [JsonProperty(PropertyName = "assessment")]
+    [JsonPropertyName("assessment")]
     public EpbEpcAssessmentDto Assessment { get; set; }
 }
 
 public class EpbEpcAssessmentDto
 {
-    [JsonProperty(PropertyName = "typeOfAssessment")]
+    [JsonPropertyName("typeOfAssessment")]
     public string AssessmentType { get; set; }
     
-    [JsonProperty(PropertyName = "address")]
+    [JsonPropertyName("address")]
     public EpbAddressDto Address { get; set; }
     
-    [JsonProperty(PropertyName = "lodgementDate")]
+    [JsonPropertyName("lodgementDate")]
     public string LodgementDate { get; set; }
     
-    [JsonProperty(PropertyName = "isLatestAssessmentForAddress")]
+    [JsonPropertyName("isLatestAssessmentForAddress")]
     public bool IsLatestAssessmentForAddress { get; set; }
     
-    [JsonProperty(PropertyName = "propertyType")]
+    [JsonPropertyName("propertyType")]
     public string PropertyType { get; set; }
     
-    [JsonProperty(PropertyName = "builtForm")]
+    [JsonPropertyName("builtForm")]
     public string BuiltForm { get; set; }
     
-    [JsonProperty(PropertyName = "PropertyAgeBand")]
+    [JsonPropertyName("PropertyAgeBand")]
     public string PropertyAgeBand { get; set; }
 
-    [JsonProperty(PropertyName = "wallsDescription")]
+    [JsonPropertyName("wallsDescription")]
     public List<string> WallsDescription { get; set; }
     
-    [JsonProperty(PropertyName = "floorDescription")]
+    [JsonPropertyName("floorDescription")]
     public List<string> FloorDescription { get; set; }
     
-    [JsonProperty(PropertyName = "roofDescription")]
+    [JsonPropertyName("roofDescription")]
     public List<string> RoofDescription { get; set; }
     
-    [JsonProperty(PropertyName = "windowsDescription")]
+    [JsonPropertyName("windowsDescription")]
     public List<string> WindowsDescription { get; set; }
     
-    [JsonProperty(PropertyName = "mainHeatingDescription")]
+    [JsonPropertyName("mainHeatingDescription")]
     public string MainHeatingDescription { get; set; }
     
-    [JsonProperty(PropertyName = "mainFuelType")]
+    [JsonPropertyName("mainFuelType")]
     public string MainFuelType { get; set; }
     
-    [JsonProperty(PropertyName = "hasHotWaterCylinder")]
+    [JsonPropertyName("hasHotWaterCylinder")]
     public bool? HasHotWaterCylinder { get; set; }
 
     public Epc Parse()

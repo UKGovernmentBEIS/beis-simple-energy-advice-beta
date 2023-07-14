@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
+using System.Text.Json.Serialization;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Common;
 using SeaPublicWebsite.BusinessLogic.Models;
 
@@ -128,11 +128,11 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc
 
     internal class TokenRequestResponse
     {
-        [JsonProperty(PropertyName = "access_token")]
+        [JsonPropertyName("access_token")]
         public string Token { get; set; }
-        [JsonProperty(PropertyName = "expires_in")]
+        [JsonPropertyName("expires_in")]
         public int ExpiryTimeInSeconds { get; set; }
-        [JsonProperty(PropertyName = "token_type")]
+        [JsonPropertyName("token_type")]
         public string TokenType { get; set; }
     }
 }
