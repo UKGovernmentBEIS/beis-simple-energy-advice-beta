@@ -4,12 +4,15 @@
 @using SeaPublicWebsite.Models.EnergyEfficiency
 @model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
 
+@{
+    Layout = Model.IsPdf ? "_PdfLayout" : "_Layout";
+}
+
 @section BeforeMain {
-    @await Html.GovUkBackLink(new BackLinkViewModel
-           {
-               Text = "Back",
-               Href = Model.BackLink,
-           })
+    @if (!Model.IsPdf)
+    {
+        await Html.RenderPartialAsync("ActionPlan/Partials/_ActionPlanBeforeMainLinks", Model);
+    }
 }
 
 <div class="govuk-grid-row">
@@ -81,7 +84,8 @@
                                       <p>
                                           Typical costs: @Model.GetInstallationCostText(recommendation)
                                       </p>
-                                      <a class="govuk-link" href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true})>
+                                      <a class="govuk-link"
+                                         href="@Model.GetUrlWithPrefix(Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true}))">
                                           Revisit recommendation
                                       </a>
                                    </text>
@@ -141,7 +145,7 @@
                        new()
                        {
                            Classes = "sea-saved-recommendations-table-headers",
-                           Html = @<a class="govuk-link" href=@Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true})>
+                           Html = @<a class="govuk-link" href="@Model.GetUrlWithPrefix(Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true}))">
                                       Revisit recommendation
                                   </a>
                        }
@@ -212,7 +216,8 @@
     {
         Reference = Model.PropertyData.Reference,
         EmailAddress = Model.EmailAddress,
-        EmailSent = Model.EmailSent
+        EmailSent = Model.EmailSent,
+        IsPdf = Model.IsPdf
     });
 }
 </div>

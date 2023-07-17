@@ -1,0 +1,15 @@
+﻿@using SeaPublicWebsite.Models.EnergyEfficiency
+@model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationsViewModel
+
+@{
+    Layout = "_PdfLayout";
+}
+
+@for (var index = 0; index < Model.PropertyRecommendations.Count; index++)
+{
+    await Html.RenderPartialAsync("Partials/_SingleRecommendationDetails.cshtml", new SingleRecommendationDetailsViewModel
+    {
+        RecommendationIndex = index,
+        PropertyRecommendations = Model.PropertyRecommendations
+    });
+}

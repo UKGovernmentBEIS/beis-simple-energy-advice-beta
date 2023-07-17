@@ -1,0 +1,2 @@
+﻿@model SeaPublicWebsite.Models.EnergyEfficiency.SingleRecommendationDetailsViewModel;
+@{ await Html.RenderPartialAsync($"_{Enum.GetName(Model.GetCurrentPropertyRecommendation().Key)}.cshtml", Model); }

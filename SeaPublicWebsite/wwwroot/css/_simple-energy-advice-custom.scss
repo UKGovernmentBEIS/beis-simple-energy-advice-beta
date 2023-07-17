@@ -311,6 +311,19 @@
     font-weight: 700;
 }
 
+.sea-download-link-container {
+    @include govuk-media-query($from: tablet) {
+        text-align: right;
+        padding-top: govuk-spacing(3);
+    }
+}
+
+// sea pdf specific styling
+
+.govuk-template.sea-pdf {
+    background-color: govuk-colour("white");
+}
+
 // Source: https://stackoverflow.com/questions/1367409/how-to-make-button-look-like-a-link
 .sea-button-as-link {
     align-items: normal;
