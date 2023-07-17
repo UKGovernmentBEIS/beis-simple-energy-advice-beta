@@ -114,22 +114,8 @@ Fill in the opened `secrets.json` file with:
 
 ### Running Locally
 
-- In Visual Studio / Rider build the solution
-- In `SeaPublicWebsite` run `npm run watch`
-- In Visual Studio / Rider run the `SeaPublicWebsite` project
-
-### Troubleshooting
-- Certificate error (e.g. `net::ERR_CERT_AUTHORITY_INVALID`)
-  - Try running `dotnet dev-certs https --trust`
-  - If you get the message “A valid HTTPS certificate is already present.” then you may need to run `dotnet dev-certs https --clean` and then `dotnet dev-certs https --trust` again
-
-## Database
-
-### Local Database Setup
-
-- For Windows: Download the installer and PostgreSQL 14 here: https://www.postgresql.org/download/windows/
-- Follow default installation steps (no additional software is required from Stack Builder upon completion)
-  - You may be prompted for a password for the postgres user and a port (good defaults are "postgres" and "5432", respectively). If you choose your own, you will have to update the connection string in appsettings.json
+- In Rider, select a new build configuration for docker-compose, selecting the docker-compose.yml file. You should then be able to debug by pressing F5.
+- NOTE: The postgres instance runs on port 5432, which is the default postgres port. If you are running any other local postgres instance, it is likely they will fight for this port.
 
 ### Creating/updating the local database
 

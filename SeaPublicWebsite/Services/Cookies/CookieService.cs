@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
+using System.Text.Json;
 using SeaPublicWebsite.Models.Cookies;
 
 namespace SeaPublicWebsite.Services.Cookies;
@@ -25,7 +25,7 @@ public class CookieService
         {
             try
             {
-                cookie = JsonConvert.DeserializeObject<T>(cookieString);
+                cookie = JsonSerializer.Deserialize<T>(cookieString);
                 return true;
             }
             catch (JsonException)
@@ -86,7 +86,7 @@ public class CookieService
 
     public void SetCookie<T>(HttpResponse response, string cookieName, T cookie)
     {
-        var cookieString = JsonConvert.SerializeObject(cookie);
+        var cookieString = JsonSerializer.Serialize(cookie);
         response.Cookies.Append(
             cookieName,
             cookieString,

@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Reflection;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace SeaPublicWebsite.Helpers
 {
@@ -24,7 +24,7 @@ namespace SeaPublicWebsite.Helpers
                 using (StreamReader streamReader = new StreamReader(pathToFile))
                 {
                     string buildNumberJson = streamReader.ReadToEnd();
-                    cachedBuildNumber = JsonConvert.DeserializeObject<BuildNumberObject>(buildNumberJson);
+                    cachedBuildNumber = JsonSerializer.Deserialize<BuildNumberObject>(buildNumberJson);
                 }
             }
 
