@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Text.Json;
 using NUnit.Framework;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using SeaPublicWebsite.Models.Cookies;
 using SeaPublicWebsite.Services.Cookies;
 
@@ -227,7 +228,7 @@ public class CookieServiceTests
 
     private string ConvertObjectToHttpHeaderSrting(object o)
     {
-        return Uri.EscapeDataString(JsonSerializer.Serialize(o));
+        return Uri.EscapeDataString(JsonConvert.SerializeObject(o));
     }
     
     public class CookieServiceTestCase

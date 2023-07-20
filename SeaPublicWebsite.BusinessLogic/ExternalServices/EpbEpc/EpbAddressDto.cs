@@ -1,24 +1,24 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 
 public class EpbAddressDto
 {
-    [JsonPropertyName("addressLine1")]
+    [JsonProperty(PropertyName = "addressLine1")]
     public string Address1 { get; set; }
         
-    [JsonPropertyName("addressLine2")]
+    [JsonProperty(PropertyName = "addressLine2")]
     public string Address2 { get; set; }
         
-    [JsonPropertyName("addressLine3")]
+    [JsonProperty(PropertyName = "addressLine3")]
     public string Address3 { get; set; }
         
-    [JsonPropertyName("addressLine4")]
+    [JsonProperty(PropertyName = "addressLine4")]
     public string Address4 { get; set; }
         
-    [JsonPropertyName("town")]
+    [JsonProperty(PropertyName = "town")]
     public string Town { get; set; }
         
-    [JsonPropertyName("postcode")]
+    [JsonProperty(PropertyName = "postcode")]
     public string Postcode { get; set; }
 }

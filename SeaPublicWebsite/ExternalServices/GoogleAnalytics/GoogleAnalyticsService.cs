@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Common;
 using SeaPublicWebsite.Services.Cookies;
 
@@ -36,7 +35,7 @@ public class GoogleAnalyticsService
             {
                 BaseAddress = Configuration.BaseUrl,
                 Path = $"/mp/collect?api_secret={Configuration.ApiSecret}&measurement_id={Configuration.MeasurementId}",
-                Body = new StringContent(JsonSerializer.Serialize(body))
+                Body = new StringContent(JsonConvert.SerializeObject(body))
             });
         }
         catch (Exception e)
@@ -58,18 +57,18 @@ public class GoogleAnalyticsService
 
 public class GaRequestBody
 {
-    [JsonPropertyName("client_id")]
+    [JsonProperty(PropertyName = "client_id")]
     public string ClientId { get; set; }
     
-    [JsonPropertyName("events")]
+    [JsonProperty(PropertyName = "events")]
     public List<GaEvent> GaEvents { get; set; }
 }
 
 public class GaEvent
 {
-    [JsonPropertyName("name")]
+    [JsonProperty(PropertyName = "name")]
     public string Name { get; set; }
     
-    [JsonPropertyName("params")]
+    [JsonProperty(PropertyName = "params")]
     public Dictionary<string, object> Parameters { get; set; }
 }
