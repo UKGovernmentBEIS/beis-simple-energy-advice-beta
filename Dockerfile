@@ -10,6 +10,7 @@ apt-get install -y nodejs
 
 # Build node assets
 WORKDIR /SeaPublicWebsite/SeaPublicWebsite
+RUN npm install
 RUN npm run build
 
 # Add Sources
