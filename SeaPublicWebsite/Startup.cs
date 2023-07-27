@@ -168,7 +168,6 @@ namespace SeaPublicWebsite
 
             app.UseStatusCodePagesWithReExecute("/error/{0}");
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseSerilogRequestLogging();
