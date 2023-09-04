@@ -9,7 +9,13 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
 apt-get install -y nodejs
 
 # Install required packages for Puppeteer
-RUN apt-get update && apt-get install -y wget gnupg2 apt-utils xorg openbox libnss3 libasound2
+RUN apt-get update \
+RUN apt-get install -y wget
+RUN apt-get install -y gnupg2
+RUN apt-get install -y apt-utils
+RUN apt-get install -y xorg
+RUN apt-get install -y openbox
+RUN apt-get install -y libnss3
 RUN apt-get install -y libcups2 libatspi2.0-0 libxcomposite1 libxdamage1 libxrandr2 \
     libgbm1 libxkbcommon0 libasound2 libnspr4 libnss3 libatk1.0-0 libatk-bridge2.0-0
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
