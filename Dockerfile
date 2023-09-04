@@ -9,6 +9,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
 apt-get install -y nodejs
 
 # Install required packages for Puppeteer
+RUN apt-get install -y libcups2 libatspi2.0-0 libxcomposite1 libxdamage1 libgobject-2.0 \
+    libxrandr2 libgbm1 libxkbcommon0 libasound2 libnspr4 libnss3 libatk1.0-0 libatk-bridge2.0-0
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 RUN echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list
 RUN apt-get update &&\
