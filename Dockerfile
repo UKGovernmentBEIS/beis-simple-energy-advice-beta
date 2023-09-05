@@ -13,7 +13,7 @@ RUN apt-get update
 RUN apt-get install -y wget
 RUN apt-get install -y gnupg2
 RUN apt-get install -y apt-utils
-RUN apt-get install -y xorg
+RUN apt-get install -y xorg keyboard-configuration-
 RUN apt-get install -y openbox
 RUN apt-get install -y libnss3
 RUN apt-get install -y libcups2 libatspi2.0-0 libxcomposite1 libxdamage1 libxrandr2 \
