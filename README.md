@@ -106,7 +106,7 @@ Fill in the opened `secrets.json` file with:
     },
    
     "GoogleAnalytics": {
-        "ApiSecret": "REAL_VALUE_HERE"
+        "ApiSecret": "REAL_VALUE_HERE",
         "MeasurementId": "REAL_VALUE_HERE"
     }
 }
