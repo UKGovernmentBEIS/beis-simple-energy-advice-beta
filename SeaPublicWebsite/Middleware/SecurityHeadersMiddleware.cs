@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Security.Cryptography;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
 namespace SeaPublicWebsite.Middleware;
@@ -21,10 +23,14 @@ public class SecurityHeadersMiddleware
         
         if (!context.Response.Headers.ContainsKey("Content-Security-Policy"))
         {
+            var nonce = GenerateNonce();
+            context.Items.Add("ScriptNonce", nonce);
+            
             context.Response.Headers.Add("Content-Security-Policy",
                 "default-src 'self'; " +
-                "script-src 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com; " +
-                "connect-src 'self' 'unsafe-inline' https://*.googletagmanager.com"); 
+                $"script-src 'self' https://*.googletagmanager.com 'nonce-{nonce}'; " +
+                "connect-src 'self' https://*.googletagmanager.com; " +
+                "img-src 'self' https://*.googletagmanager.com"); 
 
         }
         
@@ -35,5 +41,14 @@ public class SecurityHeadersMiddleware
         }
 
         return next(context);
-    } 
+    }
+
+    private static string GenerateNonce()
+    {
+        var rng = RandomNumberGenerator.Create();
+        var nonceBytes = new byte[32];
+        rng.GetBytes(nonceBytes);
+        var nonce = Convert.ToBase64String(nonceBytes);
+        return nonce;
+    }
 }

@@ -55,6 +55,6 @@
     </div>
 
     <script src="@(StaticAssetsVersioning.GetAppJsFilename())"></script>
-    <script>window.GOVUKFrontend.initAll()</script>
+    <script nonce="@Html.ScriptNonce()">window.GOVUKFrontend.initAll()</script>
 </body>
 </html>
