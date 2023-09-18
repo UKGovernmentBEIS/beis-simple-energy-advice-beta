@@ -27,6 +27,9 @@ using Serilog;
 
 namespace SeaPublicWebsite
 {
+    using Microsoft.AspNetCore.Antiforgery;
+    using Microsoft.AspNetCore.Http;
+
     public class Startup
     {
         private readonly IConfiguration configuration;
@@ -117,10 +120,16 @@ namespace SeaPublicWebsite
             services.Configure<CookieServiceConfiguration>(
                 configuration.GetSection(CookieServiceConfiguration.ConfigSection));
             // Change the default antiforgery cookie name so it doesn't include Asp.Net for security reasons
-            services.AddAntiforgery(options => options.Cookie.Name = "Antiforgery");
+            services.AddAntiforgery(ConfigureAntiForgeryCookieOptions);
             services.AddScoped<CookieService, CookieService>();
         }
 
+        private void ConfigureAntiForgeryCookieOptions(AntiforgeryOptions options)
+        {
+            options.Cookie.Name = "Antiforgery";
+            options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        }
+        
         private void ConfigureEpcApi(IServiceCollection services)
         {
             services.Configure<EpbEpcConfiguration>(
