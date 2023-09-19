@@ -56,7 +56,8 @@ namespace SeaPublicWebsite.Middleware
                 return true;
             }
 
-            return !webHostEnvironment.IsProduction();
+            // TODO BEISSEA-86: make this true when environment is not production
+            return false;
         }
 
         private bool IsAuthorised(HttpContext httpContext)
