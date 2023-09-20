@@ -127,7 +127,7 @@ namespace SeaPublicWebsite
         private void ConfigureAntiForgeryCookieOptions(AntiforgeryOptions options)
         {
             options.Cookie.Name = "Antiforgery";
-            options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            options.Cookie.SecurePolicy = webHostEnvironment.IsDevelopment() ? CookieSecurePolicy.None : CookieSecurePolicy.Always;
         }
         
         private void ConfigureEpcApi(IServiceCollection services)
