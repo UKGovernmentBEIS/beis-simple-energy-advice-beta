@@ -82,34 +82,9 @@ namespace SeaPublicWebsite
         private void ConfigureDatabaseContext(IServiceCollection services)
         {
             var databaseConnectionString = configuration.GetConnectionString("PostgreSQLConnection");
-            if (!webHostEnvironment.IsDevelopment())
-            {
-                // In Gov.PaaS the Database URL is automatically put into the DATABASE_URL environment variable
-                databaseConnectionString = DatabaseUrlToConnectionString(configuration["DATABASE_URL"]);
-            }
-
+            
             services.AddDbContext<SeaDbContext>(opt =>
                 opt.UseNpgsql(databaseConnectionString));
-        }
-
-        private string DatabaseUrlToConnectionString(string url)
-        {
-            // The DATABASE_URL environment variable has the following form
-            // postgres://<username>:<password>@<host>:<port>/<name>
-            var urlPattern = new Regex(@"postgres\:\/\/(.*)\:(.*)@(.*)\:(\d+)\/(.*)");
-            var match = urlPattern.Match(url);
-            if (!match.Success)
-            {
-                throw new Exception("Database URL was not in the expected format, cannot connect to database");
-            }
-
-            var username = match.Groups[1].Captures[0].Value;
-            var password = match.Groups[2].Captures[0].Value;
-            var host = match.Groups[3].Captures[0].Value;
-            var port = match.Groups[4].Captures[0].Value;
-            var name = match.Groups[5].Captures[0].Value;
-
-            return $"Host={host};Port={port};Username={username};Password={password};Database={name}";
         }
 
         private void ConfigureCookieService(IServiceCollection services)
