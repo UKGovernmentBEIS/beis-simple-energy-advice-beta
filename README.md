@@ -22,24 +22,26 @@ Migrations will be run automatically on deployment. If a migration needs to be r
 
 ### Process
 
+We have three branches linked to environments: dev, staging, and main.
+Committing to any of these will trigger a release to the relevant environment.
+
 For normal development:
-- Create a branch from main
+- Create a branch from dev
 - Make changes on the branch
-- Raise a PR back to main once the feature is complete
-- If the PR is accepted merge the branch into main
+- Raise a PR to dev once the feature is complete
+- If the PR is accepted merge the branch into dev and check it works
+- When we are ready for UAT merge dev into staging
 
 Doing a release:
-- Create a release branch from main
-- Deploy this branch to an environment
-- Run manual tests against this environment and gain sign-off to deploy
-- Merge the branch into production
+- Confirm the current version of staging has passed UAT
+- Gain sign-off to deploy
+- Merge staging into main
 
 For critical bug fixes on production
-- Create a branch from production
+- Create a branch from main
 - Make changes on the branch
-- Raise a PR back to production once the bug is fixed
-- If the PR is accepted merge the branch into production
-- Then also merge the branch into main
+- Raise a PR back to main once the bug is fixed
+- If the PR is accepted merge the branch
 
 ### Pre-requisites
 
