@@ -119,15 +119,16 @@ namespace SeaPublicWebsite
         {
             services.Configure<CookieServiceConfiguration>(
                 configuration.GetSection(CookieServiceConfiguration.ConfigSection));
-            // Change the default antiforgery cookie name so it doesn't include Asp.Net for security reasons
             services.AddAntiforgery(ConfigureAntiForgeryCookieOptions);
             services.AddScoped<CookieService, CookieService>();
         }
 
         private void ConfigureAntiForgeryCookieOptions(AntiforgeryOptions options)
         {
+            // Change the default antiforgery cookie name so it doesn't include Asp.Net for security reasons
             options.Cookie.Name = "Antiforgery";
-            options.Cookie.SecurePolicy = webHostEnvironment.IsDevelopment() ? CookieSecurePolicy.None : CookieSecurePolicy.Always;
+            // TODO: BEISSEA-85: Change SameAsRequest back to Always as it's a weird way of handling the health-check edge case
+            options.Cookie.SecurePolicy = webHostEnvironment.IsDevelopment() ? CookieSecurePolicy.None : CookieSecurePolicy.SameAsRequest;
         }
         
         private void ConfigureEpcApi(IServiceCollection services)
