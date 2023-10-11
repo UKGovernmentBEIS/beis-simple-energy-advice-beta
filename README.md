@@ -43,6 +43,20 @@ For critical bug fixes on production
 - Raise a PR back to main once the bug is fixed
 - If the PR is accepted merge the branch
 
+### Deployments
+
+When code is merged to the dev, staging or main branch, the corresponding CodeDeploy pipeline is started.
+
+You can look at the Deployment history [here](https://eu-west-2.console.aws.amazon.com/codesuite/codedeploy/deployments?region=eu-west-2). It should show you all the successful, failed and in-progress deployments for your current role.
+
+### Infrastructure
+
+Infrastructure is managed with Terraform in the [beis-sea-app](https://github.com/databarracks/beis-sea-app) repository.
+
+The README should have all the information you need. Infrastructure changes are triggered automatically by merges to the main branch.
+
+In the case you need to manually trigger an infrastructure deployment, you will need to contact Data Barracks directly.
+
 ### Pre-requisites
 
 - .Net 6 (https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
@@ -149,40 +163,55 @@ The solution is unfortunately tedious. Given branch 1 with migration A and branc
 
 ## Environments
 
-This app is deployed to GOV.UK Platform as a Service (https://docs.cloud.service.gov.uk/)
+This app is deployed to AWS via docker containers hosted on ECS (https://docs.aws.amazon.com/ecs/)
 
 ### Pre-requisites
 
 Before you can work with the environments you will need some things:
-- Credentials for GOV.UK PaaS
-- Install the CloudFoundry CLI (https://github.com/cloudfoundry/cli/wiki/V7-CLI-Installation-Guide)
+- AWS Credentials with access to the following roles:
+  - SEA-Development
+  - SEA-Staging
+  - SEA-Production  
+- Access to the [beis-sea-app](https://github.com/databarracks/beis-sea-app) repository
 
 ### Set up
 
 To set up an environment for the first time:
-- CD to `Infrastructure`
-- Take a copy of `LoginToGovPaasTemplate.sh`, rename it to `LoginToGovPaas.sh`, and update it with your credentials
-- Run `CreateEnvironment.sh`
-- Take a copy of `SetEnvironmentSecretsTemplate.sh`, rename it to `SetEnvironmentSecrets.sh`, and fill in the required credentials
-- Run `SetEnvironmentSecrets.sh`
+- Contact Data Barracks as they manage the terraform code
 
 ### Environment Variables
-The following is a list of environment variables required by the application. Most are set via the `SetEnvironmentSecrets.sh`
-script mentioned above. Any exceptions are noted.
-
-Other variables are needed, but these are set by `appsettings.json` and do not need to be environment variables.
+The following is a list of environment variables required by the application. Other variables are needed, but these are set by `appsettings.json` and do not need to be environment variables.
 
 - ASPNETCORE_ENVIRONMENT
   - Set automatically by .NET
+- DOTNET_ENVIRONMENT
+  - Set automatically by .NET   
 - BasicAuth__Password
 - BasicAuth__Username
 - Bre__Password
 - Bre__Username
-- DATABASE_URL
-  - Set automatically by .NET
-- DOTNET_ENVIRONMENT
-  - Set automatically by .NET
 - EpbEpc__Password
 - EpbEpc__Username
 - GoogleAnalytics__ApiSecret
 - GovUkNotify__ApiKey
+- PostgreSQLConnectionseards
+
+When working with Dev, Staging or Prod environments, the aforementioned variables are set via the [Parameter Store](https://eu-west-2.console.aws.amazon.com/systems-manager/parameters/?region=eu-west-2&tab=Table)
+
+### Logs
+
+To look at requests made to the server we can check [Logit](https://dashboard.logit.io/) or [AWS CloudWatch](https://eu-west-2.console.aws.amazon.com/cloudwatch/home?region=eu-west-2#home:)
+
+On Logit, you can Launch the Kibana interface and query the logs using [KQL](https://www.elastic.co/guide/en/kibana/7.10/kuery-query.html).
+Logit crendentials are stored in Keeper.
+
+On CloudWatch, you can look at Logs, Alarms and Metrics all displayed in the right-hand menu
+
+
+### Google Analytics
+
+Ask a member of the team to grant you access to the BEIS DCEAS Google Analytics Account.
+
+To debug GA on any of the dev, staging or prod websites you can use the [Google Tag Assistant](https://tagassistant.google.com/)
+
+The Staging and Dev environment share GA credentials
