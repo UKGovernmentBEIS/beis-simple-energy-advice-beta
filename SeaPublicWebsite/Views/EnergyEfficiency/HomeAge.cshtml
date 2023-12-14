@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.HomeAgeViewModel
 @{
-    ViewBag.Title = "Property age";
+    ViewBag.Title = @SharedLocalizer["Property age"];
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -28,15 +30,13 @@
                 Func<object,object> details = 
                     @<text>
                         <p class="govuk-body">
-                            You may find information about the age of the property in title deeds or other paperwork you received when
-                            you bought your home, or home insurance paperwork.
+                            @SharedLocalizer["You may find information about the age of the property in title deeds or other paperwork you received when you bought your home, or home insurance paperwork."]
                         </p>
                         <p class="govuk-body">
-                            If your property is a conversion, enter the year the building was originally built, regardless of
-                            what the building was used for before it was your home.
+                            @SharedLocalizer["If your property is a conversion, enter the year the building was originally built, regardless of what the building was used for before it was your home."]
                         </p>
                         <p class="govuk-body">
-                            If your property has been extended, enter the year of the oldest part of the building.
+                            @SharedLocalizer["If your property has been extended, enter the year of the oldest part of the building."]
                         </p>
                      </text>;
 
@@ -48,12 +48,12 @@
                             Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your property was built
                             <strong>
                                 @(Model.Epc?.ConstructionAgeBand switch {
-                                    HomeAge.Pre1900 or HomeAge.From1900To1929 => "before 1930.",
-                                    HomeAge.From1930To1949 or HomeAge.From1950To1966 => "between 1930 and 1966.",
-                                    HomeAge.From1967To1975 or HomeAge.From1976To1982 => "between 1967 and 1982.",
-                                    HomeAge.From1983To1990 or HomeAge.From1991To1995 => "between 1983 and 1995.",
-                                    HomeAge.From1996To2002 or HomeAge.From2003To2006 or HomeAge.From2007To2011 => "between 1996 and 2011.",
-                                    HomeAge.From2012ToPresent => "on or after 2012.",
+                                    HomeAge.Pre1900 or HomeAge.From1900To1929 => @SharedLocalizer["before 1930."],
+                                    HomeAge.From1930To1949 or HomeAge.From1950To1966 => @SharedLocalizer["between 1930 and 1966."],
+                                    HomeAge.From1967To1975 or HomeAge.From1976To1982 => @SharedLocalizer["between 1967 and 1982."],
+                                    HomeAge.From1983To1990 or HomeAge.From1991To1995 => @SharedLocalizer["between 1983 and 1995."],
+                                    HomeAge.From1996To2002 or HomeAge.From2003To2006 or HomeAge.From2007To2011 => @SharedLocalizer["between 1996 and 2011."],
+                                    HomeAge.From2012ToPresent => @SharedLocalizer["on or after 2012."],
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;
@@ -65,7 +65,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "Roughly what year was your property built?",
+                        Text = @SharedLocalizer["Roughly what year was your property built?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -74,12 +74,12 @@
                 {
                     Html = @<text>
                                <p class="govuk-body">
-                                   If you are unsure, choose 'I don't know'. We will take a best guess based on other information you provide.
+                                   @SharedLocalizer["If you are unsure, choose 'I don't know'. We will take a best guess based on other information you provide."]
                                </p>
                                
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "Help me answer this question",
+                                          SummaryText = @SharedLocalizer["Help me answer this question"].Value,
                                           Html = details
                                       })
 
@@ -96,7 +96,7 @@
                 }))
             @(await Html.GovUkButton(new ButtonViewModel
             {
-                Text = "Continue",
+                Text = @SharedLocalizer["Continue"].Value,
             }))
 
         </form>

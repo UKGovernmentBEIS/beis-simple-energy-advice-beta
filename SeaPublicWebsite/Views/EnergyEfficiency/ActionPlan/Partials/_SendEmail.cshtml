@@ -1,7 +1,9 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.Localization
 @using SeaPublicWebsite.Controllers
-@model SeaPublicWebsite.Models.EnergyEfficiency.YourSavedRecommendationsEmailViewModel
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+@model SeaPublicWebsite.Models.EnergyEfficiency.YourSavedRecommendationsEmailViewModel;
 
 <form action="@Model.PostAction" method="post" novalidate>
     
@@ -10,22 +12,22 @@
     @if (Model.EmailSent)
     {
         <p id="email-sent" class="govuk-body sea-email-sent">
-            Email sent to @Model.EmailAddress
+            @SharedLocalizer["Email sent to"] @Model.EmailAddress
         </p>
     }
 
     @await Html.GovUkTextInputFor(m => m.EmailAddress,
         labelOptions: new LabelViewModel
         {
-            Text = "Enter your email address"
+            Text = SharedLocalizer["Enter your email address"].Value
         },
         classes: "govuk-input--width-20",
         autocomplete: "email",
-        placeholder: "e.g. my.email@example.com")
+        placeholder: SharedLocalizer["e.g. my.email@example.com"].Value)
 
     @await Html.GovUkButton(new ButtonViewModel
     {
-        Text = "Email a link to your Action Plan"
+        Text = SharedLocalizer["Email a link to your Action Plan"].Value
     })
 
 </form>

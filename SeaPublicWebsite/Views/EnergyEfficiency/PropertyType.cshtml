@@ -2,16 +2,18 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.PropertyTypeViewModel
 @{
-    ViewBag.Title = "Property type";
+    ViewBag.Title = @SharedLocalizer["Property type"];
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -27,10 +29,10 @@
                 Func<object, object> details =
                     @<text>
                         <p class="govuk-body">
-                            Energy use varies between different buildings, particularly for heating.
+                            @SharedLocalizer["Energy use varies between different buildings, particularly for heating."]
                         </p>
                         <p class="govuk-body">
-                            Some home improvements are only possible or appropriate for certain buildings.
+                            @SharedLocalizer["Some home improvements are only possible or appropriate for certain buildings."]
                         </p>
                      </text>;
             }
@@ -40,7 +42,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "What kind of property do you have?",
+                        Text = @SharedLocalizer["What kind of property do you have?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -50,7 +52,7 @@
                     Html = @<text>
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "Why do we need to know this?",
+                                          SummaryText = @SharedLocalizer["Why do we need to know this?"].Value,
                                           Html = details
                                       })
                             </text>
@@ -59,7 +61,7 @@
             
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = @SharedLocalizer["Continue"].Value
                    })
         </form>
         

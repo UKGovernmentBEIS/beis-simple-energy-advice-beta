@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.HouseTypeViewModel
 @{
-    ViewBag.Title = "House type";
+    ViewBag.Title = @SharedLocalizer["House type"];
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
-        Text = "Back",
+        Text = @SharedLocalizer["Back"].Value,
         Href = Model.BackLink,
     })
 }
@@ -28,10 +30,10 @@
                 Func<object, object> details =
                     @<text>
                         <p class="govuk-body">
-                            Energy use varies between different buildings, particularly for heating.
+                            @SharedLocalizer["Energy use varies between different buildings, particularly for heating."]
                         </p>
                         <p class="govuk-body">
-                            Some home improvements are only possible or appropriate for certain buildings.
+                            @SharedLocalizer["Some home improvements are only possible or appropriate for certain buildings."]
                         </p>
                      </text>;
             }
@@ -41,7 +43,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "What kind of house do you have?",
+                        Text = @SharedLocalizer["What kind of house do you have?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -52,28 +54,28 @@
                         HouseType.Detached,
                         new HintViewModel
                         {
-                            Text = "Does not share any of its walls with another house or building"
+                            Text = @SharedLocalizer["Does not share any of its walls with another house or building"].Value
                         }
                     },
                     {
                         HouseType.SemiDetached,
                         new HintViewModel
                         {
-                            Text = "Is attached to one other house or building"
+                            Text = @SharedLocalizer["Is attached to one other house or building"].Value
                         }
                     },
                     {
                         HouseType.Terraced,
                         new HintViewModel
                         {
-                            Text = "Sits in the middle with a house or building on each side"
+                            Text = @SharedLocalizer["Sits in the middle with a house or building on each side"].Value
                         }
                     },
                     {
                         HouseType.EndTerrace,
                         new HintViewModel
                         {
-                            Text = "Sits at the end of a row of similar houses with one house attached to it"
+                            Text = @SharedLocalizer["Sits at the end of a row of similar houses with one house attached to it"].Value
                         }
                     }
                 },
@@ -83,7 +85,7 @@
                                
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "Why do we need to know this?",
+                                          SummaryText = @SharedLocalizer["Why do we need to know this?"].Value,
                                           Html = details
                                       })
                             </text>
@@ -91,7 +93,7 @@
 
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = @SharedLocalizer["Continue"].Value
                    })
             
         </form>

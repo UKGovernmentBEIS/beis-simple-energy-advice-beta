@@ -1,5 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @model SeaPublicWebsite.Models.EnergyEfficiency.SingleRecommendationDetailsViewModel;
 
 @{
@@ -9,16 +11,16 @@
 @section RecommendationBody
 {
     <p class="govuk-body">
-        Based on the information we have collected, it looks like you have an old gas boiler that may not be operating efficiently. You could consider replacing this with a modern condensing boiler, which will use less gas to provide the same amount of heat, helping to cut your fuel bills and carbon dioxide emissions.
+         @SharedLocalizer["Based on the information we have collected, it looks like you have an old gas boiler that may not be operating efficiently. You could consider replacing this with a modern condensing boiler, which will use less gas to provide the same amount of heat, helping to cut your fuel bills and carbon dioxide emissions."]
     </p>
 
     <p class="govuk-inset-text">
-        You may well need to fit new or additional controls when you fit a new gas boiler to comply with building regulations. These will help to maximise the system’s efficiency, saving you even more money.
+         @SharedLocalizer["You may well need to fit new or additional controls when you fit a new gas boiler to comply with building regulations. These will help to maximise the system’s efficiency, saving you even more money."]
     </p>
 
     <p class="govuk-body govuk-!-margin-bottom-6">
-        You can find more information on replacing your gas boiler on the
-        <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/boilers/">Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span></a>
+         @SharedLocalizer["You can find more information on replacing your gas boiler on the"]
+        <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/boilers/"> @SharedLocalizer["Energy Saving Trust website."]<span class="govuk-visually-hidden"> @SharedLocalizer["(opens in a new window)"]</span></a>
     </p>
 }
 
@@ -26,37 +28,36 @@
 {
     <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
         <li>
-            You have an old or inefficient gas boiler, or your boiler is broken
+             @SharedLocalizer["You have an old or inefficient gas boiler, or your boiler is broken"]
         </li>
     </ul>
 
     <p class="govuk-body">
-        Alternatively, you may want to consider fitting a low carbon heating system such as a heat pump.
+         @SharedLocalizer["Alternatively, you may want to consider fitting a low carbon heating system such as a heat pump."]
     </p>
 
     @await Html.GovUkWarningText(new WarningTextViewModel
     {
         IconFallbackText = "Note",
-        Text = "Gas boiler installations, and any work on a gas heating system, " +
-               "can only be carried out by an installer on the Gas Safe Register."
+        Text =  @SharedLocalizer["Gas boiler installations, and any work on a gas heating system, can only be carried out by an installer on the Gas Safe Register."].Value
     })
 }
 
 @section RecommendationLifetime
 {
-    <p class="govuk-body">New gas boilers are typically expected to last <b>around @Model.GetCurrentPropertyRecommendation().Lifetime years</b></p>
+    <p class="govuk-body"> @SharedLocalizer["New gas boilers are typically expected to last"] <b> @SharedLocalizer["around"] @Model.GetCurrentPropertyRecommendation().Lifetime  @SharedLocalizer["years"]</b></p>
 }
 
 @{
     Model.DisruptionTagViewModel = new TagViewModel
     {
         Classes = "govuk-tag--green",
-        Text = "LOW TO MEDIUM"
+        Text =  @SharedLocalizer["LOW TO MEDIUM"].Value
     };
     
     Model.DurationTagViewModel = new TagViewModel
     {
         Classes = "govuk-tag--green",
-        Text = "TYPICALLY ONE DAY"
+        Text =  @SharedLocalizer["TYPICALLY ONE DAY"].Value
     };
 }

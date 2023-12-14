@@ -1,4 +1,6 @@
 ﻿@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @model SeaPublicWebsite.Models.EnergyEfficiency.SingleRecommendationDetailsViewModel;
 
 @{
@@ -8,19 +10,19 @@
 @section RecommendationBody
 {
     <p class="govuk-body">
-        Under Development
+        @SharedLocalizer["Under Development"]
     </p>
 
     <p class="govuk-body">
-        Under Development
+        @SharedLocalizer["Under Development"]
     </p>
 
     <p class="govuk-inset-text">
-        Under Development
+        @SharedLocalizer["Under Development"]
     </p>
 
     <p class="govuk-body govuk-!-margin-bottom-6">
-        Under Development
+        @SharedLocalizer["Under Development"]
     </p>
 }
 
@@ -28,26 +30,26 @@
 {
     <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
         <li>
-            Under Development
+            @SharedLocalizer["Under Development"]
         </li>
     </ul>
 }
 
 @section RecommendationLifetime
 {
-    <p class="govuk-body">Under Development is typically expected to last <b>around @Model.GetCurrentPropertyRecommendation().Lifetime years</b></p>
+    <p class="govuk-body">@SharedLocalizer["Under Development is typically expected to last"] <b>@SharedLocalizer["around"] @Model.GetCurrentPropertyRecommendation().Lifetime @SharedLocalizer["years"]</b></p>
 }
 
 @{
     Model.DisruptionTagViewModel = new TagViewModel
     {
         Classes = "govuk-tag--green",
-        Text = "Under Development"
+        Text = SharedLocalizer["Under Development"].Value
     };
     
     Model.DurationTagViewModel = new TagViewModel
     {
         Classes = "govuk-tag--green",
-        Text = "Under Development"
+        Text = SharedLocalizer["Under Development"].Value
     };
 }

@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.CavityWallsInsulatedViewModel
 @{
-    ViewBag.Title = "Cavity Walls Insulated";
+    ViewBag.Title = @SharedLocalizer["Cavity Walls Insulated"];
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -30,23 +32,19 @@
                         @if (Model.YearBuilt is >= YearBuilt.From1996To2011)
                         {
                             <p class="govuk-body">
-                                Homes built after 1991 were typically built with insulating material between the outer and inner walls. 
+                                @SharedLocalizer["Homes built after 1991 were typically built with insulating material between the outer and inner walls."] 
                             </p>
                             <p class="govuk-body">
-                                If your home was converted, for example it was a shop or other commercial premises before, 
-                                it may have been built without insulation.
+                                @SharedLocalizer["If your home was converted, for example it was a shop or other commercial premises before, it may have been built without insulation."]
                             </p>
                         }
                         else
                         {
                             <p class="govuk-body">
-                                Many cavity walls can be insulated by injecting insulation material into the cavity from the outside. 
-                                A specialist company will drill holes in the outside walls, inject insulation through the holes and 
-                                then seal them with cement.
+                                @SharedLocalizer["Many cavity walls can be insulated by injecting insulation material into the cavity from the outside. A specialist company will drill holes in the outside walls, inject insulation through the holes and then seal them with cement."]
                             </p>
                             <p class="govuk-body">
-                                If there are small, filled 22 millimetre holes at regular intervals around the outside walls, 
-                                it’s a sign they may have been insulated.
+                                @SharedLocalizer["If there are small, filled 22 millimetre holes at regular intervals around the outside walls, it’s a sign they may have been insulated."]
                             </p>
                         }
                      </text>;
@@ -56,12 +54,12 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests
+                            @SharedLocalizer[$"Your {Model.Epc.LodgementYear} Energy Performance Certificate suggests"]
                             <strong>
                                 @(Model.Epc?.CavityWallsInsulated switch {
-                                    CavityWallsInsulated.No => "your cavity walls are not insulated.",
-                                    CavityWallsInsulated.Some => "some of your cavity walls are insulated.",
-                                    CavityWallsInsulated.All => "your cavity walls are insulated.",
+                                    CavityWallsInsulated.No => @SharedLocalizer["your cavity walls are not insulated."],
+                                    CavityWallsInsulated.Some => @SharedLocalizer["some of your cavity walls are insulated."],
+                                    CavityWallsInsulated.All => @SharedLocalizer["your cavity walls are insulated."],
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;
@@ -69,9 +67,9 @@
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            Homes of your type typically have
+                            @SharedLocalizer["Homes of your type typically have"]
                             <strong>
-                                @(Model.HintUninsulatedCavityWalls is true ? "uninsulated cavity walls." : "insulated cavity walls.")
+                                @(Model.HintUninsulatedCavityWalls is true ? @SharedLocalizer["uninsulated cavity walls."] : @SharedLocalizer["insulated cavity walls."])
                             </strong>
                         </p>;
                 }
@@ -82,7 +80,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "Are your cavity walls insulated?",
+                        Text = SharedLocalizer["Are your cavity walls insulated?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -91,15 +89,15 @@
                 {
                     Html = @<text>
                                <p class="govuk-body">
-                                   Cavity walls built before 1991 are typically uninsulated, unless you or someone before you had insulation installed.
+                                   @SharedLocalizer["Cavity walls built before 1991 are typically uninsulated, unless you or someone before you had insulation installed."]
                                </p>
                                <p class="govuk-body">
-                                   Cavity walls built after 1991 were typically built with insulating material between the outer and inner walls.
+                                   @SharedLocalizer["Cavity walls built after 1991 were typically built with insulating material between the outer and inner walls."]
                                </p>
 
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "Help me answer this question",
+                                          SummaryText = @SharedLocalizer["Help me answer this question"].Value,
                                           Html = details
                                       })
 
@@ -116,7 +114,7 @@
 
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = SharedLocalizer["Continue"].Value
                    })
             
         </form>

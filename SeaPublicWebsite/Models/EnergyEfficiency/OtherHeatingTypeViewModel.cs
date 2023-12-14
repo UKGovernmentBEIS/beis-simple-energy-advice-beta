@@ -1,12 +1,13 @@
 ﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
+using SeaPublicWebsite.Resources;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class OtherHeatingTypeViewModel : QuestionFlowViewModel
     {
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Select your main heating system")]
+        [GovUkValidateRequired(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = nameof(ErrorMessages.OtherHeatingTypeRequired))]
         public OtherHeatingType? OtherHeatingType { get; set; }
 
         public string Reference { get; set; }

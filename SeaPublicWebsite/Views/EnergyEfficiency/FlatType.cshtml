@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.FlatTypeViewModel
 @{
-    ViewBag.Title = "Flat type";
+    ViewBag.Title = @SharedLocalizer["Flat type"];
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -28,10 +30,10 @@
                 Func<object, object> details =
                     @<text>
                         <p class="govuk-body">
-                            Energy use varies between different buildings, particularly for heating.
+                            @SharedLocalizer["Energy use varies between different buildings, particularly for heating."]
                         </p>
-                        <p class="govuk-body">
-                            Some home improvements are only possible or appropriate for certain buildings.
+                        <p class="govuk-body"> 
+                            @SharedLocalizer["Some home improvements are only possible or appropriate for certain buildings."]
                         </p>
                      </text>;
             }
@@ -41,7 +43,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "What kind of flat do you have?",
+                        Text = @SharedLocalizer["What kind of flat do you have?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -52,21 +54,21 @@
                         FlatType.TopFloor,
                         new HintViewModel
                         {
-                            Text = "Sits directly below the roof with no other flat above it"
+                            Text = @SharedLocalizer["Sits directly below the roof with no other flat above it"].Value
                         }
                     },
                     {
                         FlatType.MiddleFloor,
                         new HintViewModel
                         {
-                            Text = "Has another flat above, and another below"
+                            Text = @SharedLocalizer["Has another flat above, and another below"].Value
                         }
                     },
                     {
                         FlatType.GroundFloor,
                         new HintViewModel
                         {
-                            Text = "The lowest flat in the building with no flat beneath - typically at street level but may be a basement"
+                            Text = @SharedLocalizer["The lowest flat in the building with no flat beneath - typically at street level but may be a basement"].Value
                         }
                     },
                 },
@@ -75,7 +77,7 @@
                     Html = @<text>
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "Why do we need to know this?",
+                                          SummaryText = @SharedLocalizer["Why do we need to know this?"].Value,
                                           Html = details
                                       })
                             </text>
@@ -84,7 +86,7 @@
 
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = @SharedLocalizer["Continue"].Value
                    })
             
         </form>

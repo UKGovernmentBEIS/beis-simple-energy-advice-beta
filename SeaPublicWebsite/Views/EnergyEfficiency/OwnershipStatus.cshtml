@@ -2,16 +2,18 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.OwnershipStatusViewModel
 @{
-    ViewBag.Title = "Ownership status";
+    ViewBag.Title = @SharedLocalizer["Ownership status"];
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -28,7 +30,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "Do you own your property?",
+                        Text = @SharedLocalizer["Do you own your property?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -37,18 +39,18 @@
                 {
                     Html = @<text>
                                @await Html.GovUkDetails(
-                                          new DetailsViewModel
-                                          {
-                                              SummaryText = "Why do we need to know this",
-                                              Text = "This service only provides advice to people who own their home."
-                                          })
+                                      new DetailsViewModel
+                                      {
+                                          SummaryText = @SharedLocalizer["Why do we need to know this"].Value,
+                                          Text = @SharedLocalizer["This service only provides advice to people who own their home."].Value
+                                      })
                             </text>
                 }
                 ))
 
             @(await Html.GovUkButton(new ButtonViewModel
             {
-                Text = "Continue",
+                Text = @SharedLocalizer["Continue"].Value,
             }))
 
         </form>

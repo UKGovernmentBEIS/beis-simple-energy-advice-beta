@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.FloorInsulatedViewModel
 @{
-    ViewBag.Title = "Floor Insulated";
+    ViewBag.Title = @SharedLocalizer["Floor Insulated"];
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -28,16 +30,13 @@
                 Func<object, object> details = 
                     @<text>
                         <p class="govuk-body">
-                            A solid floor may be insulated by laying insulation on top or underneath a new floor.
-                            If you’ve had to replace the ground floor, it’s likely insulated in order to comply with Building Regulations.
+                            @SharedLocalizer["A solid floor may be insulated by laying insulation on top or underneath a new floor. If you’ve had to replace the ground floor, it’s likely insulated in order to comply with Building Regulations."]
                         </p>
                         <p class="govuk-body">
-                            A suspended timber floor can be insulated by lifting the floorboards and laying mineral wool
-                            insulation supported by netting between the joists, or cutting rigid insulation boards to size.
-                            It is possible done from below if there’s enough access to the cellar or crawl space.
+                            @SharedLocalizer["A suspended timber floor can be insulated by lifting the floorboards and laying mineral wool insulation supported by netting between the joists, or cutting rigid insulation boards to size. It is possible done from below if there’s enough access to the cellar or crawl space."]
                         </p>
                         <p class="govuk-body">
-                            Suspended timber floors were rarely built with insulation, so this would need to have been installed after.
+                            @SharedLocalizer["Suspended timber floors were rarely built with insulation, so this would need to have been installed after."]
                         </p>
                      </text>;
                 
@@ -46,11 +45,11 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your home's ground floor
+                            @SharedLocalizer[$"Your {Model.Epc.LodgementYear} Energy Performance Certificate suggests your home's ground floor"]
                             <strong>
                                 @(Model.Epc?.FloorInsulated switch {
-                                    FloorInsulated.No => "is not insulated.",
-                                    FloorInsulated.Yes => "is insulated.",
+                                    FloorInsulated.No => @SharedLocalizer["is not insulated."],
+                                    FloorInsulated.Yes => @SharedLocalizer["is insulated."],
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;
@@ -58,9 +57,9 @@
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            Homes of your type typically
+                            @SharedLocalizer["Homes of your type typically "]
                             <strong>
-                                @(Model.HintUninsulatedFloor is true ? "do not have insulated floors." : "have insulated floors.")
+                                @(Model.HintUninsulatedFloor is true ? @SharedLocalizer["do not have insulated floors."] : @SharedLocalizer["have insulated floors."])
                             </strong>
                         </p>;
                 }
@@ -71,7 +70,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "Is your ground floor insulated?",
+                        Text = @SharedLocalizer["Is your ground floor insulated?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -80,12 +79,12 @@
                 {
                     Html = @<text>
                                <p class="govuk-body">
-                                   Properties built before 1996 typically have uninsulated floors, unless you or a previous owner has installed floor insulation.
+                                   @SharedLocalizer["Properties built before 1996 typically have uninsulated floors, unless you or a previous owner has installed floor insulation."]
                                </p>
                                
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "Help me answer this question",
+                                          SummaryText = @SharedLocalizer["Help me answer this question"].Value,
                                           Html = details
                                       })
                                
@@ -102,7 +101,7 @@
 
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = @SharedLocalizer["Continue"].Value
                    })
             
         </form>

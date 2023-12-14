@@ -1,12 +1,14 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @if (Model.GetDiscardedRecommendations().Any())
 {
     @await Html.GovUkDetails(new DetailsViewModel
     {
-        SummaryText = "Recommendations you discarded",
+        SummaryText = SharedLocalizer["Recommendations you discarded"].Value,
         Html = @<ul class="govuk-list govuk-list--bullet">
                    @foreach(var recommendation in Model.GetDiscardedRecommendations())
                    {

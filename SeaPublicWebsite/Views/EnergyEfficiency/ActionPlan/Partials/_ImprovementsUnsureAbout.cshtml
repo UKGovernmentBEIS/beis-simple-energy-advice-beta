@@ -1,7 +1,9 @@
 ﻿@model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 <p class="govuk-body">
-    You told us you would like some more information on one or more of the recommendations before considering them for your property:
+    @SharedLocalizer["You told us you would like some more information on one or more of the recommendations before considering them for your property:"]
 </p>
 
 <ul class="govuk-list govuk-list--bullet">

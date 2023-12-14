@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.HeatingTypeViewModel;
 @{
-    ViewBag.Title = "Heating Type";
+    ViewBag.Title = @SharedLocalizer["Heating Type"];
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -28,39 +30,37 @@
                 Func<object, object> details = 
                     @<text>
                         <p class="govuk-body">
-                            Most people in England and Wales heat their home with a gas boiler.
+                            @SharedLocalizer["Most people in England and Wales heat their home with a gas boiler."]
                         </p>
                         <p class="govuk-body">
-                            People who have an oil or liquified petroleum gas (LPG) boiler will order fuel in advance.
+                            @SharedLocalizer["People who have an oil or liquified petroleum gas (LPG) boiler will order fuel in advance."]
                         </p>
                         <p class="govuk-body">
-                            Storage heaters convert electricity to heat and provide that heat the next day.
+                            @SharedLocalizer["Storage heaters convert electricity to heat and provide that heat the next day."]
                         </p>
                         <p class="govuk-body">
-                            Direct acting electric heating refers to all electric radiators or
-                            plug-in heaters that use electricity at the same time as they emit heat.
+                            @SharedLocalizer["Direct acting electric heating refers to all electric radiators or plug-in heaters that use electricity at the same time as they emit heat."]
                         </p>
                         <p class="govuk-body">
-                            A heat pump transfers heat energy from the outdoor environment inside,
-                            either through a warm-air system or through radiators or underfloor heating
+                            @SharedLocalizer["A heat pump transfers heat energy from the outdoor environment inside, either through a warm-air system or through radiators or underfloor heating"]
                         </p>
                      </text>;
                 
                 Func<object, object> epcHint = null;
                 if (Model.Epc?.EpcHeatingType is not null)
                 {
-                    epcHint = 
+                    epcHint =
                         @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your main heating system is
+                        @SharedLocalizer[$"Your {Model.Epc.LodgementYear} Energy Performance Certificate suggests your main heating system is"]
                             <strong>
                                 @(Model.Epc?.EpcHeatingType switch {
-                                    EpcHeatingType.GasBoiler => "a gas boiler.",
-                                    EpcHeatingType.OilBoiler => "an oil boiler.",
-                                    EpcHeatingType.LpgBoiler => "an LPG boiler.",
-                                    EpcHeatingType.Storage => "storage heating.",
-                                    EpcHeatingType.DirectActionElectric => "direct action electric.",
-                                    EpcHeatingType.HeatPump => "a heat pump.",
-                                    EpcHeatingType.CoalOrSolidFuel or EpcHeatingType.Biomass or EpcHeatingType.Other => "of another type.",
+                                    EpcHeatingType.GasBoiler => @SharedLocalizer["a gas boiler."],
+                                    EpcHeatingType.OilBoiler => @SharedLocalizer["an oil boiler."],
+                                    EpcHeatingType.LpgBoiler => @SharedLocalizer["an LPG boiler."],
+                                    EpcHeatingType.Storage => @SharedLocalizer["storage heating."],
+                                    EpcHeatingType.DirectActionElectric => @SharedLocalizer["direct action electric."],
+                                    EpcHeatingType.HeatPump => @SharedLocalizer["a heat pump."],
+                                    EpcHeatingType.CoalOrSolidFuel or EpcHeatingType.Biomass or EpcHeatingType.Other => @SharedLocalizer["of another type."],
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;
@@ -69,9 +69,9 @@
                 {
                     epcHint =
                         @<p class="govuk-body">
-                            The most common method of heating is with 
+                            @SharedLocalizer["The most common method of heating is with "]
                             <strong>
-                                a gas boiler.
+                                @SharedLocalizer["a gas boiler."]
                             </strong>
                         </p>;
                 }
@@ -82,7 +82,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "What is your main heating system?",
+                        Text = @SharedLocalizer["What is your main heating system?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -92,7 +92,7 @@
                     Html = @<text>
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "Help me answer this question",
+                                          SummaryText = @SharedLocalizer["Help me answer this question"].Value,
                                           Html = details
                                       })
                                
@@ -107,8 +107,8 @@
                                
                                @await Html.GovUkWarningText(new WarningTextViewModel
                                       {
-                                          Text = "If you have more than one heating type, select the system that you use more often, or that is able to heat the whole home. For example, select ‘Oil boiler’ if you have an oil boiler and wood burning stove.",
-                                          IconFallbackText = "Note",
+                                          Text = @SharedLocalizer["If you have more than one heating type, select the system that you use more often, or that is able to heat the whole home. For example, select ‘Oil boiler’ if you have an oil boiler and wood burning stove."].Value,
+                                          IconFallbackText = @SharedLocalizer["Note"].Value,
                                       })
                             </text>
                 },
@@ -118,14 +118,14 @@
                         HeatingType.LpgBoiler,
                         new HintViewModel
                         {
-                            Text = "You have an LPG boiler if you order gas deliveries to a tank in your garden"
+                            Text = @SharedLocalizer["You have an LPG boiler if you order gas deliveries to a tank in your garden"].Value
                         }
                     },
                     {
                         HeatingType.DirectActionElectric,
                         new HintViewModel
                         {
-                            Text = "This could include electric fires, fan heaters or electric radiators"
+                            Text = @SharedLocalizer["This could include electric fires, fan heaters or electric radiators"].Value
                         }
                     },
                 }
@@ -133,7 +133,7 @@
 
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = @SharedLocalizer["Continue"].Value
                    })
             
         </form>

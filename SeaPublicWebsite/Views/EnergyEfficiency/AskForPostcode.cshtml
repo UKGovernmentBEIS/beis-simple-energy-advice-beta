@@ -2,16 +2,18 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.AskForPostcodeViewModel
 @{
-    ViewBag.Title = "Enter your address";
+    ViewBag.Title = SharedLocalizer["Enter your address"];
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
-        Text = "Back",
+        Text = SharedLocalizer["Back"].Value,
         Href = Model.BackLink,
     })
 }
@@ -23,7 +25,7 @@
             @Html.AntiForgeryToken()
             <text>
                 <p class="govuk-caption-l">
-                    Find your EPC
+                    @SharedLocalizer["Find your EPC"]
                 </p>
             </text>
             
@@ -31,11 +33,7 @@
                 Func<object, object> details =
                     @<text>
                         <p class="govuk-body">
-                            We use this information to search the Energy Performance of Buildings Register for an Energy
-                            Performance Certificate that matches your address. The Energy Performance of Buildings
-                            Register is an open register and you can find more details from the 
-                            <a href="https://epc.opendatacommunities.org/" target="_blank">Department for Levelling Up,
-                                Housing and Communities</a>.
+                            @SharedLocalizer["We use this information to search the Energy Performance of Buildings Register for an Energy Performance Certificate that matches your address. The Energy Performance of Buildings Register is an open register and you can find more details from the "]<a href="https://epc.opendatacommunities.org/" target="_blank">@SharedLocalizer["Department for Levelling Up, Housing and Communities"]</a>.
                         </p>
                      </text>;
             }
@@ -44,7 +42,7 @@
                    {
                        Legend = new LegendViewModel
                        {
-                           Text = "What is the address of your property?",
+                           Text = @SharedLocalizer["What is the address of your property?"].Value,
                            Classes = "govuk-fieldset__legend--l",
                            IsPageHeading = true
                        },
@@ -52,7 +50,7 @@
                            @<text>
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "What we do with your address", 
+                                          SummaryText = @SharedLocalizer["What we do with your address"].Value, 
                                           Html = details
                                       })
                         
@@ -60,25 +58,25 @@
                                    m => m.HouseNameOrNumber, 
                                    labelOptions: new LabelViewModel
                                    {
-                                       Text = "Building number or name",
+                                       Text = @SharedLocalizer["Building number or name"].Value,
                                    },
                                    classes: "govuk-input--width-10",
                                    formGroupOptions: new FormGroupViewModel
                                    {
                                        Classes = "govuk-!-margin-bottom-2"
                                    },
-                                   placeholder: "e.g. 19 or Buckingham Palace"
+                                   placeholder: SharedLocalizer["e.g. 19 or Buckingham Palace"].Value
                                    ))
 
                                @(await Html.GovUkTextInputFor(
                                    m => m.Postcode,
                                    labelOptions: new LabelViewModel
                                    {
-                                       Text = "Postcode",
+                                       Text = @SharedLocalizer["Postcode"].Value,
                                    },
                                    classes: "govuk-input--width-10",
 
-                                   placeholder: "e.g. AB12 3CD",
+                                   placeholder: @SharedLocalizer["e.g. AB12 3CD"].Value,
                                    autocomplete: "postal-code"
                                    ))
                             </text>
@@ -87,12 +85,12 @@
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
                 {
-                    Text = "Continue",
+                    Text = @SharedLocalizer["Continue"].Value,
                 }))
                 
                 <!-- We don't want to use the design library component since it adds additional styles we do not want -->
                 <button type="submit" class="sea-button-as-link govuk-link" name="cancel" value="true">
-                    Cancel and continue without an EPC
+                    @SharedLocalizer["Cancel and continue without an EPC"]
                 </button>
             </div>
             

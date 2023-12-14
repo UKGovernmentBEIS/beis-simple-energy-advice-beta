@@ -1,7 +1,9 @@
 ﻿@model SeaPublicWebsite.Models.EnergyEfficiency.DownloadPdfButtonViewModel;
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 <h2 class="govuk-heading-m">
-    Download your information
+    @SharedLocalizer["Download your information"]
 </h2>
 
 @{ await Html.RenderPartialAsync("Partials/_DownloadActionPlan", Model); }

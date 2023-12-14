@@ -5,6 +5,8 @@
 @using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Services
 @using SeaPublicWebsite.Services.Cookies
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @inject StaticAssetsVersioningService StaticAssetsVersioning
 @inject CookieService CookieService
 @inject GoogleAnalyticsService GoogleAnalytics
@@ -90,7 +92,7 @@
         @(await Html.GovUkPhaseBanner(new PhaseBannerViewModel
         {
             Phase = "Beta",
-            Html = @<text>This is a new service – your <a class="govuk-link" href="@ViewBag.FeedbackUrl" target="_blank">feedback (opens in new tab)</a> will help us to improve it.</text>
+            Html = @<text>@SharedLocalizer["This is a new service – your "]<a class="govuk-link" href="@ViewBag.FeedbackUrl" target="_blank">@SharedLocalizer["feedback (opens in new tab)"]</a> @SharedLocalizer["will help us to improve it."]</text>
         }))
 
         @(RenderSection("BeforeMain", false))
@@ -109,22 +111,22 @@
             {
                 new FooterLinksViewModel
                 {
-                    Text = "Contact Us",
+                    Text = @SharedLocalizer["Contact Us"].Value,
                     Href = ViewBag.FeedbackUrl
                 },
                 new FooterLinksViewModel
                 {
-                    Text = "Cookies",
+                    Text = @SharedLocalizer["Cookies"].Value,
                     Href = Url.Action(nameof(CookieController.CookieSettings_Get), "Cookie")
                 },
                 new FooterLinksViewModel
                 {
-                    Text = "Privacy Policy",
+                    Text = @SharedLocalizer["Privacy Policy"].Value,
                     Href = Url.Action(nameof(StaticPagesController.PrivacyPolicy), "StaticPages")
                 },
                 new FooterLinksViewModel
                 {
-                    Text = "Accessibility Statement",
+                    Text = @SharedLocalizer["Accessibility Statement"].Value,
                     Href = Url.Action(nameof(StaticPagesController.AccessibilityStatement), "StaticPages")
                 }
             }

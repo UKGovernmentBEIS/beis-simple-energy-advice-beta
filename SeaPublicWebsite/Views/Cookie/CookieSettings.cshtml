@@ -3,8 +3,11 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Controllers
 @model SeaPublicWebsite.Models.Cookies.CookieSettingsViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+
 @{
-    ViewBag.Title = $"Cookies on our service";
+    ViewBag.Title = @SharedLocalizer[$"Cookies on our service"];
 }
 
 <div class="govuk-grid-row cookie-settings-page">
@@ -13,7 +16,7 @@
         {
             @await Html.GovUkNotificationBanner(new NotificationBannerViewModel
             {
-                Text = "You’ve set your cookie preferences.",
+                Text = SharedLocalizer["You’ve set your cookie preferences."].Value,
                 Type = "success"
             })
         }
@@ -21,27 +24,27 @@
         <form method="POST" action="@Url.Action(nameof(CookieController.CookieSettings_Post), "Cookie")">
             
             @Html.AntiForgeryToken()
-            <h1 class="govuk-heading-xl">Cookies on our service</h1>
-            <p class="govuk-body">Cookies are files saved on your phone, tablet or computer when you visit a website.</p>
-            <p class="govuk-body">We use cookies to store information about how you use our service, such as the pages you visit.</p>
+            <h1 class="govuk-heading-xl">@SharedLocalizer["Cookies on our service test"]</h1>
+            <p class="govuk-body">@SharedLocalizer["Cookies are files saved on your phone, tablet or computer when you visit a website."]</p>
+            <p class="govuk-body">@SharedLocalizer["We use cookies to store information about how you use our service, such as the pages you visit."]</p>
             <p class="govuk-body">
-                This page has a brief explanation of each type of cookie we use. If you want more details,
-                <a href="@Url.Action(nameof(CookieController.CookieDetails), "Cookie")" class="govuk-link"> read our detailed cookie information</a>
+                @SharedLocalizer["This page has a brief explanation of each type of cookie we use. If you want more details,"]
+                <a href="@Url.Action(nameof(CookieController.CookieDetails), "Cookie")" class="govuk-link"> @SharedLocalizer["read our detailed cookie information"]</a>
             </p>
 
-            <h2 class="govuk-heading-l">Cookie settings</h2>
-            <p class="govuk-body">We use 2 types of cookies. You can choose which cookies you're happy for us to use.</p>
+            <h2 class="govuk-heading-l">@SharedLocalizer["Cookie settings"]</h2>
+            <p class="govuk-body">@SharedLocalizer["We use 2 types of cookies. You can choose which cookies you're happy for us to use."]</p>
 
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" aria-describedby="GoogleAnalyticsGpg-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                        <h3 class="govuk-fieldset__heading">Cookies used to make our service better</h3>
+                        <h3 class="govuk-fieldset__heading">@SharedLocalizer["Cookies used to make our service better"]</h3>
                     </legend>
-                    <p class="govuk-body">We use Google Analytics to measure how you use the service so we can improve it based on user needs. Google Analytics sets cookies that store anonymised information about:</p>
+                    <p class="govuk-body">@SharedLocalizer["We use Google Analytics to measure how you use the service so we can improve it based on user needs. Google Analytics sets cookies that store anonymised information about:"]</p>
                     <ul class="govuk-list govuk-list--bullet">
-                        <li>how you got to the site</li>
-                        <li>the pages you visit on the service and how long you spend on them</li>
-                        <li>what you click on while you’re visiting the site</li>
+                        <li>@SharedLocalizer["how you got to the site"]</li>
+                        <li>@SharedLocalizer["the pages you visit on the service and how long you spend on them"]</li>
+                        <li>@SharedLocalizer["what you click on while you’re visiting the site"]</li>
                     </ul>
                     <div class="govuk-radios govuk-radios--inline">
                         <div class="govuk-radios__item">
@@ -72,16 +75,16 @@
                 </fieldset>
             </div>
 
-            <h3 class="govuk-heading-m">Strictly necessary cookies</h3>
+            <h3 class="govuk-heading-m">@SharedLocalizer["Strictly necessary cookies"]</h3>
 
-            <p class="govuk-body">These essential cookies do things like:</p>
+            <p class="govuk-body">@SharedLocalizer["These essential cookies do things like:"]</p>
             <ul class="govuk-list govuk-list--bullet">
-                <li>remember your progress through the service</li>
-                <li>remember notifications you’ve seen so that we don’t show them again</li>
+                <li>@SharedLocalizer["remember your progress through the service"]</li>
+                <li>@SharedLocalizer["remember notifications you’ve seen so that we don’t show them again"]</li>
             </ul>
-            <p class="govuk-body">They always need to be on.</p>
+            <p class="govuk-body">@SharedLocalizer["They always need to be on."]</p>
 
-            <input type="submit" class="govuk-button" data-module="govuk-button" value="Confirm"/>
+            <input type="submit" class="govuk-button" data-module="govuk-button" value=@SharedLocalizer["Confirm"]/>
 
         </form>
 

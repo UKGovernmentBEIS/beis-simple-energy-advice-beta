@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Localization;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 using SeaPublicWebsite.BusinessLogic.Models;
@@ -23,7 +26,7 @@ namespace SeaPublicWebsite.Controllers
 {
     using System.Text.Encodings.Web;
     using System.Web;
-
+    
     [Route("energy-efficiency")]
     public class EnergyEfficiencyController : Controller
     {
@@ -38,7 +41,8 @@ namespace SeaPublicWebsite.Controllers
         private readonly PostcodesIoApi postcodesIoApi;
         private readonly AnswerService answerService;
         private readonly FullHostnameService fullHostnameService;
-
+        private readonly IStringLocalizer<SharedResources> sharedLocalizer;
+        
         public EnergyEfficiencyController(
             PropertyDataStore propertyDataStore,
             IQuestionFlowService questionFlowService, 
@@ -50,7 +54,8 @@ namespace SeaPublicWebsite.Controllers
             PdfGenerationService pdfGenerationService,
             PostcodesIoApi postcodesIoApi,
             AnswerService answerService,
-            FullHostnameService fullHostnameService)
+            FullHostnameService fullHostnameService,
+            IStringLocalizer<SharedResources> sharedLocalizer)
         {
             this.propertyDataStore = propertyDataStore;
             this.questionFlowService = questionFlowService;
@@ -63,11 +68,17 @@ namespace SeaPublicWebsite.Controllers
             this.postcodesIoApi = postcodesIoApi;
             this.answerService = answerService;
             this.fullHostnameService = fullHostnameService;
+            this.sharedLocalizer = sharedLocalizer;
         }
 
         [HttpGet("")]
         public IActionResult Index()
         {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("cy")),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
         
@@ -79,6 +90,11 @@ namespace SeaPublicWebsite.Controllers
             {
                 BackLink = GetBackUrl(QuestionFlowStep.NewOrReturningUser)
             };
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("cy")),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
             return View("NewOrReturningUser", viewModel);
         }
 
@@ -291,7 +307,7 @@ namespace SeaPublicWebsite.Controllers
             }
             else
             {
-                var viewModel = new ConfirmAddressViewModel
+                var viewModel = new ConfirmAddressViewModel(sharedLocalizer)
                 {
                     Reference = reference,
                     EpcSearchResults = epcSearchResults,
@@ -1365,7 +1381,7 @@ namespace SeaPublicWebsite.Controllers
                 }
             }
             
-            var viewModel = new RecommendationViewModel
+            var viewModel = new RecommendationViewModel(sharedLocalizer)
             {
                 Reference = reference,
                 RecommendationIndex = recommendationIndex,
@@ -1485,7 +1501,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
-            var viewModel = new ActionPlanViewModel
+            var viewModel = new ActionPlanViewModel(sharedLocalizer)
             {
                 BackLink = Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference }),
                 PropertyData = propertyData,

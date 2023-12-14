@@ -1,14 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
+using Microsoft.Extensions.Localization;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
+using SeaPublicWebsite.Resources;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class RecommendationViewModel
     {
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Select what to do with this recommendation")]
+        private readonly IStringLocalizer<SharedResources> sharedLocalizer;
+        
+        [GovUkValidateRequired(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = nameof(ErrorMessages.RecommendationActionRequired))]
         public RecommendationAction? RecommendationAction { get; set; }
         public int RecommendationIndex { get; set; }
         public List<PropertyRecommendation> PropertyRecommendations { get; set; }
@@ -16,6 +20,11 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string BackLink { get; set; }
         public string Reference { get; set; }
         public PropertyRecommendation GetCurrentPropertyRecommendation() => PropertyRecommendations[RecommendationIndex];
+
+        public RecommendationViewModel(IStringLocalizer<SharedResources> localizer)
+        {
+            sharedLocalizer = localizer;
+        }
 
         public bool HasPreviousIndex()
         {
@@ -42,7 +51,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string GetTotalSavingText()
         {
             var saving = GetSavedRecommendations().Sum(r => r.Saving);
-            return $"£{saving:N0} a year";
+            return sharedLocalizer[$"£{saving:N0} a year"].Value;
         }
     }
 }

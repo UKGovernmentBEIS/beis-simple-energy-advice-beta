@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.HeatingPatternViewModel
 @{
-    ViewBag.Title = "Heating pattern";
+    ViewBag.Title = @SharedLocalizer["Heating pattern"];
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -28,10 +30,10 @@
                 Func<object, object> details =
                     @<text>
                         <p class="govuk-body">
-                            You may have your heating on through the day but switch it off before you go to sleep at night.
+                            @SharedLocalizer["You may have your heating on through the day but switch it off before you go to sleep at night."]
                         </p>
                         <p class="govuk-body">
-                            Some people may run their heating all night, or for a few hours overnight.
+                            @SharedLocalizer["Some people may run their heating all night, or for a few hours overnight."]
                         </p>
                      </text>;
             }
@@ -40,7 +42,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "In winter, how do you typically heat your home?",
+                        Text = SharedLocalizer["In winter, how do you typically heat your home?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -49,15 +51,15 @@
                 {
                     Html = @<text>
                                <p class="govuk-body">
-                                   We know heating use can vary throughout the year and from one day to the next.
+                                   @SharedLocalizer["We know heating use can vary throughout the year and from one day to the next."]
                                </p>
                                <p class="govuk-body">
-                                   Choose an answer that best resembles an average weekday in winter, or let us know a specific number of hours.
+                                   @SharedLocalizer["Choose an answer that best resembles an average weekday in winter, or let us know a specific number of hours."]
                                </p>
                                
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "Help me answer this question",
+                                          SummaryText = SharedLocalizer["Help me answer this question"].Value,
                                           Html = details
                                       })
                             </text>
@@ -73,17 +75,17 @@
                                                    m => m.HoursOfHeatingMorning,
                                                    new LabelViewModel
                                                    {
-                                                       Text = "Total whole number of hours in the morning (12am until 12pm)"
+                                                       Text = SharedLocalizer["Total whole number of hours in the morning (12am until 12pm)"].Value
                                                    },
-                                                   placeholder: "e.g. 6"
+                                                   placeholder: SharedLocalizer["e.g. 6"].Value
                                                    )
                                         @await Html.GovUkTextInputFor(
                                                    m => m.HoursOfHeatingEvening,
                                                    new LabelViewModel
                                                    {
-                                                       Text = "Total whole number of hours in the afternoon and evening (12pm until 12am)"
+                                                       Text = SharedLocalizer["Total whole number of hours in the afternoon and evening (12pm until 12am)"].Value
                                                    },
-                                                   placeholder: "e.g. 6"
+                                                   placeholder: SharedLocalizer["e.g. 6"].Value
                                                    )
                                      </text>)
                         }
@@ -92,7 +94,7 @@
 
             @(await Html.GovUkButton(new ButtonViewModel
             {
-                Text = "Continue"
+                Text = @SharedLocalizer["Continue"].Value
             }))
 
         </form>

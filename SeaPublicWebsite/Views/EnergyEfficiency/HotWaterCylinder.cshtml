@@ -3,15 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+
 @model SeaPublicWebsite.Models.EnergyEfficiency.HotWaterCylinderViewModel
 @{
-    ViewBag.Title = "Hot water cylinder";
+    ViewBag.Title = @SharedLocalizer["Hot water cylinder"];
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
-        Text = "Back",
+        Text = @SharedLocalizer["Back"].Value,
         Href = Model.BackLink,
     })
 }
@@ -29,11 +32,11 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your home
+                            @SharedLocalizer[$"Your {@Model.Epc.LodgementYear} Energy Performance Certificate suggests your home"]
                             <strong>
                                 @(Model.Epc?.HasHotWaterCylinder switch {
-                                    HasHotWaterCylinder.Yes => "does have a hot water cylinder.",
-                                    HasHotWaterCylinder.No => "does not have a hot water cylinder.",
+                                    HasHotWaterCylinder.Yes => @SharedLocalizer["does have a hot water cylinder."],
+                                    HasHotWaterCylinder.No => @SharedLocalizer["does not have a hot water cylinder."],
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;
@@ -42,7 +45,7 @@
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            Most homes in England and Wales do not have a hot water cylinder.
+                            @SharedLocalizer["Most homes in England and Wales do not have a hot water cylinder."]
                         </p>;
                 }
             }
@@ -52,7 +55,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "Do you have a hot water cylinder?",
+                        Text = @SharedLocalizer["Do you have a hot water cylinder?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -61,10 +64,10 @@
                 {
                     Html = @<text>
                                <p class="govuk-body">
-                                   If you have a combi boiler, you will not have a hot water cylinder.
+                                   @SharedLocalizer["If you have a combi boiler, you will not have a hot water cylinder."]
                                </p>
                                <p class="govuk-body">
-                                   If you’re not sure what a hot water cylinder is, we’ve provided some guidance on this page that could help.
+                                   @SharedLocalizer["If you’re not sure what a hot water cylinder is, we’ve provided some guidance on this page that could help."]
                                </p>
 
                                @await Html.GovUkInsetText(new InsetTextViewModel
@@ -78,7 +81,7 @@
 
             @await Html.GovUkButton(new ButtonViewModel
             {
-                Text = "Continue"
+                Text = @SharedLocalizer["Continue"].Value
             })
             
         </form>
@@ -87,19 +90,17 @@
     <div class="govuk-grid-column-one-third">
         <aside class="app-related-items" role="complementary">
             <h2 class="govuk-heading-m" id="subsection-title">
-                What is a hot water cylinder?
+                @SharedLocalizer["What is a hot water cylinder?"]
             </h2>
             <p class="govuk-body-s">
-                A hot water cylinder, or hot water tank, stores hot water and is separate from your boiler.
+                @SharedLocalizer["A hot water cylinder, or hot water tank, stores hot water and is separate from your boiler."]
             </p>
             <p class="govuk-body-s">
-                If you have a warm tank in an airing cupboard or loft space, it’s likely this is your hot water cylinder.
+                @SharedLocalizer["If you have a warm tank in an airing cupboard or loft space, it’s likely this is your hot water cylinder."]
             </p>
             <img src="/assets/images/hot-water-cylinder-in-cupboard-with-door.svg" alt="" style="max-width: 100%"/>
             <p class="govuk-body-s">
-                Image above is of a typical domestic hot water cylinder.
-                It is a large round cylinder with pipes attached at multiple places.
-                It is separate from the boiler.
+                @SharedLocalizer["Image above is of a typical domestic hot water cylinder. It is a large round cylinder with pipes attached at multiple places. It is separate from the boiler."]
             </p>
         </aside>
         @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")

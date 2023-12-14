@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.LoftAccessViewModel
 @{
-    ViewBag.Title = "Loft access";
+    ViewBag.Title = @SharedLocalizer["Loft access"];
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
-        Text = "Back",
+        Text = @SharedLocalizer["Back"].Value,
         Href = Model.BackLink,
     })
 }
@@ -28,15 +30,15 @@
                 Func<object, object> details = 
                     @<text>
                         <p class="govuk-body">
-                            You may have a loft hatch, access ladder or stairs that could allow an insulation installer to get into the loft space.
+                            @SharedLocalizer["You may have a loft hatch, access ladder or stairs that could allow an insulation installer to get into the loft space."]
                         </p>
                      </text>;
                 
                 Func<object, object> blueBannerHint =
                     @<p class="govuk-body">
-                        Homes of your type typically
+                        @SharedLocalizer["Homes of your type typically"]
                         <strong>
-                            @(Model.HintHaveLoftAndAccess ? "have access to their loft" : "do not have access to their loft.")
+                            @(Model.HintHaveLoftAndAccess ? @SharedLocalizer["have access to their loft"] : @SharedLocalizer["do not have access to their loft."])
                         </strong>
                     </p>;
             }
@@ -46,7 +48,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "Is there access to your loft?",
+                        Text = @SharedLocalizer["Is there access to your loft?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -55,7 +57,7 @@
                 {
                     Html = @<text>
                                <p class="govuk-body">
-                                   You may have a loft hatch, access ladder or stairs that could allow an insulation installer to get into the loft space.
+                                   @SharedLocalizer["You may have a loft hatch, access ladder or stairs that could allow an insulation installer to get into the loft space."]
                                </p>
                                
                                @await Html.GovUkInsetText(new InsetTextViewModel
@@ -69,7 +71,7 @@
 
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = @SharedLocalizer["Continue"].Value
                    })
             
         </form>

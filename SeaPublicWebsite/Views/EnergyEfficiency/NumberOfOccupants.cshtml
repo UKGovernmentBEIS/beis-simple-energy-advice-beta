@@ -2,16 +2,18 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.NumberOfOccupantsViewModel
 @{
-    ViewBag.Title = "Number of occupants";
+    ViewBag.Title = @SharedLocalizer["Number of occupants"];
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -26,18 +28,18 @@
             @{
                 Func<object, object> details =
                     @<p class="govuk-body">
-                        This information allows us to estimate how much energy your household uses.
+                        @SharedLocalizer["This information allows us to estimate how much energy your household uses."]
                     </p>;
                 
                 Func<object, object> hint = 
                     @<text>
                         <p class="govuk-body">
-                            Count all adults and any children normally resident in your home.
+                            @SharedLocalizer["Count all adults and any children normally resident in your home."]
                         </p>
 
                         @await Html.GovUkDetails(new DetailsViewModel
                                {
-                                   SummaryText = "Why do we want to know this?",
+                                   SummaryText = @SharedLocalizer["Why do we want to know this?"].Value,
                                    Html = details
                                })
                      </text>;
@@ -47,7 +49,7 @@
                        m => m.NumberOfOccupants,
                        labelOptions: new LabelViewModel
                        {
-                           Text = "How many people live in your home?",
+                           Text = @SharedLocalizer["How many people live in your home?"].Value,
                            Classes = "govuk-label--l",
                            IsPageHeading = true
                        },
@@ -61,12 +63,12 @@
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
                 {
-                    Text = "Continue"
+                    Text = @SharedLocalizer["Continue"].Value
                 }))
                 
                 <!-- We don't want to use the design library component since it adds additional styles we do not want -->
                 <button type="submit" class="sea-button-as-link govuk-link" name="skip" value="true">
-                    Skip this question
+                    @SharedLocalizer["Skip this question"]
                 </button>
             </div>
             
