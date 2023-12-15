@@ -23,6 +23,7 @@ namespace SeaPublicWebsite.Controllers
 {
     using System.Text.Encodings.Web;
     using System.Web;
+    using Microsoft.EntityFrameworkCore.ChangeTracking;
 
     [Route("energy-efficiency")]
     public class EnergyEfficiencyController : Controller
@@ -257,9 +258,11 @@ namespace SeaPublicWebsite.Controllers
         {
             List<EpcSearchResult> epcSearchResults = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(postcode, number);
             
-            var filteredEpcSearchResults = epcSearchResults.Where(e =>
+            var matchingEpcSearchResults = epcSearchResults.Where(e =>
                 e.Address1.Contains(number, StringComparison.OrdinalIgnoreCase) ||
                 e.Address2.Contains(number, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            var filteredEpcSearchResults = await FilterExpiredEpc(matchingEpcSearchResults);
 
             epcSearchResults = filteredEpcSearchResults.Any() ? filteredEpcSearchResults : epcSearchResults;
 
@@ -1627,6 +1630,36 @@ namespace SeaPublicWebsite.Controllers
                 Controller = controller;
                 Values = values;
             }
+        }
+
+        private async Task<List<EpcSearchResult>> FilterExpiredEpc(List<EpcSearchResult> searchResults)
+        {
+            var expiredEpcIds = await GetExpiredEpcIds(searchResults);
+            return searchResults.Where(result => !expiredEpcIds.Contains(result.EpcId)).ToList();
+        }
+
+        private async Task<List<string>> GetExpiredEpcIds(IEnumerable<EpcSearchResult> searchResults)
+        {
+            var groupings = searchResults.GroupBy(
+                epcSearchResult => new
+                {
+                    epcSearchResult.Address1, 
+                    epcSearchResult.Address2, 
+                    epcSearchResult.Postcode
+                });
+
+            var duplicateGroupings = groupings.Where(grouping => grouping.Count() > 1);
+
+            var duplicates = duplicateGroupings.SelectMany(grouping => grouping);
+
+            var epcDtoPairList = duplicates.Select(async duplicate => new KeyValuePair<string, EpbEpcAssessmentDto>(duplicate.EpcId, await epcApi.GetEpcDtoForId(duplicate.EpcId)));
+
+            var epcDtoPairArray = await Task.WhenAll(epcDtoPairList);
+
+            return epcDtoPairArray
+                .Where(epcDtoPair => !epcDtoPair.Value.IsLatestAssessmentForAddress)
+                .Select(epcDtoPair => epcDtoPair.Key)
+                .ToList();
         }
     }
 }
