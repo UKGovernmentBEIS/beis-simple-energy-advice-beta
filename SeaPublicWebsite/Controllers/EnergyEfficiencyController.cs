@@ -1634,11 +1634,11 @@ namespace SeaPublicWebsite.Controllers
 
         private async Task<List<EpcSearchResult>> FilterExpiredEpc(List<EpcSearchResult> searchResults)
         {
-            var expiredEpcIds = await GetExpiredEpcIds(searchResults);
+            var expiredEpcIds = await GetDuplicateExpiredEpcIds(searchResults);
             return searchResults.Where(result => !expiredEpcIds.Contains(result.EpcId)).ToList();
         }
 
-        private async Task<List<string>> GetExpiredEpcIds(IEnumerable<EpcSearchResult> searchResults)
+        private async Task<List<string>> GetDuplicateExpiredEpcIds(IEnumerable<EpcSearchResult> searchResults)
         {
             var groupings = searchResults.GroupBy(
                 epcSearchResult => new
@@ -1652,9 +1652,9 @@ namespace SeaPublicWebsite.Controllers
 
             var duplicates = duplicateGroupings.SelectMany(grouping => grouping);
 
-            var epcDtoPairList = duplicates.Select(async duplicate => new KeyValuePair<string, EpbEpcAssessmentDto>(duplicate.EpcId, await epcApi.GetEpcDtoForId(duplicate.EpcId)));
+            var epcDtoPairTaskList = duplicates.Select(async duplicate => new KeyValuePair<string, EpbEpcAssessmentDto>(duplicate.EpcId, await epcApi.GetEpcDtoForId(duplicate.EpcId)));
 
-            var epcDtoPairArray = await Task.WhenAll(epcDtoPairList);
+            var epcDtoPairArray = await Task.WhenAll(epcDtoPairTaskList);
 
             return epcDtoPairArray
                 .Where(epcDtoPair => !epcDtoPair.Value.IsLatestAssessmentForAddress)
