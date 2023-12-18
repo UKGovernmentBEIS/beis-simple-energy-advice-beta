@@ -21,9 +21,7 @@ using SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 
 namespace SeaPublicWebsite.Controllers
 {
-    using System.Text.Encodings.Web;
     using System.Web;
-    using Microsoft.EntityFrameworkCore.ChangeTracking;
 
     [Route("energy-efficiency")]
     public class EnergyEfficiencyController : Controller
