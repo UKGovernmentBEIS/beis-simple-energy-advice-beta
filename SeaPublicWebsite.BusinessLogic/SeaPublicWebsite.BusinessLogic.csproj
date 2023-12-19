@@ -11,30 +11,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Resources\EnumDisplay.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>EnumDisplay.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\EnumDisplay.cy.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>EnumDIsplay.cy.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
       <EmbeddedResource Update="Resources\EnumDisplay.cy.resx">
         <LastGenOutput>EnumDisplay.cy.Designer.cs</LastGenOutput>
       </EmbeddedResource>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="Resources\EnumDisplay.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>EnumDisplay.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\EnumDisplay.cy.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>EnumDisplay.cy.resx</DependentUpon>
-      </Compile>
     </ItemGroup>
 
 </Project>

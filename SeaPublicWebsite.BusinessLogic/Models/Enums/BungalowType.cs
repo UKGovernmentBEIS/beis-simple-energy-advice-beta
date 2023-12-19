@@ -14,14 +14,12 @@ namespace SeaPublicWebsite.BusinessLogic.Models.Enums
          * TODO Port the functionality into GovUkRadioCheckboxLabelText & the Databinder Errors
          * https://github.com/cabinetoffice/govuk-design-system-dotnet/blob/master/GovUkDesignSystem/Attributes/DataBinding/GovUkDataBindingMandatoryDecimalErrorTextAttribute.cs
          * https://github.com/cabinetoffice/govuk-design-system-dotnet/blob/4c183fb6eb8f79a3b6f09909286d76326d499cc0/GovUkDesignSystem/Attributes/GovUkRadioCheckboxLabelTextAttribute.cs
-         * TODO Also check that range attributes localise correctly and see if they need changes before. Do we need to put the full string with interpolation placeholders {0} {1} in the resource file?
-         * https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.rangeattribute?view=net-8.0
          * TODO Ask someone how to test the library works how I want it to before I change it for everyone (if poss)
          */
-        [Display(Name = "Detached")]
-        //[Display(Name = nameof(EnumDisplay.Detached), ResourceType = typeof(EnumDisplay))]
+        [Display(ResourceType = typeof(EnumDisplay), Name = nameof(EnumDisplay.Detached))]
         [GovUkRadioCheckboxLabelText(Text = "Detached")]
         Detached,
+        [Display(ResourceType = typeof(EnumDisplay), Name = nameof(EnumDisplay.SemiDetached))]
         [GovUkRadioCheckboxLabelText(Text = "Semi-detached")]
         SemiDetached,
         [GovUkRadioCheckboxLabelText(Text = "Terraced")]

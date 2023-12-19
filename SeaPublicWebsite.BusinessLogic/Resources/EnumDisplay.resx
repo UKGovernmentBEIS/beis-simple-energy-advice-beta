@@ -24,4 +24,7 @@
     <data name="SemiDetached" xml:space="preserve">
         <value>English Semi-Detached</value>
     </data>
+    <data name="Semi-detached" xml:space="preserve">
+        <value>English Semi-Detached</value>
+    </data>
 </root>

@@ -64,7 +64,7 @@
         <value>Enter number of hours in the morning</value>
     </data>
     <data name="NumberOfHoursIntRange" xml:space="preserve">
-        <value>Number of hours</value>
+        <value>Number of hours must be between {1} and {2}</value>
     </data>
     <data name="HeatingSystemRequired" xml:space="preserve">
         <value>Select your main heating system</value>
@@ -91,7 +91,7 @@
         <value>Enter a valid email address</value>
     </data>
     <data name="NumberOfOccupantsIntRange" xml:space="preserve">
-        <value>The number of people who live in the property</value>
+        <value>The number of people who live in the property must be between {1} and {2}.</value>
     </data>
     <data name="OtherHeatingTypeRequired" xml:space="preserve">
         <value>Select your main heating system</value>
@@ -118,7 +118,7 @@
         <value>Select if your solid walls are insulated</value>
     </data>
     <data name="TemperatureDecimalRange" xml:space="preserve">
-        <value>The temperature</value>
+        <value>The temperature must be between {1} and {2}.</value>
     </data>
     <data name="WallConstructionRequired" xml:space="preserve">
         <value>Select wall type</value>

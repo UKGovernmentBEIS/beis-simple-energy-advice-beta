@@ -222,7 +222,7 @@ namespace SeaPublicWebsite.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number of hours.
+        ///   Looks up a localized string similar to Number of hours must be between {1} and {2}.
         /// </summary>
         internal static string NumberOfHoursIntRange {
             get {
@@ -231,7 +231,7 @@ namespace SeaPublicWebsite.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The number of people who live in the property.
+        ///   Looks up a localized string similar to The number of people who live in the property must be between {1} and {2}..
         /// </summary>
         internal static string NumberOfOccupantsIntRange {
             get {
@@ -339,7 +339,7 @@ namespace SeaPublicWebsite.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The temperature.
+        ///   Looks up a localized string similar to The temperature must be between {1} and {2}..
         /// </summary>
         internal static string TemperatureDecimalRange {
             get {

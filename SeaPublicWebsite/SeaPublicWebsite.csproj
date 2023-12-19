@@ -45,14 +45,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Resources\SharedResources.cy.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>SharedResources.cy.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Models\EnergyEfficiency\NewOrReturningUserViewModel.cy.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>NewOrReturningUser.cy.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
       <EmbeddedResource Update="Resources\ErrorMessages.cy.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Errors.cy.Designer.cs</LastGenOutput>
@@ -61,23 +53,22 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\SharedResources.cy.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SharedResources.cy.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Resources\SharedResources.cy.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>SharedResources.cy.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Models\EnergyEfficiency\NewOrReturningUserViewModel.cy.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>NewOrReturningUserViewModel.cy.resx</DependentUpon>
-      </Compile>
       <Compile Update="Resources\ErrorMessages.cy.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>ErrorMessages.cy.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\SharedResources.cy.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>SharedResources.cy.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

@@ -58,23 +58,5 @@ namespace SeaPublicWebsite.Resources {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string Cookies_on_our_service_test {
-            get {
-                return ResourceManager.GetString("Cookies on our service test", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to THIS IS A WELSH EXAMPLE REFERENCE CODE.
-        /// </summary>
-        internal static string Example_reference_code {
-            get {
-                return ResourceManager.GetString("Example reference code", resourceCulture);
-            }
-        }
     }
 }
