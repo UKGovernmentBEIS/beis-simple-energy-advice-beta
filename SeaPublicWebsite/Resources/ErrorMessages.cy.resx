@@ -21,4 +21,64 @@
     <data name="UsedServiceBeforeRequired" xml:space="preserve">
         <value>Welsh Used Service Before</value>
     </data>
+    <data name="AddressRequired" xml:space="preserve">
+        <value>Dewiswch eich cyfeiriad</value>
+    </data>
+    <data name="OwnershipStatusRequired" xml:space="preserve">
+        <value>Dewiswch eich amgylchiadau</value>
+    </data>
+    <data name="OtherHeatingTypeRequired" xml:space="preserve">
+        <value>Dewiswch eich prif system wresogi</value>
+    </data>
+    <data name="HeatingSystemRequired" xml:space="preserve">
+        <value>Dewiswch eich prif system wresogi</value>
+    </data>
+    <data name="RoofConstructionRequired" xml:space="preserve">
+        <value>Dewiswch y math o do</value>
+    </data>
+    <data name="SelectPropertyCountryRequired" xml:space="preserve">
+        <value>Dewiswch ym mha wlad mae�r eiddo</value>
+    </data>
+    <data name="BungalowTypeRequired" xml:space="preserve">
+        <value>Dewiswch y math o fyngalo</value>
+    </data>
+    <data name="FlatTypeRequired" xml:space="preserve">
+        <value>Dewiswch y math o fflat</value>
+    </data>
+    <data name="GlazingTypeRequired" xml:space="preserve">
+        <value>Dewiswch y math o ffenestri</value>
+    </data>
+    <data name="FloorInsulatedRequired" xml:space="preserve">
+        <value>Dewiswch a yw�r llawr wedi�i inswleiddio</value>
+    </data>
+    <data name="RoofInsulatedRequired" xml:space="preserve">
+        <value>Dewiswch a yw�r to wedi�i inswleiddio</value>
+    </data>
+    <data name="CavityWallInsulationRequired" xml:space="preserve">
+        <value>Dewiswch a ydy eich waliau ceudod wedi�u hinswleiddio</value>
+    </data>
+    <data name="LoftAccessRequired" xml:space="preserve">
+        <value>Dewiswch a oes gennych chi fynediad i�r atig</value>
+    </data>
+    <data name="YearBuiltRequired" xml:space="preserve">
+        <value>Dewiswch ym mha flwyddyn y cafodd eich eiddo ei adeiladu</value>
+    </data>
+    <data name="WallConstructionRequired" xml:space="preserve">
+        <value>Dewiswch y math o wal</value>
+    </data>
+    <data name="HasOutdoorSpaceRequired" xml:space="preserve">
+        <value>Dewiswch a oes gennych chi le y tu allan</value>
+    </data>
+    <data name="HasHotWaterCylinderRequired" xml:space="preserve">
+        <value>Dewiswch a oes gennych chi danc dŵr poeth</value>
+    </data>
+    <data name="FloorConstructionTypeRequired" xml:space="preserve">
+        <value>Dewiswch sut mae eich llawr wedi’i adeiladu</value>
+    </data>
+    <data name="PropertyTypeRequired" xml:space="preserve">
+        <value>Dewiswch y math o eiddo</value>
+    </data>
+    <data name="HouseTypeRequired" xml:space="preserve">
+        <value>Dewiswch y math o dŷ</value>
+    </data>
 </root>
