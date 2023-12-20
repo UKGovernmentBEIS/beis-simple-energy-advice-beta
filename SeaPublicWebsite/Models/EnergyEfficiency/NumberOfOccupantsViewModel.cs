@@ -10,7 +10,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     public class NumberOfOccupantsViewModel : QuestionFlowViewModel
     {
         [ModelBinder(typeof(GovUkMandatoryIntBinder))]
-        [GovUkDataBindingMandatoryIntErrorText("Enter the number of people who live in the property", "The number of people who live in the property")] //TODO
+        [GovUkDataBindingMandatoryIntErrorText("Enter the number of people who live in the property", "The number of people who live in the property")] //TODO localise error message
         [Range(minimum:1, maximum:9, ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName= nameof(ErrorMessages.NumberOfOccupantsIntRange))]
         public int? NumberOfOccupants { get; set; }
 
