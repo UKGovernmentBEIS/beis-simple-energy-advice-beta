@@ -1,14 +1,15 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
+using GovUkDesignSystem.Attributes;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum OwnershipStatus
     {
-        [GovUkRadioCheckboxLabelText(Text = "Yes, I own my property and live in it")]
+        [Display(ResourceType = typeof(Resources.Enum.OwnershipStatus), Description = nameof(Resources.Enum.OwnershipStatus.OwnerOccupancy))]
         OwnerOccupancy,
-        [GovUkRadioCheckboxLabelText(Text = "No, I am a tenant")]
+        [Display(ResourceType = typeof(Resources.Enum.OwnershipStatus), Description = nameof(Resources.Enum.OwnershipStatus.PrivateTenancy))]
         PrivateTenancy,
-        [GovUkRadioCheckboxLabelText(Text = "I am the property owner but lease my property to one or more tenants")]
+        [Display(ResourceType = typeof(Resources.Enum.OwnershipStatus), Description = nameof(Resources.Enum.OwnershipStatus.Landlord))]
         Landlord,
     }
 }         

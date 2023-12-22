@@ -1,14 +1,15 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
+using GovUkDesignSystem.Attributes;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum HasHotWaterCylinder
     {
-        [GovUkRadioCheckboxLabelText(Text = "Yes, I have a hot water cylinder")]
+        [Display(ResourceType = typeof(Resources.Enum.HasHotWaterCylinder), Description = nameof(Resources.Enum.HasHotWaterCylinder.Yes))]
         Yes,
-        [GovUkRadioCheckboxLabelText(Text = "No, I do not have a hot water cylinder")]
+        [Display(ResourceType = typeof(Resources.Enum.HasHotWaterCylinder), Description = nameof(Resources.Enum.HasHotWaterCylinder.No))]
         No,
-        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
+        [Display(ResourceType = typeof(Resources.Enum.HasHotWaterCylinder), Description = nameof(Resources.Enum.HasHotWaterCylinder.DoNotKnow))]
         DoNotKnow,
     }
 }

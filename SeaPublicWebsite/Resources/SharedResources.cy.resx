@@ -378,8 +378,8 @@
     <data name="Choose your address" xml:space="preserve">
         <value>Dewiswch eich cyfeiriad</value>
     </data>
-    <data name="Please choose your address if it is listed, otherwise choose ‘My address is not listed here’ (edited) " xml:space="preserve">
-        <value>Dewiswch eich cyfeiriad os yw wedi’i restru, neu dewiswch ‘Nid yw fy nghyfeiriad wedi’i restru yma’ (wedi’i olygu) </value>
+    <data name="Please choose your address if it is listed, otherwise choose ‘My address is not listed here’" xml:space="preserve">
+        <value>Dewiswch eich cyfeiriad os yw wedi’i restru, neu dewiswch ‘Nid yw fy nghyfeiriad wedi’i restru yma’</value>
     </data>
     <data name="0.665972222" xml:space="preserve">
         <value>0.665972222</value>
@@ -395,12 +395,6 @@
     </data>
     <data name="Please confirm that this information about your property is correct. This information cannot be changed later once you continue." xml:space="preserve">
         <value>Cadarnhewch fod yr wybodaeth am eich eiddo yn gywir. Ni fydd modd newid yr wybodaeth hon ar ôl i chi fwrw ymlaen.</value>
-    </data>
-    <data name="Building type " xml:space="preserve">
-        <value>Math o adeilad </value>
-    </data>
-    <data name="Year home was built " xml:space="preserve">
-        <value>Blwyddyn adeiladu’r eiddo </value>
     </data>
     <data name="Is this information correct?" xml:space="preserve">
         <value>Ydy’r wybodaeth hon yn gywir?</value>
@@ -538,7 +532,7 @@
         <value>Oddeutu pa flwyddyn y cafodd eich eiddo ei adeiladu?</value>
     </data>
     <data name="If you are unsure, choose 'I don't know'. We will take a best guess based on other information you provide." xml:space="preserve">
-        <value>Os nad ydych chi’n si?r, dewiswch ‘Ddim yn gwybod’. Byddwn yn gwneud y dyfaliad gorau ar sail yr wybodaeth arall rydych chi’n ei rhoi.</value>
+        <value>Os nad ydych chi’n siŵr, dewiswch ‘Ddim yn gwybod’. Byddwn yn gwneud y dyfaliad gorau ar sail yr wybodaeth arall rydych chi’n ei rhoi.</value>
     </data>
     <data name="Help me answer this question" xml:space="preserve">
         <value>Helpwch fi i ateb y cwestiwn hwn</value>
@@ -579,17 +573,11 @@
     <data name="Your responses to these questions cannot be changed beyond this point without starting again. Please check they are correct before continuing." xml:space="preserve">
         <value>Nid oes modd newid eich atebion i’r cwestiynau hyn yn nes ymlaen heb ddechrau eto. Gwnewch yn si?r eu bod yn gywir cyn bwrw ymlaen.</value>
     </data>
-    <data name="Building type " xml:space="preserve">
-        <value>Math o adeilad </value>
-    </data>
     <data name="Middle floor apartment, flat or maisonette " xml:space="preserve">
         <value>Rhandy, fflat neu fflat deulawr ar y llawr canol </value>
     </data>
     <data name="Change" xml:space="preserve">
         <value>Newid</value>
-    </data>
-    <data name="Year home was built " xml:space="preserve">
-        <value>Blwyddyn adeiladu’r eiddo </value>
     </data>
     <data name="I don't know " xml:space="preserve">
         <value>Ddim yn gwybod </value>
@@ -1132,7 +1120,7 @@
         <value>Os oes gennych foeler cyfun, ni fydd gennych danc d?r poeth.</value>
     </data>
     <data name="If you’re not sure what a hot water cylinder is, we’ve provided some guidance on this page that could help." xml:space="preserve">
-        <value>Os nad ydych chi’n si?r beth yw tanc d?r poeth, rydym wedi cynnwys canllawiau ar y dudalen hon a allai helpu.</value>
+        <value>Os nad ydych chi’n siŵr beth yw tanc d?r poeth, rydym wedi cynnwys canllawiau ar y dudalen hon a allai helpu.</value>
     </data>
     <data name="Your 2013 Energy Performance Certificate suggests your home does have a hot water cylinder." xml:space="preserve">
         <value>Mae eich Tystysgrif Perfformiad Ynni 2013 yn awgrymu bod tanc d?r poeth yn eich cartref.</value>
@@ -3674,5 +3662,13 @@
     </data>
     <data name="If you have any feedback on our service, you can use this link to let us know https://forms.microsoft.com/r/1G63YXE4Qq" xml:space="preserve">
         <value>Os oes gennych chi unrhyw adborth am ein gwasanaeth, gallwch ddefnyddio’r ddolen hon i roi gwybod i ni https://forms.microsoft.com/r/1G63YXE4Qq</value>
+    </data>
+    <data name="Building type" xml:space="preserve">
+        <value>Math o adeilad </value>
+        <comment>Building type</comment>
+    </data>
+    <data name="Year home was built" xml:space="preserve">
+        <value>Blwyddyn adeiladu’r eiddo </value>
+        <comment>Year home was built</comment>
     </data>
 </root>

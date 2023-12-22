@@ -1,16 +1,18 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
+using GovUkDesignSystem.Attributes;
+using SeaPublicWebsite.BusinessLogic.Resources;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum CavityWallsInsulated
     {
-        [GovUkRadioCheckboxLabelText(Text = "Yes, they are all insulated")]
+        [Display(ResourceType = typeof(Resources.Enum.CavityWallsInsulated), Description = nameof(Resources.Enum.CavityWallsInsulated.All))]
         All,
-        [GovUkRadioCheckboxLabelText(Text = "Some are insulated and some not")]
+        [Display(ResourceType = typeof(Resources.Enum.CavityWallsInsulated), Description = nameof(Resources.Enum.CavityWallsInsulated.Some))]
         Some,
-        [GovUkRadioCheckboxLabelText(Text = "No, they are not insulated")]
+        [Display(ResourceType = typeof(Resources.Enum.CavityWallsInsulated), Description = nameof(Resources.Enum.CavityWallsInsulated.No))]
         No,
-        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
+        [Display(ResourceType = typeof(Resources.Enum.CavityWallsInsulated), Description = nameof(Resources.Enum.CavityWallsInsulated.DoNotKnow))]
         DoNotKnow, 
     }
 }

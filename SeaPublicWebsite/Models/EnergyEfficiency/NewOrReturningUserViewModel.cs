@@ -21,9 +21,9 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     
     public enum NewOrReturningUser
     {
-        [GovUkRadioCheckboxLabelText(Text = "No, this is my first visit or I don’t have a reference code")] //TODO also an enum here to change
+        [Display(ResourceType = typeof(Resources.Enum.NewOrReturningUser), Description = nameof(Resources.Enum.NewOrReturningUser.NewUser))] 
         NewUser,
-        [GovUkRadioCheckboxLabelText(Text = "Yes, and I have the 8-character reference code from my previous visit")] //TODO also an enum here to change
+        [Display(ResourceType = typeof(Resources.Enum.NewOrReturningUser), Description = nameof(Resources.Enum.NewOrReturningUser.ReturningUser))] 
         ReturningUser,
     }
 }

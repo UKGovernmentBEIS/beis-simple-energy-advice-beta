@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using GovUkDesignSystem.Attributes;
 using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.Extensions.Localization;
@@ -10,21 +11,13 @@ namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum BungalowType
     {
-        /* TODO Take the functionality from display's class which allows strings to be localised. (The localise string and ResourceType thing)
-         * TODO Port the functionality into GovUkRadioCheckboxLabelText & the Databinder Errors
-         * https://github.com/cabinetoffice/govuk-design-system-dotnet/blob/master/GovUkDesignSystem/Attributes/DataBinding/GovUkDataBindingMandatoryDecimalErrorTextAttribute.cs
-         * https://github.com/cabinetoffice/govuk-design-system-dotnet/blob/4c183fb6eb8f79a3b6f09909286d76326d499cc0/GovUkDesignSystem/Attributes/GovUkRadioCheckboxLabelTextAttribute.cs
-         * TODO Ask someone how to test the library works how I want it to before I change it for everyone (if poss)
-         */
-        [Display(ResourceType = typeof(EnumDisplay), Name = nameof(EnumDisplay.Detached))]
-        [GovUkRadioCheckboxLabelText(Text = "Detached")]
+        [Display(ResourceType = typeof(Resources.Enum.BungalowType), Description = nameof(Resources.Enum.BungalowType.Detached))]
         Detached,
-        [Display(ResourceType = typeof(EnumDisplay), Name = nameof(EnumDisplay.SemiDetached))]
-        [GovUkRadioCheckboxLabelText(Text = "Semi-detached")]
+        [Display(ResourceType = typeof(Resources.Enum.BungalowType), Description = nameof(Resources.Enum.BungalowType.SemiDetached))]
         SemiDetached,
-        [GovUkRadioCheckboxLabelText(Text = "Terraced")]
+        [Display(ResourceType = typeof(Resources.Enum.BungalowType), Description = nameof(Resources.Enum.BungalowType.Terraced))]
         Terraced,
-        [GovUkRadioCheckboxLabelText(Text = "End terrace")]
+        [Display(ResourceType = typeof(Resources.Enum.BungalowType), Description = nameof(Resources.Enum.BungalowType.EndTerrace))]
         EndTerrace
     }
 }

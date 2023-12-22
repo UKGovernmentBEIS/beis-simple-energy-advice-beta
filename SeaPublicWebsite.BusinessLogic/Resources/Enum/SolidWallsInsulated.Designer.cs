@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SeaPublicWebsite.BusinessLogic.Resources {
+namespace SeaPublicWebsite.BusinessLogic.Resources.Enum {
     using System;
     
     
@@ -21,24 +21,24 @@ namespace SeaPublicWebsite.BusinessLogic.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class EnumDisplay_cy {
+    public class SolidWallsInsulated {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal EnumDisplay_cy() {
+        internal SolidWallsInsulated() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SeaPublicWebsite.BusinessLogic.Resources.EnumDisplay.cy", typeof(EnumDisplay_cy).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SeaPublicWebsite.BusinessLogic.Resources.Enum.SolidWallsInsulated", typeof(SolidWallsInsulated).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -50,7 +50,7 @@ namespace SeaPublicWebsite.BusinessLogic.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -60,20 +60,38 @@ namespace SeaPublicWebsite.BusinessLogic.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welsh Detached.
+        ///   Looks up a localized string similar to Yes, they are all insulated.
         /// </summary>
-        public static string Detached {
+        public static string All {
             get {
-                return ResourceManager.GetString("Detached", resourceCulture);
+                return ResourceManager.GetString("All", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welsh Semi-Detached.
+        ///   Looks up a localized string similar to I don&apos;t know.
         /// </summary>
-        public static string SemiDetached {
+        public static string DoNotKnow {
             get {
-                return ResourceManager.GetString("SemiDetached", resourceCulture);
+                return ResourceManager.GetString("DoNotKnow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No, they are not insulated.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Some are insulated and some are not.
+        /// </summary>
+        public static string Some {
+            get {
+                return ResourceManager.GetString("Some", resourceCulture);
             }
         }
     }

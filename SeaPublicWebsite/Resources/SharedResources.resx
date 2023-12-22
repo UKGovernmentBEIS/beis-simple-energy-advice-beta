@@ -373,8 +373,8 @@
     <data name="Choose your address" xml:space="preserve">
         <value>Choose your address</value>
     </data>
-    <data name="Please choose your address if it is listed, otherwise choose ‘My address is not listed here’ (edited) " xml:space="preserve">
-        <value>Please choose your address if it is listed, otherwise choose ‘My address is not listed here’ (edited) </value>
+    <data name="Please choose your address if it is listed, otherwise choose ‘My address is not listed here’" xml:space="preserve">
+        <value>Please choose your address if it is listed, otherwise choose ‘My address is not listed here’</value>
     </data>
     <data name="0.665972222" xml:space="preserve">
         <value>0.665972222</value>
@@ -390,12 +390,6 @@
     </data>
     <data name="Please confirm that this information about your property is correct. This information cannot be changed later once you continue." xml:space="preserve">
         <value>Please confirm that this information about your property is correct. This information cannot be changed later once you continue.</value>
-    </data>
-    <data name="Building type " xml:space="preserve">
-        <value>Building type </value>
-    </data>
-    <data name="Year home was built " xml:space="preserve">
-        <value>Year home was built </value>
     </data>
     <data name="Is this information correct?" xml:space="preserve">
         <value>Is this information correct?</value>
@@ -574,17 +568,11 @@
     <data name="Your responses to these questions cannot be changed beyond this point without starting again. Please check they are correct before continuing." xml:space="preserve">
         <value>Your responses to these questions cannot be changed beyond this point without starting again. Please check they are correct before continuing.</value>
     </data>
-    <data name="Building type " xml:space="preserve">
-        <value>Building type </value>
-    </data>
     <data name="Middle floor apartment, flat or maisonette " xml:space="preserve">
         <value>Middle floor apartment, flat or maisonette </value>
     </data>
     <data name="Change" xml:space="preserve">
         <value>Change</value>
-    </data>
-    <data name="Year home was built " xml:space="preserve">
-        <value>Year home was built </value>
     </data>
     <data name="I don't know " xml:space="preserve">
         <value>I don't know </value>
@@ -3669,5 +3657,13 @@
     </data>
     <data name="If you have any feedback on our service, you can use this link to let us know https://forms.microsoft.com/r/1G63YXE4Qq" xml:space="preserve">
         <value>If you have any feedback on our service, you can use this link to let us know https://forms.microsoft.com/r/1G63YXE4Qq</value>
+    </data>
+    <data name="Building type" xml:space="preserve">
+        <value>Building type</value>
+        <comment>Building type</comment>
+    </data>
+    <data name="Year home was built" xml:space="preserve">
+        <value>Year home was built</value>
+        <comment>Year home was built</comment>
     </data>
 </root>

@@ -1,14 +1,15 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
+using GovUkDesignSystem.Attributes;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum RoofConstruction
     { 
-        [GovUkRadioCheckboxLabelText(Text = "Yes, I only have a flat roof or roofs")]
+        [Display(ResourceType = typeof(Resources.Enum.RoofConstruction), Description = nameof(Resources.Enum.RoofConstruction.Flat))]
         Flat,
-        [GovUkRadioCheckboxLabelText(Text = "Yes, some of my roof is flat and some of my roof is pitched")]
+        [Display(ResourceType = typeof(Resources.Enum.RoofConstruction), Description = nameof(Resources.Enum.RoofConstruction.Mixed))]
         Mixed,
-        [GovUkRadioCheckboxLabelText(Text = "No, I only have a pitched roof or roofs")]
+        [Display(ResourceType = typeof(Resources.Enum.RoofConstruction), Description = nameof(Resources.Enum.RoofConstruction.Pitched))]
         Pitched,
     }
 }

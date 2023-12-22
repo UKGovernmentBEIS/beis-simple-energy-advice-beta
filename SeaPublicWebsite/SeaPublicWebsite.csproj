@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.0-922f9ad" />
+      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.2" />
       <PackageReference Include="GovukNotify" Version="6.0.0" />
       <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="6.0.4" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.13" />
@@ -57,6 +57,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>SharedResources.cy.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\NewOrReturningUser.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>NewOrReturningUser.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -69,6 +73,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>SharedResources.cy.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\NewOrReturningUser.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>NewOrReturningUser.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

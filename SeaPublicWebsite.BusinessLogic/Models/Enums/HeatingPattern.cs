@@ -1,14 +1,15 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
+using GovUkDesignSystem.Attributes;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum HeatingPattern
     {
-        [GovUkRadioCheckboxLabelText(Text = "All day and all night")]
+        [Display(ResourceType = typeof(Resources.Enum.HeatingPattern), Description = nameof(Resources.Enum.HeatingPattern.AllDayAndNight))]
         AllDayAndNight,
-        [GovUkRadioCheckboxLabelText(Text = "All day and off at night")]
+        [Display(ResourceType = typeof(Resources.Enum.HeatingPattern), Description = nameof(Resources.Enum.HeatingPattern.AllDayNotNight))]
         AllDayNotNight,
-        [GovUkRadioCheckboxLabelText (Text = "I'd like to input my hours")]
+        [Display(ResourceType = typeof(Resources.Enum.HeatingPattern), Description = nameof(Resources.Enum.HeatingPattern.Other))]
         Other
     }
 }

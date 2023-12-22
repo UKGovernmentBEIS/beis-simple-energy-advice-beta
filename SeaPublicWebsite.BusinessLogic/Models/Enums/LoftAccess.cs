@@ -1,12 +1,13 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
+using GovUkDesignSystem.Attributes;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum LoftAccess
     {
-        [GovUkRadioCheckboxLabelText(Text = "Yes, there is access to my loft")]
+        [Display(ResourceType = typeof(Resources.Enum.LoftAccess), Description = nameof(Resources.Enum.LoftAccess.Yes))]
         Yes,
-        [GovUkRadioCheckboxLabelText(Text= "No, there is no access to my loft")]
+        [Display(ResourceType = typeof(Resources.Enum.LoftAccess), Description = nameof(Resources.Enum.LoftAccess.No))]
         No,
     }
 }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SeaPublicWebsite.BusinessLogic.Resources {
+namespace SeaPublicWebsite.BusinessLogic.Resources.Enum {
     using System;
     
     
@@ -21,24 +21,24 @@ namespace SeaPublicWebsite.BusinessLogic.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class EnumDisplay {
+    public class RecommendationAction {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal EnumDisplay() {
+        internal RecommendationAction() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SeaPublicWebsite.BusinessLogic.Resources.EnumDisplay", typeof(EnumDisplay).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SeaPublicWebsite.BusinessLogic.Resources.Enum.RecommendationAction", typeof(RecommendationAction).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -50,7 +50,7 @@ namespace SeaPublicWebsite.BusinessLogic.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -60,20 +60,29 @@ namespace SeaPublicWebsite.BusinessLogic.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to English Detached.
+        ///   Looks up a localized string similar to Maybe, but I’d like more information.
         /// </summary>
-        public static string Detached {
+        public static string DecideLater {
             get {
-                return ResourceManager.GetString("Detached", resourceCulture);
+                return ResourceManager.GetString("DecideLater", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to English Semi-Detached.
+        ///   Looks up a localized string similar to No, discard this recommendation.
         /// </summary>
-        public static string SemiDetached {
+        public static string Discard {
             get {
-                return ResourceManager.GetString("SemiDetached", resourceCulture);
+                return ResourceManager.GetString("Discard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes, save this recommendation to my action plan.
+        /// </summary>
+        public static string SaveToActionPlan {
+            get {
+                return ResourceManager.GetString("SaveToActionPlan", resourceCulture);
             }
         }
     }
