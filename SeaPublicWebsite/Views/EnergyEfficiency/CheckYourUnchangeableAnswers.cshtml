@@ -37,7 +37,6 @@
                         @(Model.PropertyData.PropertyType == PropertyType.House ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.HouseType) : null)
                         @(Model.PropertyData.PropertyType == PropertyType.Bungalow ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.BungalowType) : null)
                         @(Model.PropertyData.PropertyType == PropertyType.ApartmentFlatOrMaisonette ? GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.FlatType) : null)
-                        @(GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.PropertyType).ToLower())
                      </text>)
         },
         Actions = new()
