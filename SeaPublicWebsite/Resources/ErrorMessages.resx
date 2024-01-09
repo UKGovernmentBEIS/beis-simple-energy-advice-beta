@@ -19,7 +19,7 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="UsedServiceBeforeRequired" xml:space="preserve">
-        <value>English used service before</value>
+        <value>Select if you have used this service before</value>
     </data>
     <data name="PostcodeRequired" xml:space="preserve">
         <value>Enter a postcode</value>
@@ -91,7 +91,7 @@
         <value>Enter a valid email address</value>
     </data>
     <data name="NumberOfOccupantsIntRange" xml:space="preserve">
-        <value>The number of people who live in the property must be between {1} and {2}.</value>
+        <value>The number of people who live in the property must be between {1} and {2}</value>
     </data>
     <data name="OtherHeatingTypeRequired" xml:space="preserve">
         <value>Select your main heating system</value>
@@ -122,5 +122,14 @@
     </data>
     <data name="WallConstructionRequired" xml:space="preserve">
         <value>Select wall type</value>
+    </data>
+    <data name="NumberOfOccupantsWholeNumber" xml:space="preserve">
+        <value>The number of people who live in the property must be a whole number ENGLISH</value>
+    </data>
+    <data name="NumberOfOccupantsRequired" xml:space="preserve">
+        <value>Enter the number of people who live in the property</value>
+    </data>
+    <data name="NumberOfOccupantsNumber" xml:space="preserve">
+        <value>The number of people who live in the property must be a number</value>
     </data>
 </root>

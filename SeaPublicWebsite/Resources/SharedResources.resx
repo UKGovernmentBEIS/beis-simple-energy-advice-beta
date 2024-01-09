@@ -2879,7 +2879,7 @@
         <value>The number of people who live in the property</value>
     </data>
     <data name="Enter the number of people who live in the property" xml:space="preserve">
-        <value>Enter the number of people who live in the property</value>
+        <value>Enter the number of people who live in the property ENGLISH</value>
     </data>
     <data name="Select your main heating system" xml:space="preserve">
         <value>Select your main heating system</value>
@@ -3665,5 +3665,15 @@
     <data name="Year home was built" xml:space="preserve">
         <value>Year home was built</value>
         <comment>Year home was built</comment>
+    </data>
+    <data name="There is a problem" xml:space="preserve">
+        <value>There is a problem ENGLISH</value>
+        <comment>There is a problem</comment>
+    </data>
+    <data name="The number of people who live in the property must be a whole number" xml:space="preserve">
+        <value>ENGLISH The number of people who live in the property must be a whole number</value>
+    </data>
+    <data name="The number of people who live in the property must be a number" xml:space="preserve">
+        <value>ENGLISH The number of people who live in the property must be a number</value>
     </data>
 </root>

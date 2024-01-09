@@ -18,9 +18,6 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="UsedServiceBeforeRequired" xml:space="preserve">
-        <value>Welsh Used Service Before</value>
-    </data>
     <data name="AddressRequired" xml:space="preserve">
         <value>Dewiswch eich cyfeiriad</value>
     </data>
@@ -37,7 +34,7 @@
         <value>Dewiswch y math o do</value>
     </data>
     <data name="SelectPropertyCountryRequired" xml:space="preserve">
-        <value>Dewiswch ym mha wlad mae�r eiddo</value>
+        <value>Dewiswch ym mha wlad mae’r eiddo</value>
     </data>
     <data name="BungalowTypeRequired" xml:space="preserve">
         <value>Dewiswch y math o fyngalo</value>
@@ -49,16 +46,16 @@
         <value>Dewiswch y math o ffenestri</value>
     </data>
     <data name="FloorInsulatedRequired" xml:space="preserve">
-        <value>Dewiswch a yw�r llawr wedi�i inswleiddio</value>
+        <value>Dewiswch a yw’r llawr wedi’i inswleiddio</value>
     </data>
     <data name="RoofInsulatedRequired" xml:space="preserve">
-        <value>Dewiswch a yw�r to wedi�i inswleiddio</value>
+        <value>Dewiswch a yw’r to wedi’i inswleiddio</value>
     </data>
     <data name="CavityWallInsulationRequired" xml:space="preserve">
-        <value>Dewiswch a ydy eich waliau ceudod wedi�u hinswleiddio</value>
+        <value>Dewiswch a ydy eich waliau ceudod wedi’u hinswleiddio</value>
     </data>
     <data name="LoftAccessRequired" xml:space="preserve">
-        <value>Dewiswch a oes gennych chi fynediad i�r atig</value>
+        <value>Dewiswch a oes gennych chi fynediad i’r atig</value>
     </data>
     <data name="YearBuiltRequired" xml:space="preserve">
         <value>Dewiswch ym mha flwyddyn y cafodd eich eiddo ei adeiladu</value>
@@ -80,5 +77,50 @@
     </data>
     <data name="HouseTypeRequired" xml:space="preserve">
         <value>Dewiswch y math o dŷ</value>
+    </data>
+    <data name="NumberOfOccupantsRequired" xml:space="preserve">
+        <value>Rhowch nifer y bobl sy'n byw yn yr eiddo</value>
+    </data>
+    <data name="NumberOfOccupantsWholeNumber" xml:space="preserve">
+        <value>The number of people who live in the property must be a whole number WELSH</value>
+    </data>
+    <data name="SolidWallsInsulatedRequired" xml:space="preserve">
+        <value>Dewiswch a yw eich waliau solet wedi’u hinswleiddio</value>
+    </data>
+    <data name="ReferenceRequired" xml:space="preserve">
+        <value>Rhowch eich cyfeirnod 8 nod (neu dewiswch yr opsiwn 'Dyma fy ymweliad cyntaf')</value>
+    </data>
+    <data name="RecommendationActionRequired" xml:space="preserve">
+        <value>Dewiswch beth i'w wneud gyda'r argymhelliad hwn</value>
+    </data>
+    <data name="PostcodeRequired" xml:space="preserve">
+        <value>Rhowch y cod post</value>
+    </data>
+    <data name="LoftSpaceRequired" xml:space="preserve">
+        <value>Dewiswch a oes gennych chi le gwag yn y to</value>
+    </data>
+    <data name="HeatingInMorningHoursRequired" xml:space="preserve">
+        <value>Rhowch nifer yr oriau yn y bore</value>
+    </data>
+    <data name="HeatingInAfternoonAndEveningHoursRequired" xml:space="preserve">
+        <value>Rhowch nifer yr oriau yn y prynhawn a gyda’r nos</value>
+    </data>
+    <data name="BuildingNumberOrNameRequired" xml:space="preserve">
+        <value>Rhowch rif neu enw'r adeilad</value>
+    </data>
+    <data name="CertificateBelongsToAddressRequired" xml:space="preserve">
+        <value>Cadarnhewch a yw'r dystysgrif hon yn perthyn i'ch cyfeiriad chi cyn bwrw ymlaen</value>
+    </data>
+    <data name="EmailAddressRequired" xml:space="preserve">
+        <value>Rhowch gyfeiriad e-bost dilys</value>
+    </data>
+    <data name="SearchForEPCConfirmationRequired" xml:space="preserve">
+        <value>Cadarnhewch a hoffech chi chwilio am eich EPC cyn bwrw ymlaen</value>
+    </data>
+    <data name="NumberOfOccupantsNumber" xml:space="preserve">
+        <value>The number of people who live in the property must be a number WELSH</value>
+    </data>
+    <data name="UsedServiceBeforeRequired" xml:space="preserve">
+        <value>Dewiswch a ydych chi wedi defnyddio’r gwasanaeth hwn o'r blaen</value>
     </data>
 </root>

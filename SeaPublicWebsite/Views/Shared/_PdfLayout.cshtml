@@ -1,8 +1,10 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.Localization
 @using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Services
 @inject StaticAssetsVersioningService StaticAssetsVersioning
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @inject FullHostnameService FullHostnameService
 @{
     string assetsPath = "/assets/images";
@@ -49,7 +51,7 @@
         @(RenderSection("BeforeMain", false))
 
         <main class="govuk-main-wrapper" id="main-content" role="main">
-            @(await Html.GovUkErrorSummary(ViewData.ModelState))
+            @(await Html.GovUkErrorSummary(ViewData.ModelState, errorSummaryTitle:SharedLocalizer["There is a problem"].Value))
             @RenderBody()
         </main>
     </div>

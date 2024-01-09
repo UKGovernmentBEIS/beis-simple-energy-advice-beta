@@ -231,11 +231,38 @@ namespace SeaPublicWebsite.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The number of people who live in the property must be between {1} and {2}..
+        ///   Looks up a localized string similar to The number of people who live in the property must be between {1} and {2}.
         /// </summary>
         internal static string NumberOfOccupantsIntRange {
             get {
                 return ResourceManager.GetString("NumberOfOccupantsIntRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of people who live in the property must be a number.
+        /// </summary>
+        internal static string NumberOfOccupantsNumber {
+            get {
+                return ResourceManager.GetString("NumberOfOccupantsNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the number of people who live in the property.
+        /// </summary>
+        internal static string NumberOfOccupantsRequired {
+            get {
+                return ResourceManager.GetString("NumberOfOccupantsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of people who live in the property must be a whole number ENGLISH.
+        /// </summary>
+        internal static string NumberOfOccupantsWholeNumber {
+            get {
+                return ResourceManager.GetString("NumberOfOccupantsWholeNumber", resourceCulture);
             }
         }
         
@@ -348,7 +375,7 @@ namespace SeaPublicWebsite.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to English used service before.
+        ///   Looks up a localized string similar to Select if you have used this service before.
         /// </summary>
         internal static string UsedServiceBeforeRequired {
             get {

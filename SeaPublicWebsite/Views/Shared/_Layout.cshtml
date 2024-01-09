@@ -71,14 +71,14 @@
 
     @{ await Html.RenderPartialAsync("_CookieBanner"); }
 
-    <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
+    <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">@SharedLocalizer["Skip to main content"]</a>
 
     @{
         List<HeaderNavigationViewModel> headerNavigationLinks = new List<HeaderNavigationViewModel>();
 
         @(await Html.GovUkHeader(new HeaderViewModel
         {
-            ServiceName = Constants.SERVICE_NAME,
+            ServiceName = @SharedLocalizer[Constants.SERVICE_NAME].Value,
             AssetsPath = assetsPath,
             HomepageUrl = "https://www.gov.uk",
             ServiceUrl = "/energy-efficiency",
@@ -98,7 +98,7 @@
         @(RenderSection("BeforeMain", false))
 
         <main class="govuk-main-wrapper" id="main-content" role="main">
-            @(await Html.GovUkErrorSummary(ViewData.ModelState))
+            @(await Html.GovUkErrorSummary(ViewData.ModelState, errorSummaryTitle: SharedLocalizer["There is a problem"].Value))
             @RenderBody()
         </main>
     </div>

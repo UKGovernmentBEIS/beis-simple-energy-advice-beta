@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Reflection;
+using System.Resources;
 using GovUkDesignSystem.Attributes.DataBinding;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 using GovUkDesignSystem.ModelBinders;
@@ -10,7 +12,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     public class NumberOfOccupantsViewModel : QuestionFlowViewModel
     {
         [ModelBinder(typeof(GovUkMandatoryIntBinder))]
-        [GovUkDataBindingMandatoryIntErrorText("Enter the number of people who live in the property", "The number of people who live in the property")] //TODO localise error message
+        [GovUkDataBindingMandatoryIntErrorText(nameof(ErrorMessages.NumberOfOccupantsRequired), "The number of people who live in the property", typeof(ErrorMessages), "SeaPublicWebsite.Resources.ErrorMessages", nameof(ErrorMessages.NumberOfOccupantsWholeNumber), nameof(ErrorMessages.NumberOfOccupantsNumber))]
         [Range(minimum:1, maximum:9, ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName= nameof(ErrorMessages.NumberOfOccupantsIntRange))]
         public int? NumberOfOccupants { get; set; }
 

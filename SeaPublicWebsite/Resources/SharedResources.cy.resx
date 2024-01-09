@@ -3671,4 +3671,14 @@
         <value>Blwyddyn adeiladu’r eiddo </value>
         <comment>Year home was built</comment>
     </data>
+    <data name="There is a problem" xml:space="preserve">
+        <value>There is a problem WELSH</value>
+        <comment>There is a problem</comment>
+    </data>
+    <data name="The number of people who live in the property must be a whole number" xml:space="preserve">
+        <value>WELSH The number of people who live in the property must be a whole number</value>
+    </data>
+    <data name="The number of people who live in the property must be a number" xml:space="preserve">
+        <value>WELSH The number of people who live in the property must be a number</value>
+    </data>
 </root>
