@@ -3542,10 +3542,10 @@
         <value>        DraughtproofWindowsAndDoors,</value>
     </data>
     <data name="        HotWaterCylinderInsulation," xml:space="preserve">
-        <value>        HotWaterCylinderInsulation,</value>
+        <value>HotWaterCylinderInsulation,</value>
     </data>
     <data name="        HotWaterCylinderThermostat," xml:space="preserve">
-        <value>        HotWaterCylinderThermostat,</value>
+        <value>HotWaterCylinderThermostat,</value>
     </data>
     <data name="        ReplaceCondensingBoiler," xml:space="preserve">
         <value>        ReplaceCondensingBoiler,</value>
@@ -3675,5 +3675,17 @@
     </data>
     <data name="The number of people who live in the property must be a number" xml:space="preserve">
         <value>ENGLISH The number of people who live in the property must be a number</value>
+    </data>
+    <data name="Confirm" xml:space="preserve">
+        <value>Confirm</value>
+        <comment>Confirm</comment>
+    </data>
+    <data name="Note" xml:space="preserve">
+        <value>Note</value>
+        <comment>Note</comment>
+    </data>
+    <data name="These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings." xml:space="preserve">
+        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings.</value>
+        <comment>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings.</comment>
     </data>
 </root>

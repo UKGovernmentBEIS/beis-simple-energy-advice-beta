@@ -134,6 +134,14 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>ReccomendationKey.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Bre\Enums\BreBuiltForm.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>BreBuiltForm.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Bre\RecommendationService.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>RecommendationService.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -286,6 +294,16 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>ReccomendationKey.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Bre\Enums\BreBuiltForm.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>BreBuiltForm.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Bre\RecommendationService.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>RecommendationService.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

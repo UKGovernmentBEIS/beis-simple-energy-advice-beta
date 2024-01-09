@@ -571,7 +571,7 @@
         <value>Gwiriwch eich atebion cyn bwrw ymlaen</value>
     </data>
     <data name="Your responses to these questions cannot be changed beyond this point without starting again. Please check they are correct before continuing." xml:space="preserve">
-        <value>Nid oes modd newid eich atebion i’r cwestiynau hyn yn nes ymlaen heb ddechrau eto. Gwnewch yn si?r eu bod yn gywir cyn bwrw ymlaen.</value>
+        <value>Nid oes modd newid eich atebion i’r cwestiynau hyn yn nes ymlaen heb ddechrau eto. Gwnewch yn siŵr eu bod yn gywir cyn bwrw ymlaen.</value>
     </data>
     <data name="Middle floor apartment, flat or maisonette " xml:space="preserve">
         <value>Rhandy, fflat neu fflat deulawr ar y llawr canol </value>
@@ -769,7 +769,7 @@
         <value>Gyda choncrid solet yr adeiladwyd llawr gwaelod llawer o gartrefi.</value>
     </data>
     <data name="Older homes are more likely to have suspended timber floors. If you have air bricks or ventilation bricks on the outside wall of your house that are below floor level, you probably have a suspended timber floor." xml:space="preserve">
-        <value>Mae cartrefi h?n yn fwy tebygol o gael lloriau pren crog. Os oes gennych chi frics aer neu frics awyru ar wal allanol eich tŷ sy’n is na lefel y llawr, mae’n debygol mai llawr pren crog sydd gennych.</value>
+        <value>Mae cartrefi hŷn yn fwy tebygol o gael lloriau pren crog. Os oes gennych chi frics aer neu frics awyru ar wal allanol eich tŷ sy’n is na lefel y llawr, mae’n debygol mai llawr pren crog sydd gennych.</value>
     </data>
     <data name="You may have both types, for example, if there’s a modern extension to a pre-1950 property." xml:space="preserve">
         <value>Efallai fod gennych y ddau fath, er enghraifft, os oes estyniad modern ar eiddo cyn-1950.</value>
@@ -1012,10 +1012,10 @@
         <value>Beth yw pwmp gwres?</value>
     </data>
     <data name="A heat pump is a heating technology transferring heat from outside to heat your rooms and hot water." xml:space="preserve">
-        <value>Pwmp gwres yw technoleg gwresogi sy’n trosglwyddo gwres o’r tu allan i wresogi eich ystafelloedd a’ch d?r poeth.</value>
+        <value>Pwmp gwres yw technoleg gwresogi sy’n trosglwyddo gwres o’r tu allan i wresogi eich ystafelloedd a’ch dŵr poeth.</value>
     </data>
     <data name="The most common type in the UK are air-to-water heat pumps, meaning they transfer heat energy in the air to water that is sent to your radiators or underfloor heating, as well as a hot water cylinder for providing hot water." xml:space="preserve">
-        <value>Y math mwyaf cyffredin yn y DU yw pympiau gwres aer-i-dd?r, sy’n golygu eu bod yn trosglwyddo ynni gwres yn yr aer i dd?r sy’n cael ei anfon i’ch rheiddiaduron neu system wresogi dan y llawr, yn ogystal â thanc d?r poeth ar gyfer darparu d?r poeth.</value>
+        <value>Y math mwyaf cyffredin yn y DU yw pympiau gwres aer-i-ddŵr, sy’n golygu eu bod yn trosglwyddo ynni gwres yn yr aer i ddŵr sy’n cael ei anfon i’ch rheiddiaduron neu system wresogi dan y llawr, yn ogystal â thanc dŵr poeth ar gyfer darparu dŵr poeth.</value>
     </data>
     <data name="Homes of your type typically have some outdoor space that could fit a heat pump." xml:space="preserve">
         <value>Fel arfer mae gan gartrefi o’ch math chi rywfaint o le y tu allan lle gellir gosod pwmp gwres.</value>
@@ -1114,43 +1114,43 @@
         <value>Ddim yn gwybod</value>
     </data>
     <data name="Do you have a hot water cylinder?" xml:space="preserve">
-        <value>Oes gennych chi danc d?r poeth?</value>
+        <value>Oes gennych chi danc dŵr poeth?</value>
     </data>
     <data name="If you have a combi boiler, you will not have a hot water cylinder." xml:space="preserve">
-        <value>Os oes gennych foeler cyfun, ni fydd gennych danc d?r poeth.</value>
+        <value>Os oes gennych foeler cyfun, ni fydd gennych danc dŵr poeth.</value>
     </data>
     <data name="If you’re not sure what a hot water cylinder is, we’ve provided some guidance on this page that could help." xml:space="preserve">
-        <value>Os nad ydych chi’n siŵr beth yw tanc d?r poeth, rydym wedi cynnwys canllawiau ar y dudalen hon a allai helpu.</value>
+        <value>Os nad ydych chi’n siŵr beth yw tanc dŵr poeth, rydym wedi cynnwys canllawiau ar y dudalen hon a allai helpu.</value>
     </data>
     <data name="Your 2013 Energy Performance Certificate suggests your home does have a hot water cylinder." xml:space="preserve">
-        <value>Mae eich Tystysgrif Perfformiad Ynni 2013 yn awgrymu bod tanc d?r poeth yn eich cartref.</value>
+        <value>Mae eich Tystysgrif Perfformiad Ynni 2013 yn awgrymu bod tanc dŵr poeth yn eich cartref.</value>
     </data>
     <data name="Your 2013 Energy Performance Certificate suggests your home does not have a hot water cylinder." xml:space="preserve">
-        <value>Mae eich Tystysgrif Perfformiad Ynni 2013 yn awgrymu nad oes tanc d?r poeth yn eich cartref.</value>
+        <value>Mae eich Tystysgrif Perfformiad Ynni 2013 yn awgrymu nad oes tanc dŵr poeth yn eich cartref.</value>
     </data>
     <data name="Yes, I have a hot water cylinder" xml:space="preserve">
-        <value>Oes, mae gen i danc d?r poeth</value>
+        <value>Oes, mae gen i danc dŵr poeth</value>
     </data>
     <data name="No, I do not have a hot water cylinder" xml:space="preserve">
-        <value>Nag oes, does gen i ddim tanc d?r poeth</value>
+        <value>Nag oes, does gen i ddim tanc dŵr poeth</value>
     </data>
     <data name="I don't know" xml:space="preserve">
         <value>Ddim yn gwybod</value>
     </data>
     <data name="Most homes in England and Wales do not have a hot water cylinder." xml:space="preserve">
-        <value>Does gan y rhan fwyaf o gartrefi yng Nghymru a Lloegr ddim tanc d?r poeth.</value>
+        <value>Does gan y rhan fwyaf o gartrefi yng Nghymru a Lloegr ddim tanc dŵr poeth.</value>
     </data>
     <data name="What is a hot water cylinder?" xml:space="preserve">
-        <value>Beth yw tanc d?r poeth?</value>
+        <value>Beth yw tanc dŵr poeth?</value>
     </data>
     <data name="A hot water cylinder, or hot water tank, stores hot water and is separate from your boiler." xml:space="preserve">
-        <value>Mae tanc, neu silindr, d?r poeth yn storio d?r poeth ac mae ar wahân i’ch boeler.</value>
+        <value>Mae tanc, neu silindr, dŵr poeth yn storio dŵr poeth ac mae ar wahân i’ch boeler.</value>
     </data>
     <data name="If you have a warm tank in an airing cupboard or loft space, it’s likely this is your hot water cylinder." xml:space="preserve">
-        <value>Os oes tanc cynnes mewn cwpwrdd crasu neu ofod atig mae'n debygol mai hwn yw eich tanc d?r poeth.</value>
+        <value>Os oes tanc cynnes mewn cwpwrdd crasu neu ofod atig mae'n debygol mai hwn yw eich tanc dŵr poeth.</value>
     </data>
     <data name="Image above is of a typical domestic hot water cylinder. It is a large round cylinder with pipes attached at multiple places. It is separate from the boiler." xml:space="preserve">
-        <value>Mae’r llun uchod yn dangos tanc d?r poeth domestig nodweddiadol. Mae’n silindr crwn mawr gyda phibellau’n sownd mewn sawl lle. Mae ar wahân i’r boeler.</value>
+        <value>Mae’r llun uchod yn dangos tanc dŵr poeth domestig nodweddiadol. Mae’n silindr crwn mawr gyda phibellau’n sownd mewn sawl lle. Mae ar wahân i’r boeler.</value>
     </data>
     <data name="What is your main heating system?" xml:space="preserve">
         <value>Beth yw eich prif system wresogi?</value>
@@ -1357,7 +1357,7 @@
         <value>Hoffech chi gael e-bost â’r manylion uchod?</value>
     </data>
     <data name="We will send you a link to your recommendations and your reference code so you can quickly get back when you need to. If you do not wish to provide an email, make sure you make a note of your reference code." xml:space="preserve">
-        <value>Byddwn yn anfon dolen i’ch argymhellion atoch ynghyd â’ch cyfeirnod fel bod modd i chi ddod yn ôl yn gyflym pan fydd angen. Os nad ydych yn dymuno rhoi e-bost, gwnewch yn si?r eich bod yn gwneud nodyn o’ch cyfeirnod.</value>
+        <value>Byddwn yn anfon dolen i’ch argymhellion atoch ynghyd â’ch cyfeirnod fel bod modd i chi ddod yn ôl yn gyflym pan fydd angen. Os nad ydych yn dymuno rhoi e-bost, gwnewch yn siŵr eich bod yn gwneud nodyn o’ch cyfeirnod.</value>
     </data>
     <data name="Yes, email a link and the reference code to me" xml:space="preserve">
         <value>Hoffwn, e-bostiwch ddolen a’r cyfeirnod ataf</value>
@@ -1768,7 +1768,7 @@
         <value>Gosod pwmp gwres</value>
     </data>
     <data name="A heat pump is a low carbon heating system and is much more efficient than a boiler. Rather than burning a fuel like gas or oil, it uses electricity to transfer heat from outside to heat your rooms and hot water." xml:space="preserve">
-        <value>Mae pwmp gwres yn system wresogi carbon isel ac mae’n llawer mwy effeithlon na boeler. Yn hytrach na llosgi tanwydd fel nwy neu olew, mae’n defnyddio trydan i drosglwyddo gwres o’r tu allan i wresogi eich ystafelloedd a’ch d?r poeth.</value>
+        <value>Mae pwmp gwres yn system wresogi carbon isel ac mae’n llawer mwy effeithlon na boeler. Yn hytrach na llosgi tanwydd fel nwy neu olew, mae’n defnyddio trydan i drosglwyddo gwres o’r tu allan i wresogi eich ystafelloedd a’ch dŵr poeth.</value>
     </data>
     <data name="Heat pumps are suitable for many homes, will cut your carbon emissions and there are grants available through the Boiler Upgrade Scheme for air source heat pumps and ground source heat pumps to reduce the upfront cost." xml:space="preserve">
         <value>###############################################################################################################################################################################################################################################################</value>
@@ -2014,7 +2014,7 @@
         <value>Dylech ystyried y gwelliant hwn ar gyfer eich eiddo:</value>
     </data>
     <data name="You have older, manually controlled storage heaters" xml:space="preserve">
-        <value>Os oes gennych wresogyddion storio h?n rydych chi’n eu rheoli eich hun</value>
+        <value>Os oes gennych wresogyddion storio hŷn rydych chi’n eu rheoli eich hun</value>
     </data>
     <data name="What you could save" xml:space="preserve">
         <value>Faint allech chi ei arbed</value>
@@ -2050,7 +2050,7 @@
         <value>Os ydych chi’n teimlo’n gyfforddus yn gwneud hyn eich hun, gallwch brynu siaced Safon Brydeinig o’r rhan fwyaf o siopau DIY a’i rhoi’n daclus o amgylch y tanc. Bydd gan y siacedi hyn osodiadau cryf a gorchudd gwrth-fflam.</value>
     </data>
     <data name="You may also want to consider using foam collars around any exposed hot water pipes to save even more energy." xml:space="preserve">
-        <value>Efallai y byddwch hefyd yn dymuno ystyried defnyddio coleri ewyn o amgylch unrhyw bibellau d?r poeth agored i arbed mwy fyth o ynni.</value>
+        <value>Efallai y byddwch hefyd yn dymuno ystyried defnyddio coleri ewyn o amgylch unrhyw bibellau dŵr poeth agored i arbed mwy fyth o ynni.</value>
     </data>
     <data name="You can find more information on solid wall insulation on the" xml:space="preserve">
         <value>Cewch ragor o wybodaeth am ddeunydd inswleiddio waliau solet ar</value>
@@ -2062,13 +2062,13 @@
         <value>Argymhelliad yn addas ar gyfer</value>
     </data>
     <data name="You have a hot water cylinder that isn’t factory insulated or has less than 80 mm thick insulating jacket" xml:space="preserve">
-        <value>Mae gennych danc d?r poeth sydd heb ei inswleiddio yn y ffatri neu sydd â siaced inswleiddio sy’n llai na 80mm o drwch</value>
+        <value>Mae gennych danc dŵr poeth sydd heb ei inswleiddio yn y ffatri neu sydd â siaced inswleiddio sy’n llai na 80mm o drwch</value>
     </data>
     <data name="Recommendation Lifetime" xml:space="preserve">
         <value>Oes a Argymhellir</value>
     </data>
     <data name="Insulating hot water cylinder jackets typically last around 5 years" xml:space="preserve">
-        <value>Disgwylir i siacedi tanciau d?r poeth tua 5 mlynedd fel arfer</value>
+        <value>Disgwylir i siacedi tanciau dŵr poeth tua 5 mlynedd fel arfer</value>
     </data>
     <data name="You may well need to fit new or additional controls when you fit a new gas boiler to comply with building regulations. These will help to maximise the system’s efficiency, saving you even more money." xml:space="preserve">
         <value>Efallai y bydd angen i chi osod rheolaethau newydd neu ychwanegol pan fyddwch yn gosod boeler nwy newydd i gydymffurfio â'r rheoliadau adeiladu. Bydd y rhain yn helpu i wneud y system mor effeithlon â phosibl, gan arbed hyd yn oed mwy o arian i chi.</value>
@@ -2155,7 +2155,7 @@
         <value>Gosod pwmp gwres</value>
     </data>
     <data name="Heat pumps use the energy outside to heat your home and hot water" xml:space="preserve">
-        <value>Mae pympiau gwres yn defnyddio’r ynni y tu allan i wresogi eich cartref a’ch d?r poeth</value>
+        <value>Mae pympiau gwres yn defnyddio’r ynni y tu allan i wresogi eich cartref a’ch dŵr poeth</value>
     </data>
     <data name="- - Revisit recommendation" xml:space="preserve">
         <value>- - Ailedrych ar yr argymhelliad</value>
@@ -2335,7 +2335,7 @@
         <value>Inswleiddio’r llawr gwaelod</value>
     </data>
     <data name="Insulate your hot water cylinder" xml:space="preserve">
-        <value>Inswleiddio eich tanc d?r poeth</value>
+        <value>Inswleiddio eich tanc dŵr poeth</value>
     </data>
     <data name="Upgrade your heating controls" xml:space="preserve">
         <value>Uwchraddio eich rheolaethau gwresogi</value>
@@ -2497,10 +2497,10 @@
         <value>Heb ganfod y dudalen</value>
     </data>
     <data name="If you typed the web address, check it is correct." xml:space="preserve">
-        <value>Os oeddech chi wedi teipio’r cyfeiriad gwe, gwnewch yn si?r ei fod yn gywir.</value>
+        <value>Os oeddech chi wedi teipio’r cyfeiriad gwe, gwnewch yn siŵr ei fod yn gywir.</value>
     </data>
     <data name="If you pasted the web address, check you copied the entire address." xml:space="preserve">
-        <value>Os oeddech chi wedi gludo’r cyfeiriad gwe, gwnewch yn si?r eich bod wedi copïo’r cyfeiriad cyfan.</value>
+        <value>Os oeddech chi wedi gludo’r cyfeiriad gwe, gwnewch yn siŵr eich bod wedi copïo’r cyfeiriad cyfan.</value>
     </data>
     <data name="If the web address is correct or you selected a link or button, contact our digital support assistants if you need to speak to someone." xml:space="preserve">
         <value>Os yw’r cyfeiriad gwe yn gywir neu os oeddech chi wedi dewis dolen neu fotwm, cysylltwch â’n cynorthwywyr cymorth digidol os hoffech chi siarad â rhywun.</value>
@@ -2761,7 +2761,7 @@
         <value>E-bost: casework@ico.org.uk</value>
     </data>
     <data name="Any complaint to the Information Commissioner is without prejudice to your right to seek redress through the courts." xml:space="preserve">
-        <value>Ni fydd unrhyw g?yn i’r Comisiynydd Gwybodaeth yn rhagfarnu ar eich hawl i geisio gwneud yn iawn drwy’r llysoedd.</value>
+        <value>Ni fydd unrhyw gŵyn i’r Comisiynydd Gwybodaeth yn rhagfarnu ar eich hawl i geisio gwneud yn iawn drwy’r llysoedd.</value>
     </data>
     <data name="Contact Details" xml:space="preserve">
         <value>Manylion Cyswllt</value>
@@ -2854,10 +2854,10 @@
         <value>Dewiswch ym mha flwyddyn y cafodd eich eiddo ei adeiladu</value>
     </data>
     <data name="Select whether you have a hot water cylinder" xml:space="preserve">
-        <value>Dewiswch a oes gennych chi danc d?r poeth</value>
+        <value>Dewiswch a oes gennych chi danc dŵr poeth</value>
     </data>
     <data name="Select house type" xml:space="preserve">
-        <value>Dewiswch y math o d?</value>
+        <value>Dewiswch y math o dŷ</value>
     </data>
     <data name="Select if you have loft access" xml:space="preserve">
         <value>Dewiswch a oes gennych chi fynediad i’r atig</value>
@@ -2983,10 +2983,10 @@
         <value>Oed yr eiddo</value>
     </data>
     <data name="Hot water cylinder" xml:space="preserve">
-        <value>Tanc d?r poeth</value>
+        <value>Tanc dŵr poeth</value>
     </data>
     <data name="House type" xml:space="preserve">
-        <value>Math o d?</value>
+        <value>Math o dŷ</value>
     </data>
     <data name="Energy Efficiency Questionnaire" xml:space="preserve">
         <value>Holiadur Effeithlonrwydd Ynni</value>
@@ -3481,7 +3481,7 @@
         <value>    MathArallSystemWresogi,</value>
     </data>
     <data name="    HotWaterCylinder," xml:space="preserve">
-        <value>    TancD?rPoeth,</value>
+        <value>    TancDŵrPoeth,</value>
     </data>
     <data name="    NumberOfOccupants," xml:space="preserve">
         <value>    NiferPreswylwyr,</value>
@@ -3547,10 +3547,10 @@
         <value>        AtalDrafftiauFfenestriADrysau,</value>
     </data>
     <data name="        HotWaterCylinderInsulation," xml:space="preserve">
-        <value>        InswleiddioTancD?rPoeth,</value>
+        <value>InswleiddioTancDŵrPoeth,</value>
     </data>
     <data name="        HotWaterCylinderThermostat," xml:space="preserve">
-        <value>        ThermostatTancD?rPoeth,</value>
+        <value>ThermostatTancDŵrPoeth,</value>
     </data>
     <data name="        ReplaceCondensingBoiler," xml:space="preserve">
         <value>        AmnewidBoelerCyddwyso,</value>
@@ -3562,7 +3562,7 @@
         <value>        GwresogyddionStôrCadwGwresUchel,</value>
     </data>
     <data name="        SolarWaterHeating," xml:space="preserve">
-        <value>        GwresogiD?rSolar,</value>
+        <value>        GwresogiDŵrSolar,</value>
     </data>
     <data name="        MixerShowerHeatRecoverySystem," xml:space="preserve">
         <value>        SystemAdferGwresCawodyddCymysgu,</value>
@@ -3680,5 +3680,17 @@
     </data>
     <data name="The number of people who live in the property must be a number" xml:space="preserve">
         <value>WELSH The number of people who live in the property must be a number</value>
+    </data>
+    <data name="Confirm" xml:space="preserve">
+        <value>WELSH Confirm</value>
+        <comment>Confirm</comment>
+    </data>
+    <data name="Note" xml:space="preserve">
+        <value>Sylwer</value>
+        <comment>Note</comment>
+    </data>
+    <data name="These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings." xml:space="preserve">
+        <value>Mae’r ffigurau hyn ar gyfer gosodiad arferol mewn cartref fel eich un chi. Bydd eich amgylchiadau, manylion y gosodiadau a phrisiau ynni yn effeithio ar y costau a’r arbedion a welwch. Mae’r arbedion a ddangosir yn seiliedig ar y cap ar brisiau ynni ym mis Hydref 2022. Wrth i brisiau ynni newid, felly bydd yr amcangyfrifon o arbedion.</value>
+        <comment>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings.</comment>
     </data>
 </root>

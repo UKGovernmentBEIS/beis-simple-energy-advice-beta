@@ -1,0 +1,63 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="SummaryFloorInsulationSuspendedFloor" xml:space="preserve">
+        <value>Inswleiddio’r llawr gwaelod</value>
+    </data>
+    <data name="SummaryHighHeatRetentionStorageHeaters" xml:space="preserve">
+        <value>Uwchraddio i wresogyddion stôr sy’n cadw gwres uchel</value>
+    </data>
+    <data name="SummaryHotWaterCylinderInsulation" xml:space="preserve">
+        <value>Inswleiddio eich tanc dŵr poeth</value>
+    </data>
+    <data name="SummaryInstallHeatPump" xml:space="preserve">
+        <value>Mae pympiau gwres yn defnyddio’r ynni y tu allan i wresogi eich cartref a’ch dŵr poeth</value>
+    </data>
+    <data name="TitleFloorInsulationSuspendedFloor" xml:space="preserve">
+        <value>Inswleiddio’r llawr gwaelod</value>
+    </data>
+    <data name="TitleHighHeatRetentionStorageHeaters" xml:space="preserve">
+        <value>Uwchraddio i wresogyddion stôr sy’n cadw gwres uchel</value>
+    </data>
+    <data name="TitleSolarElectricPanels" xml:space="preserve">
+        <value>Gosod paneli trydan solar</value>
+    </data>
+    <data name="TitleReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing" xml:space="preserve">
+        <value>Gosod ffenestri newydd</value>
+    </data>
+    <data name="TitleInstallHeatPump" xml:space="preserve">
+        <value>Gosod pwmp gwres</value>
+    </data>
+    <data name="TitleUpgradeHeatingControls" xml:space="preserve">
+        <value>Uwchraddio eich rheolaethau gwresogi</value>
+    </data>
+    <data name="TitleHotWaterCylinderInsulation" xml:space="preserve">
+        <value>Inswleiddio eich tanc dŵr poeth
+</value>
+    </data>
+    <data name="TitleInsulateSolidWalls" xml:space="preserve">
+        <value>Inswleiddio eich waliau solet</value>
+    </data>
+    <data name="TitleInsulateSolidWallsOther" xml:space="preserve">
+        <value>Inswleiddio eich waliau solet</value>
+    </data>
+    <data name="TitleInsulateCavityWalls" xml:space="preserve">
+        <value>Inswleiddio eich waliau ceudod</value>
+    </data>
+    <data name="TitleInsulateYourLoft" xml:space="preserve">
+        <value>Inswleiddio eich atig</value>
+    </data>
+    <data name="TitleAddLoftInsulation" xml:space="preserve">
+        <value>Ychwanegu mwy o ddeunydd inswleiddio atig</value>
+    </data>
+</root>

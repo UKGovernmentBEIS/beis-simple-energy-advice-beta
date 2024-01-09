@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="TitleAddLoftInsulation" xml:space="preserve">
+        <value>Add some more loft insulation</value>
+    </data>
+    <data name="SummaryAddLoftInsulation" xml:space="preserve">
+        <value>Increase the level of insulation in your loft to the recommended level of 300mm</value>
+    </data>
+    <data name="TitleInsulateYourLoft" xml:space="preserve">
+        <value>Insulate your loft</value>
+    </data>
+    <data name="SummaryInsulateYourLoft" xml:space="preserve">
+        <value>Add loft insulation to reach the recommended level of 300mm</value>
+    </data>
+    <data name="TitleInsulateCavityWalls" xml:space="preserve">
+        <value>Insulate your cavity walls</value>
+    </data>
+    <data name="SummaryInsulateCavityWalls" xml:space="preserve">
+        <value>Inject insulation into the cavity in your external walls</value>
+    </data>
+    <data name="TitleInsulateSolidWalls" xml:space="preserve">
+        <value>Insulate your solid walls</value>
+    </data>
+    <data name="SummaryInsulateSolidWalls" xml:space="preserve">
+        <value>Insulate your solid walls (brick walls age A-D)</value>
+    </data>
+    <data name="TitleInsulateSolidWallsOther" xml:space="preserve">
+        <value>Insulate your solid walls</value>
+    </data>
+    <data name="SummaryInsulateSolidWallsOther" xml:space="preserve">
+        <value>Insulate your solid walls (other wall types)</value>
+    </data>
+    <data name="TitleFloorInsulationSuspendedFloor" xml:space="preserve">
+        <value>Insulate the ground floor</value>
+    </data>
+    <data name="SummaryFloorInsulationSuspendedFloor" xml:space="preserve">
+        <value>Insulate the ground floor</value>
+    </data>
+    <data name="TitleHotWaterCylinderInsulation" xml:space="preserve">
+        <value>Insulate your hot water cylinder</value>
+    </data>
+    <data name="SummaryHotWaterCylinderInsulation" xml:space="preserve">
+        <value>Insulate your hot water cylinder</value>
+    </data>
+    <data name="TitleUpgradeHeatingControls" xml:space="preserve">
+        <value>Upgrade your heating controls</value>
+    </data>
+    <data name="SummaryUpgradeHeatingControls" xml:space="preserve">
+        <value>Fit a programmer, thermostat and thermostatic radiator valves</value>
+    </data>
+    <data name="TitleHighHeatRetentionStorageHeaters" xml:space="preserve">
+        <value>Upgrade to high heat retention storage heaters</value>
+    </data>
+    <data name="SummaryHighHeatRetentionStorageHeaters" xml:space="preserve">
+        <value>Upgrade to high heat retention storage heaters</value>
+    </data>
+    <data name="TitleReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing" xml:space="preserve">
+        <value>Fit new windows</value>
+    </data>
+    <data name="SummaryReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing" xml:space="preserve">
+        <value>Replace old single glazed windows with new double or triple glazing</value>
+    </data>
+    <data name="TitleSolarElectricPanels" xml:space="preserve">
+        <value>Fit solar electric panels</value>
+    </data>
+    <data name="SummarySolarElectricPanels" xml:space="preserve">
+        <value>Install PV panels on your roof to generate electricity</value>
+    </data>
+    <data name="TitleInstallHeatPump" xml:space="preserve">
+        <value>Install a heat pump</value>
+    </data>
+    <data name="SummaryInstallHeatPump" xml:space="preserve">
+        <value>Heat pumps use the energy outside to heat your home and hot water</value>
+    </data>
+</root>

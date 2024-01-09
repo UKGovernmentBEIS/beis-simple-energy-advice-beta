@@ -2,7 +2,7 @@
 
 public enum QuestionFlowStep
 {
-    Start, //TODO Localise further
+    Start,
     NewOrReturningUser,
     Country,
     OwnershipStatus,
