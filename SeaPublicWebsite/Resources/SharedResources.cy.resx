@@ -21,8 +21,8 @@
     <data name="Find energy improvements suitable for your home" xml:space="preserve">
         <value>Darganfod gwelliannau ynni sy’n addas ar gyfer eich cartref</value>
     </data>
-    <data name="Get advice on which home improvements could be installed by you or a" xml:space="preserve">
-        <value>Cael cyngor ar ba welliannau i’r cartref y gallech chi neu</value>
+    <data name="Get advice on which home improvements could be installed by you or a tradesperson to improve the energy efficiency of your home." xml:space="preserve">
+        <value>Cael cyngor ar ba welliannau i’r cartref y gallech chi neu grefftwr eu gwneud i wella effeithlonrwydd ynni eich cartref.</value>
     </data>
     <data name="tradesperson to improve the energy efficiency of your home." xml:space="preserve">
         <value>grefftwr eu gwneud i wella effeithlonrwydd ynni eich cartref.</value>
@@ -33,11 +33,11 @@
     <data name="This service is for people who own their own property in England and Wales." xml:space="preserve">
         <value>Gwasanaeth yw hwn ar gyfer pobl sy’n berchen ar eu heiddo eu hunain yng Nghymru a Lloegr.</value>
     </data>
-    <data name="If you live in Scotland, visit Home Energy Scotland to help you find ways to reduce your energy bills." xml:space="preserve">
-        <value>Os ydych chi’n byw yn yr Alban, ewch i Home Energy Scotland i ddod o hyd i ffyrdd o leihau eich biliau ynni.</value>
+    <data name="IfUserInScotlandHomeEnergyScotlandLinkString" xml:space="preserve">
+        <value>Os ydych chi’n byw yn yr Alban, ewch i &lt;a class="govuk-link" href="https://www.homeenergyscotland.org/" target="_blank"&gt;Home Energy Scotland&lt;/a&gt; i ddod o hyd i ffyrdd o leihau eich biliau ynni.</value>
     </data>
-    <data name="If you live in Northern Ireland, visit NI Direct for help." xml:space="preserve">
-        <value>Os ydych chi'n byw yng Ngogledd Iwerddon, ewch i wefan NI Direct i gael cymorth.</value>
+    <data name="IfYouLiveInNIVisitNIDirectString" xml:space="preserve">
+        <value>Os ydych chi'n byw yng Ngogledd Iwerddon, ewch i wefan &lt;a class="govuk-link" href="https://www.nidirect.gov.uk/" target="_blank"&gt;NI Direct&lt;/a&gt; i gael cymorth.</value>
     </data>
     <data name="What you get from this service" xml:space="preserve">
         <value>Beth rydych chi’n ei gael o’r gwasanaeth hwn</value>
@@ -57,8 +57,8 @@
     <data name="installing solar panels" xml:space="preserve">
         <value>gosod paneli solar</value>
     </data>
-    <data name="There is a different service available if you would like to check if a heat pump may be suitable for your property." xml:space="preserve">
-        <value>Mae gwasanaeth gwahanol ar gael os hoffech chi weld a allai pwmp gwres fod yn addas ar gyfer eich eiddo.</value>
+    <data name="DifferentServiceAvailableToCheckHeatPumpString" xml:space="preserve">
+        <value>Mae gwasanaeth gwahanol ar gael os hoffech chi&lt;a class="govuk-link" href="https://www.heat-pump-check.service.gov.uk/" target="_blank"&gt; weld a allai pwmp gwres fod yn addas ar gyfer eich eiddo.&lt;/a&gt;</value>
     </data>
     <data name="Each recommendation will explain what’s involved, how much it could cost you and how much it could save on typical energy bills. You will also receive information about where to go to for more advice." xml:space="preserve">
         <value>Bydd pob argymhelliad yn egluro beth mae’n ei gynnwys, faint y gallai ei gostio i chi a faint y gallai ei arbed ar filiau ynni arferol. Byddwch hefyd yn cael gwybodaeth am ble i fynd i gael rhagor o gyngor.</value>
@@ -72,20 +72,17 @@
     <data name="You will need to answer some questions about your home and how much energy you use." xml:space="preserve">
         <value>Bydd angen i chi ateb ychydig o gwestiynau am eich cartref a faint o ynni rydych chi’n ei ddefnyddio.</value>
     </data>
-    <data name="There is guidance available to help you answer the questions." xml:space="preserve">
-        <value>Mae canllawiau ar gael i’ch helpu i ateb y cwestiynau.</value>
-    </data>
-    <data name="If you’re still unsure, take your best guess. The service can still give you useful information." xml:space="preserve">
-        <value>Os ydych chi’n dal yn ansicr, rhowch eich dyfaliad gorau. Gall y gwasanaeth barhau i roi gwybodaeth ddefnyddiol i chi.</value>
+    <data name="There is guidance available to help you answer the questions. If you’re still unsure, take your best guess. The service can still give you useful information." xml:space="preserve">
+        <value>Mae canllawiau ar gael i’ch helpu i ateb y cwestiynau. Os ydych chi’n dal yn ansicr, rhowch eich dyfaliad gorau. Gall y gwasanaeth barhau i roi gwybodaeth ddefnyddiol i chi.</value>
     </data>
     <data name="How long it takes" xml:space="preserve">
         <value>Pa mor hir mae’n ei gymryd</value>
     </data>
-    <data name="If this is your first visit, it takes around 10 minutes to answer the questions and receive recommendations tailored to you and your home." xml:space="preserve">
-        <value>Os mai dyma eich ymweliad cyntaf, mae’n cymryd tua 10 munud i ateb y cwestiynau a chael argymhellion sydd wedi’u teilwra i chi a’ch cartref.</value>
+    <data name="IfFirstVisitTimeToAnswer" xml:space="preserve">
+        <value>Os mai dyma eich ymweliad cyntaf, mae’n cymryd tua &lt;strong&gt;10 munud&lt;/strong&gt; i ateb y cwestiynau a chael argymhellion sydd wedi’u teilwra i chi a’ch cartref.</value>
     </data>
-    <data name="You can return to your recommendations and action plan if you need to." xml:space="preserve">
-        <value>Gallwch ddychwelyd at eich argymhellion a’ch cynllun gweithredu os oes angen.</value>
+    <data name="ReturnToRecommendationsAndActionPlanIfYouNeedToString" xml:space="preserve">
+        <value>Gallwch ddychwelyd at &lt;a href="@Url.Action(nameof(EnergyEfficiencyController.NewOrReturningUser_Get), "EnergyEfficiency")"&gt;eich argymhellion a’ch cynllun gweithredu &lt;/a&gt;os oes angen.</value>
     </data>
     <data name="Start now" xml:space="preserve">
         <value>Dechrau nawr</value>
@@ -3713,5 +3710,9 @@
     <data name="Contact Us" xml:space="preserve">
         <value>Cysylltu â Ni</value>
         <comment>Contact Us</comment>
+    </data>
+    <data name="We use Google Analytics software (Google Analytics 4) to collect anonymised information about how you use our service. We do this to help make sure the site is meeting the needs of its users and to help us make improvements to the site and to government digital services." xml:space="preserve">
+        <value>Rydym yn defnyddio meddalwedd Google Analytics (Google Analytics 4) i gasglu gwybodaeth ddienw ynghylch sut rydych yn defnyddio ein gwasanaeth. Rydym yn gwneud hyn er mwyn gwneud yn siŵr bod y wefan yn diwallu anghenion y bobl sy'n ei defnyddio a’n helpu i wella’r wefan a gwasanaeth digidol y llywodraeth.</value>
+        <comment>We use Google Analytics software (Google Analytics 4) to collect anonymised information about how you use our service. We do this to help make sure the site is meeting the needs of its users and to help us make improvements to the site and to government digital services.</comment>
     </data>
 </root>

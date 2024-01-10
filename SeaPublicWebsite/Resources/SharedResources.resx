@@ -16,8 +16,8 @@
     <data name="Find energy improvements suitable for your home" xml:space="preserve">
         <value>Find energy improvements suitable for your home</value>
     </data>
-    <data name="Get advice on which home improvements could be installed by you or a" xml:space="preserve">
-        <value>Get advice on which home improvements could be installed by you or a</value>
+    <data name="Get advice on which home improvements could be installed by you or a tradesperson to improve the energy efficiency of your home." xml:space="preserve">
+        <value>Get advice on which home improvements could be installed by you or a tradesperson to improve the energy efficiency of your home.</value>
     </data>
     <data name="tradesperson to improve the energy efficiency of your home." xml:space="preserve">
         <value>tradesperson to improve the energy efficiency of your home.</value>
@@ -28,11 +28,11 @@
     <data name="This service is for people who own their own property in England and Wales." xml:space="preserve">
         <value>This service is for people who own their own property in England and Wales.</value>
     </data>
-    <data name="If you live in Scotland, visit Home Energy Scotland to help you find ways to reduce your energy bills." xml:space="preserve">
-        <value>If you live in Scotland, visit Home Energy Scotland to help you find ways to reduce your energy bills.</value>
+    <data name="IfUserInScotlandHomeEnergyScotlandLinkString" xml:space="preserve">
+        <value>If you live in Scotland, visit &lt;a class="govuk-link" href="https://www.homeenergyscotland.org/" target="_blank"&gt;Home Energy Scotland&lt;/a&gt; to help you find ways to reduce your energy bills.</value>
     </data>
-    <data name="If you live in Northern Ireland, visit NI Direct for help." xml:space="preserve">
-        <value>If you live in Northern Ireland, visit NI Direct for help.</value>
+    <data name="IfYouLiveInNIVisitNIDirectString" xml:space="preserve">
+        <value>If you live in Northern Ireland, visit&lt;a class="govuk-link" href="https://www.nidirect.gov.uk/" target="_blank"&gt;NI Direct&lt;/a&gt; for help.</value>
     </data>
     <data name="What you get from this service" xml:space="preserve">
         <value>What you get from this service</value>
@@ -52,8 +52,8 @@
     <data name="installing solar panels" xml:space="preserve">
         <value>installing solar panels</value>
     </data>
-    <data name="There is a different service available if you would like to check if a heat pump may be suitable for your property." xml:space="preserve">
-        <value>There is a different service available if you would like to check if a heat pump may be suitable for your property.</value>
+    <data name="DifferentServiceAvailableToCheckHeatPumpString" xml:space="preserve">
+        <value>There is a different service available if you would like to &lt;a class="govuk-link" href="https://www.heat-pump-check.service.gov.uk/" target="_blank"&gt; check if a heat pump may be suitable for your property.&lt;/a&gt;</value>
     </data>
     <data name="Each recommendation will explain what’s involved, how much it could cost you and how much it could save on typical energy bills. You will also receive information about where to go to for more advice." xml:space="preserve">
         <value>Each recommendation will explain what’s involved, how much it could cost you and how much it could save on typical energy bills. You will also receive information about where to go to for more advice.</value>
@@ -67,20 +67,17 @@
     <data name="You will need to answer some questions about your home and how much energy you use." xml:space="preserve">
         <value>You will need to answer some questions about your home and how much energy you use.</value>
     </data>
-    <data name="There is guidance available to help you answer the questions." xml:space="preserve">
-        <value>There is guidance available to help you answer the questions.</value>
-    </data>
-    <data name="If you’re still unsure, take your best guess. The service can still give you useful information." xml:space="preserve">
-        <value>If you’re still unsure, take your best guess. The service can still give you useful information.</value>
+    <data name="There is guidance available to help you answer the questions. If you’re still unsure, take your best guess. The service can still give you useful information." xml:space="preserve">
+        <value>There is guidance available to help you answer the questions. If you’re still unsure, take your best guess. The service can still give you useful information.</value>
     </data>
     <data name="How long it takes" xml:space="preserve">
         <value>How long it takes</value>
     </data>
-    <data name="If this is your first visit, it takes around 10 minutes to answer the questions and receive recommendations tailored to you and your home." xml:space="preserve">
-        <value>If this is your first visit, it takes around 10 minutes to answer the questions and receive recommendations tailored to you and your home.</value>
+    <data name="IfFirstVisitTimeToAnswer" xml:space="preserve">
+        <value>If this is your first visit, it takes around &lt;strong&gt;10 minutes&lt;/strong&gt; to answer the questions and receive recommendations tailored to you and your home.</value>
     </data>
-    <data name="You can return to your recommendations and action plan if you need to." xml:space="preserve">
-        <value>You can return to your recommendations and action plan if you need to.</value>
+    <data name="ReturnToRecommendationsAndActionPlanIfYouNeedToString" xml:space="preserve">
+        <value>You can &lt;a href="@Url.Action(nameof(EnergyEfficiencyController.NewOrReturningUser_Get), "EnergyEfficiency")"&gt;return to your recommendations and action plan&lt;/a&gt; if you need to.</value>
     </data>
     <data name="Start now" xml:space="preserve">
         <value>Start now</value>
@@ -3708,5 +3705,9 @@
     <data name="Contact Us" xml:space="preserve">
         <value>Contact Us</value>
         <comment>Contact Us</comment>
+    </data>
+    <data name="We use Google Analytics software (Google Analytics 4) to collect anonymised information about how you use our service. We do this to help make sure the site is meeting the needs of its users and to help us make improvements to the site and to government digital services." xml:space="preserve">
+        <value>We use Google Analytics software (Google Analytics 4) to collect anonymised information about how you use our service. We do this to help make sure the site is meeting the needs of its users and to help us make improvements to the site and to government digital services.</value>
+        <comment>We use Google Analytics software (Google Analytics 4) to collect anonymised information about how you use our service. We do this to help make sure the site is meeting the needs of its users and to help us make improvements to the site and to government digital services.</comment>
     </data>
 </root>

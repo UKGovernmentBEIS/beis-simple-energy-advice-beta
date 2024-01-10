@@ -94,10 +94,6 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>PropertyType.Designer.cs</LastGenOutput>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Enum\QuestionFlowStep.resx">
-        <Generator>PublicResXFileCodeGenerator</Generator>
-        <LastGenOutput>QuestionFlowStep.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
       <EmbeddedResource Update="Resources\Enum\BungalowType.resx">
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>BungalowType.Designer.cs</LastGenOutput>
@@ -244,11 +240,6 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>PropertyType.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Enum\QuestionFlowStep.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>QuestionFlowStep.resx</DependentUpon>
       </Compile>
       <Compile Update="Resources\Enum\BungalowType.Designer.cs">
         <DesignTime>True</DesignTime>
