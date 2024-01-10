@@ -111,7 +111,7 @@
     <data name="GOV.UKFind energy improvements suitable for your home" xml:space="preserve">
         <value>GOV.UK Darganfod gwelliannau ynni sy’n addas ar gyfer eich cartref</value>
     </data>
-    <data name="BETA This is a new service – your feedback (opens in new tab) will help us to improve it." xml:space="preserve">
+    <data name="This is a new service string" xml:space="preserve">
         <value>BETA Mae hwn yn wasanaeth newydd – bydd eich adborth (yn agor mewn tab newydd) yn ein helpu i’w wella.</value>
     </data>
     <data name="Back" xml:space="preserve">
@@ -179,9 +179,6 @@
     </data>
     <data name="Support links" xml:space="preserve">
         <value>Dolenni cymorth</value>
-    </data>
-    <data name="Contact Us Cookies Privacy Policy Accessibility Statement" xml:space="preserve">
-        <value>Cysylltu â Ni Cwcis Polisi Preifatrwydd Datganiad Hygyrchedd</value>
     </data>
     <data name=" All content is available under the Open Government Licence v3.0, except where otherwise stated" xml:space="preserve">
         <value> Mae’r holl gynnwys ar gael dan Drwydded Llywodraeth Agored v3.0 ac eithrio pan nodir fel arall</value>
@@ -1600,7 +1597,7 @@
         <value>Gosod ffenestri newydd</value>
     </data>
     <data name="Based on the information we have collected; it looks like you have some single glazed windows in your home. Double or triple glazed windows are much better at keeping the heat in, so would help you keep warm while reducing your heating bills." xml:space="preserve">
-        <value>###############################################################################################################################################################################################################################################################</value>
+        <value>Ar sail yr wybodaeth rydym wedi'i chasglu; mae'n ymddangos bod gennych rywfaint o ffenestri gwydr sengl yn eich cartref. Mae ffenestri gwydr dwbl neu driphlyg yn llawer gwell am gadw'r gwres i mewn, ac felly yn eich helpu i gadw'n gynnes yn ogystal â lleihau eich biliau gwresogi.</value>
     </data>
     <data name="The fuel bill savings from replacing windows are unlikely to pay back the full installation cost, but there are other benefits such as reduced maintenance and better sound proofing that may affect your decision." xml:space="preserve">
         <value>Mae’n annhebygol y bydd yr arbedion mewn biliau tanwydd a welir wrth newid ffenestri yn ad-dalu’r gost gosod lawn, ond mae manteision eraill fel llai o waith cynnal a chadw a gwrthsain gwell a allai effeithio ar eich penderfyniad.</value>
@@ -1771,7 +1768,7 @@
         <value>Mae pwmp gwres yn system wresogi carbon isel ac mae’n llawer mwy effeithlon na boeler. Yn hytrach na llosgi tanwydd fel nwy neu olew, mae’n defnyddio trydan i drosglwyddo gwres o’r tu allan i wresogi eich ystafelloedd a’ch dŵr poeth.</value>
     </data>
     <data name="Heat pumps are suitable for many homes, will cut your carbon emissions and there are grants available through the Boiler Upgrade Scheme for air source heat pumps and ground source heat pumps to reduce the upfront cost." xml:space="preserve">
-        <value>###############################################################################################################################################################################################################################################################</value>
+        <value>Mae pympiau gwres yn addas ar gyfer llawer o gartrefi, byddant yn lleihau eich allyriadau carbon ac mae grantiau ar gael drwy’r Cynllun Uwchraddio Boeleri ar gyfer pympiau gwres ffynhonnell aer a phympiau gwres o’r ddaear er mwyn lleihau’r gost ymlaen llaw.</value>
     </data>
     <data name="There are different types of heat pump and you can check which might be suitable for your home on our dedicated heat pump service." xml:space="preserve">
         <value>Mae gwahanol fathau o bwmp gwres a gallwch edrych pa un allai fod yn addas ar gyfer eich cartref chi ar ein gwasanaeth pympiau gwres penodol.</value>
@@ -2002,7 +1999,7 @@
         <value>Yn rhyddhau gwres yn fwy cyflym pan fo angen</value>
     </data>
     <data name="Their improved controls, including automatic charge control, thermostat and programmer, allowing you to set the temperature you want the room to be heated and when, with the heater only drawing the electricity needed to meet that programme." xml:space="preserve">
-        <value>###############################################################################################################################################################################################################################################################</value>
+        <value>Yn cynnwys rheolaethau gwell, gan gynnwys rheolydd gwefru, thermostat a rhaglennydd awtomatig, sy’n eich galluogi i osod i ba dymheredd rydych am wresogi’r ystafell a phryd, gyda’r gwresogydd ond yn defnyddio’r trydan sydd ei angen i gyflawni’r rhaglen honno.</value>
     </data>
     <data name="You can find more information on high heat retention storage heaters on the Energy Saving Trust website.(opens in a new window)" xml:space="preserve">
         <value>Gallwch ddod o hyd i ragor o wybodaeth am wresogyddion stôr cadw gwres uchel ar wefan yr Ymddiriedolaeth Arbed Ynni.(yn agor mewn ffenestr newydd)</value>
@@ -2463,23 +2460,23 @@
     <data name="Name Purpose Expires" xml:space="preserve">
         <value>Enw Pwrpas Dod i Ben</value>
     </data>
-    <data name="_ga This helps us count how many people visit our service by tracking if you’ve visited before 2 years" xml:space="preserve">
-        <value>_ga Mae hwn yn ein helpu i gyfrif faint o bobl sy’n ymweld â’n gwasanaeth drwy olrhain a ydych chi wedi ymweld o’r blaen 2 flynedd</value>
+    <data name="_ga This helps us count how many people visit our service by tracking if you’ve visited before" xml:space="preserve">
+        <value>Mae hwn yn ein helpu i gyfrif faint o bobl sy’n ymweld â’n gwasanaeth drwy olrhain a ydych chi wedi ymweld o’r blaen</value>
     </data>
-    <data name="_gid This helps us count how many people visit our service by tracking if you’ve visited before 24 hours" xml:space="preserve">
-        <value>_gid Mae hwn yn ein helpu i gyfrif faint o bobl sy’n ymweld â’n gwasanaeth drwy olrhain a ydych chi wedi ymweld o’r blaen 24 awr</value>
+    <data name="_gid This helps us count how many people visit our service by tracking if you’ve visited before" xml:space="preserve">
+        <value>Mae hwn yn ein helpu i gyfrif faint o bobl sy’n ymweld â’n gwasanaeth drwy olrhain a ydych chi wedi ymweld o’r blaen</value>
     </data>
-    <data name="_gat This helps Google to manage the rate at which they track your site interactions (when high traffic occurs) 1 minute" xml:space="preserve">
-        <value>_gat Mae hwn yn helpu Google i reoli’r gyfradd y mae’n olrhain eich rhyngweithiad â gwefannau (pan fydd llawer o draffig) 1 funud</value>
+    <data name="_gat This helps Google to manage the rate at which they track your site interactions (when high traffic occurs)" xml:space="preserve">
+        <value>Mae hwn yn helpu Google i reoli’r gyfradd y mae’n olrhain eich rhyngweithiad â gwefannau (pan fydd llawer o draffig)</value>
     </data>
-    <data name="_gat_govuk_shared This helps Google to manage the rate at which they track your site interactions (when high traffic occurs) 1 minute" xml:space="preserve">
-        <value>_gat_govuk_shared Mae hwn yn helpu Google i reoli’r gyfradd y mae’n olrhain eich rhyngweithiad â gwefannau (pan fydd llawer o draffig) 1 funud</value>
+    <data name="_gat_govuk_shared This helps Google to manage the rate at which they track your site interactions (when high traffic occurs)" xml:space="preserve">
+        <value>Mae hwn yn helpu Google i reoli’r gyfradd y mae’n olrhain eich rhyngweithiad â gwefannau (pan fydd llawer o draffig)</value>
     </data>
     <data name="Cookies message" xml:space="preserve">
         <value>Neges cwcis</value>
     </data>
     <data name="You may see a banner when you visit our service inviting you to accept cookies or review your settings. We’ll set cookies so that your computer knows you’ve seen it and not to show it again, and also to store your settings." xml:space="preserve">
-        <value>###############################################################################################################################################################################################################################################################</value>
+        <value>Efallai y byddwch yn gweld baner pan fyddwch yn ymweld â’n gwasanaeth yn eich gwahodd i dderbyn cwcis neu adolygu eich gosodiadau. Byddwn yn gosod cwcis fel bod eich cyfrifiadur yn gwybod eich bod wedi’i weld ac i beidio â’i ddangos eto, a hefyd i storio eich gosodiadau.</value>
     </data>
     <data name="Name Purpose Expires" xml:space="preserve">
         <value>Enw Pwrpas Dod i Ben</value>
@@ -2571,7 +2568,7 @@
     <data name="Hide cookie message" xml:space="preserve">
         <value>Cuddio’r neges cwcis</value>
     </data>
-    <data name="Accessibility statement" xml:space="preserve">
+    <data name="Accessibility Statement" xml:space="preserve">
         <value>Datganiad hygyrchedd</value>
     </data>
     <data name="This statement applies to content published on our service." xml:space="preserve">
@@ -2677,7 +2674,7 @@
         <value>Derbynwyr</value>
     </data>
     <data name="Your personal data will be shared by us with other Government Departments or public authorities where necessary. We may share your data if we are required to do so by law, for example by court order or to prevent fraud or other crime." xml:space="preserve">
-        <value>###############################################################################################################################################################################################################################################################</value>
+        <value>Byddwn yn rhannu eich data personol gydag Adrannau eraill y Llywodraeth neu awdurdodau cyhoeddus lle bo angen. Efallai y byddwn yn rhannu eich data os bydd yn ofynnol i ni wneud hynny yn ôl y gyfraith, er enghraifft drwy orchymyn llys neu i atal twyll neu drosedd arall.</value>
     </data>
     <data name="As your personal data will be stored on our IT infrastructure it will also be shared with our data processors Microsoft, GOV.UK PaaS, and GOV.UK Notify." xml:space="preserve">
         <value>Gan y bydd eich data personol yn cael ei storio ar ein seilwaith TG, bydd hefyd yn cael ei rannu â’n proseswyr data Microsoft, GOV.UK PaaS, a GOV.UK Notify.</value>
@@ -3692,5 +3689,29 @@
     <data name="These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings." xml:space="preserve">
         <value>Mae’r ffigurau hyn ar gyfer gosodiad arferol mewn cartref fel eich un chi. Bydd eich amgylchiadau, manylion y gosodiadau a phrisiau ynni yn effeithio ar y costau a’r arbedion a welwch. Mae’r arbedion a ddangosir yn seiliedig ar y cap ar brisiau ynni ym mis Hydref 2022. Wrth i brisiau ynni newid, felly bydd yr amcangyfrifon o arbedion.</value>
         <comment>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings.</comment>
+    </data>
+    <data name="1 minute" xml:space="preserve">
+        <value>1 funud</value>
+    </data>
+    <data name="2 years" xml:space="preserve">
+        <value>2 flynedd</value>
+    </data>
+    <data name="24 hours" xml:space="preserve">
+        <value>24 awr</value>
+    </data>
+    <data name="Data Protection Officer Email String" xml:space="preserve">
+        <value>E-bost: &lt;a class="govuk-link" href="mailto: dataprotection@beis.gov.uk"&gt; dataprotection@beis.gov.uk&lt;/a&gt;</value>
+    </data>
+    <data name="Privacy Policy" xml:space="preserve">
+        <value>Polisi Preifatrwydd</value>
+        <comment>Privacy Policy</comment>
+    </data>
+    <data name="Cookies" xml:space="preserve">
+        <value>Cwcis</value>
+        <comment>Cookies</comment>
+    </data>
+    <data name="Contact Us" xml:space="preserve">
+        <value>Cysylltu â Ni</value>
+        <comment>Contact Us</comment>
     </data>
 </root>

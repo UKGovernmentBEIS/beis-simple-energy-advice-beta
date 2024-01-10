@@ -106,8 +106,8 @@
     <data name="GOV.UKFind energy improvements suitable for your home" xml:space="preserve">
         <value>GOV.UKFind energy improvements suitable for your home</value>
     </data>
-    <data name="BETA This is a new service – your feedback (opens in new tab) will help us to improve it." xml:space="preserve">
-        <value>BETA This is a new service – your feedback (opens in new tab) will help us to improve it.</value>
+    <data name="This is a new service string" xml:space="preserve">
+        <value>This is a new service – your &lt;a class="govuk-link" href="@ViewBag.FeedbackUrl" target="_blank"&gt;feedback (opens in new tab)&lt;/a&gt; will help us to improve it.</value>
     </data>
     <data name="Back" xml:space="preserve">
         <value>Back</value>
@@ -174,9 +174,6 @@
     </data>
     <data name="Support links" xml:space="preserve">
         <value>Support links</value>
-    </data>
-    <data name="Contact Us Cookies Privacy Policy Accessibility Statement" xml:space="preserve">
-        <value>Contact Us Cookies Privacy Policy Accessibility Statement</value>
     </data>
     <data name=" All content is available under the Open Government Licence v3.0, except where otherwise stated" xml:space="preserve">
         <value> All content is available under the Open Government Licence v3.0, except where otherwise stated</value>
@@ -2458,17 +2455,17 @@
     <data name="Name Purpose Expires" xml:space="preserve">
         <value>Name Purpose Expires</value>
     </data>
-    <data name="_ga This helps us count how many people visit our service by tracking if you’ve visited before 2 years" xml:space="preserve">
-        <value>_ga This helps us count how many people visit our service by tracking if you’ve visited before 2 years</value>
+    <data name="_ga This helps us count how many people visit our service by tracking if you’ve visited before" xml:space="preserve">
+        <value>This helps us count how many people visit our service by tracking if you’ve visited before</value>
     </data>
-    <data name="_gid This helps us count how many people visit our service by tracking if you’ve visited before 24 hours" xml:space="preserve">
-        <value>_gid This helps us count how many people visit our service by tracking if you’ve visited before 24 hours</value>
+    <data name="_gid This helps us count how many people visit our service by tracking if you’ve visited before" xml:space="preserve">
+        <value>This helps us count how many people visit our service by tracking if you’ve visited before</value>
     </data>
-    <data name="_gat This helps Google to manage the rate at which they track your site interactions (when high traffic occurs) 1 minute" xml:space="preserve">
-        <value>_gat This helps Google to manage the rate at which they track your site interactions (when high traffic occurs) 1 minute</value>
+    <data name="_gat This helps Google to manage the rate at which they track your site interactions (when high traffic occurs)" xml:space="preserve">
+        <value>This helps Google to manage the rate at which they track your site interactions (when high traffic occurs)</value>
     </data>
-    <data name="_gat_govuk_shared This helps Google to manage the rate at which they track your site interactions (when high traffic occurs) 1 minute" xml:space="preserve">
-        <value>_gat_govuk_shared This helps Google to manage the rate at which they track your site interactions (when high traffic occurs) 1 minute</value>
+    <data name="_gat_govuk_shared This helps Google to manage the rate at which they track your site interactions (when high traffic occurs)" xml:space="preserve">
+        <value>This helps Google to manage the rate at which they track your site interactions (when high traffic occurs)</value>
     </data>
     <data name="Cookies message" xml:space="preserve">
         <value>Cookies message</value>
@@ -2566,7 +2563,7 @@
     <data name="Hide cookie message" xml:space="preserve">
         <value>Hide cookie message</value>
     </data>
-    <data name="Accessibility statement" xml:space="preserve">
+    <data name="Accessibility Statement" xml:space="preserve">
         <value>Accessibility statement</value>
     </data>
     <data name="This statement applies to content published on our service." xml:space="preserve">
@@ -3687,5 +3684,29 @@
     <data name="These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings." xml:space="preserve">
         <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings.</value>
         <comment>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings.</comment>
+    </data>
+    <data name="1 minute" xml:space="preserve">
+        <value>1 minute</value>
+    </data>
+    <data name="2 years" xml:space="preserve">
+        <value>2 years</value>
+    </data>
+    <data name="24 hours" xml:space="preserve">
+        <value>24 hours</value>
+    </data>
+    <data name="Data Protection Officer Email String" xml:space="preserve">
+        <value>Email: &lt;a class="govuk-link" href="mailto: dataprotection@beis.gov.uk"&gt;dataprotection@beis.gov.uk&lt;/a&gt;</value>
+    </data>
+    <data name="Privacy Policy" xml:space="preserve">
+        <value>Privacy Policy</value>
+        <comment>Privacy Policy</comment>
+    </data>
+    <data name="Cookies" xml:space="preserve">
+        <value>Cookies</value>
+        <comment>Cookies</comment>
+    </data>
+    <data name="Contact Us" xml:space="preserve">
+        <value>Contact Us</value>
+        <comment>Contact Us</comment>
     </data>
 </root>
