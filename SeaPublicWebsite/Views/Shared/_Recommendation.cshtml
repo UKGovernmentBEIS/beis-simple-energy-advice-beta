@@ -24,14 +24,12 @@
 @await Html.GovUkWarningText(new WarningTextViewModel
        {
            IconFallbackText = "Note",
-           Text = "These figures are for a typical installation in a home " +
-                  "like yours. The costs and savings you experience will " +
-                  "be affected by your circumstances, the details of the " +
-                  "installations and energy prices. The savings displayed " +
-                  "are based on the January 2024 energy price cap for gas " +
-                  "and electricity bills, and on the RdSAP energy prices " +
-                  "for all other heating fuel types. As energy prices change, " +
-                  "so will the estimates of savings."
+           Text = "These figures are for a typical installation in a home like yours. " +
+                  "The costs and savings you experience will be affected by your circumstances, " +
+                  "the details of the installations and energy prices. " +
+                  "The savings displayed are based on the January 2024 energy price cap for gas and electricity bills, " +
+                  "and on the RdSAP energy prices for all other heating fuel types. " +
+                  "As energy prices change, so will the estimates of savings."
        })
 
 @await Html.GovUkSummaryList(new SummaryListViewModel
