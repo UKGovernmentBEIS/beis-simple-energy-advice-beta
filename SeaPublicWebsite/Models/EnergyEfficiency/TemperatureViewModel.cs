@@ -11,7 +11,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     public class TemperatureViewModel : QuestionFlowViewModel
     {
         [ModelBinder(typeof(GovUkMandatoryDecimalBinder))]
-        [GovUkDataBindingMandatoryDecimalErrorText("Enter a number between 5 and 35, or skip this question", "The temperature")] //TODO localise error messages
+        [GovUkDataBindingMandatoryDecimalErrorText("Enter a number between 5 and 35, or skip this question", "The temperature", typeof(ErrorMessages), "SeaPublicWebsite.Resources.ErrorMessages", mustBeNumberErrorMessage: nameof(ErrorMessages.TemperatureNumber) )]
         [Range(minimum:5.0, maximum:35.0 , ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName= nameof(ErrorMessages.TemperatureDecimalRange))]
         public decimal? Temperature { get; set; }
         public string Reference { get; set; }

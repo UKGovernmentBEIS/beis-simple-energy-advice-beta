@@ -124,12 +124,27 @@
         <value>Select wall type</value>
     </data>
     <data name="NumberOfOccupantsWholeNumber" xml:space="preserve">
-        <value>The number of people who live in the property must be a whole number ENGLISH</value>
+        <value>The number of people who live in the property must be a whole number</value>
     </data>
     <data name="NumberOfOccupantsRequired" xml:space="preserve">
         <value>Enter the number of people who live in the property</value>
     </data>
     <data name="NumberOfOccupantsNumber" xml:space="preserve">
         <value>The number of people who live in the property must be a number</value>
+    </data>
+    <data name="MorningHoursNumber" xml:space="preserve">
+        <value>Number of hours in the morning must be a number</value>
+    </data>
+    <data name="AfternoonEveningHoursNumber" xml:space="preserve">
+        <value>Number of hours in the afternoon and evening must be a number</value>
+    </data>
+    <data name="MorningHoursWholeNumber" xml:space="preserve">
+        <value>Number of hours in the morning must be a whole number</value>
+    </data>
+    <data name="AfternoonEveningHoursWholeNumber" xml:space="preserve">
+        <value>Number of hours in the afternoon and evening must be a whole number</value>
+    </data>
+    <data name="TemperatureNumber" xml:space="preserve">
+        <value>The temperature must be a number</value>
     </data>
 </root>

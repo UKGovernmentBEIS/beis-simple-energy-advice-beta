@@ -72,6 +72,6 @@
         </table>
 
         <h2 class="govuk-heading-l">@SharedLocalizer["Change your settings"]</h2>
-        <p class="govuk-body">@SharedLocalizer["You can"] <a href="@Url.Action(nameof(CookieController.CookieSettings_Get), "Cookie")" class="govuk-link">@SharedLocalizer["change which cookies you’re happy for us to use"]</a>.</p>
+        <p class="govuk-body">@SharedLocalizer["YouCanChangeWhichCookiesString", Url.Action(nameof(CookieController.CookieSettings_Get), "Cookie")]</p>
     </div>
 </div>

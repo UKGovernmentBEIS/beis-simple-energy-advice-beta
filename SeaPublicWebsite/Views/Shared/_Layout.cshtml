@@ -130,7 +130,16 @@
                     Href = Url.Action(nameof(StaticPagesController.AccessibilityStatement), "StaticPages")
                 }
             }
+        },
+        FooterLicenseDescription = new FooterLicenseDescriptionViewModel
+        {
+            Html = @<text>@SharedLocalizer["LicenseDescriptionString"]</text>
+        },
+        FooterCopyrightText = new FooterCopyrightTextViewModel
+        {
+            Text = @SharedLocalizer["\u00a9 Crown copyright"].Value
         }
+        
     })
 
     <script src="@(StaticAssetsVersioning.GetAppJsFilename())"></script>

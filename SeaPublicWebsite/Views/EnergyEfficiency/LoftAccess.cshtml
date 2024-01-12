@@ -36,10 +36,7 @@
                 
                 Func<object, object> blueBannerHint =
                     @<p class="govuk-body">
-                        @SharedLocalizer["Homes of your type typically"]
-                        <strong>
-                            @(Model.HintHaveLoftAndAccess ? @SharedLocalizer["have access to their loft"] : @SharedLocalizer["do not have access to their loft."])
-                        </strong>
+                            @(Model.HintHaveLoftAndAccess ? @SharedLocalizer["HaveLoftAndAccessHintTrueString"] : @SharedLocalizer["HaveLoftAndAccessHintFalseString"])
                     </p>;
             }
             

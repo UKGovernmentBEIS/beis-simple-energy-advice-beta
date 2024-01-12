@@ -18,13 +18,13 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public HeatingPattern? HeatingPattern { get; set; }
         
         [ModelBinder(typeof(GovUkOptionalIntBinder))]
-        [GovUkDataBindingOptionalIntErrorText("Number of hours in the morning")] //TODO error message localise
+        [GovUkDataBindingOptionalIntErrorText("Number of hours in the morning", typeof(ErrorMessages), "SeaPublicWebsite.Resources.ErrorMessages", isWholeNumberErrorMessage:nameof(ErrorMessages.MorningHoursWholeNumber), mustBeNumberErrorMessage:nameof(ErrorMessages.MorningHoursNumber))]
         [GovUkValidateRequiredIf(ErrorMessageResourceName = nameof(ErrorMessages.HeatingInMorningHoursRequired), ErrorMessageResourceType = typeof(ErrorMessages), IsRequiredPropertyName = nameof(IsRequiredHoursOfHeating))]
         [Range(minimum:0, maximum:12, ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName= nameof(ErrorMessages.NumberOfHoursIntRange))]
         public int? HoursOfHeatingMorning { get; set; }
 
         [ModelBinder(typeof(GovUkOptionalIntBinder))]
-        [GovUkDataBindingOptionalIntErrorText("Number of hours in the afternoon and evening")] //TODO error message localise
+        [GovUkDataBindingOptionalIntErrorText("Number of hours in the afternoon and evening", typeof(ErrorMessages), "SeaPublicWebsite.Resources.ErrorMessages", isWholeNumberErrorMessage:nameof(ErrorMessages.AfternoonEveningHoursWholeNumber), mustBeNumberErrorMessage:nameof(ErrorMessages.AfternoonEveningHoursNumber))]
         [GovUkValidateRequiredIf(
             ErrorMessageResourceName = nameof(ErrorMessages.HeatingInAfternoonAndEveningHoursRequired),
             ErrorMessageResourceType = typeof(ErrorMessages),

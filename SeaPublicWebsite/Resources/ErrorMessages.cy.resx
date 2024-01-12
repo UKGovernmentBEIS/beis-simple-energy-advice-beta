@@ -82,7 +82,8 @@
         <value>Rhowch nifer y bobl sy'n byw yn yr eiddo</value>
     </data>
     <data name="NumberOfOccupantsWholeNumber" xml:space="preserve">
-        <value>The number of people who live in the property must be a whole number WELSH</value>
+        <value>Rhaid i nifer y bobl sy'n byw yn yr eiddo fod yn
+rhif cyfan</value>
     </data>
     <data name="SolidWallsInsulatedRequired" xml:space="preserve">
         <value>Dewiswch a yw eich waliau solet wedi’u hinswleiddio</value>
@@ -118,9 +119,35 @@
         <value>Cadarnhewch a hoffech chi chwilio am eich EPC cyn bwrw ymlaen</value>
     </data>
     <data name="NumberOfOccupantsNumber" xml:space="preserve">
-        <value>The number of people who live in the property must be a number WELSH</value>
+        <value>Rhaid i nifer y bobl sy'n byw yn yr eiddo fod yn 
+rhif</value>
     </data>
     <data name="UsedServiceBeforeRequired" xml:space="preserve">
         <value>Dewiswch a ydych chi wedi defnyddio’r gwasanaeth hwn o'r blaen</value>
+    </data>
+    <data name="NumberOfOccupantsIntRange" xml:space="preserve">
+        <value>Rhaid i nifer y bobl sy'n byw yn yr eiddo fod 
+rhwng {1} a {2}</value>
+    </data>
+    <data name="TemperatureDecimalRange" xml:space="preserve">
+        <value>Rhaid i'r tymheredd fod rhwng {1} a {2}</value>
+    </data>
+    <data name="NumberOfHoursIntRange" xml:space="preserve">
+        <value>Rhaid i nifer yr oriau fod rhwng {1} a {2}</value>
+    </data>
+    <data name="MorningHoursWholeNumber" xml:space="preserve">
+        <value>Rhaid i nifer yr oriau yn y bore fod yn rhif cyfan</value>
+    </data>
+    <data name="MorningHoursNumber" xml:space="preserve">
+        <value>Rhaid i nifer yr oriau yn y bore fod yn rhif</value>
+    </data>
+    <data name="AfternoonEveningHoursNumber" xml:space="preserve">
+        <value>Rhaid i nifer y bobl sy'n byw yn yr eiddo fod yn rhif</value>
+    </data>
+    <data name="AfternoonEveningHoursWholeNumber" xml:space="preserve">
+        <value>Rhaid i nifer y bobl sy'n byw yn yr eiddo fod yn rhif cyfan</value>
+    </data>
+    <data name="TemperatureNumber" xml:space="preserve">
+        <value>Rhaid i'r tymheredd fod yn rhif</value>
     </data>
 </root>

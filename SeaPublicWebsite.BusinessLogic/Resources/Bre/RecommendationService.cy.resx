@@ -60,4 +60,22 @@
     <data name="TitleAddLoftInsulation" xml:space="preserve">
         <value>Ychwanegu mwy o ddeunydd inswleiddio atig</value>
     </data>
+    <data name="SummaryInsulateCavityWalls" xml:space="preserve">
+        <value>Chwistrellu inswleiddiad i'r ceudod yn eich waliau allanol</value>
+    </data>
+    <data name="SummaryAddLoftInsulation" xml:space="preserve">
+        <value>Cynyddu lefel yr inswleiddiad yn eich atig i'r lefel a argymhellir, sef 300mm</value>
+    </data>
+    <data name="SummaryUpgradeHeatingControls" xml:space="preserve">
+        <value>Ffitio rhaglennydd, thermostat a falfiau rheiddiadur thermostatig</value>
+    </data>
+    <data name="SummarySolarElectricPanels" xml:space="preserve">
+        <value>Gosod paneli PV ar eich to i gynhyrchu trydan</value>
+    </data>
+    <data name="SummaryInsulateSolidWallsOther" xml:space="preserve">
+        <value>Inswleiddio’ch waliau solet (mathau eraill o waliau)</value>
+    </data>
+    <data name="SummaryInsulateSolidWalls" xml:space="preserve">
+        <value>Inswleiddio'ch waliau solet (waliau brics oedran A-D)</value>
+    </data>
 </root>

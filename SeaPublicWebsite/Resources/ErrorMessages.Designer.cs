@@ -69,6 +69,24 @@ namespace SeaPublicWebsite.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number of hours in the afternoon and evening must be a number.
+        /// </summary>
+        internal static string AfternoonEveningHoursNumber {
+            get {
+                return ResourceManager.GetString("AfternoonEveningHoursNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of hours in the afternoon and evening must be a whole number.
+        /// </summary>
+        internal static string AfternoonEveningHoursWholeNumber {
+            get {
+                return ResourceManager.GetString("AfternoonEveningHoursWholeNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter a building number or name.
         /// </summary>
         internal static string BuildingNumberOrNameRequired {
@@ -222,6 +240,24 @@ namespace SeaPublicWebsite.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number of hours in the morning must be a number.
+        /// </summary>
+        internal static string MorningHoursNumber {
+            get {
+                return ResourceManager.GetString("MorningHoursNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of hours in the morning must be a whole number.
+        /// </summary>
+        internal static string MorningHoursWholeNumber {
+            get {
+                return ResourceManager.GetString("MorningHoursWholeNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number of hours must be between {1} and {2}.
         /// </summary>
         internal static string NumberOfHoursIntRange {
@@ -258,7 +294,7 @@ namespace SeaPublicWebsite.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The number of people who live in the property must be a whole number ENGLISH.
+        ///   Looks up a localized string similar to The number of people who live in the property must be a whole number.
         /// </summary>
         internal static string NumberOfOccupantsWholeNumber {
             get {
@@ -371,6 +407,15 @@ namespace SeaPublicWebsite.Resources {
         internal static string TemperatureDecimalRange {
             get {
                 return ResourceManager.GetString("TemperatureDecimalRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The temperature must be a number.
+        /// </summary>
+        internal static string TemperatureNumber {
+            get {
+                return ResourceManager.GetString("TemperatureNumber", resourceCulture);
             }
         }
         
