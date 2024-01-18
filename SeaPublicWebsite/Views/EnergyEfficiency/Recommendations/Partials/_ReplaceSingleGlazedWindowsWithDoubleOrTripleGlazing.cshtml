@@ -43,7 +43,7 @@
 
 @section RecommendationLifetime
 {
-    <p class="govuk-body">@SharedLocalizer["New windows are typically expected to last"] <b>@SharedLocalizer["around"] @Model.GetCurrentPropertyRecommendation().Lifetime @SharedLocalizer["years"]</b></p>
+    <p class="govuk-body">@SharedLocalizer["NewWindowsTypicallyLastString", @Model.GetCurrentPropertyRecommendation().Lifetime]</p>
 }
 
 @{

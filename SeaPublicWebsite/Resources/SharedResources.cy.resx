@@ -1500,8 +1500,8 @@
     <data name="Alternatively, you may want to choose a smart heating controller to make it easier to adjust the settings." xml:space="preserve">
         <value>Fel arall, efallai y byddwch yn dymuno dewis rheolydd gwres clyfar i’w gwneud yn haws addasu’r gosodiadau.</value>
     </data>
-    <data name="You can find more information on heating controls on the Energy Saving Trust website.(opens in a new window)" xml:space="preserve">
-        <value>Gallwch ddod o hyd i ragor o wybodaeth am reolaethau gwresogi ar wefan yr Ymddiriedolaeth Arbed Ynni.(yn agor mewn ffenestr newydd)</value>
+    <data name="MoreInfoOnHeatingControlsOnEnergySavingTrustWebsiteString" xml:space="preserve">
+        <value>WELSH Gallwch ddod o hyd i ragor o wybodaeth am reolaethau gwresogi ar wefan yr &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="You will need a competent installer to fit new controls to your heating system." xml:space="preserve">
         <value>Bydd angen gosodwr cymwys arnoch i osod rheolaethau newydd ar eich system wresogi.</value>
@@ -1518,8 +1518,8 @@
     <data name="What you could save" xml:space="preserve">
         <value>Faint allech chi ei arbed</value>
     </data>
-    <data name="Heating controls are typically expected to last around 12 years" xml:space="preserve">
-        <value>Disgwylir i reolaethau gwresogi bara tua 12 mlynedd fel arfer</value>
+    <data name="HeatingControlsTypicallyExpectedToLastString" xml:space="preserve">
+        <value>WELSH Disgwylir i reolaethau gwresogi &lt;b&gt;bara tua {0} mlynedd&lt;/b&gt; fel arfer</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>Gallai hyn arbed hyd at</value>
@@ -1559,9 +1559,6 @@
     </data>
     <data name="What you could save" xml:space="preserve">
         <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="New windows are typically expected to last around 20 years" xml:space="preserve">
-        <value>Disgwylir i ffenestri newydd bara tua 20 mlynedd fel arfer</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>Gallai hyn arbed hyd at</value>
@@ -1674,14 +1671,14 @@
     <data name="A heat pump is a low carbon heating system and is much more efficient than a boiler. Rather than burning a fuel like gas or oil, it uses electricity to transfer heat from outside to heat your rooms and hot water." xml:space="preserve">
         <value>Mae pwmp gwres yn system wresogi carbon isel ac mae’n llawer mwy effeithlon na boeler. Yn hytrach na llosgi tanwydd fel nwy neu olew, mae’n defnyddio trydan i drosglwyddo gwres o’r tu allan i wresogi eich ystafelloedd a’ch dŵr poeth.</value>
     </data>
-    <data name="Heat pumps are suitable for many homes, will cut your carbon emissions and there are grants available through the Boiler Upgrade Scheme for air source heat pumps and ground source heat pumps to reduce the upfront cost." xml:space="preserve">
-        <value>Mae pympiau gwres yn addas ar gyfer llawer o gartrefi, byddant yn lleihau eich allyriadau carbon ac mae grantiau ar gael drwy’r Cynllun Uwchraddio Boeleri ar gyfer pympiau gwres ffynhonnell aer a phympiau gwres o’r ddaear er mwyn lleihau’r gost ymlaen llaw.</value>
+    <data name="InfoOnHelpFromBoilerUpgradeSchemeForHeatPumpsString" xml:space="preserve">
+        <value>Mae pympiau gwres yn addas ar gyfer llawer o gartrefi, byddant yn lleihau eich allyriadau carbon ac mae grantiau ar gael drwy’r &lt;a class="govuk-link" href="{0}"&gt;Cynllun Uwchraddio Boeleri&lt;/a&gt; ar gyfer pympiau gwres ffynhonnell aer a phympiau gwres o’r ddaear er mwyn lleihau’r gost ymlaen llaw.</value>
     </data>
-    <data name="There are different types of heat pump and you can check which might be suitable for your home on our dedicated heat pump service." xml:space="preserve">
-        <value>Mae gwahanol fathau o bwmp gwres a gallwch edrych pa un allai fod yn addas ar gyfer eich cartref chi ar ein gwasanaeth pympiau gwres penodol.</value>
+    <data name="CheckWhichHeatPumpIsSuitableOnHeatPumpServiceString" xml:space="preserve">
+        <value>Mae gwahanol fathau o bwmp gwres a gallwch &lt;a class="govuk-link" href="{0}" target="_blank"&gt;edrych pa un allai fod yn addas ar gyfer eich cartref chi&lt;/a&gt; ar ein gwasanaeth pympiau gwres penodol.</value>
     </data>
-    <data name="You can find more information on heat pumps on the Energy Saving Trust website." xml:space="preserve">
-        <value>Gallwch ddod o hyd i ragor o wybodaeth am bympiau gwres ar wefan yr Ymddiriedolaeth Arbed Ynni.</value>
+    <data name="MoreInfoOnHeatPumpsOnEnergySavingTrustWebsiteString" xml:space="preserve">
+        <value>WELSH Gallwch ddod o hyd i ragor o wybodaeth am bympiau gwres ar wefan yr &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Ymddiriedolaeth Arbed Ynni.&lt;/a&gt;</value>
     </data>
     <data name="Who this improvement is suitable for" xml:space="preserve">
         <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
@@ -1936,7 +1933,7 @@
         <value>Efallai y bydd angen i chi osod rheolaethau newydd neu ychwanegol pan fyddwch yn gosod boeler nwy newydd i gydymffurfio â'r rheoliadau adeiladu. Bydd y rhain yn helpu i wneud y system mor effeithlon â phosibl, gan arbed hyd yn oed mwy o arian i chi.</value>
     </data>
     <data name="MoreInfoOnGasBoilerReplacementOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>Gallwch ddod o hyd i ragor o wybodaeth am newid eich boeler nwy ar &lt;a class="govuk-link" target="_blank" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>WELSH Gallwch ddod o hyd i ragor o wybodaeth am newid eich boeler nwy ar &lt;a class="govuk-link" target="_blank" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="You have an old or inefficient gas boiler, or your boiler is broken" xml:space="preserve">
         <value>Mae gennych hen foeler nwy neu foeler nwy aneffeithlon, neu mae eich boeler wedi torri</value>
@@ -1980,8 +1977,8 @@
     <data name="Recommendation Suitable For" xml:space="preserve">
         <value>Argymhelliad yn addas ar gyfer</value>
     </data>
-    <data name="New windows are typically expected to last around 5 years" xml:space="preserve">
-        <value>Disgwylir i ffenestri newydd bara tua 5 mlynedd fel arfer</value>
+    <data name="NewWindowsTypicallyLastString" xml:space="preserve">
+        <value>Disgwylir i ffenestri newydd bara &lt;b&gt;tua {0} mlynedd&lt;/b&gt; fel arfer</value>
     </data>
     <data name="Download your Action Plan" xml:space="preserve">
         <value>Llwytho eich Cynllun Gweithredu i lawr</value>
@@ -2913,12 +2910,6 @@
     <data name="Privacy notice on Find energy improvements suitable for your home" xml:space="preserve">
         <value>Hysbysiad preifatrwydd ar Dod o hyd i welliannau ynni sy’n addas ar gyfer eich cartref</value>
     </data>
-    <data name="        SemiDetached = 2," xml:space="preserve">
-        <value>        TŷPâr = 2,</value>
-    </data>
-    <data name="        TopFloor = 3," xml:space="preserve">
-        <value>        LlawrUchaf = 3,</value>
-    </data>
     <data name="DontKnow = 0," xml:space="preserve">
         <value>DdimYnGwybod = 0,</value>
     </data>
@@ -2934,62 +2925,8 @@
     <data name="    SolidFloorWithoutInsulation = 4," xml:space="preserve">
         <value>    LlawrSoletHebDdeunyddInswleiddio = 4,</value>
     </data>
-    <data name="     DontKnow = 0," xml:space="preserve">
-        <value>     DdimYnGwybod = 0,</value>
-    </data>
-    <data name="        SingleGlazed = 1," xml:space="preserve">
-        <value>        FfenestrGwydrSengl = 1,</value>
-    </data>
-    <data name="        TripleGlazed = 3," xml:space="preserve">
-        <value>        FfenestrGwydrTriphlyg = 3,</value>
-    </data>
     <data name="  AllDayAndAllNight = 1," xml:space="preserve">
         <value>  Drwy’rDyddANos = 1,</value>
-    </data>
-    <data name="        MorningAndEvening = 3," xml:space="preserve">
-        <value>        BoreANos = 3,</value>
-    </data>
-    <data name="        NoneOfTheAbove = 6," xml:space="preserve">
-        <value>        DimUnO’rUchod = 6,</value>
-    </data>
-    <data name="     GasBoiler = 1," xml:space="preserve">
-        <value>     BoelerNwy = 1,</value>
-    </data>
-    <data name="        OilBoiler = 3," xml:space="preserve">
-        <value>        BoelerOlew = 3,</value>
-    </data>
-    <data name="        StorageHeaters = 4," xml:space="preserve">
-        <value>        GwresogyddionStôr = 4,</value>
-    </data>
-    <data name="        SolidFuelBoiler = 9," xml:space="preserve">
-        <value>        BoelerTanwyddSolet = 9,</value>
-    </data>
-    <data name="       House = 0," xml:space="preserve">
-        <value>       Tŷ = 0,</value>
-    </data>
-    <data name="        ParkHome = 4," xml:space="preserve">
-        <value>        CartrefMewnParc = 4,</value>
-    </data>
-    <data name="       DontKnow = 0," xml:space="preserve">
-        <value>       DdimYnGwybod = 0,</value>
-    </data>
-    <data name="        PitchedRoofWithoutInsulation = 1," xml:space="preserve">
-        <value>        ToArOleddfHebDdeunyddInswleiddio = 1,</value>
-    </data>
-    <data name="        PitchedRoofWithInsulation = 2," xml:space="preserve">
-        <value>        ToArOleddfGydaDeunyddInswleiddio = 2,</value>
-    </data>
-    <data name="     DontKnow = 0," xml:space="preserve">
-        <value>     DdimYnGwybod = 0,</value>
-    </data>
-    <data name="        SolidWallsWithoutInsulation = 3," xml:space="preserve">
-        <value>        WaliauSoletHebDdeunyddInswleiddio = 3,</value>
-    </data>
-    <data name="        SolidWallsWithInsulation = 4," xml:space="preserve">
-        <value>        WaliauSoletGydaDeunyddInswleiddio = 4,</value>
-    </data>
-    <data name="        OtherWallType = 5," xml:space="preserve">
-        <value>        MathArallOWal = 5,</value>
     </data>
     <data name="Detached" xml:space="preserve">
         <value>Tŷ sengl</value>
@@ -3302,33 +3239,6 @@
     </data>
     <data name="AddLoftInsulation," xml:space="preserve">
         <value>YchwaneguDeunyddInswleiddioYnYrAtig,</value>
-    </data>
-    <data name="        UpgradeHeatingControls," xml:space="preserve">
-        <value>        UwchraddioRheolaethauGwresogi,</value>
-    </data>
-    <data name="        ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing," xml:space="preserve">
-        <value>        GosodFfenestriDwblNeuDriphlygYnLleFfenestriGwydrSengl,</value>
-    </data>
-    <data name="        SolarElectricPanels," xml:space="preserve">
-        <value>        PaneliTrydanSolar,</value>
-    </data>
-    <data name="        WallInsulationBrickAgeAToD," xml:space="preserve">
-        <value>        InswleiddioWaliauBricsAToD,</value>
-    </data>
-    <data name="        WallInsulationOther," xml:space="preserve">
-        <value>        DeunyddInswleiddioArall,</value>
-    </data>
-    <data name="        ReplaceCondensingBoiler," xml:space="preserve">
-        <value>        AmnewidBoelerCyddwyso,</value>
-    </data>
-    <data name="        SolarWaterHeating," xml:space="preserve">
-        <value>        GwresogiDŵrSolar,</value>
-    </data>
-    <data name="        MixerShowerHeatRecoverySystem," xml:space="preserve">
-        <value>        SystemAdferGwresCawodyddCymysgu,</value>
-    </data>
-    <data name="        ReplaceSingleGlazedWindowsWithLowEDoubleGlazing," xml:space="preserve">
-        <value>        GosodFfenestriAllyrreddIselYnLleFfenestriGwydrSengl</value>
     </data>
     <data name="Yes, I only have a flat roof or roofs" xml:space="preserve">
         <value>Oes, dim ond to neu doeon fflat sydd gen i</value>
