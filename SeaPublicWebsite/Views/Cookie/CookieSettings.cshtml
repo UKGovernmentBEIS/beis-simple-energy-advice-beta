@@ -7,7 +7,7 @@
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @{
-    ViewBag.Title = @SharedLocalizer[$"Cookies on our service"];
+    ViewBag.Title = @SharedLocalizer["Cookies on our service"].Value;
 }
 
 <div class="govuk-grid-row cookie-settings-page" xmlns="http://www.w3.org/1999/html">
@@ -16,6 +16,7 @@
         {
             @await Html.GovUkNotificationBanner(new NotificationBannerViewModel
             {
+                TitleText = SharedLocalizer["Success"].Value,
                 Text = SharedLocalizer["You’ve set your cookie preferences."].Value,
                 Type = "success"
             })
@@ -28,7 +29,7 @@
             <p class="govuk-body">@SharedLocalizer["Cookies are files saved on your phone, tablet or computer when you visit a website."]</p>
             <p class="govuk-body">@SharedLocalizer["We use cookies to store information about how you use our service, such as the pages you visit."]</p>
             <p class="govuk-body">
-                @SharedLocalizer["BriefCookieExplanationLinkToDetailedInfoString", @Url.Action(nameof(CookieController.CookieDetails), "Cookie")]
+                @SharedLocalizer["BriefCookieExplanationLinkToDetailedInfoString", Url.Action(nameof(CookieController.CookieDetails), "Cookie")]
 
             </p>
 

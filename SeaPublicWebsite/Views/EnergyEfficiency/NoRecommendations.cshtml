@@ -38,15 +38,15 @@
         </p>
 
         <ul class="govuk-list govuk-list--bullet">
-            <li>@SharedLocalizer["When buying new appliances, upgrade to an energy efficient one - "]<a class="govuk-link" target="_blank" href="https://energylabel.org.uk/">Learn about energy labels</a></li>
+            <li>@SharedLocalizer["WhenBuyingNewAppliancesUpgradeEnergyLabelsString", "https://energylabel.org.uk/"]</li>
             @if (Model?.HasOutdoorSpace != HasOutdoorSpace.No)
             {
-                <li>@SharedLocalizer["Install a heat pump - "]<a class="govuk-link" target="_blank" href="https://www.heat-pump-check.service.gov.uk/">@SharedLocalizer["Check if your home may be suitable"]</a></li>
+                <li>@SharedLocalizer["InstallHeatPumpCheckIfHomeSuitableString", "https://www.heat-pump-check.service.gov.uk/"]</li>
             }
         </ul>
 
         <h2 class="govuk-heading-l">@SharedLocalizer["Still need help?"]</h2>
-        <p class="govuk-body">@SharedLocalizer["You can visit the "]<a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">@SharedLocalizer["Energy Saving Trust website"]</a> @SharedLocalizer["for more information on reducing your home’s energy use."]</p>
+        <p class="govuk-body">@SharedLocalizer["VisitEnergySavingTrustWebsiteString", "https://energysavingtrust.org.uk/"]</p>
 
         <h2 class="govuk-heading-m">
             @SharedLocalizer["Returning to this service"]

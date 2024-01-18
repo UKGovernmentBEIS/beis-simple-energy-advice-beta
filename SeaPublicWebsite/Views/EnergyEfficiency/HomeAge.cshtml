@@ -45,15 +45,15 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your property was built
+                            @SharedLocalizer[""]
                             <strong>
                                 @(Model.Epc?.ConstructionAgeBand switch {
-                                    HomeAge.Pre1900 or HomeAge.From1900To1929 => @SharedLocalizer["before 1930."],
-                                    HomeAge.From1930To1949 or HomeAge.From1950To1966 => @SharedLocalizer["between 1930 and 1966."],
-                                    HomeAge.From1967To1975 or HomeAge.From1976To1982 => @SharedLocalizer["between 1967 and 1982."],
-                                    HomeAge.From1983To1990 or HomeAge.From1991To1995 => @SharedLocalizer["between 1983 and 1995."],
-                                    HomeAge.From1996To2002 or HomeAge.From2003To2006 or HomeAge.From2007To2011 => @SharedLocalizer["between 1996 and 2011."],
-                                    HomeAge.From2012ToPresent => @SharedLocalizer["on or after 2012."],
+                                    HomeAge.Pre1900 or HomeAge.From1900To1929 => @SharedLocalizer["EPCSuggestsPropertyBuiltBefore1930String", @Model.Epc.LodgementYear],
+                                    HomeAge.From1930To1949 or HomeAge.From1950To1966 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1930And1966String", @Model.Epc.LodgementYear],
+                                    HomeAge.From1967To1975 or HomeAge.From1976To1982 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1967And1982String", @Model.Epc.LodgementYear],
+                                    HomeAge.From1983To1990 or HomeAge.From1991To1995 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1983And1995String", @Model.Epc.LodgementYear],
+                                    HomeAge.From1996To2002 or HomeAge.From2003To2006 or HomeAge.From2007To2011 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1996And2011String", @Model.Epc.LodgementYear],
+                                    HomeAge.From2012ToPresent => @SharedLocalizer["EPCSuggestsPropertyBuiltOnOrAfter2012String", @Model.Epc.LodgementYear],
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;

@@ -7,7 +7,7 @@
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
-    ViewBag.Title = "Recommendation " + (Model.RecommendationIndex + 1) + " of " + Model.PropertyRecommendations.Count;
+    ViewBag.Title = SharedLocalizer["RecommendationXofYString", Model.RecommendationIndex + 1, Model.PropertyRecommendations.Count].Value;
     Layout = "_Layout";
 }
 

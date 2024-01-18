@@ -43,10 +43,7 @@ else
         @SharedLocalizer["We have provided recommendations that are most suitable for your home based on the answers you provided earlier."]
     </p>
     <p class="govuk-body">
-        @SharedLocalizer["If something doesn’t look right you can"]
-        <a href="@Url.Action(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference = Model.Reference })">
-            @SharedLocalizer["view and change your answers here."]
-        </a>
+        @SharedLocalizer["ChangeAnswersIfSomethingDoesNotLookRightString", Url.Action(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference = Model.Reference })]
     </p>
 }
 
@@ -87,6 +84,6 @@ else
 </p>
 <p class="govuk-body">
     <a class="govuk-link" href="@Constants.FEEDBACK_URL_DEFAULT">
-                               @SharedLocalizer["Leave some feedback for this service"]
+        @SharedLocalizer["Leave some feedback for this service"]
     </a>
 </p>

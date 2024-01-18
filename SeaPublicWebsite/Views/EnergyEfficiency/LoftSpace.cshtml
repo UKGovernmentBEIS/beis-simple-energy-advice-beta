@@ -39,10 +39,7 @@
                 
                 Func<object, object> blueBannerHint =
                     @<p class="govuk-body">
-                        @SharedLocalizer["Homes of your type typically"]
-                        <strong>
-                            @(Model.HintHaveLoftAndAccess ? @SharedLocalizer["have a loft."] : @SharedLocalizer["do not have a loft."])
-                        </strong>
+                        @(Model.HintHaveLoftAndAccess ? @SharedLocalizer["HomesOfYourTypeTypicallyHaveALoft"] : @SharedLocalizer["HomesOfYourTypeTypicallyDoNotHaveALoftString"])
                     </p>;
             }
             
@@ -51,7 +48,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = @SharedLocalizer["Do you have a loft that hasn’t been converted into a room?"].Value,
+                        Text = SharedLocalizer["Do you have a loft that hasn't been converted into a room?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }

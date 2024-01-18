@@ -11,7 +11,7 @@
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.AnswerSummaryViewModel
 @{
-    ViewBag.Title = SharedLocalizer["Your answers"];
+    ViewBag.Title = SharedLocalizer["Your answers"].Value;
 }
 
 @section BeforeMain {
@@ -297,7 +297,7 @@
         Key = new() 
         {
             Classes = "govuk-!-width-one-quarter",
-            Text = SharedLocalizer["Glazing type "].Value
+            Text = SharedLocalizer["Glazing type"].Value
         },
         Value = new()
         {

@@ -25,7 +25,7 @@
             @SharedLocalizer["This service only provides advice for people who own their own home in England and Wales."]
         </p>
         <p class="govuk-body">
-            @SharedLocalizer["For general energy efficiency advice and to find out ways to reduce your energy bill, visit"] <a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">@SharedLocalizer["the Energy Saving Trust"]</a> @SharedLocalizer["website"]
+            @SharedLocalizer["GeneralEnergySavingTrustAdviceString", "https://energysavingtrust.org.uk/"]
         </p>
         @if (Model.Country is Country.Scotland or Country.NorthernIreland)
         {
@@ -34,13 +34,13 @@
             @if (Model.Country is Country.Scotland)
             {
                 <p class="govuk-body">
-                    @SharedLocalizer["Visit"] <a href="https://www.homeenergyscotland.org/" target="_blank" class="govuk-link">@SharedLocalizer["Home Energy Scotland"]</a> @SharedLocalizer["to help you find ways to improve your property’s energy efficiency."]
+                    @SharedLocalizer["VisitHomeEnergyScotlandString", "https://www.homeenergyscotland.org/"]
                 </p>
             }
             else
             {
                 <p class="govuk-body">
-                    @SharedLocalizer["Visit"] <a href="https://www.nidirect.gov.uk/" target="_blank" class="govuk-link">@SharedLocalizer["NI Direct"]</a> @SharedLocalizer["to help you find ways to improve your property’s energy efficiency."]
+                    @SharedLocalizer["VisitNIDirectString", "https://www.nidirect.gov.uk/"]
                 </p>
             }
         }

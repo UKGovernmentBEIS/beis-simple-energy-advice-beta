@@ -48,11 +48,10 @@
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            @SharedLocalizer["Homes of your type"]
                             <strong>
                                 @(Model.HintUninsulatedRoof is true
-                                    ? @SharedLocalizer["typically have less than 200mm of insulation."] 
-                                    : @SharedLocalizer["are typically fully insulated with at least 200mm of insulation."])
+                                    ? @SharedLocalizer["HomesOfYourTypeTypicallyHaveLessThan200mmOfInsulationString"] 
+                                    : @SharedLocalizer["HomesOfYourTypeAreTypicallyFullyInsulatedWithAtLeast200mmOfInsulationString"])
                             </strong>
                         </p>;
                 }

@@ -29,10 +29,7 @@
             @SharedLocalizer["Your name, email address and any other information sent directly to us via our email feedback function."]
         </p>
         <p class="govuk-body">
-            @SharedLocalizer["We may also collect and process anonymised information as outlined in our"]
-            <a class="govuk-link" href="@Url.Action(nameof(CookieController.CookieSettings_Get), "Cookie")" target="_blank">
-                @SharedLocalizer["cookie policy"]
-            </a>.
+            @SharedLocalizer["WeMayAlsoCollectAndProcessAnonymisedInformationCookiePolicyString", Url.Action(nameof(CookieController.CookieSettings_Get), "Cookie")]
         </p>
 
         <h3 class="govuk-heading-s">
@@ -56,8 +53,7 @@
             @SharedLocalizer["Your personal data will be shared by us with other Government Departments or public authorities where necessary. We may share your data if we are required to do so by law, for example by court order or to prevent fraud or other crime."]
         </p>
         <p class="govuk-body">
-            @SharedLocalizer["As your personal data will be stored on our IT infrastructure it will also be shared with our data processors Microsoft,"] <a href="https://www.cloud.service.gov.uk/" target="_blank">GOV.UK PaaS</a>@SharedLocalizer[", and"]
-            <a href="https://www.notifications.service.gov.uk/" target="_blank">GOV.UK Notify</a>.
+            @SharedLocalizer["SharedWithDataProcessorsString", "https://www.cloud.service.gov.uk/", "https://www.notifications.service.gov.uk/"]
         </p>
         <p class="govuk-body">
             @SharedLocalizer["Your personal data may also be shared with the Softwire Technology Ltd who developed and help to maintain this service."]
@@ -106,10 +102,7 @@
             @SharedLocalizer["International Transfers"]
         </h3>
         <p class="govuk-body">
-            @SharedLocalizer["As your personal data is stored on our IT infrastructure and shared with our data processors Microsoft,"]
-            <a href="https://www.cloud.service.gov.uk/" target="_blank">GOV.UK PaaS</a>@SharedLocalizer[", and"] 
-            <a href="https://www.notifications.service.gov.uk/" target="_blank">GOV.UK Notify</a>
-            @SharedLocalizer[", it may be transferred and stored securely in the UK and European Economic Area. Where it is the case that your personal data is stored outside the UK and EEA it will be subject to equivalent legal protection through the use of Model Contract Clauses."]
+            @SharedLocalizer["DataProcessorsWithinEEAAndModelContractClausesOutsideEEAString", "https://www.cloud.service.gov.uk/", "https://www.notifications.service.gov.uk/" ]
         </p>
         
         <h3 class="govuk-heading-s">
@@ -137,7 +130,7 @@
                     <li>@SharedLocalizer["Monday to Friday, 9am to 5pm (except public holidays)"]</li>
                 </ul>
                 <p class="govuk-body">
-                    @SharedLocalizer["Email: "]<a class="govuk-link" href="mailto: casework@ico.org.uk">casework@ico.org.uk</a>
+                    @SharedLocalizer["EmailInformationCommissioner'sOfficeString", "mailto: casework@ico.org.uk"]
                 </p>
             </text> })
         
@@ -161,7 +154,7 @@
                            London SW1H 0ET<br>
                        </p>
                        <p class="govuk-body">
-                           @SharedLocalizer["Data Protection Officer Email String"]
+                           @SharedLocalizer["DataProtectionOfficerEmailString"]
                        </p>
                     </text>
         })

@@ -42,20 +42,17 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            @SharedLocalizer[$"Your {Model.Epc.LodgementYear} Energy Performance Certificate suggests"]
-                            <strong>
-                                @(Model.Epc?.SolidWallsInsulated switch {
-                                    SolidWallsInsulated.No => @SharedLocalizer["your solid walls are uninsulated."],
-                                    SolidWallsInsulated.Some => @SharedLocalizer["some of your solid walls are insulated."],
-                                    SolidWallsInsulated.All => @SharedLocalizer["your solid walls are insulated."],
-                                    _ => throw new ArgumentOutOfRangeException()})
-                            </strong>
+                            @(Model.Epc?.SolidWallsInsulated switch {
+                                SolidWallsInsulated.No => @SharedLocalizer["EPCSuggestsAllSolidWallsAreUninsulatedString", Model.Epc.LodgementYear],
+                                SolidWallsInsulated.Some => @SharedLocalizer["EPCSuggestsSomeSolidWallsAreUninsulatedString", Model.Epc.LodgementYear],
+                                SolidWallsInsulated.All => @SharedLocalizer["EPCSuggestsAllSolidWallsAreInsulatedString", Model.Epc.LodgementYear],
+                                _ => throw new ArgumentOutOfRangeException()})
                         </p>;
                 } else
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            @SharedLocalizer["Homes of your type typically have <strong>uninsulated solid walls</strong>"]
+                            @SharedLocalizer["HomesOfYourTypeTypicallyHaveUninsulatedSolidWallsString"]
                         </p>;
                 }
             }

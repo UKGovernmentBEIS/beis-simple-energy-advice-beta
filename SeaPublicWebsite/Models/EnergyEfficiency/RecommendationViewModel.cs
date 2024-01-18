@@ -45,13 +45,13 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         {
             var minCost = GetSavedRecommendations().Sum(r => r.MinInstallCost);
             var maxCost = GetSavedRecommendations().Sum(r => r.MaxInstallCost);
-            return $"£{minCost:N0} - £{maxCost:N0}";
+            return sharedLocalizer["£RangeString", $"{minCost:N0}", $"{maxCost:N0}"];
         }
 
         public string GetTotalSavingText()
         {
             var saving = GetSavedRecommendations().Sum(r => r.Saving);
-            return sharedLocalizer[$"£{saving:N0} a year"].Value;
+            return sharedLocalizer["£AYearString", $"{saving:N0}"].Value;
         }
     }
 }

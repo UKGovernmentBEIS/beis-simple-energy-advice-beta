@@ -24,8 +24,7 @@
     </p>
 
     <p class="govuk-body govuk-!-margin-bottom-6">
-        @SharedLocalizer["You can find more information on floor insulation on the "]
-        <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/floor-insulation/">@SharedLocalizer["Energy Saving Trust website."]<span class="govuk-visually-hidden">@SharedLocalizer["(opens in a new window)"]</span></a>
+        @SharedLocalizer["MoreInfoOnFloorInsulationOnEnergySavingTrustWebsiteString", "https://energysavingtrust.org.uk/advice/floor-insulation/"]
     </p>
     
     @await Html.GovUkWarningText(new WarningTextViewModel
@@ -46,7 +45,7 @@
 
 @section RecommendationLifetime
 {
-    <p class="govuk-body">@SharedLocalizer["Floor insulation is typically expected to last"] <b>@SharedLocalizer["around"] @Model.GetCurrentPropertyRecommendation().Lifetime @SharedLocalizer["years"]</b></p>
+    <p class="govuk-body">@SharedLocalizer["FloorInsulationExpectedToLastString", Model.GetCurrentPropertyRecommendation().Lifetime]</p>
 }
 
 @{
@@ -55,7 +54,7 @@
         Classes = "govuk-tag--orange",
         Text = @SharedLocalizer["DEFINITELY"].Value
     };
-    
+
     Model.DurationTagViewModel = new TagViewModel
     {
         Classes = "govuk-tag--yellow",

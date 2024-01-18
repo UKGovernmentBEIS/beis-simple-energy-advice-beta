@@ -24,14 +24,10 @@
     </h1>
 
     <p class="govuk-body">
-        @SharedLocalizer["Here is a summary of your estimated yearly energy bill savings and cost to install the"]
-        <strong>
-            @{
-                var count = Model.GetSavedRecommendations().Count;
-            }
-            @(count == 1 ? @SharedLocalizer["1 recommendation"] : @SharedLocalizer[$"{count} recommendations"])
-        </strong>
-        @SharedLocalizer["you told us you would consider for your home."]
+        @{
+            var count = Model.GetSavedRecommendations().Count;
+        }
+        @(count == 1 ? @SharedLocalizer["SummaryOfSavingsAndCostsForSingleRecommendationString"] : @SharedLocalizer["SummaryOfSavingsAndCostsForMultipleRecommendationsString", count])
     </p>
 
     <div class="govuk-!-padding-left-4 sea-total-savings govuk-!-margin-bottom-6">
@@ -51,10 +47,7 @@
        {
            SummaryText = "How did we calculate these figures?",
            Html = @<text>
-                      @SharedLocalizer["The costs and savings you view using the services on this site are based on standards developed for Government as a way of understanding how houses and flats use energy, and how your home’s energy use could be improved. You can find out more information about these standards with the guidance published on the"]
-                                       <a class="govuk-link" target="_blank" href="https://www.gov.uk/guidance/standard-assessment-procedure">
-                          @SharedLocalizer["Standard Assessment Procedure site."]<span class="govuk-visually-hidden">@SharedLocalizer["(opens in a new window)"]</span>
-                      </a>
+                      @SharedLocalizer["CostsAndSavingsBasedOnStandardAssessmentProcedureString", "https://www.gov.uk/guidance/standard-assessment-procedure"]
                    </text>
        })
 
@@ -78,10 +71,10 @@
                                           @(recommendation.Summary)
                                       </p>
                                       <p>
-                                          @SharedLocalizer["Typical savings per year:"] @Model.GetSavingText(recommendation)
+                                          @SharedLocalizer["Typical savings per year"]: @Model.GetSavingText(recommendation)
                                       </p>
                                       <p>
-                                          @SharedLocalizer["Typical costs:"] @Model.GetInstallationCostText(recommendation)
+                                          @SharedLocalizer["Typical costs"]: @Model.GetInstallationCostText(recommendation)
                                       </p>
                                       <a class="govuk-link"
                                          href="@Model.GetUrlWithPrefix(Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true}))">
@@ -169,18 +162,16 @@
     @SharedLocalizer["We recommend consulting with a qualified installer to confirm what changes you can make to your property."]
 </p>
 <p class="govuk-body">
-    @SharedLocalizer["You can get help finding a qualified installer of heat pumps or solar panels in your area by visiting the"]
-    <a class="govuk-link" href="https://mcscertified.com/find-an-installer/" target="_blank">@SharedLocalizer["MCS website."]</a>
+    @SharedLocalizer["GetHelpFindingInstallerOnMCSWebsiteString", "https://mcscertified.com/find-an-installer/"]
 </p>
 <p class="govuk-body">
-    @SharedLocalizer["For all other changes to your property, get help finding a qualified installer in your area by visiting the"]
-    <a class="govuk-link" href="https://www.trustmark.org.uk/" target="_blank">@SharedLocalizer["TrustMark website."]</a>
+    @SharedLocalizer["HelpFindingQualifiedInstallerOnTrustMarkWebsiteString", "https://www.trustmark.org.uk/"]
 </p>
 
 @if (Model.GetDecideLaterRecommendations().Any())
 {
     <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
-        @SharedLocalizer["3. Research improvements you are unsure about"]
+        @SharedLocalizer["Research improvements you are unsure about"]
     </h2>
     await Html.RenderPartialAsync("ActionPlan/Partials/_ImprovementsUnsureAbout", Model);
 }
@@ -197,16 +188,16 @@
 
 <ul class="govuk-list govuk-list--bullet">
     <li>
-        @SharedLocalizer["Visit the"] <a class="govuk-link" target="_blank" href="https://helpforhouseholds.campaign.gov.uk/help-with-your-bills/energy-saving-advice/">@SharedLocalizer["Help for Households"]</a> @SharedLocalizer["website for even more ways to save energy and reduce your bills."]
+        @SharedLocalizer["VisitTheHelpForHouseholdsWebsiteString", "https://helpforhouseholds.campaign.gov.uk/help-with-your-bills/energy-saving-advice/"]
     </li>
-    <li>@SharedLocalizer["When buying new appliances, upgrade to an energy efficient one - "]<a class="govuk-link" target="_blank" href="https://energylabel.org.uk/">@SharedLocalizer["Learn about energy labels"]</a></li>
+    <li>@SharedLocalizer["WhenBuyingNewAppliancesUpgradeEnergyLabelsString", "https://energylabel.org.uk/"]</li>
     @if (Model.PropertyData?.HasOutdoorSpace != HasOutdoorSpace.No)
     {
-        <li>@SharedLocalizer["Install a heat pump - "]<a class="govuk-link" target="_blank" href="https://www.heat-pump-check.service.gov.uk/">@SharedLocalizer["Check if your home may be suitable"]</a></li>
+        <li>@SharedLocalizer["InstallHeatPumpCheckIfHomeSuitableString", "https://www.heat-pump-check.service.gov.uk/"]</li>
     }
     @if (Model.PropertyData?.YearBuilt == YearBuilt.Pre1930)
     {
-        <li>@SharedLocalizer["Visit the "]<a class="govuk-link" target="_blank" href="https://historicengland.org.uk/advice/your-home/energy-efficiency/">@SharedLocalizer["Historic England"]</a>@SharedLocalizer[" site for information specific to historic buildings."]</li>
+        <li>@SharedLocalizer["VisitHistoricEnglandForHistoricBuildingInformationString", "https://historicengland.org.uk/advice/your-home/energy-efficiency/"]</li>
     }
 </ul>
 

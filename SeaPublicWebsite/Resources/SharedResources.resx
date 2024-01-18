@@ -29,10 +29,10 @@
         <value>This service is for people who own their own property in England and Wales.</value>
     </data>
     <data name="IfUserInScotlandHomeEnergyScotlandLinkString" xml:space="preserve">
-        <value>If you live in Scotland, visit &lt;a class="govuk-link" href="https://www.homeenergyscotland.org/" target="_blank"&gt;Home Energy Scotland&lt;/a&gt; to help you find ways to reduce your energy bills.</value>
+        <value>If you live in Scotland, visit &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Home Energy Scotland&lt;/a&gt; to help you find ways to reduce your energy bills.</value>
     </data>
     <data name="IfYouLiveInNIVisitNIDirectString" xml:space="preserve">
-        <value>If you live in Northern Ireland, visit&lt;a class="govuk-link" href="https://www.nidirect.gov.uk/" target="_blank"&gt;NI Direct&lt;/a&gt; for help.</value>
+        <value>If you live in Northern Ireland, visit&lt;a class="govuk-link" href="{0}" target="_blank"&gt;NI Direct&lt;/a&gt; for help.</value>
     </data>
     <data name="What you get from this service" xml:space="preserve">
         <value>What you get from this service</value>
@@ -77,7 +77,7 @@
         <value>If this is your first visit, it takes around &lt;strong&gt;10 minutes&lt;/strong&gt; to answer the questions and receive recommendations tailored to you and your home.</value>
     </data>
     <data name="ReturnToRecommendationsAndActionPlanIfYouNeedToString" xml:space="preserve">
-        <value>You can &lt;a href="@Url.Action(nameof(EnergyEfficiencyController.NewOrReturningUser_Get), "EnergyEfficiency")"&gt;return to your recommendations and action plan&lt;/a&gt; if you need to.</value>
+        <value>You can &lt;a href="{0}"&gt;return to your recommendations and action plan&lt;/a&gt; if you need to.</value>
     </data>
     <data name="Start now" xml:space="preserve">
         <value>Start now</value>
@@ -104,7 +104,7 @@
         <value>GOV.UKFind energy improvements suitable for your home</value>
     </data>
     <data name="This is a new service string" xml:space="preserve">
-        <value>This is a new service – your &lt;a class="govuk-link" href="@ViewBag.FeedbackUrl" target="_blank"&gt;feedback (opens in new tab)&lt;/a&gt; will help us to improve it.</value>
+        <value>This is a new service – your &lt;a class="govuk-link" href="{0}" target="_blank"&gt;feedback (opens in new tab)&lt;/a&gt; will help us to improve it.</value>
     </data>
     <data name="Back" xml:space="preserve">
         <value>Back</value>
@@ -208,14 +208,14 @@
     <data name="This service only provides advice for people who own their own home in England and Wales." xml:space="preserve">
         <value>This service only provides advice for people who own their own home in England and Wales.</value>
     </data>
-    <data name="For general energy efficiency advice and to find out ways to reduce your energy bill, visit the Energy Saving Trust website" xml:space="preserve">
-        <value>For general energy efficiency advice and to find out ways to reduce your energy bill, visit the Energy Saving Trust website</value>
+    <data name="GeneralEnergySavingTrustAdviceString" xml:space="preserve">
+        <value>For general energy efficiency advice and to find out ways to reduce your energy bill, visit the &lt;a href="{0}" target="_blank" class="govuk-link"&gt;Energy Saving Trust&lt;/a&gt; website</value>
     </data>
     <data name="Other services that might be helpful to you" xml:space="preserve">
         <value>Other services that might be helpful to you</value>
     </data>
-    <data name="Visit Home Energy Scotland to help you find ways to improve your property’s energy efficiency." xml:space="preserve">
-        <value>Visit Home Energy Scotland to help you find ways to improve your property’s energy efficiency.</value>
+    <data name="VisitHomeEnergyScotlandString" xml:space="preserve">
+        <value>Visit &lt;a href="{0}" target="_blank" class="govuk-link"&gt;Home Energy Scotland&lt;/a&gt; to help you find ways to improve your property’s energy efficiency.</value>
     </data>
     <data name="Sorry, this service isn't for you" xml:space="preserve">
         <value>Sorry, this service isn't for you</value>
@@ -223,14 +223,14 @@
     <data name="This service only provides advice for people who own their own home in England and Wales." xml:space="preserve">
         <value>This service only provides advice for people who own their own home in England and Wales.</value>
     </data>
-    <data name="For general energy efficiency advice and to find out ways to reduce your energy bill, visit the Energy Saving Trust website" xml:space="preserve">
+    <data name="GeneralEnergySavingTrustAdviceString" xml:space="preserve">
         <value>For general energy efficiency advice and to find out ways to reduce your energy bill, visit the Energy Saving Trust website</value>
     </data>
     <data name="Other services that might be helpful to you" xml:space="preserve">
         <value>Other services that might be helpful to you</value>
     </data>
-    <data name="Visit NI Direct to help you find ways to improve your property’s energy efficiency." xml:space="preserve">
-        <value>Visit NI Direct to help you find ways to improve your property’s energy efficiency.</value>
+    <data name="VisitNIDirectString" xml:space="preserve">
+        <value>Visit &lt;a href="{0}" target="_blank" class="govuk-link"&gt;NI Direct&lt;/a&gt; to help you find ways to improve your property’s energy efficiency.</value>
     </data>
     <data name="Sorry, this service isn't for you" xml:space="preserve">
         <value>Sorry, this service isn't for you</value>
@@ -238,7 +238,7 @@
     <data name="This service only provides advice for people who own their own home in England and Wales." xml:space="preserve">
         <value>This service only provides advice for people who own their own home in England and Wales.</value>
     </data>
-    <data name="For general energy efficiency advice and to find out ways to reduce your energy bill, visit the Energy Saving Trust website" xml:space="preserve">
+    <data name="GeneralEnergySavingTrustAdviceString" xml:space="preserve">
         <value>For general energy efficiency advice and to find out ways to reduce your energy bill, visit the Energy Saving Trust website</value>
     </data>
     <data name="Do you own your property?" xml:space="preserve">
@@ -349,14 +349,8 @@
     <data name="Find your EPC" xml:space="preserve">
         <value>Find your EPC</value>
     </data>
-    <data name="0.664583333" xml:space="preserve">
-        <value>0.664583333</value>
-    </data>
     <data name="We found multiple Energy Performance Certificates that might be yours" xml:space="preserve">
         <value>We found multiple Energy Performance Certificates that might be yours</value>
-    </data>
-    <data name="0.665277778" xml:space="preserve">
-        <value>0.665277778</value>
     </data>
     <data name="One of these certificates may be registered to your property or to the properties nearby that share part of your address." xml:space="preserve">
         <value>One of these certificates may be registered to your property or to the properties nearby that share part of your address.</value>
@@ -369,9 +363,6 @@
     </data>
     <data name="Please choose your address if it is listed, otherwise choose ‘My address is not listed here’" xml:space="preserve">
         <value>Please choose your address if it is listed, otherwise choose ‘My address is not listed here’</value>
-    </data>
-    <data name="0.665972222" xml:space="preserve">
-        <value>0.665972222</value>
     </data>
     <data name="You can still continue to use this service as there are further questions that can help determine the kind of measures you can take." xml:space="preserve">
         <value>You can still continue to use this service as there are further questions that can help determine the kind of measures you can take.</value>
@@ -634,23 +625,23 @@
     <data name="A narrower wall is probably a solid wall. Stone walls may be thicker still but are usually solid." xml:space="preserve">
         <value>A narrower wall is probably a solid wall. Stone walls may be thicker still but are usually solid.</value>
     </data>
-    <data name="Homes of your type typically have cavity walls." xml:space="preserve">
-        <value>Homes of your type typically have cavity walls.</value>
+    <data name="HomesOfYourTypeTypicallyHaveCavityWallsString" xml:space="preserve">
+        <value>Homes of your type typically have &lt;strong&gt;cavity walls.&lt;/strong&gt;</value>
     </data>
-    <data name="Homes of your type typically have solid walls." xml:space="preserve">
-        <value>Homes of your type typically have solid walls.</value>
+    <data name="HomesOfYourTypeTypicallyHaveSolidWallsString" xml:space="preserve">
+        <value>Homes of your type typically have &lt;strong&gt;solid walls.&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your home has solid walls." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your home has solid walls.</value>
+    <data name="EPCSuggestsYourHomeHasSolidWallsString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home has &lt;strong&gt;solid walls.&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your home has cavity walls." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your home has cavity walls.</value>
+    <data name="EPCSuggestsYourHomeHasCavityWallsString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home has &lt;strong&gt;cavity walls.&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your home has mixed solid and cavity walls." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your home has mixed solid and cavity walls.</value>
+    <data name="EPCSuggestsYourHomeHasAMixOfSolidAndCavityWallsString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home has &lt;strong&gt;mixed solid and cavity walls.&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your home has another type of walls." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your home has another type of walls.</value>
+    <data name="EPCSuggestsYourHomeHasAnotherTypeOfWallsString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home has &lt;strong&gt;another type of walls.&lt;/strong&gt;</value>
     </data>
     <data name="Solid walls" xml:space="preserve">
         <value>Solid walls</value>
@@ -685,17 +676,17 @@
     <data name="If you have solid walls, it’s unlikely they are insulated." xml:space="preserve">
         <value>If you have solid walls, it’s unlikely they are insulated.</value>
     </data>
-    <data name="Homes of your type typically have uninsulated solid walls" xml:space="preserve">
-        <value>Homes of your type typically have uninsulated solid walls</value>
+    <data name="HomesOfYourTypeTypicallyHaveUninsulatedSolidWallsString" xml:space="preserve">
+        <value>Homes of your type typically have &lt;strong&gt;uninsulated solid walls&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your solid walls are insulated." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your solid walls are insulated.</value>
+    <data name="EPCSuggestsAllSolidWallsAreInsulatedString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests &lt;strong&gt;your solid walls are insulated.&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your solid walls are uninsulated" xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your solid walls are uninsulated</value>
+    <data name="EPCSuggestsAllSolidWallsAreUninsulatedString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests &lt;strong&gt;your solid walls are uninsulated.&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests some of your solid walls are insulated" xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests some of your solid walls are insulated</value>
+    <data name="EPCSuggestsSomeSolidWallsAreUninsulatedString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests &lt;strong&gt;some of your solid walls are insulated.&lt;/strong&gt;</value>
     </data>
     <data name="Yes, they are all insulated" xml:space="preserve">
         <value>Yes, they are all insulated</value>
@@ -727,17 +718,17 @@
     <data name="If there are small, filled 22 millimetre holes at regular intervals around the outside walls, it’s a sign they may have been insulated." xml:space="preserve">
         <value>If there are small, filled 22 millimetre holes at regular intervals around the outside walls, it’s a sign they may have been insulated.</value>
     </data>
-    <data name="Homes of your type typically have uninsulated cavity walls." xml:space="preserve">
-        <value>Homes of your type typically have uninsulated cavity walls.</value>
+    <data name="HomesOfYourTypeTypicallyHaveUninsulatedCavityWallsString" xml:space="preserve">
+        <value>Homes of your type typically have &lt;/strong&gt;uninsulated cavity walls&lt;/strong&gt;.</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your cavity walls are not insulated." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your cavity walls are not insulated.</value>
+    <data name="EPCSuggestsNoCavityWallsInsulatedString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests &lt;strong&gt;your cavity walls are not insulated.&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests some of your cavity walls are insulated" xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests some of your cavity walls are insulated</value>
+    <data name="EPCSuggestsSomeCavityWallsInsulatedString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests &lt;strong&gt;some of your cavity walls are insulated.&lt;/strong&gt;</value>
     </data>
-    <data name=" Your 2013 Energy Performance Certificate suggests your cavity walls are insulated" xml:space="preserve">
-        <value> Your 2013 Energy Performance Certificate suggests your cavity walls are insulated</value>
+    <data name="EPCSuggestsAllCavityWallsInsulatedString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests &lt;strong&gt;your cavity walls are insulated.&lt;/strong&gt;</value>
     </data>
     <data name="Yes, they are all insulated" xml:space="preserve">
         <value>Yes, they are all insulated</value>
@@ -769,23 +760,23 @@
     <data name="If you don’t have access to the space underneath your house, you will need to lift a corner of the carpet and underlay to have a look." xml:space="preserve">
         <value>If you don’t have access to the space underneath your house, you will need to lift a corner of the carpet and underlay to have a look.</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your home has a solid concrete floor." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your home has a solid concrete floor.</value>
+    <data name="EPCSuggestsSolidConcreteFloorString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home has a solid concrete floor.</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your home has a suspended timber floor." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your home has a suspended timber floor.</value>
+    <data name="EPCSuggestsSuspendedTimberFloorString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home has a suspended timber floor.</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your home has both a suspended timber floor and solid concrete floor." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your home has both a suspended timber floor and solid concrete floor.</value>
+    <data name="EPCSuggestsBothSuspendedTimberAndSolidConcreteFloorString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home has both a suspended timber floor and solid concrete floor.</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your home has another type of floor." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your home has another type of floor.</value>
+    <data name="EPCSuggestsAnotherTypeOfFloorString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home has another type of floor.</value>
     </data>
-    <data name="Homes of your type typically have a suspended timber floor." xml:space="preserve">
-        <value>Homes of your type typically have a suspended timber floor.</value>
+    <data name="HomesOfYourTypeTypicallyHaveASuspendedTimberFloorString" xml:space="preserve">
+        <value>Homes of your type typically have a &lt;strong&gt;suspended timber floor&lt;/strong&gt;.</value>
     </data>
-    <data name="Homes of your type typically have a solid concrete floor." xml:space="preserve">
-        <value>Homes of your type typically have a solid concrete floor.</value>
+    <data name="HomesOfYourTypeTypicallyHaveASolidConcreteFloorString" xml:space="preserve">
+        <value>Homes of your type typically have a &lt;strong&gt;solid concrete floor&lt;/strong&gt;.</value>
     </data>
     <data name="Suspended timber" xml:space="preserve">
         <value>Suspended timber</value>
@@ -820,17 +811,17 @@
     <data name="Suspended timber floors were rarely built with insulation, so this would need to have been installed after." xml:space="preserve">
         <value>Suspended timber floors were rarely built with insulation, so this would need to have been installed after.</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your home's ground floor is insulated." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your home's ground floor is insulated.</value>
+    <data name="EPCSuggestsGroundFloorIsInsulatedString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home's ground floor &lt;strong&gt;is insulated.&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your home's ground floor is not insulated." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your home's ground floor is not insulated.</value>
+    <data name="EPCSuggestsGroundFloorIsNotInsulatedString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home's ground floor &lt;strong&gt;is not insulated.&lt;/strong&gt;</value>
     </data>
-    <data name="Homes of your type typically do not have insulated floors." xml:space="preserve">
-        <value>Homes of your type typically do not have insulated floors.</value>
+    <data name="HomesOfYourTypeTypicallyDoNotHaveInsulatedFloorsString" xml:space="preserve">
+        <value>Homes of your type typically &lt;strong&gt;do not have insulated floors.&lt;/strong&gt;</value>
     </data>
-    <data name="Homes of your type typically have insulated floors." xml:space="preserve">
-        <value>Homes of your type typically have insulated floors.</value>
+    <data name="HomesOfYourTypeTypicallyHaveInsulatedFloorsString" xml:space="preserve">
+        <value>Homes of your type typically &lt;strong&gt;have insulated floors.&lt;/strong&gt;</value>
     </data>
     <data name="Yes, my floor is insulated" xml:space="preserve">
         <value>Yes, my floor is insulated</value>
@@ -853,14 +844,14 @@
     <data name="A flat roof is completely, or almost, level, with no obvious slope or angle." xml:space="preserve">
         <value>A flat roof is completely, or almost, level, with no obvious slope or angle.</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests you have a flat roof" xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests you have a flat roof</value>
+    <data name="EPCSuggestsFlatRoofString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests you have a &lt;strong&gt;flat&lt;/strong&gt; roof.</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests you have a pitched roof" xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests you have a pitched roof</value>
+    <data name="EPCSuggestsPitchedRoofString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests you have a &lt;strong&gt;pitched&lt;/strong&gt; roof.</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests you have a mixed flat and pitched roof" xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests you have a mixed flat and pitched roof</value>
+    <data name="EPCSuggestsMixedPitchedAndFlatRoofString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests you have a &lt;strong&gt;mixed flat and pitched&lt;/strong&gt; roof.</value>
     </data>
     <data name="Yes, I only have a flat roof or roofs" xml:space="preserve">
         <value>Yes, I only have a flat roof or roofs</value>
@@ -871,9 +862,6 @@
     <data name="No, I only have a pitched roof or roofs" xml:space="preserve">
         <value>No, I only have a pitched roof or roofs</value>
     </data>
-    <data name="Do you have a loft that hasn’t been converted into a room?" xml:space="preserve">
-        <value>Do you have a loft that hasn’t been converted into a room?</value>
-    </data>
     <data name="Help me decide if I have a loft" xml:space="preserve">
         <value>Help me decide if I have a loft</value>
     </data>
@@ -883,11 +871,11 @@
     <data name="If all the space under your pitched roof, or nearly all the space, is used as living space with finished walls and ceilings then the loft has been converted into a room." xml:space="preserve">
         <value>If all the space under your pitched roof, or nearly all the space, is used as living space with finished walls and ceilings then the loft has been converted into a room.</value>
     </data>
-    <data name="Homes of your type typically have a loft." xml:space="preserve">
-        <value>Homes of your type typically have a loft.</value>
+    <data name="HomesOfYourTypeTypicallyHaveALoft" xml:space="preserve">
+        <value>Homes of your type typically &lt;strong&gt;have a loft.&lt;/strong&gt;</value>
     </data>
-    <data name="Homes of your type typically do not have a loft." xml:space="preserve">
-        <value>Homes of your type typically do not have a loft.</value>
+    <data name="HomesOfYourTypeTypicallyDoNotHaveALoftString" xml:space="preserve">
+        <value>Homes of your type typically &lt;/strong&gt;do not have a loft.&lt;/strong&gt;</value>
     </data>
     <data name="Yes, I have a loft that hasn't been converted into a room" xml:space="preserve">
         <value>Yes, I have a loft that hasn't been converted into a room</value>
@@ -928,11 +916,11 @@
     <data name="Your 2013 Energy Performance Certificate suggests your loft is not fully insulated as it has less than 200mm of insulation." xml:space="preserve">
         <value>Your 2013 Energy Performance Certificate suggests your loft is not fully insulated as it has less than 200mm of insulation.</value>
     </data>
-    <data name="Homes of your type typically have less than 200mm of insulation" xml:space="preserve">
-        <value>Homes of your type typically have less than 200mm of insulation</value>
+    <data name="HomesOfYourTypeTypicallyHaveLessThan200mmOfInsulationString" xml:space="preserve">
+        <value>Homes of your type typically &lt;strong&gt;have less than 200mm of insulation.&lt;/strong&gt;</value>
     </data>
-    <data name="Homes of your type are typically fully insulated with at least 200mm of insulation." xml:space="preserve">
-        <value>Homes of your type are typically fully insulated with at least 200mm of insulation.</value>
+    <data name="HomesOfYourTypeAreTypicallyFullyInsulatedWithAtLeast200mmOfInsulationString" xml:space="preserve">
+        <value>Homes of your type are typically &lt;strong&gt;fully insulated with at least 200mm of insulation.&lt;/strong&gt;</value>
     </data>
     <data name="Yes, there is at least 200mm of insulation in my loft" xml:space="preserve">
         <value>Yes, there is at least 200mm of insulation in my loft</value>
@@ -958,20 +946,20 @@
     <data name="Secondary glazing is when an additional independent window is fitted inside, behind the main window. This is commonly used in conservation areas to improve the energy efficiency of the window without replacing it." xml:space="preserve">
         <value>Secondary glazing is when an additional independent window is fitted inside, behind the main window. This is commonly used in conservation areas to improve the energy efficiency of the window without replacing it.</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests all your windows are single glazed." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests all your windows are single glazed.</value>
+    <data name="EPCSuggestsAllWindowsAreSingleGlazedString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests &lt;strong&gt;all your windows are single glazed.&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests at least one of your windows is single glazed." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests at least one of your windows is single glazed.</value>
+    <data name="EPCSuggestsAtLeastOneWindowSingleGlazedString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests &lt;strong&gt;at least one of your windows is single glazed.&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests all your windows are double, triple or secondary glazed." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests all your windows are double, triple or secondary glazed.</value>
+    <data name="EPCSuggestsAllYourWindowsAreDoubleOrTripleGlazedString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests &lt;strong&gt;all your windows are double, triple or secondary glazed.&lt;/strong&gt;</value>
     </data>
-    <data name="Windows in homes of your type were typically originally built with single glazing, but they may have been replaced." xml:space="preserve">
-        <value>Windows in homes of your type were typically originally built with single glazing, but they may have been replaced.</value>
+    <data name="HomesOfYourTypeTypicallyWereBuiltWithSingleGlazingString" xml:space="preserve">
+        <value>Windows in homes of your type &lt;strong&gt;were typically originally built with single glazing, but they may have been replaced.&lt;/strong&gt;</value>
     </data>
-    <data name="Windows in homes of your type typically all have double, triple or secondary glazing." xml:space="preserve">
-        <value>Windows in homes of your type typically all have double, triple or secondary glazing.</value>
+    <data name="HomesOfYourTypeTypicallyWereBuiltWithSingleDoubleOrTripleGlazingString" xml:space="preserve">
+        <value>Windows in homes of your type &lt;strong&gt;typically all have double, triple or secondary glazing.&lt;/strong&gt;</value>
     </data>
     <data name="Yes, all the windows are single glazed" xml:space="preserve">
         <value>Yes, all the windows are single glazed</value>
@@ -1042,35 +1030,32 @@
     <data name="A heat pump transfers heat energy from the outdoor environment inside, either through a warm-air system or through radiators or underfloor heating" xml:space="preserve">
         <value>A heat pump transfers heat energy from the outdoor environment inside, either through a warm-air system or through radiators or underfloor heating</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your main heating system is direct action electric." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your main heating system is direct action electric.</value>
-    </data>
     <data name="If you have more than one heating type, select the system that you use more often, or that is able to heat the whole home. For example, select ‘Oil boiler’ if you have an oil boiler and wood burning stove." xml:space="preserve">
         <value>If you have more than one heating type, select the system that you use more often, or that is able to heat the whole home. For example, select ‘Oil boiler’ if you have an oil boiler and wood burning stove.</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your main heating system is a gas boiler" xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your main heating system is a gas boiler</value>
+    <data name="EPCSuggestsMainHeatingIsGasBoilerString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;a gas boiler&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your main heating system is an oil boiler." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your main heating system is an oil boiler.</value>
+    <data name="EPCSuggestsMainHeatingIsOilBoilerString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;an oil boiler.&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your main heating system is an LPG boiler" xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your main heating system is an LPG boiler</value>
+    <data name="EPCSuggestsMainHeatingIsLPGBoilerString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;an LPG boiler&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your main heating system is storage heating" xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your main heating system is storage heating</value>
+    <data name="EPCSuggestsMainHeatingIsStorageString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;storage heating&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your main heating system is direct action electric" xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your main heating system is direct action electric</value>
+    <data name="EPCSuggestsMainHeatingIsDirectActionElectricString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;direct action electric&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your main heating system is a heat pump" xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your main heating system is a heat pump</value>
+    <data name="EPCSuggestsMainHeatingIsHeatPumpString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;a heat pump&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your main heating system is of another type" xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your main heating system is of another type</value>
+    <data name="EPCSuggestsMainHeatingIsOtherTypeString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;of another type&lt;/strong&gt;</value>
     </data>
-    <data name="The most common method of heating is with a gas boiler." xml:space="preserve">
-        <value>The most common method of heating is with a gas boiler.</value>
+    <data name="MostCommonMethodOfHeatingIsGasBoilerString" xml:space="preserve">
+        <value>The most common method of heating is with &lt;strong&gt;a gas boiler.&lt;/strong&gt;</value>
     </data>
     <data name="Gas boiler" xml:space="preserve">
         <value>Gas boiler</value>
@@ -1111,11 +1096,11 @@
     <data name="If you’re not sure what a hot water cylinder is, we’ve provided some guidance on this page that could help." xml:space="preserve">
         <value>If you’re not sure what a hot water cylinder is, we’ve provided some guidance on this page that could help.</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your home does have a hot water cylinder." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your home does have a hot water cylinder.</value>
+    <data name="EPCSuggestsYouDoHaveHotWaterCylinderString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home &lt;strong&gt;does have a hot water cylinder.&lt;/strong&gt;</value>
     </data>
-    <data name="Your 2013 Energy Performance Certificate suggests your home does not have a hot water cylinder." xml:space="preserve">
-        <value>Your 2013 Energy Performance Certificate suggests your home does not have a hot water cylinder.</value>
+    <data name="EPCSuggestsYouDoNotHaveHotWaterCylinderString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home &lt;strong&gt;does not have a hot water cylinder.&lt;/strong&gt;</value>
     </data>
     <data name="Yes, I have a hot water cylinder" xml:space="preserve">
         <value>Yes, I have a hot water cylinder</value>
@@ -1240,8 +1225,8 @@
     <data name="What temperature should I heat my home to?" xml:space="preserve">
         <value>What temperature should I heat my home to?</value>
     </data>
-    <data name="The World Health Organisation recommends living areas are heated between 18 and 21 degrees Celsius (°C)." xml:space="preserve">
-        <value>The World Health Organisation recommends living areas are heated between 18 and 21 degrees Celsius (°C).</value>
+    <data name="The World Health Organisation recommends living areas are heated between 18 and 21 degrees Celsius (&amp;deg;C)." xml:space="preserve">
+        <value>The World Health Organisation recommends living areas are heated between 18 and 21 degrees Celsius (&amp;deg;C).</value>
     </data>
     <data name="Age UK suggest the elderly heat their main living areas to 21 degrees, while heating the rest of their home to at least 18 degrees." xml:space="preserve">
         <value>Age UK suggest the elderly heat their main living areas to 21 degrees, while heating the rest of their home to at least 18 degrees.</value>
@@ -1258,7 +1243,7 @@
     <data name="Question skipped" xml:space="preserve">
         <value>Question skipped</value>
     </data>
-    <data name="The most common method of heating is with a gas boiler." xml:space="preserve">
+    <data name="MostCommonMethodOfHeatingIsGasBoilerString" xml:space="preserve">
         <value>The most common method of heating is with a gas boiler.</value>
     </data>
     <data name="Are your solid walls insulated?" xml:space="preserve">
@@ -1288,9 +1273,6 @@
     <data name="Outdoor space for heat pump " xml:space="preserve">
         <value>Outdoor space for heat pump </value>
     </data>
-    <data name="Heating system " xml:space="preserve">
-        <value>Heating system </value>
-    </data>
     <data name="Size of household" xml:space="preserve">
         <value>Size of household</value>
     </data>
@@ -1302,12 +1284,6 @@
     </data>
     <data name="A mix of both suspended timber and solid concrete" xml:space="preserve">
         <value>A mix of both suspended timber and solid concrete</value>
-    </data>
-    <data name="3 hours in the morning" xml:space="preserve">
-        <value>3 hours in the morning</value>
-    </data>
-    <data name="3 hours in the afternoon and evening" xml:space="preserve">
-        <value>3 hours in the afternoon and evening</value>
     </data>
     <data name="Important" xml:space="preserve">
         <value>Important</value>
@@ -1330,8 +1306,8 @@
     <data name="If you like any of these recommendations, you can save them to your action plan before you move on." xml:space="preserve">
         <value>If you like any of these recommendations, you can save them to your action plan before you move on.</value>
     </data>
-    <data name="The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings." xml:space="preserve">
-        <value>The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings.</value>
+    <data name="CostsAndSavingsAreEstimatesWarningTextString" xml:space="preserve">
+        <value>The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on the January 2024 energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
     </data>
     <data name="Getting back to your recommendations once you leave" xml:space="preserve">
         <value>Getting back to your recommendations once you leave</value>
@@ -1375,8 +1351,8 @@
     <data name="If you’d like to do more to improve the energy efficiency of your home, consider the following:" xml:space="preserve">
         <value>If you’d like to do more to improve the energy efficiency of your home, consider the following:</value>
     </data>
-    <data name="When buying new appliances, upgrade to an energy efficient one - Learn about energy labels" xml:space="preserve">
-        <value>When buying new appliances, upgrade to an energy efficient one - Learn about energy labels</value>
+    <data name="WhenBuyingNewAppliancesUpgradeEnergyLabelsString" xml:space="preserve">
+        <value>When buying new appliances, upgrade to an energy efficient one - &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Learn about energy labels&lt;/a&gt;</value>
     </data>
     <data name="Install a heat pump – " xml:space="preserve">
         <value>Install a heat pump – </value>
@@ -1390,14 +1366,14 @@
     <data name="Learn about energy labels" xml:space="preserve">
         <value>Learn about energy labels</value>
     </data>
-    <data name="Install a heat pump - Check if your home may be suitable" xml:space="preserve">
-        <value>Install a heat pump - Check if your home may be suitable</value>
+    <data name="InstallHeatPumpCheckIfHomeSuitableString" xml:space="preserve">
+        <value>Install a heat pump - &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Check if your home may be suitable&lt;/a&gt;</value>
     </data>
     <data name="Still need help?" xml:space="preserve">
         <value>Still need help?</value>
     </data>
-    <data name="You can visit the Energy Saving Trust website for more information on reducing your home’s energy use." xml:space="preserve">
-        <value>You can visit the Energy Saving Trust website for more information on reducing your home’s energy use.</value>
+    <data name="VisitEnergySavingTrustWebsiteString" xml:space="preserve">
+        <value>You can visit the &lt;a href="{0}" target="_blank" class="govuk-link"&gt;Energy Saving Trust website&lt;/a&gt; for more information on reducing your home’s energy use.</value>
     </data>
     <data name="Returning to this service" xml:space="preserve">
         <value>Returning to this service</value>
@@ -1444,14 +1420,14 @@
     <data name="You have saved 1 recommended improvement." xml:space="preserve">
         <value>You have saved 1 recommended improvement.</value>
     </data>
-    <data name="You have saved 2 recommended improvements." xml:space="preserve">
-        <value>You have saved 2 recommended improvements.</value>
+    <data name="YouHaveSavedMoreThanOneImprovementString" xml:space="preserve">
+        <value>You have saved {0} recommended improvements.</value>
     </data>
     <data name="You will be able to review your action plan once you have seen all the available recommendations." xml:space="preserve">
         <value>You will be able to review your action plan once you have seen all the available recommendations.</value>
     </data>
-    <data name="Recommendation 1 of 6" xml:space="preserve">
-        <value>Recommendation 1 of 6</value>
+    <data name="RecommendationXofYString" xml:space="preserve">
+        <value>Recommendation {0} of {1}</value>
     </data>
     <data name="Add some more loft insulation" xml:space="preserve">
         <value>Add some more loft insulation</value>
@@ -1466,7 +1442,7 @@
         <value>If some of your loft is boarded so that you can store things up there you will either need to raise this boarding up and insulate underneath it, or leave that part of the loft with thinner insulation.</value>
     </data>
     <data name="MoreInfoOnLoftInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>You can find more information on loft insulation on the &lt;a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/roof-and-loft-insulation/"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>You can find more information on loft insulation on the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="Who this improvement is suitable for" xml:space="preserve">
         <value>Who this improvement is suitable for</value>
@@ -1489,14 +1465,8 @@
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
     </data>
-    <data name="£35 a year" xml:space="preserve">
-        <value>£35 a year</value>
-    </data>
     <data name="Which adds up to" xml:space="preserve">
         <value>Which adds up to</value>
-    </data>
-    <data name="£1473 over the lifetime of the installation" xml:space="preserve">
-        <value>£1473 over the lifetime of the installation</value>
     </data>
     <data name="This could cost" xml:space="preserve">
         <value>This could cost</value>
@@ -1564,14 +1534,8 @@
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
     </data>
-    <data name="£37 a year" xml:space="preserve">
-        <value>£37 a year</value>
-    </data>
     <data name="Which adds up to" xml:space="preserve">
         <value>Which adds up to</value>
-    </data>
-    <data name="£452 over the lifetime of the installation" xml:space="preserve">
-        <value>£452 over the lifetime of the installation</value>
     </data>
     <data name="This could cost" xml:space="preserve">
         <value>This could cost</value>
@@ -1612,14 +1576,8 @@
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
     </data>
-    <data name="£180 a year" xml:space="preserve">
-        <value>£180 a year</value>
-    </data>
     <data name="Which adds up to" xml:space="preserve">
         <value>Which adds up to</value>
-    </data>
-    <data name="£3619 over the lifetime of the installation" xml:space="preserve">
-        <value>£3619 over the lifetime of the installation</value>
     </data>
     <data name="This could cost" xml:space="preserve">
         <value>This could cost</value>
@@ -1663,14 +1621,11 @@
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
     </data>
-    <data name="£267 a year" xml:space="preserve">
-        <value>£267 a year</value>
-    </data>
     <data name="Which adds up to" xml:space="preserve">
         <value>Which adds up to</value>
     </data>
-    <data name="£11239 over the lifetime of the installation" xml:space="preserve">
-        <value>£11239 over the lifetime of the installation</value>
+    <data name="£OverLifetimeOfInstallationString" xml:space="preserve">
+        <value>£{0}&lt;span class="govuk-body"&gt;&lt;b&gt;over the lifetime of the installation&lt;/b&gt;&lt;/span&gt;</value>
     </data>
     <data name="This could cost" xml:space="preserve">
         <value>This could cost</value>
@@ -1714,14 +1669,8 @@
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
     </data>
-    <data name="£261 a year" xml:space="preserve">
-        <value>£261 a year</value>
-    </data>
     <data name="Which adds up to" xml:space="preserve">
         <value>Which adds up to</value>
-    </data>
-    <data name="£9421 over the lifetime of the installation" xml:space="preserve">
-        <value>£9421 over the lifetime of the installation</value>
     </data>
     <data name="This could cost" xml:space="preserve">
         <value>This could cost</value>
@@ -1768,11 +1717,11 @@
     <data name="This could cost" xml:space="preserve">
         <value>This could cost</value>
     </data>
-    <data name="£9500 - £12000 for an air source heat pump" xml:space="preserve">
-        <value>£9500 - £12000 for an air source heat pump</value>
+    <data name="PriceRangeForAnAirSourceHeatPumpString" xml:space="preserve">
+        <value>£{0} - £{1} &lt;span class="govuk-body"&gt;&lt;b&gt;for an air source heat pump&lt;/b&gt;&lt;/span&gt;</value>
     </data>
-    <data name="£12000 - £37000 for a ground source heat pump" xml:space="preserve">
-        <value>£12000 - £37000 for a ground source heat pump</value>
+    <data name="PriceRangeForAGroundSourceHeatPumpString" xml:space="preserve">
+        <value>£{0} - £{1} &lt;span class="govuk-body"&gt;&lt;b&gt;for a ground source heat pump&lt;/b&gt;&lt;/span&gt;</value>
     </data>
     <data name="Fit solar electric panels" xml:space="preserve">
         <value>Fit solar electric panels</value>
@@ -1807,14 +1756,8 @@
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
     </data>
-    <data name="£587 a year" xml:space="preserve">
-        <value>£587 a year</value>
-    </data>
     <data name="Which adds up to" xml:space="preserve">
         <value>Which adds up to</value>
-    </data>
-    <data name="£14681 over the lifetime of the installation" xml:space="preserve">
-        <value>£14681 over the lifetime of the installation</value>
     </data>
     <data name="This could cost" xml:space="preserve">
         <value>This could cost</value>
@@ -1837,8 +1780,8 @@
     <data name="Your floor could be insulated by lifting the floorboards, fitting insulation between the joists and then putting the floorboards back. This is normally a job for a professional installer." xml:space="preserve">
         <value>Your floor could be insulated by lifting the floorboards, fitting insulation between the joists and then putting the floorboards back. This is normally a job for a professional installer.</value>
     </data>
-    <data name="You can find more information on floor insulation on the Energy Saving Trust website.(opens in a new window)" xml:space="preserve">
-        <value>You can find more information on floor insulation on the Energy Saving Trust website.(opens in a new window)</value>
+    <data name="MoreInfoOnFloorInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
+        <value>You can find more information on floor insulation on the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="You will need to completely empty the rooms that are being insulated, and remove any carpet or other floor covering, before the floor boards can be lifted." xml:space="preserve">
         <value>You will need to completely empty the rooms that are being insulated, and remove any carpet or other floor covering, before the floor boards can be lifted.</value>
@@ -1855,20 +1798,14 @@
     <data name="What you could save" xml:space="preserve">
         <value>What you could save</value>
     </data>
-    <data name="Floor insulation is typically expected to last around 42 years" xml:space="preserve">
-        <value>Floor insulation is typically expected to last around 42 years</value>
+    <data name="FloorInsulationTypicallyLastsString" xml:space="preserve">
+        <value>Floor insulation is typically expected to last &lt;b&gt;around {0} years</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
     </data>
-    <data name="£150 a year" xml:space="preserve">
-        <value>£150 a year</value>
-    </data>
     <data name="Which adds up to" xml:space="preserve">
         <value>Which adds up to</value>
-    </data>
-    <data name="£6308 over the lifetime of the installation" xml:space="preserve">
-        <value>£6308 over the lifetime of the installation</value>
     </data>
     <data name="This could cost" xml:space="preserve">
         <value>This could cost</value>
@@ -1894,7 +1831,7 @@
     <data name="Your floor could be insulated by lifting the floorboards, fitting insulation between the joists and then putting the floorboards back. This is normally a job for a professional installer." xml:space="preserve">
         <value>Your floor could be insulated by lifting the floorboards, fitting insulation between the joists and then putting the floorboards back. This is normally a job for a professional installer.</value>
     </data>
-    <data name="You can find more information on floor insulation on the Energy Saving Trust website.(opens in a new window)" xml:space="preserve">
+    <data name="MoreInfoOnFloorInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
         <value>You can find more information on floor insulation on the Energy Saving Trust website.(opens in a new window)</value>
     </data>
     <data name="CautionYou will need to completely empty the rooms that are being insulated, and remove any carpet or other floor covering, before the floor boards can be lifted." xml:space="preserve">
@@ -1912,20 +1849,14 @@
     <data name="What you could save" xml:space="preserve">
         <value>What you could save</value>
     </data>
-    <data name="Floor insulation is typically expected to last around 42 years" xml:space="preserve">
+    <data name="FloorInsulationTypicallyLastsString" xml:space="preserve">
         <value>Floor insulation is typically expected to last around 42 years</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
     </data>
-    <data name="£150 a year" xml:space="preserve">
-        <value>£150 a year</value>
-    </data>
     <data name="Which adds up to" xml:space="preserve">
         <value>Which adds up to</value>
-    </data>
-    <data name="£6308 over the lifetime of the installation" xml:space="preserve">
-        <value>£6308 over the lifetime of the installation</value>
     </data>
     <data name="This could cost" xml:space="preserve">
         <value>This could cost</value>
@@ -1981,14 +1912,8 @@
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
     </data>
-    <data name="£348 a year" xml:space="preserve">
-        <value>£348 a year</value>
-    </data>
     <data name="Which adds up to" xml:space="preserve">
         <value>Which adds up to</value>
-    </data>
-    <data name="£6969 over the lifetime of the installation" xml:space="preserve">
-        <value>£6969 over the lifetime of the installation</value>
     </data>
     <data name="This could cost" xml:space="preserve">
         <value>This could cost</value>
@@ -2002,11 +1927,8 @@
     <data name="You may also want to consider using foam collars around any exposed hot water pipes to save even more energy." xml:space="preserve">
         <value>You may also want to consider using foam collars around any exposed hot water pipes to save even more energy.</value>
     </data>
-    <data name="You can find more information on solid wall insulation on the" xml:space="preserve">
-        <value>You can find more information on solid wall insulation on the</value>
-    </data>
-    <data name="Energy Saving Trust website." xml:space="preserve">
-        <value>Energy Saving Trust website.</value>
+    <data name="MoreInfoOnHotWaterCylinderInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
+        <value>You can find more information on solid wall insulation on the&lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="Recommendation Suitable For" xml:space="preserve">
         <value>Recommendation Suitable For</value>
@@ -2017,14 +1939,14 @@
     <data name="Recommendation Lifetime" xml:space="preserve">
         <value>Recommendation Lifetime</value>
     </data>
-    <data name="Insulating hot water cylinder jackets typically last around 5 years" xml:space="preserve">
-        <value>Insulating hot water cylinder jackets typically last around 5 years</value>
+    <data name="HotWaterCylinderJacketsTypicallyLastString" xml:space="preserve">
+        <value>Insulating hot water cylinder jackets typically last &lt;b&gt;around {0} years&lt;/b&gt;</value>
     </data>
     <data name="You may well need to fit new or additional controls when you fit a new gas boiler to comply with building regulations. These will help to maximise the system’s efficiency, saving you even more money." xml:space="preserve">
         <value>You may well need to fit new or additional controls when you fit a new gas boiler to comply with building regulations. These will help to maximise the system’s efficiency, saving you even more money.</value>
     </data>
-    <data name="You can find more information on replacing your gas boiler on the Energy Saving Trust website." xml:space="preserve">
-        <value>You can find more information on replacing your gas boiler on the Energy Saving Trust website.</value>
+    <data name="MoreInfoOnGasBoilerReplacementOnEnergySavingTrustWebsiteString" xml:space="preserve">
+        <value>You can find more information on replacing your gas boiler on the&lt;a class="govuk-link" target="_blank" href="{0}"&gt; Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="You have an old or inefficient gas boiler, or your boiler is broken" xml:space="preserve">
         <value>You have an old or inefficient gas boiler, or your boiler is broken</value>
@@ -2038,14 +1960,14 @@
     <data name="Alternatively, you may want to consider fitting a low carbon heating system such as a heat pump." xml:space="preserve">
         <value>Alternatively, you may want to consider fitting a low carbon heating system such as a heat pump.</value>
     </data>
-    <data name="Gas boiler installations, and any work on a gas heating system can only be carried out by an installer on the Gas Safe Register." xml:space="preserve">
-        <value>Gas boiler installations, and any work on a gas heating system can only be carried out by an installer on the Gas Safe Register.</value>
+    <data name="Gas boiler installations, and any work on a gas heating system, can only be carried out by an installer on the Gas Safe Register." xml:space="preserve">
+        <value>Gas boiler installations, and any work on a gas heating system, can only be carried out by an installer on the Gas Safe Register.</value>
     </data>
     <data name="Recommendation Lifetime" xml:space="preserve">
         <value>Recommendation Lifetime</value>
     </data>
-    <data name="New gas boilers are typically expected to last around 5 years" xml:space="preserve">
-        <value>New gas boilers are typically expected to last around 5 years</value>
+    <data name="GasBoilersTypicallyExpectedToLast" xml:space="preserve">
+        <value>New gas boilers are typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
     </data>
     <data name="Based on the information we have collected; it looks like you have some single glazed windows in your home. Double or triple glazed windows are much better at keeping the heat in, so would help" xml:space="preserve">
         <value>Based on the information we have collected; it looks like you have some single glazed windows in your home. Double or triple glazed windows are much better at keeping the heat in, so would help</value>
@@ -2077,17 +1999,17 @@
     <data name="Your Action Plan" xml:space="preserve">
         <value>Your Action Plan</value>
     </data>
-    <data name="Here is a summary of your estimated yearly energy bill savings and cost to install the 1 recommendation you told us you would consider for your home." xml:space="preserve">
-        <value>Here is a summary of your estimated yearly energy bill savings and cost to install the 1 recommendation you told us you would consider for your home.</value>
+    <data name="SummaryOfSavingsAndCostsForSingleRecommendationString" xml:space="preserve">
+        <value>Here is a summary of your estimated yearly energy bill savings and cost to install the &lt;strong&gt;1 recommendation&lt;/strong&gt; you told us you would consider for your home.</value>
     </data>
-    <data name="Here is a summary of your estimated yearly energy bill savings and cost to install the 2 recommendations you told us you would consider for your home." xml:space="preserve">
-        <value>Here is a summary of your estimated yearly energy bill savings and cost to install the 2 recommendations you told us you would consider for your home.</value>
+    <data name="SummaryOfSavingsAndCostsForMultipleRecommendationsString" xml:space="preserve">
+        <value>Here is a summary of your estimated yearly energy bill savings and cost to install the &lt;strong&gt;{0} recommendations&lt;/strong&gt; you told us you would consider for your home.</value>
     </data>
     <data name="You could save up to" xml:space="preserve">
         <value>You could save up to</value>
     </data>
-    <data name="£0 a year" xml:space="preserve">
-        <value>£0 a year</value>
+    <data name="£AYearString" xml:space="preserve">
+        <value>£{0} a year</value>
     </data>
     <data name="The total cost of the improvements could be" xml:space="preserve">
         <value>The total cost of the improvements could be</value>
@@ -2098,8 +2020,8 @@
     <data name="How did we calculate these figures?" xml:space="preserve">
         <value>How did we calculate these figures?</value>
     </data>
-    <data name="Recommendation Typical savings per year Typical costs " xml:space="preserve">
-        <value>Recommendation Typical savings per year Typical costs </value>
+    <data name="Recommendation" xml:space="preserve">
+        <value>Recommendation </value>
     </data>
     <data name="Install a heat pump" xml:space="preserve">
         <value>Install a heat pump</value>
@@ -2107,8 +2029,8 @@
     <data name="Heat pumps use the energy outside to heat your home and hot water" xml:space="preserve">
         <value>Heat pumps use the energy outside to heat your home and hot water</value>
     </data>
-    <data name="- - Revisit recommendation" xml:space="preserve">
-        <value>- - Revisit recommendation</value>
+    <data name="Revisit recommendation" xml:space="preserve">
+        <value>Revisit recommendation</value>
     </data>
     <data name="Next we have steps to help you action these recommendations." xml:space="preserve">
         <value>Next we have steps to help you action these recommendations.</value>
@@ -2134,11 +2056,8 @@
     <data name="Boiler Upgrade Scheme" xml:space="preserve">
         <value>Boiler Upgrade Scheme</value>
     </data>
-    <data name="To find out if you are eligible for a Sustainable Warmth grant please contact your Local Authority which can be found on https://www.gov.uk/find-local-council to check if they offer funding." xml:space="preserve">
-        <value>To find out if you are eligible for a Sustainable Warmth grant please contact your Local Authority which can be found on https://www.gov.uk/find-local-council to check if they offer funding.</value>
-    </data>
-    <data name="If you are worried about affording your energy bills, Ofgem has a helpful guide to the schemes, grants and benefits that may be available to you." xml:space="preserve">
-        <value>If you are worried about affording your energy bills, Ofgem has a helpful guide to the schemes, grants and benefits that may be available to you.</value>
+    <data name="OfgemGuideToSchemesAndGrantsString" xml:space="preserve">
+        <value>If you are worried about affording your energy bills, Ofgem has a &lt;a class="govuk-link" href="{0}" target="_blank"&gt;helpful guide&lt;/a&gt;to the schemes, grants and benefits that may be available to you.</value>
     </data>
     <data name="2. Consult with a qualified installer" xml:space="preserve">
         <value>2. Consult with a qualified installer</value>
@@ -2146,14 +2065,14 @@
     <data name="We recommend consulting with a qualified installer to confirm what changes you can make to your property." xml:space="preserve">
         <value>We recommend consulting with a qualified installer to confirm what changes you can make to your property.</value>
     </data>
-    <data name="You can get help finding a qualified installer of heat pumps or solar panels in your area by visiting the MCS website." xml:space="preserve">
-        <value>You can get help finding a qualified installer of heat pumps or solar panels in your area by visiting the MCS website.</value>
+    <data name="GetHelpFindingInstallerOnMCSWebsiteString" xml:space="preserve">
+        <value>You can get help finding a qualified installer of heat pumps or solar panels in your area by visiting the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;MCS website.&lt;/a&gt;</value>
     </data>
-    <data name="For all other changes to your property, get help finding a qualified installer in your area by visiting the TrustMark website." xml:space="preserve">
-        <value>For all other changes to your property, get help finding a qualified installer in your area by visiting the TrustMark website.</value>
+    <data name="HelpFindingQualifiedInstallerOnTrustMarkWebsiteString" xml:space="preserve">
+        <value>For all other changes to your property, get help finding a qualified installer in your area by visiting the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;TrustMark website.&lt;/a&gt;</value>
     </data>
-    <data name="3. Research improvements you are unsure about" xml:space="preserve">
-        <value>3. Research improvements you are unsure about</value>
+    <data name="Research improvements you are unsure about" xml:space="preserve">
+        <value>Research improvements you are unsure about</value>
     </data>
     <data name="You told us you would like some more information on one or more of the recommendations before considering them for your property:" xml:space="preserve">
         <value>You told us you would like some more information on one or more of the recommendations before considering them for your property:</value>
@@ -2176,19 +2095,19 @@
     <data name="Insulate your cavity walls" xml:space="preserve">
         <value>Insulate your cavity walls</value>
     </data>
-    <data name="4. Other ways to save energy" xml:space="preserve">
-        <value>4. Other ways to save energy</value>
+    <data name="Other ways to save energy" xml:space="preserve">
+        <value>Other ways to save energy</value>
     </data>
     <data name="If you’d like to do more to improve the energy efficiency of your home, consider the following:" xml:space="preserve">
         <value>If you’d like to do more to improve the energy efficiency of your home, consider the following:</value>
     </data>
-    <data name="Visit the Help for Households website for even more ways to save energy and reduce your bills." xml:space="preserve">
-        <value>Visit the Help for Households website for even more ways to save energy and reduce your bills.</value>
+    <data name="VisitTheHelpForHouseholdsWebsiteString" xml:space="preserve">
+        <value>Visit the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Help for Households&lt;/a&gt; website for even more ways to save energy and reduce your bills.</value>
     </data>
-    <data name="When buying new appliances, upgrade to an energy efficient one - Learn about energy labels" xml:space="preserve">
+    <data name="WhenBuyingNewAppliancesUpgradeEnergyLabelsString" xml:space="preserve">
         <value>When buying new appliances, upgrade to an energy efficient one - Learn about energy labels</value>
     </data>
-    <data name="Install a heat pump - Check if your home may be suitable" xml:space="preserve">
+    <data name="InstallHeatPumpCheckIfHomeSuitableString" xml:space="preserve">
         <value>Install a heat pump - Check if your home may be suitable</value>
     </data>
     <data name="Returning to your Action Plan" xml:space="preserve">
@@ -2227,8 +2146,8 @@
     <data name="We have provided recommendations that are most suitable for your home based on the answers you provided earlier." xml:space="preserve">
         <value>We have provided recommendations that are most suitable for your home based on the answers you provided earlier.</value>
     </data>
-    <data name="If something doesn’t look right you can view and change your answers here." xml:space="preserve">
-        <value>If something doesn’t look right you can view and change your answers here.</value>
+    <data name="ChangeAnswersIfSomethingDoesNotLookRightString" xml:space="preserve">
+        <value>If something doesn’t look right you can &lt;a href="{0}"&gt;view and change your answers here.&lt;/a&gt;</value>
     </data>
     <data name="Get help using the online service" xml:space="preserve">
         <value>Get help using the online service</value>
@@ -2473,8 +2392,8 @@
     <data name="Invalid reference" xml:space="preserve">
         <value>Invalid reference</value>
     </data>
-    <data name="Return to the home page" xml:space="preserve">
-        <value>Return to the home page</value>
+    <data name="ReturnToHomePageString" xml:space="preserve">
+        <value>Return to the &lt;a href="{0}" class="govuk-link"&gt;home page&lt;/a&gt;</value>
     </data>
     <data name="Sorry, there is a problem with the service" xml:space="preserve">
         <value>Sorry, there is a problem with the service</value>
@@ -2485,13 +2404,10 @@
     <data name="We have not saved your answers. When the service is available, you will have to start again." xml:space="preserve">
         <value>We have not saved your answers. When the service is available, you will have to start again.</value>
     </data>
-    <data name="For general energy efficiency advice and to find out ways to reduce your energy bill, visit the Energy Saving Trust website." xml:space="preserve">
-        <value>For general energy efficiency advice and to find out ways to reduce your energy bill, visit the Energy Saving Trust website.</value>
-    </data>
     <data name="Health Check Passed" xml:space="preserve">
         <value>Health Check Passed</value>
     </data>
-    <data name="Return to the home page" xml:space="preserve">
+    <data name="ReturnToHomePageString" xml:space="preserve">
         <value>Return to the home page</value>
     </data>
     <data name="Cookies on our service" xml:space="preserve">
@@ -2512,11 +2428,11 @@
     <data name="View cookies" xml:space="preserve">
         <value>View cookies</value>
     </data>
-    <data name="You’ve rejected additional cookies. You can change your cookie settings at any time." xml:space="preserve">
-        <value>You’ve rejected additional cookies. You can change your cookie settings at any time.</value>
+    <data name="You’ve rejected additional cookies." xml:space="preserve">
+        <value>You’ve rejected additional cookies.</value>
     </data>
-    <data name="You’ve accepted additional cookies. You can change your cookie settings at any time." xml:space="preserve">
-        <value>You’ve accepted additional cookies. You can change your cookie settings at any time.</value>
+    <data name="You’ve accepted additional cookies." xml:space="preserve">
+        <value>You’ve accepted additional cookies. </value>
     </data>
     <data name="Hide cookie message" xml:space="preserve">
         <value>Hide cookie message</value>
@@ -2548,14 +2464,14 @@
     <data name="We’ve also made the website text as simple as possible to understand." xml:space="preserve">
         <value>We’ve also made the website text as simple as possible to understand.</value>
     </data>
-    <data name="AbilityNet has advice on making your device easier to use if you have a disability." xml:space="preserve">
-        <value>AbilityNet has advice on making your device easier to use if you have a disability.</value>
+    <data name="AbilityNetAdviceLinkString" xml:space="preserve">
+        <value>&lt;a class="govuk-link" href="{0}" target="_blank"&gt;AbilityNet&lt;/a&gt; has advice on making your device easier to use if you have a disability.</value>
     </data>
     <data name="Reporting accessibility problems with this website" xml:space="preserve">
         <value>Reporting accessibility problems with this website</value>
     </data>
-    <data name="We’re always looking to improve the accessibility of this website. If you find any problems not listed on this page or think we’re not meeting accessibility requirements please give feedback (opens in new tab)." xml:space="preserve">
-        <value>We’re always looking to improve the accessibility of this website. If you find any problems not listed on this page or think we’re not meeting accessibility requirements please give feedback (opens in new tab).</value>
+    <data name="HelpUsImproveAccessibilityFeedbackString" xml:space="preserve">
+        <value>We’re always looking to improve the accessibility of this website. If you find any problems not listed on this page or think we’re not meeting accessibility requirements please &lt;a class="govuk-link" href="{0}" target="_blank"&gt;give feedback (opens in new tab)&lt;/a&gt;.</value>
     </data>
     <data name="Enforcement procedure" xml:space="preserve">
         <value>Enforcement procedure</value>
@@ -2569,8 +2485,8 @@
     <data name="Compliance status" xml:space="preserve">
         <value>Compliance status</value>
     </data>
-    <data name="This website is compliant with the Web Content Accessibility Guidelines version 2.1 AA standard." xml:space="preserve">
-        <value>This website is compliant with the Web Content Accessibility Guidelines version 2.1 AA standard.</value>
+    <data name="CompliantWithWebContentAccessibilityGuidelinesString" xml:space="preserve">
+        <value>This website is compliant with the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Web Content Accessibility Guidelines version 2.1 AA standard&lt;/a&gt;.</value>
     </data>
     <data name="Content that’s not within the scope of the accessibility regulations" xml:space="preserve">
         <value>Content that’s not within the scope of the accessibility regulations</value>
@@ -2611,8 +2527,8 @@
     <data name="Your name, email address and any other information sent directly to us via our email feedback function." xml:space="preserve">
         <value>Your name, email address and any other information sent directly to us via our email feedback function.</value>
     </data>
-    <data name="We may also collect and process anonymised information as outlined in our cookie policy ." xml:space="preserve">
-        <value>We may also collect and process anonymised information as outlined in our cookie policy .</value>
+    <data name="WeMayAlsoCollectAndProcessAnonymisedInformationCookiePolicyString" xml:space="preserve">
+        <value>We may also collect and process anonymised information as outlined in our &lt;a class="govuk-link" href="{0}" target="_blank"&gt;cookie policy&lt;/a&gt;.</value>
     </data>
     <data name="Purpose" xml:space="preserve">
         <value>Purpose</value>
@@ -2629,8 +2545,8 @@
     <data name="Your personal data will be shared by us with other Government Departments or public authorities where necessary. We may share your data if we are required to do so by law, for example by court order or to prevent fraud or other crime." xml:space="preserve">
         <value>Your personal data will be shared by us with other Government Departments or public authorities where necessary. We may share your data if we are required to do so by law, for example by court order or to prevent fraud or other crime.</value>
     </data>
-    <data name="As your personal data will be stored on our IT infrastructure it will also be shared with our data processors Microsoft, GOV.UK PaaS, and GOV.UK Notify." xml:space="preserve">
-        <value>As your personal data will be stored on our IT infrastructure it will also be shared with our data processors Microsoft, GOV.UK PaaS, and GOV.UK Notify.</value>
+    <data name="SharedWithDataProcessorsString" xml:space="preserve">
+        <value>As your personal data will be stored on our IT infrastructure it will also be shared with our data processors Microsoft, &lt;a href="{0}" target="_blank"&gt;GOV.UK PaaS&lt;/a&gt; and &lt;a href="{1}" target="_blank"&gt;GOV.UK Notify&lt;/a&gt;.</value>
     </data>
     <data name="Your personal data may also be shared with the Softwire Technology Ltd who developed and help to maintain this service." xml:space="preserve">
         <value>Your personal data may also be shared with the Softwire Technology Ltd who developed and help to maintain this service.</value>
@@ -2707,8 +2623,8 @@
     <data name="Monday to Friday, 9am to 5pm (except public holidays)" xml:space="preserve">
         <value>Monday to Friday, 9am to 5pm (except public holidays)</value>
     </data>
-    <data name="Email: casework@ico.org.uk" xml:space="preserve">
-        <value>Email: casework@ico.org.uk</value>
+    <data name="EmailInformationCommissioner&apos;sOfficeString" xml:space="preserve">
+        <value>Email: &lt;a class="govuk-link" href="{0}"&gt;casework@ico.org.uk&lt;/a&gt;</value>
     </data>
     <data name="Any complaint to the Information Commissioner is without prejudice to your right to seek redress through the courts." xml:space="preserve">
         <value>Any complaint to the Information Commissioner is without prejudice to your right to seek redress through the courts.</value>
@@ -2716,7 +2632,7 @@
     <data name="Contact Details" xml:space="preserve">
         <value>Contact Details</value>
     </data>
-    <data name="The data controller for your personal data is the Department for Business, Energy &amp; Industrial Strategy (BEIS)." xml:space="preserve">
+    <data name="The data controller for your personal data is the Department for Business, Energy &amp;amp; Industrial Strategy (BEIS)." xml:space="preserve">
         <value>The data controller for your personal data is the Department for Business, Energy &amp; Industrial Strategy (BEIS).</value>
     </data>
     <data name="You can contact the BEIS Data Protection Officer at:" xml:space="preserve">
@@ -2992,7 +2908,7 @@
     <data name="Your recommendations" xml:space="preserve">
         <value>Your recommendations</value>
     </data>
-    <data name="Recommendation 1 of 6" xml:space="preserve">
+    <data name="RecommendationXofYString" xml:space="preserve">
         <value>Recommendation 1 of 6</value>
     </data>
     <data name="Page not found - Home Energy Retrofit Advice - GOV.UK" xml:space="preserve">
@@ -3007,32 +2923,8 @@
     <data name="Privacy notice on Find energy improvements suitable for your home" xml:space="preserve">
         <value>Privacy notice on Find energy improvements suitable for your home</value>
     </data>
-    <data name="        Detached = 1," xml:space="preserve">
-        <value>        Detached = 1,</value>
-    </data>
     <data name="        SemiDetached = 2," xml:space="preserve">
         <value>        SemiDetached = 2,</value>
-    </data>
-    <data name="        EndTerrace = 3," xml:space="preserve">
-        <value>        EndTerrace = 3,</value>
-    </data>
-    <data name="        MidTerrace = 4," xml:space="preserve">
-        <value>        MidTerrace = 4,</value>
-    </data>
-    <data name="        EnclosedEndTerrace = 5," xml:space="preserve">
-        <value>        EnclosedEndTerrace = 5,</value>
-    </data>
-    <data name="        EnclosedMidTerrace = 6," xml:space="preserve">
-        <value>        EnclosedMidTerrace = 6,</value>
-    </data>
-    <data name="        Basement = 0," xml:space="preserve">
-        <value>        Basement = 0,</value>
-    </data>
-    <data name="        GroundFloor = 1," xml:space="preserve">
-        <value>        GroundFloor = 1,</value>
-    </data>
-    <data name="        MidFloor = 2," xml:space="preserve">
-        <value>        MidFloor = 2,</value>
     </data>
     <data name="        TopFloor = 3," xml:space="preserve">
         <value>        TopFloor = 3,</value>
@@ -3058,17 +2950,11 @@
     <data name="        SingleGlazed = 1," xml:space="preserve">
         <value>        SingleGlazed = 1,</value>
     </data>
-    <data name="        DoubleGlazed = 2," xml:space="preserve">
-        <value>        DoubleGlazed = 2,</value>
-    </data>
     <data name="        TripleGlazed = 3," xml:space="preserve">
         <value>        TripleGlazed = 3,</value>
     </data>
     <data name="  AllDayAndAllNight = 1," xml:space="preserve">
         <value>  AllDayAndAllNight = 1,</value>
-    </data>
-    <data name="        AllDayButOffAtNight = 2," xml:space="preserve">
-        <value>        AllDayButOffAtNight = 2,</value>
     </data>
     <data name="        MorningAndEvening = 3," xml:space="preserve">
         <value>        MorningAndEvening = 3,</value>
@@ -3079,41 +2965,17 @@
     <data name="     GasBoiler = 1," xml:space="preserve">
         <value>     GasBoiler = 1,</value>
     </data>
-    <data name="        LpgBoiler = 2," xml:space="preserve">
-        <value>        LpgBoiler = 2,</value>
-    </data>
     <data name="        OilBoiler = 3," xml:space="preserve">
         <value>        OilBoiler = 3,</value>
     </data>
     <data name="        StorageHeaters = 4," xml:space="preserve">
         <value>        StorageHeaters = 4,</value>
     </data>
-    <data name="        DirectActingElectric = 5," xml:space="preserve">
-        <value>        DirectActingElectric = 5,</value>
-    </data>
-    <data name="        HeatPump = 6," xml:space="preserve">
-        <value>        HeatPump = 6,</value>
-    </data>
-    <data name="        BiomassBoiler = 7," xml:space="preserve">
-        <value>        BiomassBoiler = 7,</value>
-    </data>
-    <data name="        HeatNetwork = 8," xml:space="preserve">
-        <value>        HeatNetwork = 8,</value>
-    </data>
     <data name="        SolidFuelBoiler = 9," xml:space="preserve">
         <value>        SolidFuelBoiler = 9,</value>
     </data>
     <data name="       House = 0," xml:space="preserve">
         <value>       House = 0,</value>
-    </data>
-    <data name="        Bungalow = 1," xml:space="preserve">
-        <value>        Bungalow = 1,</value>
-    </data>
-    <data name="        Flat = 2," xml:space="preserve">
-        <value>        Flat = 2,</value>
-    </data>
-    <data name="        Maisonette = 3," xml:space="preserve">
-        <value>        Maisonette = 3,</value>
     </data>
     <data name="        ParkHome = 4," xml:space="preserve">
         <value>        ParkHome = 4,</value>
@@ -3127,20 +2989,8 @@
     <data name="        PitchedRoofWithInsulation = 2," xml:space="preserve">
         <value>        PitchedRoofWithInsulation = 2,</value>
     </data>
-    <data name="        FlatRoofWithoutInsulation = 3," xml:space="preserve">
-        <value>        FlatRoofWithoutInsulation = 3,</value>
-    </data>
-    <data name="        FlatRoofWithInsulation = 4," xml:space="preserve">
-        <value>        FlatRoofWithInsulation = 4,</value>
-    </data>
     <data name="     DontKnow = 0," xml:space="preserve">
         <value>     DontKnow = 0,</value>
-    </data>
-    <data name="        CavityWallsWithoutInsulation = 1," xml:space="preserve">
-        <value>        CavityWallsWithoutInsulation = 1,</value>
-    </data>
-    <data name="        CavityWallsWithInsulation = 2," xml:space="preserve">
-        <value>        CavityWallsWithInsulation = 2,</value>
     </data>
     <data name="        SolidWallsWithoutInsulation = 3," xml:space="preserve">
         <value>        SolidWallsWithoutInsulation = 3,</value>
@@ -3463,23 +3313,14 @@
     <data name="AddLoftInsulation," xml:space="preserve">
         <value>AddLoftInsulation,</value>
     </data>
-    <data name="        FloorInsulationSuspendedFloor," xml:space="preserve">
-        <value>        FloorInsulationSuspendedFloor,</value>
-    </data>
     <data name="        UpgradeHeatingControls," xml:space="preserve">
         <value>        UpgradeHeatingControls,</value>
     </data>
     <data name="        ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing," xml:space="preserve">
         <value>        ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,</value>
     </data>
-    <data name="        InsulateCavityWalls," xml:space="preserve">
-        <value>        InsulateCavityWalls,</value>
-    </data>
     <data name="        SolarElectricPanels," xml:space="preserve">
         <value>        SolarElectricPanels,</value>
-    </data>
-    <data name="        FlatRoofInsulation," xml:space="preserve">
-        <value>        FlatRoofInsulation,</value>
     </data>
     <data name="        WallInsulationBrickAgeAToD," xml:space="preserve">
         <value>        WallInsulationBrickAgeAToD,</value>
@@ -3487,29 +3328,8 @@
     <data name="        WallInsulationOther," xml:space="preserve">
         <value>        WallInsulationOther,</value>
     </data>
-    <data name="        InsulateSolidWalls," xml:space="preserve">
-        <value>        InsulateSolidWalls,</value>
-    </data>
-    <data name="        FloorInsulationSolidFloor," xml:space="preserve">
-        <value>        FloorInsulationSolidFloor,</value>
-    </data>
-    <data name="        DraughtproofWindowsAndDoors," xml:space="preserve">
-        <value>        DraughtproofWindowsAndDoors,</value>
-    </data>
-    <data name="        HotWaterCylinderInsulation," xml:space="preserve">
-        <value>HotWaterCylinderInsulation,</value>
-    </data>
-    <data name="        HotWaterCylinderThermostat," xml:space="preserve">
-        <value>HotWaterCylinderThermostat,</value>
-    </data>
     <data name="        ReplaceCondensingBoiler," xml:space="preserve">
         <value>        ReplaceCondensingBoiler,</value>
-    </data>
-    <data name="        CondensingGasBoiler," xml:space="preserve">
-        <value>        CondensingGasBoiler,</value>
-    </data>
-    <data name="        HighHeatRetentionStorageHeaters," xml:space="preserve">
-        <value>        HighHeatRetentionStorageHeaters,</value>
     </data>
     <data name="        SolarWaterHeating," xml:space="preserve">
         <value>        SolarWaterHeating,</value>
@@ -3519,15 +3339,6 @@
     </data>
     <data name="        ReplaceSingleGlazedWindowsWithLowEDoubleGlazing," xml:space="preserve">
         <value>        ReplaceSingleGlazedWindowsWithLowEDoubleGlazing,</value>
-    </data>
-    <data name="        HighPerformanceExternalDoors," xml:space="preserve">
-        <value>        HighPerformanceExternalDoors,</value>
-    </data>
-    <data name="        InstallHeatPump," xml:space="preserve">
-        <value>        InstallHeatPump,</value>
-    </data>
-    <data name="        InsulateYourLoft" xml:space="preserve">
-        <value>        InsulateYourLoft</value>
     </data>
     <data name="Yes, I only have a flat roof or roofs" xml:space="preserve">
         <value>Yes, I only have a flat roof or roofs</value>
@@ -3633,8 +3444,8 @@
         <value>Note</value>
         <comment>Note</comment>
     </data>
-    <data name="These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings." xml:space="preserve">
-        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings.</value>
+    <data name="FiguresForTypicalInstallationWarningTextString" xml:space="preserve">
+        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the January 2024 energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
         <comment>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings.</comment>
     </data>
     <data name="1 minute" xml:space="preserve">
@@ -3646,7 +3457,7 @@
     <data name="24 hours" xml:space="preserve">
         <value>24 hours</value>
     </data>
-    <data name="Data Protection Officer Email String" xml:space="preserve">
+    <data name="DataProtectionOfficerEmailString" xml:space="preserve">
         <value>Email: &lt;a class="govuk-link" href="mailto: dataprotection@beis.gov.uk"&gt;dataprotection@beis.gov.uk&lt;/a&gt;</value>
     </data>
     <data name="Privacy Policy" xml:space="preserve">
@@ -3753,5 +3564,224 @@
     <data name="You’ve set your cookie preferences." xml:space="preserve">
         <value>You’ve set your cookie preferences.</value>
         <comment>You’ve set your cookie preferences.</comment>
+    </data>
+    <data name="VisitHistoricEnglandForHistoricBuildingInformationString" xml:space="preserve">
+        <value>Visit the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Historic England&lt;/a&gt; site for information specific to historic buildings.</value>
+    </data>
+    <data name="CostsAndSavingsBasedOnStandardAssessmentProcedureString" xml:space="preserve">
+        <value>The costs and savings you view using the services on this site are based on standards developed for Government as a way of understanding how houses and flats use energy, and how your home’s energy use could be improved. You can find out more information about these standards with the guidance published on the&lt;a class="govuk-link" target="_blank" href="{0}"&gt; Standard Assessment Procedure site.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+    </data>
+    <data name="Typical savings per year" xml:space="preserve">
+        <value>Typical savings per year</value>
+    </data>
+    <data name="Typical costs" xml:space="preserve">
+        <value>Typical costs</value>
+    </data>
+    <data name="If you are a social housing tenant, please contact your landlord directly for support." xml:space="preserve">
+        <value>If you are a social housing tenant, please contact your landlord directly for support.</value>
+        <comment>If you are a social housing tenant, please contact your landlord directly for support.</comment>
+    </data>
+    <data name="You can come back to this action plan using your reference number." xml:space="preserve">
+        <value>You can come back to this action plan using your reference number.</value>
+        <comment>You can come back to this action plan using your reference number.</comment>
+    </data>
+    <data name="You can also use this service for further tailored and impartial advice on how to improve the energy performance of your home – including but not limited to information on the relevant energy technologies, cost-effective ordering for measure installations and available Government grants schemes." xml:space="preserve">
+        <value>You can also use this service for further tailored and impartial advice on how to improve the energy performance of your home – including but not limited to information on the relevant energy technologies, cost-effective ordering for measure installations and available Government grants schemes.</value>
+        <comment>You can also use this service for further tailored and impartial advice on how to improve the energy performance of your home – including but not limited to information on the relevant energy technologies, cost-effective ordering for measure installations and available Government grants schemes.</comment>
+    </data>
+    <data name="Email sent to" xml:space="preserve">
+        <value>Email sent to</value>
+        <comment>Email sent to</comment>
+    </data>
+    <data name="are your cavity walls insulated" xml:space="preserve">
+        <value>are your cavity walls insulated</value>
+    </data>
+    <data name="Wall type" xml:space="preserve">
+        <value>Wall type</value>
+        <comment>Wall type</comment>
+    </data>
+    <data name="are your solid walls insulated" xml:space="preserve">
+        <value>are your solid walls insulated</value>
+    </data>
+    <data name="is your ground floor insulated" xml:space="preserve">
+        <value>is your ground floor insulated</value>
+    </data>
+    <data name="is any part of your roof flat" xml:space="preserve">
+        <value>is any part of your roof flat</value>
+        <comment>is any part of your roof flat</comment>
+    </data>
+    <data name="do you have a loft that hasn't been converted into a room" xml:space="preserve">
+        <value>do you have a loft that hasn't been converted into a room</value>
+        <comment>do you have a loft that hasn't been converted into a room</comment>
+    </data>
+    <data name="is there access to your loft" xml:space="preserve">
+        <value>is there access to your loft</value>
+        <comment>is there access to your loft</comment>
+    </data>
+    <data name="is your loft fully insulated" xml:space="preserve">
+        <value>is your loft fully insulated</value>
+    </data>
+    <data name="hours in the morning" xml:space="preserve">
+        <value>hours in the morning</value>
+        <comment>hours in the morning</comment>
+    </data>
+    <data name="hours in the afternoon and evening" xml:space="preserve">
+        <value>hours in the afternoon and evening</value>
+        <comment>hours in the afternoon and evening</comment>
+    </data>
+    <data name="Heating system" xml:space="preserve">
+        <value>Heating system</value>
+        <comment>Heating system</comment>
+    </data>
+    <data name="The legal basis for processing your personal data is processing necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the data controller, such as the exercise of a function of the Crown, a Minister of the Crown, or a government department; the exercise of a function conferred on a person by an enactment; the exercise of a function of either House of Parliament; or the administration of justice. In this case, in order to receive feedback about this service and to contact you for clarifications or to report service updates." xml:space="preserve">
+        <value>The legal basis for processing your personal data is processing necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the data controller, such as the exercise of a function of the Crown, a Minister of the Crown, or a government department; the exercise of a function conferred on a person by an enactment; the exercise of a function of either House of Parliament; or the administration of justice. In this case, in order to receive feedback about this service and to contact you for clarifications or to report service updates.</value>
+        <comment>The legal basis for processing your personal data is processing necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the data controller, such as the exercise of a function of the Crown, a Minister of the Crown, or a government department; the exercise of a function conferred on a person by an enactment; the exercise of a function of either House of Parliament; or the administration of justice. In this case, in order to receive feedback about this service and to contact you for clarifications or to report service updates.</comment>
+    </data>
+    <data name="DataProcessorsWithinEEAAndModelContractClausesOutsideEEAString" xml:space="preserve">
+        <value>As your personal data is stored on our IT infrastructure and shared with our data processors Microsoft, &lt;a href="{0}" target="_blank"&gt;GOV.UK PaaS&lt;/a&gt;, and &lt;a href="{1}" target="_blank"&gt;GOV.UK Notify&lt;/a&gt;, it may be transferred and stored securely in the UK and European Economic Area. Where it is the case that your personal data is stored outside the UK and EEA it will be subject to equivalent legal protection through the use of Model Contract Clauses.</value>
+        <comment>DataProcessorsWithinEEAAndModelContractClausesOutsideEEAString</comment>
+    </data>
+    <data name="FindOutIfEligibleForSustainableWarmthGrantString" xml:space="preserve">
+        <value>To find out if you are eligible for a Sustainable Warmth grant please contact your Local Authority which can be found on &lt;a class="govuk-link" href="{0}" target="_blank"&gt;https://www.gov.uk/find-local-council&lt;/a&gt; to check if they offer funding.</value>
+    </data>
+    <data name="CheckEligibilityForGBISAndHUG2String" xml:space="preserve">
+        <value>We recommend checking your eligibility for the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Great British Insulation Scheme&lt;/a&gt; and the &lt;a class="govuk-link" href="{1}" target="_blank"&gt;Home Upgrade Grant: Phase 2 Scheme&lt;/a&gt;</value>
+        <comment>CheckEligibilityForGBISAndHUG2String</comment>
+    </data>
+    <data name="WeUseInfoToSearchForEPCString" xml:space="preserve">
+        <value>We use this information to search the Energy Performance of Buildings Register for an Energy Performance Certificate that matches your address. The Energy Performance of Buildings Register is an open register and you can find more details from the &lt;a href="{0}" target="_blank"&gt;Department for Levelling Up, Housing and Communities&lt;/a&gt;.</value>
+    </data>
+    <data name="Please enter your email" xml:space="preserve">
+        <value>Please enter your email</value>
+        <comment>Please enter your email</comment>
+    </data>
+    <data name="Success" xml:space="preserve">
+        <value>Success</value>
+        <comment>Success</comment>
+    </data>
+    <data name="IfNotHappyWithComplaintContactLinkString" xml:space="preserve">
+        <value>The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the ‘accessibility regulations’). If you’re not happy with how we respond to your complaint, &lt;a class="govuk-link" href="{0}" target="_blank"&gt;contact the Equality Advisory and Support Service (EASS)&lt;/a&gt;.</value>
+    </data>
+    <data name="Homes built after 1991 were typically built with insulating material between the outer and inner walls." xml:space="preserve">
+        <value>Homes built after 1991 were typically built with insulating material between the outer and inner walls.</value>
+        <comment>Homes built after 1991 were typically built with insulating material between the outer and inner walls.</comment>
+    </data>
+    <data name="If your home was converted, for example it was a shop or other commercial premises before, it may have been built without insulation." xml:space="preserve">
+        <value>If your home was converted, for example it was a shop or other commercial premises before, it may have been built without insulation.</value>
+        <comment>If your home was converted, for example it was a shop or other commercial premises before, it may have been built without insulation.</comment>
+    </data>
+    <data name="HomesOfYourTypeTypicallyHaveInsulatedCavityWallsString" xml:space="preserve">
+        <value>Homes of your type typically have &lt;strong&gt;insulated cavity walls&lt;/strong&gt;.</value>
+        <comment>HomesOfYourTypeTypicallyHaveInsulatedCavityWallsString</comment>
+    </data>
+    <data name="address" xml:space="preserve">
+        <value>address</value>
+        <comment>address</comment>
+    </data>
+    <data name="home type" xml:space="preserve">
+        <value>home type</value>
+        <comment>home type</comment>
+    </data>
+    <data name="If you have a basement or cellar beneath your house that you can get into safely, you could look down there to see what type of floor you have. If the floor is a suspended wooden floor, you should be able to see wooden joists and the undersides of the floorboards." xml:space="preserve">
+        <value>If you have a basement or cellar beneath your house that you can get into safely, you could look down there to see what type of floor you have. If the floor is a suspended wooden floor, you should be able to see wooden joists and the undersides of the floorboards.</value>
+        <comment>If you have a basement or cellar beneath your house that you can get into safely, you could look down there to see what type of floor you have. If the floor is a suspended wooden floor, you should be able to see wooden joists and the undersides of the floorboards.</comment>
+    </data>
+    <data name="A suspended timber floor can be insulated by lifting the floorboards and laying mineral wool insulation supported by netting between the joists, or cutting rigid insulation boards to size. It is possible done from below if there’s enough access to the cellar or crawl space." xml:space="preserve">
+        <value>A suspended timber floor can be insulated by lifting the floorboards and laying mineral wool insulation supported by netting between the joists, or cutting rigid insulation boards to size. It is possible done from below if there’s enough access to the cellar or crawl space.</value>
+        <comment>A suspended timber floor can be insulated by lifting the floorboards and laying mineral wool insulation supported by netting between the joists, or cutting rigid insulation boards to size. It is possible done from below if there’s enough access to the cellar or crawl space.</comment>
+    </data>
+    <data name="Based on the information we have collected; it looks like you could save money by adding an insulating jacket to your hot water cylinder. By insulating your hot water cylinder, you will retain more heat. It will mean your hot water stays hotter for longer, and you spend less money heating water up." xml:space="preserve">
+        <value>Based on the information we have collected; it looks like you could save money by adding an insulating jacket to your hot water cylinder. By insulating your hot water cylinder, you will retain more heat. It will mean your hot water stays hotter for longer, and you spend less money heating water up.</value>
+        <comment>Based on the information we have collected; it looks like you could save money by adding an insulating jacket to your hot water cylinder. By insulating your hot water cylinder, you will retain more heat. It will mean your hot water stays hotter for longer, and you spend less money heating water up.</comment>
+    </data>
+    <data name="If you are reasonably confident with DIY, this could be a task you can complete yourself. If not, this is a job for a handyperson." xml:space="preserve">
+        <value>If you are reasonably confident with DIY, this could be a task you can complete yourself. If not, this is a job for a handyperson.</value>
+        <comment>If you are reasonably confident with DIY, this could be a task you can complete yourself. If not, this is a job for a handyperson.</comment>
+    </data>
+    <data name="Under Development is typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;" xml:space="preserve">
+        <value>Under Development is typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
+        <comment>Under Development is typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</comment>
+    </data>
+    <data name="YouCanChangeYourCookieSettingsAtAnyTimeString" xml:space="preserve">
+        <value>You can &lt;a class="govuk-link" href="{0}"&gt;change your cookie settings&lt;/a&gt; at any time.</value>
+        <comment>YouCanChangeYourCookieSettingsAtAnyTimeString</comment>
+    </data>
+    <data name="Back to" xml:space="preserve">
+        <value>Back to</value>
+        <comment>Back to</comment>
+    </data>
+    <data name="Go back to" xml:space="preserve">
+        <value>Go back to</value>
+        <comment>Go back to</comment>
+    </data>
+    <data name="Action Plan" xml:space="preserve">
+        <value>Action Plan</value>
+        <comment>Action Plan</comment>
+    </data>
+    <data name="They could cost" xml:space="preserve">
+        <value>They could cost</value>
+        <comment>They could cost</comment>
+    </data>
+    <data name="It could cost" xml:space="preserve">
+        <value>It could cost</value>
+        <comment>It could cost</comment>
+    </data>
+    <data name="You could save" xml:space="preserve">
+        <value>You could save</value>
+        <comment>You could save</comment>
+    </data>
+    <data name="YourEPCSuggestsString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home has</value>
+    </data>
+    <data name="A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the &quot;floor&quot; of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level." xml:space="preserve">
+        <value>A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the "floor" of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level.</value>
+        <comment>A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the "floor" of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level.</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBefore1930String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;before 1930.&lt;/strong&gt;</value>
+        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;before 1930.&lt;/strong&gt;</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1930And1966String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1930 and 1966.&lt;/strong&gt;</value>
+        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1930 and 1966.&lt;/strong&gt;</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1967And1982String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1967 and 1982.&lt;/strong&gt;</value>
+        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1967 and 1982.&lt;/strong&gt;</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1983And1995String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1983 and 1995.&lt;/strong&gt;</value>
+        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1983 and 1995.&lt;/strong&gt;</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1996And2011String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1996 and 2011.&lt;/strong&gt;</value>
+        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1996 and 2011.&lt;/strong&gt;</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltOnOrAfter2012String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;on or after 2012.&lt;/strong&gt;</value>
+        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;on or after 2012.&lt;/strong&gt;</comment>
+    </data>
+    <data name="LOW TO MEDIUM" xml:space="preserve">
+        <value>LOW TO MEDIUM</value>
+        <comment>LOW TO MEDIUM</comment>
+    </data>
+    <data name="TYPICALLY ONE DAY" xml:space="preserve">
+        <value>TYPICALLY ONE DAY</value>
+        <comment>TYPICALLY ONE DAY</comment>
+    </data>
+    <data name="Based on the information we have collected, it looks like you have an old gas boiler that may not be operating efficiently. You could consider replacing this with a modern condensing boiler, which will use less gas to provide the same amount of heat, helping to cut your fuel bills and carbon dioxide emissions." xml:space="preserve">
+        <value>Based on the information we have collected, it looks like you have an old gas boiler that may not be operating efficiently. You could consider replacing this with a modern condensing boiler, which will use less gas to provide the same amount of heat, helping to cut your fuel bills and carbon dioxide emissions.</value>
+        <comment>Based on the information we have collected, it looks like you have an old gas boiler that may not be operating efficiently. You could consider replacing this with a modern condensing boiler, which will use less gas to provide the same amount of heat, helping to cut your fuel bills and carbon dioxide emissions.</comment>
+    </data>
+    <data name="EPCSuggestsYourMainHeatingIsBiomassString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;a biomass boiler.&lt;/strong&gt;</value>
+        <comment>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;a biomass boiler.&lt;/strong&gt;</comment>
+    </data>
+    <data name="EPCSuggestsYourMainHeatingIsCoalOrSolidFuelString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;coal or solid fuel heating.&lt;/strong&gt;</value>
+        <comment>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;coal or solid fuel heating.&lt;/strong&gt;</comment>
+    </data>
+    <data name="£RangeString" xml:space="preserve">
+        <value>£{0} - £{1}</value>
     </data>
 </root>

@@ -42,13 +42,13 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            @SharedLocalizer[$"Your {@Model.Epc.LodgementYear} Energy Performance Certificate suggests your home has"]
+                            @SharedLocalizer[$"Your 2013 Energy Performance Certificate suggests your home has"]
                             <strong>
                                 @(Model.Epc?.FloorConstruction switch {
-                                    FloorConstruction.SuspendedTimber => @SharedLocalizer["a suspended timber floor."],
-                                    FloorConstruction.SolidConcrete => @SharedLocalizer["a solid concrete floor."],
-                                    FloorConstruction.Mix => @SharedLocalizer["both a suspended timber floor and solid concrete floor."],
-                                    FloorConstruction.Other => @SharedLocalizer["another type of floor."],
+                                    FloorConstruction.SuspendedTimber => @SharedLocalizer["EPCSuggestsSuspendedTimberFloorString", Model.Epc.LodgementYear],
+                                    FloorConstruction.SolidConcrete => @SharedLocalizer["EPCSuggestsSolidConcreteFloorString", Model.Epc.LodgementYear],
+                                    FloorConstruction.Mix => @SharedLocalizer["EPCSuggestsBothSuspendedTimberAndSolidConcreteFloorString", Model.Epc.LodgementYear],
+                                    FloorConstruction.Other => @SharedLocalizer["EPCSuggestsAnotherTypeOfFloorString", Model.Epc.LodgementYear],
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;
@@ -56,10 +56,7 @@
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            @SharedLocalizer["Homes of your type typically have a"]
-                            <strong>
-                                @(Model.HintSuspendedTimber is true ? @SharedLocalizer["suspended timber floor."] : @SharedLocalizer["solid concrete floor."])
-                            </strong>
+                            @(Model.HintSuspendedTimber is true ? SharedLocalizer["HomesOfYourTypeTypicallyHaveASuspendedTimberFloorString"] : SharedLocalizer["HomesOfYourTypeTypicallyHaveASolidConcreteFloorString"])
                         </p>;
                 }
             }

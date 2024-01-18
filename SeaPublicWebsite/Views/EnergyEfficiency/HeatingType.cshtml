@@ -51,28 +51,22 @@
                 {
                     epcHint =
                         @<p class="govuk-body">
-                        @SharedLocalizer[$"Your {Model.Epc.LodgementYear} Energy Performance Certificate suggests your main heating system is"]
-                            <strong>
-                                @(Model.Epc?.EpcHeatingType switch {
-                                    EpcHeatingType.GasBoiler => @SharedLocalizer["a gas boiler."],
-                                    EpcHeatingType.OilBoiler => @SharedLocalizer["an oil boiler."],
-                                    EpcHeatingType.LpgBoiler => @SharedLocalizer["an LPG boiler."],
-                                    EpcHeatingType.Storage => @SharedLocalizer["storage heating."],
-                                    EpcHeatingType.DirectActionElectric => @SharedLocalizer["direct action electric."],
-                                    EpcHeatingType.HeatPump => @SharedLocalizer["a heat pump."],
-                                    EpcHeatingType.CoalOrSolidFuel or EpcHeatingType.Biomass or EpcHeatingType.Other => @SharedLocalizer["of another type."],
-                                    _ => throw new ArgumentOutOfRangeException()})
-                            </strong>
+                            @(Model.Epc?.EpcHeatingType switch {
+                                EpcHeatingType.GasBoiler => @SharedLocalizer["EPCSuggestsMainHeatingIsGasBoilerString", Model.Epc.LodgementYear],
+                                EpcHeatingType.OilBoiler => @SharedLocalizer["EPCSuggestsMainHeatingIsOilBoilerString", Model.Epc.LodgementYear],
+                                EpcHeatingType.LpgBoiler => @SharedLocalizer["EPCSuggestsMainHeatingIsLPGBoilerString", Model.Epc.LodgementYear],
+                                EpcHeatingType.Storage => @SharedLocalizer["EPCSuggestsMainHeatingIsStorageString", Model.Epc.LodgementYear],
+                                EpcHeatingType.DirectActionElectric => @SharedLocalizer["EPCSuggestsMainHeatingIsDirectActionElectricString", Model.Epc.LodgementYear],
+                                EpcHeatingType.HeatPump => @SharedLocalizer["EPCSuggestsMainHeatingIsHeatPumpString", Model.Epc.LodgementYear],
+                                EpcHeatingType.CoalOrSolidFuel or EpcHeatingType.Biomass or EpcHeatingType.Other => @SharedLocalizer["EPCSuggestsMainHeatingIsOtherTypeString", Model.Epc.LodgementYear],
+                                _ => throw new ArgumentOutOfRangeException()})
                         </p>;
                 }
                 else
                 {
                     epcHint =
                         @<p class="govuk-body">
-                            @SharedLocalizer["The most common method of heating is with "]
-                            <strong>
-                                @SharedLocalizer["a gas boiler."]
-                            </strong>
+                            @SharedLocalizer["MostCommonMethodOfHeatingIsGasBoilerString"]
                         </p>;
                 }
             }

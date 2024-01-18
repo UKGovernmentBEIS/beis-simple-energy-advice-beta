@@ -2,7 +2,7 @@
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @{
-    ViewBag.Title = SharedLocalizer[$"Accessibility statement on {Constants.SERVICE_NAME}"];
+    ViewBag.Title = SharedLocalizer["Accessibility statement on Find energy improvements suitable for your home"];
 }
 
 <div class="govuk-grid-row">
@@ -27,23 +27,21 @@
     @SharedLocalizer["We’ve also made the website text as simple as possible to understand."]
 </p>
 <p class="govuk-body">
-    <a class="govuk-link" href="https://mcmw.abilitynet.org.uk/" target="_blank">@SharedLocalizer["AbilityNet"]</a> @SharedLocalizer["has advice on making your device easier to use if you have a disability."]
+    @SharedLocalizer["AbilityNetAdviceLinkString", "https://mcmw.abilitynet.org.uk/"]
 </p>
 
 <h2 class="govuk-heading-l">
     @SharedLocalizer["Reporting accessibility problems with this website"]
 </h2>
 <p class="govuk-body">
-    @SharedLocalizer["We’re always looking to improve the accessibility of this website. If you find any problems not listed on this page or think we’re not meeting accessibility requirements please "]
-    <a class="govuk-link" href="@Constants.FEEDBACK_URL_ACCESSIBILITY_PAGE" target="_blank">@SharedLocalizer["give feedback (opens in new tab)"]</a>.
+    @SharedLocalizer["HelpUsImproveAccessibilityFeedbackString", Constants.FEEDBACK_URL_ACCESSIBILITY_PAGE]
 </p>
 
 <h2 class="govuk-heading-l">
     @SharedLocalizer["Enforcement procedure"]
 </h2>
 <p class="govuk-body">
-    @SharedLocalizer["The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the ‘accessibility regulations’). If you’re not happy with how we respond to your complaint,"]
-    <a class="govuk-link" href="https://www.equalityadvisoryservice.com/" target="_blank">@SharedLocalizer["contact the Equality Advisory and Support Service (EASS)"]</a>.
+    @SharedLocalizer["IfNotHappyWithComplaintContactLinkString", "https://www.equalityadvisoryservice.com/"]
 </p>
 
 <h2 class="govuk-heading-l">
@@ -56,8 +54,7 @@
     @SharedLocalizer["Compliance status"]
 </h3>
 <p class="govuk-body">
-    @SharedLocalizer["This website is compliant with the"]
-    <a class="govuk-link" href="https://www.w3.org/TR/WCAG21/" target="_blank">@SharedLocalizer["Web Content Accessibility Guidelines version 2.1 AA standard"]</a>.
+    @SharedLocalizer["CompliantWithWebContentAccessibilityGuidelinesString","https://www.w3.org/TR/WCAG21/"]
 </p>
 <h3 class="govuk-heading-m">
     @SharedLocalizer["Content that’s not within the scope of the accessibility regulations"]

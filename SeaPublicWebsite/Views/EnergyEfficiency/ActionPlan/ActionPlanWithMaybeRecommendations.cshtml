@@ -40,17 +40,17 @@
         </p>
 
         <ul class="govuk-list govuk-list--bullet">
-              <li>
-                  @SharedLocalizer["Visit the "]<a class="govuk-link" target="_blank" href="https://helpforhouseholds.campaign.gov.uk/help-with-your-bills/energy-saving-advice/">@SharedLocalizer["Help for Households"]</a> @SharedLocalizer["website for even more ways to save energy and reduce your bills."]
-              </li>
-            <li>@SharedLocalizer["When buying new appliances, upgrade to an energy efficient one - "]<a class="govuk-link" target="_blank" href="https://energylabel.org.uk/">@SharedLocalizer["Learn about energy labels"]</a></li>
+            <li>
+                @SharedLocalizer["VisitTheHelpForHouseholdsWebsiteString", "https://helpforhouseholds.campaign.gov.uk/help-with-your-bills/energy-saving-advice/"]
+            </li>
+            <li>@SharedLocalizer["WhenBuyingNewAppliancesUpgradeEnergyLabelsString", "https://energylabel.org.uk/"]</li>
             @if (Model.PropertyData?.HasOutdoorSpace != HasOutdoorSpace.No)
             {
-                <li>@SharedLocalizer["Install a heat pump - "]<a class="govuk-link" target="_blank" href="https://www.heat-pump-check.service.gov.uk/">@SharedLocalizer["Check if your home may be suitable"]</a></li>
+                <li>@SharedLocalizer["InstallHeatPumpCheckIfHomeSuitableString", "https://www.heat-pump-check.service.gov.uk/"]</li>
             }
             @if (Model.PropertyData?.YearBuilt == YearBuilt.Pre1930)
             {
-                <li>@SharedLocalizer["Visit the "]<a class="govuk-link" target="_blank" href="https://historicengland.org.uk/advice/your-home/energy-efficiency/">@SharedLocalizer["Historic England"]</a>@SharedLocalizer[" site for information specific to historic buildings."]</li>
+                <li>@SharedLocalizer["VisitHistoricEnglandForHistoricBuildingInformationString", "https://historicengland.org.uk/advice/your-home/energy-efficiency/"]</li>
             }
         </ul>
 

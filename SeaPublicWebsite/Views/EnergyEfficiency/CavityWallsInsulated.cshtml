@@ -8,7 +8,7 @@
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.CavityWallsInsulatedViewModel
 @{
-    ViewBag.Title = @SharedLocalizer["Cavity Walls Insulated"];
+    ViewBag.Title = @SharedLocalizer["Cavity Walls Insulated"].Value;
 }
 
 @section BeforeMain {
@@ -54,23 +54,17 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            @SharedLocalizer[$"Your {Model.Epc.LodgementYear} Energy Performance Certificate suggests"]
-                            <strong>
-                                @(Model.Epc?.CavityWallsInsulated switch {
-                                    CavityWallsInsulated.No => @SharedLocalizer["your cavity walls are not insulated."],
-                                    CavityWallsInsulated.Some => @SharedLocalizer["some of your cavity walls are insulated."],
-                                    CavityWallsInsulated.All => @SharedLocalizer["your cavity walls are insulated."],
-                                    _ => throw new ArgumentOutOfRangeException()})
-                            </strong>
+                            @(Model.Epc?.CavityWallsInsulated switch {
+                                CavityWallsInsulated.No => @SharedLocalizer["EPCSuggestsNoCavityWallsInsulatedString", Model.Epc.LodgementYear],
+                                CavityWallsInsulated.Some => @SharedLocalizer["EPCSuggestsSomeCavityWallsInsulatedString", Model.Epc.LodgementYear],
+                                CavityWallsInsulated.All => @SharedLocalizer["EPCSuggestsAllCavityWallsInsulatedString", Model.Epc.LodgementYear],
+                                _ => throw new ArgumentOutOfRangeException()})
                         </p>;
                 } else if (Model.HintUninsulatedCavityWalls is not null)
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            @SharedLocalizer["Homes of your type typically have"]
-                            <strong>
-                                @(Model.HintUninsulatedCavityWalls is true ? @SharedLocalizer["uninsulated cavity walls."] : @SharedLocalizer["insulated cavity walls."])
-                            </strong>
+                            @(Model.HintUninsulatedCavityWalls is true ? @SharedLocalizer["HomesOfYourTypeTypicallyHaveUninsulatedCavityWallsString"] : @SharedLocalizer["HomesOfYourTypeTypicallyHaveInsulatedCavityWallsString"])
                         </p>;
                 }
             }

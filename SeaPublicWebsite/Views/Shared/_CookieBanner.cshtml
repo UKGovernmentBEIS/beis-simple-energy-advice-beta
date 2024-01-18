@@ -56,11 +56,8 @@
                    {
                        Html = @<text>
                                   <p class="govuk-body">
-                                      @SharedLocalizer[$"You’ve {(bannerState is BannerState.ShowAccepted ? "accepted" : "rejected")} additional cookies. You can"]
-                                      <a class="govuk-link" href="@Url.Action(nameof(CookieController.CookieSettings_Get), "Cookie")">
-                                          @SharedLocalizer["change your cookie settings"]
-                                      </a>
-                                      @SharedLocalizer["at any time."]
+                                      @(bannerState is BannerState.ShowAccepted ? SharedLocalizer["You’ve accepted additional cookies."] : SharedLocalizer["You’ve rejected additional cookies."]) 
+                                      @SharedLocalizer["YouCanChangeYourCookieSettingsAtAnyTimeString", Url.Action(nameof(CookieController.CookieSettings_Get), "Cookie")]
                                   </p>
                                </text>,
                        Hidden = bannerState is not BannerState.ShowAccepted and not BannerState.ShowRejected,

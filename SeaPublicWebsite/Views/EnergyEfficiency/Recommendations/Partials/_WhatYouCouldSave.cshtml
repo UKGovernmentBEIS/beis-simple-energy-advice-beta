@@ -9,11 +9,11 @@
         <div class="govuk-grid-column-full sea-yearly-savings govuk-!-margin-bottom-2">
             <span class="govuk-heading-s govuk-!-margin-bottom-0"><b>@SharedLocalizer["This could save up to"]</b></span>
             <h3 class="govuk-heading-l govuk-!-margin-bottom-1">
-                £@Model.GetCurrentPropertyRecommendation().Saving @SharedLocalizer["a year"]
+                @SharedLocalizer["£AYearString", @Model.GetCurrentPropertyRecommendation().Saving]
             </h3>
             <span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-margin-top-3"><b>@SharedLocalizer["Which adds up to"]</b></span>
             <h3 class="govuk-heading-l govuk-!-margin-bottom-1">
-                £@Model.GetCurrentPropertyRecommendation().LifetimeSaving <span class="govuk-body"><b>@SharedLocalizer["over the lifetime of the installation"]</b></span>
+                @SharedLocalizer["£OverLifetimeOfInstallationString", @Model.GetCurrentPropertyRecommendation().LifetimeSaving]
             </h3>
         </div>
     }
@@ -22,16 +22,16 @@
         @if (Model.GetCurrentPropertyRecommendation().Key == RecommendationKey.InstallHeatPump)
         {
             <h3 class="govuk-heading-l govuk-!-margin-bottom-1">
-                £9500 - £12000 <span class="govuk-body"><b>@SharedLocalizer["for an air source heat pump"]</b></span>
+                @SharedLocalizer["PriceRangeForAnAirSourceHeatPumpString", "9500", "12000"]
             </h3>
             <h3 class="govuk-heading-l govuk-!-margin-bottom-1">
-                £12000 - £37000 <span class="govuk-body"><b>@SharedLocalizer["for a ground source heat pump"]</b></span>
+                @SharedLocalizer["PriceRangeForAGroundSourceHeatPumpString", "12000", "37000"]
             </h3>
         }
         else
         {
             <h3 class="govuk-heading-l govuk-!-margin-bottom-1">
-                £@Model.GetCurrentPropertyRecommendation().MinInstallCost - £@Model.GetCurrentPropertyRecommendation().MaxInstallCost
+                @SharedLocalizer["£RangeString", Model.GetCurrentPropertyRecommendation().MinInstallCost, Model.GetCurrentPropertyRecommendation().MaxInstallCost]
             </h3>
         }
     </div>

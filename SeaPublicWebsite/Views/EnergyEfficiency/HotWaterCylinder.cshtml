@@ -32,13 +32,10 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            @SharedLocalizer[$"Your {@Model.Epc.LodgementYear} Energy Performance Certificate suggests your home"]
-                            <strong>
-                                @(Model.Epc?.HasHotWaterCylinder switch {
-                                    HasHotWaterCylinder.Yes => @SharedLocalizer["does have a hot water cylinder."],
-                                    HasHotWaterCylinder.No => @SharedLocalizer["does not have a hot water cylinder."],
-                                    _ => throw new ArgumentOutOfRangeException()})
-                            </strong>
+                            @(Model.Epc?.HasHotWaterCylinder switch {
+                                HasHotWaterCylinder.Yes => @SharedLocalizer["EPCSuggestsYouDoHaveHotWaterCylinderString", @Model.Epc.LodgementYear],
+                                HasHotWaterCylinder.No => @SharedLocalizer["EPCSuggestsYouDoNotHaveHotWaterCylinderString", @Model.Epc.LodgementYear],
+                                _ => throw new ArgumentOutOfRangeException()})
                         </p>;
                 }
                 else

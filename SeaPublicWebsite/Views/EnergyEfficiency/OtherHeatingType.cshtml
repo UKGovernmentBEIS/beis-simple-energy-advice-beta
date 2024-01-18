@@ -8,7 +8,7 @@
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.OtherHeatingTypeViewModel;
 @{
-    ViewBag.Title = @SharedLocalizer["Other Heating Type"];
+    ViewBag.Title = @SharedLocalizer["Other Heating Type"].Value;
 }
 
 @section BeforeMain {
@@ -32,12 +32,11 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            @SharedLocalizer[$"Your {@Model.Epc.LodgementYear} Energy Performance Certificate suggests your main heating system is"]
                             <strong>
                                 @(Model.Epc?.EpcHeatingType switch {
-                                    EpcHeatingType.Biomass => @SharedLocalizer["a biomass boiler."],
-                                    EpcHeatingType.CoalOrSolidFuel => @SharedLocalizer["coal or solid fuel heating."],
-                                    EpcHeatingType.Other => @SharedLocalizer["of another type."],
+                                    EpcHeatingType.Biomass => @SharedLocalizer["EPCSuggestsYourMainHeatingIsBiomassString", Model.Epc.LodgementYear],
+                                    EpcHeatingType.CoalOrSolidFuel => @SharedLocalizer["EPCSuggestsYourMainHeatingIsCoalOrSolidFuelString", Model.Epc.LodgementYear],
+                                    EpcHeatingType.Other => @SharedLocalizer["EPCSuggestsMainHeatingIsOtherTypeString", Model.Epc.LodgementYear],
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;

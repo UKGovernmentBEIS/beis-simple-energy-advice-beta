@@ -8,8 +8,7 @@
     @if (Model.GetSavedRecommendations().Count > 0)
     {
         <p class="govuk-body-s">
-            @SharedLocalizer["You have saved"] <strong>@Model.GetSavedRecommendations().Count</strong> @SharedLocalizer["recommended"]
-            @(Model.GetSavedRecommendations().Count == 1 ? @SharedLocalizer["improvement"] : @SharedLocalizer["improvements"]).
+            @(Model.GetSavedRecommendations().Count == 1 ? @SharedLocalizer["You have saved 1 recommended improvement."] : @SharedLocalizer["YouHaveSavedMoreThanOneImprovementString", @Model.GetSavedRecommendations().Count])
         </p>
         
         <ul class="govuk-list govuk-list--bullet">

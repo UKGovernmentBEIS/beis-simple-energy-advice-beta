@@ -8,7 +8,7 @@
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.FloorInsulatedViewModel
 @{
-    ViewBag.Title = @SharedLocalizer["Floor Insulated"];
+    ViewBag.Title = @SharedLocalizer["Floor Insulated"].Value;
 }
 
 @section BeforeMain {
@@ -45,22 +45,16 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            @SharedLocalizer[$"Your {Model.Epc.LodgementYear} Energy Performance Certificate suggests your home's ground floor"]
-                            <strong>
-                                @(Model.Epc?.FloorInsulated switch {
-                                    FloorInsulated.No => @SharedLocalizer["is not insulated."],
-                                    FloorInsulated.Yes => @SharedLocalizer["is insulated."],
-                                    _ => throw new ArgumentOutOfRangeException()})
-                            </strong>
+                            @(Model.Epc?.FloorInsulated switch {
+                                FloorInsulated.No => @SharedLocalizer["EPCSuggestsGroundFloorIsNotInsulatedString", Model.Epc.LodgementYear],
+                                FloorInsulated.Yes => @SharedLocalizer["EPCSuggestsGroundFloorIsInsulatedString", Model.Epc.LodgementYear],
+                                _ => throw new ArgumentOutOfRangeException()})
                         </p>;
                 } else if (Model.HintUninsulatedFloor is not null)
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            @SharedLocalizer["Homes of your type typically "]
-                            <strong>
-                                @(Model.HintUninsulatedFloor is true ? @SharedLocalizer["do not have insulated floors."] : @SharedLocalizer["have insulated floors."])
-                            </strong>
+                            @(Model.HintUninsulatedFloor is true ? SharedLocalizer["HomesOfYourTypeTypicallyDoNotHaveInsulatedFloorsString"] : SharedLocalizer["HomesOfYourTypeTypicallyHaveInsulatedFloorsString"])
                         </p>;
                 }
             }

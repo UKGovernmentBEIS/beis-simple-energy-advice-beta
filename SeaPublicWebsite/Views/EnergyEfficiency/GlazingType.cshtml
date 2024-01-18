@@ -45,26 +45,20 @@
                 if (Model.Epc?.GlazingType is not null)
                 {
                     blueBannerHint = 
-                        @<p class="govuk-body">
-                            @SharedLocalizer[$"Your {@Model.Epc.LodgementYear} Energy Performance Certificate suggests"] 
-                            <strong>
-                                @(Model.Epc?.GlazingType switch {
-                                    GlazingType.SingleGlazed => @SharedLocalizer["all your windows are single glazed."],
-                                    GlazingType.Both => @SharedLocalizer["at least one of your windows is single glazed."],
-                                    GlazingType.DoubleOrTripleGlazed => @SharedLocalizer["all your windows are double, triple or secondary glazed."],
-                                    _ => throw new ArgumentOutOfRangeException()})
-                            </strong>
-                        </p>;
+                    @<p class="govuk-body">
+                            @(Model.Epc?.GlazingType switch {
+                                GlazingType.SingleGlazed => @SharedLocalizer["EPCSuggestsAllWindowsAreSingleGlazedString", Model.Epc.LodgementYear],
+                                GlazingType.Both => @SharedLocalizer["EPCSuggestsAtLeastOneWindowSingleGlazedString", Model.Epc.LodgementYear],
+                                GlazingType.DoubleOrTripleGlazed => @SharedLocalizer["EPCSuggestsAllYourWindowsAreDoubleOrTripleGlazedString", Model.Epc.LodgementYear],
+                                _ => throw new ArgumentOutOfRangeException()})
+                    </p>;
                 } else if (Model.HintSingleGlazing is not null)
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            @SharedLocalizer["Windows in homes of your type"]
-                            <strong>
-                                @(Model.HintSingleGlazing is true
-                                    ? @SharedLocalizer["were typically originally built with single glazing, but they may have been replaced."] 
-                                    : @SharedLocalizer["typically all have double, triple or secondary glazing."])
-                            </strong>
+                            @(Model.HintSingleGlazing is true
+                                ? @SharedLocalizer["HomesOfYourTypeTypicallyWereBuiltWithSingleGlazingString"] 
+                                : @SharedLocalizer["HomesOfYourTypeTypicallyWereBuiltWithSingleDoubleOrTripleGlazingString"])
                         </p>;
                 }
             }

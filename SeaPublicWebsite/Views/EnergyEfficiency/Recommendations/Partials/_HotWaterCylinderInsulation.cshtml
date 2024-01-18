@@ -23,8 +23,7 @@
     </p>
 
     <p class="govuk-body govuk-!-margin-bottom-6">
-        @SharedLocalizer["You can find more information on solid wall insulation on the"] 
-        <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/insulating-tanks-pipes-and-radiators/`">@SharedLocalizer["Energy Saving Trust website."]<span class="govuk-visually-hidden">@SharedLocalizer["(opens in a new window)"]</span></a>
+        @SharedLocalizer["MoreInfoOnHotWaterCylinderInsulationOnEnergySavingTrustWebsiteString", "https://energysavingtrust.org.uk/advice/insulating-tanks-pipes-and-radiators/`"]
     </p>
 }
 
@@ -38,14 +37,14 @@
     
     @await Html.GovUkWarningText(new WarningTextViewModel
     {
-        IconFallbackText = "Caution",
+        IconFallbackText = SharedLocalizer["Caution"].Value,
         Text = SharedLocalizer["If you are reasonably confident with DIY, this could be a task you can complete yourself. If not, this is a job for a handyperson."].Value
     })
 }
 
 @section RecommendationLifetime
 {
-    <p class="govuk-body">@SharedLocalizer["Insulating hot water cylinder jackets typically last"] <b>@SharedLocalizer["around"] @Model.GetCurrentPropertyRecommendation().Lifetime @SharedLocalizer["years"]</b></p>
+    <p class="govuk-body">@SharedLocalizer["HotWaterCylinderJacketsTypicallyLastString", Model.GetCurrentPropertyRecommendation().Lifetime]</p>
 }
 
 @{

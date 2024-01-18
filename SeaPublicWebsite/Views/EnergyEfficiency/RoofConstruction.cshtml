@@ -42,15 +42,11 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            @SharedLocalizer[$"Your {@Model.Epc.LodgementYear} Energy Performance Certificate suggests you have a"]
-                            <strong>
-                                @(Model.Epc?.RoofConstruction switch {
-                                    RoofConstruction.Flat => @SharedLocalizer["flat"],
-                                    RoofConstruction.Mixed => @SharedLocalizer["mixed flat and pitched"],
-                                    RoofConstruction.Pitched => @SharedLocalizer["pitched"],
-                                    _ => throw new ArgumentOutOfRangeException()})
-                            </strong>
-                            roof.
+                            @(Model.Epc?.RoofConstruction switch {
+                                RoofConstruction.Flat => @SharedLocalizer["EPCSuggestsFlatRoofString", @Model.Epc.LodgementYear],
+                                RoofConstruction.Mixed => @SharedLocalizer["EPCSuggestsMixedPitchedAndFlatRoofString", @Model.Epc.LodgementYear],
+                                RoofConstruction.Pitched => @SharedLocalizer["EPCSuggestsPitchedRoofString", @Model.Epc.LodgementYear],
+                                _ => throw new ArgumentOutOfRangeException()})
                         </p>;
                 }
             }

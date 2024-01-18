@@ -51,13 +51,12 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            @SharedLocalizer[$"Your {Model.Epc.LodgementYear} Energy Performance Certificate suggests your home has"]
                             <strong>
                                 @(Model.Epc?.WallConstruction switch {
-                                    WallConstruction.Solid => SharedLocalizer["solid walls."],
-                                    WallConstruction.Cavity => SharedLocalizer["cavity walls."],
-                                    WallConstruction.Mixed => SharedLocalizer["mixed solid and cavity walls."],
-                                    WallConstruction.Other => SharedLocalizer["another type of walls."],
+                                    WallConstruction.Solid => SharedLocalizer["EPCSuggestsYourHomeHasSolidWallsString", Model.Epc.LodgementYear],
+                                    WallConstruction.Cavity => SharedLocalizer["EPCSuggestsYourHomeHasCavityWallsString", Model.Epc.LodgementYear],
+                                    WallConstruction.Mixed => SharedLocalizer["EPCSuggestsYourHomeHasAMixOfSolidAndCavityWallsString", Model.Epc.LodgementYear],
+                                    WallConstruction.Other => SharedLocalizer["EPCSuggestsAnotherTypeOfFloorString", Model.Epc.LodgementYear],
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;
@@ -65,10 +64,7 @@
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            @SharedLocalizer["Homes of your type typically have"]
-                            <strong>
-                                @(Model.HintSolidWalls is true ? SharedLocalizer["solid walls."] : SharedLocalizer["cavity walls."])
-                            </strong>
+                            @(Model.HintSolidWalls is true ? SharedLocalizer["HomesOfYourTypeTypicallyHaveSolidWallsString"] : SharedLocalizer["HomesOfYourTypeTypicallyHaveCavityWallsString"])
                         </p>;
                 }
             }
