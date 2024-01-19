@@ -2910,21 +2910,6 @@
     <data name="DontKnow = 0," xml:space="preserve">
         <value>DdimYnGwybod = 0,</value>
     </data>
-    <data name="    SuspendedFloorWithoutInsulation = 1," xml:space="preserve">
-        <value>    LlawrCrogHebDdeunyddInswleiddio = 1,</value>
-    </data>
-    <data name="    SuspendedFloorWithInsulation = 2," xml:space="preserve">
-        <value>    LlawrCrogGydaDeunyddInswleiddio = 2,</value>
-    </data>
-    <data name="    SolidFloorWithInsulation = 3," xml:space="preserve">
-        <value>    LlawrSoletGydaDeunyddInswleiddio = 3,</value>
-    </data>
-    <data name="    SolidFloorWithoutInsulation = 4," xml:space="preserve">
-        <value>    LlawrSoletHebDdeunyddInswleiddio = 4,</value>
-    </data>
-    <data name="  AllDayAndAllNight = 1," xml:space="preserve">
-        <value>  Drwy’rDyddANos = 1,</value>
-    </data>
     <data name="Detached" xml:space="preserve">
         <value>Tŷ sengl</value>
     </data>
@@ -2957,33 +2942,6 @@
     </data>
     <data name="GasBoiler," xml:space="preserve">
         <value>BoelerNwy,</value>
-    </data>
-    <data name="    OilBoiler," xml:space="preserve">
-        <value>    BoelerOlew,</value>
-    </data>
-    <data name="    LpgBoiler," xml:space="preserve">
-        <value>    BoelerLPG,</value>
-    </data>
-    <data name="    Storage," xml:space="preserve">
-        <value>    Stôr,</value>
-    </data>
-    <data name="    DirectActionElectric," xml:space="preserve">
-        <value>    TrydanUniongyrchol,</value>
-    </data>
-    <data name="    HeatPump," xml:space="preserve">
-        <value>    PwmpGwres,</value>
-    </data>
-    <data name="    Other," xml:space="preserve">
-        <value>    Arall,</value>
-    </data>
-    <data name="    DoNotKnow," xml:space="preserve">
-        <value>    DdimYnGwybod,</value>
-    </data>
-    <data name="    Biomass," xml:space="preserve">
-        <value>    Biomas,</value>
-    </data>
-    <data name="    CoalOrSolidFuel," xml:space="preserve">
-        <value>    GloNeuDanwyddSolet,</value>
     </data>
     <data name="Top floor" xml:space="preserve">
         <value>Y llawr uchaf</value>
@@ -3119,111 +3077,6 @@
     </data>
     <data name="Start," xml:space="preserve">
         <value>Dechrau,</value>
-    </data>
-    <data name="    NewOrReturningUser," xml:space="preserve">
-        <value>    DefnyddiwrNewyddNeuDdefnyddiwrSy’nDychwelyd,</value>
-    </data>
-    <data name="    Country," xml:space="preserve">
-        <value>    Gwlad,</value>
-    </data>
-    <data name="    OwnershipStatus," xml:space="preserve">
-        <value>    StatwsPerchnogaeth,</value>
-    </data>
-    <data name="    ServiceUnsuitable," xml:space="preserve">
-        <value>    GwasanaethAnaddas,</value>
-    </data>
-    <data name="    FindEpc," xml:space="preserve">
-        <value>    CanfodEPC,</value>
-    </data>
-    <data name="    AskForPostcode," xml:space="preserve">
-        <value>    GofynAmGodPost,</value>
-    </data>
-    <data name="    ConfirmAddress," xml:space="preserve">
-        <value>    CadarnhauCyfeiriad,</value>
-    </data>
-    <data name="    ConfirmEpcDetails," xml:space="preserve">
-        <value>    CadarnhauManylionEPC,</value>
-    </data>
-    <data name="    NoEpcFound," xml:space="preserve">
-        <value>    HebGanfodEPC,</value>
-    </data>
-    <data name="    PropertyType," xml:space="preserve">
-        <value>    MathEiddo,</value>
-    </data>
-    <data name="    HouseType," xml:space="preserve">
-        <value>    MathTŷ,</value>
-    </data>
-    <data name="    BungalowType," xml:space="preserve">
-        <value>    MathByngalo,</value>
-    </data>
-    <data name="    FlatType," xml:space="preserve">
-        <value>    MathFflat,</value>
-    </data>
-    <data name="    HomeAge," xml:space="preserve">
-        <value>    OedCatref,</value>
-    </data>
-    <data name="    CheckYourUnchangeableAnswers," xml:space="preserve">
-        <value>    GwirioEichAtebionNaEllirEuNewid,</value>
-    </data>
-    <data name="    WallConstruction," xml:space="preserve">
-        <value>    AdeiladwaithWaliau,</value>
-    </data>
-    <data name="    CavityWallsInsulated," xml:space="preserve">
-        <value>    WaliauCeudodWedi'uInswleiddio,</value>
-    </data>
-    <data name="    SolidWallsInsulated," xml:space="preserve">
-        <value>    WaliauSoletWedi’uInswleiddio,</value>
-    </data>
-    <data name="    FloorConstruction," xml:space="preserve">
-        <value>    AdeiladwaithLloriau,</value>
-    </data>
-    <data name="    FloorInsulated," xml:space="preserve">
-        <value>    LlawrWedi’iInswleiddio,</value>
-    </data>
-    <data name="    RoofConstruction," xml:space="preserve">
-        <value>    AdeiladwaithTo,</value>
-    </data>
-    <data name="    LoftSpace," xml:space="preserve">
-        <value>    LleGwagYnYTo,</value>
-    </data>
-    <data name="    LoftAccess," xml:space="preserve">
-        <value>    MynediadI’rAtig,</value>
-    </data>
-    <data name="    RoofInsulated," xml:space="preserve">
-        <value>    ToWedi’iInswleiddio,</value>
-    </data>
-    <data name="    GlazingType," xml:space="preserve">
-        <value>    MathFfenestri,</value>
-    </data>
-    <data name="    OutdoorSpace," xml:space="preserve">
-        <value>    LleTuAllan,</value>
-    </data>
-    <data name="    HeatingType," xml:space="preserve">
-        <value>    MathSystemWresogi,</value>
-    </data>
-    <data name="    OtherHeatingType," xml:space="preserve">
-        <value>    MathArallSystemWresogi,</value>
-    </data>
-    <data name="    HotWaterCylinder," xml:space="preserve">
-        <value>    TancDŵrPoeth,</value>
-    </data>
-    <data name="    NumberOfOccupants," xml:space="preserve">
-        <value>    NiferPreswylwyr,</value>
-    </data>
-    <data name="    HeatingPattern," xml:space="preserve">
-        <value>    PatrwmGwresogi,</value>
-    </data>
-    <data name="    Temperature," xml:space="preserve">
-        <value>    Tymheredd,</value>
-    </data>
-    <data name="    AnswerSummary," xml:space="preserve">
-        <value>    CrynodebAtebion,</value>
-    </data>
-    <data name="    NoRecommendations," xml:space="preserve">
-        <value>    DimArgymhellion,</value>
-    </data>
-    <data name="    YourRecommendations" xml:space="preserve">
-        <value>    EichArgymhellion</value>
     </data>
     <data name="Yes, save this recommendation to my action plan" xml:space="preserve">
         <value>Byddwn, cadw’r argymhelliad hwn yn fy nghynllun gweithredu</value>
