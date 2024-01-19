@@ -5,7 +5,7 @@
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @{
-    ViewBag.Title = @SharedLocalizer[$"Privacy notice on {Constants.SERVICE_NAME}"];
+    ViewBag.Title = SharedLocalizer["PrivacyNoticeTitleString"].Value +" "+ SharedLocalizer[Constants.SERVICE_NAME].Value;
 }
 
 <div class="govuk-grid-row">

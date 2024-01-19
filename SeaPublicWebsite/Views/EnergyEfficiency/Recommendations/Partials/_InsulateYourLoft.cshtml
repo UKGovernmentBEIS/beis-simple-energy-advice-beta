@@ -22,8 +22,7 @@
     </p>
 
     <p class="govuk-body govuk-!-margin-bottom-6">
-        @SharedLocalizer["You can find more information on loft insulation on the"]
-        <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/roof-and-loft-insulation/">@SharedLocalizer["Energy Saving Trust website."]<span class="govuk-visually-hidden">@SharedLocalizer["(opens in a new window)"]</span></a>
+        @SharedLocalizer["MoreInfoOnLoftInsulationOnEnergySavingTrustWebsiteString", "https://energysavingtrust.org.uk/advice/roof-and-loft-insulation/"]
     </p>
 }
 
@@ -44,7 +43,7 @@
 
 @section RecommendationLifetime
 {
-    <p class="govuk-body">@SharedLocalizer["Loft insulation is typically expected to last"] <b>@SharedLocalizer["around"] @Model.GetCurrentPropertyRecommendation().Lifetime @SharedLocalizer["years"]</b></p>
+    <p class="govuk-body">@SharedLocalizer["LoftInsulationExpectedToLastString", Model.GetCurrentPropertyRecommendation().Lifetime]</p>
 }
 
 @{

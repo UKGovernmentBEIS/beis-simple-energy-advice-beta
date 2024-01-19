@@ -20,10 +20,7 @@
     </p>
 
     <p class="govuk-body govuk-!-margin-bottom-6">
-        @SharedLocalizer["You can find more information on efficient windows and how to choose them at the"]
-        <a class="govuk-link" target="_blank" href="https://www.bfrc.org/homeowners">
-            @SharedLocalizer["British Fenestration Rating Council."]<span class="govuk-visually-hidden">@SharedLocalizer["(opens in a new window)"]</span>
-        </a>
+        @SharedLocalizer["MoreInfoOnNewWindowsOnBritishFenestrationRatingCouncilWebsiteString", "https://www.bfrc.org/homeowners"]
     </p>
 }
 
@@ -46,7 +43,7 @@
 
 @section RecommendationLifetime
 {
-    <p class="govuk-body">@SharedLocalizer["New windows are typically expected to last"] <b>@SharedLocalizer["around"] @Model.GetCurrentPropertyRecommendation().Lifetime @SharedLocalizer["years"]</b></p>
+    <p class="govuk-body">@SharedLocalizer["NewWindowsTypicallyLastString", Model.GetCurrentPropertyRecommendation().Lifetime]</p>
 }
 
 @{

@@ -1459,8 +1459,8 @@
     <data name="What you could save" xml:space="preserve">
         <value>What you could save</value>
     </data>
-    <data name="Loft insulation is typically expected to last around 42 years" xml:space="preserve">
-        <value>Loft insulation is typically expected to last around 42 years</value>
+    <data name="LoftInsulationExpectedToLastString" xml:space="preserve">
+        <value>Loft insulation is typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
@@ -1552,8 +1552,8 @@
     <data name="The fuel bill savings from replacing windows are unlikely to pay back the full installation cost, but there are other benefits such as reduced maintenance and better sound proofing that may affect your decision." xml:space="preserve">
         <value>The fuel bill savings from replacing windows are unlikely to pay back the full installation cost, but there are other benefits such as reduced maintenance and better sound proofing that may affect your decision.</value>
     </data>
-    <data name="You can find more information on efficient windows and how to choose them at the British Fenestration Rating Council.(opens in a new window)" xml:space="preserve">
-        <value>You can find more information on efficient windows and how to choose them at the British Fenestration Rating Council.(opens in a new window)</value>
+    <data name="MoreInfoOnNewWindowsOnBritishFenestrationRatingCouncilWebsiteString" xml:space="preserve">
+        <value>You can find more information on efficient windows and how to choose them at the&lt;a class="govuk-link" target="_blank" href="{0}"&gt;British Fenestration Rating Council.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="If you live in a conservation area or listed building there may be limits on what changes you can make to your windows. You should check with your local authority to see what is allowed." xml:space="preserve">
         <value>If you live in a conservation area or listed building there may be limits on what changes you can make to your windows. You should check with your local authority to see what is allowed.</value>
@@ -1591,8 +1591,8 @@
     <data name="Specialist contractors can inject insulation into the cavity, reducing heat loss significantly and helping to cut your bills." xml:space="preserve">
         <value>Specialist contractors can inject insulation into the cavity, reducing heat loss significantly and helping to cut your bills.</value>
     </data>
-    <data name="You can find more information on cavity wall insulation on the Energy Saving Trust website.(opens in a new window)" xml:space="preserve">
-        <value>You can find more information on cavity wall insulation on the Energy Saving Trust website.(opens in a new window)</value>
+    <data name="MoreInfoOnCavityWallInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
+        <value>You can find more information on cavity wall insulation on the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="Who this improvement is suitable for" xml:space="preserve">
         <value>Who this improvement is suitable for</value>
@@ -1612,8 +1612,8 @@
     <data name="What you could save" xml:space="preserve">
         <value>What you could save</value>
     </data>
-    <data name="Cavity wall insulation is expected to last around 42 years" xml:space="preserve">
-        <value>Cavity wall insulation is expected to last around 42 years</value>
+    <data name="CavityWallInsulationExpectedToLastString" xml:space="preserve">
+        <value>Cavity wall insulation is expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
@@ -1660,8 +1660,8 @@
     <data name="What you could save" xml:space="preserve">
         <value>What you could save</value>
     </data>
-    <data name="Solid wall insulation is expected to last around 36 years" xml:space="preserve">
-        <value>Solid wall insulation is expected to last around 36 years</value>
+    <data name="SolidWallInsulationExpectedToLastString" xml:space="preserve">
+        <value>Solid wall insulation is expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
@@ -1726,8 +1726,8 @@
     <data name="If you have a suitable roof area you may be able to fit solar photovoltaic panels, or solar PV, to generate electricity." xml:space="preserve">
         <value>If you have a suitable roof area you may be able to fit solar photovoltaic panels, or solar PV, to generate electricity.</value>
     </data>
-    <data name="You can find more information on solar PV on the Energy Saving Trust website.(opens in a new window)" xml:space="preserve">
-        <value>You can find more information on solar PV on the Energy Saving Trust website.(opens in a new window)</value>
+    <data name="MoreInfoOnSolarPVOnEnergySavingTrustWebsiteString" xml:space="preserve">
+        <value>You can find more information on solar PV on the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="Who this improvement is suitable for" xml:space="preserve">
         <value>Who this improvement is suitable for</value>
@@ -1747,8 +1747,8 @@
     <data name="What you could save" xml:space="preserve">
         <value>What you could save</value>
     </data>
-    <data name="Solar panels are typically expected to last around 25 years" xml:space="preserve">
-        <value>Solar panels are typically expected to last around 25 years</value>
+    <data name="SolarPanelsTypicallyLastString" xml:space="preserve">
+        <value>Solar panels are typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
@@ -1888,8 +1888,8 @@
     <data name="Their improved controls, including automatic charge control, thermostat and programmer, allowing you to set the temperature you want the room to be heated and when, with the heater only drawing the electricity needed to meet that programme." xml:space="preserve">
         <value>Their improved controls, including automatic charge control, thermostat and programmer, allowing you to set the temperature you want the room to be heated and when, with the heater only drawing the electricity needed to meet that programme.</value>
     </data>
-    <data name="You can find more information on high heat retention storage heaters on the Energy Saving Trust website.(opens in a new window)" xml:space="preserve">
-        <value>You can find more information on high heat retention storage heaters on the Energy Saving Trust website.(opens in a new window)</value>
+    <data name="MoreInfoOnHighHeatRetentionStorageHeatersOnEnergySavingTrustWebsiteString" xml:space="preserve">
+        <value>You can find more information on high heat retention storage heaters on the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="Who this improvement is suitable for" xml:space="preserve">
         <value>Who this improvement is suitable for</value>
@@ -1903,8 +1903,8 @@
     <data name="What you could save" xml:space="preserve">
         <value>What you could save</value>
     </data>
-    <data name="High heat retention storage heaters are typically expected to last around 20 years" xml:space="preserve">
-        <value>High heat retention storage heaters are typically expected to last around 20 years</value>
+    <data name="HighHeatRetentionStorageHeatersAreTypicallyExpectedToLastString" xml:space="preserve">
+        <value>High heat retention storage heaters are typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
@@ -1974,9 +1974,6 @@
     </data>
     <data name="The fuel bill savings from replacing windows are unlikely to pay back the full installation cost, but there are other benefits such as reduced maintenance and better sound proofing that may affect your decision." xml:space="preserve">
         <value>The fuel bill savings from replacing windows are unlikely to pay back the full installation cost, but there are other benefits such as reduced maintenance and better sound proofing that may affect your decision.</value>
-    </data>
-    <data name="You can find more information on efficient windows and how to choose them at the British Fenestration Rating Council." xml:space="preserve">
-        <value>You can find more information on efficient windows and how to choose them at the British Fenestration Rating Council.</value>
     </data>
     <data name="Caution" xml:space="preserve">
         <value>Caution</value>
@@ -2917,8 +2914,8 @@
     <data name="Accessibility statement on Find energy improvements suitable for your home" xml:space="preserve">
         <value>Accessibility statement on Find energy improvements suitable for your home</value>
     </data>
-    <data name="Privacy notice on Find energy improvements suitable for your home" xml:space="preserve">
-        <value>Privacy notice on Find energy improvements suitable for your home</value>
+    <data name="PrivacyNoticeTitleString" xml:space="preserve">
+        <value>Privacy notice on</value>
     </data>
     <data name="DontKnow = 0," xml:space="preserve">
         <value>DontKnow = 0,</value>
@@ -3693,5 +3690,28 @@
     </data>
     <data name="£RangeString" xml:space="preserve">
         <value>£{0} - £{1}</value>
+    </data>
+    <data name="CookiesOnString" xml:space="preserve">
+        <value>Cookies on {0}</value>
+        <comment>Cookies on {0}</comment>
+    </data>
+    <data name="You will be able to use some of this electricity to reduce the amount you buy from your energy supplier, cutting your bills. At times you will generate more than you are using – you can sell any surplus to your electricity supplier to save even more money." xml:space="preserve">
+        <value>You will be able to use some of this electricity to reduce the amount you buy from your energy supplier, cutting your bills. At times you will generate more than you are using – you can sell any surplus to your electricity supplier to save even more money.</value>
+        <comment>You will be able to use some of this electricity to reduce the amount you buy from your energy supplier, cutting your bills. At times you will generate more than you are using – you can sell any surplus to your electricity supplier to save even more money.</comment>
+    </data>
+    <data name="2 DAYS" xml:space="preserve">
+        <value>2 DAYS</value>
+        <comment>2 DAYS</comment>
+    </data>
+    <data name="Based on the information we have collected; it looks like you have solid walls without a cavity, and that these are not insulated. You could consider insulating these walls to help trap the heat inside your property so your heating doesn’t need to be on as much." xml:space="preserve">
+        <value>Based on the information we have collected; it looks like you have solid walls without a cavity, and that these are not insulated. You could consider insulating these walls to help trap the heat inside your property so your heating doesn’t need to be on as much.</value>
+        <comment>Based on the information we have collected; it looks like you have solid walls without a cavity, and that these are not insulated. You could consider insulating these walls to help trap the heat inside your property so your heating doesn’t need to be on as much.</comment>
+    </data>
+    <data name="External wall insulation is less disruptive to the inside of your home, but will change the external appearance of your home, so you will usually need planning permission. It’s unlikely to be allowed on the front of your property if you live in a conservation area." xml:space="preserve">
+        <value>External wall insulation is less disruptive to the inside of your home, but will change the external appearance of your home, so you will usually need planning permission. It’s unlikely to be allowed on the front of your property if you live in a conservation area.</value>
+        <comment>External wall insulation is less disruptive to the inside of your home, but will change the external appearance of your home, so you will usually need planning permission. It’s unlikely to be allowed on the front of your property if you live in a conservation area.</comment>
+    </data>
+    <data name="MoreInfoOnSolidWallInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
+        <value>You can find more information on solid wall insulation on the&lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
 </root>

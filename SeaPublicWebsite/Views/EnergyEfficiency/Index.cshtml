@@ -3,7 +3,7 @@
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @{
-    ViewBag.Title = @SharedLocalizer["Energy Efficiency Questionnaire"];
+    ViewBag.Title = @SharedLocalizer["Energy Efficiency Questionnaire"].Value;
 }
 
 @section BeforeMain {
@@ -13,7 +13,7 @@
     <div class="govuk-grid-column-two-thirds">
 
         <h1 class="govuk-heading-l">
-            @Constants.SERVICE_NAME
+            @SharedLocalizer[Constants.SERVICE_NAME]
         </h1>
 
         <p class="govuk-body">

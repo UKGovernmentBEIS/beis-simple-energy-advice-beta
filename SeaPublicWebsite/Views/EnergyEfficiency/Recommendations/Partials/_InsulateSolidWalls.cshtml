@@ -30,8 +30,7 @@
     })
     
     <p class="govuk-body govuk-!-margin-bottom-6">
-        @SharedLocalizer["MoreInfoOnHotWaterCylinderInsulationOnEnergySavingTrustWebsiteString"]
-        <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/solid-wall-insulation/">@SharedLocalizer["Energy Saving Trust website."]<span class="govuk-visually-hidden">@SharedLocalizer["(opens in a new window)"]</span></a>
+        @SharedLocalizer["MoreInfoOnSolidWallInsulationOnEnergySavingTrustWebsiteString","https://energysavingtrust.org.uk/advice/solid-wall-insulation/"]
     </p>
 }
 
@@ -55,7 +54,7 @@
 
 @section RecommendationLifetime
 {
-    <p class="govuk-body">@SharedLocalizer["Solid wall insulation is expected to last"] <b>@SharedLocalizer["around"] @Model.GetCurrentPropertyRecommendation().Lifetime @SharedLocalizer["years"]</b></p>
+    <p class="govuk-body">@SharedLocalizer["SolidWallInsulationExpectedToLastString", Model.GetCurrentPropertyRecommendation().Lifetime]</p>
 }
 
 @{

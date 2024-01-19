@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @{
-    ViewBag.Title = @SharedLocalizer[$"Details about cookies on our service"];
+    ViewBag.Title = @SharedLocalizer["Details about cookies on our service"].Value;
 }
 
 <div class="govuk-grid-row">
