@@ -33,12 +33,6 @@
     <data name="This service is for people who own their own property in England and Wales." xml:space="preserve">
         <value>Gwasanaeth yw hwn ar gyfer pobl sy’n berchen ar eu heiddo eu hunain yng Nghymru a Lloegr.</value>
     </data>
-    <data name="IfUserInScotlandHomeEnergyScotlandLinkString" xml:space="preserve">
-        <value>WELSH Os ydych chi’n byw yn yr Alban, ewch i &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Home Energy Scotland&lt;/a&gt; i ddod o hyd i ffyrdd o leihau eich biliau ynni.</value>
-    </data>
-    <data name="IfYouLiveInNIVisitNIDirectString" xml:space="preserve">
-        <value>WELSH Os ydych chi'n byw yng Ngogledd Iwerddon, ewch i wefan &lt;a class="govuk-link" href="{0}" target="_blank"&gt;NI Direct&lt;/a&gt; i gael cymorth.</value>
-    </data>
     <data name="What you get from this service" xml:space="preserve">
         <value>Beth rydych chi’n ei gael o’r gwasanaeth hwn</value>
     </data>
@@ -57,9 +51,6 @@
     <data name="installing solar panels" xml:space="preserve">
         <value>gosod paneli solar</value>
     </data>
-    <data name="DifferentServiceAvailableToCheckHeatPumpString" xml:space="preserve">
-        <value>WELSH Mae gwasanaeth gwahanol ar gael os hoffech chi&lt;a class="govuk-link" href="https://www.heat-pump-check.service.gov.uk/" target="_blank"&gt; weld a allai pwmp gwres fod yn addas ar gyfer eich eiddo.&lt;/a&gt;</value>
-    </data>
     <data name="Each recommendation will explain what’s involved, how much it could cost you and how much it could save on typical energy bills. You will also receive information about where to go to for more advice." xml:space="preserve">
         <value>Bydd pob argymhelliad yn egluro beth mae’n ei gynnwys, faint y gallai ei gostio i chi a faint y gallai ei arbed ar filiau ynni arferol. Byddwch hefyd yn cael gwybodaeth am ble i fynd i gael rhagor o gyngor.</value>
     </data>
@@ -77,12 +68,6 @@
     </data>
     <data name="How long it takes" xml:space="preserve">
         <value>Pa mor hir mae’n ei gymryd</value>
-    </data>
-    <data name="IfFirstVisitTimeToAnswer" xml:space="preserve">
-        <value>Os mai dyma eich ymweliad cyntaf, mae’n cymryd tua &lt;strong&gt;10 munud&lt;/strong&gt; i ateb y cwestiynau a chael argymhellion sydd wedi’u teilwra i chi a’ch cartref.</value>
-    </data>
-    <data name="ReturnToRecommendationsAndActionPlanIfYouNeedToString" xml:space="preserve">
-        <value>WELSH Gallwch ddychwelyd at &lt;a href="{0}"&gt;eich argymhellion a’ch cynllun gweithredu &lt;/a&gt;os oes angen.</value>
     </data>
     <data name="Start now" xml:space="preserve">
         <value>Dechrau nawr</value>
@@ -107,9 +92,6 @@
     </data>
     <data name="GOV.UKFind energy improvements suitable for your home" xml:space="preserve">
         <value>GOV.UK Darganfod gwelliannau ynni sy’n addas ar gyfer eich cartref</value>
-    </data>
-    <data name="This is a new service string" xml:space="preserve">
-        <value>WELSH Mae hwn yn wasanaeth newydd – bydd eich &lt;a class="govuk-link" href="{0}" target="_blank"&gt;adborth (yn agor mewn tab newydd)&lt;/a&gt; yn ein helpu i’w wella.</value>
     </data>
     <data name="Back" xml:space="preserve">
         <value>Yn ôl</value>
@@ -213,14 +195,8 @@
     <data name="This service only provides advice for people who own their own home in England and Wales." xml:space="preserve">
         <value>Dim ond i bobl sy’n berchen ar eu cartrefi eu hunain yng Nghymru a Lloegr y mae’r gwasanaeth hwn yn rhoi cyngor.</value>
     </data>
-    <data name="GeneralEnergySavingTrustAdviceString" xml:space="preserve">
-        <value>WELSH I gael cyngor cyffredinol ar effeithlonrwydd ynni ac i ddod o hyd i ffyrdd o leihau eich bil ynni, ewch i wefan yr &lt;a href="{0}" target="_blank" class="govuk-link"&gt;Ymddiriedolaeth Arbed Ynni&lt;/a&gt;</value>
-    </data>
     <data name="Other services that might be helpful to you" xml:space="preserve">
         <value>Gwasanaethau eraill a allai fod o gymorth i chi</value>
-    </data>
-    <data name="VisitHomeEnergyScotlandString" xml:space="preserve">
-        <value>Ewch i &lt;a href="{0}" target="_blank" class="govuk-link"&gt;Home Energy Scotland&lt;/a&gt; i ddod o hyd i ffyrdd o wella effeithlonrwydd ynni eich eiddo.</value>
     </data>
     <data name="Sorry, this service isn't for you" xml:space="preserve">
         <value>Yn anffodus dydy’r gwasanaeth hwn ddim ar eich cyfer chi</value>
@@ -233,9 +209,6 @@
     </data>
     <data name="Other services that might be helpful to you" xml:space="preserve">
         <value>Gwasanaethau eraill a allai fod o gymorth i chi</value>
-    </data>
-    <data name="VisitNIDirectString" xml:space="preserve">
-        <value>Ewch i &lt;a href="{0}" target="_blank" class="govuk-link"&gt;NI Direct&lt;/a&gt; i ddod o hyd i ffyrdd o wella effeithlonrwydd ynni eich eiddo.</value>
     </data>
     <data name="Sorry, this service isn't for you" xml:space="preserve">
         <value>Yn anffodus dydy’r gwasanaeth hwn ddim ar eich cyfer chi</value>
@@ -630,24 +603,6 @@
     <data name="A narrower wall is probably a solid wall. Stone walls may be thicker still but are usually solid." xml:space="preserve">
         <value>Mae’n debyg bod wal gulach yn un solet. Gall waliau cerrig fod yn fwy trwchus na hynny ond fel arfer maent yn solet.</value>
     </data>
-    <data name="HomesOfYourTypeTypicallyHaveCavityWallsString" xml:space="preserve">
-        <value>WELSH Fel arfer &lt;strong&gt;waliau ceudod&lt;/strong&gt; sydd mewn cartrefi fel eich un chi.</value>
-    </data>
-    <data name="HomesOfYourTypeTypicallyHaveSolidWallsString" xml:space="preserve">
-        <value>WELSH Fel arfer &lt;strong&gt;waliau solet&lt;/strong&gt; sydd mewn cartrefi fel eich un chi.</value>
-    </data>
-    <data name="EPCSuggestsYourHomeHasSolidWallsString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai &lt;strong&gt;waliau solet&lt;/strong&gt; sydd yn eich cartref.</value>
-    </data>
-    <data name="EPCSuggestsYourHomeHasCavityWallsString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai &lt;strong&gt;waliau ceudod&lt;/strong&gt; sydd yn eich cartref.</value>
-    </data>
-    <data name="EPCSuggestsYourHomeHasAMixOfSolidAndCavityWallsString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod &lt;strong&gt;cymysgedd o waliau solet a waliau ceudod&lt;/strong&gt; yn eich cartref.</value>
-    </data>
-    <data name="EPCSuggestsYourHomeHasAnotherTypeOfWallsString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai &lt;strong&gt;waliau o fath&lt;/strong&gt; arall sydd yn eich cartref.</value>
-    </data>
     <data name="Solid walls" xml:space="preserve">
         <value>Waliau solet</value>
     </data>
@@ -681,18 +636,6 @@
     <data name="If you have solid walls, it’s unlikely they are insulated." xml:space="preserve">
         <value>Os oes gennych chi waliau solet, mae’n annhebygol eu bod wedi’u hinswleiddio.</value>
     </data>
-    <data name="HomesOfYourTypeTypicallyHaveUninsulatedSolidWallsString" xml:space="preserve">
-        <value>WELSH Fel arfer &lt;strong&gt;waliau solet heb eu hinswleiddio&lt;/strong&gt; sydd mewn cartrefi fel eich un chi</value>
-    </data>
-    <data name="EPCSuggestsAllSolidWallsAreInsulatedString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu &lt;strong&gt;bod eich waliau solet wedi’u hinswleiddio.&lt;/strong&gt;</value>
-    </data>
-    <data name="EPCSuggestsAllSolidWallsAreUninsulatedString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu &lt;strong&gt;nad ydy eich waliau solet wedi’u hinswleiddio.&lt;/strong&gt;</value>
-    </data>
-    <data name="EPCSuggestsSomeSolidWallsAreUninsulatedString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu &lt;strong&gt;bod rhai o’ch waliau solet wedi’u hinswleiddio.&lt;/strong&gt;</value>
-    </data>
     <data name="Yes, they are all insulated" xml:space="preserve">
         <value>Ydy, maen nhw i gyd wedi’u hinswleiddio</value>
     </data>
@@ -723,18 +666,6 @@
     <data name="If there are small, filled 22 millimetre holes at regular intervals around the outside walls, it’s a sign they may have been insulated." xml:space="preserve">
         <value>Os oes tyllau bach 22 milimetr wedi’u llenwi i’w gweld bob hyn a hyn yn y waliau allanol, mae’n arwydd eu bod o bosibl wedi cael eu hinswleiddio.</value>
     </data>
-    <data name="HomesOfYourTypeTypicallyHaveUninsulatedCavityWallsString" xml:space="preserve">
-        <value>WELSH Fel arfer waliau &lt;strong&gt;ceudod heb eu hinswleiddio&lt;/strong&gt; sydd mewn cartrefi fel eich un chi.</value>
-    </data>
-    <data name="EPCSuggestsNoCavityWallsInsulatedString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu &lt;strong&gt;nad ydy eich waliau ceudod wedi’u hinswleiddio.&lt;/strong&gt;</value>
-    </data>
-    <data name="EPCSuggestsSomeCavityWallsInsulatedString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod &lt;strong&gt;rhai o’ch waliau ceudod wedi’u hinswleiddio&lt;/strong&gt;</value>
-    </data>
-    <data name="EPCSuggestsAllCavityWallsInsulatedString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu &lt;strong&gt;bod eich waliau ceudod wedi’u hinswleiddio.&lt;/strong&gt;</value>
-    </data>
     <data name="Yes, they are all insulated" xml:space="preserve">
         <value>Ydy, maen nhw i gyd wedi’u hinswleiddio</value>
     </data>
@@ -764,21 +695,6 @@
     </data>
     <data name="If you don’t have access to the space underneath your house, you will need to lift a corner of the carpet and underlay to have a look." xml:space="preserve">
         <value>Os nad oes modd mynd i’r gofod o dan eich tŷ, bydd angen i chi godi cornel o’r carped a’r isgarped i gael golwg.</value>
-    </data>
-    <data name="EPCSuggestsSolidConcreteFloorString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai llawr concrid solet sydd yn eich cartref.</value>
-    </data>
-    <data name="EPCSuggestsSuspendedTimberFloorString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai llawr pren crog sydd yn eich cartref.</value>
-    </data>
-    <data name="EPCSuggestsBothSuspendedTimberAndSolidConcreteFloorString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai llawr pren crog a llawr concrid solet sydd yn eich cartref.</value>
-    </data>
-    <data name="EPCSuggestsAnotherTypeOfFloorString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai llawr o fath arall sydd yn eich cartref.</value>
-    </data>
-    <data name="HomesOfYourTypeTypicallyHaveASuspendedTimberFloorString" xml:space="preserve">
-        <value>WELSH Fel arfer &lt;strong&gt;llawr pren crog sydd&lt;/strong&gt; mewn cartrefi fel eich un chi.</value>
     </data>
     <data name="Suspended timber" xml:space="preserve">
         <value>Pren crog</value>
@@ -834,15 +750,6 @@
     <data name="A flat roof is completely, or almost, level, with no obvious slope or angle." xml:space="preserve">
         <value>Mae to fflat yn hollol wastad, neu bron yn wastad, heb lethr nac ongl amlwg.</value>
     </data>
-    <data name="EPCSuggestsFlatRoofString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod gennych chi &lt;strong&gt;do fflat&lt;/strong&gt;</value>
-    </data>
-    <data name="EPCSuggestsPitchedRoofString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod gennych chi &lt;strong&gt;do ar oleddf&lt;/strong&gt;</value>
-    </data>
-    <data name="EPCSuggestsMixedPitchedAndFlatRoofString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod gennych chi &lt;strong&gt;gymysgedd o do fflat a tho ar oleddf&lt;/strong&gt;</value>
-    </data>
     <data name="Yes, I only have a flat roof or roofs" xml:space="preserve">
         <value>Oes, dim ond to neu doeon fflat sydd gen i</value>
     </data>
@@ -861,12 +768,6 @@
     <data name="If all the space under your pitched roof, or nearly all the space, is used as living space with finished walls and ceilings then the loft has been converted into a room." xml:space="preserve">
         <value>Os yw’r gofod i gyd dan eich to ar oleddf, neu'r rhan fwyaf o’r gofod hwnnw, yn cael ei ddefnyddio fel lle byw gyda waliau a nenfydau gorffenedig, yna mae’r atig wedi’i droi’n ystafell.</value>
     </data>
-    <data name="HomesOfYourTypeTypicallyHaveALoft" xml:space="preserve">
-        <value>WELSH &lt;strong&gt;Fel arfer mae atig&lt;/strong&gt; mewn cartrefi fel eich un chi.</value>
-    </data>
-    <data name="HomesOfYourTypeTypicallyDoNotHaveALoftString" xml:space="preserve">
-        <value>WELSH &lt;strong&gt;Fel arfer does dim atig&lt;/strong&gt; mewn cartrefi fel eich un chi.</value>
-    </data>
     <data name="Yes, I have a loft that hasn't been converted into a room" xml:space="preserve">
         <value>Oes, mae gennyf atig sydd heb ei droi’n ystafell</value>
     </data>
@@ -878,12 +779,6 @@
     </data>
     <data name="You may have a loft hatch, access ladder or stairs that could allow an insulation installer to get into the loft space." xml:space="preserve">
         <value>Efallai fod gennych ddrws i’r atig, ysgol neu risiau mynediad a allai ganiatáu i'r sawl sy'n gosod y deunydd inswleiddio fynd i mewn i’r atig.</value>
-    </data>
-    <data name="HaveLoftAndAccessHintTrueString" xml:space="preserve">
-        <value>WELSH Fel arfer &lt;strong&gt;mae mynediad i’r atig&lt;/strong&gt; mewn cartrefi fel eich un chi</value>
-    </data>
-    <data name="HaveLoftAndAccessHintFalseString" xml:space="preserve">
-        <value>WELSH Fel arfer does &lt;strong&gt;dim mynediad i’r atig&lt;/strong&gt; mewn cartrefi fel eich un chi</value>
     </data>
     <data name="Yes, there is access to my loft" xml:space="preserve">
         <value>Oes, mae modd mynd i’m hatig</value>
@@ -905,12 +800,6 @@
     </data>
     <data name="Your 2013 Energy Performance Certificate suggests your loft is not fully insulated as it has less than 200mm of insulation." xml:space="preserve">
         <value>Mae eich Tystysgrif Perfformiad Ynni 2013 yn awgrymu nad ydy eich atig wedi’i inswleiddio’n llwyr a bod gennych lai na 200mm o ddeunydd inswleiddio.</value>
-    </data>
-    <data name="HomesOfYourTypeTypicallyHaveLessThan200mmOfInsulationString" xml:space="preserve">
-        <value>WELSH &lt;strong&gt;Fel arfer mai llai na 200mm o ddeunydd inswleiddio&lt;/strong&gt; mewn cartrefi fel eich un chi.</value>
-    </data>
-    <data name="HomesOfYourTypeAreTypicallyFullyInsulatedWithAtLeast200mmOfInsulationString" xml:space="preserve">
-        <value>WELSH Fel arfer mae cartrefi fel eich un chi wedi’u &lt;strong&gt;hinswleiddio’n llwyr gydag o leiaf 200mm o ddeunydd inswleiddio.&lt;/strong&gt;</value>
     </data>
     <data name="Yes, there is at least 200mm of insulation in my loft" xml:space="preserve">
         <value>Ydy, mae o leiaf 200mm o ddeunydd inswleiddio yn fy atig</value>
@@ -935,21 +824,6 @@
     </data>
     <data name="Secondary glazing is when an additional independent window is fitted inside, behind the main window. This is commonly used in conservation areas to improve the energy efficiency of the window without replacing it." xml:space="preserve">
         <value>Gwydr eilaidd yw pan fydd ffenestr annibynnol ychwanegol yn cael ei gosod y tu mewn, y tu ôl i’r brif ffenestr. Gwneir hyn yn aml mewn ardaloedd cadwraeth i wella effeithlonrwydd ynni’r ffenestr heb ei newid.</value>
-    </data>
-    <data name="EPCSuggestsAllWindowsAreSingleGlazedString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod &lt;strong&gt;pob un o’ch ffenestri yn rhai gwydr sengl.&lt;/strong&gt;</value>
-    </data>
-    <data name="EPCSuggestsAtLeastOneWindowSingleGlazedString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod &lt;strong&gt;o leiaf un o’ch ffenestri yn rhai gwydr sengl.&lt;/strong&gt;</value>
-    </data>
-    <data name="EPCSuggestsAllYourWindowsAreDoubleOrTripleGlazedString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod &lt;strong&gt;pob un o’ch ffenestri yn rhai dwbl, triphlyg neu eilaidd.&lt;/strong&gt;</value>
-    </data>
-    <data name="HomesOfYourTypeTypicallyWereBuiltWithSingleGlazingString" xml:space="preserve">
-        <value>WELSH Fel arfer, roedd ffenestri mewn cartrefi o’ch math chi wedi’u &lt;strong&gt;hadeiladu’n wreiddiol gyda gwydr sengl, ond efallai eu bod wedi cael eu newid.&lt;/strong&gt;</value>
-    </data>
-    <data name="HomesOfYourTypeTypicallyWereBuiltWithSingleDoubleOrTripleGlazingString" xml:space="preserve">
-        <value>WELSH Fel arfer mae gan ffenestri mewn cartrefi o’ch math chi wyd &lt;strong&gt;dwbl, triphlyg neu eilaidd.&lt;/strong&gt;</value>
     </data>
     <data name="Yes, all the windows are single glazed" xml:space="preserve">
         <value>Oes, mae pob un o’r ffenestri yn rhai gwydr sengl</value>
@@ -1023,30 +897,6 @@
     <data name="If you have more than one heating type, select the system that you use more often, or that is able to heat the whole home. For example, select ‘Oil boiler’ if you have an oil boiler and wood burning stove." xml:space="preserve">
         <value>Os oes gennych chi fwy nag un math o ddull gwresogi, dewiswch y system rydych chi’n ei defnyddio amlaf, neu sy’n gallu gwresogi’r cartref cyfan. Er enghraifft, dewiswch 'Bwyler olew' os oes gennych chi foeler olew a stôf llosgi coed.</value>
     </data>
-    <data name="EPCSuggestsMainHeatingIsGasBoilerString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai &lt;strong&gt;boeler nwy&lt;/strong&gt; ydy eich prif system wresogi</value>
-    </data>
-    <data name="EPCSuggestsMainHeatingIsOilBoilerString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai &lt;strong&gt;boeler olew&lt;/strong&gt; ydy eich prif system wresogi.</value>
-    </data>
-    <data name="EPCSuggestsMainHeatingIsLPGBoilerString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai &lt;strong&gt;boeler LPG&lt;/strong&gt; ydy eich prif system wresogi</value>
-    </data>
-    <data name="EPCSuggestsMainHeatingIsStorageString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai &lt;strong&gt;gwresogyddion stôr&lt;/strong&gt; ydy eich prif system wresogi</value>
-    </data>
-    <data name="EPCSuggestsMainHeatingIsDirectActionElectricString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai &lt;strong&gt;trydan uniongyrchol&lt;/strong&gt; ydy eich prif system wresogi</value>
-    </data>
-    <data name="EPCSuggestsMainHeatingIsHeatPumpString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai &lt;strong&gt;pwmp gwres&lt;/strong&gt; ydy eich prif system wresogi</value>
-    </data>
-    <data name="EPCSuggestsMainHeatingIsOtherTypeString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod gennych chi &lt;strong&gt;fath arall&lt;/strong&gt; o brif system wresogi</value>
-    </data>
-    <data name="MostCommonMethodOfHeatingIsGasBoilerString" xml:space="preserve">
-        <value>WELSH Y dull gwresogi mwyaf cyffredin yw gyda &lt;strong&gt;boeler nwy.&lt;/strong&gt;</value>
-    </data>
     <data name="Gas boiler" xml:space="preserve">
         <value>Boeler nwy</value>
     </data>
@@ -1085,12 +935,6 @@
     </data>
     <data name="If you’re not sure what a hot water cylinder is, we’ve provided some guidance on this page that could help." xml:space="preserve">
         <value>Os nad ydych chi’n siŵr beth yw tanc dŵr poeth, rydym wedi cynnwys canllawiau ar y dudalen hon a allai helpu.</value>
-    </data>
-    <data name="EPCSuggestsYouDoHaveHotWaterCylinderString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu &lt;strong&gt;bod tanc dŵr poeth yn eich cartref.&lt;/strong&gt;</value>
-    </data>
-    <data name="EPCSuggestsYouDoNotHaveHotWaterCylinderString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu &lt;strong&gt;nad oes tanc dŵr poeth yn eich cartref.&lt;/strong&gt;</value>
     </data>
     <data name="Yes, I have a hot water cylinder" xml:space="preserve">
         <value>Oes, mae gen i danc dŵr poeth</value>
@@ -1341,9 +1185,6 @@
     <data name="If you’d like to do more to improve the energy efficiency of your home, consider the following:" xml:space="preserve">
         <value>Os hoffech chi wneud mwy i wella effeithlonrwydd ynni eich cartref, beth am ystyried y canlynol:</value>
     </data>
-    <data name="WhenBuyingNewAppliancesUpgradeEnergyLabelsString" xml:space="preserve">
-        <value>WELSH Pan fyddwch chi’n prynu offer newydd, beth am uwchraddio i un sy'n defnyddio ynni'n effeithlon - &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Rhagor o wybodaeth am labeli ynni&lt;/a&gt;</value>
-    </data>
     <data name="Install a heat pump – " xml:space="preserve">
         <value>Gosod pwmp gwres – </value>
     </data>
@@ -1356,14 +1197,8 @@
     <data name="Learn about energy labels" xml:space="preserve">
         <value>Rhagor o wybodaeth am labeli ynni</value>
     </data>
-    <data name="InstallHeatPumpCheckIfHomeSuitableString" xml:space="preserve">
-        <value>WELSH Gosod pwmp gwres - &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Edrychwch a ydy eich cartref yn addas&lt;/a&gt;</value>
-    </data>
     <data name="Still need help?" xml:space="preserve">
         <value>Angen mwy o help?</value>
-    </data>
-    <data name="VisitEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>WELSH Gallwch fynd i &lt;a href="{0}" target="_blank" class="govuk-link"&gt;wefan yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt; i gael rhagor o wybodaeth am ddefnyddio llai o ynni yn eich cartref.</value>
     </data>
     <data name="Returning to this service" xml:space="preserve">
         <value>Dod yn ôl at y gwasanaeth hwn</value>
@@ -1431,9 +1266,6 @@
     <data name="If some of your loft is boarded so that you can store things up there you will either need to raise this boarding up and insulate underneath it, or leave that part of the loft with thinner insulation." xml:space="preserve">
         <value>Os oes estyll mewn rhan o'ch atig er mwyn storio pethau yno, bydd angen i chi naill ai godi'r estyll hyn i fyny ac inswleiddio oddi tanodd, neu adael y rhan honno o'r atig â deunydd inswleiddio teneuach.</value>
     </data>
-    <data name="MoreInfoOnLoftInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>WELSH Gallwch ddod o hyd i ragor o wybodaeth am ddeunydd inswleiddio atig ar &lt;a class="govuk-link" target="_blank" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
-    </data>
     <data name="Who this improvement is suitable for" xml:space="preserve">
         <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
     </data>
@@ -1448,9 +1280,6 @@
     </data>
     <data name="What you could save" xml:space="preserve">
         <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="LoftInsulationExpectedToLastString" xml:space="preserve">
-        <value>WELSH Disgwylir i ddeunydd inswleiddio atig bara &lt;b&gt;tua {0} mlynedd&lt;/b&gt; fel arfer</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>Gallai hyn arbed hyd at</value>
@@ -1500,9 +1329,6 @@
     <data name="Alternatively, you may want to choose a smart heating controller to make it easier to adjust the settings." xml:space="preserve">
         <value>Fel arall, efallai y byddwch yn dymuno dewis rheolydd gwres clyfar i’w gwneud yn haws addasu’r gosodiadau.</value>
     </data>
-    <data name="MoreInfoOnHeatingControlsOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>WELSH Gallwch ddod o hyd i ragor o wybodaeth am reolaethau gwresogi ar wefan yr &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
-    </data>
     <data name="You will need a competent installer to fit new controls to your heating system." xml:space="preserve">
         <value>Bydd angen gosodwr cymwys arnoch i osod rheolaethau newydd ar eich system wresogi.</value>
     </data>
@@ -1517,9 +1343,6 @@
     </data>
     <data name="What you could save" xml:space="preserve">
         <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="HeatingControlsTypicallyExpectedToLastString" xml:space="preserve">
-        <value>WELSH Disgwylir i reolaethau gwresogi &lt;b&gt;bara tua {0} mlynedd&lt;/b&gt; fel arfer</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>Gallai hyn arbed hyd at</value>
@@ -1541,9 +1364,6 @@
     </data>
     <data name="The fuel bill savings from replacing windows are unlikely to pay back the full installation cost, but there are other benefits such as reduced maintenance and better sound proofing that may affect your decision." xml:space="preserve">
         <value>Mae’n annhebygol y bydd yr arbedion mewn biliau tanwydd a welir wrth newid ffenestri yn ad-dalu’r gost gosod lawn, ond mae manteision eraill fel llai o waith cynnal a chadw a gwrthsain gwell a allai effeithio ar eich penderfyniad.</value>
-    </data>
-    <data name="MoreInfoOnNewWindowsOnBritishFenestrationRatingCouncilWebsiteString" xml:space="preserve">
-        <value>Gallwch ddod o hyd i ragor o wybodaeth am ffenestri effeithlon a sut i’w dewis ar wefan &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Cyngor Graddio Ffenestru Prydain.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="If you live in a conservation area or listed building there may be limits on what changes you can make to your windows. You should check with your local authority to see what is allowed." xml:space="preserve">
         <value>Os ydych chi'n byw mewn ardal gadwraeth neu adeilad rhestredig, efallai y bydd cyfyngiadau ar y newidiadau y gallwch chi eu gwneud i'ch ffenestri. Dylech chi holi eich awdurdod lleol i weld beth maen nhw’n ei ganiatáu.</value>
@@ -1581,9 +1401,6 @@
     <data name="Specialist contractors can inject insulation into the cavity, reducing heat loss significantly and helping to cut your bills." xml:space="preserve">
         <value>Gall contractwyr arbenigol chwistrellu deunydd inswleiddio i mewn i’r ceudod, gan leihau faint o wres sy’n cael ei golli’n sylweddol a’ch helpu i leihau eich biliau.</value>
     </data>
-    <data name="MoreInfoOnCavityWallInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>Gallwch ddod o hyd i ragor o wybodaeth am ddeunydd inswleiddio waliau ceudod ar wefan yr &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
-    </data>
     <data name="Who this improvement is suitable for" xml:space="preserve">
         <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
     </data>
@@ -1601,9 +1418,6 @@
     </data>
     <data name="What you could save" xml:space="preserve">
         <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="CavityWallInsulationExpectedToLastString" xml:space="preserve">
-        <value>Disgwylir i ddeunydd inswleiddio waliau ceudod bara &lt;b&gt;tua {0} mlynedd&lt;/b&gt;</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>Gallai hyn arbed hyd at</value>
@@ -1650,9 +1464,6 @@
     <data name="What you could save" xml:space="preserve">
         <value>Faint allech chi ei arbed</value>
     </data>
-    <data name="SolidWallInsulationExpectedToLastString" xml:space="preserve">
-        <value>WELSH Disgwylir i ddeunydd inswleiddio wal solet bara &lt;b&gt;tua {0} mlynedd&lt;/b&gt;</value>
-    </data>
     <data name="This could save up to" xml:space="preserve">
         <value>Gallai hyn arbed hyd at</value>
     </data>
@@ -1671,15 +1482,6 @@
     <data name="A heat pump is a low carbon heating system and is much more efficient than a boiler. Rather than burning a fuel like gas or oil, it uses electricity to transfer heat from outside to heat your rooms and hot water." xml:space="preserve">
         <value>Mae pwmp gwres yn system wresogi carbon isel ac mae’n llawer mwy effeithlon na boeler. Yn hytrach na llosgi tanwydd fel nwy neu olew, mae’n defnyddio trydan i drosglwyddo gwres o’r tu allan i wresogi eich ystafelloedd a’ch dŵr poeth.</value>
     </data>
-    <data name="InfoOnHelpFromBoilerUpgradeSchemeForHeatPumpsString" xml:space="preserve">
-        <value>WELSH Mae pympiau gwres yn addas ar gyfer llawer o gartrefi, byddant yn lleihau eich allyriadau carbon ac mae grantiau ar gael drwy’r &lt;a class="govuk-link" href="{0}"&gt;Cynllun Uwchraddio Boeleri&lt;/a&gt; ar gyfer pympiau gwres ffynhonnell aer a phympiau gwres o’r ddaear er mwyn lleihau’r gost ymlaen llaw.</value>
-    </data>
-    <data name="CheckWhichHeatPumpIsSuitableOnHeatPumpServiceString" xml:space="preserve">
-        <value>WELSH Mae gwahanol fathau o bwmp gwres a gallwch &lt;a class="govuk-link" href="{0}" target="_blank"&gt;edrych pa un allai fod yn addas ar gyfer eich cartref chi&lt;/a&gt; ar ein gwasanaeth pympiau gwres penodol.</value>
-    </data>
-    <data name="MoreInfoOnHeatPumpsOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>WELSH Gallwch ddod o hyd i ragor o wybodaeth am bympiau gwres ar wefan yr &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Ymddiriedolaeth Arbed Ynni.&lt;/a&gt;</value>
-    </data>
     <data name="Who this improvement is suitable for" xml:space="preserve">
         <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
     </data>
@@ -1694,9 +1496,6 @@
     </data>
     <data name="What you could save" xml:space="preserve">
         <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="HeatPumpsTypicallyExpectedToLastString" xml:space="preserve">
-        <value>WELSH Disgwylir i bympiau gwres bara tua &lt;b&gt;12 - 15 mlynedd&lt;/b&gt; fel arfer</value>
     </data>
     <data name="The running costs of heat pumps depend on a number of factors to do with your heating system and your property. Speak to a heat pump installer to find out more." xml:space="preserve">
         <value>Mae costau rhedeg pympiau gwres yn dibynnu ar nifer o ffactorau sy’n ymwneud â’ch system wresogi a’ch eiddo. Siaradwch â gosodwr pympiau gwres i gael gwybod mwy.</value>
@@ -1716,9 +1515,6 @@
     <data name="If you have a suitable roof area you may be able to fit solar photovoltaic panels, or solar PV, to generate electricity." xml:space="preserve">
         <value>Os oes gennych chi le addas ar eich to, efallai y byddwch yn gallu gosod paneli ffotofoltäig solar, neu solar PV, i gynhyrchu trydan.</value>
     </data>
-    <data name="MoreInfoOnSolarPVOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>Gallwch ddod o hyd i ragor o wybodaeth am solar PV ar wefan yr &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
-    </data>
     <data name="Who this improvement is suitable for" xml:space="preserve">
         <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
     </data>
@@ -1736,9 +1532,6 @@
     </data>
     <data name="What you could save" xml:space="preserve">
         <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="SolarPanelsTypicallyLastString" xml:space="preserve">
-        <value>Disgwylir i baneli solar bara &lt;b&gt;tua {0} mlynedd&lt;/b&gt; fel arfer</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>Gallai hyn arbed hyd at</value>
@@ -1767,9 +1560,6 @@
     <data name="Your floor could be insulated by lifting the floorboards, fitting insulation between the joists and then putting the floorboards back. This is normally a job for a professional installer." xml:space="preserve">
         <value>Gallai eich llawr gael ei inswleiddio drwy godi’r estyll, gosod deunydd inswleiddio rhwng y distiau ac yna rhoi’r estyll yn ôl. Tasg i osodwr proffesiynol ydy hon fel arfer.</value>
     </data>
-    <data name="MoreInfoOnFloorInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>WELSH Gallwch ddod o hyd i ragor o wybodaeth am ddeunydd inswleiddio lloriau ar &lt;a class="govuk-link" target="_blank" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
-    </data>
     <data name="You will need to completely empty the rooms that are being insulated, and remove any carpet or other floor covering, before the floor boards can be lifted." xml:space="preserve">
         <value>Bydd angen i chi wagio’r ystafelloedd sy’n cael eu hinswleiddio’n gyfan gwbl a thynnu unrhyw garped neu orchudd arall sydd ar y llawr cyn y gellir codi’r estyll.</value>
     </data>
@@ -1784,9 +1574,6 @@
     </data>
     <data name="What you could save" xml:space="preserve">
         <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="FloorInsulationTypicallyLastsString" xml:space="preserve">
-        <value>WELSH Disgwylir i ddeunydd inswleiddio lloriau bara &lt;b&gt;tua {0} mlynedd fel arfer&lt;/b&gt;</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>Gallai hyn arbed hyd at</value>
@@ -1878,9 +1665,6 @@
     <data name="Their improved controls, including automatic charge control, thermostat and programmer, allowing you to set the temperature you want the room to be heated and when, with the heater only drawing the electricity needed to meet that programme." xml:space="preserve">
         <value>Yn cynnwys rheolaethau gwell, gan gynnwys rheolydd gwefru, thermostat a rhaglennydd awtomatig, sy’n eich galluogi i osod i ba dymheredd rydych am wresogi’r ystafell a phryd, gyda’r gwresogydd ond yn defnyddio’r trydan sydd ei angen i gyflawni’r rhaglen honno.</value>
     </data>
-    <data name="MoreInfoOnHighHeatRetentionStorageHeatersOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>WELSH Gallwch ddod o hyd i ragor o wybodaeth am wresogyddion stôr cadw gwres uchel ar wefan yr &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
-    </data>
     <data name="Who this improvement is suitable for" xml:space="preserve">
         <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
     </data>
@@ -1892,9 +1676,6 @@
     </data>
     <data name="What you could save" xml:space="preserve">
         <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="HighHeatRetentionStorageHeatersAreTypicallyExpectedToLastString" xml:space="preserve">
-        <value>WELSH Disgwylir i wresogyddion stôr cadw gwres uchel bara &lt;b&gt;tua {0} mlynedd&lt;/b&gt; fel arfer</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>Gallai hyn arbed hyd at</value>
@@ -1914,9 +1695,6 @@
     <data name="You may also want to consider using foam collars around any exposed hot water pipes to save even more energy." xml:space="preserve">
         <value>Efallai y byddwch hefyd yn dymuno ystyried defnyddio coleri ewyn o amgylch unrhyw bibellau dŵr poeth agored i arbed mwy fyth o ynni.</value>
     </data>
-    <data name="MoreInfoOnHotWaterCylinderInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>WELSH Gallwch ddod o hyd i ragor o wybodaeth am ddeunydd inswleiddio waliau solet ar &lt;a class="govuk-link" target="_blank" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
-    </data>
     <data name="Recommendation Suitable For" xml:space="preserve">
         <value>Argymhelliad yn addas ar gyfer</value>
     </data>
@@ -1926,14 +1704,8 @@
     <data name="Recommendation Lifetime" xml:space="preserve">
         <value>Oes a Argymhellir</value>
     </data>
-    <data name="HotWaterCylinderJacketsTypicallyLastString" xml:space="preserve">
-        <value>WELSH Disgwylir i siacedi tanciau dŵr poeth &lt;b&gt;tua {0} mlynedd&lt;/b&gt; fel arfer</value>
-    </data>
     <data name="You may well need to fit new or additional controls when you fit a new gas boiler to comply with building regulations. These will help to maximise the system’s efficiency, saving you even more money." xml:space="preserve">
         <value>Efallai y bydd angen i chi osod rheolaethau newydd neu ychwanegol pan fyddwch yn gosod boeler nwy newydd i gydymffurfio â'r rheoliadau adeiladu. Bydd y rhain yn helpu i wneud y system mor effeithlon â phosibl, gan arbed hyd yn oed mwy o arian i chi.</value>
-    </data>
-    <data name="MoreInfoOnGasBoilerReplacementOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>WELSH Gallwch ddod o hyd i ragor o wybodaeth am newid eich boeler nwy ar &lt;a class="govuk-link" target="_blank" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="You have an old or inefficient gas boiler, or your boiler is broken" xml:space="preserve">
         <value>Mae gennych hen foeler nwy neu foeler nwy aneffeithlon, neu mae eich boeler wedi torri</value>
@@ -1953,9 +1725,6 @@
     <data name="Recommendation Lifetime" xml:space="preserve">
         <value>Oes a Argymhellir</value>
     </data>
-    <data name="GasBoilersTypicallyExpectedToLast" xml:space="preserve">
-        <value>Disgwylir i foeleri nwy newydd bara &lt;b&gt;tua {0} mlynedd&lt;/b&gt; fel arfer</value>
-    </data>
     <data name="Based on the information we have collected; it looks like you have some single glazed windows in your home. Double or triple glazed windows are much better at keeping the heat in, so would help" xml:space="preserve">
         <value>Ar sail yr wybodaeth rydym wedi'i chasglu; mae'n ymddangos bod gennych rywfaint o ffenestri gwydr sengl yn eich cartref. Mae ffenestri gwydr dwbl neu driphlyg yn llawer gwell am gadw'r gwres i mewn, ac felly yn eich helpu</value>
     </data>
@@ -1974,20 +1743,11 @@
     <data name="Recommendation Suitable For" xml:space="preserve">
         <value>Argymhelliad yn addas ar gyfer</value>
     </data>
-    <data name="NewWindowsTypicallyLastString" xml:space="preserve">
-        <value>WELSH Disgwylir i ffenestri newydd bara &lt;b&gt;tua {0} mlynedd&lt;/b&gt; fel arfer</value>
-    </data>
     <data name="Download your Action Plan" xml:space="preserve">
         <value>Llwytho eich Cynllun Gweithredu i lawr</value>
     </data>
     <data name="Your Action Plan" xml:space="preserve">
         <value>Eich Cynllun Gweithredu</value>
-    </data>
-    <data name="SummaryOfSavingsAndCostsForSingleRecommendationString" xml:space="preserve">
-        <value>WELSH Dyma grynodeb o’r arbedion a amcangyfrifir i’ch bil ynni blynyddol a’r gost o osod yr &lt;strong&gt;1 argymhelliad&lt;/strong&gt; y gwnaethoch ddweud wrthym y byddech yn ei ystyried ar gyfer eich cartref.</value>
-    </data>
-    <data name="SummaryOfSavingsAndCostsForMultipleRecommendationsString" xml:space="preserve">
-        <value>WELSH Dyma grynodeb o’r arbedion a amcangyfrifir i’ch bil ynni blynyddol a’r gost o osod y &lt;strong&gt;{0} argymhelliad&lt;/strong&gt; y gwnaethoch ddweud wrthym y byddech yn eu hystyried ar gyfer eich cartref.</value>
     </data>
     <data name="You could save up to" xml:space="preserve">
         <value>Gallech arbed hyd at</value>
@@ -2040,20 +1800,11 @@
     <data name="Boiler Upgrade Scheme" xml:space="preserve">
         <value>Cynllun Uwchraddio Boeleri</value>
     </data>
-    <data name="OfgemGuideToSchemesAndGrantsString" xml:space="preserve">
-        <value>WELSH Os ydych chi’n poeni am fforddio eich biliau ynni, mae gan Ofgem &lt;a class="govuk-link" href="{0}" target="_blank"&gt;ganllaw defnyddiol&lt;/a&gt; i’r cynlluniau, y grantiau a’r budd-daliadau a allai fod ar gael i chi.</value>
-    </data>
     <data name="2. Consult with a qualified installer" xml:space="preserve">
         <value>2. Ymgynghori â gosodwr cymwys</value>
     </data>
     <data name="We recommend consulting with a qualified installer to confirm what changes you can make to your property." xml:space="preserve">
         <value>Rydym yn argymell eich bod yn ymgynghori â gosodwr cymwys i gadarnhau pa newidiadau y gallwch chi eu gwneud i’ch eiddo.</value>
-    </data>
-    <data name="GetHelpFindingInstallerOnMCSWebsiteString" xml:space="preserve">
-        <value>WELSH Gallwch gael cymorth i ddod o hyd i osodwr pympiau gwres neu baneli solar cymwys yn eich ardal drwy fynd i &lt;a class="govuk-link" href="{0}" target="_blank"&gt;wefan MCS.&lt;/a&gt;</value>
-    </data>
-    <data name="HelpFindingQualifiedInstallerOnTrustMarkWebsiteString" xml:space="preserve">
-        <value>WELSH Am bob newid arall i'ch eiddo, gallwch gael cymorth i ddod o hyd i osodwr cymwys yn eich ardal chi drwy fynd i wefan &lt;a class="govuk-link" href="{0}" target="_blank"&gt;TrustMark.&lt;/a&gt;</value>
     </data>
     <data name="Research improvements you are unsure about" xml:space="preserve">
         <value>Ymchwiliwch i’r gwelliannau rydych chi’n ansicr yn eu cylch</value>
@@ -2084,9 +1835,6 @@
     </data>
     <data name="If you’d like to do more to improve the energy efficiency of your home, consider the following:" xml:space="preserve">
         <value>Os hoffech chi wneud mwy i wella effeithlonrwydd ynni eich cartref, beth am ystyried y canlynol:</value>
-    </data>
-    <data name="VisitTheHelpForHouseholdsWebsiteString" xml:space="preserve">
-        <value>WELSH Ewch i wefan &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Help i Aelwydydd&lt;/a&gt; i gael gwybod am fwy o ffyrdd i arbed ynni a lleihau eich biliau.</value>
     </data>
     <data name="WhenBuyingNewAppliancesUpgradeEnergyLabelsString" xml:space="preserve">
         <value>Pan fyddwch chi’n prynu offer newydd, beth am uwchraddio i un sy'n defnyddio ynni'n effeithlon - Rhagor o wybodaeth am labeli ynni</value>
@@ -2129,9 +1877,6 @@
     </data>
     <data name="We have provided recommendations that are most suitable for your home based on the answers you provided earlier." xml:space="preserve">
         <value>Rydym wedi gwneud argymhellion sydd fwyaf addas ar gyfer eich cartref ar sail yr atebion a ddarparwyd gennych yn gynharach.</value>
-    </data>
-    <data name="ChangeAnswersIfSomethingDoesNotLookRightString" xml:space="preserve">
-        <value>WELSH Os nad yw rhywbeth yn edrych yn iawn, gallwch &lt;a href="{0}"&gt;weld a newid eich atebion yma.&lt;/a&gt;</value>
     </data>
     <data name="Get help using the online service" xml:space="preserve">
         <value>Cael cymorth i ddefnyddio'r gwasanaeth ar-lein</value>
@@ -2241,9 +1986,6 @@
     <data name="We use cookies to store information about how you use our service, such as the pages you visit." xml:space="preserve">
         <value>Rydym yn defnyddio cwcis i storio gwybodaeth am sut rydych chi’n defnyddio ein gwasanaeth, fel y tudalennau rydych chi’n ymweld â nhw.</value>
     </data>
-    <data name="BriefCookieExplanationLinkToDetailedInfoString" xml:space="preserve">
-        <value>WELSH Mae’r dudalen hon yn cynnwys esboniad byr o bob math o gwci rydyn ni’n ei ddefnyddio. Os hoffech chi gael rhagor o fanylion, &lt;a href="{0}" class="govuk-link"&gt;darllenwch ein gwybodaeth fanwl am gwcis&lt;/a&gt;</value>
-    </data>
     <data name="Cookie settings" xml:space="preserve">
         <value>Gosodiadau cwcis</value>
     </data>
@@ -2343,9 +2085,6 @@
     <data name="Change your settings" xml:space="preserve">
         <value>Newid eich gosodiadau</value>
     </data>
-    <data name="YouCanChangeWhichCookiesString" xml:space="preserve">
-        <value>WELSH Gallwch &lt;a href="{0}" class="govuk-link"&gt;newid pa gwcis rydych chi’n fodlon i ni eu defnyddio&lt;/a&gt;.</value>
-    </data>
     <data name="Page not found" xml:space="preserve">
         <value>Heb ganfod y dudalen</value>
     </data>
@@ -2375,9 +2114,6 @@
     </data>
     <data name="Invalid reference" xml:space="preserve">
         <value>Cyfeirnod annilys</value>
-    </data>
-    <data name="ReturnToHomePageString" xml:space="preserve">
-        <value>WELSH Dychwelyd i'r &lt;a href="{0}" class="govuk-link"&gt;hafan&lt;/a&gt;</value>
     </data>
     <data name="Sorry, there is a problem with the service" xml:space="preserve">
         <value>Yn anffodus, mae problem â’r gwasanaeth</value>
@@ -2448,14 +2184,8 @@
     <data name="We’ve also made the website text as simple as possible to understand." xml:space="preserve">
         <value>Rydyn ni hefyd wedi gwneud testun y wefan mor syml, ac mor hawdd i’w ddeall ag sy’n bosib.</value>
     </data>
-    <data name="AbilityNetAdviceLinkString" xml:space="preserve">
-        <value>WELSH Mae cyngor ar sut i wneud eich dyfais yn haws i’w defnyddio os oes gennych chi anabledd ar gael ar &lt;a class="govuk-link" href="{0}" target="_blank"&gt;AbilityNet.&lt;/a&gt;</value>
-    </data>
     <data name="Reporting accessibility problems with this website" xml:space="preserve">
         <value>Rhoi gwybod am broblemau hygyrchedd yn ymwneud â'r wefan hon</value>
-    </data>
-    <data name="HelpUsImproveAccessibilityFeedbackString" xml:space="preserve">
-        <value>WELSH Rydyn ni bob amser yn awyddus i wella hygyrchedd y wefan hon. Os ydych chi’n dod ar draws unrhyw broblemau sydd heb eu nodi ar y dudalen hon neu os ydych chi’n credu nad ydym yn bodloni gofynion hygyrchedd, yna &lt;a class="govuk-link" href="{0}" target="_blank"&gt;rhowch adborth (yn agor mewn tab newydd)&lt;/a&gt;.</value>
     </data>
     <data name="Enforcement procedure" xml:space="preserve">
         <value>Gweithdrefn gorfodi</value>
@@ -2468,9 +2198,6 @@
     </data>
     <data name="Compliance status" xml:space="preserve">
         <value>Statws Cydymffurfio</value>
-    </data>
-    <data name="CompliantWithWebContentAccessibilityGuidelinesString" xml:space="preserve">
-        <value>WELSH Mae’r wefan hon yn cydymffurfio â safon &lt;a class="govuk-link" href="{0}" target="_blank"&gt;AA Canllawiau Hygyrchedd Cynnwys y We fersiwn 2.1&lt;/a&gt;.</value>
     </data>
     <data name="Content that’s not within the scope of the accessibility regulations" xml:space="preserve">
         <value>Cynnwys nad yw o fewn cwmpas y rheoliadau hygyrchedd</value>
@@ -2511,9 +2238,6 @@
     <data name="Your name, email address and any other information sent directly to us via our email feedback function." xml:space="preserve">
         <value>Eich enw, cyfeiriad e-bost ac unrhyw wybodaeth arall a anfonir yn uniongyrchol atom drwy ein swyddogaeth adborth e-bost.</value>
     </data>
-    <data name="WeMayAlsoCollectAndProcessAnonymisedInformationCookiePolicyString" xml:space="preserve">
-        <value>WELSH Efallai y byddwn hefyd yn casglu ac yn prosesu gwybodaeth ddienw fel yr amlinellir yn ein &lt;a class="govuk-link" href="{0}" target="_blank"&gt;polisi cwcis&lt;/a&gt;.</value>
-    </data>
     <data name="Purpose" xml:space="preserve">
         <value>Pwrpas</value>
     </data>
@@ -2530,7 +2254,7 @@
         <value>Byddwn yn rhannu eich data personol gydag Adrannau eraill y Llywodraeth neu awdurdodau cyhoeddus lle bo angen. Efallai y byddwn yn rhannu eich data os bydd yn ofynnol i ni wneud hynny yn ôl y gyfraith, er enghraifft drwy orchymyn llys neu i atal twyll neu drosedd arall.</value>
     </data>
     <data name="SharedWithDataProcessorsString" xml:space="preserve">
-        <value>WELSH Gan y bydd eich data personol yn cael ei storio ar ein seilwaith TG, bydd hefyd yn cael ei rannu â’n proseswyr data Microsoft, &lt;a href="{0}" target="_blank"&gt;GOV.UK PaaS&lt;/a&gt;, a &lt;a href="{1}" target="_blank"&gt;GOV.UK Notify&lt;/a&gt;.</value>
+        <value>Gan y bydd eich data personol yn cael ei storio ar ein seilwaith TG, bydd hefyd yn cael ei rannu â’n proseswyr data Microsoft, &lt;a href="{0}" target="_blank"&gt;GOV.UK PaaS&lt;/a&gt;, a &lt;a href="{1}" target="_blank"&gt;GOV.UK Notify&lt;/a&gt;.</value>
     </data>
     <data name="Your personal data may also be shared with the Softwire Technology Ltd who developed and help to maintain this service." xml:space="preserve">
         <value>Efallai y bydd eich data personol hefyd yn cael ei rannu â Softwire Technology Ltd a ddatblygodd y gwasanaeth hwn ac sy’n helpu i’w gynnal.</value>
@@ -3144,9 +2868,6 @@
     <data name="Based on your answers, we have recommended some improvements that you or an accredited tradesperson could carry out to improve the energy efficiency of your home. Follow the link below to view your recommendations." xml:space="preserve">
         <value>Ar sail eich atebion, rydym wedi argymell rhai gwelliannau y gallech chi neu grefftwr achrededig eu gwneud i wella effeithlonrwydd ynni eich cartref. Dilynwch y ddolen isod i weld eich argymhellion.</value>
     </data>
-    <data name="https://find-energy-improvements-suitable-for-your-home.service.gov.uk/energy-efficiency/returning-user/2YHARX4Y" xml:space="preserve">
-        <value>https://find-energy-improvements-suitable-for-your-home.service.gov.uk/energy-efficiency/returning-user/2YHARX4Y</value>
-    </data>
     <data name="If the link does not work you can copy your unique reference code below" xml:space="preserve">
         <value>Os nad yw’r ddolen yn gweithio, gallwch gopïo eich cyfeirnod unigryw isod</value>
     </data>
@@ -3155,9 +2876,6 @@
     </data>
     <data name="And go to" xml:space="preserve">
         <value>A mynd i</value>
-    </data>
-    <data name="https://find-energy-improvements-suitable-for-your-home.service.gov.uk/energy-efficiency/new-or-returning-user" xml:space="preserve">
-        <value>https://find-energy-improvements-suitable-for-your-home.service.gov.uk/energy-efficiency/new-or-returning-user</value>
     </data>
     <data name="From this page, you can return to your recommendations and action plan. You will be asked to enter your reference code." xml:space="preserve">
         <value>O’r dudalen hon gallwch fynd yn ôl at eich argymhellion a chynllun gweithredu. Gofynnir i chi roi eich cyfeirnod.</value>
@@ -3170,9 +2888,6 @@
     </data>
     <data name="Feedback" xml:space="preserve">
         <value>Adborth</value>
-    </data>
-    <data name="If you have any feedback on our service, you can use this link to let us know https://forms.microsoft.com/r/1G63YXE4Qq" xml:space="preserve">
-        <value>Os oes gennych chi unrhyw adborth am ein gwasanaeth, gallwch ddefnyddio’r ddolen hon i roi gwybod i ni https://forms.microsoft.com/r/1G63YXE4Qq</value>
     </data>
     <data name="Building type" xml:space="preserve">
         <value>Math o adeilad </value>
@@ -3240,7 +2955,7 @@
         <comment>1 year</comment>
     </data>
     <data name="LicenseDescriptionString" xml:space="preserve">
-        <value>WELSH Mae’r holl gynnwys ar gael dan &lt;a class="govuk-footer__link" href = "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel = "license" &gt;Drwydded Llywodraeth Agored v3.0 &lt;/a&gt; ac eithrio pan nodir fel arall</value>
+        <value />
         <comment>LicenseDescriptionString</comment>
     </data>
     <data name="(opens in a new window)" xml:space="preserve">
@@ -3315,9 +3030,6 @@
         <value />
         <comment>You’ve set your cookie preferences.</comment>
     </data>
-    <data name="CostsAndSavingsBasedOnStandardAssessmentProcedureString" xml:space="preserve">
-        <value>WELSH Mae’r costau a’r arbedion rydych chi’n eu gweld wrth ddefnyddio’r gwasanaethau ar y wefan hon yn seiliedig ar safonau a ddatblygwyd ar gyfer y Llywodraeth fel ffordd o ddeall sut mae tai a fflatiau yn defnyddio ynni, a sut y gellid gwella defnydd ynni eich cartref chi. Gallwch ddod o hyd i ragor o wybodaeth am y safonau hyn yn y canllawiau a gyhoeddwyd ar y&lt;a class="govuk-link" target="_blank" href="{0}"&gt; wefan Gweithdrefn Asesu Safonol.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
-    </data>
     <data name="Typical savings per year" xml:space="preserve">
         <value>Arbedion arferol y flwyddyn</value>
     </data>
@@ -3385,18 +3097,12 @@
         <comment>The legal basis for processing your personal data is processing necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the data controller, such as the exercise of a function of the Crown, a Minister of the Crown, or a government department; the exercise of a function conferred on a person by an enactment; the exercise of a function of either House of Parliament; or the administration of justice. In this case, in order to receive feedback about this service and to contact you for clarifications or to report service updates.</comment>
     </data>
     <data name="DataProcessorsWithinEEAAndModelContractClausesOutsideEEAString" xml:space="preserve">
-        <value>WELSH Gan fod eich data personol yn cael ei storio ar ein seilwaith TG ac yn cael ei rannu â’n proseswyr data Microsoft, &lt;a href="{0}" target="_blank"&gt;GOV.UK PaaS&lt;/a&gt;, a &lt;a href="{1}" target="_blank"&gt;GOV.UK Notify&lt;/a&gt;, mae’n bosib y caiff ei drosglwyddo a’i storio’n ddiogel yn y DU a’r Ardal Economaidd Ewropeaidd. Pan fydd eich data personol yn cael ei storio y tu allan i’r DU a’r Ardal Economaidd Ewropeaidd bydd yn destun amddiffyniad cyfreithiol cyfatebol drwy ddefnyddio Cymalau Contract Enghreifftiol.</value>
+        <value />
         <comment>DataProcessorsWithinEEAAndModelContractClausesOutsideEEAString</comment>
-    </data>
-    <data name="FindOutIfEligibleForSustainableWarmthGrantString" xml:space="preserve">
-        <value>WELSH I gael gwybod a ydych chi’n gymwys i gael grant Cynhesrwydd Cynaliadwy cysylltwch â’ch Awdurdod Lleol yn &lt;a class="govuk-link" href="{0}" target="_blank"&gt;https://www.gov.uk/find-local-council&lt;/a&gt; i holi a yw’n cynnig cyllid.</value>
     </data>
     <data name="CheckEligibilityForGBISAndHUG2String" xml:space="preserve">
         <value />
         <comment>CheckEligibilityForGBISAndHUG2String</comment>
-    </data>
-    <data name="WeUseInfoToSearchForEPCString" xml:space="preserve">
-        <value>WELSH Rydym yn defnyddio’r wybodaeth hon i chwilio drwy’r Gofrestr Perfformiad Ynni Adeiladau am Dystysgrif Perfformiad Ynni sy’n cyfateb i’ch cyfeiriad. Mae’r Gofrestr Perfformiad Ynni Adeiladau yn gofrestr agored a gallwch gael rhagor o fanylion gan yr &lt;a href="{0}" target="_blank"&gt;Adran Ffyniant Bro, Tai a Chymunedau&lt;/a&gt;.</value>
     </data>
     <data name="Please enter your email" xml:space="preserve">
         <value />
@@ -3405,9 +3111,6 @@
     <data name="Success" xml:space="preserve">
         <value />
         <comment>Success</comment>
-    </data>
-    <data name="IfNotHappyWithComplaintContactLinkString" xml:space="preserve">
-        <value>WELSH Y Comisiwn Cydraddoldeb a Hawliau Dynol (EHRC) sy’n gyfrifol am weithredu Rheoliadau Hygyrchedd Cyrff Sector Cyhoeddus (Gwefannau ac Apiau Symudol) (Rhif 2) 2018 (y ‘rheoliadau hygyrchedd’). Os ydych chi’n anhapus â’r ffordd rydyn ni’n ymateb i'ch cwyn, &lt;a class="govuk-link" href="{0}" target="_blank"&gt;cysylltwch â’r Gwasanaeth Cynghori a Chefnogi Cydraddoldeb (EASS)&lt;/a&gt;.</value>
     </data>
     <data name="Homes built after 1991 were typically built with insulating material between the outer and inner walls." xml:space="preserve">
         <value />
@@ -3450,7 +3153,7 @@
         <comment>Under Development is typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</comment>
     </data>
     <data name="YouCanChangeYourCookieSettingsAtAnyTimeString" xml:space="preserve">
-        <value>WELSH Gallwch &lt;a class="govuk-link" href="{0}"&gt;newid eich gosodiadau cwcis&lt;/a&gt; ar unrhyw adeg.</value>
+        <value />
         <comment>YouCanChangeYourCookieSettingsAtAnyTimeString</comment>
     </data>
     <data name="Back to" xml:space="preserve">
@@ -3462,7 +3165,7 @@
         <comment>Go back to</comment>
     </data>
     <data name="Action Plan" xml:space="preserve">
-        <value>WELSH Cynllun Gweithredu</value>
+        <value />
         <comment>Action Plan</comment>
     </data>
     <data name="They could cost" xml:space="preserve">
@@ -3478,7 +3181,7 @@
         <comment>You could save</comment>
     </data>
     <data name="YourEPCSuggestsString" xml:space="preserve">
-        <value>WELSH Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu </value>
+        <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu </value>
     </data>
     <data name="A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the &quot;floor&quot; of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level." xml:space="preserve">
         <value>Mae atig wedi’i inswleiddio’n llwyr os oes mwy na 200mm (wyth modfedd) o ddeunydd inswleiddio’n gorchuddio’r atig gyfan, fel arfer ar “lawr” yr atig gydag un haen rhwng y preniau llorweddol a haen arall yn mynd ar eu traws i godi’r deunydd inswleiddio i’r lefel ofynnol.</value>
@@ -3550,8 +3253,5 @@
     <data name="External wall insulation is less disruptive to the inside of your home, but will change the external appearance of your home, so you will usually need planning permission. It’s unlikely to be allowed on the front of your property if you live in a conservation area." xml:space="preserve">
         <value>Mae inswleiddio waliau allanol yn amharu llai ar y tu mewn i’ch cartref, ond bydd yn newid ymddangosiad allanol eich cartref, felly bydd angen caniatâd cynllunio fel arfer. Mae'n annhebygol y caniateir ei osod ar wyneb blaen eich eiddo os ydych chi'n byw mewn ardal gadwraeth.</value>
         <comment>External wall insulation is less disruptive to the inside of your home, but will change the external appearance of your home, so you will usually need planning permission. It’s unlikely to be allowed on the front of your property if you live in a conservation area.</comment>
-    </data>
-    <data name="MoreInfoOnSolidWallInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>WELSH Gallwch ddod o hyd i ragor o wybodaeth am ddeunydd inswleiddio waliau solet ar &lt;a class="govuk-link" target="_blank" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
 </root>

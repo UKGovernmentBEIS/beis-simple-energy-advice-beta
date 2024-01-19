@@ -53,7 +53,7 @@
         <value>installing solar panels</value>
     </data>
     <data name="DifferentServiceAvailableToCheckHeatPumpString" xml:space="preserve">
-        <value>There is a different service available if you would like to &lt;a class="govuk-link" href="https://www.heat-pump-check.service.gov.uk/" target="_blank"&gt; check if a heat pump may be suitable for your property.&lt;/a&gt;</value>
+        <value>There is a different service available if you would like to &lt;a class="govuk-link" href="{0}" target="_blank"&gt; check if a heat pump may be suitable for your property.&lt;/a&gt;</value>
     </data>
     <data name="Each recommendation will explain what’s involved, how much it could cost you and how much it could save on typical energy bills. You will also receive information about where to go to for more advice." xml:space="preserve">
         <value>Each recommendation will explain what’s involved, how much it could cost you and how much it could save on typical energy bills. You will also receive information about where to go to for more advice.</value>
@@ -2744,7 +2744,7 @@
         <value>The number of people who live in the property</value>
     </data>
     <data name="Enter the number of people who live in the property" xml:space="preserve">
-        <value>Enter the number of people who live in the property ENGLISH</value>
+        <value>Enter the number of people who live in the property</value>
     </data>
     <data name="Select your main heating system" xml:space="preserve">
         <value>Select your main heating system</value>
@@ -3154,9 +3154,6 @@
     <data name="Based on your answers, we have recommended some improvements that you or an accredited tradesperson could carry out to improve the energy efficiency of your home. Follow the link below to view your recommendations." xml:space="preserve">
         <value>Based on your answers, we have recommended some improvements that you or an accredited tradesperson could carry out to improve the energy efficiency of your home. Follow the link below to view your recommendations.</value>
     </data>
-    <data name="https://find-energy-improvements-suitable-for-your-home.service.gov.uk/energy-efficiency/returning-user/2YHARX4Y" xml:space="preserve">
-        <value>https://find-energy-improvements-suitable-for-your-home.service.gov.uk/energy-efficiency/returning-user/2YHARX4Y</value>
-    </data>
     <data name="If the link does not work you can copy your unique reference code below" xml:space="preserve">
         <value>If the link does not work you can copy your unique reference code below</value>
     </data>
@@ -3165,9 +3162,6 @@
     </data>
     <data name="And go to" xml:space="preserve">
         <value>And go to</value>
-    </data>
-    <data name="https://find-energy-improvements-suitable-for-your-home.service.gov.uk/energy-efficiency/new-or-returning-user" xml:space="preserve">
-        <value>https://find-energy-improvements-suitable-for-your-home.service.gov.uk/energy-efficiency/new-or-returning-user</value>
     </data>
     <data name="From this page, you can return to your recommendations and action plan. You will be asked to enter your reference code." xml:space="preserve">
         <value>From this page, you can return to your recommendations and action plan. You will be asked to enter your reference code.</value>
@@ -3180,9 +3174,6 @@
     </data>
     <data name="Feedback" xml:space="preserve">
         <value>Feedback</value>
-    </data>
-    <data name="If you have any feedback on our service, you can use this link to let us know https://forms.microsoft.com/r/1G63YXE4Qq" xml:space="preserve">
-        <value>If you have any feedback on our service, you can use this link to let us know https://forms.microsoft.com/r/1G63YXE4Qq</value>
     </data>
     <data name="Building type" xml:space="preserve">
         <value>Building type</value>
