@@ -13,14 +13,8 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Find energy improvements suitable for your home" xml:space="preserve">
-        <value>Find energy improvements suitable for your home</value>
-    </data>
     <data name="Get advice on which home improvements could be installed by you or a tradesperson to improve the energy efficiency of your home." xml:space="preserve">
         <value>Get advice on which home improvements could be installed by you or a tradesperson to improve the energy efficiency of your home.</value>
-    </data>
-    <data name="tradesperson to improve the energy efficiency of your home." xml:space="preserve">
-        <value>tradesperson to improve the energy efficiency of your home.</value>
     </data>
     <data name="Who can use this service" xml:space="preserve">
         <value>Who can use this service</value>
@@ -100,10 +94,7 @@
     <data name="Find out more about call charges" xml:space="preserve">
         <value>Find out more about call charges</value>
     </data>
-    <data name="GOV.UKFind energy improvements suitable for your home" xml:space="preserve">
-        <value>GOV.UKFind energy improvements suitable for your home</value>
-    </data>
-    <data name="This is a new service string" xml:space="preserve">
+    <data name="ThisIsANewServiceString" xml:space="preserve">
         <value>This is a new service – your &lt;a class="govuk-link" href="{0}" target="_blank"&gt;feedback (opens in new tab)&lt;/a&gt; will help us to improve it.</value>
     </data>
     <data name="Back" xml:space="preserve">
@@ -114,12 +105,6 @@
     </data>
     <data name="Have you used this service before?" xml:space="preserve">
         <value>Have you used this service before?</value>
-    </data>
-    <data name="No, this is my first visit or I don’t have a reference code" xml:space="preserve">
-        <value>No, this is my first visit or I don’t have a reference code</value>
-    </data>
-    <data name="Yes, and I have the 8-character reference code from my previous visit" xml:space="preserve">
-        <value>Yes, and I have the 8-character reference code from my previous visit</value>
     </data>
     <data name="Your 8-character reference code" xml:space="preserve">
         <value>Your 8-character reference code</value>
@@ -135,9 +120,6 @@
     </data>
     <data name="Example reference code" xml:space="preserve">
         <value>Example reference code</value>
-    </data>
-    <data name="ABC123DE" xml:space="preserve">
-        <value>ABC123DE</value>
     </data>
     <data name="Get help using the online service" xml:space="preserve">
         <value>Get help using the online service</value>
@@ -172,9 +154,6 @@
     <data name="Support links" xml:space="preserve">
         <value>Support links</value>
     </data>
-    <data name=" All content is available under the Open Government Licence v3.0, except where otherwise stated" xml:space="preserve">
-        <value> All content is available under the Open Government Licence v3.0, except where otherwise stated</value>
-    </data>
     <data name="© Crown copyright" xml:space="preserve">
         <value>© Crown copyright</value>
     </data>
@@ -187,9 +166,6 @@
     <data name="This service is only available for those who live in England and Wales." xml:space="preserve">
         <value>This service is only available for those who live in England and Wales.</value>
     </data>
-    <data name="England" xml:space="preserve">
-        <value>England</value>
-    </data>
     <data name="Wales" xml:space="preserve">
         <value>Wales</value>
     </data>
@@ -198,9 +174,6 @@
     </data>
     <data name="Northern Ireland" xml:space="preserve">
         <value>Northern Ireland</value>
-    </data>
-    <data name="A country not listed here" xml:space="preserve">
-        <value>A country not listed here</value>
     </data>
     <data name="Sorry, this service isn't for you" xml:space="preserve">
         <value>Sorry, this service isn't for you</value>
@@ -403,9 +376,6 @@
     <data name="Bungalow" xml:space="preserve">
         <value>Bungalow</value>
     </data>
-    <data name="Apartment, flat or maisonette" xml:space="preserve">
-        <value>Apartment, flat or maisonette</value>
-    </data>
     <data name="What kind of house do you have?" xml:space="preserve">
         <value>What kind of house do you have?</value>
     </data>
@@ -528,18 +498,6 @@
     </data>
     <data name="Before 1930" xml:space="preserve">
         <value>Before 1930</value>
-    </data>
-    <data name="1930 to 1966" xml:space="preserve">
-        <value>1930 to 1966</value>
-    </data>
-    <data name="1967 to 1982" xml:space="preserve">
-        <value>1967 to 1982</value>
-    </data>
-    <data name="1983 to 1995" xml:space="preserve">
-        <value>1983 to 1995</value>
-    </data>
-    <data name="1996 to 2011" xml:space="preserve">
-        <value>1996 to 2011</value>
     </data>
     <data name="2012 or newer" xml:space="preserve">
         <value>2012 or newer</value>
@@ -761,13 +719,13 @@
         <value>If you don’t have access to the space underneath your house, you will need to lift a corner of the carpet and underlay to have a look.</value>
     </data>
     <data name="EPCSuggestsSolidConcreteFloorString" xml:space="preserve">
-        <value>Your {0} Energy Performance Certificate suggests your home has a solid concrete floor.</value>
+        <value>Your {0} Energy Performance Certificate suggests your home has &lt;strong&gt;a solid concrete floor.&lt;/strong&gt;</value>
     </data>
     <data name="EPCSuggestsSuspendedTimberFloorString" xml:space="preserve">
-        <value>Your {0} Energy Performance Certificate suggests your home has a suspended timber floor.</value>
+        <value>Your {0} Energy Performance Certificate suggests your home has &lt;strong&gt;a suspended timber floor.&lt;/strong&gt;</value>
     </data>
     <data name="EPCSuggestsBothSuspendedTimberAndSolidConcreteFloorString" xml:space="preserve">
-        <value>Your {0} Energy Performance Certificate suggests your home has both a suspended timber floor and solid concrete floor.</value>
+        <value>Your {0} Energy Performance Certificate suggests your home has &lt;strong&gt;both a suspended timber floor and solid concrete floor.&lt;/strong&gt;</value>
     </data>
     <data name="EPCSuggestsAnotherTypeOfFloorString" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your home has another type of floor.</value>
@@ -783,9 +741,6 @@
     </data>
     <data name="Solid concrete" xml:space="preserve">
         <value>Solid concrete</value>
-    </data>
-    <data name="A mix of both" xml:space="preserve">
-        <value>A mix of both</value>
     </data>
     <data name="I don’t see my option listed" xml:space="preserve">
         <value>I don’t see my option listed</value>
@@ -1183,12 +1138,6 @@
     <data name="Some people may run their heating all night, or for a few hours overnight." xml:space="preserve">
         <value>Some people may run their heating all night, or for a few hours overnight.</value>
     </data>
-    <data name="All day and all night" xml:space="preserve">
-        <value>All day and all night</value>
-    </data>
-    <data name="All day and off at night" xml:space="preserve">
-        <value>All day and off at night</value>
-    </data>
     <data name="I'd like to input my hours" xml:space="preserve">
         <value>I'd like to input my hours</value>
     </data>
@@ -1281,9 +1230,6 @@
     </data>
     <data name="Temperature" xml:space="preserve">
         <value>Temperature</value>
-    </data>
-    <data name="A mix of both suspended timber and solid concrete" xml:space="preserve">
-        <value>A mix of both suspended timber and solid concrete</value>
     </data>
     <data name="Important" xml:space="preserve">
         <value>Important</value>
@@ -1428,9 +1374,6 @@
     </data>
     <data name="RecommendationXofYString" xml:space="preserve">
         <value>Recommendation {0} of {1}</value>
-    </data>
-    <data name="Add some more loft insulation" xml:space="preserve">
-        <value>Add some more loft insulation</value>
     </data>
     <data name="Based on the information we have collected; it looks like you have some insulation in your loft but it’s less than the recommended amount. It could be worthwhile adding some more to bring it up to the recommended thickness of 300mm, or 12 inches." xml:space="preserve">
         <value>Based on the information we have collected; it looks like you have some insulation in your loft but it’s less than the recommended amount. It could be worthwhile adding some more to bring it up to the recommended thickness of 300mm, or 12 inches.</value>
@@ -2182,9 +2125,6 @@
     <data name="Leave some feedback for this service" xml:space="preserve">
         <value>Leave some feedback for this service</value>
     </data>
-    <data name="Add some more loft insulation" xml:space="preserve">
-        <value>Add some more loft insulation</value>
-    </data>
     <data name="Insulate your loft" xml:space="preserve">
         <value>Insulate your loft</value>
     </data>
@@ -2731,12 +2671,6 @@
     <data name="Enter your 8-character reference code (or choose the 'This is my first visit' option)" xml:space="preserve">
         <value>Enter your 8-character reference code (or choose the 'This is my first visit' option)</value>
     </data>
-    <data name="No, this is my first visit or I don’t have a reference code" xml:space="preserve">
-        <value>No, this is my first visit or I don’t have a reference code</value>
-    </data>
-    <data name="Yes, and I have the 8-character reference code from my previous visit" xml:space="preserve">
-        <value>Yes, and I have the 8-character reference code from my previous visit</value>
-    </data>
     <data name="Enter a valid email address" xml:space="preserve">
         <value>Enter a valid email address</value>
     </data>
@@ -2784,9 +2718,6 @@
     </data>
     <data name="Enter a valid email address" xml:space="preserve">
         <value>Enter a valid email address</value>
-    </data>
-    <data name="Find energy improvements suitable for your home" xml:space="preserve">
-        <value>Find energy improvements suitable for your home</value>
     </data>
     <data name="Details about cookies on our service" xml:space="preserve">
         <value>Details about cookies on our service</value>
@@ -2947,9 +2878,6 @@
     <data name="Northern Ireland" xml:space="preserve">
         <value>Northern Ireland</value>
     </data>
-    <data name="A country not listed here" xml:space="preserve">
-        <value>A country not listed here</value>
-    </data>
     <data name="GasBoiler," xml:space="preserve">
         <value>GasBoiler,</value>
     </data>
@@ -2967,9 +2895,6 @@
     </data>
     <data name="Solid concrete" xml:space="preserve">
         <value>Solid concrete</value>
-    </data>
-    <data name="A mix of both" xml:space="preserve">
-        <value>A mix of both</value>
     </data>
     <data name="I don’t see my option listed" xml:space="preserve">
         <value>I don’t see my option listed</value>
@@ -2998,12 +2923,6 @@
     <data name="No, I do not have a hot water cylinder" xml:space="preserve">
         <value>No, I do not have a hot water cylinder</value>
     </data>
-    <data name="All day and all night" xml:space="preserve">
-        <value>All day and all night</value>
-    </data>
-    <data name="All day and off at night" xml:space="preserve">
-        <value>All day and off at night</value>
-    </data>
     <data name="I'd like to input my hours" xml:space="preserve">
         <value>I'd like to input my hours</value>
     </data>
@@ -3030,9 +2949,6 @@
     </data>
     <data name="Before 1900" xml:space="preserve">
         <value>Before 1900</value>
-    </data>
-    <data name="1900 to 1929" xml:space="preserve">
-        <value>1900 to 1929</value>
     </data>
     <data name="2012 or newer" xml:space="preserve">
         <value>2012 or newer</value>
@@ -3082,9 +2998,6 @@
     <data name="Bungalow" xml:space="preserve">
         <value>Bungalow</value>
     </data>
-    <data name="Apartment, flat or maisonette" xml:space="preserve">
-        <value>Apartment, flat or maisonette</value>
-    </data>
     <data name="Start," xml:space="preserve">
         <value>Start,</value>
     </data>
@@ -3096,9 +3009,6 @@
     </data>
     <data name="No, discard this recommendation" xml:space="preserve">
         <value>No, discard this recommendation</value>
-    </data>
-    <data name="AddLoftInsulation," xml:space="preserve">
-        <value>AddLoftInsulation,</value>
     </data>
     <data name="Yes, I only have a flat roof or roofs" xml:space="preserve">
         <value>Yes, I only have a flat roof or roofs</value>
@@ -3142,12 +3052,6 @@
     <data name="Your energy savings advice reference code:" xml:space="preserve">
         <value>Your energy savings advice reference code:</value>
     </data>
-    <data name="Find energy improvements suitable for your home" xml:space="preserve">
-        <value>Find energy improvements suitable for your home</value>
-    </data>
-    <data name="Find energy improvements suitable for your home" xml:space="preserve">
-        <value>Find energy improvements suitable for your home</value>
-    </data>
     <data name="Thank you for using our service and answering questions about your home and energy use." xml:space="preserve">
         <value>Thank you for using our service and answering questions about your home and energy use.</value>
     </data>
@@ -3159,9 +3063,6 @@
     </data>
     <data name="2YHARX4Y" xml:space="preserve">
         <value>2YHARX4Y</value>
-    </data>
-    <data name="And go to" xml:space="preserve">
-        <value>And go to</value>
     </data>
     <data name="From this page, you can return to your recommendations and action plan. You will be asked to enter your reference code." xml:space="preserve">
         <value>From this page, you can return to your recommendations and action plan. You will be asked to enter your reference code.</value>
@@ -3481,9 +3382,6 @@
         <value>You could save</value>
         <comment>You could save</comment>
     </data>
-    <data name="YourEPCSuggestsString" xml:space="preserve">
-        <value>Your {0} Energy Performance Certificate suggests your home has</value>
-    </data>
     <data name="A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the &quot;floor&quot; of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level." xml:space="preserve">
         <value>A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the "floor" of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level.</value>
         <comment>A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the "floor" of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level.</comment>
@@ -3557,5 +3455,11 @@
     </data>
     <data name="MoreInfoOnSolidWallInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
         <value>You can find more information on solid wall insulation on the&lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+    </data>
+    <data name="floor construction" xml:space="preserve">
+        <value>floor construction</value>
+    </data>
+    <data name="FloorConstructionKeyString" xml:space="preserve">
+        <value>Floor construction</value>
     </data>
 </root>

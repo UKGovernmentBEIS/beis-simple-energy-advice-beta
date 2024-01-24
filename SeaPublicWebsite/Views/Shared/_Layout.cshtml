@@ -92,7 +92,7 @@
         @(await Html.GovUkPhaseBanner(new PhaseBannerViewModel
         {
             Phase = "Beta",
-            Html = @<text>@SharedLocalizer["This is a new service string", @ViewBag.FeedbackUrl]</text>
+            Html = @<text>@SharedLocalizer["ThisIsANewServiceString", @ViewBag.FeedbackUrl]</text>
         }))
 
         @(RenderSection("BeforeMain", false))
