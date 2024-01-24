@@ -2071,7 +2071,7 @@
         <value>Wedi Pasio’r Prawf Iechyd</value>
     </data>
     <data name="ReturnToHomePageString" xml:space="preserve">
-        <value>Dychwelyd i'r hafan</value>
+        <value>Dychwelyd &lt;a href="{0}" class="govuk-link"&gt;i'r hafan&lt;/a&gt;</value>
     </data>
     <data name="Cookies on our service" xml:space="preserve">
         <value>Cwcis ar ein gwasanaeth</value>
