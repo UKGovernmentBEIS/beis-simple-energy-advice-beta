@@ -5,7 +5,7 @@
 @model SeaPublicWebsite.Models.EnergyEfficiency.SingleRecommendationDetailsViewModel;
 
 <span class="govuk-caption-l">
-    @SharedLocalizer[$"Recommendation {Model.RecommendationIndex + 1} of {Model.PropertyRecommendations.Count}"]
+    @SharedLocalizer["RecommendationXofYString", Model.RecommendationIndex + 1, Model.PropertyRecommendations.Count]
 </span>
 <h1 class="govuk-heading-l">
     @Model.GetCurrentPropertyRecommendation().Title

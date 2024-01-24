@@ -7,7 +7,7 @@
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
-    ViewBag.Title = SharedLocalizer["RecommendationXofYString", Model.RecommendationIndex + 1, Model.PropertyRecommendations.Count].Value;
+    ViewBag.Title = string.Format(SharedLocalizer["RecommendationXofYString"].Value, Model.RecommendationIndex + 1, Model.PropertyRecommendations.Count);
     Layout = "_Layout";
 }
 
@@ -66,12 +66,12 @@
                 await Html.RenderPartialAsync("Partials/_ActionButtons.cshtml", new ActionButtonsViewModel
                 {
                     BackTitle = hasBack ? @SharedLocalizer["Go back to"].Value : null,
-                    BackText = hasBack ? $"{SharedLocalizer["Recommendation"]} {Model.RecommendationIndex}" : null,
+                    BackText = hasBack ? $"{SharedLocalizer["Recommendation"].Value} {Model.RecommendationIndex}" : null,
                     ForwardTitle = Model.FromActionPlan ? @SharedLocalizer["Back to"].Value : @SharedLocalizer["Continue to"].Value,
                     ForwardText = Model.FromActionPlan
                         ? @SharedLocalizer["Action Plan"].Value
                         : Model.HasNextIndex()
-                            ? $"{SharedLocalizer["Recommendation"]} {Model.RecommendationIndex + 2}"
+                            ? $"{SharedLocalizer["Recommendation"].Value} {Model.RecommendationIndex + 2}"
                             : SharedLocalizer["Action Plan"].Value
                 });
             }
