@@ -1381,7 +1381,7 @@ namespace SeaPublicWebsite.Controllers
                 }
             }
             
-            var viewModel = new RecommendationViewModel(sharedLocalizer)
+            var viewModel = new RecommendationViewModel() 
             {
                 Reference = reference,
                 RecommendationIndex = recommendationIndex,

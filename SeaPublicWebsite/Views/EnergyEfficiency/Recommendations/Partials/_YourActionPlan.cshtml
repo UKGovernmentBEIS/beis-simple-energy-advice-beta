@@ -15,7 +15,7 @@
             @foreach (PropertyRecommendation propertyRecommendation in Model.GetSavedRecommendations())
             {
                 <li class="govuk-body-s">
-                    @(propertyRecommendation.Title)
+                    @(SharedLocalizer[propertyRecommendation.Title])
                 </li>
             }
         </ul>

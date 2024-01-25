@@ -10,8 +10,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class RecommendationViewModel
     {
-        private readonly IStringLocalizer<SharedResources> sharedLocalizer;
-        
         [GovUkValidateRequired(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = nameof(ErrorMessages.RecommendationActionRequired))]
         public RecommendationAction? RecommendationAction { get; set; }
         public int RecommendationIndex { get; set; }
@@ -20,11 +18,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string BackLink { get; set; }
         public string Reference { get; set; }
         public PropertyRecommendation GetCurrentPropertyRecommendation() => PropertyRecommendations[RecommendationIndex];
-
-        public RecommendationViewModel(IStringLocalizer<SharedResources> localizer)
-        {
-            sharedLocalizer = localizer;
-        }
 
         public bool HasPreviousIndex()
         {
@@ -45,13 +38,14 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         {
             var minCost = GetSavedRecommendations().Sum(r => r.MinInstallCost);
             var maxCost = GetSavedRecommendations().Sum(r => r.MaxInstallCost);
-            return sharedLocalizer["£RangeString", $"{minCost:N0}", $"{maxCost:N0}"];
+            return
+                $"{minCost:N0} - {maxCost:N0}";
         }
 
         public string GetTotalSavingText()
         {
             var saving = GetSavedRecommendations().Sum(r => r.Saving);
-            return sharedLocalizer["£AYearString", $"{saving:N0}"].Value;
+            return $"{saving:N0} a year";
         }
     }
 }
