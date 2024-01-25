@@ -131,7 +131,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
             BreFlatLevel? breFlatLevel = GetBreFlatLevel(propertyData.PropertyType.Value, propertyData.FlatType);
 
             string breConstructionDate = GetBreConstructionDate(propertyData.YearBuilt, propertyData.WallConstruction, propertyData.CavityWallsInsulated, propertyData.Epc?.ConstructionAgeBand);
-
+            
             BreWallType breWallType = GetBreWallType(propertyData.WallConstruction.Value,
                 propertyData.SolidWallsInsulated,
                 propertyData.CavityWallsInsulated);
@@ -244,11 +244,17 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
         {
             return yearBuilt switch
             {
-                YearBuilt.Pre1930 => "B",
-                YearBuilt.From1930To1966 => "D",
-                YearBuilt.From1967To1982 => "F",
-                YearBuilt.From1983To1995 => "H",
-                YearBuilt.From1996To2011 => "K",
+                YearBuilt.Pre1900 => "A",
+                YearBuilt.From1900To1929 => "B",
+                YearBuilt.From1930To1949 => "C",
+                YearBuilt.From1950To1966 => "D",
+                YearBuilt.From1967To1975 => "E",
+                YearBuilt.From1976To1982 => "F",
+                YearBuilt.From1983To1990 => "G",
+                YearBuilt.From1991To1995 => "H",
+                YearBuilt.From1996To2002 => "I",
+                YearBuilt.From2003To2006 => "J",
+                YearBuilt.From2007To2011 => "K",
                 YearBuilt.From2012ToPresent => "L",
                 //peer-reviewed assumptions:
                 _ => epcConstructionAgeBand switch
