@@ -75,11 +75,13 @@ namespace SeaPublicWebsite.Controllers
         [HttpGet("new-or-returning-user")]
         public IActionResult NewOrReturningUser_Get()
         {
-            var viewModel = new NewOrReturningUserViewModel
-            {
-                BackLink = GetBackUrl(QuestionFlowStep.NewOrReturningUser)
-            };
-            return View("NewOrReturningUser", viewModel);
+            // var viewModel = new NewOrReturningUserViewModel
+            // {
+            //     BackLink = GetBackUrl(QuestionFlowStep.NewOrReturningUser)
+            // };
+            // return View("NewOrReturningUser", viewModel);
+
+            return RedirectToAction("ServiceIssue", "Error");
         }
 
         [HttpPost("new-or-returning-user")]
