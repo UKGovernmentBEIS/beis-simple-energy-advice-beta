@@ -6,7 +6,6 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc
     {
         public Task<List<EpcSearchResult>> GetEpcsInformationForPostcodeAndBuildingNameOrNumber(string postcode,
             string buildingNameOrNumber = null);
-        public Task<EpbEpcAssessmentDto> GetEpcDtoForId(string epcId);
         public Task<Epc> GetEpcForId(string epcId);
     }
 }

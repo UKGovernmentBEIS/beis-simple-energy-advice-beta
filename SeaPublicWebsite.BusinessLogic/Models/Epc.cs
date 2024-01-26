@@ -5,6 +5,8 @@ namespace SeaPublicWebsite.BusinessLogic.Models
     public class Epc
     {
         public int? LodgementYear { get; set; }
+        public bool IsLatestAssessmentForAddress { get; set; }
+
         public PropertyType? PropertyType { get; set; }
         public HouseType? HouseType { get; set; }
         public BungalowType? BungalowType { get; set; }

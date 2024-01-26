@@ -63,7 +63,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc
             return EpcSearchResult.SortEpcsInformation(epcsInformation);
         }
         
-        public async Task<EpbEpcAssessmentDto> GetEpcDtoForId(string epcId)
+        public async Task<Epc> GetEpcForId(string epcId)
         {
             var token = await RequestTokenIfNeeded();
             EpbEpcDto response = null;
@@ -83,16 +83,10 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc
                 return null;
             }
 
-            return response.Data.Assessment;
-        }
-
-        public async Task<Epc> GetEpcForId(string epcId)
-        {
-            var epc = await GetEpcDtoForId(epcId);
-
+            var epc = response.Data.Assessment;
             return epc.Parse();
         }
-
+        
         private async Task<string> RequestTokenIfNeeded()
         {
             if (memoryCache.TryGetValue(cacheTokenKey, out string token))

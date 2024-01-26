@@ -260,7 +260,7 @@ namespace SeaPublicWebsite.Controllers
                 e.Address1.Contains(number, StringComparison.OrdinalIgnoreCase) ||
                 e.Address2.Contains(number, StringComparison.OrdinalIgnoreCase)).ToList();
 
-            var filteredEpcSearchResults = await FilterExpiredEpc(matchingEpcSearchResults);
+            var filteredEpcSearchResults = await FilterEpcsNotUniqueByAddressToMostRecent(matchingEpcSearchResults);
 
             epcSearchResults = filteredEpcSearchResults.Any() ? filteredEpcSearchResults : epcSearchResults;
 
@@ -1629,16 +1629,10 @@ namespace SeaPublicWebsite.Controllers
                 Values = values;
             }
         }
-
-        private async Task<List<EpcSearchResult>> FilterExpiredEpc(List<EpcSearchResult> searchResults)
+        
+        private async Task<List<EpcSearchResult>> FilterEpcsNotUniqueByAddressToMostRecent(IEnumerable<EpcSearchResult> searchResults)
         {
-            var expiredEpcIds = await GetDuplicateExpiredEpcIds(searchResults);
-            return searchResults.Where(result => !expiredEpcIds.Contains(result.EpcId)).ToList();
-        }
-
-        private async Task<List<string>> GetDuplicateExpiredEpcIds(IEnumerable<EpcSearchResult> searchResults)
-        {
-            var groupings = searchResults.GroupBy(
+            var epcSearchResultsGroupedByAddress = searchResults.GroupBy(
                 epcSearchResult => new
                 {
                     epcSearchResult.Address1, 
@@ -1646,18 +1640,23 @@ namespace SeaPublicWebsite.Controllers
                     epcSearchResult.Postcode
                 });
 
-            var duplicateGroupings = groupings.Where(grouping => grouping.Count() > 1);
 
-            var duplicates = duplicateGroupings.SelectMany(grouping => grouping);
+            var epcSearchResultsNotUniqueByAddress = epcSearchResultsGroupedByAddress
+                .Where(grouping => grouping.Count() > 1)
+                .SelectMany(grouping => grouping);
+            var epcSearchResultsUniqueByAddress = epcSearchResultsGroupedByAddress
+                .Where(grouping => grouping.Count() == 1)
+                .SelectMany(grouping => grouping);
+            
+            var epcSearchResultsWithAdditionalEpcInformationTaskList = epcSearchResultsNotUniqueByAddress.Select(async epc => new KeyValuePair<EpcSearchResult, Epc>(epc, await epcApi.GetEpcForId(epc.EpcId)));
 
-            var epcDtoPairTaskList = duplicates.Select(async duplicate => new KeyValuePair<string, EpbEpcAssessmentDto>(duplicate.EpcId, await epcApi.GetEpcDtoForId(duplicate.EpcId)));
+            var epcSearchResultsWithAdditionalEpcInformation = await Task.WhenAll(epcSearchResultsWithAdditionalEpcInformationTaskList);
 
-            var epcDtoPairArray = await Task.WhenAll(epcDtoPairTaskList);
-
-            return epcDtoPairArray
+            var epcSearchResultsNotUniqueByAddressWithOlderDuplicatesRemoved = epcSearchResultsWithAdditionalEpcInformation
                 .Where(epcDtoPair => !epcDtoPair.Value.IsLatestAssessmentForAddress)
-                .Select(epcDtoPair => epcDtoPair.Key)
-                .ToList();
+                .Select(epcDtoPair => epcDtoPair.Key);
+
+            return epcSearchResultsUniqueByAddress.Concat(epcSearchResultsNotUniqueByAddressWithOlderDuplicatesRemoved).ToList();
         }
     }
 }

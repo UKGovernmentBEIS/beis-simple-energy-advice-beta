@@ -85,7 +85,8 @@ public class EpbEpcAssessmentDto
             RoofInsulated = ParseRoofInsulation(),
             GlazingType = ParseGlazingType(),
             EpcHeatingType = ParseHeatingType(),
-            HasHotWaterCylinder = ParseHasHotWaterCylinder()
+            HasHotWaterCylinder = ParseHasHotWaterCylinder(),
+            IsLatestAssessmentForAddress = IsLatestAssessmentForAddress
         };
     }
 
