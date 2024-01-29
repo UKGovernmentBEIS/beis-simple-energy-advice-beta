@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Http.Extensions
+@using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+
+<form method="POST" action="@Url.Action(nameof(EnergyEfficiencyController.LanguageChange), "EnergyEfficiency")">
+    @Html.Hidden("ReturnUrl", Context.Request.GetEncodedPathAndQuery())
+    @Html.AntiForgeryToken()
+    <nav>
+        <div class="sea-language-select govuk-body">
+
+            @Html.AntiForgeryToken()
+
+            <input name="next" type="hidden" value="@ViewContext.HttpContext.Request.Path">
+
+            <ul class="sea-language-select__list">
+                @if (CultureInfo.CurrentCulture.Equals(new CultureInfo("en-GB")))
+                {
+                    <li class="sea-language-select__list-item">
+                        <span aria-current="true">English</span>
+                    </li>
+                    <li class="sea-language-select__list-item">
+                        <input name="language" type="hidden" value="cy">
+                        <button type="submit" lang="cy" rel="alternate" class="govuk-link">
+                            <span class="govuk-visually-hidden">Newid yr iaith ir Gymraeg</span>
+                            <span aria-hidden="true">Cymraeg</span>
+                        </button>
+                    </li>
+                }
+
+                @if (CultureInfo.CurrentCulture.Equals(new CultureInfo("cy")))
+                {
+                    <li class="sea-language-select__list-item">
+                    <input name="language" type="hidden" value="en">
+                    <button type="submit" lang="en-GB" rel="alternate" class="govuk-link">
+                            <span class="govuk-visually-hidden">Change the language to English</span>
+                            <span aria-hidden="true">English</span>
+                        </button>
+                    </li>
+                    <li class="sea-language-select__list-item">
+                        <span aria-current="true">Cymraeg</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+</form>

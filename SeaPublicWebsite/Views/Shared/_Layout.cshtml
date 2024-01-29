@@ -6,6 +6,7 @@
 @using SeaPublicWebsite.Services
 @using SeaPublicWebsite.Services.Cookies
 @using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @inject StaticAssetsVersioningService StaticAssetsVersioning
 @inject CookieService CookieService
@@ -94,7 +95,7 @@
             Phase = "Beta",
             Html = @<text>@SharedLocalizer["ThisIsANewServiceString", @ViewBag.FeedbackUrl]</text>
         }))
-
+        @{ await Html.RenderPartialAsync("_LanguageControl"); }
         @(RenderSection("BeforeMain", false))
 
         <main class="govuk-main-wrapper" id="main-content" role="main">

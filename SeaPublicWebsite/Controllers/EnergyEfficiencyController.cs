@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Localization;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
@@ -18,6 +21,7 @@ using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.GoogleAnalytics;
 using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Models.EnergyEfficiency;
+using SeaPublicWebsite.Models.LanguageChange;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
 using SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
@@ -74,14 +78,21 @@ namespace SeaPublicWebsite.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            Response.Cookies.Append(
-                CookieRequestCultureProvider.DefaultCookieName,
-                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("cy")),
-                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
-            );
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
         
+        [HttpPost]
+        public IActionResult LanguageChange(LanguageChangeViewModel model)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(model.Language)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1), IsEssential = true}
+            );
+            CultureInfo.CurrentCulture = new CultureInfo(model.Language);
+            CultureInfo.CurrentUICulture = new CultureInfo(model.Language);
+            return Redirect(model.ReturnUrl);
+        }
         
         [HttpGet("new-or-returning-user")]
         public IActionResult NewOrReturningUser_Get()
@@ -90,11 +101,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 BackLink = GetBackUrl(QuestionFlowStep.NewOrReturningUser)
             };
-            Response.Cookies.Append(
-                CookieRequestCultureProvider.DefaultCookieName,
-                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("cy")),
-                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
-            );
+
             return View("NewOrReturningUser", viewModel);
         }
 
@@ -110,7 +117,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 if (!await propertyDataStore.IsReferenceValidAsync(viewModel.Reference))
                 {
-                    ModelState.AddModelError(nameof(NewOrReturningUserViewModel.Reference), "Check you have typed the reference correctly. Reference must be 8 characters.");
+                    ModelState.AddModelError(nameof(NewOrReturningUserViewModel.Reference), sharedLocalizer["Check you have typed the reference correctly. Reference must be 8 characters."]);
                     return NewOrReturningUser_Get();
                 }
 
@@ -250,7 +257,7 @@ namespace SeaPublicWebsite.Controllers
             
             if (viewModel.Postcode is not null && !(await postcodesIoApi.IsValidPostcode(viewModel.Postcode)))
             {
-                ModelState.AddModelError(nameof(AskForPostcodeViewModel.Postcode), "Enter a valid UK postcode");
+                ModelState.AddModelError(nameof(AskForPostcodeViewModel.Postcode), sharedLocalizer["Enter a valid UK postcode"]);
             }
             
             if (!ModelState.IsValid)
@@ -1486,10 +1493,10 @@ namespace SeaPublicWebsite.Controllers
                 switch (e.Type)
                 {
                     case EmailSenderExceptionType.InvalidEmailAddress:
-                        ModelState.AddModelError(nameof(emailAddress), "Enter a valid email address");
+                        ModelState.AddModelError(nameof(emailAddress), sharedLocalizer["Enter a valid email address"]);
                         return;
                     case EmailSenderExceptionType.Other:
-                        ModelState.AddModelError(nameof(emailAddress), "Unable to send email due to unexpected error. Please make a note of your reference code.");
+                        ModelState.AddModelError(nameof(emailAddress), sharedLocalizer["Unable to send email due to unexpected error. Please make a note of your reference code."]);
                         return;
                     default:
                         throw new ArgumentOutOfRangeException();

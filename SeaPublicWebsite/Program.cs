@@ -46,7 +46,7 @@ namespace SeaPublicWebsite
             List<CultureInfo> supportedCultures = new List<CultureInfo>
             {
                 new CultureInfo("cy"),
-                new CultureInfo("en")
+                new CultureInfo("en-GB")
             };   
             builder.Services.AddControllersWithViews();  
             builder.Services
@@ -57,7 +57,7 @@ namespace SeaPublicWebsite
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
             
             builder.Services.Configure<RequestLocalizationOptions>(options => {
-                options.DefaultRequestCulture = new RequestCulture("gb");   
+                options.DefaultRequestCulture = new RequestCulture("en-GB");   
                 options.SupportedCultures = supportedCultures;    
                 options.SupportedUICultures = supportedCultures; 
             });
@@ -72,7 +72,7 @@ namespace SeaPublicWebsite
             var app = builder.Build();
             var requestLocalizationOptions = new RequestLocalizationOptions
             {
-                DefaultRequestCulture = new RequestCulture("en"),
+                DefaultRequestCulture = new RequestCulture("en-GB"),
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures,
                 RequestCultureProviders = new List<IRequestCultureProvider>

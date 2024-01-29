@@ -3078,9 +3078,6 @@
         <value />
         <comment>You could save</comment>
     </data>
-    <data name="YourEPCSuggestsString" xml:space="preserve">
-        <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu </value>
-    </data>
     <data name="A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the &quot;floor&quot; of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level." xml:space="preserve">
         <value>Mae atig wedi’i inswleiddio’n llwyr os oes mwy na 200mm (wyth modfedd) o ddeunydd inswleiddio’n gorchuddio’r atig gyfan, fel arfer ar “lawr” yr atig gydag un haen rhwng y preniau llorweddol a haen arall yn mynd ar eu traws i godi’r deunydd inswleiddio i’r lefel ofynnol.</value>
         <comment>A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the "floor" of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level.</comment>
@@ -3160,5 +3157,17 @@
     </data>
     <data name="FloorConstructionKeyString" xml:space="preserve">
         <value>Adeiladwaith y lloriau</value>
+    </data>
+    <data name="Check you have typed the reference correctly. Reference must be 8 characters." xml:space="preserve">
+        <value />
+        <comment>Check you have typed the reference correctly. Reference must be 8 characters.</comment>
+    </data>
+    <data name="Unable to send email due to unexpected error. Please make a note of your reference code." xml:space="preserve">
+        <value />
+        <comment>Unable to send email due to unexpected error. Please make a note of your reference code.</comment>
+    </data>
+    <data name="Enter a valid UK postcode" xml:space="preserve">
+        <value />
+        <comment>Enter a valid UK postcode</comment>
     </data>
 </root>

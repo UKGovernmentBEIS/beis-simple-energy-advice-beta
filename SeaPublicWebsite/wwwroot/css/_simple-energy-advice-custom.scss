@@ -352,3 +352,39 @@
 .govuk-warning-text__icon {
     top: 33.3%;
 }
+
+// Language toggle
+// A combination of GBIS code and HMRC code
+.sea-language-select {
+    margin-top: 1em;
+    float: right;
+    text-align: right;
+}
+
+.sea-language-select__list {
+    list-style: none;
+}
+
+.sea-language-select__list-item {
+    display: inline-block;
+
+    &:first-child::after {
+        content: "";
+        display: inline-block;
+        position: relative;
+        top: 0.1875em;
+        height: 1em;
+        border-right: 0.09375em solid  $govuk-text-colour;
+    }
+
+    a,
+    [aria-current] {
+        padding: 0.3125em;
+    }
+}
+
+.sea-language-select__list-item button {
+    font-size: unset;
+    background: none;
+    border: none;
+}

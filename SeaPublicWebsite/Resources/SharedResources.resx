@@ -3462,4 +3462,19 @@
     <data name="FloorConstructionKeyString" xml:space="preserve">
         <value>Floor construction</value>
     </data>
+    <data name="Check you have typed the reference correctly. Reference must be 8 characters." xml:space="preserve">
+        <value>Check you have typed the reference correctly. Reference must be 8 characters.</value>
+        <comment>Check you have typed the reference correctly. Reference must be 8 characters.</comment>
+    </data>
+    <data name="Unable to send email due to unexpected error. Please make a note of your reference code." xml:space="preserve">
+        <value>Unable to send email due to unexpected error. Please make a note of your reference code.</value>
+        <comment>Unable to send email due to unexpected error. Please make a note of your reference code.</comment>
+    </data>
+    <data name="Find energy improvements suitable for your home" xml:space="preserve">
+        <value>Find energy improvements suitable for your home</value>
+    </data>
+    <data name="Enter a valid UK postcode" xml:space="preserve">
+        <value>Enter a valid UK postcode</value>
+        <comment>Enter a valid UK postcode</comment>
+    </data>
 </root>
