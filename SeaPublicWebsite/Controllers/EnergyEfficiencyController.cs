@@ -5,11 +5,13 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Options;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.BusinessLogic.Services;
+using SeaPublicWebsite.Config;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.GoogleAnalytics;
@@ -38,6 +40,7 @@ namespace SeaPublicWebsite.Controllers
         private readonly PostcodesIoApi postcodesIoApi;
         private readonly AnswerService answerService;
         private readonly FullHostnameService fullHostnameService;
+        private readonly ServiceHealthConfig serviceHealthConfig;
         private readonly EpcFilterService epcFilterService;
 
         public EnergyEfficiencyController(
@@ -52,6 +55,7 @@ namespace SeaPublicWebsite.Controllers
             PostcodesIoApi postcodesIoApi,
             AnswerService answerService,
             FullHostnameService fullHostnameService,
+            IOptions<ServiceHealthConfig> serviceHealthConfig,
             EpcFilterService epcFilterService)
         {
             this.propertyDataStore = propertyDataStore;
@@ -65,6 +69,7 @@ namespace SeaPublicWebsite.Controllers
             this.postcodesIoApi = postcodesIoApi;
             this.answerService = answerService;
             this.fullHostnameService = fullHostnameService;
+            this.serviceHealthConfig = serviceHealthConfig.Value;
             this.epcFilterService = epcFilterService;
         }
 
@@ -75,14 +80,25 @@ namespace SeaPublicWebsite.Controllers
         }
         
         
+        // This is the route that users are directed to when clicking "Start now" on the external service page.
         [HttpGet("new-or-returning-user")]
         public IActionResult NewOrReturningUser_Get()
         {
+            if (serviceHealthConfig.ActiveServiceIssue)
+            {
+                // If there is an active service issue, which makes it impossible to complete the journey,
+                // then we can immediately stop users to prevent wasting their time inputting answers.
+                // (e.g. BRE API outage on 25/01/2024)
+                return RedirectToAction("ServiceIssue", "Error");
+            }
+
             var viewModel = new NewOrReturningUserViewModel
             {
                 BackLink = GetBackUrl(QuestionFlowStep.NewOrReturningUser)
             };
+
             return View("NewOrReturningUser", viewModel);
+
         }
 
         [HttpPost("new-or-returning-user")]

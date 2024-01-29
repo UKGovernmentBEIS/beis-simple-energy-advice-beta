@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using SeaPublicWebsite.Models.Error;
 
 namespace SeaPublicWebsite.Controllers;
 
@@ -10,9 +11,10 @@ public class ErrorController: Controller
     [HttpPost]
     public IActionResult HandleException()
     {
-        return View("ServiceIssue");
+        var model = new ErrorViewModel { ShowAnswersNotSavedMessage = true };
+        return View("ServiceIssue", model);
     }
-    
+
     [HttpGet("{code:int}")]
     public IActionResult HandleErrorsWithStatusCode(int code)
     {
@@ -21,5 +23,12 @@ public class ErrorController: Controller
             404 => View("PageNotFound"),
             _ => throw new ArgumentOutOfRangeException()
         };
+    }
+
+    [HttpGet("service-issue")]
+    public IActionResult ServiceIssue()
+    {
+        var model = new ErrorViewModel { ShowAnswersNotSavedMessage = false };
+        return View("ServiceIssue", model);
     }
 }
