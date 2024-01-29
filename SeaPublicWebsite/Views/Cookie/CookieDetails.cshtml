@@ -56,6 +56,25 @@
         <p class="govuk-body">@SharedLocalizer["You may see a banner when you visit our service inviting you to accept cookies or review your settings. We’ll set cookies so that your computer knows you’ve seen it and not to show it again, and also to store your settings."]</p>
         <table class="govuk-table">
             <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">@SharedLocalizer["Name"]</th>
+                <th scope="col" class="govuk-table__header">@SharedLocalizer["Purpose"]</th>
+                <th scope="col" class="govuk-table__header">@SharedLocalizer["Expires"]</th>
+            </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">@SharedLocalizer["cookie_settings"]</td>
+                <td class="govuk-table__cell">@SharedLocalizer["Saves your cookie consent settings and lets us know if you’ve seen our cookie banner"]</td>
+                <td class="govuk-table__cell">@SharedLocalizer["1 year"]</td>
+            </tr>
+            </tbody>
+        </table>
+        
+        <h3 class="govuk-heading-s">@SharedLocalizer["Language"]</h3>
+        <p class="govuk-body">@SharedLocalizer["We’ll set a cookie that will tell us your preferred language (English or Welsh)."]</p>
+        <table class="govuk-table">
+            <thead class="govuk-table__head">
                 <tr class="govuk-table__row">
                     <th scope="col" class="govuk-table__header">@SharedLocalizer["Name"]</th>
                     <th scope="col" class="govuk-table__header">@SharedLocalizer["Purpose"]</th>
@@ -64,8 +83,8 @@
             </thead>
             <tbody class="govuk-table__body">
                 <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">@SharedLocalizer["cookie_settings"]</td>
-                    <td class="govuk-table__cell">@SharedLocalizer["Saves your cookie consent settings and lets us know if you’ve seen our cookie banner"]</td>
+                    <td class="govuk-table__cell">service_language</td>
+                    <td class="govuk-table__cell">@SharedLocalizer["Saves your language preference"]</td>
                     <td class="govuk-table__cell">@SharedLocalizer["1 year"]</td>
                 </tr>
             </tbody>

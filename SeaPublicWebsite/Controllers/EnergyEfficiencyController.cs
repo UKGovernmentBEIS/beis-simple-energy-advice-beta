@@ -85,7 +85,7 @@ namespace SeaPublicWebsite.Controllers
         public IActionResult LanguageChange(LanguageChangeViewModel model)
         {
             Response.Cookies.Append(
-                CookieRequestCultureProvider.DefaultCookieName,
+                "service_language",
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(model.Language)),
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1), IsEssential = true}
             );

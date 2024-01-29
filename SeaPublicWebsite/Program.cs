@@ -77,9 +77,10 @@ namespace SeaPublicWebsite
                 SupportedUICultures = supportedCultures,
                 RequestCultureProviders = new List<IRequestCultureProvider>
                 {
-                    // Order is important, its in which order they will be evaluated
-                    new CookieRequestCultureProvider(),
-                    new QueryStringRequestCultureProvider()
+                    new CookieRequestCultureProvider
+                    {
+                        CookieName = "service_language",
+                    },
                 }
             };
             
