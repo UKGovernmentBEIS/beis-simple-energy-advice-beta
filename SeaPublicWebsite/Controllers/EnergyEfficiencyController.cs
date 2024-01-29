@@ -17,6 +17,7 @@ using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
+using SeaPublicWebsite.Services.EnergyEfficiency.Epc;
 using SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 
 namespace SeaPublicWebsite.Controllers
@@ -37,6 +38,7 @@ namespace SeaPublicWebsite.Controllers
         private readonly PostcodesIoApi postcodesIoApi;
         private readonly AnswerService answerService;
         private readonly FullHostnameService fullHostnameService;
+        private readonly EpcFilterService epcFilterService;
 
         public EnergyEfficiencyController(
             PropertyDataStore propertyDataStore,
@@ -49,7 +51,8 @@ namespace SeaPublicWebsite.Controllers
             PdfGenerationService pdfGenerationService,
             PostcodesIoApi postcodesIoApi,
             AnswerService answerService,
-            FullHostnameService fullHostnameService)
+            FullHostnameService fullHostnameService,
+            EpcFilterService epcFilterService)
         {
             this.propertyDataStore = propertyDataStore;
             this.questionFlowService = questionFlowService;
@@ -62,6 +65,7 @@ namespace SeaPublicWebsite.Controllers
             this.postcodesIoApi = postcodesIoApi;
             this.answerService = answerService;
             this.fullHostnameService = fullHostnameService;
+            this.epcFilterService = epcFilterService;
         }
 
         [HttpGet("")]
@@ -260,7 +264,7 @@ namespace SeaPublicWebsite.Controllers
                 e.Address1.Contains(number, StringComparison.OrdinalIgnoreCase) ||
                 e.Address2.Contains(number, StringComparison.OrdinalIgnoreCase)).ToList();
 
-            var filteredEpcSearchResults = await FilterEpcsNotUniqueByAddressToMostRecent(matchingEpcSearchResults);
+            var filteredEpcSearchResults = await epcFilterService.FilterEpcsNotUniqueByAddressToMostRecent(matchingEpcSearchResults);
 
             epcSearchResults = filteredEpcSearchResults.Any() ? filteredEpcSearchResults : epcSearchResults;
 
@@ -1628,35 +1632,6 @@ namespace SeaPublicWebsite.Controllers
                 Controller = controller;
                 Values = values;
             }
-        }
-        
-        private async Task<List<EpcSearchResult>> FilterEpcsNotUniqueByAddressToMostRecent(IEnumerable<EpcSearchResult> searchResults)
-        {
-            var epcSearchResultsGroupedByAddress = searchResults.GroupBy(
-                epcSearchResult => new
-                {
-                    epcSearchResult.Address1, 
-                    epcSearchResult.Address2, 
-                    epcSearchResult.Postcode
-                });
-
-
-            var epcSearchResultsNotUniqueByAddress = epcSearchResultsGroupedByAddress
-                .Where(grouping => grouping.Count() > 1)
-                .SelectMany(grouping => grouping);
-            var epcSearchResultsUniqueByAddress = epcSearchResultsGroupedByAddress
-                .Where(grouping => grouping.Count() == 1)
-                .SelectMany(grouping => grouping);
-            
-            var epcSearchResultsWithAdditionalEpcInformationTaskList = epcSearchResultsNotUniqueByAddress.Select(async epc => new KeyValuePair<EpcSearchResult, Epc>(epc, await epcApi.GetEpcForId(epc.EpcId)));
-
-            var epcSearchResultsWithAdditionalEpcInformation = await Task.WhenAll(epcSearchResultsWithAdditionalEpcInformationTaskList);
-
-            var epcSearchResultsNotUniqueByAddressWithOlderDuplicatesRemoved = epcSearchResultsWithAdditionalEpcInformation
-                .Where(epcDtoPair => !epcDtoPair.Value.IsLatestAssessmentForAddress)
-                .Select(epcDtoPair => epcDtoPair.Key);
-
-            return epcSearchResultsUniqueByAddress.Concat(epcSearchResultsNotUniqueByAddressWithOlderDuplicatesRemoved).ToList();
         }
     }
 }
