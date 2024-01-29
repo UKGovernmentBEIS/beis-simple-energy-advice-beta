@@ -22,6 +22,7 @@ using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
+using SeaPublicWebsite.Services.EnergyEfficiency.Epc;
 using SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 using Serilog;
 
@@ -41,6 +42,7 @@ namespace SeaPublicWebsite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<EpcFilterService>();
             services.AddScoped<AnswerService>();
             services.AddScoped<PropertyDataStore>();
             services.AddScoped<PropertyDataUpdater>();
