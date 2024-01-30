@@ -23,7 +23,6 @@ using SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 
 namespace SeaPublicWebsite.Controllers
 {
-    using System.Text.Encodings.Web;
     using System.Web;
 
     [Route("energy-efficiency")]
@@ -273,9 +272,11 @@ namespace SeaPublicWebsite.Controllers
         {
             List<EpcSearchResult> epcSearchResults = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(postcode, number);
             
-            var filteredEpcSearchResults = epcSearchResults.Where(e =>
+            var matchingEpcSearchResults = epcSearchResults.Where(e =>
                 e.Address1.Contains(number, StringComparison.OrdinalIgnoreCase) ||
                 e.Address2.Contains(number, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            var filteredEpcSearchResults = await FilterExpiredEpc(matchingEpcSearchResults);
 
             epcSearchResults = filteredEpcSearchResults.Any() ? filteredEpcSearchResults : epcSearchResults;
 
@@ -1643,6 +1644,36 @@ namespace SeaPublicWebsite.Controllers
                 Controller = controller;
                 Values = values;
             }
+        }
+
+        private async Task<List<EpcSearchResult>> FilterExpiredEpc(List<EpcSearchResult> searchResults)
+        {
+            var expiredEpcIds = await GetDuplicateExpiredEpcIds(searchResults);
+            return searchResults.Where(result => !expiredEpcIds.Contains(result.EpcId)).ToList();
+        }
+
+        private async Task<List<string>> GetDuplicateExpiredEpcIds(IEnumerable<EpcSearchResult> searchResults)
+        {
+            var groupings = searchResults.GroupBy(
+                epcSearchResult => new
+                {
+                    epcSearchResult.Address1, 
+                    epcSearchResult.Address2, 
+                    epcSearchResult.Postcode
+                });
+
+            var duplicateGroupings = groupings.Where(grouping => grouping.Count() > 1);
+
+            var duplicates = duplicateGroupings.SelectMany(grouping => grouping);
+
+            var epcDtoPairTaskList = duplicates.Select(async duplicate => new KeyValuePair<string, EpbEpcAssessmentDto>(duplicate.EpcId, await epcApi.GetEpcDtoForId(duplicate.EpcId)));
+
+            var epcDtoPairArray = await Task.WhenAll(epcDtoPairTaskList);
+
+            return epcDtoPairArray
+                .Where(epcDtoPair => !epcDtoPair.Value.IsLatestAssessmentForAddress)
+                .Select(epcDtoPair => epcDtoPair.Key)
+                .ToList();
         }
     }
 }
