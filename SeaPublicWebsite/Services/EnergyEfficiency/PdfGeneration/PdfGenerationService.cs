@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.IO;
-using System.Net;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using PuppeteerSharp;

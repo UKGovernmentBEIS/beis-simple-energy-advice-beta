@@ -1354,9 +1354,6 @@
     <data name="Download Recommendations" xml:space="preserve">
         <value>Download Recommendations</value>
     </data>
-    <data name="Your action plan" xml:space="preserve">
-        <value>Your action plan</value>
-    </data>
     <data name="You haven’t saved any improvements yet." xml:space="preserve">
         <value>You haven’t saved any improvements yet.</value>
     </data>
@@ -1933,7 +1930,7 @@
     <data name="Download your Action Plan" xml:space="preserve">
         <value>Download your Action Plan</value>
     </data>
-    <data name="Your Action Plan" xml:space="preserve">
+    <data name="YourActionPlanTitleString" xml:space="preserve">
         <value>Your Action Plan</value>
     </data>
     <data name="SummaryOfSavingsAndCostsForSingleRecommendationString" xml:space="preserve">
@@ -1994,7 +1991,7 @@
         <value>Boiler Upgrade Scheme</value>
     </data>
     <data name="OfgemGuideToSchemesAndGrantsString" xml:space="preserve">
-        <value>If you are worried about affording your energy bills, Ofgem has a &lt;a class="govuk-link" href="{0}" target="_blank"&gt;helpful guide&lt;/a&gt;to the schemes, grants and benefits that may be available to you.</value>
+        <value>If you are worried about affording your energy bills, Ofgem has a &lt;a class="govuk-link" href="{0}" target="_blank"&gt;helpful guide&lt;/a&gt; to the schemes, grants and benefits that may be available to you.</value>
     </data>
     <data name="2. Consult with a qualified installer" xml:space="preserve">
         <value>2. Consult with a qualified installer</value>

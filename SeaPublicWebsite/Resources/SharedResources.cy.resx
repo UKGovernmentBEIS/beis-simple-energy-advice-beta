@@ -1182,9 +1182,6 @@
     <data name="Download Recommendations" xml:space="preserve">
         <value>Llwytho Argymhellion i Lawr</value>
     </data>
-    <data name="Your action plan" xml:space="preserve">
-        <value>Eich cynllun gweithredu</value>
-    </data>
     <data name="You haven’t saved any improvements yet." xml:space="preserve">
         <value>Dydych chi ddim wedi cadw unrhyw welliannau eto.</value>
     </data>
@@ -1692,7 +1689,7 @@
     <data name="Download your Action Plan" xml:space="preserve">
         <value>Llwytho eich Cynllun Gweithredu i lawr</value>
     </data>
-    <data name="Your Action Plan" xml:space="preserve">
+    <data name="YourActionPlanTitleString" xml:space="preserve">
         <value>Eich Cynllun Gweithredu</value>
     </data>
     <data name="You could save up to" xml:space="preserve">
