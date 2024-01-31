@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using GovUkDesignSystem.Attributes;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SeaPublicWebsite.Resources;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
