@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using GovUkDesignSystem.Attributes;
-using SeaPublicWebsite.BusinessLogic.Resources;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {

@@ -21,7 +21,7 @@ namespace SeaPublicWebsite.BusinessLogic.Models
             FixFormatting();
         }
 
-        private void FixFormatting() //TODO
+        private void FixFormatting()
         {
             var tI = new CultureInfo("en-GB", false).TextInfo;
             Address1 = tI.ToTitleCase(Address1.ToLower().Replace(",", ""));
