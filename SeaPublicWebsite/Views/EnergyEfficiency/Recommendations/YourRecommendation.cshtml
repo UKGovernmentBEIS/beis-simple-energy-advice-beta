@@ -13,14 +13,14 @@
 
 @section BeforeMain {
     <div class="govuk-grid-row">
-        <div class="govuk-grid-column-one-half">
+        <div class="govuk-grid-column-one-third">
             @await Html.GovUkBackLink(new BackLinkViewModel
                    {
                        Text = SharedLocalizer["Back"].Value,
                        Href = Model.BackLink,
                    })
         </div>
-        <div class="govuk-grid-column-one-half sea-download-link-container">
+        <div class="govuk-grid-column-one-third sea-download-link-container">
             @{ await Html.RenderPartialAsync("Partials/_DownloadRecommendations", new DownloadPdfButtonViewModel
                {
                    Reference = Model.Reference,
