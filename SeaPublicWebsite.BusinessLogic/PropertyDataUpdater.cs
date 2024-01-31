@@ -74,17 +74,17 @@ public class PropertyDataUpdater
                     p.FlatType = epc.FlatType;
                     p.YearBuilt = epc.ConstructionAgeBand switch
                     {
-                        HomeAge.Pre1900 => YearBuilt.Pre1930,
-                        HomeAge.From1900To1929 => YearBuilt.Pre1930,
-                        HomeAge.From1930To1949 => YearBuilt.From1930To1966,
-                        HomeAge.From1950To1966 => YearBuilt.From1930To1966,
-                        HomeAge.From1967To1975 => YearBuilt.From1967To1982,
-                        HomeAge.From1976To1982 => YearBuilt.From1967To1982,
-                        HomeAge.From1983To1990 => YearBuilt.From1983To1995,
-                        HomeAge.From1991To1995 => YearBuilt.From1983To1995,
-                        HomeAge.From1996To2002 => YearBuilt.From1996To2011,
-                        HomeAge.From2003To2006 => YearBuilt.From1996To2011,
-                        HomeAge.From2007To2011 => YearBuilt.From1996To2011,
+                        HomeAge.Pre1900 => YearBuilt.Pre1900,
+                        HomeAge.From1900To1929 => YearBuilt.From1900To1929,
+                        HomeAge.From1930To1949 => YearBuilt.From1930To1949,
+                        HomeAge.From1950To1966 => YearBuilt.From1950To1966,
+                        HomeAge.From1967To1975 => YearBuilt.From1967To1975,
+                        HomeAge.From1976To1982 => YearBuilt.From1976To1982,
+                        HomeAge.From1983To1990 => YearBuilt.From1983To1990,
+                        HomeAge.From1991To1995 => YearBuilt.From1991To1995,
+                        HomeAge.From1996To2002 => YearBuilt.From1996To2002,
+                        HomeAge.From2003To2006 => YearBuilt.From2003To2006,
+                        HomeAge.From2007To2011 => YearBuilt.From2007To2011,
                         HomeAge.From2012ToPresent => YearBuilt.From2012ToPresent,
                         _ => throw new ArgumentOutOfRangeException()
                     };

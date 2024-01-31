@@ -48,13 +48,13 @@ public class PropertyData
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; } = new();
 
-    public bool? HintSolidWalls => YearBuilt is null or Enums.YearBuilt.DoNotKnow ? null : YearBuilt <= Enums.YearBuilt.Pre1930;
-    public bool? HintUninsulatedCavityWalls => YearBuilt is null or Enums.YearBuilt.DoNotKnow ? null : YearBuilt < Enums.YearBuilt.From1996To2011;
-    public bool? HintSuspendedTimber => YearBuilt is null or Enums.YearBuilt.DoNotKnow ? null : YearBuilt < Enums.YearBuilt.From1967To1982;
-    public bool? HintUninsulatedFloor => YearBuilt is null or Enums.YearBuilt.DoNotKnow ? null : YearBuilt < Enums.YearBuilt.From1996To2011;
+    public bool? HintSolidWalls => YearBuilt?.IsBefore(1930);
+    public bool? HintUninsulatedCavityWalls => YearBuilt?.IsBefore(1996);
+    public bool? HintSuspendedTimber => YearBuilt?.IsBefore(1967);
+    public bool? HintUninsulatedFloor => YearBuilt?.IsBefore(1996);
     public bool HintHaveLoftAndAccess => PropertyType is Enums.PropertyType.House or Enums.PropertyType.Bungalow;
-    public bool? HintUninsulatedRoof => YearBuilt is null or Enums.YearBuilt.DoNotKnow ? null : YearBuilt < Enums.YearBuilt.From2012ToPresent;
-    public bool? HintSingleGlazing => YearBuilt is null or Enums.YearBuilt.DoNotKnow ? null : YearBuilt < Enums.YearBuilt.From1983To1995;
+    public bool? HintUninsulatedRoof => YearBuilt?.IsBefore(2012);
+    public bool? HintSingleGlazing => YearBuilt?.IsBefore(1983);
     public bool HintHasOutdoorSpace => PropertyType is Enums.PropertyType.House or Enums.PropertyType.Bungalow;
 
     public bool ShowAltRadiatorPanels => PropertyRecommendations.Exists(r =>
