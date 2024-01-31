@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using PuppeteerSharp;
@@ -32,6 +34,11 @@ public class PdfGenerationService
         var page = await browser.NewPageAsync();
         await page.AuthenticateAsync(new Credentials
             { Username = basicAuthConfiguration.Username, Password = basicAuthConfiguration.Password });
+        await page.SetCookieAsync(new CookieParam { 
+            Name = "service_language", 
+            Value = $"c={CultureInfo.CurrentCulture.Name}|uic={CultureInfo.CurrentUICulture.Name}",
+            Domain = "localhost"
+        });
         await page.GoToAsync($"{GetLocalAddress()}/{path}");
         var pdfStream = await page.PdfStreamAsync(
             new PdfOptions
