@@ -131,7 +131,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
             BreFlatLevel? breFlatLevel = GetBreFlatLevel(propertyData.PropertyType.Value, propertyData.FlatType);
 
             string breConstructionDate = GetBreConstructionDate(propertyData.YearBuilt, propertyData.WallConstruction, propertyData.CavityWallsInsulated, propertyData.Epc?.ConstructionAgeBand);
-            
+
             BreWallType breWallType = GetBreWallType(propertyData.WallConstruction.Value,
                 propertyData.SolidWallsInsulated,
                 propertyData.CavityWallsInsulated);
