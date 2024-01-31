@@ -26,7 +26,7 @@
                     @SharedLocalizer["You could save"]
                 </dt>
                 <dd class="govuk-summary-list__value govuk-!-width-one-half govuk-!-padding-right-0 govuk-body-s govuk-!-text-align-right">
-                    @Model.GetTotalSavingText()
+                    @string.Format(SharedLocalizer["£AYearString"].Value, Model.GetTotalSavingText())
                 </dd>
             </div>
             <div class="govuk-summary-list__row">

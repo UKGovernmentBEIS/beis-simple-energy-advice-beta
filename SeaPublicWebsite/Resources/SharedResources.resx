@@ -1565,7 +1565,7 @@
         <value>Which adds up to</value>
     </data>
     <data name="£OverLifetimeOfInstallationString" xml:space="preserve">
-        <value>£{0}&lt;span class="govuk-body"&gt;&lt;b&gt;over the lifetime of the installation&lt;/b&gt;&lt;/span&gt;</value>
+        <value>£{0}&lt;span class="govuk-body"&gt;&lt;b&gt; over the lifetime of the installation&lt;/b&gt;&lt;/span&gt;</value>
     </data>
     <data name="This could cost" xml:space="preserve">
         <value>This could cost</value>

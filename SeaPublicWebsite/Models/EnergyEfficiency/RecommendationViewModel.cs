@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 using Microsoft.Extensions.Localization;
 using SeaPublicWebsite.BusinessLogic.Models;
@@ -38,14 +39,13 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         {
             var minCost = GetSavedRecommendations().Sum(r => r.MinInstallCost);
             var maxCost = GetSavedRecommendations().Sum(r => r.MaxInstallCost);
-            return
-                $"{minCost:N0} - {maxCost:N0}";
+            return $"£{minCost:N0} - £{maxCost:N0}";
         }
 
         public string GetTotalSavingText()
         {
             var saving = GetSavedRecommendations().Sum(r => r.Saving);
-            return $"{saving:N0} a year";
+            return $"{saving:N0}";
         }
     }
 }

@@ -45,7 +45,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string GetTotalSavingText()
         {
             var saving = GetSavedRecommendations().Where(r => r.Key != RecommendationKey.InstallHeatPump).Sum(r => r.Saving);
-            return sharedLocalizer[$"£{saving:N0} a year"].Value;
+            return string.Format(sharedLocalizer["£AYearString"].Value, $"{saving:N0}" );
         }
         public string GetInstallationCostText(PropertyRecommendation recommendation)
         {
