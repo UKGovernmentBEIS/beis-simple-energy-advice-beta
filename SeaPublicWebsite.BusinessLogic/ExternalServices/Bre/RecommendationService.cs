@@ -16,100 +16,101 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
         public static readonly Dictionary<string, BreRecommendation> RecommendationDictionary =
             new()
             {
+                //The title and summary within the resource files have a key format of "Title/Summary" + name of key (+ any other identifier)
                 {
                     "A", new BreRecommendation
                     {
                         Key = RecommendationKey.AddLoftInsulation,
-                        Title = Resources.Bre.RecommendationService.TitleAddLoftInsulation,
-                        Summary = Resources.Bre.RecommendationService.SummaryAddLoftInsulation
+                        Title = "Title" + RecommendationKey.AddLoftInsulation,
+                        Summary = "Summary" + RecommendationKey.AddLoftInsulation
                     }
                 },
                 {
                     "A1", new BreRecommendation
                     {
                         Key = RecommendationKey.InsulateYourLoft,
-                        Title = Resources.Bre.RecommendationService.TitleInsulateYourLoft,
-                        Summary = Resources.Bre.RecommendationService.SummaryInsulateYourLoft
+                        Title = "Title" + RecommendationKey.InsulateYourLoft,
+                        Summary = "Summary" + RecommendationKey.InsulateYourLoft
                     }
                 },
                 {
                     "B", new BreRecommendation
                     {
                         Key = RecommendationKey.InsulateCavityWalls,
-                        Title = Resources.Bre.RecommendationService.TitleInsulateCavityWalls,
-                        Summary = Resources.Bre.RecommendationService.SummaryInsulateCavityWalls
+                        Title = "Title" + RecommendationKey.InsulateCavityWalls,
+                        Summary = "Summary" + RecommendationKey.InsulateCavityWalls
                     }
                 },
                 {
                     "Q", new BreRecommendation
                     {
                         Key = RecommendationKey.InsulateSolidWalls,
-                        Title = Resources.Bre.RecommendationService.TitleInsulateSolidWalls,
-                        Summary = Resources.Bre.RecommendationService.SummaryInsulateSolidWalls
+                        Title = "Title" + RecommendationKey.InsulateSolidWalls,
+                        Summary = "Summary" + RecommendationKey.InsulateSolidWalls
                     }
                 },
                 {
                     "Q1", new BreRecommendation
                     {
                         Key = RecommendationKey.InsulateSolidWalls,
-                        Title = Resources.Bre.RecommendationService.TitleInsulateSolidWallsOther,
-                        Summary = Resources.Bre.RecommendationService.SummaryInsulateSolidWallsOther
+                        Title = "Title" + RecommendationKey.InsulateSolidWalls + "Other",
+                        Summary = "Summary" + RecommendationKey.InsulateSolidWalls + "Other"
                     }
                 },
                 {
                     "W1", new BreRecommendation
                     {
                         Key = RecommendationKey.FloorInsulationSuspendedFloor,
-                        Title = Resources.Bre.RecommendationService.TitleFloorInsulationSuspendedFloor,
-                        Summary = Resources.Bre.RecommendationService.SummaryFloorInsulationSuspendedFloor
+                        Title = "Title" + RecommendationKey.FloorInsulationSuspendedFloor,
+                        Summary = "Summary" + RecommendationKey.FloorInsulationSuspendedFloor
                     }
                 },
                 {
                     "C", new BreRecommendation
                     {
                         Key = RecommendationKey.HotWaterCylinderInsulation,
-                        Title = Resources.Bre.RecommendationService.TitleHotWaterCylinderInsulation,
-                        Summary = Resources.Bre.RecommendationService.SummaryHotWaterCylinderInsulation
+                        Title = "Title" + RecommendationKey.HotWaterCylinderInsulation,
+                        Summary = "Summary" + RecommendationKey.HotWaterCylinderInsulation
                     }
                 },
                 {
                     "G", new BreRecommendation
                     {
                         Key = RecommendationKey.UpgradeHeatingControls,
-                        Title = Resources.Bre.RecommendationService.TitleUpgradeHeatingControls,
-                        Summary = Resources.Bre.RecommendationService.SummaryUpgradeHeatingControls
+                        Title = "Title" + RecommendationKey.UpgradeHeatingControls,
+                        Summary = "Summary" + RecommendationKey.UpgradeHeatingControls
                     }
                 },
                 {
                     "L2", new BreRecommendation
                     {
                         Key = RecommendationKey.HighHeatRetentionStorageHeaters,
-                        Title = Resources.Bre.RecommendationService.TitleHighHeatRetentionStorageHeaters,
-                        Summary = Resources.Bre.RecommendationService.SummaryHighHeatRetentionStorageHeaters
+                        Title = "Title" + RecommendationKey.HighHeatRetentionStorageHeaters,
+                        Summary = "Summary" + RecommendationKey.HighHeatRetentionStorageHeaters
                     }
                 },
                 {
                     "O", new BreRecommendation
                     {
                         Key = RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
-                        Title = Resources.Bre.RecommendationService.TitleReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
-                        Summary = Resources.Bre.RecommendationService.SummaryReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing
+                        Title = "Title" + RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
+                        Summary = "Summary" + RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing
                     }
                 },
                 {
                     "U", new BreRecommendation
                     {
                         Key = RecommendationKey.SolarElectricPanels,
-                        Title = Resources.Bre.RecommendationService.TitleSolarElectricPanels,
-                        Summary = Resources.Bre.RecommendationService.SummarySolarElectricPanels
+                        Title = "Title" + RecommendationKey.SolarElectricPanels,
+                        Summary = "Summary" + RecommendationKey.SolarElectricPanels
                     }
                 },
                 {
                     "Z1", new BreRecommendation
                     {
                         Key = RecommendationKey.InstallHeatPump,
-                        Title = Resources.Bre.RecommendationService.TitleInstallHeatPump,
-                        Summary = Resources.Bre.RecommendationService.SummaryInstallHeatPump
+                        Title = "Title" + RecommendationKey.InstallHeatPump,
+                        Summary = "Summary" + RecommendationKey.InstallHeatPump
                     }
                 }
             };

@@ -2,7 +2,7 @@
 {
     public enum RecommendationKey
     { 
-        AddLoftInsulation, //TODO localise 
+        AddLoftInsulation,
         FloorInsulationSuspendedFloor,
         UpgradeHeatingControls,
         ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,

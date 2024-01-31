@@ -48,6 +48,7 @@
       <EmbeddedResource Update="Resources\ErrorMessages.cy.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Errors.cy.Designer.cs</LastGenOutput>
+        <DependentUpon>ErrorMessages.resx</DependentUpon>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\ErrorMessages.resx">
         <Generator>ResXFileCodeGenerator</Generator>
@@ -56,6 +57,13 @@
       <EmbeddedResource Update="Resources\Enum\NewOrReturningUser.resx">
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>NewOrReturningUser.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\SharedResources.cy.resx">
+        <DependentUpon>SharedResources.resx</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Bre\RecommendationServiceText.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>RecommendationService.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 

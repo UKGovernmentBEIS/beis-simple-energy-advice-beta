@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SeaPublicWebsite.BusinessLogic.Resources.Bre {
+namespace SeaPublicWebsite.Resources.Bre {
     using System;
     
     
@@ -21,14 +21,14 @@ namespace SeaPublicWebsite.BusinessLogic.Resources.Bre {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class RecommendationService {
+    public class RecommendationServiceText {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal RecommendationService() {
+        internal RecommendationServiceText() {
         }
         
         /// <summary>
@@ -38,7 +38,7 @@ namespace SeaPublicWebsite.BusinessLogic.Resources.Bre {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SeaPublicWebsite.BusinessLogic.Resources.Bre.RecommendationService", typeof(RecommendationService).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SeaPublicWebsite.Resources.Bre.RecommendationServiceText", typeof(RecommendationServiceText).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
