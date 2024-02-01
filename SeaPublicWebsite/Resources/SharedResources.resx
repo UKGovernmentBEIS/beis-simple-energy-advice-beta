@@ -2752,7 +2752,7 @@
     <data name="Flat type" xml:space="preserve">
         <value>Flat type</value>
     </data>
-    <data name="Floor Construction" xml:space="preserve">
+    <data name="FloorConstructionTitleString" xml:space="preserve">
         <value>Floor Construction</value>
     </data>
     <data name="Floor Insulated" xml:space="preserve">

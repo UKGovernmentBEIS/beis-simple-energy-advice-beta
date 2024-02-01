@@ -3060,7 +3060,7 @@
         <comment>Go back to</comment>
     </data>
     <data name="Action Plan" xml:space="preserve">
-        <value />
+        <value>Cynllun Gweithredu</value>
         <comment>Action Plan</comment>
     </data>
     <data name="They could cost" xml:space="preserve">
@@ -3146,7 +3146,7 @@
         <value>Mae inswleiddio waliau allanol yn amharu llai ar y tu mewn i’ch cartref, ond bydd yn newid ymddangosiad allanol eich cartref, felly bydd angen caniatâd cynllunio fel arfer. Mae'n annhebygol y caniateir ei osod ar wyneb blaen eich eiddo os ydych chi'n byw mewn ardal gadwraeth.</value>
         <comment>External wall insulation is less disruptive to the inside of your home, but will change the external appearance of your home, so you will usually need planning permission. It’s unlikely to be allowed on the front of your property if you live in a conservation area.</comment>
     </data>
-    <data name="Floor Construction" xml:space="preserve">
+    <data name="FloorConstructionTitleString" xml:space="preserve">
         <value>Adeiladwaith y lloriau</value>
     </data>
     <data name="floor construction" xml:space="preserve">
