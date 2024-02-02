@@ -4,6 +4,7 @@
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
 @using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.EntityFrameworkCore.Diagnostics
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.HomeAgeViewModel
@@ -48,25 +49,18 @@
                             @SharedLocalizer[""]
                             <strong>
                                 @(Model.Epc?.ConstructionAgeBand switch {
-                                    HomeAge.Pre1900 or HomeAge.From1900To1929 => @SharedLocalizer["EPCSuggestsPropertyBuiltBefore1930String", @Model.Epc.LodgementYear],
-                                    HomeAge.From1930To1949 or HomeAge.From1950To1966 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1930And1966String", @Model.Epc.LodgementYear],
-                                    HomeAge.From1967To1975 or HomeAge.From1976To1982 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1967And1982String", @Model.Epc.LodgementYear],
-                                    HomeAge.From1983To1990 or HomeAge.From1991To1995 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1983And1995String", @Model.Epc.LodgementYear],
-                                    HomeAge.From1996To2002 or HomeAge.From2003To2006 or HomeAge.From2007To2011 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1996And2011String", @Model.Epc.LodgementYear],
+                                    HomeAge.Pre1900 => @SharedLocalizer["EPCSuggestsPropertyBuiltBefore1900String", @Model.Epc.LodgementYear],
+                                    HomeAge.From1900To1929 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1900And1929String", @Model.Epc.LodgementYear],
+                                    HomeAge.From1930To1949 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1930And1949String", @Model.Epc.LodgementYear],
+                                    HomeAge.From1950To1966 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1950And1966String", @Model.Epc.LodgementYear],
+                                    HomeAge.From1967To1975 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1967And1975String", @Model.Epc.LodgementYear],
+                                    HomeAge.From1976To1982 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1976And1982String", @Model.Epc.LodgementYear],
+                                    HomeAge.From1983To1990 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1983And1990String", @Model.Epc.LodgementYear],
+                                    HomeAge.From1991To1995 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1991And1995String", @Model.Epc.LodgementYear],
+                                    HomeAge.From1996To2002 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1996And2002String", @Model.Epc.LodgementYear],
+                                    HomeAge.From2003To2006 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween2003And2006String", @Model.Epc.LodgementYear],
+                                    HomeAge.From2007To2011 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween2007And2011String", @Model.Epc.LodgementYear],
                                     HomeAge.From2012ToPresent => @SharedLocalizer["EPCSuggestsPropertyBuiltOnOrAfter2012String", @Model.Epc.LodgementYear],
-                                    
-                                    HomeAge.Pre1900 => "before 1900.",
-                                    HomeAge.From1900To1929 => "between 1900 and 1929.",
-                                    HomeAge.From1930To1949 => "between 1930 and 1949.",
-                                    HomeAge.From1950To1966 => "between 1950 and 1966.",
-                                    HomeAge.From1967To1975 => "between 1967 and 1975.",
-                                    HomeAge.From1976To1982 => "between 1976 and 1982.",
-                                    HomeAge.From1983To1990 => "between 1983 and 1990.",
-                                    HomeAge.From1991To1995 => "between 1991 and 1995.",
-                                    HomeAge.From1996To2002 => "between 1996 and 2002.",
-                                    HomeAge.From2003To2006 => "between 2003 and 2006.",
-                                    HomeAge.From2007To2011 => "between 2007 and 2011.",
-                                    HomeAge.From2012ToPresent => "on or after 2012.",
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;

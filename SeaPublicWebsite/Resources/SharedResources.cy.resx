@@ -3067,25 +3067,13 @@
         <value>Mae atig wedi’i inswleiddio’n llwyr os oes mwy na 200mm (wyth modfedd) o ddeunydd inswleiddio’n gorchuddio’r atig gyfan, fel arfer ar “lawr” yr atig gydag un haen rhwng y preniau llorweddol a haen arall yn mynd ar eu traws i godi’r deunydd inswleiddio i’r lefel ofynnol.</value>
         <comment>A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the "floor" of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level.</comment>
     </data>
-    <data name="EPCSuggestsPropertyBuiltBefore1930String" xml:space="preserve">
+    <data name="EPCSuggestsPropertyBuiltBefore1900String" xml:space="preserve">
         <value />
         <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;before 1930.&lt;/strong&gt;</comment>
-    </data>
-    <data name="EPCSuggestsPropertyBuiltBetween1930And1966String" xml:space="preserve">
-        <value />
-        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1930 and 1966.&lt;/strong&gt;</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltBetween1967And1982String" xml:space="preserve">
         <value />
         <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1967 and 1982.&lt;/strong&gt;</comment>
-    </data>
-    <data name="EPCSuggestsPropertyBuiltBetween1983And1995String" xml:space="preserve">
-        <value />
-        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1983 and 1995.&lt;/strong&gt;</comment>
-    </data>
-    <data name="EPCSuggestsPropertyBuiltBetween1996And2011String" xml:space="preserve">
-        <value />
-        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1996 and 2011.&lt;/strong&gt;</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltOnOrAfter2012String" xml:space="preserve">
         <value />
@@ -3169,5 +3157,41 @@
     </data>
     <data name="HomesOfYourTypeTypicallyDoNotHaveOutdoorSpaceThatCouldFitHeatPumpString" xml:space="preserve">
         <value>Fel arfer does gan gartrefi o’ch math chi &lt;strong&gt;ddim lle y tu allan&lt;/strong&gt; lle gellir gosod pwmp gwres.</value>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1900And1929String" xml:space="preserve">
+        <value />
+        <comment>EPCSuggestsPropertyBuiltBetween1900And1929String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1930And1949String" xml:space="preserve">
+        <value />
+        <comment>EPCSuggestsPropertyBuiltBetween1930And1949String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1950And1966String" xml:space="preserve">
+        <value />
+        <comment>EPCSuggestsPropertyBuiltBetween1950And1966String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1967And1975String" xml:space="preserve">
+        <value />
+        <comment>EPCSuggestsPropertyBuiltBetween1967And1975String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1976And1982String" xml:space="preserve">
+        <value />
+        <comment>EPCSuggestsPropertyBuiltBetween1976And1982String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1983And1990String" xml:space="preserve">
+        <value />
+        <comment>EPCSuggestsPropertyBuiltBetween1983And1990String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1991And1995String" xml:space="preserve">
+        <value />
+        <comment>EPCSuggestsPropertyBuiltBetween1991And1995String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1996And2002String" xml:space="preserve">
+        <value />
+        <comment>EPCSuggestsPropertyBuiltBetween1996And2002String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween2003And2006String" xml:space="preserve">
+        <value />
+        <comment>EPCSuggestsPropertyBuiltBetween2003And2006String</comment>
     </data>
 </root>

@@ -61,7 +61,7 @@ namespace SeaPublicWebsite.Controllers
             PostcodesIoApi postcodesIoApi,
             AnswerService answerService,
             FullHostnameService fullHostnameService,
-            IOptions<ServiceHealthConfig> serviceHealthConfig)
+            IOptions<ServiceHealthConfig> serviceHealthConfig,
             IStringLocalizer<SharedResources> sharedLocalizer)
         {
             this.propertyDataStore = propertyDataStore;

@@ -69,11 +69,47 @@ namespace SeaPublicWebsite.BusinessLogic.Resources.Enum {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1900 to 1929.
+        /// </summary>
+        public static string From1900To1929 {
+            get {
+                return ResourceManager.GetString("From1900To1929", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1930 to 1949.
+        /// </summary>
+        public static string From1930To1949 {
+            get {
+                return ResourceManager.GetString("From1930To1949", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1930 to 1966.
         /// </summary>
         public static string From1930To1966 {
             get {
                 return ResourceManager.GetString("From1930To1966", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1950 to 1966.
+        /// </summary>
+        public static string From1950To1966 {
+            get {
+                return ResourceManager.GetString("From1950To1966", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1967 to 1975.
+        /// </summary>
+        public static string From1967To1975 {
+            get {
+                return ResourceManager.GetString("From1967To1975", resourceCulture);
             }
         }
         
@@ -87,11 +123,47 @@ namespace SeaPublicWebsite.BusinessLogic.Resources.Enum {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1976 to 1982.
+        /// </summary>
+        public static string From1976To1982 {
+            get {
+                return ResourceManager.GetString("From1976To1982", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1983 to 1990.
+        /// </summary>
+        public static string From1983To1990 {
+            get {
+                return ResourceManager.GetString("From1983To1990", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1983 to 1995.
         /// </summary>
         public static string From1983To1995 {
             get {
                 return ResourceManager.GetString("From1983To1995", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1991 to 1995.
+        /// </summary>
+        public static string From1991To1995 {
+            get {
+                return ResourceManager.GetString("From1991To1995", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1996 to 2002.
+        /// </summary>
+        public static string From1996To2002 {
+            get {
+                return ResourceManager.GetString("From1996To2002", resourceCulture);
             }
         }
         
@@ -105,11 +177,38 @@ namespace SeaPublicWebsite.BusinessLogic.Resources.Enum {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 2003 to 2006.
+        /// </summary>
+        public static string From2003To2006 {
+            get {
+                return ResourceManager.GetString("From2003To2006", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2007 to 2011.
+        /// </summary>
+        public static string From2007To2011 {
+            get {
+                return ResourceManager.GetString("From2007To2011", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 2012 or newer.
         /// </summary>
         public static string From2012ToPresent {
             get {
                 return ResourceManager.GetString("From2012ToPresent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Before 1900.
+        /// </summary>
+        public static string Pre1900 {
+            get {
+                return ResourceManager.GetString("Pre1900", resourceCulture);
             }
         }
         

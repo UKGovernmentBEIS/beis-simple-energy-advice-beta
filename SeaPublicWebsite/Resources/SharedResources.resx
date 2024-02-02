@@ -3371,25 +3371,13 @@
         <value>A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the "floor" of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level.</value>
         <comment>A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the "floor" of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level.</comment>
     </data>
-    <data name="EPCSuggestsPropertyBuiltBefore1930String" xml:space="preserve">
-        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;before 1930.&lt;/strong&gt;</value>
+    <data name="EPCSuggestsPropertyBuiltBefore1900String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;before 1900.&lt;/strong&gt;</value>
         <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;before 1930.&lt;/strong&gt;</comment>
-    </data>
-    <data name="EPCSuggestsPropertyBuiltBetween1930And1966String" xml:space="preserve">
-        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1930 and 1966.&lt;/strong&gt;</value>
-        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1930 and 1966.&lt;/strong&gt;</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltBetween1967And1982String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1967 and 1982.&lt;/strong&gt;</value>
         <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1967 and 1982.&lt;/strong&gt;</comment>
-    </data>
-    <data name="EPCSuggestsPropertyBuiltBetween1983And1995String" xml:space="preserve">
-        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1983 and 1995.&lt;/strong&gt;</value>
-        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1983 and 1995.&lt;/strong&gt;</comment>
-    </data>
-    <data name="EPCSuggestsPropertyBuiltBetween1996And2011String" xml:space="preserve">
-        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1996 and 2011.&lt;/strong&gt;</value>
-        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1996 and 2011.&lt;/strong&gt;</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltOnOrAfter2012String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;on or after 2012.&lt;/strong&gt;</value>
@@ -3478,5 +3466,44 @@
     <data name="HomesOfYourTypeTypicallyDoNotHaveOutdoorSpaceThatCouldFitHeatPumpString" xml:space="preserve">
         <value>Homes of your type typically &lt;strong&gt;do not have any outdoor space&lt;/strong&gt; that could fit a heat pump.</value>
         <comment>HomesOfYourTypeTypicallyDoNotHaveOutdoorSpaceThatCouldFitHeatPumpString</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween2007And2011String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 2007 and 2011.&lt;/strong&gt;</value>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1900And1929String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1900 and 1929.&lt;/strong&gt;</value>
+        <comment>EPCSuggestsPropertyBuiltBetween1900And1929String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1930And1949String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1930 and 1949.&lt;/strong&gt;</value>
+        <comment>EPCSuggestsPropertyBuiltBetween1930And1949String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1950And1966String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1950 and 1966.&lt;/strong&gt;</value>
+        <comment>EPCSuggestsPropertyBuiltBetween1950And1966String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1967And1975String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1967 and 1975.&lt;/strong&gt;</value>
+        <comment>EPCSuggestsPropertyBuiltBetween1967And1975String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1976And1982String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1976 and 1982.&lt;/strong&gt;</value>
+        <comment>EPCSuggestsPropertyBuiltBetween1976And1982String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1983And1990String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1983 and 1990.&lt;/strong&gt;</value>
+        <comment>EPCSuggestsPropertyBuiltBetween1983And1990String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1991And1995String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1991 and 1995.&lt;/strong&gt;</value>
+        <comment>EPCSuggestsPropertyBuiltBetween1991And1995String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween1996And2002String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1996 and 2002.&lt;/strong&gt;</value>
+        <comment>EPCSuggestsPropertyBuiltBetween1996And2002String</comment>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltBetween2003And2006String" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 2003 and 2006.&lt;/strong&gt;</value>
+        <comment>EPCSuggestsPropertyBuiltBetween2003And2006String</comment>
     </data>
 </root>

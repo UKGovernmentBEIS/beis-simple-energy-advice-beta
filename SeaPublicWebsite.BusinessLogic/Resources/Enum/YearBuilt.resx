@@ -39,4 +39,37 @@
     <data name="DoNotKnow" xml:space="preserve">
         <value>I don't know</value>
     </data>
+    <data name="Pre1900" xml:space="preserve">
+        <value>Before 1900</value>
+    </data>
+    <data name="From1900To1929" xml:space="preserve">
+        <value>1900 to 1929</value>
+    </data>
+    <data name="From1930To1949" xml:space="preserve">
+        <value>1930 to 1949</value>
+    </data>
+    <data name="From1950To1966" xml:space="preserve">
+        <value>1950 to 1966</value>
+    </data>
+    <data name="From1967To1975" xml:space="preserve">
+        <value>1967 to 1975</value>
+    </data>
+    <data name="From1976To1982" xml:space="preserve">
+        <value>1976 to 1982</value>
+    </data>
+    <data name="From1983To1990" xml:space="preserve">
+        <value>1983 to 1990</value>
+    </data>
+    <data name="From1991To1995" xml:space="preserve">
+        <value>1991 to 1995</value>
+    </data>
+    <data name="From1996To2002" xml:space="preserve">
+        <value>1996 to 2002</value>
+    </data>
+    <data name="From2003To2006" xml:space="preserve">
+        <value>2003 to 2006</value>
+    </data>
+    <data name="From2007To2011" xml:space="preserve">
+        <value>2007 to 2011</value>
+    </data>
 </root>
