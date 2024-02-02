@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using PuppeteerSharp;
 using PuppeteerSharp.Media;
@@ -35,7 +36,7 @@ public class PdfGenerationService
             { Username = basicAuthConfiguration.Username, Password = basicAuthConfiguration.Password });
         await page.SetCookieAsync(new CookieParam { 
             Name = "service_language", 
-            Value = $"c={CultureInfo.CurrentCulture.Name}|uic={CultureInfo.CurrentUICulture.Name}",
+            Value = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(CultureInfo.CurrentCulture)),
             Domain = "localhost"
         });
         await page.GoToAsync($"{GetLocalAddress()}/{path}");
