@@ -3063,27 +3063,21 @@
     </data>
     <data name="Building type" xml:space="preserve">
         <value>Building type</value>
-        <comment>Building type</comment>
     </data>
     <data name="Year home was built" xml:space="preserve">
         <value>Year home was built</value>
-        <comment>Year home was built</comment>
     </data>
     <data name="There is a problem" xml:space="preserve">
         <value>There is a problem</value>
-        <comment>There is a problem</comment>
     </data>
     <data name="Confirm" xml:space="preserve">
         <value>Confirm</value>
-        <comment>Confirm</comment>
     </data>
     <data name="Note" xml:space="preserve">
         <value>Note</value>
-        <comment>Note</comment>
     </data>
     <data name="FiguresForTypicalInstallationWarningTextString" xml:space="preserve">
         <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the January 2024 energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
-        <comment>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the October 2022 energy price cap. As energy prices change, so will the estimates of savings.</comment>
     </data>
     <data name="1 minute" xml:space="preserve">
         <value>1 minute</value>
@@ -3099,19 +3093,15 @@
     </data>
     <data name="Privacy Policy" xml:space="preserve">
         <value>Privacy Policy</value>
-        <comment>Privacy Policy</comment>
     </data>
     <data name="Cookies" xml:space="preserve">
         <value>Cookies</value>
-        <comment>Cookies</comment>
     </data>
     <data name="Contact Us" xml:space="preserve">
         <value>Contact Us</value>
-        <comment>Contact Us</comment>
     </data>
     <data name="We use Google Analytics software (Google Analytics 4) to collect anonymised information about how you use our service. We do this to help make sure the site is meeting the needs of its users and to help us make improvements to the site and to government digital services." xml:space="preserve">
         <value>We use Google Analytics software (Google Analytics 4) to collect anonymised information about how you use our service. We do this to help make sure the site is meeting the needs of its users and to help us make improvements to the site and to government digital services.</value>
-        <comment>We use Google Analytics software (Google Analytics 4) to collect anonymised information about how you use our service. We do this to help make sure the site is meeting the needs of its users and to help us make improvements to the site and to government digital services.</comment>
     </data>
     <data name="Requires" xml:space="preserve">
         <value>Requires</value>
@@ -3124,83 +3114,63 @@
     </data>
     <data name="1 year" xml:space="preserve">
         <value>1 year</value>
-        <comment>1 year</comment>
     </data>
     <data name="LicenseDescriptionString" xml:space="preserve">
         <value>All content is available under the &lt;a class="govuk-footer__link" href = "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel = "license" &gt; Open Government Licence v3.0 &lt;/a&gt;, except where otherwise stated</value>
-        <comment>LicenseDescriptionString</comment>
     </data>
     <data name="(opens in a new window)" xml:space="preserve">
         <value>(opens in a new window)</value>
-        <comment>(opens in a new window)</comment>
     </data>
     <data name="DEFINITELY" xml:space="preserve">
         <value>DEFINITELY</value>
-        <comment>DEFINITELY</comment>
     </data>
     <data name="1 TO 2 DAYS" xml:space="preserve">
         <value>1 TO 2 DAYS</value>
-        <comment>1 TO 2 DAYS</comment>
     </data>
     <data name="1 OR 2 DAYS" xml:space="preserve">
         <value>1 OR 2 DAYS</value>
-        <comment>1 OR 2 DAYS</comment>
     </data>
     <data name="MODERATE" xml:space="preserve">
         <value>MODERATE</value>
-        <comment>MODERATE</comment>
     </data>
     <data name="Under Development" xml:space="preserve">
         <value>Under Development</value>
-        <comment>Under Development</comment>
     </data>
     <data name="MINIMAL" xml:space="preserve">
         <value>MINIMAL</value>
-        <comment>MINIMAL</comment>
     </data>
     <data name="LESS THAN A DAY" xml:space="preserve">
         <value>LESS THAN A DAY</value>
-        <comment>LESS THAN A DAY</comment>
     </data>
     <data name="3 DAYS" xml:space="preserve">
         <value>3 DAYS</value>
-        <comment>3 DAYS</comment>
     </data>
     <data name="1 DAY" xml:space="preserve">
         <value>1 DAY</value>
-        <comment>1 DAY</comment>
     </data>
     <data name="MEDIUM TO VERY SIGNIFICANT" xml:space="preserve">
         <value>MEDIUM TO VERY SIGNIFICANT</value>
-        <comment>MEDIUM TO VERY SIGNIFICANT</comment>
     </data>
     <data name="SEVERAL DAYS" xml:space="preserve">
         <value>SEVERAL DAYS</value>
-        <comment>SEVERAL DAYS</comment>
     </data>
     <data name="Based on the information we have collected; it looks like you have no insulation in your loft. We recommend that you have your loft insulated, if possible, up to the recommended thickness of 300mm, or 12 inches." xml:space="preserve">
         <value>Based on the information we have collected; it looks like you have no insulation in your loft. We recommend that you have your loft insulated, if possible, up to the recommended thickness of 300mm, or 12 inches.</value>
-        <comment>Based on the information we have collected; it looks like you have no insulation in your loft. We recommend that you have your loft insulated, if possible, up to the recommended thickness of 300mm, or 12 inches.</comment>
     </data>
     <data name="Adding insulation will help trap the heat inside your property so your heating doesn’t need to be on as much, and so could make a significant saving on your fuel bills." xml:space="preserve">
         <value>Adding insulation will help trap the heat inside your property so your heating doesn’t need to be on as much, and so could make a significant saving on your fuel bills.</value>
-        <comment>Adding insulation will help trap the heat inside your property so your heating doesn’t need to be on as much, and so could make a significant saving on your fuel bills.</comment>
     </data>
     <data name="If some of your loft is boarded so that you can store things up there you will either need to raise this boarding up and insulate underneath it, or leave that part of the loft without insulation." xml:space="preserve">
         <value>If some of your loft is boarded so that you can store things up there you will either need to raise this boarding up and insulate underneath it, or leave that part of the loft without insulation.</value>
-        <comment>If some of your loft is boarded so that you can store things up there you will either need to raise this boarding up and insulate underneath it, or leave that part of the loft without insulation.</comment>
     </data>
     <data name="If your loft is insulated, but you have less than the recommended amount (300mm or 12 inches thick) then it could still be worthwhile topping up your insulation" xml:space="preserve">
         <value>If your loft is insulated, but you have less than the recommended amount (300mm or 12 inches thick) then it could still be worthwhile topping up your insulation</value>
-        <comment>If your loft is insulated, but you have less than the recommended amount (300mm or 12 inches thick) then it could still be worthwhile topping up your insulation</comment>
     </data>
     <data name="Your loft has no insulation" xml:space="preserve">
         <value>Your loft has no insulation</value>
-        <comment>Your loft has no insulation</comment>
     </data>
     <data name="You’ve set your cookie preferences." xml:space="preserve">
         <value>You’ve set your cookie preferences.</value>
-        <comment>You’ve set your cookie preferences.</comment>
     </data>
     <data name="VisitHistoricEnglandForHistoricBuildingInformationString" xml:space="preserve">
         <value>Visit the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Historic England&lt;/a&gt; site for information specific to historic buildings.</value>
@@ -3216,26 +3186,21 @@
     </data>
     <data name="If you are a social housing tenant, please contact your landlord directly for support." xml:space="preserve">
         <value>If you are a social housing tenant, please contact your landlord directly for support.</value>
-        <comment>If you are a social housing tenant, please contact your landlord directly for support.</comment>
     </data>
     <data name="You can come back to this action plan using your reference number." xml:space="preserve">
         <value>You can come back to this action plan using your reference number.</value>
-        <comment>You can come back to this action plan using your reference number.</comment>
     </data>
     <data name="You can also use this service for further tailored and impartial advice on how to improve the energy performance of your home – including but not limited to information on the relevant energy technologies, cost-effective ordering for measure installations and available Government grants schemes." xml:space="preserve">
         <value>You can also use this service for further tailored and impartial advice on how to improve the energy performance of your home – including but not limited to information on the relevant energy technologies, cost-effective ordering for measure installations and available Government grants schemes.</value>
-        <comment>You can also use this service for further tailored and impartial advice on how to improve the energy performance of your home – including but not limited to information on the relevant energy technologies, cost-effective ordering for measure installations and available Government grants schemes.</comment>
     </data>
     <data name="Email sent to" xml:space="preserve">
         <value>Email sent to</value>
-        <comment>Email sent to</comment>
     </data>
     <data name="are your cavity walls insulated" xml:space="preserve">
         <value>are your cavity walls insulated</value>
     </data>
     <data name="Wall type" xml:space="preserve">
         <value>Wall type</value>
-        <comment>Wall type</comment>
     </data>
     <data name="are your solid walls insulated" xml:space="preserve">
         <value>are your solid walls insulated</value>
@@ -3245,186 +3210,144 @@
     </data>
     <data name="is any part of your roof flat" xml:space="preserve">
         <value>is any part of your roof flat</value>
-        <comment>is any part of your roof flat</comment>
     </data>
     <data name="do you have a loft that hasn't been converted into a room" xml:space="preserve">
         <value>do you have a loft that hasn't been converted into a room</value>
-        <comment>do you have a loft that hasn't been converted into a room</comment>
     </data>
     <data name="is there access to your loft" xml:space="preserve">
         <value>is there access to your loft</value>
-        <comment>is there access to your loft</comment>
     </data>
     <data name="is your loft fully insulated" xml:space="preserve">
         <value>is your loft fully insulated</value>
     </data>
     <data name="hours in the morning" xml:space="preserve">
         <value>hours in the morning</value>
-        <comment>hours in the morning</comment>
     </data>
     <data name="hours in the afternoon and evening" xml:space="preserve">
         <value>hours in the afternoon and evening</value>
-        <comment>hours in the afternoon and evening</comment>
     </data>
     <data name="Heating system" xml:space="preserve">
         <value>Heating system</value>
-        <comment>Heating system</comment>
     </data>
     <data name="The legal basis for processing your personal data is processing necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the data controller, such as the exercise of a function of the Crown, a Minister of the Crown, or a government department; the exercise of a function conferred on a person by an enactment; the exercise of a function of either House of Parliament; or the administration of justice. In this case, in order to receive feedback about this service and to contact you for clarifications or to report service updates." xml:space="preserve">
         <value>The legal basis for processing your personal data is processing necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the data controller, such as the exercise of a function of the Crown, a Minister of the Crown, or a government department; the exercise of a function conferred on a person by an enactment; the exercise of a function of either House of Parliament; or the administration of justice. In this case, in order to receive feedback about this service and to contact you for clarifications or to report service updates.</value>
-        <comment>The legal basis for processing your personal data is processing necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the data controller, such as the exercise of a function of the Crown, a Minister of the Crown, or a government department; the exercise of a function conferred on a person by an enactment; the exercise of a function of either House of Parliament; or the administration of justice. In this case, in order to receive feedback about this service and to contact you for clarifications or to report service updates.</comment>
     </data>
     <data name="DataProcessorsWithinEEAAndModelContractClausesOutsideEEAString" xml:space="preserve">
         <value>As your personal data is stored on our IT infrastructure and shared with our data processors Microsoft, &lt;a href="{0}" target="_blank"&gt;GOV.UK PaaS&lt;/a&gt;, and &lt;a href="{1}" target="_blank"&gt;GOV.UK Notify&lt;/a&gt;, it may be transferred and stored securely in the UK and European Economic Area. Where it is the case that your personal data is stored outside the UK and EEA it will be subject to equivalent legal protection through the use of Model Contract Clauses.</value>
-        <comment>DataProcessorsWithinEEAAndModelContractClausesOutsideEEAString</comment>
     </data>
     <data name="FindOutIfEligibleForSustainableWarmthGrantString" xml:space="preserve">
         <value>To find out if you are eligible for a Sustainable Warmth grant please contact your Local Authority which can be found on &lt;a class="govuk-link" href="{0}" target="_blank"&gt;https://www.gov.uk/find-local-council&lt;/a&gt; to check if they offer funding.</value>
     </data>
     <data name="CheckEligibilityForGBISAndHUG2String" xml:space="preserve">
         <value>We recommend checking your eligibility for the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Great British Insulation Scheme&lt;/a&gt; and the &lt;a class="govuk-link" href="{1}" target="_blank"&gt;Home Upgrade Grant: Phase 2 Scheme&lt;/a&gt;</value>
-        <comment>CheckEligibilityForGBISAndHUG2String</comment>
     </data>
     <data name="WeUseInfoToSearchForEPCString" xml:space="preserve">
         <value>We use this information to search the Energy Performance of Buildings Register for an Energy Performance Certificate that matches your address. The Energy Performance of Buildings Register is an open register and you can find more details from the &lt;a href="{0}" target="_blank"&gt;Department for Levelling Up, Housing and Communities&lt;/a&gt;.</value>
     </data>
     <data name="Please enter your email" xml:space="preserve">
         <value>Please enter your email</value>
-        <comment>Please enter your email</comment>
     </data>
     <data name="Success" xml:space="preserve">
         <value>Success</value>
-        <comment>Success</comment>
     </data>
     <data name="IfNotHappyWithComplaintContactLinkString" xml:space="preserve">
         <value>The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the ‘accessibility regulations’). If you’re not happy with how we respond to your complaint, &lt;a class="govuk-link" href="{0}" target="_blank"&gt;contact the Equality Advisory and Support Service (EASS)&lt;/a&gt;.</value>
     </data>
     <data name="Homes built after 1991 were typically built with insulating material between the outer and inner walls." xml:space="preserve">
         <value>Homes built after 1991 were typically built with insulating material between the outer and inner walls.</value>
-        <comment>Homes built after 1991 were typically built with insulating material between the outer and inner walls.</comment>
     </data>
     <data name="If your home was converted, for example it was a shop or other commercial premises before, it may have been built without insulation." xml:space="preserve">
         <value>If your home was converted, for example it was a shop or other commercial premises before, it may have been built without insulation.</value>
-        <comment>If your home was converted, for example it was a shop or other commercial premises before, it may have been built without insulation.</comment>
     </data>
     <data name="HomesOfYourTypeTypicallyHaveInsulatedCavityWallsString" xml:space="preserve">
         <value>Homes of your type typically have &lt;strong&gt;insulated cavity walls&lt;/strong&gt;.</value>
-        <comment>HomesOfYourTypeTypicallyHaveInsulatedCavityWallsString</comment>
     </data>
     <data name="address" xml:space="preserve">
         <value>address</value>
-        <comment>address</comment>
     </data>
     <data name="home type" xml:space="preserve">
         <value>home type</value>
-        <comment>home type</comment>
     </data>
     <data name="If you have a basement or cellar beneath your house that you can get into safely, you could look down there to see what type of floor you have. If the floor is a suspended wooden floor, you should be able to see wooden joists and the undersides of the floorboards." xml:space="preserve">
         <value>If you have a basement or cellar beneath your house that you can get into safely, you could look down there to see what type of floor you have. If the floor is a suspended wooden floor, you should be able to see wooden joists and the undersides of the floorboards.</value>
-        <comment>If you have a basement or cellar beneath your house that you can get into safely, you could look down there to see what type of floor you have. If the floor is a suspended wooden floor, you should be able to see wooden joists and the undersides of the floorboards.</comment>
     </data>
     <data name="A suspended timber floor can be insulated by lifting the floorboards and laying mineral wool insulation supported by netting between the joists, or cutting rigid insulation boards to size. It is possible done from below if there’s enough access to the cellar or crawl space." xml:space="preserve">
         <value>A suspended timber floor can be insulated by lifting the floorboards and laying mineral wool insulation supported by netting between the joists, or cutting rigid insulation boards to size. It is possible done from below if there’s enough access to the cellar or crawl space.</value>
-        <comment>A suspended timber floor can be insulated by lifting the floorboards and laying mineral wool insulation supported by netting between the joists, or cutting rigid insulation boards to size. It is possible done from below if there’s enough access to the cellar or crawl space.</comment>
     </data>
     <data name="Based on the information we have collected; it looks like you could save money by adding an insulating jacket to your hot water cylinder. By insulating your hot water cylinder, you will retain more heat. It will mean your hot water stays hotter for longer, and you spend less money heating water up." xml:space="preserve">
         <value>Based on the information we have collected; it looks like you could save money by adding an insulating jacket to your hot water cylinder. By insulating your hot water cylinder, you will retain more heat. It will mean your hot water stays hotter for longer, and you spend less money heating water up.</value>
-        <comment>Based on the information we have collected; it looks like you could save money by adding an insulating jacket to your hot water cylinder. By insulating your hot water cylinder, you will retain more heat. It will mean your hot water stays hotter for longer, and you spend less money heating water up.</comment>
     </data>
     <data name="If you are reasonably confident with DIY, this could be a task you can complete yourself. If not, this is a job for a handyperson." xml:space="preserve">
         <value>If you are reasonably confident with DIY, this could be a task you can complete yourself. If not, this is a job for a handyperson.</value>
-        <comment>If you are reasonably confident with DIY, this could be a task you can complete yourself. If not, this is a job for a handyperson.</comment>
     </data>
     <data name="Under Development is typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;" xml:space="preserve">
         <value>Under Development is typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
-        <comment>Under Development is typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</comment>
     </data>
     <data name="YouCanChangeYourCookieSettingsAtAnyTimeString" xml:space="preserve">
         <value>You can &lt;a class="govuk-link" href="{0}"&gt;change your cookie settings&lt;/a&gt; at any time.</value>
-        <comment>YouCanChangeYourCookieSettingsAtAnyTimeString</comment>
     </data>
     <data name="Back to" xml:space="preserve">
         <value>Back to</value>
-        <comment>Back to</comment>
     </data>
     <data name="Go back to" xml:space="preserve">
         <value>Go back to</value>
-        <comment>Go back to</comment>
     </data>
     <data name="Action Plan" xml:space="preserve">
         <value>Action Plan</value>
-        <comment>Action Plan</comment>
     </data>
     <data name="They could cost" xml:space="preserve">
         <value>They could cost</value>
-        <comment>They could cost</comment>
     </data>
     <data name="It could cost" xml:space="preserve">
         <value>It could cost</value>
-        <comment>It could cost</comment>
     </data>
     <data name="You could save" xml:space="preserve">
         <value>You could save</value>
-        <comment>You could save</comment>
     </data>
     <data name="A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the &quot;floor&quot; of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level." xml:space="preserve">
         <value>A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the "floor" of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level.</value>
-        <comment>A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the "floor" of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level.</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltBefore1900String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;before 1900.&lt;/strong&gt;</value>
-        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;before 1930.&lt;/strong&gt;</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltBetween1967And1982String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1967 and 1982.&lt;/strong&gt;</value>
-        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1967 and 1982.&lt;/strong&gt;</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltOnOrAfter2012String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;on or after 2012.&lt;/strong&gt;</value>
-        <comment>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;on or after 2012.&lt;/strong&gt;</comment>
     </data>
     <data name="LOW TO MEDIUM" xml:space="preserve">
         <value>LOW TO MEDIUM</value>
-        <comment>LOW TO MEDIUM</comment>
     </data>
     <data name="TYPICALLY ONE DAY" xml:space="preserve">
         <value>TYPICALLY ONE DAY</value>
-        <comment>TYPICALLY ONE DAY</comment>
     </data>
     <data name="Based on the information we have collected, it looks like you have an old gas boiler that may not be operating efficiently. You could consider replacing this with a modern condensing boiler, which will use less gas to provide the same amount of heat, helping to cut your fuel bills and carbon dioxide emissions." xml:space="preserve">
         <value>Based on the information we have collected, it looks like you have an old gas boiler that may not be operating efficiently. You could consider replacing this with a modern condensing boiler, which will use less gas to provide the same amount of heat, helping to cut your fuel bills and carbon dioxide emissions.</value>
-        <comment>Based on the information we have collected, it looks like you have an old gas boiler that may not be operating efficiently. You could consider replacing this with a modern condensing boiler, which will use less gas to provide the same amount of heat, helping to cut your fuel bills and carbon dioxide emissions.</comment>
     </data>
     <data name="EPCSuggestsYourMainHeatingIsBiomassString" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;a biomass boiler.&lt;/strong&gt;</value>
-        <comment>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;a biomass boiler.&lt;/strong&gt;</comment>
     </data>
     <data name="EPCSuggestsYourMainHeatingIsCoalOrSolidFuelString" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;coal or solid fuel heating.&lt;/strong&gt;</value>
-        <comment>Your {0} Energy Performance Certificate suggests your main heating system is &lt;strong&gt;coal or solid fuel heating.&lt;/strong&gt;</comment>
     </data>
     <data name="£RangeString" xml:space="preserve">
         <value>£{0} - £{1}</value>
     </data>
     <data name="CookiesOnString" xml:space="preserve">
         <value>Cookies on {0}</value>
-        <comment>Cookies on {0}</comment>
     </data>
     <data name="You will be able to use some of this electricity to reduce the amount you buy from your energy supplier, cutting your bills. At times you will generate more than you are using – you can sell any surplus to your electricity supplier to save even more money." xml:space="preserve">
         <value>You will be able to use some of this electricity to reduce the amount you buy from your energy supplier, cutting your bills. At times you will generate more than you are using – you can sell any surplus to your electricity supplier to save even more money.</value>
-        <comment>You will be able to use some of this electricity to reduce the amount you buy from your energy supplier, cutting your bills. At times you will generate more than you are using – you can sell any surplus to your electricity supplier to save even more money.</comment>
     </data>
     <data name="2 DAYS" xml:space="preserve">
         <value>2 DAYS</value>
-        <comment>2 DAYS</comment>
     </data>
     <data name="Based on the information we have collected; it looks like you have solid walls without a cavity, and that these are not insulated. You could consider insulating these walls to help trap the heat inside your property so your heating doesn’t need to be on as much." xml:space="preserve">
         <value>Based on the information we have collected; it looks like you have solid walls without a cavity, and that these are not insulated. You could consider insulating these walls to help trap the heat inside your property so your heating doesn’t need to be on as much.</value>
-        <comment>Based on the information we have collected; it looks like you have solid walls without a cavity, and that these are not insulated. You could consider insulating these walls to help trap the heat inside your property so your heating doesn’t need to be on as much.</comment>
     </data>
     <data name="External wall insulation is less disruptive to the inside of your home, but will change the external appearance of your home, so you will usually need planning permission. It’s unlikely to be allowed on the front of your property if you live in a conservation area." xml:space="preserve">
         <value>External wall insulation is less disruptive to the inside of your home, but will change the external appearance of your home, so you will usually need planning permission. It’s unlikely to be allowed on the front of your property if you live in a conservation area.</value>
-        <comment>External wall insulation is less disruptive to the inside of your home, but will change the external appearance of your home, so you will usually need planning permission. It’s unlikely to be allowed on the front of your property if you live in a conservation area.</comment>
     </data>
     <data name="MoreInfoOnSolidWallInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
         <value>You can find more information on solid wall insulation on the&lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
@@ -3437,18 +3360,15 @@
     </data>
     <data name="Check you have typed the reference correctly. Reference must be 8 characters." xml:space="preserve">
         <value>Check you have typed the reference correctly. Reference must be 8 characters.</value>
-        <comment>Check you have typed the reference correctly. Reference must be 8 characters.</comment>
     </data>
     <data name="Unable to send email due to unexpected error. Please make a note of your reference code." xml:space="preserve">
         <value>Unable to send email due to unexpected error. Please make a note of your reference code.</value>
-        <comment>Unable to send email due to unexpected error. Please make a note of your reference code.</comment>
     </data>
     <data name="Find energy improvements suitable for your home" xml:space="preserve">
         <value>Find energy improvements suitable for your home</value>
     </data>
     <data name="Enter a valid UK postcode" xml:space="preserve">
         <value>Enter a valid UK postcode</value>
-        <comment>Enter a valid UK postcode</comment>
     </data>
     <data name="GlazingTypeTitleString" xml:space="preserve">
         <value>Glazing Type</value>
@@ -3461,49 +3381,38 @@
     </data>
     <data name="HomesOfYourTypeTypicallyHaveOutdoorSpaceThatCouldFitHeatPumpString" xml:space="preserve">
         <value>Homes of your type typically &lt;strong&gt;have some outdoor space&lt;/strong&gt; that could fit a heat pump.</value>
-        <comment>HomesOfYourTypeTypicallyHaveOutdoorSpaceThatCouldFitHeatPumpString</comment>
     </data>
     <data name="HomesOfYourTypeTypicallyDoNotHaveOutdoorSpaceThatCouldFitHeatPumpString" xml:space="preserve">
         <value>Homes of your type typically &lt;strong&gt;do not have any outdoor space&lt;/strong&gt; that could fit a heat pump.</value>
-        <comment>HomesOfYourTypeTypicallyDoNotHaveOutdoorSpaceThatCouldFitHeatPumpString</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltBetween2007And2011String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 2007 and 2011.&lt;/strong&gt;</value>
     </data>
     <data name="EPCSuggestsPropertyBuiltBetween1900And1929String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1900 and 1929.&lt;/strong&gt;</value>
-        <comment>EPCSuggestsPropertyBuiltBetween1900And1929String</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltBetween1930And1949String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1930 and 1949.&lt;/strong&gt;</value>
-        <comment>EPCSuggestsPropertyBuiltBetween1930And1949String</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltBetween1950And1966String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1950 and 1966.&lt;/strong&gt;</value>
-        <comment>EPCSuggestsPropertyBuiltBetween1950And1966String</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltBetween1967And1975String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1967 and 1975.&lt;/strong&gt;</value>
-        <comment>EPCSuggestsPropertyBuiltBetween1967And1975String</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltBetween1976And1982String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1976 and 1982.&lt;/strong&gt;</value>
-        <comment>EPCSuggestsPropertyBuiltBetween1976And1982String</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltBetween1983And1990String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1983 and 1990.&lt;/strong&gt;</value>
-        <comment>EPCSuggestsPropertyBuiltBetween1983And1990String</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltBetween1991And1995String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1991 and 1995.&lt;/strong&gt;</value>
-        <comment>EPCSuggestsPropertyBuiltBetween1991And1995String</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltBetween1996And2002String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 1996 and 2002.&lt;/strong&gt;</value>
-        <comment>EPCSuggestsPropertyBuiltBetween1996And2002String</comment>
     </data>
     <data name="EPCSuggestsPropertyBuiltBetween2003And2006String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 2003 and 2006.&lt;/strong&gt;</value>
-        <comment>EPCSuggestsPropertyBuiltBetween2003And2006String</comment>
     </data>
 </root>
