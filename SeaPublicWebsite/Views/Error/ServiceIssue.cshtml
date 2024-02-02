@@ -1,8 +1,9 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
+@model SeaPublicWebsite.Models.Error.ErrorViewModel
 
 @{
-    ViewBag.Title = @SharedLocalizer["Sorry, there is a problem with the service - Home Energy Retrofit Advice - GOV.UK"].Value;
+    ViewBag.Title = @SharedLocalizer["Sorry, there is a problem with the service"].Value;
 }
 
 <div class="govuk-grid-row">
@@ -11,9 +12,12 @@
         <p class="govuk-body">
             @SharedLocalizer["Try again later."]
         </p>
-        <p class="govuk-body">
-            @SharedLocalizer["We have not saved your answers. When the service is available, you will have to start again."]
-        </p>
+        @if (Model.ShowAnswersNotSavedMessage)
+        {
+            <p class="govuk-body">
+                @SharedLocalizer["We have not saved your answers. When the service is available, you will have to start again."]
+            </p>
+        }
         <p class="govuk-body">
             @SharedLocalizer["GeneralEnergySavingTrustAdviceString", "https://energysavingtrust.org.uk/"].
         </p>

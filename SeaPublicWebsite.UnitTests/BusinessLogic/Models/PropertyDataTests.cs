@@ -22,7 +22,7 @@ public class PropertyDataTests
             HouseType = HouseType.Detached,
             BungalowType = BungalowType.Detached,
             FlatType = FlatType.GroundFloor,
-            YearBuilt = YearBuilt.Pre1930,
+            YearBuilt = YearBuilt.Pre1900,
             WallConstruction = WallConstruction.Cavity,
             CavityWallsInsulated = CavityWallsInsulated.All,
             SolidWallsInsulated = SolidWallsInsulated.All,
@@ -146,7 +146,7 @@ public class PropertyDataTests
         // Arrange
         var propertyData = new PropertyData
         {
-            YearBuilt = YearBuilt.Pre1930
+            YearBuilt = YearBuilt.From1900To1929
         };
         
         // Assert
@@ -159,7 +159,7 @@ public class PropertyDataTests
         // Arrange
         var propertyData = new PropertyData
         {
-            YearBuilt = YearBuilt.From1930To1966
+            YearBuilt = YearBuilt.From1930To1949
         };
         
         // Assert
@@ -185,7 +185,7 @@ public class PropertyDataTests
         // Arrange
         var propertyData = new PropertyData
         {
-            YearBuilt = YearBuilt.From1983To1995
+            YearBuilt = YearBuilt.From1991To1995
         };
         
         // Assert
@@ -198,7 +198,7 @@ public class PropertyDataTests
         // Arrange
         var propertyData = new PropertyData
         {
-            YearBuilt = YearBuilt.From1996To2011
+            YearBuilt = YearBuilt.From1996To2002
         };
         
         // Assert
@@ -224,7 +224,7 @@ public class PropertyDataTests
         // Arrange
         var propertyData = new PropertyData
         {
-            YearBuilt = YearBuilt.From1930To1966
+            YearBuilt = YearBuilt.From1950To1966
         };
         
         // Assert
@@ -237,7 +237,7 @@ public class PropertyDataTests
         // Arrange
         var propertyData = new PropertyData
         {
-            YearBuilt = YearBuilt.From1967To1982
+            YearBuilt = YearBuilt.From1967To1975
         };
         
         // Assert
@@ -263,7 +263,7 @@ public class PropertyDataTests
         // Arrange
         var propertyData = new PropertyData
         {
-            YearBuilt = YearBuilt.From1983To1995
+            YearBuilt = YearBuilt.From1991To1995
         };
         
         // Assert
@@ -276,7 +276,7 @@ public class PropertyDataTests
         // Arrange
         var propertyData = new PropertyData
         {
-            YearBuilt = YearBuilt.From1996To2011
+            YearBuilt = YearBuilt.From1996To2002
         };
         
         // Assert
@@ -333,7 +333,7 @@ public class PropertyDataTests
         // Arrange
         var propertyData = new PropertyData
         {
-            YearBuilt = YearBuilt.From1996To2011
+            YearBuilt = YearBuilt.From2007To2011
         };
         
         // Assert
@@ -372,7 +372,7 @@ public class PropertyDataTests
         // Arrange
         var propertyData = new PropertyData
         {
-            YearBuilt = YearBuilt.From1967To1982
+            YearBuilt = YearBuilt.From1976To1982
         };
         
         // Assert
@@ -385,7 +385,7 @@ public class PropertyDataTests
         // Arrange
         var propertyData = new PropertyData
         {
-            YearBuilt = YearBuilt.From1983To1995
+            YearBuilt = YearBuilt.From1983To1990
         };
         
         // Assert

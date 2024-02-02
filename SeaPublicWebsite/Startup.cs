@@ -13,6 +13,7 @@ using SeaPublicWebsite.BusinessLogic;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 using SeaPublicWebsite.BusinessLogic.Services;
+using SeaPublicWebsite.Config;
 using SeaPublicWebsite.Data;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ErrorHandling;
@@ -52,6 +53,7 @@ namespace SeaPublicWebsite
             services.AddScoped<IDataAccessProvider, DataAccessProvider>();
             services.AddDataProtection().PersistKeysToDbContext<SeaDbContext>();
 
+            ConfigureServiceHealth(services);
             ConfigureEpcApi(services);
             ConfigureBreApi(services);
             ConfigureGovUkNotify(services);
@@ -70,6 +72,12 @@ namespace SeaPublicWebsite
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                 options.ModelMetadataDetailsProviders.Add(new GovUkDataBindingErrorTextProvider());
             });
+        }
+
+        private void ConfigureServiceHealth(IServiceCollection services)
+        {
+            services.Configure<ServiceHealthConfig>(
+                configuration.GetSection(ServiceHealthConfig.ConfigSection));
         }
 
         private void ConfigureGoogleAnalyticsService(IServiceCollection services)

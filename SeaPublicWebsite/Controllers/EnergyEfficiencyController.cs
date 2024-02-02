@@ -11,11 +11,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.BusinessLogic.Services;
+using SeaPublicWebsite.Config;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.GoogleAnalytics;
@@ -28,7 +30,6 @@ using SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 
 namespace SeaPublicWebsite.Controllers
 {
-    using System.Text.Encodings.Web;
     using System.Web;
     
     [Route("energy-efficiency")]
@@ -45,6 +46,7 @@ namespace SeaPublicWebsite.Controllers
         private readonly PostcodesIoApi postcodesIoApi;
         private readonly AnswerService answerService;
         private readonly FullHostnameService fullHostnameService;
+        private readonly ServiceHealthConfig serviceHealthConfig;
         private readonly IStringLocalizer<SharedResources> sharedLocalizer;
         
         public EnergyEfficiencyController(
@@ -59,6 +61,7 @@ namespace SeaPublicWebsite.Controllers
             PostcodesIoApi postcodesIoApi,
             AnswerService answerService,
             FullHostnameService fullHostnameService,
+            IOptions<ServiceHealthConfig> serviceHealthConfig)
             IStringLocalizer<SharedResources> sharedLocalizer)
         {
             this.propertyDataStore = propertyDataStore;
@@ -73,6 +76,7 @@ namespace SeaPublicWebsite.Controllers
             this.answerService = answerService;
             this.fullHostnameService = fullHostnameService;
             this.sharedLocalizer = sharedLocalizer;
+            this.serviceHealthConfig = serviceHealthConfig.Value;
         }
 
         [HttpGet("")]
@@ -94,15 +98,25 @@ namespace SeaPublicWebsite.Controllers
             return Redirect(model.ReturnUrl);
         }
         
+        // This is the route that users are directed to when clicking "Start now" on the external service page.
         [HttpGet("new-or-returning-user")]
         public IActionResult NewOrReturningUser_Get()
         {
+            if (serviceHealthConfig.ActiveServiceIssue)
+            {
+                // If there is an active service issue, which makes it impossible to complete the journey,
+                // then we can immediately stop users to prevent wasting their time inputting answers.
+                // (e.g. BRE API outage on 25/01/2024)
+                return RedirectToAction("ServiceIssue", "Error");
+            }
+
             var viewModel = new NewOrReturningUserViewModel
             {
                 BackLink = GetBackUrl(QuestionFlowStep.NewOrReturningUser)
             };
 
             return View("NewOrReturningUser", viewModel);
+
         }
 
         [HttpPost("new-or-returning-user")]
@@ -280,9 +294,11 @@ namespace SeaPublicWebsite.Controllers
         {
             List<EpcSearchResult> epcSearchResults = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(postcode, number);
             
-            var filteredEpcSearchResults = epcSearchResults.Where(e =>
+            var matchingEpcSearchResults = epcSearchResults.Where(e =>
                 e.Address1.Contains(number, StringComparison.OrdinalIgnoreCase) ||
                 e.Address2.Contains(number, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            var filteredEpcSearchResults = await FilterExpiredEpc(matchingEpcSearchResults);
 
             epcSearchResults = filteredEpcSearchResults.Any() ? filteredEpcSearchResults : epcSearchResults;
 
@@ -1650,6 +1666,36 @@ namespace SeaPublicWebsite.Controllers
                 Controller = controller;
                 Values = values;
             }
+        }
+
+        private async Task<List<EpcSearchResult>> FilterExpiredEpc(List<EpcSearchResult> searchResults)
+        {
+            var expiredEpcIds = await GetDuplicateExpiredEpcIds(searchResults);
+            return searchResults.Where(result => !expiredEpcIds.Contains(result.EpcId)).ToList();
+        }
+
+        private async Task<List<string>> GetDuplicateExpiredEpcIds(IEnumerable<EpcSearchResult> searchResults)
+        {
+            var groupings = searchResults.GroupBy(
+                epcSearchResult => new
+                {
+                    epcSearchResult.Address1, 
+                    epcSearchResult.Address2, 
+                    epcSearchResult.Postcode
+                });
+
+            var duplicateGroupings = groupings.Where(grouping => grouping.Count() > 1);
+
+            var duplicates = duplicateGroupings.SelectMany(grouping => grouping);
+
+            var epcDtoPairTaskList = duplicates.Select(async duplicate => new KeyValuePair<string, EpbEpcAssessmentDto>(duplicate.EpcId, await epcApi.GetEpcDtoForId(duplicate.EpcId)));
+
+            var epcDtoPairArray = await Task.WhenAll(epcDtoPairTaskList);
+
+            return epcDtoPairArray
+                .Where(epcDtoPair => !epcDtoPair.Value.IsLatestAssessmentForAddress)
+                .Select(epcDtoPair => epcDtoPair.Key)
+                .ToList();
         }
     }
 }

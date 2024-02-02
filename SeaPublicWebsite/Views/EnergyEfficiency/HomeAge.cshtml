@@ -54,6 +54,19 @@
                                     HomeAge.From1983To1990 or HomeAge.From1991To1995 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1983And1995String", @Model.Epc.LodgementYear],
                                     HomeAge.From1996To2002 or HomeAge.From2003To2006 or HomeAge.From2007To2011 => @SharedLocalizer["EPCSuggestsPropertyBuiltBetween1996And2011String", @Model.Epc.LodgementYear],
                                     HomeAge.From2012ToPresent => @SharedLocalizer["EPCSuggestsPropertyBuiltOnOrAfter2012String", @Model.Epc.LodgementYear],
+                                    
+                                    HomeAge.Pre1900 => "before 1900.",
+                                    HomeAge.From1900To1929 => "between 1900 and 1929.",
+                                    HomeAge.From1930To1949 => "between 1930 and 1949.",
+                                    HomeAge.From1950To1966 => "between 1950 and 1966.",
+                                    HomeAge.From1967To1975 => "between 1967 and 1975.",
+                                    HomeAge.From1976To1982 => "between 1976 and 1982.",
+                                    HomeAge.From1983To1990 => "between 1983 and 1990.",
+                                    HomeAge.From1991To1995 => "between 1991 and 1995.",
+                                    HomeAge.From1996To2002 => "between 1996 and 2002.",
+                                    HomeAge.From2003To2006 => "between 2003 and 2006.",
+                                    HomeAge.From2007To2011 => "between 2007 and 2011.",
+                                    HomeAge.From2012ToPresent => "on or after 2012.",
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;
@@ -93,7 +106,13 @@
                                }
                                
                             </text>
-                }))
+                },
+                overrideRadioValues: Enum.GetValues<YearBuilt>()
+                    .Except(new[] { YearBuilt.DoNotKnow })
+                    .Where(value => !value.IsDeprecated())
+                    .OrderBy(value => value.MaxYear())
+                    .Append(YearBuilt.DoNotKnow)
+                ))
             @(await Html.GovUkButton(new ButtonViewModel
             {
                 Text = @SharedLocalizer["Continue"].Value,
