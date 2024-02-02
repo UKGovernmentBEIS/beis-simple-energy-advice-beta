@@ -816,12 +816,6 @@
     <data name="The most common type in the UK are air-to-water heat pumps, meaning they transfer heat energy in the air to water that is sent to your radiators or underfloor heating, as well as a hot water cylinder for providing hot water." xml:space="preserve">
         <value>Y math mwyaf cyffredin yn y DU yw pympiau gwres aer-i-ddŵr, sy’n golygu eu bod yn trosglwyddo ynni gwres yn yr aer i ddŵr sy’n cael ei anfon i’ch rheiddiaduron neu system wresogi dan y llawr, yn ogystal â thanc dŵr poeth ar gyfer darparu dŵr poeth.</value>
     </data>
-    <data name="Homes of your type typically have some outdoor space that could fit a heat pump." xml:space="preserve">
-        <value>Fel arfer mae gan gartrefi o’ch math chi rywfaint o le y tu allan lle gellir gosod pwmp gwres.</value>
-    </data>
-    <data name="Homes of your type typically do not have any outdoor space that could fit a heat pump." xml:space="preserve">
-        <value>Fel arfer does gan gartrefi o’ch math chi ddim lle y tu allan lle gellir gosod pwmp gwres.</value>
-    </data>
     <data name="Yes" xml:space="preserve">
         <value>Oes</value>
     </data>
@@ -1052,9 +1046,6 @@
     </data>
     <data name="Is your loft fully insulated?" xml:space="preserve">
         <value>Ydy eich atig wedi'i inswleiddio yn llwyr?</value>
-    </data>
-    <data name="Glazing type" xml:space="preserve">
-        <value>Math o ffenestri</value>
     </data>
     <data name="Outdoor space for heat pump " xml:space="preserve">
         <value>Lle y tu allan ar gyfer pwmp gwres </value>
@@ -2469,9 +2460,6 @@
     <data name="Floor Insulated" xml:space="preserve">
         <value>Llawr wedi’i Inswleiddio</value>
     </data>
-    <data name="Glazing Type" xml:space="preserve">
-        <value>Math o Ffenestri</value>
-    </data>
     <data name="Heating pattern" xml:space="preserve">
         <value>Patrwm gwresogi</value>
     </data>
@@ -3166,5 +3154,20 @@
     <data name="Enter a valid UK postcode" xml:space="preserve">
         <value />
         <comment>Enter a valid UK postcode</comment>
+    </data>
+    <data name="GlazingTypeAnswerSummaryString" xml:space="preserve">
+        <value>Math o ffenestri</value>
+    </data>
+    <data name="GlazingTypeTitleString" xml:space="preserve">
+        <value>Math o Ffenestri</value>
+    </data>
+    <data name="GlazingTypeVisuallyHiddenString" xml:space="preserve">
+        <value>math o ffenestri</value>
+    </data>
+    <data name="HomesOfYourTypeTypicallyHaveOutdoorSpaceThatCouldFitHeatPumpString" xml:space="preserve">
+        <value>Fel arfer mae gan gartrefi o’ch math chi &lt;strong&gt;rywfaint o le y tu allan&lt;/strong&gt; lle gellir gosod pwmp gwres.</value>
+    </data>
+    <data name="HomesOfYourTypeTypicallyDoNotHaveOutdoorSpaceThatCouldFitHeatPumpString" xml:space="preserve">
+        <value>Fel arfer does gan gartrefi o’ch math chi &lt;strong&gt;ddim lle y tu allan&lt;/strong&gt; lle gellir gosod pwmp gwres.</value>
     </data>
 </root>

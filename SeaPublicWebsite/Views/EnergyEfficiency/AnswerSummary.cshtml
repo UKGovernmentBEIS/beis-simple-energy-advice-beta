@@ -297,7 +297,7 @@
         Key = new() 
         {
             Classes = "govuk-!-width-one-quarter",
-            Text = SharedLocalizer["Glazing type"].Value
+            Text = SharedLocalizer["GlazingTypeAnswerSummaryString"].Value
         },
         Value = new()
         {
@@ -313,7 +313,7 @@
                 {
                     Href = Url.Action(nameof(EnergyEfficiencyController.GlazingType_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.GlazingType}),
                     Text = SharedLocalizer["Change"].Value,
-                    VisuallyHiddenText = SharedLocalizer["glazing type"].Value
+                    VisuallyHiddenText = SharedLocalizer["GlazingTypeVisuallyHiddenString"].Value
                 }
             }
         }

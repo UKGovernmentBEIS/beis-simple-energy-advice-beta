@@ -38,11 +38,7 @@
                      </text>;
                 Func<object, object> blueBannerHint = 
                     @<p class="govuk-body">
-                        @SharedLocalizer["Homes of your type typically"]
-                        <strong>
-                            @(Model.HintHasOutdoorSpace ? @SharedLocalizer["have some outdoor space"] : @SharedLocalizer["do not have any outdoor space"])
-                            @SharedLocalizer["that could fit a heat pump."]
-                        </strong>
+                        @(Model.HintHasOutdoorSpace ? @SharedLocalizer["HomesOfYourTypeTypicallyHaveOutdoorSpaceThatCouldFitHeatPumpString"] : @SharedLocalizer["HomesOfYourTypeTypicallyDoNotHaveOutdoorSpaceThatCouldFitHeatPumpString"])
                     </p>;
             }
             
