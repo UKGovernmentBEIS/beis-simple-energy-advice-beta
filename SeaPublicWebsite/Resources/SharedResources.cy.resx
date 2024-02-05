@@ -3403,4 +3403,13 @@
     <data name="InfoOnHelpFromBoilerUpgradeSchemeForHeatPumpsString" xml:space="preserve">
         <value>Mae pympiau gwres yn addas ar gyfer llawer o gartrefi, byddan nhw’n lleihau’ch allyriadau carbon ac mae grantiau ar gael drwy'r &lt;a class="govuk-link" href="{0}"&gt;Cynllun Uwchraddio Bwyleri&lt;/a&gt; ar gyfer pympiau gwres o’r aer a phympiau gwres o'r ddaear i leihau'r gost ymlaen llaw.</value>
     </data>
+    <data name="EPCSuggestsPropertyBuiltBefore1900String" xml:space="preserve">
+        <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod eich eiddo wedi’i adeiladu &lt;strong&gt;cyn 1900.&lt;/strong&gt;</value>
+    </data>
+    <data name="EPCSuggestsPropertyBuiltOnOrAfter2012String" xml:space="preserve">
+        <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod eich eiddo wedi’i adeiladu &lt;strong&gt;ar neu ar ôl 2012.&lt;/strong&gt;</value>
+    </data>
+    <data name="CavityWallInsulationExpectedToLastString" xml:space="preserve">
+        <value>Disgwylir i inswleiddiad waliau ceudod bara &lt;b&gt;tua {0} o flynyddoedd&lt;/b&gt;</value>
+    </data>
 </root>
