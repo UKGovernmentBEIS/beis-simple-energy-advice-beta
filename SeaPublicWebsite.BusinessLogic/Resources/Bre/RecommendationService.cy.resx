@@ -78,4 +78,10 @@
     <data name="SummaryInsulateSolidWalls" xml:space="preserve">
         <value>Inswleiddio'ch waliau solet (waliau brics oedran A-D)</value>
     </data>
+    <data name="SummaryReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing" xml:space="preserve">
+        <value>Gosod gwydr dwbl neu wydr triphlyg newydd yn lle hen ffenestri gwydr sengl</value>
+    </data>
+    <data name="SummaryInsulateYourLoft" xml:space="preserve">
+        <value>Ychwanegu inswleiddiad atig i gyrraedd y lefel a argymhellir, sef 300mm</value>
+    </data>
 </root>

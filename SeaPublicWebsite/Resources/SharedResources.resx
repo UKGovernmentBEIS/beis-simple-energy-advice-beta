@@ -677,7 +677,7 @@
         <value>If there are small, filled 22 millimetre holes at regular intervals around the outside walls, it’s a sign they may have been insulated.</value>
     </data>
     <data name="HomesOfYourTypeTypicallyHaveUninsulatedCavityWallsString" xml:space="preserve">
-        <value>Homes of your type typically have &lt;/strong&gt;uninsulated cavity walls&lt;/strong&gt;.</value>
+        <value>Homes of your type typically have &lt;strong&gt;uninsulated cavity walls&lt;/strong&gt;.</value>
     </data>
     <data name="EPCSuggestsNoCavityWallsInsulatedString" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests &lt;strong&gt;your cavity walls are not insulated.&lt;/strong&gt;</value>
@@ -830,7 +830,7 @@
         <value>Homes of your type typically &lt;strong&gt;have a loft.&lt;/strong&gt;</value>
     </data>
     <data name="HomesOfYourTypeTypicallyDoNotHaveALoftString" xml:space="preserve">
-        <value>Homes of your type typically &lt;/strong&gt;do not have a loft.&lt;/strong&gt;</value>
+        <value>Homes of your type typically &lt;strong&gt;do not have a loft.&lt;/strong&gt;</value>
     </data>
     <data name="Yes, I have a loft that hasn't been converted into a room" xml:space="preserve">
         <value>Yes, I have a loft that hasn't been converted into a room</value>
@@ -3414,5 +3414,21 @@
     </data>
     <data name="EPCSuggestsPropertyBuiltBetween2003And2006String" xml:space="preserve">
         <value>Your {0} Energy Performance Certificate suggests your property was built &lt;strong&gt;between 2003 and 2006.&lt;/strong&gt;</value>
+    </data>
+    <data name="Saves your language preference" xml:space="preserve">
+        <value>Saves your language preference</value>
+        <comment>Saves your language preference</comment>
+    </data>
+    <data name="We’ll set a cookie that will tell us your preferred language (English or Welsh)." xml:space="preserve">
+        <value>We’ll set a cookie that will tell us your preferred language (English or Welsh).</value>
+        <comment>We’ll set a cookie that will tell us your preferred language (English or Welsh).</comment>
+    </data>
+    <data name="Language" xml:space="preserve">
+        <value>Language</value>
+        <comment>Language</comment>
+    </data>
+    <data name="remember your language" xml:space="preserve">
+        <value>remember your language</value>
+        <comment>remember your language</comment>
     </data>
 </root>
