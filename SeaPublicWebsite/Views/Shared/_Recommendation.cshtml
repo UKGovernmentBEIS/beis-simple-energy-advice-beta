@@ -9,7 +9,7 @@
     @SharedLocalizer["RecommendationXofYString", Model.RecommendationIndex + 1, Model.PropertyRecommendations.Count]
 </span>
 <h1 class="govuk-heading-l">
-    @RecommendationServiceText.ResourceManager.GetString(Model.GetCurrentPropertyRecommendation().Title)
+    @(RecommendationServiceText.ResourceManager.GetString(Model.GetCurrentPropertyRecommendation().Title) ?? Model.GetCurrentPropertyRecommendation().Title)
 </h1>
 
 @await RenderSectionAsync("RecommendationBody", true)

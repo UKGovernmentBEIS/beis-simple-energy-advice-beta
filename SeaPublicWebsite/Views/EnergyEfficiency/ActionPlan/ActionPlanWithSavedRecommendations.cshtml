@@ -66,10 +66,10 @@
                            Classes = "govuk-!-padding-top-4",
                            Html = @<text>
                                       <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
-                                          @(RecommendationServiceText.ResourceManager.GetString(recommendation.Title))
+                                          @(RecommendationServiceText.ResourceManager.GetString(recommendation.Title) ?? recommendation.Title)
                                       </p>
                                       <p class="govuk-body-s govuk-!-margin-bottom-0">
-                                          @(RecommendationServiceText.ResourceManager.GetString(recommendation.Summary))
+                                          @(RecommendationServiceText.ResourceManager.GetString(recommendation.Summary) ?? recommendation.Summary)
                                       </p>
                                       <p>
                                           @SharedLocalizer["Typical savings per year"]: @Model.GetSavingText(recommendation)
@@ -118,10 +118,10 @@
                            Classes = "govuk-!-padding-top-4 sea-saved-recommendations-table-headers",
                            Html = @<text>
                                       <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
-                                          @RecommendationServiceText.ResourceManager.GetString(recommendation.Title)
+                                          @(RecommendationServiceText.ResourceManager.GetString(recommendation.Title) ?? recommendation.Title)
                                       </p>
                                       <p class="govuk-body-s govuk-!-margin-bottom-0">
-                                          @RecommendationServiceText.ResourceManager.GetString(recommendation.Summary)
+                                          @(RecommendationServiceText.ResourceManager.GetString(recommendation.Summary) ?? recommendation.Summary)
                                       </p>
                                    </text>
                        },

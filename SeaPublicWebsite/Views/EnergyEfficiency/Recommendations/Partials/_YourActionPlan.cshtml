@@ -16,7 +16,7 @@
             @foreach (PropertyRecommendation propertyRecommendation in Model.GetSavedRecommendations())
             {
                 <li class="govuk-body-s">
-                    @(RecommendationServiceText.ResourceManager.GetString(propertyRecommendation.Title))
+                    @(RecommendationServiceText.ResourceManager.GetString(propertyRecommendation.Title) ?? propertyRecommendation.Title)
                 </li>
             }
         </ul>
