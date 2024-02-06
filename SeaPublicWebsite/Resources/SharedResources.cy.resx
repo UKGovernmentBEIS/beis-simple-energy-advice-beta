@@ -174,32 +174,11 @@
     <data name="Other services that might be helpful to you" xml:space="preserve">
         <value>Gwasanaethau eraill a allai fod o gymorth i chi</value>
     </data>
-    <data name="Sorry, this service isn't for you" xml:space="preserve">
-        <value>Yn anffodus dydy’r gwasanaeth hwn ddim ar eich cyfer chi</value>
-    </data>
-    <data name="This service only provides advice for people who own their own home in England and Wales." xml:space="preserve">
-        <value>Dim ond i bobl sy’n berchen ar eu cartrefi eu hunain yng Nghymru a Lloegr y mae’r gwasanaeth hwn yn rhoi cyngor.</value>
-    </data>
-    <data name="GeneralEnergySavingTrustAdviceString" xml:space="preserve">
-        <value>I gael cyngor cyffredinol ar effeithlonrwydd ynni ac i ddod o hyd i ffyrdd o leihau eich bil ynni, ewch i wefan yr Ymddiriedolaeth Arbed Ynni</value>
-    </data>
-    <data name="Other services that might be helpful to you" xml:space="preserve">
-        <value>Gwasanaethau eraill a allai fod o gymorth i chi</value>
-    </data>
-    <data name="Sorry, this service isn't for you" xml:space="preserve">
-        <value>Yn anffodus dydy’r gwasanaeth hwn ddim ar eich cyfer chi</value>
-    </data>
-    <data name="This service only provides advice for people who own their own home in England and Wales." xml:space="preserve">
-        <value>Dim ond i bobl sy’n berchen ar eu cartrefi eu hunain yng Nghymru a Lloegr y mae’r gwasanaeth hwn yn rhoi cyngor.</value>
-    </data>
     <data name="GeneralEnergySavingTrustAdviceString" xml:space="preserve">
         <value>I gael cyngor cyffredinol ar effeithlonrwydd ynni ac i ddod o hyd i ffyrdd o leihau eich bil ynni, ewch i wefan yr Ymddiriedolaeth Arbed Ynni</value>
     </data>
     <data name="Do you own your property?" xml:space="preserve">
         <value>Ydych chi'n berchen ar eich eiddo?</value>
-    </data>
-    <data name="Why do we need to know this" xml:space="preserve">
-        <value>Pam fod arnom angen cael gwybod hyn</value>
     </data>
     <data name="This service only provides advice to people who own their home." xml:space="preserve">
         <value>Dim ond i bobl sy’n berchen ar eu cartrefi y mae’r gwasanaeth hwn yn rhoi cyngor.</value>
@@ -261,9 +240,6 @@
     <data name="e.g. AB12 3CD" xml:space="preserve">
         <value>e.e. AB12 3CD</value>
     </data>
-    <data name="Continue" xml:space="preserve">
-        <value>Bwrw ymlaen</value>
-    </data>
     <data name="Cancel and continue without an EPC" xml:space="preserve">
         <value>Canslo a bwrw ymlaen heb EPC</value>
     </data>
@@ -275,9 +251,6 @@
     </data>
     <data name="You can continue without the Energy Performance Certificate. We will need to ask you some questions to work out which home improvements are most likely to be suitable for your home. There will be guidance to support you along the way." xml:space="preserve">
         <value>Gallwch fwrw ymlaen heb y Dystysgrif Perfformiad Ynni. Bydd angen i ni ofyn ychydig o gwestiynau i chi er mwyn gweld pa welliannau sydd fwyaf tebygol o fod yn addas ar gyfer eich cartref. Bydd arweiniad i’ch helpu ar hyd y daith.</value>
-    </data>
-    <data name="Find your EPC" xml:space="preserve">
-        <value>Dod o hyd i’ch Tystysgrif Perfformiad Ynni</value>
     </data>
     <data name="We found an Energy Performance Certificate that might be yours" xml:space="preserve">
         <value>Rydym wedi dod o hyd i Dystysgrif Perfformiad Ynni a allai fod yn eich un chi</value>
@@ -294,14 +267,8 @@
     <data name="Is this your address?" xml:space="preserve">
         <value>Ai eich cyfeiriad chi yw hwn?</value>
     </data>
-    <data name="Yes" xml:space="preserve">
+    <data name="YesThisIsMyAddressString" xml:space="preserve">
         <value>Ie</value>
-    </data>
-    <data name="No" xml:space="preserve">
-        <value>Na</value>
-    </data>
-    <data name="Find your EPC" xml:space="preserve">
-        <value>Dod o hyd i’ch Tystysgrif Perfformiad Ynni</value>
     </data>
     <data name="We found multiple Energy Performance Certificates that might be yours" xml:space="preserve">
         <value>Rydym wedi dod o hyd i fwy nag un Dystysgrif Perfformiad Ynni a allai fod yn eich un chi</value>
@@ -333,17 +300,11 @@
     <data name="Is this information correct?" xml:space="preserve">
         <value>Ydy’r wybodaeth hon yn gywir?</value>
     </data>
-    <data name="Yes" xml:space="preserve">
+    <data name="YesThisInformationIsCorrectString" xml:space="preserve">
         <value>Ydy</value>
-    </data>
-    <data name="No" xml:space="preserve">
-        <value>Nac ydy</value>
     </data>
     <data name="What kind of property do you have?" xml:space="preserve">
         <value>Pa fath o eiddo sydd gennych chi?</value>
-    </data>
-    <data name="Why do we need to know this?" xml:space="preserve">
-        <value>Pam fod arnom angen cael gwybod hyn?</value>
     </data>
     <data name="Energy use varies between different buildings, particularly for heating." xml:space="preserve">
         <value>Mae defnydd ynni yn amrywio rhwng gwahanol adeiladau, yn enwedig o ran gwresogi.</value>
@@ -360,20 +321,8 @@
     <data name="What kind of house do you have?" xml:space="preserve">
         <value>Pa fath o dŷ sydd gennych chi?</value>
     </data>
-    <data name="Why do we need to know this?" xml:space="preserve">
-        <value>Pam fod arnom angen cael gwybod hyn?</value>
-    </data>
-    <data name="Energy use varies between different buildings, particularly for heating." xml:space="preserve">
-        <value>Mae defnydd ynni yn amrywio rhwng gwahanol adeiladau, yn enwedig o ran gwresogi.</value>
-    </data>
-    <data name="Some home improvements are only possible or appropriate for certain buildings." xml:space="preserve">
-        <value>Dim ond ar gyfer rhai adeiladau y mae rhai gwelliannau i’r cartref yn bosibl neu’n briodol.</value>
-    </data>
-    <data name="Detached" xml:space="preserve">
-        <value>Tŷ sengl</value>
-    </data>
     <data name="Does not share any of its walls with another house or building" xml:space="preserve">
-        <value>Nid yw’n rhannu unrhyw un o’i waliau â th? neu adeilad arall</value>
+        <value>Nid yw’n rhannu unrhyw un o’i waliau â thŷ neu adeilad arall</value>
     </data>
     <data name="Semi-detached" xml:space="preserve">
         <value>Tŷ pâr</value>
@@ -396,50 +345,8 @@
     <data name="What kind of bungalow do you have?" xml:space="preserve">
         <value>Pa fath o fyngalo sydd gennych chi?</value>
     </data>
-    <data name="Why do we need to know this?" xml:space="preserve">
-        <value>Pam fod arnom angen cael gwybod hyn?</value>
-    </data>
-    <data name="Energy use varies between different buildings, particularly for heating." xml:space="preserve">
-        <value>Mae defnydd ynni yn amrywio rhwng gwahanol adeiladau, yn enwedig o ran gwresogi.</value>
-    </data>
-    <data name="Some home improvements are only possible or appropriate for certain buildings." xml:space="preserve">
-        <value>Dim ond ar gyfer rhai adeiladau y mae rhai gwelliannau i’r cartref yn bosibl neu’n briodol.</value>
-    </data>
-    <data name="Detached" xml:space="preserve">
-        <value>Byngalo sengl</value>
-    </data>
-    <data name="Does not share any of its walls with another house or building" xml:space="preserve">
-        <value>Nid yw’n rhannu unrhyw un o’i waliau â th? neu adeilad arall</value>
-    </data>
-    <data name="Semi-detached" xml:space="preserve">
-        <value>Byngalo pâr</value>
-    </data>
-    <data name="Is attached to one other house or building" xml:space="preserve">
-        <value>Mae’n sownd yn un tŷ neu adeilad arall</value>
-    </data>
-    <data name="Terraced" xml:space="preserve">
-        <value>Byngalo Teras</value>
-    </data>
-    <data name="Sits in the middle with a house or building on each side" xml:space="preserve">
-        <value>Mae’n eistedd yn y canol gyda th? neu adeilad o boptu</value>
-    </data>
-    <data name="End terrace" xml:space="preserve">
-        <value>Pen teras</value>
-    </data>
-    <data name="Sits at the end of a row of similar houses with one house attached to it" xml:space="preserve">
-        <value>Mae’n eistedd ar ben rhes o dai tebyg gydag un tŷ yn sownd ynddo</value>
-    </data>
     <data name="What kind of flat do you have?" xml:space="preserve">
         <value>Pa fath o fflat sydd gennych chi?</value>
-    </data>
-    <data name="Why do we need to know this?" xml:space="preserve">
-        <value>Pam fod arnom angen cael gwybod hyn?</value>
-    </data>
-    <data name="Energy use varies between different buildings, particularly for heating." xml:space="preserve">
-        <value>Mae defnydd ynni yn amrywio rhwng gwahanol adeiladau, yn enwedig o ran gwresogi.</value>
-    </data>
-    <data name="Some home improvements are only possible or appropriate for certain buildings." xml:space="preserve">
-        <value>Dim ond ar gyfer rhai adeiladau y mae rhai gwelliannau i’r cartref yn bosibl neu’n briodol.</value>
     </data>
     <data name="Top floor" xml:space="preserve">
         <value>Llawr uchaf</value>
@@ -500,9 +407,6 @@
     </data>
     <data name="I don't know " xml:space="preserve">
         <value>Ddim yn gwybod </value>
-    </data>
-    <data name="Change" xml:space="preserve">
-        <value>Newid</value>
     </data>
     <data name="Ground floor apartment, flat or maisonette" xml:space="preserve">
         <value>Rhandy, fflat neu fflat deulawr ar y llawr gwaelod</value>
@@ -579,17 +483,11 @@
     <data name="Other wall types could include cob walls, timber framed, system built, steel framed or other non-traditional build types" xml:space="preserve">
         <value>Gallai mathau eraill o waliau gynnwys waliau clom, ffrâm bren, system barod, ffrâm ddur neu fathau eraill anhraddodiadol</value>
     </data>
-    <data name="I don't know" xml:space="preserve">
-        <value>Ddim yn gwybod</value>
-    </data>
     <data name="Are your solid walls insulated?" xml:space="preserve">
         <value>Ydy eich waliau solet wedi’u hinsiwleiddio?</value>
     </data>
     <data name="Solid wall insulation may be installed internally, inside your home, or externally, on the outside walls." xml:space="preserve">
         <value>Mae modd gosod deunydd inswleiddio waliau solet yn fewnol, y tu mewn i’ch cartref, neu’n allanol, ar y waliau allanol.</value>
-    </data>
-    <data name="Help me answer this question" xml:space="preserve">
-        <value>Helpwch fi i ateb y cwestiwn hwn</value>
     </data>
     <data name="Solid walls are more common in pre-1930 buildings and these were typically built without insulation." xml:space="preserve">
         <value>Mae waliau solet yn fwy cyffredin mewn adeiladau cyn-1930 ac roedd y rhain fel arfer yn cael eu hadeiladu heb ddeunydd inswleiddio.</value>
@@ -606,9 +504,6 @@
     <data name="No, they are not insulated" xml:space="preserve">
         <value>Na, dydyn nhw ddim wedi’u hinswleiddio</value>
     </data>
-    <data name="I don't know" xml:space="preserve">
-        <value>Ddim yn gwybod</value>
-    </data>
     <data name="Are your cavity walls insulated?" xml:space="preserve">
         <value>Ydy eich waliau ceudod wedi’u hinswleiddio?</value>
     </data>
@@ -618,26 +513,11 @@
     <data name="Cavity walls built after 1991 were typically built with insulating material between the outer and inner walls." xml:space="preserve">
         <value>Roedd waliau ceudod a adeiladwyd ar ôl 1991 fel arfer yn cynnwys deunydd inswleiddio rhwng y waliau mewnol ac allanol.</value>
     </data>
-    <data name="Help me answer this question" xml:space="preserve">
-        <value>Helpwch fi i ateb y cwestiwn hwn</value>
-    </data>
     <data name="Many cavity walls can be insulated by injecting insulation material into the cavity from the outside. A specialist company will drill holes in the outside walls, inject insulation through the holes and then seal them with cement." xml:space="preserve">
         <value>Mae modd inswleiddio llawer o waliau ceudod drwy chwistrellu deunydd inswleiddio i mewn i’r ceudod o’r tu allan. Bydd cwmni arbenigol yn drilio tyllau yn y waliau allanol, yn chwistrellu deunydd inswleiddio drwy’r tyllau ac yna’n eu selio â sment.</value>
     </data>
     <data name="If there are small, filled 22 millimetre holes at regular intervals around the outside walls, it’s a sign they may have been insulated." xml:space="preserve">
         <value>Os oes tyllau bach 22 milimetr wedi’u llenwi i’w gweld bob hyn a hyn yn y waliau allanol, mae’n arwydd eu bod o bosibl wedi cael eu hinswleiddio.</value>
-    </data>
-    <data name="Yes, they are all insulated" xml:space="preserve">
-        <value>Ydy, maen nhw i gyd wedi’u hinswleiddio</value>
-    </data>
-    <data name="Some are insulated and some not" xml:space="preserve">
-        <value>Mae rhai ohonynt wedi’u hinswleiddio a dydy rhai ddim</value>
-    </data>
-    <data name="No, they are not insulated" xml:space="preserve">
-        <value>Na, dydyn nhw ddim wedi’u hinswleiddio</value>
-    </data>
-    <data name="I don't know" xml:space="preserve">
-        <value>Ddim yn gwybod</value>
     </data>
     <data name="How is your ground floor built?" xml:space="preserve">
         <value>Sut adeiladwyd eich llawr gwaelod?</value>
@@ -651,26 +531,11 @@
     <data name="You may have both types, for example, if there’s a modern extension to a pre-1950 property." xml:space="preserve">
         <value>Efallai fod gennych y ddau fath, er enghraifft, os oes estyniad modern ar eiddo cyn-1950.</value>
     </data>
-    <data name="Help me answer this question" xml:space="preserve">
-        <value>Helpwch fi i ateb y cwestiwn hwn</value>
-    </data>
     <data name="If you don’t have access to the space underneath your house, you will need to lift a corner of the carpet and underlay to have a look." xml:space="preserve">
         <value>Os nad oes modd mynd i’r gofod o dan eich tŷ, bydd angen i chi godi cornel o’r carped a’r isgarped i gael golwg.</value>
     </data>
-    <data name="Suspended timber" xml:space="preserve">
-        <value>Pren crog</value>
-    </data>
-    <data name="Solid concrete" xml:space="preserve">
-        <value>Concrid solet</value>
-    </data>
-    <data name="I don’t see my option listed" xml:space="preserve">
-        <value>Dydw i ddim yn gweld fy opsiwn ar y rhestr</value>
-    </data>
     <data name="Other ground floor construction types include suspended concrete, flagstones or non-traditional build types." xml:space="preserve">
         <value>Mae mathau eraill o loriau gwaelod yn cynnwys concrid crog, cerrig llorio neu fathau anhraddodiadol.</value>
-    </data>
-    <data name="I don't know" xml:space="preserve">
-        <value>Ddim yn gwybod</value>
     </data>
     <data name="Is your ground floor insulated?" xml:space="preserve">
         <value>Ydy eich llawr gwaelod wedi'i inswleiddio?</value>
@@ -678,44 +543,20 @@
     <data name="Properties built before 1996 typically have uninsulated floors, unless you or a previous owner has installed floor insulation." xml:space="preserve">
         <value>Fel arfer dydy lloriau mewn eiddo a adeiladwyd cyn 1996 ddim wedi’u hinswleiddio, oni bai eich bod chi neu berchennog blaenorol wedi ychwanegu deunydd inswleiddio.</value>
     </data>
-    <data name="Help me answer this question" xml:space="preserve">
-        <value>Helpwch fi i ateb y cwestiwn hwn</value>
-    </data>
     <data name="A solid floor may be insulated by laying insulation on top or underneath a new floor. If you’ve had to replace the ground floor, it’s likely insulated in order to comply with Building Regulations." xml:space="preserve">
         <value>Mae modd inswleiddio llawr solet drwy osod deunydd inswleiddio ar ben neu o dan lawr newydd. Os oedd yn rhaid i chi adnewyddu’r llawr gwaelod, mae’n debygol ei fod wedi’i inswleiddio i gydymffurfio â’r Rheoliadau Adeiladu.</value>
     </data>
     <data name="Suspended timber floors were rarely built with insulation, so this would need to have been installed after." xml:space="preserve">
         <value>Anaml iawn y byddai lloriau pren crog yn cael eu hinswleiddio, felly byddai angen iddo fod wedi’i osod ar ôl hynny.</value>
     </data>
-    <data name="Yes, my floor is insulated" xml:space="preserve">
-        <value>Ydy, mae fy llawr wedi’i inswleiddio</value>
-    </data>
-    <data name="No, my floor is not insulated" xml:space="preserve">
-        <value>Na, dydy fy llawr ddim wedi’i inswleiddio</value>
-    </data>
-    <data name="I don't know" xml:space="preserve">
-        <value>Ddim yn gwybod</value>
-    </data>
     <data name="Is any part of your roof flat?" xml:space="preserve">
         <value>Oes unrhyw ran o’ch to yn fflat?</value>
-    </data>
-    <data name="Help me answer this question" xml:space="preserve">
-        <value>Helpwch fi i ateb y cwestiwn hwn</value>
     </data>
     <data name="Most roofs are pitched, meaning they are built at an angle or with a slope." xml:space="preserve">
         <value>Mae’r rhan fwyaf o doeau ar oleddf, sy’n golygu eu bod wedi’u hadeiladu ar ongl neu ar lethr.</value>
     </data>
     <data name="A flat roof is completely, or almost, level, with no obvious slope or angle." xml:space="preserve">
         <value>Mae to fflat yn hollol wastad, neu bron yn wastad, heb lethr nac ongl amlwg.</value>
-    </data>
-    <data name="Yes, I only have a flat roof or roofs" xml:space="preserve">
-        <value>Oes, dim ond to neu doeon fflat sydd gen i</value>
-    </data>
-    <data name="Yes, some of my roof is flat and some of my roof is pitched" xml:space="preserve">
-        <value>Oes, mae rhywfaint o’r to yn fflat a rhywfaint o’r to ar oleddf</value>
-    </data>
-    <data name="No, I only have a pitched roof or roofs" xml:space="preserve">
-        <value>Nag oes, dim ond to neu doeon ar oleddf sydd gen i</value>
     </data>
     <data name="Help me decide if I have a loft" xml:space="preserve">
         <value>Helpwch fi i benderfynu a oes gennyf atig</value>
@@ -726,29 +567,14 @@
     <data name="If all the space under your pitched roof, or nearly all the space, is used as living space with finished walls and ceilings then the loft has been converted into a room." xml:space="preserve">
         <value>Os yw’r gofod i gyd dan eich to ar oleddf, neu'r rhan fwyaf o’r gofod hwnnw, yn cael ei ddefnyddio fel lle byw gyda waliau a nenfydau gorffenedig, yna mae’r atig wedi’i droi’n ystafell.</value>
     </data>
-    <data name="Yes, I have a loft that hasn't been converted into a room" xml:space="preserve">
-        <value>Oes, mae gennyf atig sydd heb ei droi’n ystafell</value>
-    </data>
-    <data name="No, I don’t have a loft or my loft has been converted into a room" xml:space="preserve">
-        <value>Na, does gennyf i ddim atig neu mae fy atig wedi'i droi’n ystafell</value>
-    </data>
     <data name="Is there access to your loft?" xml:space="preserve">
         <value>A oes modd mynd i’ch atig?</value>
     </data>
     <data name="You may have a loft hatch, access ladder or stairs that could allow an insulation installer to get into the loft space." xml:space="preserve">
         <value>Efallai fod gennych ddrws i’r atig, ysgol neu risiau mynediad a allai ganiatáu i'r sawl sy'n gosod y deunydd inswleiddio fynd i mewn i’r atig.</value>
     </data>
-    <data name="Yes, there is access to my loft" xml:space="preserve">
-        <value>Oes, mae modd mynd i’m hatig</value>
-    </data>
-    <data name="No, there is no access to my loft" xml:space="preserve">
-        <value>Na, does dim modd mynd i’m hatig</value>
-    </data>
     <data name="Is your loft fully insulated?" xml:space="preserve">
         <value>Ydy eich atig wedi'i inswleiddio yn llwyr?</value>
-    </data>
-    <data name="Help me answer this question" xml:space="preserve">
-        <value>Helpwch fi i ateb y cwestiwn hwn</value>
     </data>
     <data name="If your home was built after 2002, or you have installed loft insulation since 2002, it is likely that it is fully insulated." xml:space="preserve">
         <value>Os cafodd eich cartref ei adeiladu ar ôl 2002, neu os ydych chi wedi inswleiddio’r atig ers 2002, mae’n debygol ei fod wedi’i inswleiddio’n llwyr.</value>
@@ -759,20 +585,8 @@
     <data name="Your 2013 Energy Performance Certificate suggests your loft is not fully insulated as it has less than 200mm of insulation." xml:space="preserve">
         <value>Mae eich Tystysgrif Perfformiad Ynni 2013 yn awgrymu nad ydy eich atig wedi’i inswleiddio’n llwyr a bod gennych lai na 200mm o ddeunydd inswleiddio.</value>
     </data>
-    <data name="Yes, there is at least 200mm of insulation in my loft" xml:space="preserve">
-        <value>Ydy, mae o leiaf 200mm o ddeunydd inswleiddio yn fy atig</value>
-    </data>
-    <data name="No, there is less than 200mm of insulation in my loft" xml:space="preserve">
-        <value>Nac ydy, mae llai na 200mm o ddeunydd inswleiddio yn fy atig</value>
-    </data>
-    <data name="I don't know" xml:space="preserve">
-        <value>Ddim yn gwybod</value>
-    </data>
     <data name="Are any of your windows single glazed?" xml:space="preserve">
         <value>A oes unrhyw un o’ch ffenestri yn rhai gwydr sengl?</value>
-    </data>
-    <data name="Help me answer this question" xml:space="preserve">
-        <value>Helpwch fi i ateb y cwestiwn hwn</value>
     </data>
     <data name="A single glazed window has a single pane of glass." xml:space="preserve">
         <value>Un cwarel gwydr sydd mewn ffenestr gwydr sengl.</value>
@@ -782,18 +596,6 @@
     </data>
     <data name="Secondary glazing is when an additional independent window is fitted inside, behind the main window. This is commonly used in conservation areas to improve the energy efficiency of the window without replacing it." xml:space="preserve">
         <value>Gwydr eilaidd yw pan fydd ffenestr annibynnol ychwanegol yn cael ei gosod y tu mewn, y tu ôl i’r brif ffenestr. Gwneir hyn yn aml mewn ardaloedd cadwraeth i wella effeithlonrwydd ynni’r ffenestr heb ei newid.</value>
-    </data>
-    <data name="Yes, all the windows are single glazed" xml:space="preserve">
-        <value>Oes, mae pob un o’r ffenestri yn rhai gwydr sengl</value>
-    </data>
-    <data name="Yes, at least one window is single glazed" xml:space="preserve">
-        <value>Oes, mae o leiaf un o’r ffenestri yn un gwydr sengl</value>
-    </data>
-    <data name="No, all my windows are double, triple or secondary glazed" xml:space="preserve">
-        <value>Nag oes, mae pob un o’m ffenestri yn rhai gwydr dwbl, triphlyg neu eilaidd</value>
-    </data>
-    <data name="I don't know" xml:space="preserve">
-        <value>Ddim yn gwybod</value>
     </data>
     <data name="Do you have anywhere outside your home where you could fit a heat pump?" xml:space="preserve">
         <value>Oes gennych chi unrhyw le y tu allan i’ch cartref lle gallech chi osod pwmp gwres?</value>
@@ -827,9 +629,6 @@
     </data>
     <data name="What is your main heating system?" xml:space="preserve">
         <value>Beth yw eich prif system wresogi?</value>
-    </data>
-    <data name="Help me answer this question" xml:space="preserve">
-        <value>Helpwch fi i ateb y cwestiwn hwn</value>
     </data>
     <data name="Most people in England and Wales heat their home with a gas boiler." xml:space="preserve">
         <value>Mae’r rhan fwyaf o bobl yng Nghymru a Lloegr yn gwresogi eu cartrefi â boeler nwy.</value>
@@ -876,9 +675,6 @@
     <data name="Other" xml:space="preserve">
         <value>Arall</value>
     </data>
-    <data name="I don't know" xml:space="preserve">
-        <value>Ddim yn gwybod</value>
-    </data>
     <data name="Do you have a hot water cylinder?" xml:space="preserve">
         <value>Oes gennych chi danc dŵr poeth?</value>
     </data>
@@ -893,9 +689,6 @@
     </data>
     <data name="No, I do not have a hot water cylinder" xml:space="preserve">
         <value>Nag oes, does gen i ddim tanc dŵr poeth</value>
-    </data>
-    <data name="I don't know" xml:space="preserve">
-        <value>Ddim yn gwybod</value>
     </data>
     <data name="Most homes in England and Wales do not have a hot water cylinder." xml:space="preserve">
         <value>Does gan y rhan fwyaf o gartrefi yng Nghymru a Lloegr ddim tanc dŵr poeth.</value>
@@ -912,9 +705,6 @@
     <data name="Image above is of a typical domestic hot water cylinder. It is a large round cylinder with pipes attached at multiple places. It is separate from the boiler." xml:space="preserve">
         <value>Mae’r llun uchod yn dangos tanc dŵr poeth domestig nodweddiadol. Mae’n silindr crwn mawr gyda phibellau’n sownd mewn sawl lle. Mae ar wahân i’r boeler.</value>
     </data>
-    <data name="What is your main heating system?" xml:space="preserve">
-        <value>Beth yw eich prif system wresogi?</value>
-    </data>
     <data name="Biomass boiler" xml:space="preserve">
         <value>Boeler biomas</value>
     </data>
@@ -927,26 +717,17 @@
     <data name="You have coal or solid fuel heating if you burn coal or other solid fuels in a fireplace or stove" xml:space="preserve">
         <value>Mae gennych wres glo neu danwydd solet os ydych chi’n llosgi glo neu danwydd solet arall mewn lle tân neu stôf</value>
     </data>
-    <data name="Other" xml:space="preserve">
-        <value>Arall</value>
-    </data>
     <data name="How many people live in your home?" xml:space="preserve">
         <value>Sawl person sy’n byw yn eich cartref?</value>
     </data>
     <data name="Count all adults and any children normally resident in your home." xml:space="preserve">
         <value>Cyfrwch bob oedolyn ac unrhyw blant sy'n byw yn eich cartref fel arfer.</value>
     </data>
-    <data name="Why do we want to know this?" xml:space="preserve">
-        <value>Pam fod arnom eisiau cael gwybod hyn?</value>
-    </data>
     <data name="This information allows us to estimate how much energy your household uses." xml:space="preserve">
         <value>Mae’r wybodaeth hon yn ein galluogi i amcangyfrif faint o ynni mae eich cartref yn ei ddefnyddio.</value>
     </data>
     <data name="e.g. 3" xml:space="preserve">
         <value>e.e. 3</value>
-    </data>
-    <data name="Continue" xml:space="preserve">
-        <value>Bwrw ymlaen</value>
     </data>
     <data name="Skip this question" xml:space="preserve">
         <value>Anwybyddu’r cwestiwn hwn</value>
@@ -959,9 +740,6 @@
     </data>
     <data name="Choose an answer that best resembles an average weekday in winter, or let us know a specific number of hours." xml:space="preserve">
         <value>Dewiswch yr ateb sy’n cyfateb orau i ddiwrnod arferol o’r wythnos yn y gaeaf, neu nodwch nifer penodol o oriau.</value>
-    </data>
-    <data name="Help me answer this question" xml:space="preserve">
-        <value>Helpwch fi i ateb y cwestiwn hwn</value>
     </data>
     <data name="You may have your heating on through the day but switch it off before you go to sleep at night." xml:space="preserve">
         <value>Efallai y bydd eich gwres ymlaen yn ystod y dydd ond eich bod yn ei ddiffodd cyn mynd i gysgu gyda’r nos.</value>
@@ -981,9 +759,6 @@
     <data name="Total whole number of hours in the afternoon and evening (12pm until 12am)" xml:space="preserve">
         <value>Cyfanswm nifer yr oriau yn y prynhawn a gyda’r nos (12pm tan 12am)</value>
     </data>
-    <data name="e.g. 6" xml:space="preserve">
-        <value>e.e. 6</value>
-    </data>
     <data name="What temperature do you heat your home to?" xml:space="preserve">
         <value>I ba dymheredd ydych chi’n gwresogi eich cartref?</value>
     </data>
@@ -995,12 +770,6 @@
     </data>
     <data name="e.g. 20" xml:space="preserve">
         <value>e.e. 20</value>
-    </data>
-    <data name="Continue" xml:space="preserve">
-        <value>Bwrw ymlaen</value>
-    </data>
-    <data name="Skip this question" xml:space="preserve">
-        <value>Anwybyddu’r cwestiwn hwn</value>
     </data>
     <data name="What temperature should I heat my home to?" xml:space="preserve">
         <value>I ba dymheredd ddylwn i wresogi fy nghartref?</value>
@@ -1025,18 +794,6 @@
     </data>
     <data name="MostCommonMethodOfHeatingIsGasBoilerString" xml:space="preserve">
         <value>Y dull gwresogi mwyaf cyffredin yw gyda boeler nwy.</value>
-    </data>
-    <data name="Are your solid walls insulated?" xml:space="preserve">
-        <value>Ydy eich waliau solet wedi’u hinsiwleiddio?</value>
-    </data>
-    <data name="Are your cavity walls insulated?" xml:space="preserve">
-        <value>Ydy eich waliau ceudod wedi’u hinswleiddio?</value>
-    </data>
-    <data name="Is your ground floor insulated?" xml:space="preserve">
-        <value>Ydy eich llawr gwaelod wedi'i inswleiddio?</value>
-    </data>
-    <data name="Is any part of your roof flat?" xml:space="preserve">
-        <value>Oes unrhyw ran o’ch to yn fflat?</value>
     </data>
     <data name="Do you have a loft that hasn't been converted into a room?" xml:space="preserve">
         <value>Oes gennych chi atig sydd heb ei droi’n ystafell?</value>
@@ -1142,9 +899,6 @@
     </data>
     <data name="Returning to this service" xml:space="preserve">
         <value>Dod yn ôl at y gwasanaeth hwn</value>
-    </data>
-    <data name="Your reference code" xml:space="preserve">
-        <value>Eich cyfeirnod</value>
     </data>
     <data name="You can come back to this page using your reference number or we can send a link to your email." xml:space="preserve">
         <value>Gallwch ddod yn ôl i’r dudalen hon drwy ddefnyddio eich cyfeirnod neu gallwn anfon dolen i’ch e-bost.</value>
@@ -1266,26 +1020,8 @@
     <data name="You will need a competent installer to fit new controls to your heating system." xml:space="preserve">
         <value>Bydd angen gosodwr cymwys arnoch i osod rheolaethau newydd ar eich system wresogi.</value>
     </data>
-    <data name="Who this improvement is suitable for" xml:space="preserve">
-        <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
-    </data>
-    <data name="You should consider this improvement for your property if:" xml:space="preserve">
-        <value>Dylech ystyried y gwelliant hwn ar gyfer eich eiddo:</value>
-    </data>
     <data name="You have a central heating system with radiators and you do not already have a full set of controls." xml:space="preserve">
         <value>Os oes gennych chi system gwres canolog gyda rheiddiaduron ac nid oes gennych set lawn o reolaethau yn barod.</value>
-    </data>
-    <data name="What you could save" xml:space="preserve">
-        <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="This could save up to" xml:space="preserve">
-        <value>Gallai hyn arbed hyd at</value>
-    </data>
-    <data name="Which adds up to" xml:space="preserve">
-        <value>Sy’n cyfateb i</value>
-    </data>
-    <data name="This could cost" xml:space="preserve">
-        <value>Gallai hyn gostio</value>
     </data>
     <data name="£350 - £450" xml:space="preserve">
         <value>£350 - £450</value>
@@ -1302,26 +1038,8 @@
     <data name="If you live in a conservation area or listed building there may be limits on what changes you can make to your windows. You should check with your local authority to see what is allowed." xml:space="preserve">
         <value>Os ydych chi'n byw mewn ardal gadwraeth neu adeilad rhestredig, efallai y bydd cyfyngiadau ar y newidiadau y gallwch chi eu gwneud i'ch ffenestri. Dylech chi holi eich awdurdod lleol i weld beth maen nhw’n ei ganiatáu.</value>
     </data>
-    <data name="Who this improvement is suitable for" xml:space="preserve">
-        <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
-    </data>
-    <data name="You should consider this improvement for your property if:" xml:space="preserve">
-        <value>Dylech ystyried y gwelliant hwn ar gyfer eich eiddo:</value>
-    </data>
     <data name="You have any single glazed windows." xml:space="preserve">
         <value>Oes gennych chi unrhyw ffenestri gwydr sengl.</value>
-    </data>
-    <data name="What you could save" xml:space="preserve">
-        <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="This could save up to" xml:space="preserve">
-        <value>Gallai hyn arbed hyd at</value>
-    </data>
-    <data name="Which adds up to" xml:space="preserve">
-        <value>Sy’n cyfateb i</value>
-    </data>
-    <data name="This could cost" xml:space="preserve">
-        <value>Gallai hyn gostio</value>
     </data>
     <data name="£2500 - £5500" xml:space="preserve">
         <value>£2500 - £5500</value>
@@ -1335,12 +1053,6 @@
     <data name="Specialist contractors can inject insulation into the cavity, reducing heat loss significantly and helping to cut your bills." xml:space="preserve">
         <value>Gall contractwyr arbenigol chwistrellu deunydd inswleiddio i mewn i’r ceudod, gan leihau faint o wres sy’n cael ei golli’n sylweddol a’ch helpu i leihau eich biliau.</value>
     </data>
-    <data name="Who this improvement is suitable for" xml:space="preserve">
-        <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
-    </data>
-    <data name="You should consider this improvement for your property if:" xml:space="preserve">
-        <value>Dylech ystyried y gwelliant hwn ar gyfer eich eiddo:</value>
-    </data>
     <data name="Your property was built with uninsulated cavity walls - this was common between the 1920s and the 1980s." xml:space="preserve">
         <value>Os adeiladwyd eich eiddo gyda waliau ceudod heb eu hinswleiddio - roedd hyn yn gyffredin rhwng yr 1920au a’r 1980au.</value>
     </data>
@@ -1350,20 +1062,8 @@
     <data name="Not all buildings are suitable for standard cavity wall insulation. You will need a specialist contractor to inspect your property to work out what insulation options you have." xml:space="preserve">
         <value>Nid yw pob adeilad yn addas ar gyfer deunydd inswleiddio waliau ceudod safonol. Bydd angen contractwr arbenigol arnoch i archwilio eich eiddo i weld pa opsiynau inswleiddio sy’n agored i chi.</value>
     </data>
-    <data name="What you could save" xml:space="preserve">
-        <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="This could save up to" xml:space="preserve">
-        <value>Gallai hyn arbed hyd at</value>
-    </data>
-    <data name="Which adds up to" xml:space="preserve">
-        <value>Sy’n cyfateb i</value>
-    </data>
     <data name="£OverLifetimeOfInstallationString" xml:space="preserve">
         <value>£{0} &lt;span class="govuk-body"&gt;&lt;b&gt;dros oes y gosodiad&lt;/b&gt;&lt;/span&gt;</value>
-    </data>
-    <data name="This could cost" xml:space="preserve">
-        <value>Gallai hyn gostio</value>
     </data>
     <data name="£1000 - £3000" xml:space="preserve">
         <value>£1000 - £3000</value>
@@ -1380,12 +1080,6 @@
     <data name="You can find more information on solid wall insulation on the Energy Saving Trust website.(opens in a new window)" xml:space="preserve">
         <value>Gallwch ddod o hyd i ragor o wybodaeth am ddeunydd inswleiddio waliau solet ar wefan yr Ymddiriedolaeth Arbed Ynni.(yn agor mewn ffenestr newydd)</value>
     </data>
-    <data name="Who this improvement is suitable for" xml:space="preserve">
-        <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
-    </data>
-    <data name="You should consider this improvement for your property if:" xml:space="preserve">
-        <value>Dylech ystyried y gwelliant hwn ar gyfer eich eiddo:</value>
-    </data>
     <data name="You have solid brick or stone walls with no cavity (this is common for homes built before 1920)." xml:space="preserve">
         <value>Os oes gennych waliau solet o frics neu gerrig heb geudod (mae hyn yn gyffredin mewn cartrefi a adeiladwyd cyn 1920).</value>
     </data>
@@ -1394,18 +1088,6 @@
     </data>
     <data name="You will need a specialist contractor to assess what the best way is to insulate your walls, and to carry out the work. This is not a DIY job, or one for a general builder." xml:space="preserve">
         <value>Bydd angen contractwr arbenigol arnoch i asesu’r ffordd orau o inswleiddio eich waliau, ac i ymgymryd â’r gwaith. Dydy hon ddim yn dasg DIY nac yn dasg i adeiladwr cyffredinol.</value>
-    </data>
-    <data name="What you could save" xml:space="preserve">
-        <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="This could save up to" xml:space="preserve">
-        <value>Gallai hyn arbed hyd at</value>
-    </data>
-    <data name="Which adds up to" xml:space="preserve">
-        <value>Sy’n cyfateb i</value>
-    </data>
-    <data name="This could cost" xml:space="preserve">
-        <value>Gallai hyn gostio</value>
     </data>
     <data name="£9500 - £14000" xml:space="preserve">
         <value>£9500 - £14000</value>
@@ -1416,26 +1098,14 @@
     <data name="A heat pump is a low carbon heating system and is much more efficient than a boiler. Rather than burning a fuel like gas or oil, it uses electricity to transfer heat from outside to heat your rooms and hot water." xml:space="preserve">
         <value>Mae pwmp gwres yn system wresogi carbon isel ac mae’n llawer mwy effeithlon na boeler. Yn hytrach na llosgi tanwydd fel nwy neu olew, mae’n defnyddio trydan i drosglwyddo gwres o’r tu allan i wresogi eich ystafelloedd a’ch dŵr poeth.</value>
     </data>
-    <data name="Who this improvement is suitable for" xml:space="preserve">
-        <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
-    </data>
-    <data name="You should consider this improvement for your property if:" xml:space="preserve">
-        <value>Dylech ystyried y gwelliant hwn ar gyfer eich eiddo:</value>
-    </data>
     <data name="You have some outdoor space" xml:space="preserve">
         <value>Os oes gennych chi rywfaint o le y tu allan</value>
     </data>
     <data name="You are looking to reduce your carbon footprint" xml:space="preserve">
         <value>Os ydych chi eisiau lleihau eich ôl troed carbon</value>
     </data>
-    <data name="What you could save" xml:space="preserve">
-        <value>Faint allech chi ei arbed</value>
-    </data>
     <data name="The running costs of heat pumps depend on a number of factors to do with your heating system and your property. Speak to a heat pump installer to find out more." xml:space="preserve">
         <value>Mae costau rhedeg pympiau gwres yn dibynnu ar nifer o ffactorau sy’n ymwneud â’ch system wresogi a’ch eiddo. Siaradwch â gosodwr pympiau gwres i gael gwybod mwy.</value>
-    </data>
-    <data name="This could cost" xml:space="preserve">
-        <value>Gallai hyn gostio</value>
     </data>
     <data name="PriceRangeForAnAirSourceHeatPumpString" xml:space="preserve">
         <value>£{0} - £{1} &lt;span class="govuk-body"&gt;&lt;b&gt;ar gyfer pwmp gwres ffynhonnell aer&lt;/b&gt;&lt;/span&gt;</value>
@@ -1449,12 +1119,6 @@
     <data name="If you have a suitable roof area you may be able to fit solar photovoltaic panels, or solar PV, to generate electricity." xml:space="preserve">
         <value>Os oes gennych chi le addas ar eich to, efallai y byddwch yn gallu gosod paneli ffotofoltäig solar, neu solar PV, i gynhyrchu trydan.</value>
     </data>
-    <data name="Who this improvement is suitable for" xml:space="preserve">
-        <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
-    </data>
-    <data name="You should consider this improvement for your property if:" xml:space="preserve">
-        <value>Dylech ystyried y gwelliant hwn ar gyfer eich eiddo:</value>
-    </data>
     <data name="You have a roof area that faces somewhere south of due east or due west." xml:space="preserve">
         <value>Os ydy rhan o’ch to yn wynebu rhywle i’r de o gyfeiriad y dwyrain neu’r gorllewin.</value>
     </data>
@@ -1463,18 +1127,6 @@
     </data>
     <data name="The savings you get from a solar PV system will depend on many factors, including whether there are people at home during the day using electricity." xml:space="preserve">
         <value>Bydd yr arbedion a gewch o system solar PV yn dibynnu ar nifer o ffactorau, gan gynnwys a oes pobl gartref yn ystod y dydd yn defnyddio trydan.</value>
-    </data>
-    <data name="What you could save" xml:space="preserve">
-        <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="This could save up to" xml:space="preserve">
-        <value>Gallai hyn arbed hyd at</value>
-    </data>
-    <data name="Which adds up to" xml:space="preserve">
-        <value>Sy’n cyfateb i</value>
-    </data>
-    <data name="This could cost" xml:space="preserve">
-        <value>Gallai hyn gostio</value>
     </data>
     <data name="£5000 - £8000" xml:space="preserve">
         <value>£5000 - £8000</value>
@@ -1488,56 +1140,17 @@
     <data name="From the information we have it looks like you have a suspended timber floor. This means your ground floor is made of wooden floorboards with a gap underneath." xml:space="preserve">
         <value>O’r wybodaeth sydd gennym mae’n ymddangos bod gennych lawr pren crog. Mae hyn yn golygu bod eich llawr gwaelod wedi’i wneud o estyll pren gyda bwlch oddi tanodd.</value>
     </data>
-    <data name="Adding extra insulation can help trap the heat inside your property so your heating doesn’t need to be on as much." xml:space="preserve">
-        <value>Gall ychwanegu deunydd inswleiddio ychwanegol helpu i ddal gwres y tu mewn i’ch eiddo fel nad oes angen rhoi’ch gwres ymlaen gymaint.</value>
-    </data>
     <data name="Your floor could be insulated by lifting the floorboards, fitting insulation between the joists and then putting the floorboards back. This is normally a job for a professional installer." xml:space="preserve">
         <value>Gallai eich llawr gael ei inswleiddio drwy godi’r estyll, gosod deunydd inswleiddio rhwng y distiau ac yna rhoi’r estyll yn ôl. Tasg i osodwr proffesiynol ydy hon fel arfer.</value>
     </data>
     <data name="You will need to completely empty the rooms that are being insulated, and remove any carpet or other floor covering, before the floor boards can be lifted." xml:space="preserve">
         <value>Bydd angen i chi wagio’r ystafelloedd sy’n cael eu hinswleiddio’n gyfan gwbl a thynnu unrhyw garped neu orchudd arall sydd ar y llawr cyn y gellir codi’r estyll.</value>
     </data>
-    <data name="Who this improvement is suitable for" xml:space="preserve">
-        <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
-    </data>
-    <data name="You should consider this improvement for your property if:" xml:space="preserve">
-        <value>Dylech ystyried y gwelliant hwn ar gyfer eich eiddo:</value>
-    </data>
     <data name="Your property has a suspended timber floor that has not yet been insulated. If you are unsure, a qualified installer will be able to confirm this for you." xml:space="preserve">
         <value>Os oes gan eich eiddo lawr pren crog sydd heb ei inswleiddio hyd yma. Os ydych chi’n ansicr, bydd gosodwr cymwys yn gallu cadarnhau hyn i chi.</value>
     </data>
-    <data name="What you could save" xml:space="preserve">
-        <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="This could save up to" xml:space="preserve">
-        <value>Gallai hyn arbed hyd at</value>
-    </data>
-    <data name="Which adds up to" xml:space="preserve">
-        <value>Sy’n cyfateb i</value>
-    </data>
-    <data name="This could cost" xml:space="preserve">
-        <value>Gallai hyn gostio</value>
-    </data>
     <data name="£2000 - £5000" xml:space="preserve">
         <value>£2000 - £5000</value>
-    </data>
-    <data name="Will this cause disruption during installation?" xml:space="preserve">
-        <value>A fydd y gwaith gosod yn tarfu ar yr aelwyd? YN BENDANT</value>
-    </data>
-    <data name="How long could this take to install?" xml:space="preserve">
-        <value>Pa mor hir allai ei gymryd i’w osod? 1 I 2 DDIWRNOD</value>
-    </data>
-    <data name="Insulate the ground floor" xml:space="preserve">
-        <value>Inswleiddio’r llawr gwaelod</value>
-    </data>
-    <data name="From the information we have it looks like you have a suspended timber floor. This means your ground floor is made of wooden floorboards with a gap underneath." xml:space="preserve">
-        <value>O’r wybodaeth sydd gennym mae’n ymddangos bod gennych lawr pren crog. Mae hyn yn golygu bod eich llawr gwaelod wedi’i wneud o estyll pren gyda bwlch oddi tanodd.</value>
-    </data>
-    <data name="Adding extra insulation can help trap the heat inside your property so your heating doesn’t need to be on as much." xml:space="preserve">
-        <value>Gall ychwanegu deunydd inswleiddio ychwanegol helpu i ddal gwres y tu mewn i’ch eiddo fel nad oes angen rhoi’ch gwres ymlaen gymaint.</value>
-    </data>
-    <data name="Your floor could be insulated by lifting the floorboards, fitting insulation between the joists and then putting the floorboards back. This is normally a job for a professional installer." xml:space="preserve">
-        <value>Gallai eich llawr gael ei inswleiddio drwy godi’r estyll, gosod deunydd inswleiddio rhwng y distiau ac yna rhoi’r estyll yn ôl. Tasg i osodwr proffesiynol ydy hon fel arfer.</value>
     </data>
     <data name="MoreInfoOnFloorInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
         <value>Gallwch ddod o hyd i ragor o wybodaeth am ddeunydd inswleiddio lloriau ar wefan yr Ymddiriedolaeth Arbed Ynni.(yn agor mewn ffenestr newydd)</value>
@@ -1545,38 +1158,8 @@
     <data name="CautionYou will need to completely empty the rooms that are being insulated, and remove any carpet or other floor covering, before the floor boards can be lifted." xml:space="preserve">
         <value>Rhybudd Bydd angen i chi wagio’r ystafelloedd sy’n cael eu hinswleiddio’n gyfan gwbl a thynnu unrhyw garped neu orchudd arall sydd ar y llawr cyn y gellir codi’r estyll.</value>
     </data>
-    <data name="Who this improvement is suitable for" xml:space="preserve">
-        <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
-    </data>
-    <data name="You should consider this improvement for your property if:" xml:space="preserve">
-        <value>Dylech ystyried y gwelliant hwn ar gyfer eich eiddo:</value>
-    </data>
-    <data name="Your property has a suspended timber floor that has not yet been insulated. If you are unsure, a qualified installer will be able to confirm this for you." xml:space="preserve">
-        <value>Os oes gan eich eiddo lawr pren crog sydd heb ei inswleiddio hyd yma. Os ydych chi’n ansicr, bydd gosodwr cymwys yn gallu cadarnhau hyn i chi.</value>
-    </data>
-    <data name="What you could save" xml:space="preserve">
-        <value>Faint allech chi ei arbed</value>
-    </data>
     <data name="FloorInsulationTypicallyLastsString" xml:space="preserve">
         <value>Disgwylir i ddeunydd inswleiddio lloriau bara tua 42 mlynedd fel arfer</value>
-    </data>
-    <data name="This could save up to" xml:space="preserve">
-        <value>Gallai hyn arbed hyd at</value>
-    </data>
-    <data name="Which adds up to" xml:space="preserve">
-        <value>Sy’n cyfateb i</value>
-    </data>
-    <data name="This could cost" xml:space="preserve">
-        <value>Gallai hyn gostio</value>
-    </data>
-    <data name="£2000 - £5000" xml:space="preserve">
-        <value>£2000 - £5000</value>
-    </data>
-    <data name="Will this cause disruption during installation?" xml:space="preserve">
-        <value>A fydd y gwaith gosod yn tarfu ar yr aelwyd? YN BENDANT</value>
-    </data>
-    <data name="How long could this take to install?" xml:space="preserve">
-        <value>Pa mor hir allai ei gymryd i’w osod? 1 I 2 DDIWRNOD</value>
     </data>
     <data name="Upgrade to high heat retention storage heaters" xml:space="preserve">
         <value>Uwchraddio i wresogyddion stôr sy’n cadw gwres uchel</value>
@@ -1599,26 +1182,8 @@
     <data name="Their improved controls, including automatic charge control, thermostat and programmer, allowing you to set the temperature you want the room to be heated and when, with the heater only drawing the electricity needed to meet that programme." xml:space="preserve">
         <value>Yn cynnwys rheolaethau gwell, gan gynnwys rheolydd gwefru, thermostat a rhaglennydd awtomatig, sy’n eich galluogi i osod i ba dymheredd rydych am wresogi’r ystafell a phryd, gyda’r gwresogydd ond yn defnyddio’r trydan sydd ei angen i gyflawni’r rhaglen honno.</value>
     </data>
-    <data name="Who this improvement is suitable for" xml:space="preserve">
-        <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
-    </data>
-    <data name="You should consider this improvement for your property if:" xml:space="preserve">
-        <value>Dylech ystyried y gwelliant hwn ar gyfer eich eiddo:</value>
-    </data>
     <data name="You have older, manually controlled storage heaters" xml:space="preserve">
         <value>Os oes gennych wresogyddion storio hŷn rydych chi’n eu rheoli eich hun</value>
-    </data>
-    <data name="What you could save" xml:space="preserve">
-        <value>Faint allech chi ei arbed</value>
-    </data>
-    <data name="This could save up to" xml:space="preserve">
-        <value>Gallai hyn arbed hyd at</value>
-    </data>
-    <data name="Which adds up to" xml:space="preserve">
-        <value>Sy’n cyfateb i</value>
-    </data>
-    <data name="This could cost" xml:space="preserve">
-        <value>Gallai hyn gostio</value>
     </data>
     <data name="£2000 - £3000" xml:space="preserve">
         <value>£2000 - £3000</value>
@@ -1644,20 +1209,11 @@
     <data name="You have an old or inefficient gas boiler, or your boiler is broken" xml:space="preserve">
         <value>Mae gennych hen foeler nwy neu foeler nwy aneffeithlon, neu mae eich boeler wedi torri</value>
     </data>
-    <data name="Recommendation Suitable For" xml:space="preserve">
-        <value>Argymhelliad yn addas ar gyfer</value>
-    </data>
-    <data name="You have an old or inefficient gas boiler, or your boiler is broken" xml:space="preserve">
-        <value>Mae gennych hen foeler nwy neu foeler nwy aneffeithlon, neu mae eich boeler wedi torri</value>
-    </data>
     <data name="Alternatively, you may want to consider fitting a low carbon heating system such as a heat pump." xml:space="preserve">
         <value>Neu, efallai y byddwch yn dymuno ystyried gosod system wresogi carbon isel fel pwmp gwres.</value>
     </data>
     <data name="Gas boiler installations, and any work on a gas heating system, can only be carried out by an installer on the Gas Safe Register." xml:space="preserve">
         <value>Dim ond gosodwr ar y Gofrestr Diogelwch Nwy all osod boeleri nwy ac ymgymryd ag unrhyw waith ar system wresogi nwy.</value>
-    </data>
-    <data name="Recommendation Lifetime" xml:space="preserve">
-        <value>Oes a Argymhellir</value>
     </data>
     <data name="Based on the information we have collected; it looks like you have some single glazed windows in your home. Double or triple glazed windows are much better at keeping the heat in, so would help" xml:space="preserve">
         <value>Ar sail yr wybodaeth rydym wedi'i chasglu; mae'n ymddangos bod gennych rywfaint o ffenestri gwydr sengl yn eich cartref. Mae ffenestri gwydr dwbl neu driphlyg yn llawer gwell am gadw'r gwres i mewn, ac felly yn eich helpu</value>
@@ -1665,17 +1221,8 @@
     <data name="you keep warm while reducing your heating bills." xml:space="preserve">
         <value>i gadw'n gynnes yn ogystal â lleihau eich biliau gwresogi.</value>
     </data>
-    <data name="The fuel bill savings from replacing windows are unlikely to pay back the full installation cost, but there are other benefits such as reduced maintenance and better sound proofing that may affect your decision." xml:space="preserve">
-        <value>Mae’n annhebygol y bydd yr arbedion mewn biliau tanwydd a welir wrth newid ffenestri yn ad-dalu’r gost gosod lawn, ond mae manteision eraill fel llai o waith cynnal a chadw a gwrthsain gwell a allai effeithio ar eich penderfyniad.</value>
-    </data>
     <data name="Caution" xml:space="preserve">
         <value>Rhybudd</value>
-    </data>
-    <data name="If you live in a conservation area or listed building there may be limits on what changes you can make to your windows. You should check with your local authority to see what is allowed." xml:space="preserve">
-        <value>Os ydych chi'n byw mewn ardal gadwraeth neu adeilad rhestredig, efallai y bydd cyfyngiadau ar y newidiadau y gallwch chi eu gwneud i'ch ffenestri. Dylech chi holi eich awdurdod lleol i weld beth maen nhw’n ei ganiatáu.</value>
-    </data>
-    <data name="Recommendation Suitable For" xml:space="preserve">
-        <value>Argymhelliad yn addas ar gyfer</value>
     </data>
     <data name="Download your Action Plan" xml:space="preserve">
         <value>Llwytho eich Cynllun Gweithredu i lawr</value>
@@ -1700,9 +1247,6 @@
     </data>
     <data name="Recommendation" xml:space="preserve">
         <value>Argymhelliad</value>
-    </data>
-    <data name="Install a heat pump" xml:space="preserve">
-        <value>Gosod pwmp gwres</value>
     </data>
     <data name="Heat pumps use the energy outside to heat your home and hot water" xml:space="preserve">
         <value>Mae pympiau gwres yn defnyddio’r ynni y tu allan i wresogi eich cartref a’ch dŵr poeth</value>
@@ -1746,29 +1290,11 @@
     <data name="You told us you would like some more information on one or more of the recommendations before considering them for your property:" xml:space="preserve">
         <value>Rydych chi wedi dweud wrthym y byddech chi’n hoffi cael rhagor o wybodaeth am un neu fwy o’r argymhellion cyn eu hystyried ar gyfer eich eiddo:</value>
     </data>
-    <data name="Fit new windows" xml:space="preserve">
-        <value>Gosod ffenestri newydd</value>
-    </data>
-    <data name="Fit solar electric panels" xml:space="preserve">
-        <value>Gosod paneli trydan solar</value>
-    </data>
     <data name="Recommendations you discarded" xml:space="preserve">
         <value>Argymhellion rydych chi wedi’u diystyru</value>
     </data>
-    <data name="Insulate the ground floor" xml:space="preserve">
-        <value>Inswleiddio’r llawr gwaelod</value>
-    </data>
-    <data name="Upgrade your heating controls" xml:space="preserve">
-        <value>Uwchraddio eich rheolaethau gwresogi</value>
-    </data>
-    <data name="Insulate your cavity walls" xml:space="preserve">
-        <value>Inswleiddio eich waliau ceudod</value>
-    </data>
     <data name="Other ways to save energy" xml:space="preserve">
         <value>Ffyrdd eraill o arbed ynni</value>
-    </data>
-    <data name="If you’d like to do more to improve the energy efficiency of your home, consider the following:" xml:space="preserve">
-        <value>Os hoffech chi wneud mwy i wella effeithlonrwydd ynni eich cartref, beth am ystyried y canlynol:</value>
     </data>
     <data name="WhenBuyingNewAppliancesUpgradeEnergyLabelsString" xml:space="preserve">
         <value>Pan fyddwch chi’n prynu offer newydd, beth am uwchraddio i un sy'n defnyddio ynni'n effeithlon - Rhagor o wybodaeth am labeli ynni</value>
@@ -1778,9 +1304,6 @@
     </data>
     <data name="Returning to your Action Plan" xml:space="preserve">
         <value>Mynd yn ôl at eich Cynllun Gweithredu</value>
-    </data>
-    <data name="Your reference code" xml:space="preserve">
-        <value>Eich cyfeirnod</value>
     </data>
     <data name="GMWND25C" xml:space="preserve">
         <value>GMWND25C</value>
@@ -1800,53 +1323,17 @@
     <data name="Download your information" xml:space="preserve">
         <value>Llwytho eich gwybodaeth i lawr</value>
     </data>
-    <data name="Download your Action Plan" xml:space="preserve">
-        <value>Llwytho eich Cynllun Gweithredu i lawr</value>
-    </data>
-    <data name="Download Recommendations" xml:space="preserve">
-        <value>Llwytho Argymhellion i Lawr</value>
-    </data>
     <data name="Change your answers" xml:space="preserve">
         <value>Newid eich atebion</value>
     </data>
     <data name="We have provided recommendations that are most suitable for your home based on the answers you provided earlier." xml:space="preserve">
         <value>Rydym wedi gwneud argymhellion sydd fwyaf addas ar gyfer eich cartref ar sail yr atebion a ddarparwyd gennych yn gynharach.</value>
     </data>
-    <data name="Get help using the online service" xml:space="preserve">
-        <value>Cael cymorth i ddefnyddio'r gwasanaeth ar-lein</value>
-    </data>
-    <data name="Telephone (free phone service): 0800 098 7950" xml:space="preserve">
-        <value>Ffôn (gwasanaeth ffôn rhad ac am ddim): 0800 098 7950</value>
-    </data>
-    <data name="Monday to Friday, 8am to 6pm" xml:space="preserve">
-        <value>Dydd Llun i ddydd Gwener, 8am i 6pm</value>
-    </data>
-    <data name="Saturday, 9am to 12pm" xml:space="preserve">
-        <value>Dydd Sadwrn, 9am i 12pm</value>
-    </data>
-    <data name="Sunday and Bank Holidays, Closed" xml:space="preserve">
-        <value>Dydd Sul a Gwyliau Banc, Ar gau</value>
-    </data>
-    <data name="You can get phone support if you need help using the online service. This could be if you:" xml:space="preserve">
-        <value>Gallwch gael cymorth dros y ffôn os oes angen help arnoch i ddefnyddio’r gwasanaeth ar-lein. Gallai hyn fod yn berthnasol i chi os:</value>
-    </data>
-    <data name="do not feel confident using a computer or mobile device" xml:space="preserve">
-        <value>nad ydych chi’n teimlo’n hyderus wrth ddefnyddio cyfrifiadur neu ddyfais symudol</value>
-    </data>
-    <data name="do not have internet access" xml:space="preserve">
-        <value>nad oes gennych chi fynediad i’r rhyngrwyd</value>
-    </data>
     <data name="Please note: We are not able to offer you advice with your energy bills, give legal, financial or installation advice but we can signpost you to other organisations." xml:space="preserve">
         <value>Sylwer: Nid ydym yn gallu cynnig cyngor i chi â’ch biliau ynni, rhoi cyngor cyfreithiol, ariannol neu ynghylch gosodiadau, ond gallwn eich cyfeirio at sefydliadau eraill.</value>
     </data>
-    <data name="Give feedback" xml:space="preserve">
-        <value>Rhoi adborth</value>
-    </data>
     <data name="This service is still in its early stages and under active development." xml:space="preserve">
         <value>Mae’n ddyddiau cynnar o hyd ar y gwasanaeth hwn ac mae’n dal i gael ei ddatblygu.</value>
-    </data>
-    <data name="Your feedback can help us to shape how the service develops so that it can best serve the needs of the public." xml:space="preserve">
-        <value>Gall eich adborth ein helpu i ddatblygu’r gwasanaeth er mwyn diwallu anghenion y cyhoedd yn y ffordd orau.</value>
     </data>
     <data name="Leave some feedback for this service" xml:space="preserve">
         <value>Gadael adborth ar gyfer y gwasanaeth hwn</value>
@@ -1854,32 +1341,8 @@
     <data name="Insulate your loft" xml:space="preserve">
         <value>Inswleiddio eich atig</value>
     </data>
-    <data name="Insulate your cavity walls" xml:space="preserve">
-        <value>Inswleiddio eich waliau ceudod</value>
-    </data>
-    <data name="Insulate your solid walls" xml:space="preserve">
-        <value>Inswleiddio eich waliau solet</value>
-    </data>
-    <data name="Insulate the ground floor" xml:space="preserve">
-        <value>Inswleiddio’r llawr gwaelod</value>
-    </data>
     <data name="Insulate your hot water cylinder" xml:space="preserve">
         <value>Inswleiddio eich tanc dŵr poeth</value>
-    </data>
-    <data name="Upgrade your heating controls" xml:space="preserve">
-        <value>Uwchraddio eich rheolaethau gwresogi</value>
-    </data>
-    <data name="Upgrade to high heat retention storage heaters" xml:space="preserve">
-        <value>Uwchraddio i wresogyddion stôr sy’n cadw gwres uchel</value>
-    </data>
-    <data name="Fit new windows" xml:space="preserve">
-        <value>Gosod ffenestri newydd</value>
-    </data>
-    <data name="Fit solar electric panels" xml:space="preserve">
-        <value>Gosod paneli trydan solar</value>
-    </data>
-    <data name="Install a heat pump" xml:space="preserve">
-        <value>Gosod pwmp gwres</value>
     </data>
     <data name="You told us that you don’t want to proceed with any of the recommendations suggested to you." xml:space="preserve">
         <value>Rydych chi wedi dweud wrthym nad ydych chi eisiau bwrw ymlaen ag unrhyw un o’r argymhellion a gynigiwyd i chi.</value>
@@ -1974,14 +1437,8 @@
     <data name="Google Analytics stores information about:" xml:space="preserve">
         <value>Mae Google Analytics yn storio gwybodaeth am:</value>
     </data>
-    <data name="how you got to the site" xml:space="preserve">
-        <value>sut y daethoch chi i'r safle</value>
-    </data>
     <data name="the pages you visit on our service and how long you spend on them" xml:space="preserve">
         <value>y tudalennau rydych chi’n ymweld â nhw ar ein gwasanaeth a faint o amser rydych chi’n ei dreulio arnynt</value>
-    </data>
-    <data name="what you click on while you’re visiting the site" xml:space="preserve">
-        <value>yr hyn rydych yn clicio arno wrth ymweld â'r safle</value>
     </data>
     <data name="Google Analytics sets the following cookies:" xml:space="preserve">
         <value>Mae Google Analytics yn gosod y cwcis canlynol:</value>
@@ -2007,9 +1464,6 @@
     <data name="You may see a banner when you visit our service inviting you to accept cookies or review your settings. We’ll set cookies so that your computer knows you’ve seen it and not to show it again, and also to store your settings." xml:space="preserve">
         <value>Efallai y byddwch yn gweld baner pan fyddwch yn ymweld â’n gwasanaeth yn eich gwahodd i dderbyn cwcis neu adolygu eich gosodiadau. Byddwn yn gosod cwcis fel bod eich cyfrifiadur yn gwybod eich bod wedi’i weld ac i beidio â’i ddangos eto, a hefyd i storio eich gosodiadau.</value>
     </data>
-    <data name="Name" xml:space="preserve">
-        <value>Enw Pwrpas Dod i Ben</value>
-    </data>
     <data name="Saves your cookie consent settings and lets us know if you’ve seen our cookie banner" xml:space="preserve">
         <value>Mae’n cadw eich gosodiadau caniatáu cwcis ac yn rhoi gwybod i ni os ydych chi wedi gweld ein baner cwcis </value>
     </data>
@@ -2028,20 +1482,11 @@
     <data name="If the web address is correct or you selected a link or button, contact our digital support assistants if you need to speak to someone." xml:space="preserve">
         <value>Os yw’r cyfeiriad gwe yn gywir neu os oeddech chi wedi dewis dolen neu fotwm, cysylltwch â’n cynorthwywyr cymorth digidol os hoffech chi siarad â rhywun.</value>
     </data>
-    <data name="Telephone" xml:space="preserve">
-        <value>Ffôn</value>
-    </data>
     <data name="0800 444 202" xml:space="preserve">
         <value>0800 444 202</value>
     </data>
     <data name="Opening times:" xml:space="preserve">
         <value>Amseroedd agor:</value>
-    </data>
-    <data name="Monday to Friday: 8am to 8pm" xml:space="preserve">
-        <value>Dydd Llun i ddydd Gwener: 8am tan 8pm</value>
-    </data>
-    <data name="Saturday and Sunday: 9am to 5pm" xml:space="preserve">
-        <value>Dydd Sadwrn a dydd Sul: 9am tan 5pm</value>
     </data>
     <data name="Invalid reference" xml:space="preserve">
         <value>Cyfeirnod annilys</value>
@@ -2060,9 +1505,6 @@
     </data>
     <data name="ReturnToHomePageString" xml:space="preserve">
         <value>Dychwelyd &lt;a href="{0}" class="govuk-link"&gt;i'r hafan&lt;/a&gt;</value>
-    </data>
-    <data name="Cookies on our service" xml:space="preserve">
-        <value>Cwcis ar ein gwasanaeth</value>
     </data>
     <data name="We use some essential cookies to make this service work." xml:space="preserve">
         <value>Rydyn ni’n defnyddio rhai cwcis hanfodol i wneud i’r gwasanaeth hwn weithio.</value>
@@ -2313,9 +1755,6 @@
     <data name="Confirm whether or not this certificate belongs to your address before continuing" xml:space="preserve">
         <value>Cadarnhewch a yw'r dystysgrif hon yn perthyn i'ch cyfeiriad chi cyn bwrw ymlaen</value>
     </data>
-    <data name="Confirm whether or not this certificate belongs to your address before continuing" xml:space="preserve">
-        <value>Cadarnhewch a yw'r dystysgrif hon yn perthyn i'ch cyfeiriad chi cyn bwrw ymlaen</value>
-    </data>
     <data name="Select which country the property is located in" xml:space="preserve">
         <value>Dewiswch ym mha wlad mae’r eiddo</value>
     </data>
@@ -2337,20 +1776,8 @@
     <data name="Select heating pattern" xml:space="preserve">
         <value>Dewiswch y patrwm gwresogi</value>
     </data>
-    <data name="Number of hours in the morning" xml:space="preserve">
-        <value>Nifer yr oriau yn y bore</value>
-    </data>
-    <data name="Enter number of hours in the morning" xml:space="preserve">
-        <value>Rhowch nifer yr oriau yn y bore</value>
-    </data>
     <data name="Number of hours" xml:space="preserve">
         <value>Nifer yr oriau</value>
-    </data>
-    <data name="Number of hours in the afternoon and evening" xml:space="preserve">
-        <value>Nifer yr oriau yn y prynhawn a gyda’r nos</value>
-    </data>
-    <data name="Enter number of hours in the afternoon and evening" xml:space="preserve">
-        <value>Rhowch nifer yr oriau yn y prynhawn a gyda’r nos</value>
     </data>
     <data name="Select your main heating system" xml:space="preserve">
         <value>Dewiswch eich prif system wresogi</value>
@@ -2385,9 +1812,6 @@
     <data name="Enter the number of people who live in the property" xml:space="preserve">
         <value>Rhowch nifer y bobl sy'n byw yn yr eiddo</value>
     </data>
-    <data name="Select your main heating system" xml:space="preserve">
-        <value>Dewiswch eich prif system wresogi</value>
-    </data>
     <data name="Select whether you have outdoor space" xml:space="preserve">
         <value>Dewiswch a oes gennych chi le y tu allan</value>
     </data>
@@ -2399,9 +1823,6 @@
     </data>
     <data name="Select what to do with this recommendation" xml:space="preserve">
         <value>Dewiswch beth i'w wneud gyda'r argymhelliad hwn</value>
-    </data>
-    <data name="Enter a valid email address" xml:space="preserve">
-        <value>Rhowch gyfeiriad e-bost dilys</value>
     </data>
     <data name="Select roof type" xml:space="preserve">
         <value>Dewiswch y math o do</value>
@@ -2421,12 +1842,6 @@
     <data name="Select wall type" xml:space="preserve">
         <value>Dewiswch y math o wal</value>
     </data>
-    <data name="Enter a valid email address" xml:space="preserve">
-        <value>Rhowch gyfeiriad e-bost dilys</value>
-    </data>
-    <data name="Details about cookies on our service" xml:space="preserve">
-        <value>Manylion am gwcis ar ein gwasanaeth</value>
-    </data>
     <data name="Your answers" xml:space="preserve">
         <value>Eich atebion</value>
     </data>
@@ -2445,14 +1860,8 @@
     <data name="Confirm your address" xml:space="preserve">
         <value>Cadarnhau eich cyfeiriad</value>
     </data>
-    <data name="Confirm your EPC details" xml:space="preserve">
-        <value>Cadarnhau manylion eich Tystysgrif Perfformiad Ynni</value>
-    </data>
     <data name="Country" xml:space="preserve">
         <value>Gwlad</value>
-    </data>
-    <data name="Find your EPC" xml:space="preserve">
-        <value>Dod o hyd i’ch Tystysgrif Perfformiad Ynni</value>
     </data>
     <data name="Flat type" xml:space="preserve">
         <value>Math o fflat</value>
@@ -2490,9 +1899,6 @@
     <data name="No EPC found" xml:space="preserve">
         <value>Heb ddod o hyd i EPC</value>
     </data>
-    <data name="Your home is energy efficient" xml:space="preserve">
-        <value>Mae eich cartref yn defnyddio ynni’n effeithlon</value>
-    </data>
     <data name="Number of occupants" xml:space="preserve">
         <value>Nifer y preswylwyr</value>
     </data>
@@ -2520,17 +1926,11 @@
     <data name="Solid Walls Insulated" xml:space="preserve">
         <value>Waliau Solet wedi’u Hinswleiddio</value>
     </data>
-    <data name="Temperature" xml:space="preserve">
-        <value>Tymheredd</value>
-    </data>
     <data name="Wall Construction" xml:space="preserve">
         <value>Adeiladwaith y waliau</value>
     </data>
     <data name="Your recommendations" xml:space="preserve">
         <value>Eich argymhellion</value>
-    </data>
-    <data name="RecommendationXofYString" xml:space="preserve">
-        <value>Argymhelliad 1 o 6</value>
     </data>
     <data name="Page not found - Home Energy Retrofit Advice - GOV.UK" xml:space="preserve">
         <value>Heb ganfod y dudalen - Cyngor ar Ôl-osod Ynni Cartref - GOV.UK</value>
@@ -2543,207 +1943,6 @@
     </data>
     <data name="PrivacyNoticeTitleString" xml:space="preserve">
         <value>Hysbysiad preifatrwydd ar</value>
-    </data>
-    <data name="DontKnow = 0," xml:space="preserve">
-        <value>DdimYnGwybod = 0,</value>
-    </data>
-    <data name="Detached" xml:space="preserve">
-        <value>Tŷ sengl</value>
-    </data>
-    <data name="Semi-detached" xml:space="preserve">
-        <value>Tŷ pâr</value>
-    </data>
-    <data name="Terraced" xml:space="preserve">
-        <value>Tŷ Teras</value>
-    </data>
-    <data name="End terrace" xml:space="preserve">
-        <value>Pen teras</value>
-    </data>
-    <data name="Yes, they are all insulated" xml:space="preserve">
-        <value>Ydy, maen nhw i gyd wedi’u hinswleiddio</value>
-    </data>
-    <data name="Some are insulated and some not" xml:space="preserve">
-        <value>Mae rhai ohonynt wedi’u hinswleiddio a dydy rhai ddim</value>
-    </data>
-    <data name="No, they are not insulated" xml:space="preserve">
-        <value>Na, dydyn nhw ddim wedi’u hinswleiddio</value>
-    </data>
-    <data name="I don't know" xml:space="preserve">
-        <value>Ddim yn gwybod</value>
-    </data>
-    <data name="Northern Ireland" xml:space="preserve">
-        <value>Gogledd Iwerddon</value>
-    </data>
-    <data name="GasBoiler," xml:space="preserve">
-        <value>BoelerNwy,</value>
-    </data>
-    <data name="Top floor" xml:space="preserve">
-        <value>Y llawr uchaf</value>
-    </data>
-    <data name="Middle floor" xml:space="preserve">
-        <value>Llawr canol</value>
-    </data>
-    <data name="Ground floor" xml:space="preserve">
-        <value>Llawr gwaelod</value>
-    </data>
-    <data name="Suspended timber" xml:space="preserve">
-        <value>Pren crog</value>
-    </data>
-    <data name="Solid concrete" xml:space="preserve">
-        <value>Concrid solet</value>
-    </data>
-    <data name="I don’t see my option listed" xml:space="preserve">
-        <value>Dydw i ddim yn gweld fy opsiwn ar y rhestr</value>
-    </data>
-    <data name="I don’t know" xml:space="preserve">
-        <value>Ddim yn gwybod</value>
-    </data>
-    <data name="Yes, my floor is insulated" xml:space="preserve">
-        <value>Ydy, mae fy llawr wedi’i inswleiddio</value>
-    </data>
-    <data name="No, my floor is not insulated" xml:space="preserve">
-        <value>Na, dydy fy llawr ddim wedi’i inswleiddio</value>
-    </data>
-    <data name="Yes, all the windows are single glazed" xml:space="preserve">
-        <value>Oes, mae pob un o’r ffenestri yn rhai gwydr sengl</value>
-    </data>
-    <data name="Yes, at least one window is single glazed" xml:space="preserve">
-        <value>Oes, mae o leiaf un o’r ffenestri yn un gwydr sengl</value>
-    </data>
-    <data name="No, all my windows are double, triple or secondary glazed" xml:space="preserve">
-        <value>Nag oes, mae pob un o’m ffenestri yn rhai gwydr dwbl, triphlyg neu eilaidd</value>
-    </data>
-    <data name="Yes, I have a hot water cylinder" xml:space="preserve">
-        <value>Oes, mae gen i danc d?r poeth</value>
-    </data>
-    <data name="No, I do not have a hot water cylinder" xml:space="preserve">
-        <value>Nag oes, does gen i ddim tanc d?r poeth</value>
-    </data>
-    <data name="I'd like to input my hours" xml:space="preserve">
-        <value>Hoffwn nodi’r nifer o oriau</value>
-    </data>
-    <data name="Gas boiler" xml:space="preserve">
-        <value>Boeler nwy</value>
-    </data>
-    <data name="Oil boiler" xml:space="preserve">
-        <value>Boeler olew</value>
-    </data>
-    <data name="LPG boiler" xml:space="preserve">
-        <value>Boeler LPG</value>
-    </data>
-    <data name="Storage heaters" xml:space="preserve">
-        <value>Gwresogyddion stôr</value>
-    </data>
-    <data name="Direct acting electric heating" xml:space="preserve">
-        <value>Gwres trydan uniongyrchol</value>
-    </data>
-    <data name="Heat pump" xml:space="preserve">
-        <value>Pwmp gwres</value>
-    </data>
-    <data name="Other" xml:space="preserve">
-        <value>Arall</value>
-    </data>
-    <data name="Before 1900" xml:space="preserve">
-        <value>Cyn 1900</value>
-    </data>
-    <data name="2012 or newer" xml:space="preserve">
-        <value>2012 neu ar ôl hynny</value>
-    </data>
-    <data name="Detached" xml:space="preserve">
-        <value>Tŷ sengl</value>
-    </data>
-    <data name="Semi-detached" xml:space="preserve">
-        <value>Tŷ pâr</value>
-    </data>
-    <data name="Terraced" xml:space="preserve">
-        <value>Tŷ Teras</value>
-    </data>
-    <data name="End terrace" xml:space="preserve">
-        <value>Pen teras</value>
-    </data>
-    <data name="Yes, there is access to my loft" xml:space="preserve">
-        <value>Oes, mae modd mynd i’m hatig</value>
-    </data>
-    <data name="No, there is no access to my loft" xml:space="preserve">
-        <value>Na, does dim modd mynd i’m hatig</value>
-    </data>
-    <data name="Yes, I have a loft that hasn't been converted into a room" xml:space="preserve">
-        <value>Oes, mae gennyf atig sydd heb ei droi’n ystafell</value>
-    </data>
-    <data name="No, I don’t have a loft or my loft has been converted into a room" xml:space="preserve">
-        <value>Na, does gennyf i ddim atig neu mae fy atig wedi'i droi’n ystafell</value>
-    </data>
-    <data name="Biomass boiler" xml:space="preserve">
-        <value>Boeler biomas</value>
-    </data>
-    <data name="Coal or solid fuel heating" xml:space="preserve">
-        <value>Gwres glo neu danwydd solet</value>
-    </data>
-    <data name="Yes, I own my property and live in it" xml:space="preserve">
-        <value>Ydw, rwy’n berchen ar fy eiddo ac yn byw ynddo</value>
-    </data>
-    <data name="No, I am a tenant" xml:space="preserve">
-        <value>Na, rwy’n denant</value>
-    </data>
-    <data name="I am the property owner but lease my property to one or more tenants" xml:space="preserve">
-        <value>Fi ydy perchennog yr eiddo ond rwy’n prydlesu’r eiddo i un neu fwy o denantiaid</value>
-    </data>
-    <data name="House" xml:space="preserve">
-        <value>Tŷ</value>
-    </data>
-    <data name="Bungalow" xml:space="preserve">
-        <value>Byngalo</value>
-    </data>
-    <data name="Start," xml:space="preserve">
-        <value>Dechrau,</value>
-    </data>
-    <data name="Yes, save this recommendation to my action plan" xml:space="preserve">
-        <value>Byddwn, cadw’r argymhelliad hwn yn fy nghynllun gweithredu</value>
-    </data>
-    <data name="Maybe, but I’d like more information" xml:space="preserve">
-        <value>Efallai, ond hoffwn gael rhagor o wybodaeth</value>
-    </data>
-    <data name="No, discard this recommendation" xml:space="preserve">
-        <value>Na fyddwn, anwybyddu’r argymhelliad hwn</value>
-    </data>
-    <data name="Yes, I only have a flat roof or roofs" xml:space="preserve">
-        <value>Oes, dim ond to neu doeon fflat sydd gen i</value>
-    </data>
-    <data name="Yes, some of my roof is flat and some of my roof is pitched" xml:space="preserve">
-        <value>Oes, mae rhywfaint o’r to yn fflat a rhywfaint o’r to ar oleddf</value>
-    </data>
-    <data name="No, I only have a pitched roof or roofs" xml:space="preserve">
-        <value>Nag oes, dim ond to neu doeon ar oleddf sydd gen i</value>
-    </data>
-    <data name="Yes, there is at least 200mm of insulation in my loft" xml:space="preserve">
-        <value>Ydy, mae o leiaf 200mm o ddeunydd inswleiddio yn fy atig</value>
-    </data>
-    <data name="No, there is less than 200mm of insulation in my loft" xml:space="preserve">
-        <value>Nac ydy, mae llai na 200mm o ddeunydd inswleiddio yn fy atig</value>
-    </data>
-    <data name="Yes, they are all insulated" xml:space="preserve">
-        <value>Ydy, maen nhw i gyd wedi’u hinswleiddio</value>
-    </data>
-    <data name="Some are insulated and some are not" xml:space="preserve">
-        <value>Mae rhai ohonynt wedi’u hinswleiddio a dydy rhai ddim</value>
-    </data>
-    <data name="No, they are not insulated" xml:space="preserve">
-        <value>Na, dydyn nhw ddim wedi’u hinswleiddio</value>
-    </data>
-    <data name="Solid walls" xml:space="preserve">
-        <value>Waliau solet</value>
-    </data>
-    <data name="Cavity walls" xml:space="preserve">
-        <value>Waliau ceudod</value>
-    </data>
-    <data name="Mix of solid and cavity walls" xml:space="preserve">
-        <value>Cymysgedd o waliau solet a waliau ceudod</value>
-    </data>
-    <data name="I don’t see my option listed" xml:space="preserve">
-        <value>Dydw i ddim yn gweld fy opsiwn ar y rhestr</value>
-    </data>
-    <data name="Before 1930" xml:space="preserve">
-        <value>Cyn 1930</value>
     </data>
     <data name="Your energy savings advice reference code:" xml:space="preserve">
         <value>Eich cyfeirnod ar gyfer cyngor arbed ynni:</value>
