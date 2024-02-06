@@ -2,17 +2,25 @@
 using System.Linq;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
+using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Mvc.Localization;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class ActionPlanViewModel
     {
+        private readonly IStringLocalizer<SharedResources> sharedLocalizer;
         public PropertyData PropertyData { get; set; }
         public string EmailAddress { get; set; }
         public bool EmailSent { get; set; }
         public string BackLink { get; set; }
         public bool IsPdf { get; set; }
         public string UrlPrefix { get; set; }
+        
+        public ActionPlanViewModel(IStringLocalizer<SharedResources> localizer)
+        {
+            sharedLocalizer = localizer;
+        }
 
         public string GetTotalInstallationCostText()
         {
@@ -37,7 +45,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string GetTotalSavingText()
         {
             var saving = GetSavedRecommendations().Where(r => r.Key != RecommendationKey.InstallHeatPump).Sum(r => r.Saving);
-            return $"£{saving:N0} a year";
+            return string.Format(sharedLocalizer["£AYearString"].Value, $"{saving:N0}" );
         }
         public string GetInstallationCostText(PropertyRecommendation recommendation)
         {

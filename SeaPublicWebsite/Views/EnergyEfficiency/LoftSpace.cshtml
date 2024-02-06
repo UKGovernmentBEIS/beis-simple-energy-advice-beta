@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.LoftSpaceViewModel
 @{
-    ViewBag.Title = "Loft space";
+    ViewBag.Title = @SharedLocalizer["Loft space"].Value;
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
-        Text = "Back",
+        Text = @SharedLocalizer["Back"].Value,
         Href = Model.BackLink,
     })
 }
@@ -28,19 +30,16 @@
                 Func<object, object> details = 
                     @<text>
                         <p class="govuk-body">
-                            A loft is an unheated space without walls and ceilings, immediately beneath the pitched roof. You will usually be able to see the roof timbers.
+                            @SharedLocalizer["A loft is an unheated space without walls and ceilings, immediately beneath the pitched roof. You will usually be able to see the roof timbers."]
                         </p>
-                        <p class="govuk-body">
-                            If all the space under your pitched roof, or nearly all the space, is used as living space with finished walls and ceilings then the loft has been converted into a room.
+                        <p class="govuk-body"> 
+                            @SharedLocalizer["If all the space under your pitched roof, or nearly all the space, is used as living space with finished walls and ceilings then the loft has been converted into a room."]
                         </p>
                      </text>;
                 
                 Func<object, object> blueBannerHint =
                     @<p class="govuk-body">
-                        Homes of your type typically
-                        <strong>
-                            @(Model.HintHaveLoftAndAccess ? "have a loft." : "do not have a loft.")
-                        </strong>
+                        @(Model.HintHaveLoftAndAccess ? @SharedLocalizer["HomesOfYourTypeTypicallyHaveALoft"] : @SharedLocalizer["HomesOfYourTypeTypicallyDoNotHaveALoftString"])
                     </p>;
             }
             
@@ -49,7 +48,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "Do you have a loft that hasn’t been converted into a room?",
+                        Text = SharedLocalizer["Do you have a loft that hasn't been converted into a room?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -59,7 +58,7 @@
                     Html = @<text>
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "Help me decide if I have a loft",
+                                          SummaryText = @SharedLocalizer["Help me decide if I have a loft"].Value,
                                           Html = details
                                       })
                                
@@ -74,7 +73,7 @@
 
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = @SharedLocalizer["Continue"].Value
                    })
             
         </form>

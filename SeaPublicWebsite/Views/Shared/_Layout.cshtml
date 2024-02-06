@@ -5,6 +5,9 @@
 @using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Services
 @using SeaPublicWebsite.Services.Cookies
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @inject StaticAssetsVersioningService StaticAssetsVersioning
 @inject CookieService CookieService
 @inject GoogleAnalyticsService GoogleAnalytics
@@ -33,7 +36,7 @@
         </script>
     }
     <meta charset="utf-8"/>
-    <title>@(ViewBag.Title != null ? ViewBag.Title + " -" : "") @Constants.SERVICE_NAME - Gov.UK</title>
+    <title>@(ViewBag.Title != null ? ViewBag.Title + " -" : "") @SharedLocalizer[Constants.SERVICE_NAME].Value - Gov.UK</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
 
@@ -69,14 +72,14 @@
 
     @{ await Html.RenderPartialAsync("_CookieBanner"); }
 
-    <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">Skip to main content</a>
+    <a href="#main-content" class="govuk-skip-link" data-module="govuk-skip-link">@SharedLocalizer["Skip to main content"]</a>
 
     @{
         List<HeaderNavigationViewModel> headerNavigationLinks = new List<HeaderNavigationViewModel>();
 
         @(await Html.GovUkHeader(new HeaderViewModel
         {
-            ServiceName = Constants.SERVICE_NAME,
+            ServiceName = @SharedLocalizer[Constants.SERVICE_NAME].Value,
             AssetsPath = assetsPath,
             HomepageUrl = "https://www.gov.uk",
             ServiceUrl = "/energy-efficiency",
@@ -90,13 +93,13 @@
         @(await Html.GovUkPhaseBanner(new PhaseBannerViewModel
         {
             Phase = "Beta",
-            Html = @<text>This is a new service – your <a class="govuk-link" href="@ViewBag.FeedbackUrl" target="_blank">feedback (opens in new tab)</a> will help us to improve it.</text>
+            Html = @<text>@SharedLocalizer["ThisIsANewServiceString", @ViewBag.FeedbackUrl]</text>
         }))
-
+        @{ await Html.RenderPartialAsync("_LanguageControl"); }
         @(RenderSection("BeforeMain", false))
 
         <main class="govuk-main-wrapper" id="main-content" role="main">
-            @(await Html.GovUkErrorSummary(ViewData.ModelState))
+            @(await Html.GovUkErrorSummary(ViewData.ModelState, errorSummaryTitle: SharedLocalizer["There is a problem"].Value))
             @RenderBody()
         </main>
     </div>
@@ -109,26 +112,35 @@
             {
                 new FooterLinksViewModel
                 {
-                    Text = "Contact Us",
+                    Text = @SharedLocalizer["Contact Us"].Value,
                     Href = ViewBag.FeedbackUrl
                 },
                 new FooterLinksViewModel
                 {
-                    Text = "Cookies",
+                    Text = @SharedLocalizer["Cookies"].Value,
                     Href = Url.Action(nameof(CookieController.CookieSettings_Get), "Cookie")
                 },
                 new FooterLinksViewModel
                 {
-                    Text = "Privacy Policy",
+                    Text = @SharedLocalizer["Privacy Policy"].Value,
                     Href = Url.Action(nameof(StaticPagesController.PrivacyPolicy), "StaticPages")
                 },
                 new FooterLinksViewModel
                 {
-                    Text = "Accessibility Statement",
+                    Text = @SharedLocalizer["Accessibility Statement"].Value,
                     Href = Url.Action(nameof(StaticPagesController.AccessibilityStatement), "StaticPages")
                 }
             }
+        },
+        FooterLicenseDescription = new FooterLicenseDescriptionViewModel
+        {
+            Html = @<text>@SharedLocalizer["LicenseDescriptionString"]</text>
+        },
+        FooterCopyrightText = new FooterCopyrightTextViewModel
+        {
+            Text = @SharedLocalizer["\u00a9 Crown copyright"].Value
         }
+        
     })
 
     <script src="@(StaticAssetsVersioning.GetAppJsFilename())"></script>

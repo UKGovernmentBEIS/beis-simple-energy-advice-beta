@@ -1,14 +1,14 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum FlatType
     {
-        [GovUkRadioCheckboxLabelText(Text = "Top floor")]
+        [Display(ResourceType = typeof(Resources.Enum.FlatTypes), Description = nameof(Resources.Enum.FlatTypes.TopFloor))]
         TopFloor,
-        [GovUkRadioCheckboxLabelText(Text = "Middle floor")]
+        [Display(ResourceType = typeof(Resources.Enum.FlatTypes), Description = nameof(Resources.Enum.FlatTypes.MiddleFloor))]
         MiddleFloor,
-        [GovUkRadioCheckboxLabelText(Text = "Ground floor")]
-        GroundFloor,
+        [Display(ResourceType = typeof(Resources.Enum.FlatTypes), Description = nameof(Resources.Enum.FlatTypes.GroundFloor))]
+        GroundFloor
     }
 }

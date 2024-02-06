@@ -1,12 +1,12 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum LoftSpace
     {
-        [GovUkRadioCheckboxLabelText(Text = "Yes, I have a loft that hasn't been converted into a room")]
+        [Display(ResourceType = typeof(Resources.Enum.LoftSpace), Description = nameof(Resources.Enum.LoftSpace.Yes))]
         Yes,
-        [GovUkRadioCheckboxLabelText(Text= "No, I don’t have a loft or my loft has been converted into a room")]
+        [Display(ResourceType = typeof(Resources.Enum.LoftSpace), Description = nameof(Resources.Enum.LoftSpace.No))]
         No,
     }
 }

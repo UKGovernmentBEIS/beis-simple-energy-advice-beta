@@ -102,6 +102,7 @@ namespace SeaPublicWebsite
             // Change the default antiforgery cookie name so it doesn't include Asp.Net for security reasons
             services.AddAntiforgery(options => options.Cookie.Name = "Antiforgery");
             services.AddScoped<CookieService, CookieService>();
+            
         }
 
         private void ConfigureEpcApi(IServiceCollection services)

@@ -11,9 +11,10 @@ namespace SeaPublicWebsite.BusinessLogic.Services
         
         public QuestionFlowStep SkipDestination(QuestionFlowStep page, PropertyData propertyData, QuestionFlowStep? entryPoint = null);
     }
-
+    
     public class QuestionFlowService: IQuestionFlowService
     {
+        
         public QuestionFlowStep PreviousStep(
             QuestionFlowStep page, 
             PropertyData propertyData, 

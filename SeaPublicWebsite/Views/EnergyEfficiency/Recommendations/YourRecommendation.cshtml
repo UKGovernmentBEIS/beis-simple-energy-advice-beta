@@ -2,10 +2,12 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.Controllers
 @using SeaPublicWebsite.Models.EnergyEfficiency
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel;
 
 @{
-    ViewBag.Title = "Recommendation " + (Model.RecommendationIndex + 1) + " of " + Model.PropertyRecommendations.Count;
+    ViewBag.Title = string.Format(SharedLocalizer["RecommendationXofYString"].Value, Model.RecommendationIndex + 1, Model.PropertyRecommendations.Count);
     Layout = "_Layout";
 }
 
@@ -14,7 +16,7 @@
         <div class="govuk-grid-column-one-half">
             @await Html.GovUkBackLink(new BackLinkViewModel
                    {
-                       Text = "Back",
+                       Text = SharedLocalizer["Back"].Value,
                        Href = Model.BackLink,
                    })
         </div>
@@ -51,7 +53,7 @@
                     Legend = new LegendViewModel
                     {
                         Html = @<h1 class="govuk-fieldset__heading">
-                                   Would you consider this improvement for your property?
+                                   @SharedLocalizer["Would you consider this improvement for your property?"]
                                </h1>,
                         Classes = "govuk-fieldset__legend--l",
                     }
@@ -63,14 +65,14 @@
                 var hasBack = Model.HasPreviousIndex() && !Model.FromActionPlan;
                 await Html.RenderPartialAsync("Partials/_ActionButtons.cshtml", new ActionButtonsViewModel
                 {
-                    BackTitle = hasBack ? "Go back to" : null,
-                    BackText = hasBack ? $"Recommendation {Model.RecommendationIndex}" : null,
-                    ForwardTitle = Model.FromActionPlan ? "Back to" : "Continue to",
+                    BackTitle = hasBack ? @SharedLocalizer["Go back to"].Value : null,
+                    BackText = hasBack ? $"{SharedLocalizer["Recommendation"].Value} {Model.RecommendationIndex}" : null,
+                    ForwardTitle = Model.FromActionPlan ? @SharedLocalizer["Back to"].Value : @SharedLocalizer["Continue to"].Value,
                     ForwardText = Model.FromActionPlan
-                        ? "Action Plan"
+                        ? @SharedLocalizer["Action Plan"].Value
                         : Model.HasNextIndex()
-                            ? $"Recommendation {Model.RecommendationIndex + 2}"
-                            : "Action Plan"
+                            ? $"{SharedLocalizer["Recommendation"].Value} {Model.RecommendationIndex + 2}"
+                            : SharedLocalizer["Action Plan"].Value
                 });
             }
         </form>

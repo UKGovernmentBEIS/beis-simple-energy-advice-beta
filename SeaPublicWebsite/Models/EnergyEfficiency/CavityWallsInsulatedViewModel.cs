@@ -1,12 +1,13 @@
 ﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
+using SeaPublicWebsite.Resources;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class CavityWallsInsulatedViewModel : QuestionFlowViewModel
     {
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Select if your cavity walls are insulated")]
+        [GovUkValidateRequired(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = nameof(ErrorMessages.CavityWallInsulationRequired))]
         public CavityWallsInsulated? CavityWallsInsulated { get; set; }
         public YearBuilt? YearBuilt { get; set; }
         public string Reference { get; set; }

@@ -1,35 +1,32 @@
-﻿<p class="govuk-body">
-    There may be schemes or grants available to help with the cost of installing energy efficiency improvements.
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+<p class="govuk-body">
+    @SharedLocalizer["There may be schemes or grants available to help with the cost of installing energy efficiency improvements."]
 </p>
 
 <p class="govuk-body">
-    We recommend checking your eligibility for the 
-    <a class="govuk-link" href="https://www.gov.uk/apply-great-british-insulation-scheme" target="_blank">Great British Insulation Scheme</a> 
-    and the <a class="govuk-link" href="https://www.gov.uk/apply-home-upgrade-grant" target="_blank">Home Upgrade Grant: Phase 2 Scheme</a>
+    @SharedLocalizer["CheckEligibilityForGBISAndHUG2String","https://www.gov.uk/apply-great-british-insulation-scheme","https://www.gov.uk/apply-home-upgrade-grant"]
 </p>
 
 <p class="govuk-body">
-    Some of the types of support include:
+    @SharedLocalizer["Some of the types of support include:"]
 </p>
 
 <ul class="govuk-list govuk-list--bullet">
-    <li><a class="govuk-link" href="https://www.gov.uk/energy-company-obligation" target="_blank">Energy Company Obligation (ECO)</a></li>
-    <li><a class="govuk-link" href="https://www.gov.uk/guidance/check-if-you-may-be-eligible-for-the-boiler-upgrade-scheme-from-april-2022" target="_blank">Boiler Upgrade Scheme</a></li>
+    <li><a class="govuk-link" href="https://www.gov.uk/energy-company-obligation" target="_blank">@SharedLocalizer["Energy Company Obligation (ECO)"]</a></li>
+    <li><a class="govuk-link" href="https://www.gov.uk/guidance/check-if-you-may-be-eligible-for-the-boiler-upgrade-scheme-from-april-2022" target="_blank">@SharedLocalizer["Boiler Upgrade Scheme"]</a></li>
 </ul>
 
 
 
 <p class="govuk-body">
-   To find out if you are eligible for a  Sustainable Warmth grant please contact your Local Authority which can be found on   
-       <a class="govuk-link" href="https://www.gov.uk/find-local-council" target="_blank">https://www.gov.uk/find-local-council</a> to check if they offer funding.
+   @SharedLocalizer["FindOutIfEligibleForSustainableWarmthGrantString", "https://www.gov.uk/find-local-council"]
 </p>
 
 <p class="govuk-body">
-    If you are worried about affording your energy bills, Ofgem has a 
-    <a class="govuk-link" href="https://www.ofgem.gov.uk/find-schemes-grants-and-benefits-help-home-energy" target="_blank">helpful guide</a>
-    to the schemes, grants and benefits that may be available to you.
+    @SharedLocalizer["OfgemGuideToSchemesAndGrantsString", "https://www.ofgem.gov.uk/find-schemes-grants-and-benefits-help-home-energy"]
 </p>
 
 <p class="govuk-body">
-    If you are a social housing tenant, please contact your landlord directly for support.
+    @SharedLocalizer["If you are a social housing tenant, please contact your landlord directly for support."]
 </p>

@@ -1,18 +1,18 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum FloorConstruction
     {
-        [GovUkRadioCheckboxLabelText(Text = "Suspended timber")]
+        [Display(ResourceType = typeof(Resources.Enum.FloorConstruction), Description = nameof(Resources.Enum.FloorConstruction.SuspendedTimber))]
         SuspendedTimber,
-        [GovUkRadioCheckboxLabelText(Text = "Solid concrete")]
+        [Display(ResourceType = typeof(Resources.Enum.FloorConstruction), Description = nameof(Resources.Enum.FloorConstruction.SolidConcrete))]
         SolidConcrete,
-        [GovUkRadioCheckboxLabelText(Text = "A mix of both")]
+        [Display(ResourceType = typeof(Resources.Enum.FloorConstruction), Description = nameof(Resources.Enum.FloorConstruction.Mix))]
         Mix,
-        [GovUkRadioCheckboxLabelText(Text = "I don’t see my option listed")]
+        [Display(ResourceType = typeof(Resources.Enum.FloorConstruction), Description = nameof(Resources.Enum.FloorConstruction.Other))]
         Other,
-        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
+        [Display(ResourceType = typeof(Resources.Enum.FloorConstruction), Description = nameof(Resources.Enum.FloorConstruction.DoNotKnow))]
         DoNotKnow,
     }
     

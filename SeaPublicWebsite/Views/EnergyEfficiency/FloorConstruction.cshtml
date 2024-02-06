@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.FloorConstructionViewModel
 @{
-    ViewBag.Title = "Floor Construction";
+    ViewBag.Title = @SharedLocalizer["FloorConstructionTitleString"].Value;
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -28,13 +30,10 @@
                 Func<object, object> details = 
                     @<text>
                         <p class="govuk-body">
-                            If you have a basement or cellar beneath your house that you can get into safely, you could look down
-                            there to see what type of floor you have. If the floor is a suspended wooden floor, you should be
-                            able to see wooden joists and the undersides of the floorboards.
+                            @SharedLocalizer["If you have a basement or cellar beneath your house that you can get into safely, you could look down there to see what type of floor you have. If the floor is a suspended wooden floor, you should be able to see wooden joists and the undersides of the floorboards."]
                         </p>
                         <p class="govuk-body">
-                            If you don’t have access to the space underneath your house,
-                            you will need to lift a corner of the carpet and underlay to have a look.
+                            @SharedLocalizer["If you don’t have access to the space underneath your house, you will need to lift a corner of the carpet and underlay to have a look."]
                         </p>
                      </text>;
                 
@@ -43,13 +42,13 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your home has
+                            @SharedLocalizer[$"Your 2013 Energy Performance Certificate suggests your home has"]
                             <strong>
                                 @(Model.Epc?.FloorConstruction switch {
-                                    FloorConstruction.SuspendedTimber => "a suspended timber floor.",
-                                    FloorConstruction.SolidConcrete => "a solid concrete floor.",
-                                    FloorConstruction.Mix => "both a suspended timber floor and solid concrete floor.",
-                                    FloorConstruction.Other => "another type of floor.",
+                                    FloorConstruction.SuspendedTimber => @SharedLocalizer["EPCSuggestsSuspendedTimberFloorString", Model.Epc.LodgementYear],
+                                    FloorConstruction.SolidConcrete => @SharedLocalizer["EPCSuggestsSolidConcreteFloorString", Model.Epc.LodgementYear],
+                                    FloorConstruction.Mix => @SharedLocalizer["EPCSuggestsBothSuspendedTimberAndSolidConcreteFloorString", Model.Epc.LodgementYear],
+                                    FloorConstruction.Other => @SharedLocalizer["EPCSuggestsAnotherTypeOfFloorString", Model.Epc.LodgementYear],
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;
@@ -57,10 +56,7 @@
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            Homes of your type typically have a
-                            <strong>
-                                @(Model.HintSuspendedTimber is true ? "suspended timber floor." : "solid concrete floor.")
-                            </strong>
+                            @(Model.HintSuspendedTimber is true ? SharedLocalizer["HomesOfYourTypeTypicallyHaveASuspendedTimberFloorString"] : SharedLocalizer["HomesOfYourTypeTypicallyHaveASolidConcreteFloorString"])
                         </p>;
                 }
             }
@@ -70,7 +66,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "How is your ground floor built?",
+                        Text = @SharedLocalizer["How is your ground floor built?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -79,20 +75,18 @@
                 {
                     Html = @<text>
                                <p class="govuk-body">
-                                   Many homes have a ground floor made of solid concrete.  
+                                   @SharedLocalizer["Many homes have a ground floor made of solid concrete."]  
                                </p>
                                <p class="govuk-body">
-                                   Older homes are more likely to have suspended timber floors. 
-                                   If you have air bricks or ventilation bricks on the outside wall of your house 
-                                   that are below floor level, you probably have a suspended timber floor. 
+                                   @SharedLocalizer["Older homes are more likely to have suspended timber floors. If you have air bricks or ventilation bricks on the outside wall of your house that are below floor level, you probably have a suspended timber floor."] 
                                </p>
                                <p class="govuk-body">
-                                   You may have both types, for example, if there’s a modern extension to a pre-1950 property.
+                                   @SharedLocalizer["You may have both types, for example, if there’s a modern extension to a pre-1950 property."]
                                </p>
                                
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "Help me answer this question",
+                                          SummaryText = @SharedLocalizer["Help me answer this question"].Value,
                                           Html = details
                                       })
                                
@@ -112,14 +106,14 @@
                         FloorConstruction.Other,
                         new HintViewModel
                         {
-                            Text = "Other ground floor construction types include suspended concrete, flagstones or non-traditional build types."
+                            Text = @SharedLocalizer["Other ground floor construction types include suspended concrete, flagstones or non-traditional build types."].Value
                         }
                     }
                 }))
 
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = @SharedLocalizer["Continue"].Value
                    })
             
         </form>
