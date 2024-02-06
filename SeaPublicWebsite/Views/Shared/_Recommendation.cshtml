@@ -1,6 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.Localization
+@using SeaPublicWebsite.Resources.Bre
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @model SeaPublicWebsite.Models.EnergyEfficiency.SingleRecommendationDetailsViewModel;
 
@@ -8,7 +9,7 @@
     @SharedLocalizer["RecommendationXofYString", Model.RecommendationIndex + 1, Model.PropertyRecommendations.Count]
 </span>
 <h1 class="govuk-heading-l">
-    @SharedLocalizer[Model.GetCurrentPropertyRecommendation().Title]
+    @RecommendationServiceText.ResourceManager.GetString(Model.GetCurrentPropertyRecommendation().Title)
 </h1>
 
 @await RenderSectionAsync("RecommendationBody", true)
@@ -26,7 +27,7 @@
 @await Html.GovUkWarningText(new WarningTextViewModel
        {
            IconFallbackText = SharedLocalizer["Note"].Value,
-           Text = @SharedLocalizer["FiguresForTypicalInstallationWarningTextString"].Value
+           Text = SharedLocalizer["FiguresForTypicalInstallationWarningTextString"].Value
        })
 
 @await Html.GovUkSummaryList(new SummaryListViewModel
