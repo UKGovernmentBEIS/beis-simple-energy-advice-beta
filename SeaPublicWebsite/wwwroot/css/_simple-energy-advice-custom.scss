@@ -356,12 +356,12 @@
 // Language toggle
 // A combination of GBIS code and HMRC code
 .sea-language-select {
-    margin-top: 1em;
-    float: right;
+    margin: 0;
     text-align: right;
 }
 
 .sea-language-select__list {
+    margin: 1rem 0 0 0;
     list-style: none;
 }
 
@@ -387,4 +387,5 @@
     font-size: unset;
     background: none;
     border: none;
+    cursor: pointer;
 }
