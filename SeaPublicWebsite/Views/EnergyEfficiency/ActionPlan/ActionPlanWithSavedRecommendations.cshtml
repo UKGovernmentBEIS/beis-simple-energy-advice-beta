@@ -4,6 +4,7 @@
 @using SeaPublicWebsite.Models.EnergyEfficiency
 @model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
 @using Microsoft.AspNetCore.Mvc.Localization
+@using SeaPublicWebsite.Resources.Bre
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @{
@@ -65,10 +66,10 @@
                            Classes = "govuk-!-padding-top-4",
                            Html = @<text>
                                       <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
-                                          @(recommendation.Title)
+                                          @(RecommendationServiceText.ResourceManager.GetString(recommendation.Title))
                                       </p>
                                       <p class="govuk-body-s govuk-!-margin-bottom-0">
-                                          @(recommendation.Summary)
+                                          @(RecommendationServiceText.ResourceManager.GetString(recommendation.Summary))
                                       </p>
                                       <p>
                                           @SharedLocalizer["Typical savings per year"]: @Model.GetSavingText(recommendation)
@@ -117,10 +118,10 @@
                            Classes = "govuk-!-padding-top-4 sea-saved-recommendations-table-headers",
                            Html = @<text>
                                       <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
-                                          @(recommendation.Title)
+                                          @RecommendationServiceText.ResourceManager.GetString(recommendation.Title)
                                       </p>
                                       <p class="govuk-body-s govuk-!-margin-bottom-0">
-                                          @(recommendation.Summary)
+                                          @RecommendationServiceText.ResourceManager.GetString(recommendation.Summary)
                                       </p>
                                    </text>
                        },

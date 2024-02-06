@@ -1,5 +1,6 @@
 ﻿@using SeaPublicWebsite.BusinessLogic.Models
 @using Microsoft.AspNetCore.Mvc.Localization
+@using SeaPublicWebsite.Resources.Bre
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationViewModel
 
@@ -15,7 +16,7 @@
             @foreach (PropertyRecommendation propertyRecommendation in Model.GetSavedRecommendations())
             {
                 <li class="govuk-body-s">
-                    @(SharedLocalizer[propertyRecommendation.Title])
+                    @(RecommendationServiceText.ResourceManager.GetString(propertyRecommendation.Title))
                 </li>
             }
         </ul>

@@ -1,5 +1,6 @@
 ﻿@model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
 @using Microsoft.AspNetCore.Mvc.Localization
+@using SeaPublicWebsite.Resources.Bre
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 <p class="govuk-body">
@@ -11,7 +12,7 @@
     {
         <li>
             <a class="govuk-link" href="@Model.GetUrlWithPrefix(Url.Action("Recommendation_Get", new { id = (int)recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true }))">
-                @recommendation.Title
+                @RecommendationServiceText.ResourceManager.GetString(recommendation.Title)
             </a>
         </li>
     }
