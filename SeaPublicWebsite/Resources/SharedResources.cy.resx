@@ -175,7 +175,7 @@
         <value>Gwasanaethau eraill a allai fod o gymorth i chi</value>
     </data>
     <data name="GeneralEnergySavingTrustAdviceString" xml:space="preserve">
-        <value>I gael cyngor cyffredinol ar effeithlonrwydd ynni ac i ddod o hyd i ffyrdd o leihau eich bil ynni, ewch i wefan yr Ymddiriedolaeth Arbed Ynni</value>
+        <value>I gael cyngor cyffredinol ar effeithlonrwydd ynni ac i ddod o hyd i ffyrdd o leihau eich bil ynni, ewch i wefan yr &lt;a href="{0}" target="_blank" class="govuk-link"&gt;Ymddiriedolaeth Arbed Ynni&lt;/a&gt;</value>
     </data>
     <data name="Do you own your property?" xml:space="preserve">
         <value>Ydych chi'n berchen ar eich eiddo?</value>
