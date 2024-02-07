@@ -2617,4 +2617,10 @@
     <data name="WeFoundImprovementsSingularString" xml:space="preserve">
         <value>Rydym wedi canfod &lt;b&gt;1 gwelliant a argymhellir&lt;/b&gt; i chi ei ystyried.</value>
     </data>
+    <data name="Why do we need to know this" xml:space="preserve">
+        <value>Pam fod arnom angen cael gwybod hyn</value>
+    </data>
+    <data name="Why do we want to know this?" xml:space="preserve">
+        <value>Pam fod arnom eisiau cael gwybod hyn?</value>
+    </data>
 </root>
