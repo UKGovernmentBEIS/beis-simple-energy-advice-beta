@@ -2562,4 +2562,10 @@
     <data name="2012 or newer" xml:space="preserve">
         <value>2012 or newer</value>
     </data>
+    <data name="WeFoundImprovementsSingularString" xml:space="preserve">
+        <value>We’ve found &lt;b&gt;1 recommended improvement&lt;/b&gt; for you to consider.</value>
+    </data>
+    <data name="WeFoundImprovementsPluralString" xml:space="preserve">
+        <value>We’ve found &lt;b&gt;{0} recommended improvements&lt;/b&gt; for you to consider.</value>
+    </data>
 </root>

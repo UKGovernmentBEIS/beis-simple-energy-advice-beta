@@ -28,7 +28,7 @@
             @SharedLocalizer["Based on the information you’ve given us, there may be some changes a qualified installer could make to your home to reduce the amount of energy it needs to use."]
         </p>
 
-        <p class="govuk-body">@SharedLocalizer[$"We’ve found <b>{Model.NumberOfPropertyRecommendations} recommended improvement{(Model.NumberOfPropertyRecommendations == 1 ? "" : "s")}</b> for you to consider."]</p>
+        <p class="govuk-body">@(Model.NumberOfPropertyRecommendations == 1 ? SharedLocalizer["WeFoundImprovementsSingularString"] : SharedLocalizer["WeFoundImprovementsPluralString", Model.NumberOfPropertyRecommendations])</p>
 
         <p class="govuk-body">
             @SharedLocalizer["We will advise you if your home needs to meet certain conditions for a given improvement to be effective for you."]
