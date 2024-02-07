@@ -2568,4 +2568,7 @@
     <data name="WeFoundImprovementsPluralString" xml:space="preserve">
         <value>We’ve found &lt;b&gt;{0} recommended improvements&lt;/b&gt; for you to consider.</value>
     </data>
+    <data name="Ground floor" xml:space="preserve">
+        <value>Ground floor</value>
+    </data>
 </root>
