@@ -51,14 +51,12 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            <strong>
                                 @(Model.Epc?.WallConstruction switch {
                                     WallConstruction.Solid => SharedLocalizer["EPCSuggestsYourHomeHasSolidWallsString", Model.Epc.LodgementYear],
                                     WallConstruction.Cavity => SharedLocalizer["EPCSuggestsYourHomeHasCavityWallsString", Model.Epc.LodgementYear],
                                     WallConstruction.Mixed => SharedLocalizer["EPCSuggestsYourHomeHasAMixOfSolidAndCavityWallsString", Model.Epc.LodgementYear],
                                     WallConstruction.Other => SharedLocalizer["EPCSuggestsAnotherTypeOfFloorString", Model.Epc.LodgementYear],
                                     _ => throw new ArgumentOutOfRangeException()})
-                            </strong>
                         </p>;
                 } else if (Model.HintSolidWalls is not null)
                 {
