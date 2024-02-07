@@ -147,4 +147,7 @@
     <data name="TemperatureNumber" xml:space="preserve">
         <value>The temperature must be a number</value>
     </data>
+    <data name="TemperatureRequired" xml:space="preserve">
+        <value>Enter a number between 5 and 35, or skip this question</value>
+    </data>
 </root>

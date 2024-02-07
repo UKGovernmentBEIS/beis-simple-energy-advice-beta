@@ -420,6 +420,15 @@ namespace SeaPublicWebsite.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter a number between 5 and 35, or skip this question.
+        /// </summary>
+        internal static string TemperatureRequired {
+            get {
+                return ResourceManager.GetString("TemperatureRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select if you have used this service before.
         /// </summary>
         internal static string UsedServiceBeforeRequired {
