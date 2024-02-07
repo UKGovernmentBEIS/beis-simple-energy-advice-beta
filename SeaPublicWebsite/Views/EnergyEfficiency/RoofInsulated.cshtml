@@ -38,11 +38,10 @@
                     var insulated = Model.Epc?.RoofInsulated is RoofInsulated.Yes;
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            @SharedLocalizer[$"Your {@Model.Epc.LodgementYear} Energy Performance Certificate suggests your"]
-                            <strong>
-                                @SharedLocalizer[$"loft is {(insulated ? "" : "not")} fully insulated"]
-                            </strong>
-                            @SharedLocalizer[$"as it has {(insulated ? "at least" : "less than")} 200mm of insulation."]
+                            @(insulated switch {
+                                true => @SharedLocalizer["EPCSuggestsYourLoftIsFullyInsulatedString", @Model.Epc.LodgementYear],
+                                false => @SharedLocalizer["EPCSuggestsYourLoftIsNotFullyInsulatedString", @Model.Epc.LodgementYear],
+                                })
                         </p>;
                 } else if (Model.HintUninsulatedRoof is not null)
                 {

@@ -2617,4 +2617,18 @@
     <data name="WeFoundImprovementsSingularString" xml:space="preserve">
         <value>Rydym wedi canfod &lt;b&gt;1 gwelliant a argymhellir&lt;/b&gt; i chi ei ystyried.</value>
     </data>
+    <data name="Why do we need to know this" xml:space="preserve">
+        <value>Pam fod arnom angen cael gwybod hyn</value>
+    </data>
+    <data name="Why do we want to know this?" xml:space="preserve">
+        <value>Pam fod arnom eisiau cael gwybod hyn?</value>
+    </data>
+    <data name="EPCSuggestsYourLoftIsFullyInsulatedString" xml:space="preserve">
+        <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod eich &lt;strong&gt;atig wedi’i inswleiddio’n llwyr&lt;/strong&gt; a bod gennych o leiaf 200mm o ddeunydd inswleiddio.</value>
+        <comment>EPCSuggestsYourLoftIsFullyInsulatedString</comment>
+    </data>
+    <data name="EPCSuggestsYourLoftIsNotFullyInsulatedString" xml:space="preserve">
+        <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu nad ydy eich &lt;strong&gt;atig wedi’i inswleiddio’n llwyr&lt;/strong&gt; a bod gennych lai na 200mm o ddeunydd inswleiddio.</value>
+        <comment>EPCSuggestsYourLoftIsNotFullyInsulatedString</comment>
+    </data>
 </root>
