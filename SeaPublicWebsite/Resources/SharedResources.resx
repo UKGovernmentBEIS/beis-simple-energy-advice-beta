@@ -2571,4 +2571,12 @@
     <data name="Ground floor" xml:space="preserve">
         <value>Ground floor</value>
     </data>
+    <data name="EPCSuggestsYourLoftIsFullyInsulatedString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your &lt;strong&gt;loft is  fully insulated&lt;/strong&gt; as it has at least 200mm of insulation.</value>
+        <comment>EPCSuggestsYourLoftIsFullyInsulatedString</comment>
+    </data>
+    <data name="EPCSuggestsYourLoftIsNotFullyInsulatedString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your &lt;strong&gt;loft is not fully insulated&lt;/strong&gt; as it has less than 200mm of insulation.</value>
+        <comment>EPCSuggestsYourLoftIsNotFullyInsulatedString</comment>
+    </data>
 </root>
