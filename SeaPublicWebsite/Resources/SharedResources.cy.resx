@@ -2611,4 +2611,10 @@
     <data name="CavityWallInsulationExpectedToLastString" xml:space="preserve">
         <value>Disgwylir i inswleiddiad waliau ceudod bara &lt;b&gt;tua {0} o flynyddoedd&lt;/b&gt;</value>
     </data>
+    <data name="WeFoundImprovementsPluralString" xml:space="preserve">
+        <value>Rydym wedi dod o hyd i &lt;b&gt;{0} o welliannau&lt;/b&gt; i chi eu hystyried.</value>
+    </data>
+    <data name="WeFoundImprovementsSingularString" xml:space="preserve">
+        <value>Rydym wedi canfod &lt;b&gt;1 gwelliant a argymhellir&lt;/b&gt; i chi ei ystyried.</value>
+    </data>
 </root>
