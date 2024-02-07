@@ -2559,4 +2559,7 @@
         <value>remember your language</value>
         <comment>remember your language</comment>
     </data>
+    <data name="2012 or newer" xml:space="preserve">
+        <value>2012 or newer</value>
+    </data>
 </root>
