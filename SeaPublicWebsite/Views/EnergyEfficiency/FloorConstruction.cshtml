@@ -42,15 +42,12 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            @SharedLocalizer[$"Your 2013 Energy Performance Certificate suggests your home has"]
-                            <strong>
-                                @(Model.Epc?.FloorConstruction switch {
-                                    FloorConstruction.SuspendedTimber => @SharedLocalizer["EPCSuggestsSuspendedTimberFloorString", Model.Epc.LodgementYear],
-                                    FloorConstruction.SolidConcrete => @SharedLocalizer["EPCSuggestsSolidConcreteFloorString", Model.Epc.LodgementYear],
-                                    FloorConstruction.Mix => @SharedLocalizer["EPCSuggestsBothSuspendedTimberAndSolidConcreteFloorString", Model.Epc.LodgementYear],
-                                    FloorConstruction.Other => @SharedLocalizer["EPCSuggestsAnotherTypeOfFloorString", Model.Epc.LodgementYear],
-                                    _ => throw new ArgumentOutOfRangeException()})
-                            </strong>
+                            @(Model.Epc?.FloorConstruction switch {
+                                FloorConstruction.SuspendedTimber => @SharedLocalizer["EPCSuggestsSuspendedTimberFloorString", Model.Epc.LodgementYear],
+                                FloorConstruction.SolidConcrete => @SharedLocalizer["EPCSuggestsSolidConcreteFloorString", Model.Epc.LodgementYear],
+                                FloorConstruction.Mix => @SharedLocalizer["EPCSuggestsBothSuspendedTimberAndSolidConcreteFloorString", Model.Epc.LodgementYear],
+                                FloorConstruction.Other => @SharedLocalizer["EPCSuggestsAnotherTypeOfFloorString", Model.Epc.LodgementYear],
+                                _ => throw new ArgumentOutOfRangeException()})
                         </p>;
                 } else if (Model.HintSuspendedTimber is not null)
                 {
