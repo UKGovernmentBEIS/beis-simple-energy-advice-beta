@@ -1,25 +1,27 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
+using SeaPublicWebsite.Resources;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class NewOrReturningUserViewModel : QuestionFlowViewModel
     {
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Select if you have used this service before")]
+        
+        [GovUkValidateRequired(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = nameof(ErrorMessages.UsedServiceBeforeRequired))]
         public NewOrReturningUser? NewOrReturningUser { get; set; }
 
-        [GovUkValidateRequiredIf(
-            ErrorMessageIfMissing = "Enter your 8-character reference code (or choose the 'This is my first visit' option)", 
+        [GovUkValidateRequiredIf(ErrorMessageResourceName = nameof(ErrorMessages.ReferenceRequired), ErrorMessageResourceType = typeof(ErrorMessages),
             IsRequiredPropertyName = nameof(RefRequired))]
         public string Reference { get; set; }
         public bool RefRequired => NewOrReturningUser == EnergyEfficiency.NewOrReturningUser.ReturningUser;
+        
     }
     
     public enum NewOrReturningUser
     {
-        [GovUkRadioCheckboxLabelText(Text = "No, this is my first visit or I don’t have a reference code")]
+        [Display(ResourceType = typeof(Resources.Enum.NewOrReturningUser), Description = nameof(Resources.Enum.NewOrReturningUser.NewUser))] 
         NewUser,
-        [GovUkRadioCheckboxLabelText(Text = "Yes, and I have the 8-character reference code from my previous visit")]
+        [Display(ResourceType = typeof(Resources.Enum.NewOrReturningUser), Description = nameof(Resources.Enum.NewOrReturningUser.ReturningUser))] 
         ReturningUser,
     }
 }

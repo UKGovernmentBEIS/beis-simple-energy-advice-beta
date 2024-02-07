@@ -2,16 +2,18 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.YourRecommendationsViewModel
 @{
-    ViewBag.Title = "Your recommendations";
+    ViewBag.Title = SharedLocalizer["Your recommendations"].Value;
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -20,45 +22,40 @@
     <div class="govuk-grid-column-two-thirds">
 
         <h1 class="govuk-heading-xl">
-            You may be able to make some improvements to your home
+            @SharedLocalizer["You may be able to make some improvements to your home"]
         </h1>
         <p class="govuk-body">
-            Based on the information you’ve given us, there may be some changes a qualified
-            installer could make to your home to reduce the amount of energy it needs to use.
+            @SharedLocalizer["Based on the information you’ve given us, there may be some changes a qualified installer could make to your home to reduce the amount of energy it needs to use."]
         </p>
 
-        <p class="govuk-body">We’ve found <b>@Model.NumberOfPropertyRecommendations recommended improvement@(Model.NumberOfPropertyRecommendations == 1 ? "" : "s")</b> for you to consider.</p>
+        <p class="govuk-body">@(Model.NumberOfPropertyRecommendations == 1 ? SharedLocalizer["WeFoundImprovementsSingularString"] : SharedLocalizer["WeFoundImprovementsPluralString", Model.NumberOfPropertyRecommendations])</p>
 
         <p class="govuk-body">
-            We will advise you if your home needs to meet certain conditions for a given
-            improvement to be effective for you.
+            @SharedLocalizer["We will advise you if your home needs to meet certain conditions for a given improvement to be effective for you."]
         </p>
 
         <p class="govuk-body">
-            If you like any of these recommendations, you can save them to your action plan before you move on.
+            @SharedLocalizer["If you like any of these recommendations, you can save them to your action plan before you move on."]
         </p>
 
         <div class="govuk-warning-text">
             <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
             <strong class="govuk-warning-text__text">
                 <span class="govuk-warning-text__assistive">Note</span>
-                The costs and savings we provide are estimates and may not be the same in practice. 
-                The savings displayed are based on the January 2024 energy price cap for gas and electricity bills, 
-                and on the RdSAP energy prices for all other heating fuel types. 
-                As energy prices change, so will the estimates of savings.
+                @SharedLocalizer["CostsAndSavingsAreEstimatesWarningTextString"] 
             </strong>
         </div>
 
         <h2 class="govuk-heading-l">
-            Getting back to your recommendations once you leave
+            @SharedLocalizer["Getting back to your recommendations once you leave"]
         </h2>
 
         <p class="govuk-body">
-            You will need a reference code to return to your recommendations and action plan quickly if you leave the service.
+            @SharedLocalizer["You will need a reference code to return to your recommendations and action plan quickly if you leave the service."]
         </p>
 
         <div class="sea-user-reference govuk-!-margin-bottom-6" role="complementary">
-            <h3 class="govuk-body-l govuk-!-margin-bottom-0">Your reference code</h3>
+            <h3 class="govuk-body-l govuk-!-margin-bottom-0">@SharedLocalizer["Your reference code"]</h3>
             <span class="govuk-heading-l" id="subsection-title">@Model.Reference</span>
         </div>
 
@@ -70,7 +67,7 @@
                 m => m.HasEmailAddress,
                 label: new()
                 {
-                    Text = "Yes, email a link and the reference code to me"
+                    Text = @SharedLocalizer["Yes, email a link and the reference code to me"].Value
                 },
                 fieldsetOptions: new FieldsetViewModel
                 {
@@ -78,9 +75,11 @@
                     {
                         Html = @<text>
                                    <h3 class="govuk-!-margin-bottom-4">
-                                       Would you like us to email the above?
+                                       @SharedLocalizer["Would you like us to email the above?"]
                                    </h3>
-                                   <p class="govuk-body">We will send you a link to your recommendations and your reference code so you can quickly get back when you need to. If you do not wish to provide an email, make sure you make a note of your reference code.</p>
+                                    <p class="govuk-body">
+                                        @SharedLocalizer["We will send you a link to your recommendations and your reference code so you can quickly get back when you need to. If you do not wish to provide an email, make sure you make a note of your reference code."]
+                                    </p>
                                 </text>,
                         Classes = "govuk-fieldset__legend--m",
                         IsPageHeading = true,
@@ -93,11 +92,11 @@
                                            m => m.EmailAddress,
                                            labelOptions: new LabelViewModel
                                            {
-                                               Text = "Please enter your email",
+                                               Text = @SharedLocalizer["Please enter your email"].Value,
                                            },
                                            classes: "govuk-input--width-20",
                                            autocomplete: "email",
-                                           placeholder: "e.g. my.email@example.com"
+                                           placeholder: @SharedLocalizer["e.g. my.email@example.com"].Value
                                            )
                              </text>)
                 }))
@@ -105,7 +104,7 @@
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
                 {
-                    Text = "Explore recommendations",
+                    Text = @SharedLocalizer["Explore recommendations"].Value,
                     IsStartButton = true
                 }))
             </div>

@@ -1,16 +1,16 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum BungalowType
     {
-        [GovUkRadioCheckboxLabelText(Text = "Detached")]
+        [Display(ResourceType = typeof(Resources.Enum.BungalowType), Description = nameof(Resources.Enum.BungalowType.Detached))]
         Detached,
-        [GovUkRadioCheckboxLabelText(Text = "Semi-detached")]
+        [Display(ResourceType = typeof(Resources.Enum.BungalowType), Description = nameof(Resources.Enum.BungalowType.SemiDetached))]
         SemiDetached,
-        [GovUkRadioCheckboxLabelText(Text = "Terraced")]
+        [Display(ResourceType = typeof(Resources.Enum.BungalowType), Description = nameof(Resources.Enum.BungalowType.Terraced))]
         Terraced,
-        [GovUkRadioCheckboxLabelText(Text = "End terrace")]
+        [Display(ResourceType = typeof(Resources.Enum.BungalowType), Description = nameof(Resources.Enum.BungalowType.EndTerrace))]
         EndTerrace
     }
 }

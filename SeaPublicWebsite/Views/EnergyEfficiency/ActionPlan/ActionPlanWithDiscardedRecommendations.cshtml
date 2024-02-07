@@ -2,6 +2,8 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Models.EnergyEfficiency
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
 
 @{
@@ -18,37 +20,37 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <h1 class="govuk-heading-xl">
-            Your Action Plan
+            @SharedLocalizer["YourActionPlanTitleString"]
         </h1>
 
         <p class="govuk-body">
-            You told us that you don’t want to proceed with any of the recommendations suggested to you.
-            There are still some options for you to consider.
+            @SharedLocalizer["You told us that you don’t want to proceed with any of the recommendations suggested to you."]
+            @SharedLocalizer["There are still some options for you to consider."]
         </p>
 
         @{ await Html.RenderPartialAsync("ActionPlan/Partials/_AvailableSchemesOrGrants", Model); }
         @{ await Html.RenderPartialAsync("ActionPlan/Partials/_DiscardedRecommendations", Model); }
 
         <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
-            Other ways to save energy
+            @SharedLocalizer["Other ways to save energy"]
         </h2>
 
         <p class="govuk-body">
-            If you’d like to do more to improve the energy efficiency of your home, consider the following:
+            @SharedLocalizer["If you’d like to do more to improve the energy efficiency of your home, consider the following:"]
         </p>
 
         <ul class="govuk-list govuk-list--bullet">
             <li>
-                Visit the <a class="govuk-link" target="_blank" href="https://helpforhouseholds.campaign.gov.uk/help-with-your-bills/energy-saving-advice/">Help for Households</a> website for even more ways to save energy and reduce your bills.
+                @SharedLocalizer["VisitTheHelpForHouseholdsWebsiteString", "https://helpforhouseholds.campaign.gov.uk/help-with-your-bills/energy-saving-advice/"]
             </li>
-            <li>When buying new appliances, upgrade to an energy efficient one - <a class="govuk-link" target="_blank" href="https://energylabel.org.uk/">Learn about energy labels</a></li>
+            <li>@SharedLocalizer["WhenBuyingNewAppliancesUpgradeEnergyLabelsString", "https://energylabel.org.uk/"]</li>
             @if (Model.PropertyData?.HasOutdoorSpace != HasOutdoorSpace.No)
             {
-                <li>Install a heat pump - <a class="govuk-link" target="_blank" href="https://www.heat-pump-check.service.gov.uk/">Check if your home may be suitable</a></li>
+                <li>@SharedLocalizer["InstallHeatPumpCheckIfHomeSuitableString", "https://www.heat-pump-check.service.gov.uk/"]</li>
             }
             @if (Model.PropertyData?.YearBuilt == YearBuilt.Pre1900)
             {
-                <li>Visit the <a class="govuk-link" target="_blank" href="https://historicengland.org.uk/advice/your-home/energy-efficiency/">Historic England</a> site for information specific to historic buildings.</li>
+                <li>@SharedLocalizer["VisitHistoricEnglandForHistoricBuildingInformationString", "https://historicengland.org.uk/advice/your-home/energy-efficiency/"]</li>
             }
         </ul>
 

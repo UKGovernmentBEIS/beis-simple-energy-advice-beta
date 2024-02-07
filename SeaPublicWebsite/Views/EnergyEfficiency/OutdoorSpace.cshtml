@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.OutdoorSpaceViewModel
 @{
-    ViewBag.Title = "Outdoor space for heat pump";
+    ViewBag.Title = @SharedLocalizer["Outdoor space for heat pump"].Value;
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -28,20 +30,15 @@
                 Func<object, object> details = 
                     @<text>
                         <p class="govuk-body">
-                            A heat pump is a heating technology transferring heat from outside to heat your rooms and hot water.
+                            @SharedLocalizer["A heat pump is a heating technology transferring heat from outside to heat your rooms and hot water."]
                         </p>
                         <p class="govuk-body">
-                            The most common type in the UK are air-to-water heat pumps, meaning they transfer heat energy in the
-                            air to water that is sent to your radiators or underfloor heating, as well as a hot water cylinder for providing hot water.
+                            @SharedLocalizer["The most common type in the UK are air-to-water heat pumps, meaning they transfer heat energy in the air to water that is sent to your radiators or underfloor heating, as well as a hot water cylinder for providing hot water."]
                         </p>
                      </text>;
                 Func<object, object> blueBannerHint = 
                     @<p class="govuk-body">
-                        Homes of your type typically
-                        <strong>
-                            @(Model.HintHasOutdoorSpace ? "have some outdoor space" : "do not have any outdoor space")
-                            that could fit a heat pump.
-                        </strong>
+                        @(Model.HintHasOutdoorSpace ? @SharedLocalizer["HomesOfYourTypeTypicallyHaveOutdoorSpaceThatCouldFitHeatPumpString"] : @SharedLocalizer["HomesOfYourTypeTypicallyDoNotHaveOutdoorSpaceThatCouldFitHeatPumpString"])
                     </p>;
             }
             
@@ -50,7 +47,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "Do you have anywhere outside your home where you could fit a heat pump?", 
+                        Text = @SharedLocalizer["Do you have anywhere outside your home where you could fit a heat pump?"].Value, 
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -59,21 +56,18 @@
                 {
                     Html = @<text>
                                <p class="govuk-body">
-                                   Most heat pump systems will need some outside space that you own where you could fit 
-                                   an external unit, about as big as a medium-sized chest of drawers. 
+                                   @SharedLocalizer["Most heat pump systems will need some outside space that you own where you could fit an external unit, about as big as a medium-sized chest of drawers."]
                                </p>
                                <p class="govuk-body">
-                                   If you have a garden or own some land next to your home that would be accessible to an 
-                                   installer, then you may have enough outside space for a heat pump. 
+                                   @SharedLocalizer["If you have a garden or own some land next to your home that would be accessible to an installer, then you may have enough outside space for a heat pump."]
                                </p>                              
                                <p class="govuk-body">
-                                   If you don’t have a garden or don’t own any land next to your home, then you may not 
-                                   have anywhere that could fit the external unit of a heat pump.
+                                   @SharedLocalizer["If you don’t have a garden or don’t own any land next to your home, then you may not have anywhere that could fit the external unit of a heat pump."]
                                </p>
                                
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "What is a heat pump?",
+                                          SummaryText = @SharedLocalizer["What is a heat pump?"].Value,
                                           Html = details
                                       })
                                
@@ -88,7 +82,7 @@
 
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = @SharedLocalizer["Continue"].Value
                    })
             
         </form>

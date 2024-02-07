@@ -1,14 +1,14 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum PropertyType
     {
-        [GovUkRadioCheckboxLabelText(Text = "House")]
+        [Display(ResourceType = typeof(Resources.Enum.PropertyType), Description = nameof(Resources.Enum.PropertyType.House))]
         House,
-        [GovUkRadioCheckboxLabelText(Text = "Bungalow")]
+        [Display(ResourceType = typeof(Resources.Enum.PropertyType), Description = nameof(Resources.Enum.PropertyType.Bungalow))]
         Bungalow,
-        [GovUkRadioCheckboxLabelText(Text = "Apartment, flat or maisonette")]
+        [Display(ResourceType = typeof(Resources.Enum.PropertyType), Description = nameof(Resources.Enum.PropertyType.ApartmentFlatOrMaisonette))]
         ApartmentFlatOrMaisonette
     }
 }

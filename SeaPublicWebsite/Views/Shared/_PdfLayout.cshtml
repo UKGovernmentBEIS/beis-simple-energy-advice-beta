@@ -1,8 +1,10 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.Localization
 @using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Services
 @inject StaticAssetsVersioningService StaticAssetsVersioning
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @inject FullHostnameService FullHostnameService
 @{
     string assetsPath = "/assets/images";
@@ -12,7 +14,7 @@
 <html lang="en" class="govuk-template sea-pdf app-html-class">
 <head>
     <meta charset="utf-8"/>
-    <title>@(ViewBag.Title != null ? ViewBag.Title + " -" : "") @Constants.SERVICE_NAME - Gov.UK</title>
+    <title>@(ViewBag.Title != null ? ViewBag.Title + " -" : "") @SharedLocalizer[Constants.SERVICE_NAME].Value - Gov.UK</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0b0c0c">
 
@@ -37,7 +39,7 @@
 
         @(await Html.GovUkHeader(new HeaderViewModel
         {
-            ServiceName = Constants.SERVICE_NAME,
+            ServiceName = @SharedLocalizer[Constants.SERVICE_NAME].Value,
             AssetsPath = assetsPath,
             HomepageUrl = "https://www.gov.uk",
             ServiceUrl = $"{FullHostnameService.GetHostname()}/energy-efficiency",
@@ -49,7 +51,7 @@
         @(RenderSection("BeforeMain", false))
 
         <main class="govuk-main-wrapper" id="main-content" role="main">
-            @(await Html.GovUkErrorSummary(ViewData.ModelState))
+            @(await Html.GovUkErrorSummary(ViewData.ModelState, errorSummaryTitle:SharedLocalizer["There is a problem"].Value))
             @RenderBody()
         </main>
     </div>

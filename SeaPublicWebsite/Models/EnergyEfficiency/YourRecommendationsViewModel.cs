@@ -1,6 +1,7 @@
 ﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
 using GovUkDesignSystem.ModelBinders;
 using Microsoft.AspNetCore.Mvc;
+using SeaPublicWebsite.Resources;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
@@ -12,7 +13,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         [ModelBinder(typeof(GovUkCheckboxBoolBinder))]
         public bool HasEmailAddress { get; set; }
         
-        [GovUkValidateRequiredIf(ErrorMessageIfMissing = "Enter a valid email address", 
+        [GovUkValidateRequiredIf(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = nameof(ErrorMessages.EmailAddressRequired), 
             IsRequiredPropertyName = nameof(HasEmailAddress))]
         public string EmailAddress { get; set; }
     }

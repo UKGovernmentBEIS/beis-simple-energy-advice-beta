@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.SolidWallsInsulatedViewModel
 @{
-    ViewBag.Title = "Solid Walls Insulated";
+    ViewBag.Title = @SharedLocalizer["Solid Walls Insulated"].Value;
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -28,10 +30,10 @@
                 Func<object, object> details = 
                     @<text>
                         <p class="govuk-body">
-                            Solid walls are more common in pre-1930 buildings and these were typically built without insulation.
+                            @SharedLocalizer["Solid walls are more common in pre-1930 buildings and these were typically built without insulation."]
                         </p>
-                        <p class="govuk-body">
-                            If you have solid walls, it’s unlikely they are insulated. 
+                        <p class="govuk-body"> 
+                            @SharedLocalizer["If you have solid walls, it’s unlikely they are insulated."]
                         </p>
                      </text>;
                 
@@ -40,23 +42,17 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests
-                            <strong>
-                                @(Model.Epc?.SolidWallsInsulated switch {
-                                    SolidWallsInsulated.No => "your solid walls are uninsulated.",
-                                    SolidWallsInsulated.Some => "some of your solid walls are insulated.",
-                                    SolidWallsInsulated.All => "your solid walls are insulated.",
-                                    _ => throw new ArgumentOutOfRangeException()})
-                            </strong>
+                            @(Model.Epc?.SolidWallsInsulated switch {
+                                SolidWallsInsulated.No => @SharedLocalizer["EPCSuggestsAllSolidWallsAreUninsulatedString", Model.Epc.LodgementYear],
+                                SolidWallsInsulated.Some => @SharedLocalizer["EPCSuggestsSomeSolidWallsAreUninsulatedString", Model.Epc.LodgementYear],
+                                SolidWallsInsulated.All => @SharedLocalizer["EPCSuggestsAllSolidWallsAreInsulatedString", Model.Epc.LodgementYear],
+                                _ => throw new ArgumentOutOfRangeException()})
                         </p>;
                 } else
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            Homes of your type typically have
-                            <strong>
-                                uninsulated solid walls
-                            </strong>
+                            @SharedLocalizer["HomesOfYourTypeTypicallyHaveUninsulatedSolidWallsString"]
                         </p>;
                 }
             }
@@ -66,7 +62,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "Are your solid walls insulated?",
+                        Text = @SharedLocalizer["Are your solid walls insulated?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -75,12 +71,12 @@
                 {
                     Html = @<text>
                                <p class="govuk-body">
-                                   Solid wall insulation may be installed internally, inside your home, or externally, on the outside walls.
+                                   @SharedLocalizer["Solid wall insulation may be installed internally, inside your home, or externally, on the outside walls."]
                                </p>
                                
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "Help me answer this question",
+                                          SummaryText = @SharedLocalizer["Help me answer this question"].Value,
                                           Html = details
                                       })
                                
@@ -94,7 +90,7 @@
 
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = @SharedLocalizer["Continue"].Value
                    })
             
         </form>

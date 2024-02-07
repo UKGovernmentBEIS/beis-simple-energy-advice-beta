@@ -1,14 +1,14 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum RoofInsulated
     {
-        [GovUkRadioCheckboxLabelText(Text = "Yes, there is at least 200mm of insulation in my loft")]
+        [Display(ResourceType = typeof(Resources.Enum.RoofInsulated), Description = nameof(Resources.Enum.RoofInsulated.Yes))]
         Yes,
-        [GovUkRadioCheckboxLabelText(Text = "No, there is less than 200mm of insulation in my loft")]
+        [Display(ResourceType = typeof(Resources.Enum.RoofInsulated), Description = nameof(Resources.Enum.RoofInsulated.No))]
         No,
-        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
+        [Display(ResourceType = typeof(Resources.Enum.RoofInsulated), Description = nameof(Resources.Enum.RoofInsulated.DoNotKnow))]
         DoNotKnow,
     }
 }

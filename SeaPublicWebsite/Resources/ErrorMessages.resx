@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="UsedServiceBeforeRequired" xml:space="preserve">
+        <value>Select if you have used this service before</value>
+    </data>
+    <data name="PostcodeRequired" xml:space="preserve">
+        <value>Enter a postcode</value>
+    </data>
+    <data name="BuildingNumberOrNameRequired" xml:space="preserve">
+        <value>Enter a building number or name</value>
+    </data>
+    <data name="BungalowTypeRequired" xml:space="preserve">
+        <value>Select bungalow type</value>
+    </data>
+    <data name="CavityWallInsulationRequired" xml:space="preserve">
+        <value>Select if your cavity walls are insulated</value>
+    </data>
+    <data name="AddressRequired" xml:space="preserve">
+        <value>Select your address</value>
+    </data>
+    <data name="CertificateBelongsToAddressRequired" xml:space="preserve">
+        <value>Confirm whether or not this certificate belongs to your address before continuing</value>
+    </data>
+    <data name="SelectPropertyCountryRequired" xml:space="preserve">
+        <value>Select which country the property is located in</value>
+    </data>
+    <data name="SearchForEPCConfirmationRequired" xml:space="preserve">
+        <value>Confirm whether or not you would like to search for your EPC before continuing</value>
+    </data>
+    <data name="FlatTypeRequired" xml:space="preserve">
+        <value>Select flat type</value>
+    </data>
+    <data name="FloorConstructionTypeRequired" xml:space="preserve">
+        <value>Select how your floor is built</value>
+    </data>
+    <data name="FloorInsulatedRequired" xml:space="preserve">
+        <value>Select if the floor is insulated</value>
+    </data>
+    <data name="GlazingTypeRequired" xml:space="preserve">
+        <value>Select glazing type</value>
+    </data>
+    <data name="HeatingInAfternoonAndEveningHoursRequired" xml:space="preserve">
+        <value>Enter number of hours in the afternoon and evening</value>
+    </data>
+    <data name="HeatingInMorningHoursRequired" xml:space="preserve">
+        <value>Enter number of hours in the morning</value>
+    </data>
+    <data name="NumberOfHoursIntRange" xml:space="preserve">
+        <value>Number of hours must be between {1} and {2}</value>
+    </data>
+    <data name="HeatingSystemRequired" xml:space="preserve">
+        <value>Select your main heating system</value>
+    </data>
+    <data name="YearBuiltRequired" xml:space="preserve">
+        <value>Select what year your property was built</value>
+    </data>
+    <data name="HasHotWaterCylinderRequired" xml:space="preserve">
+        <value>Select whether you have a hot water cylinder</value>
+    </data>
+    <data name="HouseTypeRequired" xml:space="preserve">
+        <value>Select house type</value>
+    </data>
+    <data name="LoftAccessRequired" xml:space="preserve">
+        <value>Select if you have loft access</value>
+    </data>
+    <data name="LoftSpaceRequired" xml:space="preserve">
+        <value>Select if you have a loft space</value>
+    </data>
+    <data name="ReferenceRequired" xml:space="preserve">
+        <value>Enter your 8-character reference code (or choose the 'This is my first visit' option)</value>
+    </data>
+    <data name="EmailAddressRequired" xml:space="preserve">
+        <value>Enter a valid email address</value>
+    </data>
+    <data name="NumberOfOccupantsIntRange" xml:space="preserve">
+        <value>The number of people who live in the property must be between {1} and {2}</value>
+    </data>
+    <data name="OtherHeatingTypeRequired" xml:space="preserve">
+        <value>Select your main heating system</value>
+    </data>
+    <data name="HasOutdoorSpaceRequired" xml:space="preserve">
+        <value>Select whether you have outdoor space</value>
+    </data>
+    <data name="OwnershipStatusRequired" xml:space="preserve">
+        <value>Select your circumstances</value>
+    </data>
+    <data name="PropertyTypeRequired" xml:space="preserve">
+        <value>Select property type</value>
+    </data>
+    <data name="RecommendationActionRequired" xml:space="preserve">
+        <value>Select what to do with this recommendation</value>
+    </data>
+    <data name="RoofConstructionRequired" xml:space="preserve">
+        <value>Select roof type</value>
+    </data>
+    <data name="RoofInsulatedRequired" xml:space="preserve">
+        <value>Select if the roof is insulated</value>
+    </data>
+    <data name="SolidWallsInsulatedRequired" xml:space="preserve">
+        <value>Select if your solid walls are insulated</value>
+    </data>
+    <data name="TemperatureDecimalRange" xml:space="preserve">
+        <value>The temperature must be between {1} and {2}.</value>
+    </data>
+    <data name="WallConstructionRequired" xml:space="preserve">
+        <value>Select wall type</value>
+    </data>
+    <data name="NumberOfOccupantsWholeNumber" xml:space="preserve">
+        <value>The number of people who live in the property must be a whole number</value>
+    </data>
+    <data name="NumberOfOccupantsRequired" xml:space="preserve">
+        <value>Enter the number of people who live in the property</value>
+    </data>
+    <data name="NumberOfOccupantsNumber" xml:space="preserve">
+        <value>The number of people who live in the property must be a number</value>
+    </data>
+    <data name="MorningHoursNumber" xml:space="preserve">
+        <value>Number of hours in the morning must be a number</value>
+    </data>
+    <data name="AfternoonEveningHoursNumber" xml:space="preserve">
+        <value>Number of hours in the afternoon and evening must be a number</value>
+    </data>
+    <data name="MorningHoursWholeNumber" xml:space="preserve">
+        <value>Number of hours in the morning must be a whole number</value>
+    </data>
+    <data name="AfternoonEveningHoursWholeNumber" xml:space="preserve">
+        <value>Number of hours in the afternoon and evening must be a whole number</value>
+    </data>
+    <data name="TemperatureNumber" xml:space="preserve">
+        <value>The temperature must be a number</value>
+    </data>
+</root>

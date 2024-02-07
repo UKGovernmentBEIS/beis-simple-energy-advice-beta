@@ -2,16 +2,18 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.TemperatureViewModel
 @{
-    ViewBag.Title = "Temperature";
+    ViewBag.Title = @SharedLocalizer["Temperature"].Value;
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
-        Text = "Back",
+        Text = @SharedLocalizer["Back"].Value,
         Href = Model.BackLink,
     })
 }
@@ -27,7 +29,7 @@
             {
                 Legend = new LegendViewModel
                 {
-                    Text = "What temperature do you heat your home to?",
+                    Text = @SharedLocalizer["What temperature do you heat your home to?"].Value,
                     Classes = "govuk-fieldset__legend--l",
                     IsPageHeading = true
                 },
@@ -35,17 +37,17 @@
                 InnerHtml = 
                     @<text>
                         <div class="govuk-body">
-                            If you have a room thermostat, this will be the temperature that is usually set to.
+                            @SharedLocalizer["If you have a room thermostat, this will be the temperature that is usually set to."]
                         </div>
                         
                         @await Html.GovUkTextInputFor(
                             m => m.Temperature,
                             hintOptions: new HintViewModel
                             {
-                                Text = "Enter the temperature you heat your home to in degrees Celcius (°C)."
+                                Text = @SharedLocalizer["Enter the temperature you heat your home to in degrees Celcius (°C)."].Value
                             },
                             classes: "govuk-input--width-5",
-                            placeholder: "e.g. 20")
+                            placeholder: @SharedLocalizer["e.g. 20"].Value)
                      </text>
                 
             })
@@ -53,12 +55,12 @@
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
                 {
-                    Text = "Continue",
+                    Text = @SharedLocalizer["Continue"].Value,
                 }))
                 
                 <!-- We don't want to use the design library component since it adds additional styles we do not want -->
                 <button type="submit" class="sea-button-as-link govuk-link" name="skip" value="true">
-                    Skip this question
+                    @SharedLocalizer["Skip this question"]
                 </button>
             </div>
             
@@ -66,12 +68,12 @@
     </div>
     <div class="govuk-grid-column-one-third">
         <aside class="app-related-items" role="complementary">
-            <h2 class="govuk-heading-m" id="subsection-title">What temperature should I heat my home to?</h2>
+            <h2 class="govuk-heading-m" id="subsection-title">@SharedLocalizer["What temperature should I heat my home to?"]</h2>
             <p class="govuk-body-s">
-                The World Health Organisation recommends living areas are heated between 18 and 21 degrees Celsius (&deg;C).
+                @SharedLocalizer["The World Health Organisation recommends living areas are heated between 18 and 21 degrees Celsius (&deg;C)."]
             </p>
             <p class="govuk-body-s">
-                Age UK suggest the elderly heat their main living areas to 21 degrees, while heating the rest of their home to at least 18 degrees.
+                @SharedLocalizer["Age UK suggest the elderly heat their main living areas to 21 degrees, while heating the rest of their home to at least 18 degrees."]
             </p>
         </aside>
         @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")

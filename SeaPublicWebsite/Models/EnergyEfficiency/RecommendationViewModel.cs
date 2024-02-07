@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
+using Microsoft.Extensions.Localization;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
+using SeaPublicWebsite.Resources;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class RecommendationViewModel
     {
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Select what to do with this recommendation")]
+        [GovUkValidateRequired(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = nameof(ErrorMessages.RecommendationActionRequired))]
         public RecommendationAction? RecommendationAction { get; set; }
         public int RecommendationIndex { get; set; }
         public List<PropertyRecommendation> PropertyRecommendations { get; set; }
@@ -42,7 +45,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string GetTotalSavingText()
         {
             var saving = GetSavedRecommendations().Sum(r => r.Saving);
-            return $"£{saving:N0} a year";
+            return $"{saving:N0}";
         }
     }
 }

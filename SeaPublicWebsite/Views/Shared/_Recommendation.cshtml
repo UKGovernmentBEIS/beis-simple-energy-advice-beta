@@ -1,35 +1,33 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.Localization
+@using SeaPublicWebsite.Resources.Bre
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @model SeaPublicWebsite.Models.EnergyEfficiency.SingleRecommendationDetailsViewModel;
 
 <span class="govuk-caption-l">
-    Recommendation @(Model.RecommendationIndex + 1) of @Model.PropertyRecommendations.Count
+    @SharedLocalizer["RecommendationXofYString", Model.RecommendationIndex + 1, Model.PropertyRecommendations.Count]
 </span>
 <h1 class="govuk-heading-l">
-    @Model.GetCurrentPropertyRecommendation().Title
+    @(RecommendationServiceText.ResourceManager.GetString(Model.GetCurrentPropertyRecommendation().Title) ?? Model.GetCurrentPropertyRecommendation().Title)
 </h1>
 
 @await RenderSectionAsync("RecommendationBody", true)
 
-<h2 class="govuk-heading-m">Who this improvement is suitable for</h2>
-<p class="govuk-body">You should consider this improvement for your property if:</p>
+<h2 class="govuk-heading-m">@SharedLocalizer["Who this improvement is suitable for"]</h2>
+<p class="govuk-body">@SharedLocalizer["You should consider this improvement for your property if:"]</p>
 @await RenderSectionAsync("RecommendationSuitableFor", true)
 
 <h2 class="govuk-heading-m">
-    What you could save
+    @SharedLocalizer["What you could save"]
 </h2>
 @await RenderSectionAsync("RecommendationLifetime", true)
 @{ await Html.RenderPartialAsync("../EnergyEfficiency/Recommendations/Partials/_WhatYouCouldSave.cshtml", Model); }
 
 @await Html.GovUkWarningText(new WarningTextViewModel
        {
-           IconFallbackText = "Note",
-           Text = "These figures are for a typical installation in a home like yours. " +
-                  "The costs and savings you experience will be affected by your circumstances, " +
-                  "the details of the installations and energy prices. " +
-                  "The savings displayed are based on the January 2024 energy price cap for gas and electricity bills, " +
-                  "and on the RdSAP energy prices for all other heating fuel types. " +
-                  "As energy prices change, so will the estimates of savings."
+           IconFallbackText = SharedLocalizer["Note"].Value,
+           Text = SharedLocalizer["FiguresForTypicalInstallationWarningTextString"].Value
        })
 
 @await Html.GovUkSummaryList(new SummaryListViewModel
@@ -42,7 +40,7 @@
                    Key = new SummaryListRowKey
                    {
                        Classes = "govuk-!-width-two-thirds",
-                       Text = "Will this cause disruption during installation?"
+                       Text = @SharedLocalizer["Will this cause disruption during installation?"].Value
                    },
                    Value = new SummaryListRowValue
                    {
@@ -57,7 +55,7 @@
                    Key = new SummaryListRowKey
                    {
                        Classes = "govuk-!-width-two-thirds",
-                       Text = "How long could this take to install?"
+                       Text = @SharedLocalizer["How long could this take to install?"].Value
                    },
                    Value = new SummaryListRowValue
                    {

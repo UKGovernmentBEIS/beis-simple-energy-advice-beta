@@ -7,7 +7,11 @@
         public string ApiKey { get; set; }
         public string BaseUrl { get; set; }
         public ApplicationReferenceNumberConfiguration ApplicationReferenceNumberTemplate { get; set; }
+        
+        public ApplicationReferenceNumberConfiguration ApplicationReferenceNumberTemplateCy { get; set; }
         public RequestDocumentConfiguration RequestDocumentTemplate { get; set; }
+        
+        public RequestDocumentConfiguration RequestDocumentTemplateCy { get; set; }
     }
     
     public class ApplicationReferenceNumberConfiguration

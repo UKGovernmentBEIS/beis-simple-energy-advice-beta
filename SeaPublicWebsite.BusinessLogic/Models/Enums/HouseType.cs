@@ -1,18 +1,16 @@
-﻿using GovUkDesignSystem;
-using GovUkDesignSystem.Attributes;
-using GovUkDesignSystem.Attributes.ValidationAttributes;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum HouseType
     {
-        [GovUkRadioCheckboxLabelText(Text = "Detached")]
+        [Display(ResourceType = typeof(Resources.Enum.HouseType), Description = nameof(Resources.Enum.HouseType.Detached))]
         Detached,
-        [GovUkRadioCheckboxLabelText(Text = "Semi-detached")]
+        [Display(ResourceType = typeof(Resources.Enum.HouseType), Description = nameof(Resources.Enum.HouseType.SemiDetached))]
         SemiDetached,
-        [GovUkRadioCheckboxLabelText(Text = "Terraced")]
+        [Display(ResourceType = typeof(Resources.Enum.HouseType), Description = nameof(Resources.Enum.HouseType.Terraced))]
         Terraced,
-        [GovUkRadioCheckboxLabelText(Text = "End terrace")]
+        [Display(ResourceType = typeof(Resources.Enum.HouseType), Description = nameof(Resources.Enum.HouseType.EndTerrace))]
         EndTerrace
     }
 }

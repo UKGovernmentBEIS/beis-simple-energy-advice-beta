@@ -3,16 +3,18 @@
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.ConfirmEpcDetailsViewModel
 @{
-    ViewBag.Title = "Confirm your EPC details";
+    ViewBag.Title = @SharedLocalizer["Confirm your EPC details"].Value;
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
     {
-        Text = "Back",
+        Text = @SharedLocalizer["Back"].Value,
         Href = Model.BackLink,
     })
 }
@@ -25,7 +27,7 @@
         Key = new()
         {
             Classes = "govuk-!-width-one-half",
-            Text = "Building type"
+            Text = @SharedLocalizer["Building type"].Value
         },
         Value = new()
         {
@@ -44,7 +46,7 @@
         Key = new()
         {
             Classes = "govuk-!-width-one-half",
-            Text = "Year home was built"
+            Text = @SharedLocalizer["Year home was built"].Value
         },
         Value = new()
         {
@@ -64,14 +66,14 @@
                    {
                        Legend = new LegendViewModel
                        {
-                           Text = "Check your property's details",
+                           Text = SharedLocalizer["Check your property's details"].Value,
                            Classes = "govuk-fieldset__legend--l",
                            IsPageHeading = true
                        },
                        InnerHtml =
                            @<text>
                                <p class="govuk-caption-m">
-                                   Please confirm that this information about your property is correct. This information cannot be changed later once you continue.
+                                   @SharedLocalizer["Please confirm that this information about your property is correct. This information cannot be changed later once you continue."]
                                </p>
                                @(await Html.GovUkSummaryList(new SummaryListViewModel
                                {
@@ -84,7 +86,7 @@
                                           {
                                               Legend = new LegendViewModel
                                               {
-                                                  Text = "Is this information correct?",
+                                                  Text = SharedLocalizer["Is this information correct?"].Value,
                                                   Classes = "govuk-fieldset__legend--m",
                                                   IsPageHeading = false
                                               }
@@ -95,7 +97,7 @@
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
                 {
-                    Text = "Continue",
+                    Text = @SharedLocalizer["Continue"].Value,
                 }))
             </div>
         </form>

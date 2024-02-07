@@ -6,8 +6,293 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.0-922f9ad" />
+      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.37" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Enum\CavityWallsInsulated.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>CavityWallsInsulated.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\Country.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Country.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\EpcAddressConfirmed.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>EPCAddressConfirmed.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\EpcDetailsConfirmed.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>EpcDetailsConfirmed.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\EpcHeatingType.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>EpcHeatingType.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\EpcAddressConfirmed.resx">
+        <LastGenOutput>EpcAddressConfirmed.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\FlatTypes.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>FlatType.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\FloorConstruction.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>FloorConstruction.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\FloorInsulated.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>FloorInsulated.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\GlazingType.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>GlazingType.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\HasHotWaterCylinder.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>HasHotWaterCylinder.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\HasOutdoorSpace.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>HasOutdoorSpace.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\HeatingPattern.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>HeatingPattern.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\HeatingType.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>HeatingType.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\HomeAge.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>HomeAge.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\HouseType.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>HouseType.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\LoftAccess.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>LoftAccess.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\LoftSpace.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>LoftSpace.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\OtherHeatingType.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>OtherHeatingType.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\OwnershipStatus.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>OwnershipStatus.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\PropertyType.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>PropertyType.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\BungalowType.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>BungalowType.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\RecommendationAction.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>RecommendationAction.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\RoofInsulated.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>RoofConstruction.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\SearchForEpc.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>SearchForEpc.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\SolidWallsInsulated.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>SolidWallsInsulated.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\WallConstruction.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>WallConstruction.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\YearBuilt.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>YearBuilt.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\RoofConstruction.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>RoofConstruction.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\ReccomendationKey.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>ReccomendationKey.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Bre\Enums\BreBuiltForm.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>BreBuiltForm.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Enum\CavityWallsInsulated.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>CavityWallsInsulated.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\Country.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Country.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\EpcAddressConfirmed.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>EpcAddressConfirmed.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\EpcDetailsConfirmed.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>EpcDetailsConfirmed.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\EpcHeatingType.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>EpcHeatingType.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\FlatTypes.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>FlatTypes.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\FloorConstruction.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>FloorConstruction.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\FloorInsulated.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>FloorInsulated.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\GlazingType.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>GlazingType.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\HasHotWaterCylinder.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>HasHotWaterCylinder.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\HasOutdoorSpace.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>HasOutdoorSpace.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\HeatingPattern.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>HeatingPattern.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\HeatingType.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>HeatingType.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\HomeAge.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>HomeAge.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\HouseType.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>HouseType.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\LoftAccess.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>LoftAccess.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\LoftSpace.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>LoftSpace.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\OtherHeatingType.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>OtherHeatingType.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\OwnershipStatus.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>OwnershipStatus.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\PropertyType.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>PropertyType.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\BungalowType.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>BungalowType.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\RecommendationAction.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>RecommendationAction.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\RoofInsulated.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>RoofInsulated.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\SearchForEpc.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>SearchForEpc.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\SolidWallsInsulated.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>SolidWallsInsulated.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\WallConstruction.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>WallConstruction.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\YearBuilt.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>YearBuilt.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\RoofConstruction.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>RoofConstruction.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\ReccomendationKey.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ReccomendationKey.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Bre\Enums\BreBuiltForm.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>BreBuiltForm.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\EnumDisplay.cy.resx">
+        <LastGenOutput>EnumDisplay.cy.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
 </Project>
