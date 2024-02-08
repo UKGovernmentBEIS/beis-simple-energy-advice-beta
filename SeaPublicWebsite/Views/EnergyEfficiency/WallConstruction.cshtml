@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.WallConstructionViewModel;
 @{
-    ViewBag.Title = "Wall Construction";
+    ViewBag.Title = SharedLocalizer["Wall Construction"].Value;
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -28,20 +30,19 @@
                 Func<object,object> details = 
                     @<text>
                         <p class="govuk-body">
-                            Solid brick walls will have an alternating pattern, with some bricks laid across the wall so you can see the smaller ends from the outside.
+                            @SharedLocalizer["Solid brick walls will have an alternating pattern, with some bricks laid across the wall so you can see the smaller ends from the outside."]
                         </p>
                         <p class="govuk-body">
-                            If your home has cavity walls, the bricks typically have an even pattern with all bricks laid lengthways.
+                            @SharedLocalizer["If your home has cavity walls, the bricks typically have an even pattern with all bricks laid lengthways."]
                         </p>
                         <p class="govuk-body">
-                            If the brickwork has been covered, you may be able to tell by measuring the width of the wall.
-                            Measure the depth of the wall by a window or door on one of your external walls.
+                            @SharedLocalizer["If the brickwork has been covered, you may be able to tell by measuring the width of the wall. Measure the depth of the wall by a window or door on one of your external walls."]
                         </p>
                         <p class="govuk-body">
-                            If a brick wall is more than 260mm thick, then it is probably a cavity wall.
+                            @SharedLocalizer["If a brick wall is more than 260mm thick, then it is probably a cavity wall."]
                         </p>
                         <p class="govuk-body">
-                            A narrower wall is probably a solid wall. Stone walls may be thicker still but are usually solid.
+                            @SharedLocalizer["A narrower wall is probably a solid wall. Stone walls may be thicker still but are usually solid."]
                         </p>
                      </text>;
 
@@ -50,24 +51,18 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your home has
-                            <strong>
                                 @(Model.Epc?.WallConstruction switch {
-                                    WallConstruction.Solid => "solid walls.",
-                                    WallConstruction.Cavity => "cavity walls.",
-                                    WallConstruction.Mixed => "mixed solid and cavity walls.",
-                                    WallConstruction.Other => "another type of walls.",
+                                    WallConstruction.Solid => SharedLocalizer["EPCSuggestsYourHomeHasSolidWallsString", Model.Epc.LodgementYear],
+                                    WallConstruction.Cavity => SharedLocalizer["EPCSuggestsYourHomeHasCavityWallsString", Model.Epc.LodgementYear],
+                                    WallConstruction.Mixed => SharedLocalizer["EPCSuggestsYourHomeHasAMixOfSolidAndCavityWallsString", Model.Epc.LodgementYear],
+                                    WallConstruction.Other => SharedLocalizer["EPCSuggestsAnotherTypeOfFloorString", Model.Epc.LodgementYear],
                                     _ => throw new ArgumentOutOfRangeException()})
-                            </strong>
                         </p>;
                 } else if (Model.HintSolidWalls is not null)
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            Homes of your type typically have
-                            <strong>
-                                @(Model.HintSolidWalls is true ? "solid walls." : "cavity walls.")
-                            </strong>
+                            @(Model.HintSolidWalls is true ? SharedLocalizer["HomesOfYourTypeTypicallyHaveSolidWallsString"] : SharedLocalizer["HomesOfYourTypeTypicallyHaveCavityWallsString"])
                         </p>;
                 }
             }
@@ -76,7 +71,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "What kind of walls does your property have?",
+                        Text = @SharedLocalizer["What kind of walls does your property have?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -85,18 +80,18 @@
                 {
                     Html = @<text>
                                <p class="govuk-body">
-                                   Solid walls may be made from brick or stone. If your home was built before 1930, it’s likely to have solid walls.
+                                   @SharedLocalizer["Solid walls may be made from brick or stone. If your home was built before 1930, it’s likely to have solid walls."]
                                </p>
                                <p class="govuk-body">
-                                   Most homes built after 1930 have cavity walls. Cavity walls have a gap, or cavity, between the wall outside and wall inside. 
+                                    @SharedLocalizer["Most homes built after 1930 have cavity walls. Cavity walls have a gap, or cavity, between the wall outside and wall inside."] 
                                </p>
                                <p class="govuk-body">
-                                   You may have both types. For example, you have a pre-1930 home with an extension built later than 1930.
+                                    @SharedLocalizer["You may have both types. For example, you have a pre-1930 home with an extension built later than 1930."]
                                </p>
                                
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "Help me choose which wall type I have",
+                                          SummaryText = @SharedLocalizer["Help me choose which wall type I have"].Value,
                                           Html = details
                                       })
 
@@ -116,14 +111,14 @@
                         WallConstruction.Other,
                         new HintViewModel
                         {
-                            Text = "Other wall types could include cob walls, timber framed, system built, steel framed or other non-traditional build types"
+                            Text = @SharedLocalizer["Other wall types could include cob walls, timber framed, system built, steel framed or other non-traditional build types"].Value
                         }
                     }
                 }))
 
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = @SharedLocalizer["Continue"].Value
                    })
             
         </form>

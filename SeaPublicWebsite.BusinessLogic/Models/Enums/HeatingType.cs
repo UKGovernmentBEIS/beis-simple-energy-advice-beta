@@ -1,24 +1,24 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum HeatingType
     {
-        [GovUkRadioCheckboxLabelText(Text = "Gas boiler")]
+        [Display(ResourceType = typeof(Resources.Enum.HeatingType), Description = nameof(Resources.Enum.HeatingType.GasBoiler))]
         GasBoiler,
-        [GovUkRadioCheckboxLabelText(Text = "Oil boiler")]
+        [Display(ResourceType = typeof(Resources.Enum.HeatingType), Description = nameof(Resources.Enum.HeatingType.OilBoiler))]
         OilBoiler,
-        [GovUkRadioCheckboxLabelText(Text = "LPG boiler")]
+        [Display(ResourceType = typeof(Resources.Enum.HeatingType), Description = nameof(Resources.Enum.HeatingType.LpgBoiler))]
         LpgBoiler,
-        [GovUkRadioCheckboxLabelText(Text = "Storage heaters")]
+        [Display(ResourceType = typeof(Resources.Enum.HeatingType), Description = nameof(Resources.Enum.HeatingType.Storage))]
         Storage,
-        [GovUkRadioCheckboxLabelText(Text = "Direct acting electric heating")]
+        [Display(ResourceType = typeof(Resources.Enum.HeatingType), Description = nameof(Resources.Enum.HeatingType.DirectActionElectric))]
         DirectActionElectric,
-        [GovUkRadioCheckboxLabelText(Text = "Heat pump")]
+        [Display(ResourceType = typeof(Resources.Enum.HeatingType), Description = nameof(Resources.Enum.HeatingType.HeatPump))]
         HeatPump,
-        [GovUkRadioCheckboxLabelText(Text = "Other")]
+        [Display(ResourceType = typeof(Resources.Enum.HeatingType), Description = nameof(Resources.Enum.HeatingType.Other))]
         Other,
-        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
+        [Display(ResourceType = typeof(Resources.Enum.HeatingType), Description = nameof(Resources.Enum.HeatingType.DoNotKnow))]
         DoNotKnow,
     }
 }

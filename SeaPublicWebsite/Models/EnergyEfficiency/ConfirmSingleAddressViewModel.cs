@@ -1,6 +1,7 @@
 ﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
+using SeaPublicWebsite.Resources;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
@@ -8,7 +9,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public EpcSearchResult EpcSearchResult { get; set; }
         public string Reference { get; set; }
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Confirm whether or not this certificate belongs to your address before continuing")]
+        [GovUkValidateRequired(ErrorMessageResourceName = nameof(ErrorMessages.CertificateBelongsToAddressRequired), ErrorMessageResourceType = typeof(ErrorMessages))]
         public EpcAddressConfirmed? EpcAddressConfirmed { get; set; }
         public string Postcode { get; set; }
         public string Number { get; set; }

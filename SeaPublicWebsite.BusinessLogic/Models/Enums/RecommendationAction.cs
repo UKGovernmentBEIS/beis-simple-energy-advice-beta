@@ -1,14 +1,14 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum RecommendationAction
     {
-        [GovUkRadioCheckboxLabelText(Text = "Yes, save this recommendation to my action plan")]
+        [Display(ResourceType = typeof(Resources.Enum.RecommendationAction), Description = nameof(Resources.Enum.RecommendationAction.SaveToActionPlan))]
         SaveToActionPlan,
-        [GovUkRadioCheckboxLabelText(Text = "Maybe, but I’d like more information")]
+        [Display(ResourceType = typeof(Resources.Enum.RecommendationAction), Description = nameof(Resources.Enum.RecommendationAction.DecideLater))]
         DecideLater,
-        [GovUkRadioCheckboxLabelText(Text = "No, discard this recommendation")]
+        [Display(ResourceType = typeof(Resources.Enum.RecommendationAction), Description = nameof(Resources.Enum.RecommendationAction.Discard))]
         Discard,
     }
 }

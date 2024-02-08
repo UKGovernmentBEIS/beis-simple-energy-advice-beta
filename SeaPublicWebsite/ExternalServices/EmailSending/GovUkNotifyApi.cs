@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Notify.Client;
@@ -46,7 +47,7 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
 
         public void SendReferenceNumberEmail(string emailAddress, string reference)
         {
-            var template = govUkNotifyConfig.ApplicationReferenceNumberTemplate;
+            var template = CultureInfo.CurrentCulture.ToString() == "cy" ? govUkNotifyConfig.ApplicationReferenceNumberTemplateCy : govUkNotifyConfig.ApplicationReferenceNumberTemplate;
             var personalisation = new Dictionary<string, dynamic>
             {
                 { template.ReferencePlaceholder, reference },
@@ -65,7 +66,7 @@ namespace SeaPublicWebsite.ExternalServices.EmailSending
 
         public void SendRequestedDocumentEmail(string emailAddress, byte[] documentContents)
         {
-            var template = govUkNotifyConfig.RequestDocumentTemplate;
+            var template = CultureInfo.CurrentCulture.ToString() == "cy" ? govUkNotifyConfig.RequestDocumentTemplateCy : govUkNotifyConfig.RequestDocumentTemplate;
             var personalisation = new Dictionary<string, dynamic>
             {
                 { template.DocumentContentsPlaceholder, NotificationClient.PrepareUpload(documentContents) }

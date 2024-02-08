@@ -1,16 +1,16 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum GlazingType
     {
-        [GovUkRadioCheckboxLabelText(Text = "Yes, all the windows are single glazed")]
+        [Display(ResourceType = typeof(Resources.Enum.GlazingType), Description = nameof(Resources.Enum.GlazingType.SingleGlazed))]
         SingleGlazed,
-        [GovUkRadioCheckboxLabelText(Text = "Yes, at least one window is single glazed ")]
+        [Display(ResourceType = typeof(Resources.Enum.GlazingType), Description = nameof(Resources.Enum.GlazingType.Both))]
         Both,
-        [GovUkRadioCheckboxLabelText(Text = "No, all my windows are double, triple or secondary glazed")]
+        [Display(ResourceType = typeof(Resources.Enum.GlazingType), Description = nameof(Resources.Enum.GlazingType.DoubleOrTripleGlazed))]
         DoubleOrTripleGlazed,
-        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
+        [Display(ResourceType = typeof(Resources.Enum.GlazingType), Description = nameof(Resources.Enum.GlazingType.DoNotKnow))]
         DoNotKnow
     }
 }

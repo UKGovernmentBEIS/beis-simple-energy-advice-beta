@@ -1,18 +1,18 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum WallConstruction
     {
-        [GovUkRadioCheckboxLabelText(Text = "Solid walls")]
+        [Display(ResourceType = typeof(Resources.Enum.WallConstruction), Description = nameof(Resources.Enum.WallConstruction.Solid))]
         Solid,
-        [GovUkRadioCheckboxLabelText(Text = "Cavity walls")]
+        [Display(ResourceType = typeof(Resources.Enum.WallConstruction), Description = nameof(Resources.Enum.WallConstruction.Cavity))]
         Cavity,
-        [GovUkRadioCheckboxLabelText(Text = "Mix of solid and cavity walls")]
+        [Display(ResourceType = typeof(Resources.Enum.WallConstruction), Description = nameof(Resources.Enum.WallConstruction.Mixed))]
         Mixed,
-        [GovUkRadioCheckboxLabelText(Text = "I don’t see my option listed")]
+        [Display(ResourceType = typeof(Resources.Enum.WallConstruction), Description = nameof(Resources.Enum.WallConstruction.Other))]
         Other,
-        [GovUkRadioCheckboxLabelText(Text = "I don't know")]
+        [Display(ResourceType = typeof(Resources.Enum.WallConstruction), Description = nameof(Resources.Enum.WallConstruction.DoNotKnow))]
         DoNotKnow,
     }
 }

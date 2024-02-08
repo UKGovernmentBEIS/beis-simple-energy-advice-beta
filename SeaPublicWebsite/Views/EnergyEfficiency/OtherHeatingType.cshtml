@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.OtherHeatingTypeViewModel;
 @{
-    ViewBag.Title = "Other Heating Type";
+    ViewBag.Title = @SharedLocalizer["Other Heating Type"].Value;
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -30,12 +32,11 @@
                 {
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your main heating system is
                             <strong>
                                 @(Model.Epc?.EpcHeatingType switch {
-                                    EpcHeatingType.Biomass => "a biomass boiler.",
-                                    EpcHeatingType.CoalOrSolidFuel => "coal or solid fuel heating.",
-                                    EpcHeatingType.Other => "of another type.",
+                                    EpcHeatingType.Biomass => @SharedLocalizer["EPCSuggestsYourMainHeatingIsBiomassString", Model.Epc.LodgementYear],
+                                    EpcHeatingType.CoalOrSolidFuel => @SharedLocalizer["EPCSuggestsYourMainHeatingIsCoalOrSolidFuelString", Model.Epc.LodgementYear],
+                                    EpcHeatingType.Other => @SharedLocalizer["EPCSuggestsMainHeatingIsOtherTypeString", Model.Epc.LodgementYear],
                                     _ => throw new ArgumentOutOfRangeException()})
                             </strong>
                         </p>;
@@ -47,7 +48,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "What is your main heating system?",
+                        Text = @SharedLocalizer["What is your main heating system?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -71,21 +72,21 @@
                         OtherHeatingType.Biomass,
                         new HintViewModel
                         {
-                            Text = "A biomass boiler burns wood logs, chips or pellets and provides your whole home with heating"
+                            Text = @SharedLocalizer["A biomass boiler burns wood logs, chips or pellets and provides your whole home with heating"].Value
                         }
                     },
                     {
                         OtherHeatingType.CoalOrSolidFuel,
                         new HintViewModel
                         {
-                            Text = "You have coal or solid fuel heating if you burn coal or other solid fuels in a fireplace or stove"
+                            Text = @SharedLocalizer["You have coal or solid fuel heating if you burn coal or other solid fuels in a fireplace or stove"].Value
                         }
                     },
                 }))
 
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = @SharedLocalizer["Continue"].Value
                    })
             
         </form>

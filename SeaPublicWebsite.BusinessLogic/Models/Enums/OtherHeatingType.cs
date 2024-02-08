@@ -1,14 +1,14 @@
-﻿using GovUkDesignSystem.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SeaPublicWebsite.BusinessLogic.Models.Enums
 {
     public enum OtherHeatingType
     {
-        [GovUkRadioCheckboxLabelText(Text = "Biomass boiler")]
+        [Display(ResourceType = typeof(Resources.Enum.OtherHeatingType), Description = nameof(Resources.Enum.OtherHeatingType.Biomass))]
         Biomass,
-        [GovUkRadioCheckboxLabelText(Text = "Coal or solid fuel heating")]
+        [Display(ResourceType = typeof(Resources.Enum.OtherHeatingType), Description = nameof(Resources.Enum.OtherHeatingType.CoalOrSolidFuel))]
         CoalOrSolidFuel,
-        [GovUkRadioCheckboxLabelText(Text = "Other")]
+        [Display(ResourceType = typeof(Resources.Enum.OtherHeatingType), Description = nameof(Resources.Enum.OtherHeatingType.Other))]
         Other,
     }
 }

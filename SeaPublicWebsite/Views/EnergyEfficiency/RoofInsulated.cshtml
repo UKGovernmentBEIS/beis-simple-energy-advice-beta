@@ -3,16 +3,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.RoofInsulatedViewModel
 @{
-    ViewBag.Title = "Roof Insulated";
+    ViewBag.Title = @SharedLocalizer["Roof Insulated"].Value;
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -27,8 +29,7 @@
             @{
                 Func<object, object> details = 
                     @<p class="govuk-body">
-                        If your home was built after 2002, or you have installed loft insulation since 2002, 
-                        it is likely that it is fully insulated.
+                        @SharedLocalizer["If your home was built after 2002, or you have installed loft insulation since 2002, it is likely that it is fully insulated."]
                     </p>;
                 
                 Func<object, object> blueBannerHint = null;
@@ -37,21 +38,19 @@
                     var insulated = Model.Epc?.RoofInsulated is RoofInsulated.Yes;
                     blueBannerHint = 
                         @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests your
-                            <strong>
-                                loft is @(insulated ? "" : "not") fully insulated
-                            </strong>
-                            as it has @(insulated ? "at least" : "less than") 200mm of insulation.
+                            @(insulated switch {
+                                true => @SharedLocalizer["EPCSuggestsYourLoftIsFullyInsulatedString", @Model.Epc.LodgementYear],
+                                false => @SharedLocalizer["EPCSuggestsYourLoftIsNotFullyInsulatedString", @Model.Epc.LodgementYear],
+                                })
                         </p>;
                 } else if (Model.HintUninsulatedRoof is not null)
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            Homes of your type
                             <strong>
                                 @(Model.HintUninsulatedRoof is true
-                                    ? "typically have less than 200mm of insulation." 
-                                    : "are typically fully insulated with at least 200mm of insulation.")
+                                    ? @SharedLocalizer["HomesOfYourTypeTypicallyHaveLessThan200mmOfInsulationString"] 
+                                    : @SharedLocalizer["HomesOfYourTypeAreTypicallyFullyInsulatedWithAtLeast200mmOfInsulationString"])
                             </strong>
                         </p>;
                 }
@@ -62,7 +61,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "Is your loft fully insulated?",
+                        Text = @SharedLocalizer["Is your loft fully insulated?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -71,14 +70,12 @@
                 {
                     Html = @<text>
                                <p class="govuk-body">
-                                   A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft,
-                                   usually laid on the "floor" of the loft with one layer between the horizontal timbers and
-                                   another layer going across them to bring the insulation up to the required level.
+                                   @SharedLocalizer["A loft is fully insulated if it has more than 200mm (eight inches) of insulation covering the whole loft, usually laid on the \"floor\" of the loft with one layer between the horizontal timbers and another layer going across them to bring the insulation up to the required level."]
                                </p>
                                
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "Help me answer this question",
+                                          SummaryText = @SharedLocalizer["Help me answer this question"].Value,
                                           Html = details
                                       })
                                
@@ -95,7 +92,7 @@
 
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = @SharedLocalizer["Continue"].Value
                    })
             
         </form>

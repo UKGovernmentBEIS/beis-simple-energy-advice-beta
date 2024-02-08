@@ -16,100 +16,101 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
         public static readonly Dictionary<string, BreRecommendation> RecommendationDictionary =
             new()
             {
+                //The title and summary within the resource files have a key format of "Title/Summary" + name of key (+ any other identifier)
                 {
                     "A", new BreRecommendation
                     {
                         Key = RecommendationKey.AddLoftInsulation,
-                        Title = "Add some more loft insulation",
-                        Summary = "Increase the level of insulation in your loft to the recommended level of 300mm"
+                        Title = "Title" + RecommendationKey.AddLoftInsulation,
+                        Summary = "Summary" + RecommendationKey.AddLoftInsulation
                     }
                 },
                 {
                     "A1", new BreRecommendation
                     {
                         Key = RecommendationKey.InsulateYourLoft,
-                        Title = "Insulate your loft",
-                        Summary = "Add loft insulation to reach the recommended level of 300mm"
+                        Title = "Title" + RecommendationKey.InsulateYourLoft,
+                        Summary = "Summary" + RecommendationKey.InsulateYourLoft
                     }
                 },
                 {
                     "B", new BreRecommendation
                     {
                         Key = RecommendationKey.InsulateCavityWalls,
-                        Title = "Insulate your cavity walls",
-                        Summary = "Inject insulation into the cavity in your external walls"
+                        Title = "Title" + RecommendationKey.InsulateCavityWalls,
+                        Summary = "Summary" + RecommendationKey.InsulateCavityWalls
                     }
                 },
                 {
                     "Q", new BreRecommendation
                     {
                         Key = RecommendationKey.InsulateSolidWalls,
-                        Title = "Insulate your solid walls",
-                        Summary = "Insulate your solid walls (brick walls age A-D)"
+                        Title = "Title" + RecommendationKey.InsulateSolidWalls,
+                        Summary = "Summary" + RecommendationKey.InsulateSolidWalls
                     }
                 },
                 {
                     "Q1", new BreRecommendation
                     {
                         Key = RecommendationKey.InsulateSolidWalls,
-                        Title = "Insulate your solid walls",
-                        Summary = "Insulate your solid walls (other wall types)"
+                        Title = "Title" + RecommendationKey.InsulateSolidWalls + "Other",
+                        Summary = "Summary" + RecommendationKey.InsulateSolidWalls + "Other"
                     }
                 },
                 {
                     "W1", new BreRecommendation
                     {
                         Key = RecommendationKey.FloorInsulationSuspendedFloor,
-                        Title = "Insulate the ground floor",
-                        Summary = "Insulate the ground floor"
+                        Title = "Title" + RecommendationKey.FloorInsulationSuspendedFloor,
+                        Summary = "Summary" + RecommendationKey.FloorInsulationSuspendedFloor
                     }
                 },
                 {
                     "C", new BreRecommendation
                     {
                         Key = RecommendationKey.HotWaterCylinderInsulation,
-                        Title = "Insulate your hot water cylinder",
-                        Summary = "Insulate your hot water cylinder"
+                        Title = "Title" + RecommendationKey.HotWaterCylinderInsulation,
+                        Summary = "Summary" + RecommendationKey.HotWaterCylinderInsulation
                     }
                 },
                 {
                     "G", new BreRecommendation
                     {
                         Key = RecommendationKey.UpgradeHeatingControls,
-                        Title = "Upgrade your heating controls",
-                        Summary = "Fit a programmer, thermostat and thermostatic radiator valves"
+                        Title = "Title" + RecommendationKey.UpgradeHeatingControls,
+                        Summary = "Summary" + RecommendationKey.UpgradeHeatingControls
                     }
                 },
                 {
                     "L2", new BreRecommendation
                     {
                         Key = RecommendationKey.HighHeatRetentionStorageHeaters,
-                        Title = "Upgrade to high heat retention storage heaters",
-                        Summary = "Upgrade to high heat retention storage heaters"
+                        Title = "Title" + RecommendationKey.HighHeatRetentionStorageHeaters,
+                        Summary = "Summary" + RecommendationKey.HighHeatRetentionStorageHeaters
                     }
                 },
                 {
                     "O", new BreRecommendation
                     {
                         Key = RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
-                        Title = "Fit new windows",
-                        Summary = "Replace old single glazed windows with new double or triple glazing"
+                        Title = "Title" + RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing,
+                        Summary = "Summary" + RecommendationKey.ReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing
                     }
                 },
                 {
                     "U", new BreRecommendation
                     {
                         Key = RecommendationKey.SolarElectricPanels,
-                        Title = "Fit solar electric panels",
-                        Summary = "Install PV panels on your roof to generate electricity"
+                        Title = "Title" + RecommendationKey.SolarElectricPanels,
+                        Summary = "Summary" + RecommendationKey.SolarElectricPanels
                     }
                 },
                 {
                     "Z1", new BreRecommendation
                     {
                         Key = RecommendationKey.InstallHeatPump,
-                        Title = "Install a heat pump",
-                        Summary = "Heat pumps use the energy outside to heat your home and hot water"
+                        Title = "Title" + RecommendationKey.InstallHeatPump,
+                        Summary = "Summary" + RecommendationKey.InstallHeatPump
                     }
                 }
             };

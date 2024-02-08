@@ -4,16 +4,18 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.GlazingTypeViewModel;
 @{
-    ViewBag.Title = "Glazing Type";
+    ViewBag.Title = @SharedLocalizer["GlazingTypeTitleString"].Value;
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -29,13 +31,13 @@
                 Func<object, object> details = 
                     @<text>
                         <p class="govuk-body">
-                            A single glazed window has a single pane of glass.
+                            @SharedLocalizer["A single glazed window has a single pane of glass."]
                         </p>
                         <p class="govuk-body">
-                            A double glazed window has two panes of glass, separated by air or gas, to make up a single window. A triple glazed window has three panes of glass.
+                            @SharedLocalizer["A double glazed window has two panes of glass, separated by air or gas, to make up a single window. A triple glazed window has three panes of glass."]
                         </p>
                         <p class="govuk-body">
-                            Secondary glazing is when an additional independent window is fitted inside, behind the main window. This is commonly used in conservation areas to improve the energy efficiency of the window without replacing it.
+                            @SharedLocalizer["Secondary glazing is when an additional independent window is fitted inside, behind the main window. This is commonly used in conservation areas to improve the energy efficiency of the window without replacing it."]
                         </p>
                      </text>;
                 
@@ -43,26 +45,20 @@
                 if (Model.Epc?.GlazingType is not null)
                 {
                     blueBannerHint = 
-                        @<p class="govuk-body">
-                            Your @Model.Epc.LodgementYear Energy Performance Certificate suggests 
-                            <strong>
-                                @(Model.Epc?.GlazingType switch {
-                                    GlazingType.SingleGlazed => "all your windows are single glazed.",
-                                    GlazingType.Both => "at least one of your windows is single glazed.",
-                                    GlazingType.DoubleOrTripleGlazed => "all your windows are double, triple or secondary glazed.",
-                                    _ => throw new ArgumentOutOfRangeException()})
-                            </strong>
-                        </p>;
+                    @<p class="govuk-body">
+                            @(Model.Epc?.GlazingType switch {
+                                GlazingType.SingleGlazed => @SharedLocalizer["EPCSuggestsAllWindowsAreSingleGlazedString", Model.Epc.LodgementYear],
+                                GlazingType.Both => @SharedLocalizer["EPCSuggestsAtLeastOneWindowSingleGlazedString", Model.Epc.LodgementYear],
+                                GlazingType.DoubleOrTripleGlazed => @SharedLocalizer["EPCSuggestsAllYourWindowsAreDoubleOrTripleGlazedString", Model.Epc.LodgementYear],
+                                _ => throw new ArgumentOutOfRangeException()})
+                    </p>;
                 } else if (Model.HintSingleGlazing is not null)
                 {
                     blueBannerHint =
                         @<p class="govuk-body">
-                            Windows in homes of your type
-                            <strong>
-                                @(Model.HintSingleGlazing is true
-                                    ? "were typically originally built with single glazing, but they may have been replaced." 
-                                    : "typically all have double, triple or secondary glazing.")
-                            </strong>
+                            @(Model.HintSingleGlazing is true
+                                ? @SharedLocalizer["HomesOfYourTypeTypicallyWereBuiltWithSingleGlazingString"] 
+                                : @SharedLocalizer["HomesOfYourTypeTypicallyWereBuiltWithSingleDoubleOrTripleGlazingString"])
                         </p>;
                 }
             }
@@ -72,7 +68,7 @@
                 {
                     Legend = new LegendViewModel
                     {
-                        Text = "Are any of your windows single glazed?",
+                        Text = @SharedLocalizer["Are any of your windows single glazed?"].Value,
                         Classes = "govuk-fieldset__legend--l",
                         IsPageHeading = true
                     }
@@ -82,7 +78,7 @@
                     Html = @<text>
                                @await Html.GovUkDetails(new DetailsViewModel
                                       {
-                                          SummaryText = "Help me answer this question",
+                                          SummaryText = @SharedLocalizer["Help me answer this question"].Value,
                                           Html = details
                                       })
                                
@@ -100,7 +96,7 @@
 
             @await Html.GovUkButton(new ButtonViewModel
                    {
-                       Text = "Continue"
+                       Text = @SharedLocalizer["Continue"].Value
                    })
             
         </form>

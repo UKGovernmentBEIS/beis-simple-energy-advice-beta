@@ -1,12 +1,13 @@
 ﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
+using SeaPublicWebsite.Resources;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class HotWaterCylinderViewModel : QuestionFlowViewModel
     {
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Select whether you have a hot water cylinder")]
+        [GovUkValidateRequired(ErrorMessageResourceName = nameof(ErrorMessages.HasHotWaterCylinderRequired), ErrorMessageResourceType = typeof(ErrorMessages))]
         public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
 
         public string Reference { get; set; }

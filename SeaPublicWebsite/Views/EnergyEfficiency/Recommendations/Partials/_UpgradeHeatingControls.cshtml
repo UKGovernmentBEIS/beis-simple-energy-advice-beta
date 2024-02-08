@@ -1,5 +1,7 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @model SeaPublicWebsite.Models.EnergyEfficiency.SingleRecommendationDetailsViewModel;
 
 @{
@@ -9,32 +11,25 @@
 @section RecommendationBody
 {
     <p class="govuk-body">
-        If you have a central heating system then it’s important you can control it effectively,
-        so that you can stay warm without wasting energy.
+        @SharedLocalizer["If you have a central heating system then it’s important you can control it effectively, so that you can stay warm without wasting energy."]
     </p>
 
     <p class="govuk-body">
-        The standard way to do that is to have a central programmer and thermostat to
-        manage when the heating is on and how much, as well as thermostatic radiator valves
-        (TRVs) to control the heating in each room.
+        @SharedLocalizer["The standard way to do that is to have a central programmer and thermostat to manage when the heating is on and how much, as well as thermostatic radiator valves (TRVs) to control the heating in each room."]
     </p>
 
     <p class="govuk-body">
-        Alternatively, you may want to choose a smart heating controller to make it easier
-        to adjust the settings.
+        @SharedLocalizer["Alternatively, you may want to choose a smart heating controller to make it easier to adjust the settings."]
     </p>
 
     <p class="govuk-body govuk-!-margin-bottom-6">
-        You can find more information on heating controls on the
-        <a class="govuk-link" target="_blank" href="https://energysavingtrust.org.uk/advice/thermostats-and-heating-controls/">
-            Energy Saving Trust website.<span class="govuk-visually-hidden">(opens in a new window)</span>
-        </a>
+        @SharedLocalizer["MoreInfoOnHeatingControlsOnEnergySavingTrustWebsiteString", "https://energysavingtrust.org.uk/advice/thermostats-and-heating-controls/"]
     </p>
     
     @await Html.GovUkWarningText(new WarningTextViewModel
     {
-        IconFallbackText = "Caution",
-        Text = "You will need a competent installer to fit new controls to your heating system."
+        IconFallbackText = @SharedLocalizer["Caution"].Value,
+        Text = @SharedLocalizer["You will need a competent installer to fit new controls to your heating system."].Value
     })
 }
 
@@ -42,26 +37,26 @@
 {
     <ul class="govuk-list govuk-list--bullet govuk-!-margin-bottom-7">
         <li>
-            You have a central heating system with radiators and you do not already have a full set of controls.
+            @SharedLocalizer["You have a central heating system with radiators and you do not already have a full set of controls."]
         </li>
     </ul>
 }
 
 @section RecommendationLifetime
 {
-    <p class="govuk-body">Heating controls are typically expected to last <b>around @Model.GetCurrentPropertyRecommendation().Lifetime years</b></p>
+    <p class="govuk-body">@SharedLocalizer["HeatingControlsTypicallyExpectedToLastString", @Model.GetCurrentPropertyRecommendation().Lifetime]</p>
 }
 
 @{
     Model.DisruptionTagViewModel = new TagViewModel
     {
         Classes = "govuk-tag--green",
-        Text = "MINIMAL"
+        Text = @SharedLocalizer["MINIMAL"].Value
     };
     
     Model.DurationTagViewModel = new TagViewModel
     {
         Classes = "govuk-tag--green",
-        Text = "LESS THAN A DAY"
+        Text = @SharedLocalizer["LESS THAN A DAY"].Value
     };
 }

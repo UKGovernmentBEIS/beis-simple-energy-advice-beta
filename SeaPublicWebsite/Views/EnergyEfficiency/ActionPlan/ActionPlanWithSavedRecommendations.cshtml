@@ -3,6 +3,9 @@
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Models.EnergyEfficiency
 @model SeaPublicWebsite.Models.EnergyEfficiency.ActionPlanViewModel;
+@using Microsoft.AspNetCore.Mvc.Localization
+@using SeaPublicWebsite.Resources.Bre
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @{
     Layout = Model.IsPdf ? "_PdfLayout" : "_Layout";
@@ -17,45 +20,35 @@
 
 <div class="govuk-grid-row">
 <div class="govuk-grid-column-full">
-<h1 class="govuk-heading-xl">
-    Your Action Plan
-</h1>
+    <h1 class="govuk-heading-xl">
+        @SharedLocalizer["YourActionPlanTitleString"]
+    </h1>
 
-<p class="govuk-body">
-    Here is a summary of your estimated yearly energy bill savings and cost to install the
-    <strong>
+    <p class="govuk-body">
         @{
             var count = Model.GetSavedRecommendations().Count;
         }
-        @(count == 1 ? "1 recommendation" : $"{count} recommendations")
-    </strong>
-    you told us you would consider for your home.
-</p>
+        @(count == 1 ? @SharedLocalizer["SummaryOfSavingsAndCostsForSingleRecommendationString"] : @SharedLocalizer["SummaryOfSavingsAndCostsForMultipleRecommendationsString", count])
+    </p>
 
-<div class="govuk-!-padding-left-4 sea-total-savings govuk-!-margin-bottom-6">
-    <h2 class="govuk-heading-s govuk-!-margin-0">You could save up to</h2>
-    <span class="govuk-heading-l sea-total-savings-text">@Model.GetTotalSavingText()</span>
-</div>
-<div class="govuk-grid-row govuk-!-margin-bottom-4">
-    <div class="govuk-grid-column-one-half">
-        <div class="govuk-!-padding-left-4 sea-total-installation-cost">
-            <h2 class="govuk-heading-s govuk-!-margin-0">The total cost of the improvements could be</h2>
-            <span class="govuk-heading-l">@Model.GetTotalInstallationCostText()</span>
+    <div class="govuk-!-padding-left-4 sea-total-savings govuk-!-margin-bottom-6">
+        <h2 class="govuk-heading-s govuk-!-margin-0">@SharedLocalizer["You could save up to"]</h2>
+        <span class="govuk-heading-l sea-total-savings-text">@Model.GetTotalSavingText()</span>
+    </div>
+    <div class="govuk-grid-row govuk-!-margin-bottom-4">
+        <div class="govuk-grid-column-one-half">
+            <div class="govuk-!-padding-left-4 sea-total-installation-cost">
+                <h2 class="govuk-heading-s govuk-!-margin-0">@SharedLocalizer["The total cost of the improvements could be"]</h2>
+                <span class="govuk-heading-l">@Model.GetTotalInstallationCostText()</span>
+            </div>
         </div>
     </div>
-</div>
 
 @await Html.GovUkDetails(new DetailsViewModel
        {
-           SummaryText = "How did we calculate these figures?",
+           SummaryText = @SharedLocalizer["How did we calculate these figures?"].Value,
            Html = @<text>
-                      The costs and savings you view using the services on this site are based on standards
-                      developed for Government as a way of understanding how houses and flats use energy,
-                      and how your home’s energy use could be improved. You can find out more information
-                      about these standards with the guidance published on the
-                      <a class="govuk-link" target="_blank" href="https://www.gov.uk/guidance/standard-assessment-procedure">
-                          Standard Assessment Procedure site.<span class="govuk-visually-hidden">(opens in a new window)</span>
-                      </a>
+                      @SharedLocalizer["CostsAndSavingsBasedOnStandardAssessmentProcedureString", "https://www.gov.uk/guidance/standard-assessment-procedure"]
                    </text>
        })
 
@@ -73,20 +66,20 @@
                            Classes = "govuk-!-padding-top-4",
                            Html = @<text>
                                       <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
-                                          @(recommendation.Title)
+                                          @(RecommendationServiceText.ResourceManager.GetString(recommendation.Title) ?? recommendation.Title)
                                       </p>
                                       <p class="govuk-body-s govuk-!-margin-bottom-0">
-                                          @(recommendation.Summary)
+                                          @(RecommendationServiceText.ResourceManager.GetString(recommendation.Summary) ?? recommendation.Summary)
                                       </p>
                                       <p>
-                                          Typical savings per year: @Model.GetSavingText(recommendation)
+                                          @SharedLocalizer["Typical savings per year"]: @Model.GetSavingText(recommendation)
                                       </p>
                                       <p>
-                                          Typical costs: @Model.GetInstallationCostText(recommendation)
+                                          @SharedLocalizer["Typical costs"]: @Model.GetInstallationCostText(recommendation)
                                       </p>
                                       <a class="govuk-link"
                                          href="@Model.GetUrlWithPrefix(Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true}))">
-                                          Revisit recommendation
+                                          @SharedLocalizer["Revisit recommendation"]
                                       </a>
                                    </text>
                        }
@@ -103,16 +96,16 @@
                {
                    new()
                    {
-                       Text = "Recommendation"
+                       Text = @SharedLocalizer["Recommendation"].Value
                    },
                    new()
                    {
-                       Text = "Typical savings per year"
+                       Text = @SharedLocalizer["Typical savings per year"].Value
                    },
                    new()
                    {
                        Classes = "govuk-!-padding-right-0",
-                       Text = "Typical costs"
+                       Text = @SharedLocalizer["Typical costs"].Value
                    },
                    new()
                },
@@ -125,10 +118,10 @@
                            Classes = "govuk-!-padding-top-4 sea-saved-recommendations-table-headers",
                            Html = @<text>
                                       <p class="govuk-body govuk-!-margin-bottom-1 govuk-!-font-weight-bold">
-                                          @(recommendation.Title)
+                                          @(RecommendationServiceText.ResourceManager.GetString(recommendation.Title) ?? recommendation.Title)
                                       </p>
                                       <p class="govuk-body-s govuk-!-margin-bottom-0">
-                                          @(recommendation.Summary)
+                                          @(RecommendationServiceText.ResourceManager.GetString(recommendation.Summary) ?? recommendation.Summary)
                                       </p>
                                    </text>
                        },
@@ -146,7 +139,7 @@
                        {
                            Classes = "sea-saved-recommendations-table-headers",
                            Html = @<a class="govuk-link" href="@Model.GetUrlWithPrefix(Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true}))">
-                                      Revisit recommendation
+                                      @SharedLocalizer["Revisit recommendation"]
                                   </a>
                        }
                    }
@@ -155,33 +148,31 @@
 </div>
 
 <p class="govuk-body">
-    Next we have steps to help you action these recommendations.
+    @SharedLocalizer["Next we have steps to help you action these recommendations."]
 </p>
 
 <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
-    1. Find out if you can apply for support
+    @SharedLocalizer["1. Find out if you can apply for support"]
 </h2>
 @{ await Html.RenderPartialAsync("ActionPlan/Partials/_AvailableSchemesOrGrants", Model); }
 
 <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
-    2. Consult with a qualified installer
+    @SharedLocalizer["2. Consult with a qualified installer"]
 </h2>
 <p class="govuk-body">
-    We recommend consulting with a qualified installer to confirm what changes you can make to your property.
+    @SharedLocalizer["We recommend consulting with a qualified installer to confirm what changes you can make to your property."]
 </p>
 <p class="govuk-body">
-    You can get help finding a qualified installer of heat pumps or solar panels in your area by visiting the
-    <a class="govuk-link" href="https://mcscertified.com/find-an-installer/" target="_blank">MCS website.</a>
+    @SharedLocalizer["GetHelpFindingInstallerOnMCSWebsiteString", "https://mcscertified.com/find-an-installer/"]
 </p>
 <p class="govuk-body">
-    For all other changes to your property, get help finding a qualified installer in your area by visiting the
-    <a class="govuk-link" href="https://www.trustmark.org.uk/" target="_blank">TrustMark website.</a>
+    @SharedLocalizer["HelpFindingQualifiedInstallerOnTrustMarkWebsiteString", "https://www.trustmark.org.uk/"]
 </p>
 
 @if (Model.GetDecideLaterRecommendations().Any())
 {
     <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
-        3. Research improvements you are unsure about
+        @SharedLocalizer["Research improvements you are unsure about"]
     </h2>
     await Html.RenderPartialAsync("ActionPlan/Partials/_ImprovementsUnsureAbout", Model);
 }
@@ -189,25 +180,25 @@
 @{ await Html.RenderPartialAsync("ActionPlan/Partials/_DiscardedRecommendations", Model); }
 
 <h2 class="govuk-heading-l govuk-!-margin-bottom-3 govuk-!-margin-top-7">
-    @(Model.GetDecideLaterRecommendations().Any() ? "4." : "3.") Other ways to save energy
+    @(Model.GetDecideLaterRecommendations().Any() ? "4." : "3.") @SharedLocalizer["Other ways to save energy"]
 </h2>
 
 <p class="govuk-body">
-    If you’d like to do more to improve the energy efficiency of your home, consider the following:
+    @SharedLocalizer["If you’d like to do more to improve the energy efficiency of your home, consider the following:"]
 </p>
 
 <ul class="govuk-list govuk-list--bullet">
     <li>
-        Visit the <a class="govuk-link" target="_blank" href="https://helpforhouseholds.campaign.gov.uk/help-with-your-bills/energy-saving-advice/">Help for Households</a> website for even more ways to save energy and reduce your bills.
+        @SharedLocalizer["VisitTheHelpForHouseholdsWebsiteString", "https://helpforhouseholds.campaign.gov.uk/help-with-your-bills/energy-saving-advice/"]
     </li>
-    <li>When buying new appliances, upgrade to an energy efficient one - <a class="govuk-link" target="_blank" href="https://energylabel.org.uk/">Learn about energy labels</a></li>
+    <li>@SharedLocalizer["WhenBuyingNewAppliancesUpgradeEnergyLabelsString", "https://energylabel.org.uk/"]</li>
     @if (Model.PropertyData?.HasOutdoorSpace != HasOutdoorSpace.No)
     {
-        <li>Install a heat pump - <a class="govuk-link" target="_blank" href="https://www.heat-pump-check.service.gov.uk/">Check if your home may be suitable</a></li>
+        <li>@SharedLocalizer["InstallHeatPumpCheckIfHomeSuitableString", "https://www.heat-pump-check.service.gov.uk/"]</li>
     }
     @if (Model.PropertyData?.YearBuilt == YearBuilt.Pre1900)
     {
-        <li>Visit the <a class="govuk-link" target="_blank" href="https://historicengland.org.uk/advice/your-home/energy-efficiency/">Historic England</a> site for information specific to historic buildings.</li>
+        <li>@SharedLocalizer["VisitHistoricEnglandForHistoricBuildingInformationString", "https://historicengland.org.uk/advice/your-home/energy-efficiency/"]</li>
     }
 </ul>
 

@@ -1,12 +1,13 @@
 ﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
+using SeaPublicWebsite.Resources;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class FloorConstructionViewModel : QuestionFlowViewModel
     {
-        [GovUkValidateRequired(ErrorMessageIfMissing = "Select how your floor is built")]
+        [GovUkValidateRequired(ErrorMessageResourceName = nameof(ErrorMessages.FloorConstructionTypeRequired), ErrorMessageResourceType = typeof(ErrorMessages))]
         public FloorConstruction? FloorConstruction { get; set; }
         public bool? HintSuspendedTimber { get; set; }
 

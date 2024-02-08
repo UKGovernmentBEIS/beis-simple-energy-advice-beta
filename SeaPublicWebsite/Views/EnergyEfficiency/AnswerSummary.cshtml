@@ -6,16 +6,18 @@
 @using SeaPublicWebsite.Controllers
 @using SeaPublicWebsite.Helpers
 @using SeaPublicWebsite.Services
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.AnswerSummaryViewModel
 @{
-    ViewBag.Title = "Your answers";
+    ViewBag.Title = SharedLocalizer["Your answers"].Value;
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -28,7 +30,7 @@
         Key = new() 
         {
             Classes = "govuk-!-width-one-quarter",
-            Text = "Wall type"
+            Text = SharedLocalizer["Wall type"].Value
         },
         Value = new()
         {
@@ -43,8 +45,8 @@
                 new()
                 {
                     Href = @Url.Action(nameof(EnergyEfficiencyController.WallConstruction_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.WallConstruction}),
-                    Text = "Change",
-                    VisuallyHiddenText = "wall type"
+                    Text = SharedLocalizer["Change"].Value,
+                    VisuallyHiddenText = SharedLocalizer["wall type"].Value
                 }
             }
         }
@@ -57,7 +59,7 @@
             Key = new()
             {
                 Classes = "govuk-!-width-one-quarter",
-                Text = "Are your cavity walls insulated?"
+                Text = SharedLocalizer["Are your cavity walls insulated?"].Value
             },
             Value = new()
             {
@@ -72,8 +74,8 @@
                     new()
                     {
                         Href = Url.Action(nameof(EnergyEfficiencyController.CavityWallsInsulated_Get), "EnergyEfficiency", new { reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.CavityWallsInsulated }),
-                        Text = "Change",
-                        VisuallyHiddenText = "are your cavity walls insulated"
+                        Text = SharedLocalizer["Change"].Value,
+                        VisuallyHiddenText = SharedLocalizer["are your cavity walls insulated"].Value
                     }
                 }
             }
@@ -87,7 +89,7 @@
             Key = new() 
             {
                 Classes = "govuk-!-width-one-quarter",
-                Text = "Are your solid walls insulated?"
+                Text = SharedLocalizer["Are your solid walls insulated?"].Value
             },
             Value = new()
             {
@@ -102,8 +104,8 @@
                     new()
                     {
                         Href = Url.Action(nameof(EnergyEfficiencyController.SolidWallsInsulated_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.SolidWallsInsulated}),
-                        Text = "Change",
-                        VisuallyHiddenText = "are your solid walls insulated"
+                        Text = SharedLocalizer["Change"].Value,
+                        VisuallyHiddenText = SharedLocalizer["are your solid walls insulated"].Value
                     }
                 }
             }
@@ -117,7 +119,7 @@
             Key = new() 
             {
                 Classes = "govuk-!-width-one-quarter",
-                Text = "Floor construction"
+                Text = SharedLocalizer["FloorConstructionKeyString"].Value
             },
             Value = new()
             {
@@ -132,8 +134,8 @@
                     new()
                     {
                         Href = Url.Action(nameof(EnergyEfficiencyController.FloorConstruction_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.FloorConstruction}),
-                        Text = "Change",
-                        VisuallyHiddenText = "floor construction"
+                        Text = SharedLocalizer["Change"].Value,
+                        VisuallyHiddenText = SharedLocalizer["floor construction"].Value
                     }
                 }
             }
@@ -146,7 +148,7 @@
                 Key = new() 
                 {
                     Classes = "govuk-!-width-one-quarter",
-                    Text = "Is your ground floor insulated?"
+                    Text = SharedLocalizer["Is your ground floor insulated?"].Value
                 },
                 Value = new()
                 {
@@ -161,8 +163,8 @@
                         new()
                         {
                             Href = Url.Action(nameof(EnergyEfficiencyController.FloorInsulated_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.FloorInsulated}),
-                            Text = "Change",
-                            VisuallyHiddenText = "is your ground floor insulated"
+                            Text = SharedLocalizer["Change"].Value,
+                            VisuallyHiddenText = SharedLocalizer["is your ground floor insulated"].Value
                         }
                     }
                 }
@@ -177,7 +179,7 @@
             Key = new() 
             {
                 Classes = "govuk-!-width-one-quarter",
-                Text = "Is any part of your roof flat?"
+                Text = SharedLocalizer["Is any part of your roof flat?"].Value
             },
             Value = new()
             {
@@ -192,8 +194,8 @@
                     new()
                     {
                         Href = Url.Action(nameof(EnergyEfficiencyController.RoofConstruction_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.RoofConstruction}),
-                        Text = "Change",
-                        VisuallyHiddenText = "is any part of your roof flat"
+                        Text = SharedLocalizer["Change"].Value,
+                        VisuallyHiddenText = SharedLocalizer["is any part of your roof flat"].Value
                     }
                 }
             }
@@ -206,7 +208,7 @@
                 Key = new() 
                 {
                     Classes = "govuk-!-width-one-quarter",
-                    Text = "Do you have a loft that hasn't been converted into a room?"
+                    Text = SharedLocalizer["Do you have a loft that hasn't been converted into a room?"].Value
                 },
                 Value = new()
                 {
@@ -221,8 +223,8 @@
                         new()
                         {
                             Href = Url.Action(nameof(EnergyEfficiencyController.LoftSpace_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.LoftSpace}),
-                            Text = "Change",
-                            VisuallyHiddenText = "do you have a loft that hasn't been converted into a room"
+                            Text = SharedLocalizer["Change"].Value,
+                            VisuallyHiddenText = SharedLocalizer["do you have a loft that hasn't been converted into a room"].Value
                         }
                     }
                 }
@@ -235,7 +237,7 @@
                     Key = new() 
                     {
                         Classes = "govuk-!-width-one-quarter",
-                        Text = "Is there access to your loft?"
+                        Text = SharedLocalizer["Is there access to your loft?"].Value
                     },
                     Value = new()
                     {
@@ -250,8 +252,8 @@
                             new()
                             {
                                 Href = Url.Action(nameof(EnergyEfficiencyController.LoftAccess_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.LoftAccess}),
-                                Text = "Change",
-                                VisuallyHiddenText = "is there access to your loft"
+                                Text = SharedLocalizer["Change"].Value,
+                                VisuallyHiddenText = SharedLocalizer["is there access to your loft"].Value
                             }
                         }
                     }
@@ -264,7 +266,7 @@
                         Key = new()
                         {
                             Classes = "govuk-!-width-one-quarter",
-                            Text = "Is your loft fully insulated?"
+                            Text = SharedLocalizer["Is your loft fully insulated?"].Value
                         },
                         Value = new()
                         {
@@ -279,8 +281,8 @@
                                 new()
                                 {
                                     Href = Url.Action(nameof(EnergyEfficiencyController.RoofInsulated_Get), "EnergyEfficiency", new { reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.RoofInsulated }),
-                                    Text = "Change",
-                                    VisuallyHiddenText = "is your loft fully insulated"
+                                    Text = SharedLocalizer["Change"].Value,
+                                    VisuallyHiddenText = SharedLocalizer["is your loft fully insulated"].Value
                                 }
                             }
                         }
@@ -295,7 +297,7 @@
         Key = new() 
         {
             Classes = "govuk-!-width-one-quarter",
-            Text = "Glazing type "
+            Text = SharedLocalizer["GlazingTypeAnswerSummaryString"].Value
         },
         Value = new()
         {
@@ -310,8 +312,8 @@
                 new()
                 {
                     Href = Url.Action(nameof(EnergyEfficiencyController.GlazingType_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.GlazingType}),
-                    Text = "Change",
-                    VisuallyHiddenText = "glazing type"
+                    Text = SharedLocalizer["Change"].Value,
+                    VisuallyHiddenText = SharedLocalizer["GlazingTypeVisuallyHiddenString"].Value
                 }
             }
         }
@@ -322,7 +324,7 @@
         Key = new() 
         {
             Classes = "govuk-!-width-one-quarter",
-            Text = "Outdoor space for heat pump"
+            Text = SharedLocalizer["Outdoor space for heat pump"].Value
         },
         Value = new()
         {
@@ -337,8 +339,8 @@
                 new()
                 {
                     Href = Url.Action(nameof(EnergyEfficiencyController.OutdoorSpace_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.OutdoorSpace}),
-                    Text = "Change",
-                    VisuallyHiddenText = "outdoor space for heat pump"
+                    Text = SharedLocalizer["Change"].Value,
+                    VisuallyHiddenText = SharedLocalizer["outdoor space for heat pump"].Value
                 }
             }
         }
@@ -349,7 +351,7 @@
         Key = new() 
         {
             Classes = "govuk-!-width-one-quarter",
-            Text = "Heating system"
+            Text = SharedLocalizer["Heating system"].Value
         },
         Value = new()
         {
@@ -366,8 +368,8 @@
                 new()
                 {
                     Href = Url.Action(nameof(EnergyEfficiencyController.HeatingType_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.HeatingType}),
-                    Text = "Change",
-                    VisuallyHiddenText = "heating system"
+                    Text = SharedLocalizer["Change"].Value,
+                    VisuallyHiddenText = SharedLocalizer["heating system"].Value
                 }
             }
         }
@@ -380,7 +382,7 @@
             Key = new() 
             {
                 Classes = "govuk-!-width-one-quarter",
-                Text = "Hot water cylinder "
+                Text = SharedLocalizer["Hot water cylinder"].Value
             },
             Value = new()
             {
@@ -395,8 +397,8 @@
                     new()
                     {
                         Href = Url.Action(nameof(EnergyEfficiencyController.HotWaterCylinder_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.HotWaterCylinder}),
-                        Text = "Change",
-                        VisuallyHiddenText = "hot water cylinder"
+                        Text = SharedLocalizer["Change"].Value,
+                        VisuallyHiddenText = SharedLocalizer["hot water cylinder"].Value
                     }
                 }
             }
@@ -408,12 +410,12 @@
         Key = new() 
         {
             Classes = "govuk-!-width-one-quarter",
-            Text = "Size of household"
+            Text = SharedLocalizer["Size of household"].Value
         },
         Value = new()
         {
             Classes = "govuk-!-width-one-half",
-            Text = Model.PropertyData.NumberOfOccupants?.ToString() ?? "Question skipped"
+            Text = Model.PropertyData.NumberOfOccupants?.ToString() ?? @SharedLocalizer["Question skipped"].Value
         },
         Actions = new()
         {
@@ -423,8 +425,8 @@
                 new()
                 {
                     Href = Url.Action(nameof(EnergyEfficiencyController.NumberOfOccupants_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.NumberOfOccupants}),
-                    Text = "Change",
-                    VisuallyHiddenText = "size of household"
+                    Text = SharedLocalizer["Change"].Value,
+                    VisuallyHiddenText = SharedLocalizer["size of household"].Value
                 }
             }
         }
@@ -435,7 +437,7 @@
         Key = new() 
         {
             Classes = "govuk-!-width-one-quarter",
-            Text = "Heating pattern"
+            Text = SharedLocalizer["Heating pattern"].Value
         },
         Value = new()
         {
@@ -445,9 +447,9 @@
                             if (Model.PropertyData.HeatingPattern is HeatingPattern.Other)
                             {
                                 <span>
-                                    @Model.PropertyData.HoursOfHeatingMorning.ToString() hours in the morning
+                                    @Model.PropertyData.HoursOfHeatingMorning.ToString() @SharedLocalizer["hours in the morning"]
                                     <br />
-                                    @Model.PropertyData.HoursOfHeatingEvening.ToString() hours in the afternoon and evening
+                                    @Model.PropertyData.HoursOfHeatingEvening.ToString() @SharedLocalizer["hours in the afternoon and evening"]
                                 </span>
                             }
                             else
@@ -466,8 +468,8 @@
                 new()
                 {
                     Href = Url.Action(nameof(EnergyEfficiencyController.HeatingPattern_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.HeatingPattern}),
-                    Text = "Change",
-                    VisuallyHiddenText = "heating pattern"
+                    Text = SharedLocalizer["Change"].Value,
+                    VisuallyHiddenText = SharedLocalizer["heating pattern"].Value
                 }
             }
         }
@@ -478,12 +480,12 @@
         Key = new() 
         {
             Classes = "govuk-!-width-one-quarter",
-            Text = "Temperature"
+            Text = SharedLocalizer["Temperature"].Value
         },
         Value = new()
         {
             Classes = "govuk-!-width-one-half",
-            Text = Model.PropertyData.Temperature.HasValue ? Model.PropertyData.Temperature.Value + "°C" : "Question skipped"
+            Text = Model.PropertyData.Temperature.HasValue ? Model.PropertyData.Temperature.Value + "°C" : SharedLocalizer["Question skipped"].Value
         },
         Actions = new()
         {
@@ -493,8 +495,8 @@
                 new()
                 {
                     Href = Url.Action(nameof(EnergyEfficiencyController.Temperature_Get), "EnergyEfficiency", new {reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.Temperature}),
-                    Text = "Change",
-                    VisuallyHiddenText = "temperature"
+                    Text = SharedLocalizer["Change"].Value,
+                    VisuallyHiddenText = SharedLocalizer["temperature"].Value
                 }
             }
         }
@@ -507,19 +509,19 @@
         {
             @await Html.GovUkNotificationBanner(new NotificationBannerViewModel
                    {
-                       TitleText = "Important",
-                       Text = "Your saved recommendations will be reset if you change any of your answers"
+                       TitleText = SharedLocalizer["Important"].Value,
+                       Text = SharedLocalizer["Your saved recommendations will be reset if you change any of your answers"].Value
                    })
         }
         
 
         <h1 class="govuk-heading-l">
-            Check your answers
+            @SharedLocalizer["Check your answers"]
         </h1>
 
         @await Html.GovUkHint(new HintViewModel
                {
-                   Text = "Please review the information we have gathered. You can still change your answers if anything looks wrong."
+                   Text = SharedLocalizer["Please review the information we have gathered. You can still change your answers if anything looks wrong."].Value
                })
 
         @(await Html.GovUkSummaryList(new SummaryListViewModel
@@ -532,7 +534,7 @@
             @await Html.GovUkButton(new ButtonViewModel
                    {
                        Html = @<text>
-                                  See results
+                                  @SharedLocalizer["See results"]
                                   <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
                                       <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/>
                                   </svg>

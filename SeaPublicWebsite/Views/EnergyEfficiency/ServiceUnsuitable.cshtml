@@ -1,16 +1,18 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.ServiceUnsuitableViewModel
 @{
-    ViewBag.Title = "Only available to homeowners in England and Wales";
+    ViewBag.Title = @SharedLocalizer["Only available to homeowners in England and Wales"].Value;
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = "Back",
+               Text = @SharedLocalizer["Back"].Value,
                Href = Model.BackLink,
            })
 }
@@ -18,25 +20,27 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         
-        <h1 class="govuk-heading-l">Sorry, this service isn't for you</h1>
-        <p class="govuk-body">This service only provides advice for people who own their own home in England and Wales.</p>
+        <h1 class="govuk-heading-l">@SharedLocalizer["Sorry, this service isn't for you"]</h1>
         <p class="govuk-body">
-            For general energy efficiency advice and to find out ways to reduce your energy bill, visit <a href="https://energysavingtrust.org.uk/" target="_blank" class="govuk-link">the Energy Saving Trust</a> website
+            @SharedLocalizer["This service only provides advice for people who own their own home in England and Wales."]
+        </p>
+        <p class="govuk-body">
+            @SharedLocalizer["GeneralEnergySavingTrustAdviceString", "https://energysavingtrust.org.uk/"]
         </p>
         @if (Model.Country is Country.Scotland or Country.NorthernIreland)
         {
-            <h2 class="govuk-heading-m">Other services that might be helpful to you</h2>
+            <h2 class="govuk-heading-m">@SharedLocalizer["Other services that might be helpful to you"]</h2>
 
             @if (Model.Country is Country.Scotland)
             {
                 <p class="govuk-body">
-                    Visit <a href="https://www.homeenergyscotland.org/" target="_blank" class="govuk-link">Home Energy Scotland</a> to help you find ways to improve your property’s energy efficiency.
+                    @SharedLocalizer["VisitHomeEnergyScotlandString", "https://www.homeenergyscotland.org/"]
                 </p>
             }
             else
             {
                 <p class="govuk-body">
-                    Visit <a href="https://www.nidirect.gov.uk/" target="_blank" class="govuk-link">NI Direct</a> to help you find ways to improve your property’s energy efficiency.
+                    @SharedLocalizer["VisitNIDirectString", "https://www.nidirect.gov.uk/"]
                 </p>
             }
         }
