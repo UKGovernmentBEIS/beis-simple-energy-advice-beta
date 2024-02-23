@@ -2,14 +2,12 @@
 using System.Linq;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
-using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Mvc.Localization;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class ActionPlanViewModel
     {
-        private readonly IStringLocalizer<SharedResources> sharedLocalizer;
         public PropertyData PropertyData { get; set; }
         public string EmailAddress { get; set; }
         public bool EmailSent { get; set; }
@@ -17,11 +15,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public bool IsPdf { get; set; }
         public string UrlPrefix { get; set; }
         
-        public ActionPlanViewModel(IStringLocalizer<SharedResources> localizer)
-        {
-            sharedLocalizer = localizer;
-        }
-
         public string GetTotalInstallationCostText()
         {
             var minCost = GetSavedRecommendations().Where(r => r.Key != RecommendationKey.InstallHeatPump).Sum(r => r.MinInstallCost);
@@ -42,7 +35,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
             return PropertyData.PropertyRecommendations.Where(r => r.RecommendationAction == RecommendationAction.Discard).ToList();
         }
 
-        public string GetTotalSavingText()
+        public string GetTotalSavingText(IHtmlLocalizer<SharedResources> sharedLocalizer)
         {
             var saving = GetSavedRecommendations().Where(r => r.Key != RecommendationKey.InstallHeatPump).Sum(r => r.Saving);
             return string.Format(sharedLocalizer["£AYearString"].Value, $"{saving:N0}" );

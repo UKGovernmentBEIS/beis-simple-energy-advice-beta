@@ -330,7 +330,7 @@ namespace SeaPublicWebsite.Controllers
             }
             else
             {
-                var viewModel = new ConfirmAddressViewModel(sharedLocalizer)
+                var viewModel = new ConfirmAddressViewModel
                 {
                     Reference = reference,
                     EpcSearchResults = epcSearchResults,
@@ -1524,7 +1524,7 @@ namespace SeaPublicWebsite.Controllers
         {
             var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
-            var viewModel = new ActionPlanViewModel(sharedLocalizer)
+            var viewModel = new ActionPlanViewModel
             {
                 BackLink = Url.Action(nameof(Recommendation_Get), new { id = (int)propertyData.GetLastRecommendationKey(), reference }),
                 PropertyData = propertyData,
