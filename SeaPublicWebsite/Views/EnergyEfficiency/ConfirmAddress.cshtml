@@ -29,7 +29,7 @@
             </p>
 
             @await Html.GovUkRadiosFromStringsFor(m => m.SelectedEpcId,
-                       radioOptions: Model.EpcOptionsWithUnlistedOption(),
+                       radioOptions: Model.EpcOptionsWithUnlistedOption(SharedLocalizer),
                        fieldsetOptions: new FieldsetViewModel
                        {
                            Legend = new LegendViewModel
