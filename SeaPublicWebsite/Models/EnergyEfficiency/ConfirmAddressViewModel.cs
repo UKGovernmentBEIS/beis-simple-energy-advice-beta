@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 using GovUkDesignSystem.GovUkDesignSystemComponents;
-using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Mvc.Localization;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.Resources;
 
@@ -11,7 +11,6 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
     public class ConfirmAddressViewModel : QuestionFlowViewModel
     {
-        private readonly IStringLocalizer<SharedResources> sharedLocalizer;
         public List<EpcSearchResult> EpcSearchResults { get; set; }
         [GovUkValidateRequired(ErrorMessageResourceName = nameof(ErrorMessages.AddressRequired), ErrorMessageResourceType = typeof(ErrorMessages))]
         public string SelectedEpcId { get; set; }
@@ -19,12 +18,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string Postcode { get; set; }
         public string Number { get; set; }
         
-        public ConfirmAddressViewModel(IStringLocalizer<SharedResources> localizer)
-        {
-            sharedLocalizer = localizer;
-        }
-
-        public Dictionary<string, LabelViewModel> EpcOptionsWithUnlistedOption()
+        public Dictionary<string, LabelViewModel> EpcOptionsWithUnlistedOption(IHtmlLocalizer<SharedResources> sharedLocalizer)
         {
             Dictionary<string, LabelViewModel> dict = EpcSearchResults.ToDictionary(
                 epc => epc.EpcId,
@@ -34,7 +28,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
                 });
             dict.Add("unlisted", new LabelViewModel
             {
-                Text = sharedLocalizer["My address is not listed here"],
+                Text = sharedLocalizer["My address is not listed here"].Value,
             });
             return dict;
         }
