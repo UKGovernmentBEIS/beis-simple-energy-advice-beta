@@ -215,3 +215,61 @@ Ask a member of the team to grant you access to the BEIS DCEAS Google Analytics 
 To debug GA on any of the dev, staging or prod websites you can use the [Google Tag Assistant](https://tagassistant.google.com/)
 
 The Staging and Dev environment share GA credentials
+
+## String CRUD
+As this website has been translated into Welsh, when Creating, Updating, or Deleting strings there are some things to note:
+The following is a list of environment variables required by the application. Other variables are needed, but these are set by `appsettings.json` and do not need to be environment variables.
+
+User-facing strings are held within resource files (.resx) located in the corresponding project.
+
+Avoid using string interpolation/appending to strings, as this will not function similarly for all languages.
+
+The localisation resource files function as key-value pairs, with the file that is queried for the value changing based on the CurrentCulture/CurrentUICulture, which is set by the selected_language cookie.
+
+### Updating Strings
+To update an existing string with a new value, find the resource file that the relevant key is located in, and update its corresponding value in the relevant resource file.
+
+Ensure that you change both English and Welsh so their meanings still align.
+
+### Deleting Strings
+If you are deleting a user facing string from the function 
+
+### Creating(Adding) Strings
+
+#### Strings in .CSHTML files
+In these files within the SeaPublicWebsite project, strings are localised using IHTMLLocalizer.
+
+These lines are required at the top of the file.
+```
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+```
+You can then place your keystring within: `SharedLocalizer["MyChosenKeyString"]`
+
+If your string has things which need to be interpolated with it, do it similarly to string.Format: `SharedLocalizer["MyChosenKeyString", ValueOne, ValueTwo]`
+
+In the SharedResources.resx and SharedResources.cy.resx (or in your IDE's localization manager or resource manager) add English and Welsh key-value pairs respectively.
+
+If you require values to be interpolated with the strings, use placeholders as you would with string.Format in both English and Welsh: {0}, {1} etc.
+
+In some cases, the IDE will raise an issue that LocalizableString can't be used as String. In this case, add .Value like so: `SharedLocalizer["MyChosenKeyString"].Value` which will return a string type object.
+
+If your string contains HTML tags like `<a>` or `<strong>`, place these within the resource file.
+    In the case of `<a>`, the value of the href attribute should be added as an interpolated value. (Unless you require it to be different for English and Welsh)
+##### ViewBag.Title
+This one works a little differently if values need to be interpolated. You have to use `string.Format(SharedLocalizer["MyTitleKeyString"].Value, ValueOne, ValueTwo)`
+
+#### Strings in Controllers
+For these, you have to add an IStringLocalizer to the constructor for the controller if it doesn't already exist there. Then you can use it as above.
+
+Ex: `IStringLocalizer<SharedResources> sharedLocalizer`
+
+##### Strings in attributes
+Attributes are required to be static, so these use a different method to identify the string in the resource files.
+
+Attributes will usually require two pieces of information to be supplied in their parameters, ResourceName and ResourceType see the example to reference the key UsedServiceBeforeRequired in the file ErrorMessages:
+```
+using SeaPublicWebsite.Resources;
+[...rest of file]
+[GovUkValidateRequired(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = nameof(ErrorMessages.UsedServiceBeforeRequired))]
+```
