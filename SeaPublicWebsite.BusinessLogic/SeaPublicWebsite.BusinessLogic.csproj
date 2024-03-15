@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.46" />
+      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.0-456b8e9" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     </ItemGroup>
 
