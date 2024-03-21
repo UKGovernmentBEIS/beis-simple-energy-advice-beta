@@ -78,8 +78,8 @@ If you need to make changes to the GovUkDesignSystem (e.g. to add a new componen
 - Develop and commit your changes (don't forget automated tests as applicable)
 - Build and package your branch with `dotnet pack -p:PackageVersion=1.0.0-$(git rev-parse --short HEAD) -c Release -o .` in the `GovUkDesignSystem` folder
 - Copy the built package to /Lib and delete the old package
-- Update the package version in the IYPEE project
-- Test that your changes work on the IYPEE site
+- Update the package version in the SEA project
+- Test that your changes work on the SEA site
 - Create a PR from your branch back to `master`
 - Get the PR reviewed and merged
 - From time to time create a PR to merge the `master` branch back to the Cabinet Office repository (https://github.com/cabinetoffice/govuk-design-system-dotnet)
