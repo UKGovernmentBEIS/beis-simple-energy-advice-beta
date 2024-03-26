@@ -21,6 +21,7 @@ public class ErrorController: Controller
         return code switch
         {
             404 => View("PageNotFound"),
+            403 => View("Forbidden"), // TODO: BEISSEA-85: This is a WIP and should be removed
             _ => throw new ArgumentOutOfRangeException()
         };
     }
