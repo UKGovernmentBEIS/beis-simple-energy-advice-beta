@@ -974,7 +974,7 @@
         <value>If you like any of these recommendations, you can save them to your action plan before you move on.</value>
     </data>
     <data name="CostsAndSavingsAreEstimatesWarningTextString" xml:space="preserve">
-        <value>The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on the April 2024 energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
+        <value>The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on the January 2024 energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
     </data>
     <data name="Getting back to your recommendations once you leave" xml:space="preserve">
         <value>Getting back to your recommendations once you leave</value>
@@ -1187,7 +1187,7 @@
         <value>The fuel bill savings from replacing windows are unlikely to pay back the full installation cost, but there are other benefits such as reduced maintenance and better sound proofing that may affect your decision.</value>
     </data>
     <data name="MoreInfoOnNewWindowsOnBritishFenestrationRatingCouncilWebsiteString" xml:space="preserve">
-        <value>You can find more information on efficient windows and how to choose them at the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;British Fenestration Rating Council.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>You can find more information on efficient windows and how to choose them at the&lt;a class="govuk-link" target="_blank" href="{0}"&gt;British Fenestration Rating Council.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="If you live in a conservation area or listed building there may be limits on what changes you can make to your windows. You should check with your local authority to see what is allowed." xml:space="preserve">
         <value>If you live in a conservation area or listed building there may be limits on what changes you can make to your windows. You should check with your local authority to see what is allowed.</value>
@@ -1256,7 +1256,7 @@
         <value>Heat pumps are suitable for many homes, will cut your carbon emissions and there are grants available through the &lt;a class="govuk-link" href="{0}"&gt;Boiler Upgrade Scheme&lt;/a&gt; for air source heat pumps and ground source heat pumps to reduce the upfront cost.</value>
     </data>
     <data name="CheckWhichHeatPumpIsSuitableOnHeatPumpServiceString" xml:space="preserve">
-        <value>There are different types of heat pump and you can &lt;a class="govuk-link" href="{0}" target="_blank"&gt;check which might be suitable for your home&lt;/a&gt; on our dedicated heat pump service.</value>
+        <value>There are different types of heat pump and you can &lt;a class="govuk-link" href="{0}" target="_blank"&gt;check which might be suitable for your home &lt;/a&gt;on our dedicated heat pump service.</value>
     </data>
     <data name="MoreInfoOnHeatPumpsOnEnergySavingTrustWebsiteString" xml:space="preserve">
         <value>You can find more information on heat pumps on the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Energy Saving Trust&lt;/a&gt; website.</value>
@@ -2205,7 +2205,7 @@
         <value>Note</value>
     </data>
     <data name="FiguresForTypicalInstallationWarningTextString" xml:space="preserve">
-        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the April 2024 energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
+        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the January 2024 energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
     </data>
     <data name="1 minute" xml:space="preserve">
         <value>1 minute</value>
