@@ -1187,7 +1187,7 @@
         <value>The fuel bill savings from replacing windows are unlikely to pay back the full installation cost, but there are other benefits such as reduced maintenance and better sound proofing that may affect your decision.</value>
     </data>
     <data name="MoreInfoOnNewWindowsOnBritishFenestrationRatingCouncilWebsiteString" xml:space="preserve">
-        <value>You can find more information on efficient windows and how to choose them at the&lt;a class="govuk-link" target="_blank" href="{0}"&gt;British Fenestration Rating Council.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>You can find more information on efficient windows and how to choose them at the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;British Fenestration Rating Council.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="If you live in a conservation area or listed building there may be limits on what changes you can make to your windows. You should check with your local authority to see what is allowed." xml:space="preserve">
         <value>If you live in a conservation area or listed building there may be limits on what changes you can make to your windows. You should check with your local authority to see what is allowed.</value>
