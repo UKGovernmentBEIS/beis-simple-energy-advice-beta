@@ -36,11 +36,13 @@ Doing a release:
 - Confirm the current version of staging has passed UAT
 - Gain sign-off to deploy
 - Merge staging into main
+   - To merge to main, the `production release` label must be applied to your pull request
 
 For critical bug fixes on production
 - Create a branch from main
 - Make changes on the branch
 - Raise a PR back to main once the bug is fixed
+   - To merge to main, the `production release` label must be applied to your pull request
 - If the PR is accepted merge the branch
 
 ### Deployments
