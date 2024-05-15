@@ -16,6 +16,7 @@ Add a brief description of the change(s) you have made
 - [ ] I have checked there are no unnecessary IDE warnings in this PR
 - [ ] I have checked there are no unintentional line ending changes
 - [ ] I have added tests where applicable
+- [ ] If I have made any changes to the code, I have used the IDE auto-formatter on it
 - [ ] If I have made any changes to website flow, I have checked forward and back behaviour is still consistent
 - [ ] If I have <b>added</b> a new string to the code, I have checked it is surrounded by an appropriate localiser
 - [ ] If I have <b>added</b> a new string to the code, I have added a new key/value set to the corresponding resource file
