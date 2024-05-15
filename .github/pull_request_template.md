@@ -20,6 +20,7 @@ Add a brief description of the change(s) you have made
 - [ ] If I have made any changes to website flow, I have checked forward and back behaviour is still consistent
 - [ ] If I have <b>added</b> a new string to the code, I have checked it is surrounded by an appropriate localiser
 - [ ] If I have <b>added</b> a new string to the code, I have added a new key/value set to the corresponding resource file
+- [ ] If I have <b>added</b> a new string to the code, or key to resource file, it is not the direct English text, and follows the format of "\[GeneralPurposeOfText\]String" e.g. "WelcomePageTitleString"
 - [ ] If I have <b>added</b> a new key to a resource file, I have checked it is not a duplicate (case insensitively)
 - [ ] If I have <b>edited</b> a resource file key, I have checked that all references have also been updated
 - [ ] If I have <b>edited</b> a resource file value, I have checked that all references to its key are still correct with the updated value
