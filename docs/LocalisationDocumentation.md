@@ -41,5 +41,11 @@ If in the process of following one piece of guidance below, you find you "trigge
 
 #### When adding a new enum/enum value
 * Check if the new enum/enum value will be displayed to the user as part of a radio button/checkbox/dropdown.
-  * If you're making a new enum, add the `[Display(ResourceType = typeof(Resources.Enum.<name of resource file>), Description = nameof(Resources.Enum.<name of resource file>.<key>))]` attribute above each option, and make that resource file (and contents) in the route specified in typeof.
-  * If you're adding a new value to an existing enum, add the attribute `[Display(ResourceType = typeof(Resources.Enum.<resource file name>), Description = nameof(Resources.Enum.<resource file name>.<key>))]` above your new option, add a new Key/English Value/Welsh Value triad to the enum's existing resource file.
+  * If you're making a new enum, add the `[Display(ResourceType = typeof(Resources.Enum.<resource filename>), Description = nameof(Resources.Enum.<resource filename>.<key>))]` attribute above each option, and make that resource file (and contents) in the route specified in typeof.
+  * If you're adding a new value to an existing enum, add the attribute `[Display(ResourceType = typeof(Resources.Enum.<resource filename>), Description = nameof(Resources.Enum.<resource filename>.<key>))]` above your new option, add a new Key/English Value/Welsh Value triad to the enum's existing resource file.
+
+#### When using GovDesignSystem Validation:
+* Check that you have referenced the error messages and translations appropriately, some examples below:
+  * `[GovUkValidateRequired(ErrorMessageResourceType = typeof(<resource filename>), ErrorMessageResourceName = nameof(<resource filename>.<key>))]`
+  * `[GovUkDataBindingMandatoryDecimalErrorText(nameof(<resource filename>.<key>), "The temperature", typeof(<resource filename>), "SeaPublicWebsite.Resources.<resource filename>", mustBeNumberErrorMessage: nameof(<resource filename>.<key>) )]`
+  * `[Range(minimum:5.0, maximum:35.0 , ErrorMessageResourceType = typeof(<resource filename>), ErrorMessageResourceName= nameof(<resource filename>.<key>))]`
