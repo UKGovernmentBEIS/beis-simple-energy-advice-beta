@@ -17,8 +17,8 @@ If in the process of following one piece of guidance below, you find you "trigge
 * If you're adding completely new copy text that doesn't already have an entry in the resource file: ensure that you add the complete Key/English Value/Welsh Value triad to the resource file.
 
 #### When editing a content string
-* Ensure that your newly edited string corresponds to a resource file key within the resource file that the localiser references.
-* If your edited string is for the purpose of adding completely new copy text that doesn't already have an entry in the resource file: ensure that you add the complete Key/English Value/Welsh Value triad to the resource file.
+* Ensure that your newly edited content string corresponds to a resource file key within the resource file that the localiser references.
+* If your edited content string is for the purpose of adding completely new copy text that doesn't already have an entry in the resource file: ensure that you add the complete Key/English Value/Welsh Value triad to the resource file.
 
 #### When deleting a content string
 * Check in the corresponding resource file that it is still being referenced elsewhere (using find usages, or your IDE's search function). If it is not being used elsewhere, delete the key from the resource file. (In rider, use Safe Delete)
@@ -37,7 +37,7 @@ If in the process of following one piece of guidance below, you find you "trigge
 * Do not leave the value empty
 
 #### When deleting a resource file value
-* Don't delete resource file values without replacing the text. Leaving the value blank will be considered as an empty string, so no text will be visible.
+* Don't delete resource file values without replacing the text. Leaving the value blank will be considered as an empty string to display, so no text will be visible.
 
 #### When adding a new enum/enum value
 * Check if the new enum/enum value will be displayed to the user as part of a radio button/checkbox/dropdown.
