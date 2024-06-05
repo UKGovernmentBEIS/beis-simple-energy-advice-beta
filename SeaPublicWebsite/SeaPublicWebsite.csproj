@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <LangVersion>11</LangVersion>
+        <LangVersion>12</LangVersion>
         <UserSecretsId>b88a2d94-9041-47c6-ab29-ff57149dd347</UserSecretsId>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
