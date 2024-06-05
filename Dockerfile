@@ -36,5 +36,5 @@ RUN dotnet publish -c Release -o out
 FROM base
 WORKDIR /SeaPublicWebsite
 COPY --from=build-env /SeaPublicWebsite/out .
-EXPOSE 8080
+EXPOSE 80
 ENTRYPOINT ["dotnet", "SeaPublicWebsite.dll"]
