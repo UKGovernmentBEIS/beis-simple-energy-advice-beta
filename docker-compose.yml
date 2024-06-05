@@ -4,9 +4,10 @@ services:
   sea:
     build: .
     ports:
-      - "5001:8080"
+      - "5001:80"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_HTTP_PORTS: "80"
     volumes:
       # map the dotnet user-secret folder
       - $APPDATA/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
