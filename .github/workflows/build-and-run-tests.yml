@@ -3,12 +3,12 @@ name: Run automated tests
 on:
   pull_request:
     branches:
-      - main
-      - production
+      - '**'
   push:
     branches:
+      - dev
+      - staging
       - main
-      - production
 
 jobs:
   build-and-run-tests:
