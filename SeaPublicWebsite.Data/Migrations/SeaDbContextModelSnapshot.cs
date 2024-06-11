@@ -190,6 +190,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("PropertyType")
                         .HasColumnType("integer");
 
+                    b.Property<DateTime?>("RecommendationsFirstRetrievedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Reference")
                         .HasColumnType("text");
 

@@ -1233,6 +1233,7 @@ namespace SeaPublicWebsite.Controllers
                 ).ToList();
             }
 
+            propertyData.RecommendationsFirstRetrievedAt ??= DateTime.Now.ToUniversalTime();
             propertyData.HasSeenRecommendations = true;
             await propertyDataStore.SavePropertyDataAsync(propertyData);
 
