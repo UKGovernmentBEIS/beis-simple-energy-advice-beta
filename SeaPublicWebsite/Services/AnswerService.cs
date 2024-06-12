@@ -9,11 +9,11 @@ namespace SeaPublicWebsite.Services;
 
 public class AnswerService
 {
-    private readonly PropertyDataStore propertyDataStore;
+    private readonly IPropertyDataStore propertyDataStore;
     private readonly PropertyDataUpdater propertyDataUpdater;
     
     public AnswerService(
-        PropertyDataStore propertyDataStore,
+        IPropertyDataStore propertyDataStore,
         PropertyDataUpdater propertyDataUpdater)
     {
         this.propertyDataStore = propertyDataStore;

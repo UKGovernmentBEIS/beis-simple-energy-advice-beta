@@ -4,7 +4,12 @@ using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 {
-    public class RecommendationService
+    public interface IRecommendationService
+    {
+        Task<List<BreRecommendation>> GetRecommendationsForPropertyAsync(PropertyData propertyData);
+    }
+
+    public class RecommendationService : IRecommendationService
     {
         private readonly BreApi breApi;
 

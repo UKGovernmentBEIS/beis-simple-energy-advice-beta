@@ -5,14 +5,11 @@ using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
-using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
@@ -26,6 +23,7 @@ using SeaPublicWebsite.Models.EnergyEfficiency;
 using SeaPublicWebsite.Models.LanguageChange;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
+using SeaPublicWebsite.Services.EnergyEfficiency;
 using SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 
 namespace SeaPublicWebsite.Controllers
@@ -35,11 +33,11 @@ namespace SeaPublicWebsite.Controllers
     [Route("energy-efficiency")]
     public class EnergyEfficiencyController : Controller
     {
-        private readonly PropertyDataStore propertyDataStore;
+        private readonly IPropertyDataStore propertyDataStore;
         private readonly IQuestionFlowService questionFlowService;
+        private readonly PropertyDataService propertyDataService;
         private readonly IEpcApi epcApi;
         private readonly IEmailSender emailApi;
-        private readonly RecommendationService recommendationService;
         private readonly CookieService cookieService;
         private readonly GoogleAnalyticsService googleAnalyticsService;
         private readonly PdfGenerationService pdfGenerationService;
@@ -50,11 +48,11 @@ namespace SeaPublicWebsite.Controllers
         private readonly IStringLocalizer<SharedResources> sharedLocalizer;
         
         public EnergyEfficiencyController(
-            PropertyDataStore propertyDataStore,
+            IPropertyDataStore propertyDataStore,
             IQuestionFlowService questionFlowService, 
+            PropertyDataService propertyDataService,
             IEpcApi epcApi,
             IEmailSender emailApi,
-            RecommendationService recommendationService,
             CookieService cookieService,
             GoogleAnalyticsService googleAnalyticsService,
             PdfGenerationService pdfGenerationService,
@@ -66,9 +64,9 @@ namespace SeaPublicWebsite.Controllers
         {
             this.propertyDataStore = propertyDataStore;
             this.questionFlowService = questionFlowService;
+            this.propertyDataService = propertyDataService;
             this.emailApi = emailApi;
             this.epcApi = epcApi;
-            this.recommendationService = recommendationService;
             this.cookieService = cookieService;
             this.googleAnalyticsService = googleAnalyticsService;
             this.pdfGenerationService = pdfGenerationService;
@@ -1214,28 +1212,7 @@ namespace SeaPublicWebsite.Controllers
                 return await AnswerSummary_Get(reference);
             }
             
-            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
-            if (propertyData.PropertyRecommendations is null || propertyData.PropertyRecommendations.Count == 0)
-            {
-                var recommendationsForPropertyAsync = await recommendationService.GetRecommendationsForPropertyAsync(propertyData);
-                propertyData.PropertyRecommendations = recommendationsForPropertyAsync.Select(r => 
-                    new PropertyRecommendation()
-                    {
-                        Key = r.Key,
-                        Title = r.Title,
-                        MinInstallCost = r.MinInstallCost,
-                        MaxInstallCost = r.MaxInstallCost,
-                        Saving = r.Saving,
-                        LifetimeSaving = r.LifetimeSaving,
-                        Lifetime = r.Lifetime,
-                        Summary = r.Summary
-                    }
-                ).ToList();
-            }
-
-            propertyData.RecommendationsFirstRetrievedAt ??= DateTime.Now.ToUniversalTime();
-            propertyData.HasSeenRecommendations = true;
-            await propertyDataStore.SavePropertyDataAsync(propertyData);
+            var propertyData = await propertyDataService.UpdatePropertyDataWithRecommendations(reference);
 
             var nextStep = questionFlowService.NextStep(QuestionFlowStep.AnswerSummary, propertyData);
             var forwardArgs = GetActionArgumentsForQuestion(nextStep, reference);
