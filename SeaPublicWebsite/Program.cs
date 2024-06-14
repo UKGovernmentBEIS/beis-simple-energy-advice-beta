@@ -91,16 +91,15 @@ namespace SeaPublicWebsite
             
             startup.Configure(app, app.Environment);
 
-            
-            // Migrate the database for local dev and for instance 0 on GOV.PaaS.
-            // As we use rolling deployments there shouldn't be any chance of multiple instances of this running at the
-            // same time anyway, but it's easy to check the instance index for extra safety.
-            if (app.Environment.IsDevelopment() || app.Configuration["CF_INSTANCE_INDEX"] == "0")
-            {
-                using var scope = app.Services.CreateScope();
-                var dbContext = scope.ServiceProvider.GetRequiredService<SeaDbContext>();
-                dbContext.Database.Migrate();
-            }
+            // Migrate the database if it's out of date. Ideally we wouldn't do this on app startup for our deployed
+            // environments, because we're risking multiple containers attempting to run the migrations concurrently and
+            // getting into a mess. However, we very rarely add migrations at this point, so in practice it's easier to
+            // risk it and keep an eye on the deployment: we should be doing rolling deployments anyway which makes it
+            // very unlikely we run into concurrency issues. If that changes though we should look at moving migrations
+            // to a deployment pipeline step, and only doing the following locally (PC-1150).
+            using var scope = app.Services.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<SeaDbContext>();
+            dbContext.Database.Migrate();
 
             app.Run();
         }
