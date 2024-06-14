@@ -86,10 +86,11 @@ public class PropertyDataStore : IPropertyDataStore
                 await dataAccessProvider.AddPropertyDataAsync(propertyData);
                 return propertyData;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 // Just retry
-                logger.LogWarning("Failed to create new property data row with reference " + propertyData.Reference);
+                logger.LogWarning("Failed to create new property data row with reference {Reference}: {Message}",
+                    propertyData.Reference, e.Message);
                 await Task.Delay(SleepMilliSeconds);
             }
             saveCount++;
