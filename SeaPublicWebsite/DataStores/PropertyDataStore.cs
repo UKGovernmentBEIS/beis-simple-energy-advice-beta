@@ -10,7 +10,15 @@ using SeaPublicWebsite.Helpers;
 
 namespace SeaPublicWebsite.DataStores;
 
-public class PropertyDataStore
+public interface IPropertyDataStore
+{
+    Task<PropertyData> LoadPropertyDataAsync(string reference);
+    Task<bool> IsReferenceValidAsync(string reference);
+    Task SavePropertyDataAsync(PropertyData propertyData);
+    Task<PropertyData> CreateNewPropertyDataAsync();
+}
+
+public class PropertyDataStore : IPropertyDataStore
 {
     private readonly IDataAccessProvider dataAccessProvider;
     private readonly ILogger<PropertyDataStore> logger;

@@ -6,6 +6,8 @@ public class PropertyData
 {
     public string Reference { get; set; }
 
+    public DateTime? RecommendationsFirstRetrievedAt { get; set; }
+
     public OwnershipStatus? OwnershipStatus { get; set; }
     public Country? Country { get; set; }
     
