@@ -23,6 +23,7 @@ using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Middleware;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
+using SeaPublicWebsite.Services.EnergyEfficiency;
 using SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 using Serilog;
 
@@ -43,13 +44,13 @@ namespace SeaPublicWebsite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<AnswerService>();
-            services.AddScoped<PropertyDataStore>();
+            services.AddScoped<IPropertyDataStore, PropertyDataStore>();
             services.AddScoped<PropertyDataUpdater>();
             services.AddScoped<IQuestionFlowService, QuestionFlowService>();
             services.AddScoped<PostcodesIoApi>();
             services.AddMemoryCache();
             services.AddSingleton<StaticAssetsVersioningService>();
-            services.AddScoped<RecommendationService>();
+            services.AddScoped<IRecommendationService, RecommendationService>();
             services.AddScoped<IDataAccessProvider, DataAccessProvider>();
             services.AddDataProtection().PersistKeysToDbContext<SeaDbContext>();
 
@@ -62,6 +63,7 @@ namespace SeaPublicWebsite
             ConfigureGoogleAnalyticsService(services);
             ConfigurePdfGeneration(services);
             ConfigureFullHostnameService(services);
+            ConfigurePropertyDataService(services);
 
             services.Configure<BasicAuthMiddlewareConfiguration>(
                 configuration.GetSection(BasicAuthMiddlewareConfiguration.ConfigSection));
@@ -129,6 +131,11 @@ namespace SeaPublicWebsite
         private void ConfigurePdfGeneration(IServiceCollection services)
         {
             services.AddScoped<PdfGenerationService>();
+        }
+
+        private void ConfigurePropertyDataService(IServiceCollection services)
+        {
+            services.AddScoped<PropertyDataService>();
         }
 
         private void ConfigureFullHostnameService(IServiceCollection services)

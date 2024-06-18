@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 using SeaPublicWebsite.BusinessLogic.Models;
@@ -44,6 +45,7 @@ public class PropertyDataTests
             Temperature = 20,
             UneditedData = new PropertyData(),
             HasSeenRecommendations = false,
+            RecommendationsFirstRetrievedAt = DateTime.Now.ToUniversalTime(),
             PropertyRecommendations = new List<PropertyRecommendation>
             {
                 new()
