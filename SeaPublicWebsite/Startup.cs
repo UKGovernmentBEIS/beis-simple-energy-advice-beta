@@ -29,6 +29,9 @@ using Serilog;
 
 namespace SeaPublicWebsite
 {
+    using Microsoft.AspNetCore.Antiforgery;
+    using Microsoft.AspNetCore.Http;
+
     public class Startup
     {
         private readonly IConfiguration configuration;
@@ -101,12 +104,19 @@ namespace SeaPublicWebsite
         {
             services.Configure<CookieServiceConfiguration>(
                 configuration.GetSection(CookieServiceConfiguration.ConfigSection));
-            // Change the default antiforgery cookie name so it doesn't include Asp.Net for security reasons
-            services.AddAntiforgery(options => options.Cookie.Name = "Antiforgery");
+            services.AddAntiforgery(ConfigureAntiForgeryCookieOptions);
             services.AddScoped<CookieService, CookieService>();
             
         }
 
+        private void ConfigureAntiForgeryCookieOptions(AntiforgeryOptions options)
+        {
+            // Change the default antiforgery cookie name so it doesn't include Asp.Net for security reasons
+            options.Cookie.Name = "Antiforgery";
+            // TODO: BEISSEA-85: Change SameAsRequest back to Always as it's a weird way of handling the health-check edge case
+            options.Cookie.SecurePolicy = webHostEnvironment.IsDevelopment() ? CookieSecurePolicy.None : CookieSecurePolicy.SameAsRequest;
+        }
+        
         private void ConfigureEpcApi(IServiceCollection services)
         {
             services.Configure<EpbEpcConfiguration>(
