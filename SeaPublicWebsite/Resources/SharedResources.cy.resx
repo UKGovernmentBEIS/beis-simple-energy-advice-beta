@@ -838,7 +838,7 @@
         <value>Os ydych chi’n hoffi unrhyw un o’r argymhellion hyn, gallwch eu cadw yn eich cynllun gweithredu cyn bwrw ymlaen.</value>
     </data>
     <data name="CostsAndSavingsAreEstimatesWarningTextString" xml:space="preserve">
-        <value>Amcangyfrifon yw’r costau a’r arbedion a ddarparwn ac efallai na fyddant yr un fath yn ymarferol. Mae'r arbedion a ddangosir wedi’u seilio ar gap prisiau ynni Ebrill 2024 yn achos biliau nwy a thrydan, ac ar brisiau ynni RdSAP yn achos pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, felly bydd yr amcangyfrifon o arbedion.</value>
+        <value>Amcangyfrifon yw’r costau a’r arbedion a ddarparwn ac efallai na fyddant yr un fath yn ymarferol. Mae'r arbedion a ddangosir wedi’u seilio ar gap prisiau ynni Gorffennaf 2024 yn achos biliau nwy a thrydan, ac ar brisiau ynni RdSAP yn achos pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, felly bydd yr amcangyfrifon o arbedion.</value>
     </data>
     <data name="Getting back to your recommendations once you leave" xml:space="preserve">
         <value>Mynd yn ôl at eich argymhellion ar ôl i chi adael</value>
@@ -1987,7 +1987,7 @@
         <value>Sylwer</value>
     </data>
     <data name="FiguresForTypicalInstallationWarningTextString" xml:space="preserve">
-        <value>Sylwer Mae’r ffigurau hyn ar gyfer gosodiad arferol mewn cartref fel eich un chi. Bydd eich amgylchiadau, manylion y gosodiadau a phrisiau ynni yn effeithio ar y costau a’r arbedion a welwch. Mae'r arbedion a ddangosir wedi’u seilio ar gap prisiau ynni Ebrill 2024 yn achos biliau nwy a thrydan, ac ar brisiau ynni RdSAP yn achos pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, felly bydd yr amcangyfrifon o arbedion.</value>
+        <value>Sylwer Mae’r ffigurau hyn ar gyfer gosodiad arferol mewn cartref fel eich un chi. Bydd eich amgylchiadau, manylion y gosodiadau a phrisiau ynni yn effeithio ar y costau a’r arbedion a welwch. Mae'r arbedion a ddangosir wedi’u seilio ar gap prisiau ynni Gorffennaf 2024 yn achos biliau nwy a thrydan, ac ar brisiau ynni RdSAP yn achos pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, felly bydd yr amcangyfrifon o arbedion.</value>
     </data>
     <data name="1 minute" xml:space="preserve">
         <value>1 funud</value>
