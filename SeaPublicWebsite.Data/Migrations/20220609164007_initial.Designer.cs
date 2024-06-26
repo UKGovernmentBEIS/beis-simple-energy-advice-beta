@@ -13,7 +13,7 @@ namespace SeaPublicWebsite.Data.Migrations
 {
     [DbContext(typeof(SeaDbContext))]
     [Migration("20220609164007_initial")]
-    partial class Initial
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

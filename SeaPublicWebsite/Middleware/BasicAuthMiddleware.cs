@@ -93,7 +93,7 @@ namespace SeaPublicWebsite.Middleware
             }
             else
             {
-                httpContext.Response.Headers.Append(headerName, headerValue);
+                httpContext.Response.Headers.Add(headerName, headerValue);
             }
         }
     }
