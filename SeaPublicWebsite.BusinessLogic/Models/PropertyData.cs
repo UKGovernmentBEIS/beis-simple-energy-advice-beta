@@ -6,7 +6,12 @@ public class PropertyData
 {
     public string Reference { get; set; }
 
-    public DateTime? RecommendationsFirstRetrievedAt { get; set; }
+    /// <summary>
+    /// RecommendationsFirstRetrievedAt's name no longer reflects when it is assigned,
+    /// it is now assigned after the new-or-returning user question, at the start of the journey.
+    /// TODO-1235 Rename to reflect new position in journey
+    /// </summary>
+    public DateTime? RecommendationsFirstRetrievedAt { get; set; } 
 
     public OwnershipStatus? OwnershipStatus { get; set; }
     public Country? Country { get; set; }
