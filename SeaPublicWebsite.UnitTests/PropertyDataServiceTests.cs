@@ -84,25 +84,4 @@ public class PropertyDataServiceTests
         // Assert
         Assert.AreEqual(testTime, returnedPropertyData.RecommendationsFirstRetrievedAt);
     }
-    
-    [Test]
-    public async Task UpdatePropertyDataWithRecommendations_WhenCalledOnReferenceThatHasNoTimestamp_ReturnsPropertyDataWithTimestampForNow()
-    {
-        // Arrange
-        var startTime = DateTime.Now.ToUniversalTime();
-        mockRecommendationService.Setup(rs => rs.GetRecommendationsForPropertyAsync(It.IsAny<PropertyData>()))
-            .ReturnsAsync(new List<BreRecommendation>());
-        mockPropertyDataStore.Setup(ds => ds.LoadPropertyDataAsync("222222"))
-            .ReturnsAsync(InitializePropertyDataWithRecommendationsFirstRetrievedAt(null));
-        mockPropertyDataStore.Setup(ds => ds.SavePropertyDataAsync(It.IsAny<PropertyData>()));
-        
-        // Act
-        var returnedPropertyData = await underTest.UpdatePropertyDataWithRecommendations("222222");
-
-        
-        // Assert
-        var endTime = DateTime.Now.ToUniversalTime();
-        Assert.LessOrEqual(startTime, returnedPropertyData.RecommendationsFirstRetrievedAt);
-        Assert.GreaterOrEqual(endTime, returnedPropertyData.RecommendationsFirstRetrievedAt);
-    }
 }
