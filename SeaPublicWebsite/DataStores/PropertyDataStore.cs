@@ -80,7 +80,7 @@ public class PropertyDataStore : IPropertyDataStore
                 Reference = RandomHelper.Generate8CharacterReference()
             };
             attemptedReferences.Add(propertyData.Reference);
-            
+
             try
             {
                 await dataAccessProvider.AddPropertyDataAsync(propertyData);
