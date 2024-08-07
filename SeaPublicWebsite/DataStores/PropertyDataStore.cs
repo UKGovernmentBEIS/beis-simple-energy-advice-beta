@@ -83,9 +83,8 @@ public class PropertyDataStore : IPropertyDataStore
 
             try
             {
-                await dataAccessProvider.AddPropertyDataAsync(propertyData);
                 propertyData.RecommendationsFirstRetrievedAt = DateTime.Now.ToUniversalTime();
-                await SavePropertyDataAsync(propertyData);
+                await dataAccessProvider.AddPropertyDataAsync(propertyData);
                 return propertyData;
             }
             catch (Exception)
