@@ -13,12 +13,12 @@ namespace SeaPublicWebsite.Data.Migrations
             {
                 Sql = @"
                     with grouped_table as (
-                        SELECT *, count(""RecommendationsFirstRetrievedAt"") 
+                        SELECT ""PropertyDataId"", ""RecommendationsFirstRetrievedAt"", count(""RecommendationsFirstRetrievedAt"") 
                         OVER (ORDER BY ""PropertyDataId"") AS _grp
                         FROM ""PropertyData""
                     ), 
                     final_table AS(
-                        SELECT *, _grp, FIRST_VALUE(""RecommendationsFirstRetrievedAt"") 
+                        SELECT ""PropertyDataId"", _grp, FIRST_VALUE(""RecommendationsFirstRetrievedAt"") 
                             OVER (partition by _grp order by ""PropertyDataId"") AS smeared_timestamps FROM grouped_table
                     )
                     UPDATE ""PropertyData"" p 
