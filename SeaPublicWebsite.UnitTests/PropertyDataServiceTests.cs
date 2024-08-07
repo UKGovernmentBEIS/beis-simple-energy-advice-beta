@@ -7,9 +7,7 @@ using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.DataStores;
 using SeaPublicWebsite.Services.EnergyEfficiency;
 using Moq;
-using NUnit.Framework.Constraints;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
-using SeaPublicWebsite.Models.EnergyEfficiency;
 
 namespace Tests;
 
