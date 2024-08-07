@@ -7,8 +7,10 @@ public class PropertyData
     public string Reference { get; set; }
 
     /// <summary>
-    /// RecommendationsFirstRetrievedAt's name no longer reflects when it is assigned,
-    /// it is now assigned after the new-or-returning user question, at the start of the journey.
+    /// Due to PC-1234, RecommendationsFirstRetrievedAt's name no longer reflects when it is assigned
+    /// a constraint on the fix was that the data team cannot currently rewrite their
+    /// ingestion pipelines due to deadlines, therefore the column name in the database cannot change.
+    /// This timestamp is now assigned after the new-or-returning user question, at the start of the journey.
     /// TODO-1240 Rename to reflect new position in journey
     /// </summary>
     public DateTime? RecommendationsFirstRetrievedAt { get; set; } 
