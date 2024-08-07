@@ -9,8 +9,9 @@ namespace SeaPublicWebsite.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            // This operation will perform a forward-fill on "RecommendationsFirstRetrievedAt"
-            // starting from August 1st onward, filling in null values with the most recent non-null value
+            /// Part of PC-1234, to recover the "missing" data by approximating timestamps for incomplete journeys:
+            /// This will perform a forward-fill on "RecommendationsFirstRetrievedAt"
+            /// starting from August 1st onward, filling in null values with the most recent non-null value.
             migrationBuilder.Operations.Add(new SqlOperation
             {
                 Sql = @"
