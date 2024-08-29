@@ -80,9 +80,10 @@ public class PropertyDataStore : IPropertyDataStore
                 Reference = RandomHelper.Generate8CharacterReference()
             };
             attemptedReferences.Add(propertyData.Reference);
-            
+
             try
             {
+                propertyData.RecommendationsFirstRetrievedAt = DateTime.Now.ToUniversalTime();
                 await dataAccessProvider.AddPropertyDataAsync(propertyData);
                 return propertyData;
             }
