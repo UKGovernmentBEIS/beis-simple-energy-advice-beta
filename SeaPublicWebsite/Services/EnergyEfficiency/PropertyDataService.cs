@@ -41,7 +41,6 @@ public class PropertyDataService
             ).ToList();
         }
 
-        propertyData.RecommendationsFirstRetrievedAt ??= DateTime.Now.ToUniversalTime();
         propertyData.HasSeenRecommendations = true;
         await propertyDataStore.SavePropertyDataAsync(propertyData);
         return propertyData;
