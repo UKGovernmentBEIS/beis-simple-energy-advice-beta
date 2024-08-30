@@ -12,6 +12,30 @@ namespace SeaPublicWebsite.Data.Migrations
             /// Part of PC-1234, to recover the "missing" data by approximating timestamps for incomplete journeys:
             /// This will perform a forward-fill on "RecommendationsFirstRetrievedAt"
             /// starting from August 1st onward, filling in null values with the most recent non-null value.
+            ///
+            /// After release, we realised there was a mistake in this migration: it did not account for old users
+            /// revisiting the site and retrieving recommendations for PropertyData generated before August. This was
+            /// fixed manually on all environments using the following script:
+            ///
+            /// with older_rows as (
+            ///     select *, lag("RecommendationsFirstRetrievedAt") over (order by "PropertyDataId") as prev
+            ///     from "PropertyData"
+            ///     where "PropertyDataId" < N
+            /// ),
+            /// rows_to_clear as (
+            ///     select * from older_rows
+            ///     where "RecommendationsFirstRetrievedAt" = prev
+            /// )
+            /// update "PropertyData"
+            /// set "RecommendationsFirstRetrievedAt" = null
+            /// where "PropertyDataId" in (select "PropertyDataId" from rows_to_clear)
+            /// and extract(month from "RecommendationsFirstRetrievedAt") = 8;
+            ///
+            /// where N was the manually-observed start point of August (for prod this was 481800). We could not do
+            /// something like:
+            /// select max("PropertyDataId") from "PropertyData" where extract(month from "RecommendationsFirstRetrievedAt") = 7
+            /// because there was one pathological row with a July timestamp (and no reference code) that appeared to
+            /// have been insterted in August - this was raised as a separate issue (PC-1287).
             migrationBuilder.Operations.Add(new SqlOperation
             {
                 Sql = @"
