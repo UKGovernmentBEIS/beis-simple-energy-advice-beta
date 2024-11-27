@@ -153,4 +153,7 @@ rhwng {1} a {2}</value>
     <data name="TemperatureRequired" xml:space="preserve">
         <value>Rhowch rif rhwng 5 a 35, neu anwybyddwch y cwestiwn hwn</value>
     </data>
+    <data name="SolarElectricPanelsRequired" xml:space="preserve">
+        <value>Dewiswch a oes gennych baneli solar</value>
+    </data>
 </root>

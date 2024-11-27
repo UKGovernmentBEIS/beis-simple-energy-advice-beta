@@ -165,6 +165,16 @@ public class AnswerService
             reference);
     }
     
+    public async Task<QuestionFlowStep> UpdateSolarElectricPanels(
+        string reference,
+        SolarElectricPanels? solarElectricPanels,
+        QuestionFlowStep? entryPoint)
+    {
+        return await UpdatePropertyDataAsync(
+            (b, p) => b.UpdateSolarElectricPanels(p, solarElectricPanels, entryPoint),
+            reference);
+    }
+    
     public async Task<QuestionFlowStep> UpdateLoftSpace(
         string reference,
         LoftSpace? loftSpace,

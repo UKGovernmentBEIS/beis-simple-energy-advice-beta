@@ -200,6 +200,36 @@
                 }
             }
         });
+        
+        @if (Model.PropertyData.PropertyType is not PropertyType.ApartmentFlatOrMaisonette || Model.PropertyData.FlatType is FlatType.TopFloor)
+        {
+            rows.Add(new()
+            {
+                Key = new()
+                {
+                    Classes = "govuk-!-width-one-quarter",
+                    Text = SharedLocalizer["SolarElectricPanelsQuestionString"].Value
+                },
+                Value = new()
+                {
+                    Classes = "govuk-!-width-one-half",
+                    Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.SolarElectricPanels)
+                },
+                Actions = new()
+                {
+                    Classes = "govuk-!-width-one-quarter",
+                    Items = new()
+                    {
+                        new()
+                        {
+                            Href = Url.Action(nameof(EnergyEfficiencyController.SolarElectricPanels_Get), "EnergyEfficiency", new { reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.SolarElectricPanels }),
+                            Text = SharedLocalizer["Change"].Value,
+                            VisuallyHiddenText = SharedLocalizer["SolarElectricPanelsQuestionString"].Value
+                        }
+                    }
+                }
+            });
+        }
 
         if (Model.PropertyData.RoofConstruction is not RoofConstruction.Flat)
         {
