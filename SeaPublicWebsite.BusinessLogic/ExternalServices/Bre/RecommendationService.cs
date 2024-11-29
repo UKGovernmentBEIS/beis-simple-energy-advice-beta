@@ -550,7 +550,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
             {
                 SolarElectricPanels.Yes => true,
                 SolarElectricPanels.No => false,
-                SolarElectricPanels.DoNotKnow => null,
+                SolarElectricPanels.DoNotKnow => false,
+                null => null,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
