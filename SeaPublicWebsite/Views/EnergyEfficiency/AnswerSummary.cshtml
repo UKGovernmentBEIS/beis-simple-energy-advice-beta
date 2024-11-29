@@ -213,7 +213,7 @@
                 Value = new()
                 {
                     Classes = "govuk-!-width-one-half",
-                    Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.SolarElectricPanels)
+                    Text = GovUkRadioCheckboxLabelTextAttribute.GetLabelText(Model.PropertyData.SolarElectricPanels ?? SolarElectricPanels.DoNotKnow)
                 },
                 Actions = new()
                 {
