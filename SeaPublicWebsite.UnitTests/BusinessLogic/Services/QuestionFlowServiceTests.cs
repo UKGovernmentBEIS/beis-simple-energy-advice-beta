@@ -402,15 +402,46 @@ public class QuestionFlowServiceTests
             ),
             QuestionFlowStep.AnswerSummary),
         new(
-            "Solar (PV) panels goes back to roof construction",
+            "Solar (PV) panels goes back to roof construction if the user has flat roof",
             new Input(
                 QuestionFlowStep.SolarElectricPanels,
-                propertyType: PropertyType.ApartmentFlatOrMaisonette,
-                flatType: FlatType.TopFloor,
-                wallConstruction: WallConstruction.DoNotKnow,
-                reference: "ABCDEFGH"
+                "ABCDEFGH",
+                propertyType: PropertyType.House,
+                roofConstruction: RoofConstruction.Flat
             ),
             QuestionFlowStep.RoofConstruction),
+        new(
+            "Solar (PV) panels goes back to loft space if the user does not have flat roof nor loft space",
+            new Input(
+                QuestionFlowStep.SolarElectricPanels,
+                "ABCDEFGH",
+                propertyType: PropertyType.House,
+                roofConstruction: RoofConstruction.Pitched,
+                loftSpace: LoftSpace.No
+            ),
+            QuestionFlowStep.LoftSpace),
+        new(
+            "Solar (PV) panels goes back to loft access if the user does not have flat roof and has inaccessible loft space",
+            new Input(
+                QuestionFlowStep.SolarElectricPanels,
+                "ABCDEFGH",
+                propertyType: PropertyType.House,
+                roofConstruction: RoofConstruction.Pitched,
+                loftSpace: LoftSpace.Yes,
+                accessibleLoft: LoftAccess.No
+            ),
+            QuestionFlowStep.LoftAccess),
+        new(
+            "Solar (PV) panels goes back to roof insulation if the user does not have flat roof but has accessible loft space",
+            new Input(
+                QuestionFlowStep.SolarElectricPanels,
+                "ABCDEFGH",
+                propertyType: PropertyType.House,
+                roofConstruction: RoofConstruction.Pitched,
+                loftSpace: LoftSpace.Yes,
+                accessibleLoft: LoftAccess.Yes
+            ),
+            QuestionFlowStep.RoofInsulated),
         new(
             "Changing solar (PV) panels goes back to summary",
             new Input(
@@ -420,12 +451,12 @@ public class QuestionFlowServiceTests
             ),
             QuestionFlowStep.AnswerSummary),
         new(
-            "Loft space goes back to solar (PV) panels",
+            "Loft space goes back to roof construction",
             new Input(
                 QuestionFlowStep.LoftSpace,
                 "ABCDEFGH"
             ),
-            QuestionFlowStep.SolarElectricPanels),
+            QuestionFlowStep.RoofConstruction),
         new(
             "Changing loft space goes back to summary",
             new Input(
@@ -473,38 +504,6 @@ public class QuestionFlowServiceTests
                 roofConstruction: RoofConstruction.Flat
             ),
             QuestionFlowStep.SolarElectricPanels),
-        new(
-            "Glazing type goes back to loft space if the user does not have flat roof nor loft space",
-            new Input(
-                QuestionFlowStep.GlazingType,
-                "ABCDEFGH",
-                propertyType: PropertyType.House,
-                roofConstruction: RoofConstruction.Pitched,
-                loftSpace: LoftSpace.No
-            ),
-            QuestionFlowStep.LoftSpace),
-        new(
-            "Glazing type goes back to loft access if the user does not have flat roof and has inaccessible loft space",
-            new Input(
-                QuestionFlowStep.GlazingType,
-                "ABCDEFGH",
-                propertyType: PropertyType.House,
-                roofConstruction: RoofConstruction.Pitched,
-                loftSpace: LoftSpace.Yes,
-                accessibleLoft: LoftAccess.No
-            ),
-            QuestionFlowStep.LoftAccess),
-        new(
-            "Glazing type goes back to roof insulation if the user does not have flat roof but has accessible loft space",
-            new Input(
-                QuestionFlowStep.GlazingType,
-                "ABCDEFGH",
-                propertyType: PropertyType.House,
-                roofConstruction: RoofConstruction.Pitched,
-                loftSpace: LoftSpace.Yes,
-                accessibleLoft: LoftAccess.Yes
-            ),
-            QuestionFlowStep.RoofInsulated),
         new(
             "Glazing type goes back to floor construction if the user was not asked about their roof",
             new Input(
@@ -1094,27 +1093,10 @@ public class QuestionFlowServiceTests
             ),
             QuestionFlowStep.AnswerSummary),
         new(
-            "Solar (PV) panels continues to loft space if roof is pitched",
+            "Solar (PV) panels continues to glazing type",
             new Input(
                 QuestionFlowStep.SolarElectricPanels,
-                "ABCDEFGH",
-                roofConstruction: RoofConstruction.Pitched
-            ),
-            QuestionFlowStep.LoftSpace),
-        new(
-            "Solar (PV) panels continues to loft space if roof is mixed",
-            new Input(
-                QuestionFlowStep.SolarElectricPanels,
-                "ABCDEFGH",
-                roofConstruction: RoofConstruction.Mixed
-            ),
-            QuestionFlowStep.LoftSpace),
-        new(
-            "Solar (PV) panels continues to glazing type space if roof is not pitched",
-            new Input(
-                QuestionFlowStep.SolarElectricPanels,
-                "ABCDEFGH",
-                roofConstruction: RoofConstruction.Flat
+                "ABCDEFGH"
             ),
             QuestionFlowStep.GlazingType),
         new(
@@ -1143,13 +1125,13 @@ public class QuestionFlowServiceTests
             ),
             QuestionFlowStep.AnswerSummary),
         new(
-            "Loft space continues to glazing type if user does not have it",
+            "Loft space continues to Solar (PV) panels if user does not have it",
             new Input(
                 QuestionFlowStep.LoftSpace,
                 "ABCDEFGH",
                 loftSpace: LoftSpace.No
             ),
-            QuestionFlowStep.GlazingType),
+            QuestionFlowStep.SolarElectricPanels),
         new(
             "Loft access continues to roof insulation if user has it",
             new Input(
@@ -1177,20 +1159,20 @@ public class QuestionFlowServiceTests
             ),
             QuestionFlowStep.AnswerSummary),
         new(
-            "Loft access continues to glazing type if user does not have it",
+            "Loft access continues to Solar (PV) panels if user does not have it",
             new Input(
                 QuestionFlowStep.LoftAccess,
                 "ABCDEFGH",
                 loftSpace: LoftSpace.No
             ),
-            QuestionFlowStep.GlazingType),
+            QuestionFlowStep.SolarElectricPanels),
         new(
-            "Roof insulated continues to glazing type",
+            "Roof insulated continues to Solar (PV) type",
             new Input(
                 QuestionFlowStep.RoofInsulated,
                 "ABCDEFGH"
             ),
-            QuestionFlowStep.GlazingType),
+            QuestionFlowStep.SolarElectricPanels),
         new(
             "Changing roof insulated continues to summary",
             new Input(

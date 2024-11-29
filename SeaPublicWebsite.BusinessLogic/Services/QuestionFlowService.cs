@@ -43,10 +43,10 @@ namespace SeaPublicWebsite.BusinessLogic.Services
                 QuestionFlowStep.FloorConstruction => FloorConstructionBackDestination(propertyData, entryPoint),
                 QuestionFlowStep.FloorInsulated => FloorInsulatedBackDestination(entryPoint),
                 QuestionFlowStep.RoofConstruction => RoofConstructionBackDestination(propertyData, entryPoint),
-                QuestionFlowStep.SolarElectricPanels => SolarElectricPanelsBackDestination(entryPoint),
                 QuestionFlowStep.LoftSpace => LoftSpaceBackDestination(entryPoint),
                 QuestionFlowStep.LoftAccess => LoftAccessBackDestination(entryPoint),
                 QuestionFlowStep.RoofInsulated => RoofInsulatedBackDestination(entryPoint),
+                QuestionFlowStep.SolarElectricPanels => SolarElectricPanelsBackDestination(propertyData, entryPoint),
                 QuestionFlowStep.OutdoorSpace => OutdoorSpaceBackDestination(entryPoint),
                 QuestionFlowStep.GlazingType => GlazingTypeBackDestination(propertyData, entryPoint),
                 QuestionFlowStep.HeatingType => HeatingTypeBackDestination(entryPoint),
@@ -86,10 +86,10 @@ namespace SeaPublicWebsite.BusinessLogic.Services
                 QuestionFlowStep.FloorConstruction => FloorConstructionForwardDestination(propertyData, entryPoint),
                 QuestionFlowStep.FloorInsulated => FloorInsulatedForwardDestination(propertyData, entryPoint),
                 QuestionFlowStep.RoofConstruction => RoofConstructionForwardDestination(propertyData, entryPoint),
-                QuestionFlowStep.SolarElectricPanels => SolarElectricPanelsForwardDestination(propertyData, entryPoint),
                 QuestionFlowStep.LoftSpace => LoftSpaceForwardDestination(propertyData, entryPoint),
                 QuestionFlowStep.LoftAccess => LoftAccessForwardDestination(propertyData, entryPoint),
                 QuestionFlowStep.RoofInsulated => RoofInsulatedForwardDestination(entryPoint),
+                QuestionFlowStep.SolarElectricPanels => SolarElectricPanelsForwardDestination(entryPoint),
                 QuestionFlowStep.OutdoorSpace => OutdoorSpaceForwardDestination(entryPoint),
                 QuestionFlowStep.GlazingType => GlazingTypeForwardDestination(entryPoint),
                 QuestionFlowStep.HeatingType => HeatingTypeForwardDestination(propertyData, entryPoint),
@@ -306,19 +306,12 @@ namespace SeaPublicWebsite.BusinessLogic.Services
                 _ => QuestionFlowStep.WallConstruction
             };
         }
-        
-        private QuestionFlowStep SolarElectricPanelsBackDestination(QuestionFlowStep? entryPoint)
-        {
-            return entryPoint is QuestionFlowStep.SolarElectricPanels
-                ? QuestionFlowStep.AnswerSummary
-                : QuestionFlowStep.RoofConstruction;
-        }
 
         private QuestionFlowStep LoftSpaceBackDestination(QuestionFlowStep? entryPoint)
         {
             return entryPoint is QuestionFlowStep.LoftSpace
                 ? QuestionFlowStep.AnswerSummary
-                : QuestionFlowStep.SolarElectricPanels;
+                : QuestionFlowStep.RoofConstruction;
         }
         
         private QuestionFlowStep LoftAccessBackDestination(QuestionFlowStep? entryPoint)
@@ -334,6 +327,25 @@ namespace SeaPublicWebsite.BusinessLogic.Services
                 ? QuestionFlowStep.AnswerSummary
                 : QuestionFlowStep.LoftAccess;
         }
+        
+        private QuestionFlowStep SolarElectricPanelsBackDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
+        {
+            if (entryPoint is QuestionFlowStep.SolarElectricPanels)
+            {
+                return QuestionFlowStep.AnswerSummary;
+            }
+            
+            return propertyData switch
+            {
+                { RoofConstruction: RoofConstruction.Flat }
+                    => QuestionFlowStep.RoofConstruction,
+                { LoftSpace: not LoftSpace.Yes }
+                    => QuestionFlowStep.LoftSpace,
+                { LoftAccess: not LoftAccess.Yes }
+                    => QuestionFlowStep.LoftAccess,
+                _ => QuestionFlowStep.RoofInsulated
+            };
+        }
 
         private QuestionFlowStep GlazingTypeBackDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
@@ -344,16 +356,7 @@ namespace SeaPublicWebsite.BusinessLogic.Services
 
             if (propertyData.HasRoof())
             {
-                return propertyData switch
-                {
-                    { RoofConstruction: RoofConstruction.Flat }
-                        => QuestionFlowStep.SolarElectricPanels,
-                    { LoftSpace: not LoftSpace.Yes }
-                        => QuestionFlowStep.LoftSpace,
-                    { LoftAccess: not LoftAccess.Yes }
-                        => QuestionFlowStep.LoftAccess,
-                    _ => QuestionFlowStep.RoofInsulated
-                };
+                return QuestionFlowStep.SolarElectricPanels;
             }
 
             if (propertyData.HasFloor())
@@ -679,6 +682,11 @@ namespace SeaPublicWebsite.BusinessLogic.Services
 
         private QuestionFlowStep RoofConstructionForwardDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
+            if (propertyData.RoofConstruction is RoofConstruction.Mixed or RoofConstruction.Pitched)
+            {
+                return QuestionFlowStep.LoftSpace;
+            }
+            
             if (entryPoint is not null)
             {
                 return QuestionFlowStep.AnswerSummary;
@@ -687,21 +695,6 @@ namespace SeaPublicWebsite.BusinessLogic.Services
             return QuestionFlowStep.SolarElectricPanels;
         }
         
-        private QuestionFlowStep SolarElectricPanelsForwardDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
-        {
-            if (propertyData.RoofConstruction is RoofConstruction.Mixed or RoofConstruction.Pitched)
-            {
-                return QuestionFlowStep.LoftSpace;
-            }
-
-            if (entryPoint is not null)
-            {
-                return QuestionFlowStep.AnswerSummary;
-            }
-
-            return QuestionFlowStep.GlazingType;
-        }
-
         private QuestionFlowStep LoftSpaceForwardDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
         {
             if (propertyData.LoftSpace is LoftSpace.Yes)
@@ -714,7 +707,7 @@ namespace SeaPublicWebsite.BusinessLogic.Services
                 return QuestionFlowStep.AnswerSummary;
             }
 
-            return QuestionFlowStep.GlazingType;
+            return QuestionFlowStep.SolarElectricPanels;
         }
         
         private QuestionFlowStep LoftAccessForwardDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
@@ -729,14 +722,19 @@ namespace SeaPublicWebsite.BusinessLogic.Services
                 return QuestionFlowStep.AnswerSummary;
             }
 
-            return QuestionFlowStep.GlazingType;
+            return QuestionFlowStep.SolarElectricPanels;
         }
 
         private QuestionFlowStep RoofInsulatedForwardDestination(QuestionFlowStep? entryPoint)
         {
             return entryPoint is not null
                 ? QuestionFlowStep.AnswerSummary
-                : QuestionFlowStep.GlazingType;
+                : QuestionFlowStep.SolarElectricPanels;
+        }
+        
+        private QuestionFlowStep SolarElectricPanelsForwardDestination(QuestionFlowStep? entryPoint)
+        {
+            return entryPoint is not null ? QuestionFlowStep.AnswerSummary : QuestionFlowStep.GlazingType;
         }
 
         private QuestionFlowStep GlazingTypeForwardDestination(QuestionFlowStep? entryPoint)
