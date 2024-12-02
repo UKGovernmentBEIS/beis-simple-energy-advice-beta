@@ -208,6 +208,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("SearchForEpc")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("SolarElectricPanels")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("SolidWallsInsulated")
                         .HasColumnType("integer");
 

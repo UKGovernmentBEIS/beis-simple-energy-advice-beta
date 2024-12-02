@@ -150,4 +150,7 @@
     <data name="TemperatureRequired" xml:space="preserve">
         <value>Enter a number between 5 and 35, or skip this question</value>
     </data>
+    <data name="SolarElectricPanelsRequired" xml:space="preserve">
+        <value>Select if you have solar panels</value>
+    </data>
 </root>

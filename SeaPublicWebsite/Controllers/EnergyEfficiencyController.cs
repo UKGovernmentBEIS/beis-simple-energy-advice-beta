@@ -806,6 +806,39 @@ namespace SeaPublicWebsite.Controllers
             
             return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
+        
+        [HttpGet("solar-electric-panels/{reference}")]
+        public async Task<IActionResult> SolarElectricPanels_Get(string reference, QuestionFlowStep? entryPoint = null)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+            
+            var viewModel = new SolarElectricPanelsViewModel
+            {
+                SolarElectricPanels = propertyData.SolarElectricPanels,
+                Reference = propertyData.Reference,
+                Epc = propertyData.Epc,
+                EntryPoint = entryPoint,
+                BackLink = GetBackUrl(QuestionFlowStep.SolarElectricPanels, propertyData, entryPoint)
+            };
+
+            return View("SolarElectricPanels", viewModel);
+        }
+        
+        [HttpPost("solar-electric-panels/{reference}")]
+        public async Task<IActionResult> SolarElectricPanels_Post(SolarElectricPanelsViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await SolarElectricPanels_Get(viewModel.Reference, viewModel.EntryPoint);
+            }
+            
+            var nextStep = await answerService.UpdateSolarElectricPanels(
+                viewModel.Reference,
+                viewModel.SolarElectricPanels,
+                viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
+        }
 
         [HttpGet("loft-space/{reference}")]
         public async Task<IActionResult> LoftSpace_Get(string reference, QuestionFlowStep? entryPoint = null)
@@ -1590,6 +1623,7 @@ namespace SeaPublicWebsite.Controllers
                 QuestionFlowStep.FloorConstruction => new PathByActionArguments(nameof(FloorConstruction_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
                 QuestionFlowStep.FloorInsulated => new PathByActionArguments(nameof(FloorInsulated_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
                 QuestionFlowStep.RoofConstruction => new PathByActionArguments(nameof(RoofConstruction_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.SolarElectricPanels => new PathByActionArguments(nameof(SolarElectricPanels_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
                 QuestionFlowStep.LoftSpace => new PathByActionArguments(nameof(LoftSpace_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
                 QuestionFlowStep.LoftAccess => new PathByActionArguments(nameof(LoftAccess_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
                 QuestionFlowStep.RoofInsulated => new PathByActionArguments(nameof(RoofInsulated_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),

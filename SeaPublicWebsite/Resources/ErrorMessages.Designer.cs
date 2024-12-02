@@ -393,6 +393,15 @@ namespace SeaPublicWebsite.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select if you have solar panels.
+        /// </summary>
+        internal static string SolarElectricPanelsRequired {
+            get {
+                return ResourceManager.GetString("SolarElectricPanelsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select if your solid walls are insulated.
         /// </summary>
         internal static string SolidWallsInsulatedRequired {

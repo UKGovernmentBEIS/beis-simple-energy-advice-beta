@@ -24,6 +24,7 @@ public enum QuestionFlowStep
     FloorConstruction,
     FloorInsulated,
     RoofConstruction,
+    SolarElectricPanels,
     LoftSpace,
     LoftAccess,
     RoofInsulated,

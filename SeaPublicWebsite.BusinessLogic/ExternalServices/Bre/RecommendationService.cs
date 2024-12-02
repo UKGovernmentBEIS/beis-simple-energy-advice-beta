@@ -162,6 +162,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 
             bool? breOutsideSpace = GetBreOutsideSpace(propertyData.HasOutdoorSpace);
 
+            bool? brePvPanels = GetBrePvPanels(propertyData.SolarElectricPanels);
+
             BreRequest request = new(
                 brePropertyType: brePropertyType,
                 breBuiltForm: breBuiltForm,
@@ -177,7 +179,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 breNormalDaysOffHours: breNormalDaysOffHours,
                 breTemperature: propertyData.Temperature,
                 breFloorType: breFloorType,
-                breOutsideSpace: breOutsideSpace
+                breOutsideSpace: breOutsideSpace,
+                brePvPanels: brePvPanels
             );
 
             return request;
@@ -537,6 +540,18 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 HasOutdoorSpace.Yes => true,
                 HasOutdoorSpace.No => false,
                 HasOutdoorSpace.DoNotKnow => true,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+        
+        private static bool? GetBrePvPanels(SolarElectricPanels? solarElectricPanels)
+        {
+            return solarElectricPanels switch
+            {
+                SolarElectricPanels.Yes => true,
+                SolarElectricPanels.No => false,
+                SolarElectricPanels.DoNotKnow => false,
+                null => null,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
