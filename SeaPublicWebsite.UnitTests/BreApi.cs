@@ -26,7 +26,8 @@ public class BreApi
             breNormalDaysOffHours: null,
             breTemperature: null,
             breFloorType: BreFloorType.DontKnow,
-            breOutsideSpace: true
+            breOutsideSpace: true,
+            brePvPanels: false
         );
         
         // Assert

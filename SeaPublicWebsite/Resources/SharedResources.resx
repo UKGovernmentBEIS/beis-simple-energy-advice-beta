@@ -2579,4 +2579,20 @@
         <value>Your {0} Energy Performance Certificate suggests your &lt;strong&gt;loft is not fully insulated&lt;/strong&gt; as it has less than 200mm of insulation.</value>
         <comment>EPCSuggestsYourLoftIsNotFullyInsulatedString</comment>
     </data>
+    <data name="HelpMeAnswerSolarElectricPanelsString" xml:space="preserve">
+        <value>A rooftop solar photovoltaic (PV) array is a collection of dark coloured panels. Panels are most commonly attached to the roof with a fixed mount. Less commonly they are integrated into the roof itself (building integrated PV). </value>
+        <comment>HelpMeAnswerSolarElectricPanelsString</comment>
+    </data>
+    <data name="EPCSuggestsNoSolarPanelsString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home &lt;strong&gt;does not have solar photovoltaic panels installed.&lt;/strong&gt; </value>
+        <comment>EPCSuggestsNoSolarPanelsString</comment>
+    </data>
+    <data name="EPCSuggestsHasSolarPanelsString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home &lt;strong&gt;has solar photovoltaic panels installed.&lt;strong&gt;</value>
+        <comment>EPCSuggestsHasSolarPanelsString</comment>
+    </data>
+    <data name="SolarElectricPanelsQuestionString" xml:space="preserve">
+        <value>Is your property fitted with Solar Photovoltaic (PV) panels? </value>
+        <comment>SolarElectricPanelsQuestionString</comment>
+    </data>
 </root>
