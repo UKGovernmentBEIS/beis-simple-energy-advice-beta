@@ -119,7 +119,8 @@ public class ResetUnusedFieldsTests
                 FlatType = FlatType.GroundFloor,
                 RoofConstruction = RoofConstruction.Mixed,
                 LoftSpace = LoftSpace.Yes,
-                RoofInsulated = RoofInsulated.Yes
+                RoofInsulated = RoofInsulated.Yes,
+                SolarElectricPanels = SolarElectricPanels.Yes
             },
             new()
             {
@@ -137,7 +138,8 @@ public class ResetUnusedFieldsTests
                 FloorInsulated = FloorInsulated.Yes,
                 RoofConstruction = RoofConstruction.Mixed,
                 LoftSpace = LoftSpace.Yes,
-                RoofInsulated = RoofInsulated.Yes
+                RoofInsulated = RoofInsulated.Yes,
+                SolarElectricPanels = SolarElectricPanels.Yes
             },
             new()
             {

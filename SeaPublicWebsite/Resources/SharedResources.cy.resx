@@ -2631,4 +2631,20 @@
         <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu nad ydy eich &lt;strong&gt;atig wedi’i inswleiddio’n llwyr&lt;/strong&gt; a bod gennych lai na 200mm o ddeunydd inswleiddio.</value>
         <comment>EPCSuggestsYourLoftIsNotFullyInsulatedString</comment>
     </data>
+    <data name="HelpMeAnswerSolarElectricPanelsString" xml:space="preserve">
+        <value>Mae arae ffotofoltäig solar (PV) ar ben y to yn gasgliad o baneli lliw tywyll. Yn fwyaf cyffredin mae’r paneli yn cael eu cysylltu â'r to â mownt gosod. Yn llai cyffredin maen nhw wedi’u hintegreiddio â'r to ei hun (PV integredig adeilad).</value>
+        <comment>HelpMeAnswerSolarElectricPanelsString</comment>
+    </data>
+    <data name="EPCSuggestsNoSolarPanelsString" xml:space="preserve">
+        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu &lt;strong&gt;nad oes paneli ffotofoltäig solar wedi'u gosod ar eich cartref. &lt;/strong&gt;</value>
+        <comment>EPCSuggestsNoSolarPanelsString</comment>
+    </data>
+    <data name="EPCSuggestsHasSolarPanelsString" xml:space="preserve">
+        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu &lt;strong&gt;bod paneli ffotofoltäig solar wedi'u gosod ar eich cartref.&lt;/strong&gt;</value>
+        <comment>EPCSuggestsHasSolarPanelsString</comment>
+    </data>
+    <data name="SolarElectricPanelsQuestionString" xml:space="preserve">
+        <value>Oes paneli Ffotofoltäig Solar (PV) wedi’u gosod ar eich eiddo chi?</value>
+        <comment>SolarElectricPanelsQuestionString</comment>
+    </data>
 </root>

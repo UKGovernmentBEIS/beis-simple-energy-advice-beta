@@ -45,6 +45,7 @@ public class PropertyDataTests
             Temperature = 20,
             UneditedData = new PropertyData(),
             HasSeenRecommendations = false,
+            SolarElectricPanels = SolarElectricPanels.Yes,
             RecommendationsFirstRetrievedAt = DateTime.Now.ToUniversalTime(),
             PropertyRecommendations = new List<PropertyRecommendation>
             {

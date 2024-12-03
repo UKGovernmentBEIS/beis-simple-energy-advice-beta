@@ -226,6 +226,18 @@ public class PropertyDataUpdater
             entryPoint);
     }
     
+    public QuestionFlowStep UpdateSolarElectricPanels(
+        PropertyData propertyData,
+        SolarElectricPanels? solarElectricPanels,
+        QuestionFlowStep? entryPoint)
+    {
+        return UpdatePropertyData(
+            p => { p.SolarElectricPanels = solarElectricPanels; },
+            propertyData,
+            QuestionFlowStep.SolarElectricPanels,
+            entryPoint);
+    }
+    
     public QuestionFlowStep UpdateLoftSpace(
         PropertyData propertyData,
         LoftSpace? loftSpace,

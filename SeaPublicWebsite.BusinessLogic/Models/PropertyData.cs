@@ -37,6 +37,7 @@ public class PropertyData
     public FloorConstruction? FloorConstruction { get; set; }
     public FloorInsulated? FloorInsulated { get; set; }
     public RoofConstruction? RoofConstruction { get; set; }
+    public SolarElectricPanels? SolarElectricPanels { get; set; }
     public LoftSpace? LoftSpace { get; set; }
     public LoftAccess? LoftAccess { get; set; }
     public RoofInsulated? RoofInsulated { get; set; }
@@ -140,6 +141,7 @@ public class PropertyData
         if (!HasRoof())
         {
             RoofConstruction = null;
+            SolarElectricPanels = null;
         }
 
         if (RoofConstruction is not Enums.RoofConstruction.Mixed and not Enums.RoofConstruction.Pitched)
