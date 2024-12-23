@@ -18,6 +18,22 @@ Migrations will be run automatically on deployment. If a migration needs to be r
        2. `cf conduit sea-beta-<Environment>-db`
    6. Use pgAdmin or similar with the credentials from cf conduit to run the rollback script
 
+### Code cleanup/formatting/linting
+
+We use the standard Rider code cleanup tool for this project. Before committing, make sure to run the code cleanup on edited files.
+See [Rider docs](https://www.jetbrains.com/help/rider/2024.3/Code_Cleanup__Index.html#running) for information on running the formatter.
+
+Use the 'DESNZ' profile when running code format. If this does not appear:
+- Go to Settings
+- Manage Layers
+- Add layer
+- From file
+- Select 'Cleanup.DotSettings' in this project
+
+Historically, we did not always use this formatter, so some files will be non-compliant.
+Run the formatter on all files edited in a PR. There may be additional formatting changes made.
+Commit these in a separate commit to your other changes.
+
 ## Development
 
 ### Process
