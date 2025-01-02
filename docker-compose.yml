@@ -2,7 +2,10 @@
 
 services:
   sea:
-    build: .
+    build:
+      context: .
+      args:
+        CONFIGURATION: "Debug"
     ports:
       - "5001:80"
     environment:
