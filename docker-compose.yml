@@ -1,6 +1,4 @@
-﻿version: '3.8'
-
-services:
+﻿services:
   sea:
     build:
       context: .
@@ -14,6 +12,10 @@ services:
     volumes:
       # map the dotnet user-secret folder
       - $APPDATA/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
   db:
     image: postgres
     restart: unless-stopped
@@ -23,3 +25,8 @@ services:
       POSTGRES_DB: seadev
     ports:
       - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $$POSTGRES_DB -U $$POSTGRES_USER" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
