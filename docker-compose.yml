@@ -3,6 +3,9 @@
     build:
       context: .
       args:
+        # If running docker-compose via a run configuration in Rider, it will
+        # override this with whatever build configuration you have selected.
+        # This is clever and kind of it, but a bit surprising!
         CONFIGURATION: "Debug"
     ports:
       - "5001:80"
