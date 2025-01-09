@@ -2595,4 +2595,21 @@
         <value>Is your property fitted with Solar Photovoltaic (PV) panels? </value>
         <comment>SolarElectricPanelsQuestionString</comment>
     </data>
+    <data name="HeatingControlsQuestionString" xml:space="preserve">
+        <value>How is your heating controlled?</value>
+        <comment>HeatingControlsQuestionString</comment>
+    </data>
+    <data name="SmartHeatingControlsHelpString" xml:space="preserve">
+        <value>Smart controls are connected to the internet. Please select an option, regardless of whether they are controlled by a mobile
+device, or a physical control in your home.</value>
+        <comment>SmartHeatingControlsHelpString</comment>
+    </data>
+    <data name="HelpMeAnswerHeatingControlsString" xml:space="preserve">
+        <value>What if I have smart heating controls?</value>
+        <comment>HelpMeAnswerHeatingControlsString</comment>
+    </data>
+    <data name="or" xml:space="preserve">
+        <value>or</value>
+        <comment>or</comment>
+    </data>
 </root>

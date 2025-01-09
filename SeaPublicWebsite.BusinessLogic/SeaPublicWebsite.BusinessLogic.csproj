@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.0-456b8e9" />
+      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.0-2c405c0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     </ItemGroup>
 
@@ -65,7 +65,7 @@
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\Enum\HeatingType.resx">
         <Generator>PublicResXFileCodeGenerator</Generator>
-        <LastGenOutput>HeatingType.Designer.cs</LastGenOutput>
+        <LastGenOutput>HeatingControls.Designer.cs</LastGenOutput>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\Enum\HomeAge.resx">
         <Generator>PublicResXFileCodeGenerator</Generator>
@@ -139,6 +139,10 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>SolarElectricPanels.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Enum\HeatingControls.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>HeatingControls.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -202,10 +206,10 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>HeatingPattern.resx</DependentUpon>
       </Compile>
-      <Compile Update="Resources\Enum\HeatingType.Designer.cs">
+      <Compile Update="Resources\Enum\HeatingControls.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
-        <DependentUpon>HeatingType.resx</DependentUpon>
+        <DependentUpon>HeatingControls.resx</DependentUpon>
       </Compile>
       <Compile Update="Resources\Enum\HomeAge.Designer.cs">
         <DesignTime>True</DesignTime>
@@ -291,6 +295,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>BreBuiltForm.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Enum\HeatingControls.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>HeatingControls.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

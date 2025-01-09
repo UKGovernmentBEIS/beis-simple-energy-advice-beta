@@ -45,6 +45,9 @@ public class PropertyData
     public GlazingType? GlazingType { get; set; }
     public HeatingType? HeatingType { get; set; }
     public OtherHeatingType? OtherHeatingType { get; set; }
+    
+    public List<HeatingControls> HeatingControls { get; set; } = [];
+    
     public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
 
     public int? NumberOfOccupants { get; set; }
@@ -168,6 +171,7 @@ public class PropertyData
             and not Enums.HeatingType.LpgBoiler)
         {
             HasHotWaterCylinder = null;
+            HeatingControls = [];
         }
 
         if (HeatingPattern is not Enums.HeatingPattern.Other)

@@ -1072,8 +1072,40 @@ namespace SeaPublicWebsite.Controllers
             
             return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
+        
+        [HttpGet("heating-controls/{reference}")]
+        public async Task<IActionResult> HeatingControls_Get(string reference, QuestionFlowStep? entryPoint = null)
+        {
+            var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
+            var viewModel = new HeatingControlsViewModel
+            {
+                HeatingControls = propertyData.HeatingControls,
+                Reference = propertyData.Reference,
+                EntryPoint = entryPoint,
+                BackLink = GetBackUrl(QuestionFlowStep.HeatingControls, propertyData, entryPoint)
+            };
 
+            return View("HeatingControls", viewModel);
+        }
+        
+        [HttpPost("heating-controls/{reference}")]
+        public async Task<IActionResult> HeatingControls_Post(HeatingControlsViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                Console.WriteLine(ModelState.ValidationState);
+                return await HeatingControls_Get(viewModel.Reference, viewModel.EntryPoint);
+            }
+            
+            var nextStep = await answerService.UpdateHeatingControls(
+                viewModel.Reference,
+                viewModel.HeatingControls,
+                viewModel.EntryPoint);
+            
+            return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
+        }
+        
         [HttpGet("hot-water-cylinder/{reference}")]
         public async Task<IActionResult> HotWaterCylinder_Get(string reference, QuestionFlowStep? entryPoint = null)
         {
@@ -1631,6 +1663,7 @@ namespace SeaPublicWebsite.Controllers
                 QuestionFlowStep.GlazingType => new PathByActionArguments(nameof(GlazingType_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
                 QuestionFlowStep.HeatingType => new PathByActionArguments(nameof(HeatingType_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
                 QuestionFlowStep.OtherHeatingType => new PathByActionArguments(nameof(OtherHeatingType_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
+                QuestionFlowStep.HeatingControls => new PathByActionArguments(nameof(HeatingControls_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
                 QuestionFlowStep.HotWaterCylinder => new PathByActionArguments(nameof(HotWaterCylinder_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
                 QuestionFlowStep.NumberOfOccupants => new PathByActionArguments(nameof(NumberOfOccupants_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),
                 QuestionFlowStep.HeatingPattern => new PathByActionArguments(nameof(HeatingPattern_Get), "EnergyEfficiency", GetRouteValues(reference, extraRouteValues, entryPoint)),

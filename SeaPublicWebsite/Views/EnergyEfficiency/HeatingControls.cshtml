@@ -1,0 +1,74 @@
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using SeaPublicWebsite.BusinessLogic.Models.Enums
+@using SeaPublicWebsite.Controllers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+
+@model SeaPublicWebsite.Models.EnergyEfficiency.HeatingControlsViewModel;
+@{
+    ViewBag.Title = @SharedLocalizer["Heating Controls"].Value;
+}
+
+@section BeforeMain {
+    @await Html.GovUkBackLink(new BackLinkViewModel
+           {
+               Text = @SharedLocalizer["Back"].Value,
+               Href = Model.BackLink
+           })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        
+        <form action="@Url.Action(nameof(EnergyEfficiencyController.HeatingControls_Post), "EnergyEfficiency", new {reference = Model.Reference})" method="post" novalidate>
+        @(Html.HiddenFor(m => m.EntryPoint))
+        @Html.AntiForgeryToken()
+
+        @{
+            Func<object, object> details =
+                @<text>
+                     <p class="govuk-body">
+                         @SharedLocalizer["SmartHeatingControlsHelpString"]
+                     </p>
+            </text>;
+        }
+
+        @(await Html.GovUkCheckboxesFor(m => m.HeatingControls,
+            fieldsetOptions: new FieldsetViewModel
+            {
+                Legend = new LegendViewModel
+                {
+                    Text = @SharedLocalizer["HeatingControlsQuestionString"].Value,
+                    Classes = "govuk-fieldset__legend--l",
+                    IsPageHeading = true
+                }
+            },
+            hintOptions: new HintViewModel
+            {
+                Html = @<text>
+                            @await Html.GovUkDetails(new DetailsViewModel
+                            {
+                                SummaryText = @SharedLocalizer["HelpMeAnswerHeatingControlsString"].Value,
+                                Html = details
+                            })
+                        </text>
+            }, 
+            dividerOptions: new Dictionary<HeatingControls, string>
+            {
+                [HeatingControls.None] = SharedLocalizer["or"].Value
+            }))
+
+        @await Html.GovUkButton(new ButtonViewModel
+                   {
+                       Text = @SharedLocalizer["Continue"].Value
+                   })
+            
+        </form>
+        
+    </div>
+    <div class="govuk-grid-column-one-third">
+        @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")
+    </div>
+</div>

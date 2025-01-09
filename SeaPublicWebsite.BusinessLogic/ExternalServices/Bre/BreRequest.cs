@@ -35,6 +35,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
         public int? roof_type { get; set; }
 
         public bool? pv_panel { get; set; }
+        
+        public int? heating_controls { get; set; }
 
         public int wall_type { get; set; }
 
@@ -60,7 +62,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
             decimal? breTemperature,
             BreFloorType? breFloorType,
             bool? breOutsideSpace,
-            bool? brePvPanels
+            bool? brePvPanels,
+            int? breHeatingControls
         )
         {
             property_type = ((int) brePropertyType).ToString();
@@ -74,6 +77,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
             glazing_type = (int) breGlazingType;
             //no input for outdoor heater space in BRE API
             heating_system = (int) breHeatingSystem;
+            heating_controls = breHeatingControls;
             hot_water_cylinder = breHotWaterCylinder;
             occupants = breOccupants;
             heating_pattern_type = (int) breHeatingPatternType;

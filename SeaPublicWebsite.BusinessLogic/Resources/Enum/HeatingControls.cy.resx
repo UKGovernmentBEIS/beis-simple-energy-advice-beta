@@ -1,0 +1,29 @@
+﻿<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Programmer" xml:space="preserve">
+        <value>Rhaglennydd</value>
+    </data>
+    <data name="RoomThermostat" xml:space="preserve">
+        <value>Thermostat stafell</value>
+    </data>
+    <data name="ThermostaticRadiatorValves" xml:space="preserve">
+        <value>Falfiau thermostatig ar y rheiddiaduron (TRVs)</value>
+    </data>
+    <data name="DoNotKnow" xml:space="preserve">
+        <value>Dwi ddim yn gwybod sut mae fy ngwres yn cael ei reoli</value>
+    </data>
+    <data name="None" xml:space="preserve">
+        <value>Dim un o’r uchod</value>
+    </data>
+</root>

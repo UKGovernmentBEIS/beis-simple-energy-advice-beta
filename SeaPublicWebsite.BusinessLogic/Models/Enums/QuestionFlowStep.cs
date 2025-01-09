@@ -32,6 +32,7 @@ public enum QuestionFlowStep
     OutdoorSpace,
     HeatingType,
     OtherHeatingType,
+    HeatingControls,
     HotWaterCylinder,
     NumberOfOccupants,
     HeatingPattern,
