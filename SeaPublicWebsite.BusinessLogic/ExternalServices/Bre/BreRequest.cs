@@ -35,7 +35,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
         public int? roof_type { get; set; }
 
         public bool? pv_panel { get; set; }
-        
+
         public int? heating_controls { get; set; }
 
         public int wall_type { get; set; }

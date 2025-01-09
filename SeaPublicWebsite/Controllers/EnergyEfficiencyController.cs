@@ -1072,7 +1072,7 @@ namespace SeaPublicWebsite.Controllers
             
             return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
-        
+
         [HttpGet("heating-controls/{reference}")]
         public async Task<IActionResult> HeatingControls_Get(string reference, QuestionFlowStep? entryPoint = null)
         {
@@ -1088,7 +1088,7 @@ namespace SeaPublicWebsite.Controllers
 
             return View("HeatingControls", viewModel);
         }
-        
+
         [HttpPost("heating-controls/{reference}")]
         public async Task<IActionResult> HeatingControls_Post(HeatingControlsViewModel viewModel)
         {
@@ -1097,12 +1097,12 @@ namespace SeaPublicWebsite.Controllers
                 Console.WriteLine(ModelState.ValidationState);
                 return await HeatingControls_Get(viewModel.Reference, viewModel.EntryPoint);
             }
-            
+
             var nextStep = await answerService.UpdateHeatingControls(
                 viewModel.Reference,
                 viewModel.HeatingControls,
                 viewModel.EntryPoint);
-            
+
             return RedirectToNextStep(nextStep, viewModel.Reference, viewModel.EntryPoint);
         }
         

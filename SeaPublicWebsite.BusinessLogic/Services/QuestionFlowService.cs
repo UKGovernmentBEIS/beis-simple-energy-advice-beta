@@ -791,7 +791,7 @@ namespace SeaPublicWebsite.BusinessLogic.Services
         {
             // If entrypoint is HeatingType, we must ask the other followup question on this route
             if (entryPoint is QuestionFlowStep.HeatingType) return QuestionFlowStep.HotWaterCylinder;
-            
+
             return entryPoint is not null
                 ? QuestionFlowStep.AnswerSummary
                 : QuestionFlowStep.HotWaterCylinder;

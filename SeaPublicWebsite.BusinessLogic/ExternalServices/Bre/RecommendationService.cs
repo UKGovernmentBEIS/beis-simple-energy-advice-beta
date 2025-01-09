@@ -149,8 +149,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 
             BreHeatingSystem breHeatingSystem =
                 GetBreHeatingSystem(propertyData.HeatingType.Value, propertyData.OtherHeatingType);
-            
-            int? breHeatingControls = GetBreHeatingControls(propertyData.HeatingControls);
+
+            var breHeatingControls = GetBreHeatingControls(propertyData.HeatingControls);
 
             bool? breHotWaterCylinder = GetBreHotWaterCylinder(propertyData.HasHotWaterCylinder);
 
@@ -561,46 +561,21 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 
         private static int? GetBreHeatingControls(List<HeatingControls> heatingControls)
         {
-            if (heatingControls.Count == 0)
-            {
-                return null;
-            }
-            if (!heatingControls.Except([HeatingControls.Programmer, HeatingControls.RoomThermostats, HeatingControls.ThermostaticRadiatorValves]).Any())
-            {
-                return 1;
-            }
-            if (!heatingControls.Except([HeatingControls.RoomThermostats, HeatingControls.ThermostaticRadiatorValves]).Any())
-            {
-                return 2;
-            }
-            if (!heatingControls.Except([HeatingControls.Programmer, HeatingControls.ThermostaticRadiatorValves]).Any())
-            {
-                return 3;
-            }
-            if (!heatingControls.Except([HeatingControls.RoomThermostats, HeatingControls.Programmer]).Any())
-            {
-                return 4;
-            }
-            if (!heatingControls.Except([HeatingControls.Programmer]).Any())
-            {
-                return 5;
-            }
-            if (!heatingControls.Except([HeatingControls.RoomThermostats]).Any())
-            {
-                return 6;
-            }
-            if (!heatingControls.Except([HeatingControls.RoomThermostats]).Any())
-            {
-                return 7;
-            }
-            if (heatingControls.Contains(HeatingControls.None))
-            {
-                return 8;
-            }
-            if (heatingControls.Contains(HeatingControls.DoNotKnow))
-            {
-                return 9;
-            }
+            if (heatingControls.Count == 0) return null;
+            if (!heatingControls.Except([
+                    HeatingControls.Programmer, HeatingControls.RoomThermostats,
+                    HeatingControls.ThermostaticRadiatorValves
+                ]).Any()) return 1;
+            if (!heatingControls.Except([HeatingControls.RoomThermostats, HeatingControls.ThermostaticRadiatorValves])
+                    .Any()) return 2;
+            if (!heatingControls.Except([HeatingControls.Programmer, HeatingControls.ThermostaticRadiatorValves])
+                    .Any()) return 3;
+            if (!heatingControls.Except([HeatingControls.RoomThermostats, HeatingControls.Programmer]).Any()) return 4;
+            if (!heatingControls.Except([HeatingControls.Programmer]).Any()) return 5;
+            if (!heatingControls.Except([HeatingControls.RoomThermostats]).Any()) return 6;
+            if (!heatingControls.Except([HeatingControls.RoomThermostats]).Any()) return 7;
+            if (heatingControls.Contains(HeatingControls.None)) return 8;
+            if (heatingControls.Contains(HeatingControls.DoNotKnow)) return 9;
 
             throw new Exception("Invalid HeatingControls answer set");
         }

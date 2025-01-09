@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
-using HeatingControls = SeaPublicWebsite.BusinessLogic.Resources.Enum.HeatingControls;
 
 namespace Tests.BusinessLogic.Models;
 
@@ -234,7 +233,7 @@ public class ResetUnusedFieldsTests
                 HeatingType = HeatingType.Storage,
                 OtherHeatingType = OtherHeatingType.Biomass,
                 HasHotWaterCylinder = HasHotWaterCylinder.Yes,
-                HeatingControls = [SeaPublicWebsite.BusinessLogic.Models.Enums.HeatingControls.Programmer, SeaPublicWebsite.BusinessLogic.Models.Enums.HeatingControls.RoomThermostats]
+                HeatingControls = [HeatingControls.Programmer, HeatingControls.RoomThermostats]
             },
             new()
             {

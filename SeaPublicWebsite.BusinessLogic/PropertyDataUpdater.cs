@@ -321,7 +321,7 @@ public class PropertyDataUpdater
             QuestionFlowStep.OtherHeatingType,
             entryPoint);
     }
-    
+
     public QuestionFlowStep UpdateHeatingControls(
         PropertyData propertyData,
         List<HeatingControls> heatingControls,
