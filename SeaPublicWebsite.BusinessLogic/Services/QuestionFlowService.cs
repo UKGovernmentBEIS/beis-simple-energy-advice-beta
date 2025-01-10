@@ -789,12 +789,12 @@ namespace SeaPublicWebsite.BusinessLogic.Services
 
         private QuestionFlowStep HeatingControlsForwardDestination(QuestionFlowStep? entryPoint)
         {
-            // If entrypoint is HeatingType, we must ask the other followup question on this route
-            if (entryPoint is QuestionFlowStep.HeatingType) return QuestionFlowStep.HotWaterCylinder;
-
-            return entryPoint is not null
-                ? QuestionFlowStep.AnswerSummary
-                : QuestionFlowStep.HotWaterCylinder;
+            return entryPoint switch
+            {
+                QuestionFlowStep.HeatingType => QuestionFlowStep.HotWaterCylinder,
+                null => QuestionFlowStep.HotWaterCylinder,
+                _ => QuestionFlowStep.AnswerSummary
+            };
         }
 
         private QuestionFlowStep HotWaterCylinderForwardDestination(QuestionFlowStep? entryPoint)

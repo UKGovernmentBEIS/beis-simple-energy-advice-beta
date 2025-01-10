@@ -17,9 +17,15 @@ public class HeatingControlsViewModel : QuestionFlowViewModel
         ErrorMessageResourceName = nameof(ErrorMessages.HeatingControlsRequired))]
     public List<HeatingControls> HeatingControls { get; set; } = [];
 
-    public bool HeatingControlsIsValid => !(HeatingControls.Count == 0 ||
-                                            ((HeatingControls.Contains(BusinessLogic.Models.Enums.HeatingControls
-                                                  .DoNotKnow) ||
-                                              HeatingControls.Contains(BusinessLogic.Models.Enums.HeatingControls
-                                                  .None)) && HeatingControls.Count > 1));
+    public bool HeatingControlsIsValid
+    {
+        get
+        {
+            bool containsExclusiveOption = HeatingControls.Contains(BusinessLogic.Models.Enums.HeatingControls.None) ||
+                                           HeatingControls.Contains(
+                                               BusinessLogic.Models.Enums.HeatingControls.DoNotKnow);
+            if (containsExclusiveOption) return HeatingControls.Count == 1;
+            return HeatingControls.Count > 0;
+        }
+    }
 }
