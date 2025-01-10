@@ -561,23 +561,24 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 
         private static int? GetBreHeatingControls(List<HeatingControls> heatingControls)
         {
-            if (heatingControls.Count == 0) return null;
-            if (!heatingControls.Except([
+            heatingControls.Sort();
+            return heatingControls switch
+            {
+                [
                     HeatingControls.Programmer, HeatingControls.RoomThermostats,
                     HeatingControls.ThermostaticRadiatorValves
-                ]).Any()) return 1;
-            if (!heatingControls.Except([HeatingControls.RoomThermostats, HeatingControls.ThermostaticRadiatorValves])
-                    .Any()) return 2;
-            if (!heatingControls.Except([HeatingControls.Programmer, HeatingControls.ThermostaticRadiatorValves])
-                    .Any()) return 3;
-            if (!heatingControls.Except([HeatingControls.RoomThermostats, HeatingControls.Programmer]).Any()) return 4;
-            if (!heatingControls.Except([HeatingControls.Programmer]).Any()) return 5;
-            if (!heatingControls.Except([HeatingControls.RoomThermostats]).Any()) return 6;
-            if (!heatingControls.Except([HeatingControls.RoomThermostats]).Any()) return 7;
-            if (heatingControls.Contains(HeatingControls.None)) return 8;
-            if (heatingControls.Contains(HeatingControls.DoNotKnow)) return 9;
-
-            throw new Exception("Invalid HeatingControls answer set");
+                ] => 1,
+                [HeatingControls.RoomThermostats, HeatingControls.ThermostaticRadiatorValves] => 2,
+                [HeatingControls.Programmer, HeatingControls.ThermostaticRadiatorValves] => 3,
+                [HeatingControls.Programmer, HeatingControls.RoomThermostats] => 4,
+                [HeatingControls.Programmer] => 5,
+                [HeatingControls.RoomThermostats] => 6,
+                [HeatingControls.ThermostaticRadiatorValves] => 7,
+                [HeatingControls.None] => 8,
+                [HeatingControls.DoNotKnow] => 9,
+                [] => null,
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
     }
 }
