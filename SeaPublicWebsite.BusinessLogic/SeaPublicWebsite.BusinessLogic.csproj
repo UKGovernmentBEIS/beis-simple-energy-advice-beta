@@ -65,7 +65,7 @@
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\Enum\HeatingType.resx">
         <Generator>PublicResXFileCodeGenerator</Generator>
-        <LastGenOutput>HeatingControls.Designer.cs</LastGenOutput>
+        <LastGenOutput>HeatingType.Designer.cs</LastGenOutput>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\Enum\HomeAge.resx">
         <Generator>PublicResXFileCodeGenerator</Generator>
