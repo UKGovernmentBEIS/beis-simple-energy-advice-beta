@@ -28,7 +28,7 @@ public class BreApi
             breFloorType: BreFloorType.DontKnow,
             breOutsideSpace: true,
             brePvPanels: false,
-            breHeatingControls: 0
+            breHeatingControls: 2
         );
         
         // Assert

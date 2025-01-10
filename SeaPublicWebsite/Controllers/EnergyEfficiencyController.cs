@@ -1094,7 +1094,6 @@ namespace SeaPublicWebsite.Controllers
         {
             if (!ModelState.IsValid)
             {
-                Console.WriteLine(ModelState.ValidationState);
                 return await HeatingControls_Get(viewModel.Reference, viewModel.EntryPoint);
             }
 
