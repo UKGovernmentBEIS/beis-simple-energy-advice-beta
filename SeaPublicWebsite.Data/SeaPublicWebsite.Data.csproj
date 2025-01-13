@@ -16,8 +16,4 @@
       <ProjectReference Include="..\SeaPublicWebsite.BusinessLogic\SeaPublicWebsite.BusinessLogic.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Compile Remove="Migrations\20250107164209_AddHeatingControlsField.cs" />
-    </ItemGroup>
-
 </Project>

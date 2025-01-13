@@ -558,7 +558,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
-
+        
+        /// <returns>Mappings for the returned integer can be found in the BRE API Documentation</returns>
         private static int? GetBreHeatingControls(List<HeatingControls> heatingControls)
         {
             heatingControls.Sort();
