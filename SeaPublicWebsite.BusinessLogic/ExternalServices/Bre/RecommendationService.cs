@@ -577,7 +577,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 [HeatingControls.None] => 8,
                 [HeatingControls.DoNotKnow] => 9,
                 [] => null,
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException("heatingControls value: [" + string.Join(", ", heatingControls) + "]")
             };
         }
     }

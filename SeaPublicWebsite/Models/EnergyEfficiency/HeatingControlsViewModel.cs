@@ -12,7 +12,7 @@ public class HeatingControlsViewModel : QuestionFlowViewModel
     public string Reference { get; set; }
 
     [ModelBinder(typeof(GovUkCheckboxEnumSetBinder<HeatingControls>))]
-    [GovUkValidateCustom(CustomValidationPropertyName = nameof(HeatingControlsIsValid),
+    [GovUkHasCustomValidator(CustomerValidatorPropertyName = nameof(HeatingControlsIsValid),
         ErrorMessageResourceType = typeof(ErrorMessages),
         ErrorMessageResourceName = nameof(ErrorMessages.HeatingControlsRequired))]
     public List<HeatingControls> HeatingControls { get; set; } = [];
@@ -21,9 +21,10 @@ public class HeatingControlsViewModel : QuestionFlowViewModel
     {
         get
         {
-            bool containsExclusiveOption = HeatingControls.Contains(BusinessLogic.Models.Enums.HeatingControls.None) ||
-                                           HeatingControls.Contains(
-                                               BusinessLogic.Models.Enums.HeatingControls.DoNotKnow);
+            var containsExclusiveOption = HeatingControls.Contains(BusinessLogic.Models.Enums.HeatingControls.None) ||
+                                          HeatingControls.Contains(
+                                              BusinessLogic.Models.Enums.HeatingControls.DoNotKnow);
+            //If the answer contains an exclusive option, check it's the only option. Otherwise, ensure at least one non-exclusive option.
             if (containsExclusiveOption) return HeatingControls.Count == 1;
             return HeatingControls.Count > 0;
         }
