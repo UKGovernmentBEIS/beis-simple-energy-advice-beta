@@ -1,8 +1,12 @@
-﻿version: '3.8'
-
-services:
+﻿services:
   sea:
-    build: .
+    build:
+      context: .
+      args:
+        # If running docker-compose via a run configuration in Rider, it will
+        # override this with whatever build configuration you have selected.
+        # This is clever and kind of it, but a bit surprising!
+        CONFIGURATION: "Debug"
     ports:
       - "5001:80"
     environment:
@@ -11,6 +15,10 @@ services:
     volumes:
       # map the dotnet user-secret folder
       - $APPDATA/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
   db:
     image: postgres
     restart: unless-stopped
@@ -20,3 +28,8 @@ services:
       POSTGRES_DB: seadev
     ports:
       - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $$POSTGRES_DB -U $$POSTGRES_USER" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5

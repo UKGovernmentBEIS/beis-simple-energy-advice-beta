@@ -51,6 +51,7 @@ namespace SeaPublicWebsite.BusinessLogic.Services
                 QuestionFlowStep.GlazingType => GlazingTypeBackDestination(propertyData, entryPoint),
                 QuestionFlowStep.HeatingType => HeatingTypeBackDestination(entryPoint),
                 QuestionFlowStep.OtherHeatingType => OtherHeatingTypeBackDestination(entryPoint),
+                QuestionFlowStep.HeatingControls => HeatingControlsBackDestination(entryPoint),
                 QuestionFlowStep.HotWaterCylinder => HotWaterCylinderBackDestination(entryPoint),
                 QuestionFlowStep.NumberOfOccupants => NumberOfOccupantsBackDestination(propertyData, entryPoint),
                 QuestionFlowStep.HeatingPattern => HeatingPatternBackDestination(entryPoint),
@@ -94,6 +95,7 @@ namespace SeaPublicWebsite.BusinessLogic.Services
                 QuestionFlowStep.GlazingType => GlazingTypeForwardDestination(entryPoint),
                 QuestionFlowStep.HeatingType => HeatingTypeForwardDestination(propertyData, entryPoint),
                 QuestionFlowStep.OtherHeatingType => OtherHeatingTypeForwardDestination(entryPoint),
+                QuestionFlowStep.HeatingControls => HeatingControlsForwardDestination(entryPoint),
                 QuestionFlowStep.HotWaterCylinder => HotWaterCylinderForwardDestination(entryPoint),
                 QuestionFlowStep.NumberOfOccupants => NumberOfOccupantsForwardDestination(entryPoint),
                 QuestionFlowStep.HeatingPattern => HeatingPatternForwardDestination(entryPoint),
@@ -400,11 +402,18 @@ namespace SeaPublicWebsite.BusinessLogic.Services
                 : QuestionFlowStep.HeatingType;
         }
 
+        private QuestionFlowStep HeatingControlsBackDestination(QuestionFlowStep? entryPoint)
+        {
+            return entryPoint is QuestionFlowStep.HeatingControls
+                ? QuestionFlowStep.AnswerSummary
+                : QuestionFlowStep.HeatingType;
+        }
+        
         private QuestionFlowStep HotWaterCylinderBackDestination(QuestionFlowStep? entryPoint)
         {
             return entryPoint is QuestionFlowStep.HotWaterCylinder
                 ? QuestionFlowStep.AnswerSummary
-                : QuestionFlowStep.HeatingType;
+                : QuestionFlowStep.HeatingControls;
         }
 
         private QuestionFlowStep NumberOfOccupantsBackDestination(PropertyData propertyData, QuestionFlowStep? entryPoint)
@@ -760,7 +769,7 @@ namespace SeaPublicWebsite.BusinessLogic.Services
 
             if (propertyData.HeatingType is HeatingType.GasBoiler or HeatingType.OilBoiler or HeatingType.LpgBoiler)
             {
-                return QuestionFlowStep.HotWaterCylinder;
+                return QuestionFlowStep.HeatingControls;
             }
 
             if (entryPoint is not null)
@@ -776,6 +785,16 @@ namespace SeaPublicWebsite.BusinessLogic.Services
             return entryPoint is not null
                 ? QuestionFlowStep.AnswerSummary
                 : QuestionFlowStep.NumberOfOccupants;
+        }
+
+        private QuestionFlowStep HeatingControlsForwardDestination(QuestionFlowStep? entryPoint)
+        {
+            return entryPoint switch
+            {
+                QuestionFlowStep.HeatingType => QuestionFlowStep.HotWaterCylinder,
+                null => QuestionFlowStep.HotWaterCylinder,
+                _ => QuestionFlowStep.AnswerSummary
+            };
         }
 
         private QuestionFlowStep HotWaterCylinderForwardDestination(QuestionFlowStep? entryPoint)

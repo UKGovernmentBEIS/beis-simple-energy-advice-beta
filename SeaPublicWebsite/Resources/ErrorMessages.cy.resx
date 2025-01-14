@@ -156,4 +156,7 @@ rhwng {1} a {2}</value>
     <data name="SolarElectricPanelsRequired" xml:space="preserve">
         <value>Dewiswch a oes gennych baneli solar</value>
     </data>
+    <data name="HeatingControlsRequired" xml:space="preserve">
+        <value>Dewiswch eich rheolaethau gwresogi</value>
+    </data>
 </root>

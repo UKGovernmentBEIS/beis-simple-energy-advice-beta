@@ -232,11 +232,13 @@ public class ResetUnusedFieldsTests
             {
                 HeatingType = HeatingType.Storage,
                 OtherHeatingType = OtherHeatingType.Biomass,
-                HasHotWaterCylinder = HasHotWaterCylinder.Yes
+                HasHotWaterCylinder = HasHotWaterCylinder.Yes,
+                HeatingControls = [HeatingControls.Programmer, HeatingControls.RoomThermostats]
             },
             new()
             {
                 HeatingType = HeatingType.Storage,
+                HeatingControls = []
             }
         ),
     };

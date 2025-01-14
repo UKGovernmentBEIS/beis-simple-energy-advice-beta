@@ -153,4 +153,7 @@
     <data name="SolarElectricPanelsRequired" xml:space="preserve">
         <value>Select if you have solar panels</value>
     </data>
+    <data name="HeatingControlsRequired" xml:space="preserve">
+        <value>Select your heating controls</value>
+    </data>
 </root>

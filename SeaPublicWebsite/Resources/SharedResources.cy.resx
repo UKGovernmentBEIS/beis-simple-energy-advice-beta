@@ -2647,4 +2647,20 @@
         <value>Oes paneli Ffotofoltäig Solar (PV) wedi’u gosod ar eich eiddo chi?</value>
         <comment>SolarElectricPanelsQuestionString</comment>
     </data>
+    <data name="HeatingControlsQuestionString" xml:space="preserve">
+        <value>Sut mae’ch gwres yn cael ei reoli?</value>
+        <comment>HeatingControlsQuestionString</comment>
+    </data>
+    <data name="SmartHeatingControlsHelpString" xml:space="preserve">
+        <value>Mae rheolaethau clyfar wedi'u cysylltu â'r rhyngrwyd. Dewiswch opsiwn, ni waeth a ydyn nhw’n cael eu rheoli gan ddyfais symudol ynteu gan reolaeth gorfforol yn eich cartref.</value>
+        <comment>SmartHeatingControlsHelpString</comment>
+    </data>
+    <data name="HelpMeAnswerHeatingControlsString" xml:space="preserve">
+        <value>Beth os oes gen i reolaethau gwres clyfar?</value>
+        <comment>HelpMeAnswerHeatingControlsString</comment>
+    </data>
+    <data name="or" xml:space="preserve">
+        <value>neu</value>
+        <comment>or</comment>
+    </data>
 </root>

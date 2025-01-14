@@ -8,6 +8,9 @@ RUN apt-get update \
 ENV PUPPETEER_EXECUTABLE_PATH "/usr/bin/google-chrome-stable"
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+
+ARG CONFIGURATION=Release
+
 WORKDIR /SeaPublicWebsite
 
 # Copy everything
@@ -30,7 +33,7 @@ RUN dotnet nuget add source /SeaPublicWebsite/Lib --name Local
 RUN dotnet restore
 
 # Build and publish a release
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c $CONFIGURATION -o out
 
 # Build runtime image
 FROM base

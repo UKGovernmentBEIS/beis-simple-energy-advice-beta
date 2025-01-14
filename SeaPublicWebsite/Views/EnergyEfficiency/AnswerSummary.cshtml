@@ -405,6 +405,36 @@
         }
     });
 
+    if (Model.PropertyData.HeatingControls.Count > 0)
+    {
+        rows.Add(new SummaryListRowViewModel
+        {
+            Key = new SummaryListRowKey
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Text = SharedLocalizer["HeatingControlsQuestionString"].Value
+            },
+            Value = new SummaryListRowValue
+            {
+                Classes = "govuk-!-width-one-half",
+                Text = string.Join(", ", Model.PropertyData.HeatingControls.Select(x => GovUkRadioCheckboxLabelTextAttribute.GetLabelText(x)))
+            },
+            Actions = new SummaryListRowActionViewModel
+            {
+                Classes = "govuk-!-width-one-quarter",
+                Items = new List<SummaryListRowActionItemViewModel>
+                {
+                    new()
+                    {
+                        Href = Url.Action(nameof(EnergyEfficiencyController.HeatingControls_Get), "EnergyEfficiency", new { reference = Model.PropertyData.Reference, entryPoint = QuestionFlowStep.HeatingControls }),
+                        Text = SharedLocalizer["Change"].Value,
+                        VisuallyHiddenText = SharedLocalizer["HeatingControlsQuestionString"].Value
+                    }
+                }
+            }
+        });
+    }
+
     if (Model.PropertyData.HasHotWaterCylinder is not null)
     {
         rows.Add(new()
