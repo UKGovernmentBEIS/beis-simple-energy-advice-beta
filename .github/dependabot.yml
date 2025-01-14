@@ -6,19 +6,23 @@ updates:
       interval: "daily"
     # we may not be able to respond to pull requests immediately
     # prioritise showing them all
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 100
     # group together minor & patch updates. major ones get a PR per change
     groups:
       non-major:
         update-types:
           - "minor"
           - "patch"
-  
+
   - package-ecosystem: "npm"
     directory: "SeaPublicWebsite"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 100
     # group all npm updates
     groups:
       npm:
+        update-types:
+          - "major"
+          - "minor"
+          - "patch"
