@@ -321,6 +321,18 @@ public class PropertyDataUpdater
             QuestionFlowStep.OtherHeatingType,
             entryPoint);
     }
+
+    public QuestionFlowStep UpdateHeatingControls(
+        PropertyData propertyData,
+        List<HeatingControls> heatingControls,
+        QuestionFlowStep? entryPoint)
+    {
+        return UpdatePropertyData(
+            p => { p.HeatingControls = heatingControls; },
+            propertyData,
+            QuestionFlowStep.HeatingControls,
+            entryPoint);
+    }
     
     public QuestionFlowStep UpdateHasHotWaterCylinder(
         PropertyData propertyData,

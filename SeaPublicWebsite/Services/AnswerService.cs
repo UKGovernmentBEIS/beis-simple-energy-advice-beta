@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using SeaPublicWebsite.BusinessLogic;
 using SeaPublicWebsite.BusinessLogic.Models;
@@ -242,6 +243,17 @@ public class AnswerService
     {
         return await UpdatePropertyDataAsync(
             (b, p) => b.UpdateOtherHeatingType(p, otherHeatingType, entryPoint),
+            reference);
+    }
+
+    public async Task<QuestionFlowStep> UpdateHeatingControls(
+        string reference,
+        List<HeatingControls> heatingControls,
+        QuestionFlowStep? entryPoint
+    )
+    {
+        return await UpdatePropertyDataAsync(
+            (b, p) => b.UpdateHeatingControls(p, heatingControls, entryPoint),
             reference);
     }
     

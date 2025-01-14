@@ -186,6 +186,15 @@ namespace SeaPublicWebsite.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select your heating controls.
+        /// </summary>
+        internal static string HeatingControlsRequired {
+            get {
+                return ResourceManager.GetString("HeatingControlsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter number of hours in the afternoon and evening.
         /// </summary>
         internal static string HeatingInAfternoonAndEveningHoursRequired {
