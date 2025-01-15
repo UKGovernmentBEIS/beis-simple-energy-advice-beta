@@ -576,12 +576,27 @@ public class QuestionFlowServiceTests
             ),
             QuestionFlowStep.AnswerSummary),
         new(
-            "Hot water cylinder goes back to heating type",
+            "Heating controls goes back to heating type",
+            new Input(
+                QuestionFlowStep.HeatingControls,
+                "ABCDEFGH"
+            ),
+            QuestionFlowStep.HeatingType),
+        new(
+            "Changing heating controls goes back to summary",
+            new Input(
+                QuestionFlowStep.HeatingControls,
+                "ABCDEFGH",
+                entryPoint: QuestionFlowStep.HeatingControls
+            ),
+            QuestionFlowStep.AnswerSummary),
+        new(
+            "Hot water cylinder goes back to heating controls",
             new Input(
                 QuestionFlowStep.HotWaterCylinder,
                 "ABCDEFGH"
             ),
-            QuestionFlowStep.HeatingType),
+            QuestionFlowStep.HeatingControls),
         new(
             "Changing hot water cylinder goes back to summary",
             new Input(
@@ -1220,11 +1235,18 @@ public class QuestionFlowServiceTests
             ),
             QuestionFlowStep.OtherHeatingType),
         new(
-            "Heating type continues to hot water cylinder if user has a boiler",
+            "Heating type continues to heating controls if user has a boiler",
             new Input(
                 QuestionFlowStep.HeatingType,
                 "ABCDEFGH",
                 heatingType: HeatingType.GasBoiler
+            ),
+            QuestionFlowStep.HeatingControls),
+        new(
+            "Heating controls continues to hot water cylinder",
+            new Input(
+                QuestionFlowStep.HeatingControls,
+                "ABCDEFGH"
             ),
             QuestionFlowStep.HotWaterCylinder),
         new(

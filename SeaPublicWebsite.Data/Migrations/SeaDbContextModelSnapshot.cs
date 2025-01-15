@@ -157,6 +157,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<bool>("HasSeenRecommendations")
                         .HasColumnType("boolean");
 
+                    b.Property<int[]>("HeatingControls")
+                        .HasColumnType("integer[]");
+
                     b.Property<int?>("HeatingPattern")
                         .HasColumnType("integer");
 

@@ -150,6 +150,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
             BreHeatingSystem breHeatingSystem =
                 GetBreHeatingSystem(propertyData.HeatingType.Value, propertyData.OtherHeatingType);
 
+            var breHeatingControls = GetBreHeatingControls(propertyData.HeatingControls);
+
             bool? breHotWaterCylinder = GetBreHotWaterCylinder(propertyData.HasHotWaterCylinder);
 
             BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(propertyData.HeatingPattern.Value,
@@ -180,7 +182,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 breTemperature: propertyData.Temperature,
                 breFloorType: breFloorType,
                 breOutsideSpace: breOutsideSpace,
-                brePvPanels: brePvPanels
+                brePvPanels: brePvPanels,
+                breHeatingControls: breHeatingControls
             );
 
             return request;
@@ -553,6 +556,29 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 SolarElectricPanels.DoNotKnow => false,
                 null => null,
                 _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+        
+        /// <returns>Mappings for the returned integer can be found in the BRE API Documentation</returns>
+        private static int? GetBreHeatingControls(List<HeatingControls> heatingControls)
+        {
+            heatingControls.Sort();
+            return heatingControls switch
+            {
+                [
+                    HeatingControls.Programmer, HeatingControls.RoomThermostats,
+                    HeatingControls.ThermostaticRadiatorValves
+                ] => 1,
+                [HeatingControls.RoomThermostats, HeatingControls.ThermostaticRadiatorValves] => 2,
+                [HeatingControls.Programmer, HeatingControls.ThermostaticRadiatorValves] => 3,
+                [HeatingControls.Programmer, HeatingControls.RoomThermostats] => 4,
+                [HeatingControls.Programmer] => 5,
+                [HeatingControls.RoomThermostats] => 6,
+                [HeatingControls.ThermostaticRadiatorValves] => 7,
+                [HeatingControls.None] => 8,
+                [HeatingControls.DoNotKnow] => 9,
+                [] => null,
+                _ => throw new ArgumentOutOfRangeException("heatingControls value: [" + string.Join(", ", heatingControls) + "]")
             };
         }
     }
