@@ -1,5 +1,3 @@
-using System;
-using System.Text.RegularExpressions;
 using GovUkDesignSystem.ModelBinders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
@@ -13,6 +11,7 @@ using SeaPublicWebsite.BusinessLogic;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 using SeaPublicWebsite.BusinessLogic.Services;
+using SeaPublicWebsite.BusinessLogic.Services.Password;
 using SeaPublicWebsite.Config;
 using SeaPublicWebsite.Data;
 using SeaPublicWebsite.DataStores;
@@ -32,12 +31,15 @@ namespace SeaPublicWebsite
     public class Startup
     {
         private readonly IConfiguration configuration;
+        private readonly AuthService authService;
         private readonly IWebHostEnvironment webHostEnvironment;
 
         public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             this.configuration = configuration;
             this.webHostEnvironment = webHostEnvironment;
+
+            authService = new AuthService(this.webHostEnvironment);
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -64,9 +66,7 @@ namespace SeaPublicWebsite
             ConfigurePdfGeneration(services);
             ConfigureFullHostnameService(services);
             ConfigurePropertyDataService(services);
-
-            services.Configure<BasicAuthMiddlewareConfiguration>(
-                configuration.GetSection(BasicAuthMiddlewareConfiguration.ConfigSection));
+            ConfigurePassword(services);
 
             services.AddControllersWithViews(options =>
             {
@@ -144,6 +144,14 @@ namespace SeaPublicWebsite
             services.Configure<FullHostnameConfiguration>(configuration.GetSection(FullHostnameConfiguration.ConfigSection));
         }
 
+        private void ConfigurePassword(IServiceCollection services)
+        {
+            services.Configure<PasswordConfiguration>(
+                configuration.GetSection(PasswordConfiguration.ConfigSection));
+            services.AddScoped<PasswordService>();
+            services.AddScoped<AuthService>();
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -167,18 +175,21 @@ namespace SeaPublicWebsite
 
             app.UseAuthorization();
 
-            ConfigureHttpBasicAuth(app);
+            if (authService.AuthIsEnabled())
+            {
+                ConfigureAuth(app);
+            }
 
             app.UseMiddleware<SecurityHeadersMiddleware>();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
-        private void ConfigureHttpBasicAuth(IApplicationBuilder app)
+        private void ConfigureAuth(IApplicationBuilder app)
         {
-            // Add HTTP Basic Authentication in our non-production environments to make sure people don't accidentally stumble across the site
-            // and on production only for pdf generation endpoints
-            app.UseMiddleware<BasicAuthMiddleware>();
+            // Add password authentication in our non-local-development and non-production environments
+            // to make sure people don't accidentally stumble across the site
+            app.UseMiddleware<AuthMiddleware>();
         }
     }
 }

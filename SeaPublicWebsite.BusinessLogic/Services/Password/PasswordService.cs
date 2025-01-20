@@ -8,12 +8,9 @@ public class PasswordService(IOptions<PasswordConfiguration> options)
 {
     public bool HashMatchesConfiguredPassword(string hash)
     {
-        if (options.Value.Password == null)
-        {
-            return false;
-        }
+        var configuredPasswordHash = GetConfiguredPasswordHash();
 
-        return HashPassword(options.Value.Password) == hash;
+        return configuredPasswordHash != null && configuredPasswordHash == hash;
     }
 
     public string HashPassword(string password)
@@ -22,5 +19,10 @@ public class PasswordService(IOptions<PasswordConfiguration> options)
         var bytes = Encoding.UTF8.GetBytes(password);
         var hashValue = sha256.ComputeHash(bytes);
         return Convert.ToBase64String(hashValue);
+    }
+
+    public string GetConfiguredPasswordHash()
+    {
+        return options.Value.Password != null ? HashPassword(options.Value.Password) : null;
     }
 }
