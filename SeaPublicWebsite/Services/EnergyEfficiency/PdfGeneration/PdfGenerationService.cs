@@ -19,10 +19,11 @@ public class PdfGenerationService(AuthService authService, PasswordService passw
         var launchOptions = new LaunchOptions
         {
             Headless = true,
-            Args = new [] { "--no-sandbox" }
+            Args = new[] { "--no-sandbox" }
         };
         var browser = await Puppeteer.LaunchAsync(launchOptions);
         var page = await browser.NewPageAsync();
+
         if (authService.AuthIsEnabled())
         {
             await page.SetCookieAsync(new CookieParam
@@ -32,8 +33,10 @@ public class PdfGenerationService(AuthService authService, PasswordService passw
                 Domain = "localhost"
             });
         }
-        await page.SetCookieAsync(new CookieParam { 
-            Name = "service_language", 
+
+        await page.SetCookieAsync(new CookieParam
+        {
+            Name = "service_language",
             Value = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(CultureInfo.CurrentCulture)),
             Domain = "localhost"
         });
