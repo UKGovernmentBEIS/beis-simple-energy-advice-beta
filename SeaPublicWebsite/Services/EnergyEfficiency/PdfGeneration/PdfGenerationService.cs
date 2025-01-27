@@ -2,22 +2,14 @@
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.Extensions.Options;
 using PuppeteerSharp;
 using PuppeteerSharp.Media;
-using SeaPublicWebsite.Middleware;
+using SeaPublicWebsite.BusinessLogic.Services.Password;
 
 namespace SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 
-public class PdfGenerationService
+public class PdfGenerationService(AuthService authService, PasswordService passwordService)
 {
-    private readonly BasicAuthMiddlewareConfiguration basicAuthConfiguration;
-
-    public PdfGenerationService(IOptions<BasicAuthMiddlewareConfiguration> basicAuthOptions)
-    {
-        basicAuthConfiguration = basicAuthOptions.Value;
-    }
-
     // This function runs a headless chrome browser without a sandbox (--no-sandbox).
     // This means whatever we run in that browser has access to the server's kernel
     // There is a ticket to revisit this when we move to BEIS Digital's platform:
@@ -27,15 +19,24 @@ public class PdfGenerationService
         var launchOptions = new LaunchOptions
         {
             Headless = true,
-            Args = new [] { "--no-sandbox" }
+            Args = new[] { "--no-sandbox" }
         };
-        
         var browser = await Puppeteer.LaunchAsync(launchOptions);
         var page = await browser.NewPageAsync();
-        await page.AuthenticateAsync(new Credentials
-            { Username = basicAuthConfiguration.Username, Password = basicAuthConfiguration.Password });
-        await page.SetCookieAsync(new CookieParam { 
-            Name = "service_language", 
+
+        if (authService.AuthIsEnabled())
+        {
+            await page.SetCookieAsync(new CookieParam
+            {
+                Name = AuthService.AuthCookieName,
+                Value = passwordService.GetConfiguredPasswordHash(),
+                Domain = "localhost"
+            });
+        }
+
+        await page.SetCookieAsync(new CookieParam
+        {
+            Name = "service_language",
             Value = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(CultureInfo.CurrentCulture)),
             Domain = "localhost"
         });
