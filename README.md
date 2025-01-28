@@ -197,8 +197,7 @@ The following is a list of environment variables required by the application. Ot
   - Set automatically by .NET
 - DOTNET_ENVIRONMENT
   - Set automatically by .NET   
-- BasicAuth__Password
-- BasicAuth__Username
+- Auth__Password
 - Bre__Password
 - Bre__Username
 - EpbEpc__Password
