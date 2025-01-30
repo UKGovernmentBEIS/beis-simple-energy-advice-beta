@@ -37,6 +37,9 @@ RUN dotnet publish -c $CONFIGURATION -o out
 
 # Build runtime image
 FROM base
+RUN groupadd -r fwtsuser && useradd -r -g fwtsuser fwtsuser
+USER fwtsuser
+
 WORKDIR /SeaPublicWebsite
 COPY --from=build-env /SeaPublicWebsite/out .
 EXPOSE 80
