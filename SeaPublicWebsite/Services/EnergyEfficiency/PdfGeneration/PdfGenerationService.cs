@@ -18,8 +18,7 @@ public class PdfGenerationService(AuthService authService, PasswordService passw
     {
         var launchOptions = new LaunchOptions
         {
-            Headless = true,
-            Args = new[] { "--no-sandbox" }
+            Headless = true
         };
         var browser = await Puppeteer.LaunchAsync(launchOptions);
         var page = await browser.NewPageAsync();
