@@ -77,7 +77,9 @@
                                                    {
                                                        Text = SharedLocalizer["Total whole number of hours in the morning (12am until 12pm)"].Value
                                                    },
-                                                   placeholder: SharedLocalizer["e.g. 6"].Value
+                                                   placeholder: SharedLocalizer["e.g. 6"].Value,
+                                                   inputMode:"numeric",
+                                                   pattern:"[0-9]*"
                                                    )
                                         @await Html.GovUkTextInputFor(
                                                    m => m.HoursOfHeatingEvening,
@@ -85,7 +87,9 @@
                                                    {
                                                        Text = SharedLocalizer["Total whole number of hours in the afternoon and evening (12pm until 12am)"].Value
                                                    },
-                                                   placeholder: SharedLocalizer["e.g. 6"].Value
+                                                   placeholder: SharedLocalizer["e.g. 6"].Value,
+                                                   inputMode:"numeric",
+                                                   pattern:"[0-9]*"
                                                    )
                                      </text>)
                         }
