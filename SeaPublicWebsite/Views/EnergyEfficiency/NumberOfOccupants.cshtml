@@ -58,7 +58,9 @@
                            Html = hint
                        },
                        classes: "govuk-input--width-5",
-                       placeholder: SharedLocalizer["e.g. 3"].Value)
+                       placeholder: SharedLocalizer["e.g. 3"].Value,
+                       pattern: "[0-9]*",
+                       inputMode: "numeric")
             
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
