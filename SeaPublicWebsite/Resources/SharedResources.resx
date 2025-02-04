@@ -2366,8 +2366,8 @@
     <data name="FindOutIfEligibleForSustainableWarmthGrantString" xml:space="preserve">
         <value>To find out if you are eligible for a Sustainable Warmth grant please contact your Local Authority which can be found on &lt;a class="govuk-link" href="{0}" target="_blank"&gt;https://www.gov.uk/find-local-council&lt;/a&gt; to check if they offer funding.</value>
     </data>
-    <data name="CheckEligibilityForGBISAndHUG2String" xml:space="preserve">
-        <value>We recommend checking your eligibility for the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Great British Insulation Scheme&lt;/a&gt; and the &lt;a class="govuk-link" href="{1}" target="_blank"&gt;Home Upgrade Grant: Phase 2 Scheme&lt;/a&gt;</value>
+    <data name="CheckEligibilityForGBISString" xml:space="preserve">
+        <value>We recommend checking your eligibility for the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Great British Insulation Scheme&lt;/a&gt;.</value>
     </data>
     <data name="WeUseInfoToSearchForEPCString" xml:space="preserve">
         <value>We use this information to search the Energy Performance of Buildings Register for an Energy Performance Certificate that matches your address. The Energy Performance of Buildings Register is an open register and you can find more details from the &lt;a href="{0}" target="_blank"&gt;Department for Levelling Up, Housing and Communities&lt;/a&gt;.</value>
