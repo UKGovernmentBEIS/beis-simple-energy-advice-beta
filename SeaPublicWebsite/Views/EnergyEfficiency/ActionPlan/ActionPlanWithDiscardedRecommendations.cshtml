@@ -8,6 +8,7 @@
 
 @{
     Layout = Model.IsPdf ? "_PdfLayout" : "_Layout";
+    ViewBag.Title = SharedLocalizer["Action Plan"].Value;
 }
 
 @section BeforeMain {
