@@ -7,14 +7,14 @@
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.NumberOfOccupantsViewModel
 @{
-    ViewBag.Title = @SharedLocalizer["Number of occupants"].Value;
+    ViewBag.Title = SharedLocalizer["Number of occupants"].Value;
 }
 
 @section BeforeMain {
     @await Html.GovUkBackLink(new BackLinkViewModel
            {
-               Text = @SharedLocalizer["Back"].Value,
-               Href = Model.BackLink,
+               Text = SharedLocalizer["Back"].Value,
+               Href = Model.BackLink
            })
 }
 
@@ -39,7 +39,7 @@
 
                         @await Html.GovUkDetails(new DetailsViewModel
                                {
-                                   SummaryText = @SharedLocalizer["Why do we want to know this?"].Value,
+                                   SummaryText = SharedLocalizer["Why do we want to know this?"].Value,
                                    Html = details
                                })
                      </text>;
@@ -47,23 +47,24 @@
             
             @await Html.GovUkTextInputFor(
                        m => m.NumberOfOccupants,
-                       labelOptions: new LabelViewModel
+                       new LabelViewModel
                        {
-                           Text = @SharedLocalizer["How many people live in your home?"].Value,
+                           Text = SharedLocalizer["How many people live in your home?"].Value,
                            Classes = "govuk-label--l",
                            IsPageHeading = true
                        },
-                       hintOptions: new HintViewModel
+                       new HintViewModel
                        {
                            Html = hint
                        },
                        classes: "govuk-input--width-5",
-                       placeholder: SharedLocalizer["e.g. 3"].Value)
+                       placeholder: SharedLocalizer["e.g. 3"].Value,
+                       inputMode: "numeric")
             
             <div class="govuk-button-group">
                 @(await Html.GovUkButton(new ButtonViewModel
                 {
-                    Text = @SharedLocalizer["Continue"].Value
+                    Text = SharedLocalizer["Continue"].Value
                 }))
                 
                 <!-- We don't want to use the design library component since it adds additional styles we do not want -->

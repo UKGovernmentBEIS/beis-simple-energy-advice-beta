@@ -1,8 +1,11 @@
-﻿@using SeaPublicWebsite.Models.EnergyEfficiency
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @model SeaPublicWebsite.Models.EnergyEfficiency.RecommendationsViewModel
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @{
     Layout = "_PdfLayout";
+    ViewBag.Title = SharedLocalizer["Your recommendations"].Value;
 }
 
 @for (var index = 0; index < Model.PropertyRecommendations.Count; index++)
