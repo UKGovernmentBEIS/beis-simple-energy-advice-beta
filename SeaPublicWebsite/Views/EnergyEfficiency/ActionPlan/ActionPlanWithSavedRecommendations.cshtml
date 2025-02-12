@@ -79,8 +79,8 @@
                                           @SharedLocalizer["Typical costs"]: @Model.GetInstallationCostText(recommendation)
                                       </p>
                                       <a class="govuk-link"
-                                         href="@Model.GetUrlWithPrefix(Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true}))">
-                                          @SharedLocalizer["Revisit recommendation"]
+                                         href="@Model.GetUrlWithPrefix(Url.Action("Recommendation_Get", new { id = (int)recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true }))">
+                                          @SharedLocalizer["Revisit recommendation"] <text class="govuk-visually-hidden">:@(RecommendationServiceText.ResourceManager.GetString(recommendation.Title) ?? recommendation.Title)</text>
                                       </a>
                                    </text>
                        }
@@ -139,9 +139,10 @@
                        new()
                        {
                            Classes = "sea-saved-recommendations-table-headers",
-                           Html = @<a class="govuk-link" href="@Model.GetUrlWithPrefix(Url.Action("Recommendation_Get", new {id = (int) recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true}))">
-                                      @SharedLocalizer["Revisit recommendation"]
-                                  </a>
+                           Html = @<a class="govuk-link"
+                                    href="@Model.GetUrlWithPrefix(Url.Action("Recommendation_Get", new { id = (int)recommendation.Key, reference = Model.PropertyData.Reference, fromActionPlan = true }))">
+                                    @SharedLocalizer["Revisit recommendation"] <text class="govuk-visually-hidden-focusable">:@(RecommendationServiceText.ResourceManager.GetString(recommendation.Title) ?? recommendation.Title)</text>
+                                    </a>
                        }
                    }
                }).ToList()
