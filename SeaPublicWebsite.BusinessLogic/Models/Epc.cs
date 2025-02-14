@@ -20,6 +20,8 @@ namespace SeaPublicWebsite.BusinessLogic.Models
         public RoofInsulated? RoofInsulated { get; set; }
         public GlazingType? GlazingType { get; set; }
         public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
+        
+        public SolarElectricPanels? SolarElectricPanels { get; set; }
 
         public bool ContainsPropertyTypeAndAge()
         {

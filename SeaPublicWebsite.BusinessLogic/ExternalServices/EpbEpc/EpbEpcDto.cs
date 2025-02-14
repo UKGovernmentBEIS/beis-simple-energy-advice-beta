@@ -60,6 +60,9 @@ public class EpbEpcAssessmentDto
     
     [JsonProperty(PropertyName = "hasHotWaterCylinder")]
     public bool? HasHotWaterCylinder { get; set; }
+    
+    [JsonProperty(PropertyName = "photoSupply")]
+    public int? SolarElectricPanelPercentRoofCoverage { get; set; }
 
     public Epc Parse()
     {
@@ -85,7 +88,8 @@ public class EpbEpcAssessmentDto
             RoofInsulated = ParseRoofInsulation(),
             GlazingType = ParseGlazingType(),
             EpcHeatingType = ParseHeatingType(),
-            HasHotWaterCylinder = ParseHasHotWaterCylinder()
+            HasHotWaterCylinder = ParseHasHotWaterCylinder(),
+            SolarElectricPanels = ParseSolarElectricPanels()
         };
     }
 
@@ -757,5 +761,16 @@ public class EpbEpcAssessmentDto
             : SeaPublicWebsite.BusinessLogic.Models.Enums.HasHotWaterCylinder.No;
     }
 
+    private SolarElectricPanels? ParseSolarElectricPanels()
+    {
+        if (SolarElectricPanelPercentRoofCoverage is null)
+        {
+            return null;
+        }
 
+        return SolarElectricPanelPercentRoofCoverage > 0
+            ? SolarElectricPanels.Yes
+            : SolarElectricPanels.No;
+    }
+    
 }
