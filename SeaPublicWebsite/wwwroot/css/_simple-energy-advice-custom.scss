@@ -381,11 +381,13 @@
     [aria-current] {
         padding: 0.3125em;
     }
-}
-
-.sea-language-select__list-item button {
-    font-size: unset;
-    background: none;
-    border: none;
-    cursor: pointer;
+    
+    button {
+        font-size: unset;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: $govuk-text-colour;
+        padding-inline: 0.3125em;
+    }
 }
