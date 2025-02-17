@@ -556,9 +556,9 @@ public class EpcTests
             {
                 ("Can handle null solar electric panels", null, null),
                 ("Can parse has solar electric panels (0)", 0, SolarElectricPanels.No),
-                ("Can parse has solar electric panels (>0)", 1, SolarElectricPanels.Yes),
-                ("Can parse has solar electric panels (>0)", 100, SolarElectricPanels.Yes),
-                ("Can parse has solar electric panels (>0)", 50, SolarElectricPanels.Yes)
+                ("Can parse has solar electric panels (1)", 1, SolarElectricPanels.Yes),
+                ("Can parse has solar electric panels (50)", 50, SolarElectricPanels.Yes),
+                ("Can parse has solar electric panels (100)", 100, SolarElectricPanels.Yes)
             }
             .Select(p => new EpcTestCase(
                 p.Descrption,
