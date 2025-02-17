@@ -94,9 +94,6 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("RoofInsulated")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("SolarElectricPanels")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("SolidWallsInsulated")
                         .HasColumnType("integer");
 
