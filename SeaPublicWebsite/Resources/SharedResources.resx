@@ -2620,7 +2620,7 @@ device, or a physical control in your home.</value>
         <value>Your {0} Energy Performance Certificate suggests &lt;strong&gt;your home does not have solar photovoltaic panels installed. &lt;/strong&gt;  </value>
         <comment>EPCSuggestsNoSolarElectricPanels</comment>
     </data>
-    <data name="Solar Photovoltaic (PV) panels" xml:space="preserve">
+    <data name="SolarElectricPanelsTitleString" xml:space="preserve">
         <value>Solar Photovoltaic (PV) panels</value>
         <comment>Solar Photovoltaic (PV) panels</comment>
     </data>
