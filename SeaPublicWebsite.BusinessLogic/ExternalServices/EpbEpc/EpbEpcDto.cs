@@ -6,10 +6,9 @@ using SeaPublicWebsite.BusinessLogic.Models.Enums;
 namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 
 /// <summary>
-/// The classes in the file parse the response from the EPB EPC API:
+/// This class is used to parse the response from the EPB EPC API:
 /// <see href="https://api-docs.epcregisters.net/#/Find%20Ways%20to%20Save%20Energy/get-assessment-retrofit-advice"/> 
 /// </summary>
-
 public class EpbEpcDto
 {
     [JsonProperty(PropertyName = "data")]
