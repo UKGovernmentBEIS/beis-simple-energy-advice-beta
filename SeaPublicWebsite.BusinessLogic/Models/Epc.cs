@@ -20,7 +20,7 @@ public class Epc
     public RoofInsulated? RoofInsulated { get; set; }
     public GlazingType? GlazingType { get; set; }
     public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
-    public SolarElectricPanels? SolarElectricPanels { get; set; }
+    public SolarElectricPanels? HasSolarElectricPanels { get; set; }
 
     public bool ContainsPropertyTypeAndAge()
     {

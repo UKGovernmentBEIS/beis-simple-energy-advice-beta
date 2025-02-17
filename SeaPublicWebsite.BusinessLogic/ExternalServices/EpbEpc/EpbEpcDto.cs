@@ -5,6 +5,11 @@ using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 
+/// <summary>
+/// The classes in the file parse the response from the EPB EPC API:
+/// <see href="https://api-docs.epcregisters.net/#/Find%20Ways%20to%20Save%20Energy/get-assessment-retrofit-advice"/> 
+/// </summary>
+
 public class EpbEpcDto
 {
     [JsonProperty(PropertyName = "data")]
@@ -63,7 +68,7 @@ public class EpbEpcAssessmentDto
     
     [JsonProperty(PropertyName = "photoSupply")]
     public int? SolarElectricPanelPercentRoofCoverage { get; set; }
-
+    
     public Epc Parse()
     {
         if (AssessmentType.Equals("SAP", StringComparison.OrdinalIgnoreCase))
@@ -89,7 +94,7 @@ public class EpbEpcAssessmentDto
             GlazingType = ParseGlazingType(),
             EpcHeatingType = ParseHeatingType(),
             HasHotWaterCylinder = ParseHasHotWaterCylinder(),
-            SolarElectricPanels = ParseSolarElectricPanels()
+            HasSolarElectricPanels = ParseSolarElectricPanelPercentRoofCoverage()
         };
     }
 
@@ -761,7 +766,7 @@ public class EpbEpcAssessmentDto
             : SeaPublicWebsite.BusinessLogic.Models.Enums.HasHotWaterCylinder.No;
     }
 
-    private SolarElectricPanels? ParseSolarElectricPanels()
+    private SolarElectricPanels? ParseSolarElectricPanelPercentRoofCoverage()
     {
         if (SolarElectricPanelPercentRoofCoverage is null)
         {

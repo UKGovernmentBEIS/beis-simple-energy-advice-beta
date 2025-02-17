@@ -76,6 +76,9 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("HasHotWaterCylinder")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("HasSolarElectricPanels")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("HouseType")
                         .HasColumnType("integer");
 
