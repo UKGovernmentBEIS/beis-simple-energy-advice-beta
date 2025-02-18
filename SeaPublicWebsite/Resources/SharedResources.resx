@@ -2612,4 +2612,13 @@ device, or a physical control in your home.</value>
         <value>or</value>
         <comment>or</comment>
     </data>
+    <data name="EPCSuggestsSolarElectricPanels" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home &lt;strong&gt;has solar photovoltaic panels installed. &lt;/strong&gt;</value>
+    </data>
+    <data name="EPCSuggestsNoSolarElectricPanels" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests &lt;strong&gt;your home does not have solar photovoltaic panels installed. &lt;/strong&gt;  </value>
+    </data>
+    <data name="SolarElectricPanelsTitleString" xml:space="preserve">
+        <value>Solar Photovoltaic (PV) panels</value>
+    </data>
 </root>

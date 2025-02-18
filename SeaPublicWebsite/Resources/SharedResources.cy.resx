@@ -2663,4 +2663,16 @@
         <value>neu</value>
         <comment>or</comment>
     </data>
+    <data name="EPCSuggestsSolarElectricPanels" xml:space="preserve">
+        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu &lt;strong&gt;bod paneli ffotofoltäig solar wedi'u gosod ar eich cartref.&lt;/strong&gt;</value>
+        <comment>EPCSuggestsSolarElectricPanels</comment>
+    </data>
+    <data name="EPCSuggestsNoSolarElectricPanels" xml:space="preserve">
+        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu &lt;strong&gt;nad oes paneli ffotofoltäig solar wedi'u gosod ar eich cartref.&lt;/strong&gt; </value>
+        <comment>EPCSuggestsNoSolarElectricPanels</comment>
+    </data>
+    <data name="SolarElectricPanelsTitleString" xml:space="preserve">
+        <value>Paneli Ffotofoltäig Solar (PV)</value>
+        <comment>Solar Photovoltaic (PV) panels</comment>
+    </data>
 </root>
