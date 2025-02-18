@@ -6,13 +6,12 @@ using SeaPublicWebsite.BusinessLogic.Models.Enums;
 namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc;
 
 /// <summary>
-/// This class is used to parse the response from the EPB EPC API:
-/// <see href="https://api-docs.epcregisters.net/#/Find%20Ways%20to%20Save%20Energy/get-assessment-retrofit-advice"/> 
+///     This class is used to parse the response from the EPB EPC API:
+///     <see href="https://api-docs.epcregisters.net/#/Find%20Ways%20to%20Save%20Energy/get-assessment-retrofit-advice" />
 /// </summary>
 public class EpbEpcDto
 {
-    [JsonProperty(PropertyName = "data")]
-    public EpbEpcDataDto Data { get; set; }
+    [JsonProperty(PropertyName = "data")] public EpbEpcDataDto Data { get; set; }
 }
 
 public class EpbEpcDataDto
@@ -25,56 +24,56 @@ public class EpbEpcAssessmentDto
 {
     [JsonProperty(PropertyName = "typeOfAssessment")]
     public string AssessmentType { get; set; }
-    
+
     [JsonProperty(PropertyName = "address")]
     public EpbAddressDto Address { get; set; }
-    
+
     [JsonProperty(PropertyName = "lodgementDate")]
     public string LodgementDate { get; set; }
-    
+
     [JsonProperty(PropertyName = "isLatestAssessmentForAddress")]
     public bool IsLatestAssessmentForAddress { get; set; }
-    
+
     [JsonProperty(PropertyName = "propertyType")]
     public string PropertyType { get; set; }
-    
+
     [JsonProperty(PropertyName = "builtForm")]
     public string BuiltForm { get; set; }
-    
+
     [JsonProperty(PropertyName = "PropertyAgeBand")]
     public string PropertyAgeBand { get; set; }
 
     [JsonProperty(PropertyName = "wallsDescription")]
     public List<string> WallsDescription { get; set; }
-    
+
     [JsonProperty(PropertyName = "floorDescription")]
     public List<string> FloorDescription { get; set; }
-    
+
     [JsonProperty(PropertyName = "roofDescription")]
     public List<string> RoofDescription { get; set; }
-    
+
     [JsonProperty(PropertyName = "windowsDescription")]
     public List<string> WindowsDescription { get; set; }
-    
+
     [JsonProperty(PropertyName = "mainHeatingDescription")]
     public string MainHeatingDescription { get; set; }
-    
+
     [JsonProperty(PropertyName = "mainFuelType")]
     public string MainFuelType { get; set; }
-    
+
     [JsonProperty(PropertyName = "hasHotWaterCylinder")]
     public bool? HasHotWaterCylinder { get; set; }
-    
+
     [JsonProperty(PropertyName = "photoSupply")]
     public int? SolarElectricPanelPercentRoofCoverage { get; set; }
-    
+
     public Epc Parse()
     {
         if (AssessmentType.Equals("SAP", StringComparison.OrdinalIgnoreCase))
         {
             return null;
         }
-            
+
         return new Epc
         {
             LodgementYear = ParseLodgementDate()?.Year,
@@ -103,11 +102,11 @@ public class EpbEpcAssessmentDto
         {
             return null;
         }
-        
+
         var date = DateTime.Parse(LodgementDate);
         return DateTime.SpecifyKind(date, DateTimeKind.Utc);
     }
-    
+
     private HomeAge? ParseConstructionAgeBand()
     {
         if (PropertyAgeBand is null)
@@ -120,67 +119,67 @@ public class EpbEpcAssessmentDto
         {
             return HomeAge.Pre1900;
         }
-        
+
         if (PropertyAgeBand.Equals("B", StringComparison.OrdinalIgnoreCase) ||
             PropertyAgeBand.Contains("1900-1929"))
         {
             return HomeAge.From1900To1929;
         }
-        
+
         if (PropertyAgeBand.Equals("C", StringComparison.OrdinalIgnoreCase) ||
             PropertyAgeBand.Contains("1930-1949"))
         {
             return HomeAge.From1930To1949;
         }
-        
+
         if (PropertyAgeBand.Equals("D", StringComparison.OrdinalIgnoreCase) ||
             PropertyAgeBand.Contains("1950-1966"))
         {
             return HomeAge.From1950To1966;
         }
-        
+
         if (PropertyAgeBand.Equals("E", StringComparison.OrdinalIgnoreCase) ||
             PropertyAgeBand.Contains("1967-1975"))
         {
             return HomeAge.From1967To1975;
         }
-        
+
         if (PropertyAgeBand.Equals("F", StringComparison.OrdinalIgnoreCase) ||
             PropertyAgeBand.Contains("1976-1982"))
         {
             return HomeAge.From1976To1982;
         }
-        
+
         if (PropertyAgeBand.Equals("G", StringComparison.OrdinalIgnoreCase) ||
             PropertyAgeBand.Contains("1983-1990"))
         {
             return HomeAge.From1983To1990;
         }
-        
+
         if (PropertyAgeBand.Equals("H", StringComparison.OrdinalIgnoreCase) ||
             PropertyAgeBand.Contains("1991-1995"))
         {
             return HomeAge.From1991To1995;
         }
-        
+
         if (PropertyAgeBand.Equals("I", StringComparison.OrdinalIgnoreCase) ||
             PropertyAgeBand.Contains("1996-2002"))
         {
             return HomeAge.From1996To2002;
         }
-        
+
         if (PropertyAgeBand.Equals("J", StringComparison.OrdinalIgnoreCase) ||
             PropertyAgeBand.Contains("2003-2006"))
         {
             return HomeAge.From2003To2006;
         }
-        
+
         if (PropertyAgeBand.Equals("K", StringComparison.OrdinalIgnoreCase) ||
             PropertyAgeBand.Contains("2007-2011"))
         {
             return HomeAge.From2007To2011;
         }
-        
+
         if (PropertyAgeBand.Equals("L", StringComparison.OrdinalIgnoreCase) ||
             PropertyAgeBand.Contains("2012 onwards"))
         {
@@ -196,29 +195,29 @@ public class EpbEpcAssessmentDto
         {
             return null;
         }
-        
+
         if (PropertyType.Contains("House", StringComparison.OrdinalIgnoreCase))
         {
-            return SeaPublicWebsite.BusinessLogic.Models.Enums.PropertyType.House;
+            return Models.Enums.PropertyType.House;
         }
 
         if (PropertyType.Contains("Bungalow", StringComparison.OrdinalIgnoreCase))
         {
-            return SeaPublicWebsite.BusinessLogic.Models.Enums.PropertyType.Bungalow;
+            return Models.Enums.PropertyType.Bungalow;
         }
 
         if (PropertyType.Contains("Flat", StringComparison.OrdinalIgnoreCase) ||
             PropertyType.Contains("Maisonette", StringComparison.OrdinalIgnoreCase))
         {
-            return SeaPublicWebsite.BusinessLogic.Models.Enums.PropertyType.ApartmentFlatOrMaisonette;
+            return Models.Enums.PropertyType.ApartmentFlatOrMaisonette;
         }
 
         return null;
     }
-    
+
     private HouseType? ParseHouseType()
     {
-        if (ParsePropertyType() is not SeaPublicWebsite.BusinessLogic.Models.Enums.PropertyType.House)
+        if (ParsePropertyType() is not Models.Enums.PropertyType.House)
         {
             return null;
         }
@@ -227,7 +226,7 @@ public class EpbEpcAssessmentDto
         {
             return HouseType.SemiDetached;
         }
-        
+
         if (PropertyType.Contains("detached", StringComparison.OrdinalIgnoreCase))
         {
             return HouseType.Detached;
@@ -237,7 +236,7 @@ public class EpbEpcAssessmentDto
         {
             return HouseType.Terraced;
         }
-        
+
         if (PropertyType.Contains("end-terrace", StringComparison.OrdinalIgnoreCase))
         {
             return HouseType.EndTerrace;
@@ -245,10 +244,10 @@ public class EpbEpcAssessmentDto
 
         return null;
     }
-    
+
     private BungalowType? ParseBungalowType()
     {
-        if (ParsePropertyType() is not SeaPublicWebsite.BusinessLogic.Models.Enums.PropertyType.Bungalow)
+        if (ParsePropertyType() is not Models.Enums.PropertyType.Bungalow)
         {
             return null;
         }
@@ -257,7 +256,7 @@ public class EpbEpcAssessmentDto
         {
             return BungalowType.SemiDetached;
         }
-        
+
         if (PropertyType.Contains("detached", StringComparison.OrdinalIgnoreCase))
         {
             return BungalowType.Detached;
@@ -267,7 +266,7 @@ public class EpbEpcAssessmentDto
         {
             return BungalowType.Terraced;
         }
-        
+
         if (PropertyType.Contains("end-terrace", StringComparison.OrdinalIgnoreCase))
         {
             return BungalowType.EndTerrace;
@@ -275,14 +274,14 @@ public class EpbEpcAssessmentDto
 
         return null;
     }
-    
+
     private FlatType? ParseFlatType()
     {
-        if (ParsePropertyType() is not SeaPublicWebsite.BusinessLogic.Models.Enums.PropertyType.ApartmentFlatOrMaisonette)
+        if (ParsePropertyType() is not Models.Enums.PropertyType.ApartmentFlatOrMaisonette)
         {
             return null;
         }
-        
+
         if (PropertyType.Contains("basement", StringComparison.OrdinalIgnoreCase) ||
             PropertyType.Contains("ground", StringComparison.OrdinalIgnoreCase))
         {
@@ -293,7 +292,7 @@ public class EpbEpcAssessmentDto
         {
             return FlatType.MiddleFloor;
         }
-        
+
         if (PropertyType.Contains("top", StringComparison.OrdinalIgnoreCase))
         {
             return FlatType.TopFloor;
@@ -317,7 +316,7 @@ public class EpbEpcAssessmentDto
         {
             return null;
         }
-        
+
         var hasOther = WallsDescription.Any(description =>
             description.Contains("System built", StringComparison.OrdinalIgnoreCase) ||
             description.Contains("Cob", StringComparison.OrdinalIgnoreCase) ||
@@ -329,7 +328,7 @@ public class EpbEpcAssessmentDto
             return WallConstruction.Other;
         }
 
-        var hasCavity = WallsDescription.Any(description => 
+        var hasCavity = WallsDescription.Any(description =>
             description.Contains("cavity", StringComparison.OrdinalIgnoreCase));
         var hasSolid = WallsDescription.Any(HasSolidWalls);
 
@@ -341,7 +340,7 @@ public class EpbEpcAssessmentDto
             (false, false) => null
         };
     }
-    
+
     private SolidWallsInsulated? ParseSolidWallsInsulated()
     {
         if (WallsDescription is null)
@@ -357,14 +356,14 @@ public class EpbEpcAssessmentDto
         {
             return SolidWallsInsulated.All;
         }
-        
+
         if (WallsDescription.Any(description =>
                 HasSolidWalls(description) &&
                 description.Contains("partial insulation", StringComparison.OrdinalIgnoreCase)))
         {
             return SolidWallsInsulated.Some;
         }
-        
+
         if (WallsDescription.Any(description =>
                 HasSolidWalls(description) &&
                 description.Contains("no insulation", StringComparison.OrdinalIgnoreCase)))
@@ -391,14 +390,14 @@ public class EpbEpcAssessmentDto
         {
             return CavityWallsInsulated.All;
         }
-        
+
         if (WallsDescription.Any(description =>
                 description.Contains("cavity", StringComparison.OrdinalIgnoreCase) &&
                 description.Contains("partial insulation", StringComparison.OrdinalIgnoreCase)))
         {
             return CavityWallsInsulated.Some;
         }
-        
+
         if (WallsDescription.Any(description =>
                 description.Contains("cavity", StringComparison.OrdinalIgnoreCase) &&
                 description.Contains("no insulation", StringComparison.OrdinalIgnoreCase)))
@@ -440,11 +439,11 @@ public class EpbEpcAssessmentDto
         if (FloorDescription.All(description =>
                 description.Contains("insulated", StringComparison.OrdinalIgnoreCase) ||
                 description.Contains("limited", StringComparison.OrdinalIgnoreCase)
-                ))
+            ))
         {
             return FloorInsulated.Yes;
         }
-        
+
         if (FloorDescription.Any(description =>
                 description.Contains("no insulation", StringComparison.OrdinalIgnoreCase)))
         {
@@ -497,7 +496,7 @@ public class EpbEpcAssessmentDto
         {
             return RoofInsulated.No;
         }
-            
+
         if (RoofDescription.All(description =>
             {
                 if (description.Contains("limited", StringComparison.OrdinalIgnoreCase) ||
@@ -523,14 +522,14 @@ public class EpbEpcAssessmentDto
         {
             return null;
         }
-        
+
         var hasSingle = WindowsDescription.Any(description =>
             description.Contains("single", StringComparison.OrdinalIgnoreCase) ||
             description.Contains("some", StringComparison.OrdinalIgnoreCase) ||
             description.Contains("partial", StringComparison.OrdinalIgnoreCase) ||
             description.Contains("mostly", StringComparison.OrdinalIgnoreCase) ||
             description.Contains("multiple glazing throughout", StringComparison.OrdinalIgnoreCase));
-        
+
         var hasDoubleOrTriple = WindowsDescription.Any(description =>
             description.Contains("some", StringComparison.OrdinalIgnoreCase) ||
             description.Contains("partial", StringComparison.OrdinalIgnoreCase) ||
@@ -538,7 +537,7 @@ public class EpbEpcAssessmentDto
             description.Contains("full", StringComparison.OrdinalIgnoreCase) ||
             description.Contains("high", StringComparison.OrdinalIgnoreCase) ||
             description.Contains("multiple glazing throughout", StringComparison.OrdinalIgnoreCase));
-        
+
         return (hasSingle, hasDoubleOrTriple) switch
         {
             (true, true) => GlazingType.Both,
@@ -554,7 +553,7 @@ public class EpbEpcAssessmentDto
         {
             return null;
         }
-        
+
         // Anything ending in '(community)'
         // Communal heating is treated as 'other heating'
         if (
@@ -574,7 +573,7 @@ public class EpbEpcAssessmentDto
         {
             return EpcHeatingType.Other;
         }
-        
+
         // 19 - bioethanol
         // 34, 35, 36 - biodiesel from ...
         // Biodiesel and bioethanol is treated as 'other heating'
@@ -588,7 +587,7 @@ public class EpbEpcAssessmentDto
         {
             return EpcHeatingType.Other;
         }
-        
+
         // 11 - waste combustion
         // Treated as 'other heating'
         if (MainFuelType.Equals("11") ||
@@ -596,7 +595,7 @@ public class EpbEpcAssessmentDto
         {
             return EpcHeatingType.Other;
         }
-        
+
         // 16 - wood pellets in bags for secondary heating
         // Treated as 'other heating'
         if (MainFuelType.Equals("16") ||
@@ -618,7 +617,7 @@ public class EpbEpcAssessmentDto
         {
             return EpcHeatingType.GasBoiler;
         }
-        
+
         // Lpg boiler check
         // 3 - bottled LPG
         // 2, 17, 27 - LPG ...
@@ -630,7 +629,7 @@ public class EpbEpcAssessmentDto
         {
             return EpcHeatingType.LpgBoiler;
         }
-        
+
         // Oil boiler check
         // 4 - oil - this is for backwards compatibility only and should not be used
         // 18 - B30K (not community)
@@ -645,7 +644,7 @@ public class EpbEpcAssessmentDto
         {
             return EpcHeatingType.OilBoiler;
         }
-        
+
         // coal check
         // 5 - anthracite
         // 14 - house coal
@@ -660,14 +659,14 @@ public class EpbEpcAssessmentDto
         {
             return EpcHeatingType.CoalOrSolidFuel;
         }
-        
+
         // biomass boiler check
         // 6 - wood logs
         // 7 - bulk wood pellets
         // 8 - wood chips
         // 9 - dual fuel - mineral + wood
         // 12 - biomass
-        if (MainFuelType.Equals("6") || 
+        if (MainFuelType.Equals("6") ||
             MainFuelType.Equals("7") ||
             MainFuelType.Equals("8") ||
             MainFuelType.Equals("9") ||
@@ -689,12 +688,12 @@ public class EpbEpcAssessmentDto
             MainFuelType.Contains("electricity", StringComparison.OrdinalIgnoreCase))
         {
             // We need to inspect the main heating description to decide
-            
+
             if (MainHeatingDescription is null)
             {
                 return null;
             }
-            
+
             // Communal heating is treated as 'other heating'
             // 6 - community heating system
             if (MainHeatingDescription.Equals("6") ||
@@ -702,7 +701,7 @@ public class EpbEpcAssessmentDto
             {
                 return EpcHeatingType.Other;
             }
-            
+
             // Direct action electric check
             // 2 - boiler with radiators or underfloor heating
             // 8 - electric underfloor heating
@@ -714,15 +713,17 @@ public class EpbEpcAssessmentDto
                 MainHeatingDescription.Equals("9") ||
                 MainHeatingDescription.Equals("10") ||
                 MainHeatingDescription.Equals("11") ||
-                MainHeatingDescription.Contains("boiler with radiators or underfloor heating", StringComparison.OrdinalIgnoreCase) ||
+                MainHeatingDescription.Contains("boiler with radiators or underfloor heating",
+                    StringComparison.OrdinalIgnoreCase) ||
                 MainHeatingDescription.Contains("electric underfloor heating", StringComparison.OrdinalIgnoreCase) ||
-                MainHeatingDescription.Contains("warm air system (not heat pump)", StringComparison.OrdinalIgnoreCase) ||
+                MainHeatingDescription.Contains("warm air system (not heat pump)",
+                    StringComparison.OrdinalIgnoreCase) ||
                 MainHeatingDescription.Contains("room heaters", StringComparison.OrdinalIgnoreCase) ||
                 MainHeatingDescription.Contains("other system", StringComparison.OrdinalIgnoreCase))
             {
                 return EpcHeatingType.DirectActionElectric;
             }
-            
+
             // Heat pump check
             // 4 - heat pump with radiators or underfloor heating
             // 5 - heat pump with warm air distribution
@@ -732,7 +733,7 @@ public class EpbEpcAssessmentDto
             {
                 return EpcHeatingType.HeatPump;
             }
-            
+
             // Storage heater check
             // 7 - electric storage heaters
             if (MainHeatingDescription.Equals("7") ||
@@ -740,7 +741,7 @@ public class EpbEpcAssessmentDto
             {
                 return EpcHeatingType.Storage;
             }
-            
+
             // Special case of micro combined heat and power
             // 3 - micro-cogeneration
             if (MainHeatingDescription.Equals("3") ||
@@ -749,7 +750,7 @@ public class EpbEpcAssessmentDto
                 return EpcHeatingType.GasBoiler;
             }
         }
-        
+
         return null;
     }
 
@@ -761,8 +762,8 @@ public class EpbEpcAssessmentDto
         }
 
         return HasHotWaterCylinder.Value
-            ? SeaPublicWebsite.BusinessLogic.Models.Enums.HasHotWaterCylinder.Yes
-            : SeaPublicWebsite.BusinessLogic.Models.Enums.HasHotWaterCylinder.No;
+            ? Models.Enums.HasHotWaterCylinder.Yes
+            : Models.Enums.HasHotWaterCylinder.No;
     }
 
     private SolarElectricPanels? ParseSolarElectricPanelPercentRoofCoverage()
@@ -776,5 +777,4 @@ public class EpbEpcAssessmentDto
             ? SolarElectricPanels.Yes
             : SolarElectricPanels.No;
     }
-    
 }
