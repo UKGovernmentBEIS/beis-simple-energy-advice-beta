@@ -1063,7 +1063,7 @@
         <value>Nid yw pob adeilad yn addas ar gyfer deunydd inswleiddio waliau ceudod safonol. Bydd angen contractwr arbenigol arnoch i archwilio eich eiddo i weld pa opsiynau inswleiddio sy’n agored i chi.</value>
     </data>
     <data name="£OverLifetimeOfInstallationString" xml:space="preserve">
-        <value>£{0} &lt;span class="govuk-body"&gt;&lt;b&gt;dros oes y gosodiad&lt;/b&gt;&lt;/span&gt;</value>
+        <value>£{0} &lt;span class="govuk-body"&gt;&lt;strong&gt;dros oes y gosodiad&lt;/strong&gt;&lt;/span&gt;</value>
     </data>
     <data name="£1000 - £3000" xml:space="preserve">
         <value>£1000 - £3000</value>
@@ -1108,10 +1108,10 @@
         <value>Mae costau rhedeg pympiau gwres yn dibynnu ar nifer o ffactorau sy’n ymwneud â’ch system wresogi a’ch eiddo. Siaradwch â gosodwr pympiau gwres i gael gwybod mwy.</value>
     </data>
     <data name="PriceRangeForAnAirSourceHeatPumpString" xml:space="preserve">
-        <value>£{0} - £{1} &lt;span class="govuk-body"&gt;&lt;b&gt;ar gyfer pwmp gwres ffynhonnell aer&lt;/b&gt;&lt;/span&gt;</value>
+        <value>£{0} - £{1} &lt;span class="govuk-body"&gt;&lt;strong&gt;ar gyfer pwmp gwres ffynhonnell aer&lt;/strong&gt;&lt;/span&gt;</value>
     </data>
     <data name="PriceRangeForAGroundSourceHeatPumpString" xml:space="preserve">
-        <value>£{0} - £{1} &lt;span class="govuk-body"&gt;&lt;b&gt;ar gyfer pwmp gwres o’r ddaear&lt;/b&gt;&lt;/span&gt;</value>
+        <value>£{0} - £{1} &lt;span class="govuk-body"&gt;&lt;strong&gt;ar gyfer pwmp gwres o’r ddaear&lt;/strong&gt;&lt;/span&gt;</value>
     </data>
     <data name="Fit solar electric panels" xml:space="preserve">
         <value>Gosod paneli trydan solar</value>
@@ -1159,7 +1159,7 @@
         <value>Rhybudd Bydd angen i chi wagio’r ystafelloedd sy’n cael eu hinswleiddio’n gyfan gwbl a thynnu unrhyw garped neu orchudd arall sydd ar y llawr cyn y gellir codi’r estyll.</value>
     </data>
     <data name="FloorInsulationTypicallyLastsString" xml:space="preserve">
-        <value>Disgwylir i ddeunydd inswleiddio lloriau bara tua 42 mlynedd fel arfer</value>
+        <value>Disgwylir i ddeunydd inswleiddio lloriau bara tua {0} mlynedd fel arfer</value>
     </data>
     <data name="Upgrade to high heat retention storage heaters" xml:space="preserve">
         <value>Uwchraddio i wresogyddion stôr sy’n cadw gwres uchel</value>
@@ -2375,10 +2375,10 @@
         <value>Dyma grynodeb o'r amcangyfrif o’ch arbedion ar filiau ynni blynyddol a chost gosod yr &lt;strong&gt;{0} o argymhellion&lt;/strong&gt; y dwedsoch y byddech chi’n eu hystyried ar gyfer eich cartref.</value>
     </data>
     <data name="SolidWallInsulationExpectedToLastString" xml:space="preserve">
-        <value>Disgwylir i inswleiddiad waliau solet bara &lt;b&gt;tua {0} o flynyddoedd&lt;/b&gt;</value>
+        <value>Disgwylir i inswleiddiad waliau solet bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="SolarPanelsTypicallyLastString" xml:space="preserve">
-        <value>Ar y cyfan, disgwylir i baneli haul bara &lt;b&gt;tua {0} o flynyddoedd&lt;/b&gt;</value>
+        <value>Ar y cyfan, disgwylir i baneli haul bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="ReturnToRecommendationsAndActionPlanIfYouNeedToString" xml:space="preserve">
         <value>Gallwch &lt;a href="{0}"&gt;ddychwelyd i’ch argymhellion a'ch cynllun gweithredu&lt;/a&gt; os oes angen.</value>
@@ -2387,7 +2387,7 @@
         <value>Os ydych chi'n poeni am fforddio’ch biliau ynni, mae gan Ofgem &lt;a class="govuk-link" href="{0}" target="_blank"&gt;ganllaw defnyddiol&lt;/a&gt; i'r cynlluniau, y grantiau a'r budd-daliadau a allai fod ar gael ichi.</value>
     </data>
     <data name="NewWindowsTypicallyLastString" xml:space="preserve">
-        <value>Ar y cyfan, disgwylir i ffenestri newydd bara &lt;b&gt;tua {0} o flynyddoedd&lt;/b&gt;</value>
+        <value>Ar y cyfan, disgwylir i ffenestri newydd bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="EPCSuggestsMainHeatingIsLPGBoilerString" xml:space="preserve">
         <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai &lt;strong&gt;bwyler LPG&lt;/strong&gt; yw eich prif system wresogi</value>
@@ -2477,7 +2477,7 @@
         <value>I ddarganfod a ydych chi’n gymwys i gael grant Cynhesrwydd Cynaliadwy, cysylltwch â'ch Awdurdod Lleol sydd i’w weld ar &lt;a class="govuk-link" href="{0}" target="_blank"&gt;https://www.gov.uk/find-local-council&lt;/a&gt; i wirio a ydyn  nhw’n cynnig cyllid.</value>
     </data>
     <data name="GasBoilersTypicallyExpectedToLast" xml:space="preserve">
-        <value>Ar y cyfan, disgwylir i fwyleri nwy newydd bara &lt;b&gt;tua {0} o flynyddoedd&lt;/b&gt;</value>
+        <value>Ar y cyfan, disgwylir i fwyleri nwy newydd bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="GetHelpFindingInstallerOnMCSWebsiteString" xml:space="preserve">
         <value>Gallwch gael help i ddod o hyd i osodwr cymwys pympiau gwres neu baneli haul yn eich ardal chi drwy ymweld â &lt;a class="govuk-link" href="{0}" target="_blank"&gt;gwefan yr MCS.&lt;/a&gt;</value>
@@ -2489,10 +2489,10 @@
         <value>Ar y cyfan, mae gan gartrefi o’ch math chi &lt;strong&gt;fynediad i’r atig.&lt;/strong&gt;</value>
     </data>
     <data name="HeatingControlsTypicallyExpectedToLastString" xml:space="preserve">
-        <value>Ar y cyfan, disgwylir i reolaethau gwres bara &lt;b&gt;tua {0} o flynyddoedd&lt;/b&gt;</value>
+        <value>Ar y cyfan, disgwylir i reolaethau gwres bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="HeatPumpsTypicallyExpectedToLastString" xml:space="preserve">
-        <value>Ar y cyfan, disgwylir i bympiau gwres bara &lt;b&gt;12 - 15 o flynyddoedd&lt;/b&gt;</value>
+        <value>Ar y cyfan, disgwylir i bympiau gwres bara &lt;strong&gt;12 - 15 o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="HelpFindingQualifiedInstallerOnTrustMarkWebsiteString" xml:space="preserve">
         <value>Ar gyfer pob newid arall i'ch eiddo, mynnwch help i ddod o hyd i osodwr cymwys yn eich ardal drwy ymweld â gwefan &lt;a class="govuk-link" href="{0}" target="_blank"&gt;TrustMark.&lt;/a&gt;</value>
@@ -2501,7 +2501,7 @@
         <value>Rydyn ni bob amser yn ceisio gwella hygyrchedd y wefan yma. Os gwelwch chi unrhyw broblemau sydd heb eu rhestru ar y tudalen yma neu os ydych chi’n credu ein bod ni heb fodloni gofynion hygyrchedd, &lt;a class="govuk-link" href="{0}" target="_blank"&gt; rhowch adborth (yn agor mewn tab newydd)&lt;/a&gt;.</value>
     </data>
     <data name="HighHeatRetentionStorageHeatersAreTypicallyExpectedToLastString" xml:space="preserve">
-        <value>Ar y cyfan, disgwylir i  wresogyddion storio sy’n cadw gwres uchel bara &lt;b&gt;tua {0} o flynyddoedd&lt;/b&gt;</value>
+        <value>Ar y cyfan, disgwylir i  wresogyddion storio sy’n cadw gwres uchel bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="Homes built after 1991 were typically built with insulating material between the outer and inner walls." xml:space="preserve">
         <value>Ar y cyfan, cafodd cartrefi a godwyd ar ôl 1991 eu hadeiladu gyda deunydd inswleiddio rhwng y waliau allanol a mewnol.</value>
@@ -2555,7 +2555,7 @@
         <value>Gallwch weld rhagor o wybodaeth am inswleiddiad waliau ceudod ar &lt;a class="govuk-link" target="_blank" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
     </data>
     <data name="LoftInsulationExpectedToLastString" xml:space="preserve">
-        <value>Ar y cyfan, disgwylir i inswleiddiad atig bara &lt;b&gt;tua {0} o flynyddoedd&lt;/b&gt;</value>
+        <value>Ar y cyfan, disgwylir i inswleiddiad atig bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="HomesOfYourTypeTypicallyHaveCavityWallsString" xml:space="preserve">
         <value>Ar y cyfan, mae gan gartrefi o’ch math chi &lt;strong&gt;waliau ceudod.&lt;/strong&gt;</value>
@@ -2582,7 +2582,7 @@
         <value>Ar y cyfan roedd ffenestri mewn cartrefi o’ch math chi &lt;strong&gt;yn cael eu hadeiladu’n wreiddiol â gwydr sengl, ond mae’n bosibl eu bod nhw wedi’u hamnewid.&lt;/strong&gt;</value>
     </data>
     <data name="HotWaterCylinderJacketsTypicallyLastString" xml:space="preserve">
-        <value>Ar y cyfan mae siacedi silindrau dŵr poeth yn para &lt;b&gt;tua {0} o flynyddoedd&lt;/b&gt;</value>
+        <value>Ar y cyfan mae siacedi silindrau dŵr poeth yn para &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="If your home was converted, for example it was a shop or other commercial premises before, it may have been built without insulation." xml:space="preserve">
         <value>Os cafodd eich cartref ei drosi, er enghraifft os oedd yn siop neu’n fangre fasnachol arall o'r blaen, efallai ei fod wedi'i adeiladu heb ei inswleiddio.</value>
@@ -2609,13 +2609,13 @@
         <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod eich eiddo wedi’i adeiladu &lt;strong&gt;ar neu ar ôl 2012.&lt;/strong&gt;</value>
     </data>
     <data name="CavityWallInsulationExpectedToLastString" xml:space="preserve">
-        <value>Disgwylir i inswleiddiad waliau ceudod bara &lt;b&gt;tua {0} o flynyddoedd&lt;/b&gt;</value>
+        <value>Disgwylir i inswleiddiad waliau ceudod bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="WeFoundImprovementsPluralString" xml:space="preserve">
-        <value>Rydym wedi dod o hyd i &lt;b&gt;{0} o welliannau&lt;/b&gt; i chi eu hystyried.</value>
+        <value>Rydym wedi dod o hyd i &lt;strong&gt;{0} o welliannau&lt;/strong&gt; i chi eu hystyried.</value>
     </data>
     <data name="WeFoundImprovementsSingularString" xml:space="preserve">
-        <value>Rydym wedi canfod &lt;b&gt;1 gwelliant a argymhellir&lt;/b&gt; i chi ei ystyried.</value>
+        <value>Rydym wedi canfod &lt;strong&gt;1 gwelliant a argymhellir&lt;/strong&gt; i chi ei ystyried.</value>
     </data>
     <data name="Why do we need to know this" xml:space="preserve">
         <value>Pam fod arnom angen cael gwybod hyn</value>
