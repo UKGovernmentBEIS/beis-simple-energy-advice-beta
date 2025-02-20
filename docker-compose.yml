@@ -14,7 +14,7 @@
       ASPNETCORE_HTTP_PORTS: "80"
     volumes:
       # map the dotnet user-secret folder
-      - $APPDATA/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - $APPDATA/Microsoft/UserSecrets:/home/appuser/.microsoft/usersecrets:ro
     depends_on:
       db:
         condition: service_healthy
