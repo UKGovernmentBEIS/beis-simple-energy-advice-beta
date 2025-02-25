@@ -20,7 +20,7 @@
 <!-- Build number: @(BuildNumberHelper.GetBuildNumber()) -->
 <!-- Server name: @(Environment.MachineName) -->
 
-<html lang="en" class="govuk-template app-html-class">
+<html lang="@CultureInfo.CurrentCulture.TwoLetterISOLanguageName" class="govuk-template app-html-class">
 <head>
     @if (CookieService.HasAcceptedGoogleAnalytics(Context.Request))
     {

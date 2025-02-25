@@ -1118,7 +1118,7 @@
         <value>What you could save</value>
     </data>
     <data name="LoftInsulationExpectedToLastString" xml:space="preserve">
-        <value>Loft insulation is typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
+        <value>Loft insulation is typically expected to last &lt;strong&gt;around {0} years&lt;/strong&gt;</value>
     </data>
     <data name="This could save up to" xml:space="preserve">
         <value>This could save up to</value>
@@ -1175,7 +1175,7 @@
         <value>You have a central heating system with radiators and you do not already have a full set of controls.</value>
     </data>
     <data name="HeatingControlsTypicallyExpectedToLastString" xml:space="preserve">
-        <value>Heating controls are typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
+        <value>Heating controls are typically expected to last &lt;strong&gt;around {0} years&lt;/strong&gt;</value>
     </data>
     <data name="Fit new windows" xml:space="preserve">
         <value>Fit new windows</value>
@@ -1217,10 +1217,10 @@
         <value>Not all buildings are suitable for standard cavity wall insulation. You will need a specialist contractor to inspect your property to work out what insulation options you have.</value>
     </data>
     <data name="CavityWallInsulationExpectedToLastString" xml:space="preserve">
-        <value>Cavity wall insulation is expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
+        <value>Cavity wall insulation is expected to last &lt;strong&gt;around {0} years&lt;/strong&gt;</value>
     </data>
     <data name="£OverLifetimeOfInstallationString" xml:space="preserve">
-        <value>£{0}&lt;span class="govuk-body"&gt;&lt;b&gt; over the lifetime of the installation&lt;/b&gt;&lt;/span&gt;</value>
+        <value>£{0}&lt;span class="govuk-body"&gt;&lt;strong&gt; over the lifetime of the installation&lt;/strong&gt;&lt;/span&gt;</value>
     </data>
     <data name="Insulate your solid walls" xml:space="preserve">
         <value>Insulate your solid walls</value>
@@ -1244,7 +1244,7 @@
         <value>You will need a specialist contractor to assess what the best way is to insulate your walls, and to carry out the work. This is not a DIY job, or one for a general builder.</value>
     </data>
     <data name="SolidWallInsulationExpectedToLastString" xml:space="preserve">
-        <value>Solid wall insulation is expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
+        <value>Solid wall insulation is expected to last &lt;strong&gt;around {0} years&lt;/strong&gt;</value>
     </data>
     <data name="Install a heat pump" xml:space="preserve">
         <value>Install a heat pump</value>
@@ -1268,16 +1268,16 @@
         <value>You are looking to reduce your carbon footprint</value>
     </data>
     <data name="HeatPumpsTypicallyExpectedToLastString" xml:space="preserve">
-        <value>Heat pumps are typically expected to last &lt;b&gt;12 - 15 years&lt;/b&gt;</value>
+        <value>Heat pumps are typically expected to last &lt;strong&gt;12 - 15 years&lt;/strong&gt;</value>
     </data>
     <data name="The running costs of heat pumps depend on a number of factors to do with your heating system and your property. Speak to a heat pump installer to find out more." xml:space="preserve">
         <value>The running costs of heat pumps depend on a number of factors to do with your heating system and your property. Speak to a heat pump installer to find out more.</value>
     </data>
     <data name="PriceRangeForAnAirSourceHeatPumpString" xml:space="preserve">
-        <value>£{0} - £{1} &lt;span class="govuk-body"&gt;&lt;b&gt;for an air source heat pump&lt;/b&gt;&lt;/span&gt;</value>
+        <value>£{0} - £{1} &lt;span class="govuk-body"&gt;&lt;strong&gt;for an air source heat pump&lt;/strong&gt;&lt;/span&gt;</value>
     </data>
     <data name="PriceRangeForAGroundSourceHeatPumpString" xml:space="preserve">
-        <value>£{0} - £{1} &lt;span class="govuk-body"&gt;&lt;b&gt;for a ground source heat pump&lt;/b&gt;&lt;/span&gt;</value>
+        <value>£{0} - £{1} &lt;span class="govuk-body"&gt;&lt;strong&gt;for a ground source heat pump&lt;/strong&gt;&lt;/span&gt;</value>
     </data>
     <data name="Fit solar electric panels" xml:space="preserve">
         <value>Fit solar electric panels</value>
@@ -1298,7 +1298,7 @@
         <value>The savings you get from a solar PV system will depend on many factors, including whether there are people at home during the day using electricity.</value>
     </data>
     <data name="SolarPanelsTypicallyLastString" xml:space="preserve">
-        <value>Solar panels are typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
+        <value>Solar panels are typically expected to last &lt;strong&gt;around {0} years&lt;/strong&gt;</value>
     </data>
     
     <data name="How long could this take to install? 2 DAYS" xml:space="preserve">
@@ -1323,7 +1323,7 @@
         <value>Your property has a suspended timber floor that has not yet been insulated. If you are unsure, a qualified installer will be able to confirm this for you.</value>
     </data>
     <data name="FloorInsulationTypicallyLastsString" xml:space="preserve">
-        <value>Floor insulation is typically expected to last &lt;b&gt;around {0} years</value>
+        <value>Floor insulation is typically expected to last &lt;strong&gt;around {0} years&lt;/strong&gt;</value>
     </data>
     <data name="CautionYou will need to completely empty the rooms that are being insulated, and remove any carpet or other floor covering, before the floor boards can be lifted." xml:space="preserve">
         <value>CautionYou will need to completely empty the rooms that are being insulated, and remove any carpet or other floor covering, before the floor boards can be lifted.</value>
@@ -1356,7 +1356,7 @@
         <value>You have older, manually controlled storage heaters</value>
     </data>
     <data name="HighHeatRetentionStorageHeatersAreTypicallyExpectedToLastString" xml:space="preserve">
-        <value>High heat retention storage heaters are typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
+        <value>High heat retention storage heaters are typically expected to last &lt;strong&gt;around {0} years&lt;/strong&gt;</value>
     </data>
     <data name="If you feel comfortable fitting this yourself, you can buy a British Standard jacket from most DIY shops and fit it snugly around the tank. These jackets will have heavy duty fixings and a flame retardant cover." xml:space="preserve">
         <value>If you feel comfortable fitting this yourself, you can buy a British Standard jacket from most DIY shops and fit it snugly around the tank. These jackets will have heavy duty fixings and a flame retardant cover.</value>
@@ -1377,7 +1377,7 @@
         <value>Recommendation Lifetime</value>
     </data>
     <data name="HotWaterCylinderJacketsTypicallyLastString" xml:space="preserve">
-        <value>Insulating hot water cylinder jackets typically last &lt;b&gt;around {0} years&lt;/b&gt;</value>
+        <value>Insulating hot water cylinder jackets typically last &lt;strong&gt;around {0} years&lt;/strong&gt;</value>
     </data>
     <data name="You may well need to fit new or additional controls when you fit a new gas boiler to comply with building regulations. These will help to maximise the system’s efficiency, saving you even more money." xml:space="preserve">
         <value>You may well need to fit new or additional controls when you fit a new gas boiler to comply with building regulations. These will help to maximise the system’s efficiency, saving you even more money.</value>
@@ -1395,7 +1395,7 @@
         <value>Gas boiler installations, and any work on a gas heating system, can only be carried out by an installer on the Gas Safe Register.</value>
     </data>
     <data name="GasBoilersTypicallyExpectedToLast" xml:space="preserve">
-        <value>New gas boilers are typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
+        <value>New gas boilers are typically expected to last &lt;strong&gt;around {0} years&lt;/strong&gt;</value>
     </data>
     <data name="Based on the information we have collected; it looks like you have some single glazed windows in your home. Double or triple glazed windows are much better at keeping the heat in, so would help" xml:space="preserve">
         <value>Based on the information we have collected; it looks like you have some single glazed windows in your home. Double or triple glazed windows are much better at keeping the heat in, so would help</value>
@@ -1407,7 +1407,7 @@
         <value>Caution</value>
     </data>
     <data name="NewWindowsTypicallyLastString" xml:space="preserve">
-        <value>New windows are typically expected to last &lt;b&gt;around {0} years&lt;/b&gt;</value>
+        <value>New windows are typically expected to last &lt;strong&gt;around {0} years&lt;/strong&gt;</value>
     </data>
     <data name="Download your Action Plan" xml:space="preserve">
         <value>Download your Action Plan</value>
@@ -2563,10 +2563,10 @@
         <value>2012 or newer</value>
     </data>
     <data name="WeFoundImprovementsSingularString" xml:space="preserve">
-        <value>We’ve found &lt;b&gt;1 recommended improvement&lt;/b&gt; for you to consider.</value>
+        <value>We’ve found &lt;strong&gt;1 recommended improvement&lt;/strong&gt; for you to consider.</value>
     </data>
     <data name="WeFoundImprovementsPluralString" xml:space="preserve">
-        <value>We’ve found &lt;b&gt;{0} recommended improvements&lt;/b&gt; for you to consider.</value>
+        <value>We’ve found &lt;strong&gt;{0} recommended improvements&lt;/strong&gt; for you to consider.</value>
     </data>
     <data name="Ground floor" xml:space="preserve">
         <value>Ground floor</value>
@@ -2611,5 +2611,14 @@ device, or a physical control in your home.</value>
     <data name="or" xml:space="preserve">
         <value>or</value>
         <comment>or</comment>
+    </data>
+    <data name="EPCSuggestsSolarElectricPanels" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home &lt;strong&gt;has solar photovoltaic panels installed. &lt;/strong&gt;</value>
+    </data>
+    <data name="EPCSuggestsNoSolarElectricPanels" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests &lt;strong&gt;your home does not have solar photovoltaic panels installed. &lt;/strong&gt;  </value>
+    </data>
+    <data name="SolarElectricPanelsTitleString" xml:space="preserve">
+        <value>Solar Photovoltaic (PV) panels</value>
     </data>
 </root>

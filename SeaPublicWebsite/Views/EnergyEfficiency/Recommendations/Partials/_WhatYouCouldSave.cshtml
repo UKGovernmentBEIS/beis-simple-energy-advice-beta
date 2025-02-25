@@ -7,18 +7,18 @@
     @if (Model.GetCurrentPropertyRecommendation().Key != RecommendationKey.InstallHeatPump)
     {
         <div class="govuk-grid-column-full sea-yearly-savings govuk-!-margin-bottom-2">
-            <span class="govuk-heading-s govuk-!-margin-bottom-0"><b>@SharedLocalizer["This could save up to"]</b></span>
+            <strong class="govuk-heading-s govuk-!-margin-bottom-0">@SharedLocalizer["This could save up to"]</strong>
             <h3 class="govuk-heading-l govuk-!-margin-bottom-1">
                 @SharedLocalizer["£AYearString", @Model.GetCurrentPropertyRecommendation().Saving]
             </h3>
-            <span class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-margin-top-3"><b>@SharedLocalizer["Which adds up to"]</b></span>
+            <strong class="govuk-heading-s govuk-!-margin-bottom-0 govuk-!-margin-top-3">@SharedLocalizer["Which adds up to"]</strong>
             <h3 class="govuk-heading-l govuk-!-margin-bottom-1">
                 @SharedLocalizer["£OverLifetimeOfInstallationString", @Model.GetCurrentPropertyRecommendation().LifetimeSaving]
             </h3>
         </div>
     }
     <div class="govuk-grid-column-full sea-install-costs">
-        <span class="govuk-heading-s govuk-!-margin-bottom-0"><b>@SharedLocalizer["This could cost"]</b></span>
+        <strong class="govuk-heading-s govuk-!-margin-bottom-0">@SharedLocalizer["This could cost"]</strong>
         @if (Model.GetCurrentPropertyRecommendation().Key == RecommendationKey.InstallHeatPump)
         {
             <h3 class="govuk-heading-l govuk-!-margin-bottom-1">
