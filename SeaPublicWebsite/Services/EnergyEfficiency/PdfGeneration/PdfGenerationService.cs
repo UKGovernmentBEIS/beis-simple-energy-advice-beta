@@ -10,16 +10,11 @@ namespace SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 
 public class PdfGenerationService(AuthService authService, PasswordService passwordService)
 {
-    // This function runs a headless chrome browser without a sandbox (--no-sandbox).
-    // This means whatever we run in that browser has access to the server's kernel
-    // There is a ticket to revisit this when we move to BEIS Digital's platform:
-    // https://softwiretech.atlassian.net/browse/BEISSEA-73
     public async Task<Stream> GeneratePdf(string path)
     {
         var launchOptions = new LaunchOptions
         {
-            Headless = true,
-            Args = new[] { "--no-sandbox" }
+            Headless = true
         };
         var browser = await Puppeteer.LaunchAsync(launchOptions);
         var page = await browser.NewPageAsync();
