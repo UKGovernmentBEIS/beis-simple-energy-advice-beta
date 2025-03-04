@@ -42,5 +42,5 @@ USER appuser
 
 WORKDIR /SeaPublicWebsite
 COPY --from=build-env /SeaPublicWebsite/out .
-EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT ["dotnet", "SeaPublicWebsite.dll"]

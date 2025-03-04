@@ -8,10 +8,10 @@
         # This is clever and kind of it, but a bit surprising!
         CONFIGURATION: "Debug"
     ports:
-      - "5001:80"
+      - "5001:8080"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
-      ASPNETCORE_HTTP_PORTS: "80"
+      ASPNETCORE_HTTP_PORTS: "8080"
     volumes:
       # map the dotnet user-secret folder
       - $APPDATA/Microsoft/UserSecrets:/home/appuser/.microsoft/usersecrets:ro
