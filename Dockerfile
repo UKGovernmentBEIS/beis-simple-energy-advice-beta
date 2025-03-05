@@ -37,10 +37,9 @@ RUN dotnet publish -c $CONFIGURATION -o out
 
 # Build runtime image
 FROM base
-RUN groupadd -r appuser && useradd -r -g appuser appuser
-USER appuser
+USER app
 
 WORKDIR /SeaPublicWebsite
 COPY --from=build-env /SeaPublicWebsite/out .
-EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT ["dotnet", "SeaPublicWebsite.dll"]
