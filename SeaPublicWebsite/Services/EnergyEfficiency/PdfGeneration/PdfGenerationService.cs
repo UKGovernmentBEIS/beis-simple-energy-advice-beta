@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Localization;
@@ -14,7 +15,11 @@ public class PdfGenerationService(AuthService authService, PasswordService passw
     {
         var launchOptions = new LaunchOptions
         {
-            Headless = true
+            Headless = true,
+            Args =
+            [
+                "--no-sandbox"
+            ]
         };
         var browser = await Puppeteer.LaunchAsync(launchOptions);
         var page = await browser.NewPageAsync();
