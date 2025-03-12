@@ -36,7 +36,7 @@ public class PropertyDataStoreTests
         
         // Assert
         var endTime = DateTime.Now.ToUniversalTime();
-        Assert.LessOrEqual(startTime, returnedPropertyData.RecommendationsFirstRetrievedAt);
-        Assert.GreaterOrEqual(endTime, returnedPropertyData.RecommendationsFirstRetrievedAt);
+        Assert.That(returnedPropertyData.RecommendationsFirstRetrievedAt, Is.GreaterThanOrEqualTo(startTime));
+        Assert.That(returnedPropertyData.RecommendationsFirstRetrievedAt, Is.LessThanOrEqualTo(endTime));
     }
 }
