@@ -2,7 +2,7 @@
 
 namespace SeaPublicWebsite.BusinessLogic.Models;
 
-public class PropertyData
+public class PropertyData : IEntityWithRowVersioning
 {
     public string Reference { get; set; }
 
@@ -58,6 +58,7 @@ public class PropertyData
     public PropertyData UneditedData { get; set; }
     public bool HasSeenRecommendations { get; set; }
     public bool ReturningUser { get; set; }
+    public uint Version { get; set; }
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; } = new();
 
