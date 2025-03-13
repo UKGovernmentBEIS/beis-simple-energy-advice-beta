@@ -26,3 +26,7 @@ updates:
           - "major"
           - "minor"
           - "patch"
+    ignore:
+      # ensure govuk-frontend doesn't update to 5.x until we're ready
+      - dependency-name: "govuk-frontend"
+        update-types: ['version-update:semver-major']
