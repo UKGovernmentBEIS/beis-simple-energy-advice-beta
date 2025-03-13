@@ -40,9 +40,7 @@ namespace SeaPublicWebsite
                 .ReadFrom.Configuration(context.Configuration)
                 .ReadFrom.Services(services)
                 .WriteTo.Console()
-                .Enrich.FromLogContext()
-                .Enrich.WithEnvironmentName()
-                .Enrich.WithMachineName());
+                .Enrich.FromLogContext());
             List<CultureInfo> supportedCultures = new List<CultureInfo>
             {
                 new CultureInfo("cy"),
