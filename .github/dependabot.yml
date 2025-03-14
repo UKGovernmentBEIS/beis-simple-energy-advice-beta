@@ -13,6 +13,10 @@ updates:
         update-types:
           - "minor"
           - "patch"
+    ignore:
+      # ensure FluentAssertions doesn't update to 8.x as its new license prohibit commercial use
+      - dependency-name: "FluentAssertions"
+        versions: ["8.x"]
 
   - package-ecosystem: "npm"
     directory: "SeaPublicWebsite"
