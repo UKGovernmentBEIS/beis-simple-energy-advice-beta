@@ -17,7 +17,7 @@ namespace SeaPublicWebsite.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "8.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -100,13 +100,14 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("SolidWallsInsulated")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("WallConstruction")
-                        .HasColumnType("integer");
-
-                    b.Property<uint>("xmin")
+                    b.Property<uint>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("xid");
+                        .HasColumnType("xid")
+                        .HasColumnName("xmin");
+
+                    b.Property<int?>("WallConstruction")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -223,16 +224,17 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<decimal?>("Temperature")
                         .HasColumnType("numeric");
 
+                    b.Property<uint>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid")
+                        .HasColumnName("xmin");
+
                     b.Property<int?>("WallConstruction")
                         .HasColumnType("integer");
 
                     b.Property<int?>("YearBuilt")
                         .HasColumnType("integer");
-
-                    b.Property<uint>("xmin")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("xid");
 
                     b.HasKey("PropertyDataId");
 
@@ -283,10 +285,11 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<uint>("xmin")
+                    b.Property<uint>("Version")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("xid");
+                        .HasColumnType("xid")
+                        .HasColumnName("xmin");
 
                     b.HasKey("PropertyRecommendationId");
 

@@ -2,7 +2,7 @@
 
 namespace SeaPublicWebsite.BusinessLogic.Models;
 
-public class PropertyRecommendation
+public class PropertyRecommendation : IEntityWithRowVersioning
 {
     public RecommendationKey Key { get; set; }
     public int MinInstallCost { get; set; }
@@ -13,6 +13,7 @@ public class PropertyRecommendation
     public string Title { get; set; }
     public string Summary { get; set; }
     public RecommendationAction? RecommendationAction { get; set; }
+    public uint Version { get; set; }
     
     public int PropertyDataId { get; set; }
     public PropertyData PropertyData { get; set; }
