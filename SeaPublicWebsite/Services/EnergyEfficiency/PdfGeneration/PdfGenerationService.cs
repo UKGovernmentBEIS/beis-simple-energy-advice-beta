@@ -17,6 +17,10 @@ public class PdfGenerationService(AuthService authService, PasswordService passw
             Headless = true,
             Args =
             [
+                /* Investigated this flag's removal in PC-1760
+                // Due to limitations with running chromium sandboxes in Fargate, we are unable to remove this flag
+                // See GitHub issue: https://github.com/aws/containers-roadmap/issues/2102
+                */ 
                 "--no-sandbox"
             ]
         };
