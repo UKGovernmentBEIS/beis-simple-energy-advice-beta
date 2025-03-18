@@ -22,6 +22,8 @@ updates:
         versions: ["9.*"]
       - dependency-name: "Serilog.Settings.Configuration"
         versions: ["9.*"]
+      - dependency-name: "Microsoft.EntityFrameworkCore.Design"
+        versions: ["9.*"]
 
   - package-ecosystem: "npm"
     directory: "SeaPublicWebsite"
