@@ -10,6 +10,10 @@ namespace SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 
 public class PdfGenerationService(AuthService authService, PasswordService passwordService)
 {
+    /// <summary>
+    ///     Warning: When using this method, ensure you only supply paths to trusted content as it creates a non-sandboxed
+    ///     browser.
+    /// </summary>
     public async Task<Stream> GeneratePdf(string path)
     {
         var launchOptions = new LaunchOptions
@@ -17,10 +21,13 @@ public class PdfGenerationService(AuthService authService, PasswordService passw
             Headless = true,
             Args =
             [
-                /* Investigated this flag's removal in PC-1760
-                // Due to limitations with running chromium sandboxes in Fargate, we are unable to remove this flag
+                /*
+                //'--no-sandbox' is not considered good practice as what is running in this browser can have root access to the container
+                // This is only used here as ECS Tasks on Fargate do not currently support sandboxing
                 // See GitHub issue: https://github.com/aws/containers-roadmap/issues/2102
-                */ 
+                // At present, we aren't concerned about this as we only serve our own content on this browser process
+                // If you are using this method for any future reason, ensure you are only serving trusted content
+                */
                 "--no-sandbox"
             ]
         };
