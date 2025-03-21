@@ -25,7 +25,8 @@ public class PdfGenerationService(AuthService authService, PasswordService passw
                 //'--no-sandbox' is not considered good practice as what is running in this browser can have root access to the container
                 // This is only used here as ECS Tasks on Fargate do not currently support sandboxing
                 // See GitHub issue: https://github.com/aws/containers-roadmap/issues/2102
-                // At present, we aren't concerned about this as we only serve our own content on this browser process
+                // At present, we aren't concerned about this as we only serve our own content on this browser process,
+                // and we don't render unvalidated user input
                 // If you are using this method for any future reason, ensure you are only serving trusted content
                 */
                 "--no-sandbox"
