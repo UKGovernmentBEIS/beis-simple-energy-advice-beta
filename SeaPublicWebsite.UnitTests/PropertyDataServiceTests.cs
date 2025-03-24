@@ -80,6 +80,6 @@ public class PropertyDataServiceTests
         var returnedPropertyData = await underTest.UpdatePropertyDataWithRecommendations("222222");
         
         // Assert
-        Assert.AreEqual(testTime, returnedPropertyData.RecommendationsFirstRetrievedAt);
+        Assert.That(testTime, Is.EqualTo(returnedPropertyData.RecommendationsFirstRetrievedAt));
     }
 }

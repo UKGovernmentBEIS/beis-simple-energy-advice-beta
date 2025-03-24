@@ -11,7 +11,7 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
     public DbSet<Epc> Epc { get; set; }
     public DbSet<PropertyRecommendation> PropertyRecommendations { get; set; }
     public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
-    
+
     public SeaDbContext(DbContextOptions<SeaDbContext> options) : base(options)
     {
     }
@@ -33,7 +33,7 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
             .ValueGeneratedOnAdd();
         modelBuilder.Entity<PropertyData>()
             .HasKey("PropertyDataId");
-        
+
         // Property data row versioning
         AddRowVersionColumn(modelBuilder.Entity<PropertyData>());
 
@@ -41,7 +41,7 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
             .HasIndex(p => p.Reference)
             .IsUnique();
     }
-    
+
     private void SetupPropertyRecommendations(ModelBuilder modelBuilder)
     {
         // Property recommendations primary key
@@ -51,7 +51,7 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
             .ValueGeneratedOnAdd();
         modelBuilder.Entity<PropertyRecommendation>()
             .HasKey("PropertyRecommendationId");
-        
+
         // Property recommendations row versioning
         AddRowVersionColumn(modelBuilder.Entity<PropertyRecommendation>());
     }
@@ -65,7 +65,7 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
             .ValueGeneratedOnAdd();
         modelBuilder.Entity<Epc>()
             .HasKey("Id");
-        
+
         // Epc row versioning
         AddRowVersionColumn(modelBuilder.Entity<Epc>());
     }
@@ -75,13 +75,13 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
         // Set up the PropertyData <-> EPC relationship in the database
         modelBuilder.Entity<Epc>()
             .Property<int>("PropertyDataId");
-        
+
         modelBuilder.Entity<Epc>()
             .HasOne<PropertyData>()
             .WithOne(d => d.Epc)
             .HasForeignKey<Epc>("PropertyDataId")
             .IsRequired();
-        
+
         // Set up the PropertyData <-> UneditedData relationship in the database
         modelBuilder.Entity<PropertyData>()
             .Property<int?>("EditedDataId");
@@ -93,9 +93,12 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
             .OnDelete(DeleteBehavior.Cascade);
     }
 
-    private void AddRowVersionColumn<T>(EntityTypeBuilder<T> builder) where T : class
+    private void AddRowVersionColumn<T>(EntityTypeBuilder<T> builder) where T : class, IEntityWithRowVersioning
     {
-        // This is a PostgreSQL specific implementation of row versioning
-        builder.UseXminAsConcurrencyToken();
+        // Instruct EF to use Postgres specific implementation of row versioning
+        // See https://www.npgsql.org/efcore/modeling/concurrency.html
+        builder
+            .Property(b => b.Version)
+            .IsRowVersion();
     }
 }
