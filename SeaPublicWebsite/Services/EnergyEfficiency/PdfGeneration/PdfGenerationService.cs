@@ -10,16 +10,27 @@ namespace SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
 
 public class PdfGenerationService(AuthService authService, PasswordService passwordService)
 {
-    // This function runs a headless chrome browser without a sandbox (--no-sandbox).
-    // This means whatever we run in that browser has access to the server's kernel
-    // There is a ticket to revisit this when we move to BEIS Digital's platform:
-    // https://softwiretech.atlassian.net/browse/BEISSEA-73
+    /// <summary>
+    ///     Warning: When using this method, ensure you only supply paths to trusted content as it creates a non-sandboxed
+    ///     browser.
+    /// </summary>
     public async Task<Stream> GeneratePdf(string path)
     {
         var launchOptions = new LaunchOptions
         {
             Headless = true,
-            Args = new[] { "--no-sandbox" }
+            Args =
+            [
+                /*
+                //'--no-sandbox' is not considered good practice as what is running in this browser can have root access to the container
+                // This is only used here as ECS Tasks on Fargate do not currently support sandboxing
+                // See GitHub issue: https://github.com/aws/containers-roadmap/issues/2102
+                // At present, we aren't concerned about this as we only serve our own content on this browser process,
+                // and we don't render unvalidated user input
+                // If you are using this method for any future reason, ensure you are only serving trusted content
+                */
+                "--no-sandbox"
+            ]
         };
         var browser = await Puppeteer.LaunchAsync(launchOptions);
         var page = await browser.NewPageAsync();
@@ -56,6 +67,6 @@ public class PdfGenerationService(AuthService authService, PasswordService passw
     private string GetLocalAddress()
     {
         // If the port the application runs on is ever changed this will need to be updated
-        return "http://localhost:80";
+        return "http://localhost:8080";
     }
 }

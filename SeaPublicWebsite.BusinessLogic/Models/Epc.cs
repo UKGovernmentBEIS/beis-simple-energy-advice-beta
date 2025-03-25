@@ -2,7 +2,7 @@
 
 namespace SeaPublicWebsite.BusinessLogic.Models;
 
-public class Epc
+public class Epc : IEntityWithRowVersioning
 {
     public int? LodgementYear { get; set; }
     public PropertyType? PropertyType { get; set; }
@@ -21,6 +21,7 @@ public class Epc
     public GlazingType? GlazingType { get; set; }
     public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
     public SolarElectricPanels? HasSolarElectricPanels { get; set; }
+    public uint Version { get; set; }
 
     public bool ContainsPropertyTypeAndAge()
     {

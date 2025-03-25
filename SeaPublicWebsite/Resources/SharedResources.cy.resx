@@ -1530,68 +1530,98 @@
     <data name="Hide cookie message" xml:space="preserve">
         <value>Cuddio’r neges cwcis</value>
     </data>
-    <data name="Accessibility Statement" xml:space="preserve">
-        <value>Datganiad hygyrchedd</value>
+    <data name="AccessibilityStatementTitleString" xml:space="preserve">
+        <value>Datganiad hygyrchedd ar gyfer Dod o hyd i ffyrdd i arbed ynni yn eich cartref</value>
     </data>
-    <data name="This statement applies to content published on our service." xml:space="preserve">
-        <value>Mae’r datganiad hwn yn berthnasol i gynnwys a gyhoeddir ar ein gwasanaeth.</value>
+    <data name="AccessibilityThisStatementAppliesString" xml:space="preserve">
+        <value>Mae'r datganiad hygyrchedd yma yn gymwys i’r wefan Gwella Effeithlonrwydd Ynni lle mae'r gwasanaeth Dod o hyd i ffyrdd i arbed ynni yn eich cartref wedi’i leoli. Mae'r wefan yma yn cael ei rhedeg gan yr Adran Diogelwch Ynni a Sero Net (DESNZ). Rydyn ni am i gynifer o bobl â phosibl allu defnyddio'r wefan yma. Er enghraifft, mae hyn yn golygu y dylech chi allu:</value>
     </data>
-    <data name="This website is run by the Department for Business, Energy and Industrial Strategy (BEIS). We want as many people as possible to be able to use this website. For example, that means you should be able to:" xml:space="preserve">
-        <value>Mae’r wefan hon yn cael ei rhedeg gan yr Adran Busnes, Ynni a Strategaeth Ddiwydiannol (BEIS). Rydyn ni eisiau i gymaint o bobl ag sy’n bosib allu defnyddio'r wefan hon. Er enghraifft, mae hynny’n golygu y dylech chi allu:</value>
-    </data>
-    <data name="change colours, contrast levels and fonts" xml:space="preserve">
+    <data name="AccessibilityCanChangeColoursString" xml:space="preserve">
         <value>newid lliwiau, lefelau cyferbyniad a ffontiau</value>
     </data>
-    <data name="zoom in up to 200% without the text spilling off the screen" xml:space="preserve">
-        <value>chwyddo i mewn hyd at 200% a bod y testun i gyd yn dal i ffitio ar y sgrin</value>
+    <data name="AccessibilityCanZoomInString" xml:space="preserve">
+        <value>chwyddo i mewn hyd at 300% heb i'r testun ollwng oddi ar y sgrin</value>
     </data>
-    <data name="navigate most of the website using just a keyboard" xml:space="preserve">
-        <value>symud o gwmpas y rhan fwyaf o'r wefan gan ddefnyddio bysellfwrdd yn unig</value>
+    <data name="AccessibilityCanNavigateKeyboardString" xml:space="preserve">
+        <value>llywio'r rhan fwyaf o'r wefan drwy ddefnyddio bysellfwrdd yn unig</value>
     </data>
-    <data name="navigate most of the website using speech recognition software" xml:space="preserve">
-        <value>symud o gwmpas y rhan fwyaf o'r wefan gan ddefnyddio meddalwedd adnabod llais</value>
+    <data name="AccessibilityCanNavigateSpeechString" xml:space="preserve">
+        <value>llywio'r rhan fwyaf o'r wefan drwy ddefnyddio meddalwedd adnabod lleferydd</value>
     </data>
-    <data name="listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)" xml:space="preserve">
-        <value>gwrando ar y rhan fwyaf o'r wefan gan ddefnyddio darllenydd sgrin (gan gynnwys y fersiynau mwyaf diweddar o JAWS, NVDA a VoiceOver)</value>
+    <data name="AccessibilityCanListenString" xml:space="preserve">
+        <value>gwrando ar y rhan fwyaf o'r wefan drwy ddefnyddio darllenydd sgrin (gan gynnwys y fersiynau diweddaraf o JAWS, NVDA a VoiceOver)</value>
     </data>
-    <data name="We’ve also made the website text as simple as possible to understand." xml:space="preserve">
-        <value>Rydyn ni hefyd wedi gwneud testun y wefan mor syml, ac mor hawdd i’w ddeall ag sy’n bosib.</value>
+    <data name="AccessibilitySimpleTextString" xml:space="preserve">
+        <value>Rydyn ni hefyd wedi gwneud testun y wefan mor syml â phosibl i'w ddeall.</value>
     </data>
-    <data name="Reporting accessibility problems with this website" xml:space="preserve">
-        <value>Rhoi gwybod am broblemau hygyrchedd yn ymwneud â'r wefan hon</value>
+    <data name="AccessibilityLimitationsTitleString" xml:space="preserve">
+        <value>Pa mor hygyrch yw'r wefan yma</value>
     </data>
-    <data name="Enforcement procedure" xml:space="preserve">
-        <value>Gweithdrefn gorfodi</value>
+    <data name="AccessibilityPartsNotAccessibleString" xml:space="preserve">
+        <value>Rydyn ni’n gwybod nad yw rhai rhannau o'r wefan yma yn gwbl hygyrch:</value>
     </data>
-    <data name="Technical information about this website’s accessibility" xml:space="preserve">
-        <value>Gwybodaeth dechnegol am hygyrchedd y wefan hon</value>
+    <data name="AccessibilityCantDragonUploadString" xml:space="preserve">
+        <value>Dyw defnyddwyr Dragon Naturally Speaking ddim yn gallu uwchlwytho ffeiliau drwy ddefnyddio gorchmynion llais hysbys</value>
     </data>
-    <data name="The Department for Business, Energy and Industrial Strategy (BEIS) is committed to making its website accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018." xml:space="preserve">
-        <value>Mae’r Adran Busnes, Ynni a Strategaeth Ddiwydiannol (BEIS) wedi ymrwymo i wneud ei gwefan yn hygyrch, yn unol â Rheoliadau Hygyrchedd Cyrff Sector Cyhoeddus (Gwefannau ac Apiau Symudol) (Rhif 2) 2018.</value>
+    <data name="AccessibilityCantVoiceoverFocusString" xml:space="preserve">
+        <value>Dyw iOS Voiceover ddim bob amser yn ffocysu’n gywir ar dudalennau newydd</value>
     </data>
-    <data name="Compliance status" xml:space="preserve">
-        <value>Statws Cydymffurfio</value>
+    <data name="AccessibilityFeedbackTitleString" xml:space="preserve">
+        <value>Adborth a gwybodaeth gysylltu</value>
     </data>
-    <data name="Content that’s not within the scope of the accessibility regulations" xml:space="preserve">
-        <value>Cynnwys nad yw o fewn cwmpas y rheoliadau hygyrchedd</value>
+    <data name="AccessibilityDifferentFormatString" xml:space="preserve">
+        <value>Os oes arnoch chi angen gwybodaeth ar y wefan yma mewn fformat gwahanol fel PDF hygyrch, print bras, hawdd ei ddarllen, recordiad sain neu braille:</value>
     </data>
-    <data name="Not applicable." xml:space="preserve">
-        <value>Ddim yn berthnasol.</value>
+    <data name="AccessibilityContactEmailString" xml:space="preserve">
+        <value>Anfonwch neges ebost: &lt;a class="govuk-link" href="mailto: {0}"&gt;{0}&lt;/a&gt;</value>
     </data>
-    <data name="What we’re doing to improve accessibility" xml:space="preserve">
-        <value>Beth rydyn ni’n ei wneud i wella hygyrchedd</value>
+    <data name="AccessibilityContactNumberString" xml:space="preserve">
+        <value>Ffoniwch: {0}</value>
     </data>
-    <data name="We will fix issues that fail to meet the Web Content Accessibility Guidelines version 2.1 AA standard. We will update this page when issues are fixed." xml:space="preserve">
-        <value>Byddwn yn datrys problemau nad ydynt yn cydymffurfio â safon AA Canllawiau Hygyrchedd Cynnwys y We fersiwn 2.1. Byddwn yn diweddaru’r dudalen hon pan fydd problemau wedi cael eu datrys.</value>
+    <data name="AccessibilityConsiderRequestString" xml:space="preserve">
+        <value>Byddwn yn ystyried eich cais ac yn cysylltu â chi o fewn 10 diwrnod gwaith.</value>
     </data>
-    <data name="Preparation of this accessibility statement" xml:space="preserve">
-        <value>Paratoi’r datganiad hygyrchedd hwn</value>
+    <data name="AccessibilityCannotViewMapString" xml:space="preserve">
+        <value>Os na allwch chi weld y map ar ein tudalen 'cysylltwch â ni', ffoniwch ni ar {0} neu anfonwch neges ebost aton ni yn &lt;a class="govuk-link" href="mailto: {1}"&gt;{1}&lt;/a&gt; i gael cyfarwyddiadau.</value>
     </data>
-    <data name="This statement was prepared on 16 June 2022. It was last reviewed on 16 June 2022." xml:space="preserve">
-        <value>Paratowyd y datganiad hwn ar 16 Mehefin 2022. Cafodd ei adolygu ddiwethaf ar 16 Mehefin 2022.</value>
+    <data name="AccessibilityReportingTitleString" xml:space="preserve">
+        <value>Rhoi gwybod am broblemau hygyrchedd gyda'r wefan yma</value>
     </data>
-    <data name="This website was last tested on 16 June 2022. The test was carried out by a Digital Accessibility Expert." xml:space="preserve">
-        <value>Cafodd y wefan hon ei phrofi ddiwethaf ar 16 Mehefin 2022. Cynhaliwyd y prawf gan Arbenigwr Hygyrchedd Digidol.</value>
+    <data name="AccessibilityEnforcementProcedureTitleString" xml:space="preserve">
+        <value>Gweithdrefn orfodi</value>
+    </data>
+    <data name="AccessibilityTechnicalInformationTitleString" xml:space="preserve">
+        <value>Gwybodaeth dechnegol am hygyrchedd y wefan yma</value>
+    </data>
+    <data name="AccessibilityDesnzCommitmentString" xml:space="preserve">
+        <value>Mae'r Adran Diogelwch Ynni a Sero Net (DESNZ) wedi ymrwymo i wneud ei gwefan yn hygyrch, yn unol â Rheoliadau Hygyrchedd Cyrff Sector Cyhoeddus (Gwefannau a Chymwysiadau Symudol) (Rhif 2) 2018.</value>
+    </data>
+    <data name="AccessibilityComplianceStatusTitleString" xml:space="preserve">
+        <value>Statws cydymffurfio</value>
+    </data>
+    <data name="AccessibilityDisproportionateBurdenTitleString" xml:space="preserve">
+        <value>Baich anghymesur</value>
+    </data>
+    <data name="AccessibilityDragonNaturallyDisproportionateBurdenString" xml:space="preserve">
+        <value>Dim ond drwy ddefnyddio nodwedd grid y llygoden y gall Dragon Naturally Speaking (meddalwedd adnabod lleferydd) uwchlwytho ffeiliau. Credir mai mater parhaus ynglŷn â meddalwedd Dragon Naturally Speaking yw hwn ac mae modd cael rhagor o wybodaeth ar y ddolen ganlynol: &lt;a class="govuk-link" href="{0}" target="_blank"&gt;{0}&lt;/a&gt;.</value>
+    </data>
+    <data name="AccessibilityVoiceOverDisproportionateBurdenString" xml:space="preserve">
+        <value>Gall defnyddwyr Voiceover iOS neidio'n ddigymell i elfen arall yn y rhyngwyneb defnyddwyr, yn arbennig felly yn fuan ar ôl agor sgrin, dewislen neu foddol. Credir mai problem barhaus ynglŷn â meddalwedd Apple Voiceover yw hwn, ac mae modd cael rhagor o wybodaeth ar y ddolen ganlynol: &lt;a class="govuk-link" href="{0}" target="_blank"&gt;{0}&lt;/a&gt;.</value>
+    </data>
+    <data name="AccessibilityDisproportionateBurdenString" xml:space="preserve">
+        <value>Gan mai mater trydydd parti yw hwn, allwn ninnau ddim datrys hyn ac felly mae’n esempt rhag cael ei fodloni o dan y rheoliadau hygyrchedd ac felly mae’n &lt;a class="govuk-link" href="{0}" target="_blank"&gt;faich anghymesurd&lt;/a&gt; o fewn ystyr y rheoliadau hygyrchedd.</value>
+    </data>
+    <data name="AccessibilityStatementPreparationTitleString" xml:space="preserve">
+        <value>Paratoi'r datganiad hygyrchedd yma</value>
+    </data>
+    <data name="AccessibilityStatementPreparationDateString" xml:space="preserve">
+        <value>Cafodd y datganiad yma ei baratoi ar 28/02/2025. Y tro diwethaf iddo gael ei adolygu oedd 28/02/2025.</value>
+    </data>
+    <data name="AccessibilityWebsiteTestDateString" xml:space="preserve">
+        <value>Y tro diwethaf i’r wefan yma gael ei phrofi oedd 27/02/2025. Cafodd y prawf ei gynnal gan Zoonou.</value>
+    </data>
+    <data name="AccessibilityToolString" xml:space="preserve">
+        <value>Defnyddiodd Zoonou &lt;a class="govuk-link" href="{0}" target="_blank"&gt;WCAG-EM&lt;/a&gt; i ddiffinio detholiad cynrychioliadol o dudalennau a dull profi.</value>
     </data>
     <data name="Privacy notice" xml:space="preserve">
         <value>Hysbysiad preifatrwydd</value>
@@ -2275,7 +2305,7 @@
         <value>Mae gwahanol fathau o bwmp gwres a gallwch &lt;a class="govuk-link" href="{0}" target="_blank"&gt;wirio pa un a allai fod yn addas ar gyfer eich cartref chi&lt;/a&gt; ar ein gwasanaeth pympiau gwres pwrpasol.</value>
     </data>
     <data name="CompliantWithWebContentAccessibilityGuidelinesString" xml:space="preserve">
-        <value>Mae'r wefan yma yn cydymffurfio â safon AA &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Canllawiau Hygyrchedd Cynnwys y We, fersiwn 2.1&lt;/a&gt;.</value>
+        <value>Mae'r wefan yma yn cydymffurfio'n rhannol â &lt;a class="govuk-link" href="{0}" target="_blank"&gt;safon AA fersiwn 2.2 o Ganllawiau Hygyrchedd Cynnwys y We&lt;/a&gt;, oherwydd y diffygion cydymffurfio isod.</value>
     </data>
     <data name="CostsAndSavingsBasedOnStandardAssessmentProcedureString" xml:space="preserve">
         <value>Mae'r costau a'r arbedion rydych chi'n eu gweld drwy ddefnyddio'r gwasanaethau ar y wefan yma wedi’u seilio ar safonau a ddatblygwyd i'r Llywodraeth fel ffordd o ddeall sut mae tai a fflatiau yn defnyddio ynni, a sut y gallai defnydd ynni eich cartref chi gael ei wella. Gallwch gael rhagor o wybodaeth am y safonau hyn gyda'r canllawiau sydd wedi’u cyhoeddi ar wefan y &lt;a class="govuk-link" target="_blank" href="{0}"&gt; Weithdrefn Asesu Safonol&lt;span class="govuk-visually-hidden"&gt; (yn agor mewn ffenestr newydd) &lt;/span&gt;&lt;/a&gt;</value>
@@ -2498,7 +2528,7 @@
         <value>Ar gyfer pob newid arall i'ch eiddo, mynnwch help i ddod o hyd i osodwr cymwys yn eich ardal drwy ymweld â gwefan &lt;a class="govuk-link" href="{0}" target="_blank"&gt;TrustMark.&lt;/a&gt;</value>
     </data>
     <data name="HelpUsImproveAccessibilityFeedbackString" xml:space="preserve">
-        <value>Rydyn ni bob amser yn ceisio gwella hygyrchedd y wefan yma. Os gwelwch chi unrhyw broblemau sydd heb eu rhestru ar y tudalen yma neu os ydych chi’n credu ein bod ni heb fodloni gofynion hygyrchedd, &lt;a class="govuk-link" href="{0}" target="_blank"&gt; rhowch adborth (yn agor mewn tab newydd)&lt;/a&gt;.</value>
+        <value>Rydyn ni bob amser yn ceisio gwella hygyrchedd y wefan yma. Os cewch chi unrhyw broblemau sydd heb eu rhestru ar y tudalen yma neu'n credu nad ydyn ni’n bodloni gofynion hygyrchedd, cysylltwch ag: &lt;a class="govuk-link" href="mailto: {0}"&gt;{0}&lt;/a&gt;</value>
     </data>
     <data name="HighHeatRetentionStorageHeatersAreTypicallyExpectedToLastString" xml:space="preserve">
         <value>Ar y cyfan, disgwylir i  wresogyddion storio sy’n cadw gwres uchel bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>

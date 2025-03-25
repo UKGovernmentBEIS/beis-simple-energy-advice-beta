@@ -1733,77 +1733,107 @@
     <data name="Hide cookie message" xml:space="preserve">
         <value>Hide cookie message</value>
     </data>
-    <data name="Accessibility Statement" xml:space="preserve">
-        <value>Accessibility statement</value>
+    <data name="AccessibilityStatementTitleString" xml:space="preserve">
+        <value>Accessibility statement for Find ways to save energy in your home</value>
     </data>
-    <data name="This statement applies to content published on our service." xml:space="preserve">
-        <value>This statement applies to content published on our service.</value>
+    <data name="AccessibilityThisStatementAppliesString" xml:space="preserve">
+        <value>This accessibility statement applies to the Improve Energy Efficiency website where the Find ways to save energy in your home service is located. This website is run by Department for Energy Security and Net Zero (DESNZ). We want as many people as possible to be able to use this website. For example, that means you should be able to:</value>
     </data>
-    <data name="This website is run by the Department for Business, Energy and Industrial Strategy (BEIS). We want as many people as possible to be able to use this website. For example, that means you should be able to:" xml:space="preserve">
-        <value>This website is run by the Department for Business, Energy and Industrial Strategy (BEIS). We want as many people as possible to be able to use this website. For example, that means you should be able to:</value>
-    </data>
-    <data name="change colours, contrast levels and fonts" xml:space="preserve">
+    <data name="AccessibilityCanChangeColoursString" xml:space="preserve">
         <value>change colours, contrast levels and fonts</value>
     </data>
-    <data name="zoom in up to 200% without the text spilling off the screen" xml:space="preserve">
-        <value>zoom in up to 200% without the text spilling off the screen</value>
+    <data name="AccessibilityCanZoomInString" xml:space="preserve">
+        <value>zoom in up to 300% without the text spilling off the screen</value>
     </data>
-    <data name="navigate most of the website using just a keyboard" xml:space="preserve">
+    <data name="AccessibilityCanNavigateKeyboardString" xml:space="preserve">
         <value>navigate most of the website using just a keyboard</value>
     </data>
-    <data name="navigate most of the website using speech recognition software" xml:space="preserve">
+    <data name="AccessibilityCanNavigateSpeechString" xml:space="preserve">
         <value>navigate most of the website using speech recognition software</value>
     </data>
-    <data name="listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)" xml:space="preserve">
+    <data name="AccessibilityCanListenString" xml:space="preserve">
         <value>listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)</value>
     </data>
-    <data name="We’ve also made the website text as simple as possible to understand." xml:space="preserve">
+    <data name="AccessibilitySimpleTextString" xml:space="preserve">
         <value>We’ve also made the website text as simple as possible to understand.</value>
     </data>
     <data name="AbilityNetAdviceLinkString" xml:space="preserve">
         <value>&lt;a class="govuk-link" href="{0}" target="_blank"&gt;AbilityNet&lt;/a&gt; has advice on making your device easier to use if you have a disability.</value>
     </data>
-    <data name="Reporting accessibility problems with this website" xml:space="preserve">
+    <data name="AccessibilityLimitationsTitleString" xml:space="preserve">
+        <value>How accessible this website is</value>
+    </data>
+    <data name="AccessibilityPartsNotAccessibleString" xml:space="preserve">
+        <value>We know some parts of this website are not fully accessible:</value>
+    </data>
+    <data name="AccessibilityCantDragonUploadString" xml:space="preserve">
+        <value>Dragon Naturally Speaking users cannot upload files using known voice commands</value>
+    </data>
+    <data name="AccessibilityCantVoiceoverFocusString" xml:space="preserve">
+        <value>iOS Voiceover does not always focus correctly on new pages</value>
+    </data>
+    <data name="AccessibilityFeedbackTitleString" xml:space="preserve">
+        <value>Feedback and contact information</value>
+    </data>
+    <data name="AccessibilityDifferentFormatString" xml:space="preserve">
+        <value>If you need information on this website in a different format like accessible PDF, large print, easy read, audio recording or braille:</value>
+    </data>
+    <data name="AccessibilityContactEmailString" xml:space="preserve">
+        <value>Email: &lt;a class="govuk-link" href="mailto: {0}"&gt;{0}&lt;/a&gt;</value>
+    </data>
+    <data name="AccessibilityContactNumberString" xml:space="preserve">
+        <value>Call: {0}</value>
+    </data>
+    <data name="AccessibilityConsiderRequestString" xml:space="preserve">
+        <value>We’ll consider your request and get back to you in 10 working days.</value>
+    </data>
+    <data name="AccessibilityCannotViewMapString" xml:space="preserve">
+        <value>If you cannot view the map on our 'contact us' page, call us on {0} or email us at &lt;a class="govuk-link" href="mailto: {1}"&gt;{1}&lt;/a&gt; for directions.</value>
+    </data>
+    <data name="AccessibilityReportingTitleString" xml:space="preserve">
         <value>Reporting accessibility problems with this website</value>
     </data>
     <data name="HelpUsImproveAccessibilityFeedbackString" xml:space="preserve">
-        <value>We’re always looking to improve the accessibility of this website. If you find any problems not listed on this page or think we’re not meeting accessibility requirements please &lt;a class="govuk-link" href="{0}" target="_blank"&gt;give feedback (opens in new tab)&lt;/a&gt;.</value>
+        <value>We’re always looking to improve the accessibility of this website. If you find any problems not listed on this page or think we’re not meeting accessibility requirements, contact: &lt;a class="govuk-link" href="mailto: {0}"&gt;{0}&lt;/a&gt;</value>
     </data>
-    <data name="Enforcement procedure" xml:space="preserve">
+    <data name="AccessibilityEnforcementProcedureTitleString" xml:space="preserve">
         <value>Enforcement procedure</value>
     </data>
-    <data name="Technical information about this website’s accessibility" xml:space="preserve">
+    <data name="AccessibilityTechnicalInformationTitleString" xml:space="preserve">
         <value>Technical information about this website’s accessibility</value>
     </data>
-    <data name="The Department for Business, Energy and Industrial Strategy (BEIS) is committed to making its website accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018." xml:space="preserve">
-        <value>The Department for Business, Energy and Industrial Strategy (BEIS) is committed to making its website accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.</value>
+    <data name="AccessibilityDesnzCommitmentString" xml:space="preserve">
+        <value>The Department for Energy Security and Net Zero (DESNZ) is committed to making its website accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.</value>
     </data>
-    <data name="Compliance status" xml:space="preserve">
+    <data name="AccessibilityComplianceStatusTitleString" xml:space="preserve">
         <value>Compliance status</value>
     </data>
     <data name="CompliantWithWebContentAccessibilityGuidelinesString" xml:space="preserve">
-        <value>This website is compliant with the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Web Content Accessibility Guidelines version 2.1 AA standard&lt;/a&gt;.</value>
+        <value>This website is compliant with the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Web Content Accessibility Guidelines version 2.2 AA standard&lt;/a&gt;, due to the non-compliances listed below.</value>
     </data>
-    <data name="Content that’s not within the scope of the accessibility regulations" xml:space="preserve">
-        <value>Content that’s not within the scope of the accessibility regulations</value>
+    <data name="AccessibilityDisproportionateBurdenTitleString" xml:space="preserve">
+        <value>Disproportionate burden</value>
     </data>
-    <data name="Not applicable." xml:space="preserve">
-        <value>Not applicable.</value>
+    <data name="AccessibilityDragonNaturallyDisproportionateBurdenString" xml:space="preserve">
+        <value>Dragon Naturally Speaking (speech recognition software) can only upload files when using the mouse grid feature. This issue is believed to be an ongoing issue with the Dragon Naturally Speaking software and further information can be found on the following link: &lt;a class="govuk-link" href="{0}" target="_blank"&gt;{0}&lt;/a&gt;.</value>
     </data>
-    <data name="What we’re doing to improve accessibility" xml:space="preserve">
-        <value>What we’re doing to improve accessibility</value>
+    <data name="AccessibilityVoiceOverDisproportionateBurdenString" xml:space="preserve">
+        <value>iOS Voiceover users may spontaneously jump to another UI element, most typically soon after opening a screen, menu or modal. This issue is believed to be an ongoing issue with the apple Voiceover software, and further information can be found on the following link: &lt;a class="govuk-link" href="{0}" target="_blank"&gt;{0}&lt;/a&gt;.</value>
     </data>
-    <data name="We will fix issues that fail to meet the Web Content Accessibility Guidelines version 2.1 AA standard. We will update this page when issues are fixed." xml:space="preserve">
-        <value>We will fix issues that fail to meet the Web Content Accessibility Guidelines version 2.1 AA standard. We will update this page when issues are fixed.</value>
+    <data name="AccessibilityDisproportionateBurdenString" xml:space="preserve">
+        <value>As this is a third-party issue we are unable to fix this and it is therefore exempt from meeting the accessibility regulations and consequently a &lt;a class="govuk-link" href="{0}" target="_blank"&gt;disproportionate burden&lt;/a&gt; within the meaning of the accessibility regulations.</value>
     </data>
-    <data name="Preparation of this accessibility statement" xml:space="preserve">
+    <data name="AccessibilityStatementPreparationTitleString" xml:space="preserve">
         <value>Preparation of this accessibility statement</value>
     </data>
-    <data name="This statement was prepared on 16 June 2022. It was last reviewed on 16 June 2022." xml:space="preserve">
-        <value>This statement was prepared on 16 June 2022. It was last reviewed on 16 June 2022.</value>
+    <data name="AccessibilityStatementPreparationDateString" xml:space="preserve">
+        <value>This statement was prepared on 28/02/2025. It was last reviewed on 28/02/2025.</value>
     </data>
-    <data name="This website was last tested on 16 June 2022. The test was carried out by a Digital Accessibility Expert." xml:space="preserve">
-        <value>This website was last tested on 16 June 2022. The test was carried out by a Digital Accessibility Expert.</value>
+    <data name="AccessibilityWebsiteTestDateString" xml:space="preserve">
+        <value>This website was last tested on 27/02/2025. The test was carried out by Zoonou.</value>
+    </data>
+    <data name="AccessibilityToolString" xml:space="preserve">
+        <value>Zoonou used &lt;a class="govuk-link" href="{0}" target="_blank"&gt;WCAG-EM&lt;/a&gt; to define a representative selection of pages and test approach.</value>
     </data>
     <data name="Privacy notice" xml:space="preserve">
         <value>Privacy notice</value>
