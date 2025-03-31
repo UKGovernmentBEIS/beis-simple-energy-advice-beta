@@ -791,15 +791,18 @@ public class EpbEpcAssessmentDto
         {
             output.Add(HeatingControls.Programmer);
         }
+
         if (MainHeatingControls.Any(s => s.Contains("Room thermostat", StringComparison.OrdinalIgnoreCase)))
         {
             output.Add(HeatingControls.RoomThermostats);
         }
-        if (MainHeatingControls.Any(s => s.Contains("TRV") || s.Contains("Thermostatic Radiator Valve", StringComparison.OrdinalIgnoreCase)))
+
+        if (MainHeatingControls.Any(s =>
+                s.Contains("TRV") || s.Contains("Thermostatic Radiator Valve", StringComparison.OrdinalIgnoreCase)))
         {
             output.Add(HeatingControls.ThermostaticRadiatorValves);
         }
-        
+
         return output.Count > 0 ? output : [HeatingControls.None];
     }
 }
