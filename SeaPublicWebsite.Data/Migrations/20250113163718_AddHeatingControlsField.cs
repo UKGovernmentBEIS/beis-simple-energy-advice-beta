@@ -13,7 +13,7 @@ namespace SeaPublicWebsite.Data.Migrations
                 name: "HeatingControls",
                 table: "PropertyData",
                 type: "integer[]",
-                defaultValue: "{}",
+                defaultValueSql: "ARRAY[]::integer[]",
                 nullable: false);
         }
 
