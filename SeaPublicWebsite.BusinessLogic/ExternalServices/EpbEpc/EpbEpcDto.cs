@@ -67,6 +67,9 @@ public class EpbEpcAssessmentDto
     [JsonProperty(PropertyName = "photoSupply")]
     public int? SolarElectricPanelPercentRoofCoverage { get; set; }
 
+    [JsonProperty(PropertyName = "mainHeatingControls")]
+    public string[] MainHeatingControls { get; set; }
+
     public Epc Parse()
     {
         if (AssessmentType.Equals("SAP", StringComparison.OrdinalIgnoreCase))
@@ -92,7 +95,8 @@ public class EpbEpcAssessmentDto
             GlazingType = ParseGlazingType(),
             EpcHeatingType = ParseHeatingType(),
             HasHotWaterCylinder = ParseHasHotWaterCylinder(),
-            HasSolarElectricPanels = ParseSolarElectricPanelPercentRoofCoverage()
+            HasSolarElectricPanels = ParseSolarElectricPanelPercentRoofCoverage(),
+            HeatingControls = ParseMainHeatingControls()
         };
     }
 
@@ -776,5 +780,26 @@ public class EpbEpcAssessmentDto
         return SolarElectricPanelPercentRoofCoverage > 0
             ? SolarElectricPanels.Yes
             : SolarElectricPanels.No;
+    }
+
+    private List<HeatingControls> ParseMainHeatingControls()
+    {
+        if (MainHeatingControls == null) return [];
+
+        List<HeatingControls> output = [];
+        if (MainHeatingControls.Any(s => s.Contains("Programmer", StringComparison.OrdinalIgnoreCase)))
+        {
+            output.Add(HeatingControls.Programmer);
+        }
+        if (MainHeatingControls.Any(s => s.Contains("Room thermostat", StringComparison.OrdinalIgnoreCase)))
+        {
+            output.Add(HeatingControls.RoomThermostats);
+        }
+        if (MainHeatingControls.Any(s => s.Contains("TRV") || s.Contains("Thermostatic Radiator Valve", StringComparison.OrdinalIgnoreCase)))
+        {
+            output.Add(HeatingControls.ThermostaticRadiatorValves);
+        }
+        
+        return output.Count > 0 ? output : [HeatingControls.None];
     }
 }

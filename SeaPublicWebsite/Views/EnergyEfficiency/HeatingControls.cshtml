@@ -4,6 +4,8 @@
 @using SeaPublicWebsite.BusinessLogic.Models.Enums
 @using SeaPublicWebsite.Controllers
 @using Microsoft.AspNetCore.Mvc.Localization
+@using Notify.Exceptions
+@using SeaPublicWebsite.Helpers
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @model SeaPublicWebsite.Models.EnergyEfficiency.HeatingControlsViewModel;
@@ -33,6 +35,29 @@
                              @SharedLocalizer["SmartHeatingControlsHelpString"]
                          </p>
                 </text>;
+                Func<object, object> blueBannerHint = null;
+                if (Model.Epc?.HeatingControls?.Count > 0)
+                {
+                    blueBannerHint =
+                        @<p class="govuk-body">
+                            @(Model.Epc?.HeatingControls.Count switch
+                                {
+                                    1 => Model.Epc.HeatingControls[0] == HeatingControls.None
+                                        ? SharedLocalizer["NoHeatingControlsEPCHintString", Model.Epc.LodgementYear]
+                                        : SharedLocalizer["OneHeatingControlEPCHintString", Model.Epc.LodgementYear,
+                                            SharedLocalizer[Model.Epc?.HeatingControls[0].HeatingControlEnumToEpcHintResourceKey()]],
+                                    2 => SharedLocalizer["TwoHeatingControlsEPCHintString", Model.Epc.LodgementYear,
+                                        SharedLocalizer[Model.Epc?.HeatingControls[0].HeatingControlEnumToEpcHintResourceKey()],
+                                        SharedLocalizer[Model.Epc?.HeatingControls[1].HeatingControlEnumToEpcHintResourceKey()]],
+                                    3 => SharedLocalizer["ThreeHeatingControlsEPCHintString", Model.Epc.LodgementYear,
+                                        SharedLocalizer[Model.Epc?.HeatingControls[0].HeatingControlEnumToEpcHintResourceKey()],
+                                        SharedLocalizer[Model.Epc?.HeatingControls[1].HeatingControlEnumToEpcHintResourceKey()],
+                                        SharedLocalizer[Model.Epc?.HeatingControls[2].HeatingControlEnumToEpcHintResourceKey()]],
+                                    _ => throw new IndexOutOfRangeException()
+                                }
+                            )
+                        </p>;
+                }
             }
 
             @(await Html.GovUkCheckboxesFor(m => m.HeatingControls,
@@ -53,6 +78,14 @@
                                     SummaryText = SharedLocalizer["HelpMeAnswerHeatingControlsString"].Value,
                                     Html = details
                                 })
+                                @if (blueBannerHint is not null)
+                                {
+                                    @await Html.GovUkInsetText(new InsetTextViewModel
+                                    {
+                                        Classes = "sea-epc-hint",
+                                        Html = blueBannerHint
+                                    })
+                                }
                             </text>
                 },
                 dividerOptions: new Dictionary<HeatingControls, string>

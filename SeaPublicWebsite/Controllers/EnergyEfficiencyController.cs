@@ -1082,6 +1082,7 @@ namespace SeaPublicWebsite.Controllers
             {
                 HeatingControls = propertyData.HeatingControls,
                 Reference = propertyData.Reference,
+                Epc = propertyData.Epc,
                 EntryPoint = entryPoint,
                 BackLink = GetBackUrl(QuestionFlowStep.HeatingControls, propertyData, entryPoint)
             };
