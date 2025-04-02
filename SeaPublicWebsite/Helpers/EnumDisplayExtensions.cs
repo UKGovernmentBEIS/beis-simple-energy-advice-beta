@@ -20,7 +20,7 @@ public static class EnumDisplayExtensions
             HeatingControls.Programmer => "ProgrammerHeatingControlEPCHintString",
             HeatingControls.RoomThermostats => "RoomThermostatHeatingControlEPCHintString",
             HeatingControls.ThermostaticRadiatorValves => "ThermostaticRadiatorValvesHeatingControlEPCHintString",
-            _ => throw new IndexOutOfRangeException()
+            _ => throw new ArgumentOutOfRangeException()
         };
     }
 }

@@ -598,6 +598,27 @@ public class EpcTests
                     [
                         HeatingControls.Programmer, HeatingControls.RoomThermostats,
                         HeatingControls.ThermostaticRadiatorValves
+                    ]),
+                ("Can parse no heating controls in dual system (no relevant entries)",
+                    ["Temperature and Zone control", "Second Temperature and Zone control"],
+                    [HeatingControls.None]),
+                ("Can parse Programmer, Room Thermostats, Thermostatic Radiator Valves (TRVs) in dual system",
+                    [
+                        "Temperature and Zone Control",
+                        "Programmer, Room Thermostats, Thermostatic Radiator Valves (TRVs)"
+                    ],
+                    [
+                        HeatingControls.Programmer, HeatingControls.RoomThermostats,
+                        HeatingControls.ThermostaticRadiatorValves
+                    ]),
+                ("Can parse Programmer, Room Thermostats, Thermostatic Radiator Valves (TRVs) in dual system with duplicate answers (each only outputs once)",
+                    [
+                        "Programmer, Room Thermostats, Thermostatic Radiator Valves (TRVs)",
+                        "Programmer, Room Thermostats, Thermostatic Radiator Valves (TRVs)"
+                    ],
+                    [
+                        HeatingControls.Programmer, HeatingControls.RoomThermostats,
+                        HeatingControls.ThermostaticRadiatorValves
                     ])
             }
             .Select(p => new EpcTestCase(
