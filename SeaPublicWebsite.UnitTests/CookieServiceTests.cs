@@ -82,7 +82,7 @@ public class CookieServiceTests
         var value = testCase.CookieSettings;
         var context = new DefaultHttpContext();
         var request = context.Request;
-        request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderSrting(value)}";
+        request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderString(value)}";
         
         // Act
         var success = CookieService.TryGetCookie<CookieSettings>(request, Key, out var cookie);
@@ -113,7 +113,7 @@ public class CookieServiceTests
         var value = testCase.CookieSettings;
         var context = new DefaultHttpContext();
         var request = context.Request;
-        request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderSrting(value)}";
+        request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderString(value)}";
         
         // Act
         var success = CookieService.CookieSettingsAreUpToDate(request);
@@ -130,7 +130,7 @@ public class CookieServiceTests
         var analytics = value.Version == LatestVersion && value.GoogleAnalytics;
         var context = new DefaultHttpContext();
         var request = context.Request;
-        request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderSrting(value)}";
+        request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderString(value)}";
         
         // Act
         var success = CookieService.HasAcceptedGoogleAnalytics(request);
@@ -154,6 +154,23 @@ public class CookieServiceTests
         // Assert
         bannerState.Should().Be(BannerState.Hide);
     }
+    
+    [TestCase("/password")]
+    [TestCase("/password?returnPath=%2fenergy-efficiency%2fnew-or-returning-user")]
+    public void HidesBannerIfOnPasswordPage(string passwordUrl)
+    {
+        // Arrange
+        var context = new DefaultHttpContext();
+        var request = context.Request;
+        var response = context.Response;
+        request.Path = passwordUrl;
+
+        // Act
+        var bannerState = CookieService.GetAndUpdateBannerState(request, response);
+
+        // Assert
+        bannerState.Should().Be(BannerState.Hide);
+    }
 
     [TestCaseSource(nameof(CookieServiceTestCases))]
     public void ShowsBannerIfSettingsAreOutdatedOrMissing(CookieServiceTestCase testCase)
@@ -163,7 +180,7 @@ public class CookieServiceTests
         var context = new DefaultHttpContext();
         var request = context.Request;
         var response = context.Response;
-        request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderSrting(value)}";
+        request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderString(value)}";
 
         // Precondition: the only cases we are testing are 'Missing cookie' and 'Outdated version'
         Assume.That(!CookieService.CookieSettingsAreUpToDate(request));
@@ -183,7 +200,7 @@ public class CookieServiceTests
         var context = new DefaultHttpContext();
         var request = context.Request;
         var response = context.Response;
-        request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderSrting(value)}";
+        request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderString(value)}";
 
         // Precondition: the only cases we are testing are 'Accepted latest cookies' and 'Rejected analytics and
         // confirmation shown'
@@ -205,7 +222,7 @@ public class CookieServiceTests
         var context = new DefaultHttpContext();
         var request = context.Request;
         var response = context.Response;
-        request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderSrting(value)}";
+        request.Headers.Cookie = $"{Key}={ConvertObjectToHttpHeaderString(value)}";
 
         // Precondition: the only case we are testing is 'Rejected analytics and confirmation not shown'
         Assume.That(CookieService.CookieSettingsAreUpToDate(request));
@@ -223,10 +240,10 @@ public class CookieServiceTests
 
     private void AssertResponseContainsCookie(HttpResponse response, string key, object value)
     {
-        response.Headers.SetCookie.ToString().Should().Contain($"{key}={ConvertObjectToHttpHeaderSrting(value)}");
+        response.Headers.SetCookie.ToString().Should().Contain($"{key}={ConvertObjectToHttpHeaderString(value)}");
     }
 
-    private string ConvertObjectToHttpHeaderSrting(object o)
+    private string ConvertObjectToHttpHeaderString(object o)
     {
         return Uri.EscapeDataString(JsonConvert.SerializeObject(o));
     }
