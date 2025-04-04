@@ -787,6 +787,7 @@ public class EpbEpcAssessmentDto
         if (MainHeatingControls == null) return [];
 
         List<HeatingControls> output = [];
+        
         if (MainHeatingControls.Any(s => s.Contains("Programmer", StringComparison.OrdinalIgnoreCase)))
         {
             output.Add(HeatingControls.Programmer);

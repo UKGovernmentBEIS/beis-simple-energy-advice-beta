@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 using GovUkDesignSystem.ModelBinders;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Localization;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
+using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Resources;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency;
@@ -30,5 +34,32 @@ public class HeatingControlsViewModel : QuestionFlowViewModel
             if (containsExclusiveOption) return HeatingControls.Count == 1;
             return HeatingControls.Count > 0;
         }
+    }
+
+    public string GetHeatingControlsEpcHintTextKey()
+    {
+        if (Epc.HeatingControls.Contains(BusinessLogic.Models.Enums.HeatingControls.None))
+        {
+            return "NoHeatingControlsEPCHintString";
+        }
+                                
+        return Epc.HeatingControls.Count switch
+        {
+            1 => "OneHeatingControlEPCHintString",
+            2 => "TwoHeatingControlsEPCHintString",
+            3 => "ThreeHeatingControlsEPCHintString",
+            _ => throw new ArgumentOutOfRangeException()
+        };
+    }
+
+    public object[] GetHeatingControlsEpcHintTextParams(IHtmlLocalizer<SharedResources> sharedLocalizer)
+    {
+        if (Epc.HeatingControls.Contains(BusinessLogic.Models.Enums.HeatingControls.None))
+        {
+            return [Epc.LodgementYear];
+        }
+        var localisedControls = Epc.HeatingControls.Select(control => sharedLocalizer[control.HeatingControlEnumToEpcHintResourceKey()]);
+                                
+        return [Epc.LodgementYear, ..localisedControls];
     }
 }
