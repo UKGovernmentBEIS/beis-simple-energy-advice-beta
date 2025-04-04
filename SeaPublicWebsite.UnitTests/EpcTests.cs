@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
@@ -573,6 +574,66 @@ public class EpcTests
                 }))
             .ToArray();
 
+    private static readonly EpcTestCase[] HeatingControlsTestCases =
+        new (string Descrption, string[] inputHeatingControls, List<HeatingControls> outputHeatingControls)[]
+            {
+                ("Can parse null", null, []),
+                ("Can parse no heating controls (empty array)", [], [HeatingControls.None]),
+                ("Can parse no heating controls (no relevant entries)", ["fake heating control"],
+                    [HeatingControls.None]),
+                ("Can parse Room Thermostats", ["Room Thermostats"], [HeatingControls.RoomThermostats]),
+                ("Can parse Programmer", ["Programmer"], [HeatingControls.Programmer]),
+                ("Can parse Thermostatic Radiator Valves (TRVs)", ["Thermostatic Radiator Valves"],
+                    [HeatingControls.ThermostaticRadiatorValves]),
+                ("Can parse Programmer, Room Thermostats", ["Programmer, Room Thermostats"],
+                    [HeatingControls.Programmer, HeatingControls.RoomThermostats]),
+                ("Can parse Room Thermostats, Thermostatic Radiator Valves (TRVs)",
+                    ["Thermostatic Radiator Valves (TRVs), Room Thermostats"],
+                    [HeatingControls.RoomThermostats, HeatingControls.ThermostaticRadiatorValves]),
+                ("Can parse Programmer, Thermostatic Radiator Valves (TRVs)",
+                    ["Programmer, Thermostatic Radiator Valves (TRVs)"],
+                    [HeatingControls.Programmer, HeatingControls.ThermostaticRadiatorValves]),
+                ("Can parse Programmer, Room Thermostats, Thermostatic Radiator Valves (TRVs)",
+                    ["Programmer, Room Thermostats, Thermostatic Radiator Valves (TRVs)"],
+                    [
+                        HeatingControls.Programmer, HeatingControls.RoomThermostats,
+                        HeatingControls.ThermostaticRadiatorValves
+                    ]),
+                ("Can parse no heating controls in dual system (no relevant entries)",
+                    ["Temperature and Zone control", "Second Temperature and Zone control"],
+                    [HeatingControls.None]),
+                ("Can parse Programmer, Room Thermostats, Thermostatic Radiator Valves (TRVs) in dual system",
+                    [
+                        "Temperature and Zone Control",
+                        "Programmer, Room Thermostats, Thermostatic Radiator Valves (TRVs)"
+                    ],
+                    [
+                        HeatingControls.Programmer, HeatingControls.RoomThermostats,
+                        HeatingControls.ThermostaticRadiatorValves
+                    ]),
+                ("Can parse Programmer, Room Thermostats, Thermostatic Radiator Valves (TRVs) in dual system with duplicate answers (each only outputs once)",
+                    [
+                        "Programmer, Room Thermostats, Thermostatic Radiator Valves (TRVs)",
+                        "Programmer, Room Thermostats, Thermostatic Radiator Valves (TRVs)"
+                    ],
+                    [
+                        HeatingControls.Programmer, HeatingControls.RoomThermostats,
+                        HeatingControls.ThermostaticRadiatorValves
+                    ])
+            }
+            .Select(p => new EpcTestCase(
+                p.Descrption,
+                new EpbEpcAssessmentDto
+                {
+                    AssessmentType = "RdSAP",
+                    MainHeatingControls = p.inputHeatingControls
+                },
+                new Epc
+                {
+                    HeatingControls = p.outputHeatingControls
+                }))
+            .ToArray();
+
     private static readonly EpcTestCase[] EpcParseTestCases =
         Array.Empty<EpcTestCase>()
             .Concat(AssessmentTypeTestCases)
@@ -593,6 +654,7 @@ public class EpcTests
             .Concat(HeatingTypeTestCases)
             .Concat(HasHotWaterCylinderTestCases)
             .Concat(SolarElectricPanelsTestCases)
+            .Concat(HeatingControlsTestCases)
             .ToArray();
 
     public class EpcTestCase
