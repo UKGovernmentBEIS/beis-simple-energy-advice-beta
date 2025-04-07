@@ -21,6 +21,7 @@ public class Epc : IEntityWithRowVersioning
     public GlazingType? GlazingType { get; set; }
     public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
     public SolarElectricPanels? HasSolarElectricPanels { get; set; }
+    public List<HeatingControls> HeatingControls { get; set; } = [];
     public uint Version { get; set; }
 
     public bool ContainsPropertyTypeAndAge()
