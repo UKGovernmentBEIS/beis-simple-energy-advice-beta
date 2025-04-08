@@ -2705,4 +2705,26 @@
         <value>Paneli Ffotofoltäig Solar (PV)</value>
         <comment>Solar Photovoltaic (PV) panels</comment>
     </data>
+    <data name="NoHeatingControlsEPCHintString" xml:space="preserve">
+        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu &lt;strong&gt;nad oes gan eich cartref reolaethau gwresogi.&lt;/strong&gt;</value>
+    </data>
+    <data name="OneHeatingControlEPCHintString" xml:space="preserve">
+        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu bod gan eich cartref &lt;strong&gt;{1}.&lt;/strong&gt;</value>
+    </data>
+    <data name="TwoHeatingControlsEPCHintString" xml:space="preserve">
+        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu bod gan eich
+cartref &lt;strong&gt;{1}, a {2}.&lt;/strong&gt;</value>
+    </data>
+    <data name="ThreeHeatingControlsEPCHintString" xml:space="preserve">
+        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu bod gan eich cartref &lt;strong&gt;{1}, {2}, a {3}.&lt;/strong&gt;</value>
+    </data>
+    <data name="ThermostaticRadiatorValvesHeatingControlEPCHintString" xml:space="preserve">
+        <value>falfiau rheiddiadur thermostatig (TRVs)</value>
+    </data>
+    <data name="RoomThermostatHeatingControlEPCHintString" xml:space="preserve">
+        <value>thermostatau ystafell</value>
+    </data>
+    <data name="ProgrammerHeatingControlEPCHintString" xml:space="preserve">
+        <value>raglennydd</value>
+    </data>
 </root>

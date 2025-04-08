@@ -17,7 +17,7 @@ namespace SeaPublicWebsite.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.12")
+                .HasAnnotation("ProductVersion", "8.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -78,6 +78,9 @@ namespace SeaPublicWebsite.Data.Migrations
 
                     b.Property<int?>("HasSolarElectricPanels")
                         .HasColumnType("integer");
+
+                    b.Property<int[]>("HeatingControls")
+                        .HasColumnType("integer[]");
 
                     b.Property<int?>("HouseType")
                         .HasColumnType("integer");
