@@ -2651,4 +2651,25 @@ device, or a physical control in your home.</value>
     <data name="SolarElectricPanelsTitleString" xml:space="preserve">
         <value>Solar Photovoltaic (PV) panels</value>
     </data>
+    <data name="ThreeHeatingControlsEPCHintString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home has &lt;strong&gt; {1}, {2}, and {3}.&lt;/strong&gt;</value>
+    </data>
+    <data name="TwoHeatingControlsEPCHintString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home has &lt;strong&gt;{1}, and {2}.&lt;/strong&gt;</value>
+    </data>
+    <data name="OneHeatingControlEPCHintString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home has &lt;strong&gt;{1}.&lt;/strong&gt;</value>
+    </data>
+    <data name="NoHeatingControlsEPCHintString" xml:space="preserve">
+        <value>Your {0} Energy Performance Certificate suggests your home has &lt;strong&gt;no heating controls.&lt;/strong&gt;</value>
+    </data>
+    <data name="ProgrammerHeatingControlEPCHintString" xml:space="preserve">
+        <value>a programmer</value>
+    </data>
+    <data name="RoomThermostatHeatingControlEPCHintString" xml:space="preserve">
+        <value>room thermostats</value>
+    </data>
+    <data name="ThermostaticRadiatorValvesHeatingControlEPCHintString" xml:space="preserve">
+        <value>thermostatic radiator valves (TRVs)</value>
+    </data>
 </root>
