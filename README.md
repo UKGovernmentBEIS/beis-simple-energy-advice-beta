@@ -112,11 +112,6 @@ Fill in the opened `secrets.json` file with:
         "Username": "<REAL_VALUE_HERE>",
         "Password": "<REAL_VALUE_HERE>"
     },
-    
-    "OpenEpc": {
-        "Username": "<REAL_VALUE_HERE>",
-        "Password": "<REAL_VALUE_HERE>"
-    },
 
     "EpbEpc": {
         "Username": "<REAL_VALUE_HERE>",

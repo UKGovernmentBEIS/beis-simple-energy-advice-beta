@@ -53,21 +53,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Conf", "Conf", "{10A4A1C1-7
 		Infrastructure\Metrics\Grafana\Conf\defaults.ini = Infrastructure\Metrics\Grafana\Conf\defaults.ini
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{B72D428D-D0C8-4910-B781-039FEF25523B}"
-	ProjectSection(SolutionItems) = preProject
-		Infrastructure\Logging\README.md = Infrastructure\Logging\README.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logit.io", "Logit.io", "{94B8C042-6AF7-4B9C-93FC-BAA03A1A5492}"
-	ProjectSection(SolutionItems) = preProject
-		Infrastructure\Logging\Logit.io\LogstashPipeline.txt = Infrastructure\Logging\Logit.io\LogstashPipeline.txt
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AlertRules", "AlertRules", "{E6F96C6F-9441-43DD-9E74-B116E5AEC001}"
-	ProjectSection(SolutionItems) = preProject
-		Infrastructure\Logging\Logit.io\AlertRules\WebsiteError.yaml = Infrastructure\Logging\Logit.io\AlertRules\WebsiteError.yaml
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaPublicWebsite.BusinessLogic", "SeaPublicWebsite.BusinessLogic\SeaPublicWebsite.BusinessLogic.csproj", "{52A59A93-AC33-48E1-927D-FFCBB37A330E}"
 EndProject
 Global
@@ -98,8 +83,5 @@ Global
 		{78864A65-55C3-4E60-B099-F9A068083BFC} = {9E875C15-E270-4952-8C83-3D2FA04C9D09}
 		{835C7323-A422-4C2B-9BAE-082A665C338F} = {9E875C15-E270-4952-8C83-3D2FA04C9D09}
 		{10A4A1C1-7187-44FD-ADAD-8FF85B21BFB7} = {78864A65-55C3-4E60-B099-F9A068083BFC}
-		{B72D428D-D0C8-4910-B781-039FEF25523B} = {EE6BCE34-EE65-4B59-9310-3AD1608277BB}
-		{94B8C042-6AF7-4B9C-93FC-BAA03A1A5492} = {B72D428D-D0C8-4910-B781-039FEF25523B}
-		{E6F96C6F-9441-43DD-9E74-B116E5AEC001} = {94B8C042-6AF7-4B9C-93FC-BAA03A1A5492}
 	EndGlobalSection
 EndGlobal

@@ -9,8 +9,6 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SeaPublicWebsite.Data;
-using Serilog;
-using Serilog.Events;
 
 namespace SeaPublicWebsite
 {
@@ -18,13 +16,6 @@ namespace SeaPublicWebsite
     {
         public static void Main(string[] args)
         {
-            // Create a Serilog bootstrap logger
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-                .Enrich.FromLogContext()
-                .WriteTo.Console()
-                .CreateBootstrapLogger();
-
             var builder = WebApplication.CreateBuilder(args);
 
             // Hide that we are using Kestrel for security reasons
@@ -32,13 +23,7 @@ namespace SeaPublicWebsite
 
             var startup = new Startup(builder.Configuration, builder.Environment);
             startup.ConfigureServices(builder.Services);
-
-            // Switch to the full Serilog logger
-            builder.Host.UseSerilog((context, services, configuration) => configuration
-                .ReadFrom.Configuration(context.Configuration)
-                .ReadFrom.Services(services)
-                .WriteTo.Console()
-                .Enrich.FromLogContext());
+            
             List<CultureInfo> supportedCultures =
             [
                 new CultureInfo("cy"),
