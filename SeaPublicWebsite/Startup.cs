@@ -24,7 +24,6 @@ using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
 using SeaPublicWebsite.Services.EnergyEfficiency;
 using SeaPublicWebsite.Services.EnergyEfficiency.PdfGeneration;
-using Serilog;
 
 namespace SeaPublicWebsite;
 
@@ -168,8 +167,6 @@ public class Startup
         app.UseStatusCodePagesWithReExecute("/error/{0}");
 
         app.UseStaticFiles();
-
-        app.UseSerilogRequestLogging();
 
         app.UseRouting();
 

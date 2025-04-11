@@ -108,13 +108,7 @@ Fill in the opened `secrets.json` file with:
 
 ```json
 {
-    "BasicAuth": {
-        "Username": "<REAL_VALUE_HERE>",
-        "Password": "<REAL_VALUE_HERE>"
-    },
-    
-    "OpenEpc": {
-        "Username": "<REAL_VALUE_HERE>",
+    "Auth": {
         "Password": "<REAL_VALUE_HERE>"
     },
 
