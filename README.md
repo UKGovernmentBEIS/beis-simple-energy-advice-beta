@@ -70,7 +70,7 @@ In the case you need to manually trigger an infrastructure deployment, you will 
 
 ### Pre-requisites
 
-- .Net 6 (https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- .Net 8 (https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 - Install EF Core CLI tools (https://docs.microsoft.com/en-us/ef/core/cli/dotnet)
 - Node v14+ (https://nodejs.org/en/)
 - If you're using Rider then you will need to install the ".net core user secrets" plugin
@@ -108,13 +108,7 @@ Fill in the opened `secrets.json` file with:
 
 ```json
 {
-    "BasicAuth": {
-        "Username": "<REAL_VALUE_HERE>",
-        "Password": "<REAL_VALUE_HERE>"
-    },
-    
-    "OpenEpc": {
-        "Username": "<REAL_VALUE_HERE>",
+    "Auth": {
         "Password": "<REAL_VALUE_HERE>"
     },
 
@@ -196,7 +190,7 @@ The following is a list of environment variables required by the application. Ot
 - ASPNETCORE_ENVIRONMENT
   - Set automatically by .NET
 - DOTNET_ENVIRONMENT
-  - Set automatically by .NET   
+  - Set automatically by .NET
 - Auth__Password
 - Bre__Password
 - Bre__Username
@@ -206,16 +200,21 @@ The following is a list of environment variables required by the application. Ot
 - GovUkNotify__ApiKey
 - PostgreSQLConnectionseards
 
-When working with Dev, Staging or Prod environments, the aforementioned variables are set via the [Parameter Store](https://eu-west-2.console.aws.amazon.com/systems-manager/parameters/?region=eu-west-2&tab=Table)
+When working with Dev, Staging or Prod environments, the aforementioned variables are set via the [Parameter Store](https://eu-west-2.console.aws.amazon.com/systems-manager/parameters/?region=eu-west-2&tab=Table), or directly through the Task Definition.
+
+#### appsettings.json
+The base `appsettings.json` will also be partially overwritten by one variant of `appsettings.<ASPNETCORE_ENVIRONMENT>.json`, dependent on the value of `ASPNETCORE_ENVIRONMENT`
+We use the following values:
+- Development (Local)
+- DEV (Dev Environment)
+- Staging (Staging/UAT Environment)
+- Production (Production Environment)
 
 ### Logs
 
-To look at requests made to the server we can check [Logit](https://dashboard.logit.io/) or [AWS CloudWatch](https://eu-west-2.console.aws.amazon.com/cloudwatch/home?region=eu-west-2#home:)
+To look at requests made to the server we can check [AWS CloudWatch](https://eu-west-2.console.aws.amazon.com/cloudwatch/home?region=eu-west-2#home:)
 
-On Logit, you can Launch the Kibana interface and query the logs using [KQL](https://www.elastic.co/guide/en/kibana/7.10/kuery-query.html).
-Logit crendentials are stored in Keeper.
-
-On CloudWatch, you can look at Logs, Alarms and Metrics all displayed in the right-hand menu
+On CloudWatch, you can look at Logs, Alarms and Metrics all displayed in the right-hand menu.
 
 
 ### Google Analytics
