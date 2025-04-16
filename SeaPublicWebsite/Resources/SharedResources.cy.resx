@@ -2414,7 +2414,7 @@
         <value>Gallwch &lt;a href="{0}"&gt;ddychwelyd i’ch argymhellion a'ch cynllun gweithredu&lt;/a&gt; os oes angen.</value>
     </data>
     <data name="OfgemGuideToSchemesAndGrantsString" xml:space="preserve">
-        <value>Os ydych chi'n poeni am fforddio’ch biliau ynni, mae gan Ofgem &lt;a class="govuk-link" href="{0}" target="_blank"&gt;ganllaw defnyddiol&lt;/a&gt; i'r cynlluniau, y grantiau a'r budd-daliadau a allai fod ar gael ichi.</value>
+        <value>Os ydych chi'n poeni am fforddio’ch biliau ynni, mae gan Ofgem &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt;ganllaw defnyddiol (yn agor mewn tab newydd)&lt;/a&gt; i'r cynlluniau, y grantiau a'r budd-daliadau a allai fod ar gael ichi.</value>
     </data>
     <data name="NewWindowsTypicallyLastString" xml:space="preserve">
         <value>Ar y cyfan, disgwylir i ffenestri newydd bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
