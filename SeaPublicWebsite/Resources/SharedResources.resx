@@ -1467,7 +1467,7 @@
         <value>Boiler Upgrade Scheme</value>
     </data>
     <data name="OfgemGuideToSchemesAndGrantsString" xml:space="preserve">
-        <value>If you are worried about affording your energy bills, Ofgem has a &lt;a class="govuk-link" href="{0}" target="_blank"&gt;helpful guide&lt;/a&gt; to the schemes, grants and benefits that may be available to you.</value>
+        <value>If you are worried about affording your energy bills, Ofgem has a &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt;helpful guide (opens in a new tab)&lt;/a&gt; to the schemes, grants and benefits that may be available to you.</value>
     </data>
     <data name="2. Consult with a qualified installer" xml:space="preserve">
         <value>2. Consult with a qualified installer</value>
