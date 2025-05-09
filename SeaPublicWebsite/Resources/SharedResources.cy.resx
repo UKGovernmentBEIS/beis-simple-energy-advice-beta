@@ -1297,7 +1297,7 @@
         <value>Ffyrdd eraill o arbed ynni</value>
     </data>
     <data name="WhenBuyingNewAppliancesUpgradeEnergyLabelsString" xml:space="preserve">
-        <value>Pan fyddwch chi’n prynu offer newydd, beth am uwchraddio i un sy'n defnyddio ynni'n effeithlon - Rhagor o wybodaeth am labeli ynni</value>
+        <value>Pan fyddwch chi’n prynu offer newydd, beth am uwchraddio i un sy'n defnyddio ynni'n effeithlon - &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt; Rhagor o wybodaeth am labeli ynni (yn agor mewn tab newydd)&lt;/a&gt; ar wefan yr Ymddiriedolaeth Arbed Ynni.</value>
     </data>
     <data name="InstallHeatPumpCheckIfHomeSuitableString" xml:space="preserve">
         <value>Gosod pwmp gwres - Edrychwch a ydy eich cartref yn addas</value>
