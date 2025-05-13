@@ -1019,7 +1019,7 @@
         <value>If you’d like to do more to improve the energy efficiency of your home, consider the following:</value>
     </data>
     <data name="WhenBuyingNewAppliancesUpgradeEnergyLabelsString" xml:space="preserve">
-        <value>When buying new appliances, upgrade to an energy efficient one - &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Learn about energy labels&lt;/a&gt;</value>
+        <value>When buying new appliances, upgrade to an energy efficient one - &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt; Learn about energy labels (opens in a new tab)&lt;/a&gt; on the Energy Saving Trust website.</value>
     </data>
     <data name="Install a heat pump – " xml:space="preserve">
         <value>Install a heat pump – </value>
