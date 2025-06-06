@@ -111,6 +111,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
         {
             [JsonProperty(PropertyName = "measures")]
             public Dictionary<string, BreMeasure> Measures { get; set; }
+            [JsonProperty(PropertyName = "notes")]
+            public BreNotes Notes { get; set; }
         }
 
         internal class BreMeasure
@@ -126,6 +128,12 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 
             [JsonProperty(PropertyName = "lifetime")]
             public int Lifetime { get; set; }
+        }
+
+        internal class BreNotes
+        {
+            [JsonProperty(PropertyName = "energy_price_cap")]
+            public string EnergyPriceCap { get; set; }
         }
     }
 }
