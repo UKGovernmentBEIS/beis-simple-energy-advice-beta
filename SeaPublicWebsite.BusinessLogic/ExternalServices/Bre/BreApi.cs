@@ -21,12 +21,12 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
             this.logger = logger;
         }
 
-        public async Task<List<BreRecommendation>> GetRecommendationsForPropertyRequestAsync(BreRequest request)
+        public async Task<BreRecommendationsWithPriceCap> GetRecommendationsWithPriceCapForPropertyRequestAsync(BreRequest request)
         {
             // BRE requests and responses shouldn't contain any sensitive details so we are OK to log them as-is
             logger.LogInformation($"Sending BRE request: {JsonConvert.SerializeObject(request)}");
 
-            BreResponse response = null;
+            BreResponse apiResponse = null;
             try
             {
                 string username = configuration.Username;
@@ -40,7 +40,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 string requestString = JsonConvert.SerializeObject(request);
                 StringContent stringContent = new(requestString);
                 
-                response = await HttpRequestHelper.SendPostRequestAsync<BreResponse>(
+                apiResponse = await HttpRequestHelper.SendPostRequestAsync<BreResponse>(
                     new RequestParameters
                     {
                         BaseAddress = configuration.BaseUrl,
@@ -51,18 +51,23 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 );
                 
                 // BRE requests and responses shouldn't contain any sensitive details so we are OK to log them as-is
-                logger.LogInformation($"Received BRE response: {JsonConvert.SerializeObject(response)}");
-                
-                if (response.Measures is null)
-                {
-                    return new List<BreRecommendation>();
-                }
+                logger.LogInformation($"Received BRE response: {JsonConvert.SerializeObject(apiResponse)}");
 
-                return response
-                    .Measures
-                    .Select(kvp => CreateRecommendation(kvp.Key, kvp.Value))
-                    .Where(r => r != null)
-                    .ToList();
+                var recommendations = apiResponse.Measures switch
+                {
+                    null => [],
+                    _ => apiResponse
+                            .Measures
+                            .Select(kvp => CreateRecommendation(kvp.Key, kvp.Value))
+                            .Where(r => r != null)
+                            .ToList()
+                };
+
+                return new BreRecommendationsWithPriceCap
+                {
+                    Recommendations = recommendations,
+                    EnergyPriceCapInfo = CreateEnergyPriceCapNotes(apiResponse.Notes.EnergyPriceCap)
+                };
             }
             catch (Exception e)
             {
@@ -71,7 +76,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
             }
         }
 
-        private BreRecommendation CreateRecommendation(string measureCode, BreMeasure measure)
+        private BreRecommendation CreateRecommendation(string measureCode, BreMeasure apiMeasure)
         {
             try
             {
@@ -80,21 +85,40 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 {
                     Key = dictEntry.Key,
                     Title = dictEntry.Title,
-                    MinInstallCost = measure.MinInstallationCost,
-                    MaxInstallCost = measure.MaxInstallationCost,
-                    Saving = (int) measure.Saving,
-                    LifetimeSaving = (int) (measure.Lifetime * measure.Saving),
-                    Lifetime = measure.Lifetime,
+                    MinInstallCost = apiMeasure.MinInstallationCost,
+                    MaxInstallCost = apiMeasure.MaxInstallationCost,
+                    Saving = (int) apiMeasure.Saving,
+                    LifetimeSaving = (int) (apiMeasure.Lifetime * apiMeasure.Saving),
+                    Lifetime = apiMeasure.Lifetime,
                     Summary = dictEntry.Summary
                 };
             }
             catch (Exception e)
             {
                 // We would prefer to return some recommendations rather than show the error page to the user.
-                logger.LogError($"There was an error parsing a BRE recommendation. Code: {measureCode} Details: {JsonConvert.SerializeObject(measure)} Error: {e.Message}");
+                logger.LogError($"There was an error parsing a BRE recommendation. Code: {measureCode} Details: {JsonConvert.SerializeObject(apiMeasure)} Error: {e.Message}");
                 return null;
             }
             
+        }
+
+        private BreEnergyPriceCapInfo CreateEnergyPriceCapNotes(string energyPriceCap)
+        {
+            try
+            {
+                var date = DateTime.ParseExact(energyPriceCap, "MMMM yyyy", CultureInfo.InvariantCulture);
+
+                return new BreEnergyPriceCapInfo
+                {
+                    Year = date.Year,
+                    MonthIndex = date.Month - 1 // Month is 1-based, we need 0-based index
+                };
+            } 
+            catch (FormatException e)
+            {
+                logger.LogError($"There was an error parsing the energy price cap date: {energyPriceCap}. Error: {e.Message}");
+                return null;
+            }
         }
 
         private static string GenerateToken(string input)

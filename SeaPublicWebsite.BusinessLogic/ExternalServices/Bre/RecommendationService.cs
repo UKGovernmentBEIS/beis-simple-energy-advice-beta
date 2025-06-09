@@ -6,7 +6,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 {
     public interface IRecommendationService
     {
-        Task<List<BreRecommendation>> GetRecommendationsForPropertyAsync(PropertyData propertyData);
+        Task<BreRecommendationsWithPriceCap> GetRecommendationsWithPriceCapForPropertyAsync(PropertyData propertyData);
     }
 
     public class RecommendationService : IRecommendationService
@@ -120,11 +120,11 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 }
             };
 
-        public async Task<List<BreRecommendation>> GetRecommendationsForPropertyAsync(PropertyData propertyData)
+        public async Task<BreRecommendationsWithPriceCap> GetRecommendationsWithPriceCapForPropertyAsync(PropertyData propertyData)
         {
             BreRequest request = CreateRequest(propertyData);
 
-            return await breApi.GetRecommendationsForPropertyRequestAsync(request);
+            return await breApi.GetRecommendationsWithPriceCapForPropertyRequestAsync(request);
         }
 
         private static BreRequest CreateRequest(PropertyData propertyData)

@@ -25,8 +25,11 @@ public class PropertyDataService
         var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
         if (propertyData.PropertyRecommendations is null || propertyData.PropertyRecommendations.Count == 0)
         {
-            var recommendationsForPropertyAsync = await recommendationService.GetRecommendationsForPropertyAsync(propertyData);
-            propertyData.PropertyRecommendations = recommendationsForPropertyAsync.Select(r => 
+            var recommendationsWithPriceCap = await recommendationService.GetRecommendationsWithPriceCapForPropertyAsync(propertyData);
+            
+            // TODO: put the date info around
+            
+            propertyData.PropertyRecommendations = recommendationsWithPriceCap.Recommendations.Select(r => 
                 new PropertyRecommendation
                 {
                     Key = r.Key,
