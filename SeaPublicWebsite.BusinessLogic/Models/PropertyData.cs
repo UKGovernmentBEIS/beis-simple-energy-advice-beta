@@ -61,6 +61,9 @@ public class PropertyData : IEntityWithRowVersioning
     public uint Version { get; set; }
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; } = new();
+    public bool EnergyPriceCapInfoRequested { get; set; }
+    public int? EnergyPriceCapYear { get; set; }
+    public int? EnergyPriceCapMonthIndex { get; set; }
 
     public bool? HintSolidWalls => YearBuilt?.IsBefore(1930);
     public bool? HintUninsulatedCavityWalls => YearBuilt?.IsBefore(1996);
