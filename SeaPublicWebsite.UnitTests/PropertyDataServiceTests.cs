@@ -55,7 +55,8 @@ public class PropertyDataServiceTests
             UneditedData = new PropertyData(),
             HasSeenRecommendations = false,
             RecommendationsFirstRetrievedAt = dateTime,
-            PropertyRecommendations = null
+            PropertyRecommendations = null,
+            EnergyPriceCapInfoRequested = false
         };
     }
     
@@ -71,8 +72,12 @@ public class PropertyDataServiceTests
     {
         // Arrange
         var testTime = new DateTime(2000, 1, 1);
-        mockRecommendationService.Setup(rs => rs.GetRecommendationsForPropertyAsync(It.IsAny<PropertyData>()))
-            .ReturnsAsync(new List<BreRecommendation>());
+        mockRecommendationService.Setup(rs => rs.GetRecommendationsWithPriceCapForPropertyAsync(It.IsAny<PropertyData>()))
+            .ReturnsAsync(new BreRecommendationsWithPriceCap
+            {
+                Recommendations = [],
+                EnergyPriceCapInfo = null
+            });
         mockPropertyDataStore.Setup(ds => ds.LoadPropertyDataAsync("222222"))
             .ReturnsAsync(InitializePropertyDataWithRecommendationsFirstRetrievedAt(testTime));
         
@@ -81,5 +86,71 @@ public class PropertyDataServiceTests
         
         // Assert
         Assert.That(testTime, Is.EqualTo(returnedPropertyData.RecommendationsFirstRetrievedAt));
+    }
+    
+    [Test]
+    public async Task UpdatePropertyDataWithRecommendations_WhenCalled_SetsEnergyPriceCapInfoRequestedToTrue()
+    {
+        // Arrange
+        mockRecommendationService.Setup(rs => rs.GetRecommendationsWithPriceCapForPropertyAsync(It.IsAny<PropertyData>()))
+            .ReturnsAsync(new BreRecommendationsWithPriceCap
+            {
+                Recommendations = [],
+                EnergyPriceCapInfo = null
+            });
+        mockPropertyDataStore.Setup(ds => ds.LoadPropertyDataAsync("222222"))
+            .ReturnsAsync(InitializePropertyDataWithRecommendationsFirstRetrievedAt(null));
+        
+        // Act
+        var returnedPropertyData = await underTest.UpdatePropertyDataWithRecommendations("222222");
+        
+        // Assert
+        Assert.That(returnedPropertyData.EnergyPriceCapInfoRequested, Is.True);
+    }
+    
+    [Test]
+    public async Task UpdatePropertyDataWithRecommendations_WhenCalledAndResponseHasEnergyPriceCapInfo_ParsesTheInfo()
+    {
+        // Arrange
+        mockRecommendationService.Setup(rs => rs.GetRecommendationsWithPriceCapForPropertyAsync(It.IsAny<PropertyData>()))
+            .ReturnsAsync(new BreRecommendationsWithPriceCap
+            {
+                Recommendations = [],
+                EnergyPriceCapInfo = new BreEnergyPriceCapInfo()
+                {
+                    Year = 2000,
+                    MonthIndex = 1
+                }
+            });
+        mockPropertyDataStore.Setup(ds => ds.LoadPropertyDataAsync("222222"))
+            .ReturnsAsync(InitializePropertyDataWithRecommendationsFirstRetrievedAt(null));
+        
+        // Act
+        var returnedPropertyData = await underTest.UpdatePropertyDataWithRecommendations("222222");
+        
+        // Assert
+        Assert.That(returnedPropertyData.EnergyPriceCapYear, Is.EqualTo(2000));
+        Assert.That(returnedPropertyData.EnergyPriceCapMonthIndex, Is.EqualTo(1));
+    }
+    
+    [Test]
+    public async Task UpdatePropertyDataWithRecommendations_WhenCalledAndResponseHasNoEnergyPriceCapInfo_SetsInfoToNull()
+    {
+        // Arrange
+        mockRecommendationService.Setup(rs => rs.GetRecommendationsWithPriceCapForPropertyAsync(It.IsAny<PropertyData>()))
+            .ReturnsAsync(new BreRecommendationsWithPriceCap
+            {
+                Recommendations = [],
+                EnergyPriceCapInfo = null
+            });
+        mockPropertyDataStore.Setup(ds => ds.LoadPropertyDataAsync("222222"))
+            .ReturnsAsync(InitializePropertyDataWithRecommendationsFirstRetrievedAt(null));
+        
+        // Act
+        var returnedPropertyData = await underTest.UpdatePropertyDataWithRecommendations("222222");
+        
+        // Assert
+        Assert.That(returnedPropertyData.EnergyPriceCapYear, Is.Null);
+        Assert.That(returnedPropertyData.EnergyPriceCapMonthIndex, Is.Null);
     }
 }

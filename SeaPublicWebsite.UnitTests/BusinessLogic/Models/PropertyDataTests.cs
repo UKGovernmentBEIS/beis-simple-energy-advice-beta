@@ -50,7 +50,10 @@ public class PropertyDataTests
             PropertyRecommendations = new List<PropertyRecommendation>
             {
                 new()
-            }
+            },
+            EnergyPriceCapInfoRequested = true,
+            EnergyPriceCapYear = 2000,
+            EnergyPriceCapMonthIndex = 1
         };
     }
 
