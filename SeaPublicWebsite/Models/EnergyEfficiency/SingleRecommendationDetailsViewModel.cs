@@ -10,11 +10,12 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
     {
         public int RecommendationIndex { get; set; }
         public List<PropertyRecommendation> PropertyRecommendations { get; set; }
-        public TagViewModel DisruptionTagViewModel { get; set;  }
-        public TagViewModel DurationTagViewModel { get; set;  }
+        public TagViewModel DisruptionTagViewModel { get; set; }
+        public TagViewModel DurationTagViewModel { get; set; }
 
-        public PropertyRecommendation GetCurrentPropertyRecommendation() => PropertyRecommendations[RecommendationIndex];
-        
+        public PropertyRecommendation GetCurrentPropertyRecommendation() =>
+            PropertyRecommendations[RecommendationIndex];
+
         public EnergyPriceCapInfo EnergyPriceCapInfo { get; set; }
 
         public string GetEnergyPriceCapString(IHtmlLocalizer<SharedResources> sharedLocalizer)

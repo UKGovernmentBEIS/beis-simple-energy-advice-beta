@@ -16,8 +16,8 @@ public class PropertyDataServiceTests
 {
     private Mock<IPropertyDataStore> mockPropertyDataStore;
     private Mock<IRecommendationService> mockRecommendationService;
-    private PropertyDataService underTest ;
-    
+    private PropertyDataService underTest;
+
     private PropertyData InitializePropertyDataWithRecommendationsFirstRetrievedAt(DateTime? dateTime)
     {
         return new PropertyData
@@ -59,7 +59,7 @@ public class PropertyDataServiceTests
             EnergyPriceCapInfoRequested = false
         };
     }
-    
+
     public PropertyDataServiceTests()
     {
         mockPropertyDataStore = new Mock<IPropertyDataStore>();
@@ -68,7 +68,8 @@ public class PropertyDataServiceTests
     }
 
     [Test]
-    public async Task UpdatePropertyDataWithRecommendations_WhenCalledOnReferenceThatAlreadyHasTimestamp_ReturnsPropertyDataWithSameTimestamp()
+    public async Task
+        UpdatePropertyDataWithRecommendations_WhenCalledOnReferenceThatAlreadyHasTimestamp_ReturnsPropertyDataWithSameTimestamp()
     {
         // Arrange
         var testTime = new DateTime(2000, 1, 1);
@@ -80,14 +81,14 @@ public class PropertyDataServiceTests
             });
         mockPropertyDataStore.Setup(ds => ds.LoadPropertyDataAsync("222222"))
             .ReturnsAsync(InitializePropertyDataWithRecommendationsFirstRetrievedAt(testTime));
-        
+
         // Act
         var returnedPropertyData = await underTest.UpdatePropertyDataWithRecommendations("222222");
-        
+
         // Assert
         Assert.That(testTime, Is.EqualTo(returnedPropertyData.RecommendationsFirstRetrievedAt));
     }
-    
+
     [Test]
     public async Task UpdatePropertyDataWithRecommendations_WhenCalled_SetsEnergyPriceCapInfoRequestedToTrue()
     {
@@ -100,14 +101,14 @@ public class PropertyDataServiceTests
             });
         mockPropertyDataStore.Setup(ds => ds.LoadPropertyDataAsync("222222"))
             .ReturnsAsync(InitializePropertyDataWithRecommendationsFirstRetrievedAt(null));
-        
+
         // Act
         var returnedPropertyData = await underTest.UpdatePropertyDataWithRecommendations("222222");
-        
+
         // Assert
         Assert.That(returnedPropertyData.EnergyPriceCapInfoRequested, Is.True);
     }
-    
+
     [Test]
     public async Task UpdatePropertyDataWithRecommendations_WhenCalledAndResponseHasEnergyPriceCapInfo_ParsesTheInfo()
     {
@@ -124,17 +125,18 @@ public class PropertyDataServiceTests
             });
         mockPropertyDataStore.Setup(ds => ds.LoadPropertyDataAsync("222222"))
             .ReturnsAsync(InitializePropertyDataWithRecommendationsFirstRetrievedAt(null));
-        
+
         // Act
         var returnedPropertyData = await underTest.UpdatePropertyDataWithRecommendations("222222");
-        
+
         // Assert
         Assert.That(returnedPropertyData.EnergyPriceCapYear, Is.EqualTo(2000));
         Assert.That(returnedPropertyData.EnergyPriceCapMonthIndex, Is.EqualTo(1));
     }
-    
+
     [Test]
-    public async Task UpdatePropertyDataWithRecommendations_WhenCalledAndResponseHasNoEnergyPriceCapInfo_SetsInfoToNull()
+    public async Task
+        UpdatePropertyDataWithRecommendations_WhenCalledAndResponseHasNoEnergyPriceCapInfo_SetsInfoToNull()
     {
         // Arrange
         mockRecommendationService.Setup(rs => rs.GetRecommendationsWithPriceCapForPropertyAsync(It.IsAny<PropertyData>()))
@@ -145,10 +147,10 @@ public class PropertyDataServiceTests
             });
         mockPropertyDataStore.Setup(ds => ds.LoadPropertyDataAsync("222222"))
             .ReturnsAsync(InitializePropertyDataWithRecommendationsFirstRetrievedAt(null));
-        
+
         // Act
         var returnedPropertyData = await underTest.UpdatePropertyDataWithRecommendations("222222");
-        
+
         // Assert
         Assert.That(returnedPropertyData.EnergyPriceCapYear, Is.Null);
         Assert.That(returnedPropertyData.EnergyPriceCapMonthIndex, Is.Null);

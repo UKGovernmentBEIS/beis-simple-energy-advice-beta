@@ -16,11 +16,12 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 
         [ModelBinder(typeof(GovUkCheckboxBoolBinder))]
         public bool HasEmailAddress { get; set; }
-        
-        [GovUkValidateRequiredIf(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = nameof(ErrorMessages.EmailAddressRequired), 
+
+        [GovUkValidateRequiredIf(ErrorMessageResourceType = typeof(ErrorMessages),
+            ErrorMessageResourceName = nameof(ErrorMessages.EmailAddressRequired),
             IsRequiredPropertyName = nameof(HasEmailAddress))]
         public string EmailAddress { get; set; }
-        
+
         public EnergyPriceCapInfo EnergyPriceCapInfo { get; set; }
 
         public LocalizedHtmlString GetEnergyPriceCapString(IHtmlLocalizer<SharedResources> sharedLocalizer)

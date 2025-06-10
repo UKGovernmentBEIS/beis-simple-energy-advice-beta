@@ -1784,13 +1784,12 @@ public class EnergyEfficiencyController : Controller
 
     private async Task<List<string>> GetDuplicateExpiredEpcIds(IEnumerable<EpcSearchResult> searchResults)
     {
-        var groupings = searchResults.GroupBy(
-            epcSearchResult => new
-            {
-                epcSearchResult.Address1,
-                epcSearchResult.Address2,
-                epcSearchResult.Postcode
-            });
+        var groupings = searchResults.GroupBy(epcSearchResult => new
+        {
+            epcSearchResult.Address1,
+            epcSearchResult.Address2,
+            epcSearchResult.Postcode
+        });
 
         var duplicateGroupings = groupings.Where(grouping => grouping.Count() > 1);
 

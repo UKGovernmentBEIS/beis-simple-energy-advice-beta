@@ -61,21 +61,23 @@ public class PropertyDataTests
     {
         return new PropertyData
         {
-            PropertyRecommendations = new List<PropertyRecommendation>
-            {
+            PropertyRecommendations =
+            [
                 new()
                 {
                     Key = RecommendationKey.InsulateCavityWalls
                 },
+
                 new()
                 {
                     Key = RecommendationKey.InsulateSolidWalls
                 },
+
                 new()
                 {
                     Key = RecommendationKey.AddLoftInsulation
                 }
-            }
+            ]
         };
     }
 
@@ -84,10 +86,10 @@ public class PropertyDataTests
     {
         // Arrange
         var propertyData = InitializePropertyData();
-        
+
         // Act
         propertyData.CreateUneditedData();
-        
+
         // Assert
         foreach (var propertyInfo in propertyData.GetType().GetProperties())
         {
@@ -98,24 +100,24 @@ public class PropertyDataTests
             {
                 continue;
             }
-            
+
             propertyInfo.GetValue(propertyData.UneditedData).Should().NotBeNull();
         }
     }
-    
+
     [Test]
     public void CommitEditsResetsUneditedData()
     {
         // Arrange
         var propertyData = InitializePropertyData();
-        
+
         // Act
         propertyData.CommitEdits();
-        
+
         // Assert
         propertyData.UneditedData.Should().BeNull();
     }
-    
+
     [Test]
     public void CommitEditsResetsPropertyRecommendationsIfThereIsAChange()
     {
@@ -123,14 +125,14 @@ public class PropertyDataTests
         var propertyData = InitializePropertyData();
         propertyData.CreateUneditedData();
         propertyData.WallConstruction = null;
-        
+
         // Act
         propertyData.CommitEdits();
-        
+
         // Assert
         propertyData.PropertyRecommendations.Should().BeNullOrEmpty();
     }
-    
+
     [Test]
     public void CommitEditsKeepsPropertyRecommendationsIfThereAreNoChange()
     {
@@ -138,10 +140,10 @@ public class PropertyDataTests
         var propertyData = InitializePropertyData();
         propertyData.CreateUneditedData();
         var previousRecommendations = propertyData.PropertyRecommendations;
-        
+
         // Act
         propertyData.CommitEdits();
-        
+
         // Assert
         propertyData.PropertyRecommendations.Should().Equal(previousRecommendations);
     }
@@ -154,11 +156,11 @@ public class PropertyDataTests
         {
             YearBuilt = YearBuilt.From1900To1929
         };
-        
+
         // Assert
         propertyData.HintSolidWalls.Should().BeTrue();
     }
-    
+
     [Test]
     public void ShowCavityWallsHintIfBuiltAfter1930()
     {
@@ -167,11 +169,11 @@ public class PropertyDataTests
         {
             YearBuilt = YearBuilt.From1930To1949
         };
-        
+
         // Assert
         propertyData.HintSolidWalls.Should().BeFalse();
     }
-    
+
     [Test]
     public void DoNotShowWallsHintIfNoYearBuilt()
     {
@@ -180,11 +182,11 @@ public class PropertyDataTests
         {
             YearBuilt = null
         };
-        
+
         // Assert
         propertyData.HintSolidWalls.Should().BeNull();
     }
-    
+
     [Test]
     public void ShowUninsulatedCavityWallsHintIfBuiltBefore1996()
     {
@@ -193,11 +195,11 @@ public class PropertyDataTests
         {
             YearBuilt = YearBuilt.From1991To1995
         };
-        
+
         // Assert
         propertyData.HintUninsulatedCavityWalls.Should().BeTrue();
     }
-    
+
     [Test]
     public void ShowInsulatedCavityWallsHintIfBuiltAfter1996()
     {
@@ -206,11 +208,11 @@ public class PropertyDataTests
         {
             YearBuilt = YearBuilt.From1996To2002
         };
-        
+
         // Assert
         propertyData.HintUninsulatedCavityWalls.Should().BeFalse();
     }
-    
+
     [Test]
     public void DoNotShowCavityWallsInsulatedHintIfNoYearBuilt()
     {
@@ -219,11 +221,11 @@ public class PropertyDataTests
         {
             YearBuilt = null
         };
-        
+
         // Assert
         propertyData.HintUninsulatedCavityWalls.Should().BeNull();
     }
-    
+
     [Test]
     public void ShowSuspendedTimberFloorHintIfBuiltBefore1967()
     {
@@ -232,11 +234,11 @@ public class PropertyDataTests
         {
             YearBuilt = YearBuilt.From1950To1966
         };
-        
+
         // Assert
         propertyData.HintSuspendedTimber.Should().BeTrue();
     }
-    
+
     [Test]
     public void ShowSolidConcreteFloorHintIfBuiltAfter1967()
     {
@@ -245,11 +247,11 @@ public class PropertyDataTests
         {
             YearBuilt = YearBuilt.From1967To1975
         };
-        
+
         // Assert
         propertyData.HintSuspendedTimber.Should().BeFalse();
     }
-    
+
     [Test]
     public void DoNotShowFloorHintIfNoYearBuilt()
     {
@@ -258,11 +260,11 @@ public class PropertyDataTests
         {
             YearBuilt = null
         };
-        
+
         // Assert
         propertyData.HintSuspendedTimber.Should().BeNull();
     }
-    
+
     [Test]
     public void ShowUninsulatedFloorHintIfBuiltBefore1996()
     {
@@ -271,11 +273,11 @@ public class PropertyDataTests
         {
             YearBuilt = YearBuilt.From1991To1995
         };
-        
+
         // Assert
         propertyData.HintUninsulatedFloor.Should().BeTrue();
     }
-    
+
     [Test]
     public void ShowInsulatedFloorHintIfBuiltAfter1996()
     {
@@ -284,11 +286,11 @@ public class PropertyDataTests
         {
             YearBuilt = YearBuilt.From1996To2002
         };
-        
+
         // Assert
         propertyData.HintUninsulatedFloor.Should().BeFalse();
     }
-    
+
     [Test]
     public void DoNotShowFloorInsulationHintIfNoYearBuilt()
     {
@@ -297,11 +299,11 @@ public class PropertyDataTests
         {
             YearBuilt = null
         };
-        
+
         // Assert
         propertyData.HintUninsulatedFloor.Should().BeNull();
     }
-    
+
     [Test]
     public void ShowLoftAccessHintIfPropertyIsHouseOrBungalow()
     {
@@ -319,7 +321,7 @@ public class PropertyDataTests
         propertyData1.HintHaveLoftAndAccess.Should().BeTrue();
         propertyData2.HintHaveLoftAndAccess.Should().BeTrue();
     }
-    
+
     [Test]
     public void ShowNoLoftAccessHintIfPropertyIsFlat()
     {
@@ -332,7 +334,7 @@ public class PropertyDataTests
         // Assert
         propertyData.HintHaveLoftAndAccess.Should().BeFalse();
     }
-    
+
     [Test]
     public void ShowUninsulatedRoofHintIfBuiltBefore2012()
     {
@@ -341,11 +343,11 @@ public class PropertyDataTests
         {
             YearBuilt = YearBuilt.From2007To2011
         };
-        
+
         // Assert
         propertyData.HintUninsulatedRoof.Should().BeTrue();
     }
-    
+
     [Test]
     public void ShowInsulatedRoofHintIfBuiltAfter2012()
     {
@@ -354,11 +356,11 @@ public class PropertyDataTests
         {
             YearBuilt = YearBuilt.From2012ToPresent
         };
-        
+
         // Assert
         propertyData.HintUninsulatedRoof.Should().BeFalse();
     }
-    
+
     [Test]
     public void DoNotShowRoofInsulationHintIfNoYearBuilt()
     {
@@ -367,11 +369,11 @@ public class PropertyDataTests
         {
             YearBuilt = null
         };
-        
+
         // Assert
         propertyData.HintUninsulatedRoof.Should().BeNull();
     }
-    
+
     [Test]
     public void ShowSingleGlazingHintIfBuiltBefore1983()
     {
@@ -380,11 +382,11 @@ public class PropertyDataTests
         {
             YearBuilt = YearBuilt.From1976To1982
         };
-        
+
         // Assert
         propertyData.HintSingleGlazing.Should().BeTrue();
     }
-    
+
     [Test]
     public void ShowDoubleOrTripleGlazingHintIfBuiltAfter1983()
     {
@@ -393,11 +395,11 @@ public class PropertyDataTests
         {
             YearBuilt = YearBuilt.From1983To1990
         };
-        
+
         // Assert
         propertyData.HintSingleGlazing.Should().BeFalse();
     }
-    
+
     [Test]
     public void DoNotShowGlazingHintIfNoYearBuilt()
     {
@@ -406,11 +408,11 @@ public class PropertyDataTests
         {
             YearBuilt = null
         };
-        
+
         // Assert
         propertyData.HintSingleGlazing.Should().BeNull();
     }
-    
+
     [Test]
     public void ShowHasOutdoorSpaceHintIfPropertyIsHouseOrBungalow()
     {
@@ -428,7 +430,7 @@ public class PropertyDataTests
         propertyData1.HintHasOutdoorSpace.Should().BeTrue();
         propertyData2.HintHasOutdoorSpace.Should().BeTrue();
     }
-    
+
     [Test]
     public void ShowNoOutdoorSpaceHintIfPropertyIsFlat()
     {
@@ -466,18 +468,18 @@ public class PropertyDataTests
                 }
             }
         };
-        
+
         // Assert
         propertyData1.ShowAltRadiatorPanels.Should().BeTrue();
         propertyData2.ShowAltRadiatorPanels.Should().BeTrue();
     }
-    
+
     [Test]
     public void DoNotShowAlternativeRecommendationRadiatorPanelsIfUserShouldNotInsulateTheirWalls()
     {
         // Arrange
         var propertyData = new PropertyData();
-        
+
         // Assert
         propertyData.ShowAltRadiatorPanels.Should().BeFalse();
     }
@@ -490,11 +492,11 @@ public class PropertyDataTests
         {
             HeatingType = HeatingType.GasBoiler
         };
-        
+
         // Assert
         propertyData.ShowAltHeatPump.Should().BeTrue();
     }
-    
+
     [Test]
     public void DoNotShowAlternativeRecommendationHeatPumpIfUserHeatingTypeIsHeatPump()
     {
@@ -503,11 +505,11 @@ public class PropertyDataTests
         {
             HeatingType = HeatingType.HeatPump
         };
-        
+
         // Assert
         propertyData.ShowAltHeatPump.Should().BeFalse();
     }
-    
+
     [Test]
     public void ShowAlternativeRecommendationForFloorIfUserHasUninsulatedFloor()
     {
@@ -516,11 +518,11 @@ public class PropertyDataTests
         {
             FloorInsulated = FloorInsulated.No
         };
-        
+
         // Assert
         propertyData.ShowAltDraughtProofFloors.Should().BeTrue();
     }
-    
+
     [Test]
     public void DoNotShowAlternativeRecommendationForFloorIfUserHasInsulatedFloor()
     {
@@ -529,11 +531,11 @@ public class PropertyDataTests
         {
             FloorInsulated = FloorInsulated.Yes
         };
-        
+
         // Assert
         propertyData.ShowAltDraughtProofFloors.Should().BeFalse();
     }
-    
+
     [Test]
     public void ShowAlternativeRecommendationForGlazingIfUserHasAtLeastOneSingleGlazedWindow()
     {
@@ -546,12 +548,12 @@ public class PropertyDataTests
         {
             GlazingType = GlazingType.Both
         };
-        
+
         // Assert
         propertyData1.ShowAltDraughtProofWindowsAndDoors.Should().BeTrue();
         propertyData2.ShowAltDraughtProofWindowsAndDoors.Should().BeTrue();
     }
-    
+
     [Test]
     public void DoNotShowAlternativeRecommendationForGlazingIfUserHasDoubleOrTripleGlazing()
     {
@@ -560,11 +562,11 @@ public class PropertyDataTests
         {
             GlazingType = GlazingType.DoubleOrTripleGlazed
         };
-        
+
         // Assert
         propertyData.ShowAltDraughtProofWindowsAndDoors.Should().BeFalse();
     }
-    
+
     [Test]
     public void ShowAlternativeRecommendationForLoftIfUserHasAccessibleLoft()
     {
@@ -573,11 +575,11 @@ public class PropertyDataTests
         {
             LoftAccess = LoftAccess.Yes
         };
-        
+
         // Assert
         propertyData.ShowAltDraughtProofLoftAccess.Should().BeTrue();
     }
-    
+
     [Test]
     public void DoNotShowAlternativeRecommendationForLoftIfUserDoesNotHaveAccessibleLoft()
     {
@@ -586,7 +588,7 @@ public class PropertyDataTests
         {
             LoftAccess = LoftAccess.No
         };
-        
+
         // Assert
         propertyData.ShowAltDraughtProofLoftAccess.Should().BeFalse();
     }
@@ -596,62 +598,62 @@ public class PropertyDataTests
     {
         // Arrange
         var propertyData = PropertyDataWithRecommendations();
-        
+
         // Act
         var key = propertyData.GetFirstRecommendationKey();
-        
+
         // Assert
         key.Should().Be(RecommendationKey.InsulateCavityWalls);
     }
-    
+
     [Test]
     public void CanGetLastRecommendationKey()
     {
         // Arrange
         var propertyData = PropertyDataWithRecommendations();
-        
+
         // Act
         var key = propertyData.GetLastRecommendationKey();
-        
+
         // Assert
         key.Should().Be(RecommendationKey.AddLoftInsulation);
     }
-    
+
     [Test]
     public void CanGetNextRecommendationKey()
     {
         // Arrange
         var propertyData = PropertyDataWithRecommendations();
-        
+
         // Act
         var key = propertyData.GetNextRecommendationKey(RecommendationKey.InsulateCavityWalls);
-        
+
         // Assert
         key.Should().Be(RecommendationKey.InsulateSolidWalls);
     }
-    
+
     [Test]
     public void CanGetPreviousRecommendationKey()
     {
         // Arrange
         var propertyData = PropertyDataWithRecommendations();
-        
+
         // Act
         var key = propertyData.GetPreviousRecommendationKey(RecommendationKey.InsulateSolidWalls);
-        
+
         // Assert
         key.Should().Be(RecommendationKey.InsulateCavityWalls);
     }
-    
+
     [Test]
     public void CanGetRecommendationIndex()
     {
         // Arrange
         var propertyData = PropertyDataWithRecommendations();
-        
+
         // Act
         var index = propertyData.GetRecommendationIndex(RecommendationKey.AddLoftInsulation);
-        
+
         // Assert
         index.Should().Be(2);
     }

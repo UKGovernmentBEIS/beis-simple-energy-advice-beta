@@ -9,15 +9,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
         Task<BreRecommendationsWithPriceCap> GetRecommendationsWithPriceCapForPropertyAsync(PropertyData propertyData);
     }
 
-    public class RecommendationService : IRecommendationService
+    public class RecommendationService(BreApi breApi) : IRecommendationService
     {
-        private readonly BreApi breApi;
-
-        public RecommendationService(BreApi breApi)
-        {
-            this.breApi = breApi;
-        }
-
         public static readonly Dictionary<string, BreRecommendation> RecommendationDictionary =
             new()
             {
@@ -129,42 +122,43 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
 
         private static BreRequest CreateRequest(PropertyData propertyData)
         {
-            BrePropertyType brePropertyType = GetBrePropertyType(propertyData.PropertyType.Value);
+            var brePropertyType = GetBrePropertyType(propertyData.PropertyType.Value);
 
-            BreBuiltForm breBuiltForm =
+            var breBuiltForm =
                 GetBreBuiltForm(propertyData.PropertyType.Value, propertyData.HouseType, propertyData.BungalowType);
 
-            BreFlatLevel? breFlatLevel = GetBreFlatLevel(propertyData.PropertyType.Value, propertyData.FlatType);
+            var breFlatLevel = GetBreFlatLevel(propertyData.PropertyType.Value, propertyData.FlatType);
 
-            string breConstructionDate = GetBreConstructionDate(propertyData.YearBuilt, propertyData.WallConstruction, propertyData.CavityWallsInsulated, propertyData.Epc?.ConstructionAgeBand);
+            var breConstructionDate = GetBreConstructionDate(propertyData.YearBuilt, propertyData.WallConstruction,
+                propertyData.CavityWallsInsulated, propertyData.Epc?.ConstructionAgeBand);
 
-            BreWallType breWallType = GetBreWallType(propertyData.WallConstruction.Value,
+            var breWallType = GetBreWallType(propertyData.WallConstruction.Value,
                 propertyData.SolidWallsInsulated,
                 propertyData.CavityWallsInsulated);
 
-            BreRoofType? breRoofType = GetBreRoofType(propertyData.RoofConstruction, propertyData.LoftSpace, 
+            var breRoofType = GetBreRoofType(propertyData.RoofConstruction, propertyData.LoftSpace,
                 propertyData.LoftAccess, propertyData.RoofInsulated);
 
-            BreGlazingType breGlazingType = GetBreGlazingType(propertyData.GlazingType.Value);
+            var breGlazingType = GetBreGlazingType(propertyData.GlazingType.Value);
 
-            BreHeatingSystem breHeatingSystem =
+            var breHeatingSystem =
                 GetBreHeatingSystem(propertyData.HeatingType.Value, propertyData.OtherHeatingType);
 
             var breHeatingControls = GetBreHeatingControls(propertyData.HeatingControls);
 
-            bool? breHotWaterCylinder = GetBreHotWaterCylinder(propertyData.HasHotWaterCylinder);
+            var breHotWaterCylinder = GetBreHotWaterCylinder(propertyData.HasHotWaterCylinder);
 
-            BreHeatingPatternType breHeatingPatternType = GetBreHeatingPatternType(propertyData.HeatingPattern.Value,
+            var breHeatingPatternType = GetBreHeatingPatternType(propertyData.HeatingPattern.Value,
                 propertyData.HoursOfHeatingEvening, propertyData.HoursOfHeatingEvening);
 
-            int[] breNormalDaysOffHours =
+            var breNormalDaysOffHours =
                 GetBreNormalDaysOffHours(propertyData.HoursOfHeatingMorning, propertyData.HoursOfHeatingEvening);
 
-            BreFloorType? breFloorType = GetBreFloorType(propertyData.FloorConstruction, propertyData.FloorInsulated);
+            var breFloorType = GetBreFloorType(propertyData.FloorConstruction, propertyData.FloorInsulated);
 
-            bool? breOutsideSpace = GetBreOutsideSpace(propertyData.HasOutdoorSpace);
+            var breOutsideSpace = GetBreOutsideSpace(propertyData.HasOutdoorSpace);
 
-            bool? brePvPanels = GetBrePvPanels(propertyData.SolarElectricPanels);
+            var brePvPanels = GetBrePvPanels(propertyData.SolarElectricPanels);
 
             BreRequest request = new(
                 brePropertyType: brePropertyType,
@@ -197,7 +191,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 PropertyType.Bungalow => BrePropertyType.Bungalow,
                 // peer-reviewed assumption:
                 PropertyType.ApartmentFlatOrMaisonette => BrePropertyType.Flat,
-                _ => throw new ArgumentNullException()
+                _ => throw new ArgumentNullException(nameof(propertyType))
             };
         }
 
@@ -214,7 +208,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                     HouseType.EndTerrace => BreBuiltForm.EndTerrace,
                     //peer-reviewed assumption:
                     HouseType.Terraced => BreBuiltForm.MidTerrace,
-                    _ => throw new ArgumentOutOfRangeException()
+                    _ => throw new ArgumentOutOfRangeException(nameof(houseType))
                 },
                 PropertyType.Bungalow => bungalowType switch
                 {
@@ -224,42 +218,41 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                     BungalowType.EndTerrace => BreBuiltForm.EndTerrace,
                     //peer-reviewed assumption:
                     BungalowType.Terraced => BreBuiltForm.MidTerrace,
-                    _ => throw new ArgumentOutOfRangeException()
+                    _ => throw new ArgumentOutOfRangeException(nameof(bungalowType))
                 },
                 PropertyType.ApartmentFlatOrMaisonette =>
                     //the BreBuiltForm values don't make sense for flats, but built_form is a required input to the
                     //BRE API even when property_type is Flat  so we set EnclosedEndTerrace as a default value
                     //(this value indicates two adjacent exposed walls which seems a good average for a flat):
                     BreBuiltForm.EnclosedEndTerrace,
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException(nameof(propertyType))
             };
         }
 
         private static BreFlatLevel? GetBreFlatLevel(PropertyType propertyType, FlatType? flatType)
         {
-            switch (propertyType)
+            return propertyType switch
             {
-                case PropertyType.ApartmentFlatOrMaisonette:
-                    return flatType switch
-                    {
-                        FlatType.TopFloor => BreFlatLevel.TopFloor,
-                        FlatType.MiddleFloor => BreFlatLevel.MidFloor,
-                        FlatType.GroundFloor => BreFlatLevel.GroundFloor,
-                        _ => throw new ArgumentOutOfRangeException()
-                    };
-                default:
-                    return null;
-            }
+                PropertyType.ApartmentFlatOrMaisonette => flatType switch
+                {
+                    FlatType.TopFloor => BreFlatLevel.TopFloor,
+                    FlatType.MiddleFloor => BreFlatLevel.MidFloor,
+                    FlatType.GroundFloor => BreFlatLevel.GroundFloor,
+                    _ => throw new ArgumentOutOfRangeException(nameof(flatType))
+                },
+                _ => null
+            };
         }
 
-        private static string GetBreConstructionDate(YearBuilt? yearBuilt, WallConstruction? wallConstruction, CavityWallsInsulated? cavityWallsInsulated,  HomeAge? epcConstructionAgeBand)
+        private static string GetBreConstructionDate(YearBuilt? yearBuilt, WallConstruction? wallConstruction,
+            CavityWallsInsulated? cavityWallsInsulated, HomeAge? epcConstructionAgeBand)
         {
             return yearBuilt switch
             {
                 YearBuilt.Pre1900 => "A",
                 YearBuilt.From1900To1929 or YearBuilt.Pre1930 => "B",
                 YearBuilt.From1930To1949 => "C",
-                YearBuilt.From1950To1966 or YearBuilt.From1930To1966=> "D",
+                YearBuilt.From1950To1966 or YearBuilt.From1930To1966 => "D",
                 YearBuilt.From1967To1975 => "E",
                 YearBuilt.From1976To1982 or YearBuilt.From1967To1982 => "F",
                 YearBuilt.From1983To1990 => "G",
@@ -293,11 +286,11 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                             CavityWallsInsulated.No => "D",
                             CavityWallsInsulated.Some => "D",
                             CavityWallsInsulated.All => "I",
-                            _ => throw new ArgumentOutOfRangeException()
+                            _ => throw new ArgumentOutOfRangeException(nameof(cavityWallsInsulated))
                         },
                         WallConstruction.Mixed => "B",
                         WallConstruction.Other => "D",
-                        _ => throw new ArgumentOutOfRangeException()
+                        _ => throw new ArgumentOutOfRangeException(nameof(wallConstruction))
                     },
                 },
             };
@@ -317,7 +310,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                     //peer-reviewed assumption:
                     SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
                     SolidWallsInsulated.All => BreWallType.SolidWallsWithInsulation,
-                    _ => throw new ArgumentOutOfRangeException()
+                    _ => throw new ArgumentOutOfRangeException(nameof(solidWallsInsulated))
                 },
                 WallConstruction.Cavity => cavityWallsInsulated switch
                 {
@@ -326,7 +319,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                     //peer-reviewed assumption:
                     CavityWallsInsulated.Some => BreWallType.CavityWallsWithoutInsulation,
                     CavityWallsInsulated.All => BreWallType.CavityWallsWithInsulation,
-                    _ => throw new ArgumentOutOfRangeException()
+                    _ => throw new ArgumentOutOfRangeException(nameof(cavityWallsInsulated))
                 },
                 WallConstruction.Mixed => cavityWallsInsulated switch
                 {
@@ -340,7 +333,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                         SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
                         //peer-reviewed assumption:
                         SolidWallsInsulated.All => BreWallType.DontKnow,
-                        _ => throw new ArgumentOutOfRangeException()
+                        _ => throw new ArgumentOutOfRangeException(nameof(solidWallsInsulated))
                     },
                     //peer-reviewed assumption:
                     CavityWallsInsulated.No => BreWallType.CavityWallsWithoutInsulation,
@@ -356,12 +349,12 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                         SolidWallsInsulated.Some => BreWallType.SolidWallsWithoutInsulation,
                         //peer-reviewed assumption:
                         SolidWallsInsulated.All => BreWallType.SolidWallsWithInsulation,
-                        _ => throw new ArgumentOutOfRangeException()
+                        _ => throw new ArgumentOutOfRangeException(nameof(solidWallsInsulated))
                     },
-                    _ => throw new ArgumentOutOfRangeException()
+                    _ => throw new ArgumentOutOfRangeException(nameof(cavityWallsInsulated))
                 },
                 WallConstruction.Other => BreWallType.OtherWallType,
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException(nameof(wallConstruction))
             };
         }
 
@@ -387,11 +380,11 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                             RoofInsulated.Yes => BreRoofType.PitchedRoofWithInsulation,
                             //peer-reviewed assumption in case RoofConstruction.Mixed:
                             RoofInsulated.No => BreRoofType.PitchedRoofWithoutInsulation,
-                            _ => throw new ArgumentOutOfRangeException()
+                            _ => throw new ArgumentOutOfRangeException(nameof(roofInsulated))
                         },
-                        _ => throw new ArgumentOutOfRangeException()
+                        _ => throw new ArgumentOutOfRangeException(nameof(loftAccess))
                     },
-                    _ => throw new ArgumentOutOfRangeException()
+                    _ => throw new ArgumentOutOfRangeException(nameof(roofConstruction))
                 },
                 //peer-reviewed assumption for ground and middle floor flats
                 _ => null
@@ -409,7 +402,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 GlazingType.DoubleOrTripleGlazed => BreGlazingType.DoubleGlazed,
                 //peer-reviewed assumption:
                 GlazingType.Both => BreGlazingType.SingleGlazed,
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException(nameof(glazingType))
             };
         }
 
@@ -430,9 +423,9 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                     OtherHeatingType.CoalOrSolidFuel => BreHeatingSystem.SolidFuelBoiler,
                     //peer-reviewed assumption:
                     OtherHeatingType.Other => BreHeatingSystem.GasBoiler,
-                    _ => throw new ArgumentOutOfRangeException()
+                    _ => throw new ArgumentOutOfRangeException(nameof(otherHeatingType))
                 },
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException(nameof(heatingType))
             };
         }
 
@@ -467,7 +460,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 HeatingPattern.AllDayAndNight => BreHeatingPatternType.AllDayAndAllNight,
                 HeatingPattern.AllDayNotNight => BreHeatingPatternType.AllDayButOffAtNight,
                 HeatingPattern.Other => BreHeatingPatternType.NoneOfTheAbove,
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException(nameof(heatingPattern))
             };
         }
 
@@ -487,22 +480,23 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 //Peer-reviewed assumptions: time heating is turned on is not collected so we assume morning heating
                 //starts at 7am, evening heating starts at 6pm. If morning/evening hours is greater than 5/6
                 //(hence reaching 12 pm/am) then the extra hours are added on before 7am/6pm.
-                int hoursOnFrom12amTo7am = Math.Max(0, hoursOfHeatingMorning.Value - 5);
-                int hoursOnFrom7amTo12pm = Math.Min(5, hoursOfHeatingMorning.Value);
-                int hoursOnFrom12pmTo6pm = Math.Max(0, hoursOfHeatingEvening.Value - 6);
-                int hoursOnFrom6pmTo12am = Math.Min(6, hoursOfHeatingEvening.Value);
+                var hoursOnFrom12amTo7am = Math.Max(0, hoursOfHeatingMorning.Value - 5);
+                var hoursOnFrom7amTo12pm = Math.Min(5, hoursOfHeatingMorning.Value);
+                var hoursOnFrom12pmTo6pm = Math.Max(0, hoursOfHeatingEvening.Value - 6);
+                var hoursOnFrom6pmTo12am = Math.Min(6, hoursOfHeatingEvening.Value);
                 //Hours between heating turning off in the morning and turning on in the evening
-                int firstOffPeriod = (18 - hoursOnFrom12pmTo6pm) - (7 + hoursOnFrom7amTo12pm);
+                var firstOffPeriod = (18 - hoursOnFrom12pmTo6pm) - (7 + hoursOnFrom7amTo12pm);
                 //Hours between midnight and heating turning on in the morning, plus hours between heating turning off
                 //in the evening and midnight 
-                int secondOffPeriod = (7 - hoursOnFrom12amTo7am) + (6 - hoursOnFrom6pmTo12am);
-                return new[] { firstOffPeriod, secondOffPeriod };
+                var secondOffPeriod = (7 - hoursOnFrom12amTo7am) + (6 - hoursOnFrom6pmTo12am);
+                return [firstOffPeriod, secondOffPeriod];
             }
 
             return null;
         }
 
-        private static BreFloorType? GetBreFloorType(FloorConstruction? floorConstruction, FloorInsulated? floorInsulated)
+        private static BreFloorType? GetBreFloorType(FloorConstruction? floorConstruction,
+            FloorInsulated? floorInsulated)
         {
             return floorConstruction switch
             {
@@ -512,7 +506,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                     FloorInsulated.No => BreFloorType.SuspendedFloorWithoutInsulation,
                     //peer-reviewed assumption:
                     FloorInsulated.DoNotKnow => BreFloorType.SuspendedFloorWithoutInsulation,
-                    _ => throw new ArgumentOutOfRangeException()
+                    _ => throw new ArgumentOutOfRangeException(nameof(floorInsulated))
                 },
                 FloorConstruction.SolidConcrete => floorInsulated switch
                 {
@@ -520,7 +514,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                     FloorInsulated.No => BreFloorType.SolidFloorWithoutInsulation,
                     //peer-reviewed assumption:
                     FloorInsulated.DoNotKnow => BreFloorType.SolidFloorWithoutInsulation,
-                    _ => throw new ArgumentOutOfRangeException()
+                    _ => throw new ArgumentOutOfRangeException(nameof(floorInsulated))
                 },
                 FloorConstruction.Mix => floorInsulated switch
                 {
@@ -528,7 +522,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                     FloorInsulated.Yes => BreFloorType.SuspendedFloorWithInsulation,
                     FloorInsulated.No => BreFloorType.SuspendedFloorWithoutInsulation,
                     FloorInsulated.DoNotKnow => BreFloorType.SuspendedFloorWithoutInsulation,
-                    _ => throw new ArgumentOutOfRangeException()
+                    _ => throw new ArgumentOutOfRangeException(nameof(floorInsulated))
                 },
                 FloorConstruction.Other => BreFloorType.DontKnow,
                 FloorConstruction.DoNotKnow => BreFloorType.DontKnow,
@@ -543,10 +537,10 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 HasOutdoorSpace.Yes => true,
                 HasOutdoorSpace.No => false,
                 HasOutdoorSpace.DoNotKnow => true,
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException(nameof(hasOutdoorSpace))
             };
         }
-        
+
         private static bool? GetBrePvPanels(SolarElectricPanels? solarElectricPanels)
         {
             return solarElectricPanels switch
@@ -555,10 +549,10 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 SolarElectricPanels.No => false,
                 SolarElectricPanels.DoNotKnow => false,
                 null => null,
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentOutOfRangeException(nameof(solarElectricPanels))
             };
         }
-        
+
         /// <returns>Mappings for the returned integer can be found in the BRE API Documentation</returns>
         private static int? GetBreHeatingControls(List<HeatingControls> heatingControls)
         {
@@ -578,7 +572,8 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre
                 [HeatingControls.None] => 8,
                 [HeatingControls.DoNotKnow] => 9,
                 [] => null,
-                _ => throw new ArgumentOutOfRangeException("heatingControls value: [" + string.Join(", ", heatingControls) + "]")
+                _ => throw new ArgumentOutOfRangeException("heatingControls value: [" +
+                                                           string.Join(", ", heatingControls) + "]")
             };
         }
     }

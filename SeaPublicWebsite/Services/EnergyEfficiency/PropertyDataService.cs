@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
 using SeaPublicWebsite.BusinessLogic.Models;
@@ -7,26 +6,17 @@ using SeaPublicWebsite.DataStores;
 
 namespace SeaPublicWebsite.Services.EnergyEfficiency;
 
-public class PropertyDataService
+public class PropertyDataService(
+    IPropertyDataStore propertyDataStore,
+    IRecommendationService recommendationService)
 {
-    private readonly IPropertyDataStore propertyDataStore;
-    private readonly IRecommendationService recommendationService;
-    
-    public PropertyDataService(
-        IPropertyDataStore propertyDataStore,
-        IRecommendationService recommendationService)
-    {
-        this.propertyDataStore = propertyDataStore;
-        this.recommendationService = recommendationService;
-    }
-    
     public async Task<PropertyData> UpdatePropertyDataWithRecommendations(string reference)
     {
         var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
         if (propertyData.PropertyRecommendations is null || propertyData.PropertyRecommendations.Count == 0)
         {
             var recommendationsWithPriceCap = await recommendationService.GetRecommendationsWithPriceCapForPropertyAsync(propertyData);
-            
+
             propertyData.PropertyRecommendations = recommendationsWithPriceCap.Recommendations.Select(r =>
                 new PropertyRecommendation
                 {
