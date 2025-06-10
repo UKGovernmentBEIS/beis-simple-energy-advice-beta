@@ -1,4 +1,5 @@
-﻿using SeaPublicWebsite.BusinessLogic.Models.Enums;
+﻿using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.BusinessLogic.Models;
 
@@ -183,6 +184,21 @@ public class PropertyData : IEntityWithRowVersioning
             HoursOfHeatingMorning = null;
             HoursOfHeatingEvening = null;
         }
+    }
+    
+    public EnergyPriceCapInfo GetEnergyPriceCapInfo()
+    {
+        if (!EnergyPriceCapInfoRequested)
+        {
+            return new EnergyPriceCapInfoNotRequested();
+        }
+
+        if (EnergyPriceCapYear is not null && EnergyPriceCapMonthIndex is not null)
+        {
+            return new EnergyPriceCapInfoParsed(EnergyPriceCapYear.Value, EnergyPriceCapMonthIndex.Value);
+        }
+
+        return new EnergyPriceCapInfoNotParsed();
     }
 
     public void CreateUneditedData()

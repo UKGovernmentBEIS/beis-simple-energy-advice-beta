@@ -1383,7 +1383,8 @@ public class EnergyEfficiencyController : Controller
             Reference = reference,
             NumberOfPropertyRecommendations = propertyData.PropertyRecommendations.Count,
             HasEmailAddress = false,
-            BackLink = GetBackUrl(QuestionFlowStep.YourRecommendations, propertyData)
+            BackLink = GetBackUrl(QuestionFlowStep.YourRecommendations, propertyData),
+            EnergyPriceCapInfo = propertyData.GetEnergyPriceCapInfo()
         };
 
         return View("YourRecommendations", viewModel);
@@ -1463,7 +1464,8 @@ public class EnergyEfficiencyController : Controller
             PropertyRecommendations = propertyData.PropertyRecommendations,
             RecommendationAction = propertyData.PropertyRecommendations[recommendationIndex].RecommendationAction,
             FromActionPlan = fromActionPlan,
-            BackLink = backLink
+            BackLink = backLink,
+            EnergyPriceCapInfo = propertyData.GetEnergyPriceCapInfo()
         };
 
         return View("recommendations/YourRecommendation", viewModel);
@@ -1475,7 +1477,8 @@ public class EnergyEfficiencyController : Controller
         var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
         var viewModel = new RecommendationsViewModel
         {
-            PropertyRecommendations = propertyData.PropertyRecommendations
+            PropertyRecommendations = propertyData.PropertyRecommendations,
+            EnergyPriceCapInfo = propertyData.GetEnergyPriceCapInfo()
         };
 
         return View("Recommendations/RecommendationsPdf", viewModel);

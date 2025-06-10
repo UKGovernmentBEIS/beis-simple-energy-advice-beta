@@ -3,6 +3,7 @@ using System.Linq;
 using System.Resources;
 using GovUkDesignSystem.Attributes.ValidationAttributes;
 using Microsoft.Extensions.Localization;
+using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.Resources;
@@ -19,6 +20,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string BackLink { get; set; }
         public string Reference { get; set; }
         public PropertyRecommendation GetCurrentPropertyRecommendation() => PropertyRecommendations[RecommendationIndex];
+        public EnergyPriceCapInfo EnergyPriceCapInfo { get; set; }
 
         public bool HasPreviousIndex()
         {

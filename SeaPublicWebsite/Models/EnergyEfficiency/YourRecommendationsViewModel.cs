@@ -1,6 +1,10 @@
-﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
+﻿using System;
+using GovUkDesignSystem.Attributes.ValidationAttributes;
 using GovUkDesignSystem.ModelBinders;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Localization;
+using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 using SeaPublicWebsite.Resources;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
@@ -16,5 +20,20 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         [GovUkValidateRequiredIf(ErrorMessageResourceType = typeof(ErrorMessages), ErrorMessageResourceName = nameof(ErrorMessages.EmailAddressRequired), 
             IsRequiredPropertyName = nameof(HasEmailAddress))]
         public string EmailAddress { get; set; }
+        
+        public EnergyPriceCapInfo EnergyPriceCapInfo { get; set; }
+
+        public LocalizedHtmlString GetEnergyPriceCapString(IHtmlLocalizer<SharedResources> sharedLocalizer)
+        {
+            return EnergyPriceCapInfo switch
+            {
+                EnergyPriceCapInfoNotParsed =>
+                    sharedLocalizer["CostsAndSavingsAreEstimatesWarningTextUnknownPriceCapString"],
+                EnergyPriceCapInfoParsed e =>
+                    sharedLocalizer["CostsAndSavingsAreEstimatesWarningTextString",
+                        sharedLocalizer[$"Month{e.MonthIndex}String"].Value + " " + e.Year],
+                _ => sharedLocalizer["CostsAndSavingsAreEstimatesWarningTextNoPriceCapString"]
+            };
+        }
     }
 }
