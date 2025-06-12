@@ -974,7 +974,13 @@
         <value>If you like any of these recommendations, you can save them to your action plan before you move on.</value>
     </data>
     <data name="CostsAndSavingsAreEstimatesWarningTextString" xml:space="preserve">
-        <value>The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on the April 2025 energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
+        <value>The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on the {0} energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
+    </data>
+    <data name="CostsAndSavingsAreEstimatesWarningTextNoPriceCapString" xml:space="preserve">
+        <value>The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on a previous energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
+    </data>
+    <data name="CostsAndSavingsAreEstimatesWarningTextUnknownPriceCapString" xml:space="preserve">
+        <value>The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on the latest energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
     </data>
     <data name="Getting back to your recommendations once you leave" xml:space="preserve">
         <value>Getting back to your recommendations once you leave</value>
@@ -2235,7 +2241,13 @@
         <value>Note</value>
     </data>
     <data name="FiguresForTypicalInstallationWarningTextString" xml:space="preserve">
-        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the April 2025 energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
+        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the {0} energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
+    </data>
+    <data name="FiguresForTypicalInstallationWarningTextNoPriceCapString" xml:space="preserve">
+        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on a previous energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
+    </data>
+    <data name="FiguresForTypicalInstallationWarningTextUnknownString" xml:space="preserve">
+        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the latest energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
     </data>
     <data name="1 minute" xml:space="preserve">
         <value>1 minute</value>
@@ -2671,5 +2683,41 @@ device, or a physical control in your home.</value>
     </data>
     <data name="ThermostaticRadiatorValvesHeatingControlEPCHintString" xml:space="preserve">
         <value>thermostatic radiator valves (TRVs)</value>
+    </data>
+    <data name="MonthJanuaryString" xml:space="preserve">
+        <value>January</value>
+    </data>
+    <data name="MonthFebruaryString" xml:space="preserve">
+        <value>February</value>
+    </data>
+    <data name="MonthMarchString" xml:space="preserve">
+        <value>March</value>
+    </data>
+    <data name="MonthAprilString" xml:space="preserve">
+        <value>April</value>
+    </data>
+    <data name="MonthMayString" xml:space="preserve">
+        <value>May</value>
+    </data>
+    <data name="MonthJuneString" xml:space="preserve">
+        <value>June</value>
+    </data>
+    <data name="MonthJulyString" xml:space="preserve">
+        <value>July</value>
+    </data>
+    <data name="MonthAugustString" xml:space="preserve">
+        <value>August</value>
+    </data>
+    <data name="MonthSeptemberString" xml:space="preserve">
+        <value>September</value>
+    </data>
+    <data name="MonthOctoberString" xml:space="preserve">
+        <value>October</value>
+    </data>
+    <data name="MonthNovemberString" xml:space="preserve">
+        <value>November</value>
+    </data>
+    <data name="MonthDecemberString" xml:space="preserve">
+        <value>December</value>
     </data>
 </root>

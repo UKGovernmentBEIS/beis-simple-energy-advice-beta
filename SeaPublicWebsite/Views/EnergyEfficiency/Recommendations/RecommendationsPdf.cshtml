@@ -13,6 +13,7 @@
     await Html.RenderPartialAsync("Partials/_SingleRecommendationDetails.cshtml", new SingleRecommendationDetailsViewModel
     {
         RecommendationIndex = index,
-        PropertyRecommendations = Model.PropertyRecommendations
+        PropertyRecommendations = Model.PropertyRecommendations,
+        EnergyPriceCapInfo = Model.EnergyPriceCapInfo
     });
 }
