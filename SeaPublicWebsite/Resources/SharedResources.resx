@@ -2684,40 +2684,40 @@ device, or a physical control in your home.</value>
     <data name="ThermostaticRadiatorValvesHeatingControlEPCHintString" xml:space="preserve">
         <value>thermostatic radiator valves (TRVs)</value>
     </data>
-    <data name="Month0String" xml:space="preserve">
+    <data name="MonthJanuaryString" xml:space="preserve">
         <value>January</value>
     </data>
-    <data name="Month1String" xml:space="preserve">
+    <data name="MonthFebruaryString" xml:space="preserve">
         <value>February</value>
     </data>
-    <data name="Month2String" xml:space="preserve">
+    <data name="MonthMarchString" xml:space="preserve">
         <value>March</value>
     </data>
-    <data name="Month3String" xml:space="preserve">
+    <data name="MonthAprilString" xml:space="preserve">
         <value>April</value>
     </data>
-    <data name="Month4String" xml:space="preserve">
+    <data name="MonthMayString" xml:space="preserve">
         <value>May</value>
     </data>
-    <data name="Month5String" xml:space="preserve">
+    <data name="MonthJuneString" xml:space="preserve">
         <value>June</value>
     </data>
-    <data name="Month6String" xml:space="preserve">
+    <data name="MonthJulyString" xml:space="preserve">
         <value>July</value>
     </data>
-    <data name="Month7String" xml:space="preserve">
+    <data name="MonthAugustString" xml:space="preserve">
         <value>August</value>
     </data>
-    <data name="Month8String" xml:space="preserve">
+    <data name="MonthSeptemberString" xml:space="preserve">
         <value>September</value>
     </data>
-    <data name="Month9String" xml:space="preserve">
+    <data name="MonthOctoberString" xml:space="preserve">
         <value>October</value>
     </data>
-    <data name="Month10String" xml:space="preserve">
+    <data name="MonthNovemberString" xml:space="preserve">
         <value>November</value>
     </data>
-    <data name="Month11String" xml:space="preserve">
+    <data name="MonthDecemberString" xml:space="preserve">
         <value>December</value>
     </data>
 </root>

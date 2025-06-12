@@ -3,6 +3,7 @@ using GovUkDesignSystem.GovUkDesignSystemComponents;
 using Microsoft.AspNetCore.Mvc.Localization;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
 using SeaPublicWebsite.BusinessLogic.Models;
+using SeaPublicWebsite.Helpers;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
 {
@@ -27,7 +28,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
                 EnergyPriceCapInfoParsed e =>
                     string.Format(
                         sharedLocalizer["FiguresForTypicalInstallationWarningTextString"].Value,
-                        sharedLocalizer[$"Month{e.MonthIndex}String"].Value + " " + e.Year),
+                        e.GetDateString(sharedLocalizer)),
                 _ => sharedLocalizer["FiguresForTypicalInstallationWarningTextNoPriceCapString"].Value
             };
         }

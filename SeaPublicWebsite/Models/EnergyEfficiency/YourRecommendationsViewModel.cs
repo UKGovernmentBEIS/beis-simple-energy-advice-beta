@@ -1,10 +1,9 @@
-﻿using System;
-using GovUkDesignSystem.Attributes.ValidationAttributes;
+﻿using GovUkDesignSystem.Attributes.ValidationAttributes;
 using GovUkDesignSystem.ModelBinders;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
-using SeaPublicWebsite.BusinessLogic.Models.Enums;
+using SeaPublicWebsite.Helpers;
 using SeaPublicWebsite.Resources;
 
 namespace SeaPublicWebsite.Models.EnergyEfficiency
@@ -31,8 +30,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
                 EnergyPriceCapInfoNotParsed =>
                     sharedLocalizer["CostsAndSavingsAreEstimatesWarningTextUnknownPriceCapString"],
                 EnergyPriceCapInfoParsed e =>
-                    sharedLocalizer["CostsAndSavingsAreEstimatesWarningTextString",
-                        sharedLocalizer[$"Month{e.MonthIndex}String"].Value + " " + e.Year],
+                    sharedLocalizer["CostsAndSavingsAreEstimatesWarningTextString", e.GetDateString(sharedLocalizer)],
                 _ => sharedLocalizer["CostsAndSavingsAreEstimatesWarningTextNoPriceCapString"]
             };
         }

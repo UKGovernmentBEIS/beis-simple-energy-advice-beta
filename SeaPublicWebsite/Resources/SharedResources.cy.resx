@@ -2739,40 +2739,40 @@ cartref &lt;strong&gt;{1}, a {2}.&lt;/strong&gt;</value>
     <data name="ProgrammerHeatingControlEPCHintString" xml:space="preserve">
         <value>raglennydd</value>
     </data>
-    <data name="Month0String" xml:space="preserve">
+    <data name="MonthJanuaryString" xml:space="preserve">
         <value>Ionawr</value>
     </data>
-    <data name="Month1String" xml:space="preserve">
+    <data name="MonthFebruaryString" xml:space="preserve">
         <value>Chwefror</value>
     </data>
-    <data name="Month2String" xml:space="preserve">
+    <data name="MonthMarchString" xml:space="preserve">
         <value>Mawrth</value>
     </data>
-    <data name="Month3String" xml:space="preserve">
+    <data name="MonthAprilString" xml:space="preserve">
         <value>Ebrill</value>
     </data>
-    <data name="Month4String" xml:space="preserve">
+    <data name="MonthMayString" xml:space="preserve">
         <value>Mai</value>
     </data>
-    <data name="Month5String" xml:space="preserve">
+    <data name="MonthJuneString" xml:space="preserve">
         <value>Mehefin</value>
     </data>
-    <data name="Month6String" xml:space="preserve">
+    <data name="MonthJulyString" xml:space="preserve">
         <value>Gorffennaf</value>
     </data>
-    <data name="Month7String" xml:space="preserve">
+    <data name="MonthAugustString" xml:space="preserve">
         <value>Awst</value>
     </data>
-    <data name="Month8String" xml:space="preserve">
+    <data name="MonthSeptemberString" xml:space="preserve">
         <value>Medi</value>
     </data>
-    <data name="Month9String" xml:space="preserve">
+    <data name="MonthOctoberString" xml:space="preserve">
         <value>Hydref</value>
     </data>
-    <data name="Month10String" xml:space="preserve">
+    <data name="MonthNovemberString" xml:space="preserve">
         <value>Tachwedd</value>
     </data>
-    <data name="Month11String" xml:space="preserve">
+    <data name="MonthDecemberString" xml:space="preserve">
         <value>Rhagfyr</value>
     </data>
 </root>
