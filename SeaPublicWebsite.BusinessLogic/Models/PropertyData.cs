@@ -1,4 +1,5 @@
-﻿using SeaPublicWebsite.BusinessLogic.Models.Enums;
+﻿using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
+using SeaPublicWebsite.BusinessLogic.Models.Enums;
 
 namespace SeaPublicWebsite.BusinessLogic.Models;
 
@@ -13,11 +14,11 @@ public class PropertyData : IEntityWithRowVersioning
     /// This timestamp is now assigned after the new-or-returning user question, at the start of the journey.
     /// TODO-1240 Rename to reflect new position in journey
     /// </summary>
-    public DateTime? RecommendationsFirstRetrievedAt { get; set; } 
+    public DateTime? RecommendationsFirstRetrievedAt { get; set; }
 
     public OwnershipStatus? OwnershipStatus { get; set; }
     public Country? Country { get; set; }
-    
+
     public SearchForEpc? SearchForEpc { get; set; }
 
     public EpcDetailsConfirmed? EpcDetailsConfirmed { get; set; }
@@ -47,7 +48,7 @@ public class PropertyData : IEntityWithRowVersioning
     public OtherHeatingType? OtherHeatingType { get; set; }
 
     public List<HeatingControls> HeatingControls { get; set; } = [];
-    
+
     public HasHotWaterCylinder? HasHotWaterCylinder { get; set; }
 
     public int? NumberOfOccupants { get; set; }
@@ -60,7 +61,10 @@ public class PropertyData : IEntityWithRowVersioning
     public bool ReturningUser { get; set; }
     public uint Version { get; set; }
 
-    public List<PropertyRecommendation> PropertyRecommendations { get; set; } = new();
+    public List<PropertyRecommendation> PropertyRecommendations { get; set; } = [];
+    public bool EnergyPriceCapInfoRequested { get; set; }
+    public int? EnergyPriceCapYear { get; set; }
+    public int? EnergyPriceCapMonthIndex { get; set; }
 
     public bool? HintSolidWalls => YearBuilt?.IsBefore(1930);
     public bool? HintUninsulatedCavityWalls => YearBuilt?.IsBefore(1996);
@@ -81,7 +85,7 @@ public class PropertyData : IEntityWithRowVersioning
         GlazingType is Enums.GlazingType.SingleGlazed or Enums.GlazingType.Both;
 
     public bool ShowAltDraughtProofLoftAccess => LoftAccess is Enums.LoftAccess.Yes;
-    
+
     public bool HasFloor()
     {
         return (PropertyType, FlatType) switch
@@ -92,7 +96,7 @@ public class PropertyData : IEntityWithRowVersioning
             _ => false
         };
     }
-    
+
     public bool HasRoof()
     {
         return (PropertyType, FlatType) switch
@@ -103,34 +107,34 @@ public class PropertyData : IEntityWithRowVersioning
             _ => false
         };
     }
-    
+
     public void ResetUnusedFields()
     {
         if (PropertyType is not Enums.PropertyType.House)
         {
             HouseType = null;
         }
-        
+
         if (PropertyType is not Enums.PropertyType.Bungalow)
         {
             BungalowType = null;
         }
-        
+
         if (PropertyType is not Enums.PropertyType.ApartmentFlatOrMaisonette)
         {
             FlatType = null;
         }
-        
+
         if (WallConstruction is not Enums.WallConstruction.Cavity and not Enums.WallConstruction.Mixed)
         {
             CavityWallsInsulated = null;
         }
-        
+
         if (WallConstruction is not Enums.WallConstruction.Solid and not Enums.WallConstruction.Mixed)
         {
             SolidWallsInsulated = null;
         }
-        
+
         if (!HasFloor())
         {
             FloorConstruction = null;
@@ -182,12 +186,27 @@ public class PropertyData : IEntityWithRowVersioning
         }
     }
 
+    public EnergyPriceCapInfo GetEnergyPriceCapInfo()
+    {
+        if (!EnergyPriceCapInfoRequested)
+        {
+            return new EnergyPriceCapInfoNotRequested();
+        }
+
+        if (EnergyPriceCapYear is not null && EnergyPriceCapMonthIndex is not null)
+        {
+            return new EnergyPriceCapInfoParsed(EnergyPriceCapYear.Value, EnergyPriceCapMonthIndex.Value);
+        }
+
+        return new EnergyPriceCapInfoNotParsed();
+    }
+
     public void CreateUneditedData()
     {
         UneditedData = new PropertyData();
         CopyAnswersTo(UneditedData);
     }
-    
+
     public void CommitEdits()
     {
         // If a user has made changes to their answers we have to delete any recommendations they have as they may now
@@ -196,15 +215,16 @@ public class PropertyData : IEntityWithRowVersioning
         {
             PropertyRecommendations.Clear();
         }
+
         DeleteUneditedData();
     }
-    
+
     public void RevertToUneditedData()
     {
         UneditedData.CopyAnswersTo(this);
         DeleteUneditedData();
     }
-    
+
     private void DeleteUneditedData()
     {
         UneditedData = null;
@@ -254,18 +274,18 @@ public class PropertyData : IEntityWithRowVersioning
     {
         return PropertyRecommendations[0].Key;
     }
-    
+
     public RecommendationKey GetLastRecommendationKey()
     {
         return PropertyRecommendations[^1].Key;
     }
-    
+
     public RecommendationKey GetNextRecommendationKey(RecommendationKey currentRecommendationKey)
     {
         var currentIndex = GetRecommendationIndex(currentRecommendationKey);
         return PropertyRecommendations[currentIndex + 1].Key;
     }
-    
+
     public RecommendationKey GetPreviousRecommendationKey(RecommendationKey currentRecommendationKey)
     {
         var currentIndex = GetRecommendationIndex(currentRecommendationKey);

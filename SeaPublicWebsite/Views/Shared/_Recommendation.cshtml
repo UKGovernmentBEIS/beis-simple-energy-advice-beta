@@ -27,7 +27,7 @@
 @await Html.GovUkWarningText(new WarningTextViewModel
        {
            IconFallbackText = SharedLocalizer["Note"].Value,
-           Text = SharedLocalizer["FiguresForTypicalInstallationWarningTextString"].Value
+           Text = Model.GetEnergyPriceCapString(SharedLocalizer)
        })
 
 @await Html.GovUkSummaryList(new SummaryListViewModel

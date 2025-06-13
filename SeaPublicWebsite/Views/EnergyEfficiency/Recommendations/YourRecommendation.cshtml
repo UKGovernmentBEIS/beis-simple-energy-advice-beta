@@ -44,7 +44,8 @@
             @{ await Html.RenderPartialAsync("Partials/_SingleRecommendationDetails.cshtml", new SingleRecommendationDetailsViewModel
                {
                    RecommendationIndex = Model.RecommendationIndex,
-                   PropertyRecommendations = Model.PropertyRecommendations
+                   PropertyRecommendations = Model.PropertyRecommendations,
+                   EnergyPriceCapInfo = Model.EnergyPriceCapInfo
                }); }
 
             @(await Html.GovUkRadiosFor(m => m.RecommendationAction,
