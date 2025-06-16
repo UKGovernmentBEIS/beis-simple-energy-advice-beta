@@ -13,12 +13,12 @@ ARG CONFIGURATION=Release
 
 WORKDIR /SeaPublicWebsite
 
-# Copy everything
-COPY . ./
-
 # Install NodeJS and NPM
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
 apt-get install -y nodejs
+
+# Copy everything
+COPY . ./
 
 # Build node assets
 WORKDIR /SeaPublicWebsite/SeaPublicWebsite
