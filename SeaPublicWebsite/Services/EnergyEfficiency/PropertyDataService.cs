@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
 using SeaPublicWebsite.BusinessLogic.Models;
@@ -7,26 +6,18 @@ using SeaPublicWebsite.DataStores;
 
 namespace SeaPublicWebsite.Services.EnergyEfficiency;
 
-public class PropertyDataService
+public class PropertyDataService(
+    IPropertyDataStore propertyDataStore,
+    IRecommendationService recommendationService)
 {
-    private readonly IPropertyDataStore propertyDataStore;
-    private readonly IRecommendationService recommendationService;
-    
-    public PropertyDataService(
-        IPropertyDataStore propertyDataStore,
-        IRecommendationService recommendationService)
-    {
-        this.propertyDataStore = propertyDataStore;
-        this.recommendationService = recommendationService;
-    }
-    
     public async Task<PropertyData> UpdatePropertyDataWithRecommendations(string reference)
     {
         var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
         if (propertyData.PropertyRecommendations is null || propertyData.PropertyRecommendations.Count == 0)
         {
-            var recommendationsForPropertyAsync = await recommendationService.GetRecommendationsForPropertyAsync(propertyData);
-            propertyData.PropertyRecommendations = recommendationsForPropertyAsync.Select(r => 
+            var recommendationsWithPriceCap = await recommendationService.GetRecommendationsWithPriceCapForPropertyAsync(propertyData);
+
+            propertyData.PropertyRecommendations = recommendationsWithPriceCap.Recommendations.Select(r =>
                 new PropertyRecommendation
                 {
                     Key = r.Key,
@@ -39,6 +30,19 @@ public class PropertyDataService
                     Summary = r.Summary
                 }
             ).ToList();
+
+            propertyData.EnergyPriceCapInfoRequested = true;
+
+            if (recommendationsWithPriceCap.EnergyPriceCapInfo is not null)
+            {
+                propertyData.EnergyPriceCapYear = recommendationsWithPriceCap.EnergyPriceCapInfo.Year;
+                propertyData.EnergyPriceCapMonthIndex = recommendationsWithPriceCap.EnergyPriceCapInfo.MonthIndex;
+            }
+            else
+            {
+                propertyData.EnergyPriceCapYear = null;
+                propertyData.EnergyPriceCapMonthIndex = null;
+            }
         }
 
         propertyData.HasSeenRecommendations = true;

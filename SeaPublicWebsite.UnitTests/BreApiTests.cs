@@ -5,7 +5,7 @@ using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre.Enums;
 
 namespace Tests;
 
-public class BreApi
+public class BreApiTests
 {
     [Test]
     public void BreRequestMeasuresShouldBeTrue()
@@ -30,7 +30,7 @@ public class BreApi
             brePvPanels: false,
             breHeatingControls: 2
         );
-        
+
         // Assert
         request.measures.Should().Be(true);
     }

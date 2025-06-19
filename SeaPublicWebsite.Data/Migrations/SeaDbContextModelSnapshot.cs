@@ -140,6 +140,15 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<int?>("EditedDataId")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("EnergyPriceCapInfoRequested")
+                        .HasColumnType("boolean");
+
+                    b.Property<int?>("EnergyPriceCapMonthIndex")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("EnergyPriceCapYear")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("EpcDetailsConfirmed")
                         .HasColumnType("integer");
 

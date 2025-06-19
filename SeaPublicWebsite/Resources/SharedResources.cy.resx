@@ -838,7 +838,13 @@
         <value>Os ydych chi’n hoffi unrhyw un o’r argymhellion hyn, gallwch eu cadw yn eich cynllun gweithredu cyn bwrw ymlaen.</value>
     </data>
     <data name="CostsAndSavingsAreEstimatesWarningTextString" xml:space="preserve">
-        <value>Amcangyfrifon yw’r costau a’r arbedion rydyn ni’n eu darparu ac efallai na fyddan nhw yr un fath yn ymarferol. Mae’r arbedion sy’n cael eu dangos wedi’u seilio ar gap prisiau ynni Ebrill 2025 ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
+        <value>Amcangyfrifon yw’r costau a’r arbedion rydyn ni’n eu darparu ac efallai na fyddan nhw yr un fath yn ymarferol. Mae’r arbedion sy’n cael eu dangos wedi’u seilio ar gap prisiau ynni {0} ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
+    </data>
+    <data name="CostsAndSavingsAreEstimatesWarningTextNoPriceCapString" xml:space="preserve">
+        <value>Amcangyfrifon yw’r costau a’r arbedion rydyn ni’n eu darparu ac efallai na fyddan nhw yr un fath yn ymarferol. Mae'r arbedion a ddangosir wedi’u seilio ar gap prisiau ynni blaenorol ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
+    </data>
+    <data name="CostsAndSavingsAreEstimatesWarningTextUnknownPriceCapString" xml:space="preserve">
+        <value>Amcangyfrifon yw’r costau a’r arbedion rydyn ni’n eu darparu ac efallai na fyddan nhw yr un fath yn ymarferol. Mae'r arbedion a ddangosir wedi’u seilio ar y cap prisiau ynni diweddaraf ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
     </data>
     <data name="Getting back to your recommendations once you leave" xml:space="preserve">
         <value>Mynd yn ôl at eich argymhellion ar ôl i chi adael</value>
@@ -2017,7 +2023,13 @@
         <value>Sylwer</value>
     </data>
     <data name="FiguresForTypicalInstallationWarningTextString" xml:space="preserve">
-        <value>Ffigurau ar gyfer gosodiad nodweddiadol mewn cartref fel eich un chi yw’r ffigurau hyn. Bydd eich amgylchiadau chi, manylion y gosodiadau a'r prisiau ynni yn effeithio ar y costau a'r arbedion gewch chi. Mae'r arbedion sy’n cael eu dangos wedi’u seilio ar gap prisiau ynni Ebrill 2025 ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
+        <value>Ffigurau ar gyfer gosodiad nodweddiadol mewn cartref fel eich un chi yw’r ffigurau hyn. Bydd eich amgylchiadau chi, manylion y gosodiadau a'r prisiau ynni yn effeithio ar y costau a'r arbedion gewch chi. Mae'r arbedion sy’n cael eu dangos wedi’u seilio ar gap prisiau ynni {0} ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
+    </data>
+    <data name="FiguresForTypicalInstallationWarningTextNoPriceCapString" xml:space="preserve">
+        <value>Ffigurau ar gyfer gosodiad nodweddiadol mewn cartref fel eich un chi yw’r ffigurau hyn. Bydd eich amgylchiadau chi, manylion y gosodiadau a'r prisiau ynni yn effeithio ar y costau a'r arbedion gewch chi. Mae'r arbedion a ddangosir wedi’u seilio ar gap prisiau ynni blaenorol ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
+    </data>
+    <data name="FiguresForTypicalInstallationWarningTextUnknownString" xml:space="preserve">
+        <value>Ffigurau ar gyfer gosodiad nodweddiadol mewn cartref fel eich un chi yw’r ffigurau hyn. Bydd eich amgylchiadau chi, manylion y gosodiadau a'r prisiau ynni yn effeithio ar y costau a'r arbedion gewch chi. Mae'r arbedion a ddangosir wedi’u seilio ar y cap prisiau ynni diweddaraf ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
     </data>
     <data name="1 minute" xml:space="preserve">
         <value>1 funud</value>
@@ -2726,5 +2738,41 @@ cartref &lt;strong&gt;{1}, a {2}.&lt;/strong&gt;</value>
     </data>
     <data name="ProgrammerHeatingControlEPCHintString" xml:space="preserve">
         <value>raglennydd</value>
+    </data>
+    <data name="MonthJanuaryString" xml:space="preserve">
+        <value>Ionawr</value>
+    </data>
+    <data name="MonthFebruaryString" xml:space="preserve">
+        <value>Chwefror</value>
+    </data>
+    <data name="MonthMarchString" xml:space="preserve">
+        <value>Mawrth</value>
+    </data>
+    <data name="MonthAprilString" xml:space="preserve">
+        <value>Ebrill</value>
+    </data>
+    <data name="MonthMayString" xml:space="preserve">
+        <value>Mai</value>
+    </data>
+    <data name="MonthJuneString" xml:space="preserve">
+        <value>Mehefin</value>
+    </data>
+    <data name="MonthJulyString" xml:space="preserve">
+        <value>Gorffennaf</value>
+    </data>
+    <data name="MonthAugustString" xml:space="preserve">
+        <value>Awst</value>
+    </data>
+    <data name="MonthSeptemberString" xml:space="preserve">
+        <value>Medi</value>
+    </data>
+    <data name="MonthOctoberString" xml:space="preserve">
+        <value>Hydref</value>
+    </data>
+    <data name="MonthNovemberString" xml:space="preserve">
+        <value>Tachwedd</value>
+    </data>
+    <data name="MonthDecemberString" xml:space="preserve">
+        <value>Rhagfyr</value>
     </data>
 </root>
