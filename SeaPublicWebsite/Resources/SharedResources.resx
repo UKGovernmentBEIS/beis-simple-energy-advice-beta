@@ -974,13 +974,13 @@
         <value>If you like any of these recommendations, you can save them to your action plan before you move on.</value>
     </data>
     <data name="CostsAndSavingsAreEstimatesWarningTextString" xml:space="preserve">
-        <value>The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on the {0} energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
+        <value>The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on the {0} energy price cap for gas and electricity bills, and on the RdSAP2012 energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
     </data>
     <data name="CostsAndSavingsAreEstimatesWarningTextNoPriceCapString" xml:space="preserve">
-        <value>The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on a previous energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
+        <value>The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on a previous energy price cap for gas and electricity bills, and on the RdSAP2012 energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
     </data>
     <data name="CostsAndSavingsAreEstimatesWarningTextUnknownPriceCapString" xml:space="preserve">
-        <value>The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on the latest energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
+        <value>The costs and savings we provide are estimates and may not be the same in practice. The savings displayed are based on the latest energy price cap for gas and electricity bills, and on the RdSAP2012 energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
     </data>
     <data name="Getting back to your recommendations once you leave" xml:space="preserve">
         <value>Getting back to your recommendations once you leave</value>
@@ -2241,13 +2241,13 @@
         <value>Note</value>
     </data>
     <data name="FiguresForTypicalInstallationWarningTextString" xml:space="preserve">
-        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the {0} energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
+        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the {0} energy price cap for gas and electricity bills, and on the RdSAP2012 energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
     </data>
     <data name="FiguresForTypicalInstallationWarningTextNoPriceCapString" xml:space="preserve">
-        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on a previous energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
+        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on a previous energy price cap for gas and electricity bills, and on the RdSAP2012 energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
     </data>
     <data name="FiguresForTypicalInstallationWarningTextUnknownString" xml:space="preserve">
-        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the latest energy price cap for gas and electricity bills, and on the RdSAP energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
+        <value>These figures are for a typical installation in a home like yours. The costs and savings you experience will be affected by your circumstances, the details of the installations and energy prices. The savings displayed are based on the latest energy price cap for gas and electricity bills, and on the RdSAP2012 energy prices for all other heating fuel types. As energy prices change, so will the estimates of savings.</value>
     </data>
     <data name="1 minute" xml:space="preserve">
         <value>1 minute</value>
