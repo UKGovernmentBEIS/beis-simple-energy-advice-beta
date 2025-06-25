@@ -23,10 +23,10 @@
         <value>This service is for people who own their own property in England and Wales.</value>
     </data>
     <data name="IfUserInScotlandHomeEnergyScotlandLinkString" xml:space="preserve">
-        <value>If you live in Scotland, visit &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Home Energy Scotland&lt;/a&gt; to help you find ways to reduce your energy bills.</value>
+        <value>If you live in Scotland, visit &lt;a class="govuk-link" href="{0}"&gt;Home Energy Scotland&lt;/a&gt; to help you find ways to reduce your energy bills.</value>
     </data>
     <data name="IfYouLiveInNIVisitNIDirectString" xml:space="preserve">
-        <value>If you live in Northern Ireland, visit&lt;a class="govuk-link" href="{0}" target="_blank"&gt;NI Direct&lt;/a&gt; for help.</value>
+        <value>If you live in Northern Ireland, visit&lt;a class="govuk-link" href="{0}"&gt;NI Direct&lt;/a&gt; for help.</value>
     </data>
     <data name="What you get from this service" xml:space="preserve">
         <value>What you get from this service</value>
@@ -47,7 +47,7 @@
         <value>installing solar panels</value>
     </data>
     <data name="DifferentServiceAvailableToCheckHeatPumpString" xml:space="preserve">
-        <value>There is a different service available if you would like to &lt;a class="govuk-link" href="{0}" target="_blank"&gt; check if a heat pump may be suitable for your property.&lt;/a&gt;</value>
+        <value>There is a different service available if you would like to &lt;a class="govuk-link" href="{0}"&gt; check if a heat pump may be suitable for your property&lt;/a&gt;.</value>
     </data>
     <data name="Each recommendation will explain what’s involved, how much it could cost you and how much it could save on typical energy bills. You will also receive information about where to go to for more advice." xml:space="preserve">
         <value>Each recommendation will explain what’s involved, how much it could cost you and how much it could save on typical energy bills. You will also receive information about where to go to for more advice.</value>
@@ -71,7 +71,7 @@
         <value>If this is your first visit, it takes around &lt;strong&gt;10 minutes&lt;/strong&gt; to answer the questions and receive recommendations tailored to you and your home.</value>
     </data>
     <data name="ReturnToRecommendationsAndActionPlanIfYouNeedToString" xml:space="preserve">
-        <value>You can &lt;a href="{0}"&gt;return to your recommendations and action plan&lt;/a&gt; if you need to.</value>
+        <value>You can &lt;a href="{0}" class="govuk-link"&gt;return to your recommendations and action plan&lt;/a&gt; if you need to.</value>
     </data>
     <data name="Start now" xml:space="preserve">
         <value>Start now</value>
@@ -95,7 +95,7 @@
         <value>Find out more about call charges</value>
     </data>
     <data name="ThisIsANewServiceString" xml:space="preserve">
-        <value>This is a new service – your &lt;a class="govuk-link" href="{0}" target="_blank"&gt;feedback (opens in new tab)&lt;/a&gt; will help us to improve it.</value>
+        <value>This is a new service – your &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt;feedback (opens in new tab)&lt;/a&gt; will help us to improve it.</value>
     </data>
     <data name="Back" xml:space="preserve">
         <value>Back</value>
@@ -182,16 +182,16 @@
         <value>This service only provides advice for people who own their own home in England and Wales.</value>
     </data>
     <data name="GeneralEnergySavingTrustAdviceString" xml:space="preserve">
-        <value>For general energy efficiency advice and to find out ways to reduce your energy bill, visit the &lt;a href="{0}" target="_blank" class="govuk-link"&gt;Energy Saving Trust&lt;/a&gt; website</value>
+        <value>For general energy efficiency advice and to find out ways to reduce your energy bill, visit the &lt;a href="{0}" class="govuk-link"&gt;Energy Saving Trust&lt;/a&gt; website</value>
     </data>
     <data name="Other services that might be helpful to you" xml:space="preserve">
         <value>Other services that might be helpful to you</value>
     </data>
     <data name="VisitHomeEnergyScotlandString" xml:space="preserve">
-        <value>Visit &lt;a href="{0}" target="_blank" class="govuk-link"&gt;Home Energy Scotland&lt;/a&gt; to help you find ways to improve your property’s energy efficiency.</value>
+        <value>Visit &lt;a href="{0}" class="govuk-link"&gt;Home Energy Scotland&lt;/a&gt; to help you find ways to improve your property’s energy efficiency.</value>
     </data>
     <data name="VisitNIDirectString" xml:space="preserve">
-        <value>Visit &lt;a href="{0}" target="_blank" class="govuk-link"&gt;NI Direct&lt;/a&gt; to help you find ways to improve your property’s energy efficiency.</value>
+        <value>Visit &lt;a href="{0}" class="govuk-link"&gt;NI Direct&lt;/a&gt; to help you find ways to improve your property’s energy efficiency.</value>
     </data>
     <data name="Do you own your property?" xml:space="preserve">
         <value>Do you own your property?</value>
@@ -1025,7 +1025,7 @@
         <value>If you’d like to do more to improve the energy efficiency of your home, consider the following:</value>
     </data>
     <data name="WhenBuyingNewAppliancesUpgradeEnergyLabelsString" xml:space="preserve">
-        <value>When buying new appliances, upgrade to an energy efficient one - &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt; Learn about energy labels (opens in a new tab)&lt;/a&gt; on the Energy Saving Trust website.</value>
+        <value>When buying new appliances, upgrade to an energy efficient one - &lt;a class="govuk-link" href="{0}"&gt; Learn about energy labels &lt;/a&gt; on the Energy Saving Trust website.</value>
     </data>
     <data name="Install a heat pump – " xml:space="preserve">
         <value>Install a heat pump – </value>
@@ -1040,13 +1040,13 @@
         <value>Learn about energy labels</value>
     </data>
     <data name="InstallHeatPumpCheckIfHomeSuitableString" xml:space="preserve">
-        <value>Install a heat pump - &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Check if your home may be suitable&lt;/a&gt;</value>
+        <value>Install a heat pump - &lt;a class="govuk-link" href="{0}"&gt;Check if your home may be suitable&lt;/a&gt;</value>
     </data>
     <data name="Still need help?" xml:space="preserve">
         <value>Still need help?</value>
     </data>
     <data name="VisitEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>You can visit the &lt;a href="{0}" target="_blank" class="govuk-link"&gt;Energy Saving Trust website&lt;/a&gt; for more information on reducing your home’s energy use.</value>
+        <value>You can visit the &lt;a href="{0}" class="govuk-link"&gt;Energy Saving Trust website&lt;/a&gt; for more information on reducing your home’s energy use.</value>
     </data>
     <data name="Returning to this service" xml:space="preserve">
         <value>Returning to this service</value>
@@ -1106,7 +1106,7 @@
         <value>If some of your loft is boarded so that you can store things up there you will either need to raise this boarding up and insulate underneath it, or leave that part of the loft with thinner insulation.</value>
     </data>
     <data name="MoreInfoOnLoftInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>You can find more information on loft insulation on the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>You can find more information on loft insulation on the &lt;a class="govuk-link" href="{0}"&gt;Energy Saving Trust website&lt;/a&gt;.</value>
     </data>
     <data name="Who this improvement is suitable for" xml:space="preserve">
         <value>Who this improvement is suitable for</value>
@@ -1172,7 +1172,7 @@
         <value>Alternatively, you may want to choose a smart heating controller to make it easier to adjust the settings.</value>
     </data>
     <data name="MoreInfoOnHeatingControlsOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>You can find more information on heating controls on the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>You can find more information on heating controls on the &lt;a class="govuk-link" href="{0}"&gt;Energy Saving Trust website&lt;/a&gt;.</value>
     </data>
     <data name="You will need a competent installer to fit new controls to your heating system." xml:space="preserve">
         <value>You will need a competent installer to fit new controls to your heating system.</value>
@@ -1193,7 +1193,7 @@
         <value>The fuel bill savings from replacing windows are unlikely to pay back the full installation cost, but there are other benefits such as reduced maintenance and better sound proofing that may affect your decision.</value>
     </data>
     <data name="MoreInfoOnNewWindowsOnBritishFenestrationRatingCouncilWebsiteString" xml:space="preserve">
-        <value>You can find more information on efficient windows and how to choose them at the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;British Fenestration Rating Council.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>You can find more information on efficient windows and how to choose them at the &lt;a class="govuk-link" href="{0}"&gt;British Fenestration Rating Council&lt;/a&gt;.</value>
     </data>
     <data name="If you live in a conservation area or listed building there may be limits on what changes you can make to your windows. You should check with your local authority to see what is allowed." xml:space="preserve">
         <value>If you live in a conservation area or listed building there may be limits on what changes you can make to your windows. You should check with your local authority to see what is allowed.</value>
@@ -1211,7 +1211,7 @@
         <value>Specialist contractors can inject insulation into the cavity, reducing heat loss significantly and helping to cut your bills.</value>
     </data>
     <data name="MoreInfoOnCavityWallInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>You can find more information on cavity wall insulation on the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>You can find more information on cavity wall insulation on the &lt;a class="govuk-link" href="{0}"&gt;Energy Saving Trust website&lt;/a&gt;.</value>
     </data>
     <data name="Your property was built with uninsulated cavity walls - this was common between the 1920s and the 1980s." xml:space="preserve">
         <value>Your property was built with uninsulated cavity walls - this was common between the 1920s and the 1980s.</value>
@@ -1259,10 +1259,10 @@
         <value>Heat pumps are suitable for many homes, will cut your carbon emissions and there are grants available through the &lt;a class="govuk-link" href="{0}"&gt;Boiler Upgrade Scheme&lt;/a&gt; for air source heat pumps and ground source heat pumps to reduce the upfront cost.</value>
     </data>
     <data name="CheckWhichHeatPumpIsSuitableOnHeatPumpServiceString" xml:space="preserve">
-        <value>There are different types of heat pump and you can &lt;a class="govuk-link" href="{0}" target="_blank"&gt;check which might be suitable for your home&lt;/a&gt; on our dedicated heat pump service.</value>
+        <value>There are different types of heat pump and you can &lt;a class="govuk-link" href="{0}"&gt;check which might be suitable for your home&lt;/a&gt; on our dedicated heat pump service.</value>
     </data>
     <data name="MoreInfoOnHeatPumpsOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>You can find more information on heat pumps on the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Energy Saving Trust&lt;/a&gt; website.</value>
+        <value>You can find more information on heat pumps on the &lt;a class="govuk-link" href="{0}"&gt;Energy Saving Trust website&lt;/a&gt;.</value>
     </data>
     <data name="You have some outdoor space" xml:space="preserve">
         <value>You have some outdoor space</value>
@@ -1289,7 +1289,7 @@
         <value>If you have a suitable roof area you may be able to fit solar photovoltaic panels, or solar PV, to generate electricity.</value>
     </data>
     <data name="MoreInfoOnSolarPVOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>You can find more information on solar PV on the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>You can find more information on solar PV on the &lt;a class="govuk-link" href="{0}"&gt;Energy Saving Trust website&lt;/a&gt;.</value>
     </data>
     <data name="You have a roof area that faces somewhere south of due east or due west." xml:space="preserve">
         <value>You have a roof area that faces somewhere south of due east or due west.</value>
@@ -1317,7 +1317,7 @@
         <value>Your floor could be insulated by lifting the floorboards, fitting insulation between the joists and then putting the floorboards back. This is normally a job for a professional installer.</value>
     </data>
     <data name="MoreInfoOnFloorInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>You can find more information on floor insulation on the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>You can find more information on floor insulation on the &lt;a class="govuk-link" href="{0}"&gt;Energy Saving Trust website&lt;/a&gt;.</value>
     </data>
     <data name="You will need to completely empty the rooms that are being insulated, and remove any carpet or other floor covering, before the floor boards can be lifted." xml:space="preserve">
         <value>You will need to completely empty the rooms that are being insulated, and remove any carpet or other floor covering, before the floor boards can be lifted.</value>
@@ -1353,7 +1353,7 @@
         <value>Their improved controls, including automatic charge control, thermostat and programmer, allowing you to set the temperature you want the room to be heated and when, with the heater only drawing the electricity needed to meet that programme.</value>
     </data>
     <data name="MoreInfoOnHighHeatRetentionStorageHeatersOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>You can find more information on high heat retention storage heaters on the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>You can find more information on high heat retention storage heaters on the &lt;a class="govuk-link" href="{0}"&gt;Energy Saving Trust website&lt;/a&gt;.</value>
     </data>
     <data name="You have older, manually controlled storage heaters" xml:space="preserve">
         <value>You have older, manually controlled storage heaters</value>
@@ -1368,7 +1368,7 @@
         <value>You may also want to consider using foam collars around any exposed hot water pipes to save even more energy.</value>
     </data>
     <data name="MoreInfoOnHotWaterCylinderInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>You can find more information on solid wall insulation on the&lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>You can find more information on solid wall insulation on the &lt;a class="govuk-link" href="{0}"&gt;Energy Saving Trust website&lt;/a&gt;.</value>
     </data>
     <data name="Recommendation Suitable For" xml:space="preserve">
         <value>Recommendation Suitable For</value>
@@ -1386,7 +1386,7 @@
         <value>You may well need to fit new or additional controls when you fit a new gas boiler to comply with building regulations. These will help to maximise the system’s efficiency, saving you even more money.</value>
     </data>
     <data name="MoreInfoOnGasBoilerReplacementOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>You can find more information on replacing your gas boiler on the&lt;a class="govuk-link" target="_blank" href="{0}"&gt; Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>You can find more information on replacing your gas boiler on the &lt;a class="govuk-link" href="{0}"&gt;Energy Saving Trust website&lt;/a&gt;.</value>
     </data>
     <data name="You have an old or inefficient gas boiler, or your boiler is broken" xml:space="preserve">
         <value>You have an old or inefficient gas boiler, or your boiler is broken</value>
@@ -1470,7 +1470,7 @@
         <value>&lt;a class="govuk-link" href="{0}"&gt;Boiler Upgrade Scheme&lt;/a&gt;</value>
     </data>
     <data name="OfgemGuideToSchemesAndGrantsString" xml:space="preserve">
-        <value>If you are worried about affording your energy bills, Ofgem has a &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt;helpful guide (opens in a new tab)&lt;/a&gt; to the schemes, grants and benefits that may be available to you.</value>
+        <value>If you are worried about affording your energy bills, Ofgem has a &lt;a class="govuk-link" href="{0}"&gt;helpful guide&lt;/a&gt; to the schemes, grants and benefits that may be available to you.</value>
     </data>
     <data name="2. Consult with a qualified installer" xml:space="preserve">
         <value>2. Consult with a qualified installer</value>
@@ -1479,10 +1479,10 @@
         <value>We recommend consulting with a qualified installer to confirm what changes you can make to your property.</value>
     </data>
     <data name="GetHelpFindingInstallerOnMCSWebsiteString" xml:space="preserve">
-        <value>You can get help finding a qualified installer of heat pumps or solar panels in your area by visiting the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;MCS website.&lt;/a&gt;</value>
+        <value>You can get help finding a qualified installer of heat pumps or solar panels in your area by visiting the &lt;a class="govuk-link" href="{0}"&gt;MCS website&lt;/a&gt;.</value>
     </data>
     <data name="HelpFindingQualifiedInstallerOnTrustMarkWebsiteString" xml:space="preserve">
-        <value>For all other changes to your property, get help finding a qualified installer in your area by visiting the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;TrustMark website.&lt;/a&gt;</value>
+        <value>For all other changes to your property, get help finding a qualified installer in your area by visiting the &lt;a class="govuk-link" href="{0}"&gt;TrustMark website&lt;/a&gt;.</value>
     </data>
     <data name="Research improvements you are unsure about" xml:space="preserve">
         <value>Research improvements you are unsure about</value>
@@ -1497,7 +1497,7 @@
         <value>Other ways to save energy</value>
     </data>
     <data name="VisitTheHelpForHouseholdsWebsiteString" xml:space="preserve">
-        <value>Visit the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Help for Households&lt;/a&gt; website for even more ways to save energy and reduce your bills.</value>
+        <value>Visit the &lt;a class="govuk-link" href="{0}"&gt;Help for Households&lt;/a&gt; website for even more ways to save energy and reduce your bills.</value>
     </data>
     <data name="Returning to your Action Plan" xml:space="preserve">
         <value>Returning to your Action Plan</value>
@@ -1527,7 +1527,7 @@
         <value>We have provided recommendations that are most suitable for your home based on the answers you provided earlier.</value>
     </data>
     <data name="ChangeAnswersIfSomethingDoesNotLookRightString" xml:space="preserve">
-        <value>If something doesn’t look right you can &lt;a href="{0}"&gt;view and change your answers here.&lt;/a&gt;</value>
+        <value>If something doesn’t look right you can &lt;a href="{0}" class="govuk-link"&gt;view and change your answers here&lt;/a&gt;.</value>
     </data>
     <data name="Please note: We are not able to offer you advice with your energy bills, give legal, financial or installation advice but we can signpost you to other organisations." xml:space="preserve">
         <value>Please note: We are not able to offer you advice with your energy bills, give legal, financial or installation advice but we can signpost you to other organisations.</value>
@@ -1761,7 +1761,7 @@
         <value>We’ve also made the website text as simple as possible to understand.</value>
     </data>
     <data name="AbilityNetAdviceLinkString" xml:space="preserve">
-        <value>&lt;a class="govuk-link" href="{0}" target="_blank"&gt;AbilityNet&lt;/a&gt; has advice on making your device easier to use if you have a disability.</value>
+        <value>&lt;a class="govuk-link" href="{0}"&gt;AbilityNet&lt;/a&gt; has advice on making your device easier to use if you have a disability.</value>
     </data>
     <data name="AccessibilityLimitationsTitleString" xml:space="preserve">
         <value>How accessible this website is</value>
@@ -1812,19 +1812,19 @@
         <value>Compliance status</value>
     </data>
     <data name="CompliantWithWebContentAccessibilityGuidelinesString" xml:space="preserve">
-        <value>This website is compliant with the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Web Content Accessibility Guidelines version 2.2 AA standard&lt;/a&gt;, due to the non-compliances listed below.</value>
+        <value>This website is compliant with the &lt;a class="govuk-link" href="{0}"&gt;Web Content Accessibility Guidelines version 2.2 AA standard&lt;/a&gt;, due to the non-compliances listed below.</value>
     </data>
     <data name="AccessibilityDisproportionateBurdenTitleString" xml:space="preserve">
         <value>Disproportionate burden</value>
     </data>
     <data name="AccessibilityDragonNaturallyDisproportionateBurdenString" xml:space="preserve">
-        <value>Dragon Naturally Speaking (speech recognition software) can only upload files when using the mouse grid feature. This issue is believed to be an ongoing issue with the Dragon Naturally Speaking software and further information can be found on the following link: &lt;a class="govuk-link" href="{0}" target="_blank"&gt;{0}&lt;/a&gt;.</value>
+        <value>Dragon Naturally Speaking (speech recognition software) can only upload files when using the mouse grid feature. This issue is believed to be an ongoing issue with the Dragon Naturally Speaking software and further information can be found on the following link: &lt;a class="govuk-link" href="{0}"&gt;{0}&lt;/a&gt;.</value>
     </data>
     <data name="AccessibilityVoiceOverDisproportionateBurdenString" xml:space="preserve">
-        <value>iOS Voiceover users may spontaneously jump to another UI element, most typically soon after opening a screen, menu or modal. This issue is believed to be an ongoing issue with the apple Voiceover software, and further information can be found on the following link: &lt;a class="govuk-link" href="{0}" target="_blank"&gt;{0}&lt;/a&gt;.</value>
+        <value>iOS Voiceover users may spontaneously jump to another UI element, most typically soon after opening a screen, menu or modal. This issue is believed to be an ongoing issue with the apple Voiceover software, and further information can be found on the following link: &lt;a class="govuk-link" href="{0}"&gt;{0}&lt;/a&gt;.</value>
     </data>
     <data name="AccessibilityDisproportionateBurdenString" xml:space="preserve">
-        <value>As this is a third-party issue we are unable to fix this and it is therefore exempt from meeting the accessibility regulations and consequently a &lt;a class="govuk-link" href="{0}" target="_blank"&gt;disproportionate burden&lt;/a&gt; within the meaning of the accessibility regulations.</value>
+        <value>As this is a third-party issue we are unable to fix this and it is therefore exempt from meeting the accessibility regulations and consequently a &lt;a class="govuk-link" href="{0}"&gt;disproportionate burden&lt;/a&gt; within the meaning of the accessibility regulations.</value>
     </data>
     <data name="AccessibilityStatementPreparationTitleString" xml:space="preserve">
         <value>Preparation of this accessibility statement</value>
@@ -1836,7 +1836,7 @@
         <value>This website was last tested on 27/02/2025. The test was carried out by Zoonou.</value>
     </data>
     <data name="AccessibilityToolString" xml:space="preserve">
-        <value>Zoonou used &lt;a class="govuk-link" href="{0}" target="_blank"&gt;WCAG-EM&lt;/a&gt; to define a representative selection of pages and test approach.</value>
+        <value>Zoonou used &lt;a class="govuk-link" href="{0}"&gt;WCAG-EM&lt;/a&gt; to define a representative selection of pages and test approach.</value>
     </data>
     <data name="Privacy notice" xml:space="preserve">
         <value>Privacy notice</value>
@@ -1857,7 +1857,7 @@
         <value>Your name, email address and any other information sent directly to us via our email feedback function.</value>
     </data>
     <data name="WeMayAlsoCollectAndProcessAnonymisedInformationCookiePolicyString" xml:space="preserve">
-        <value>We may also collect and process anonymised information as outlined in our &lt;a class="govuk-link" href="{0}" target="_blank"&gt;cookie policy&lt;/a&gt;.</value>
+        <value>We may also collect and process anonymised information as outlined in our &lt;a class="govuk-link" href="{0}"&gt;cookie policy&lt;/a&gt;.</value>
     </data>
     <data name="Purpose" xml:space="preserve">
         <value>Purpose</value>
@@ -1875,7 +1875,7 @@
         <value>Your personal data will be shared by us with other Government Departments or public authorities where necessary. We may share your data if we are required to do so by law, for example by court order or to prevent fraud or other crime.</value>
     </data>
     <data name="SharedWithDataProcessorsString" xml:space="preserve">
-        <value>As your personal data will be stored on our IT infrastructure it will also be shared with our data processors Microsoft, &lt;a href="{0}" target="_blank"&gt;GOV.UK PaaS&lt;/a&gt; and &lt;a href="{1}" target="_blank"&gt;GOV.UK Notify&lt;/a&gt;.</value>
+        <value>As your personal data will be stored on our IT infrastructure it will also be shared with our data processors Microsoft, &lt;a href="{0}" class="govuk-link"&gt;GOV.UK PaaS&lt;/a&gt; and &lt;a href="{1}" class="govuk-link"&gt;GOV.UK Notify&lt;/a&gt;.</value>
     </data>
     <data name="Your personal data may also be shared with the Softwire Technology Ltd who developed and help to maintain this service." xml:space="preserve">
         <value>Your personal data may also be shared with the Softwire Technology Ltd who developed and help to maintain this service.</value>
@@ -2337,10 +2337,10 @@
         <value>You’ve set your cookie preferences.</value>
     </data>
     <data name="VisitHistoricEnglandForHistoricBuildingInformationString" xml:space="preserve">
-        <value>Visit the &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Historic England&lt;/a&gt; site for information specific to historic buildings.</value>
+        <value>Visit the &lt;a class="govuk-link" href="{0}"&gt;Historic England&lt;/a&gt; site for information specific to historic buildings.</value>
     </data>
     <data name="CostsAndSavingsBasedOnStandardAssessmentProcedureString" xml:space="preserve">
-        <value>The costs and savings you view using the services on this site are based on standards developed for Government as a way of understanding how houses and flats use energy, and how your home’s energy use could be improved. You can find out more information about these standards with the guidance published on the&lt;a class="govuk-link" target="_blank" href="{0}"&gt; Standard Assessment Procedure site.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>The costs and savings you view using the services on this site are based on standards developed for Government as a way of understanding how houses and flats use energy, and how your home’s energy use could be improved. You can find out more information about these standards with the guidance published on the&lt;a class="govuk-link" href="{0}"&gt; Standard Assessment Procedure site&lt;/a&gt;.</value>
     </data>
     <data name="Typical savings per year" xml:space="preserve">
         <value>Typical savings per year</value>
@@ -2397,16 +2397,16 @@
         <value>The legal basis for processing your personal data is processing necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the data controller, such as the exercise of a function of the Crown, a Minister of the Crown, or a government department; the exercise of a function conferred on a person by an enactment; the exercise of a function of either House of Parliament; or the administration of justice. In this case, in order to receive feedback about this service and to contact you for clarifications or to report service updates.</value>
     </data>
     <data name="DataProcessorsWithinEEAAndModelContractClausesOutsideEEAString" xml:space="preserve">
-        <value>As your personal data is stored on our IT infrastructure and shared with our data processors Microsoft, &lt;a href="{0}" target="_blank"&gt;GOV.UK PaaS&lt;/a&gt;, and &lt;a href="{1}" target="_blank"&gt;GOV.UK Notify&lt;/a&gt;, it may be transferred and stored securely in the UK and European Economic Area. Where it is the case that your personal data is stored outside the UK and EEA it will be subject to equivalent legal protection through the use of Model Contract Clauses.</value>
+        <value>As your personal data is stored on our IT infrastructure and shared with our data processors Microsoft, &lt;a class="govuk-link" href="{0}"&gt;GOV.UK PaaS&lt;/a&gt;, and &lt;a class="govuk-link" href="{1}"&gt;GOV.UK Notify&lt;/a&gt;, it may be transferred and stored securely in the UK and European Economic Area. Where it is the case that your personal data is stored outside the UK and EEA it will be subject to equivalent legal protection through the use of Model Contract Clauses.</value>
     </data>
     <data name="FindOutIfEligibleForSustainableWarmthGrantString" xml:space="preserve">
-        <value>To find out if you are eligible for a Sustainable Warmth grant please contact your Local Authority which can be found on &lt;a class="govuk-link" href="{0}" target="_blank"&gt;https://www.gov.uk/find-local-council&lt;/a&gt; to check if they offer funding.</value>
+        <value>To find out if you are eligible for a Sustainable Warmth grant please contact your Local Authority which can be found on &lt;a class="govuk-link" href="{0}"&gt;https://www.gov.uk/find-local-council&lt;/a&gt; to check if they offer funding.</value>
     </data>
     <data name="CheckEligibilityForGBISString" xml:space="preserve">
-        <value>We recommend checking your eligibility for the &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Great British Insulation Scheme&lt;/a&gt;.</value>
+        <value>We recommend checking your eligibility for the &lt;a class="govuk-link" href="{0}"&gt;Great British Insulation Scheme&lt;/a&gt;.</value>
     </data>
     <data name="WeUseInfoToSearchForEPCString" xml:space="preserve">
-        <value>We use this information to search the Energy Performance of Buildings Register for an Energy Performance Certificate that matches your address. The Energy Performance of Buildings Register is an open register and you can find more details from the &lt;a href="{0}" target="_blank"&gt;Department for Levelling Up, Housing and Communities&lt;/a&gt;.</value>
+        <value>We use this information to search the Energy Performance of Buildings Register for an Energy Performance Certificate that matches your address. The Energy Performance of Buildings Register is an open register and you can find more details from the &lt;a href="{0}" class="govuk-link"&gt;Department for Levelling Up, Housing and Communities&lt;/a&gt;.</value>
     </data>
     <data name="Please enter your email" xml:space="preserve">
         <value>Please enter your email</value>
@@ -2415,7 +2415,7 @@
         <value>Success</value>
     </data>
     <data name="IfNotHappyWithComplaintContactLinkString" xml:space="preserve">
-        <value>The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the ‘accessibility regulations’). If you’re not happy with how we respond to your complaint, &lt;a class="govuk-link" href="{0}" target="_blank"&gt;contact the Equality Advisory and Support Service (EASS)&lt;/a&gt;.</value>
+        <value>The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the ‘accessibility regulations’). If you’re not happy with how we respond to your complaint, &lt;a class="govuk-link" href="{0}"&gt;contact the Equality Advisory and Support Service (EASS)&lt;/a&gt;.</value>
     </data>
     <data name="Homes built after 1991 were typically built with insulating material between the outer and inner walls." xml:space="preserve">
         <value>Homes built after 1991 were typically built with insulating material between the outer and inner walls.</value>
@@ -2514,7 +2514,7 @@
         <value>External wall insulation is less disruptive to the inside of your home, but will change the external appearance of your home, so you will usually need planning permission. It’s unlikely to be allowed on the front of your property if you live in a conservation area.</value>
     </data>
     <data name="MoreInfoOnSolidWallInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>You can find more information on solid wall insulation on the&lt;a class="govuk-link" target="_blank" href="{0}"&gt;Energy Saving Trust website.&lt;span class="govuk-visually-hidden"&gt;(opens in a new window)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>You can find more information on solid wall insulation on the &lt;a class="govuk-link" href="{0}"&gt;Energy Saving Trust website&lt;/a&gt;.</value>
     </data>
     <data name="floor construction" xml:space="preserve">
         <value>floor construction</value>
