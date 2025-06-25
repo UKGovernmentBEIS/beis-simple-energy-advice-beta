@@ -148,8 +148,8 @@
     <data name="Sunday and Bank Holidays, Closed" xml:space="preserve">
         <value>Sunday and Bank Holidays, Closed</value>
     </data>
-    <data name="Find out about call charges" xml:space="preserve">
-        <value>Find out about call charges</value>
+    <data name="FindOutAboutCallChargesString" xml:space="preserve">
+        <value>&lt;a href="{0}" class="govuk-link"&gt;Find out about call charges (opens in new tab)&lt;/a&gt;</value>
     </data>
     <data name="Support links" xml:space="preserve">
         <value>Support links</value>
@@ -1460,14 +1460,14 @@
     <data name="Some of the types of support include:" xml:space="preserve">
         <value>Some of the types of support include:</value>
     </data>
-    <data name="Energy Company Obligation (ECO)" xml:space="preserve">
-        <value>Energy Company Obligation (ECO)</value>
+    <data name="EnergyCompanyObligationString" xml:space="preserve">
+        <value>&lt;a class="govuk-link" href="{0}"&gt;Energy Company Obligation (ECO)&lt;/a&gt;</value>
     </data>
     <data name="Sustainable Warmth (Local Authority Delivery Phase 3 and Homes Upgrade Grant Phase 1)" xml:space="preserve">
         <value>Sustainable Warmth (Local Authority Delivery Phase 3 and Homes Upgrade Grant Phase 1)</value>
     </data>
-    <data name="Boiler Upgrade Scheme" xml:space="preserve">
-        <value>Boiler Upgrade Scheme</value>
+    <data name="BoilerUpgradeSchemeString" xml:space="preserve">
+        <value>&lt;a class="govuk-link" href="{0}"&gt;Boiler Upgrade Scheme&lt;/a&gt;</value>
     </data>
     <data name="OfgemGuideToSchemesAndGrantsString" xml:space="preserve">
         <value>If you are worried about affording your energy bills, Ofgem has a &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt;helpful guide (opens in a new tab)&lt;/a&gt; to the schemes, grants and benefits that may be available to you.</value>

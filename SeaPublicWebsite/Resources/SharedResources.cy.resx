@@ -138,8 +138,8 @@
     <data name="Sunday and Bank Holidays, Closed" xml:space="preserve">
         <value>Dydd Sul a Gwyliau Banc, Ar gau</value>
     </data>
-    <data name="Find out about call charges" xml:space="preserve">
-        <value>Gwybodaeth am gostau galwadau</value>
+    <data name="FindOutAboutCallChargesString" xml:space="preserve">
+        <value>&lt;a href="{0}" class="govuk-link"&gt;Gwybodaeth am gostau galwadau (yn agor mewn tab newydd)&lt;/a&gt;</value>
     </data>
     <data name="Support links" xml:space="preserve">
         <value>Dolenni cymorth</value>
@@ -1272,14 +1272,14 @@
     <data name="Some of the types of support include:" xml:space="preserve">
         <value>Dyma rai mathau o gymorth sydd ar gael:</value>
     </data>
-    <data name="Energy Company Obligation (ECO)" xml:space="preserve">
-        <value>Rhwymedigaeth Cwmni Ynni (ECO)</value>
+    <data name="EnergyCompanyObligationString" xml:space="preserve">
+        <value>&lt;a class="govuk-link" href="{0}"&gt;Rhwymedigaeth Cwmni Ynni (ECO)&lt;/a&gt;</value>
     </data>
     <data name="Sustainable Warmth (Local Authority Delivery Phase 3 and Homes Upgrade Grant Phase 1)" xml:space="preserve">
         <value>Cynhesrwydd Cynaliadwy (Cyfnod Cyflawni 3 Awdurdod Lleol a Chyfnod Grant 1 Uwchraddio Cartrefi)</value>
     </data>
-    <data name="Boiler Upgrade Scheme" xml:space="preserve">
-        <value>Cynllun Uwchraddio Boeleri</value>
+    <data name="BoilerUpgradeSchemeString" xml:space="preserve">
+        <value>&lt;a class="govuk-link" href="{0}"&gt;Cynllun Uwchraddio Boeleri&lt;/a&gt;</value>
     </data>
     <data name="2. Consult with a qualified installer" xml:space="preserve">
         <value>2. Ymgynghori â gosodwr cymwys</value>
