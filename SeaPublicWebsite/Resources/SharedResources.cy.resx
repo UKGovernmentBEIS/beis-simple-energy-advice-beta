@@ -138,8 +138,8 @@
     <data name="Sunday and Bank Holidays, Closed" xml:space="preserve">
         <value>Dydd Sul a Gwyliau Banc, Ar gau</value>
     </data>
-    <data name="Find out about call charges" xml:space="preserve">
-        <value>Gwybodaeth am gostau galwadau</value>
+    <data name="FindOutAboutCallChargesString" xml:space="preserve">
+        <value>&lt;a href="{0}" class="govuk-link"&gt;Gwybodaeth am gostau galwadau (yn agor mewn tab newydd)&lt;/a&gt;</value>
     </data>
     <data name="Support links" xml:space="preserve">
         <value>Dolenni cymorth</value>
@@ -175,7 +175,7 @@
         <value>Gwasanaethau eraill a allai fod o gymorth i chi</value>
     </data>
     <data name="GeneralEnergySavingTrustAdviceString" xml:space="preserve">
-        <value>I gael cyngor cyffredinol ar effeithlonrwydd ynni ac i ddod o hyd i ffyrdd o leihau eich bil ynni, ewch i wefan yr &lt;a href="{0}" target="_blank" class="govuk-link"&gt;Ymddiriedolaeth Arbed Ynni&lt;/a&gt;</value>
+        <value>I gael cyngor cyffredinol ar effeithlonrwydd ynni ac i ddod o hyd i ffyrdd o leihau eich bil ynni, ewch i wefan yr &lt;a href="{0}" class="govuk-link"&gt;Ymddiriedolaeth Arbed Ynni&lt;/a&gt;</value>
     </data>
     <data name="Do you own your property?" xml:space="preserve">
         <value>Ydych chi'n berchen ar eich eiddo?</value>
@@ -1083,9 +1083,6 @@
     <data name="Internal wall insulation will slightly reduce the size of any rooms that have an external wall, and you will need to redecorate afterwards." xml:space="preserve">
         <value>Bydd inswleiddio waliau mewnol yn lleihau ychydig ar faint unrhyw ystafelloedd sydd â wal allanol, a bydd angen i chi ailaddurno wedyn.</value>
     </data>
-    <data name="You can find more information on solid wall insulation on the Energy Saving Trust website.(opens in a new window)" xml:space="preserve">
-        <value>Gallwch ddod o hyd i ragor o wybodaeth am ddeunydd inswleiddio waliau solet ar wefan yr Ymddiriedolaeth Arbed Ynni.(yn agor mewn ffenestr newydd)</value>
-    </data>
     <data name="You have solid brick or stone walls with no cavity (this is common for homes built before 1920)." xml:space="preserve">
         <value>Os oes gennych waliau solet o frics neu gerrig heb geudod (mae hyn yn gyffredin mewn cartrefi a adeiladwyd cyn 1920).</value>
     </data>
@@ -1159,7 +1156,7 @@
         <value>£2000 - £5000</value>
     </data>
     <data name="MoreInfoOnFloorInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>Gallwch ddod o hyd i ragor o wybodaeth am ddeunydd inswleiddio lloriau ar wefan yr Ymddiriedolaeth Arbed Ynni.(yn agor mewn ffenestr newydd)</value>
+        <value>Gallwch ddod o hyd i ragor o wybodaeth am ddeunydd inswleiddio lloriau ar &lt;a class="govuk-link" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt;.</value>
     </data>
     <data name="CautionYou will need to completely empty the rooms that are being insulated, and remove any carpet or other floor covering, before the floor boards can be lifted." xml:space="preserve">
         <value>Rhybudd Bydd angen i chi wagio’r ystafelloedd sy’n cael eu hinswleiddio’n gyfan gwbl a thynnu unrhyw garped neu orchudd arall sydd ar y llawr cyn y gellir codi’r estyll.</value>
@@ -1275,14 +1272,14 @@
     <data name="Some of the types of support include:" xml:space="preserve">
         <value>Dyma rai mathau o gymorth sydd ar gael:</value>
     </data>
-    <data name="Energy Company Obligation (ECO)" xml:space="preserve">
-        <value>Rhwymedigaeth Cwmni Ynni (ECO)</value>
+    <data name="EnergyCompanyObligationString" xml:space="preserve">
+        <value>&lt;a class="govuk-link" href="{0}"&gt;Rhwymedigaeth Cwmni Ynni (ECO)&lt;/a&gt;</value>
     </data>
     <data name="Sustainable Warmth (Local Authority Delivery Phase 3 and Homes Upgrade Grant Phase 1)" xml:space="preserve">
         <value>Cynhesrwydd Cynaliadwy (Cyfnod Cyflawni 3 Awdurdod Lleol a Chyfnod Grant 1 Uwchraddio Cartrefi)</value>
     </data>
-    <data name="Boiler Upgrade Scheme" xml:space="preserve">
-        <value>Cynllun Uwchraddio Boeleri</value>
+    <data name="BoilerUpgradeSchemeString" xml:space="preserve">
+        <value>&lt;a class="govuk-link" href="{0}"&gt;Cynllun Uwchraddio Boeleri&lt;/a&gt;</value>
     </data>
     <data name="2. Consult with a qualified installer" xml:space="preserve">
         <value>2. Ymgynghori â gosodwr cymwys</value>
@@ -1303,10 +1300,10 @@
         <value>Ffyrdd eraill o arbed ynni</value>
     </data>
     <data name="WhenBuyingNewAppliancesUpgradeEnergyLabelsString" xml:space="preserve">
-        <value>Pan fyddwch chi’n prynu offer newydd, beth am uwchraddio i un sy'n defnyddio ynni'n effeithlon - &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt; Rhagor o wybodaeth am labeli ynni (yn agor mewn tab newydd)&lt;/a&gt; ar wefan yr Ymddiriedolaeth Arbed Ynni.</value>
+        <value>Pan fyddwch chi’n prynu offer newydd, beth am uwchraddio i un sy'n defnyddio ynni'n effeithlon - &lt;a class="govuk-link" href="{0}"&gt; Rhagor o wybodaeth am labeli ynni (yn agor mewn tab newydd)&lt;/a&gt; ar wefan yr Ymddiriedolaeth Arbed Ynni.</value>
     </data>
     <data name="InstallHeatPumpCheckIfHomeSuitableString" xml:space="preserve">
-        <value>Gosod pwmp gwres - Edrychwch a ydy eich cartref yn addas</value>
+        <value>Gosod pwmp gwres - &lt;a class="govuk-link" href="{0}"&gt; Edrychwch a ydy eich cartref yn addas &lt;/a&gt;</value>
     </data>
     <data name="Returning to your Action Plan" xml:space="preserve">
         <value>Mynd yn ôl at eich Cynllun Gweithredu</value>
@@ -1609,13 +1606,13 @@
         <value>Baich anghymesur</value>
     </data>
     <data name="AccessibilityDragonNaturallyDisproportionateBurdenString" xml:space="preserve">
-        <value>Dim ond drwy ddefnyddio nodwedd grid y llygoden y gall Dragon Naturally Speaking (meddalwedd adnabod lleferydd) uwchlwytho ffeiliau. Credir mai mater parhaus ynglŷn â meddalwedd Dragon Naturally Speaking yw hwn ac mae modd cael rhagor o wybodaeth ar y ddolen ganlynol: &lt;a class="govuk-link" href="{0}" target="_blank"&gt;{0}&lt;/a&gt;.</value>
+        <value>Dim ond drwy ddefnyddio nodwedd grid y llygoden y gall Dragon Naturally Speaking (meddalwedd adnabod lleferydd) uwchlwytho ffeiliau. Credir mai mater parhaus ynglŷn â meddalwedd Dragon Naturally Speaking yw hwn ac mae modd cael rhagor o wybodaeth ar y ddolen ganlynol: &lt;a class="govuk-link" href="{0}"&gt;{0}&lt;/a&gt;.</value>
     </data>
     <data name="AccessibilityVoiceOverDisproportionateBurdenString" xml:space="preserve">
-        <value>Gall defnyddwyr Voiceover iOS neidio'n ddigymell i elfen arall yn y rhyngwyneb defnyddwyr, yn arbennig felly yn fuan ar ôl agor sgrin, dewislen neu foddol. Credir mai problem barhaus ynglŷn â meddalwedd Apple Voiceover yw hwn, ac mae modd cael rhagor o wybodaeth ar y ddolen ganlynol: &lt;a class="govuk-link" href="{0}" target="_blank"&gt;{0}&lt;/a&gt;.</value>
+        <value>Gall defnyddwyr Voiceover iOS neidio'n ddigymell i elfen arall yn y rhyngwyneb defnyddwyr, yn arbennig felly yn fuan ar ôl agor sgrin, dewislen neu foddol. Credir mai problem barhaus ynglŷn â meddalwedd Apple Voiceover yw hwn, ac mae modd cael rhagor o wybodaeth ar y ddolen ganlynol: &lt;a class="govuk-link" href="{0}"&gt;{0}&lt;/a&gt;.</value>
     </data>
     <data name="AccessibilityDisproportionateBurdenString" xml:space="preserve">
-        <value>Gan mai mater trydydd parti yw hwn, allwn ninnau ddim datrys hyn ac felly mae’n esempt rhag cael ei fodloni o dan y rheoliadau hygyrchedd ac felly mae’n &lt;a class="govuk-link" href="{0}" target="_blank"&gt;faich anghymesurd&lt;/a&gt; o fewn ystyr y rheoliadau hygyrchedd.</value>
+        <value>Gan mai mater trydydd parti yw hwn, allwn ninnau ddim datrys hyn ac felly mae’n esempt rhag cael ei fodloni o dan y rheoliadau hygyrchedd ac felly mae’n &lt;a class="govuk-link" href="{0}"&gt;faich anghymesurd&lt;/a&gt; o fewn ystyr y rheoliadau hygyrchedd.</value>
     </data>
     <data name="AccessibilityStatementPreparationTitleString" xml:space="preserve">
         <value>Paratoi'r datganiad hygyrchedd yma</value>
@@ -1627,7 +1624,7 @@
         <value>Y tro diwethaf i’r wefan yma gael ei phrofi oedd 27/02/2025. Cafodd y prawf ei gynnal gan Zoonou.</value>
     </data>
     <data name="AccessibilityToolString" xml:space="preserve">
-        <value>Defnyddiodd Zoonou &lt;a class="govuk-link" href="{0}" target="_blank"&gt;WCAG-EM&lt;/a&gt; i ddiffinio detholiad cynrychioliadol o dudalennau a dull profi.</value>
+        <value>Defnyddiodd Zoonou &lt;a class="govuk-link" href="{0}"&gt;WCAG-EM&lt;/a&gt; i ddiffinio detholiad cynrychioliadol o dudalennau a dull profi.</value>
     </data>
     <data name="Privacy notice" xml:space="preserve">
         <value>Hysbysiad preifatrwydd</value>
@@ -1663,7 +1660,7 @@
         <value>Byddwn yn rhannu eich data personol gydag Adrannau eraill y Llywodraeth neu awdurdodau cyhoeddus lle bo angen. Efallai y byddwn yn rhannu eich data os bydd yn ofynnol i ni wneud hynny yn ôl y gyfraith, er enghraifft drwy orchymyn llys neu i atal twyll neu drosedd arall.</value>
     </data>
     <data name="SharedWithDataProcessorsString" xml:space="preserve">
-        <value>Gan y bydd eich data personol yn cael ei storio ar ein seilwaith TG, bydd hefyd yn cael ei rannu â’n proseswyr data Microsoft, &lt;a href="{0}" target="_blank"&gt;GOV.UK PaaS&lt;/a&gt;, a &lt;a href="{1}" target="_blank"&gt;GOV.UK Notify&lt;/a&gt;.</value>
+        <value>Gan y bydd eich data personol yn cael ei storio ar ein seilwaith TG, bydd hefyd yn cael ei rannu â’n proseswyr data Microsoft, &lt;a href="{0}" class="govuk-link"&gt;GOV.UK PaaS&lt;/a&gt;, a &lt;a href="{1}" class="govuk-link"&gt;GOV.UK Notify&lt;/a&gt;.</value>
     </data>
     <data name="Your personal data may also be shared with the Softwire Technology Ltd who developed and help to maintain this service." xml:space="preserve">
         <value>Efallai y bydd eich data personol hefyd yn cael ei rannu â Softwire Technology Ltd a ddatblygodd y gwasanaeth hwn ac sy’n helpu i’w gynnal.</value>
@@ -2070,9 +2067,6 @@
     <data name="LicenseDescriptionString" xml:space="preserve">
         <value>Mae'r holl gynnwys ar gael o dan &lt;a class="govuk-footer__link" href = "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel = "license" &gt; y Drwydded Llywodraeth Agored v3.0 &lt;/a&gt;, ac eithrio lle nodir yn wahanol</value>
     </data>
-    <data name="(opens in a new window)" xml:space="preserve">
-        <value>(yn agor mewn ffenestr newydd)</value>
-    </data>
     <data name="DEFINITELY" xml:space="preserve">
         <value>YN BENDANT</value>
     </data>
@@ -2179,10 +2173,10 @@
         <value>Y sail gyfreithiol dros brosesu eich data personol yw bod prosesu yn angenrheidiol er mwyn cyflawni tasg a wneir er budd y cyhoedd neu wrth arfer awdurdod swyddogol a freiniwyd yn y rheolydd data, fel arfer un o swyddogaethau’r Goron, un o Weinidogion y Goron, neu un o adrannau’r llywodraeth; arfer swyddogaeth a roddir i berson gan ddeddfiad; arfer swyddogaeth naill ai Tŷ’r Senedd; neu weinyddu cyfiawnder. Yn yr achos hwn, er mwyn cael adborth am y gwasanaeth hwn ac i gysylltu â chi am eglurhad neu i roi gwybod am ddiweddariadau i’r gwasanaeth.</value>
     </data>
     <data name="DataProcessorsWithinEEAAndModelContractClausesOutsideEEAString" xml:space="preserve">
-        <value>Gan fod eich data personol yn cael ei storio ar ein seilwaith TG a'i rannu gyda'n proseswyr data Microsoft, &lt;a href="{0}" target="_blank"&gt;GOV.UK PaaS&lt;/a&gt;, a &lt;a href="{1}" target="_blank"&gt;GOV.UK Notify&lt;/a&gt;, fe allai gael ei drosglwyddo a'i storio'n ddiogel yn y Deyrnas Unedig a'r Ardal Economaidd Ewropeaidd. Os bydd eich data personol yn cael ei storio y tu allan i'r Deyrnas Unedig a'r AEE, bydd yn dod o dan amddiffyniad cyfreithiol cyfatebol trwy ddefnyddio Cymalau Contract Enghreifftiol.</value>
+        <value>Gan fod eich data personol yn cael ei storio ar ein seilwaith TG a'i rannu gyda'n proseswyr data Microsoft, &lt;a class="govuk-link" href="{0}"&gt;GOV.UK PaaS&lt;/a&gt;, a &lt;a class="govuk-link" href="{1}"&gt;GOV.UK Notify&lt;/a&gt;, fe allai gael ei drosglwyddo a'i storio'n ddiogel yn y Deyrnas Unedig a'r Ardal Economaidd Ewropeaidd. Os bydd eich data personol yn cael ei storio y tu allan i'r Deyrnas Unedig a'r AEE, bydd yn dod o dan amddiffyniad cyfreithiol cyfatebol trwy ddefnyddio Cymalau Contract Enghreifftiol.</value>
     </data>
     <data name="CheckEligibilityForGBISString" xml:space="preserve">
-        <value>Rydym yn argymell y dylech chi wirio’ch cymhwyster ar gyfer &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Cynllun Inswleiddio Mawr Prydain&lt;/a&gt;.</value>
+        <value>Rydym yn argymell y dylech chi wirio’ch cymhwyster ar gyfer &lt;a class="govuk-link" href="{0}"&gt;Cynllun Inswleiddio Mawr Prydain&lt;/a&gt;.</value>
     </data>
     <data name="Please enter your email" xml:space="preserve">
         <value>Rhowch eich ebost</value>
@@ -2305,25 +2299,25 @@
         <value>2 DDIWRNOD</value>
     </data>
     <data name="AbilityNetAdviceLinkString" xml:space="preserve">
-        <value>Mae gan &lt;a class="govuk-link" href="{0}" target="_blank"&gt;AbilityNet&lt;/a&gt; gyngor ar wneud eich dyfais yn haws i'w defnyddio os oes gennych anabledd.</value>
+        <value>Mae gan &lt;a class="govuk-link" href="{0}"&gt;AbilityNet&lt;/a&gt; gyngor ar wneud eich dyfais yn haws i'w defnyddio os oes gennych anabledd.</value>
     </data>
     <data name="BriefCookieExplanationLinkToDetailedInfoString" xml:space="preserve">
         <value>Mae gan y tudalen yma esboniad byr o bob math o gwci rydyn ni'n ei ddefnyddio. Os hoffech chi gael rhagor o fanylion, &lt;a href="{0}" class="govuk-link"&gt;darllenwch ein gwybodaeth fanwl am gwcis&lt;/a&gt;</value>
     </data>
     <data name="ChangeAnswersIfSomethingDoesNotLookRightString" xml:space="preserve">
-        <value>Os nad yw rhywbeth yn edrych yn iawn, gallwch &lt;a href="{0}"&gt;weld a newid eich atebion yma.&lt;/a&gt;</value>
+        <value>Os nad yw rhywbeth yn edrych yn iawn, gallwch &lt;a href="{0}" class="govuk-link"&gt;weld a newid eich atebion yma&lt;/a&gt;.</value>
     </data>
     <data name="CheckWhichHeatPumpIsSuitableOnHeatPumpServiceString" xml:space="preserve">
-        <value>Mae gwahanol fathau o bwmp gwres a gallwch &lt;a class="govuk-link" href="{0}" target="_blank"&gt;wirio pa un a allai fod yn addas ar gyfer eich cartref chi&lt;/a&gt; ar ein gwasanaeth pympiau gwres pwrpasol.</value>
+        <value>Mae gwahanol fathau o bwmp gwres a gallwch &lt;a class="govuk-link" href="{0}"&gt;wirio pa un a allai fod yn addas ar gyfer eich cartref chi&lt;/a&gt; ar ein gwasanaeth pympiau gwres pwrpasol.</value>
     </data>
     <data name="CompliantWithWebContentAccessibilityGuidelinesString" xml:space="preserve">
-        <value>Mae'r wefan yma yn cydymffurfio'n rhannol â &lt;a class="govuk-link" href="{0}" target="_blank"&gt;safon AA fersiwn 2.2 o Ganllawiau Hygyrchedd Cynnwys y We&lt;/a&gt;, oherwydd y diffygion cydymffurfio isod.</value>
+        <value>Mae'r wefan yma yn cydymffurfio'n rhannol â &lt;a class="govuk-link" href="{0}"&gt;safon AA fersiwn 2.2 o Ganllawiau Hygyrchedd Cynnwys y We&lt;/a&gt;, oherwydd y diffygion cydymffurfio isod.</value>
     </data>
     <data name="CostsAndSavingsBasedOnStandardAssessmentProcedureString" xml:space="preserve">
-        <value>Mae'r costau a'r arbedion rydych chi'n eu gweld drwy ddefnyddio'r gwasanaethau ar y wefan yma wedi’u seilio ar safonau a ddatblygwyd i'r Llywodraeth fel ffordd o ddeall sut mae tai a fflatiau yn defnyddio ynni, a sut y gallai defnydd ynni eich cartref chi gael ei wella. Gallwch gael rhagor o wybodaeth am y safonau hyn gyda'r canllawiau sydd wedi’u cyhoeddi ar wefan y &lt;a class="govuk-link" target="_blank" href="{0}"&gt; Weithdrefn Asesu Safonol&lt;span class="govuk-visually-hidden"&gt; (yn agor mewn ffenestr newydd) &lt;/span&gt;&lt;/a&gt;</value>
+        <value>Mae'r costau a'r arbedion rydych chi'n eu gweld drwy ddefnyddio'r gwasanaethau ar y wefan yma wedi’u seilio ar safonau a ddatblygwyd i'r Llywodraeth fel ffordd o ddeall sut mae tai a fflatiau yn defnyddio ynni, a sut y gallai defnydd ynni eich cartref chi gael ei wella. Gallwch gael rhagor o wybodaeth am y safonau hyn gyda'r canllawiau sydd wedi’u cyhoeddi ar wefan y &lt;a class="govuk-link" href="{0}"&gt; Weithdrefn Asesu Safonol&lt;/a&gt;.</value>
     </data>
     <data name="DifferentServiceAvailableToCheckHeatPumpString" xml:space="preserve">
-        <value>Mae gwasanaeth gwahanol ar gael os hoffech chi &lt;a class="govuk-link" href="{0}" target="_blank"&gt; wirio a allai pwmp gwres fod yn addas ar gyfer eich eiddo.&lt;/a&gt;\</value>
+        <value>Mae gwasanaeth gwahanol ar gael os hoffech chi &lt;a class="govuk-link" href="{0}"&gt; wirio a allai pwmp gwres fod yn addas ar gyfer eich eiddo&lt;/a&gt;.</value>
     </data>
     <data name="EPCSuggestsAllCavityWallsInsulatedString" xml:space="preserve">
         <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu &lt;strong&gt;bod eich waliau ceudod wedi’u hinswleiddio.&lt;/strong&gt;</value>
@@ -2368,16 +2362,16 @@
         <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai &lt;strong&gt;pwmp gwres&lt;/strong&gt; yw eich prif system wresogi</value>
     </data>
     <data name="WeUseInfoToSearchForEPCString" xml:space="preserve">
-        <value>Rydyn ni’n defnyddio'r wybodaeth yma i chwilio’r Gofrestr Perfformiad Ynni Adeiladau ar gyfer Tystysgrif Perfformiad Ynni sy'n cyd-fynd â'ch cyfeiriad chi. Mae'r Gofrestr Perfformiad Ynni Adeiladau yn gofrestr agored a gallwch gael rhagor o fanylion gan yr &lt;a href="{0}" target="_blank"&gt;Adran Ffyniant Bro, Tai a Chymunedau&lt;/a&gt;.</value>
+        <value>Rydyn ni’n defnyddio'r wybodaeth yma i chwilio’r Gofrestr Perfformiad Ynni Adeiladau ar gyfer Tystysgrif Perfformiad Ynni sy'n cyd-fynd â'ch cyfeiriad chi. Mae'r Gofrestr Perfformiad Ynni Adeiladau yn gofrestr agored a gallwch gael rhagor o fanylion gan yr &lt;a href="{0}" class="govuk-link"&gt;Adran Ffyniant Bro, Tai a Chymunedau&lt;/a&gt;.</value>
     </data>
     <data name="YouCanChangeWhichCookiesString" xml:space="preserve">
         <value>Gallwch &lt;a href="{0}" class="govuk-link"&gt;newid pa gwcis rydych chi'n hapus inni eu defnyddio&lt;/a&gt;.</value>
     </data>
     <data name="WeMayAlsoCollectAndProcessAnonymisedInformationCookiePolicyString" xml:space="preserve">
-        <value>Efallai y byddwn ni hefyd yn casglu ac yn prosesu gwybodaeth ddienw fel yr amlinellir yn ein &lt;a class="govuk-link" href="{0}" target="_blank"&gt;polisi cwcis&lt;/a&gt;.</value>
+        <value>Efallai y byddwn ni hefyd yn casglu ac yn prosesu gwybodaeth ddienw fel yr amlinellir yn ein &lt;a class="govuk-link" href="{0}"&gt;polisi cwcis&lt;/a&gt;.</value>
     </data>
     <data name="VisitTheHelpForHouseholdsWebsiteString" xml:space="preserve">
-        <value>Ewch i wefan &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Cymorth i Aelwydydd&lt;/a&gt; i gael mwy byth o ffyrdd o arbed ynni a lleihau’ch biliau.</value>
+        <value>Ewch i wefan &lt;a class="govuk-link" href="{0}"&gt;Cymorth i Aelwydydd&lt;/a&gt; i gael mwy byth o ffyrdd o arbed ynni a lleihau’ch biliau.</value>
     </data>
     <data name="Saves your language preference" xml:space="preserve">
         <value>Yn cadw’ch dewis iaith</value>
@@ -2396,19 +2390,19 @@
         <comment>remember your language</comment>
     </data>
     <data name="VisitNIDirectString" xml:space="preserve">
-        <value>Ewch i &lt;a href="{0}" target="_blank" class="govuk-link"&gt;NI Direct&lt;/a&gt; i'ch helpu i ddod o hyd i ffyrdd o wella effeithlonrwydd ynni eich eiddo.</value>
+        <value>Ewch i &lt;a href="{0}" class="govuk-link"&gt;NI Direct&lt;/a&gt; i'ch helpu i ddod o hyd i ffyrdd o wella effeithlonrwydd ynni eich eiddo.</value>
     </data>
     <data name="VisitHomeEnergyScotlandString" xml:space="preserve">
-        <value>Ewch i wefan &lt;a href="{0}" target="_blank" class="govuk-link"&gt;Home Energy Scotland&lt;/a&gt; i'ch helpu i ddod o hyd i ffyrdd o wella effeithlonrwydd ynni eich eiddo.</value>
+        <value>Ewch i wefan &lt;a href="{0}" class="govuk-link"&gt;Home Energy Scotland&lt;/a&gt; i'ch helpu i ddod o hyd i ffyrdd o wella effeithlonrwydd ynni eich eiddo.</value>
     </data>
     <data name="VisitHistoricEnglandForHistoricBuildingInformationString" xml:space="preserve">
-        <value>Ewch i wefan &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Historic England&lt;/a&gt; i gael gwybodaeth sy'n benodol i adeiladau hanesyddol.</value>
+        <value>Ewch i wefan &lt;a class="govuk-link" href="{0}"&gt;Historic England&lt;/a&gt; i gael gwybodaeth sy'n benodol i adeiladau hanesyddol.</value>
     </data>
     <data name="VisitEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>Gallwch ymweld â gwefan &lt;a href="{0}" target="_blank" class="govuk-link"&gt;yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt; i gael rhagor o wybodaeth am leihau defnydd ynni eich cartref.</value>
+        <value>Gallwch ymweld â gwefan &lt;a href="{0}" class="govuk-link"&gt;yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt; i gael rhagor o wybodaeth am leihau defnydd ynni eich cartref.</value>
     </data>
     <data name="ThisIsANewServiceString" xml:space="preserve">
-        <value>Gwasanaeth newydd yw hwn – bydd eich &lt;a class="govuk-link" href="{0}" target="_blank"&gt;adborth (yn agor mewn tab newydd)&lt;/a&gt; yn ein helpu i'w wella.</value>
+        <value>Gwasanaeth newydd yw hwn – bydd eich &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt;adborth (yn agor mewn tab newydd)&lt;/a&gt; yn ein helpu i'w wella.</value>
     </data>
     <data name="SummaryOfSavingsAndCostsForSingleRecommendationString" xml:space="preserve">
         <value>Dyma grynodeb o'r amcangyfrif o’ch arbedion ar filiau ynni blynyddol a chost gosod yr &lt;strong&gt;1 argymhelliad&lt;/strong&gt; y dwedsoch y byddech chi’n ei ystyried ar gyfer eich cartref.</value>
@@ -2426,7 +2420,7 @@
         <value>Gallwch &lt;a href="{0}"&gt;ddychwelyd i’ch argymhellion a'ch cynllun gweithredu&lt;/a&gt; os oes angen.</value>
     </data>
     <data name="OfgemGuideToSchemesAndGrantsString" xml:space="preserve">
-        <value>Os ydych chi'n poeni am fforddio’ch biliau ynni, mae gan Ofgem &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt;ganllaw defnyddiol (yn agor mewn tab newydd)&lt;/a&gt; i'r cynlluniau, y grantiau a'r budd-daliadau a allai fod ar gael ichi.</value>
+        <value>Os ydych chi'n poeni am fforddio’ch biliau ynni, mae gan Ofgem &lt;a class="govuk-link" href="{0}"&gt;ganllaw defnyddiol&lt;/a&gt; i'r cynlluniau, y grantiau a'r budd-daliadau a allai fod ar gael ichi.</value>
     </data>
     <data name="NewWindowsTypicallyLastString" xml:space="preserve">
         <value>Ar y cyfan, disgwylir i ffenestri newydd bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
@@ -2516,13 +2510,13 @@
         <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod gan eich cartref &lt;strong&gt;waliau solet.&lt;/strong&gt;</value>
     </data>
     <data name="FindOutIfEligibleForSustainableWarmthGrantString" xml:space="preserve">
-        <value>I ddarganfod a ydych chi’n gymwys i gael grant Cynhesrwydd Cynaliadwy, cysylltwch â'ch Awdurdod Lleol sydd i’w weld ar &lt;a class="govuk-link" href="{0}" target="_blank"&gt;https://www.gov.uk/find-local-council&lt;/a&gt; i wirio a ydyn  nhw’n cynnig cyllid.</value>
+        <value>I ddarganfod a ydych chi’n gymwys i gael grant Cynhesrwydd Cynaliadwy, cysylltwch â'ch Awdurdod Lleol sydd i’w weld ar &lt;a class="govuk-link" href="{0}"&gt;https://www.gov.uk/find-local-council&lt;/a&gt; i wirio a ydyn  nhw’n cynnig cyllid.</value>
     </data>
     <data name="GasBoilersTypicallyExpectedToLast" xml:space="preserve">
         <value>Ar y cyfan, disgwylir i fwyleri nwy newydd bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="GetHelpFindingInstallerOnMCSWebsiteString" xml:space="preserve">
-        <value>Gallwch gael help i ddod o hyd i osodwr cymwys pympiau gwres neu baneli haul yn eich ardal chi drwy ymweld â &lt;a class="govuk-link" href="{0}" target="_blank"&gt;gwefan yr MCS.&lt;/a&gt;</value>
+        <value>Gallwch gael help i ddod o hyd i osodwr cymwys pympiau gwres neu baneli haul yn eich ardal chi drwy ymweld â &lt;a class="govuk-link" href="{0}"&gt;gwefan yr MCS&lt;/a&gt;.</value>
     </data>
     <data name="HaveLoftAndAccessHintFalseString" xml:space="preserve">
         <value>Ar y cyfan, does gan gartrefi o’ch math chi &lt;strong&gt;ddim mynediad i’r atig.&lt;/strong&gt;</value>
@@ -2537,7 +2531,7 @@
         <value>Ar y cyfan, disgwylir i bympiau gwres bara &lt;strong&gt;12 - 15 o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="HelpFindingQualifiedInstallerOnTrustMarkWebsiteString" xml:space="preserve">
-        <value>Ar gyfer pob newid arall i'ch eiddo, mynnwch help i ddod o hyd i osodwr cymwys yn eich ardal drwy ymweld â gwefan &lt;a class="govuk-link" href="{0}" target="_blank"&gt;TrustMark.&lt;/a&gt;</value>
+        <value>Ar gyfer pob newid arall i'ch eiddo, mynnwch help i ddod o hyd i osodwr cymwys yn eich ardal drwy ymweld â gwefan &lt;a class="govuk-link" href="{0}"&gt;TrustMark&lt;/a&gt;.</value>
     </data>
     <data name="HelpUsImproveAccessibilityFeedbackString" xml:space="preserve">
         <value>Rydyn ni bob amser yn ceisio gwella hygyrchedd y wefan yma. Os cewch chi unrhyw broblemau sydd heb eu rhestru ar y tudalen yma neu'n credu nad ydyn ni’n bodloni gofynion hygyrchedd, cysylltwch ag: &lt;a class="govuk-link" href="mailto: {0}"&gt;{0}&lt;/a&gt;</value>
@@ -2567,34 +2561,34 @@
         <value>Ar y cyfan, mae gan gartrefi o’ch math chi &lt;strong&gt;lawr pren crog &lt;/strong&gt;.</value>
     </data>
     <data name="MoreInfoOnHotWaterCylinderInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>Gallwch weld rhagor o wybodaeth am inswleiddiad waliau solet ar wefan &lt;a class="govuk-link" target="_blank" href="{0}"&gt;yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>Gallwch weld rhagor o wybodaeth am inswleiddiad waliau solet ar &lt;a class="govuk-link" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt;.</value>
     </data>
     <data name="MoreInfoOnSolidWallInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>Gallwch weld rhagor o wybodaeth am inswleiddiad waliau solet ar wefan &lt;a class="govuk-link" target="_blank" href="{0}"&gt;yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>Gallwch weld rhagor o wybodaeth am inswleiddiad waliau solet ar &lt;a class="govuk-link" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt;.</value>
     </data>
     <data name="MoreInfoOnSolarPVOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>Gallwch weld rhagor o wybodaeth am baneli haul PV ar&lt;a class="govuk-link" target="_blank" href="{0}"&gt; wefan yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>Gallwch weld rhagor o wybodaeth am baneli haul PV ar &lt;a class="govuk-link" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt;.</value>
     </data>
     <data name="MoreInfoOnNewWindowsOnBritishFenestrationRatingCouncilWebsiteString" xml:space="preserve">
-        <value>Gallwch weld rhagor o wybodaeth am ffenestri effeithlon a sut i'w dewis ar wefan &lt;a class="govuk-link" target="_blank" href="{0}"&gt;Cyngor Sgorio Ffenestri Prydain.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>Gallwch weld rhagor o wybodaeth am ffenestri effeithlon a sut i'w dewis ar &lt;a class="govuk-link" href="{0}"&gt;wefan Cyngor Sgorio Ffenestri Prydain&lt;/a&gt;.</value>
     </data>
     <data name="MoreInfoOnLoftInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>Gallwch weld rhagor o wybodaeth am inswleiddiad atig ar &lt;a class="govuk-link" target="_blank" href="{0}"&gt; wefan yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>Gallwch weld rhagor o wybodaeth am inswleiddiad atig ar &lt;a class="govuk-link" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt;.</value>
     </data>
     <data name="MoreInfoOnHighHeatRetentionStorageHeatersOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>Gallwch weld rhagor o wybodaeth am wresogyddion storio sy’n cadw gwres uchel ar &lt;a class="govuk-link" target="_blank" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>Gallwch weld rhagor o wybodaeth am wresogyddion storio sy’n cadw gwres uchel ar &lt;a class="govuk-link" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt;.</value>
     </data>
     <data name="MoreInfoOnHeatPumpsOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>Gallwch weld rhagor o wybodaeth am bympiau gwres ar wefan &lt;a class="govuk-link" href="{0}" target="_blank"&gt;yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt;.</value>
+        <value>Gallwch weld rhagor o wybodaeth am bympiau gwres ar &lt;a class="govuk-link" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt;.</value>
     </data>
     <data name="MoreInfoOnHeatingControlsOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>Gallwch weld rhagor o wybodaeth am reolaethau gwres ar wefan &lt;a class="govuk-link" target="_blank" href="{0}"&gt; yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>Gallwch weld rhagor o wybodaeth am reolaethau gwres ar &lt;a class="govuk-link" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt;.</value>
     </data>
     <data name="MoreInfoOnGasBoilerReplacementOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>Gallwch weld rhagor o wybodaeth am amnewid eich bwyler nwy ar wefan &lt;a class="govuk-link" target="_blank" href="{0}"&gt;yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>Gallwch weld rhagor o wybodaeth am amnewid eich bwyler nwy ar &lt;a class="govuk-link" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt;.</value>
     </data>
     <data name="MoreInfoOnCavityWallInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
-        <value>Gallwch weld rhagor o wybodaeth am inswleiddiad waliau ceudod ar &lt;a class="govuk-link" target="_blank" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni.&lt;span class="govuk-visually-hidden"&gt;(yn agor mewn ffenestr newydd)&lt;/span&gt;&lt;/a&gt;</value>
+        <value>Gallwch weld rhagor o wybodaeth am inswleiddiad waliau ceudod ar &lt;a class="govuk-link" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt;.</value>
     </data>
     <data name="LoftInsulationExpectedToLastString" xml:space="preserve">
         <value>Ar y cyfan, disgwylir i inswleiddiad atig bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
@@ -2633,13 +2627,13 @@
         <value>Os dyma’ch ymweliad cyntaf, mae'n cymryd tua &lt;strong&gt;10 munud&lt;/strong&gt; i ateb y cwestiynau a chael argymhellion sydd wedi'u teilwra i chi a'ch cartref.</value>
     </data>
     <data name="IfNotHappyWithComplaintContactLinkString" xml:space="preserve">
-        <value>Y Comisiwn Cydraddoldeb a Hawliau Dynol (EHRC) sy’n gyfrifol am orfodi Rheoliadau Hygyrchedd Cyrff y Sector Cyhoeddus (Gwefannau a Chymwysiadau Symudol) (Rhif 2) 2018 (y 'rheoliadau hygyrchedd'). Os nad ydych chi’n fodlon ar y ffordd rydyn ni’n ymateb i'ch cwyn, &lt;a class="govuk-link" href="{0}" target="_blank"&gt;cysylltwch â'r Gwasanaeth Cynghori a Chymorth Cydraddoldeb (EASS)&lt;/a&gt;.</value>
+        <value>Y Comisiwn Cydraddoldeb a Hawliau Dynol (EHRC) sy’n gyfrifol am orfodi Rheoliadau Hygyrchedd Cyrff y Sector Cyhoeddus (Gwefannau a Chymwysiadau Symudol) (Rhif 2) 2018 (y 'rheoliadau hygyrchedd'). Os nad ydych chi’n fodlon ar y ffordd rydyn ni’n ymateb i'ch cwyn, &lt;a class="govuk-link" href="{0}"&gt;cysylltwch â'r Gwasanaeth Cynghori a Chymorth Cydraddoldeb (EASS)&lt;/a&gt;.</value>
     </data>
     <data name="IfUserInScotlandHomeEnergyScotlandLinkString" xml:space="preserve">
-        <value>Os ydych chi'n byw yn yr Alban, ewch i &lt;a class="govuk-link" href="{0}" target="_blank"&gt;Home Energy Scotland&lt;/a&gt; i'ch helpu i ddod o hyd i ffyrdd o leihau’ch biliau ynni.</value>
+        <value>Os ydych chi'n byw yn yr Alban, ewch i &lt;a class="govuk-link" href="{0}"&gt;Home Energy Scotland&lt;/a&gt; i'ch helpu i ddod o hyd i ffyrdd o leihau’ch biliau ynni.</value>
     </data>
     <data name="IfYouLiveInNIVisitNIDirectString" xml:space="preserve">
-        <value>Os ydych chi'n byw yng Ngogledd Iwerddon, ewch i&lt;a class="govuk-link" href="{0}" target="_blank"&gt;NI Direct&lt;/a&gt; i gael cymorth.</value>
+        <value>Os ydych chi'n byw yng Ngogledd Iwerddon, ewch i&lt;a class="govuk-link" href="{0}"&gt;NI Direct&lt;/a&gt; i gael cymorth.</value>
     </data>
     <data name="InfoOnHelpFromBoilerUpgradeSchemeForHeatPumpsString" xml:space="preserve">
         <value>Mae pympiau gwres yn addas ar gyfer llawer o gartrefi, byddan nhw’n lleihau’ch allyriadau carbon ac mae grantiau ar gael drwy'r &lt;a class="govuk-link" href="{0}"&gt;Cynllun Uwchraddio Bwyleri&lt;/a&gt; ar gyfer pympiau gwres o’r aer a phympiau gwres o'r ddaear i leihau'r gost ymlaen llaw.</value>
