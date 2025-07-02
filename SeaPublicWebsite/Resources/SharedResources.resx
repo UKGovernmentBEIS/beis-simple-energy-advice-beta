@@ -149,7 +149,7 @@
         <value>Sunday and Bank Holidays, Closed</value>
     </data>
     <data name="FindOutAboutCallChargesString" xml:space="preserve">
-        <value>&lt;a href="{0}" class="govuk-link"&gt;Find out about call charges (opens in new tab)&lt;/a&gt;</value>
+        <value>&lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt; Find out about call charges (opens in new tab)&lt;/a&gt;</value>
     </data>
     <data name="Support links" xml:space="preserve">
         <value>Support links</value>
