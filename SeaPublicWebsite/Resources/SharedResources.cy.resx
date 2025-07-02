@@ -139,7 +139,7 @@
         <value>Dydd Sul a Gwyliau Banc, Ar gau</value>
     </data>
     <data name="FindOutAboutCallChargesString" xml:space="preserve">
-        <value>&lt;a href="{0}" class="govuk-link"&gt;Gwybodaeth am gostau galwadau (yn agor mewn tab newydd)&lt;/a&gt;</value>
+        <value>&lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt;Gwybodaeth am gostau galwadau (yn agor mewn tab newydd)&lt;/a&gt;</value>
     </data>
     <data name="Support links" xml:space="preserve">
         <value>Dolenni cymorth</value>
