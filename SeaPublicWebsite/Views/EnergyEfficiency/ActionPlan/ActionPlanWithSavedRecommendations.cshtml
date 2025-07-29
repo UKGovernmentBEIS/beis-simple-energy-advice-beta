@@ -22,6 +22,10 @@
 <div class="govuk-grid-row">
 <div class="govuk-grid-column-full">
     <h1 class="govuk-heading-xl">
+        @if (Model.LastUpdated is not null)
+        {
+            <span class="govuk-caption-xl">@SharedLocalizer["Updated {0}", Model.GetLastUpdatedText()]</span>
+        }
         @SharedLocalizer["YourActionPlanTitleString"]
     </h1>
 
@@ -50,6 +54,14 @@
            SummaryText = @SharedLocalizer["How did we calculate these figures?"].Value,
            Html = @<text>
                       @SharedLocalizer["CostsAndSavingsBasedOnStandardAssessmentProcedureString", "https://www.gov.uk/guidance/standard-assessment-procedure"]
+                   </text>
+       })
+
+@await Html.GovUkDetails(new DetailsViewModel
+       {
+           SummaryText = @SharedLocalizer["Why recommendations may have changed"].Value,
+           Html = @<text>
+                      @SharedLocalizer["Your recommendations, along with their associated costs and savings, will be recalculated when you return to this service. These may change over time based on updated information, such as changes to the energy price cap or RdSAP energy prices."]
                    </text>
        })
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
@@ -14,6 +15,7 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string BackLink { get; set; }
         public bool IsPdf { get; set; }
         public string UrlPrefix { get; set; }
+        public DateTime? LastUpdated { get; set; }
         
         public string GetTotalInstallationCostText()
         {
@@ -53,6 +55,11 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
         public string GetUrlWithPrefix(string url)
         {
             return $"{UrlPrefix}{url}";
+        }
+
+        public string GetLastUpdatedText()
+        {
+            return $"{LastUpdated:d}";
         }
     }
 }

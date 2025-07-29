@@ -22,13 +22,26 @@
     <div class="govuk-grid-column-two-thirds">
 
         <h1 class="govuk-heading-xl">
-            @SharedLocalizer["You may be able to make some improvements to your home"]
+            @if (Model.RecommendationsUpdatedSinceLastVisit)
+            {
+                @SharedLocalizer["Your recommendations have been updated"]
+            }
+            else
+            {
+                @SharedLocalizer["You may be able to make some improvements to your home"]
+            }
         </h1>
         <p class="govuk-body">
             @SharedLocalizer["Based on the information you’ve given us, there may be some changes a qualified installer could make to your home to reduce the amount of energy it needs to use."]
         </p>
 
-        <p class="govuk-body">@(Model.NumberOfPropertyRecommendations == 1 ? SharedLocalizer["WeFoundImprovementsSingularString"] : SharedLocalizer["WeFoundImprovementsPluralString", Model.NumberOfPropertyRecommendations])</p>
+        <p class="govuk-body">
+            @if (Model.RecommendationsUpdatedSinceLastVisit)
+            {
+                @SharedLocalizer["Since your last visit, your recommendations have changed."]
+            }
+            @(Model.NumberOfPropertyRecommendations == 1 ? SharedLocalizer["WeFoundImprovementsSingularString"] : SharedLocalizer["WeFoundImprovementsPluralString", Model.NumberOfPropertyRecommendations])
+        </p>
 
         <p class="govuk-body">
             @SharedLocalizer["We will advise you if your home needs to meet certain conditions for a given improvement to be effective for you."]

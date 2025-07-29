@@ -1,4 +1,6 @@
-﻿@using SeaPublicWebsite.Models.EnergyEfficiency
+﻿@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using SeaPublicWebsite.Models.EnergyEfficiency
 @using SeaPublicWebsite.Controllers
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
@@ -45,6 +47,10 @@ else
     <p class="govuk-body">
         @SharedLocalizer["ChangeAnswersIfSomethingDoesNotLookRightString", Url.Action(nameof(EnergyEfficiencyController.AnswerSummary_Get), "EnergyEfficiency", new { reference = Model.Reference })]
     </p>
+    @await Html.GovUkWarningText(new WarningTextViewModel
+    {
+        Text = SharedLocalizer["Your recommendations will be recalculated if you change your answers."].Value
+    })
 }
 
 <h2 class="govuk-heading-m">
