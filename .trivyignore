@@ -1,0 +1,23 @@
+﻿# ignored in debian packages
+CVE-2023-45853
+# we do not use CPAN.pm
+CVE-2023-31484
+# from base image, waiting on upstream
+CVE-2025-6020
+# we do not use LDAP
+CVE-2023-2953
+# we do not use custom setuid binaries
+CVE-2025-4802
+# installed with chrome though inputs to chrome are limited
+CVE-2025-49794
+CVE-2025-49796
+CVE-2025-6021
+CVE-2023-52355
+CVE-2023-25193
+CVE-2025-7345
+CVE-2024-8176
+CVE-2023-52425 
+# we do not send emails
+CVE-2022-4055
+# we do not use sqlite
+CVE-2025-6965
