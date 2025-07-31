@@ -24,7 +24,7 @@
         <h1 class="govuk-heading-xl">
             @if (Model.LastUpdated is not null)
             {
-                <span class="govuk-caption-xl">@SharedLocalizer["Updated {0}", Model.GetLastUpdatedText()]</span>
+                <span class="govuk-caption-xl">@SharedLocalizer["UpdatedString", Model.GetLastUpdatedText()]</span>
             }
             @SharedLocalizer["YourActionPlanTitleString"]
         </h1>
