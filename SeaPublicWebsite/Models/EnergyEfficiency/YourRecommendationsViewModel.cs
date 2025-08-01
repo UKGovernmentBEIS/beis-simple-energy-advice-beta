@@ -23,6 +23,8 @@ namespace SeaPublicWebsite.Models.EnergyEfficiency
 
         public EnergyPriceCapInfo EnergyPriceCapInfo { get; set; }
 
+        public bool RecommendationsUpdatedSinceLastVisit { get; set; }
+
         public LocalizedHtmlString GetEnergyPriceCapString(IHtmlLocalizer<SharedResources> sharedLocalizer)
         {
             return EnergyPriceCapInfo switch
