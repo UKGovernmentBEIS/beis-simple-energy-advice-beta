@@ -2769,4 +2769,22 @@ cartref &lt;strong&gt;{1}, a {2}.&lt;/strong&gt;</value>
     <data name="MonthDecemberString" xml:space="preserve">
         <value>Rhagfyr</value>
     </data>
+    <data name="YourRecommendationsUpdatedString" xml:space="preserve">
+        <value>Mae’ch argymhellion wedi'u diweddaru</value>
+    </data>
+    <data name="SinceLastVisitRecommendationsChangedString" xml:space="preserve">
+        <value>Ers eich ymweliad diwethaf, mae’ch argymhellion wedi newid</value>
+    </data>
+    <data name="RecommendationsRecalculatedIfChangeAnswersString" xml:space="preserve">
+        <value>Bydd eich argymhellion yn cael eu hailgyfrif os byddwch chi’n newid eich atebion.</value>
+    </data>
+    <data name="UpdatedString" xml:space="preserve">
+        <value>Wedi’i ddiweddaru {0}</value>
+    </data>
+    <data name="WhyRecommendationsChangedTitleString" xml:space="preserve">
+        <value>pam y gallai argymhellion fod wedi newid</value>
+    </data>
+    <data name="WhyRecommendationsChangedDescriptionString" xml:space="preserve">
+        <value>Bydd eich argymhellion, ynghyd â'u costau a'u harbedion cysylltiedig, yn cael eu hailgyfrifo pan fyddwch chi'n dychwelyd i'r gwasanaeth yma. Gall y rhain newid dros amser ar sail gwybodaeth wedi'i diweddaru, megis newidiadau yn y cap prisiau ynni neu brisiau ynni RdSAP.</value>
+    </data>
 </root>
