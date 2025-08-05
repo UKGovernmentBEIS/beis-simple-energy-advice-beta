@@ -2714,4 +2714,22 @@ device, or a physical control in your home.</value>
     <data name="MonthDecemberString" xml:space="preserve">
         <value>December</value>
     </data>
+    <data name="YourRecommendationsUpdatedString" xml:space="preserve">
+        <value>Your recommendations have been updated</value>
+    </data>
+    <data name="SinceLastVisitRecommendationsChangedString" xml:space="preserve">
+        <value>Since your last visit, your recommendations have changed.</value>
+    </data>
+    <data name="RecommendationsRecalculatedIfChangeAnswersString" xml:space="preserve">
+        <value>Your recommendations will be recalculated if you change your answers.</value>
+    </data>
+    <data name="UpdatedString" xml:space="preserve">
+        <value>Updated {0}</value>
+    </data>
+    <data name="WhyRecommendationsChangedTitleString" xml:space="preserve">
+        <value>Why recommendations may have changed</value>
+    </data>
+    <data name="WhyRecommendationsChangedDescriptionString" xml:space="preserve">
+        <value>Your recommendations, along with their associated costs and savings, will be recalculated when you return to this service. These may change over time based on updated information, such as changes to the energy price cap or RdSAP energy prices.</value>
+    </data>
 </root>

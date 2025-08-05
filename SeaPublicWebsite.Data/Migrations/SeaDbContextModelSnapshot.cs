@@ -212,6 +212,12 @@ namespace SeaPublicWebsite.Data.Migrations
                     b.Property<DateTime?>("RecommendationsFirstRetrievedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<DateTime?>("RecommendationsLastRetrievedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("RecommendationsUpdatedSinceLastVisit")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Reference")
                         .HasColumnType("text");
 

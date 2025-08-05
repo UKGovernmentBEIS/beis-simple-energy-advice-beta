@@ -53,7 +53,9 @@ public class PropertyDataTests
             },
             EnergyPriceCapInfoRequested = true,
             EnergyPriceCapYear = 2000,
-            EnergyPriceCapMonthIndex = 1
+            EnergyPriceCapMonthIndex = 1,
+            RecommendationsUpdatedSinceLastVisit = false,
+            RecommendationsLastRetrievedAt = DateTime.Now
         };
     }
 
@@ -81,6 +83,8 @@ public class PropertyDataTests
         };
     }
 
+    // If this test fails it is likely due to adding new properties to the PropertyData class.
+    // Make sure InitializePropertyData() is updated to set the new properties.
     [Test]
     public void CopiesAllAnswers()
     {

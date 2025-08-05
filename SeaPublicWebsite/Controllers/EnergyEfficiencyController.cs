@@ -1316,12 +1316,24 @@ public class EnergyEfficiencyController : Controller
         propertyData.ReturningUser = true;
         await propertyDataStore.SavePropertyDataAsync(propertyData);
 
-        var recommendations = propertyData.PropertyRecommendations;
+        // Always request the latest recommendations
+        var updatedPropertyData =
+            await propertyDataService.UpdatePropertyDataWithRecommendations(reference);
+
+        var recommendations = updatedPropertyData.PropertyRecommendations;
+
+        // On any change we show the user this page which explains why their recommendations may have changed
+        if (updatedPropertyData.RecommendationsUpdatedSinceLastVisit)
+        {
+            return RedirectToAction(nameof(YourRecommendations_Get), "EnergyEfficiency", new { reference });
+        }
+
         if (!recommendations.Any())
         {
             return RedirectToAction(nameof(NoRecommendations_Get), "EnergyEfficiency", new { reference });
         }
 
+        // This path is only used for if the user didn't complete answering actions last time they filled the form
         var firstNotActionedRecommendation =
             recommendations.Find(recommendation => recommendation.RecommendationAction is null);
         if (firstNotActionedRecommendation is not null)
@@ -1384,7 +1396,8 @@ public class EnergyEfficiencyController : Controller
             NumberOfPropertyRecommendations = propertyData.PropertyRecommendations.Count,
             HasEmailAddress = false,
             BackLink = GetBackUrl(QuestionFlowStep.YourRecommendations, propertyData),
-            EnergyPriceCapInfo = propertyData.GetEnergyPriceCapInfo()
+            EnergyPriceCapInfo = propertyData.GetEnergyPriceCapInfo(),
+            RecommendationsUpdatedSinceLastVisit = propertyData.RecommendationsUpdatedSinceLastVisit
         };
 
         return View("YourRecommendations", viewModel);
@@ -1598,7 +1611,8 @@ public class EnergyEfficiencyController : Controller
             EmailAddress = null,
             EmailSent = false,
             IsPdf = isPdf,
-            UrlPrefix = isPdf ? fullHostnameService.GetHostname() : ""
+            UrlPrefix = isPdf ? fullHostnameService.GetHostname() : "",
+            LastUpdated = propertyData.RecommendationsLastRetrievedAt
         };
 
         if (viewModel.GetSavedRecommendations().Any())

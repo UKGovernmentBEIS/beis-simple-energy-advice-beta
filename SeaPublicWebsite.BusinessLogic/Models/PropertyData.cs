@@ -62,6 +62,8 @@ public class PropertyData : IEntityWithRowVersioning
     public uint Version { get; set; }
 
     public List<PropertyRecommendation> PropertyRecommendations { get; set; } = [];
+    public bool RecommendationsUpdatedSinceLastVisit { get; set; }
+    public DateTime? RecommendationsLastRetrievedAt { get; set; }
     public bool EnergyPriceCapInfoRequested { get; set; }
     public int? EnergyPriceCapYear { get; set; }
     public int? EnergyPriceCapMonthIndex { get; set; }
