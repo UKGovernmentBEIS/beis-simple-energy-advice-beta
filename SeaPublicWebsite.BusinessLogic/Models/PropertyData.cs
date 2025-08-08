@@ -5,6 +5,10 @@ namespace SeaPublicWebsite.BusinessLogic.Models;
 
 public class PropertyData : IEntityWithRowVersioning
 {
+    /// <summary>
+    /// In some cases there can be rows in the database that have a null reference.
+    /// These null reference rows releate to the <see cref="UneditedData"/> field.
+    /// </summary>
     public string Reference { get; set; }
 
     /// <summary>
@@ -56,7 +60,17 @@ public class PropertyData : IEntityWithRowVersioning
     public int? HoursOfHeatingMorning { get; set; }
     public int? HoursOfHeatingEvening { get; set; }
     public decimal? Temperature { get; set; }
+
+    /// <summary>
+    /// When the user opts to change their answers we store a copy of the answers here.
+    /// When they return to the check your answers page by going through the flow, this data is discarded.
+    /// See <see cref="PropertyDataUpdater.UpdatePropertyData"/>.
+    /// If they return to the check your answers page via any other means (browser back button, etc.) then we overwrite
+    /// their current answers with this data to ensure the user is never on the check your answers page with invalid data.
+    /// See <see cref="RevertToUneditedData"/> and its usages.
+    /// </summary>
     public PropertyData UneditedData { get; set; }
+
     public bool HasSeenRecommendations { get; set; }
     public bool ReturningUser { get; set; }
     public uint Version { get; set; }
