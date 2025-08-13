@@ -45,6 +45,12 @@ public class AuthController(PasswordService passwordService, AuthService authSer
             HttpOnly = true
         });
 
-        return Redirect(viewModel.ReturnPath);
+        // links starting with // are protocol-relative URLs which can be used to redirect to other domains
+        // send to index if this is the case
+        var returnPath = viewModel.ReturnPath.StartsWith("//")
+            ? "/"
+            : viewModel.ReturnPath;
+
+        return Redirect(returnPath);
     }
 }
