@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.0-392f2974" />
+      <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.0-1d1e0af" />
       <PackageReference Include="GovukNotify" Version="7.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="8.0.14" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.14" />
