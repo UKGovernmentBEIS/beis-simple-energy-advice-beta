@@ -54,6 +54,13 @@ For critical bug fixes on production
    - To merge to main, the `production release` label must be applied to your pull request
 - If the PR is accepted merge the branch
 
+### Trivy
+
+On each push to develop, we run a Trivy scan on the Docker image to check for vulnerabilities.
+If the scan fails, we should look into the new vulnerability and either:
+- Fix it
+- Add to .trivyignore if the issue is a false positive.
+
 ### Deployments
 
 When code is merged to the dev, staging or main branch, the corresponding CodeDeploy pipeline is started.
