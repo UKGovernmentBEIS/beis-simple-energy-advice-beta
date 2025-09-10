@@ -49,7 +49,7 @@ public class AuthController(PasswordService passwordService, AuthService authSer
 
         return Redirect(returnPath);
     }
-    
+
     private static bool IsValidReturnPath(string returnPath)
     {
         // return false if contains \. they can be treated as / in some cases and never used by the site so can be ignored
@@ -57,7 +57,7 @@ public class AuthController(PasswordService passwordService, AuthService authSer
         {
             return false;
         }
-        
+
         // ensure both that the link starts with a slash (is relative) but not starts with //
         // links starting with // are protocol-relative URLs which can be used to redirect to other domains
         // send to index if this is the case
