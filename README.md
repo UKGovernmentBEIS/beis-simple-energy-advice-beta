@@ -57,6 +57,7 @@ For managing the database, see [here](Documentation/database.md).
 ### Running the service locally
 
 - In Rider, select a new build configuration for docker-compose, selecting the docker-compose.yml file. You should then be able to debug by pressing F5.
+  - Be sure to set Build: Always as a configuration setting to ensure latest code and assets are built.
 - NOTE: The postgres instance runs on port 5432, which is the default postgres port. If you are running any other local postgres instance, it is likely they will fight for this port.
 - In a browser, visit http://localhost:5001/energy-efficiency/new-or-returning-user
 
