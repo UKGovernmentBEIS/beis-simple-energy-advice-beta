@@ -52,6 +52,7 @@ public class PdfGenerationService(AuthService authService, PasswordService passw
             Domain = "localhost"
         });
         await page.GoToAsync($"{GetLocalAddress()}/{path}");
+        var html = await page.GetContentAsync(); // TODO PC-1961: Add breakpoint here to view html
         var pdfStream = await page.PdfStreamAsync(
             new PdfOptions
             {
