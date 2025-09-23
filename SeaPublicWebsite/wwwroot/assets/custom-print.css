@@ -1,0 +1,19 @@
+.govuk-logo-dot {
+    fill: #00ffe0 !important;
+}
+
+@media print {
+    .govuk-logo-dot {
+        fill: #00ffe0 !important;
+    }
+}
+
+@media (forced-colors: active) {
+    .govuk-logo-dot {
+        fill: #00ffe0 !important;
+    }
+}
+
+:focus .govuk-logo-dot {
+    fill: #00ffe0 !important;
+}
