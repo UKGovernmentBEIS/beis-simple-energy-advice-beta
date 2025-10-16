@@ -2175,9 +2175,6 @@
     <data name="DataProcessorsWithinEEAAndModelContractClausesOutsideEEAString" xml:space="preserve">
         <value>Gan fod eich data personol yn cael ei storio ar ein seilwaith TG a'i rannu gyda'n proseswyr data Microsoft, &lt;a class="govuk-link" href="{0}"&gt;GOV.UK PaaS&lt;/a&gt;, a &lt;a class="govuk-link" href="{1}"&gt;GOV.UK Notify&lt;/a&gt;, fe allai gael ei drosglwyddo a'i storio'n ddiogel yn y Deyrnas Unedig a'r Ardal Economaidd Ewropeaidd. Os bydd eich data personol yn cael ei storio y tu allan i'r Deyrnas Unedig a'r AEE, bydd yn dod o dan amddiffyniad cyfreithiol cyfatebol trwy ddefnyddio Cymalau Contract Enghreifftiol.</value>
     </data>
-    <data name="CheckEligibilityForGBISString" xml:space="preserve">
-        <value>Rydym yn argymell y dylech chi wirio’ch cymhwyster ar gyfer &lt;a class="govuk-link" href="{0}"&gt;Cynllun Inswleiddio Mawr Prydain&lt;/a&gt;.</value>
-    </data>
     <data name="Please enter your email" xml:space="preserve">
         <value>Rhowch eich ebost</value>
     </data>
