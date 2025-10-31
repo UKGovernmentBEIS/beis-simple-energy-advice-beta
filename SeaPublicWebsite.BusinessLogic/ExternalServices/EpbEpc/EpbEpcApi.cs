@@ -9,6 +9,14 @@ using SeaPublicWebsite.BusinessLogic.Models;
 
 namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc
 {
+    /**
+     * Documented at <see href="https://api-docs.epcregisters.net/#/Find%20Ways%20to%20Save%20Energy/"/>
+     * There is a dropdown at the top left where you can select live/staging API. Ensure you have the correct one selected before Authorising.
+     * Credentials to use can be found in Keeper.
+     * For dev/staging, use the Staging Service on swagger and the EPB EPC DEV Credentials on Keeper.
+     * For production, use the Production Service on swagger and the EPB EPC Prod Credentials on Keeper.
+     * Select the retrofit-advice:assessment:fetch scope when authorizing.
+     */
     public class EpbEpcApi : IEpcApi
     {
         private readonly IMemoryCache memoryCache;

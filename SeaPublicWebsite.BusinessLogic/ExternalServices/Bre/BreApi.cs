@@ -9,12 +9,18 @@ using SeaPublicWebsite.BusinessLogic.ExternalServices.Common;
 
 namespace SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
 
+/**
+ * Documentated at <see href="https://softwiretech.atlassian.net/wiki/spaces/Support/pages/21647818868/DESNZ+Support+Reference+Documentation#FWTS-BRE-Recommendations-API"/>
+ */
 public class BreApi(
     IOptions<BreConfiguration> options,
     ILogger<BreApi> logger)
 {
     private readonly BreConfiguration configuration = options.Value;
 
+    /**
+     * Sample request/response documented in docs/sample-responses/bre-api/get-recommendations
+     */
     public async Task<BreRecommendationsWithPriceCap> GetRecommendationsWithPriceCapForPropertyRequestAsync(
         BreRequest request)
     {
