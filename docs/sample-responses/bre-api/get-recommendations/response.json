@@ -1,0 +1,19 @@
+﻿{
+  "measures": {
+    "Z1": {
+      "min_installation_cost": 9500,
+      "max_installation_cost": 12000,
+      "cost_saving": 0.0,
+      "lifetime": 15
+    },
+    "O": {
+      "min_installation_cost": 2500,
+      "max_installation_cost": 5500,
+      "cost_saving": 119.85,
+      "lifetime": 20
+    }
+  },
+  "notes": {
+    "energy_price_cap": "October 2025"
+  }
+}
