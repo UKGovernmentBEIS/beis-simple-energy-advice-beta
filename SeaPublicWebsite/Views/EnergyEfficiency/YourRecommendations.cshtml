@@ -51,13 +51,11 @@
             @SharedLocalizer["If you like any of these recommendations, you can save them to your action plan before you move on."]
         </p>
 
-        <div class="govuk-warning-text">
-            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-            <strong class="govuk-warning-text__text">
-                <span class="govuk-warning-text__assistive">Note</span>
-                @Model.GetEnergyPriceCapString(SharedLocalizer)
-            </strong>
-        </div>
+        @await Html.GovUkWarningText(new WarningTextViewModel
+        {
+            IconFallbackText = @SharedLocalizer["Note"].Value,
+            Html = @<text>@Model.GetEnergyPriceCapString(SharedLocalizer)</text>
+        })
 
         <h2 class="govuk-heading-l">
             @SharedLocalizer["Getting back to your recommendations once you leave"]
