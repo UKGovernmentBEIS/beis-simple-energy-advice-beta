@@ -38,8 +38,14 @@ RUN dotnet nuget add source /SeaPublicWebsite/Lib --name Local
 # Restore as distinct layers
 RUN dotnet restore
 
+# Restore ManagementShell
+RUN dotnet restore SeaPublicWebsite.ManagementShell/
+
 # Build and publish a release
 RUN dotnet publish -c $CONFIGURATION -o out
+
+# Build ManagementShell
+RUN dotnet build SeaPublicWebsite.ManagementShell/ -c $CONFIGURATION --no-restore -o /cli
 
 # Build runtime image
 FROM base
@@ -47,5 +53,6 @@ USER app
 
 WORKDIR /SeaPublicWebsite
 COPY --from=build-env /SeaPublicWebsite/out .
+COPY --from=build-env /cli ./cli
 EXPOSE 8080
 ENTRYPOINT ["dotnet", "SeaPublicWebsite.dll"]

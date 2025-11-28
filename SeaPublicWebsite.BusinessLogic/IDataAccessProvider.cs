@@ -1,6 +1,6 @@
-﻿using SeaPublicWebsite.BusinessLogic.Models;
+using SeaPublicWebsite.BusinessLogic.Models;
 
-namespace SeaPublicWebsite.Data;
+namespace SeaPublicWebsite.BusinessLogic;
 
 public interface IDataAccessProvider
 {
@@ -8,4 +8,7 @@ public interface IDataAccessProvider
     Task UpdatePropertyDataAsync(PropertyData propertyData);
     Task<PropertyData> GetPropertyDataAsync(string reference);
     Task<bool> PropertyDataExistsAsync(string reference);
+    Task<EmergencyMaintenanceHistory?> GetLatestEmergencyMaintenanceHistoryAsync();
+    Task AddEmergencyMaintenanceHistoryAsync(EmergencyMaintenanceHistory history);
 }
+

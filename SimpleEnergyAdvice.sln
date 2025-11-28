@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaPublicWebsite.Data", "Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaPublicWebsite.BusinessLogic", "SeaPublicWebsite.BusinessLogic\SeaPublicWebsite.BusinessLogic.csproj", "{52A59A93-AC33-48E1-927D-FFCBB37A330E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeaPublicWebsite.ManagementShell", "SeaPublicWebsite.ManagementShell\SeaPublicWebsite.ManagementShell.csproj", "{8BD6DCC7-63BB-46EF-BE93-5F7C2D9ADE42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,10 @@ Global
 		{52A59A93-AC33-48E1-927D-FFCBB37A330E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52A59A93-AC33-48E1-927D-FFCBB37A330E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52A59A93-AC33-48E1-927D-FFCBB37A330E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BD6DCC7-63BB-46EF-BE93-5F7C2D9ADE42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BD6DCC7-63BB-46EF-BE93-5F7C2D9ADE42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BD6DCC7-63BB-46EF-BE93-5F7C2D9ADE42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BD6DCC7-63BB-46EF-BE93-5F7C2D9ADE42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection

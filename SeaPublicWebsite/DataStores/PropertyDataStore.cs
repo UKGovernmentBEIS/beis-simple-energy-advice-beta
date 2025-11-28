@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using SeaPublicWebsite.BusinessLogic;
 using SeaPublicWebsite.BusinessLogic.Models;
-using SeaPublicWebsite.Data;
 using SeaPublicWebsite.ErrorHandling;
 using SeaPublicWebsite.Helpers;
 
