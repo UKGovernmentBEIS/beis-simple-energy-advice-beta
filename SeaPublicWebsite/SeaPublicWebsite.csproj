@@ -11,15 +11,15 @@
     <ItemGroup>
       <PackageReference Include="CabinetOffice.GovUkDesignSystem" Version="1.0.0-0f0543d7" />
       <PackageReference Include="GovukNotify" Version="7.2.0" />
-      <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="8.0.14" />
-      <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.14" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.14">
+      <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="8.0.22" />
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.22" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.22">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
-      <PackageReference Include="PuppeteerSharp" Version="20.2.2" />
+      <PackageReference Include="PuppeteerSharp" Version="20.2.5" />
     </ItemGroup>
 
     <ItemGroup>
