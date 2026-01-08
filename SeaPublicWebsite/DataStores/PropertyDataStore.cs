@@ -30,11 +30,11 @@ public class PropertyDataStore : IPropertyDataStore
         this.dataAccessProvider = dataAccessProvider;
         this.logger = logger;
     }
-    
+
     public async Task<PropertyData> LoadPropertyDataAsync(string reference)
     {
         var data = await dataAccessProvider.GetPropertyDataAsync(reference.ToUpper());
-        
+
         if (data == null)
         {
             throw new PropertyReferenceNotFoundException
@@ -42,10 +42,11 @@ public class PropertyDataStore : IPropertyDataStore
                 Reference = reference
             };
         }
-        
+
         // Recommendations need to be in a consistent order to allow navigation between them.
-        data.PropertyRecommendations.Sort(Comparer<PropertyRecommendation>.Create((p1, p2) => p1.Key.CompareTo(p2.Key)));
-        
+        data.PropertyRecommendations.Sort(
+            Comparer<PropertyRecommendation>.Create((p1, p2) => p1.Key.CompareTo(p2.Key)));
+
         return data;
     }
 
@@ -64,7 +65,8 @@ public class PropertyDataStore : IPropertyDataStore
         {
             // Most likely reason for this is that the user double-clicked a form submit button so just continue,
             // the previous request should have updated the DB already.
-            logger.LogWarning($"DbUpdateConcurrencyException caught. This probably means that a user double-clicked a form submit. {e.Message}");
+            logger.LogWarning(
+                $"DbUpdateConcurrencyException caught. This probably means that a user double-clicked a form submit. {e.Message}");
         }
     }
 
@@ -93,9 +95,11 @@ public class PropertyDataStore : IPropertyDataStore
                 logger.LogWarning("Failed to create new property data row with reference " + propertyData.Reference);
                 await Task.Delay(SleepMilliSeconds);
             }
+
             saveCount++;
         }
 
-        throw new Exception("Failed to create new property data row. Tried references: " + string.Join(',', attemptedReferences));
+        throw new Exception("Failed to create new property data row. Tried references: " +
+                            string.Join(',', attemptedReferences));
     }
 }

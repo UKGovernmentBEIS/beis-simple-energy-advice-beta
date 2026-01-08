@@ -12,7 +12,7 @@ public class DataAccessProvider : IDataAccessProvider
     {
         this.context = context;
     }
-    
+
     public async Task AddPropertyDataAsync(PropertyData propertyData)
     {
         context.PropertyData.Add(propertyData);
@@ -39,9 +39,10 @@ public class DataAccessProvider : IDataAccessProvider
         return await context.PropertyData.AnyAsync(p => p.Reference == reference);
     }
 
-    public async Task<EmergencyMaintenanceHistory?> GetLatestEmergencyMaintenanceHistoryAsync()
+    public async Task<EmergencyMaintenanceHistory> GetLatestEmergencyMaintenanceHistoryAsync()
     {
-        return await context.EmergencyMaintenanceHistories.OrderByDescending(emh => emh.ChangeDate).FirstOrDefaultAsync();
+        return await context.EmergencyMaintenanceHistories.OrderByDescending(emh => emh.ChangeDate)
+            .FirstOrDefaultAsync();
     }
 
     public async Task AddEmergencyMaintenanceHistoryAsync(EmergencyMaintenanceHistory history)

@@ -8,7 +8,6 @@ public interface IDataAccessProvider
     Task UpdatePropertyDataAsync(PropertyData propertyData);
     Task<PropertyData> GetPropertyDataAsync(string reference);
     Task<bool> PropertyDataExistsAsync(string reference);
-    Task<EmergencyMaintenanceHistory?> GetLatestEmergencyMaintenanceHistoryAsync();
+    Task<EmergencyMaintenanceHistory> GetLatestEmergencyMaintenanceHistoryAsync();
     Task AddEmergencyMaintenanceHistoryAsync(EmergencyMaintenanceHistory history);
 }
-

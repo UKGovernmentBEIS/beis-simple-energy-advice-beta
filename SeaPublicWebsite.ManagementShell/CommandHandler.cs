@@ -12,14 +12,14 @@ public class CommandHandler(IOutputProvider outputProvider, IDataAccessProvider 
 
         DisplayMaintenanceStateWarnings();
 
-        EmergencyMaintenanceState? argEmergencyMaintenanceState = ParseEmergencyMaintenanceStateInput(args);
+        var argEmergencyMaintenanceState = ParseEmergencyMaintenanceStateInput(args);
         if (argEmergencyMaintenanceState is null) return;
 
-        var emergencyMaintenanceVerb =
+        var argEmergencyMaintenanceVerb =
             argEmergencyMaintenanceState == EmergencyMaintenanceState.Enabled ? "ENABLE" : "DISABLE";
         var liveEmergencyMaintenanceState = await emergencyMaintenanceService.GetEmergencyMaintenanceState();
 
-        DisplayMaintenanceStateDetails(emergencyMaintenanceVerb, liveEmergencyMaintenanceState);
+        DisplayMaintenanceStateDetails(argEmergencyMaintenanceVerb, liveEmergencyMaintenanceState);
 
         if (argEmergencyMaintenanceState == liveEmergencyMaintenanceState)
         {
@@ -28,13 +28,14 @@ public class CommandHandler(IOutputProvider outputProvider, IDataAccessProvider 
             return;
         }
 
-        var confirmation = GetUserConfirmationForSettingMaintenanceState(emergencyMaintenanceVerb);
+        var confirmation = GetUserConfirmationForSettingMaintenanceState(argEmergencyMaintenanceVerb);
         if (!confirmation) return;
 
         var authorEmail = GetUserEmailForAudit();
         if (authorEmail is null) return;
 
-        await emergencyMaintenanceService.SetEmergencyMaintenanceState((EmergencyMaintenanceState)argEmergencyMaintenanceState, authorEmail);
+        await emergencyMaintenanceService.SetEmergencyMaintenanceState(
+            (EmergencyMaintenanceState)argEmergencyMaintenanceState, authorEmail);
 
         outputProvider.Output("Output Complete.");
     }
@@ -49,10 +50,10 @@ public class CommandHandler(IOutputProvider outputProvider, IDataAccessProvider 
             outputProvider.Output("Exiting without changes...");
             return null;
         }
-        
+
         return authorEmail;
     }
-    
+
     private bool GetUserConfirmationForSettingMaintenanceState(string emergencyMaintenanceVerb)
     {
         outputProvider.Output("!!!!!!!!!!!!!!!!!!!!!!");
@@ -68,13 +69,19 @@ public class CommandHandler(IOutputProvider outputProvider, IDataAccessProvider 
         return confirmation;
     }
 
-    private void DisplayMaintenanceStateDetails(string emergencyMaintenanceVerb, EmergencyMaintenanceState liveEmergencyMaintenanceState)
+    private void DisplayMaintenanceStateDetails(string emergencyMaintenanceVerb,
+        EmergencyMaintenanceState liveEmergencyMaintenanceState)
     {
         var isMaintenanceStateEnabled = liveEmergencyMaintenanceState == EmergencyMaintenanceState.Enabled;
 
         outputProvider.Output("Details:");
         outputProvider.Output($"Request is to {emergencyMaintenanceVerb} emergency maintenance mode.");
-        outputProvider.Output($"Portal is currently {(isMaintenanceStateEnabled ? "IN" : "NOT IN")} emergency maintenance mode. Referrals cannot be submitted.");
+        outputProvider.Output(
+            $"Portal emergency maintenance mode is currently {(isMaintenanceStateEnabled ? "ENABLED" : "DISABLED")}.");
+        if (isMaintenanceStateEnabled)
+        {
+            outputProvider.Output("Recommendations cannot be viewed.");
+        }
     }
 
     private void DisplayMaintenanceStateWarnings()
@@ -94,7 +101,7 @@ public class CommandHandler(IOutputProvider outputProvider, IDataAccessProvider 
     {
         try
         {
-            return Enum.Parse<EmergencyMaintenanceState>(args[0].Trim(), ignoreCase: true);
+            return Enum.Parse<EmergencyMaintenanceState>(args[0].Trim(), true);
         }
         catch (Exception e) when (e is ArgumentException or IndexOutOfRangeException)
         {
