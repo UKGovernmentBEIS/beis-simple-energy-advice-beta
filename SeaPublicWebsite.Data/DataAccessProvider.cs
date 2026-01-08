@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SeaPublicWebsite.BusinessLogic;
 using SeaPublicWebsite.BusinessLogic.Models;
 
 namespace SeaPublicWebsite.Data;
@@ -11,7 +12,7 @@ public class DataAccessProvider : IDataAccessProvider
     {
         this.context = context;
     }
-    
+
     public async Task AddPropertyDataAsync(PropertyData propertyData)
     {
         context.PropertyData.Add(propertyData);
@@ -36,5 +37,17 @@ public class DataAccessProvider : IDataAccessProvider
     public async Task<bool> PropertyDataExistsAsync(string reference)
     {
         return await context.PropertyData.AnyAsync(p => p.Reference == reference);
+    }
+
+    public async Task<EmergencyMaintenanceHistory> GetLatestEmergencyMaintenanceHistoryAsync()
+    {
+        return await context.EmergencyMaintenanceHistories.OrderByDescending(emh => emh.ChangeDate)
+            .FirstOrDefaultAsync();
+    }
+
+    public async Task AddEmergencyMaintenanceHistoryAsync(EmergencyMaintenanceHistory history)
+    {
+        context.EmergencyMaintenanceHistories.Add(history);
+        await context.SaveChangesAsync();
     }
 }
