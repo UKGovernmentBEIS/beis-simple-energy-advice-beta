@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using SeaPublicWebsite.Services.Cookies;
 
 namespace SeaPublicWebsite.Middleware;
 
@@ -19,9 +20,9 @@ public class CorrelationIdMiddleware
         this.logger = logger;
     }
 
-    public async Task Invoke(HttpContext httpContext)
+    public async Task Invoke(HttpContext httpContext, CookieService cookieService)
     {
-        var correlationId = GetOrCreateCorrelationId(httpContext);
+        var correlationId = GetOrCreateCorrelationId(httpContext, cookieService);
         httpContext.Items[CorrelationIdItemKey] = correlationId;
 
         var method = httpContext.Request.Method;
@@ -42,9 +43,9 @@ public class CorrelationIdMiddleware
             correlationId, method, path, httpContext.Response.StatusCode, stopwatch.ElapsedMilliseconds);
     }
 
-    private string GetOrCreateCorrelationId(HttpContext httpContext)
+    private static string GetOrCreateCorrelationId(HttpContext httpContext, CookieService cookieService)
     {
-        if (httpContext.Request.Cookies.TryGetValue(CorrelationIdCookieName, out var existingCorrelationId) 
+        if (cookieService.TryGetCookie<string>(httpContext.Request, CorrelationIdCookieName, out var existingCorrelationId) 
             && !string.IsNullOrWhiteSpace(existingCorrelationId))
         {
             return existingCorrelationId;
@@ -52,15 +53,7 @@ public class CorrelationIdMiddleware
 
         var newCorrelationId = Guid.NewGuid().ToString();
 
-        httpContext.Response.Cookies.Append(
-            CorrelationIdCookieName,
-            newCorrelationId,
-            new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = true,
-                SameSite = SameSiteMode.Lax
-            });
+        cookieService.SetSessionCookie(httpContext.Response, CorrelationIdCookieName, newCorrelationId);
 
         return newCorrelationId;
     }
