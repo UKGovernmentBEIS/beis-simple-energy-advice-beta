@@ -170,6 +170,8 @@ public class Startup
 
         app.UseRouting();
 
+        app.UseMiddleware<CorrelationIdMiddleware>();
+
         app.UseAuthorization();
 
         if (authService.AuthIsEnabled())
