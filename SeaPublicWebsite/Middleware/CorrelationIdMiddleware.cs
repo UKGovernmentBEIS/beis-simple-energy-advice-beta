@@ -27,10 +27,12 @@ public class CorrelationIdMiddleware
 
         var method = httpContext.Request.Method;
         var path = httpContext.Request.Path.ToString();
+        var safeMethod = method?.Replace("\r", string.Empty).Replace("\n", string.Empty);
+        var safePath = path?.Replace("\r", string.Empty).Replace("\n", string.Empty);
 
         logger.LogInformation(
-            "Request started: CorrelationId={CorrelationId}, Method={Method}, Path={Path}",
-            correlationId, method, path);
+            "Request started: CorrelationId={CorrelationId}, Method={safeMethod}, Path={safePath}",
+            correlationId, safeMethod, safePath);
 
         var stopwatch = Stopwatch.StartNew();
 
@@ -39,8 +41,8 @@ public class CorrelationIdMiddleware
         stopwatch.Stop();
 
         logger.LogInformation(
-            "Request completed: CorrelationId={CorrelationId}, Method={Method}, Path={Path}, StatusCode={StatusCode}, Duration={Duration}ms",
-            correlationId, method, path, httpContext.Response.StatusCode, stopwatch.ElapsedMilliseconds);
+            "Request completed: CorrelationId={CorrelationId}, Method={safeMethod}, Path={safePath}, StatusCode={StatusCode}, Duration={Duration}ms",
+            correlationId, safeMethod, safePath, httpContext.Response.StatusCode, stopwatch.ElapsedMilliseconds);
     }
 
     private static string GetOrCreateCorrelationId(HttpContext httpContext, CookieService cookieService)
