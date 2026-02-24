@@ -11,6 +11,7 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
     public DbSet<Epc> Epc { get; set; }
     public DbSet<PropertyRecommendation> PropertyRecommendations { get; set; }
     public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
+    public DbSet<EmergencyMaintenanceHistory> EmergencyMaintenanceHistories { get; set; }
 
     public SeaDbContext(DbContextOptions<SeaDbContext> options) : base(options)
     {
@@ -22,6 +23,7 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
         SetupPropertyRecommendations(modelBuilder);
         SetupEpc(modelBuilder);
         SetupRelations(modelBuilder);
+        SetupEmergencyMaintenanceHistory(modelBuilder);
     }
 
     private void SetupPropertyData(ModelBuilder modelBuilder)
@@ -91,6 +93,22 @@ public class SeaDbContext : DbContext, IDataProtectionKeyContext
             .WithOne(d => d.UneditedData)
             .HasForeignKey<PropertyData>("EditedDataId")
             .OnDelete(DeleteBehavior.Cascade);
+    }
+
+    private void SetupEmergencyMaintenanceHistory(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<EmergencyMaintenanceHistory>()
+            .Property(emh => emh.Id)
+            .ValueGeneratedOnAdd();
+        modelBuilder.Entity<EmergencyMaintenanceHistory>()
+            .HasKey("Id");
+        modelBuilder.Entity<EmergencyMaintenanceHistory>()
+            .Property(emh => emh.ChangeDate)
+            .HasColumnType("timestamp with time zone");
+        modelBuilder.Entity<EmergencyMaintenanceHistory>()
+            .HasIndex(emh => emh.ChangeDate);
+
+        AddRowVersionColumn(modelBuilder.Entity<EmergencyMaintenanceHistory>());
     }
 
     private void AddRowVersionColumn<T>(EntityTypeBuilder<T> builder) where T : class, IEntityWithRowVersioning

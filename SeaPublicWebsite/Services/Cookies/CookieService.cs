@@ -81,14 +81,26 @@ public class CookieService(IOptions<CookieServiceConfiguration> options, ILogger
 
     public void SetCookie<T>(HttpResponse response, string cookieName, T cookie)
     {
+        SetCookie(response, cookieName, cookie, TimeSpan.FromDays(Configuration.DefaultDaysUntilExpiry), httpOnly: false);
+    }
+
+    public void SetSessionCookie<T>(HttpResponse response, string cookieName, T cookie, bool httpOnly = true)
+    {
+        SetCookie(response, cookieName, cookie, maxAge: null, httpOnly);
+    }
+
+    private static void SetCookie<T>(HttpResponse response, string cookieName, T cookie, TimeSpan? maxAge, bool httpOnly)
+    {
         var cookieString = JsonConvert.SerializeObject(cookie);
         response.Cookies.Append(
             cookieName,
             cookieString,
             new CookieOptions
             {
-                Secure = true, SameSite = SameSiteMode.Lax,
-                MaxAge = TimeSpan.FromDays(Configuration.DefaultDaysUntilExpiry)
+                Secure = true, 
+                SameSite = SameSiteMode.Lax,
+                MaxAge = maxAge,
+                HttpOnly = httpOnly
             });
     }
 

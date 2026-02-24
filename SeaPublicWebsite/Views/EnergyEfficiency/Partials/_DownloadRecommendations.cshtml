@@ -1,13 +1,13 @@
 ﻿@using GovUkDesignSystem
 @using GovUkDesignSystem.GovUkDesignSystemComponents
 @using Microsoft.AspNetCore.Mvc.Localization
+@using SeaPublicWebsite.Controllers
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @model SeaPublicWebsite.Models.EnergyEfficiency.DownloadPdfButtonViewModel
 
-@using (Html.BeginForm("GenerateRecommendationsPdf_Post", "EnergyEfficiency", new { reference = Model.Reference }))
-{
-    @await Html.GovUkButton(new ButtonViewModel
-           {
-               Text = SharedLocalizer["Download Recommendations"].Value
-           })
-}
+@await Html.GovUkButton(new ButtonViewModel
+      {
+         Href = Url.Action(nameof(EnergyEfficiencyController.GenerateRecommendationsPdf_Get), "EnergyEfficiency", new { reference = Model.Reference }),
+         Text = SharedLocalizer["Download Recommendations"].Value
+      })
+

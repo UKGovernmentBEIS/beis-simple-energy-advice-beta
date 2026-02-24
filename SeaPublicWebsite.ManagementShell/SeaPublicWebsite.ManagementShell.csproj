@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>12</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>SeaPublicWebsite.ManagementShell</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\SeaPublicWebsite.Data\SeaPublicWebsite.Data.csproj" />
+        <ProjectReference Include="..\SeaPublicWebsite.BusinessLogic\SeaPublicWebsite.BusinessLogic.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.15" />
+    </ItemGroup>
+
+</Project>

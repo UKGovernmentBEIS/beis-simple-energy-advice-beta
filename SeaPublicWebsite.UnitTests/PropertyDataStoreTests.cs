@@ -7,7 +7,7 @@ using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.DataStores;
 using Moq;
 using SeaPublicWebsite.BusinessLogic.Models.Enums;
-using SeaPublicWebsite.Data;
+using SeaPublicWebsite.BusinessLogic;
 
 namespace Tests;
 

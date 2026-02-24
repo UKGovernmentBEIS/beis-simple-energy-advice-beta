@@ -53,6 +53,7 @@ public class Startup
         services.AddSingleton<StaticAssetsVersioningService>();
         services.AddScoped<IRecommendationService, RecommendationService>();
         services.AddScoped<IDataAccessProvider, DataAccessProvider>();
+        services.AddScoped<EmergencyMaintenanceService>();
         services.AddDataProtection().PersistKeysToDbContext<SeaDbContext>();
 
         ConfigureServiceHealth(services);
@@ -170,12 +171,16 @@ public class Startup
 
         app.UseRouting();
 
+        app.UseMiddleware<CorrelationIdMiddleware>();
+
         app.UseAuthorization();
 
         if (authService.AuthIsEnabled())
         {
             ConfigureAuth(app);
         }
+
+        ConfigureEmergencyMaintenance(app);
 
         app.UseMiddleware<SecurityHeadersMiddleware>();
 
@@ -187,5 +192,11 @@ public class Startup
         // Add password authentication in our non-local-development and non-production environments
         // to make sure people don't accidentally stumble across the site
         app.UseMiddleware<AuthMiddleware>();
+    }
+
+    private void ConfigureEmergencyMaintenance(IApplicationBuilder app)
+    {
+        // Add emergency maintenance middleware to return 503 Service Unavailable if required
+        app.UseMiddleware<EmergencyMaintenanceMiddleware>();
     }
 }
