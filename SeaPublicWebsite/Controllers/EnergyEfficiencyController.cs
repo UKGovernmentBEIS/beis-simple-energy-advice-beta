@@ -1421,8 +1421,8 @@ public class EnergyEfficiencyController : Controller
             new { id = (int)propertyData.GetFirstRecommendationKey(), reference = viewModel.Reference });
     }
 
-    [HttpPost("your-recommendations-download/{reference}")]
-    public async Task<IActionResult> GenerateRecommendationsPdf_Post(string reference)
+    [HttpGet("your-recommendations-download/{reference}")]
+    public async Task<IActionResult> GenerateRecommendationsPdf_Get(string reference)
     {
         var encodedReference = HttpUtility.UrlEncode(reference);
         var stream =
@@ -1431,7 +1431,7 @@ public class EnergyEfficiencyController : Controller
         return File(stream, MediaTypeNames.Application.Pdf, "Recommendations.pdf");
     }
 
-    [HttpPost("action-plan-download/{reference}")]
+    [HttpGet("action-plan-download/{reference}")]
     public async Task<IActionResult> GenerateActionPlanPdf_Post(string reference)
     {
         var encodedReference = HttpUtility.UrlEncode(reference);
