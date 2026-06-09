@@ -1679,6 +1679,12 @@
     <data name="Page not found" xml:space="preserve">
         <value>Page not found</value>
     </data>
+    <data name="Method not allowed" xml:space="preserve">
+        <value>Method not allowed</value>
+    </data>
+    <data name="The request method you used is not supported for this page." xml:space="preserve">
+        <value>The request method you used is not supported for this page.</value>
+    </data>
     <data name="If you typed the web address, check it is correct." xml:space="preserve">
         <value>If you typed the web address, check it is correct.</value>
     </data>
@@ -2185,6 +2191,9 @@
     </data>
     <data name="Page not found - Home Energy Retrofit Advice - GOV.UK" xml:space="preserve">
         <value>Page not found - Home Energy Retrofit Advice - GOV.UK</value>
+    </data>
+    <data name="Method not allowed - Home Energy Retrofit Advice - GOV.UK" xml:space="preserve">
+        <value>Method not allowed - Home Energy Retrofit Advice - GOV.UK</value>
     </data>
     <data name="Sorry, there is a problem with the service - Home Energy Retrofit Advice - GOV.UK" xml:space="preserve">
         <value>Sorry, there is a problem with the service - Home Energy Retrofit Advice - GOV.UK</value>

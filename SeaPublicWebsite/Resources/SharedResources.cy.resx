@@ -1476,6 +1476,12 @@
     <data name="Page not found" xml:space="preserve">
         <value>Heb ganfod y dudalen</value>
     </data>
+    <data name="Method not allowed" xml:space="preserve">
+        <value>Dull heb ei ganiatáu</value>
+    </data>
+    <data name="The request method you used is not supported for this page." xml:space="preserve">
+        <value>Nid yw’r dull cais a ddefnyddioch yn cael ei gefnogi ar gyfer y dudalen hon.</value>
+    </data>
     <data name="If you typed the web address, check it is correct." xml:space="preserve">
         <value>Os oeddech chi wedi teipio’r cyfeiriad gwe, gwnewch yn siŵr ei fod yn gywir.</value>
     </data>
@@ -1967,6 +1973,9 @@
     </data>
     <data name="Page not found - Home Energy Retrofit Advice - GOV.UK" xml:space="preserve">
         <value>Heb ganfod y dudalen - Cyngor ar Ôl-osod Ynni Cartref - GOV.UK</value>
+    </data>
+    <data name="Method not allowed - Home Energy Retrofit Advice - GOV.UK" xml:space="preserve">
+        <value>Dull heb ei ganiatáu - Cyngor ar Ôl-osod Ynni Cartref - GOV.UK</value>
     </data>
     <data name="Sorry, there is a problem with the service - Home Energy Retrofit Advice - GOV.UK" xml:space="preserve">
         <value>Yn anffodus, mae problem â’r gwasanaeth - Cyngor ar Ôl-osod Ynni Cartref - GOV.UK</value>
