@@ -1,4 +1,4 @@
-# Find energy improvements suitable for your home BETA
+# Find energy improvements suitable for your home BETA 
 
 ## Local setup
 
