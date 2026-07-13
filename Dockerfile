@@ -3,10 +3,12 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 RUN apt-get update && apt-get -f install && apt-get -y install wget gnupg2 apt-utils
 
 # latest google-chrome-stable can be found at https://www.ubuntuupdates.org/pm/google-chrome-stable
-ARG CHROME_VERSION=139.0.7258.138-1
+ARG CHROME_VERSION=150.0.7871.114-1
 RUN wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}_amd64.deb \
-  && apt install -y /tmp/chrome.deb --no-install-recommends \
-  && rm /tmp/chrome.deb
+  && apt-get update \
+  && apt-get install -y --no-install-recommends /tmp/chrome.deb \
+  && rm /tmp/chrome.deb \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf
