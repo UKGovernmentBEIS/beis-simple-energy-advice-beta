@@ -1,4 +1,4 @@
-# Find energy improvements suitable for your home BETA
+# Find energy improvements suitable for your home BETA 
 
 ## Local setup
 
@@ -151,4 +151,4 @@ This is likely because the CSS hasn't been built. To fix this:
 - Run `git pull` to ensure you have the latest code
 - Navigate to the `SeaPublicWebsite` directory
 - Run `npm install` to install any new dependencies
-- Run `npm run build` to build the CSS
+- Run `npm run build` to build the CSS  
