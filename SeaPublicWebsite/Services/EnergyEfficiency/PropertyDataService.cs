@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using SeaPublicWebsite.BusinessLogic.ExternalServices.Bre;
 using SeaPublicWebsite.BusinessLogic.Models;
 using SeaPublicWebsite.DataStores;
+using SeaPublicWebsite.ErrorHandling;
 
 namespace SeaPublicWebsite.Services.EnergyEfficiency;
 
@@ -16,8 +17,16 @@ public class PropertyDataService(
     {
         var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
-        var recommendationsWithPriceCap =
-            await recommendationService.GetRecommendationsWithPriceCapForPropertyAsync(propertyData);
+        BreRecommendationsWithPriceCap recommendationsWithPriceCap;
+        try
+        {
+            recommendationsWithPriceCap =
+                await recommendationService.GetRecommendationsWithPriceCapForPropertyAsync(propertyData);
+        }
+        catch (Exception)
+        {
+            throw new BreApiUnavailableException { Reference = reference };
+        }
 
         var newRecommendations = recommendationsWithPriceCap.Recommendations.Select(r =>
             new PropertyRecommendation

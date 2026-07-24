@@ -2729,4 +2729,10 @@ device, or a physical control in your home.</value>
     <data name="WhyRecommendationsChangedDescriptionString" xml:space="preserve">
         <value>Your recommendations, along with their associated costs and savings, will be recalculated when you return to this service. These may change over time based on updated information, such as changes to the energy price cap or RdSAP energy prices.</value>
     </data>
+    <data name="We cannot currently show you your recommendations due to a service issue. Please check again later." xml:space="preserve">
+        <value>We cannot currently show you your recommendations due to a service issue. Please check again later.</value>
+    </data>
+    <data name="Use your reference code when doing so:" xml:space="preserve">
+        <value>Use your reference code when doing so:</value>
+    </data>
 </root>

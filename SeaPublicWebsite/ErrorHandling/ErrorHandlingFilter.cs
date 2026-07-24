@@ -11,6 +11,7 @@ namespace SeaPublicWebsite.ErrorHandling
         {
             if (context.Exception is CustomErrorPageException customErrorPageException)
             {
+                context.ExceptionHandled = true;
                 context.Result = new ViewResult
                 {
                     StatusCode = customErrorPageException.StatusCode,
