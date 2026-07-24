@@ -350,6 +350,24 @@ public class PropertyDataServiceTests
         Assert.That(returnedPropertyData.RecommendationsUpdatedSinceLastVisit, Is.False);
     }
 
+    [Test]
+    public void UpdatePropertyDataWithRecommendations_WhenRecommendationServiceThrows_ThrowsBreApiUnavailableExceptionWithReference()
+    {
+        // Arrange
+        mockRecommendationService
+            .Setup(rs => rs.GetRecommendationsWithPriceCapForPropertyAsync(It.IsAny<PropertyData>()))
+            .ThrowsAsync(new Exception("BRE unavailable"));
+        mockPropertyDataStore.Setup(ds => ds.LoadPropertyDataAsync("222222"))
+            .ReturnsAsync(InitializePropertyDataWithRecommendationsFirstRetrievedAt(null));
+
+        // Act
+        var exception = Assert.ThrowsAsync<SeaPublicWebsite.ErrorHandling.BreApiUnavailableException>(
+            async () => await underTest.UpdatePropertyDataWithRecommendations("222222"));
+
+        // Assert
+        Assert.That(exception!.Reference, Is.EqualTo("222222"));
+    }
+
     private static IEnumerable<PropertyRecommendation> ExampleRecommendations => new List<PropertyRecommendation>
     {
         new()

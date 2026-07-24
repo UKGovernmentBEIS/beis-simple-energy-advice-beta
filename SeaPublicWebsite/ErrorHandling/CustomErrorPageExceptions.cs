@@ -17,4 +17,11 @@ namespace SeaPublicWebsite.ErrorHandling
         public string Reference { get; set; }
     }
 
+    public class BreApiUnavailableException : CustomErrorPageException
+    {
+        public override string ViewName => "../Error/RecommendationsUnavailable";
+        public override int StatusCode => 503;
+        public string Reference { get; set; }
+    }
+
 }

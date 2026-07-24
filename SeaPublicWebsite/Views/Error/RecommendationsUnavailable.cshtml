@@ -1,0 +1,26 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+@model SeaPublicWebsite.ErrorHandling.BreApiUnavailableException
+
+@{
+    ViewBag.Title = @SharedLocalizer["Sorry, there is a problem with the service"].Value;
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">@SharedLocalizer["Sorry, there is a problem with the service"]</h1>
+        <p class="govuk-body">
+            @SharedLocalizer["We cannot currently show you your recommendations due to a service issue. Please check again later."]
+        </p>
+        <p class="govuk-body">
+            @SharedLocalizer["Use your reference code when doing so:"]
+        </p>
+        <div class="sea-user-reference govuk-!-margin-bottom-6" role="complementary">
+            <h2 class="govuk-body-l govuk-!-margin-bottom-0">@SharedLocalizer["Your reference code"]</h2>
+            <strong class="govuk-heading-l">@Model.Reference</strong>
+        </div>
+        <p class="govuk-body">
+            @SharedLocalizer["GeneralEnergySavingTrustAdviceString", "https://energysavingtrust.org.uk/"].
+        </p>
+    </div>
+</div>
