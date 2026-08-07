@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <root>
     <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
@@ -91,10 +91,10 @@
         <value>Yn ôl</value>
     </data>
     <data name="Skip to main content" xml:space="preserve">
-        <value>Neidio i'r prif gynnwys</value>
+        <value>Neidio i’r prif gynnwys</value>
     </data>
     <data name="Have you used this service before?" xml:space="preserve">
-        <value>Ydych chi wedi defnyddio’r gwasanaeth hwn o'r blaen?</value>
+        <value>Ydych chi wedi defnyddio’r gwasanaeth hwn o’r blaen?</value>
     </data>
     <data name="Your 8-character reference code" xml:space="preserve">
         <value>Eich cyfeirnod 8 nod</value>
@@ -112,7 +112,7 @@
         <value>Cyfeirnod enghreifftiol</value>
     </data>
     <data name="Get help using the online service" xml:space="preserve">
-        <value>Cael cymorth i ddefnyddio'r gwasanaeth ar-lein</value>
+        <value>Cael cymorth i ddefnyddio’r gwasanaeth ar-lein</value>
     </data>
     <data name="You can get phone support if you need help using the online service. This could be if you:" xml:space="preserve">
         <value>Gallwch gael cymorth dros y ffôn os oes angen help arnoch i ddefnyddio’r gwasanaeth ar-lein. Gallai hyn fod yn berthnasol i chi os:</value>
@@ -178,7 +178,7 @@
         <value>I gael cyngor cyffredinol ar effeithlonrwydd ynni ac i ddod o hyd i ffyrdd o leihau eich bil ynni, ewch i wefan yr &lt;a href="{0}" class="govuk-link"&gt;Ymddiriedolaeth Arbed Ynni&lt;/a&gt;</value>
     </data>
     <data name="Do you own your property?" xml:space="preserve">
-        <value>Ydych chi'n berchen ar eich eiddo?</value>
+        <value>Ydych chi’n berchen ar eich eiddo?</value>
     </data>
     <data name="This service only provides advice to people who own their home." xml:space="preserve">
         <value>Dim ond i bobl sy’n berchen ar eu cartrefi y mae’r gwasanaeth hwn yn rhoi cyngor.</value>
@@ -229,7 +229,7 @@
         <value>Beth rydym yn ei wneud gyda’ch cyfeiriad</value>
     </data>
     <data name="Building number or name" xml:space="preserve">
-        <value>Rhif neu enw'r adeilad</value>
+        <value>Rhif neu enw’r adeilad</value>
     </data>
     <data name="e.g. 19 or Buckingham Palace" xml:space="preserve">
         <value>e.e. 19 neu Palas Buckingham</value>
@@ -256,7 +256,7 @@
         <value>Rydym wedi dod o hyd i Dystysgrif Perfformiad Ynni a allai fod yn eich un chi</value>
     </data>
     <data name="This certificate may be registered to your property or one of the properties nearby that shares part of your address." xml:space="preserve">
-        <value>Efallai bod y dystysgrif hon wedi'i chofrestru i’ch eiddo neu eiddo cyfagos sy'n rhannu rhan o'ch cyfeiriad.</value>
+        <value>Efallai bod y dystysgrif hon wedi’i chofrestru i’ch eiddo neu eiddo cyfagos sy’n rhannu rhan o’ch cyfeiriad.</value>
     </data>
     <data name="Certificate" xml:space="preserve">
         <value>Tystysgrif</value>
@@ -274,7 +274,7 @@
         <value>Rydym wedi dod o hyd i fwy nag un Dystysgrif Perfformiad Ynni a allai fod yn eich un chi</value>
     </data>
     <data name="One of these certificates may be registered to your property or to the properties nearby that share part of your address." xml:space="preserve">
-        <value>Efallai bod un o’r tystysgrifau hyn wedi'i chofrestru i’ch eiddo neu eiddo cyfagos sy'n rhannu rhan o'ch cyfeiriad.</value>
+        <value>Efallai bod un o’r tystysgrifau hyn wedi’i chofrestru i’ch eiddo neu eiddo cyfagos sy’n rhannu rhan o’ch cyfeiriad.</value>
     </data>
     <data name="Your address may not be listed here if it does not have a registered certificate." xml:space="preserve">
         <value>Efallai na fydd eich cyfeiriad wedi’i restru yma os nad oes ganddo dystysgrif gofrestredig.</value>
@@ -379,7 +379,7 @@
         <value>Efallai y byddwch yn gallu dod o hyd i wybodaeth am oed yr eiddo mewn gweithredoedd neu waith papur arall a gawsoch wrth brynu eich cartref, neu yng ngwaith papur eich yswiriant cartref.</value>
     </data>
     <data name="If your property is a conversion, enter the year the building was originally built, regardless of what the building was used for before it was your home." xml:space="preserve">
-        <value>Os yw eich eiddo'n addasiad, nodwch y flwyddyn y cafodd yr adeilad ei godi'n wreiddiol, ni waeth ar gyfer beth y defnyddiwyd yr adeilad cyn iddo fod yn gartref i chi.</value>
+        <value>Os yw eich eiddo’n addasiad, nodwch y flwyddyn y cafodd yr adeilad ei godi’n wreiddiol, ni waeth ar gyfer beth y defnyddiwyd yr adeilad cyn iddo fod yn gartref i chi.</value>
     </data>
     <data name="If your property has been extended, enter the year of the oldest part of the building." xml:space="preserve">
         <value>Os yw eich eiddo wedi cael ei ymestyn, nodwch flwyddyn rhan hynaf yr adeilad.</value>
@@ -538,7 +538,7 @@
         <value>Mae mathau eraill o loriau gwaelod yn cynnwys concrid crog, cerrig llorio neu fathau anhraddodiadol.</value>
     </data>
     <data name="Is your ground floor insulated?" xml:space="preserve">
-        <value>Ydy eich llawr gwaelod wedi'i inswleiddio?</value>
+        <value>Ydy eich llawr gwaelod wedi’i inswleiddio?</value>
     </data>
     <data name="Properties built before 1996 typically have uninsulated floors, unless you or a previous owner has installed floor insulation." xml:space="preserve">
         <value>Fel arfer dydy lloriau mewn eiddo a adeiladwyd cyn 1996 ddim wedi’u hinswleiddio, oni bai eich bod chi neu berchennog blaenorol wedi ychwanegu deunydd inswleiddio.</value>
@@ -565,16 +565,16 @@
         <value>Mae atig yn ofod heb ei wresogi ac nid oes ganddo waliau na nenfydau - mae’n union o dan y to ar oleddf. Byddwch fel arfer yn gallu gweld y trawstiau.</value>
     </data>
     <data name="If all the space under your pitched roof, or nearly all the space, is used as living space with finished walls and ceilings then the loft has been converted into a room." xml:space="preserve">
-        <value>Os yw’r gofod i gyd dan eich to ar oleddf, neu'r rhan fwyaf o’r gofod hwnnw, yn cael ei ddefnyddio fel lle byw gyda waliau a nenfydau gorffenedig, yna mae’r atig wedi’i droi’n ystafell.</value>
+        <value>Os yw’r gofod i gyd dan eich to ar oleddf, neu’r rhan fwyaf o’r gofod hwnnw, yn cael ei ddefnyddio fel lle byw gyda waliau a nenfydau gorffenedig, yna mae’r atig wedi’i droi’n ystafell.</value>
     </data>
     <data name="Is there access to your loft?" xml:space="preserve">
         <value>A oes modd mynd i’ch atig?</value>
     </data>
     <data name="You may have a loft hatch, access ladder or stairs that could allow an insulation installer to get into the loft space." xml:space="preserve">
-        <value>Efallai fod gennych ddrws i’r atig, ysgol neu risiau mynediad a allai ganiatáu i'r sawl sy'n gosod y deunydd inswleiddio fynd i mewn i’r atig.</value>
+        <value>Efallai fod gennych ddrws i’r atig, ysgol neu risiau mynediad a allai ganiatáu i’r sawl sy’n gosod y deunydd inswleiddio fynd i mewn i’r atig.</value>
     </data>
     <data name="Is your loft fully insulated?" xml:space="preserve">
-        <value>Ydy eich atig wedi'i inswleiddio yn llwyr?</value>
+        <value>Ydy eich atig wedi’i inswleiddio yn llwyr?</value>
     </data>
     <data name="If your home was built after 2002, or you have installed loft insulation since 2002, it is likely that it is fully insulated." xml:space="preserve">
         <value>Os cafodd eich cartref ei adeiladu ar ôl 2002, neu os ydych chi wedi inswleiddio’r atig ers 2002, mae’n debygol ei fod wedi’i inswleiddio’n llwyr.</value>
@@ -592,7 +592,7 @@
         <value>Un cwarel gwydr sydd mewn ffenestr gwydr sengl.</value>
     </data>
     <data name="A double glazed window has two panes of glass, separated by air or gas, to make up a single window. A triple glazed window has three panes of glass." xml:space="preserve">
-        <value>Mae dau gwarel gwydr mewn ffenestr gwydr dwbl, wedi'u gwahanu ag aer neu nwy, i greu un ffenestr. Mae tri cwarel gwydr mewn ffenestr gwydr triphlyg.</value>
+        <value>Mae dau gwarel gwydr mewn ffenestr gwydr dwbl, wedi’u gwahanu ag aer neu nwy, i greu un ffenestr. Mae tri cwarel gwydr mewn ffenestr gwydr triphlyg.</value>
     </data>
     <data name="Secondary glazing is when an additional independent window is fitted inside, behind the main window. This is commonly used in conservation areas to improve the energy efficiency of the window without replacing it." xml:space="preserve">
         <value>Gwydr eilaidd yw pan fydd ffenestr annibynnol ychwanegol yn cael ei gosod y tu mewn, y tu ôl i’r brif ffenestr. Gwneir hyn yn aml mewn ardaloedd cadwraeth i wella effeithlonrwydd ynni’r ffenestr heb ei newid.</value>
@@ -646,7 +646,7 @@
         <value>Mae pwmp gwres yn trosglwyddo ynni gwres o’r amgylchedd tu allan i’r tu mewn, naill ai drwy system gwresogi aer cynnes neu drwy reiddiaduron neu system wresogi dan y llawr</value>
     </data>
     <data name="If you have more than one heating type, select the system that you use more often, or that is able to heat the whole home. For example, select ‘Oil boiler’ if you have an oil boiler and wood burning stove." xml:space="preserve">
-        <value>Os oes gennych chi fwy nag un math o ddull gwresogi, dewiswch y system rydych chi’n ei defnyddio amlaf, neu sy’n gallu gwresogi’r cartref cyfan. Er enghraifft, dewiswch 'Bwyler olew' os oes gennych chi foeler olew a stôf llosgi coed.</value>
+        <value>Os oes gennych chi fwy nag un math o ddull gwresogi, dewiswch y system rydych chi’n ei defnyddio amlaf, neu sy’n gallu gwresogi’r cartref cyfan. Er enghraifft, dewiswch ‘Bwyler olew’ os oes gennych chi foeler olew a stôf llosgi coed.</value>
     </data>
     <data name="Gas boiler" xml:space="preserve">
         <value>Boeler nwy</value>
@@ -700,7 +700,7 @@
         <value>Mae tanc, neu silindr, dŵr poeth yn storio dŵr poeth ac mae ar wahân i’ch boeler.</value>
     </data>
     <data name="If you have a warm tank in an airing cupboard or loft space, it’s likely this is your hot water cylinder." xml:space="preserve">
-        <value>Os oes tanc cynnes mewn cwpwrdd crasu neu ofod atig mae'n debygol mai hwn yw eich tanc dŵr poeth.</value>
+        <value>Os oes tanc cynnes mewn cwpwrdd crasu neu ofod atig mae’n debygol mai hwn yw eich tanc dŵr poeth.</value>
     </data>
     <data name="Image above is of a typical domestic hot water cylinder. It is a large round cylinder with pipes attached at multiple places. It is separate from the boiler." xml:space="preserve">
         <value>Mae’r llun uchod yn dangos tanc dŵr poeth domestig nodweddiadol. Mae’n silindr crwn mawr gyda phibellau’n sownd mewn sawl lle. Mae ar wahân i’r boeler.</value>
@@ -721,7 +721,7 @@
         <value>Sawl person sy’n byw yn eich cartref?</value>
     </data>
     <data name="Count all adults and any children normally resident in your home." xml:space="preserve">
-        <value>Cyfrwch bob oedolyn ac unrhyw blant sy'n byw yn eich cartref fel arfer.</value>
+        <value>Cyfrwch bob oedolyn ac unrhyw blant sy’n byw yn eich cartref fel arfer.</value>
     </data>
     <data name="This information allows us to estimate how much energy your household uses." xml:space="preserve">
         <value>Mae’r wybodaeth hon yn ein galluogi i amcangyfrif faint o ynni mae eich cartref yn ei ddefnyddio.</value>
@@ -802,7 +802,7 @@
         <value>A oes modd mynd i’ch atig?</value>
     </data>
     <data name="Is your loft fully insulated?" xml:space="preserve">
-        <value>Ydy eich atig wedi'i inswleiddio yn llwyr?</value>
+        <value>Ydy eich atig wedi’i inswleiddio yn llwyr?</value>
     </data>
     <data name="Outdoor space for heat pump " xml:space="preserve">
         <value>Lle y tu allan ar gyfer pwmp gwres </value>
@@ -841,10 +841,10 @@
         <value>Amcangyfrifon yw’r costau a’r arbedion rydyn ni’n eu darparu ac efallai na fyddan nhw yr un fath yn ymarferol. Mae’r arbedion sy’n cael eu dangos wedi’u seilio ar gap prisiau ynni {0} ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP2012 ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
     </data>
     <data name="CostsAndSavingsAreEstimatesWarningTextNoPriceCapString" xml:space="preserve">
-        <value>Amcangyfrifon yw’r costau a’r arbedion rydyn ni’n eu darparu ac efallai na fyddan nhw yr un fath yn ymarferol. Mae'r arbedion a ddangosir wedi’u seilio ar gap prisiau ynni blaenorol ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP2012 ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
+        <value>Amcangyfrifon yw’r costau a’r arbedion rydyn ni’n eu darparu ac efallai na fyddan nhw yr un fath yn ymarferol. Mae’r arbedion a ddangosir wedi’u seilio ar gap prisiau ynni blaenorol ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP2012 ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
     </data>
     <data name="CostsAndSavingsAreEstimatesWarningTextUnknownPriceCapString" xml:space="preserve">
-        <value>Amcangyfrifon yw’r costau a’r arbedion rydyn ni’n eu darparu ac efallai na fyddan nhw yr un fath yn ymarferol. Mae'r arbedion a ddangosir wedi’u seilio ar y cap prisiau ynni diweddaraf ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP2012 ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
+        <value>Amcangyfrifon yw’r costau a’r arbedion rydyn ni’n eu darparu ac efallai na fyddan nhw yr un fath yn ymarferol. Mae’r arbedion a ddangosir wedi’u seilio ar y cap prisiau ynni diweddaraf ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP2012 ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
     </data>
     <data name="Getting back to your recommendations once you leave" xml:space="preserve">
         <value>Mynd yn ôl at eich argymhellion ar ôl i chi adael</value>
@@ -895,7 +895,7 @@
         <value>Edrychwch a ydy eich cartref yn addas</value>
     </data>
     <data name="When buying new appliances, upgrade to an energy efficient one -" xml:space="preserve">
-        <value>Pan fyddwch yn prynu offer newydd, beth am uwchraddio i un sy'n defnyddio ynni'n effeithlon -</value>
+        <value>Pan fyddwch yn prynu offer newydd, beth am uwchraddio i un sy’n defnyddio ynni’n effeithlon -</value>
     </data>
     <data name="Learn about energy labels" xml:space="preserve">
         <value>Rhagor o wybodaeth am labeli ynni</value>
@@ -952,13 +952,13 @@
         <value>Argymhelliad {0} o {1}</value>
     </data>
     <data name="Based on the information we have collected; it looks like you have some insulation in your loft but it’s less than the recommended amount. It could be worthwhile adding some more to bring it up to the recommended thickness of 300mm, or 12 inches." xml:space="preserve">
-        <value>Ar sail yr wybodaeth rydym wedi'i chasglu; mae'n ymddangos bod gennych rywfaint o ddeunydd inswleiddio yn eich atig ond ei fod yn llai na'r hyn a argymhellir. Gallai fod yn werth ychwanegu mwy i’w godi i’r trwch a argymhellir o 300mm, neu 12 modfedd.</value>
+        <value>Ar sail yr wybodaeth rydym wedi’i chasglu; mae’n ymddangos bod gennych rywfaint o ddeunydd inswleiddio yn eich atig ond ei fod yn llai na’r hyn a argymhellir. Gallai fod yn werth ychwanegu mwy i’w godi i’r trwch a argymhellir o 300mm, neu 12 modfedd.</value>
     </data>
     <data name="Adding extra insulation can help trap the heat inside your property so your heating doesn’t need to be on as much." xml:space="preserve">
         <value>Gall ychwanegu deunydd inswleiddio ychwanegol helpu i ddal gwres y tu mewn i’ch eiddo fel nad oes angen rhoi’ch gwres ymlaen gymaint.</value>
     </data>
     <data name="If some of your loft is boarded so that you can store things up there you will either need to raise this boarding up and insulate underneath it, or leave that part of the loft with thinner insulation." xml:space="preserve">
-        <value>Os oes estyll mewn rhan o'ch atig er mwyn storio pethau yno, bydd angen i chi naill ai godi'r estyll hyn i fyny ac inswleiddio oddi tanodd, neu adael y rhan honno o'r atig â deunydd inswleiddio teneuach.</value>
+        <value>Os oes estyll mewn rhan o’ch atig er mwyn storio pethau yno, bydd angen i chi naill ai godi’r estyll hyn i fyny ac inswleiddio oddi tanodd, neu adael y rhan honno o’r atig â deunydd inswleiddio teneuach.</value>
     </data>
     <data name="Who this improvement is suitable for" xml:space="preserve">
         <value>Ar gyfer pwy mae’r gwelliant hwn yn addas</value>
@@ -1036,13 +1036,13 @@
         <value>Gosod ffenestri newydd</value>
     </data>
     <data name="Based on the information we have collected; it looks like you have some single glazed windows in your home. Double or triple glazed windows are much better at keeping the heat in, so would help you keep warm while reducing your heating bills." xml:space="preserve">
-        <value>Ar sail yr wybodaeth rydym wedi'i chasglu; mae'n ymddangos bod gennych rywfaint o ffenestri gwydr sengl yn eich cartref. Mae ffenestri gwydr dwbl neu driphlyg yn llawer gwell am gadw'r gwres i mewn, ac felly yn eich helpu i gadw'n gynnes yn ogystal â lleihau eich biliau gwresogi.</value>
+        <value>Ar sail yr wybodaeth rydym wedi’i chasglu; mae’n ymddangos bod gennych rywfaint o ffenestri gwydr sengl yn eich cartref. Mae ffenestri gwydr dwbl neu driphlyg yn llawer gwell am gadw’r gwres i mewn, ac felly yn eich helpu i gadw’n gynnes yn ogystal â lleihau eich biliau gwresogi.</value>
     </data>
     <data name="The fuel bill savings from replacing windows are unlikely to pay back the full installation cost, but there are other benefits such as reduced maintenance and better sound proofing that may affect your decision." xml:space="preserve">
         <value>Mae’n annhebygol y bydd yr arbedion mewn biliau tanwydd a welir wrth newid ffenestri yn ad-dalu’r gost gosod lawn, ond mae manteision eraill fel llai o waith cynnal a chadw a gwrthsain gwell a allai effeithio ar eich penderfyniad.</value>
     </data>
     <data name="If you live in a conservation area or listed building there may be limits on what changes you can make to your windows. You should check with your local authority to see what is allowed." xml:space="preserve">
-        <value>Os ydych chi'n byw mewn ardal gadwraeth neu adeilad rhestredig, efallai y bydd cyfyngiadau ar y newidiadau y gallwch chi eu gwneud i'ch ffenestri. Dylech chi holi eich awdurdod lleol i weld beth maen nhw’n ei ganiatáu.</value>
+        <value>Os ydych chi’n byw mewn ardal gadwraeth neu adeilad rhestredig, efallai y bydd cyfyngiadau ar y newidiadau y gallwch chi eu gwneud i’ch ffenestri. Dylech chi holi eich awdurdod lleol i weld beth maen nhw’n ei ganiatáu.</value>
     </data>
     <data name="You have any single glazed windows." xml:space="preserve">
         <value>Oes gennych chi unrhyw ffenestri gwydr sengl.</value>
@@ -1126,7 +1126,7 @@
         <value>Os ydy rhan o’ch to yn wynebu rhywle i’r de o gyfeiriad y dwyrain neu’r gorllewin.</value>
     </data>
     <data name="This roof area is not often shaded by trees or other buildings." xml:space="preserve">
-        <value>Os nad yw’r rhan hon o’r to yn cael ei chysgodi'n aml gan goed neu adeiladau eraill.</value>
+        <value>Os nad yw’r rhan hon o’r to yn cael ei chysgodi’n aml gan goed neu adeiladau eraill.</value>
     </data>
     <data name="The savings you get from a solar PV system will depend on many factors, including whether there are people at home during the day using electricity." xml:space="preserve">
         <value>Bydd yr arbedion a gewch o system solar PV yn dibynnu ar nifer o ffactorau, gan gynnwys a oes pobl gartref yn ystod y dydd yn defnyddio trydan.</value>
@@ -1168,10 +1168,10 @@
         <value>Uwchraddio i wresogyddion stôr sy’n cadw gwres uchel</value>
     </data>
     <data name="Based on the information we have collected; it looks like you have manual storage heaters. Consider upgrading to high heat retention storage heaters with automatic controls." xml:space="preserve">
-        <value>Ar sail yr wybodaeth rydym wedi'i chasglu; mae'n ymddangos bod gennych wresogyddion stôr rydych chi’n eu rheoli eich hun. Ystyriwch uwchraddio i wresogyddion stôr cadw gwres uchel gyda rheolaethau awtomatig.</value>
+        <value>Ar sail yr wybodaeth rydym wedi’i chasglu; mae’n ymddangos bod gennych wresogyddion stôr rydych chi’n eu rheoli eich hun. Ystyriwch uwchraddio i wresogyddion stôr cadw gwres uchel gyda rheolaethau awtomatig.</value>
     </data>
     <data name="Compared to older storage heaters, modern high heat retention storage heaters:" xml:space="preserve">
-        <value>O'i gymharu â hen wresogyddion stôr, mae gwresogyddion stôr cadw gwres uchel:</value>
+        <value>O’i gymharu â hen wresogyddion stôr, mae gwresogyddion stôr cadw gwres uchel:</value>
     </data>
     <data name="Hold more heat" xml:space="preserve">
         <value>Yn dal mwy o wres</value>
@@ -1207,7 +1207,7 @@
         <value>Oes a Argymhellir</value>
     </data>
     <data name="You may well need to fit new or additional controls when you fit a new gas boiler to comply with building regulations. These will help to maximise the system’s efficiency, saving you even more money." xml:space="preserve">
-        <value>Efallai y bydd angen i chi osod rheolaethau newydd neu ychwanegol pan fyddwch yn gosod boeler nwy newydd i gydymffurfio â'r rheoliadau adeiladu. Bydd y rhain yn helpu i wneud y system mor effeithlon â phosibl, gan arbed hyd yn oed mwy o arian i chi.</value>
+        <value>Efallai y bydd angen i chi osod rheolaethau newydd neu ychwanegol pan fyddwch yn gosod boeler nwy newydd i gydymffurfio â’r rheoliadau adeiladu. Bydd y rhain yn helpu i wneud y system mor effeithlon â phosibl, gan arbed hyd yn oed mwy o arian i chi.</value>
     </data>
     <data name="You have an old or inefficient gas boiler, or your boiler is broken" xml:space="preserve">
         <value>Mae gennych hen foeler nwy neu foeler nwy aneffeithlon, neu mae eich boeler wedi torri</value>
@@ -1219,10 +1219,10 @@
         <value>Dim ond gosodwr ar y Gofrestr Diogelwch Nwy all osod boeleri nwy ac ymgymryd ag unrhyw waith ar system wresogi nwy.</value>
     </data>
     <data name="Based on the information we have collected; it looks like you have some single glazed windows in your home. Double or triple glazed windows are much better at keeping the heat in, so would help" xml:space="preserve">
-        <value>Ar sail yr wybodaeth rydym wedi'i chasglu; mae'n ymddangos bod gennych rywfaint o ffenestri gwydr sengl yn eich cartref. Mae ffenestri gwydr dwbl neu driphlyg yn llawer gwell am gadw'r gwres i mewn, ac felly yn eich helpu</value>
+        <value>Ar sail yr wybodaeth rydym wedi’i chasglu; mae’n ymddangos bod gennych rywfaint o ffenestri gwydr sengl yn eich cartref. Mae ffenestri gwydr dwbl neu driphlyg yn llawer gwell am gadw’r gwres i mewn, ac felly yn eich helpu</value>
     </data>
     <data name="you keep warm while reducing your heating bills." xml:space="preserve">
-        <value>i gadw'n gynnes yn ogystal â lleihau eich biliau gwresogi.</value>
+        <value>i gadw’n gynnes yn ogystal â lleihau eich biliau gwresogi.</value>
     </data>
     <data name="Caution" xml:space="preserve">
         <value>Rhybudd</value>
@@ -1300,7 +1300,7 @@
         <value>Ffyrdd eraill o arbed ynni</value>
     </data>
     <data name="WhenBuyingNewAppliancesUpgradeEnergyLabelsString" xml:space="preserve">
-        <value>Pan fyddwch chi’n prynu offer newydd, beth am uwchraddio i un sy'n defnyddio ynni'n effeithlon - &lt;a class="govuk-link" href="{0}"&gt; Rhagor o wybodaeth am labeli ynni (yn agor mewn tab newydd)&lt;/a&gt; ar wefan yr Ymddiriedolaeth Arbed Ynni.</value>
+        <value>Pan fyddwch chi’n prynu offer newydd, beth am uwchraddio i un sy’n defnyddio ynni’n effeithlon - &lt;a class="govuk-link" href="{0}"&gt; Rhagor o wybodaeth am labeli ynni (yn agor mewn tab newydd)&lt;/a&gt; ar wefan yr Ymddiriedolaeth Arbed Ynni.</value>
     </data>
     <data name="InstallHeatPumpCheckIfHomeSuitableString" xml:space="preserve">
         <value>Gosod pwmp gwres - &lt;a class="govuk-link" href="{0}"&gt; Edrychwch a ydy eich cartref yn addas &lt;/a&gt;</value>
@@ -1378,7 +1378,7 @@
         <value>Cwcis ar ein gwasanaeth</value>
     </data>
     <data name="Cookies are files saved on your phone, tablet or computer when you visit a website." xml:space="preserve">
-        <value>Ffeiliau sy'n cael eu cadw ar eich ffôn, eich llechen neu'ch cyfrifiadur pan fyddwch yn defnyddio gwefan yw cwcis.</value>
+        <value>Ffeiliau sy’n cael eu cadw ar eich ffôn, eich llechen neu’ch cyfrifiadur pan fyddwch yn defnyddio gwefan yw cwcis.</value>
     </data>
     <data name="We use cookies to store information about how you use our service, such as the pages you visit." xml:space="preserve">
         <value>Rydym yn defnyddio cwcis i storio gwybodaeth am sut rydych chi’n defnyddio ein gwasanaeth, fel y tudalennau rydych chi’n ymweld â nhw.</value>
@@ -1393,16 +1393,16 @@
         <value>Rydym yn defnyddio cwcis i wneud ein gwasanaeth yn well</value>
     </data>
     <data name="We use Google Analytics to measure how you use the service so we can improve it based on user needs. Google Analytics sets cookies that store anonymised information about:" xml:space="preserve">
-        <value>Rydym yn defnyddio Google Analytics i fesur sut rydych chi'n defnyddio'r gwasanaeth er mwyn ei wella ar sail anghenion defnyddwyr. Mae Google Analytics yn gosod cwcis sy’n storio gwybodaeth ddienw am:</value>
+        <value>Rydym yn defnyddio Google Analytics i fesur sut rydych chi’n defnyddio’r gwasanaeth er mwyn ei wella ar sail anghenion defnyddwyr. Mae Google Analytics yn gosod cwcis sy’n storio gwybodaeth ddienw am:</value>
     </data>
     <data name="how you got to the site" xml:space="preserve">
-        <value>sut y daethoch chi i'r safle</value>
+        <value>sut y daethoch chi i’r safle</value>
     </data>
     <data name="the pages you visit on the service and how long you spend on them" xml:space="preserve">
         <value>y tudalennau rydych chi’n ymweld â nhw ar y gwasanaeth a faint o amser rydych chi’n ei dreulio arnynt</value>
     </data>
     <data name="what you click on while you’re visiting the site" xml:space="preserve">
-        <value>yr hyn rydych yn clicio arno wrth ymweld â'r safle</value>
+        <value>yr hyn rydych yn clicio arno wrth ymweld â’r safle</value>
     </data>
     <data name="On" xml:space="preserve">
         <value>Gweithredol</value>
@@ -1414,13 +1414,13 @@
         <value>Cwcis sydd wir eu hangen</value>
     </data>
     <data name="These essential cookies do things like:" xml:space="preserve">
-        <value>Mae'r cwcis hanfodol hyn yn gwneud pethau fel:</value>
+        <value>Mae’r cwcis hanfodol hyn yn gwneud pethau fel:</value>
     </data>
     <data name="remember your progress through the service" xml:space="preserve">
-        <value>cofio eich cynnydd drwy'r gwasanaeth</value>
+        <value>cofio eich cynnydd drwy’r gwasanaeth</value>
     </data>
     <data name="remember notifications you’ve seen so that we don’t show them again" xml:space="preserve">
-        <value>cofio pa hysbysiadau rydych chi wedi'u gweld fel nad ydym yn eu dangos eto</value>
+        <value>cofio pa hysbysiadau rydych chi wedi’u gweld fel nad ydym yn eu dangos eto</value>
     </data>
     <data name="They always need to be on." xml:space="preserve">
         <value>Rhaid iddynt fod yn weithredol bob amser.</value>
@@ -1432,7 +1432,7 @@
         <value>Mae ein gwasanaeth yn rhoi ffeiliau bach (a elwir yn ‘gwcis’) ar eich cyfrifiadur i gasglu gwybodaeth am sut rydych chi’n pori’r wefan. Rhagor o wybodaeth am y cwcis rydym yn eu defnyddio, ar gyfer beth, a phryd maen nhw’n dod i ben.</value>
     </data>
     <data name="Cookies that measure website usage" xml:space="preserve">
-        <value>Cwcis sy'n mesur defnydd o'r wefan</value>
+        <value>Cwcis sy’n mesur defnydd o’r wefan</value>
     </data>
     <data name="We do not allow Google to use or share the data about how you use this site." xml:space="preserve">
         <value>Dydyn ni ddim yn caniatáu i Google ddefnyddio na rhannu’r data am sut rydych chi’n defnyddio’r safle hwn.</value>
@@ -1507,7 +1507,7 @@
         <value>Wedi Pasio’r Prawf Iechyd</value>
     </data>
     <data name="ReturnToHomePageString" xml:space="preserve">
-        <value>Dychwelyd &lt;a href="{0}" class="govuk-link"&gt;i'r hafan&lt;/a&gt;</value>
+        <value>Dychwelyd &lt;a href="{0}" class="govuk-link"&gt;i’r hafan&lt;/a&gt;</value>
     </data>
     <data name="We use some essential cookies to make this service work." xml:space="preserve">
         <value>Rydyn ni’n defnyddio rhai cwcis hanfodol i wneud i’r gwasanaeth hwn weithio.</value>
@@ -1537,31 +1537,31 @@
         <value>Datganiad hygyrchedd ar gyfer Dod o hyd i ffyrdd i arbed ynni yn eich cartref</value>
     </data>
     <data name="AccessibilityThisStatementAppliesString" xml:space="preserve">
-        <value>Mae'r datganiad hygyrchedd yma yn gymwys i’r wefan Gwella Effeithlonrwydd Ynni lle mae'r gwasanaeth Dod o hyd i ffyrdd i arbed ynni yn eich cartref wedi’i leoli. Mae'r wefan yma yn cael ei rhedeg gan yr Adran Diogelwch Ynni a Sero Net (DESNZ). Rydyn ni am i gynifer o bobl â phosibl allu defnyddio'r wefan yma. Er enghraifft, mae hyn yn golygu y dylech chi allu:</value>
+        <value>Mae’r datganiad hygyrchedd yma yn gymwys i’r wefan Gwella Effeithlonrwydd Ynni lle mae’r gwasanaeth Dod o hyd i ffyrdd i arbed ynni yn eich cartref wedi’i leoli. Mae’r wefan yma yn cael ei rhedeg gan yr Adran Diogelwch Ynni a Sero Net (DESNZ). Rydyn ni am i gynifer o bobl â phosibl allu defnyddio’r wefan yma. Er enghraifft, mae hyn yn golygu y dylech chi allu:</value>
     </data>
     <data name="AccessibilityCanChangeColoursString" xml:space="preserve">
         <value>newid lliwiau, lefelau cyferbyniad a ffontiau</value>
     </data>
     <data name="AccessibilityCanZoomInString" xml:space="preserve">
-        <value>chwyddo i mewn hyd at 300% heb i'r testun ollwng oddi ar y sgrin</value>
+        <value>chwyddo i mewn hyd at 300% heb i’r testun ollwng oddi ar y sgrin</value>
     </data>
     <data name="AccessibilityCanNavigateKeyboardString" xml:space="preserve">
-        <value>llywio'r rhan fwyaf o'r wefan drwy ddefnyddio bysellfwrdd yn unig</value>
+        <value>llywio’r rhan fwyaf o’r wefan drwy ddefnyddio bysellfwrdd yn unig</value>
     </data>
     <data name="AccessibilityCanNavigateSpeechString" xml:space="preserve">
-        <value>llywio'r rhan fwyaf o'r wefan drwy ddefnyddio meddalwedd adnabod lleferydd</value>
+        <value>llywio’r rhan fwyaf o’r wefan drwy ddefnyddio meddalwedd adnabod lleferydd</value>
     </data>
     <data name="AccessibilityCanListenString" xml:space="preserve">
-        <value>gwrando ar y rhan fwyaf o'r wefan drwy ddefnyddio darllenydd sgrin (gan gynnwys y fersiynau diweddaraf o JAWS, NVDA a VoiceOver)</value>
+        <value>gwrando ar y rhan fwyaf o’r wefan drwy ddefnyddio darllenydd sgrin (gan gynnwys y fersiynau diweddaraf o JAWS, NVDA a VoiceOver)</value>
     </data>
     <data name="AccessibilitySimpleTextString" xml:space="preserve">
-        <value>Rydyn ni hefyd wedi gwneud testun y wefan mor syml â phosibl i'w ddeall.</value>
+        <value>Rydyn ni hefyd wedi gwneud testun y wefan mor syml â phosibl i’w ddeall.</value>
     </data>
     <data name="AccessibilityLimitationsTitleString" xml:space="preserve">
-        <value>Pa mor hygyrch yw'r wefan yma</value>
+        <value>Pa mor hygyrch yw’r wefan yma</value>
     </data>
     <data name="AccessibilityPartsNotAccessibleString" xml:space="preserve">
-        <value>Rydyn ni’n gwybod nad yw rhai rhannau o'r wefan yma yn gwbl hygyrch:</value>
+        <value>Rydyn ni’n gwybod nad yw rhai rhannau o’r wefan yma yn gwbl hygyrch:</value>
     </data>
     <data name="AccessibilityCantDragonUploadString" xml:space="preserve">
         <value>Dyw defnyddwyr Dragon Naturally Speaking ddim yn gallu uwchlwytho ffeiliau drwy ddefnyddio gorchmynion llais hysbys</value>
@@ -1585,10 +1585,10 @@
         <value>Byddwn yn ystyried eich cais ac yn cysylltu â chi o fewn 10 diwrnod gwaith.</value>
     </data>
     <data name="AccessibilityCannotViewMapString" xml:space="preserve">
-        <value>Os na allwch chi weld y map ar ein tudalen 'cysylltwch â ni', ffoniwch ni ar {0} neu anfonwch neges ebost aton ni yn &lt;a class="govuk-link" href="mailto: {1}"&gt;{1}&lt;/a&gt; i gael cyfarwyddiadau.</value>
+        <value>Os na allwch chi weld y map ar ein tudalen ‘cysylltwch â ni’, ffoniwch ni ar {0} neu anfonwch neges ebost aton ni yn &lt;a class="govuk-link" href="mailto: {1}"&gt;{1}&lt;/a&gt; i gael cyfarwyddiadau.</value>
     </data>
     <data name="AccessibilityReportingTitleString" xml:space="preserve">
-        <value>Rhoi gwybod am broblemau hygyrchedd gyda'r wefan yma</value>
+        <value>Rhoi gwybod am broblemau hygyrchedd gyda’r wefan yma</value>
     </data>
     <data name="AccessibilityEnforcementProcedureTitleString" xml:space="preserve">
         <value>Gweithdrefn orfodi</value>
@@ -1597,7 +1597,7 @@
         <value>Gwybodaeth dechnegol am hygyrchedd y wefan yma</value>
     </data>
     <data name="AccessibilityDesnzCommitmentString" xml:space="preserve">
-        <value>Mae'r Adran Diogelwch Ynni a Sero Net (DESNZ) wedi ymrwymo i wneud ei gwefan yn hygyrch, yn unol â Rheoliadau Hygyrchedd Cyrff Sector Cyhoeddus (Gwefannau a Chymwysiadau Symudol) (Rhif 2) 2018.</value>
+        <value>Mae’r Adran Diogelwch Ynni a Sero Net (DESNZ) wedi ymrwymo i wneud ei gwefan yn hygyrch, yn unol â Rheoliadau Hygyrchedd Cyrff Sector Cyhoeddus (Gwefannau a Chymwysiadau Symudol) (Rhif 2) 2018.</value>
     </data>
     <data name="AccessibilityComplianceStatusTitleString" xml:space="preserve">
         <value>Statws cydymffurfio</value>
@@ -1609,13 +1609,13 @@
         <value>Dim ond drwy ddefnyddio nodwedd grid y llygoden y gall Dragon Naturally Speaking (meddalwedd adnabod lleferydd) uwchlwytho ffeiliau. Credir mai mater parhaus ynglŷn â meddalwedd Dragon Naturally Speaking yw hwn ac mae modd cael rhagor o wybodaeth ar y ddolen ganlynol: &lt;a class="govuk-link" href="{0}"&gt;{0}&lt;/a&gt;.</value>
     </data>
     <data name="AccessibilityVoiceOverDisproportionateBurdenString" xml:space="preserve">
-        <value>Gall defnyddwyr Voiceover iOS neidio'n ddigymell i elfen arall yn y rhyngwyneb defnyddwyr, yn arbennig felly yn fuan ar ôl agor sgrin, dewislen neu foddol. Credir mai problem barhaus ynglŷn â meddalwedd Apple Voiceover yw hwn, ac mae modd cael rhagor o wybodaeth ar y ddolen ganlynol: &lt;a class="govuk-link" href="{0}"&gt;{0}&lt;/a&gt;.</value>
+        <value>Gall defnyddwyr Voiceover iOS neidio’n ddigymell i elfen arall yn y rhyngwyneb defnyddwyr, yn arbennig felly yn fuan ar ôl agor sgrin, dewislen neu foddol. Credir mai problem barhaus ynglŷn â meddalwedd Apple Voiceover yw hwn, ac mae modd cael rhagor o wybodaeth ar y ddolen ganlynol: &lt;a class="govuk-link" href="{0}"&gt;{0}&lt;/a&gt;.</value>
     </data>
     <data name="AccessibilityDisproportionateBurdenString" xml:space="preserve">
         <value>Gan mai mater trydydd parti yw hwn, allwn ninnau ddim datrys hyn ac felly mae’n esempt rhag cael ei fodloni o dan y rheoliadau hygyrchedd ac felly mae’n &lt;a class="govuk-link" href="{0}"&gt;faich anghymesurd&lt;/a&gt; o fewn ystyr y rheoliadau hygyrchedd.</value>
     </data>
     <data name="AccessibilityStatementPreparationTitleString" xml:space="preserve">
-        <value>Paratoi'r datganiad hygyrchedd yma</value>
+        <value>Paratoi’r datganiad hygyrchedd yma</value>
     </data>
     <data name="AccessibilityStatementPreparationDateString" xml:space="preserve">
         <value>Cafodd y datganiad yma ei baratoi ar 28/02/2025. Y tro diwethaf iddo gael ei adolygu oedd 28/02/2025.</value>
@@ -1714,7 +1714,7 @@
         <value>Gallwch gysylltu â’r Comisiynydd Gwybodaeth yn y cyfeiriad isod:</value>
     </data>
     <data name="Information Commissioner's Office" xml:space="preserve">
-        <value>Swyddfa'r Comisiynydd Gwybodaeth</value>
+        <value>Swyddfa’r Comisiynydd Gwybodaeth</value>
     </data>
     <data name="Wycliffe House" xml:space="preserve">
         <value>Wycliffe House</value>
@@ -1768,7 +1768,7 @@
         <value>E-bost: dataprotection@beis.gov.uk</value>
     </data>
     <data name="Enter a building number or name" xml:space="preserve">
-        <value>Rhowch rif neu enw'r adeilad</value>
+        <value>Rhowch rif neu enw’r adeilad</value>
     </data>
     <data name="Enter a postcode" xml:space="preserve">
         <value>Rhowch y cod post</value>
@@ -1783,10 +1783,10 @@
         <value>Dewiswch eich cyfeiriad</value>
     </data>
     <data name="My address is not listed here" xml:space="preserve">
-        <value>Nid yw fy nghyfeiriad wedi'i restru yma</value>
+        <value>Nid yw fy nghyfeiriad wedi’i restru yma</value>
     </data>
     <data name="Confirm whether or not this certificate belongs to your address before continuing" xml:space="preserve">
-        <value>Cadarnhewch a yw'r dystysgrif hon yn perthyn i'ch cyfeiriad chi cyn bwrw ymlaen</value>
+        <value>Cadarnhewch a yw’r dystysgrif hon yn perthyn i’ch cyfeiriad chi cyn bwrw ymlaen</value>
     </data>
     <data name="Select which country the property is located in" xml:space="preserve">
         <value>Dewiswch ym mha wlad mae’r eiddo</value>
@@ -1831,10 +1831,10 @@
         <value>Dewiswch a oes gennych chi le gwag yn y to</value>
     </data>
     <data name="Select if you have used this service before" xml:space="preserve">
-        <value>Dewiswch a ydych chi wedi defnyddio’r gwasanaeth hwn o'r blaen</value>
+        <value>Dewiswch a ydych chi wedi defnyddio’r gwasanaeth hwn o’r blaen</value>
     </data>
     <data name="Enter your 8-character reference code (or choose the 'This is my first visit' option)" xml:space="preserve">
-        <value>Rhowch eich cyfeirnod 8 nod (neu dewiswch yr opsiwn 'Dyma fy ymweliad cyntaf')</value>
+        <value>Rhowch eich cyfeirnod 8 nod (neu dewiswch yr opsiwn ‘Dyma fy ymweliad cyntaf’)</value>
     </data>
     <data name="Enter a valid email address" xml:space="preserve">
         <value>Rhowch gyfeiriad e-bost dilys</value>
@@ -1843,7 +1843,7 @@
         <value>Nifer y bobl sy’n byw yn yr eiddo</value>
     </data>
     <data name="Enter the number of people who live in the property" xml:space="preserve">
-        <value>Rhowch nifer y bobl sy'n byw yn yr eiddo</value>
+        <value>Rhowch nifer y bobl sy’n byw yn yr eiddo</value>
     </data>
     <data name="Select whether you have outdoor space" xml:space="preserve">
         <value>Dewiswch a oes gennych chi le y tu allan</value>
@@ -1855,7 +1855,7 @@
         <value>Dewiswch y math o eiddo</value>
     </data>
     <data name="Select what to do with this recommendation" xml:space="preserve">
-        <value>Dewiswch beth i'w wneud gyda'r argymhelliad hwn</value>
+        <value>Dewiswch beth i’w wneud gyda’r argymhelliad hwn</value>
     </data>
     <data name="Select roof type" xml:space="preserve">
         <value>Dewiswch y math o do</value>
@@ -2020,13 +2020,13 @@
         <value>Sylwer</value>
     </data>
     <data name="FiguresForTypicalInstallationWarningTextString" xml:space="preserve">
-        <value>Ffigurau ar gyfer gosodiad nodweddiadol mewn cartref fel eich un chi yw’r ffigurau hyn. Bydd eich amgylchiadau chi, manylion y gosodiadau a'r prisiau ynni yn effeithio ar y costau a'r arbedion gewch chi. Mae'r arbedion sy’n cael eu dangos wedi’u seilio ar gap prisiau ynni {0} ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP2012 ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
+        <value>Ffigurau ar gyfer gosodiad nodweddiadol mewn cartref fel eich un chi yw’r ffigurau hyn. Bydd eich amgylchiadau chi, manylion y gosodiadau a’r prisiau ynni yn effeithio ar y costau a’r arbedion gewch chi. Mae’r arbedion sy’n cael eu dangos wedi’u seilio ar gap prisiau ynni {0} ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP2012 ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
     </data>
     <data name="FiguresForTypicalInstallationWarningTextNoPriceCapString" xml:space="preserve">
-        <value>Ffigurau ar gyfer gosodiad nodweddiadol mewn cartref fel eich un chi yw’r ffigurau hyn. Bydd eich amgylchiadau chi, manylion y gosodiadau a'r prisiau ynni yn effeithio ar y costau a'r arbedion gewch chi. Mae'r arbedion a ddangosir wedi’u seilio ar gap prisiau ynni blaenorol ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP2012 ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
+        <value>Ffigurau ar gyfer gosodiad nodweddiadol mewn cartref fel eich un chi yw’r ffigurau hyn. Bydd eich amgylchiadau chi, manylion y gosodiadau a’r prisiau ynni yn effeithio ar y costau a’r arbedion gewch chi. Mae’r arbedion a ddangosir wedi’u seilio ar gap prisiau ynni blaenorol ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP2012 ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
     </data>
     <data name="FiguresForTypicalInstallationWarningTextUnknownString" xml:space="preserve">
-        <value>Ffigurau ar gyfer gosodiad nodweddiadol mewn cartref fel eich un chi yw’r ffigurau hyn. Bydd eich amgylchiadau chi, manylion y gosodiadau a'r prisiau ynni yn effeithio ar y costau a'r arbedion gewch chi. Mae'r arbedion a ddangosir wedi’u seilio ar y cap prisiau ynni diweddaraf ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP2012 ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
+        <value>Ffigurau ar gyfer gosodiad nodweddiadol mewn cartref fel eich un chi yw’r ffigurau hyn. Bydd eich amgylchiadau chi, manylion y gosodiadau a’r prisiau ynni yn effeithio ar y costau a’r arbedion gewch chi. Mae’r arbedion a ddangosir wedi’u seilio ar y cap prisiau ynni diweddaraf ar gyfer biliau nwy a thrydan, ac ar brisiau ynni RdSAP2012 ar gyfer pob math arall o danwydd gwresogi. Wrth i brisiau ynni newid, bydd yr amcangyfrifon o’r arbedion yn newid hefyd.</value>
     </data>
     <data name="1 minute" xml:space="preserve">
         <value>1 funud</value>
@@ -2050,7 +2050,7 @@
         <value>Cysylltu â Ni</value>
     </data>
     <data name="We use Google Analytics software (Google Analytics 4) to collect anonymised information about how you use our service. We do this to help make sure the site is meeting the needs of its users and to help us make improvements to the site and to government digital services." xml:space="preserve">
-        <value>Rydym yn defnyddio meddalwedd Google Analytics (Google Analytics 4) i gasglu gwybodaeth ddienw ynghylch sut rydych yn defnyddio ein gwasanaeth. Rydym yn gwneud hyn er mwyn gwneud yn siŵr bod y wefan yn diwallu anghenion y bobl sy'n ei defnyddio a’n helpu i wella’r wefan a gwasanaeth digidol y llywodraeth.</value>
+        <value>Rydym yn defnyddio meddalwedd Google Analytics (Google Analytics 4) i gasglu gwybodaeth ddienw ynghylch sut rydych yn defnyddio ein gwasanaeth. Rydym yn gwneud hyn er mwyn gwneud yn siŵr bod y wefan yn diwallu anghenion y bobl sy’n ei defnyddio a’n helpu i wella’r wefan a gwasanaeth digidol y llywodraeth.</value>
     </data>
     <data name="Requires" xml:space="preserve">
         <value>Dod i Ben</value>
@@ -2065,7 +2065,7 @@
         <value>1 flwyddyn</value>
     </data>
     <data name="LicenseDescriptionString" xml:space="preserve">
-        <value>Mae'r holl gynnwys ar gael o dan &lt;a class="govuk-footer__link" href = "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel = "license" &gt; y Drwydded Llywodraeth Agored v3.0 &lt;/a&gt;, ac eithrio lle nodir yn wahanol</value>
+        <value>Mae’r holl gynnwys ar gael o dan &lt;a class="govuk-footer__link" href = "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel = "license" &gt; y Drwydded Llywodraeth Agored v3.0 &lt;/a&gt;, ac eithrio lle nodir yn wahanol</value>
     </data>
     <data name="DEFINITELY" xml:space="preserve">
         <value>YN BENDANT</value>
@@ -2101,16 +2101,16 @@
         <value>SAWL DIWRNOD</value>
     </data>
     <data name="Based on the information we have collected; it looks like you have no insulation in your loft. We recommend that you have your loft insulated, if possible, up to the recommended thickness of 300mm, or 12 inches." xml:space="preserve">
-        <value>Ar sail yr wybodaeth rydyn ni wedi'i chasglu, mae'n edrych yn debyg nad oes gennych chi unrhyw inswleiddiad yn eich atig. Rydym yn argymell y dylech chi inswleiddio'ch atig, os oes modd, hyd at y trwch a argymhellir, sef 300mm, neu 12 modfedd.</value>
+        <value>Ar sail yr wybodaeth rydyn ni wedi’i chasglu, mae’n edrych yn debyg nad oes gennych chi unrhyw inswleiddiad yn eich atig. Rydym yn argymell y dylech chi inswleiddio’ch atig, os oes modd, hyd at y trwch a argymhellir, sef 300mm, neu 12 modfedd.</value>
     </data>
     <data name="Adding insulation will help trap the heat inside your property so your heating doesn’t need to be on as much, and so could make a significant saving on your fuel bills." xml:space="preserve">
-        <value>Bydd ychwanegu insiwleiddiad yn helpu i ddal y gwres y tu mewn i'ch eiddo fel nad oes angen i'ch gwres fod ymlaen gymaint, ac felly fe allai wneud arbediad sylweddol ar eich biliau tanwydd.</value>
+        <value>Bydd ychwanegu insiwleiddiad yn helpu i ddal y gwres y tu mewn i’ch eiddo fel nad oes angen i’ch gwres fod ymlaen gymaint, ac felly fe allai wneud arbediad sylweddol ar eich biliau tanwydd.</value>
     </data>
     <data name="If some of your loft is boarded so that you can store things up there you will either need to raise this boarding up and insulate underneath it, or leave that part of the loft without insulation." xml:space="preserve">
-        <value>Os oes rhywfaint o'ch atig wedi'i fyrddio er mwyn ichi storio pethau yno, bydd angen ichi naill ai godi'r byrddau hyn ac inswleiddio odanyn nhw, neu adael y rhan yma o'r atig heb ei hinswleiddio.</value>
+        <value>Os oes rhywfaint o’ch atig wedi’i fyrddio er mwyn ichi storio pethau yno, bydd angen ichi naill ai godi’r byrddau hyn ac inswleiddio odanyn nhw, neu adael y rhan yma o’r atig heb ei hinswleiddio.</value>
     </data>
     <data name="If your loft is insulated, but you have less than the recommended amount (300mm or 12 inches thick) then it could still be worthwhile topping up your insulation" xml:space="preserve">
-        <value>Os yw'ch atig wedi'i inswleiddio, ond bod gennych chi lai na'r swm a argymhellir (300mm neu 12 modfedd o drwch) yna fe allai fod yn werth codi lefel eich inswleiddiad o hyd.</value>
+        <value>Os yw’ch atig wedi’i inswleiddio, ond bod gennych chi lai na’r swm a argymhellir (300mm neu 12 modfedd o drwch) yna fe allai fod yn werth codi lefel eich inswleiddiad o hyd.</value>
     </data>
     <data name="Your loft has no insulation" xml:space="preserve">
         <value>Does gan eich atig ddim inswleiddiad</value>
@@ -2125,10 +2125,10 @@
         <value>Costau arferol</value>
     </data>
     <data name="If you are a social housing tenant, please contact your landlord directly for support." xml:space="preserve">
-        <value>Os ydych chi’n denant tai cymdeithasol, cysylltwch â'ch landlord yn uniongyrchol i gael cymorth.</value>
+        <value>Os ydych chi’n denant tai cymdeithasol, cysylltwch â’ch landlord yn uniongyrchol i gael cymorth.</value>
     </data>
     <data name="You can come back to this action plan using your reference number." xml:space="preserve">
-        <value>Gallwch ddod yn ôl i’r cynllun gweithredu yma drwy ddefnyddio'ch rhif cyfeirnod.</value>
+        <value>Gallwch ddod yn ôl i’r cynllun gweithredu yma drwy ddefnyddio’ch rhif cyfeirnod.</value>
     </data>
     <data name="You can also use this service for further tailored and impartial advice on how to improve the energy performance of your home – including but not limited to information on the relevant energy technologies, cost-effective ordering for measure installations and available Government grants schemes." xml:space="preserve">
         <value>Gallwch hefyd ddefnyddio’r gwasanaeth hwn i gael rhagor o gyngor diduedd wedi’i deilwra ar sut i wella perfformiad ynni eich cartref – gan gynnwys, ond heb fod yn gyfyngedig i, wybodaeth am y technolegau ynni perthnasol, archebu cost-effeithiol ar gyfer gosod mesurau a chynlluniau grantiau sydd ar gael gan y Llywodraeth.</value>
@@ -2146,7 +2146,7 @@
         <value>ydy eich waliau solet wedi’u hinsiwleiddio</value>
     </data>
     <data name="is your ground floor insulated" xml:space="preserve">
-        <value>ydy eich llawr gwaelod wedi'i inswleiddio</value>
+        <value>ydy eich llawr gwaelod wedi’i inswleiddio</value>
     </data>
     <data name="is any part of your roof flat" xml:space="preserve">
         <value>oes unrhyw ran o’ch to yn fflat</value>
@@ -2158,7 +2158,7 @@
         <value>a oes modd mynd i’ch atig</value>
     </data>
     <data name="is your loft fully insulated" xml:space="preserve">
-        <value>ydy eich atig wedi'i inswleiddio yn llwyr</value>
+        <value>ydy eich atig wedi’i inswleiddio yn llwyr</value>
     </data>
     <data name="hours in the morning" xml:space="preserve">
         <value>awr yn y bore</value>
@@ -2173,7 +2173,7 @@
         <value>Y sail gyfreithiol dros brosesu eich data personol yw bod prosesu yn angenrheidiol er mwyn cyflawni tasg a wneir er budd y cyhoedd neu wrth arfer awdurdod swyddogol a freiniwyd yn y rheolydd data, fel arfer un o swyddogaethau’r Goron, un o Weinidogion y Goron, neu un o adrannau’r llywodraeth; arfer swyddogaeth a roddir i berson gan ddeddfiad; arfer swyddogaeth naill ai Tŷ’r Senedd; neu weinyddu cyfiawnder. Yn yr achos hwn, er mwyn cael adborth am y gwasanaeth hwn ac i gysylltu â chi am eglurhad neu i roi gwybod am ddiweddariadau i’r gwasanaeth.</value>
     </data>
     <data name="DataProcessorsWithinEEAAndModelContractClausesOutsideEEAString" xml:space="preserve">
-        <value>Gan fod eich data personol yn cael ei storio ar ein seilwaith TG a'i rannu gyda'n proseswyr data Microsoft, &lt;a class="govuk-link" href="{0}"&gt;GOV.UK PaaS&lt;/a&gt;, a &lt;a class="govuk-link" href="{1}"&gt;GOV.UK Notify&lt;/a&gt;, fe allai gael ei drosglwyddo a'i storio'n ddiogel yn y Deyrnas Unedig a'r Ardal Economaidd Ewropeaidd. Os bydd eich data personol yn cael ei storio y tu allan i'r Deyrnas Unedig a'r AEE, bydd yn dod o dan amddiffyniad cyfreithiol cyfatebol trwy ddefnyddio Cymalau Contract Enghreifftiol.</value>
+        <value>Gan fod eich data personol yn cael ei storio ar ein seilwaith TG a’i rannu gyda’n proseswyr data Microsoft, &lt;a class="govuk-link" href="{0}"&gt;GOV.UK PaaS&lt;/a&gt;, a &lt;a class="govuk-link" href="{1}"&gt;GOV.UK Notify&lt;/a&gt;, fe allai gael ei drosglwyddo a’i storio’n ddiogel yn y Deyrnas Unedig a’r Ardal Economaidd Ewropeaidd. Os bydd eich data personol yn cael ei storio y tu allan i’r Deyrnas Unedig a’r AEE, bydd yn dod o dan amddiffyniad cyfreithiol cyfatebol trwy ddefnyddio Cymalau Contract Enghreifftiol.</value>
     </data>
     <data name="Please enter your email" xml:space="preserve">
         <value>Rhowch eich ebost</value>
@@ -2191,13 +2191,13 @@
         <value>math o gartref</value>
     </data>
     <data name="If you have a basement or cellar beneath your house that you can get into safely, you could look down there to see what type of floor you have. If the floor is a suspended wooden floor, you should be able to see wooden joists and the undersides of the floorboards." xml:space="preserve">
-        <value>Os oes gennych chi seler o dan eich tŷ y gallwch fynd iddo'n ddiogel, fe allech chi edrych yno i weld pa fath o lawr sydd gennych. Os yw'r llawr yn llawr pren crog, fe ddylech chi allu gweld distiau pren ac ochrau isaf y byrddau.</value>
+        <value>Os oes gennych chi seler o dan eich tŷ y gallwch fynd iddo’n ddiogel, fe allech chi edrych yno i weld pa fath o lawr sydd gennych. Os yw’r llawr yn llawr pren crog, fe ddylech chi allu gweld distiau pren ac ochrau isaf y byrddau.</value>
     </data>
     <data name="A suspended timber floor can be insulated by lifting the floorboards and laying mineral wool insulation supported by netting between the joists, or cutting rigid insulation boards to size. It is possible done from below if there’s enough access to the cellar or crawl space." xml:space="preserve">
         <value>Mae modd inswleiddio llawr pren crog drwy godi’r estyll a gosod deunydd inswleiddio gwlân mwynol oddi tanodd gan ei ddal yn ei le gyda rhwydi rhwng y distiau, neu drwy dorri byrddau inswleiddio anhyblyg i ffitio. Mae’n bosibl gwneud hyn oddi tanodd os oes digon o le i fynd i’r seler neu’r gofod cropian.</value>
     </data>
     <data name="Based on the information we have collected; it looks like you could save money by adding an insulating jacket to your hot water cylinder. By insulating your hot water cylinder, you will retain more heat. It will mean your hot water stays hotter for longer, and you spend less money heating water up." xml:space="preserve">
-        <value>Ar sail yr wybodaeth rydym wedi'i chasglu; mae'n ymddangos y gallech chi arbed arian drwy roi siaced inswleiddio ar eich tanc dŵr poeth. Drwy inswleiddio eich tanc dŵr poeth, byddwch yn dal gafael ar fwy o wres. Mae’n golygu y bydd eich dŵr poeth yn aros yn boethach am hirach, ac y byddwch yn gwario llai o arian yn cynhesu dŵr.</value>
+        <value>Ar sail yr wybodaeth rydym wedi’i chasglu; mae’n ymddangos y gallech chi arbed arian drwy roi siaced inswleiddio ar eich tanc dŵr poeth. Drwy inswleiddio eich tanc dŵr poeth, byddwch yn dal gafael ar fwy o wres. Mae’n golygu y bydd eich dŵr poeth yn aros yn boethach am hirach, ac y byddwch yn gwario llai o arian yn cynhesu dŵr.</value>
     </data>
     <data name="If you are reasonably confident with DIY, this could be a task you can complete yourself. If not, this is a job for a handyperson." xml:space="preserve">
         <value>Os ydych chi’n weddol hyderus gyda DIY, gallai hon fod yn dasg y gallwch ei chwblhau eich hun. Os na, mae hon yn dasg i grefftwr.</value>
@@ -2236,7 +2236,7 @@
         <value>UN DIWRNOD FEL ARFER</value>
     </data>
     <data name="Based on the information we have collected, it looks like you have an old gas boiler that may not be operating efficiently. You could consider replacing this with a modern condensing boiler, which will use less gas to provide the same amount of heat, helping to cut your fuel bills and carbon dioxide emissions." xml:space="preserve">
-        <value>Ar sail yr wybodaeth rydym wedi'i chasglu, mae'n ymddangos bod gennych hen foeler nwy ac efallai nad yw’n gweithredu’n effeithlon. Gallech ystyried ei newid am foeler cyddwyso modern, a fydd yn defnyddio llai o nwy i ddarparu’r un faint o wres, gan helpu i leihau eich biliau tanwydd a’ch allyriadau carbon deuocsid.</value>
+        <value>Ar sail yr wybodaeth rydym wedi’i chasglu, mae’n ymddangos bod gennych hen foeler nwy ac efallai nad yw’n gweithredu’n effeithlon. Gallech ystyried ei newid am foeler cyddwyso modern, a fydd yn defnyddio llai o nwy i ddarparu’r un faint o wres, gan helpu i leihau eich biliau tanwydd a’ch allyriadau carbon deuocsid.</value>
     </data>
     <data name="EPCSuggestsYourMainHeatingIsBiomassString" xml:space="preserve">
         <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai &lt;strong&gt;bwyler biomas&lt;/strong&gt; yw eich prif system wresogi.</value>
@@ -2254,10 +2254,10 @@
         <value>Byddwch yn gallu defnyddio rhywfaint o’r trydan hwn i leihau faint rydych chi’n ei brynu gan eich cyflenwr ynni, gan leihau eich biliau. Ar adegau byddwch yn cynhyrchu mwy nag yr ydych yn ei ddefnyddio – gallwch werthu unrhyw beth sydd dros ben i’ch cyflenwr trydan i arbed mwy fyth o arian.</value>
     </data>
     <data name="Based on the information we have collected; it looks like you have solid walls without a cavity, and that these are not insulated. You could consider insulating these walls to help trap the heat inside your property so your heating doesn’t need to be on as much." xml:space="preserve">
-        <value>Ar sail yr wybodaeth rydym wedi'i chasglu; mae'n ymddangos bod gennych waliau solet heb geudod, ac nad ydy’r rhain wedi’u hinswleiddio. Gallech ystyried inswleiddio'r waliau hyn er mwyn helpu i ddal gwres y tu mewn i’ch eiddo fel nad oes angen rhoi’ch gwres ymlaen gymaint.</value>
+        <value>Ar sail yr wybodaeth rydym wedi’i chasglu; mae’n ymddangos bod gennych waliau solet heb geudod, ac nad ydy’r rhain wedi’u hinswleiddio. Gallech ystyried inswleiddio’r waliau hyn er mwyn helpu i ddal gwres y tu mewn i’ch eiddo fel nad oes angen rhoi’ch gwres ymlaen gymaint.</value>
     </data>
     <data name="External wall insulation is less disruptive to the inside of your home, but will change the external appearance of your home, so you will usually need planning permission. It’s unlikely to be allowed on the front of your property if you live in a conservation area." xml:space="preserve">
-        <value>Mae inswleiddio waliau allanol yn amharu llai ar y tu mewn i’ch cartref, ond bydd yn newid ymddangosiad allanol eich cartref, felly bydd angen caniatâd cynllunio fel arfer. Mae'n annhebygol y caniateir ei osod ar wyneb blaen eich eiddo os ydych chi'n byw mewn ardal gadwraeth.</value>
+        <value>Mae inswleiddio waliau allanol yn amharu llai ar y tu mewn i’ch cartref, ond bydd yn newid ymddangosiad allanol eich cartref, felly bydd angen caniatâd cynllunio fel arfer. Mae’n annhebygol y caniateir ei osod ar wyneb blaen eich eiddo os ydych chi’n byw mewn ardal gadwraeth.</value>
     </data>
     <data name="FloorConstructionTitleString" xml:space="preserve">
         <value>Adeiladwaith y lloriau</value>
@@ -2269,7 +2269,7 @@
         <value>Adeiladwaith y lloriau</value>
     </data>
     <data name="Check you have typed the reference correctly. Reference must be 8 characters." xml:space="preserve">
-        <value>Gwiriwch eich bod wedi teipio'r cyfeirnod yn gywir. Rhaid i'r cyfeirnod fod yn 8 o gymeriadau.</value>
+        <value>Gwiriwch eich bod wedi teipio’r cyfeirnod yn gywir. Rhaid i’r cyfeirnod fod yn 8 o gymeriadau.</value>
     </data>
     <data name="Unable to send email due to unexpected error. Please make a note of your reference code." xml:space="preserve">
         <value>Methu anfon neges ebost oherwydd gwall annisgwyl. Cadwch nodyn o’ch cod cyfeirnod.</value>
@@ -2296,10 +2296,10 @@
         <value>2 DDIWRNOD</value>
     </data>
     <data name="AbilityNetAdviceLinkString" xml:space="preserve">
-        <value>Mae gan &lt;a class="govuk-link" href="{0}"&gt;AbilityNet&lt;/a&gt; gyngor ar wneud eich dyfais yn haws i'w defnyddio os oes gennych anabledd.</value>
+        <value>Mae gan &lt;a class="govuk-link" href="{0}"&gt;AbilityNet&lt;/a&gt; gyngor ar wneud eich dyfais yn haws i’w defnyddio os oes gennych anabledd.</value>
     </data>
     <data name="BriefCookieExplanationLinkToDetailedInfoString" xml:space="preserve">
-        <value>Mae gan y tudalen yma esboniad byr o bob math o gwci rydyn ni'n ei ddefnyddio. Os hoffech chi gael rhagor o fanylion, &lt;a href="{0}" class="govuk-link"&gt;darllenwch ein gwybodaeth fanwl am gwcis&lt;/a&gt;</value>
+        <value>Mae gan y tudalen yma esboniad byr o bob math o gwci rydyn ni’n ei ddefnyddio. Os hoffech chi gael rhagor o fanylion, &lt;a href="{0}" class="govuk-link"&gt;darllenwch ein gwybodaeth fanwl am gwcis&lt;/a&gt;</value>
     </data>
     <data name="ChangeAnswersIfSomethingDoesNotLookRightString" xml:space="preserve">
         <value>Os nad yw rhywbeth yn edrych yn iawn, gallwch &lt;a href="{0}" class="govuk-link"&gt;weld a newid eich atebion yma&lt;/a&gt;.</value>
@@ -2308,10 +2308,10 @@
         <value>Mae gwahanol fathau o bwmp gwres a gallwch &lt;a class="govuk-link" href="{0}"&gt;wirio pa un a allai fod yn addas ar gyfer eich cartref chi&lt;/a&gt; ar ein gwasanaeth pympiau gwres pwrpasol.</value>
     </data>
     <data name="CompliantWithWebContentAccessibilityGuidelinesString" xml:space="preserve">
-        <value>Mae'r wefan yma yn cydymffurfio'n rhannol â &lt;a class="govuk-link" href="{0}"&gt;safon AA fersiwn 2.2 o Ganllawiau Hygyrchedd Cynnwys y We&lt;/a&gt;, oherwydd y diffygion cydymffurfio isod.</value>
+        <value>Mae’r wefan yma yn cydymffurfio’n rhannol â &lt;a class="govuk-link" href="{0}"&gt;safon AA fersiwn 2.2 o Ganllawiau Hygyrchedd Cynnwys y We&lt;/a&gt;, oherwydd y diffygion cydymffurfio isod.</value>
     </data>
     <data name="CostsAndSavingsBasedOnStandardAssessmentProcedureString" xml:space="preserve">
-        <value>Mae'r costau a'r arbedion rydych chi'n eu gweld drwy ddefnyddio'r gwasanaethau ar y wefan yma wedi’u seilio ar safonau a ddatblygwyd i'r Llywodraeth fel ffordd o ddeall sut mae tai a fflatiau yn defnyddio ynni, a sut y gallai defnydd ynni eich cartref chi gael ei wella. Gallwch gael rhagor o wybodaeth am y safonau hyn gyda'r canllawiau sydd wedi’u cyhoeddi ar wefan y &lt;a class="govuk-link" href="{0}"&gt; Weithdrefn Asesu Safonol&lt;/a&gt;.</value>
+        <value>Mae’r costau a’r arbedion rydych chi’n eu gweld drwy ddefnyddio’r gwasanaethau ar y wefan yma wedi’u seilio ar safonau a ddatblygwyd i’r Llywodraeth fel ffordd o ddeall sut mae tai a fflatiau yn defnyddio ynni, a sut y gallai defnydd ynni eich cartref chi gael ei wella. Gallwch gael rhagor o wybodaeth am y safonau hyn gyda’r canllawiau sydd wedi’u cyhoeddi ar wefan y &lt;a class="govuk-link" href="{0}"&gt; Weithdrefn Asesu Safonol&lt;/a&gt;.</value>
     </data>
     <data name="DifferentServiceAvailableToCheckHeatPumpString" xml:space="preserve">
         <value>Mae gwasanaeth gwahanol ar gael os hoffech chi &lt;a class="govuk-link" href="{0}"&gt; wirio a allai pwmp gwres fod yn addas ar gyfer eich eiddo&lt;/a&gt;.</value>
@@ -2359,10 +2359,10 @@
         <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu mai &lt;strong&gt;pwmp gwres&lt;/strong&gt; yw eich prif system wresogi</value>
     </data>
     <data name="WeUseInfoToSearchForEPCString" xml:space="preserve">
-        <value>Rydyn ni’n defnyddio'r wybodaeth yma i chwilio’r Gofrestr Perfformiad Ynni Adeiladau ar gyfer Tystysgrif Perfformiad Ynni sy'n cyd-fynd â'ch cyfeiriad chi. Mae'r Gofrestr Perfformiad Ynni Adeiladau yn gofrestr agored a gallwch gael rhagor o fanylion gan yr &lt;a href="{0}" class="govuk-link"&gt;Adran Ffyniant Bro, Tai a Chymunedau&lt;/a&gt;.</value>
+        <value>Rydyn ni’n defnyddio’r wybodaeth yma i chwilio’r Gofrestr Perfformiad Ynni Adeiladau ar gyfer Tystysgrif Perfformiad Ynni sy’n cyd-fynd â’ch cyfeiriad chi. Mae’r Gofrestr Perfformiad Ynni Adeiladau yn gofrestr agored a gallwch gael rhagor o fanylion gan yr &lt;a href="{0}" class="govuk-link"&gt;Adran Ffyniant Bro, Tai a Chymunedau&lt;/a&gt;.</value>
     </data>
     <data name="YouCanChangeWhichCookiesString" xml:space="preserve">
-        <value>Gallwch &lt;a href="{0}" class="govuk-link"&gt;newid pa gwcis rydych chi'n hapus inni eu defnyddio&lt;/a&gt;.</value>
+        <value>Gallwch &lt;a href="{0}" class="govuk-link"&gt;newid pa gwcis rydych chi’n hapus inni eu defnyddio&lt;/a&gt;.</value>
     </data>
     <data name="WeMayAlsoCollectAndProcessAnonymisedInformationCookiePolicyString" xml:space="preserve">
         <value>Efallai y byddwn ni hefyd yn casglu ac yn prosesu gwybodaeth ddienw fel yr amlinellir yn ein &lt;a class="govuk-link" href="{0}"&gt;polisi cwcis&lt;/a&gt;.</value>
@@ -2387,25 +2387,25 @@
         <comment>remember your language</comment>
     </data>
     <data name="VisitNIDirectString" xml:space="preserve">
-        <value>Ewch i &lt;a href="{0}" class="govuk-link"&gt;NI Direct&lt;/a&gt; i'ch helpu i ddod o hyd i ffyrdd o wella effeithlonrwydd ynni eich eiddo.</value>
+        <value>Ewch i &lt;a href="{0}" class="govuk-link"&gt;NI Direct&lt;/a&gt; i’ch helpu i ddod o hyd i ffyrdd o wella effeithlonrwydd ynni eich eiddo.</value>
     </data>
     <data name="VisitHomeEnergyScotlandString" xml:space="preserve">
-        <value>Ewch i wefan &lt;a href="{0}" class="govuk-link"&gt;Home Energy Scotland&lt;/a&gt; i'ch helpu i ddod o hyd i ffyrdd o wella effeithlonrwydd ynni eich eiddo.</value>
+        <value>Ewch i wefan &lt;a href="{0}" class="govuk-link"&gt;Home Energy Scotland&lt;/a&gt; i’ch helpu i ddod o hyd i ffyrdd o wella effeithlonrwydd ynni eich eiddo.</value>
     </data>
     <data name="VisitHistoricEnglandForHistoricBuildingInformationString" xml:space="preserve">
-        <value>Ewch i wefan &lt;a class="govuk-link" href="{0}"&gt;Historic England&lt;/a&gt; i gael gwybodaeth sy'n benodol i adeiladau hanesyddol.</value>
+        <value>Ewch i wefan &lt;a class="govuk-link" href="{0}"&gt;Historic England&lt;/a&gt; i gael gwybodaeth sy’n benodol i adeiladau hanesyddol.</value>
     </data>
     <data name="VisitEnergySavingTrustWebsiteString" xml:space="preserve">
         <value>Gallwch ymweld â gwefan &lt;a href="{0}" class="govuk-link"&gt;yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt; i gael rhagor o wybodaeth am leihau defnydd ynni eich cartref.</value>
     </data>
     <data name="ThisIsANewServiceString" xml:space="preserve">
-        <value>Gwasanaeth newydd yw hwn – bydd eich &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt;adborth (yn agor mewn tab newydd)&lt;/a&gt; yn ein helpu i'w wella.</value>
+        <value>Gwasanaeth newydd yw hwn – bydd eich &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt;adborth (yn agor mewn tab newydd)&lt;/a&gt; yn ein helpu i’w wella.</value>
     </data>
     <data name="SummaryOfSavingsAndCostsForSingleRecommendationString" xml:space="preserve">
-        <value>Dyma grynodeb o'r amcangyfrif o’ch arbedion ar filiau ynni blynyddol a chost gosod yr &lt;strong&gt;1 argymhelliad&lt;/strong&gt; y dwedsoch y byddech chi’n ei ystyried ar gyfer eich cartref.</value>
+        <value>Dyma grynodeb o’r amcangyfrif o’ch arbedion ar filiau ynni blynyddol a chost gosod yr &lt;strong&gt;1 argymhelliad&lt;/strong&gt; y dwedsoch y byddech chi’n ei ystyried ar gyfer eich cartref.</value>
     </data>
     <data name="SummaryOfSavingsAndCostsForMultipleRecommendationsString" xml:space="preserve">
-        <value>Dyma grynodeb o'r amcangyfrif o’ch arbedion ar filiau ynni blynyddol a chost gosod yr &lt;strong&gt;{0} o argymhellion&lt;/strong&gt; y dwedsoch y byddech chi’n eu hystyried ar gyfer eich cartref.</value>
+        <value>Dyma grynodeb o’r amcangyfrif o’ch arbedion ar filiau ynni blynyddol a chost gosod yr &lt;strong&gt;{0} o argymhellion&lt;/strong&gt; y dwedsoch y byddech chi’n eu hystyried ar gyfer eich cartref.</value>
     </data>
     <data name="SolidWallInsulationExpectedToLastString" xml:space="preserve">
         <value>Disgwylir i inswleiddiad waliau solet bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
@@ -2414,10 +2414,10 @@
         <value>Ar y cyfan, disgwylir i baneli haul bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="ReturnToRecommendationsAndActionPlanIfYouNeedToString" xml:space="preserve">
-        <value>Gallwch &lt;a href="{0}"&gt;ddychwelyd i’ch argymhellion a'ch cynllun gweithredu&lt;/a&gt; os oes angen.</value>
+        <value>Gallwch &lt;a href="{0}"&gt;ddychwelyd i’ch argymhellion a’ch cynllun gweithredu&lt;/a&gt; os oes angen.</value>
     </data>
     <data name="OfgemGuideToSchemesAndGrantsString" xml:space="preserve">
-        <value>Os ydych chi'n poeni am fforddio’ch biliau ynni, mae gan Ofgem &lt;a class="govuk-link" href="{0}"&gt;ganllaw defnyddiol&lt;/a&gt; i'r cynlluniau, y grantiau a'r budd-daliadau a allai fod ar gael ichi.</value>
+        <value>Os ydych chi’n poeni am fforddio’ch biliau ynni, mae gan Ofgem &lt;a class="govuk-link" href="{0}"&gt;ganllaw defnyddiol&lt;/a&gt; i’r cynlluniau, y grantiau a’r budd-daliadau a allai fod ar gael ichi.</value>
     </data>
     <data name="NewWindowsTypicallyLastString" xml:space="preserve">
         <value>Ar y cyfan, disgwylir i ffenestri newydd bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
@@ -2507,7 +2507,7 @@
         <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod gan eich cartref &lt;strong&gt;waliau solet.&lt;/strong&gt;</value>
     </data>
     <data name="FindOutIfEligibleForSustainableWarmthGrantString" xml:space="preserve">
-        <value>I ddarganfod a ydych chi’n gymwys i gael grant Cynhesrwydd Cynaliadwy, cysylltwch â'ch Awdurdod Lleol sydd i’w weld ar &lt;a class="govuk-link" href="{0}"&gt;https://www.gov.uk/find-local-council&lt;/a&gt; i wirio a ydyn  nhw’n cynnig cyllid.</value>
+        <value>I ddarganfod a ydych chi’n gymwys i gael grant Cynhesrwydd Cynaliadwy, cysylltwch â’ch Awdurdod Lleol sydd i’w weld ar &lt;a class="govuk-link" href="{0}"&gt;https://www.gov.uk/find-local-council&lt;/a&gt; i wirio a ydyn  nhw’n cynnig cyllid.</value>
     </data>
     <data name="GasBoilersTypicallyExpectedToLast" xml:space="preserve">
         <value>Ar y cyfan, disgwylir i fwyleri nwy newydd bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
@@ -2528,10 +2528,10 @@
         <value>Ar y cyfan, disgwylir i bympiau gwres bara &lt;strong&gt;12 - 15 o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="HelpFindingQualifiedInstallerOnTrustMarkWebsiteString" xml:space="preserve">
-        <value>Ar gyfer pob newid arall i'ch eiddo, mynnwch help i ddod o hyd i osodwr cymwys yn eich ardal drwy ymweld â gwefan &lt;a class="govuk-link" href="{0}"&gt;TrustMark&lt;/a&gt;.</value>
+        <value>Ar gyfer pob newid arall i’ch eiddo, mynnwch help i ddod o hyd i osodwr cymwys yn eich ardal drwy ymweld â gwefan &lt;a class="govuk-link" href="{0}"&gt;TrustMark&lt;/a&gt;.</value>
     </data>
     <data name="HelpUsImproveAccessibilityFeedbackString" xml:space="preserve">
-        <value>Rydyn ni bob amser yn ceisio gwella hygyrchedd y wefan yma. Os cewch chi unrhyw broblemau sydd heb eu rhestru ar y tudalen yma neu'n credu nad ydyn ni’n bodloni gofynion hygyrchedd, cysylltwch ag: &lt;a class="govuk-link" href="mailto: {0}"&gt;{0}&lt;/a&gt;</value>
+        <value>Rydyn ni bob amser yn ceisio gwella hygyrchedd y wefan yma. Os cewch chi unrhyw broblemau sydd heb eu rhestru ar y tudalen yma neu’n credu nad ydyn ni’n bodloni gofynion hygyrchedd, cysylltwch ag: &lt;a class="govuk-link" href="mailto: {0}"&gt;{0}&lt;/a&gt;</value>
     </data>
     <data name="HighHeatRetentionStorageHeatersAreTypicallyExpectedToLastString" xml:space="preserve">
         <value>Ar y cyfan, disgwylir i  wresogyddion storio sy’n cadw gwres uchel bara &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
@@ -2567,7 +2567,7 @@
         <value>Gallwch weld rhagor o wybodaeth am baneli haul PV ar &lt;a class="govuk-link" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt;.</value>
     </data>
     <data name="MoreInfoOnNewWindowsOnBritishFenestrationRatingCouncilWebsiteString" xml:space="preserve">
-        <value>Gallwch weld rhagor o wybodaeth am ffenestri effeithlon a sut i'w dewis ar &lt;a class="govuk-link" href="{0}"&gt;wefan Cyngor Sgorio Ffenestri Prydain&lt;/a&gt;.</value>
+        <value>Gallwch weld rhagor o wybodaeth am ffenestri effeithlon a sut i’w dewis ar &lt;a class="govuk-link" href="{0}"&gt;wefan Cyngor Sgorio Ffenestri Prydain&lt;/a&gt;.</value>
     </data>
     <data name="MoreInfoOnLoftInsulationOnEnergySavingTrustWebsiteString" xml:space="preserve">
         <value>Gallwch weld rhagor o wybodaeth am inswleiddiad atig ar &lt;a class="govuk-link" href="{0}"&gt;wefan yr Ymddiriedolaeth Arbed Ynni&lt;/a&gt;.</value>
@@ -2618,22 +2618,22 @@
         <value>Ar y cyfan mae siacedi silindrau dŵr poeth yn para &lt;strong&gt;tua {0} o flynyddoedd&lt;/strong&gt;</value>
     </data>
     <data name="If your home was converted, for example it was a shop or other commercial premises before, it may have been built without insulation." xml:space="preserve">
-        <value>Os cafodd eich cartref ei drosi, er enghraifft os oedd yn siop neu’n fangre fasnachol arall o'r blaen, efallai ei fod wedi'i adeiladu heb ei inswleiddio.</value>
+        <value>Os cafodd eich cartref ei drosi, er enghraifft os oedd yn siop neu’n fangre fasnachol arall o’r blaen, efallai ei fod wedi’i adeiladu heb ei inswleiddio.</value>
     </data>
     <data name="IfFirstVisitTimeToAnswer" xml:space="preserve">
-        <value>Os dyma’ch ymweliad cyntaf, mae'n cymryd tua &lt;strong&gt;10 munud&lt;/strong&gt; i ateb y cwestiynau a chael argymhellion sydd wedi'u teilwra i chi a'ch cartref.</value>
+        <value>Os dyma’ch ymweliad cyntaf, mae’n cymryd tua &lt;strong&gt;10 munud&lt;/strong&gt; i ateb y cwestiynau a chael argymhellion sydd wedi’u teilwra i chi a’ch cartref.</value>
     </data>
     <data name="IfNotHappyWithComplaintContactLinkString" xml:space="preserve">
-        <value>Y Comisiwn Cydraddoldeb a Hawliau Dynol (EHRC) sy’n gyfrifol am orfodi Rheoliadau Hygyrchedd Cyrff y Sector Cyhoeddus (Gwefannau a Chymwysiadau Symudol) (Rhif 2) 2018 (y 'rheoliadau hygyrchedd'). Os nad ydych chi’n fodlon ar y ffordd rydyn ni’n ymateb i'ch cwyn, &lt;a class="govuk-link" href="{0}"&gt;cysylltwch â'r Gwasanaeth Cynghori a Chymorth Cydraddoldeb (EASS)&lt;/a&gt;.</value>
+        <value>Y Comisiwn Cydraddoldeb a Hawliau Dynol (EHRC) sy’n gyfrifol am orfodi Rheoliadau Hygyrchedd Cyrff y Sector Cyhoeddus (Gwefannau a Chymwysiadau Symudol) (Rhif 2) 2018 (y ‘rheoliadau hygyrchedd’). Os nad ydych chi’n fodlon ar y ffordd rydyn ni’n ymateb i’ch cwyn, &lt;a class="govuk-link" href="{0}"&gt;cysylltwch â’r Gwasanaeth Cynghori a Chymorth Cydraddoldeb (EASS)&lt;/a&gt;.</value>
     </data>
     <data name="IfUserInScotlandHomeEnergyScotlandLinkString" xml:space="preserve">
-        <value>Os ydych chi'n byw yn yr Alban, ewch i &lt;a class="govuk-link" href="{0}"&gt;Home Energy Scotland&lt;/a&gt; i'ch helpu i ddod o hyd i ffyrdd o leihau’ch biliau ynni.</value>
+        <value>Os ydych chi’n byw yn yr Alban, ewch i &lt;a class="govuk-link" href="{0}"&gt;Home Energy Scotland&lt;/a&gt; i’ch helpu i ddod o hyd i ffyrdd o leihau’ch biliau ynni.</value>
     </data>
     <data name="IfYouLiveInNIVisitNIDirectString" xml:space="preserve">
-        <value>Os ydych chi'n byw yng Ngogledd Iwerddon, ewch i&lt;a class="govuk-link" href="{0}"&gt;NI Direct&lt;/a&gt; i gael cymorth.</value>
+        <value>Os ydych chi’n byw yng Ngogledd Iwerddon, ewch i&lt;a class="govuk-link" href="{0}"&gt;NI Direct&lt;/a&gt; i gael cymorth.</value>
     </data>
     <data name="InfoOnHelpFromBoilerUpgradeSchemeForHeatPumpsString" xml:space="preserve">
-        <value>Mae pympiau gwres yn addas ar gyfer llawer o gartrefi, byddan nhw’n lleihau’ch allyriadau carbon ac mae grantiau ar gael drwy'r &lt;a class="govuk-link" href="{0}"&gt;Cynllun Uwchraddio Bwyleri&lt;/a&gt; ar gyfer pympiau gwres o’r aer a phympiau gwres o'r ddaear i leihau'r gost ymlaen llaw.</value>
+        <value>Mae pympiau gwres yn addas ar gyfer llawer o gartrefi, byddan nhw’n lleihau’ch allyriadau carbon ac mae grantiau ar gael drwy’r &lt;a class="govuk-link" href="{0}"&gt;Cynllun Uwchraddio Bwyleri&lt;/a&gt; ar gyfer pympiau gwres o’r aer a phympiau gwres o’r ddaear i leihau’r gost ymlaen llaw.</value>
     </data>
     <data name="EPCSuggestsPropertyBuiltBefore1900String" xml:space="preserve">
         <value>Mae eich Tystysgrif Perfformiad Ynni {0} yn awgrymu bod eich eiddo wedi’i adeiladu &lt;strong&gt;cyn 1900.&lt;/strong&gt;</value>
@@ -2665,15 +2665,15 @@
         <comment>EPCSuggestsYourLoftIsNotFullyInsulatedString</comment>
     </data>
     <data name="HelpMeAnswerSolarElectricPanelsString" xml:space="preserve">
-        <value>Mae arae ffotofoltäig solar (PV) ar ben y to yn gasgliad o baneli lliw tywyll. Yn fwyaf cyffredin mae’r paneli yn cael eu cysylltu â'r to â mownt gosod. Yn llai cyffredin maen nhw wedi’u hintegreiddio â'r to ei hun (PV integredig adeilad).</value>
+        <value>Mae arae ffotofoltäig solar (PV) ar ben y to yn gasgliad o baneli lliw tywyll. Yn fwyaf cyffredin mae’r paneli yn cael eu cysylltu â’r to â mownt gosod. Yn llai cyffredin maen nhw wedi’u hintegreiddio â’r to ei hun (PV integredig adeilad).</value>
         <comment>HelpMeAnswerSolarElectricPanelsString</comment>
     </data>
     <data name="EPCSuggestsNoSolarPanelsString" xml:space="preserve">
-        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu &lt;strong&gt;nad oes paneli ffotofoltäig solar wedi'u gosod ar eich cartref. &lt;/strong&gt;</value>
+        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu &lt;strong&gt;nad oes paneli ffotofoltäig solar wedi’u gosod ar eich cartref. &lt;/strong&gt;</value>
         <comment>EPCSuggestsNoSolarPanelsString</comment>
     </data>
     <data name="EPCSuggestsHasSolarPanelsString" xml:space="preserve">
-        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu &lt;strong&gt;bod paneli ffotofoltäig solar wedi'u gosod ar eich cartref.&lt;/strong&gt;</value>
+        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu &lt;strong&gt;bod paneli ffotofoltäig solar wedi’u gosod ar eich cartref.&lt;/strong&gt;</value>
         <comment>EPCSuggestsHasSolarPanelsString</comment>
     </data>
     <data name="SolarElectricPanelsQuestionString" xml:space="preserve">
@@ -2685,7 +2685,7 @@
         <comment>HeatingControlsQuestionString</comment>
     </data>
     <data name="SmartHeatingControlsHelpString" xml:space="preserve">
-        <value>Mae rheolaethau clyfar wedi'u cysylltu â'r rhyngrwyd. Dewiswch opsiwn, ni waeth a ydyn nhw’n cael eu rheoli gan ddyfais symudol ynteu gan reolaeth gorfforol yn eich cartref.</value>
+        <value>Mae rheolaethau clyfar wedi’u cysylltu â’r rhyngrwyd. Dewiswch opsiwn, ni waeth a ydyn nhw’n cael eu rheoli gan ddyfais symudol ynteu gan reolaeth gorfforol yn eich cartref.</value>
         <comment>SmartHeatingControlsHelpString</comment>
     </data>
     <data name="HelpMeAnswerHeatingControlsString" xml:space="preserve">
@@ -2697,11 +2697,11 @@
         <comment>or</comment>
     </data>
     <data name="EPCSuggestsSolarElectricPanels" xml:space="preserve">
-        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu &lt;strong&gt;bod paneli ffotofoltäig solar wedi'u gosod ar eich cartref.&lt;/strong&gt;</value>
+        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu &lt;strong&gt;bod paneli ffotofoltäig solar wedi’u gosod ar eich cartref.&lt;/strong&gt;</value>
         <comment>EPCSuggestsSolarElectricPanels</comment>
     </data>
     <data name="EPCSuggestsNoSolarElectricPanels" xml:space="preserve">
-        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu &lt;strong&gt;nad oes paneli ffotofoltäig solar wedi'u gosod ar eich cartref.&lt;/strong&gt; </value>
+        <value>Mae eich Tystysgrif Perfformiad Ynni ar gyfer {0} yn awgrymu &lt;strong&gt;nad oes paneli ffotofoltäig solar wedi’u gosod ar eich cartref.&lt;/strong&gt; </value>
         <comment>EPCSuggestsNoSolarElectricPanels</comment>
     </data>
     <data name="SolarElectricPanelsTitleString" xml:space="preserve">
@@ -2767,7 +2767,7 @@ cartref &lt;strong&gt;{1}, a {2}.&lt;/strong&gt;</value>
         <value>Rhagfyr</value>
     </data>
     <data name="YourRecommendationsUpdatedString" xml:space="preserve">
-        <value>Mae’ch argymhellion wedi'u diweddaru</value>
+        <value>Mae’ch argymhellion wedi’u diweddaru</value>
     </data>
     <data name="SinceLastVisitRecommendationsChangedString" xml:space="preserve">
         <value>Ers eich ymweliad diwethaf, mae’ch argymhellion wedi newid</value>
@@ -2782,6 +2782,6 @@ cartref &lt;strong&gt;{1}, a {2}.&lt;/strong&gt;</value>
         <value>pam y gallai argymhellion fod wedi newid</value>
     </data>
     <data name="WhyRecommendationsChangedDescriptionString" xml:space="preserve">
-        <value>Bydd eich argymhellion, ynghyd â'u costau a'u harbedion cysylltiedig, yn cael eu hailgyfrifo pan fyddwch chi'n dychwelyd i'r gwasanaeth yma. Gall y rhain newid dros amser ar sail gwybodaeth wedi'i diweddaru, megis newidiadau yn y cap prisiau ynni neu brisiau ynni RdSAP.</value>
+        <value>Bydd eich argymhellion, ynghyd â’u costau a’u harbedion cysylltiedig, yn cael eu hailgyfrifo pan fyddwch chi’n dychwelyd i’r gwasanaeth yma. Gall y rhain newid dros amser ar sail gwybodaeth wedi’i diweddaru, megis newidiadau yn y cap prisiau ynni neu brisiau ynni RdSAP.</value>
     </data>
 </root>

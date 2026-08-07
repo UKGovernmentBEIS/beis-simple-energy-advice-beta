@@ -61,10 +61,10 @@
         <value>Ychwanegu mwy o ddeunydd inswleiddio atig</value>
     </data>
     <data name="SummaryInsulateCavityWalls" xml:space="preserve">
-        <value>Chwistrellu inswleiddiad i'r ceudod yn eich waliau allanol</value>
+        <value>Chwistrellu inswleiddiad i’r ceudod yn eich waliau allanol</value>
     </data>
     <data name="SummaryAddLoftInsulation" xml:space="preserve">
-        <value>Cynyddu lefel yr inswleiddiad yn eich atig i'r lefel a argymhellir, sef 300mm</value>
+        <value>Cynyddu lefel yr inswleiddiad yn eich atig i’r lefel a argymhellir, sef 300mm</value>
     </data>
     <data name="SummaryUpgradeHeatingControls" xml:space="preserve">
         <value>Ffitio rhaglennydd, thermostat a falfiau rheiddiadur thermostatig</value>
@@ -76,7 +76,7 @@
         <value>Inswleiddio’ch waliau solet (mathau eraill o waliau)</value>
     </data>
     <data name="SummaryInsulateSolidWalls" xml:space="preserve">
-        <value>Inswleiddio'ch waliau solet (waliau brics oedran A-D)</value>
+        <value>Inswleiddio’ch waliau solet (waliau brics oedran A-D)</value>
     </data>
     <data name="SummaryReplaceSingleGlazedWindowsWithDoubleOrTripleGlazing" xml:space="preserve">
         <value>Gosod gwydr dwbl neu wydr triphlyg newydd yn lle hen ffenestri gwydr sengl</value>
