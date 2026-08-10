@@ -1,4 +1,4 @@
-﻿<root>
+<root>
     <resheader name="resmimetype">
         <value>text/microsoft-resx</value>
     </resheader>
@@ -15,6 +15,6 @@
         <value>Oes, mae gennyf atig sydd heb ei droi’n ystafell</value>
     </data>
     <data name="No" xml:space="preserve">
-        <value>Na, does gennyf i ddim atig neu mae fy atig wedi'i droi’n ystafell</value>
+        <value>Na, does gennyf i ddim atig neu mae fy atig wedi’i droi’n ystafell</value>
     </data>
 </root>

@@ -17,6 +17,14 @@ If in the process of following one piece of guidance below, you find you "trigge
 #### When making ANY changes to content strings, localisers, or resource files:
 * Make sure that you have visually confirmed that the text has been updated as you would expect when you run the site, in both English and Welsh.
 
+#### Welsh apostrophes and quotes:
+* In Welsh `<value>` text (any `*.cy.resx` file), always use smart (curly) punctuation:
+  * Apostrophes in words: `’` (U+2019), e.g. `o’r`, `wedi’u`, `chi’n`
+  * Quoted phrases: `‘…’` (U+2018 … U+2019), e.g. `‘Bwyler olew’`
+* Do **not** use the straight ASCII apostrophe `'` in Welsh values.
+* English `name="…"` resource keys may still contain straight apostrophes; leave those alone so lookups keep working.
+* This is enforced by the unit test `WelshApostropheLintTests` (runs in CI with `dotnet test`).
+
 #### When adding a new content string:
 * If the new content string relates to brand new copy text, ensure it is not just the verbatim English text. Instead, use the format `[GeneralPurposeOfText]String` e.g. `WelcomePageTitleString` which is the new standard for resource file keys.
 * Check the new content string is surrounded by an appropriate localiser. Examples:
