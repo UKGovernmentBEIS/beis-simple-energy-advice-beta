@@ -1,0 +1,13 @@
+# Hadolint config for FWTS Dockerfile static analysis.
+# See https://github.com/hadolint/hadolint and AWS ECS container security guidance:
+# https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security-tasks-containers.html
+
+ignored:
+  # Pinning every apt package to an exact version breaks whenever the base image
+  # refreshes package indexes. Chrome is already version-pinned via CHROME_VERSION.
+  - DL3008
+  # Separate RUN layers keep restore/build caches useful in CI; consolidating them
+  # would slow incremental builds more than it helps image size here.
+  - DL3059
+  # Microsoft's aspnet images ship a named `app` user; that is the supported pattern.
+  - DL3066

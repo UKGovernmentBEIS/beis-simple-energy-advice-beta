@@ -1,6 +1,9 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-# Install Chrome
-RUN apt-get update && apt-get -f install && apt-get -y install wget gnupg2 apt-utils
+# Install Chrome dependencies
+RUN apt-get update \
+    && apt-get -y -f install --no-install-recommends \
+    && apt-get -y install --no-install-recommends wget gnupg2 apt-utils \
+    && rm -rf /var/lib/apt/lists/*
 
 # latest google-chrome-stable can be found at https://www.ubuntuupdates.org/pm/google-chrome-stable
 ARG CHROME_VERSION=150.0.7871.114-1
@@ -11,7 +14,8 @@ RUN wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/
   && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf
+    && apt-get install -y --no-install-recommends fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf \
+    && rm -rf /var/lib/apt/lists/*
 
 ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/google-chrome-stable"
 
@@ -22,8 +26,10 @@ ARG CONFIGURATION=Release
 WORKDIR /SeaPublicWebsite
 
 # Install NodeJS and NPM
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
-apt-get install -y nodejs
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y --no-install-recommends nodejs \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy everything
 COPY . ./
