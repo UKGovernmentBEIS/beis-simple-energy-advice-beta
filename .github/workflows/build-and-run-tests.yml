@@ -10,6 +10,9 @@ on:
       - staging
       - main
 
+permissions:
+  contents: read
+
 jobs:
   build-and-run-tests:
     runs-on: ubuntu-latest
