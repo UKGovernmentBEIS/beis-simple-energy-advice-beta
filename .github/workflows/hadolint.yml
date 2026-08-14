@@ -1,0 +1,26 @@
+# Dockerfile static analysis (Hadolint), per AWS ECS security recommendations:
+# https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security-tasks-containers.html
+name: hadolint
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint-dockerfile:
+    name: Lint Dockerfile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Hadolint
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+          config: .hadolint.yaml
+          failure-threshold: warning
