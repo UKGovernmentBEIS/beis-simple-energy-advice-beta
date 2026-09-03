@@ -215,6 +215,11 @@ public class EnergyEfficiencyController : Controller
     [HttpGet("find-epc/{reference}")]
     public async Task<IActionResult> FindEpc_Get(string reference)
     {
+        if (!await epcApi.IsApiAvailable())
+        {
+            return RedirectToAction(nameof(PropertyType_Get), new { reference });
+        }
+
         var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
 
         var viewModel = new FindEpcViewModel
@@ -289,15 +294,31 @@ public class EnergyEfficiencyController : Controller
 
 
     [HttpGet("address/{reference}/{postcode}/{number}")]
-    public async Task<ViewResult> ConfirmAddress_Get(string reference, string postcode, string number)
+    public async Task<IActionResult> ConfirmAddress_Get(string reference, string postcode, string number)
     {
-        var epcSearchResults = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(postcode, number);
+        List<EpcSearchResult> epcSearchResults;
+        try
+        {
+            epcSearchResults = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(postcode, number);
+        }
+        catch (EpcApiUnavailableException)
+        {
+            return RedirectToAction(nameof(EpcServiceError_Get), new { reference });
+        }
 
         var matchingEpcSearchResults = epcSearchResults.Where(e =>
             e.Address1.Contains(number, StringComparison.OrdinalIgnoreCase) ||
             e.Address2.Contains(number, StringComparison.OrdinalIgnoreCase)).ToList();
 
-        var filteredEpcSearchResults = await FilterExpiredEpc(matchingEpcSearchResults);
+        List<EpcSearchResult> filteredEpcSearchResults;
+        try
+        {
+            filteredEpcSearchResults = await FilterExpiredEpc(matchingEpcSearchResults);
+        }
+        catch (EpcApiUnavailableException)
+        {
+            return RedirectToAction(nameof(EpcServiceError_Get), new { reference });
+        }
 
         epcSearchResults = filteredEpcSearchResults.Any() ? filteredEpcSearchResults : epcSearchResults;
 
@@ -352,7 +373,15 @@ public class EnergyEfficiencyController : Controller
         }
 
         var epcId = viewModel.SelectedEpcId == "unlisted" ? null : viewModel.SelectedEpcId;
-        var nextStep = await answerService.SetEpc(viewModel.Reference, epcId);
+        QuestionFlowStep nextStep;
+        try
+        {
+            nextStep = await answerService.SetEpc(viewModel.Reference, epcId);
+        }
+        catch (EpcApiUnavailableException)
+        {
+            return RedirectToAction(nameof(EpcServiceError_Get), new { reference = viewModel.Reference });
+        }
 
         return RedirectToNextStep(nextStep, viewModel.Reference);
     }
@@ -366,9 +395,31 @@ public class EnergyEfficiencyController : Controller
         }
 
         var epcId = viewModel.EpcAddressConfirmed == EpcAddressConfirmed.Yes ? viewModel.EpcId : null;
-        var nextStep = await answerService.SetEpc(viewModel.Reference, epcId);
+        QuestionFlowStep nextStep;
+        try
+        {
+            nextStep = await answerService.SetEpc(viewModel.Reference, epcId);
+        }
+        catch (EpcApiUnavailableException)
+        {
+            return RedirectToAction(nameof(EpcServiceError_Get), new { reference = viewModel.Reference });
+        }
 
         return RedirectToNextStep(nextStep, viewModel.Reference);
+    }
+
+    [HttpGet("epc-service-error/{reference}")]
+    public async Task<IActionResult> EpcServiceError_Get(string reference)
+    {
+        var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+        var viewModel = new NoEpcFoundViewModel
+        {
+            Reference = propertyData.Reference,
+            BackLink = GetBackUrl(QuestionFlowStep.ConfirmAddress, propertyData),
+            ForwardLink = GetForwardUrl(QuestionFlowStep.NoEpcFound, propertyData)
+        };
+
+        return View("EpcServiceError", viewModel);
     }
 
     [HttpGet("confirm-epc-details/{reference}")]
@@ -403,11 +454,14 @@ public class EnergyEfficiencyController : Controller
     public async Task<IActionResult> NoEpcFound_Get(string reference)
     {
         var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+        var backLink = propertyData.SearchForEpc is null
+            ? GetBackUrl(QuestionFlowStep.FindEpc, propertyData)
+            : GetBackUrl(QuestionFlowStep.NoEpcFound, propertyData);
 
         var viewModel = new NoEpcFoundViewModel
         {
             Reference = propertyData.Reference,
-            BackLink = GetBackUrl(QuestionFlowStep.NoEpcFound, propertyData),
+            BackLink = backLink,
             ForwardLink = GetForwardUrl(QuestionFlowStep.NoEpcFound, propertyData)
         };
 
@@ -1816,7 +1870,7 @@ public class EnergyEfficiencyController : Controller
         var epcDtoPairArray = await Task.WhenAll(epcDtoPairTaskList);
 
         return epcDtoPairArray
-            .Where(epcDtoPair => !epcDtoPair.Value.IsLatestAssessmentForAddress)
+            .Where(epcDtoPair => epcDtoPair.Value is not null && !epcDtoPair.Value.IsLatestAssessmentForAddress)
             .Select(epcDtoPair => epcDtoPair.Key)
             .ToList();
     }
