@@ -176,6 +176,15 @@ public class QuestionFlowServiceTests
             ),
             QuestionFlowStep.NoEpcFound),
         new(
+            "Property type goes back to ownership status if EPC step was skipped",
+            new Input(
+                QuestionFlowStep.PropertyType,
+                "ABCDEFGH",
+                epc: null,
+                searchForEpc: null
+            ),
+            QuestionFlowStep.OwnershipStatus),
+        new(
             "Property type goes back to find EPC if didn't search for EPC",
             new Input(
                 QuestionFlowStep.PropertyType,

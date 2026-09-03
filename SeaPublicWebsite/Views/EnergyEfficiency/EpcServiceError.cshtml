@@ -1,0 +1,42 @@
+@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+
+@model SeaPublicWebsite.Models.EnergyEfficiency.NoEpcFoundViewModel
+@{
+    ViewBag.Title = @SharedLocalizer["Sorry, there is a problem with the service"].Value;
+}
+
+@section BeforeMain {
+    @await Html.GovUkBackLink(new BackLinkViewModel
+           {
+               Text = @SharedLocalizer["Back"].Value,
+               Href = Model.BackLink,
+           })
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+            @SharedLocalizer["Sorry, there is a problem with the service"]
+        </h1>
+
+        <p class="govuk-body">
+            @SharedLocalizer["Try again later."]
+        </p>
+
+        <p class="govuk-body">
+            @SharedLocalizer["You can continue without the Energy Performance Certificate. We will need to ask you some questions to work out which home improvements are most likely to be suitable for your home. There will be guidance to support you along the way."]
+        </p>
+
+        @await Html.GovUkButton(new ButtonViewModel
+               {
+                   Href = Model.ForwardLink,
+                   Text = @SharedLocalizer["Continue"].Value
+               })
+    </div>
+    <div class="govuk-grid-column-one-third">
+        @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_AdditionalSupport.cshtml")
+    </div>
+</div>

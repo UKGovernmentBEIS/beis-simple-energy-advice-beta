@@ -4,6 +4,7 @@ namespace SeaPublicWebsite.BusinessLogic.ExternalServices.EpbEpc
 {
     public interface IEpcApi
     {
+        public Task<bool> IsApiAvailable();
         public Task<List<EpcSearchResult>> GetEpcsInformationForPostcodeAndBuildingNameOrNumber(string postcode,
             string buildingNameOrNumber = null);
         public Task<EpbEpcAssessmentDto> GetEpcDtoForId(string epcId);
