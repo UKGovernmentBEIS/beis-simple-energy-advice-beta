@@ -202,6 +202,11 @@ public class EnergyEfficiencyController : Controller
     public async Task<IActionResult> ServiceUnsuitable(string reference)
     {
         var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+        if (!propertyData.IsServiceUnsuitable)
+        {
+            return RedirectToAction(nameof(NewOrReturningUser_Get));
+        }
+        
         var viewModel = new ServiceUnsuitableViewModel
         {
             Reference = propertyData.Reference,

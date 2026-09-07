@@ -21,6 +21,7 @@ public class ErrorController: Controller
         return code switch
         {
             404 => View("PageNotFound"),
+            405 => View("MethodNotAllowed"),
             _ => throw new ArgumentOutOfRangeException()
         };
     }

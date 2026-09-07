@@ -102,6 +102,10 @@ public class PropertyData : IEntityWithRowVersioning
 
     public bool ShowAltDraughtProofLoftAccess => LoftAccess is Enums.LoftAccess.Yes;
 
+    public bool IsServiceUnsuitable =>
+        Country is not Enums.Country.England and not Enums.Country.Wales
+        && OwnershipStatus is Enums.OwnershipStatus.PrivateTenancy;
+
     public bool HasFloor()
     {
         return (PropertyType, FlatType) switch
