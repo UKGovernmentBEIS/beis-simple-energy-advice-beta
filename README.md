@@ -5,7 +5,7 @@
 ### Pre-requisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) for running app locally.
-- .Net 8 (https://dotnet.microsoft.com/en-us/download/dotnet/8.0) for editing the code & running tests.
+- .Net 10 (https://dotnet.microsoft.com/en-us/download/dotnet/10.0) for editing the code & running tests.
 - Install EF Core CLI tools (https://docs.microsoft.com/en-us/ef/core/cli/dotnet) for managing database migrations.
 - Node v14+ (https://nodejs.org/en/) for running frontend tasks, such as updating GDS assets.
 - If you're using Rider then you will need to install the ".net core user secrets" plugin.
