@@ -97,6 +97,18 @@
     <data name="ThisIsANewServiceString" xml:space="preserve">
         <value>This is a new service – your &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt;feedback (opens in new tab)&lt;/a&gt; will help us to improve it.</value>
     </data>
+    <data name="ServiceDecommissionBannerHeadingString" xml:space="preserve">
+        <value>This service is closing soon</value>
+    </data>
+    <data name="ServiceDecommissionBannerReplacementString" xml:space="preserve">
+        <value>We’re replacing this service with our new Home Energy Advice service.</value>
+    </data>
+    <data name="ServiceDecommissionBannerDownloadString" xml:space="preserve">
+        <value>If you want to keep your existing energy-saving recommendations and action plan, please download or print them before this service closes.</value>
+    </data>
+    <data name="ServiceDecommissionBannerNewServiceString" xml:space="preserve">
+        <value>The new service will also let you create a new, updated action plan with recommendations to help make your home warmer and cheaper to run.</value>
+    </data>
     <data name="Back" xml:space="preserve">
         <value>Back</value>
     </data>

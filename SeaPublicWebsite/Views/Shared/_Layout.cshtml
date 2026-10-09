@@ -95,6 +95,20 @@
 
         <main class="govuk-main-wrapper" id="main-content" role="main">
             @(await Html.GovUkErrorSummary(ViewData.ModelState, errorSummaryTitle: SharedLocalizer["There is a problem"].Value))
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                    @(await Html.GovUkNotificationBanner(new NotificationBannerViewModel
+                    {
+                        TitleText = SharedLocalizer["Important"].Value,
+                        Html = @<text>
+                                   <p class="govuk-notification-banner__heading">@SharedLocalizer["ServiceDecommissionBannerHeadingString"]</p>
+                                   <p class="govuk-body">@SharedLocalizer["ServiceDecommissionBannerReplacementString"]</p>
+                                   <p class="govuk-body">@SharedLocalizer["ServiceDecommissionBannerDownloadString"]</p>
+                                   <p class="govuk-body">@SharedLocalizer["ServiceDecommissionBannerNewServiceString"]</p>
+                                </text>
+                    }))
+                </div>
+            </div>
             @RenderBody()
         </main>
     </div>
