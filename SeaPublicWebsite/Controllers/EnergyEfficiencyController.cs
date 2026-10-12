@@ -376,6 +376,7 @@ public class EnergyEfficiencyController : Controller
     public async Task<IActionResult> ConfirmEpcDetails_Get(string reference)
     {
         var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+        if (!HasEpcToConfirm(propertyData)) return AnswersInvalidForPage();
 
         var viewModel = new ConfirmEpcDetailsViewModel
         {
