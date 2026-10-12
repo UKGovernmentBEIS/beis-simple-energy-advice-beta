@@ -85,14 +85,15 @@ public class EnergyEfficiencyController : Controller
     [HttpPost]
     public IActionResult LanguageChange(LanguageChangeViewModel model)
     {
+        var language = model.Language == "cy" ? "cy" : "en";
         Response.Cookies.Append(
             "service_language",
-            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(model.Language)),
+            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(language)),
             new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1), IsEssential = true }
         );
-        CultureInfo.CurrentCulture = new CultureInfo(model.Language);
-        CultureInfo.CurrentUICulture = new CultureInfo(model.Language);
-        return Redirect(model.ReturnUrl);
+        CultureInfo.CurrentCulture = new CultureInfo(language);
+        CultureInfo.CurrentUICulture = new CultureInfo(language);
+        return LocalRedirect(Url.IsLocalUrl(model.ReturnUrl) ? model.ReturnUrl : "/");
     }
 
     // This is the route that users are directed to when clicking "Start now" on the external service page.
