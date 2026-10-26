@@ -187,6 +187,11 @@ namespace SeaPublicWebsite.BusinessLogic.Services
                 return QuestionFlowStep.NoEpcFound;    
             }
 
+            if (propertyData.SearchForEpc is null)
+            {
+                return QuestionFlowStep.OwnershipStatus;
+            }
+
             return QuestionFlowStep.FindEpc;
         }
 
