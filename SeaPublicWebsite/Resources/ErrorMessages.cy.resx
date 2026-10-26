@@ -79,20 +79,20 @@
         <value>Dewiswch y math o dŷ</value>
     </data>
     <data name="NumberOfOccupantsRequired" xml:space="preserve">
-        <value>Rhowch nifer y bobl sy'n byw yn yr eiddo</value>
+        <value>Rhowch nifer y bobl sy’n byw yn yr eiddo</value>
     </data>
     <data name="NumberOfOccupantsWholeNumber" xml:space="preserve">
-        <value>Rhaid i nifer y bobl sy'n byw yn yr eiddo fod yn
+        <value>Rhaid i nifer y bobl sy’n byw yn yr eiddo fod yn
 rhif cyfan</value>
     </data>
     <data name="SolidWallsInsulatedRequired" xml:space="preserve">
         <value>Dewiswch a yw eich waliau solet wedi’u hinswleiddio</value>
     </data>
     <data name="ReferenceRequired" xml:space="preserve">
-        <value>Rhowch eich cyfeirnod 8 nod (neu dewiswch yr opsiwn 'Dyma fy ymweliad cyntaf')</value>
+        <value>Rhowch eich cyfeirnod 8 nod (neu dewiswch yr opsiwn ‘Dyma fy ymweliad cyntaf’)</value>
     </data>
     <data name="RecommendationActionRequired" xml:space="preserve">
-        <value>Dewiswch beth i'w wneud gyda'r argymhelliad hwn</value>
+        <value>Dewiswch beth i’w wneud gyda’r argymhelliad hwn</value>
     </data>
     <data name="PostcodeRequired" xml:space="preserve">
         <value>Rhowch y cod post</value>
@@ -107,10 +107,10 @@ rhif cyfan</value>
         <value>Rhowch nifer yr oriau yn y prynhawn a gyda’r nos</value>
     </data>
     <data name="BuildingNumberOrNameRequired" xml:space="preserve">
-        <value>Rhowch rif neu enw'r adeilad</value>
+        <value>Rhowch rif neu enw’r adeilad</value>
     </data>
     <data name="CertificateBelongsToAddressRequired" xml:space="preserve">
-        <value>Cadarnhewch a yw'r dystysgrif hon yn perthyn i'ch cyfeiriad chi cyn bwrw ymlaen</value>
+        <value>Cadarnhewch a yw’r dystysgrif hon yn perthyn i’ch cyfeiriad chi cyn bwrw ymlaen</value>
     </data>
     <data name="EmailAddressRequired" xml:space="preserve">
         <value>Rhowch gyfeiriad e-bost dilys</value>
@@ -119,18 +119,18 @@ rhif cyfan</value>
         <value>Cadarnhewch a hoffech chi chwilio am eich EPC cyn bwrw ymlaen</value>
     </data>
     <data name="NumberOfOccupantsNumber" xml:space="preserve">
-        <value>Rhaid i nifer y bobl sy'n byw yn yr eiddo fod yn 
+        <value>Rhaid i nifer y bobl sy’n byw yn yr eiddo fod yn 
 rhif</value>
     </data>
     <data name="UsedServiceBeforeRequired" xml:space="preserve">
-        <value>Dewiswch a ydych chi wedi defnyddio’r gwasanaeth hwn o'r blaen</value>
+        <value>Dewiswch a ydych chi wedi defnyddio’r gwasanaeth hwn o’r blaen</value>
     </data>
     <data name="NumberOfOccupantsIntRange" xml:space="preserve">
-        <value>Rhaid i nifer y bobl sy'n byw yn yr eiddo fod 
+        <value>Rhaid i nifer y bobl sy’n byw yn yr eiddo fod 
 rhwng {1} a {2}</value>
     </data>
     <data name="TemperatureDecimalRange" xml:space="preserve">
-        <value>Rhaid i'r tymheredd fod rhwng {1} a {2}</value>
+        <value>Rhaid i’r tymheredd fod rhwng {1} a {2}</value>
     </data>
     <data name="NumberOfHoursIntRange" xml:space="preserve">
         <value>Rhaid i nifer yr oriau fod rhwng {1} a {2}</value>
@@ -142,13 +142,13 @@ rhwng {1} a {2}</value>
         <value>Rhaid i nifer yr oriau yn y bore fod yn rhif</value>
     </data>
     <data name="AfternoonEveningHoursNumber" xml:space="preserve">
-        <value>Rhaid i nifer y bobl sy'n byw yn yr eiddo fod yn rhif</value>
+        <value>Rhaid i nifer y bobl sy’n byw yn yr eiddo fod yn rhif</value>
     </data>
     <data name="AfternoonEveningHoursWholeNumber" xml:space="preserve">
-        <value>Rhaid i nifer y bobl sy'n byw yn yr eiddo fod yn rhif cyfan</value>
+        <value>Rhaid i nifer y bobl sy’n byw yn yr eiddo fod yn rhif cyfan</value>
     </data>
     <data name="TemperatureNumber" xml:space="preserve">
-        <value>Rhaid i'r tymheredd fod yn rhif</value>
+        <value>Rhaid i’r tymheredd fod yn rhif</value>
     </data>
     <data name="TemperatureRequired" xml:space="preserve">
         <value>Rhowch rif rhwng 5 a 35, neu anwybyddwch y cwestiwn hwn</value>
