@@ -54,7 +54,11 @@ public class PropertyDataUpdater
         var epc = epcId == null ? null : await epcApi.GetEpcForId(epcId);
 
         return UpdatePropertyData(
-            p => { p.Epc = epc; },
+            p =>
+            {
+                p.Epc = epc;
+                p.EpcDetailsConfirmed = null;
+            },
             propertyData,
             QuestionFlowStep.ConfirmAddress);
     }

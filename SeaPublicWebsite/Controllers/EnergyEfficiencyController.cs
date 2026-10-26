@@ -21,6 +21,7 @@ using SeaPublicWebsite.ExternalServices.EmailSending;
 using SeaPublicWebsite.ExternalServices.GoogleAnalytics;
 using SeaPublicWebsite.ExternalServices.PostcodesIo;
 using SeaPublicWebsite.Models.EnergyEfficiency;
+using SeaPublicWebsite.Models.Error;
 using SeaPublicWebsite.Models.LanguageChange;
 using SeaPublicWebsite.Services;
 using SeaPublicWebsite.Services.Cookies;
@@ -85,14 +86,15 @@ public class EnergyEfficiencyController : Controller
     [HttpPost]
     public IActionResult LanguageChange(LanguageChangeViewModel model)
     {
+        var language = model.Language == "cy" ? "cy" : "en";
         Response.Cookies.Append(
             "service_language",
-            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(model.Language)),
+            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(language)),
             new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1), IsEssential = true }
         );
-        CultureInfo.CurrentCulture = new CultureInfo(model.Language);
-        CultureInfo.CurrentUICulture = new CultureInfo(model.Language);
-        return Redirect(model.ReturnUrl);
+        CultureInfo.CurrentCulture = new CultureInfo(language);
+        CultureInfo.CurrentUICulture = new CultureInfo(language);
+        return LocalRedirect(Url.IsLocalUrl(model.ReturnUrl) ? model.ReturnUrl : "/");
     }
 
     // This is the route that users are directed to when clicking "Start now" on the external service page.
@@ -294,8 +296,8 @@ public class EnergyEfficiencyController : Controller
         var epcSearchResults = await epcApi.GetEpcsInformationForPostcodeAndBuildingNameOrNumber(postcode, number);
 
         var matchingEpcSearchResults = epcSearchResults.Where(e =>
-            e.Address1.Contains(number, StringComparison.OrdinalIgnoreCase) ||
-            e.Address2.Contains(number, StringComparison.OrdinalIgnoreCase)).ToList();
+            e.Address1?.Contains(number, StringComparison.OrdinalIgnoreCase) is true ||
+            e.Address2?.Contains(number, StringComparison.OrdinalIgnoreCase) is true).ToList();
 
         var filteredEpcSearchResults = await FilterExpiredEpc(matchingEpcSearchResults);
 
@@ -375,6 +377,7 @@ public class EnergyEfficiencyController : Controller
     public async Task<IActionResult> ConfirmEpcDetails_Get(string reference)
     {
         var propertyData = await propertyDataStore.LoadPropertyDataAsync(reference);
+        if (!HasEpcToConfirm(propertyData)) return AnswersInvalidForPage();
 
         var viewModel = new ConfirmEpcDetailsViewModel
         {
@@ -389,6 +392,7 @@ public class EnergyEfficiencyController : Controller
     [HttpPost("confirm-epc-details/{reference}")]
     public async Task<IActionResult> ConfirmEpcDetails_Post(ConfirmEpcDetailsViewModel viewModel)
     {
+        if (!HasEpcToConfirm(await propertyDataStore.LoadPropertyDataAsync(viewModel.Reference))) return AnswersInvalidForPage();
         if (!ModelState.IsValid)
         {
             return await ConfirmEpcDetails_Get(viewModel.Reference);
@@ -1655,6 +1659,19 @@ public class EnergyEfficiencyController : Controller
         var nextStep = questionFlowService.NextStep(currentStep, propertyData, entryPoint);
         var args = GetActionArgumentsForQuestion(nextStep, propertyData?.Reference, entryPoint);
         return Url.Action(args.Action, args.Controller, args.Values);
+    }
+
+    // The EPC can be cleared by changing an earlier answer, after which this page may be revisited via browser history
+    private static bool HasEpcToConfirm(PropertyData propertyData)
+    {
+        return propertyData.Epc?.ContainsPropertyTypeAndAge() is true;
+    }
+
+    private ViewResult AnswersInvalidForPage()
+    {
+        var result = View("../Error/ServiceIssue", new ErrorViewModel());
+        result.StatusCode = StatusCodes.Status409Conflict;
+        return result;
     }
 
     private RedirectToActionResult RedirectToNextStep(QuestionFlowStep nextStep, string reference,

@@ -98,7 +98,7 @@ public class EpbEpcApi : IEpcApi
     {
         var epc = await GetEpcDtoForId(epcId);
 
-        return epc.Parse();
+        return epc?.Parse();
     }
 
     private async Task<string> RequestTokenIfNeeded()
