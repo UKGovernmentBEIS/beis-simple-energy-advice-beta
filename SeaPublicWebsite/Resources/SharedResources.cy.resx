@@ -2402,16 +2402,16 @@
         <value>Gwasanaeth newydd yw hwn – bydd eich &lt;a class="govuk-link" href="{0}" target="_blank" rel="noreferrer noopener"&gt;adborth (yn agor mewn tab newydd)&lt;/a&gt; yn ein helpu i’w wella.</value>
     </data>
     <data name="ServiceDecommissionBannerHeadingString" xml:space="preserve">
-        <value>[Welsh placeholder: This service is closing soon]</value>
+        <value>Mae’r gwasanaeth yma yn cau cyn hir</value>
     </data>
     <data name="ServiceDecommissionBannerReplacementString" xml:space="preserve">
-        <value>[Welsh placeholder: replacing this service with Home Energy Advice]</value>
+        <value>Rydyn ni’n disodli’r gwasanaeth yma gyda’n gwasanaeth Cyngor Ynni Cartref newydd.</value>
     </data>
     <data name="ServiceDecommissionBannerDownloadString" xml:space="preserve">
-        <value>[Welsh placeholder: download or print your recommendations and action plan]</value>
+        <value>Os hoffech chi gadw’ch argymhellion ynni a’ch cynllun gweithredu presennol, lawrlwythwch nhw neu argraffwch nhw cyn i’r gwasanaeth yma gau.</value>
     </data>
     <data name="ServiceDecommissionBannerNewServiceString" xml:space="preserve">
-        <value>[Welsh placeholder: the new service lets you create an updated action plan]</value>
+        <value>Bydd y gwasanaeth newydd hefyd yn gadael ichi greu cynllun gweithredu newydd, wedi’i ddiweddaru gydag argymhellion i helpu i wneud eich cartref yn gynhesach ac yn rhatach i’w redeg.</value>
     </data>
     <data name="SummaryOfSavingsAndCostsForSingleRecommendationString" xml:space="preserve">
         <value>Dyma grynodeb o’r amcangyfrif o’ch arbedion ar filiau ynni blynyddol a chost gosod yr &lt;strong&gt;1 argymhelliad&lt;/strong&gt; y dwedsoch y byddech chi’n ei ystyried ar gyfer eich cartref.</value>

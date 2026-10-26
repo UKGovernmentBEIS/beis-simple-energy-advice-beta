@@ -1,0 +1,15 @@
+@using GovUkDesignSystem
+@using GovUkDesignSystem.GovUkDesignSystemComponents
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
+
+@(await Html.GovUkNotificationBanner(new NotificationBannerViewModel
+{
+    TitleText = SharedLocalizer["Important"].Value,
+    Html = @<text>
+               <p class="govuk-notification-banner__heading">@SharedLocalizer["ServiceDecommissionBannerHeadingString"]</p>
+               <p class="govuk-body">@SharedLocalizer["ServiceDecommissionBannerReplacementString"]</p>
+               <p class="govuk-body">@SharedLocalizer["ServiceDecommissionBannerDownloadString"]</p>
+               <p class="govuk-body">@SharedLocalizer["ServiceDecommissionBannerNewServiceString"]</p>
+            </text>
+}))
