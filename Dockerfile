@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 # Install Chrome
 RUN apt-get update && apt-get -f install && apt-get -y install wget gnupg2 apt-utils
 
@@ -15,7 +15,7 @@ RUN apt-get update \
 
 ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/google-chrome-stable"
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build-env
 
 ARG CONFIGURATION=Release
 
