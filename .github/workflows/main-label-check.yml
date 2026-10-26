@@ -10,6 +10,9 @@ on:
       - synchronize
       - unlabeled
 
+permissions:
+  contents: read
+
 jobs:
   label_check:
     runs-on: ubuntu-latest
