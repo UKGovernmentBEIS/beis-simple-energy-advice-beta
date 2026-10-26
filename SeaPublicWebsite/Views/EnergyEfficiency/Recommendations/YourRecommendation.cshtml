@@ -32,6 +32,7 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
+        @await Html.PartialAsync("/Views/EnergyEfficiency/Partials/_ServiceDecommissionBanner.cshtml")
         @{ await Html.RenderPartialAsync("Partials/_YourActionPlan.cshtml", Model); }
     </div>
 
